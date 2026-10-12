@@ -1,4 +1,4 @@
 Recovered game implementation removed from versioned history.
-Original Git blob: 17b3673670da10a7d6571d8acfffae277d6286c5
+Original Git blob: 20e9489259bca69794d59aac0b6c725a710258ba
 The original is preserved only in the verified external recovery bundle.
 See docs/re/SOURCE_CONTENT_REVIEW_20261029.md.
