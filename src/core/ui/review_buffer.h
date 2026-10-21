@@ -2,11 +2,20 @@
 #include <string>
 #include <optional>
 #include <vector>
+#include <cstdint>
 #include "result_notifications.h"
 
 // Current displayed page/phase only. Consumers supply renderer-backed lines.
 namespace ui::review {
 enum class Domain { Results, Status, Information };
+// Diagnostic identity only: these integer tokens must never be dereferenced on
+// a worker. The native owner copies at most 128 raw Text.m_Text UTF-16 units
+// from a visible name component at capture time; markup remains diagnostic.
+struct NameSource {
+    int row = 0;
+    uintptr_t content = 0, view = 0, name_text = 0;
+    std::wstring name;
+};
 struct Options {
     Domain domain = Domain::Results;
     bool announce = true;
@@ -30,6 +39,9 @@ struct Options {
     // Native information panels can have their own independent page toggle.
     // Manual I/West reads that current panel instead of the comparison buffer.
     std::string details_action;
+    int producer_phase = -1;
+    unsigned producer_generation = 0;
+    std::vector<NameSource> source_names;
 };
 /// Claim input while an event-owned renderer snapshot is being captured.
 void begin(void* owner, const std::wstring& headline, Options options = {});

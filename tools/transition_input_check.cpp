@@ -144,6 +144,7 @@ int main() {
         binding(K::P, M::None, layout ? "Mod.AnnounceEntityOnly" : "Mod.NavigateToEntity");
         binding(K::P, M::Shift, layout ? "Mod.ResetToAllCategory" : "Mod.TogglePathfindingFilter");
         binding(K::P, M::Ctrl, layout ? nullptr : "Mod.ToggleToLayerFilter");
+        binding(K::P, M::CtrlShift, "Mod.ToggleEventGroupFilter");
         binding(K::K, M::None, layout ? nullptr : "Mod.AnnounceEntityOnly");
         binding(K::K, M::Shift, layout ? nullptr : "Mod.ResetToAllCategory");
         binding(K::J, M::None, layout ? nullptr : "Mod.CyclePrevious");

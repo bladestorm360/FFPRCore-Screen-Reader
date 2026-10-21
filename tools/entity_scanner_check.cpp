@@ -1,4 +1,4 @@
-// check-sources: field/entity_filter.cpp field/npc_names.cpp field/field_refs.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
+// check-sources: field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp field/field_refs.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
 // Actual scanner/capture/publication/input flow, with fake native owners only.
 #include <windows.h>
 #include <thread>

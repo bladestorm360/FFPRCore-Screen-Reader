@@ -6,6 +6,9 @@
 // once it passes kMaxBytes, so a runaway log can never fill the disk. That means the log
 // from the run BEFORE a crash is still on disk after the game is restarted — which is
 // exactly when you need it.
+// The writer records session/part/frame health every ten seconds, accounts for
+// queue and file losses, and retries failed handles in append mode. Long UTF-8
+// records keep a marked prefix. See docs/re/LOGGING.md for diagnostic coverage.
 namespace log_ {
 
 constexpr int    kKeep     = 5;              // ffpr_screen_reader.1.log .. .5.log

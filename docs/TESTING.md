@@ -1,5 +1,48 @@
 # Testing the native mod
 
+## Narshe events and entrance suffixes, October 21
+
+User confirmation, October 21: the intro works substantially better in a brief test.
+This confirms limited intro improvement, not every Narshe state or the other games.
+Entrance suffixes, all later story states and runtime timing remain unconfirmed.
+
+Test these first when the relevant map is available:
+
+1. FF6 intro in Narshe: browse Events and request directions to a nearby Scene trigger.
+   Expect usable directions. A genuinely blocked exit should include directions to a
+   reachable scene trigger when one exists. Follow normal game progression and repeat.
+2. Press Control+Shift+P. Repeated copies of one event should collapse to one usable
+   target. Distinct events remain separate. F8 → Navigation → Event group filter must
+   show the same state; turn it off to restore the individual triggers.
+3. On a floor with two entrances to another floor (Deist is an example), turn on
+   F8 → Speech → Entrance suffixes. Turn off Map exit filter to browse both doors.
+   Expect (a)/(b) labels that stay with their doors as you move. Tiles of one wide
+   doorway share a letter. Turn suffixes off: letters disappear without stacking.
+4. Reopen the mod menu after restarting normally: both settings retain their values.
+
+Offline fixtures use actual bakes and production workers, with fake native boundaries.
+Live event enablement, later Narshe stages and audible delivery remain gameplay checks.
+The mod must retain genuine story gates; it must not promise an event's story outcome.
+[Implementation and evidence](re/NAVIGATION_GROUPS.md).
+
+## Results names and log continuity, October 21
+
+Test first when a normal battle is available in FF1, then the other games as convenient:
+
+1. Win a battle. Review the EXP/member rows and any growth pages with the arrow keys.
+2. Expect the party's actual custom names. Note any wrong name or number and whether
+   it was automatic speech, an arrow-reviewed row or a growth heading.
+3. After playing for at least30 seconds, close normally and retain that game's
+   `ffpr_screen_reader.log` and its numbered `.1.log` through `.5.log` files together.
+
+The new log should contain advancing health/frame records, phase and raw name-source
+identities, captured/published rows and actual Prism submissions. Sol inspects those;
+the user need only report the symptom and send the files. If it cannot be reproduced,
+the original report stays open. All-six native name/serialized ownership audits and
+production-reader fixtures cover static/source behavior; runtime pooling, another
+machine's native UI state, audible delivery and measured game responsiveness remain
+unconfirmed. [Evidence and diagnostic limits](re/LOGGING.md).
+
 ## Persistent cross-floor chest state, October 15
 
 Test first in the next FFII session: choose F8 > Navigation > Current map, then browse

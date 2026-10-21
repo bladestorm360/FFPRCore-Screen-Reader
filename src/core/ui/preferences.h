@@ -29,6 +29,8 @@ inline constexpr int kFilterCurrentFloor = 0;
 inline constexpr int kFilterCurrentMapWithVehicles = 1;
 inline constexpr int kFilterCurrentMap = 2;
 inline constexpr const char* kMapExitFilter = "MapExitFilter";              // Map Exit Filter
+inline constexpr const char* kEventGroupFilter = "EventGroupFilter";
+inline constexpr const char* kEntranceSuffixes = "EntranceSuffixes";
 inline constexpr const char* kToLayerFilter = "ToLayerFilter";              // Layer Transition Filter
 inline constexpr const char* kWallTones = "WallTones";                      // Wall Tones
 inline constexpr const char* kFootsteps = "Footsteps";                      // Footsteps
@@ -71,6 +73,8 @@ inline constexpr const char* kEnemyLetters = "EnemyLetters";                // E
 // --- defaults -----------------------------------------------------------------------------
 inline constexpr bool kPathfindingFilterDefault = false;
 inline constexpr bool kMapExitFilterDefault = false;
+inline constexpr bool kEventGroupFilterDefault = false;
+inline constexpr bool kEntranceSuffixesDefault = false;
 inline constexpr bool kToLayerFilterDefault = false;
 inline constexpr bool kWallTonesDefault = false;
 inline constexpr bool kFootstepsDefault = false;

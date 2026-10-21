@@ -101,7 +101,7 @@ loading them. Complete instruction/call records are `ff1_movement_calls.txt` thr
 
 1. Global `InputDevice.ObserveInput` calls `get_InputAxis` rather than inlining it, then
    tests against zero and dispatches the axis to enabled `IInputDeviceListener` instances.
-2. `get_InputAxis`: native `Vector2(void* self, const MethodInfo*)`; the eight-byte value
+2. `get_InputAxis`: native a Vector2 return, instance receiver and hidden MethodInfo pointer; the eight-byte value
    returns in RAX. The existing native input source executes first. Real movement input
    cancels the walker before any synthetic axis is returned, including native remaps/touch.
 3. `Last.Map.FieldPlayerKeyController.OnTouchPadCallback(Vector2)` receives its eight-byte

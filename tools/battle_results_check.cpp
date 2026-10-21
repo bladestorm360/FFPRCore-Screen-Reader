@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <thread>
+#include "../src/core/text_util.h"
 #include "../src/core/frame.cpp"
 #include "../src/core/background.cpp"
 #include "../src/core/displayed_skill_progress.cpp"
@@ -171,6 +172,10 @@ namespace sound { void initialize() {} void play_exp_counter() {} void stop_exp_
 namespace speech { void request_load() {} }
 namespace log_ { void write(const char*, ...) {} }
 namespace il2cpp {
+bool read_string(String* source, wchar_t* out, size_t capacity) {
+    text_util::copy(out, capacity, source ? reinterpret_cast<fixture::Node*>(source)->name.c_str() : L"");
+    return source != nullptr;
+}
 Class* object_class(Object*) { return nullptr; }
 int32_t field_offset(Class*, const char* name) { return std::string(name) == "perormanceEndCount" ? static_cast<int32_t>(offsetof(fixture::Node, end_count)) : -1; }
 }
@@ -705,6 +710,44 @@ int main()
     spoken.clear(); ui::review::details();
     expect(panel_reads == 2 && spoken.empty(), "I remains independent of comparison buffer after assembly");
     ui::review::clear();
+    // Player-entered names must pass through current rendered results unchanged,
+    // including Unicode and digits. Never hide a name by guessing that its text
+    // resembles a developer identifier. Native name population is audited by
+    // tools/re/result_names_check.py; these are real production-consumer checks.
+    for (int n = 1; n <= 6; ++n) {
+        game_id = static_cast<game::Id>(n); detail = false; changed_stats = false;
+        result_reset_state(); skill.visible = false;
+        const auto renamed = std::wstring(L"\u00c9owyn ") + std::to_wstring(n);
+        Node name_component;
+        name_component.name = renamed; name_component.fields["m_Text"] = &name_component;
+        status_view.fields["nameText"] = &name_component;
+        status_view.text["nameText"] = renamed;
+        spoken.clear(); d_status(&menu, nullptr); tick();
+        expect(contains(renamed) && !contains(L"Firion") && !contains(L"Character 09"),
+               "all-six growth headings preserve the current displayed custom name");
+        expect(ui::review::g_options.source_names.size() == 1 && ui::review::g_options.source_names.front().name == renamed,
+               "diagnostic name provenance belongs to the same captured native growth row");
+        spoken.clear(); ui::review::first();
+        expect(contains(renamed), "reviewed name matches the automatic results heading");
+        status_view.text["nameText"] = L"Character 09";
+        name_component.name = L"Character 09";
+        spoken.clear(); d_status(&menu, nullptr); tick();
+        expect(contains(L"Character 09") && !contains(renamed),
+               "a legitimately displayed numbered name is preserved; prior character cannot leak");
+        if (n != 2) {
+            detail = true; member.row = renamed + L" EXP 60 of 120"; members.end_count = 0;
+            spoken.clear(); d_points(&menu, nullptr); tick();
+            steps[n - 1](&members, nullptr); steps[n - 1](&members, nullptr); tick();
+            expect(contains(renamed) && !contains(L"Firion"),
+                   "all five EXP result adapters retain the rendered custom name after completion");
+        } else {
+            weapon_name.text["nameText"] = renamed;
+            const auto rows = ff2_weapon_rows(&weapon);
+            expect(!rows.empty() && rows.front().starts_with(renamed + L":"),
+                   "FF2 nested weapon rows use the displayed renamed member");
+        }
+    }
+    result_reset_state();
     std::printf("Results: all-six phase/Autodetail/lifecycle and 10 native input entry points: %d failures\n", failures);
     return failures ? 1 : 0;
 }

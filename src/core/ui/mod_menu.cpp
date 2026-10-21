@@ -162,6 +162,9 @@ void initialize()
     v.push_back(toggle(L"Mod warnings", p::kModWarnings, p::kModWarningsDefault,
                        L"Announce mod warning messages, including event and trap warnings.",
                        L"Announce mod warning messages, including event and trap warnings."));
+    v.push_back(toggle(L"Entrance suffixes", p::kEntranceSuffixes, p::kEntranceSuffixesDefault,
+                       L"On. Separate entrances leading to the same floor have letter suffixes, such as (a) and (b).",
+                       L"Off. Floor entrance names have no letter suffixes."));
     v.push_back(toggle(L"Spoil treasure chest contents", p::kSpoilTreasureChestContents,
                        p::kSpoilTreasureChestContentsDefault,
                        L"Spoil treasure chest contents on", L"Spoil treasure chest contents off"));
@@ -192,6 +195,9 @@ void initialize()
     v.push_back(toggle(L"Map Exit Filter", p::kMapExitFilter, p::kMapExitFilterDefault,
                        L"On. Multiple exits leading to the same destination collapse to the closest one.",
                        L"Off. All map exits appear in navigation."));
+    v.push_back(toggle(L"Event group filter", p::kEventGroupFilter, p::kEventGroupFilterDefault,
+                       L"On. Repeated triggers for the same event are grouped. Navigation keeps the closest reachable trigger.",
+                       L"Off. All event triggers appear separately in navigation."));
     v.push_back(toggle(L"Layer Transition Filter", p::kToLayerFilter, p::kToLayerFilterDefault,
                        L"On. Layer transition entities are hidden from navigation.",
                        L"Off. Layer transition entities appear in navigation."));

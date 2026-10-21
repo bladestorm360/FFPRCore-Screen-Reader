@@ -419,3 +419,59 @@ file size/digest, Latest status and draft=false/prerelease=false. Metadata and s
 are retained in this correction's public_release.json/public_verification.json and
 verify_remote.py. Final documentation commits follow the corrected source tag without
 changing installed DLLs or distributed bytes. No additional gameplay claim is made.
+
+## V0.9.4 preparation and publication, October 21
+
+The user requested release 0.9.4 after reporting substantial improvement in a brief
+FF6 intro test. That is a limited gameplay confirmation; later Narshe states, other
+games, entrance suffixes and actual response timing remain separately tracked in
+TESTING.md. The intermittent numbered result-name report remains unreproduced and
+open. This release adds diagnostics rather than claiming a proven name correction.
+
+The existing public user-owned bladestorm360/FFPRCore-Screen-Reader repository,
+ADMIN access, master branch and named remote were verified. Remote/local master
+agreed at 3dd52e4820fbd714517ca6b1a38939bfa334253f before preparation. No v0.9.4
+tag or release existed; all earlier releases and tags are preserved.
+
+This release includes shared selected-scene-trigger reachability correction and
+truthful gate hints, Navigation's persistent default-off Event group filter
+(Control+Shift+P in both keymaps), Speech's persistent default-off Entrance suffixes,
+and worker-owned session/result/speech diagnostics. The feature records are
+re/NAVIGATION_GROUPS.md, re/LOGGING.md and re/RESULTS.md. Native research exports
+remain outside Git; added receipts retain factual symbols/layouts/hashes only.
+Current documentation replaces the pre-existing copied/illustrative snippets with
+behavior and source locators. No shared history was rewritten.
+
+README/TXT describe the actual controls and known issues and match exactly.
+FILEVERSION/PRODUCTVERSION and both resource strings are 0.9.4.0; kBuild identifies
+V0.9.4. Runtime architecture, locked dependency versions and attribution remain.
+
+Canonical build and every included offline check pass: 6,864 native-name checks,
+zero missing; 119 used/326 defined wiring names, zero undefined; all 47 proxy exports.
+The navigation corpus covers 2,433 direct event routes across all six games and
+inspects all 638 FF6 bakes; earlier independent rebaking reproduced FF6 byte-for-byte.
+Logger pressure/recovery/truncation, results provenance, input/menu and existing
+route/trap/vehicle regressions pass. One sandboxed MSBuild worker startup stalled;
+it was interrupted, and the canonical build completed with normal compiler-process
+access. No source repair or reduced check set was used.
+
+Isolated smoke passes proxy forwarding, boot and logger startup without a crash or
+fastfail. No game was launched or probed. Release preparation does not redeploy:
+the six installed games retain the already user-tested functional build E9A7392A,
+whose complete hash/recovery receipt is in re/NAVIGATION_GROUPS.md.
+
+Prepared folder: releases/Final Fantasy Pixel Master Core Screen Reader V0.9.4.
+Archive: releases/Final Fantasy Pixel Master Core Screen Reader V0.9.4.zip.
+7-Zip created and tested the 5,901,425-byte, 28-file complete dependency bundle.
+Independent ZIP inspection confirms CRCs, unique/exact paths, source/folder/archive
+byte equality, README conversion, the full SHA256 manifest, pinned Prism/OpenAL/HRTF
+runtime/data/notices, corresponding-source attribution and x64 PE/build versions.
+
+- DLL: 9,767,936 bytes; SHA256 f12a4d24027c0551175844688a63607747798d876b31f4649f9598570ab7e3aa.
+- ZIP SHA256: acb6163efdfc92a321c8bc3c6d5db5faf4f1a95be996da3194a936106320f376.
+
+Evidence: build_check/v094/ build/smoke/package console receipts;
+build_check/verify_v094_package.py, v094_version.json and
+v094_package_verification.json. Sol reviewed and verified the release without new
+delegation. The earlier Luna catalog task and Sol validation remain recorded with
+the navigation feature. Source/tag/upload/publication verification follows below.

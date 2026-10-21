@@ -103,7 +103,10 @@ void request_reachability(bool with_vehicles, std::function<void()> ready);
 // Same owned native obstacle snapshot and movement rules as explicit routes.
 // Capture functions run on the native owner; distances run only on Navigation.
 struct ExitSnapshot;
-struct ExitTarget { unity::Vec3 position; int map_id = 0, destination = 0; baked_route::Cell cell; };
+struct ExitTarget {
+    unity::Vec3 position; int map_id = 0, destination = 0; baked_route::Cell cell;
+    TargetKind kind = TargetKind::Transition;
+};
 std::shared_ptr<ExitSnapshot> begin_exit_capture(bool with_vehicles, bool indoor);
 void capture_exit_obstacle(ExitSnapshot& snapshot, void* entity);
 void finish_exit_capture(ExitSnapshot& snapshot);

@@ -230,12 +230,17 @@ void drain_backend()
 {
     Line l;
     while (dequeue(&l)) {
-        if (l.silence) { (void)g_backend.stop(); }
+        if (l.silence) {
+            const auto error = g_backend.stop();
+            LOGF("[Speech] stop generation=%llu result=%d", l.generation, static_cast<int>(error));
+        }
         else if (l.text[0]) {
             // Logging and screen-reader RPCs belong to this worker, never a UI hook.
             LOGW(l.interrupt ? L"say: " : L"say (queued): ",l.text);
             const double submitting = l.timing.feature != Feature::None && l.timing.first ? speech_now() : 0;
             const auto error = g_backend.output(l.text, l.interrupt, l.kind == Kind::Braille);
+            LOGF("[Speech] submit generation=%llu interrupt=%d kind=%d feature=%d result=%d",
+                 l.generation, l.interrupt, static_cast<int>(l.kind), static_cast<int>(l.timing.feature), static_cast<int>(error));
             if (submitting) {
                 const char* feature = l.timing.feature == Feature::EntityBrowse ? "browse" :
                     l.timing.feature == Feature::EntityCategory ? "category" :

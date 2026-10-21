@@ -1,0 +1,1408 @@
+[
+  {
+    "game": 1,
+    "bundle": "key_battle_assets_all_1312346180c6e88413f178ee6f83ad87.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -4835153495802813922,
+        "view_path_id": 867940324745829848,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -1218112513354386502,
+        "view_path_id": 1772741418960406137,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2281424341347921665,
+        "view_path_id": 8204807497908844994,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 7851500033180600092,
+        "view_path_id": 5519463134165209695,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8661917130658280824,
+        "view_path_id": 4480443400224277368,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  },
+  {
+    "game": 2,
+    "bundle": "key_battle_assets_all_7659a9dbda2e127fe2f2a0941ae4fda4.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -7895985928035305900,
+        "view_path_id": -2104480177990141512,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -3866617605202442422,
+        "view_path_id": 2473062311229136349,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -3064321109761450954,
+        "view_path_id": -2913685738588439555,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 5253469897294621690,
+        "view_path_id": 1424647756561182190,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8650969915137858136,
+        "view_path_id": -5974207957008162591,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "bundle": "key_battle_assets_all_72352c2c301f3f9ab0867ab4ec68956f.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -4835153495802813922,
+        "view_path_id": 867940324745829848,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -1218112513354386502,
+        "view_path_id": 1772741418960406137,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2281424341347921665,
+        "view_path_id": 8204807497908844994,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 7851500033180600092,
+        "view_path_id": 5519463134165209695,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8661917130658280824,
+        "view_path_id": 4480443400224277368,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "bundle": "key_battle_assets_all_958287951e14e2ae364bc23b5d2d8035.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -7816977209902473489,
+        "view_path_id": 222540302220510869,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -7368061359953903029,
+        "view_path_id": 4045773798111050993,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -4835153495802813922,
+        "view_path_id": 867940324745829848,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -3222300843050988911,
+        "view_path_id": 2772336791827143694,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -1218112513354386502,
+        "view_path_id": 1772741418960406137,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2281424341347921665,
+        "view_path_id": 8204807497908844994,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 7851500033180600092,
+        "view_path_id": 5519463134165209695,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8661917130658280824,
+        "view_path_id": 4480443400224277368,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "expValueText",
+          "levelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "bundle": "key_battle_assets_all_e61eafed92d7a2f73ec7b38da8a1d05e.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -4835153495802813922,
+        "view_path_id": 867940324745829848,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -1218112513354386502,
+        "view_path_id": 1772741418960406137,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2281424341347921665,
+        "view_path_id": 8204807497908844994,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 7851500033180600092,
+        "view_path_id": 5519463134165209695,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8661917130658280824,
+        "view_path_id": 4480443400224277368,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "abpValueText",
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "jobLevelUpText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "bundle": "key_battle_assets_all_b4052038d54b7467b53a823737a89ee6.bundle",
+    "rows": [
+      {
+        "controller_path_id": -8616140144593348115,
+        "view_path_id": 1652950453105622791,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -5248151232548776372,
+        "view_path_id": -6439268753309009505,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -4835153495802813922,
+        "view_path_id": 867940324745829848,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -1218112513354386502,
+        "view_path_id": 1772741418960406137,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": -71631053125992986,
+        "view_path_id": 8971826505729054031,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2135054997550219770,
+        "view_path_id": -5388153071350204580,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2281424341347921665,
+        "view_path_id": 8204807497908844994,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 2663048381522395890,
+        "view_path_id": 5394967427783672635,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4553226112457335057,
+        "view_path_id": 8615110256633258792,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 4803832194167421882,
+        "view_path_id": 8271711111968997044,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6299046046053367117,
+        "view_path_id": -7793687843808241631,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 6506540591230392015,
+        "view_path_id": 9182499943374166463,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 7851500033180600092,
+        "view_path_id": 5519463134165209695,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8046306472485259016,
+        "view_path_id": -1253321797045808483,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8661917130658280824,
+        "view_path_id": 4480443400224277368,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      },
+      {
+        "controller_path_id": 8893589179408627800,
+        "view_path_id": 7755394122947658624,
+        "name_is_descendant": true,
+        "result_names_in_controller_subtree": 1,
+        "text_fields": [
+          "afterLevelText",
+          "beforLevelText",
+          "charaLevelUpText",
+          "expValueText",
+          "nameText",
+          "nextValueText"
+        ]
+      }
+    ]
+  }
+]
