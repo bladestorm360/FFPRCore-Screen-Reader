@@ -1,4 +1,5 @@
 #include "entity_filter.h"
+#include "navigation_labels.h"
 #include <algorithm>
 #include <cmath>
 namespace field::filter_worker {
@@ -87,6 +88,16 @@ static Filtered build_impl(FilterInput& input) {
     });
     std::unordered_set<std::wstring> pads;
     std::unordered_map<int,size_t> exits;
+    std::unordered_map<std::wstring,size_t> events;
+    if(input.events)for(size_t index:result.order) {
+        check_cancelled(input);
+        const auto& row=input.rows[index];if(row.event_group.empty())continue;
+        const auto [at,inserted]=events.emplace(row.event_group,index);if(inserted)continue;
+        const auto& old=input.rows[at->second];
+        const bool better=row.route_distance>=0 && (old.route_distance<0 || row.route_distance<old.route_distance);
+        const bool fallback=row.route_distance<0 && old.route_distance<0 && input.sort && point_distance(row.position,input.player)<point_distance(old.position,input.player);
+        if(better||fallback)at->second=index;
+    }
     if (input.exits) for (size_t index : result.order) {
         check_cancelled(input);
         const auto& row = input.rows[index];
@@ -106,9 +117,18 @@ static Filtered build_impl(FilterInput& input) {
         check_cancelled(input);
         const auto& row = input.rows[index];
         if (input.world && row.kind == Kind::MapExit && row.route_distance < 0) return true;
-        // Preserve only the two existing, user-approved grouping guards.
+        // Group only explicitly enabled native identities, never spoken text.
         if (input.pads && !row.pad.empty() && !pads.insert(row.pad).second) return true;
         if (input.exits && row.kind == Kind::MapExit && row.destination > 0 && exits[row.destination] != index) return true;
+        if (input.events && !row.event_group.empty() && events[row.event_group] != index) {
+            // A remembered explicit objective is never rebound to the group's
+            // newly nearest sibling during movement or a floor continuation.
+            const bool continued=input.continued_goal && (row.remote_map?row.remote_map:input.current_map)==input.continued_map &&
+                (row.remote_map || row.cell_valid) && row.cell_x==input.continued_x && row.cell_y==input.continued_y &&
+                (input.continued_entity_id<0 || row.entity_id==input.continued_entity_id) &&
+                (input.continued_raw.empty() || row.raw_name==input.continued_raw);
+            if(!continued)return true;
+        }
         return input.layer && row.kind == Kind::Event && row.event_type == L"ToLayer";
     }), result.order.end());
     restore_selection(result, input);
@@ -135,14 +155,16 @@ static Categories categories_impl(FilterInput& input) {
         }
         if(matched&&all)row.available=false;
     }
+    if(!prepare_navigation_labels(input))throw Cancelled{};
     if (input.navigation) {
         std::vector<baked_nav::ExitTarget> targets;
         std::vector<size_t> indices;
         for (size_t i=0; i<input.rows.size(); ++i) {
             check_cancelled(input);
             const auto& row = input.rows[i];
-            if (row.kind != Kind::MapExit) continue;
-            targets.push_back({row.position,row.remote_map,row.destination,{row.cell_layer,row.cell_x,row.cell_y}});
+            if (row.kind != Kind::MapExit && (!input.events || row.event_group.empty())) continue;
+            targets.push_back({row.position,row.remote_map,row.destination,{row.cell_layer,row.cell_x,row.cell_y},
+                row.kind==Kind::MapExit?TargetKind::Transition:TargetKind::Infer});
             indices.push_back(i);
         }
         const auto distances = baked_nav::exit_distances(*input.navigation,targets,input.cancelled);

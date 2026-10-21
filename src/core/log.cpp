@@ -5,6 +5,7 @@
 #include <locale.h>
 #include <array>
 #include <atomic>
+#include <algorithm>
 #include "log.h"
 #include "timing.h"
 
@@ -48,6 +49,21 @@ size_t g_head = 0, g_count = 0;
 std::atomic<unsigned> g_dropped{0};
 size_t           g_bytes = 0;
 wchar_t          g_base[MAX_PATH]{};
+// Writer-owned health counters survive a failed file handle. Recovery appends to
+// the same part rather than truncating the evidence already on disk.
+uint64_t g_started = 0, g_written = 0, g_failed_writes = 0, g_lost_bytes = 0, g_total_dropped = 0;
+DWORD g_last_error = 0;
+unsigned g_part = 0;
+constexpr DWORD kHealthInterval = 10000;
+
+// Preserve a valid UTF-8 prefix and make diagnostic truncation visible.
+void mark_truncated(char* bytes, size_t capacity) {
+    constexpr char marker[] = " [truncated]";
+    size_t end = (std::min)(strlen(bytes), capacity - sizeof(marker));
+    while (end && (static_cast<unsigned char>(bytes[end]) & 0xC0) == 0x80) --end;
+    memcpy(bytes + end, marker, sizeof(marker));
+}
+void write_bytes(const char* data, int len);
 
 void build_path(wchar_t* out, size_t n, int index)
 {
@@ -67,7 +83,7 @@ void rotate()
     }
 }
 
-void open_current()
+void open_current(bool append = false)
 {
     wchar_t path[MAX_PATH];
     build_path(path, MAX_PATH, 0);
@@ -76,22 +92,51 @@ void open_current()
     // logs and silently skip others (that is why a ffpr_screen_reader.2.log went missing). Sharing
     // delete also lets the user copy or clear the log without closing the game.
     g_file = CreateFileW(path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_DELETE, nullptr,
-                         CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+                         append ? OPEN_ALWAYS : CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (g_file == INVALID_HANDLE_VALUE) { ++g_failed_writes; g_last_error = GetLastError(); return; }
+    if (append) {
+        LARGE_INTEGER zero{}, end{};
+        if (!SetFilePointerEx(g_file, zero, &end, FILE_END)) {
+            ++g_failed_writes; g_last_error = GetLastError(); CloseHandle(g_file); g_file = INVALID_HANDLE_VALUE; return;
+        }
+        g_bytes = static_cast<size_t>(end.QuadPart);
+        return;
+    }
     g_bytes = 0;
     if (g_file != INVALID_HANDLE_VALUE) {
         const unsigned char bom[3] = { 0xEF, 0xBB, 0xBF };
-        DWORD wrote = 0;
-        WriteFile(g_file, bom, 3, &wrote, nullptr);
-        g_bytes += wrote;
+        write_bytes(reinterpret_cast<const char*>(bom), 3);
+        char identity[160];
+        const int n = _snprintf_s(identity, sizeof(identity), _TRUNCATE,
+            "[log] session pid=%lu start-tick=%llu part=%u\r\n", GetCurrentProcessId(), g_started, g_part);
+        if (n > 0) write_bytes(identity, n);
     }
 }
 
 void write_bytes(const char* data, int len)
 {
-    if (g_file == INVALID_HANDLE_VALUE || len <= 0) return;
-    DWORD wrote = 0;
-    WriteFile(g_file, data, static_cast<DWORD>(len), &wrote, nullptr);
-    g_bytes += wrote;
+    if (len <= 0) return;
+    if (g_file == INVALID_HANDLE_VALUE) { g_lost_bytes += len; return; }
+    DWORD total = 0;
+    DWORD failure = ERROR_WRITE_FAULT;
+    // WriteFile may succeed with a short write. Retry only the remaining suffix;
+    // bound attempts even on a malfunctioning file/device. This is worker-only.
+    for (unsigned attempt = 0; total < static_cast<DWORD>(len) && attempt < 4; ++attempt) {
+        DWORD wrote = 0;
+        const bool ok = WriteFile(g_file, data + total, static_cast<DWORD>(len) - total, &wrote, nullptr) != FALSE;
+        if (!ok || !wrote || wrote > static_cast<DWORD>(len) - total) {
+            failure = ok ? ERROR_WRITE_FAULT : GetLastError(); break;
+        }
+        total += wrote;
+    }
+    g_bytes += total;
+    if (total != static_cast<DWORD>(len)) {
+        ++g_failed_writes; g_lost_bytes += len - total;
+        g_last_error = failure;
+        CloseHandle(g_file); g_file = INVALID_HANDLE_VALUE;
+        return;
+    }
+    ++g_written;
     // NO FlushFileBuffers here. WriteFile has already handed the bytes to the kernel's file
     // cache, and a crash of THIS process (the only crash the mod can cause) never loses
     // them - only a kernel crash or a power cut could. The flush that used to sit on this
@@ -105,6 +150,7 @@ void write_bytes(const char* data, int len)
         CloseHandle(g_file);
         g_file = INVALID_HANDLE_VALUE;
         rotate();
+        ++g_part;
         open_current();
     }
 }
@@ -113,10 +159,19 @@ void write_bytes(const char* data, int len)
 // A full/contended diagnostic queue drops logs, never game input or speech.
 void emit_utf8(const char* utf8_line)
 {
-    char out[2048];
+    char out[2048]{};
     DWORD ms = GetTickCount();
     int n = _snprintf_s(out, sizeof(out), _TRUNCATE, "[%7u.%03u] %s\r\n",
                         ms / 1000, ms % 1000, utf8_line);
+    if (n < 0) {
+        // _TRUNCATE returns -1 with a usable prefix. Retain it with an explicit
+        // marker, stopping before a partial UTF-8 code point instead of dropping
+        // the entire diagnostic (especially long CJK/braille text).
+        constexpr char marker[] = " [truncated]\r\n";
+        size_t end = (std::min)(strlen(out), sizeof(out) - sizeof(marker));
+        while (end && (static_cast<unsigned char>(out[end]) & 0xC0) == 0x80) --end;
+        memcpy(out + end, marker, sizeof(marker)); n = static_cast<int>(end + sizeof(marker) - 1);
+    }
     if (n <= 0 || !g_ready.load(std::memory_order_acquire)) return;
     if (!TryAcquireSRWLockExclusive(&g_lock)) { ++g_dropped; return; }
     if (g_count < kQueueSize) {
@@ -180,8 +235,21 @@ DWORD WINAPI writer(void*)
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
     rotate();
     open_current();
+    auto health = [] {
+        if (g_file == INVALID_HANDLE_VALUE) open_current(true);
+        char line[512];
+        const int n = _snprintf_s(line, sizeof(line), _TRUNCATE,
+            "[log] health pid=%lu session=%llu part=%u uptime-ms=%llu frame=%llu written=%llu dropped=%llu write-failures=%llu lost-bytes=%llu last-error=%lu\r\n",
+            GetCurrentProcessId(), g_started, g_part, GetTickCount64() - g_started,
+            timing::frame.load(std::memory_order_relaxed), g_written, g_total_dropped,
+            g_failed_writes, g_lost_bytes, g_last_error);
+        if (n > 0) write_bytes(line, n);
+    };
+    health();
+    uint64_t next_health = GetTickCount64() + kHealthInterval;
     for (;;) {
-        WaitForSingleObject(g_wake, INFINITE);
+        const DWORD wake = WaitForSingleObject(g_wake, kHealthInterval);
+        if (wake != WAIT_OBJECT_0 && wake != WAIT_TIMEOUT) break;
         for (;;) {
             Line line;
             AcquireSRWLockExclusive(&g_lock);
@@ -195,16 +263,21 @@ DWORD WINAPI writer(void*)
             if (!have) break;
             if(line.is_timing)write_timing(line.timing);
             else write_bytes(line.bytes, static_cast<int>(line.size));
+            // Sustained diagnostics must not postpone health/recovery forever.
+            if (GetTickCount64() >= next_health) { health(); next_health = GetTickCount64() + kHealthInterval; }
         }
         const unsigned lost = g_dropped.exchange(0);
         if (lost) {
+            g_total_dropped += lost;
             char line[128];
             const int n = _snprintf_s(line, sizeof(line), _TRUNCATE,
                 "[log] %u diagnostic lines dropped; producer never waits for disk\r\n", lost);
             if (n > 0) write_bytes(line, n);
         }
+        if (GetTickCount64() >= next_health) { health(); next_health = GetTickCount64() + kHealthInterval; }
         if (g_stopping.load(std::memory_order_acquire)) break;
     }
+    health();
     if (g_file != INVALID_HANDLE_VALUE) { CloseHandle(g_file); g_file = INVALID_HANDLE_VALUE; }
     return 0;
 }
@@ -227,6 +300,7 @@ void init()
     // blank line (2026-09-22). Formatting through a UTF-8 locale keeps them. The CRT is
     // static (/MT), so this locale object is ours alone and never touches the game's.
     g_utf8 = _create_locale(LC_ALL, ".UTF8");
+    g_started = GetTickCount64();
     g_wake = CreateEventW(nullptr, FALSE, FALSE, nullptr);
     if (!g_wake) return;
     g_worker = CreateThread(nullptr, 0, writer, nullptr, 0, nullptr);
@@ -261,6 +335,7 @@ void write(const char* fmt, ...)
     int n = g_utf8 ? _vsnprintf_s_l(buf, sizeof(buf), _TRUNCATE, fmt, g_utf8, ap)
                    : _vsnprintf_s(buf, sizeof(buf), _TRUNCATE, fmt, ap);
     if (n < 0 && buf[0] == 0) _snprintf_s(buf, sizeof(buf), _TRUNCATE, "(unformattable line: %s)", fmt);
+    else if (n < 0) mark_truncated(buf, sizeof(buf));
     va_end(ap);
     emit_utf8(buf);
 
@@ -270,10 +345,18 @@ void writeW(const wchar_t* prefix, const wchar_t* text)
 {
     if (!g_ready) return;
     wchar_t combined[1024];
-    _snwprintf_s(combined, sizeof(combined) / sizeof(combined[0]), _TRUNCATE, L"%s%s",
+    const int combined_size = _snwprintf_s(combined, sizeof(combined) / sizeof(combined[0]), _TRUNCATE, L"%s%s",
                  prefix ? prefix : L"", text ? text : L"");
+    if (combined_size < 0) {
+        constexpr wchar_t marker[] = L" [truncated]";
+        size_t end = (sizeof(combined) - sizeof(marker)) / sizeof(wchar_t);
+        if (end && text_util::high_surrogate(combined[end - 1])) --end;
+        memcpy(combined + end, marker, sizeof(marker));
+    }
 
-    char utf8[2048];
+    // A UTF-16 unit can require three UTF-8 bytes (four per surrogate pair).
+    // Conversion must fit before emit_utf8 applies its marked byte limit.
+    char utf8[4096];
     int n = WideCharToMultiByte(CP_UTF8, 0, combined, -1, utf8, sizeof(utf8), nullptr, nullptr);
     if (n > 0) emit_utf8(utf8);   // n includes the terminator; emit_utf8 uses strlen semantics
 

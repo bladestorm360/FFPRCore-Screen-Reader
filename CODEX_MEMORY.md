@@ -1,5 +1,46 @@
 # Native FFPR durable memory
 
+- October21 V0.9.4 prepared: [release/source/package record](docs/release.md#v094-preparation-and-publication-october-21).
+  User reports substantial improvement from a brief FF6 intro test; other states
+  and numbered result-name report remain open. Includes scene-trigger navigation,
+  event grouping, entrance suffixes and logging diagnostics. Build/all checks/smoke
+  and independent 28-file package/version/dependency checks pass; 6,864 names/zero
+  missing, zero undefined, 47 exports. x64 version 0.9.4.0, DLL f12a4d24027c0551175844688a63607747798d876b31f4649f9598570ab7e3aa.
+  ZIP acb6163efdfc92a321c8bc3c6d5db5faf4f1a95be996da3194a936106320f376
+  (5,901,425 bytes). Source/tag/publication pending. Installed games retain the
+  previously deployed functional build below; no game launch/probe/new deployment.
+  Sol owns release review/verification; no new delegation.
+
+- October21 navigation follow-up: [scene trigger grouping, Narshe
+  evidence and stable entrance letters](docs/re/NAVIGATION_GROUPS.md).
+  Event filter belongs to Navigation (Control+Shift+P); entrance suffixes to
+  Speech. Both persistent/default off. All 638 FF6 bakes inspected and rebaked
+  byte-identically; 2,433 all-six event routes pass, including Narshe with all
+  119 gates intact. Truthful gates offer reachable scene-trigger directions.
+  Deist/all-six entrance letters remain stable across sort/player changes.
+  Canonical build/all checks/smoke pass; native names zero missing/undefined,
+  47 exports. Local DLL E9A7392A4324F288B31397433F61E437BD3D49FD974AB22BA8C792306F981BDA
+  (9,767,936 bytes), receipts build_check/navigation_groups_2026_10_21/.
+  User then requested deployment: all six closed games now hash-match this DLL;
+  SDL matches; settings, waypoints and dependencies unchanged. Recovery and
+  verified receipt are in the same evidence folder. No publication/commit or
+  new game control. Gameplay/large multi-floor timing remain pending.
+  Luna's catalog-only eight-entry/12-locale task and
+  follow-up completed; Sol reviewed/validated the catalog and all implementation.
+
+- October21: [shared logging audit/hardening](docs/re/LOGGING.md) and
+  [all-six result-name ownership investigation](docs/re/RESULTS.md#result-name-provenance-october-21).
+  Authorized Timorensinck root log contains only1.813s of startup; missing full-session
+  cause and Character09 report remain open. New bounded raw-name/source identities,
+  buffer contents/generations, speech results, command/context traces, logger health,
+  marked Unicode truncation and file recovery are implemented/offline verified.
+  Canonical build/all checks and isolated47-export smoke pass; local diagnostic DLL
+  CED3B991C8D7B307B929A3C44B874F509C87F2BE2BD9BC5B6F2E1E3768926C12.
+  Initial logging checkpoint was local only. The combined navigation/logging
+  build above was subsequently deployed to all six at the user's request;
+  no publication or new commit/push in this task.
+  Do not substitute IDs or remove numbered names. No game launch/probe/delegation.
+
 - October16 V0.9.3 replacement published and verified: user withdrew the initialization report (default layout),
   then authorized replacing existing0.9.3 after current tasks without further gameplay
   testing. [All-six findings](docs/re/BASELINE_FIXES_2026_10_16.md),
@@ -660,3 +701,5 @@
 - Visible-only game speech, native results phases, central helpers, no new deduplication, controller/context gates, manual review and Autodetail requirements apply throughout.
 - Scoped user authorization, 2026-10-11: preserve legacy optional enemy HP Numbers/Percentage/Hidden modes, defaults and saved preferences in all six games. HP may be spoken without native rendering under this exception; hidden enemy status parameters remain excluded. See [approval and implementation](docs/AUDIT_2026_10.md).
 - Map routing now projects off-floor groups from read-only flag snapshots and navigation-only initializer programs, with live current-group overrides, collected-chest flags and future-floor blockers. Unknown control flow stays conservative; no native script execution or save writes. [Audit evidence and limits](docs/AUDIT_2026_10.md) replaces the earlier cross-floor gaps in [port status](docs/PORT_STATUS.md).
+
+Documentation standards and current cleanup: [initial designs, live feature status and game/mod architecture](../../../codex/templates/accessibility-mod/references/feature-documentation.md); [no game source in repositories or code snippets in docs](../../../codex/templates/accessibility-mod/references/repository-content.md); [2026-10-20 snippet/provenance audit and limits](../../../codex/research/repository-source-audit-2026-10-20/README.md). Keep this project’s feature register and both architecture maps linked here as they evolve; current cleanup does not certify complete feature documentation or source-free Git history.

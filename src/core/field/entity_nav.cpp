@@ -417,6 +417,8 @@ int install()
     actions::define("Settings.Changed.PathfindingFilter", [] { scanner::invalidate_map(); scanner::scan_entities(); });
     actions::define("Settings.Changed.SpoilTreasureChestContents", [] { scanner::invalidate_map(); scanner::scan_entities(); });
     actions::define("Settings.Changed.MapExitFilter", [] { scanner::reapply_filter(); });
+    actions::define("Settings.Changed.EventGroupFilter", [] { scanner::reapply_filter(); });
+    actions::define("Settings.Changed.EntranceSuffixes", [] { scanner::reapply_filter(); });
     actions::define("Settings.Changed.ToLayerFilter", [] { scanner::set_filter_to_layer(true); });
 
     // A route that goes on past a transition (user, 2026-10-11): 0.8 s after "Entering X", the

@@ -215,9 +215,9 @@ Local raw `ff2_gauge_native.c`, `ff2_rendered_followup.c` and
 
 SkillLevelProvider.SettingSkillLevel at RVA 6FC630 computes:
 
-`level = ExpUtility.GetExpLevel(1, points, 1)`
+The level comes from ExpUtility.GetExpLevel using category 1, current points and selector 1.
 
-`fill = 1 - GetNextExp(1, points, 1) / GetExpDifference(1, points, 1)`
+The fill is one minus remaining experience divided by the current-level threshold interval, using category/selector 1 for both queries.
 
 Both operands are native integer values. GetNextExp (382D30) is next-threshold minus
 current points; GetExpDifference (381C40) is next-threshold minus current-level threshold.
@@ -450,3 +450,110 @@ line 453, following a successfully installed CreateHitCount hook. The log record
 not a screenshot of that frame: the producer/source contract is confirmed, while direct
 visual comparison of that specific attack is not claimed. No hit-count gameplay code or
 rendered-value policy changed. Sol performed the audit; no delegation or game launch/probe.
+
+## Result-name provenance, October 21
+
+Diagnostic implementation status: **complete**; the existing phase reader remains
+implemented. Offline native/serialized ownership audits, canonical build/all checks
+and isolated DLL smoke pass. The original reported symptom
+is **unconfirmed/open**, not fixed by an assumed fallback removal. The user could not
+reproduce it locally and identifies wrong source data/number formatting as a possibility.
+No game launch, control, runtime probe or delegation was used.
+
+The authorized Timorensinck log in the workspace root covers only about1.813 seconds
+of FF1 startup and contains no result capture or submitted speech. It cannot establish
+which name field/phase produced Character09 or why a full session was not retained.
+[Logging findings and corrections](LOGGING.md) distinguish verified logger defects
+from that unresolved session.
+
+### Native and mod data flow
+
+All six `OwnedCharacterData.get_Name` implementations directly read the saved name
+string from `saveData.name`, whose offset is0x20. They do not derive a name from
+character/class ID or calculate a numbered label. Matching native producers pass
+the after-battle character's saved name into their own rendered name field. Learned
+skill messages also obtain the saved name before native message composition.
+
+| Game | Name getter RVA | Owned saveData offset | Result SetData producers calling that getter |
+| --- | --- | --- | --- |
+| FF1 | 0x3BCCF0 | 0x80 | 4 |
+| FF2 | 0x67F9B0 | 0x80 | 5, including nested weapon rows |
+| FF3 | 0x668F40 | 0x80 | 4 |
+| FF4 | 0x66EB00 | 0x80 | 4 |
+| FF5 | 0x5B3EC0 | 0x88 | 4 |
+| FF6 | 0x48CA30 | 0x90 | 4 |
+
+`tools/re/result_names_check.py` re-reads installed binaries without loading them,
+records binary/dump hashes and exact call sites, and checks the saved-name reads and
+text-writer paths. [Factual receipt](result_names_native.json). FF2's weapon header
+uses `UICommonProvider.SetText`, whose inspected wrapper calls `SafeTextSet`; treating
+only direct SafeTextSet calls as valid would incorrectly reject it. Learned-skill
+composition goes through native localized messages; its getter call is recorded,
+without claiming the existence of a separate direct text-field write. Folded native
+aliases are counted instead of being mistaken for unrelated calls.
+
+FF1 exact five-function read-only Ghidra analysis is preserved outside all Git trees
+at `../tools/name_diagnostics_20261021/ff1_names_native.c` relative to the repository.
+It confirms the direct saved-name getter, SafeTextSet's native setter handoff,
+`ResultCharacterListContentController.SetData` at0x5F9D00 and
+`ResultStatusUpController.SetData` at0x5FCBF0. Both populate the name from the
+after-battle character data; initialization clears name fields before use.
+Raw exploratory FF1/FF2 disassembly stays in that same local analysis directory.
+The first sandboxed Ghidra wrapper did not start Java; outside-sandbox read-only
+execution completed and reported discarded project changes. No game source is added
+to the repository or this document.
+
+The mod's Points buffer calls `point_details`/`row_lines` and
+`displayed::skill_row`/`texts` on native member content controllers. Growth uses
+the current `ResultStatusUpView.nameText` directly. FF2 weapon rows use each
+nested member view's own `nameText`. Shared `displayed::text` reads
+`UnityEngine.UI.Text.m_Text`, then normal markup/whitespace cleanup; there is no
+numeric conversion of player names in these paths.
+
+`tools/re/result_name_views_check.py` checks real installed battle bundles:
+16/16/16/19/16/16 serialized EXP content controllers in FF1–FF6,99 total, each
+contain exactly their own referenced name field in the descendant subtree. None
+of those inspected controller roots contains a sibling result row's name. This
+addresses the generic recursive reader's source boundary, but does not certify
+runtime pool contents, lifetime or visibility on the tester's machine.
+[Serialized ownership receipt](result_name_views.json).
+
+### Capture, lifetime and diagnostics
+
+Native SetData originals complete before the result observer. Pending pages read
+only after their earliest frame during native result-menu updates. Phase/owner
+generations cancel obsolete pages. `ui::review::show_impl` moves copied strings,
+values and options into `worker_job`; its native-owner continuation validates the
+current generation and visible owner before publication. Workers cannot walk live
+Unity objects. Source review found no borrowed name-string reference carried into
+the worker, and the current source does not synthesize numbered fallback names here.
+These facts narrow the investigation, without proving the reported intermittent
+case impossible or attributing it to a screen reader.
+
+Each accepted native capture now includes phase/generation and a bounded raw name
+sample with content/view/nameText integer identities. At most128 rows and128 UTF-16
+units per name are copied through `il2cpp::read_string`, only from a visible name
+component. Raw markup stays available to compare against the cleaned assembled
+row. These are diagnostic tokens and owned strings, never worker-usable pointers.
+The existing review worker records source names and full bounded buffer contents;
+owner publication and speech-worker submission are separate records. Hidden-owner
+or missing-total waits log once per pending page/reason; this diagnostic state does
+not change readiness, event guards, phase order, speech or cancellation.
+
+No behavioral name replacement, digit stripping or text deduplication was added.
+A player may legitimately choose a numbered name. Existing controls, Auto/manual
+language handling, Autodetail and changed-stat settings remain authoritative.
+Source and serialized-layout evidence currently reveal no wrong-row defect to fix.
+
+`tools/battle_results_check.cpp` adds all-six renamed Unicode/digit growth headings,
+same-row source provenance, automatic/manual agreement, old-name replacement,
+all-five EXP adapter completion names and FF2 nested weapon names. It also preserves
+a legitimately displayed Character09 instead of hiding the evidence by a heuristic.
+The fixture models ready rendered views, not the tester's native allocation/reuse
+or audible screen-reader behavior. [Prioritized nonvisual procedure](../TESTING.md#results-names-and-log-continuity-october-21)
+keeps those remaining facts separate from offline verification.
+
+The initial diagnostic-build hash and focused receipts are in
+[the logging receipt](LOGGING.md#final-offline-receipt-october21); its delivery follow-up
+records the later combined deployment and 0.9.4 release preparation. This work adds evidence
+for a recurrence; it does not certify that every machine's intermittent name issue is fixed.

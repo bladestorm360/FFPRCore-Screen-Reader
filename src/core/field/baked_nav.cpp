@@ -23,6 +23,7 @@
 #include "../background.h"
 #include "../worker_job.h"
 #include "capture_budget.h"
+#include "navigation_progress.h"
 #include "../system/system.h"
 #include "../modtext.h"
 #include "../say.h"
@@ -2130,6 +2131,15 @@ Planned plan_snapshot(RouteSnapshot& snapshot) {
     if (!route_to_goal(nullptr, nullptr, snapshot.goal, snapshot.kind, snapshot.name, result.path)) {
         result.path.reason = result.path.error = T(L"Navigation map data unavailable");
     }
+    if(result.path.reason==T(L"Story gated")) {
+        auto movement=walk_request(*snapshot.submap,result.start);world_mode(movement);
+        const auto live=live_blockers(*snapshot.submap,baked::grids(*snapshot.submap),{});
+        movement.blocked=live.hard();movement.directional=live.directional;
+        movement.live_hazards=true;movement.hazards=live.triggers;
+        movement.live_traps=true;movement.traps=live.traps;
+        Phase next;next.cells=reachable_event_route(std::move(movement));
+        if(!next.cells.empty())result.path.reason=TF(L"Story gated. Reachable scene trigger: {0}.",{describe({next})});
+    }
     result.active = std::make_shared<ActiveRoute>(std::move(snapshot.active)); result.pending = std::move(snapshot.pending);
     result.path.warning = route_warning(result.path, snapshot.goal);
     result.compute_ms = (frame::now() - compute_started) * 1000;
@@ -2234,11 +2244,25 @@ BrowsePlanned plan_browse_snapshot(RouteSnapshot& snapshot) {
     result.route.direct = path.success && !path.next_map_id && !path.required_trap && !path.event_on_route;
     SnapshotScope scope(snapshot);
     const auto live = live_blockers(*snapshot.submap, baked::grids(*snapshot.submap), {});
+    const bool selected_trap = snapshot.goal.map_id == snapshot.map_id &&
+        std::any_of(baked::grids(*snapshot.submap).objects.begin(),baked::grids(*snapshot.submap).objects.end(),
+            [&](const auto& object) { return baked::is_trap(object) && object.contains(snapshot.goal.cell.x,snapshot.goal.cell.y); });
+    if(selected_trap)result.route.direct=false;
+    // The selected step-on event is a usable destination. Do not count its own
+    // final cell as an intervening event a second time after find() excluded it.
+    std::vector<Cell> selected;
+    if (!selected_trap && snapshot.kind == TargetKind::Infer && snapshot.goal.map_id == snapshot.map_id &&
+        std::any_of(baked::grids(*snapshot.submap).objects.begin(), baked::grids(*snapshot.submap).objects.end(),
+            [&](const auto& object) { return baked_route::step_event(object) && !baked::is_trap(object) && object.contains(snapshot.goal.cell.x,snapshot.goal.cell.y); }))
+        selected = goals_for(*snapshot.submap,snapshot.goal.cell,snapshot.kind).cells;
     for (const auto& phase : path.walk_phases)
-        if (!phase.action_before.empty() || !phase.action_after.empty() || event_on_route(phase.cells, live.triggers))
+        if (!phase.action_before.empty() || !phase.action_after.empty() || event_on_route(phase.cells, live.triggers, selected))
             result.route.direct = false;
     if (path.success && path.next_map_id != planned.map_id) result.route.via_map_id = path.next_map_id;
     result.route.reason = path.reason;
+    if(selected_trap && result.route.reason.empty())result.route.reason=T(L"Warning: a trap is required on this route.");
+    if (!result.route.direct && result.route.reason.empty() && path.success)
+        result.route.reason = route_warning(path,snapshot.goal);
     // Route geometry, phase text and temporary plans are destroyed here on the
     // worker. Only small owned evidence goes back to the native owner.
     return result;
@@ -2379,6 +2403,15 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
             continue;
         }
         const Cell at = cell_of(*sm,target.position,snapshot.layer);
+        if(target.kind==TargetKind::Infer) {
+            // The same flood can rank step-on event targets: the goal edge may
+            // enter that event, but may not cross a different active trigger.
+            auto movement=req;
+            movement.goals=baked_route::goals_for(movement,at,baked_route::GoalKind::Infer).cells;
+            movement.allow_trap_goal=true;
+            result[i]=baked_route::transition_distance(movement,reach);
+            continue;
+        }
         for (const auto& object : g.objects) {
             if (object.type != baked::ObjType::GotoMap || object.a != target.destination || !object.contains(at.x,at.y)) continue;
             if (!snapshot.state.active(*sm,object)) continue;

@@ -162,6 +162,7 @@ Checked in this order:
 | H | `Mod.AnnounceCharacterStatus` | Global |
 | M | `Mod.AnnounceCurrentMap` | Global |
 | Shift+M | `Mod.ToggleMapExitFilter` | Global |
+| Ctrl+Shift+P | `Mod.ToggleEventGroupFilter`: persistent Navigation event grouping, default off; both keymaps | Field |
 | Tab | clears a stuck battle flag: if `BattleStateHelper.IsInBattle` and not `BattleStateHelper.IsBattleControllerAlive`, runs `BattleStateHelper.ForceClearBattleState` | Global |
 | V | `GlobalHotkeyHandler.AnnounceCurrentVehicle` (speaks text query `MoveStateHelper.GetMoveStateName`) | Global |
 | R | `MessageWindowPatches.RepeatLastDialogue` if `MessageWindowPatches.IsInDialogue` | Global |

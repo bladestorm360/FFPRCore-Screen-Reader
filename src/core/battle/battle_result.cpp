@@ -153,21 +153,58 @@ struct PendingPage {
     Configure configure;
     unsigned generation;
     uint64_t earliest_frame;
+    bool hidden_logged = false, totals_logged = false;
 };
 std::optional<PendingPage> g_pending_page;
+std::vector<ui::review::NameSource> source_names(void* owner)
+{
+    std::vector<ui::review::NameSource> names;
+    auto add = [&](void* content, int index) {
+        if (!displayed::container_visible(content)) return;
+        void* view = displayed::field(content, "view");
+        void* name_text = displayed::field(view, "nameText");
+        wchar_t sample[129]{};
+        // Diagnostics copy at most 128 UTF-16 units, independent of an abnormal
+        // native string length. This is the same Text.m_Text source used by the
+        // regular reader; keep markup here to compare raw source with assembly.
+        if (displayed::visible(name_text))
+            il2cpp::read_string(static_cast<il2cpp::String*>(displayed::field(name_text, "m_Text")), sample, 129);
+        names.push_back({index, reinterpret_cast<uintptr_t>(content), reinterpret_cast<uintptr_t>(view),
+            reinterpret_cast<uintptr_t>(name_text), sample});
+    };
+    if (g_phase == ResultPhase::Status) add(owner, 0);
+    else if (g_phase == ResultPhase::Points || g_phase == ResultPhase::Weapon) {
+        void* controller = displayed::field(owner, g_phase == ResultPhase::Weapon ?
+            "skillLevelController" : "characterListConteroller");
+        void* list = displayed::field(controller, "contentList");
+        const int count = unity::list_count(list);
+        if (count < 0 || count > 128) return names;
+        for (int i = 0; i < count; ++i) add(unity::list_at(list, i), i);
+    }
+    return names;
+}
 void read_pending_page()
 {
     if (!g_pending_page) return;
     if (g_pending_page->generation != g_generation || g_phase == ResultPhase::None ||
-        !unity::alive(g_pending_page->owner)) { g_pending_page.reset(); return; }
-    if (frame::count() < g_pending_page->earliest_frame ||
-        !displayed::container_visible(g_pending_page->owner)) return;
+        !unity::alive(g_pending_page->owner)) {
+        LOGF("[Battle Result] cancelled pending generation=%u phase=%d", g_pending_page->generation, static_cast<int>(g_phase));
+        g_pending_page.reset(); return;
+    }
+    if (frame::count() < g_pending_page->earliest_frame) return;
+    if (!displayed::container_visible(g_pending_page->owner)) {
+        if (!g_pending_page->hidden_logged) LOGF("[Battle Result] pending generation=%u waiting for visible owner", g_pending_page->generation);
+        g_pending_page->hidden_logged = true; return;
+    }
     auto page = *g_pending_page;
     auto summary = page.summary ? page.summary() : std::vector<std::wstring>{};
     auto notifications = page.notifications ? page.notifications() : std::vector<std::wstring>{};
     // Read a small rendered total first while a reward panel is fading. Do not
     // traverse its full table (or all descendant text) on every native update.
-    if ((g_phase == ResultPhase::Points || g_phase == ResultPhase::Weapon) && summary.empty() && notifications.empty()) return;
+    if ((g_phase == ResultPhase::Points || g_phase == ResultPhase::Weapon) && summary.empty() && notifications.empty()) {
+        if (!g_pending_page->totals_logged) LOGF("[Battle Result] pending generation=%u waiting for rendered totals/notifications", page.generation);
+        g_pending_page->totals_logged = true; return;
+    }
     auto lines = page.read();
     ui::review::Options options;
     options.include_headline = true;
@@ -179,6 +216,12 @@ void read_pending_page()
         options.notification_session = g_notification_session;
     }
     if (page.configure) page.configure(options);
+    // Keep the exact row/view/name-field provenance alongside the owned text.
+    // This distinguishes a wrong pooled/native source from later formatting or
+    // speech. Logging uses the existing buffer worker, never native pointers.
+    options.producer_phase = static_cast<int>(g_phase);
+    options.producer_generation = page.generation;
+    options.source_names = source_names(page.owner);
     const auto heading = page.title();
     g_pending_page.reset();
     LOGF("[Battle Result] displayed phase %d: %zu detail rows, %zu totals",
@@ -193,6 +236,7 @@ void later(void* owner, std::function<std::wstring()> title, ReadLines read,
     frame::cancel_label("BattleResult.Read");
     g_pending_page = PendingPage{owner, std::move(title), std::move(read), std::move(summary), std::move(notifications),
                                 std::move(configure), generation, frame::count() + 1};
+    LOGF("[Battle Result] pending generation=%u phase=%d owner=%p frame=%llu", generation, static_cast<int>(g_phase), owner, frame::count());
     // Only the result controller's post-update event can read this page. Its
     // outer init queues an inner state transition: a global next-frame callback
     // can run before that transition has populated the new views.

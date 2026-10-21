@@ -599,7 +599,9 @@ void apply_filter() {
     input->state=std::make_shared<map_state::Resolver>();
     input->category = g_category; input->sort = player_local_position(input->player);
     input->pads = game::flags().has_vehicle_pads; input->exits = settings::get_bool("MapExitFilter", false);
-    input->navigation = baked_nav::begin_exit_capture(pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,input->exits);
+    input->events = settings::get_bool(ui::prefs::kEventGroupFilter,ui::prefs::kEventGroupFilterDefault);
+    input->entrance_suffixes = settings::get_bool(ui::prefs::kEntranceSuffixes,ui::prefs::kEntranceSuffixesDefault);
+    input->navigation = baked_nav::begin_exit_capture(pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,input->exits || input->events);
     input->world = input->navigation && baked_nav::exit_snapshot_world(*input->navigation);
     const bool navigation_filtered = input->navigation != nullptr;
     const int vehicle = input->navigation ? baked_nav::exit_snapshot_vehicle(*input->navigation) : 0;
@@ -638,13 +640,21 @@ void apply_filter() {
             row.position = entity->position(); row.numbering_position = entity->pos;
             row.remote_map = entity->remote_map_id; row.cell_x = entity->cell_x; row.cell_y = entity->cell_y;
             row.cell_layer = entity->cell_layer;
+            if (!row.remote_map && (input->events || input->entrance_suffixes)) {
+                const int layer = entity->game ? game_object_layer(entity->game)-9 : -1;
+                row.cell_layer = layer>=0 && layer<=2 ? layer : -1;
+            }
             if (!row.remote_map && ((input->continued_goal && map_id == continued_map) ||
                 (input->selected_has && map_id == input->selected_map && row.entity_id == input->selected_entity_id))) {
                 baked_route::Cell cell;
                 row.cell_valid = baked_nav::cell_at(field::map_handle(), row.position, cell);
                 if (row.cell_valid) { row.cell_x = cell.x; row.cell_y = cell.y; }
             }
-            row.destination = entity->dest_map_id; row.name = entity->name; row.event_type = entity->event_type;
+            row.destination = entity->dest_map_id;
+            // Reapply from the original label so toggle changes never accumulate
+            // suffixes, and disabling the preference restores the game label.
+            row.name = entity->kind == Kind::MapExit ? entity->converted_name : entity->name;
+            row.event_type = entity->event_type;
             if (input->pads) row.pad = vehicle_pad_name(entity);
             if (row.kind == Kind::NPC) row.label = npc_display_label(entity->converted_name);
             row.selected = entity == g_sel;

@@ -20,11 +20,14 @@ struct FilterRow {
     bool cell_valid = false;
     int route_distance = -1;
     int entity_id = -1;
+    // Owned bake identity, derived on the worker; never group translated labels.
+    std::wstring event_group;
 };
 struct FilterInput {
     std::vector<FilterRow> rows;
     Vec3 player, selected_position;
     bool sort = false, pads = false, exits = false, layer = false, selected_has = false;
+    bool events = false, entrance_suffixes = false;
     int selected_remote = 0, selected_x = 0, selected_y = 0;
     Category category = Category::All, selected_category = Category::All;
     std::wstring selected_name;

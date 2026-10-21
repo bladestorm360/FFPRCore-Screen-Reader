@@ -100,6 +100,11 @@ if errorlevel 1 (
 )
 
 echo Checking every game-code name against each game's dump.cs...
+"out\checks\navigation_groups_check.exe" > build_check\navigation_groups_report.txt 2>&1
+if errorlevel 1 (
+    echo Navigation groups check FAILED - see build_check\navigation_groups_report.txt
+    exit /b 1
+)
 "out\checks\autowalk_check.exe" > build_check\autowalk_report.txt 2>&1
 if errorlevel 1 (
     echo Autowalk check FAILED - see build_check\autowalk_report.txt

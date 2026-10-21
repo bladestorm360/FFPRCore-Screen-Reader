@@ -48,54 +48,28 @@ Plan: `D:\Games\Dev\Unity\FFPR\UNIFIED_MOD_PLAN.md`. Open issues: `..\OPEN_ISSUE
 | `frame.h` | `frame::next_frame`, `after_frames`, `after_seconds`, `every_frame` (bounded), `cancel`, `cancel_label`, `subscribe` (per-frame: input/audio only), `post` (from another thread), `now` |
 | `say.h` | `ffpr::say(text, interrupt = true)`, `ffpr::say_queued`, `ffpr::silence`, `ffpr::last_spoken` |
 | `modtext.h` | `T(L"key")`, `TF(L"key", {a, b})`, `modtext::lang()`, `data::game_json("translation")`, `data::game_json("entitynames")` |
-| `settings.h` | `settings::get_bool("WallTones", false)`, `set_bool`, `get_int`, `toggle` … keys = the MelonPreferences entry names, same defaults |
+| `settings.h` | settings::get_bool for WallTones, default false, `set_bool`, `get_int`, `toggle` … keys = the MelonPreferences entry names, same defaults |
 | `dedup.h` | `dedup::index/object/text/index_text(ctx, value, scope)`, `reset`, `reset_scope` |
 | `unity.h` | `find_object`, `find_objects`, `get_component`, `components_in_children`, `texts`, `ui_text`, `first_text`, `active_in_hierarchy`, `name`, `transform`, `parent`, `child`, `child_count`, `find_child`, `find_descendant`, `position`, `array_*`, `list_*`, `dict_for_each`, `alive` |
 | `ui_util.h` | `ui::menu_position(text, index, count)`, `ui::cursor_index(cursor)`, `ui::state_tag(controller, field)`, `ui::list_item` |
 | `core.h` | `core::Install`, `actions::define/run`, `menu_state::*` (FF1 MenuStateRegistry), `events::on/fire` |
 | `game.h` | `game::current()`, `game::is(game::Id::FF1)`, `game::flags()` |
 | `text.h` | `text::clean`, `strip_markup`, `collapse`, `trim`, `format`, `num`, `join`, `from_utf8`, `to_utf8` |
-| `log.h` | `LOGF("fmt %d %ls", n, wide)` (UTF-8 log; `%ls` for `const wchar_t*`), `LOGW(L"prefix: ", wide)` |
+| `log.h` | LOGF with numeric and wide-string formatting (UTF-8 log; `%ls` for `const wchar_t*`), LOGW for a wide-text prefix and message |
 | `il2cpp.h` | low level: `read_field<T>(obj, off)`, `object_class_name`, `is_a`, `find_class`, `find_nested_prefix` (coroutine state machines) |
 
 ## Converting C# patterns
 
 **A Harmony postfix:**
 
-```cpp
-// Ports FF1 Patches/MessageWindowPatches.cs (SetContent postfix).
-namespace {
-ref::Class  kMwm{"Last.Message", "MessageWindowManager"};
-ref::Field  fMessageList{kMwm, "messageList"};
-ref::Method mSetContent{kMwm, "SetContent", 0};
+The FF1 MessageWindowPatches.SetContent postfix maps to the native Last.Message.MessageWindowManager.SetContent hook. Resolve the messageList field and zero-explicit-argument method through the central reflection helpers, preserve the hidden method-info argument, and call the original before observing the ready list. Use hooks::guarded for the observation and the central ffpr::say output route. The reference registration used the MessageWindow installer at priority 100 through hooks::attach. See the actual message feature, core installer and shared hooks/reflection sources; this is an architectural mapping rather than a copied detour.
 
-using SetContent_t = void (*)(void* self, const void* mi);
-SetContent_t o_SetContent;
-
-void d_SetContent(void* self, const void* mi)
-{
-    o_SetContent(self, mi);                     // postfix: the game runs first
-    hooks::guarded("MessageWindow.SetContent", [&] {
-        void* list = ref::rd<void*>(self, fMessageList);
-        ...
-        ffpr::say(line, false);
-    });
-}
-
-int install()
-{
-    return hooks::attach(mSetContent, &d_SetContent, &o_SetContent) ? 1 : 0;
-}
-core::Install s_install{"MessageWindow", &install, 100};
-}
-```
-
-- **Signature:** every IL2CPP method is `R fn(void* self, args..., const void* methodInfo)`;
+- **Signature:** every IL2CPP method is a return value, instance receiver, explicit arguments and hidden method-info pointer;
   static methods drop `self`. Types: `bool`, `int32_t`, `float`, enums as `int32_t`, references as
   `void*`, `Vector3`/`Vector2` structs by value (`unity::Vec3`). Get the exact parameter list from
   `dump.cs` for EVERY game the hook applies to.
-- **Prefix** = body before calling the original. A prefix that `return false` = don't call the
-  original. `ref __result` = take the original's return value, change it, return it.
+- **Prefix** = body before calling the original. A prefix that returns false = don't call the
+  original. the Harmony result-reference parameter = take the original's return value, change it, return it.
 - `__instance` = `self`. `__0`, `__1` = the parameters in order.
 - **Overloads:** `ref::Method` resolves by name and argument count. If two overloads have the same
   count, find another hook point or resolve with `il2cpp::find_method_overload_param` in your
@@ -107,19 +81,19 @@ core::Install s_install{"MessageWindow", &install, 100};
   hook. OPEN_ISSUES.md "Cross-cutting lessons" lists known traps. Two areas hooking the same
   method is fine for the same reason (Harmony allowed it too); always call your original.
 - **Typed property reads** (`instance.Foo`) → `ref::Field` on the backing field
-  (`<Foo>k__BackingField`) or the plain field, or `ref::call<T>(mGetFoo, obj)` for a computed getter.
+  (`<Foo>k__BackingField`) or the plain field, or the typed ref::call helper for the resolved getter and receiver for a computed getter.
 - **IL2CppOffsets / raw pointer offsets** → a `ref::Field` by NAME. Find the field name in
   `dump.cs` from the C# comment or the offset. The native mod has no offset tables.
-- `FindObjectOfType<T>()` → `unity::find_object(kT)`. `GetComponentsInChildren<Text>()` →
-  `unity::texts(obj)`, `unity::ui_text(t)`.
+- FindObjectOfType → unity::find_object with the resolved class. GetComponentsInChildren for Text →
+  unity::texts for the object, unity::ui_text for each text component.
 - `il2cpp List<T>` → `unity::list_count` / `list_at`; arrays → `array_length` / `array_at`.
-- **Coroutines:** `yield return null` then work → `frame::next_frame([=]{ … })`. N frames →
+- **Coroutines:** yielding until the next frame then work → frame::next_frame. N frames →
   `after_frames`. `WaitForSeconds(s)` → `after_seconds`. A loop that waits for UI to fill in →
-  `frame::every_frame([=]{ … return keep_going; }, "label", max_frames)`. Never capture raw game
+  frame::every_frame with a continuation condition, diagnostic label and maximum-frame bound. Never capture raw game
   pointers in a deferred task unless you re-check them with `unity::alive` (Unity objects) when it
   runs; prefer re-finding the object.
-- `SpeakText(text, interrupt)` → `ffpr::say(text, interrupt)` (default interrupt = true, as in FF1).
-- `PreferencesManager.WallTonesEnabled` → `settings::get_bool("WallTones", false)` (key and
+- SpeakText → ffpr::say with the same text and interruption choice (default interrupt = true, as in FF1).
+- `PreferencesManager.WallTonesEnabled` → settings::get_bool for WallTones, default false (key and
   default from FF1's `Core/PreferencesManager.cs`).
 - `MenuStateRegistry` → `menu_state::`. `lastAnnouncedX` variables → `dedup::` with a context
   name `Area.What` (see docs/DEDUP_INVENTORY.md when it exists).
@@ -130,9 +104,7 @@ core::Install s_install{"MessageWindow", &install, 100};
 
 Input never calls a feature directly. A feature defines a named action and input binds to it:
 
-```cpp
-actions::define("StatusNavigationReader.NavigateNext", [] { navigate_next(); });
-```
+Register StatusNavigationReader.NavigateNext in the central actions registry, pointing to the feature’s navigate_next handler. Keyboard and controller bindings resolve the same named action; see the actual actions definition API and status-navigation source.
 
 **Naming:** `Class.Method` after the C# method that implements it. Methods of
 `FFI_ScreenReaderMod` are `Mod.Method` (e.g. `Mod.AnnounceGilAmount`, `Mod.CycleNext`). The agent
@@ -143,17 +115,17 @@ name per argument (`Mod.TeleportNorth` … `Mod.TeleportWest`).
 
 ## Shared state between areas
 
-- `queries::define("MessageWindowPatches.IsInDialogue", [] { return g_in_dialogue; })` publishes a
-  state; `queries::is("MessageWindowPatches.IsInDialogue")` reads it anywhere (false when nobody
+- queries::define for MessageWindowPatches.IsInDialogue, backed by g_in_dialogue publishes a
+  state; queries::is for that named state reads it anywhere (false when nobody
   defines it). Text queries: `queries::define_text` / `queries::text`. Same naming rule as
   actions: the C# member it ports. Define every `Is…` / `IsActive` property of your C# files
   that another area reads (grep the old mod for `YourClass.` uses outside your files).
-- After toggling a setting, run `actions::run("Settings.Changed.<Key>")` only if
-  `actions::defined(...)`; the area that reacts (audio loops, entity filters) defines it.
+- After toggling a setting, run actions::run for the named Settings.Changed action only if
+  actions::defined confirms it exists; the area that reacts (audio loops, entity filters) defines it.
 - `sound::` (`src/core/audio/sound.h`) is the sound-effect contract (FF1 SoundPlayer); call it
   from any area.
 - `menu_state::` — which menu is active (FF1 keys in core.h).
-- `events::fire(events::Kind::BattleStart)` etc. Fire from the hook that knows it happened;
+- events::fire for BattleStart etc. Fire from the hook that knows it happened;
   subscribe with `events::on`.
 - For anything else another area needs (e.g. "is a dialogue window open"), expose a small
   function in your area's header and name it in your report.

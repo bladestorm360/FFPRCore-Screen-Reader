@@ -129,6 +129,8 @@ int main()
     fixture::values[ui::prefs::kStatDeltaMode] = 1;
     const std::map<std::string, std::wstring> moved_settings = {
         {ui::prefs::kAutowalk, L"Navigation"},
+        {ui::prefs::kEventGroupFilter, L"Navigation"},
+        {ui::prefs::kEntranceSuffixes, L"Speech"},
         {ui::prefs::kSpeechEnabled, L"Speech"},
         {ui::prefs::kResultNotificationsOnce, L"Speech"},
         {ui::prefs::kSpeakAutowalkPath, L"Navigation"},
@@ -171,6 +173,14 @@ int main()
                        "Game speech is the first Speech row and defaults on");
             }
             if (item.key) {
+                if (std::string(item.key)==ui::prefs::kEventGroupFilter || std::string(item.key)==ui::prefs::kEntranceSuffixes) {
+                    expect(item.kind==ui::mod_menu::Kind::Toggle && !item.bool_def,"new navigation naming preferences are independent default-off toggles");
+                    fixture::values.erase(item.key);
+                    ui::mod_menu::flip(item);
+                    expect(settings::get_bool(item.key,false),"new preference persists through the actual menu toggle");
+                    ui::mod_menu::flip(item);
+                    expect(!settings::get_bool(item.key,true),"new preference can be disabled independently");
+                }
                 if (std::string(item.key) == ui::prefs::kSpeechEnabled) {
                     ++speech_rows;
                     expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && item.bool_def,

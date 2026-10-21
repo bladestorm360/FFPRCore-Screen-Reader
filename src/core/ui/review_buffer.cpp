@@ -13,6 +13,7 @@
 #include "../ui_util.h"
 #include "../input/input.h"
 #include "../worker_job.h"
+#include "../log.h"
 
 namespace ui::review {
 namespace {
@@ -31,6 +32,36 @@ std::wstring g_phase_changes;
 using Action = void (*)();
 std::deque<Action> g_pending_actions;
 Domain g_domain = Domain::Results;
+// Log only owned text on the review worker. A capture can be cancelled before
+// publication; the separate published record below distinguishes that case.
+// Keep diagnostic work bounded independently of native row/formatting bounds.
+void log_capture(uint64_t generation, const std::wstring& headline,
+                 const std::vector<std::wstring>& lines, const Options& options, bool autodetail) {
+    LOGF("[ReviewBuffer] capture generation=%llu domain=%d rows=%zu totals=%zu notifications=%zu autodetail=%d announce=%d deferred=%d phase=%d producer-generation=%u",
+         generation, static_cast<int>(options.domain), lines.size(), options.summary.size(),
+         options.notifications.size(), autodetail, options.announce, options.defer_details,
+         options.producer_phase, options.producer_generation);
+    for (size_t i = 0; i < options.source_names.size() && i < 128; ++i) {
+        const auto& source = options.source_names[i];
+        LOGF("[ReviewBuffer] generation=%llu name-source[%d] content=0x%llX view=0x%llX nameText=0x%llX chars=%zu: %.128ls",
+             generation, source.row, source.content, source.view, source.name_text, source.name.size(), source.name.c_str());
+    }
+    size_t rows = 0, characters = 0;
+    auto row = [&](const char* kind, size_t index, const std::wstring& value) {
+        if (rows >= 128 || characters >= 16384) return;
+        const size_t length = (std::min)({value.size(), size_t{512}, size_t{16384} - characters});
+        LOGF("[ReviewBuffer] generation=%llu %s[%zu] chars=%zu%s: %.*ls", generation, kind, index,
+             value.size(), length < value.size() ? " truncated" : "", static_cast<int>(length), value.c_str());
+        ++rows; characters += length;
+    };
+    row("headline", 0, headline);
+    auto list = [&](const char* kind, const std::vector<std::wstring>& values) {
+        for (size_t i = 0; i < values.size() && rows < 128 && characters < 16384; ++i) row(kind, i, values[i]);
+    };
+    list("total", options.summary); list("notification", options.notifications);
+    list("detail", lines); if (options.brief) list("change", *options.brief);
+    if (rows >= 128 || characters >= 16384) LOGF("[ReviewBuffer] generation=%llu diagnostic row/text limit reached", generation);
+}
 void speak(std::wstring line) {
     if (!active() || line.empty()) return;
     ffpr::say(ui::menu_position(line, g_buffer.index(), g_buffer.count()), true);
@@ -129,8 +160,9 @@ void show_impl(void* owner, const std::wstring& headline, std::vector<std::wstri
     };
     worker_job::start(g_work, Input{headline, std::move(lines), std::move(options), prefs::auto_detail_enabled(),
                                   notification_history, filter_notifications},
-        [](Input& input) {
+        [generation](Input& input) {
             Built built; auto& options = input.options;
+            log_capture(generation, input.headline, input.lines, options, input.autodetail);
             if (input.filter_notifications) {
                 auto selection = select_result_notifications(options.notifications, input.history);
                 options.notifications = std::move(selection.lines);
@@ -154,6 +186,8 @@ void show_impl(void* owner, const std::wstring& headline, std::vector<std::wstri
             return built;
         }, [owner, generation, notification_session, filter_notifications](Built built) {
             if (generation != g_generation || g_owner != owner || !displayed::container_visible(owner)) return;
+            LOGF("[ReviewBuffer] published generation=%llu domain=%d rows=%zu", generation,
+                 static_cast<int>(built.options.domain), built.lines.size());
             g_build_pending = false;
             g_options = std::move(built.options); g_lines = std::move(built.lines);
             g_options.notification_session = notification_session;

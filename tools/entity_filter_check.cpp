@@ -1,4 +1,4 @@
-// check-sources: field/entity_filter.cpp field/npc_names.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
+// check-sources: field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
 #include "../src/core/field/entity_filter.h"
 #include <cstdio>
 #include <thread>

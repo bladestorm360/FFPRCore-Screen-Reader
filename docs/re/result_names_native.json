@@ -1,0 +1,2039 @@
+[
+  {
+    "game": 1,
+    "binary_sha256": "33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108",
+    "dump_sha256": "8313bacc58a606108db7dc0786b4fc5bcd57dc07e171cb8b051c2a68cd817740",
+    "name_getter_rva": "0x3bccf0",
+    "saved_name_field": "name",
+    "save_data_offset": "0x80",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF1.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x5f9d00",
+        "name_call_rvas": [
+          "0x5f9d94"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xd6cdd0",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x36a510",
+            "symbols": [
+              "Last.Systems.GameConstantIntUtility.GetValue1ByKey"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xd6cdd0",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x10879a0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a7360",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a72d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a71d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF1.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x5fcbf0",
+        "name_call_rvas": [
+          "0x5fcc54"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x12b2ca0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xaebf80",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xfb2680",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x4f8770",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x4f8770",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x945370",
+            "symbols": [
+              "Last.UI.KeyInput.ResultStatusContentController.SetData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x2698f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2417
+          },
+          {
+            "rva": "0x2698f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2417
+          },
+          {
+            "rva": "0x237800",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x2377d0",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x634270",
+        "name_call_rvas": [
+          "0x6342a2"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x633cf0",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237690",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xea8da0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x398840",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x29e560",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x29c650",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a76d0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237800",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x636c70",
+        "name_call_rvas": [
+          "0x636d03"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xea8da0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xc7a710",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x29c910",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c54b0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x5ac730",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237800",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": 2,
+    "binary_sha256": "dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b",
+    "dump_sha256": "2cd79f198f2792c2a5c274833b94a7daeaa522cf67aff35f2e867d66be6422c4",
+    "name_getter_rva": "0x67f9b0",
+    "saved_name_field": "name",
+    "save_data_offset": "0x80",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF2.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x3d79d0",
+        "name_call_rvas": [
+          "0x3d7a99"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xd7cc10",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xd7cc10",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x10cb520",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xc9cfc0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x3d7b90",
+            "symbols": [
+              "Serial.FF2.UI.KeyInput.ResultCharacterListContentView.CommonInitialize"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF2.UI.KeyInput.ResultSkillLevelContentController.SetData",
+        "rva": "0x3dabb0",
+        "name_call_rvas": [
+          "0x3dac6b"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": true,
+        "calls_after_name": [
+          {
+            "rva": "0x3a7a70",
+            "symbols": [
+              "Last.UI.UICommonProvider.SetText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x13c7ec0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x3dbf80",
+            "symbols": [
+              "Serial.FF2.UI.SkillLevelContentController.SetBothHandsData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237980",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x13c8070",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x6fc630",
+            "symbols": [
+              "Last.UI.SkillLevelProvider.SettingSkillLevel"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x3dc2e0",
+            "symbols": [
+              "Serial.FF2.UI.SkillLevelContentController.SetSkillLevelUpColor"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xc9ce30",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x13c7ec0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x3dbf80",
+            "symbols": [
+              "Serial.FF2.UI.SkillLevelContentController.SetBothHandsData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237980",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x13c8070",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF2.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x3db950",
+        "name_call_rvas": [
+          "0x3db9bf"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x13a5750",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa42760",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xfa6b10",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x46f470",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x46f470",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x470160",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x470160",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x46f470",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x46f470",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x470160",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetValue"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x5b75b0",
+        "name_call_rvas": [
+          "0x5b75e2"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x5b7030",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237980",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x10e8a40",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x4ec680",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x4db7c0",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x4d97f0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xc9d330",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237af0",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x5ba1d0",
+        "name_call_rvas": [
+          "0x5ba263"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x10e8a40",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa22000",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x4d9ab0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c57a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x3a8500",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x237af0",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "binary_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+    "dump_sha256": "cf74887b07f39807182c95701b3888ebfe171f0c9f7afbe8f33811b47c3d4b15",
+    "name_getter_rva": "0x668f40",
+    "saved_name_field": "name",
+    "save_data_offset": "0x80",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF3.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x6c5d20",
+        "name_call_rvas": [
+          "0x6c5db5"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xdee8e0",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x600410",
+            "symbols": [
+              "Last.Systems.GameConstantIntUtility.GetValue1ByKey"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xdee8e0",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1104e30",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x159feb0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x159fe20",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x159fd20",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF3.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x6c8dd0",
+        "name_call_rvas": [
+          "0x6c8e34"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x10eb840",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa4ee80",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x105b7d0",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x607540",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x607540",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x96e8a0",
+            "symbols": [
+              "Last.UI.KeyInput.ResultStatusContentController.SetData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x26d8f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2513
+          },
+          {
+            "rva": "0x26d8f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2513
+          },
+          {
+            "rva": "0x23bd10",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x23bce0",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x61a5a0",
+        "name_call_rvas": [
+          "0x61a5d2"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x61a020",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x23bba0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xf6c390",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x43d670",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x2c2c40",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x2c0d30",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15a02a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x23bd10",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x61cfa0",
+        "name_call_rvas": [
+          "0x61d033"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xf6c390",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa87aa0",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x2c0ff0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c99c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x5343d0",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x23bd10",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "binary_sha256": "bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed",
+    "dump_sha256": "011bc480d50bba3784b001844f854eae9abbe7a0050cb91c6e82146dffacc916",
+    "name_getter_rva": "0x66eb00",
+    "saved_name_field": "name",
+    "save_data_offset": "0x80",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF0.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x489a50",
+        "name_call_rvas": [
+          "0x489b0e"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xd7ca80",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x6c3be0",
+            "symbols": [
+              "Last.Systems.GameConstantIntUtility.GetValue1ByKey"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xe29380",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xd7ca80",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x10ca7d0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1563080",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1562ef0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF0.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x48cbe0",
+        "name_call_rvas": [
+          "0x48cc44"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x11821d0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa18950",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xfc2e50",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6cada0",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6cada0",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x994540",
+            "symbols": [
+              "Last.UI.KeyInput.ResultStatusContentController.SetData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x26b8f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2434
+          },
+          {
+            "rva": "0x26b8f0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2434
+          },
+          {
+            "rva": "0x239f40",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x239f10",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x614cc0",
+        "name_call_rvas": [
+          "0x614cf2"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x614740",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x239dd0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xee5e50",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x41dd50",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x538e00",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x536e30",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15633f0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x239f40",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x617990",
+        "name_call_rvas": [
+          "0x617a23"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xee5e50",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x3db770",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x5370f0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1c7bf0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x44b030",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x239f40",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "binary_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "name_getter_rva": "0x5b3ec0",
+    "saved_name_field": "name",
+    "save_data_offset": "0x88",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF5.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x4adc00",
+        "name_call_rvas": [
+          "0x4adede"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": true,
+        "calls_after_name": [
+          {
+            "rva": "0x362e80",
+            "symbols": [
+              "Last.UI.UICommonProvider.SetText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11988b0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1675f70",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11988b0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1675f70",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11988b0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1675f70",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11988b0",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF5.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x4b0e60",
+        "name_call_rvas": [
+          "0x4b0ecd"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1676360",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x15626e0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xb36a20",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x240750",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x2715a0",
+            "symbols": [
+              "Mono.Xml.SecurityParser.OnStartParsing",
+              "Mono.Xml.SecurityParser.OnProcessingInstruction",
+              "Mono.Xml.SecurityParser.OnIgnorableWhitespace",
+              "Mono.Xml.SecurityParser.OnEndParsing"
+            ],
+            "alias_count": 2630
+          },
+          {
+            "rva": "0x240380",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x240380",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x108d200",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x4965e0",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x4965e0",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x7d9c40",
+            "symbols": [
+              "Last.UI.KeyInput.ResultStatusContentController.SetData"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x7d3f60",
+        "name_call_rvas": [
+          "0x7d3f92"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x7d39e0",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x240620",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1676360",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x104bf40",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x436360",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x3aa600",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x3a86f0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1676360",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x240790",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x7d6c10",
+        "name_call_rvas": [
+          "0x7d6ca3"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x104bf40",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xb2f290",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x3a89b0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1ce450",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x363910",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x240790",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "binary_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+    "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+    "name_getter_rva": "0x48ca30",
+    "saved_name_field": "name",
+    "save_data_offset": "0x90",
+    "saved_name_offset": "0x20",
+    "getter_reads_saved_name_directly": true,
+    "producers": [
+      {
+        "method": "Serial.FF6.UI.KeyInput.ResultCharacterListContentController.SetData",
+        "rva": "0x609b90",
+        "name_call_rvas": [
+          "0x609c5e"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x6a0930",
+            "symbols": [
+              "Last.Systems.GameConstantIntUtility.GetValue1ByKey"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x11565d0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xf610d0",
+            "symbols": [
+              "System.Int32.ToString"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x12ec350",
+            "symbols": [
+              "UnityEngine.Color32.op_Implicit"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee4b0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeColorSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee300",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x12ed1c0",
+            "symbols": [
+              "UnityEngine.Component.get_gameObject"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee420",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeActiveSet"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Serial.FF6.UI.KeyInput.ResultStatusUpController.SetData",
+        "rva": "0x60d100",
+        "name_call_rvas": [
+          "0x60d17b"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x13420a0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xbe4cd0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x12d1620",
+            "symbols": [
+              "UnityEngine.Object.op_Equality"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a7c20",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x6a7c20",
+            "symbols": [
+              "Last.Systems.ParameterUtility.GetNaturalValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x645a90",
+            "symbols": [
+              "Last.UI.KeyInput.ResultStatusContentController.SetData"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xa96560",
+            "symbols": [
+              "Serial.ProviderManager.get_Instance"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xa8c4a0",
+            "symbols": [
+              "Serial.Template.Management.CharacterInfomationProvider.IsDisplayMp"
+            ],
+            "alias_count": 1
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultLevelUpContentController.SetData",
+        "rva": "0x63fdb0",
+        "name_call_rvas": [
+          "0x63fde2"
+        ],
+        "subsequent_safe_text_write": true,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x63f830",
+            "symbols": [
+              "Last.UI.KeyInput.ResultLevelUpContentController.GetMessageByWeaponType"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x24fac0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11b22c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x5cc050",
+            "symbols": [
+              "Last.UI.IconTextUtility.SetIconText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x620630",
+            "symbols": [
+              "Last.Management.MessageManager.SetValue"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x61e720",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessageByMessageConclusion"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0xbee8a0",
+            "symbols": [
+              "UnityEngine.SafeSetFunction.SafeTextSet"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x24fc30",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      },
+      {
+        "method": "Last.UI.KeyInput.ResultSkillContentController.SetData",
+        "rva": "0x642a60",
+        "name_call_rvas": [
+          "0x642af3"
+        ],
+        "subsequent_safe_text_write": false,
+        "subsequent_verified_ui_text_wrapper": false,
+        "calls_after_name": [
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x11b22c0",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0xb39980",
+            "symbols": [
+              "Last.Data.Master.Ability.get_ProcessProg",
+              "Last.Data.Master.Achievement.get_AchievmentId",
+              "Last.Data.Master.Action.get_ActionName",
+              "Last.Data.Master.Area.get_AreaName"
+            ],
+            "alias_count": 43
+          },
+          {
+            "rva": "0x61e9e0",
+            "symbols": [
+              "Last.Management.MessageManager.GetMessage"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x1dd530",
+            "symbols": [],
+            "alias_count": 0
+          },
+          {
+            "rva": "0x6547a0",
+            "symbols": [
+              "Last.UI.UIMessageSortProvider.SetResultLearnText"
+            ],
+            "alias_count": 1
+          },
+          {
+            "rva": "0x24fc30",
+            "symbols": [],
+            "alias_count": 0
+          }
+        ]
+      }
+    ]
+  }
+]

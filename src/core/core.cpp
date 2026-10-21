@@ -56,6 +56,9 @@ bool run(const char* name)
         LOGF("action: %s is not available in %s", name, game::label());
         return false;
     }
+    // Discrete mod commands, not physical key polling. This also explains a
+    // command that correctly produces no speech in the current native context.
+    LOGF("action: %s", name);
     hooks::guarded(name, [&] { it->second(); });
     return true;
 }
@@ -102,7 +105,11 @@ std::map<std::string, bool>& states() { if (!g_states) g_states = new std::map<s
 std::map<std::string, std::vector<std::function<void()>>>& resets() { if (!g_resets) g_resets = new std::map<std::string, std::vector<std::function<void()>>>(); return *g_resets; }
 }
 
-void set_active(const char* key, bool active) { states()[key] = active; }
+void set_active(const char* key, bool active) {
+    auto& value = states()[key];
+    if (value != active) LOGF("[MenuState] %s=%d", key, active);
+    value = active;
+}
 
 void set_active_exclusive(const char* key)
 {
@@ -172,6 +179,7 @@ void on(Kind k, Handler h) { handlers(k).push_back(std::move(h)); }
 
 void fire(Kind k)
 {
+    LOGF("[Event] kind=%d game=%s", static_cast<int>(k), game::label());
     switch (k) {
     case Kind::MenuOpened:
     case Kind::MenuClosed: dedup::reset_scope(dedup::Scope::Menu); break;
