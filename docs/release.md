@@ -475,3 +475,26 @@ build_check/verify_v094_package.py, v094_version.json and
 v094_package_verification.json. Sol reviewed and verified the release without new
 delegation. The earlier Luna catalog task and Sol validation remain recorded with
 the navigation feature. Source/tag/upload/publication verification follows below.
+
+Published [V0.9.4](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.4)
+at 2026-10-21 15:35:55 UTC as Latest. Release ID419736233 is public,
+draft=false and prerelease=false. Annotated v0.9.4 is tag object
+af92303b237e5675616cac1e3d1075415e12bf53, resolving locally/remotely to source
+5e5c0a2e4e4d5e722588f08c7bac654f5a52f047. Master and the tag were pushed and
+verified before upload. No tag or prior release was overwritten.
+
+GitHub's initial tag endpoint omitted the unpublished draft; the release was
+located and verified by its numeric ID. Draft source/title/tag and its single
+uploaded asset were verified before publication. Asset662958035 is
+[Final.Fantasy.Pixel.Master.Core.Screen.Reader.V0.9.4.zip](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/download/v0.9.4/Final.Fantasy.Pixel.Master.Core.Screen.Reader.V0.9.4.zip).
+The archive's internal folder retains the requested spaced name.
+
+The authenticated draft download and anonymous public download both match the
+independently verified local ZIP: 5,901,425 bytes and SHA256
+acb6163efdfc92a321c8bc3c6d5db5faf4f1a95be996da3194a936106320f376.
+Public API checks confirm the expected source/tag/asset ID, uploaded state, digest,
+download URL and Latest status. Earlier release IDs, sources, notes and assets
+match their pre-publication snapshots. Receipts include source_verification.json,
+draft_verification.json and public_verification.json under build_check/v094/.
+Final documentation commits follow the tagged source without changing the verified
+binary, archive or installed files. No additional gameplay claim is made.
