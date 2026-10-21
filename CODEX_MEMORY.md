@@ -1,14 +1,19 @@
 # Native FFPR durable memory
 
-- October21 V0.9.4 prepared: [release/source/package record](docs/release.md#v094-preparation-and-publication-october-21).
+- October21 [V0.9.4 published as Latest](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.4):
+  [release/source/package record](docs/release.md#v094-preparation-and-publication-october-21).
   User reports substantial improvement from a brief FF6 intro test; other states
   and numbered result-name report remain open. Includes scene-trigger navigation,
   event grouping, entrance suffixes and logging diagnostics. Build/all checks/smoke
   and independent 28-file package/version/dependency checks pass; 6,864 names/zero
   missing, zero undefined, 47 exports. x64 version 0.9.4.0, DLL f12a4d24027c0551175844688a63607747798d876b31f4649f9598570ab7e3aa.
   ZIP acb6163efdfc92a321c8bc3c6d5db5faf4f1a95be996da3194a936106320f376
-  (5,901,425 bytes). Source/tag/publication pending. Installed games retain the
-  previously deployed functional build below; no game launch/probe/new deployment.
+  (5,901,425 bytes). Annotated v0.9.4 points to source
+  5e5c0a2e4e4d5e722588f08c7bac654f5a52f047; pushed/verified with master.
+  Release419736233/asset662958035: downloaded draft and anonymous public ZIP hashes
+  match; draft=false/prerelease=false/Latest verified. Earlier releases preserved.
+  Receipts: build_check/v094/. Installed games retain the previously deployed
+  functional build below; no game launch/probe/new deployment.
   Sol owns release review/verification; no new delegation.
 
 - October21 navigation follow-up: [scene trigger grouping, Narshe
