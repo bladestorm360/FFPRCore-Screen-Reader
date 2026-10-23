@@ -547,13 +547,43 @@ scripts/reports:build_check/verify_v095_package.py, v095_package_verification.js
 and v095_version.json. Publication/source/tag/download verification follows below.
 
 
-V0.9.5 publication is pending explicit user approval. Local source commit
+V0.9.5 publication initially paused for explicit user approval. Local source commit
 834d687684b99d85eb2374bbcc33b71693ee7bf5 and annotated v0.9.5 resolve to the tested
 implementation. Automatic approval review rejected the normal source/tag push
 twice, including after the standing AGENTS/release-procedure authorization was
 rechecked. Its reason was that “prepare release” and that recorded convention did
 not explicitly authorize public source publication and the destination. No
 workaround was attempted; no remote push, draft, uploaded asset or public release
-was created. The verified ZIP and local recovery remain ready. An explicit
-question asks permission to publish source, tag and ZIP to the existing public
-bladestorm360/FFPRCore-Screen-Reader repository. Receipt:build_check/v095/publication_status.json.
+was created before the user answered. The verified ZIP and local recovery were
+preserved. The user then explicitly selected “Publish source, tag and ZIP” for
+the named public bladestorm360/FFPRCore-Screen-Reader repository. The resolved
+approval and final state are recorded in build_check/v095/publication_status.json.
+
+## V0.9.5 publication, October23
+
+Published [V0.9.5](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.5)
+at 2026-10-23 15:44:22 UTC, after that explicit public-publication approval.
+The existing master branch was pushed normally; annotated v0.9.5 resolves locally
+and remotely to tested source 834d687684b99d85eb2374bbcc33b71693ee7bf5.
+The intervening branch commit 3691df9 only recorded the initial approval pause.
+Final documentation follows the tagged source without changing the package.
+
+Draft release 422020274 was inspected by numeric ID after creation. Its tag,
+title, notes, single uploaded asset, size and GitHub SHA256 digest all matched the
+verified package. Its authenticated downloaded bytes matched the local archive
+before publication. Asset 669583057 is
+[Final.Fantasy.Pixel.Master.Core.Screen.Reader.V0.9.5.zip](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/download/v0.9.5/Final.Fantasy.Pixel.Master.Core.Screen.Reader.V0.9.5.zip).
+GitHub normalized filename spaces to periods; the internal folder keeps its
+requested spaced name.
+
+The anonymous public download also matches the verified local ZIP: 6,061,592 bytes,
+SHA256 346c943d6835852ed1de4dc25254fd2d8a9ec8642f728f9962ac10a1e51be6aa.
+Public API checks confirm release/tag/asset IDs, uploaded state, digest,
+draft=false, prerelease=false and Latest. All five earlier release IDs, source
+targets, notes, publication timestamps and asset identities/content metadata match
+their pre-publication snapshot. Download counts may change with public use.
+Receipts:build_check/v095/draft_verification.json, public_verification.json,
+final_verification.json and the corresponding source/API snapshots. The read-only
+verify_publication.py retains the exact checks. No game launch or new gameplay
+confirmation was part of publication; the new occupancy refinement remains
+gameplay-unconfirmed as recorded in the testing and mechanics documents.
