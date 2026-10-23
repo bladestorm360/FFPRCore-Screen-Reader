@@ -1,0 +1,67 @@
+{
+  "reviewed_occurrences": 483,
+  "games": [
+    {
+      "game": 1,
+      "actionable_entity_candidates": 115,
+      "map_alias_lookups": 115,
+      "context_lookups": 37,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "05496a2fb235d1e3f3287179bb31431c3ab3592f9bb421759814afeefd3f9414",
+      "eventlabels_sha256": "50391d396eaa958e5930af61e5ef246ee9469cde1ba2779dc81d1ae247dfa244"
+    },
+    {
+      "game": 2,
+      "actionable_entity_candidates": 55,
+      "map_alias_lookups": 55,
+      "context_lookups": 1,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "aaf6a22ae23d585dce41d4718e75786fb117b551954eb46daad566ae90086cc3",
+      "eventlabels_sha256": "fca85ace02c390a22e75cab4996b90aaa297da7673cd1e435fdd12a51977a11a"
+    },
+    {
+      "game": 3,
+      "actionable_entity_candidates": 232,
+      "map_alias_lookups": 241,
+      "context_lookups": 25,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "c4e55d91a7519e18eecb970cd2a7da7266e9c0ffe88a3e362e4b506bf49ecd45",
+      "eventlabels_sha256": "06783d9d83b134f200705002c9ab8211eceba7fc9ab9eb8c70d43234fb0a1e06"
+    },
+    {
+      "game": 4,
+      "actionable_entity_candidates": 168,
+      "map_alias_lookups": 168,
+      "context_lookups": 39,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "9581c3295f405afc639843b64a74cd73855f8df85bec239ee3e3f0df4caa2c26",
+      "eventlabels_sha256": "e54ab287cb7e09da7c84c1ed111295513c85e6d478de09567d5c6791a55d424c"
+    },
+    {
+      "game": 5,
+      "actionable_entity_candidates": 471,
+      "map_alias_lookups": 471,
+      "context_lookups": 37,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "d0bedfd68c7aafbe6cf60d8c44ec5d0f3e5ff1f76e7ec73fc076569fd713930c",
+      "eventlabels_sha256": "22b3b80a27404e8aa67949eee505b0eb442d29929d8795f2be846a2bacc3de40"
+    },
+    {
+      "game": 6,
+      "actionable_entity_candidates": 389,
+      "map_alias_lookups": 395,
+      "context_lookups": 9,
+      "unresolved": 0,
+      "lookup_mismatches": 0,
+      "object_dump_sha256": "17f6a180291875ebad43dd0e375a37493bee68f9d8077a8e3538353006abed23",
+      "eventlabels_sha256": "2270d77815775d4f59344a8d2b5307914c5c02584cdf73c5e167b5304b4e94d2"
+    }
+  ],
+  "scope": "All extracted type5/10 candidates with an action, script or direct message; inactive/no-action helpers are separate.",
+  "limits": "Offline source/key coverage; native runtime activation, cue timing and physical speech remain gameplay checks."
+}

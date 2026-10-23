@@ -341,6 +341,9 @@ int install()
         g_key_action = -1;
     });
     events::on(events::Kind::BattleStart, [] { cancel(); });
+    events::on(events::Kind::PartyChanging, [] {
+        g_active=g_planning=false;g_key_action=-1;
+    });
     events::on(events::Kind::MenuOpened, [] { cancel(); });
     events::on(events::Kind::SceneLoaded, [] { if (field::scene_name() == L"Title") cancel(); });
     events::on(events::Kind::MapChanging, [] {

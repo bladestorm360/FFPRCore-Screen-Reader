@@ -151,6 +151,15 @@ void announce_step(bool interrupt)
 void start_or_repeat()
 {
     if (!field_ready()) return;
+    if(queries::is("GameModule.HasPuzzleGuide")) {
+        if(const auto* old=active()) {
+            baked_nav::MapGoal goal;goal.map_id=old->steps[static_cast<size_t>(g_step)].map_id;
+            goal.cell=old->steps[static_cast<size_t>(g_step)].cell;
+            baked_nav::clear_preview_destination(goal);
+        }
+        ++g_context;g_active=-1;g_step=0;g_arrived_step=-1;
+        actions::run("GameModule.PuzzleGuide");return;
+    }
     load();
     if (!g_puzzles) { ffpr::say(T(L"Navigation data is loading")); return; }
     if (!active()) {
@@ -181,6 +190,7 @@ void start_or_repeat()
 void stop()
 {
     if (!field_ready()) return;
+    if(queries::is("GameModule.PuzzleGuideActive")) { actions::run("GameModule.StopPuzzleGuide");return; }
     if (!active()) return;
     const auto& step = active()->steps[static_cast<size_t>(g_step)];
     baked_nav::MapGoal goal; goal.map_id=step.map_id;goal.cell=step.cell;
@@ -244,7 +254,7 @@ int install()
     actions::define("PuzzleGuide.Next", [] { hooks::guarded("PuzzleGuide.Next", [] { start_or_repeat(); }); });
     actions::define("PuzzleGuide.Stop", [] { hooks::guarded("PuzzleGuide.Stop", [] { stop(); }); });
     actions::define("PuzzleGuide.OnMove", [] { hooks::guarded("PuzzleGuide.OnMove", [] { on_move(); }); });
-    queries::define("PuzzleGuide.IsActive", [] { return active() != nullptr; });
+    queries::define("PuzzleGuide.IsActive", [] { return active() != nullptr || queries::is("GameModule.PuzzleGuideActive"); });
     events::on(events::Kind::MapChanged, [] { hooks::guarded("PuzzleGuide.MapChanged", [] { on_map_changed(); }); });
     events::on(events::Kind::MapChanging, [] { ++g_context; });
     events::on(events::Kind::BattleStart, [] { ++g_context; frame::cancel_label("PuzzleGuide.MapChanged"); });

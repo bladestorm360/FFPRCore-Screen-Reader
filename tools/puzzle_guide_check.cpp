@@ -19,7 +19,7 @@ namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n)
 namespace hooks {void note_fault(const char*){std::abort();} }
 namespace log_ {void write(const char*,...){} }
 namespace data {bool game_data_ready(){return true;} const json::Value& game_json(const char*){return fixture::puzzles;} }
-namespace actions {void define(const char*,Fn){} }
+namespace actions {void define(const char*,Fn){} bool run(const char*){return false;} }
 namespace queries {bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldNavigationReady" ? fixture::ready : std::string(n)=="GameStatePatches.IsInputTransitionBlocked" ? fixture::blocked : false;} void define(const char*,std::function<bool()>){ } }
 namespace events {void on(Kind kind,Handler fn){fixture::handlers[kind]=std::move(fn);} }
 namespace frame {int every_frame(Step s,const char*,int){fixture::step=std::move(s);return 1;} void cancel_label(const char*){fixture::step={};} }

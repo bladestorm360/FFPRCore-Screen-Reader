@@ -1,5 +1,118 @@
 # Testing the native mod
 
+## October 23 FF6 story fixes: test Terra first
+
+October23 follow-up: the user confirms preceding defense guidance works and the
+log reaches Guard Leader/post-defense dialogue. Parked-party occupancy was missing;
+the [new correction](re/PARKED_PARTIES.md) remains gameplay-unconfirmed. When
+convenient, park Party1 on the narrow approach, switch to Party2, then request
+Shift+G and ordinary directions. Expect a legal detour or a named party-block
+suffix after usable directions, then a clear route after moving Party1. Do not replay solely for this.
+
+Implementation and offline evidence are in
+[FF6 story navigation](re/FF6_STORY_NAVIGATION.md). Gameplay remains unconfirmed.
+Use Shift+G to request/repeat guidance, Ctrl+G to stop. Controller: field mod mode,
+right shoulder for guidance, left shoulder to stop. Use native controls for actions
+and party switching. No code review is needed.
+
+1. During the moogle defense, press Shift+G. Expect brief directions toward Guard
+   Leader, or an enemy threatening Terra. Within three tiles of Terra, expect one
+   danger warning and the closest party when all positions are known. Shift+G
+   repeats it. Change parties, then request directions again. Defeat the leader
+   to advance. Do not deliberately let an enemy reach Terra for this test.
+2. In Phoenix Cave, follow guidance to switches. A party needed on a switch should
+   be told to stay. Change parties and continue. If told to leave, expect a route
+   that remains usable after the old switch releases. Check stone crossings,
+   draining water, both rock positions and the reunion. Report any return-to-switch
+   loop, closed route or instruction that moves the wrong party.
+3. In Kefka's Tower, check party numbers, outer plates, then the instruction
+   to step clear below a weight. Check ladder/belt routes, three-party bridge and
+   final switches. A waiting party should not be guided off an unfinished plate.
+4. At the opera, check action-window cues and success/failure feedback. During
+   sabotage, expect the far-right lever, then routes through rats to Ultros.
+   The timer should continue normally. Report a late/missing cue, maze dead end
+   or wrong lever; do not spend retries testing unrelated settings.
+5. Later Narshe should warn for Banon and guide toward Kefka or an immediate
+   threat. When available, check burning-house rescue and Phantom Train engine
+   guidance. The train should correct actual lever state, including
+   retries. Normal navigation remains available for other puzzles and optional fights.
+
+For a failure, report the sequence, active party, last guidance and what happened.
+Native timing, real movement/encounter activation and audible response require
+these checks; offline fixtures alone cannot confirm them. Existing procedures
+below remain applicable.
+
+## October23 navigation and speech follow-ups
+
+Implementation/evidence: [follow-up register](re/NAVIGATION_FOLLOWUPS_2026_10_23.md).
+Gameplay confirmation remains pending. Prioritize the defense checks above.
+
+1. After Ymir, request the nearby Narshe Mines exit without leaving the map.
+   Expect no event warning when its trigger has moved away.
+2. Toggle Ctrl+Shift+Backslash, or F8 > Navigation > Hide story-gated destinations.
+   Expect destinations behind current story barriers to disappear; toggle Off to
+   restore them. Ordinary NPC obstructions should not hide destinations.
+3. Find a save point. Expect one destination in Save Points, with no animation or
+   tutorial duplicate in Events. Request directions to it.
+4. At a nearby NPC, expect “Interact: Jun” using the current name, without ev_e
+   numbers. In native name entry, arrows speak letters and Backspace speaks the
+   erased letter. Repeated equal letters should each speak.
+5. Ymir and Angler Whelk targets should say Head or Shell; Chadarnook should name
+   the current form. FF5 Neo Exdeath should identify each body area. No need to
+   replay these fights solely for testing.
+
+## October 22 fixes: test these first
+
+All changes are implemented and offline checked; physical/gameplay confirmation
+is still needed. The game has not been launched by the agent. Test these first
+when progression permits; existing unconfirmed procedures below remain applicable.
+Current engineering evidence is in FIXES_2026_10_22.md. No code review is required.
+
+1. In FF2, open Config Bestiary, then Leg Eater. Review its buffer: expect real
+   labels/values in the game language, not zero/dash/Japanese prefab rows. Change
+   monsters and reopen. Check title Extras Bestiary separately. Repeat both paths
+   in each other game when available. Report the path and monster if values lag.
+2. Let Maria gain Thunder or another spell. Keep Speech / Battle results notifications
+   once On. Advance through results: expect one automatic announcement of that
+   gain across the results session, with the text still manually reviewable on
+   every page where shown. A later battle's genuine identical gain should speak.
+   If an existing saved setting is Off, turn it On for this check.
+3. Approach the reported barred gate: expect Iron gate in navigation and Interaction
+   available: Iron gate when its ! appears. Staying in range should not repeat;
+   leaving and returning should announce again. Check nearby objects for wrong names.
+   Repeat on other games' doors, pots, barrels, bookshelves and switches. Compare
+   the current-floor list with off-floor destinations; neither should lose the identity.
+4. At the Ship with the Canoe owned, request directions. Expect a valid approach and
+   boarding instruction when the world permits it. Compare selection description
+   and explicit directions: a blocked route must use the same specific requirement.
+5. Ride the Chocobo and select Current map with vehicles. Expect valid town/map
+   destinations to remain available. Request one, then dismount/remount and switch
+   filters. A stale or empty list is a failure. Check other mounts when available.
+6. Turn Speech / Entrance suffixes On. With map-exit grouping Off, review the six
+   Coliseum exits: expect stable(A)..(F). Move and review again; letters must remain
+   attached to their own physical exits. Also check another same-name exit area.
+7. In Speech, turn Interrupt speech on character turn Off. At a new turn while
+   speech is active, expect the turn to queue. Turn it On and expect interruption.
+   Manual T should still interrupt; the opening roster should finish in either mode.
+8. Enemy status announcements defaults Off. Enable it and apply an ordinary visible
+   status or Frog when available: expect the enemy and a supported status/effect cue
+   when rendered. Shared visuals/material colors can say Status effect. With Off,
+   expect no new automatic status observer speech. Ordinary native combat messages
+   remain. Critical is not inferred from hidden enemy HP and is expected to stay silent.
+9. With HRTF active, bump a wall at the usual volume: expect a stronger bump, roughly
+   twice the previous output. Other sounds and stereo mode should retain their prior
+   levels. Check mute/user volume. Report distortion as well as insufficient volume.
+10. Restart a game after changing the new settings and confirm the saved choices.
+    Repeat relevant cases across I–VI as access permits, preserving the exact game,
+    map/monster and action in any report. Existing logs provide producer/submission
+    evidence; offline fixtures cannot establish physical audibility or frame delay.
+11. In FF1, win a normal battle and review a member row after the counter finishes.
+    Expect the actual name and labelled EXP/Next values, rather than two bare numbers.
+    The rendered EXP countdown can end at zero; the total earned is a separate row.
+    Check automatic details with Autodetail On, then arrow review with it Off.
+    Report any actual wrong name separately; retain the full logs for Sol to inspect.
+
+
 ## Narshe events and entrance suffixes, October 21
 
 User confirmation, October 21: the intro works substantially better in a brief test.
@@ -35,7 +148,11 @@ Test first when a normal battle is available in FF1, then the other games as con
 3. After playing for at least30 seconds, close normally and retain that game's
    `ffpr_screen_reader.log` and its numbered `.1.log` through `.5.log` files together.
 
-The new log should contain advancing health/frame records, phase and raw name-source
+The October22 full tester log now supplies those records and proves missing Points
+column labels; it preserves the correct raw names. The structured reader is fixed
+and offline checked. A literal Character09 substitution remains unconfirmed.
+
+New logs should contain advancing health/frame records, phase and raw name-source
 identities, captured/published rows and actual Prism submissions. Sol inspects those;
 the user need only report the symptom and send the files. If it cannot be reproduced,
 the original report stays open. All-six native name/serialized ownership audits and

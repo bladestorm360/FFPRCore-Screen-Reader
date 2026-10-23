@@ -192,13 +192,13 @@ int main()
                            "Mod warnings is a default-on Speech toggle");
                 }
                 if (std::string(item.key) == ui::prefs::kResultNotificationsOnce) {
-                    expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && !item.bool_def &&
+                    expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && item.bool_def &&
                         i > 0 && items[i-1].key && std::string(items[i-1].key) == ui::prefs::kAutoDetail,
-                        "all-six notifications-once option follows Auto Detail and defaults off");
+                        "all-six notifications-once option follows Auto Detail and defaults on");
                     fixture::values.erase(item.key);
-                    expect(!ui::prefs::result_notifications_once_enabled(),"new option preserves existing repeated notifications by default");
+                    expect(ui::prefs::result_notifications_once_enabled(),"notifications default to once per battle");
                     ui::mod_menu::flip(item);
-                    expect(ui::prefs::result_notifications_once_enabled(),"notification toggle uses the saved preference");
+                    expect(!ui::prefs::result_notifications_once_enabled(),"explicit saved Off overrides the default");
                     ui::mod_menu::flip(item);
                 }
                 const auto expected = moved_settings.find(item.key);

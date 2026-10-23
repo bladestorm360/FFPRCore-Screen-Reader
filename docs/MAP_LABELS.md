@@ -1,5 +1,88 @@
 # Map labels for untitled sub-maps
 
+October23: [navigation/speech follow-ups](re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
+document Save Points/category6, exact FF6 tutorial/animation companion removal,
+the story-gate filter, live moved-trigger correction and prefix-free nearby cues.
+
+October22 implementation: [object identities and native interaction cues](re/OBJECT_IDENTITIES.md)
+now supersedes the original deferred reports below. The all-six audit identifies712
+physical rows and45 actual sprite IDs; the reported FF2 object is Iron gate. Unsupported
+identities remain neutral. Native ! appearance speech is implemented; gameplay retest
+is pending. [Combined status](FIXES_2026_10_22.md).
+
+The two following sections preserve the original report/requirements before implementation.
+
+
+## Open issue: generic Interactive Object labels, October 22
+
+**Status: open; audit and implementation not started.** User reports this FF2
+navigation entry:
+
+> Interactive object (1.0 step South) - Interactive Object (1 of 1)
+
+User request: audit the codebase across FF1–FF6 for these generic object names and
+replace them with meaningful labels supported by the object's sprite/appearance,
+interaction scripts/messages and reliable game data. A generic category alone does
+not identify the object.
+
+Screenshot evidence: user attachment
+`codex-clipboard-7e848cae-e24a-49d4-baf1-2728db16bdba.png`, originally supplied from
+`C:/Users/pmoen/AppData/Local/Temp/`. It shows FF2, with the player immediately north
+of a green barred doorway/gate and an interaction indicator. The user subsequently
+confirmed that interacting with this object says:
+
+> A sturdy iron gate blocks the doorway.
+
+This user-reported interaction identifies the example as an **Iron gate**, a more
+specific label than the earlier appearance-only Gate/Door candidates. The exact map,
+entity, script/message key and sprite mapping have not been independently established.
+Preserve this example without assuming every generic object is a gate.
+
+Deferred work: trace shared and game-specific generic-name producers, live and
+baked/remote navigation labels, sprite/asset identifiers and interaction scripts.
+Check script/message references as well as sprites: interaction text can establish
+an object's identity, as with the Iron gate. Trace relevant state-dependent branches
+without executing game scripts or exposing unrelated future event outcomes. Use
+verified sprite appearance/identity, interaction text and map/entity data to name
+each object; retain
+safe neutral labels where identity cannot be established and document those gaps.
+Keep names consistent across navigation listings and direction output, localize
+mod-owned labels in all supported languages, and preserve actual interaction/route
+validity, type-only treasure labels and spoiler-safe event naming. The standing
+pathfinding-identification approval applies; no renewed name-reveal approval is
+needed for reliable sprite/data identification.
+
+Future checks: cover each applicable game and label-producing path, the reported
+gate/door example, shared sprites with differing context, and state/appearance
+changes. Verify that meaningful labels replace generic fallbacks without changing
+object selection or route behavior. This is documentation only at the user's
+explicit request; no code audit, investigation, implementation, build, deployment
+or runtime probe performed. Offline and gameplay verification remain pending.
+
+## Planned speech for in-range interaction indicators, October 22
+
+**Status: not started.** User request: when the player is in interaction range and
+the visible **!** indicator appears for an object, vocalize that interaction
+availability. Identify the associated object with its meaningful label when known,
+so the player knows what can be interacted with. Final wording is not specified.
+This requirement is about announcing the visible interaction opportunity; full
+interaction dialogue continues to follow the actual interaction/display event.
+
+Future investigation must identify the native indicator producer, actual range/
+readiness and owning object across applicable FF1–FF6 paths. Announce on the relevant
+appearance event, preserving legitimate reappearances and avoiding repeated output
+on unchanged frames through native event/state ownership rather than text-content
+deduplication. Preserve original input/interaction behavior and keep owner-thread
+observation bounded and nonblocking. Localize mod-owned cue text.
+
+Future checks: approach an object until ! appears, confirm the cue identifies the
+correct object, remain in range, leave and reapproach, and test adjacent objects,
+indicator disappearance and object/state changes. Confirm cues follow the actual
+visible indicator and do not announce out-of-range or stale opportunities.
+Documentation only; no producer investigation, code changes or runtime tests.
+
+## Existing sub-map naming record
+
 Written 2026-10-11. The game's map master (`map.txt`) titles most interiors ("Salamand Items",
 "Castle Fynn 1F"), but some rooms carry `map_title None` and floor 0, so the mod spoke only the
 area name there: "Exit to Salamand" for Josef's house and for the church as well as for the town.

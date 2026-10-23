@@ -35,6 +35,14 @@ int main(){
     int failures=0;auto expect=[&](bool x,const char*why){if(!x){++failures;std::printf("FAIL %s\n",why);}};
     const int route=b::add("key.route","Navigate to current entity / stop autowalk",false,1,int(K::P),0,0);
     const int brackets=b::add("key.brackets","Bracket directions",false,1,int(K::Backslash),0,1);
+    const int story=b::add("key.story","Toggle story gate filter",false,1,int(K::Backslash),3);
+    for(int layout:{0,1}) {
+        fixture::neutral();fixture::keymap=layout;fixture::edges[int(K::Backslash)]=true;
+        fixture::keys[int(K::LeftControl)]=fixture::keys[int(K::LeftShift)]=true;
+        expect(b::pressed(story)&&!b::pressed(brackets),"Ctrl+Shift+Backslash is independent of navigation layout and bare directions");
+        fixture::keys[int(K::LeftAlt)]=true;expect(!b::pressed(story),"story filter requires exact modifiers");
+    }
+    fixture::neutral();fixture::keymap=0;
     std::wstring conflict;
     fixture::edges[int(K::P)]=true;
     expect(b::pressed(route)&&!b::pressed(brackets),"default Letters layout remains independently selectable");

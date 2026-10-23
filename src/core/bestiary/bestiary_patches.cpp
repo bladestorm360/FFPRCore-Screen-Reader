@@ -6,15 +6,18 @@
 // LibraryInfoController.SetData (KeyInput, hooked below), as in FF1 and FF5. LibraryMenuController.ChangeState is inlined in FF1,
 // so the minimap open/close is read one frame after SetupKeyHelp / SetupEnlargedMapKeyHelp.
 //
-// Not ported: GameObjectCache.Register(LibraryInfoController) (nothing reads that cache entry;
-// the native readers use FindObjectOfType) and ConfigBestiaryStateHandler._previousState
-// (written, never read).
+// Native lifecycle hooks retain the current controller; detail capture reads its
+// actual window/content view after UpdateView and visibility, with no scene search.
+// ConfigBestiaryStateHandler._previousState was write-only and is not ported.
 #include <vector>
+#include <memory>
+#include <climits>
 #include "bestiary.h"
 #include "../core.h"
 #include "../dedup.h"
 #include "../displayed_ui.h"
 #include "../field/object_cache.h"
+#include "../field/capture_budget.h"
 #include "../frame.h"
 #include "../game.h"
 #include "../hooks.h"
@@ -42,6 +45,7 @@ ref::Field  fLibMenuSelectState{kLibMenu, "selectState"};
 
 ref::Class  kLibInfo{"Last.UI.KeyInput", "LibraryInfoController"};
 ref::Method mLibInfoSetData{kLibInfo, "SetData", 1};
+ref::Method mLibInfoUpdate{kLibInfo, "UpdateController", 0};
 
 ref::Class  kLibList{"Last.UI.KeyInput", "LibraryMenuListController"};
 ref::Method mLibListCurrentContent{kLibList, "GetCurrentContent", 0};
@@ -66,6 +70,7 @@ ref::Method mPictureBookClientInstance{kPictureBookClient, "Instance", 0};
 ref::Method mGetPictureBooks{kPictureBookClient, "GetPictureBooks", 0};
 
 ref::Class  kInfoContent{"Last.UI.Common.Library", "LibraryInfoContent"};
+ref::Method mLibContentUpdate{kInfoContent,"UpdateView",1};
 
 ref::Class  kMonsterData{"Last.OutGame.Library", "MonsterData"};
 ref::Field  fMonsterPictureBook{kMonsterData, "<pictureBookData>k__BackingField"};
@@ -95,6 +100,8 @@ std::wstring g_cached_entry_name;                 // C# null = empty
 std::vector<std::wstring> g_cached_habitat_names; // C# null = empty
 
 Tracker g_tracker;
+uint64_t g_detail_generation = 0;
+bool g_detail_data_ready = false, g_detail_capture_started = false;
 
 // Bestiary.Minimap: FF1's lastSelectState, a state-change check (DEDUP_INVENTORY.md row 8).
 // lastSelectState started at -1 (no baseline: the first read only records) and
@@ -360,36 +367,75 @@ void build_and_initialize_stat_buffer()
         LOGF("[Bestiary] LibraryInfoContent not available");
         return;
     }
-    std::vector<StatEntry> entries = build_stat_buffer(content, t.current_monster_data);
-
-    void* pbd = picture_book(t.current_monster_data);
-    std::wstring name = (pbd && ref::call<bool>(mPbIsRelease, pbd)) ? ref::call_str(mPbMonsterName, pbd) : T(L"Unknown");
-    entries.insert(entries.begin(), StatEntry{T(L"Name"), name, StatGroup::MonsterData});
-
-    nav_initialize(entries);
-    t.is_navigation_active = !entries.empty();
-    if (!entries.empty()) ffpr::say(entries[0].to_string(), false);
-    menu_state::set_active(menu_state::BESTIARY_DETAIL, true);
+    // SetData only selects targetData. Native LibraryInfoContent.UpdateView fills the text
+    // later, possibly after a fade; never read the serialized prefab placeholders.
+    auto name = displayed::text_field(displayed::field(window, "view"), "nameText");
+    if (name.empty() || !displayed::container_visible(content)) return;
+    if(name.size()>4096)name.resize(4096);
+    g_detail_capture_started = true;
+    const auto generation = g_detail_generation;
+    auto capture = std::make_shared<StatCapture>();
+    capture->content = content;
+    capture->characters=name.size();
+    capture->entries.push_back({T(L"Name"), std::move(name), StatGroup::MonsterData});
+    frame::every_frame([capture, generation, controller] {
+        const auto& current = tracker();
+        if (generation != g_detail_generation || current.active_controller != controller ||
+            !unity::alive(controller) || !unity::active_in_hierarchy(controller) ||
+            !current.current_monster_data || !displayed::container_visible(capture->content)) return false;
+        field::CaptureBudget budget;
+        while (budget.available()) {
+            if (!capture_stat_step(*capture)) continue;
+            const bool populated=!capture->entries.empty();
+            auto headline=populated?capture->entries[0].to_string():std::wstring();
+            nav_initialize(std::move(capture->entries));
+            tracker().is_navigation_active = populated;
+            if (!headline.empty()) ffpr::say(headline, false);
+            menu_state::set_active(menu_state::BESTIARY_DETAIL, true);
+            return false;
+        }
+        return true;
+    }, "Bestiary.DetailCapture", INT_MAX);
 }
 
 using SetData_t = void (*)(void* self, void* data, const void* mi);
 SetData_t o_LibInfoSetData;
 void d_LibInfoSetData(void* self, void* data, const void* mi)
 {
-    o_LibInfoSetData(self, data, mi);
+    // Select/invalidate before native code: an adapter may populate its content
+    // synchronously inside SetData. Its nested producer event must belong to the
+    // new generation rather than be discarded by a later postfix reset.
     hooks::guarded("LibraryInfoController.SetData", [&] {
         if (!self || !data) return;
         Tracker& t = tracker();
         t.current_monster_data = data;
         t.active_controller = self;
-        // DelayedDetailAnnouncement: two frames, for the detail UI to fill.
-        void* controller = self;
-        frame::after_frames(2, [controller] {
-            hooks::guarded("Bestiary.DelayedDetail", [&] {
-                if (!unity::alive(controller) || !unity::active_in_hierarchy(controller)) return;
-                build_and_initialize_stat_buffer();
-            });
-        }, "Bestiary.Detail");
+        ++g_detail_generation;
+        g_detail_data_ready = g_detail_capture_started = false;
+        frame::cancel_label("Bestiary.DetailCapture");
+    });
+    o_LibInfoSetData(self, data, mi);
+}
+
+SetData_t o_LibContentUpdate;
+void d_LibContentUpdate(void* self, void* data, const void* mi)
+{
+    o_LibContentUpdate(self, data, mi);
+    hooks::guarded("Bestiary.RenderedDataReady", [&] {
+        const auto& t = tracker();
+        void* owner_window = displayed::field(displayed::field(t.active_controller, "view"), "windowController");
+        void* owner_content = displayed::field(displayed::field(owner_window,"contentController"),"view");
+        if (self == owner_content && data == t.current_monster_data) g_detail_data_ready = true;
+    });
+}
+using Update_t = void (*)(void*, const void*);
+Update_t o_LibInfoUpdate;
+void d_LibInfoUpdate(void* self, const void* mi)
+{
+    o_LibInfoUpdate(self, mi);
+    hooks::guarded("Bestiary.VisibleDetailReady", [&] {
+        if (self == tracker().active_controller && g_detail_data_ready && !g_detail_capture_started)
+            build_and_initialize_stat_buffer();
     });
 }
 
@@ -544,6 +590,8 @@ int install()
     add(hooks::attach(mLibMenuOnContentSelected, &d_LibMenuOnContentSelected, &o_LibMenuOnContentSelected),
         "LibraryMenuController.OnContentSelected");
     add(hooks::attach(mLibInfoSetData, &d_LibInfoSetData, &o_LibInfoSetData), "LibraryInfoController.SetData");
+    add(hooks::attach(mLibContentUpdate, &d_LibContentUpdate, &o_LibContentUpdate), "LibraryInfoContent.UpdateView");
+    add(hooks::attach(mLibInfoUpdate, &d_LibInfoUpdate, &o_LibInfoUpdate), "LibraryInfoController.UpdateController");
     add(hooks::attach(mInfoOnChangedMonster, &d_InfoOnChangedMonster, &o_InfoOnChangedMonster),
         "ExtraLibraryInfo.OnChangedMonster");
     add(hooks::attach(mLibMenuSetupKeyHelp, &d_SetupKeyHelp, &o_SetupKeyHelp), "LibraryMenuController.SetupKeyHelp");
@@ -587,6 +635,9 @@ Tracker& tracker() { return g_tracker; }
 
 void Tracker::reset()
 {
+    ++g_detail_generation;
+    g_detail_data_ready = g_detail_capture_started = false;
+    frame::cancel_label("Bestiary.DetailCapture");
     is_navigation_active = false;
     current_monster_data = nullptr;
     active_controller = nullptr;

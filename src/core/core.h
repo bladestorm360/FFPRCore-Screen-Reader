@@ -108,6 +108,7 @@ enum class Kind : uint8_t {
     BattleEntering,   // transition prefix: flags/epochs only; no cleanup or native reads
     BattleStart,      // native opening presentation is ready, after its original call
     BattleEnd,
+    PartyChanging,   // FF6 native party slot setter; epochs/flags only before original
     MenuOpened,
     MenuClosed,
     DialogueClosed,

@@ -19,14 +19,17 @@ template<class T, size_t N> struct Array {
     std::array<T, N> values{};
 };
 struct Packed { uintptr_t header[2]{}; void* bits = nullptr; int length = 1024; };
-struct Storage { uintptr_t header[2]{}; Packed* scenario; Packed* treasure; void* global; };
+struct Storage { uintptr_t header[2]{}; Packed* scenario; Packed* treasure; void* global; void* area; void* map; void* script=nullptr; void* labels=nullptr; int selected=0,item=0,map_id=318; };
 Array<uint32_t, 128> scenario, treasure;
 Array<int32_t, 16> global;
+Array<int32_t, 8> area,local;
 Packed scenario_flags{{}, &scenario}, treasure_flags{{}, &treasure};
-Storage storage{{}, &scenario_flags, &treasure_flags, &global};
+Storage storage{{}, &scenario_flags, &treasure_flags, &global, &area, &local};
+struct User { uint8_t padding[0x7c]{}; int area_id=101; } user;
 void* current = &storage;
 json::Value records;
 void* instance(const void*) { native(); return current; }
+void* user_instance(const void*) { native(); return &user; }
 std::string read(const std::string& path) { std::ifstream f(path, std::ios::binary); return {std::istreambuf_iterator<char>(f), {}}; }
 }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
@@ -41,10 +44,14 @@ int32_t Field::get() {
         if (std::strcmp(name,"scenario") == 0) return 0x10;
         if (std::strcmp(name,"treasure") == 0) return 0x18;
         if (std::strcmp(name,"global") == 0) return 0x20;
+        if (std::strcmp(name,"area") == 0) return 0x28;
+        if (std::strcmp(name,"map") == 0) return 0x30;
+        if (std::strcmp(name,"<currentMapId>k__BackingField") == 0) return 0x50;
     }
+    if (std::strcmp(cls.name,"UserDataManager")==0&&std::strcmp(name,"<CurrentAreaId>k__BackingField")==0)return 0x7c;
     return -1;
 }
-void* Method::ptr() { fixture::native(); return std::strcmp(name,"get_Instance") == 0 ? reinterpret_cast<void*>(&fixture::instance) : nullptr; }
+void* Method::ptr() { fixture::native(); return std::strcmp(name,"get_Instance") == 0 ? reinterpret_cast<void*>(&fixture::instance) : std::strcmp(name,"Instance")==0 ? reinterpret_cast<void*>(&fixture::user_instance) : nullptr; }
 il2cpp::Method* Method::get() { fixture::native(); return nullptr; }
 std::wstring str(void*) { fixture::native(); return {}; }
 void call_failed_note(const char*) { fixture::expect(false,"native getter must not fault"); }
@@ -61,7 +68,10 @@ namespace field::scanner { void invalidate_map() {} }
 namespace field::r {
 ref::Class kFieldController{"Last.Map", "FieldController"};
 ref::Field fMapManager{kFieldController, "mapManager"};
+ref::Class kUserDataManager{"Last.Management", "UserDataManager"};
+ref::Method mUserDataInstance{kUserDataManager, "Instance", 0};
 }
+namespace events { void on(Kind, Handler) {} }
 namespace data { const json::Value& game_json(const char*) { return fixture::records; } }
 int main()
 {
@@ -73,6 +83,7 @@ int main()
     for (size_t i = 0; i < 32; ++i) { scenario.values[i] = 0x80000001u; treasure.values[i] = ~scenario.values[i]; }
     for (size_t i = 32; i < 128; ++i) { scenario.values[i] = 0xdeadbeefu; treasure.values[i] = 0xffffffffu; }
     for (size_t i = 0; i < 16; ++i) global.values[i] = static_cast<int>(i) - 8;
+    for(size_t i=0;i<8;++i){area.values[i]=static_cast<int>(i)-3;local.values[i]=static_cast<int>(i)+20;}
     auto captured = map_state::snapshot();
     bool exact = true;
     for (size_t i = 0; i < 1024; ++i) {
@@ -81,6 +92,11 @@ int main()
     }
     expect(exact,"real 128-word allocation preserves all 1024 scenario/treasure flags");
     expect(captured.global[0] == -8 && captured.global[15] == 7,"global variables retain signed values");
+    expect(captured.area[0]==-3&&captured.area[7]==4&&captured.local[0]==20&&captured.local[7]==27&&captured.current_map_id==318&&captured.current_area_id==101,
+        "bounded native area/map locals retain signed state and exact ownership IDs");
+    area.length=7;local.length=9;
+    expect(!map_state::snapshot().area[0]&&!map_state::snapshot().local[0],"malformed local arrays stay unknown without partial reads");
+    area.length=local.length=8;
     treasure.length = 32;
     expect(map_state::snapshot().treasure == captured.treasure,"minimal complete backing allocation has the same logical bits");
     for (auto length : {0, 31, 129}) {

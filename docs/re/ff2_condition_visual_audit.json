@@ -1,0 +1,1123 @@
+{
+  "game": 2,
+  "source": "tools\\mapdump\\ff2_master\\condition.txt",
+  "source_sha256": "1a550107744bcf0efe86b0e829fad96bfab3c53e80586aca4d6a83d200ccf8de",
+  "conditions": [
+    {
+      "id": 1,
+      "type": 1,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 2,
+      "type": 2,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 3,
+      "type": 3,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 4,
+      "type": 4,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 5,
+      "type": 5,
+      "message_key": "MSG_SYSTEM_036",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 6,
+      "type": 6,
+      "message_key": "MSG_SYSTEM_040",
+      "effect_asset": 49,
+      "native_target_type": 0
+    },
+    {
+      "id": 7,
+      "type": 7,
+      "message_key": "MSG_SYSTEM_041",
+      "effect_asset": 50,
+      "native_target_type": 0
+    },
+    {
+      "id": 8,
+      "type": 8,
+      "message_key": "MSG_SYSTEM_038",
+      "effect_asset": 48,
+      "native_target_type": 0
+    },
+    {
+      "id": 9,
+      "type": 9,
+      "message_key": "None",
+      "effect_asset": 52,
+      "native_target_type": 0
+    },
+    {
+      "id": 10,
+      "type": 10,
+      "message_key": "MSG_SYSTEM_042",
+      "effect_asset": 51,
+      "native_target_type": 0
+    },
+    {
+      "id": 11,
+      "type": 11,
+      "message_key": "None",
+      "effect_asset": 201,
+      "native_target_type": 0
+    },
+    {
+      "id": 12,
+      "type": 12,
+      "message_key": "MSG_SYSTEM_037",
+      "effect_asset": 47,
+      "native_target_type": 0
+    },
+    {
+      "id": 13,
+      "type": 204,
+      "message_key": "None",
+      "effect_asset": 378,
+      "native_target_type": 0
+    },
+    {
+      "id": 14,
+      "type": 205,
+      "message_key": "None",
+      "effect_asset": 316,
+      "native_target_type": 0
+    },
+    {
+      "id": 15,
+      "type": 406,
+      "message_key": "None",
+      "effect_asset": 317,
+      "native_target_type": 0
+    },
+    {
+      "id": 16,
+      "type": 401,
+      "message_key": "MSG_SYSTEM_039",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 17,
+      "type": 402,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 18,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 19,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 20,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 21,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 22,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 23,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 24,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 25,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 26,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 27,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 28,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 29,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 30,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 31,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 32,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 33,
+      "type": 201,
+      "message_key": "MSG_MAGIC_NAME_20",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 34,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 35,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 36,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 37,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 38,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 39,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 40,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 41,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 42,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 43,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 44,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 45,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 46,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 47,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 48,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 49,
+      "type": 202,
+      "message_key": "MSG_MAGIC_NAME_29",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 50,
+      "type": 203,
+      "message_key": "None",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 51,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 66,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 67,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 68,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 69,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 70,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 71,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 72,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 73,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 74,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 75,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 76,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 77,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 78,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 79,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 80,
+      "type": 18,
+      "message_key": "MSG_MAGIC_NAME_18",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 52,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 81,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 82,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 83,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 84,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 85,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 86,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 87,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 88,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 89,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 90,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 91,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 92,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 93,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 94,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 95,
+      "type": 15,
+      "message_key": "MSG_MAGIC_NAME_19",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 53,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 54,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 55,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 56,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 57,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 58,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 59,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 60,
+      "type": 24,
+      "message_key": "MSG_MAGIC_NAME_25",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 61,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 96,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 97,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 98,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 99,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 100,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 101,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 102,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 103,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 104,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 105,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 106,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 107,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 108,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 109,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 110,
+      "type": 14,
+      "message_key": "MSG_MAGIC_NAME_26",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 62,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 111,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 112,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 113,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 114,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 115,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 116,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 117,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 118,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 119,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 120,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 121,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 122,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 123,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 124,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 125,
+      "type": 19,
+      "message_key": "MSG_MAGIC_NAME_27",
+      "effect_asset": 202,
+      "native_target_type": 0
+    },
+    {
+      "id": 63,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 126,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 127,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 128,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 129,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 130,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 131,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 132,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 133,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 134,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 135,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 136,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 137,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 138,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 139,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 140,
+      "type": 412,
+      "message_key": "MSG_MAGIC_NAME_28",
+      "effect_asset": 203,
+      "native_target_type": 0
+    },
+    {
+      "id": 64,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 141,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 142,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 143,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 144,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 145,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 146,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 147,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 148,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 149,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 150,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 151,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 152,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 153,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 154,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 155,
+      "type": 16,
+      "message_key": "MSG_MAGIC_NAME_35",
+      "effect_asset": 206,
+      "native_target_type": 0
+    },
+    {
+      "id": 65,
+      "type": 206,
+      "message_key": "MSG_ITEM_NAME_25",
+      "effect_asset": 205,
+      "native_target_type": 0
+    },
+    {
+      "id": 156,
+      "type": 662,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 157,
+      "type": 663,
+      "message_key": "None",
+      "effect_asset": 388,
+      "native_target_type": 0
+    },
+    {
+      "id": 158,
+      "type": 0,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    }
+  ],
+  "critical": [
+    {
+      "id": 4,
+      "type": 4,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    }
+  ],
+  "limits": "Asset metadata establishes candidates only. Runtime requires actual native enemy effect creation and visible renderer proof. Shared assets have no unique exact-name approval."
+}

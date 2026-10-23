@@ -1,4 +1,4 @@
-// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
 // All baked master-map roots and native state projections; real logged FFII route replay.
 #define main existing_route_worker_main
 #include "route_worker_check.cpp"
@@ -66,10 +66,11 @@ int main() {
                 }
                 // Check every active event row on every connected floor, not just
                 // one named event or the floors reached in a single play session.
-                for(const auto& floor:connected_floors(source,map,resolver))for(const auto& object:baked::grids(*floor.submap).objects) {
+                for(const auto& floor:connected_floors(source,map,resolver))for(const auto& original:baked::grids(*floor.submap).objects) {
+                    const auto object=resolver.effective(*floor.submap,original);
                     const bool event=(object.type==baked::ObjType::Entity&&(object.d&12))||
                         ((object.type==baked::ObjType::Event||object.type==baked::ObjType::RandomEvent||object.type==baked::ObjType::SwitchEvent||object.type==baked::ObjType::TransportationEventAction)&&(object.a||object.b));
-                    if(!event||!resolver.active(*floor.submap,object)||resolver.consumed(*floor.submap,object))continue;
+                    if(!event||!resolver.active(*floor.submap,original)||resolver.consumed(*floor.submap,original))continue;
                     const auto& grid=baked::grids(*floor.submap);
                     if(object.tx>=grid.width||object.ty>=grid.height||object.tx+object.tw<=0||object.ty+object.th<=0)continue;
                     expect(actual.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),

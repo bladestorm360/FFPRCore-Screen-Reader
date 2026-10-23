@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-23",
+  "identities": [
+    {
+      "game": 5,
+      "monster": 387,
+      "message": "MSG_MON_NAME_182",
+      "descriptor": "Center",
+      "asset": 295,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\ff5_scripts\\sc_ai_387_NeoExdeath.txt",
+      "evidence_sha256": "2f5f7a96b34ecac504a58aff32b63d48ba6bb14c89339fcc6be2faf086f50f51",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff5_master\\monster.txt",
+      "master_sha256": "8764ba3b2368c005279431334ebd3e8d3d5b4464c48bff3270b1fa04f9bcd557",
+      "method": "Native AI title explicitly identifies this anatomical area"
+    },
+    {
+      "game": 5,
+      "monster": 388,
+      "message": "MSG_MON_NAME_182",
+      "descriptor": "Lower right",
+      "asset": 288,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\ff5_scripts\\sc_ai_388_NeoExdeath.txt",
+      "evidence_sha256": "abf1854fb03449ec9bc5ff43889f4e0a3435b53afd51428f781ce9b6f3db519e",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff5_master\\monster.txt",
+      "master_sha256": "8764ba3b2368c005279431334ebd3e8d3d5b4464c48bff3270b1fa04f9bcd557",
+      "method": "Native AI title explicitly identifies this anatomical area"
+    },
+    {
+      "game": 5,
+      "monster": 389,
+      "message": "MSG_MON_NAME_182",
+      "descriptor": "Upper right",
+      "asset": 295,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\ff5_scripts\\sc_ai_389_NeoExdeath.txt",
+      "evidence_sha256": "a62ab024adf6d594a9eae9e02edfab9d08ece27fb6b9ab87166c523b9271e050",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff5_master\\monster.txt",
+      "master_sha256": "8764ba3b2368c005279431334ebd3e8d3d5b4464c48bff3270b1fa04f9bcd557",
+      "method": "Native AI title explicitly identifies this anatomical area"
+    },
+    {
+      "game": 5,
+      "monster": 390,
+      "message": "MSG_MON_NAME_182",
+      "descriptor": "Lower left",
+      "asset": 295,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\ff5_scripts\\sc_ai_390_NeoExdeath.txt",
+      "evidence_sha256": "fdbfe6206c992120478e0967f8a9354404136c9db1268465325f04b9bcea5cce",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff5_master\\monster.txt",
+      "master_sha256": "8764ba3b2368c005279431334ebd3e8d3d5b4464c48bff3270b1fa04f9bcd557",
+      "method": "Native AI title explicitly identifies this anatomical area"
+    },
+    {
+      "game": 6,
+      "monster": 257,
+      "message": "MSG_MON_NAME_254",
+      "descriptor": "Shell",
+      "asset": 269,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_102_MN_FF6_102_C00.png",
+      "evidence_sha256": "869c93040b0dd60c24710fdb49bf6a5f619a8c45528a48caa2f381cb04004084",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    },
+    {
+      "game": 6,
+      "monster": 309,
+      "message": "MSG_MON_NAME_254",
+      "descriptor": "Head",
+      "asset": 271,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_103_MN_FF6_103_C00.png",
+      "evidence_sha256": "fcb024bca2c540baf56d00fcca81dc32c16a83cc4a86cd3347aec1ac2245858d",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    },
+    {
+      "game": 6,
+      "monster": 258,
+      "message": "MSG_MON_NAME_255",
+      "descriptor": "Shell",
+      "asset": 270,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_102_MN_FF6_102_C01.png",
+      "evidence_sha256": "9207af11b38b21e1b770b26e083478a21087ea889254f57c1d48dcbfdec60ffd",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    },
+    {
+      "game": 6,
+      "monster": 310,
+      "message": "MSG_MON_NAME_255",
+      "descriptor": "Head",
+      "asset": 272,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_104_MN_FF6_104_C00.png",
+      "evidence_sha256": "3c4cf4a71327d482b943029289ea20293eba4859b67f4201d9096cabaa148f7f",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    },
+    {
+      "game": 6,
+      "monster": 287,
+      "message": "MSG_MON_NAME_279",
+      "descriptor": "Goddess",
+      "asset": 300,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_127_MN_FF6_127_C00.png",
+      "evidence_sha256": "decc125aa846f0ebaee23f6b61a94ea925c4c8546460c44cf0bd30c50e249c63",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    },
+    {
+      "game": 6,
+      "monster": 329,
+      "message": "MSG_MON_NAME_279",
+      "descriptor": "Demon",
+      "asset": 317,
+      "evidence": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\boss_parts_20261023\\mn_ff6_144_MN_FF6_144_C00.png",
+      "evidence_sha256": "99f8a7a425c9affe266678fb5fb63de3d8bb8ea91db177af33b99ba9a34f4740",
+      "master": "D:\\Games\\Dev\\Unity\\FFPR\\tools\\mapdump\\ff6_master\\monster.txt",
+      "master_sha256": "8c7ecfae0aedb65a9ad0b9a68e32cefeec0da64805571e9d276a803ff3db1241",
+      "method": "Actual extracted sprite visually reviewed by Sol"
+    }
+  ],
+  "additional_review": {
+    "ff5": "Soul Cannon already names Launchers separately; Neo Exdeath dummy511 and Stalker copies receive no inferred identity.",
+    "ff6": "Crane/Tentacle have positional variants without a verified anatomical adapter; Erebus clones remain ordinary duplicate letters."
+  },
+  "limits": "Target/status reads use current native master plus message identity. Opening roster and bestiary retain native display names. No gameplay confirmation."
+}

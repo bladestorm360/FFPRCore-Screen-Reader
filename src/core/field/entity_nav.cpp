@@ -41,6 +41,7 @@ std::wstring category_name(Category c)
     case Category::MapExits: return T(L"Map Exits");
     case Category::Events: return T(L"Events");
     case Category::Vehicles: return T(L"Vehicles");
+    case Category::SavePoints: return T(L"Save Points");
     }
     return T(L"Unknown");
 }
@@ -112,7 +113,9 @@ TargetKind target_kind_of(const Entity& e)
     case Kind::NPC:
     case Kind::TreasureChest: return TargetKind::Interact;
     case Kind::MapExit: return TargetKind::Transition;
-    case Kind::SavePoint:
+    // Infer recognizes the save point's own overlapping tutorial trigger as
+    // the selected action, so it is not announced as an event along the route.
+    case Kind::SavePoint: return TargetKind::Infer;
     case Kind::Vehicle: return TargetKind::Spot;
     default: return TargetKind::Infer;
     }
@@ -131,6 +134,8 @@ void format_current_entity(std::function<void(std::wstring)> publish)
     const auto position = e->position();
     baked_nav::MapGoal goal;
     goal.map_id = current_map_id();
+    goal.entity_id = e->entity_id;
+    if (e->raw_name_known) goal.raw_name = e->audio_hint;
     if (!baked_nav::cell_at(ctx.map_handle, position, goal.cell)) {
         publish(e->format_description({}, false, T(L"Navigation map data unavailable")) + ordinal); return;
     }
@@ -418,6 +423,7 @@ int install()
     actions::define("Settings.Changed.SpoilTreasureChestContents", [] { scanner::invalidate_map(); scanner::scan_entities(); });
     actions::define("Settings.Changed.MapExitFilter", [] { scanner::reapply_filter(); });
     actions::define("Settings.Changed.EventGroupFilter", [] { scanner::reapply_filter(); });
+    actions::define("Settings.Changed.StoryGateFilter", [] { scanner::reapply_filter(); });
     actions::define("Settings.Changed.EntranceSuffixes", [] { scanner::reapply_filter(); });
     actions::define("Settings.Changed.ToLayerFilter", [] { scanner::set_filter_to_layer(true); });
 
@@ -437,6 +443,11 @@ int install()
         }, "BakedNav.ContinuePending", INT_MAX);
     });
     events::on(events::Kind::BattleEntering, [] {
+        ++g_category_generation;
+        scanner::interrupt_navigation_work();
+        baked_nav::interrupt_requests();
+    });
+    events::on(events::Kind::PartyChanging, [] {
         ++g_category_generation;
         scanner::interrupt_navigation_work();
         baked_nav::interrupt_requests();
@@ -502,6 +513,7 @@ void request_rescan()
     // captured gates/actions even when the player and map have not moved.
     baked_nav::invalidate();
     scanner::refresh_state();
+    if(actions::defined("GameModule.FieldStateChanged"))actions::run("GameModule.FieldStateChanged");
 }
 
 } // namespace field

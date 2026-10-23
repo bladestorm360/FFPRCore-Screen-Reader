@@ -15,6 +15,7 @@
 #include "../unity.h"
 #include "../ui/review_buffer.h"
 #include "../ui/preferences.h"
+#include <tuple>
 
 namespace ffpr::battle {
 namespace {
@@ -274,8 +275,48 @@ std::vector<std::wstring> skill_notifications()
 }
 std::vector<std::wstring> point_details(void* self)
 {
-    auto lines = game::is(game::Id::FF2) ? std::vector<std::wstring>{} :
-        row_lines(displayed::field(self, "characterListConteroller"), "contentList");
+    std::vector<std::wstring> lines;
+    if (game::is(game::Id::FF2)) return lines; // No character EXP in this game.
+    void* controller = displayed::field(self, "characterListConteroller");
+    void* headings = displayed::field(controller, "view");
+    void* list = displayed::field(controller, "contentList");
+    const int count = unity::list_count(list);
+    if (count < 0 || count > 128) return lines;
+    for (int i = 0; i < count; ++i) {
+        void* content = unity::list_at(list, i);
+        if (!displayed::container_visible(content)) continue;
+        void* view = displayed::field(content, "view");
+        const auto name = displayed::text_field(view, "nameText");
+        std::vector<std::wstring> columns;
+        // These columns are siblings of the member rows, not their descendants.
+        // Recursive skill_row lost the headings and announced e.g. "Robyn 0 489".
+        // Keep the rendered zero (the native EXP countdown), never reinterpret it
+        // as a name, level, earned total or saved character ID.
+        for (auto [heading, value, fallback] : {
+                 std::tuple{"expFixText", "expValueText", L"EXP"},
+                 std::tuple{"nextFixText", "nextValueText", L"Next Level"},
+                 std::tuple{"abpFixText", "abpValueText", L"ABP"}}) {
+            const auto rendered = displayed::text_field(view, value);
+            if (rendered.empty()) continue;
+            auto label = displayed::text_field(headings, heading);
+            if (label.empty()) label = T(fallback);
+            columns.push_back(label + L": " + rendered);
+        }
+        const auto before = displayed::text_field(view, "beforLevelText");
+        const auto after = displayed::text_field(view, "afterLevelText");
+        if (!before.empty() || !after.empty())
+            columns.push_back(T(L"Level") + L": " + before +
+                (after.empty() ? L"" : before.empty() ? after : TF(L" to {0}", {after})));
+        // Native level/job messages may replace the numeric level panel. Read
+        // only visible components; a hidden stale pool value cannot reappear.
+        for (const char* field : {"levelUpText", "charaLevelUpText", "jobLevelUpText"}) {
+            auto message = displayed::text_field(view, field);
+            if (!message.empty()) columns.push_back(std::move(message));
+        }
+        auto line = text::join(columns, L", ");
+        if (!name.empty()) line = name + (line.empty() ? L"" : L": " + line);
+        if (!line.empty()) lines.push_back(std::move(line));
+    }
     return lines;
 }
 void begin_phase(void* menu, ResultPhase phase)

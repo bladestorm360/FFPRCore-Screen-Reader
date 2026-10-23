@@ -43,6 +43,10 @@ struct PathInfo {
     int next_map_id = 0;          // the route continues on this map after its last leg ("take
                                   // the exit to ..."): the target is cut off on this floor or
                                   // lies on another one (baked_nav); 0 = the route ends at the target
+    std::wstring guidance;        // owned scenario instruction, selected with the actual usable route
+    int guidance_index = -1;      // index in the bounded request's authored candidate list
+    std::wstring defense_warning; // concise current danger/closest-party advice
+    int blocking_party = -1;      // partial route ends beside this parked corps, zero-based
 };
 
 /// FieldNavigationHelper.WallDistances (tiles to the nearest wall; -1 = none in range)

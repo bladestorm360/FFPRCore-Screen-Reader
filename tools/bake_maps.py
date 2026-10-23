@@ -49,7 +49,7 @@ a=link_object_id b=accept_action_direction c=entity_id d=flags(1 collision, 2 al
 4 script, 8 action, 16 wanders; a TreasureBox also carries content_id << 8 in d);
 Warp (baked only: an Event / Entity whose script's Main runs ChangeMap, unless the destination's
 continuation script changes map straight back, a cutscene) a=dest map_id b=dest point_id
-c=entity_id d=step_on(1 Event, 0 examined); Event/TransportationEventAction a=script_id b=action_id c=entity_id
+c=entity_id d=step_on(1 Event, 0 examined, low byte 2 reviewed manual travel + optional approach mask bits 8..11); Event/TransportationEventAction a=script_id b=action_id c=entity_id
 d=ignore_route_link_object_id; OpenTrigger a=link_object_id c=entity_id; TelepoPoint
 a=goto_entity_id b=pointin_entity_id c=entity_id; CollisionEntity a=collision_type
 b=through_condition_type c=entity_id, name_str=target_transportation_ids; SavePoint
@@ -403,20 +403,21 @@ def bake_game(game, out_dir, check=False):
         sid = to_int((o["props"] or {}).get("script_id"))
         if sid and t in ("Event", "RandomEvent", "Entity", "AnimEntity"):
             s = shared_trap_script(o, script_names.get(sid, ""))
-            dest = main_change_map(s) if s else None
-            correction = next(((index, row) for index, row in enumerate(arrival_overrides)
-                               if row['submap'] == o['submap'] and row['entity_id'] == to_int((o['props'] or {}).get('entity_id'))
-                               and ('object_id' not in row or row['object_id'] == o['id'])), None)
-            if correction and correction[1].get('same_map'):
-                index, row = correction
-                assert dest is None
-                assert s and s['name'] == row['continuation']
-                dest = (row['destination_map'], 0, row['continuation'])
-            if dest and round_trip(o["submap"], dest[0], dest[2]):
-                scenes += 1   # a cutscene that returns: the cell stays open, no edge
-            elif dest:
-                point = dest[1]
-                if correction:
+            corrections = [(index, row) for index, row in enumerate(arrival_overrides)
+                           if row['submap'] == o['submap'] and row['entity_id'] == to_int((o['props'] or {}).get('entity_id'))
+                           and ('object_id' not in row or row['object_id'] == o['id'])]
+            for correction in corrections or [None]:
+                dest = main_change_map(s) if s else None
+                if correction and correction[1].get('same_map'):
+                    index, row = correction
+                    assert dest is None
+                    assert s and s['name'] == row['continuation']
+                    dest = (row['destination_map'], 0, row['continuation'])
+                if dest and round_trip(o["submap"], dest[0], dest[2]):
+                    scenes += 1   # a cutscene that returns: the cell stays open, no edge
+                elif dest:
+                    point = dest[1]
+                    if correction:
                         index, row = correction
                         assert dest[:2] == (row['destination_map'], row['original_point'])
                         assert dest[2] == row['continuation']
@@ -435,12 +436,12 @@ def bake_game(game, out_dir, check=False):
                             by_sub.setdefault(arrival['submap'],[]).append(arrival)
                         else: point = row['arrival_point']
                         used_arrivals.add(index)
-                w = dict(o)
-                w["type_name"] = "Warp"
-                w["props"] = {"entity_id": (o["props"] or {}).get("entity_id"), "map_id": -1 if correction and correction[1].get('same_map') else dest[0],
-                              "point_id": point, "step_on": 1 if t in ('Event','RandomEvent') else 0}
-                by_sub[o["submap"]].append(w)
-                warps += 1
+                    w = dict(o)
+                    w["type_name"] = "Warp"
+                    w["props"] = {"entity_id": (o["props"] or {}).get("entity_id"), "map_id": -1 if correction and correction[1].get('same_map') else dest[0],
+                                  "point_id": point, "step_on": (2 | (int(correction[1].get('approach_mask',0))<<8)) if correction and correction[1].get('interaction_travel') else 1 if t in ('Event','RandomEvent') else 0}
+                    by_sub[o["submap"]].append(w)
+                    warps += 1
 
     assert len(used_arrivals) == len(arrival_overrides), 'Reviewed arrival override did not match its object'
 

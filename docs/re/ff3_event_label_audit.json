@@ -145,9 +145,14 @@
     "id": 232,
     "raw": "石像（赤）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -155,9 +160,14 @@
     "id": 233,
     "raw": "石像（赤）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -165,9 +175,14 @@
     "id": 234,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -175,9 +190,14 @@
     "id": 235,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -185,9 +205,14 @@
     "id": 236,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -195,9 +220,14 @@
     "id": 237,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -205,9 +235,14 @@
     "id": 238,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -215,9 +250,14 @@
     "id": 239,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_3",
@@ -435,9 +475,14 @@
     "id": 234,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -445,9 +490,14 @@
     "id": 235,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -455,9 +505,14 @@
     "id": 236,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -465,9 +520,14 @@
     "id": 237,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -475,9 +535,14 @@
     "id": 238,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -485,9 +550,14 @@
     "id": 239,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_4",
@@ -675,9 +745,14 @@
     "id": 236,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_5",
@@ -685,9 +760,14 @@
     "id": 237,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_5",
@@ -695,9 +775,14 @@
     "id": 238,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_5",
@@ -705,9 +790,14 @@
     "id": 239,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_5",
@@ -865,9 +955,14 @@
     "id": 238,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_6",
@@ -875,9 +970,14 @@
     "id": 239,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_00000_6",
@@ -16785,9 +16885,14 @@
     "id": 232,
     "raw": "石像（赤）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16795,9 +16900,14 @@
     "id": 233,
     "raw": "石像（赤）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16805,9 +16915,14 @@
     "id": 234,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16815,9 +16930,14 @@
     "id": 235,
     "raw": "石像（青）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16825,9 +16945,14 @@
     "id": 236,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16835,9 +16960,14 @@
     "id": 237,
     "raw": "石像（緑）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16845,9 +16975,14 @@
     "id": 238,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -16855,9 +16990,14 @@
     "id": 239,
     "raw": "石像（茶）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -17675,9 +17815,14 @@
     "id": 27,
     "raw": "HP/MP回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_sty_0003",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -17685,9 +17830,14 @@
     "id": 28,
     "raw": "HP/MP回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_sty_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -17695,9 +17845,14 @@
     "id": 31,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -17705,9 +17860,14 @@
     "id": 32,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -17715,9 +17875,17 @@
     "id": 10,
     "raw": "sc_e_0211:ウルの村：音楽再生②",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0211",
+      "message_keys": [
+        "s0013_999_a_01",
+        "E0231_00_080_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -17725,9 +17893,17 @@
     "id": 11,
     "raw": "sc_e_0210:ウルの村：音楽再生①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0210",
+      "message_keys": [
+        "s0013_999_a_01",
+        "E0231_00_080_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -17735,9 +17911,16 @@
     "id": 16,
     "raw": "",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": [
+        "N999_C10_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_20011_5",
@@ -17785,9 +17968,14 @@
     "id": 11,
     "raw": "sc_e_0209:回復の泉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0209",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_6",
@@ -17795,9 +17983,14 @@
     "id": 12,
     "raw": "sc_e_XXXX:生き返りの泉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20011_6",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_8",
@@ -17805,9 +17998,16 @@
     "id": 13,
     "raw": "隠し扉を開ける①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0290",
+      "message_keys": [
+        "N999_C10_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_20011_8",
@@ -17825,9 +18025,14 @@
     "id": 21,
     "raw": "ロウソク①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_8",
@@ -17835,9 +18040,14 @@
     "id": 23,
     "raw": "ロウソク②",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20020",
@@ -17845,9 +18055,14 @@
     "id": 56,
     "raw": "焚火",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Campfire",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20020",
@@ -17875,9 +18090,14 @@
     "id": 26,
     "raw": "HP/MP回復(右)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_sty_0005",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_2",
@@ -17885,9 +18105,14 @@
     "id": 27,
     "raw": "HP/MP回復(左)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_sty_0004",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_2",
@@ -17895,9 +18120,14 @@
     "id": 30,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_2",
@@ -17905,9 +18135,14 @@
     "id": 31,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_5",
@@ -17955,9 +18190,14 @@
     "id": 14,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_6",
@@ -17965,9 +18205,14 @@
     "id": 15,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_6",
@@ -17975,9 +18220,14 @@
     "id": 16,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_7",
@@ -17985,9 +18235,16 @@
     "id": 6,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_rec_20021_7",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20031_1",
@@ -17995,9 +18252,14 @@
     "id": 3,
     "raw": "sc_e_0333:シドの飛空艇入手",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0333",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -18005,9 +18267,14 @@
     "id": 51,
     "raw": "HP/MP回復(右)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sty_0007",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_13",
@@ -18015,9 +18282,14 @@
     "id": 37,
     "raw": "サラ姫のベッドで寝る",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0213",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_5",
@@ -18085,9 +18357,14 @@
     "id": 11,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_2",
@@ -18095,9 +18372,14 @@
     "id": 16,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_2",
@@ -18105,9 +18387,14 @@
     "id": 17,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_2",
@@ -18115,9 +18402,14 @@
     "id": 18,
     "raw": "暖炉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Fireplace",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_5",
@@ -18165,9 +18457,16 @@
     "id": 8,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_riv_20071_6",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20071_7",
@@ -18175,9 +18474,16 @@
     "id": 18,
     "raw": "壁を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_sw_20071_7",
+      "message_keys": [
+        "N999_C10_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_20071_7",
@@ -18185,9 +18491,14 @@
     "id": 19,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_7",
@@ -18205,9 +18516,14 @@
     "id": 38,
     "raw": "暖炉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Fireplace",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_1",
@@ -18225,9 +18541,14 @@
     "id": 38,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_2",
@@ -18245,9 +18566,14 @@
     "id": 7,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_5",
@@ -18295,9 +18621,14 @@
     "id": 62,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20091_1",
@@ -18305,9 +18636,14 @@
     "id": 63,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20091_2",
@@ -18315,9 +18651,14 @@
     "id": 28,
     "raw": "大砲を撃つ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Cannon",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0264",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20091_2",
@@ -18335,9 +18676,14 @@
     "id": 13,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20091_4",
@@ -18345,9 +18691,16 @@
     "id": 14,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_riv_20091_4",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20100",
@@ -18365,9 +18718,14 @@
     "id": 12,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_1",
@@ -18375,9 +18733,14 @@
     "id": 13,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_1",
@@ -18395,9 +18758,14 @@
     "id": 25,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_3",
@@ -18405,9 +18773,14 @@
     "id": 15,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20110",
@@ -18555,9 +18928,14 @@
     "id": 11,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_2",
@@ -18565,9 +18943,16 @@
     "id": 5,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20111_2",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20111_3",
@@ -18615,9 +19000,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20120",
@@ -18625,9 +19015,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0226",
+      "message_keys": [
+        "N028_C00_999_06_02",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20120",
@@ -18635,9 +19034,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0226",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -18645,9 +19049,16 @@
     "id": 44,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_rec_20130",
+      "message_keys": [
+        "E0246_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20130",
@@ -18655,9 +19066,16 @@
     "id": 43,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_riv_20130",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20130",
@@ -18665,9 +19083,19 @@
     "id": 70,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_20130_1",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_20130",
@@ -18675,9 +19103,19 @@
     "id": 71,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_20130_2",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_20130",
@@ -18685,9 +19123,14 @@
     "id": 72,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_rec_20130",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -18695,9 +19138,14 @@
     "id": 73,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_riv_20130",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20131_2",
@@ -18705,9 +19153,14 @@
     "id": 23,
     "raw": "隠し扉を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fireplace",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sw_20131_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20131_2",
@@ -18725,9 +19178,14 @@
     "id": 7,
     "raw": "②の壁を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Wall",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sw_20131_6",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20131_6",
@@ -19075,9 +19533,14 @@
     "id": 13,
     "raw": "ピアノ演奏D",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0232",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20151_3",
@@ -19085,9 +19548,14 @@
     "id": 12,
     "raw": "ピアノ演奏C",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0231",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20151_4",
@@ -19095,9 +19563,14 @@
     "id": 8,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20151_5",
@@ -19105,9 +19578,16 @@
     "id": 5,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_riv_20151_5",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20161_1",
@@ -19135,9 +19615,15 @@
     "id": 45,
     "raw": "元々あった角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19145,9 +19631,15 @@
     "id": 44,
     "raw": "元々あった角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19155,9 +19647,21 @@
     "id": 40,
     "raw": "角を置く場所確認",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0051",
+      "message_keys": [
+        "E0051_00_085_a_01",
+        "E0051_00_085_a_02",
+        "s0015_999_a_01",
+        "E0051_00_085_a_03",
+        "E0051_00_085_a_04",
+        "E0051_00_085_a_05"
+      ]
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19165,9 +19669,15 @@
     "id": 42,
     "raw": "ドワーフの角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19175,9 +19685,15 @@
     "id": 43,
     "raw": "元々あった角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19185,9 +19701,15 @@
     "id": 46,
     "raw": "元々あった角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -19195,9 +19717,15 @@
     "id": 47,
     "raw": "ドワーフの角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_20161_5",
@@ -19205,9 +19733,14 @@
     "id": 7,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20161_6",
@@ -19215,9 +19748,16 @@
     "id": 8,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_riv_20161_6",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20161_6",
@@ -19225,9 +19765,14 @@
     "id": 46,
     "raw": "岩が道をふさいでいる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20161_7",
@@ -19235,9 +19780,20 @@
     "id": 9,
     "raw": "地底湖入口通常",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hole",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0047",
+      "message_keys": [
+        "E0040_00_147_a_04",
+        "E0040_00_147_a_05",
+        "E0040_00_147_a_01",
+        "E0040_00_147_a_02",
+        "E0040_00_147_a_03"
+      ]
+    }
   },
   {
     "submap": "Map_20161_7",
@@ -19265,9 +19821,17 @@
     "id": 29,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20191_1",
+      "message_keys": [
+        "E0245_00_999_a_01",
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20191_1",
@@ -19275,9 +19839,17 @@
     "id": 30,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_rec_20191_1",
+      "message_keys": [
+        "E0246_00_999_a_01",
+        "E0246_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20191_2",
@@ -19285,9 +19857,15 @@
     "id": 12,
     "raw": "クリスタルのかけら",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0065",
+      "message_keys": [],
+      "mapobject_asset_id": 138
+    }
   },
   {
     "submap": "Map_20200",
@@ -19335,9 +19913,14 @@
     "id": 71,
     "raw": "鍵がかかっている",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20200",
@@ -19495,9 +20078,16 @@
     "id": 5,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20201_1",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20201_2",
@@ -19505,9 +20095,14 @@
     "id": 5,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20201_3",
@@ -19515,9 +20110,14 @@
     "id": 14,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20201_4",
@@ -19525,9 +20125,18 @@
     "id": 15,
     "raw": "曲に合わせて踊る",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0218",
+      "message_keys": [
+        "s0013_999_a_01",
+        "E0218_00_101_a_01",
+        "E0218_00_101_a_02"
+      ]
+    }
   },
   {
     "submap": "Map_20201_4",
@@ -19535,9 +20144,18 @@
     "id": 17,
     "raw": "曲に合わせて踊る",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Piano",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0218",
+      "message_keys": [
+        "s0013_999_a_01",
+        "E0218_00_101_a_01",
+        "E0218_00_101_a_02"
+      ]
+    }
   },
   {
     "submap": "Map_20211_1",
@@ -19695,9 +20313,14 @@
     "id": 12,
     "raw": "壁を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Wall",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_sw_20211_6",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20211_6",
@@ -19825,9 +20448,16 @@
     "id": 107,
     "raw": "ガルーダ撃破まで入れない",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [
+        "N999_C01_121_01_01"
+      ]
+    }
   },
   {
     "submap": "Map_20221_2",
@@ -19835,9 +20465,14 @@
     "id": 38,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20221_2",
@@ -19845,9 +20480,14 @@
     "id": 40,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20221_3",
@@ -19855,9 +20495,16 @@
     "id": 6,
     "raw": "生き返り",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20221_3",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20221_4",
@@ -19935,9 +20582,16 @@
     "id": 31,
     "raw": "ガルーダ撃破まで入れない",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": [
+        "N999_C01_121_01_01"
+      ]
+    }
   },
   {
     "submap": "Map_20241_1",
@@ -19945,9 +20599,14 @@
     "id": 12,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_2",
@@ -19995,9 +20654,14 @@
     "id": 5,
     "raw": "図書館の本を読む⑨",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0242",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20005,9 +20669,14 @@
     "id": 6,
     "raw": "図書館の本を読む⑧",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0241",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20015,9 +20684,14 @@
     "id": 7,
     "raw": "図書館の本を読む⑦",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0240",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20025,9 +20699,14 @@
     "id": 8,
     "raw": "図書館の本を読む⑥",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0239",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20035,9 +20714,14 @@
     "id": 9,
     "raw": "図書館の本を読む⑤",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0238",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20045,9 +20729,14 @@
     "id": 10,
     "raw": "図書館の本を読む④",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0237",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20055,9 +20744,14 @@
     "id": 11,
     "raw": "図書館の本を読む③",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0236",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20065,9 +20759,14 @@
     "id": 12,
     "raw": "図書館の本を読む②",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0235",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20241_3",
@@ -20075,9 +20774,14 @@
     "id": 13,
     "raw": "図書館の本を読む①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Book",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0234",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20250",
@@ -20085,9 +20789,16 @@
     "id": 37,
     "raw": "ガルーダ撃破まで入れない",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": [
+        "N999_C01_121_01_01"
+      ]
+    }
   },
   {
     "submap": "Map_20250",
@@ -20095,9 +20806,14 @@
     "id": 38,
     "raw": "ガルーダ撃破まで入れない",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20250",
@@ -20105,9 +20821,14 @@
     "id": 39,
     "raw": "ガルーダ撃破まで入れない",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20251_1",
@@ -20115,9 +20836,14 @@
     "id": 13,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20251_2",
@@ -20225,9 +20951,18 @@
     "id": 17,
     "raw": "ギサールのやさいを使う",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0356",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20261_2",
@@ -20235,9 +20970,14 @@
     "id": 31,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20261_3",
@@ -20245,9 +20985,18 @@
     "id": 19,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Pot",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_rec_20261_3",
+      "message_keys": [
+        "E0246_00_999_a_01",
+        "E0246_00_999_a_01",
+        "E0246_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20261_3",
@@ -20255,9 +21004,18 @@
     "id": 18,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Pot",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_riv_20261_3",
+      "message_keys": [
+        "E0245_00_999_a_01",
+        "E0245_00_999_a_01",
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20261_3",
@@ -20265,9 +21023,16 @@
     "id": 14,
     "raw": "壁を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_sw_20261_3",
+      "message_keys": [
+        "N999_C10_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_20261_3",
@@ -20285,9 +21050,20 @@
     "id": 21,
     "raw": "ドーガの館：魔法陣の洞窟への穴に入る",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hole",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_e_0317",
+      "message_keys": [
+        "E0317_00_133_a_01",
+        "E0317_00_133_a_02",
+        "E0317_00_133_a_03",
+        "E0032_00_169_a_03",
+        "E0032_00_169_a_04"
+      ]
+    }
   },
   {
     "submap": "Map_20271_1",
@@ -20295,9 +21071,14 @@
     "id": 10,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20281_1",
@@ -20335,9 +21116,14 @@
     "id": 10,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20281_3",
@@ -20345,9 +21131,16 @@
     "id": 3,
     "raw": "壁を消す",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_sw_20281_3",
+      "message_keys": [
+        "N999_C10_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_20281_3",
@@ -20365,9 +21158,14 @@
     "id": 12,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20291_1",
@@ -20385,9 +21183,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0335",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20395,9 +21202,14 @@
     "id": 37,
     "raw": "魔法屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Magic shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20405,9 +21217,14 @@
     "id": 38,
     "raw": "武器屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Weapon shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20415,9 +21232,14 @@
     "id": 39,
     "raw": "防具屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Armor shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20425,9 +21247,14 @@
     "id": 40,
     "raw": "道具屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Item shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20435,9 +21262,14 @@
     "id": 49,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20455,9 +21287,14 @@
     "id": 54,
     "raw": "HP/MP回復(左)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sty_0002",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20465,9 +21302,16 @@
     "id": 55,
     "raw": "インビンシブルはじめて",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Helm",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0083",
+      "message_keys": [
+        "E0083_00_143_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -20475,9 +21319,14 @@
     "id": 56,
     "raw": "インビンシブルを操作する",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Helm",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_ship_0008",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20310",
@@ -20555,9 +21404,14 @@
     "id": 11,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20311_2",
@@ -20565,9 +21419,16 @@
     "id": 5,
     "raw": "生き返り",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_riv_20311_2",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20311_3",
@@ -20615,9 +21476,16 @@
     "id": 8,
     "raw": "状態異常回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0257",
+      "message_keys": [
+        "E0326_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20330",
@@ -20625,9 +21493,16 @@
     "id": 7,
     "raw": "いきかえり",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_riv_20330",
+      "message_keys": [
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20330",
@@ -20635,9 +21510,16 @@
     "id": 6,
     "raw": "HP/MP全回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_rec_20330",
+      "message_keys": [
+        "E0246_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_20340",
@@ -20645,9 +21527,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20340",
@@ -20655,9 +21542,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20340",
@@ -20665,9 +21561,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20675,9 +21576,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0335",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20695,9 +21605,14 @@
     "id": 37,
     "raw": "魔法屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Magic shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20705,9 +21620,14 @@
     "id": 38,
     "raw": "武器屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Weapon shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20715,9 +21635,14 @@
     "id": 39,
     "raw": "防具屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Armor shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20725,9 +21650,14 @@
     "id": 40,
     "raw": "道具屋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Item shop",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20735,9 +21665,14 @@
     "id": 49,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20755,9 +21690,14 @@
     "id": 51,
     "raw": "インビンシブルを操作する",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Helm",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_ship_0002",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -20765,9 +21705,14 @@
     "id": 53,
     "raw": "HP/MP回復(左)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bed",
+    "reason": "reviewed physical rest interaction",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sty_0002",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20360",
@@ -20775,9 +21720,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20360",
@@ -20785,9 +21735,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20360",
@@ -20795,9 +21754,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20370",
@@ -20805,9 +21769,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20370",
@@ -20815,9 +21784,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20370",
@@ -20825,9 +21803,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20380",
@@ -20835,9 +21818,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20380",
@@ -20845,9 +21833,18 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": [
+        "N028_C00_999_06_03",
+        "s0015_999_a_01",
+        "N028_C00_999_06_04"
+      ]
+    }
   },
   {
     "submap": "Map_20380",
@@ -20855,9 +21852,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20390",
@@ -20865,9 +21867,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20390",
@@ -20875,9 +21882,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20390",
@@ -20885,9 +21897,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20400",
@@ -20895,9 +21912,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20400",
@@ -20905,9 +21927,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20400",
@@ -20915,9 +21942,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20410",
@@ -20925,9 +21957,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20410",
@@ -20935,9 +21972,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20410",
@@ -20945,9 +21987,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20420",
@@ -20955,9 +22002,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20420",
@@ -20965,9 +22017,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20420",
@@ -20975,9 +22032,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20430",
@@ -20985,9 +22047,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20430",
@@ -20995,9 +22062,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20430",
@@ -21005,9 +22077,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20440",
@@ -21015,9 +22092,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20440",
@@ -21025,9 +22107,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20440",
@@ -21035,9 +22122,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20450",
@@ -21045,9 +22137,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20450",
@@ -21055,9 +22152,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20450",
@@ -21065,9 +22167,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20460",
@@ -21075,9 +22182,14 @@
     "id": 20,
     "raw": "デブチョコボ用コリジョン1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_dchoco_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20460",
@@ -21085,9 +22197,14 @@
     "id": 22,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20460",
@@ -21095,9 +22212,14 @@
     "id": 23,
     "raw": "デブチョコボを呼ぶ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chocobo clearing",
+    "reason": "reviewed physical Chocobo summon clearing",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0334",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -21105,9 +22227,14 @@
     "id": 20,
     "raw": "sc_e_0003:壁開けスイッチ：左",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0003",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -21155,9 +22282,14 @@
     "id": 20,
     "raw": "sc_e_0006:回復の泉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0006",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_2",
@@ -21165,9 +22297,14 @@
     "id": 25,
     "raw": "sc_e_0006:回復の泉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0006",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_2",
@@ -21305,9 +22442,14 @@
     "id": 84,
     "raw": "クリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0008",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_3",
@@ -21405,9 +22547,14 @@
     "id": 8,
     "raw": "2の道が開く",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0295",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_2",
@@ -21475,9 +22622,15 @@
     "id": 12,
     "raw": "デッシュ登場",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Grass",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1259,
+      "script": "sc_e_0028",
+      "message_keys": [],
+      "mapobject_asset_id": 217
+    }
   },
   {
     "submap": "Map_30051_1",
@@ -21555,9 +22708,14 @@
     "id": 4,
     "raw": "小さな穴",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hole",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0032",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30061_1",
@@ -21565,9 +22723,22 @@
     "id": 8,
     "raw": "目を返さなければ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0035",
+      "message_keys": [
+        "E0035_00_169_a_01",
+        "s0015_999_a_01",
+        "E0035_00_169_a_02",
+        "E0035_00_169_a_03",
+        "E0035_00_169_a_04",
+        "E0035_00_169_a_06",
+        "E0035_00_169_a_07"
+      ]
+    }
   },
   {
     "submap": "Map_30061_1",
@@ -21575,9 +22746,21 @@
     "id": 9,
     "raw": "目を返した後",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0032",
+      "message_keys": [
+        "E0032_00_169_a_01",
+        "E0032_00_169_a_02",
+        "N999_C20_169_01_01",
+        "E0032_00_169_a_03",
+        "E0032_00_169_a_04",
+        "E0032_00_169_a_05"
+      ]
+    }
   },
   {
     "submap": "Map_30061_2",
@@ -21645,9 +22828,15 @@
     "id": 16,
     "raw": "ネプトのめ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0033_1",
+      "message_keys": [],
+      "mapobject_asset_id": 126
+    }
   },
   {
     "submap": "Map_30061_5",
@@ -21655,9 +22844,15 @@
     "id": 17,
     "raw": "ネプトのめ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0033_1",
+      "message_keys": [],
+      "mapobject_asset_id": 126
+    }
   },
   {
     "submap": "Map_30071_1",
@@ -21665,9 +22860,20 @@
     "id": 12,
     "raw": "トード使用前・後",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hole",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0040",
+      "message_keys": [
+        "E0040_00_147_a_04",
+        "E0040_00_147_a_05",
+        "E0040_00_147_a_01",
+        "E0040_00_147_a_02",
+        "E0040_00_147_a_03"
+      ]
+    }
   },
   {
     "submap": "Map_30071_1",
@@ -21725,9 +22931,24 @@
     "id": 13,
     "raw": "ディッシュとの別れ",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Flame",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0045",
+      "message_keys": [
+        "E0045_00_184_a_01",
+        "E0045_00_184_a_02",
+        "E0045_00_184_a_03",
+        "E0045_00_184_a_04",
+        "E0045_00_184_a_05",
+        "E0045_00_184_a_06",
+        "E0045_00_184_a_07",
+        "E0045_00_184_a_08",
+        "E0045_00_184_a_09"
+      ]
+    }
   },
   {
     "submap": "Map_30071_2",
@@ -21835,9 +23056,14 @@
     "id": 14,
     "raw": "オーエンの塔：隠し扉を開ける",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Wall",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_sw_30071_6",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30071_6",
@@ -21995,9 +23221,15 @@
     "id": 15,
     "raw": "ドワーフの角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0048_1",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_30081_4",
@@ -22005,9 +23237,15 @@
     "id": 17,
     "raw": "ドワーフの角",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Horn",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0048_1",
+      "message_keys": [],
+      "mapobject_asset_id": 127
+    }
   },
   {
     "submap": "Map_30091_1",
@@ -22035,9 +23273,16 @@
     "id": 36,
     "raw": "炎イベント",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Flame",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0046",
+      "message_keys": [
+        "N999_C10_189_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30091_2",
@@ -22065,9 +23310,14 @@
     "id": 16,
     "raw": "ほのおの洞窟：隠し扉を開ける",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sw_30091_3",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30091_3",
@@ -22225,9 +23475,14 @@
     "id": 33,
     "raw": "クリスタル（イベント用）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0053",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30091_5",
@@ -22285,9 +23540,20 @@
     "id": 18,
     "raw": "抜け穴を通る",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hole",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0057",
+      "message_keys": [
+        "E0057_00_194_a_01",
+        "E0057_00_194_a_02",
+        "E0057_00_194_a_03",
+        "E0032_00_169_a_03",
+        "E0032_00_169_a_04"
+      ]
+    }
   },
   {
     "submap": "Map_30101_1",
@@ -22295,9 +23561,17 @@
     "id": 20,
     "raw": "回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_rec_30101_1",
+      "message_keys": [
+        "E0246_00_999_a_01",
+        "E0245_00_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30111_1",
@@ -22335,9 +23609,16 @@
     "id": 15,
     "raw": "扉が封印されている",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "E0066_00_260_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30111_1",
@@ -22505,9 +23786,14 @@
     "id": 32,
     "raw": "水のクリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0310",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_6",
@@ -22735,9 +24021,19 @@
     "id": 30,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_key_30131_1_1",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30131_1",
@@ -22745,9 +24041,19 @@
     "id": 31,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_key_30131_1_2",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30131_1",
@@ -22755,9 +24061,19 @@
     "id": 32,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_key_30131_1_3",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30131_1",
@@ -22765,9 +24081,19 @@
     "id": 33,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "sc_key_30131_1_4",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30131_1",
@@ -22895,9 +24221,15 @@
     "id": 12,
     "raw": "金のクリスタル",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1259,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 124
+    }
   },
   {
     "submap": "Map_30131_8",
@@ -23205,9 +24537,19 @@
     "id": 30,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_1_1",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_1",
@@ -23215,9 +24557,19 @@
     "id": 31,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_1_2",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_1",
@@ -23265,9 +24617,15 @@
     "id": 6,
     "raw": "リュート",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Lute",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0080",
+      "message_keys": [],
+      "mapobject_asset_id": 130
+    }
   },
   {
     "submap": "Map_30171_2",
@@ -23325,9 +24683,19 @@
     "id": 34,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_5_1",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_5",
@@ -23335,9 +24703,19 @@
     "id": 35,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_5_2",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_5",
@@ -23345,9 +24723,19 @@
     "id": 36,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_5_3",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_5",
@@ -23445,9 +24833,19 @@
     "id": 79,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_9_2",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_9",
@@ -23455,9 +24853,19 @@
     "id": 80,
     "raw": "魔法の鍵で入れる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_key_30171_9_1",
+      "message_keys": [
+        "N999_C01_999_1_01",
+        "s0015_999_a_01",
+        "N999_C01_999_1_03",
+        "N999_C01_999_1_02"
+      ]
+    }
   },
   {
     "submap": "Map_30171_9",
@@ -23515,9 +24923,15 @@
     "id": 40,
     "raw": "アダマンタイト1",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 218
+    }
   },
   {
     "submap": "Map_30181_1",
@@ -23525,9 +24939,15 @@
     "id": 41,
     "raw": "アダマンタイト2",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 218
+    }
   },
   {
     "submap": "Map_30181_1",
@@ -23535,9 +24955,15 @@
     "id": 42,
     "raw": "アダマンタイト3",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 218
+    }
   },
   {
     "submap": "Map_30181_1",
@@ -23545,9 +24971,15 @@
     "id": 43,
     "raw": "アダマンタイト4",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 218
+    }
   },
   {
     "submap": "Map_30181_1",
@@ -23735,9 +25167,14 @@
     "id": 16,
     "raw": "ロウソク",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Candle",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1257,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30181_4",
@@ -24075,9 +25512,15 @@
     "id": 8,
     "raw": "土の牙",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fang",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1515,
+      "script": "sc_e_0084",
+      "message_keys": [],
+      "mapobject_asset_id": 131
+    }
   },
   {
     "submap": "Map_30231_2",
@@ -24495,9 +25938,14 @@
     "id": 30,
     "raw": "土のクリスタル（イベント）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0319",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30251_2",
@@ -24605,9 +26053,18 @@
     "id": 11,
     "raw": "シルクスの鍵を使うと扉が開く",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0090",
+      "message_keys": [
+        "E0090_00_305_a_01",
+        "E0090_00_305_a_02",
+        "s0015_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30261_10",
@@ -24635,9 +26092,14 @@
     "id": 21,
     "raw": "エウレカへ移動",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Mirror",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0321",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30261_2",
@@ -24655,9 +26117,14 @@
     "id": 20,
     "raw": "鏡の警告、鍵を使うと通行可能に",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Mirror",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0258",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30261_3",
@@ -24875,9 +26342,24 @@
     "id": 64,
     "raw": "５つの心をあつめる",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Mirror",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0091",
+      "message_keys": [
+        "E0091_00_313_a_01",
+        "E0091_00_313_a_02",
+        "E0091_00_313_a_03",
+        "E0091_00_313_a_04",
+        "E0091_00_313_a_05",
+        "E0091_00_313_a_06",
+        "E0091_00_313_a_07",
+        "E0091_00_313_a_08",
+        "E0091_00_313_a_09"
+      ]
+    }
   },
   {
     "submap": "Map_30271_1",
@@ -24905,9 +26387,14 @@
     "id": 31,
     "raw": "泉を調べると生き返り",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_riv_30271_10",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -24915,9 +26402,14 @@
     "id": 33,
     "raw": "調べると壁が開く",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sw_30271_10",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -24925,9 +26417,14 @@
     "id": 34,
     "raw": "調べると壁が開く",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_sw_30271_10",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -24945,9 +26442,14 @@
     "id": 37,
     "raw": "泉を調べると回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_rec_30271_10",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -24965,9 +26467,14 @@
     "id": 18,
     "raw": "泉を調べると回復",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -24975,9 +26482,14 @@
     "id": 17,
     "raw": "泉を調べると生き返り",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30271_10",
@@ -25135,9 +26647,15 @@
     "id": 18,
     "raw": "調べるとアモスとバトル、円月輪入手",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chakram",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0259",
+      "message_keys": [],
+      "mapobject_asset_id": 135
+    }
   },
   {
     "submap": "Map_30271_7",
@@ -25165,9 +26683,15 @@
     "id": 30,
     "raw": "調べるとくのいちと戦闘、その後まさむねを入手",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Sword",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0260",
+      "message_keys": [],
+      "mapobject_asset_id": 134
+    }
   },
   {
     "submap": "Map_30271_8",
@@ -25195,9 +26719,15 @@
     "id": 25,
     "raw": "調べるとジェネラルと戦闘、その後エクスカリバー入手",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Sword",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0261",
+      "message_keys": [],
+      "mapobject_asset_id": 133
+    }
   },
   {
     "submap": "Map_30271_9",
@@ -25225,9 +26755,15 @@
     "id": 32,
     "raw": "調べるとスキュラと戦闘、その後長老の杖入手",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Staff",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0262",
+      "message_keys": [],
+      "mapobject_asset_id": 132
+    }
   },
   {
     "submap": "Map_30271_9",
@@ -25235,9 +26771,15 @@
     "id": 35,
     "raw": "調べるとガーディアンと戦闘、その後ラグナロク入手",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Sword",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0263",
+      "message_keys": [],
+      "mapobject_asset_id": 136
+    }
   },
   {
     "submap": "Map_30281_11",
@@ -25255,9 +26797,24 @@
     "id": 39,
     "raw": "くらやみのくも戦～エンディング",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "@name:くらやみのくも",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0101",
+      "message_keys": [
+        "E0101_00_335_a_01",
+        "E0101_00_335_a_02",
+        "E0101_00_335_a_03",
+        "E0101_00_335_a_04",
+        "E0101_00_335_a_05",
+        "E0101_00_335_a_06",
+        "E0101_00_335_a_07",
+        "E0101_00_335_a_08",
+        "E0101_00_335_a_09"
+      ]
+    }
   },
   {
     "submap": "Map_30281_3",
@@ -25285,9 +26842,14 @@
     "id": 41,
     "raw": "闇のクリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0094",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30281_3",
@@ -25345,9 +26907,14 @@
     "id": 39,
     "raw": "闇のクリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0096",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30281_5",
@@ -25405,9 +26972,14 @@
     "id": 39,
     "raw": "闇のクリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0098",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30281_7",
@@ -25465,9 +27037,14 @@
     "id": 35,
     "raw": "闇のクリスタル（スクリプト）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0100",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30281_9",
@@ -25535,9 +27112,14 @@
     "id": 17,
     "raw": "ミスリルの洞窟：隠し扉を開ける スイッチ①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1513,
+      "script": "sc_e_0274",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30291_2",
@@ -25556,7 +27138,12 @@
     "raw": "クリスタル",
     "type": 10,
     "label": "Crystal",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1004,
+      "script": "",
+      "message_keys": []
+    }
   }
 ]

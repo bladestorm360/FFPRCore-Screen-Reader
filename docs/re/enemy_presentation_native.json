@@ -1,0 +1,1627 @@
+{
+  "ff1": {
+    "binary_sha256": "33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108",
+    "dump_sha256": "8313bacc58a606108db7dc0786b4fc5bcd57dc07e171cb8b051c2a68cd817740",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "2698F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "2698F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "408520",
+        "parameters": 2,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "454140",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "4541C0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "8631B0",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "5758B0",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "575490",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x4ee7c0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0x354cd0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0x5bf050"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x4eb000"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0x5bf150"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x4ec940"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0x5bf0d0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x4eb5a0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0x5bef50"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x4e9710"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0x5befd0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x4ea1f0"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x41c8f0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0xff0a70"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x29c910"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4ee7c0"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfb0110"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0x719180",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0xff0a70"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x29c910"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4ee7c0"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0xfb2680"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfb0110"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0xa02a20",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0x867ba0"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0x9c74d0"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0x577740",
+        "parameter_count": 4,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "MiscAssetDescAccessor",
+            "method": "get_Desc",
+            "rva": "0x930e60"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e1730"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x1088850"
+          },
+          {
+            "class": "ConditionEffectEntityController",
+            "method": "AddEffectComponent",
+            "rva": "0x576d80"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xa0b860"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xa0b580"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x1088850"
+          },
+          {
+            "class": "Transform",
+            "method": "get_position",
+            "rva": "0x14cb4c0"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x108a160"
+          }
+        ]
+      }
+    }
+  },
+  "ff2": {
+    "binary_sha256": "dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b",
+    "dump_sha256": "2cd79f198f2792c2a5c274833b94a7daeaa522cf67aff35f2e867d66be6422c4",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "2698F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "2698F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "39D020",
+        "parameters": 2,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "493940",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "4939C0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "90A3A0",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "91C5F0",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "91C1D0",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x53eb90",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0x6a24c0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0x69aa30"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x53b3d0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0x69ab30"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x53cd10"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0x69aab0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x53b970"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0x69a930"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x539ae0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0x69a9b0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x53a5c0"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x44a3f0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x1023c30"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x4d9ab0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x53eb90"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfa45a0"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0x9715f0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x1023c30"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x4d9ab0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x53eb90"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0xfa6b10"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfa45a0"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0x487230",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0x90e7f0"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0x6ac550"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0x47fd70",
+        "parameter_count": 4,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2698f0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "MiscAssetDescAccessor",
+            "method": "get_Desc",
+            "rva": "0x86da70"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2a4990"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x10cc3f0"
+          },
+          {
+            "class": "ConditionEffectEntityController",
+            "method": "AddEffectComponent",
+            "rva": "0x47f3b0"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xd9a860"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xd9a580"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x10cc3f0"
+          },
+          {
+            "class": "Transform",
+            "method": "get_position",
+            "rva": "0x14ec540"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x10cdd00"
+          }
+        ]
+      }
+    }
+  },
+  "ff3": {
+    "binary_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+    "dump_sha256": "cf74887b07f39807182c95701b3888ebfe171f0c9f7afbe8f33811b47c3d4b15",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "26D8F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "26D8F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "421810",
+        "parameters": 2,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "543770",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "5437F0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "6E7620",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "B1D860",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "B1CFE0",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x657f00",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0x476ef0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0x4a2c70"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x654610"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0x4a2d70"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e9aa0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x655f50"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0x4a2cf0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x654bb0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0x4a2b70"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e9aa0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e9aa0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x652c70"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0x4a2bf0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e9aa0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x653800"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x50eca0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x108b060"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x2c0ff0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x657f00"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26d8f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x1059260"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0x9d0e20",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x108b060"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x2c0ff0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x657f00"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0x105b7d0"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26d8f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x1059260"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0x4c82b0",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0x6ec580"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0xa2e970"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0x4bfc60",
+        "parameter_count": 3,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26d8f0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e9aa0"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x1105ce0"
+          },
+          {
+            "class": "ConditionEffectEntity",
+            "method": "Init",
+            "rva": "0xb1ed50"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xd04130"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xd03e50"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x11075f0"
+          }
+        ]
+      }
+    }
+  },
+  "ff4": {
+    "binary_sha256": "bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed",
+    "dump_sha256": "011bc480d50bba3784b001844f854eae9abbe7a0050cb91c6e82146dffacc916",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "26B8F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "26B8F0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "3C6B70",
+        "parameters": 3,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "5CEFD0",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "5CF050",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "5B5A10",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "A030A0",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "A02920",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x4a7e40",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0x40b5c0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0x405490"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x4a4680"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0x405590"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2c3d70"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x4a5fc0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0x405510"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x4a4c20"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0x405390"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2c3d70"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2c3d70"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x4a2d90"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0x405410"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2c3d70"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x4a3870"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x51aa80",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x102f5a0"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x5370f0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4a7e40"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26b8f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfc08e0"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0x5e2720",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x102f5a0"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x5370f0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4a7e40"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0xfc2e50"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26b8f0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0xfc08e0"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0x4c5250",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0x5ba980"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0xaa7a40"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0xa14800",
+        "parameter_count": 4,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x26b8f0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2c3d70"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x10cb6f0"
+          },
+          {
+            "class": "ConditionEffectEntity",
+            "method": "Init",
+            "rva": "0xa151a0"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xc91be0"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xc91900"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x10cd000"
+          }
+        ]
+      }
+    }
+  },
+  "ff5": {
+    "binary_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "2715A0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "2715A0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "4829D0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "75F360",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "75F3E0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "A14F50",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "533230",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "532980",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x58ff80",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0x41e1c0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0x41a2c0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x58c660"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0x41a3c0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2cfaf0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x58dfe0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0x41a340"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x58cc00"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0x41a1c0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2cfaf0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2cfaf0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x58acb0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0x41a240"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2cfaf0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x58b850"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x4fb9c0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x10ec000"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x3a89b0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x58ff80"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2715a0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x108ac90"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0x993650",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x10ec000"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x3a89b0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x58ff80"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0x108d200"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2715a0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x108ac90"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0x40efc0",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0xa19cf0"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0x9f86a0"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0x534e20",
+        "parameter_count": 4,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2715a0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2cfaf0"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x1199ac0"
+          },
+          {
+            "class": "ConditionEffectEntity",
+            "method": "Init",
+            "rva": "0x5357c0"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xb88c90"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xb889b0"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x119b3d0"
+          }
+        ]
+      }
+    }
+  },
+  "ff6": {
+    "binary_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+    "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+    "enemy_critical_override": false,
+    "methods": {
+      "BattleAnimatorBase.Dying": {
+        "rva": "2F10A0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleAnimatorBase.UpdateDying": {
+        "rva": "2F10A0",
+        "parameters": 0,
+        "return_only": true
+      },
+      "BattleEnemyEntity.ChangeMotionListFromCondition": {
+        "rva": "5A06B0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "InstantiateManager.InitEnemyEntityFromCondition": {
+        "rva": "897940",
+        "parameters": 2,
+        "return_only": false,
+        "direct_init_enemy_call": true
+      },
+      "InstantiateManager.InitEnemyEntity": {
+        "rva": "8979C0",
+        "parameters": 2,
+        "return_only": false
+      },
+      "BattleSpriteEntity.SetSprite": {
+        "rva": "864120",
+        "parameters": 1,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Start": {
+        "rva": "4A7A40",
+        "parameters": 0,
+        "return_only": false
+      },
+      "ChangeSkinColorConditionFunctionBase.Remove": {
+        "rva": "4A7350",
+        "parameters": 0,
+        "return_only": false
+      }
+    },
+    "bestiary_and_play": {
+      "LibraryInfoContent.UpdateView": {
+        "rva": "0x4670a0",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "ProviderManager",
+            "method": "get_Instance",
+            "rva": "0xa96560"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetMonsterDataTable",
+            "rva": "0xa8c920"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetMonsterData",
+            "rva": "0x463480"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetStatusTable",
+            "rva": "0xa8ca20"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetStatus",
+            "rva": "0x465040"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetOptionTable",
+            "rva": "0xa8c9a0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetOption",
+            "rva": "0x463b80"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetDropTable",
+            "rva": "0xa8c820"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetDrop",
+            "rva": "0x461ad0"
+          },
+          {
+            "class": "ExtraLibraryProvider",
+            "method": "GetHierarchyTable",
+            "rva": "0xa8c8a0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "SetHierarchy",
+            "rva": "0x462670"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView": {
+        "rva": "0x935f50",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x125f560"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x61e9e0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4670a0"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2f10a0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x12cf0b0"
+          }
+        ]
+      },
+      "LibraryInfoWindowController.UpdateView.1": {
+        "rva": "0xa21b40",
+        "parameter_count": 1,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "String",
+            "method": "Format",
+            "rva": "0x125f560"
+          },
+          {
+            "class": "MessageManager",
+            "method": "GetMessage",
+            "rva": "0x61e9e0"
+          },
+          {
+            "class": "LibraryInfoContent",
+            "method": "UpdateView",
+            "rva": "0x4670a0"
+          },
+          {
+            "class": "Object",
+            "method": "op_Equality",
+            "rva": "0x12d1620"
+          },
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2f10a0"
+          },
+          {
+            "class": "MonoBehaviour",
+            "method": "StartCoroutine",
+            "rva": "0x12cf0b0"
+          }
+        ]
+      },
+      "DyingConditionFunction.Start": {
+        "rva": "0x696820",
+        "parameter_count": 0,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "BattleUnitData",
+            "method": "GetAnimStateController",
+            "rva": "0x91c210"
+          },
+          {
+            "class": "AnimStateController",
+            "method": "AnimDying",
+            "rva": "0x5d5980"
+          }
+        ]
+      },
+      "ConditionEffectEntityController.Play": {
+        "rva": "0x4a9dc0",
+        "parameter_count": 4,
+        "return_only": false,
+        "calls": [
+          {
+            "class": "SecurityParser",
+            "method": "OnStartParsing",
+            "rva": "0x2f10a0"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "MiscAssetDescAccessor",
+            "method": "get_Desc",
+            "rva": "0x86dd20"
+          },
+          {
+            "class": "UnsafeNativeMethods.ManifestEtw.EtwEnableCallback",
+            "method": ".ctor",
+            "rva": "0x2e11c0"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x12ed200"
+          },
+          {
+            "class": "ConditionEffectEntity",
+            "method": "Init",
+            "rva": "0x4aa950"
+          },
+          {
+            "class": "ConditionEffectEntity",
+            "method": "Init",
+            "rva": "0x4aa950"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "Init",
+            "rva": "0xdb5c20"
+          },
+          {
+            "class": "EffectReactionInspector",
+            "method": "EffectUpdate",
+            "rva": "0xdb5960"
+          },
+          {
+            "class": "Component",
+            "method": "get_transform",
+            "rva": "0x12ed200"
+          },
+          {
+            "class": "Transform",
+            "method": "get_position",
+            "rva": "0x13731c0"
+          },
+          {
+            "class": "Debug",
+            "method": "LogError",
+            "rva": "0x12eec00"
+          }
+        ]
+      }
+    }
+  }
+}

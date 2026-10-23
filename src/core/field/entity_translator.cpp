@@ -19,6 +19,7 @@ std::atomic<bool> g_initialized{false};
 const json::Value* g_translations = nullptr;   // object: japanese -> { lang: text }
 int g_count = 0;
 std::map<std::wstring, std::set<std::wstring>> g_untranslated_by_map;
+thread_local bool g_track_native_map = true;
 
 void initialize()
 {
@@ -371,7 +372,7 @@ std::wstring translate_entity_name(const std::wstring& japanese_name)
 
     // 4. Track the untranslated name by the current map (development aid).
     const std::wstring& tracking = has_prefix ? base : core;
-    if (contains_japanese(tracking)) {
+    if (g_track_native_map && contains_japanese(tracking)) {
         std::wstring map_name = current_map_name();
         if (!map_name.empty()) g_untranslated_by_map[map_name].insert(tracking);
     }
@@ -386,6 +387,21 @@ npc_names::Label npc_display_label(const std::wstring& converted_name)
     label.base = std::move(descriptive.base);
     if (label.ordinal < 0) label.ordinal = descriptive.ordinal;
     return label;
+}
+namespace {
+struct SnapshotNames {
+    bool previous=g_track_native_map;
+    SnapshotNames(){g_track_native_map=false;}
+    ~SnapshotNames(){g_track_native_map=previous;}
+};
+}
+std::wstring translate_entity_name_snapshot(const std::wstring& raw) {
+    SnapshotNames scope;
+    return translate_entity_name(raw);
+}
+npc_names::Label npc_display_label_snapshot(const std::wstring& converted) {
+    SnapshotNames scope;
+    return npc_display_label(converted);
 }
 
 } // namespace field

@@ -173,7 +173,11 @@ int main(int argc,char** argv) {
     expect(fixture::energy(legacy_hrtf_pcm,0)>0,"short footstep HRTF tail survives its dry sample boundary");
     reference.stop_all();
     reference.start(1,cues::Id::WallBump,0,1,1,1);
-    expect(reference.voices[1].reference.mono==original_bump&&reference.voices[1].gain==1,"HRTF receives unaltered full-amplitude original wall bump");
+    expect(reference.voices[1].reference.mono==original_bump&&reference.voices[1].gain==2,"HRTF doubles only wall-bump gain while retaining original waveform");
+    reference.bank[size_t(cues::Id::WallBump)].custom=true;
+    reference.start(2,cues::Id::WallBump,0,1,.25f,1);
+    expect(reference.voices[2].gain==.5f,"custom wall-bump clips receive the same cue-specific HRTF gain and preserve user volume");
+    reference.bank[size_t(cues::Id::WallBump)].custom=false;
     reference.render(legacy_hrtf_pcm.data(),441);
     expect(fixture::energy(legacy_hrtf_pcm,0)>0,"actual production HRTF legacy voice renders");reference.stop_all();
     reference.hrtf.open(L"",bank); // production has one loopback context per audio worker

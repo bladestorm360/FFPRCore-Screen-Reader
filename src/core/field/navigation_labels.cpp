@@ -11,7 +11,7 @@ namespace {
 bool cancelled(const FilterInput& input) { return input.cancelled && input.cancelled(); }
 std::wstring letters(size_t index) {
     std::wstring result;
-    do { result.insert(result.begin(),static_cast<wchar_t>(L'a'+index%26)); index=index/26; if(!index)break; --index; } while(true);
+    do { result.insert(result.begin(),static_cast<wchar_t>(L'A'+index%26)); index=index/26; if(!index)break; --index; } while(true);
     return result;
 }
 struct Floor {
@@ -20,7 +20,21 @@ struct Floor {
     std::vector<const baked::Object*> exits;
     std::vector<size_t> roots;
     std::map<size_t,std::wstring> suffixes;
+    // Destination IDs can differ while their displayed names are identical
+    // (e.g. several Coliseum floors). The owned unfiltered rows supply the
+    // localized name; worker code never calls the game's name/localization API.
+    std::map<int,std::wstring> destination_names;
+    std::vector<const FilterRow*> rows;
+    std::vector<baked::Object> observed_exits;
+    std::map<const baked::Object*,std::wstring> observed_names;
 };
+bool row_cell(const Floor& floor,const FilterRow& row,int& x,int& y) {
+    x=row.cell_x;y=row.cell_y;
+    if(row.remote_map)return true;
+    if(!std::isfinite(row.position.x)||!std::isfinite(row.position.y)||std::abs(row.position.x)>1.e6||std::abs(row.position.y)>1.e6)return false;
+    x=static_cast<int>(std::floor(floor.map->width*.5+row.position.x/16));
+    y=static_cast<int>(std::floor(floor.map->height*.5-row.position.y/16));return true;
+}
 bool prepare_floor(Floor& floor, FilterInput& input) {
     const auto& map=*floor.map;
     for(const auto& object:baked::grids(map).objects) {
@@ -30,6 +44,28 @@ bool prepare_floor(Floor& floor, FilterInput& input) {
         if (!input.entrance_suffixes || object.type!=baked::ObjType::GotoMap || object.a<=0)continue;
         if (input.state && !input.state->active(map,object))continue;
         floor.exits.push_back(&object);
+    }
+    // Native door/stair adapters can expose exits with no GotoMap bake record or
+    // destination ID. They still need distinct names. Represent only their
+    // captured physical tile here; this never changes route geometry/game data.
+    floor.observed_exits.reserve(floor.rows.size());
+    std::vector<std::wstring> observed_names;
+    for(const auto* row:floor.rows) {
+        if(cancelled(input))return false;
+        if(!input.entrance_suffixes || row->kind!=Kind::MapExit)continue;
+        int x,y;if(!row_cell(floor,*row,x,y)||!baked::in_bounds(baked::grids(map),x,y)||x>32767||y>32767||row->cell_layer>2)continue;
+        const bool known=std::any_of(floor.exits.begin(),floor.exits.end(),[&](const auto* o) {
+            return o->a==row->destination&&o->contains(x,y)&&(row->cell_layer<0||o->layer==row->cell_layer);
+        });
+        if(known)continue;
+        baked::Object object{};object.type=baked::ObjType::GotoMap;object.layer=static_cast<uint8_t>(row->cell_layer<0?1:row->cell_layer);
+        object.tx=static_cast<int16_t>(x);object.ty=static_cast<int16_t>(y);object.tw=object.th=1;object.a=row->destination;
+        object.b=-(row->entity_id>=0?row->entity_id:y*int(map.width)+x)-1;
+        floor.observed_exits.push_back(object);observed_names.push_back(row->name);
+    }
+    for(size_t i=0;i<floor.observed_exits.size();++i) {
+        const auto* object=&floor.observed_exits[i];floor.exits.push_back(object);
+        floor.observed_names.emplace(object,std::move(observed_names[i]));
     }
     auto& roots=floor.roots;roots.resize(floor.exits.size());std::iota(roots.begin(),roots.end(),0);
     const auto root=[&](size_t n){while(roots[n]!=n){roots[n]=roots[roots[n]];n=roots[n];}return n;};
@@ -53,11 +89,15 @@ bool prepare_floor(Floor& floor, FilterInput& input) {
             }
     }
     using Anchor=std::tuple<int,int,int,int>; // layer, y, x, destination point
-    std::map<int,std::map<size_t,Anchor>> destinations;
+    std::map<std::wstring,std::map<size_t,Anchor>> destinations;
     for(size_t i=0;i<floor.exits.size();++i) {
         if(cancelled(input))return false;
         const auto& o=*floor.exits[i];roots[i]=root(i);
-        auto& group=destinations[o.a];const Anchor anchor{o.layer,o.ty,o.tx,o.b};
+        const auto named=floor.destination_names.find(o.a);
+        const auto observed=floor.observed_names.find(&o);
+        const auto key=observed!=floor.observed_names.end()?observed->second:
+            named==floor.destination_names.end()?L"#"+std::to_wstring(o.a):named->second;
+        auto& group=destinations[key];const Anchor anchor{o.layer,o.ty,o.tx,o.b};
         const auto at=group.find(roots[i]);
         if(at==group.end())group.emplace(roots[i],anchor);else at->second=std::min(at->second,anchor);
     }
@@ -74,24 +114,28 @@ bool prepare_floor(Floor& floor, FilterInput& input) {
 bool prepare_navigation_labels(FilterInput& input) {
     if(!input.events && !input.entrance_suffixes)return true;
     std::map<int,Floor> floors;
+    // Gather every row before assigning letters so category/distance ordering
+    // cannot change the set of destination names or physical doorway identities.
+    for(const auto& row:input.rows) {
+        if(cancelled(input))return false;
+        if(row.kind!=Kind::Event && row.kind!=Kind::MapExit)continue;
+        const int id=row.remote_map?row.remote_map:input.current_map;
+        auto& floor=floors[id];
+        floor.map=baked::submap_by_map_id(id);
+        floor.rows.push_back(&row);
+        if(row.kind==Kind::MapExit && row.destination>0 && !row.name.empty())
+            floor.destination_names.try_emplace(row.destination,row.name);
+    }
+    for(auto& [id,floor]:floors)
+        if(floor.map && !prepare_floor(floor,input))return false;
     for(auto& row:input.rows) {
         if(cancelled(input))return false;
         row.event_group.clear();
         if(!row.available || (row.kind!=Kind::Event && row.kind!=Kind::MapExit))continue;
         const int id=row.remote_map?row.remote_map:input.current_map;
-        auto found=floors.find(id);
-        if(found==floors.end()) {
-            Floor floor;floor.map=baked::submap_by_map_id(id);
-            if(floor.map && !prepare_floor(floor,input))return false;
-            found=floors.emplace(id,std::move(floor)).first;
-        }
+        const auto found=floors.find(id);
         const auto& floor=found->second;if(!floor.map)continue;
-        int x=row.cell_x,y=row.cell_y;
-        if(!row.remote_map) {
-            if(!std::isfinite(row.position.x)||!std::isfinite(row.position.y)||std::abs(row.position.x)>1.e6||std::abs(row.position.y)>1.e6)continue;
-            x=static_cast<int>(std::floor(floor.map->width*.5+row.position.x/16));
-            y=static_cast<int>(std::floor(floor.map->height*.5-row.position.y/16));
-        }
+        int x,y;if(!row_cell(floor,row,x,y))continue;
         if(input.events && row.kind==Kind::Event && row.event_type==L"Event" && row.entity_id>=0 && !row.raw_name.empty()) {
             const auto at=floor.events.find(row.entity_id);
             if(at==floor.events.end())continue;

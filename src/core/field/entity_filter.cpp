@@ -1,5 +1,6 @@
 #include "entity_filter.h"
 #include "navigation_labels.h"
+#include "save_points.h"
 #include <algorithm>
 #include <cmath>
 namespace field::filter_worker {
@@ -76,7 +77,7 @@ static Filtered build_impl(FilterInput& input) {
         check_cancelled(input);
         if (row.kind == Kind::MapExit && !row.remote_map && (!input.world || row.route_distance>=0)) result.exits.push_back(row.numbering_position);
         result.names.push_back(row.name);
-        if (row.available && (input.category == Category::All || input.category == row.category)) result.order.push_back(row.index);
+        if (row.available && !row.story_gated && (input.category == Category::All || input.category == row.category)) result.order.push_back(row.index);
     }
     if (input.sort) std::stable_sort(result.order.begin(), result.order.end(), [&](size_t a, size_t b) {
         check_cancelled(input);
@@ -140,6 +141,8 @@ Filtered build(FilterInput& input) {
 }
 static Categories categories_impl(FilterInput& input) {
     check_cancelled(input);
+    for(auto& row:input.rows)row.story_gated=false;
+    save_points::consolidate(input);
     if (input.state) for (auto& row:input.rows) {
         check_cancelled(input);
         if (row.remote_map || row.entity_id<0 || (row.kind!=Kind::NPC&&row.kind!=Kind::Event)) continue;
@@ -156,6 +159,35 @@ static Categories categories_impl(FilterInput& input) {
         if(matched&&all)row.available=false;
     }
     if(!prepare_navigation_labels(input))throw Cancelled{};
+    if(input.story_gates && input.navigation) {
+        std::vector<baked_nav::StoryTarget> targets;
+        std::vector<size_t> indices;
+        for(size_t i=0;i<input.rows.size();++i) {
+            check_cancelled(input);
+            const auto& row=input.rows[i];if(!row.available)continue;
+            const int map=row.remote_map?row.remote_map:input.current_map;
+            const auto* sm=baked::submap_by_map_id(map);if(!sm)continue;
+            baked_route::Cell cell{sm->world?1:row.cell_layer,row.cell_x,row.cell_y};
+            if(!row.remote_map) {
+                if(!std::isfinite(row.position.x)||!std::isfinite(row.position.y)||std::abs(row.position.x)>1.e6||std::abs(row.position.y)>1.e6)continue;
+                cell.x=static_cast<int>(std::floor(sm->width*.5+row.position.x/16));
+                cell.y=static_cast<int>(std::floor(sm->height*.5-row.position.y/16));
+            }
+            TargetKind kind=TargetKind::Infer;
+            switch(row.kind) {
+            case Kind::NPC:case Kind::TreasureChest:kind=TargetKind::Interact;break;
+            case Kind::MapExit:kind=TargetKind::Transition;break;
+            case Kind::Vehicle:kind=TargetKind::Spot;break;
+            default:break;
+            }
+            baked_nav::MapGoal goal;goal.map_id=map;goal.cell=cell;
+            goal.entity_id=row.entity_id;goal.raw_name=row.raw_name;
+            targets.push_back({std::move(goal),kind});indices.push_back(i);
+        }
+        const auto hidden=baked_nav::story_gate_mask(*input.navigation,targets,input.cancelled);
+        check_cancelled(input);
+        for(size_t i=0;i<hidden.size();++i)input.rows[indices[i]].story_gated=hidden[i];
+    }
     if (input.navigation) {
         std::vector<baked_nav::ExitTarget> targets;
         std::vector<size_t> indices;

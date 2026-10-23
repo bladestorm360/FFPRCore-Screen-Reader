@@ -22,7 +22,9 @@ enum class ObjType : uint8_t {
     IgnoreRoute = 22, NonEncountArea = 23, RandomEvent = 28, SwitchEvent = 30,
     /// Baked only: an event whose script changes map (ChangeMap in its Main segment): a warp
     /// pad, a trapdoor. a = destination map id, b = destination PointIn point id, d = 1 when
-    /// stepping on it fires (an Event), 0 when it is examined (an Entity). A cutscene whose
+    /// stepping on it fires (an Event), 0 when it is examined (an Entity). Low byte 2 is
+    /// reviewed manual travel; bits 8..11 optionally restrict native approach sides.
+    /// A cutscene whose
     /// destination script changes map straight back (FF1's bridge credits) is not one
     /// (bake_maps.py round_trip, 2026-10-11).
     Warp = 100,

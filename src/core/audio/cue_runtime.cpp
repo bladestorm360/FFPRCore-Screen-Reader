@@ -81,14 +81,22 @@ public:
     void start(size_t i,cues::Id cue,float x,float north,float gain,float pitch,bool loop=false,uint64_t id=0,float amplitude=1) {
         stop(i);
         if(bank[size_t(cue)].mono.empty()) return;
+        // Wall bumps need extra headroom through the HRTF renderer. Apply this
+        // only after actual activation, so stereo/unavailable-HRTF fallback and
+        // every other cue keep their existing levels and volume-bank semantics.
+        const float cue_gain = hrtf.active() && cue == cues::Id::WallBump ? 2.f : 1.f;
         auto& v=voices[i];
         v={true,loop,id!=0,id,cue,x,north,std::clamp(gain*amplitude,0.f,4.f),hrtf.active()?1.f:std::clamp(pitch,.4f,2.f),0,{}};
         if(size_t(cue)<cues::first_entity && !bank[size_t(cue)].custom) {
             v.reference=legacy::make(cue,x,gain,pitch,amplitude,hrtf.active());
             v.pitch=1; // Original synthesis changes frequency without stretching envelopes.
             v.gain=(cue==cues::Id::Beacon || cue==cues::Id::BeaconBlocked)?1:gain;
+            v.gain *= cue_gain;
             hrtf.play_pcm(i,v.reference.mono,x,north,v.gain,loop);
-        } else hrtf.play(i,cue,x,north,v.gain,loop);
+        } else {
+            v.gain *= cue_gain;
+            hrtf.play(i,cue,x,north,v.gain,loop);
+        }
     }
     void configure(scape::Options next) {
         const bool change=next.hrtf!=wanted_hrtf;

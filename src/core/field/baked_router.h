@@ -99,7 +99,10 @@ struct Goals {
 /// The goal cells for `target` under the request's movement rules (its submap, transport and
 /// passages; `start` is not used). `accept_bits` are the NPC accept_action_direction bits in
 /// direction order north, east, south, west (0 = ignore the mask).
-Goals goals_for(const Request& movement, const Cell& target, GoalKind kind);
+// An owned live NPC footprint can replace its baked home/counter metadata.
+// The override is read only for this call and never retained by the router.
+Goals goals_for(const Request& movement, const Cell& target, GoalKind kind,
+                const baked::Object* interaction = nullptr);
 
 /// The direction index (0 north, 1 east, 2 south, 3 west) from `from` towards `to`, by the
 /// larger axis delta (ties: the vertical). -1 when the cells coincide.

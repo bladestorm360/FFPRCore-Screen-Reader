@@ -26,6 +26,11 @@ for n, game in enumerate(GAMES, 1):
                 transforms[tree['m_GameObject']['m_PathID']] = tree
     views = {pid: t for pid, t in trees.items() if 'nameText' in t and 'expValueText' in t}
     assert views
+    headings = [t for t in trees.values() if 'nextFixText' in t and 'expFixText' in t]
+    assert headings, f'FF{n}: native member-column headings missing'
+    assert all('nextValueText' in t for t in views.values())
+    if n == 5:
+        assert all('abpValueText' in t for t in views.values()) and all('abpFixText' in t for t in headings)
     text_ids = {pid for pid, t in trees.items() if 'm_Text' in t}
     def descends(child, parent):
         seen = set()
@@ -57,6 +62,8 @@ for n, game in enumerate(GAMES, 1):
         assert row['name_is_descendant'], f'FF{n}: recursive reader misses its own row name {pid}'
         assert len(names_in_tree) == 1, f'FF{n}: recursive reader crosses character rows {pid}'
     assert rows
-    records.append({'game': n, 'bundle': paths[0].name, 'rows': rows})
+    records.append({'game': n, 'bundle': paths[0].name, 'rows': rows,
+                    'member_heading_views': len(headings),
+                    'structured_columns': ['expValueText', 'nextValueText'] + (['abpValueText'] if n == 5 else [])})
     print(f'FF{n}: {len(rows)} serialized EXP row controllers each contain exactly their own name')
 (ROOT / 'docs/re/result_name_views.json').write_text(json.dumps(records, indent=2) + '\n', encoding='utf-8')

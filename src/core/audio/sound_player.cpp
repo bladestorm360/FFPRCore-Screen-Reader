@@ -98,6 +98,9 @@ int install() {
         wall_active=false;
         runtime::walls(0,0);
     });
+    events::on(events::Kind::PartyChanging, [] {
+        runtime::cancel_field();field_active=false;wall_active=false;runtime::walls(0,0);
+    });
     actions::define("Soundscape.RangeDown",[]{range(-1);});
     actions::define("Soundscape.RangeUp",[]{range(1);});
     actions::define("Audio.RefreshSettings",[]{configure();});

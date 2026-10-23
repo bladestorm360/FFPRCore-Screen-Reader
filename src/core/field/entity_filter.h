@@ -16,6 +16,7 @@ struct FilterRow {
     npc_names::Label label;
     bool selected = false;
     bool available = true;
+    bool story_gated = false; // inclusion only; NPC numbering uses unpruned rows
     std::wstring raw_name;
     bool cell_valid = false;
     int route_distance = -1;
@@ -28,6 +29,7 @@ struct FilterInput {
     Vec3 player, selected_position;
     bool sort = false, pads = false, exits = false, layer = false, selected_has = false;
     bool events = false, entrance_suffixes = false;
+    bool story_gates = false;
     int selected_remote = 0, selected_x = 0, selected_y = 0;
     Category category = Category::All, selected_category = Category::All;
     std::wstring selected_name;
@@ -51,6 +53,6 @@ struct Filtered {
 Filtered build(FilterInput& input);
 // One worker pass prepares every category. Only view 0 owns names/exits; the
 // other views share those source rows and contain their own selection indices.
-struct Categories { std::array<Filtered, 6> views; };
+struct Categories { std::array<Filtered, kCategoryCount> views; };
 Categories build_categories(FilterInput& input);
 }

@@ -1,5 +1,13 @@
 # Persistent navigation state, October 15
 
+October23 [story-state extension](FF6_STORY_NAVIGATION.md) adds owner-scoped area/map
+locals, additive native groups and bounded synchronous actor visibility/position
+facts. Current live observations still own actor positions; pressure-plate
+departure explicitly projects released gates without changing native state or
+moving NPCs to baked homes. Metadata IDs such as PointIn remain separate. Native
+physical Event actors can be hidden/shown too, as Phoenix's two rock controls
+demonstrate. Tests now compare projected actor coordinates, not stale home tiles.
+
 The user's FFII log shows opened native chests on Deist B1 losing their state prefix
 when browsed from B2. B2's native chests then say Opened while the remote B1 chest
 says only Treasure Chest. That is an unknown-state result, not evidence of the game

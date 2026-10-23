@@ -1,14 +1,14 @@
-# Final Fantasy Pixel Master Core Screen Reader V0.9.4
+# Final Fantasy Pixel Master Core Screen Reader V0.9.5
 
 ## Purpose
 
 Adds speech, menu and battle reading, pathfinding, optional autowalk and audio navigation to FINAL FANTASY I-VI Pixel Remaster on Steam. One set of files supports all six games. Keyboard and controller controls are supported.
 
-V0.9.4 corrects scene-trigger reachability announcements and adds optional event grouping and stable letters for separate entrances to the same floor. It also improves session logging and battle-result name diagnostics. See the field controls below for the new settings.
+V0.9.5 adds brief, party-aware FFVI story guidance, Terra/Banon danger warnings and routes that respect parked parties. It also adds the story-gate filter, a Save Points category, boss-part labels and native name-entry letter speech. Shared fixes improve battle results, Bestiary refresh, object names, vehicle routes and navigation audio.
 
 ## Known Issues
 
-V0.9.4 is an early combined release. Some game-specific screens, airships and scripted map exits still need gameplay testing. Intermittent stalls are still under investigation; automatic timing logs remain enabled. FFIII and FFVI automatic airship boarding is disabled: board and take the wheel manually before requesting a flying route. FFVI flight autowalk has passed offline checks but still needs gameplay confirmation. A report of a numbered character name in battle results remains unreproduced; additional diagnostics are included. Report missing or repeated speech with the game's ffpr_screen_reader.log and a short description of what happened.
+V0.9.5 is an early combined release. Some game-specific screens, airships and scripted map exits still need gameplay testing. Intermittent stalls are still under investigation; automatic timing logs remain enabled. FFIII and FFVI automatic airship boarding is disabled: board and take the wheel manually before requesting a flying route. FFVI flight autowalk has passed offline checks but still needs gameplay confirmation. A report of a numbered character name in battle results remains unreproduced; additional diagnostics are included. Report missing or repeated speech with the game's ffpr_screen_reader.log and a short description of what happened.
 
 Timing diagnostics run automatically in every session and use that same log. If intermittent lag returns, note what you were doing and report it. The five previous log files are retained as ffpr_screen_reader.1.log through .5.log, so the affected run can still be checked after restarting.
 
@@ -82,8 +82,12 @@ Common commands in both layouts:
 - Backtick, above Tab: rescan the map.
 - Shift+M: toggle the map exit filter, grouping exits by destination and preferring the nearest reachable entrance.
 - Ctrl+Shift+P: toggle the event group filter, grouping repeated triggers for the same event and preferring the closest reachable trigger. Also available under Navigation in the mod menu.
+- Ctrl+Shift+Backslash: toggle Hide story-gated destinations (default Off). Also under F8 > Navigation. This hides proven story barriers while keeping uncertain destinations and ordinary NPC obstructions.
 - Ctrl+arrow: teleport north, south, west or east of the selected destination, if Navigation / Teleport shortcuts is enabled (default off).
 - Shift+G: start or repeat the current puzzle-guide step.
+- FF6 story guidance gives brief directions and necessary party-switch instructions. Parked parties block both guidance and normal paths; when approaches are occupied, directions stop one step before the party and append “Blocked by Party n”. Terra/Banon defenses warn once when an enemy enters three tiles; Shift+G repeats the danger and identifies the closest party when all positions are known. Otherwise guidance aims for the commander who ends the defense.
+- Save points have their own Save Points category. FF6 animation/tutorial companions do not add duplicate destinations.
+- Native name entry speaks letters crossed with arrows and letters erased with Backspace. Boss targets distinguish verified heads/shells, Chadarnook forms and FF5 Neo Exdeath body areas.
 - Ctrl+G: stop the puzzle guide.
 - G: announce gil.
 - M: announce the current map.
@@ -101,7 +105,7 @@ Use Current map to keep eligible events and interactive objects available while 
 
 Each individual map exit routes to its highlighted tile, including entrances that lead to the same floor. World map exit lists include reachable transition trigger tiles. The map exit filter updates the nearest entrance after movement; turn it off to browse individual reachable entrances.
 
-Speech / Entrance suffixes adds stable letters to separate entrances leading to the same floor, such as Deist Cavern 2F (a) and (b). Adjacent tiles of one doorway share a letter. Both entrance suffixes and event grouping default off and are saved per game.
+Speech / Entrance suffixes adds stable letters to distinct exits sharing a destination name, including different destination IDs and floors, such as Coliseum (A) and (B). Adjacent tiles of one doorway share a letter. Both entrance suffixes and event grouping default off and are saved per game.
 Scene triggers can be selected as destinations. For a story-gated destination, directions to a reachable scene trigger are included when one is available.
 
 ### Waypoints (field only)
@@ -127,6 +131,8 @@ In the waypoint name window, type normally. Left/Right reviews letters, Up/Down 
 - F5 in battle: cycle enemy HP Numbers, Percentage or Hidden. Enemy HP is an optional extra; the native target panel does not display it.
 - F7: toggle Autodetail.
 - F8 on the field: open the mod menu. F8 closes it directly.
+
+The October 22 development build adds two Speech settings: Interrupt speech on character turn (default on) and Enemy status announcements (default off). Turning turn interruption off queues automatic turn speech; manual T still interrupts. Enemy status speech follows actual visible effects, sprite transformations or material changes. Indistinguishable effects use a generic label; hidden Critical is not inferred from enemy HP. Battle results notifications once defaults on when unset and keeps every displayed message in the review buffer. Existing saved settings are preserved.
 
 The mod menu has Speech, Navigation, Navigation audio and Battle categories. Speech starts with Game speech (default on). Turning it off mutes game and gameplay announcements; the speech-only mod menu continues speaking, including its help and close announcement. Speech also includes Autodetail, Verbose/Brief stat deltas, Status damage (default on) and Spoil treasure chest contents (default off). Navigation includes Autowalk, Navigation keymap, Teleport shortcuts, Speak autowalk path, filters and Stick Click Normalization. Navigation audio starts with its master switch (default on), followed by HRTF, Soundscape and Soundscape settings. The audio master silences every mod sound while preserving individual preferences. It also contains the existing sound toggles and volumes, Beacon with directions, the EXP counter where supported, and Sound previews. Autowalk, Speak autowalk path, Beacon with directions, Soundscape and HRTF remain independently default off.
 

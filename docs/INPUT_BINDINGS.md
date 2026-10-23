@@ -1,5 +1,13 @@
 # Input bindings
 
+October23: Ctrl+Shift+Backslash toggles persisted StoryGateFilter, default Off,
+in either layout. The same setting is F8 > Navigation > Hide story-gated
+destinations. It refreshes the owned list filter through Settings.Changed;
+manual destination/route identity is retained. Save Points is appended to the
+category cycle. FF6 Shift+G speaks brief current-party directions and repeats
+current Terra/Banon danger; ordinary party changes announce only the number.
+See [follow-up contracts](re/NAVIGATION_FOLLOWUPS_2026_10_23.md).
+
 Source: `src/core/input/` (ports FF1 `InputManager`, `KeyBindingRegistry`, `ControllerRouter`,
 `GamepadManager`, `Core/Handlers/*`, `InputPassthroughPatches`). Input never calls a feature
 directly: every key and button runs a named action (`actions::run`), and every context check

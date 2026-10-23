@@ -159,6 +159,19 @@ bool entity_is_active(void* field_entity);
 bool entity_is_hidden_by_vehicle(void* field_entity);
 bool entity_is_scenery(void* field_entity);
 
+// CanAction describes the confirm-button interaction, not whether a unit can
+// start a contact encounter. Native EventActionDefine excludes actions 0 and 9
+// from talking; action 9 with a real script remains a navigation target. Read
+// this only on the native owner, after the caller validates the entity lifetime.
+// This is shared by discovery and later selected-target lifetime checks.
+inline bool npc_navigation_available(void* entity) {
+    if (!r::mNonPlayerGetCanAction.get() || ref::call<bool>(r::mNonPlayerGetCanAction, entity)) return true;
+    void* property = ref::rd<void*>(entity, r::fEntityProperty);
+    return property && r::kPropertyEvent.is(property) &&
+        ref::rd<int32_t>(property, r::fEventActionId) == 9 &&
+        ref::rd<int32_t>(property, r::fEventScriptId) > 0;
+}
+
 // --- EntityDetectionHelpers (entity_detection.cpp) ------------------------------------------
 int object_type_of(void* property);
 int goto_map_destination_id(void* field_entity);
@@ -175,8 +188,9 @@ int vehicle_type_from_name(const std::wstring& vehicle_name);
 bool entity_on_current_map(void* field_entity, const std::wstring& current_map_asset);
 
 // --- NavigableEntity (navigable_entity.cpp) -------------------------------------------------
-enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5 };
-constexpr int kCategoryCount = 6;
+// Append categories to retain the established numeric identities of old views.
+enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5, SavePoints = 6 };
+constexpr int kCategoryCount = 7;
 
 enum class Kind { TreasureChest, NPC, MapExit, SavePoint, Event, ScriptTrigger, Vehicle };
 

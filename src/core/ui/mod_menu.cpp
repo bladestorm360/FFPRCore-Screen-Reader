@@ -154,6 +154,12 @@ void initialize()
                        L"Off. Use the I key to read descriptions on demand."));
     v.push_back(toggle(L"Battle results: notifications once", p::kResultNotificationsOnce, p::kResultNotificationsOnceDefault,
                        L"Battle results: notifications once on", L"Battle results: notifications once off"));
+    v.push_back(toggle(L"Interrupt speech on character turn", p::kInterruptCharacterTurn, p::kInterruptCharacterTurnDefault,
+                       L"On. A character's turn announcement interrupts current speech.",
+                       L"Off. A character's turn announcement queues after current speech."));
+    v.push_back(toggle(L"Enemy status announcements", p::kEnemyStatusAnnouncements, p::kEnemyStatusAnnouncementsDefault,
+                       L"On. Announce visually displayed enemy conditions.",
+                       L"Off. Do not automatically announce enemy conditions."));
     v.push_back(enumeration(L"Stat delta detail", {L"Verbose", L"Brief"},
                             p::kStatDeltaMode, p::kStatDeltaModeDefault, p::kStatDeltaModeMax,
                             L"Stat delta detail help"));
@@ -198,6 +204,9 @@ void initialize()
     v.push_back(toggle(L"Event group filter", p::kEventGroupFilter, p::kEventGroupFilterDefault,
                        L"On. Repeated triggers for the same event are grouped. Navigation keeps the closest reachable trigger.",
                        L"Off. All event triggers appear separately in navigation."));
+    v.push_back(toggle(L"Hide story-gated destinations", p::kStoryGateFilter, p::kStoryGateFilterDefault,
+                       L"On. Destinations blocked by confirmed story gates are hidden. Uncertain routes remain listed.",
+                       L"Off. Story-gated destinations remain listed in navigation."));
     v.push_back(toggle(L"Layer Transition Filter", p::kToLayerFilter, p::kToLayerFilterDefault,
                        L"On. Layer transition entities are hidden from navigation.",
                        L"Off. Layer transition entities appear in navigation."));

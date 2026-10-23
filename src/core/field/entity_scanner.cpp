@@ -15,6 +15,8 @@
 #include "entity_translator.h"
 #include "npc_names.h"
 #include "entity_filter.h"
+#include "save_points.h"
+#include "party_entities.h"
 #include "capture_budget.h"
 #include "event_labels.h"
 #include "field_api.h"
@@ -225,6 +227,9 @@ Detection vehicle_detector(Context& c)
 /// VisualEffectFilter (20): party members, visual effects and inactive objects.
 Detection visual_effect_filter(Context& c)
 {
+    // They are physical route blockers, not new NPC destinations. Navigation
+    // captures them before applying this display-only detector chain.
+    if(party_entities::is_native(c.fe))return skip();
     const std::wstring& lower = c.go_lower;
     if (contains(lower, L"residentchara") || contains(lower, L"resident")) return skip();
     if (!c.is_event_trigger) {
@@ -278,11 +283,12 @@ Detection treasure_detector(Context& c)
     return detected(e);
 }
 
-/// NPCDetector (70): FieldNonPlayer; one that cannot be talked to (CanAction false) is skipped.
+/// NPCDetector (70): talk targets and scripted contact encounters. CanAction is
+/// deliberately false for action 9 (FF6's Terra defense and moving monsters).
 Detection npc_detector(Context& c)
 {
     if (!r::kFieldNonPlayer.is(c.fe)) return not_handled();
-    if (r::mNonPlayerGetCanAction.get() && !ref::call<bool>(r::mNonPlayerGetCanAction, c.fe)) return skip();
+    if (!npc_navigation_available(c.fe)) return skip();
     // FF2's vehicle spawn NPCs (the Dreadnought flying over the world map, the airship) have an
     // action but no script or message; the game's CanAction cannot tell (user, 2026-10-10).
     if (placeholder(c)) {
@@ -304,6 +310,14 @@ Detection npc_detector(Context& c)
 /// SavePointDetector (80).
 Detection save_point_detector(Context& c)
 {
+    // Type 9 is authoritative even when the engine's GameObject name says
+    // EventTriggerEntity. FF6's tutorial and asset-256 animation are separate.
+    if(c.object_type()==9)return detected(make(Kind::SavePoint,c,T(L"Save Point")));
+    if(game::is(game::Id::FF6)) {
+        const auto raw=c.property()?ref::rd_str(c.property(),r::fPropName):std::wstring();
+        if(c.object_type()==10 && save_points::animation(raw))return skip();
+        return not_handled();
+    }
     if (contains(c.go_lower, L"save") || contains(c.type_name, L"Save"))
         return detected(make(Kind::SavePoint, c, T(L"Save Point")));
     return not_handled();
@@ -418,7 +432,7 @@ EntityPtr convert(void* fe)
 
 std::vector<std::pair<void*, EntityPtr>> g_entity_map;   // FieldEntity -> conversion, in insertion order
 std::vector<EntityPtr> g_entities;
-std::array<std::vector<EntityPtr>, 6> g_category_views;
+std::array<std::vector<EntityPtr>, kCategoryCount> g_category_views;
 uint64_t g_audio_revision = 1;
 std::vector<Vec3> g_exit_positions; // worker-compiled unfiltered live exits, for wall tones
 int g_index = 0;
@@ -547,7 +561,7 @@ std::vector<EntityPtr> build_remote(RemoteInput& input) {
         std::wstring base;
         if (!object.event_type.empty()) {
             entity->kind = Kind::Event; entity->event_type = object.event_type;
-            entity->name = safe_event_label(object.raw_name, object.event_type);
+            entity->name = safe_event_label(object.raw_name, object.event_type, object.map_id, object.entity_id, static_cast<int>(object.type));
             if (object.type == baked::ObjType::TransportationEventAction) entity->vehicle_pad = object.raw_name;
         } else switch (object.type) {
         case baked::ObjType::NPC:
@@ -600,8 +614,10 @@ void apply_filter() {
     input->category = g_category; input->sort = player_local_position(input->player);
     input->pads = game::flags().has_vehicle_pads; input->exits = settings::get_bool("MapExitFilter", false);
     input->events = settings::get_bool(ui::prefs::kEventGroupFilter,ui::prefs::kEventGroupFilterDefault);
+    input->story_gates = settings::get_bool(ui::prefs::kStoryGateFilter,ui::prefs::kStoryGateFilterDefault);
     input->entrance_suffixes = settings::get_bool(ui::prefs::kEntranceSuffixes,ui::prefs::kEntranceSuffixesDefault);
-    input->navigation = baked_nav::begin_exit_capture(pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,input->exits || input->events);
+    input->navigation = baked_nav::begin_exit_capture(pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,
+        input->exits || input->events || input->story_gates,input->story_gates);
     input->world = input->navigation && baked_nav::exit_snapshot_world(*input->navigation);
     const bool navigation_filtered = input->navigation != nullptr;
     const int vehicle = input->navigation ? baked_nav::exit_snapshot_vehicle(*input->navigation) : 0;
@@ -640,7 +656,8 @@ void apply_filter() {
             row.position = entity->position(); row.numbering_position = entity->pos;
             row.remote_map = entity->remote_map_id; row.cell_x = entity->cell_x; row.cell_y = entity->cell_y;
             row.cell_layer = entity->cell_layer;
-            if (!row.remote_map && (input->events || input->entrance_suffixes)) {
+            if (!row.remote_map && (input->events || input->entrance_suffixes || input->story_gates ||
+                row.kind==Kind::SavePoint || (game::is(game::Id::FF6) && save_points::tutorial(row.raw_name)))) {
                 const int layer = entity->game ? game_object_layer(entity->game)-9 : -1;
                 row.cell_layer = layer>=0 && layer<=2 ? layer : -1;
             }
@@ -677,7 +694,7 @@ void apply_filter() {
             [entities, generation, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle](Categories filtered) {
                 if (generation != g_filter_generation || map_id != current_map_id_or_user_data()) return;
                 auto result = std::make_shared<Categories>(std::move(filtered));
-                auto handles = std::make_shared<std::array<std::vector<EntityPtr>, 6>>(); // native owner registry only
+                auto handles = std::make_shared<std::array<std::vector<EntityPtr>, kCategoryCount>>(); // native owner registry only
                 frame::every_frame([entities, result, handles, named = size_t(0), ordered = size_t(0), view = size_t(0),
                                     generation, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle]() mutable {
                     if (generation != g_filter_generation) return false;

@@ -498,3 +498,50 @@ match their pre-publication snapshots. Receipts include source_verification.json
 draft_verification.json and public_verification.json under build_check/v094/.
 Final documentation commits follow the tagged source without changing the verified
 binary, archive or installed files. No additional gameplay claim is made.
+
+
+## V0.9.5 preparation, October23
+
+Requested after the user confirmed preceding Terra-defense guidance/progression,
+then reported parked parties missing from physical route planning. The refined
+contract retains usable directions and appends “Blocked by Party n” at the
+obstruction; standalone blocker speech requires the adjacent blocked step.
+[Parked-party mechanics/evidence](re/PARKED_PARTIES.md) records the native array,
+shared snapshot integration, partial terminal boundary, actual-map fixtures,
+user-confirmed scope and remaining gameplay limits. The [October22 register](FIXES_2026_10_22.md),
+[FF6 story audit](re/FF6_STORY_NAVIGATION.md) and [follow-ups](re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
+cover the other changes since V0.9.4. All125 registrations are indexed.
+
+The existing public user-owned repository, ADMIN access, master branch and named
+FFPRCore-Screen-Reader remote were verified. Local/remote master initially agreed
+at ebf1516d73094ea075e1fd861fc991b93c082b61. No v0.9.5 tag/release existed.
+All five prior release/asset records were saved for preservation verification.
+No history rewrite, repository rename or dependency installation is performed.
+Source-bearing native evidence remains outside Git; changed documentation has
+no implementation snippets. Commercial game source/binaries/logs are excluded.
+
+README/TXT match the current controls, scoped gameplay confirmations and known
+limits. Numeric/string FileVersion and ProductVersion are0.9.5.0; kBuild says
+V0.9.5. Canonical build/all offline gates pass:7,182 native names/zero missing;
+125 used/333 defined wiring names/zero undefined;47 HID exports. Isolated smoke
+passes proxy forwarding, boot and logger startup without a crash. Gameplay is
+separate; no game was launched or probed. Sol owns implementation/review/testing;
+Luna/gpt-6-luna supplied only the bounded localized party suffix and its revision,
+reviewed by Sol across12 locales and placeholder/idempotence checks.
+
+Folder: releases/Final Fantasy Pixel Master Core Screen Reader V0.9.5.
+Archive: releases/Final Fantasy Pixel Master Core Screen Reader V0.9.5.zip.
+7-Zip creation/test and independent verification pass CRCs, exact28-file single
+root payload, source/folder/archive equality, README conversion, SHA256 manifest,
+pinned Prism/SDL/OpenAL/HRTF runtime/data/notices/source attribution and x64 PE
+versions. No settings, saves, receipts, logs or SDKs enter the release bundle.
+
+- DLL:10,558,976 bytes; SHA256 ea1cd296802a9f2510b06759b2077d57481ca6711c02d931c45549a9b0230419.
+- ZIP:6,061,592 bytes; SHA256 346c943d6835852ed1de4dc25254fd2d8a9ec8642f728f9962ac10a1e51be6aa.
+
+The tested fix was separately deployed/hash-verified to all six local games;
+144 protected Prism/OpenAL/settings/waypoint files retain bytes/timestamps.
+Previous DLL/SDL files and evidence are in build_check/v095/. All19 embedded
+maps/state/puzzle/catalog resources match current source. Independent package
+scripts/reports:build_check/verify_v095_package.py, v095_package_verification.json
+and v095_version.json. Publication/source/tag/download verification follows below.

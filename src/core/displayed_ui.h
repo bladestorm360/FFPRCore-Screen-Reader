@@ -11,6 +11,8 @@ bool visible(void* component);
 /// An active UI container. A disabled controller script does not hide its graphics.
 bool container_visible(void* component);
 bool world_visible(void* entity);
+/// One known native renderer: no child search/allocation, native owner only.
+bool renderer_visible(void* renderer);
 /// A rendered UI Image with a live sprite (for digit/icon reconstruction).
 bool image_visible(void* component);
 void* image_sprite(void* component);

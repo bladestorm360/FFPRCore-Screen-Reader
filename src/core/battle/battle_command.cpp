@@ -24,6 +24,7 @@
 #include "../modtext.h"
 #include "../say.h"
 #include "../settings.h"
+#include "../ui/preferences.h"
 #include "../text.h"
 #include "../ui_util.h"
 #include "../unity.h"
@@ -328,8 +329,11 @@ void d_SetCommandData(void* self, void* data, void* targets, void* items, const 
         state_set(menu_state::BATTLE_MAGIC, false);
         state_set(menu_state::BATTLE_ITEM, false);
 
-        // Preserve the opening roster; subsequent turns retain their interruption.
-        ffpr::say(TF(L"{0}'s turn", {character_name_v}), !formation_first_turn());
+        // The opening roster always finishes first. Later automatic turns use
+        // the Speech preference; manual T remains an intentional interruption.
+        const bool opening_turn = formation_first_turn();
+        ffpr::say(TF(L"{0}'s turn", {character_name_v}),
+                  ui::prefs::interrupt_character_turn_enabled() && !opening_turn);
     });
 }
 

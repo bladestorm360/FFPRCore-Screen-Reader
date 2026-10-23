@@ -795,3 +795,7 @@ ADDITIONS = [
     }, "FF6 vehicle fallback name (TransportationType.LowFlying), translated by hand (no game text): "
        "the airship word of FF6's Special Airship entry plus the Low altitude entry's wording"),
 ]
+
+# Current follow-up catalog is kept together with its translation/placeholder checks.
+from modtext_oct22 import extend as extend_oct22
+extend_oct22(ADDITIONS)
