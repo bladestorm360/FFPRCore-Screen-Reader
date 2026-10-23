@@ -8,8 +8,11 @@
   one step before the blocker, then “Blocked by Party n”; standalone only when
   adjacent. Build/all checks/47-export smoke and independent28-file package checks
   pass;7,182 names/zero missing. V0.9.5 deployed to all six,144 protected files
-  unchanged; recovery/receipts:build_check/v095/. Publication in progress; new
-  occupancy behavior remains gameplay-unconfirmed.
+  unchanged; recovery/receipts:build_check/v095/. Source834d687 and local annotated
+  v0.9.5 are ready. Automatic review twice rejected public source/tag push pending
+  explicit approval; no remote mutation/publication occurred. Approval question
+  asks source/tag/ZIP publication to the existing public user-owned repository.
+  New occupancy behavior remains gameplay-unconfirmed.
 
 - October23 [navigation/name-entry/boss follow-ups](docs/re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
   track the saved story-gate filter, Save Points category/FF6 companions, moved

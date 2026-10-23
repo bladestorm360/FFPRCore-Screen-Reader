@@ -545,3 +545,15 @@ Previous DLL/SDL files and evidence are in build_check/v095/. All19 embedded
 maps/state/puzzle/catalog resources match current source. Independent package
 scripts/reports:build_check/verify_v095_package.py, v095_package_verification.json
 and v095_version.json. Publication/source/tag/download verification follows below.
+
+
+V0.9.5 publication is pending explicit user approval. Local source commit
+834d687684b99d85eb2374bbcc33b71693ee7bf5 and annotated v0.9.5 resolve to the tested
+implementation. Automatic approval review rejected the normal source/tag push
+twice, including after the standing AGENTS/release-procedure authorization was
+rechecked. Its reason was that “prepare release” and that recorded convention did
+not explicitly authorize public source publication and the destination. No
+workaround was attempted; no remote push, draft, uploaded asset or public release
+was created. The verified ZIP and local recovery remain ready. An explicit
+question asks permission to publish source, tag and ZIP to the existing public
+bladestorm360/FFPRCore-Screen-Reader repository. Receipt:build_check/v095/publication_status.json.
