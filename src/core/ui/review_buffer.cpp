@@ -155,6 +155,7 @@ void show_impl(void* owner, const std::wstring& headline, std::vector<std::wstri
         std::vector<std::wstring> lines;
         Options options;
         std::wstring full, headline, details, brief;
+        std::vector<std::wstring> automatic_notifications;
         bool autodetail = false;
         std::shared_ptr<const ResultNotificationHistory> notification_history;
     };
@@ -165,7 +166,9 @@ void show_impl(void* owner, const std::wstring& headline, std::vector<std::wstri
             log_capture(generation, input.headline, input.lines, options, input.autodetail);
             if (input.filter_notifications) {
                 auto selection = select_result_notifications(options.notifications, input.history);
-                options.notifications = std::move(selection.lines);
+                // The exception applies only to automatic speech. Keep every
+                // native notification in options/the current review buffer.
+                built.automatic_notifications = std::move(selection.lines);
                 built.notification_history = std::move(selection.history);
             }
             built.details = text::join(input.lines, L". ");
@@ -195,7 +198,7 @@ void show_impl(void* owner, const std::wstring& headline, std::vector<std::wstri
             g_phase_changes = std::move(built.brief);
             if (g_options.announce) {
                 if (filter_notifications) {
-                    if (!g_options.notifications.empty()) ffpr::say_parts(g_options.notifications, false);
+                    if (!built.automatic_notifications.empty()) ffpr::say_parts(std::move(built.automatic_notifications), false);
                     // A cancelled/hidden build or muted game speech must not count
                     // an unseen notification as announced in a later buffer.
                     if (prefs::speech_enabled()) notification_session->history = std::move(built.notification_history);

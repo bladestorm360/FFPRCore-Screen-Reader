@@ -1,4 +1,4 @@
-// check-sources: field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp field/field_refs.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
+// check-sources: field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp field/field_refs.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
 // Actual scanner/capture/publication/input flow, with fake native owners only.
 #include <windows.h>
 #include <thread>
@@ -14,7 +14,7 @@ namespace fixture {
 const DWORD owner = GetCurrentThreadId();
 int wrong_owner = 0, map = 1, next_task = 0, native_reads=0;
 bool ready = true, transition = false, route_pending = false;
-struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; } talk;
+struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; int action=2; } talk;
 struct Actor { void* property = &talk; } npc, object;
 bool can_action = true;
 bool capture_cells = false;
@@ -59,7 +59,7 @@ bool Class::is(void* p) { fixture::native();
  if(p==&fixture::talk)return std::strcmp(name,"PropertyEvent")==0||std::strcmp(name,"PropertyTalk")==0;
  return false;
 }
-int32_t Field::get() { fixture::native(); return std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):-1; }
+int32_t Field::get() { fixture::native(); return std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):std::strcmp(name,"<ActionId>k__BackingField")==0?offsetof(fixture::TalkProperty,action):-1; }
 il2cpp::Method* Method::get() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<il2cpp::Method*>(1):nullptr; }
 void* Method::ptr() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<void*>(&fixture::get_can_action):nullptr; }
 std::wstring str(void*) { fixture::native(); return {}; }
@@ -68,6 +68,7 @@ void* instance(Class&) { fixture::native(); return nullptr; }
 void call_failed_note(const char*) {}
 void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
 }
+namespace field::party_entities {bool is_native(void*){fixture::native();return false;}}
 namespace il2cpp {
 Class* object_class(void*) { fixture::native(); return nullptr; }
 const char* object_class_name(void*) { fixture::native(); return "FieldEntity"; }
@@ -104,7 +105,7 @@ bool post(std::function<void()> task, Lane lane) {
 }
 namespace hooks { void note_fault(const char* label) { std::printf("FAIL native fixture fault: %s\n",label);std::fflush(stdout);std::abort(); } }
 namespace log_ { void write(const char*, ...) {} }
-namespace game { const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
+namespace game { Id current() { return Id::FF2; } const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
 namespace settings {
 int get_int(const char*, int fallback) { return fallback; }
 bool get_bool(const char*, bool fallback) { return fallback; }
@@ -148,6 +149,7 @@ std::wstring entity_name_from_property(void* p) { fixture::native(); return p==&
 std::wstring clean_object_name(const std::wstring& name, const std::wstring&) { return name; }
 std::wstring safe_event_label(void*, const std::wstring& name) { fixture::native(); return name; }
 std::wstring safe_event_label(const std::wstring&, const std::wstring&) { return L"Conversation"; }
+std::wstring safe_event_label(const std::wstring&, const std::wstring&, int, int, int) { return L"Conversation"; }
 std::wstring resolve_map_name(int) { fixture::native(); return {}; }
 std::wstring resolve_item_name(int) { fixture::native(); return {}; }
 std::wstring current_map_asset_name() { fixture::native(); return {}; }
@@ -157,17 +159,18 @@ bool is_decimal_digit(wchar_t c) { return c >= L'0' && c <= L'9'; }
 bool EntityCursor::next(void*& entity) { fixture::native();entity=nullptr;if(index>=static_cast<int>(fixture::candidates.size()))return false;entity=fixture::candidates[index++];seen.insert(entity);return true; }
 bool Entity::is_alive() const { fixture::native(); return game != reinterpret_cast<void*>(2); }
 bool Entity::is_opened() const { fixture::native(); return opened; }
-Category Entity::category() const { return kind == Kind::NPC ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : Category::Events; }
+Category Entity::category() const { return kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : Category::Events; }
 unity::Vec3 Entity::position() const { fixture::native(); return pos; }
 PathInfo find_path_to_quick(unity::Vec3, unity::Vec3, void*, void*, TargetKind, bool) { fixture::native(); return {}; }
 }
 namespace field::baked_nav {
-std::shared_ptr<ExitSnapshot> begin_exit_capture(bool,bool) { fixture::native(); return {}; }
+std::shared_ptr<ExitSnapshot> begin_exit_capture(bool,bool,bool) { fixture::native(); return {}; }
 void capture_exit_obstacle(ExitSnapshot&,void*) { fixture::native(); }
 void finish_exit_capture(ExitSnapshot&) { fixture::native(); }
 bool exit_snapshot_world(const ExitSnapshot&) { fixture::native(); return false; }
 int exit_snapshot_vehicle(const ExitSnapshot&) { fixture::native(); return 0; }
 std::vector<int> exit_distances(ExitSnapshot&,const std::vector<ExitTarget>&,std::function<bool()>) { return {}; }
+std::vector<bool> story_gate_mask(ExitSnapshot&,const std::vector<StoryTarget>& targets,std::function<bool()>) { return std::vector<bool>(targets.size(),false); }
 bool available(void*) { fixture::native(); return true; }
 bool prepared() { fixture::native(); return true; }
 bool cell_at(void*, unity::Vec3 position, baked_route::Cell& cell) { fixture::native();if(!fixture::capture_cells)return false;cell={0,static_cast<int>(position.x),static_cast<int>(position.y)};return true; }
@@ -194,6 +197,14 @@ int main() {
     expect(npc_detector(talk).result==Result::Detected,"message-only animal NPC bypasses the placeholder name filter");
     fixture::talk.message.clear();expect(npc_detector(talk).result==Result::Skip,"scriptless/message-less cutscene or vehicle NPC remains excluded");
     fixture::talk.script=65;fixture::can_action=false;expect(npc_detector(talk).result==Result::Skip,"native CanAction still owns interactability");fixture::can_action=true;
+    fixture::can_action=false;fixture::talk.action=9;
+    for(int script:{1207,1208,1209,1210,1211,1212}) {
+        fixture::talk.script=script;
+        expect(npc_detector(talk).result==Result::Detected,"all six Terra defense contact encounters survive the talk-only CanAction guard");
+    }
+    fixture::talk.script=0;
+    expect(npc_detector(talk).result==Result::Skip,"action 9 without a script does not admit a cutscene placeholder");
+    fixture::talk.script=65;fixture::talk.action=2;fixture::can_action=true;
     for(const auto* name:{L"太陽の炎トリガー用",L"女神のベルトリガー用"}){fixture::talk.name=name;Context object;object.fe=&fixture::object;object.is_event_trigger=true;object.go_name=name;object.go_lower=text::lower(name);expect(npc_detector(object).result==Result::NotHandled,"keyword objects are not reclassified as NPCs by dialogue");auto event=event_trigger_detector(object);expect(event.result==Result::Detected&&event.entity->kind==Kind::Event,"keyword objects retain the event interaction category");}
     RemoteInput remote;RemoteRow row;row.object.type=baked::ObjType::NPC;row.object.map_id=180;row.object.raw_name=L"飛竜";row.object.scripted=true;row.name=L"Wyvern";row.floor=L"Castle Deist: Wyvern's Room";remote.rows.push_back(row);
     auto built=build_remote(remote);expect(built.size()==1&&built[0]->kind==Kind::NPC&&built[0]->name==L"Wyvern","scripted Wyvern remains an NPC target across floors");

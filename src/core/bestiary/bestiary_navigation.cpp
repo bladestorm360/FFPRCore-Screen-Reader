@@ -100,7 +100,7 @@ core::Install s_install{"BestiaryNavigation", &install, 131};
 
 } // namespace
 
-void nav_initialize(const std::vector<StatEntry>& entries)
+void nav_initialize(std::vector<StatEntry> entries)
 {
     g_work.cancel();
     frame::cancel_label("BestiaryNavigation.Replay");
@@ -117,7 +117,7 @@ void nav_initialize(const std::vector<StatEntry>& entries)
     struct Built {
         ui::NavigationBuffer buffer;
     };
-    worker_job::start(g_work, Input{entries, modtext::lang()},
+    worker_job::start(g_work, Input{std::move(entries), modtext::lang()},
         [](Input& input) {
             modtext::LocaleScope locale(input.locale);
             std::vector<ui::NavigationBuffer::Entry> funcs;

@@ -1,4 +1,4 @@
-// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
 // Actual owned planner and all-six extracted maps. No game process or live capture.
 #define main existing_route_worker_main
 #include "route_worker_check.cpp"
@@ -39,7 +39,8 @@ int main() {
         if(overrides) {
             const std::string data((std::istreambuf_iterator<char>(overrides)),{});
             json::Value rows; expect(json::parse(data,rows),"reviewed arrival fixture JSON parses");
-            for(const auto& row:rows.arr) {
+            for(size_t reviewed_index=0;reviewed_index<rows.arr.size();++reviewed_index) {
+                const auto& row=rows.arr[reviewed_index];
                 const auto* source=field::baked::submap_by_name(row.get(L"submap")->s);
                 const auto* dest=field::baked::submap_by_map_id(static_cast<int>(row.get(L"destination_map")->n));
                 const auto* self=row.get(L"same_map");
@@ -47,8 +48,9 @@ int main() {
                 const int id=static_cast<int>(row.get(L"entity_id")->n);
                 const field::baked::Object* edge=nullptr;
                 if(source) for(const auto& object:field::baked::grids(*source).objects)
-                    if(object.type==field::baked::ObjType::Warp && object.entity_id()==id &&
-                        object.a==(same ? -1 : dest->first_map_id)) edge=&object;
+                    if(dest && object.type==field::baked::ObjType::Warp && object.entity_id()==id &&
+                        object.a==(same ? -1 : dest->first_map_id) &&
+                        object.b==(row.get(L"arrival_cell") ? -100000-static_cast<int>(reviewed_index) : static_cast<int>(row.get(L"arrival_point")->n))) edge=&object;
                 expect(source && dest && edge,"reviewed trap has a graph transition");
                 if(!dest || !edge) continue;
                 const field::baked::Object* arrival=nullptr;

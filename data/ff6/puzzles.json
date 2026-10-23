@@ -1,48 +1,2283 @@
 {
-  "_comment": "Guided puzzle solutions for FINAL FANTASY VI (src/core/field/puzzle_guide.cpp). Map ids are the map master's (tools/mapdump/ff6_master/map.txt); cells are baked tile coordinates, one row above the dumps' ty for tile objects since the 2026-10-11 bottom-edge fix in bake_maps.py (tools/mapdump/ff6_objects.jsonl). Authored 2026-10-10 from the dumps' developer labels and the games' known answers; not yet tested in game. October 13: step cells are relative to the native MapRange room rectangle; _about retains original asset coordinates. Still to author (OPEN_ISSUES.md): Phoenix Cave and Kefka's Tower switch sets, the Cave to the Sealed Gate's moving islands, Owzer's second painting, the Opera House levers, the Phantom Train and Dreamscape levers.",
+  "_comment": "Original factual navigation recipes. Static puzzles retain their original authorship. Story guides use native completion flags and reachable live targets, not proximity completion. See docs/re/FF6_STORY_NAVIGATION.md for source locators, controls, limits and pending gameplay confirmation.",
   "puzzles": [
     {
       "id": "zozo_clock",
       "_about": "Zozo: the clock in the weapon shop building (map 387, (125,46)) is set to 6:10:50; the wall at (10,19) in the inn (map 386) then opens.",
-      "maps": [386, 387],
+      "maps": [
+        386,
+        387
+      ],
       "steps": [
-        {"map": 387, "x": 9, "y": 8, "layer": 1, "examine": true, "text": "Set the clock to 6:10:50"},
-        {"map": 386, "x": 10, "y": 18, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+        {
+          "map": 387,
+          "x": 9,
+          "y": 8,
+          "layer": 1,
+          "examine": true,
+          "text": "Set the clock to 6:10:50"
+        },
+        {
+          "map": 386,
+          "x": 10,
+          "y": 18,
+          "layer": 1,
+          "examine": false,
+          "text": "Go through the hidden door"
+        }
       ]
     },
     {
       "id": "darills_tomb_doors",
       "_about": "Darill's Tomb B2: examining the stone at (28,43) on map 458 makes a door appear (the passage at (28,40)); the stone at (76,13) on map 463 does the same there.",
-      "maps": [458, 463],
+      "maps": [
+        458,
+        463
+      ],
       "steps": [
-        {"map": 458, "x": 7, "y": 10, "layer": 1, "examine": true, "text": "Examine the gravestone"},
-        {"map": 463, "x": 13, "y": 12, "layer": 1, "examine": true, "text": "Examine the gravestone"}
+        {
+          "map": 458,
+          "x": 7,
+          "y": 10,
+          "layer": 1,
+          "examine": true,
+          "text": "Examine the gravestone"
+        },
+        {
+          "map": 463,
+          "x": 13,
+          "y": 12,
+          "layer": 1,
+          "examine": true,
+          "text": "Examine the gravestone"
+        }
       ]
     },
     {
       "id": "ancient_castle_hidden_stairs",
       "_about": "Ancient Castle: the hidden switch at (34,15) on map 517 makes the hidden stairs appear in the queen's room on map 518 (the stair cells around (31..34,67)).",
-      "maps": [517, 518],
+      "maps": [
+        517,
+        518
+      ],
       "steps": [
-        {"map": 517, "x": 15, "y": 14, "layer": 1, "examine": true, "text": "Examine the hidden switch"},
-        {"map": 518, "x": 14, "y": 32, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+        {
+          "map": 517,
+          "x": 15,
+          "y": 14,
+          "layer": 1,
+          "examine": true,
+          "text": "Examine the hidden switch"
+        },
+        {
+          "map": 518,
+          "x": 14,
+          "y": 32,
+          "layer": 1,
+          "examine": false,
+          "text": "Go through the hidden door"
+        }
       ]
     },
     {
       "id": "cultists_tower_hidden_switch",
       "_about": "Cultists' Tower: the hidden switch at (9,9) on map 478 makes the door appear.",
-      "maps": [478],
+      "maps": [
+        478
+      ],
       "steps": [
-        {"map": 478, "x": 9, "y": 8, "layer": 1, "examine": true, "text": "Examine the hidden switch"}
+        {
+          "map": 478,
+          "x": 9,
+          "y": 8,
+          "layer": 1,
+          "examine": true,
+          "text": "Examine the hidden switch"
+        }
       ]
     },
     {
       "id": "owzers_mansion_painting",
       "_about": "Owzer's Mansion: the flower painting at (111,18) on map 442 is examined (a battle follows).",
-      "maps": [442],
+      "maps": [
+        442
+      ],
       "steps": [
-        {"map": 442, "x": 18, "y": 16, "layer": 1, "examine": true, "text": "Examine the painting"}
+        {
+          "map": 442,
+          "x": 18,
+          "y": 16,
+          "layer": 1,
+          "examine": true,
+          "text": "Examine the painting"
+        }
       ]
+    }
+  ],
+  "story_guides": [
+    {
+      "id": "terra_defense",
+      "maps": [
+        318
+      ],
+      "introduction": "",
+      "when": [
+        [
+          "scenario",
+          13,
+          "eq",
+          1
+        ],
+        [
+          "scenario",
+          14,
+          "eq",
+          0
+        ]
+      ],
+      "rules": [
+        {
+          "when": [],
+          "targets": [
+            {
+              "map": 318,
+              "entity": 9,
+              "raw": "ガードリーダー:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 18,
+              "raw": "モンスター1:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 19,
+              "raw": "モンスター2:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 20,
+              "raw": "モンスター3:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 21,
+              "raw": "モンスター4:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 22,
+              "raw": "モンスター5:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 318,
+              "entity": 23,
+              "raw": "モンスター6:防衛戦用",
+              "group": "ev_e_0018",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage.",
+      "defend": {
+        "map": 318,
+        "entity": 32,
+        "raw": "倒れたティナ:防衛戦用",
+        "group": "ev_e_0018",
+        "kind": "interact",
+        "text": ""
+      },
+      "danger": "Terra in danger."
+    },
+    {
+      "id": "phoenix_cave",
+      "maps": [
+        497,
+        498,
+        499
+      ],
+      "introduction": "",
+      "when": [
+        [
+          "scenario",
+          408,
+          "eq",
+          0
+        ]
+      ],
+      "rules": [
+        {
+          "when": [
+            [
+              "scenario",
+              402,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 40,
+            "raw": "sc_e_0805:スイッチ1の上に乗る",
+            "group": "ev_e_0806",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              402,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 41,
+            "raw": "sc_e_0804:スイッチ1の上に乗る",
+            "group": "ev_e_0806",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              1,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 108,
+            "raw": "sc_e_0794:スイッチ踏むと左の壁開く",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            1,
+            0
+          ],
+          "leave_script": "sc_e_0794_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              2,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 94,
+            "raw": "sc_e_0795:スイッチ踏むと右の壁開く",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            2,
+            0
+          ],
+          "leave_script": "sc_e_0795_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              3,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 86,
+            "raw": "sc_e_0796:スイッチ踏むととげ消える",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            3,
+            0
+          ],
+          "leave_script": "sc_e_0796_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              4,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 77,
+            "raw": "sc_e_0797:スイッチ踏むととげ消える",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            4,
+            0
+          ],
+          "leave_script": "sc_e_0797_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              5,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 61,
+            "raw": "sc_e_0798:スイッチ踏むととげ消える",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            5,
+            0
+          ],
+          "leave_script": "sc_e_0798_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              6,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 49,
+            "raw": "sc_e_0800:スイッチ踏むと岩の位置変わる",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            6,
+            0
+          ],
+          "leave_script": "sc_e_0800_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "area",
+              7,
+              "eq",
+              1
+            ]
+          ],
+          "at": {
+            "map": 498,
+            "entity": 44,
+            "raw": "sc_e_0801:スイッチ踏むと岩が出現",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "release": [
+            "area",
+            7,
+            0
+          ],
+          "leave_script": "sc_e_0801_1",
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              408,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 499,
+              "entity": 50,
+              "raw": "ロックと再会",
+              "group": "ev_e_0828",
+              "kind": "spot",
+              "text": "Join {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              1,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 108,
+              "raw": "sc_e_0794:スイッチ踏むと左の壁開く",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              2,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 94,
+              "raw": "sc_e_0795:スイッチ踏むと右の壁開く",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              3,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 86,
+              "raw": "sc_e_0796:スイッチ踏むととげ消える",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              4,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 77,
+              "raw": "sc_e_0797:スイッチ踏むととげ消える",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              5,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 61,
+              "raw": "sc_e_0798:スイッチ踏むととげ消える",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              6,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 49,
+              "raw": "sc_e_0800:スイッチ踏むと岩の位置変わる",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "area",
+              7,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 44,
+              "raw": "sc_e_0801:スイッチ踏むと岩が出現",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              399,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 56,
+              "raw": "sc_e_0799:調べるとフロアの水がなくなり、溶岩も通れるように",
+              "group": "ev_e_0799",
+              "kind": "interact",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              402,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              400,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 41,
+              "raw": "sc_e_0804:スイッチ1の上に乗る",
+              "group": "ev_e_0806",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              402,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              401,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 40,
+              "raw": "sc_e_0805:スイッチ1の上に乗る",
+              "group": "ev_e_0806",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              403,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 498,
+              "entity": 98,
+              "raw": "sc_e_0808:スイッチ踏むと橋がかかる",
+              "group": "ev_e_0808",
+              "kind": "spot",
+              "text": "Step on {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              405,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 499,
+              "entity": 66,
+              "raw": "sc_e_0811:スイッチ踏むと岩が出現",
+              "group": "ev_e_0811",
+              "kind": "spot",
+              "text": "Step on {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              406,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              407,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 499,
+              "entity": 58,
+              "raw": "sc_e_0816:スイッチ踏むと岩が動く:下",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              406,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 499,
+              "entity": 55,
+              "raw": "sc_e_0817:スイッチ踏むと岩が動く:上",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              407,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 499,
+              "entity": 58,
+              "raw": "sc_e_0816:スイッチ踏むと岩が動く:下",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage."
+    },
+    {
+      "id": "kefkas_tower",
+      "maps": [
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        590,
+        595,
+        596
+      ],
+      "introduction": "",
+      "when": [
+        [
+          "scenario",
+          501,
+          "eq",
+          0
+        ]
+      ],
+      "rules": [
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 549,
+            "entity": 37,
+            "raw": "sc_e_0976:左スイッチ",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 549,
+            "entity": 38,
+            "raw": "sc_e_0982:左スイッチ",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              486,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 549,
+            "entity": 37,
+            "raw": "sc_e_0976:左スイッチ",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Leave the switch."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              487,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 549,
+            "entity": 38,
+            "raw": "sc_e_0982:左スイッチ",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Leave the switch."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 565,
+            "entity": 40,
+            "raw": "sc_e_0988:中央のスイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 565,
+            "entity": 41,
+            "raw": "sc_e_0989:右のスイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 565,
+            "entity": 44,
+            "raw": "sc_e_0990:左のスイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 570,
+            "entity": 14,
+            "raw": "sc_e_1001:中央スイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 570,
+            "entity": 15,
+            "raw": "sc_e_0999:左スイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ]
+          ],
+          "at": {
+            "map": 570,
+            "entity": 16,
+            "raw": "sc_e_1000:右スイッチの上に乗る",
+            "group": "entity_default",
+            "kind": "spot",
+            "text": ""
+          },
+          "note": "Hold switch. Switch parties."
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              478,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 549,
+              "entity": 37,
+              "raw": "sc_e_0976:左スイッチ",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              482,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 549,
+              "entity": 38,
+              "raw": "sc_e_0982:左スイッチ",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              486,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 549,
+              "entity": 39,
+              "raw": "4トン重り:右",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Push {0}. Clear the party below first."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              483,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              487,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 549,
+              "entity": 45,
+              "raw": "4トン重り:左",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Push {0}. Clear the party below first."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              484,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 565,
+              "entity": 25,
+              "raw": "移動すると柵が出現（右）",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              485,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 565,
+              "entity": 26,
+              "raw": "移動すると柵が出現（左）",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              493,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 549,
+              "entity": 61,
+              "raw": "（共通）スイッチを押し隠し扉を出現させる",
+              "group": "ev_e_0993",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              488,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 565,
+              "entity": 40,
+              "raw": "sc_e_0988:中央のスイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              489,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 565,
+              "entity": 41,
+              "raw": "sc_e_0989:右のスイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              491,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              490,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 565,
+              "entity": 44,
+              "raw": "sc_e_0990:左のスイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              474,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 544,
+              "entity": 14,
+              "raw": "インフェルノとバトル",
+              "group": "ev_e_0972",
+              "kind": "spot",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              492,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 566,
+              "entity": 47,
+              "raw": "ガーディアンとバトル",
+              "group": "ev_e_0992",
+              "kind": "spot",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              494,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 542,
+              "entity": 93,
+              "raw": "鬼神とバトル",
+              "group": "ev_e_0994",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              495,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 567,
+              "entity": 2,
+              "raw": "魔神とバトル",
+              "group": "ev_e_0996",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              496,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 568,
+              "entity": 2,
+              "raw": "女神とバトル",
+              "group": "ev_e_0997",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              498,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 570,
+              "entity": 15,
+              "raw": "sc_e_0999:左スイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              499,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 570,
+              "entity": 16,
+              "raw": "sc_e_1000:右スイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              501,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              500,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 570,
+              "entity": 14,
+              "raw": "sc_e_1001:中央スイッチの上に乗る",
+              "group": "entity_default",
+              "kind": "spot",
+              "text": "Hold switch. Switch parties."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage."
+    },
+    {
+      "id": "opera",
+      "maps": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        576
+      ],
+      "introduction": "",
+      "when": [
+        [
+          "scenario",
+          177,
+          "eq",
+          0
+        ]
+      ],
+      "rules": [
+        {
+          "when": [
+            [
+              "scenario",
+              159,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 112,
+              "entity": 21,
+              "raw": "ダンチョーにセリスを代役を提案、オペラが上演開始",
+              "group": "ev_e_0315",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              161,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              160,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 112,
+              "entity": 20,
+              "raw": "NPCダンチョー",
+              "group": "ev_e_0322",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              164,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              162,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 112,
+              "entity": 19,
+              "raw": "NPCダンチョー",
+              "group": "ev_e_0325",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              164,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              163,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 112,
+              "entity": 18,
+              "raw": "NPCダンチョー",
+              "group": "ev_e_0327",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              159,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 113,
+              "entity": 6,
+              "raw": "NPCセリス（オペラ衣装）:ev_e_0316",
+              "group": "ev_e_0316",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              159,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              160,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 113,
+              "entity": 7,
+              "raw": "セリスで舞台へ、正しいセリフを選択する（３回）",
+              "group": "ev_e_0318",
+              "kind": "spot",
+              "text": "Enter the stage."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              164,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              162,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 113,
+              "entity": 12,
+              "raw": "NPCセリス（オペラ衣装）:ev_e_0323",
+              "group": "ev_e_0323",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              160,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              166,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 113,
+              "entity": 13,
+              "raw": "手紙",
+              "group": "ev_e_0329",
+              "kind": "interact",
+              "text": "Read {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              168,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 115,
+              "entity": 6,
+              "raw": "レバー操作",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Pull the far-right lever."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 5,
+              "raw": "NPCオルトロス:ev_e_0344",
+              "group": "ev_e_0344",
+              "kind": "interact",
+              "text": "Reach {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              169,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 13,
+              "raw": "NPCネズミ1",
+              "group": "ev_e_0336",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              170,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 12,
+              "raw": "NPCネズミ2",
+              "group": "ev_e_0337",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              171,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 11,
+              "raw": "NPCネズミ3",
+              "group": "ev_e_0338",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              172,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 10,
+              "raw": "NPCネズミ4",
+              "group": "ev_e_0339",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              167,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              173,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 117,
+              "entity": 9,
+              "raw": "NPCネズミ5",
+              "group": "ev_e_0340",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "map",
+              0,
+              "eq",
+              576
+            ]
+          ],
+          "note": "Follow performance cues."
+        }
+      ],
+      "complete": "Continue through the passage."
+    },
+    {
+      "id": "narshe_battle",
+      "maps": [
+        19
+      ],
+      "introduction": "",
+      "when": [
+        [
+          "scenario",
+          137,
+          "eq",
+          1
+        ],
+        [
+          "scenario",
+          138,
+          "eq",
+          0
+        ]
+      ],
+      "rules": [
+        {
+          "when": [],
+          "targets": [
+            {
+              "map": 19,
+              "entity": 25,
+              "raw": "ケフカ:sc_e_0259",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 24,
+              "raw": "帝国兵:sc_e_0257",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 38,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘1",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 39,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘2",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 40,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘3",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 41,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘4",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 42,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘5",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 43,
+              "raw": "ナルシェ襲撃で緑兵士と当たると戦闘6",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 44,
+              "raw": "ナルシェ襲撃で茶兵士と当たると戦闘1",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 45,
+              "raw": "ナルシェ襲撃で茶兵士と当たると戦闘2",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 46,
+              "raw": "ナルシェ襲撃で茶兵士と当たると戦闘3",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 47,
+              "raw": "ナルシェ襲撃で茶兵士と当たると戦闘4",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 19,
+              "entity": 48,
+              "raw": "ナルシェ襲撃で茶兵士と当たると戦闘5",
+              "group": "ev_e_0257",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage.",
+      "defend": {
+        "map": 19,
+        "entity": 64,
+        "raw": "NPC1バナン",
+        "group": "ev_e_0257",
+        "kind": "interact",
+        "text": ""
+      },
+      "danger": "Banon in danger."
+    },
+    {
+      "id": "burning_house",
+      "maps": [
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420
+      ],
+      "introduction": "",
+      "when": [],
+      "rules": [
+        {
+          "when": [],
+          "targets": [
+            {
+              "map": 420,
+              "entity": 1,
+              "raw": "sc_e_0539:フレイムイーターとバトル、救出後西の山を目指す。シャドウ離脱",
+              "group": "ev_e_0539",
+              "kind": "spot",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 413,
+              "entity": 1,
+              "raw": "sc_e_0525:炎に触れると戦闘1",
+              "group": "ev_e_0525",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 413,
+              "entity": 2,
+              "raw": "sc_e_0526:炎に触れると戦闘2",
+              "group": "ev_e_0526",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 413,
+              "entity": 3,
+              "raw": "sc_e_0527:炎に触れると戦闘3",
+              "group": "ev_e_0527",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 414,
+              "entity": 1,
+              "raw": "sc_e_0528:炎に触れると戦闘4",
+              "group": "ev_e_0528",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 414,
+              "entity": 2,
+              "raw": "sc_e_0529:炎に触れると戦闘5",
+              "group": "ev_e_0529",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 414,
+              "entity": 3,
+              "raw": "sc_e_0530:炎に触れると戦闘6",
+              "group": "ev_e_0530",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 414,
+              "entity": 4,
+              "raw": "sc_e_0531:炎に触れると戦闘7",
+              "group": "ev_e_0531",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 415,
+              "entity": 1,
+              "raw": "sc_e_0533:炎に触れると戦闘8",
+              "group": "ev_e_0533",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 415,
+              "entity": 2,
+              "raw": "sc_e_0534:炎に触れると戦闘9",
+              "group": "ev_e_0534",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 415,
+              "entity": 3,
+              "raw": "sc_e_0535:炎に触れると戦闘10",
+              "group": "ev_e_0535",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 417,
+              "entity": 1,
+              "raw": "sc_e_0536:炎に触れると戦闘11",
+              "group": "ev_e_0536",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 417,
+              "entity": 2,
+              "raw": "sc_e_0537:炎に触れると戦闘12",
+              "group": "ev_e_0537",
+              "kind": "interact",
+              "text": "Fight {0}."
+            },
+            {
+              "map": 414,
+              "entity": 5,
+              "raw": "sc_e_0532:扉に入ろうとすると敵出現",
+              "group": "ev_e_0532",
+              "kind": "spot",
+              "text": "Operate {0}."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage."
+    },
+    {
+      "id": "phantom_train",
+      "maps": [
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        624
+      ],
+      "introduction": "",
+      "when": [],
+      "rules": [
+        {
+          "when": [
+            [
+              "scenario",
+              120,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 371,
+              "entity": 14,
+              "raw": "sc_e_0208:レバー操作",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              121,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 371,
+              "entity": 10,
+              "raw": "sc_e_0210:レバー操作",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              122,
+              "eq",
+              0
+            ]
+          ],
+          "targets": [
+            {
+              "map": 371,
+              "entity": 6,
+              "raw": "sc_e_0212:レバー操作",
+              "group": "entity_default",
+              "kind": "interact",
+              "text": "Operate {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "scenario",
+              120,
+              "eq",
+              1
+            ],
+            [
+              "scenario",
+              121,
+              "eq",
+              0
+            ],
+            [
+              "scenario",
+              122,
+              "eq",
+              1
+            ]
+          ],
+          "targets": [
+            {
+              "map": 356,
+              "entity": 5,
+              "raw": "sc_e_0214:列車を止め、魔列車とバトル。その後カイエンと妻子の別れ。",
+              "group": "ev_e_0214",
+              "kind": "interact",
+              "text": "Fight {0}."
+            }
+          ]
+        },
+        {
+          "when": [
+            [
+              "map",
+              0,
+              "eq",
+              372
+            ]
+          ],
+          "targets": [
+            {
+              "map": 372,
+              "entity": 1,
+              "raw": "sc_e_0215:カイエンに話しかけ魔列車を後にする",
+              "group": "ev_e_0215",
+              "kind": "interact",
+              "text": "Talk to {0}."
+            }
+          ]
+        }
+      ],
+      "complete": "Continue through the passage."
     }
   ]
 }

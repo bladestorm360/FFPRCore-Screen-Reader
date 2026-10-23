@@ -1,5 +1,75 @@
 # Native FFPR durable memory
 
+- Active October23 [parked-party occupancy fix](docs/re/PARKED_PARTIES.md) and
+  V0.9.5 preparation. The user confirms prior Terra guidance works; the latest
+  log reaches Guard Leader and post-defense dialogue. Separate native
+  FieldController.partyEntityList was absent from route capture. Sol adds actual
+  parked actors to shared snapshots. Directions retain a usable prefix ending
+  one step before the blocker, then “Blocked by Party n”; standalone only when
+  adjacent. Build/all checks/47-export smoke and independent28-file package checks
+  pass;7,182 names/zero missing. V0.9.5 deployed to all six,144 protected files
+  unchanged; recovery/receipts:build_check/v095/. Publication in progress; new
+  occupancy behavior remains gameplay-unconfirmed.
+
+- October23 [navigation/name-entry/boss follow-ups](docs/re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
+  track the saved story-gate filter, Save Points category/FF6 companions, moved
+  Ymir trigger warning, interaction prefix cleanup, multipart targets and native
+  name-entry letters, brief party-aware guides and Terra/Banon three-tile alerts.
+  Implemented/offline verified and deployed to all six. Final DLL SHA256:
+  ad901861a8d98f3e523aed5d0b2e3fb96af26e1c8ad5219ae9cf4b5b16d096c1.
+  Build/all checks/47-export smoke pass;7,179 names/zero missing,125 used/333
+  defined/zero undefined. All19 embedded resources match;144 protected files
+  unchanged. Recovery/receipt:build_check/navigation_followups_20261023/.
+  Gameplay unconfirmed; no game launch/control/probe. Test defense first.
+  Luna/gpt-6-luna supplied21 bounded catalog keys; Sol reviewed all locales,
+  corrected3 proper names and verified all31 new keys/372 values. No Astra.
+
+- October23 [FF6 story/bake audit and native contracts](docs/re/FF6_STORY_NAVIGATION.md):
+  Terra defense contact NPCs, live moving goals and ID0 barriers corrected;
+  seven state-based guides cover Phoenix, tower, Opera and related scenes.
+  Phoenix pressure-release prediction and per-party pending objectives prevent
+  walking off required switches or returning to an already passed plate.
+  106 reviewed travel links; [coverage inventory](docs/re/ff6_story_audit.json)
+  spans638 submaps/2,297 scripted objects. [Test Terra first](docs/TESTING.md#october-23-ff6-story-fixes-test-terra-first).
+  Canonical build/all offline checks and47-export smoke pass;7,132 names/zero
+  missing. FF6 deployed/hash-verified:66b12fb37be13ba2ccc4b270683d1ae6fed25d357857947de020b02156c7eeb7.
+  Recovery and protected-file receipt:build_check/ff6_story_20261023/. Prism,
+  OpenAL, settings and waypoints unchanged. No gameplay confirmation, game
+  launch/control/probe, commit/push or public release. Build now rejects negative
+  Windows crash exits; final route checks actually run and pass.
+
+- October22 follow-up is implemented, offline verified and deployed to all six:
+  all1,430 extracted actionable Entity/AnimEntity candidates resolve consistently
+  in1,445 live/remote map-alias lookups;483 reviewed occurrences,52 sprite IDs,
+  direct messages, script actors and map art;99 changed/new recipe entries x12
+  locales. The earlier "unsupported" wording covered unfinished investigation.
+  The authorized full tester log shows correct FF1 names with unlabelled0/489
+  columns; structured sibling headings now label those values. Literal Character09
+  substitution is not established by that log. [Object evidence](docs/re/OBJECT_IDENTITIES.md),
+  [results evidence](docs/re/RESULTS.md). Gameplay/physical speech remain unconfirmed.
+
+- October22 first delivery is implemented and offline verified: results speech
+  retains full buffers; Bestiary waits for actual native populated content; Speech
+  turn-interruption and visible-enemy-status toggles; Ship/Canoe and mounted filters;
+  the initial45 sprite IDs/712 physical object rows (expanded above) plus native ! cues; HRTF bump-only
+  gain2; same-name exit letters across IDs/all six. [Current fix/evidence register](docs/FIXES_2026_10_22.md).
+  New toggles: InterruptCharacterTurn default On; EnemyStatusAnnouncements default
+  Off. Existing saved preferences preserved. Critical has no enemy visual producer
+  established: all-six asset0 and inherited no-op Dying poses; no hidden-HP inference.
+  [Prioritized remaining player checks](docs/TESTING.md#october-22-fixes-test-these-first).
+
+- [Current complete feature/source index](docs/FEATURE_INDEX.md) maps125 registrations
+  to owning source/functions and subsystem contracts; historical FEATURES.md is the
+  port checklist. [Runtime](docs/architecture/RUNTIME.md), [screen readers](docs/architecture/MENUS_AND_DIALOGUE.md),
+  [game adapters](docs/architecture/GAME_ADAPTERS.md). New research stays outside Git;
+  existing source-bearing historical records remain a publication/content limitation.
+  Luna's incomplete catalog handoff was rejected; Sol took over, reviewed and tested.
+  No game launch/control/probe or new public release was authorized/performed.
+  Canonical build,7116 names/zero missing, all offline checks and47-export smoke pass.
+  Current deployed/hash-verified DLL: d1dc03fd921c5b3782a3df2dcdf509c5c6ef439c6c2ab48e2c0272398eecb9ed.
+  Recovery/final receipts: build_check/issuefix_20261022/followup/ (first delivery retained in its parent). Prism, OpenAL, settings
+  and waypoints retain bytes/timestamps. No commit/push or release publication.
+
 - October21 [V0.9.4 published as Latest](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.4):
   [release/source/package record](docs/release.md#v094-preparation-and-publication-october-21).
   User reports substantial improvement from a brief FF6 intro test; other states

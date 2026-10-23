@@ -1,5 +1,14 @@
 # Read-only snapshots and worker ownership
 
+October23 [FF6 story guidance](FF6_STORY_NAVIGATION.md) adds owned rule/party-state
+snapshots ahead of the existing bounded route capture and Navigation worker.
+Native party/map/battle producers interrupt epochs; ready continuations clean up.
+At most32 candidate routes share one capture; diagnostics count every attempt.
+Pressure-plate departure predicts released static gates from copied flags while
+retaining live NPC positions. Original request time reaches speech diagnostics
+through both worker stages. Offline route/model/cancellation checks do not measure
+real native callback tails, capture age under load or audible response.
+
 October15 [persistent-state repair](MAP_STATE.md): the native Flags backing array
 has 128 words, while only 32 words hold the 1,024 logical bits. The shared reader
 now accepts this allocation instead of returning unknown scenario/treasure flags;
@@ -795,3 +804,14 @@ help sentence were preserved; no new duplicate introduced. Receipt:
 `build_check/autowalk_controls_2026_10_16/labels_validation.json`. Remaining issues are actual
 gameplay/latency confirmation and the tester's unknown exact game/mode/device, not a code-review
 handoff to the user.
+
+
+October23 organization review: story rules/native observation are separate,
+cohesive FF6 files. Existing baked_nav.cpp remains a documented size exception:
+its snapshot-local route/follow/browse clients share the private planner state,
+phase/transition receipts and thread-local SnapshotScope. The new guidance wrapper
+reuses that pipeline; a separate duplicated planner would break cancellation and
+geometry parity. Broader extraction of those existing private responsibilities is
+outside this progression fix. Released flag storage is owned/immutable and shared
+between candidate results, avoiding large repeated stack copies. The test runner
+now treats negative Windows exception exits as failures as well as positive codes.

@@ -31,23 +31,39 @@ enum class StatGroup { MonsterData, Status, Options, Items, Properties };
 struct StatEntry {
     std::wstring label;
     std::wstring value;
-    StatGroup group;
-    std::wstring to_string() const { return label + L": " + value; }
+    StatGroup group = StatGroup::MonsterData;
+    // List contents are copied individually on the native owner and joined by
+    // the navigation worker, never by a native panel-update callback.
+    std::vector<std::wstring> parts;
+    std::wstring to_string() const {
+        std::wstring out = label + L": " + value;
+        for (size_t i=0;i<parts.size();++i) { if(i)out+=L", ";out+=parts[i]; }
+        return out;
+    }
 };
 
 /// "042: Goblin" ("???" for an unseen monster). `picture_book_data` = PictureBookData.
 std::wstring read_list_entry(void* picture_book_data);
 /// "Bestiary. Encountered: X of Y" for a List<PictureBookData>.
 std::wstring read_encounter_summary(void* list);
-/// The detail view's visible stats (LibraryInfoContent) plus the dropped items from master data.
-std::vector<StatEntry> build_stat_buffer(void* content, void* monster_data);
+/// Owner-thread bounded capture cursor. Never hand this native pointer to a worker.
+/// The owning controller/selected-data generation must be validated between slices.
+struct StatCapture {
+    void* content = nullptr;
+    int table = 0, row = 0, detail = -1;
+    size_t characters = 0;
+    StatEntry current;
+    std::vector<StatEntry> entries;
+};
+/// Copy one ready rendered row/individual list field; true when capture is complete.
+bool capture_stat_step(StatCapture& capture);
 /// "Formation N: name, name" for a Last.Data.Master.MonsterParty.
 std::wstring read_formation(int formation_index, void* party);
 /// The monster's habitat name at `map_index` (MonsterData.HabitatNameList).
 std::wstring read_map_name(void* monster_data, int map_index);
 
 // --- BestiaryNavigationReader ---------------------------------------------------------------
-void nav_initialize(const std::vector<StatEntry>& entries);
+void nav_initialize(std::vector<StatEntry> entries);
 void nav_reset();
 /// Populated buffer and the tracker active.
 bool nav_is_active();

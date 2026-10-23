@@ -1,4 +1,4 @@
-// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
 // Actual baked planner snapshot on a worker. Every fake native API flags worker use.
 #include <windows.h>
 #include <atomic>
@@ -39,6 +39,7 @@ void call_failed_note(const char*) {}
 void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
 void* instance(Class&) { fixture::native(); return nullptr; }
 }
+namespace field::party_entities {bool is_native(void*){fixture::native();return false;}int native_slot(void*){fixture::native();return -1;}}
 namespace il2cpp {
 Method* find_method_overload_param(Class*, const char*, int, Class*, int) { fixture::native(); return nullptr; }
 void* method_pointer(Method*) { fixture::native(); return nullptr; }
@@ -82,6 +83,7 @@ std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring> arg
 namespace data {
 void prepare_game_json() {}
 std::string game_file(const char*) { return {}; }
+const json::Value& game_json(const char*) { return fixture::records; }
 }
 namespace field {
 void prepare_entity_translations() {}
@@ -219,6 +221,39 @@ int main() {
         // land entrances (110,98) and (218,43). Existing bakes contain group 4.
         const auto* ship = field::baked::transport(4);
         expect(ship && ship->type==2 && ship->group==4, "actual FF2 ship transportation rules are baked");
+        {
+            const auto& grid=field::baked::grids(*world);
+            auto foot=walk_request(*world,{1,0,0});foot.auto_groups={2};
+            auto plain=foot;plain.auto_groups.clear();
+            auto ship_grid=foot;ship_grid.vehicle_group=4;
+            Cell boat,shore;bool found=false;
+            for(int y=0;y<grid.height&&!found;++y)for(int x=0;x<grid.width&&!found;++x){
+                Cell water{1,x,y};
+                if(!field::baked_route::open(ship_grid,grid,water)||field::baked_route::open(foot,grid,water))continue;
+                for(auto side:{Cell{1,0,-1},Cell{1,1,0},Cell{1,0,1},Cell{1,-1,0}}){
+                    Cell bank{1,(x+side.x+grid.width)%grid.width,(y+side.y+grid.height)%grid.height};
+                    if(field::baked_route::open(foot,grid,bank)&&!field::baked_route::open(plain,grid,bank)){boat=water;shore=bank;found=true;break;}
+                }
+            }
+            expect(found,"real FF2 Canoe-only river reaches an owned Ship boarding edge");
+            if(found){
+                RouteSnapshot target(field::map_state::Resolver(field::map_state::Flags{},fixture::records));
+                target.submap=world;target.map_id=world->first_map_id;target.layer=1;target.locale=L"en";
+                target.position=world_of_cell(*world,shore);target.auto_groups={2};
+                field::VehicleOnMap vehicle;vehicle.transportation_id=4;vehicle.type=2;vehicle.pos=world_of_cell(*world,boat);
+                target.vehicles={vehicle};target.vehicle_names[4]=L"Ship";
+                target.goal.map_id=target.map_id;target.goal.cell=boat;target.kind=field::TargetKind::Spot;
+                Planned planned;BrowsePlanned browsed;
+                std::thread board_worker([&]{planned=plan_snapshot(target);browsed=plan_browse_snapshot(target);});board_worker.join();
+                expect(planned.path.success&&planned.path.walk_phases.size()==2,"selected parked Ship is reached without a fictional landing round trip");
+                if(planned.path.walk_phases.size()==2)expect(planned.path.walk_phases.back().cells.back()==boat&&
+                    planned.path.walk_phases.back().vehicle_before==field::route_progress::VehicleAction::WalkOn,
+                    "selected Ship goal preserves its exact water tile and native boarding edge");
+                expect(browsed.route.reason.find(L"board the Ship")!=std::wstring::npos,
+                    "list tracker and explicit directions share the specific valid Ship boarding action");
+            }
+        }
+
         for (auto target : {Cell{1,110,98}, Cell{1,218,43}}) {
             RouteSnapshot onboard(field::map_state::Resolver(field::map_state::Flags{}, fixture::records));
             onboard.submap=world; onboard.map_id=world->first_map_id; onboard.layer=1;
@@ -328,6 +363,141 @@ int main() {
         for(auto& v:chest_flags.scenario) v=0;
         for(auto& v:chest_flags.treasure) v=0;
         for(auto& v:chest_flags.global) v=0;
+        if(number==6) {
+            const auto* room=field::baked::submap_by_map_id(318);
+            expect(room!=nullptr,"Terra defense uses the actual Narshe mines room 318");
+            auto flags=chest_flags;flags.scenario[13]=1;
+            RouteSnapshot defense(field::map_state::Resolver(flags,chest_records));
+            defense.submap=room;defense.map_id=318;defense.layer=1;defense.locale=L"en";
+            defense.position=world_of_cell(*room,{1,13,15});
+            const auto& grid=field::baked::grids(*room);
+            std::vector<field::baked::Object> encounters;
+            for(const auto& object:grid.objects) {
+                if(field::baked::str(object.group)!=L"ev_e_0018")continue;
+                NativeObstacle actor;actor.type=static_cast<int>(object.type);actor.id=object.entity_id();
+                actor.raw_name=field::baked::object_identifier(object);actor.cell={object.layer,object.tx,object.ty};
+                actor.npc=object.type==field::baked::ObjType::NPC;
+                defense.obstacles.push_back(actor);
+                if(actor.npc&&(object.d&4))encounters.push_back(object);
+            }
+            expect(encounters.size()==7,"six contact encounters and Guard Leader retain distinct identities");
+            {
+                SnapshotScope scope(defense);
+                const auto blockers=live_blockers(*room,grid,{});
+                expect(blockers.gates.size()==2,"both ID-zero defense barriers actually enter the current collision snapshot");
+            }
+            auto moved_defense=defense;
+            for(const auto& object:encounters) {
+                GuideTarget candidate;candidate.goal.map_id=318;candidate.goal.cell={object.layer,object.tx,object.ty};
+                candidate.goal.entity_id=object.entity_id();candidate.goal.raw_name=field::baked::object_identifier(object);
+                candidate.kind=field::TargetKind::Interact;
+                defense.candidates.push_back(candidate);
+                if(object.entity_id()!=18)continue;
+                moved_defense.goal=candidate.goal;moved_defense.kind=candidate.kind;
+                for(auto& actor:moved_defense.obstacles)if(actor.id==18&&actor.npc)actor.cell={1,13,22};
+                Planned result;
+                std::thread moved([&]{result=plan_snapshot(moved_defense);});moved.join();
+                expect(result.path.success&&result.goal.cell==Cell{1,13,22},"moving encounter rebinds to its captured current cell instead of its baked home");
+                expect(!result.path.walk_phases.empty()&&result.path.walk_phases.back().arrival_direction>=0,
+                    "moved encounter retains a facing interaction approach");
+                moved_defense.obstacles.erase(std::remove_if(moved_defense.obstacles.begin(),moved_defense.obstacles.end(),[](const auto& actor){return actor.npc&&actor.id==18;}),moved_defense.obstacles.end());
+                std::thread missing([&]{result=plan_snapshot(moved_defense);});missing.join();
+                expect(!result.path.success&&result.path.reason==L"Destination is no longer available","defeated contact enemy cannot be resurrected from its baked candidate");
+            }
+            std::stable_sort(defense.candidates.begin(),defense.candidates.end(),[](const auto& a,const auto& b){return (a.goal.entity_id==9)<(b.goal.entity_id==9);});
+            // Native encounters themselves occupy choke points. Clear a usable
+            // enemy before asking for one behind it; never walk through the exit
+            // barriers or pretend every enemy is initially accessible at once.
+            int completed=0;
+            for(int phase=0;phase<7;++phase) {
+                Planned result;
+                std::thread route([&]{result=plan_snapshot(defense);});route.join();
+                expect(result.path.success,"each defense phase supplies a reachable encounter with every remaining enemy and both barriers intact");
+                if(!result.path.success)break;
+                ++completed;
+                if(!result.path.walk_phases.empty()&&!result.path.walk_phases.back().cells.empty())
+                    defense.position=world_of_cell(*room,result.path.walk_phases.back().cells.back());
+                const int defeated=result.goal.entity_id;
+                defense.obstacles.erase(std::remove_if(defense.obstacles.begin(),defense.obstacles.end(),[defeated](const auto& actor){return actor.npc&&actor.id==defeated;}),defense.obstacles.end());
+            }
+            expect(completed==7,"guidance reaches all six moving encounters and the story-advancing Guard Leader in a legal sequence");
+            std::printf("FF6 Terra defense: seven real encounters, moving/defeated state and native exit barriers checked\n");
+            int crossings=0,directional=0;
+            for(int index=0;index<field::baked::submap_count();++index) {
+                const auto* floor=field::baked::submap_at(index);
+                for(const auto& crossing:field::baked::grids(*floor).objects) {
+                    if(crossing.type!=field::baked::ObjType::Warp||(crossing.d&255)!=2)continue;
+                    ++crossings;auto request=walk_request(*floor,{crossing.layer,crossing.tx,crossing.ty});
+                    request.blocked={{crossing.layer,crossing.tx,crossing.ty}};
+                    const auto goals=field::baked_route::goals_for(request,request.start,field::baked_route::GoalKind::Interact,&crossing);
+                    if(goals.cells.empty())std::printf("Crossing without baked approach: %ls entity %d at %d,%d L%d mask %d; %ls\n",
+                        field::baked::name_of(*floor).c_str(),crossing.entity_id(),crossing.tx,crossing.ty,crossing.layer,(crossing.d>>8)&15,
+                        field::baked::object_identifier(crossing).c_str());
+                    expect(!goals.cells.empty(),"reviewed manual crossing has an actual native approach");
+                    auto reach=field::baked_route::flood(request,goals.cells);
+                    expect(distance_to_object(request,reach,crossing,crossing.layer,false)==0,
+                        "solid crossing uses its interaction approach as a graph edge, never its blocked actor cell");
+                    const int mask=(crossing.d>>8)&15;
+                    if(mask){++directional;for(const auto& c:goals.cells){
+                        const int dx=c.x-crossing.tx,dy=c.y-crossing.ty;
+                        const int side=dy<0?0:dx>0?1:dy>0?2:3;
+                        expect((mask&(1<<side))!=0,"direction-dispatched crossing cannot use an unreviewed side");
+                    }}
+                    bool landing=false;
+                    for(const auto& p:field::baked::grids(*floor).objects)
+                        landing|=p.type==field::baked::ObjType::PointIn&&p.a==crossing.b;
+                    expect(landing,"every reviewed same-floor crossing resolves its own factual landing");
+                }
+            }
+            expect(crossings==87&&directional==69,"Phoenix, Zozo, cave bridges and tower ladder travel are present");
+            std::printf("FF6 reviewed travel: %d solid interactions, %d approach restrictions checked\n",crossings,directional);
+            const auto* phoenix=field::baked::submap_by_map_id(498);
+            const auto& cave_record=*chest_records.get(field::baked::name_of(*phoenix));
+            for(int index=1;index<=7;++index) {
+                auto held=chest_flags;held.current_map_id=498;held.current_area_id=static_cast<int>(cave_record.get(L"area_id")->n);
+                held.area.fill(0);held.local.fill(0);held.area[static_cast<size_t>(index)]=1;
+                auto released=held;released.area[static_cast<size_t>(index)]=0;
+                RouteSnapshot departing(field::map_state::Resolver(released,chest_records));
+                departing.submap=phoenix;departing.map_id=498;departing.anticipated_release=std::make_shared<const field::map_state::Flags>(released);
+                NativeObstacle npc;npc.npc=true;npc.type=6;npc.id=777;npc.cell={1,2,3};
+                departing.obstacles.push_back(npc);
+                Blockers projected;
+                std::thread work([&]{SnapshotScope scope(departing);projected=live_blockers(*phoenix,field::baked::grids(*phoenix),{});});work.join();
+                auto expected=walk_request(*phoenix,{1,2,3});field::map_state::Resolver state(released,chest_records);
+                field::map_state::add_obstacles(state,*phoenix,expected,true,true);
+                expect(projected.gates==expected.blocked&&projected.moving_npcs.size()==1,
+                    "plate departure restores exact released-state gates while retaining captured NPC positions");
+                expect(held.area[static_cast<size_t>(index)]==1,"counterfactual departure does not modify observed/native state");
+            }
+            std::printf("FF6 Phoenix: seven exact plate-release geometry predictions checked\n");
+            const auto* rafters=field::baked::submap_by_map_id(117);
+            auto opera_flags=chest_flags;opera_flags.scenario[167]=1;opera_flags.scenario[168]=1;
+            RouteSnapshot opera(field::map_state::Resolver(opera_flags,chest_records));
+            opera.submap=rafters;opera.map_id=117;opera.layer=1;opera.locale=L"en";
+            bool entry=false;
+            for(const auto& o:field::baked::grids(*rafters).objects) {
+                if(o.type==field::baked::ObjType::PointIn&&o.a==1){opera.layer=o.layer;opera.position=world_of_cell(*rafters,{o.layer,o.tx,o.ty});entry=true;}
+                if(o.type!=field::baked::ObjType::NPC||!((o.entity_id()>=9&&o.entity_id()<=13)||
+                    (o.entity_id()==5&&field::baked::str(o.group)==L"ev_e_0344")))continue;
+                NativeObstacle raw;raw.type=6;raw.id=o.entity_id();raw.npc=true;raw.cell={o.layer,o.tx,o.ty};raw.raw_name=field::baked::object_identifier(o);
+                opera.obstacles.push_back(raw);GuideTarget candidate;candidate.goal={117,raw.cell};
+                candidate.goal.entity_id=raw.id;candidate.goal.raw_name=raw.raw_name;candidate.kind=field::TargetKind::Interact;opera.candidates.push_back(candidate);
+            }
+            std::stable_sort(opera.candidates.begin(),opera.candidates.end(),[](const auto& a,const auto& b){return (a.goal.entity_id==5)<(b.goal.entity_id==5);});
+            expect(entry&&opera.candidates.size()==6,"real Opera rafters entry, five contact rats and Ultros are captured");
+            int cleared=0;
+            for(int stage=0;stage<6;++stage) {
+                Planned result;std::thread work([&]{result=plan_snapshot(opera);});work.join();
+                expect(result.path.success,"rafters maze supplies a legal next encounter through remaining native rats");
+                if(!result.path.success)break;
+                ++cleared;
+                if(!result.path.walk_phases.empty()&&!result.path.walk_phases.back().cells.empty())opera.position=world_of_cell(*rafters,result.path.walk_phases.back().cells.back());
+                const auto id=result.goal.entity_id;
+                opera.obstacles.erase(std::remove_if(opera.obstacles.begin(),opera.obstacles.end(),[id](const auto& npc){return npc.id==id;}),opera.obstacles.end());
+            }
+            expect(cleared==6,"rafters route reaches the native story-advancing Ultros encounter after the rats");
+            std::printf("FF6 Opera rafters: %d encounter routes checked\n",cleared);
+        }
         bool remote_checked=false;
         for(int index=0;index<field::baked::submap_count()&&!remote_checked;++index){
             const auto* here=field::baked::submap_at(index);if(here->world||here->first_map_id<=0)continue;
@@ -389,6 +559,11 @@ int main() {
                     const auto began=std::chrono::steady_clock::now();
                     const auto distances=exit_distances(capture,exits,{});
                     const double bulk_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-began).count();
+                    std::vector<StoryTarget> story_targets;
+                    for(const auto& exit:exits){MapGoal target;target.map_id=parked.map_id;target.cell=exit.cell;story_targets.push_back({target,field::TargetKind::Transition});}
+                    const auto mask=story_gate_mask(capture,story_targets,{});
+                    expect(std::none_of(mask.begin(),mask.end(),[](bool hidden){return hidden;}),
+                        "owned parked-vehicle access is never misclassified as a story gate on any bake");
                     SnapshotScope scope(parked);
                     auto req=walk_request(*map,shore);const auto live=live_blockers(*map,grid,{});
                     req.blocked=live.hard();req.directional=live.directional;req.live_hazards=true;req.hazards=live.triggers;req.live_traps=true;req.traps=live.traps;
@@ -481,6 +656,10 @@ int main() {
                     const auto index=categories.views[0].order.front(); const auto& row=input.rows[index];
                     NativeObstacle gate;gate.type=19;gate.cell={-1,row.cell_x,row.cell_y};gate.collider=true;gate.collision=1;
                     copied.obstacles.push_back(gate);
+                    StoryTarget target;target.goal.map_id=copied.map_id;target.goal.cell={1,row.cell_x,row.cell_y};target.kind=field::TargetKind::Transition;
+                    std::vector<bool> story_mask;
+                    std::thread story([&]{story_mask=story_gate_mask(*input.navigation,{target},{});});story.join();
+                    expect(story_mask==std::vector<bool>({true}),"all-six world story filter proves a captured gate without confusing world layers");
                     std::thread gated([&]{categories=build_categories(input);});gated.join();
                     expect(input.rows[index].route_distance<0,"copied native story collider vetoes a world transition before grouping");
                 }
@@ -516,6 +695,13 @@ int main() {
                 onboard.goal.map_id=onboard.map_id; onboard.goal.cell=target; onboard.kind=field::TargetKind::Transition; onboard.locale=L"en";
                 // Exercise the actual exit-filter path while already aboard,
                 // rather than inferring its behavior from a successful route.
+                {
+                    SnapshotScope scope(onboard);
+                    const auto inferred=goals_for(*map,target,field::TargetKind::Infer);
+                    const auto explicit_goal=goals_for(*map,target,field::TargetKind::Transition);
+                    expect(!inferred.cells.empty()&&inferred.cells==explicit_goal.cells,
+                        "all-six mounted filter inference agrees with explicit destination footprint");
+                }
                 for(bool with_vehicles : {false,true}) {
                     ExitSnapshot filtered(with_vehicles,field::map_state::Resolver(field::map_state::Flags{},fixture::records));
                     filtered.route.submap=map;filtered.route.map_id=onboard.map_id;filtered.route.layer=1;

@@ -56,6 +56,39 @@ int main()
         for (auto& v : flags.treasure) v = 0;
         for (auto& v : flags.global) v = 0;
         map_state::Resolver resolver(flags, records);
+        if(n==6) {
+            auto state=flags;state.scenario[13]=1;
+            const auto defense=map_state::project(*records.get(L"Map_30011_2"),state);
+            expect(defense.known&&defense.groups.count(L"ev_e_0018")&&defense.groups.count(L"ev_e_0609"),
+                "native SetEntities preserves the normal exit group alongside the Terra defense group");
+            const auto& cave=*records.get(L"Map_30781_1");
+            state=flags;state.current_map_id=498;state.current_area_id=static_cast<int>(cave.get(L"area_id")->n);
+            for(auto& v:state.area)v=0;
+            const auto initial=map_state::project(cave,state);
+            expect(initial.known&&initial.groups.count(L"ev_e_0806")&&initial.groups.count(L"ev_e_0799")&&initial.groups.count(L"ev_e_0808"),
+                "Phoenix Cave independently retains the twin-switch gate, drain lever and bridge event groups");
+            state.area[7]=1;
+            const auto rocks=map_state::project(cave,state);
+            expect(rocks.known&&rocks.groups.count(L"ev_e_0801")&&rocks.groups.count(L"ev_e_0806"),
+                "native area locals add the rock crossing without dropping other puzzle groups");
+            for(int index=1;index<=7;++index) {
+                state.area.fill(0);state.area[static_cast<size_t>(index)]=1;
+                const auto held=map_state::project(cave,state);state.area[static_cast<size_t>(index)]=0;
+                const auto released=map_state::project(cave,state);
+                expect(held.known&&released.known&&(held.entities!=released.entities||held.groups!=released.groups),
+                    "every Phoenix temporary plate changes projected geometry again on its native release");
+            }
+            state.current_map_id=499;state.scenario[406]=1;
+            map_state::Resolver alternate(state,records);
+            const auto* second=baked::submap_by_map_id(499);bool checked_show=false,checked_hide=false;
+            for(const auto& o:baked::grids(*second).objects)if(o.type==baked::ObjType::Event) {
+                if(o.entity_id()==55){expect(alternate.active(*second,o),"lower rock state exposes the alternate upper control");checked_show=true;}
+                if(o.entity_id()==58){expect(!alternate.active(*second,o),"native Hide also applies to a physical Event actor");checked_hide=true;}
+            }
+            expect(checked_show&&checked_hide,"both real rock controls are identified");
+            state.current_area_id+=1000;
+            expect(!map_state::project(cave,state).known,"another area's local variables cannot certify Phoenix Cave state");
+        }
         int known = 0, unknown = 0, solid = 0, known_chests = 0, unknown_chests = 0;
         for (int i = 0; i < baked::submap_count(); ++i) {
             const auto& sm = *baked::submap_at(i);
@@ -94,7 +127,8 @@ int main()
                 if ((o.type != baked::ObjType::NPC && o.type != baked::ObjType::ShopNPC) || !(o.d & 1)) continue;
                 ++solid;
                 bool blocked = false;
-                for (const auto& c : request.blocked) if (c.x == o.tx && c.y == o.ty) blocked = true;
+                const auto effective=resolver.effective(sm,o);
+                for (const auto& c : request.blocked) if (c.x == effective.tx && c.y == effective.ty) blocked = true;
                 expect(blocked, "every applicable solid NPC blocks future-floor routes");
             }
         }

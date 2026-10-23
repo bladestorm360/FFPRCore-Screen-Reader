@@ -19346,5 +19346,61 @@
     "th": "ผู้ชายสวมหมวก (สีเขียว)",
     "zhc": "戴帽子的男性（绿色）",
     "zht": "戴帽子的男性（綠色）"
+  },
+  "シヴァ": {
+    "en": "Shiva",
+    "ja": "シヴァ",
+    "fr": "Shiva",
+    "it": "Shiva",
+    "de": "Shiva",
+    "es": "Shiva",
+    "ko": "시바",
+    "zht": "濕婆",
+    "zhc": "希瓦",
+    "ru": "Шива",
+    "th": "ชีวา",
+    "pt": "Shiva"
+  },
+  "オーディン": {
+    "en": "Odin",
+    "ja": "オーディン",
+    "fr": "Odin",
+    "it": "Odino",
+    "de": "Odin",
+    "es": "Odín",
+    "ko": "오딘",
+    "zht": "奧汀",
+    "zhc": "奥丁",
+    "ru": "Один",
+    "th": "โอดิน",
+    "pt": "Odin"
+  },
+  "ウイングラプター": {
+    "en": "Wing Raptor",
+    "ja": "ウイングラプター",
+    "fr": "Ptéroraptor",
+    "it": "Rapace",
+    "de": "Flügelraptor",
+    "es": "Ala rapaz",
+    "ko": "윙 랩터",
+    "zht": "巨翼猛禽",
+    "zhc": "巨翼猛禽",
+    "ru": "Крылатый раптор",
+    "th": "อินทรีเวหา",
+    "pt": "Rapinante"
+  },
+  "ものまね師　ゴゴ": {
+    "en": "Famed Mimic Gogo",
+    "ja": "ものまね師　ゴゴ",
+    "fr": "Gogo le Mime",
+    "it": "Gogo il mimo",
+    "de": "Gogo der Mime",
+    "es": "Gogo el mimo",
+    "ko": "흉내쟁이 고고",
+    "zht": "模仿師　格格",
+    "zhc": "模仿师　格格",
+    "ru": "Великий мим Гого",
+    "th": "นักเลียนแบบชื่อดัง โกโกะ",
+    "pt": "O Famoso Mímico Gogo"
   }
 }

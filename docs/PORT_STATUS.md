@@ -1,5 +1,9 @@
 # Port status
 
+Current native feature coverage is maintained in [FEATURE_INDEX](FEATURE_INDEX.md);
+October22 fixes/evidence are tracked in [the current register](FIXES_2026_10_22.md).
+The historical FINISHED labels below are implementation/port labels, not blanket gameplay certification.
+
 October 12 results follow-up supersedes all historical L-log references below:
 all six games use native current-phase buffers, concise displayed totals and
 Autodetail-controlled details, with prefix input ownership. [Evidence](re/RESULTS.md).
@@ -180,6 +184,11 @@ BattlePausePatches, BattleResultPatches, BattleStartPatches. All names checked i
 - Not yet done: in-game tests, then the release zip (Phase 5) and archiving the old repos (Phase 6).
 
 ## Core: status, config, bestiary (`src/core/status`, `src/core/bestiary`) — FINISHED
+
+October22 regression correction: FF2 Config Bestiary now waits for actual native populated content.
+Investigation not started; check both Config and title Extras entry paths in all
+six games. The historical porting label above is not gameplay confirmation.
+[Exact user output and deferred investigation](re/BESTIARY.md).
 
 StatusMenuPatches, StatusNavigationReader, StatusDetailsReader, StatusStatDefinitions,
 StatusNavigationHandler, ConfigMenuPatches, ConfigMenuReader, BestiaryPatches, BestiaryReader,
@@ -749,3 +758,17 @@ due). From the user's first baked-map session in FF2.
     (`navigation.cpp` `find_path`, with `search_target_and_neighbours`,
     `search_with_passages_open` and `breadcrumb_chain.cpp`). The user will retire it once the
     beacon is confirmed in game; nothing else depends on `MapRouteSearcher`.
+
+
+## FF6 story/bake repair, October23
+
+[Current scenario contracts, architecture and verification](re/FF6_STORY_NAVIGATION.md)
+supersede the older Phoenix/tower/Opera guide omissions for this delivery. Seven
+state-based story guides, native party changes and held-switch release behavior
+now use the shared worker/bakes. Contact encounters and moving actor goals are
+corrected;106 reviewed scripted travel links are baked. Canonical build/all offline
+checks and smoke pass; FF6 alone is deployed. Gameplay remains unconfirmed; use
+[the prioritized Terra-first procedure](TESTING.md#october-23-ff6-story-fixes-test-terra-first).
+Other puzzle controls retain normal navigation; this is not a new solution guide
+for every FF6 puzzle or proof of an exhaustive playthrough. No public release,
+commit or push was made.

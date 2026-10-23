@@ -1,8 +1,35 @@
 # Speech ordering and Prism priority audit, October 13
 
+October22 implementation: Speech now contains **Interrupt speech on character turn**,
+persisted as InterruptCharacterTurn. Default On preserves existing automatic behavior;
+Off queues the same turn announcement. The opening turn always queues behind the
+formation roster. Manual T remains an intentional interruption. battle_command.cpp
+owns the single shared producer; all-six battle_focus_check covers both setting
+states and the opening-roster exception. All12 languages are supplied.
+[Combined verification](../FIXES_2026_10_22.md). The planned section below is the original report.
+
+
 User report: category names are cut off by the initially focused destination. Required
 order is category, then destination queued behind it. Audit the same priorities across
 the shared mod, retaining intentional manual interruption and game-event ordering.
+
+## Planned setting: interrupt speech on character turn, October 22
+
+**Status: not started.** User request, 2026-10-22: add a persistent toggle to
+the mod menu's **Speech** submenu controlling whether an automatic announcement
+when a character's turn becomes active interrupts current screen-reader speech.
+Enabled: that turn announcement interrupts. Disabled: it queues without interrupting
+current speech; the announcement itself remains enabled. Scope is applicable turn
+activation announcements across all six games. Preserve manual T/active-turn reading
+and unrelated speech priorities. The default and final localized label have not been
+specified; determine them during implementation without changing behavior now.
+
+Future implementation should use the shared speech/settings path, localize the
+mod-owned setting in all supported languages and persist its value. Verify both
+states with speech already active at turn activation, saved-value reload and each
+applicable game adapter. Existing event/lifetime ownership and central speech-order
+rules remain in force. Documentation only; no implementation, code investigation,
+build, deployment or runtime testing performed. Offline and gameplay checks pending.
 
 ## Backend and central queue evidence
 

@@ -2,6 +2,7 @@
 // GetConditionName(int), GetActionName, GetItemName, GetAbilityName), Patches/MagicMenuState.cs
 // (GetConditionName(Condition), ConditionTypeFallback) and Utils/TextUtils.cs (StripIconMarkup).
 #include "battle_util.h"
+#include "enemy_parts.h"
 #include <cstring>
 #include "../core.h"
 #include "../log.h"
@@ -339,7 +340,7 @@ std::wstring enemy_name(void* enemy)
     if (!enemy) return std::wstring();
     std::wstring mes_id = ref::call_str(mGetMesIdName, enemy);
     if (mes_id.empty()) return std::wstring();
-    return message(mes_id);
+    return enemy_parts::qualify(enemy,message(mes_id),mes_id);
 }
 
 std::wstring unit_name(void* unit)

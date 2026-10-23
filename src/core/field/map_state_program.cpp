@@ -1,6 +1,7 @@
 // Read-only projection of the navigation subset of a native map initializer.
 #include "map_state.h"
 #include <vector>
+#include <climits>
 
 namespace field::map_state {
 namespace {
@@ -16,6 +17,8 @@ std::optional<int> value(int category, int index, const Flags& flags, const std:
         return category < 4 ? flags.scenario[bit] : flags.treasure[bit];
     }
     if (category == 8 && index < 16) return flags.global[static_cast<size_t>(index)];
+    if (category == 9 && index < 8) return flags.area[static_cast<size_t>(index)];
+    if (category == 10 && index < 8) return flags.local[static_cast<size_t>(index)];
     // Locals from another floor are unknown unless that initializer assigns them.
     return {};
 }
@@ -29,8 +32,17 @@ std::optional<bool> compare(int op, int a, int b)
 }
 }
 
-Selection project(const json::Value& record, const Flags& flags)
+Selection project(const json::Value& record, const Flags& input)
 {
+    // Area locals survive floor switches within their native area. Map locals
+    // belong only to that exact loaded map. Never borrow another floor's state.
+    Flags flags=input;
+    const auto* area=record.get(L"area_id");
+    if (!area || input.current_area_id<=0 || number(*area)!=input.current_area_id) flags.area.fill({});
+    bool same_map=false;
+    if (const auto* maps=record.get(L"map_ids"))
+        for (const auto& map:maps->arr) same_map |= number(map)==input.current_map_id && input.current_map_id>0;
+    if (!same_map) flags.local.fill({});
     const auto* code = record.get(L"code");
     if (!code || code->arr.empty()) return {};
     const auto* entry = record.get(L"entry");
@@ -38,9 +50,12 @@ Selection project(const json::Value& record, const Flags& flags)
         int pc; std::wstring group;
         std::vector<int> stack;
         std::map<Key, std::optional<int>> shadow;
+        std::set<std::wstring> groups;
+        std::map<int,std::pair<int,EntityState>> puppets;
+        std::map<int,EntityState> entities;
     };
     std::vector<Machine> branches{{entry ? number(*entry) : 0, {}, {}, {}}};
-    std::optional<std::wstring> agreed;
+    std::optional<Selection> agreed;
     int budget = 8192;
     size_t explored = 0;
     while (!branches.empty()) {
@@ -56,7 +71,9 @@ Selection project(const json::Value& record, const Flags& flags)
             case 0: break;
             case 1:
                 if (row.size() < 2 || !row[1].is_string()) return {false, {}};
-                state.group = row[1].s; break;
+                state.group = row[1].s;
+                if (!state.group.empty()) state.groups.insert(state.group);
+                break;
             case 2: {
                 if (i(3) < 0 || i(3) > 5) return {false, {}};
                 const auto lhs = value(i(1), i(2), flags, state.shadow), rhs = value(i(4), i(5), flags, state.shadow);
@@ -84,30 +101,76 @@ Selection project(const json::Value& record, const Flags& flags)
             case 6: finished = true; break;
             case 7: state.shadow[{i(1), i(2)}] = i(3); break;
             case 8: state.shadow[{i(1), i(2)}] = value(i(3), i(4), flags, state.shadow); break;
+            case 10: {
+                if(row.size()!=6||i(1)<0||i(1)>=32)return {false,{}};
+                EntityState effect;
+                if(i(3)==0||i(3)==1)effect.visible=i(3)!=0;
+                if(i(4)!=INT_MIN)effect.x=i(4);
+                if(i(5)!=INT_MIN)effect.y=i(5);
+                state.puppets[i(1)]={i(2),effect};
+                break;
+            }
+            case 11:
+                for(const auto& [slot,entry]:state.puppets) {
+                    if(entry.first<=0)continue;
+                    const auto& effect=entry.second;
+                    if(!effect.visible.has_value()&&!effect.x&&!effect.y)continue;
+                    if(row.size()>1&&i(1)!=0)return {false,{}}; // asynchronous final state is not ready evidence
+                    auto& into=state.entities[entry.first];
+                    if(effect.visible.has_value())into.visible=effect.visible;
+                    if(effect.x)into.x=effect.x;
+                    if(effect.y)into.y=effect.y;
+                }
+                if(state.entities.size()>4096)return {false,{}};
+                state.puppets.clear(); // completed native cores sleep until another SetPuppet
+                break;
             default: return {false, {}};
             }
         }
-        if (agreed && *agreed != state.group) return {false, {}};
-        agreed = state.group;
+        if (agreed && (agreed->groups != state.groups || agreed->entities != state.entities)) return {false, {}};
+        agreed = Selection{true, state.group, std::move(state.groups),std::move(state.entities)};
     }
-    return {true, agreed.value_or(L"")};
+    return agreed.value_or(Selection{});
 }
 
-Selection Resolver::selection(const baked::Submap& sm)
+const Selection& Resolver::selection(const baked::Submap& sm)
 {
     const int id = baked::submap_index(&sm);
     if (auto it = cache_.find(id); it != cache_.end()) return it->second;
     const auto* record = records_.get(baked::name_of(sm));
     auto selected = record ? project(*record, flags_) : Selection{};
-    cache_[id] = selected;
-    return selected;
+    return cache_.emplace(id,std::move(selected)).first->second;
 }
 bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool obstacle)
 {
+    const auto& selected = selection(sm);
+    // PointIn/ToLayer and other graph metadata have their own ID domains. A
+    // puppet changes a physical actor (and its derived Warp), never those IDs.
+    const bool puppet = object.type==baked::ObjType::Entity || object.type==baked::ObjType::AnimEntity ||
+        object.type==baked::ObjType::NPC || object.type==baked::ObjType::ShopNPC || object.type==baked::ObjType::Warp ||
+        object.type==baked::ObjType::Event || object.type==baked::ObjType::RandomEvent || object.type==baked::ObjType::SwitchEvent;
+    if(selected.known && puppet) {
+        const auto entity=selected.entities.find(object.entity_id());
+        if(entity!=selected.entities.end()&&entity->second.visible==std::optional<bool>(false))return false;
+    }
     const auto group = baked::str(object.group);
     if (group.empty() || group == L"entity_default" || group == L"default") return true;
-    const auto selected = selection(sm);
-    return selected.known ? group == selected.group : obstacle;
+    return selected.known ? selected.groups.count(group) != 0 : obstacle;
+}
+baked::Object Resolver::effective(const baked::Submap& sm,const baked::Object& object) {
+    auto result=object;
+    if(object.type!=baked::ObjType::Entity && object.type!=baked::ObjType::AnimEntity &&
+       object.type!=baked::ObjType::NPC && object.type!=baked::ObjType::ShopNPC && object.type!=baked::ObjType::Warp &&
+       object.type!=baked::ObjType::Event && object.type!=baked::ObjType::RandomEvent && object.type!=baked::ObjType::SwitchEvent)return result;
+    const auto& selected=selection(sm);
+    if(!selected.known)return result;
+    const auto at=selected.entities.find(object.entity_id());
+    if(at==selected.entities.end())return result;
+    // The bake's supported dimensions fit signed tile fields. Keep malformed
+    // projection coordinates from wrapping into an unrelated route cell.
+    if(at->second.x&&*at->second.x>=SHRT_MIN&&*at->second.x<=SHRT_MAX)result.tx=static_cast<int16_t>(*at->second.x);
+    if(at->second.y&&*at->second.y>=SHRT_MIN&&*at->second.y<=SHRT_MAX)result.ty=static_cast<int16_t>(*at->second.y);
+    return result;
 }
 bool Resolver::known(const baked::Submap& sm) { return selection(sm).known; }
 bool Resolver::consumed(const baked::Submap& sm, const baked::Object& object) {
@@ -138,7 +201,9 @@ uint64_t Resolver::signature() const {
             hash *= 1099511628211ull;
         }
     };
-    bank(flags_.scenario); bank(flags_.treasure); bank(flags_.global);
+    bank(flags_.scenario); bank(flags_.treasure); bank(flags_.global); bank(flags_.area); bank(flags_.local);
+    hash ^= static_cast<uint64_t>(flags_.current_map_id); hash *= 1099511628211ull;
+    hash ^= static_cast<uint64_t>(flags_.current_area_id); hash *= 1099511628211ull;
     return hash;
 }
 std::optional<bool> Resolver::treasure_opened(const baked::Submap& sm, const baked::Object& object) const
@@ -158,18 +223,21 @@ std::optional<bool> Resolver::treasure_opened(const baked::Submap& sm, const bak
     }
     return {};
 }
-void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates)
+void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates, bool geometry_only)
 {
     request.live_hazards = true;
     request.live_traps = true;
-    for (const auto& o : baked::grids(sm).objects) {
-        if (!resolver.active(sm, o, true)) continue;
+    for (const auto& original : baked::grids(sm).objects) {
+        if(geometry_only && original.type!=baked::ObjType::Entity && original.type!=baked::ObjType::AnimEntity &&
+           original.type!=baked::ObjType::CollisionEntity)continue;
+        if (!resolver.active(sm, original, true)) continue;
+        const auto o=resolver.effective(sm,original);
         const bool npc = o.type == baked::ObjType::NPC || o.type == baked::ObjType::ShopNPC;
         const bool solid = o.type == baked::ObjType::TreasureBox ||
             (npc && (o.d & 1)) ||
             (gates && ((o.type == baked::ObjType::Entity || o.type == baked::ObjType::AnimEntity) && (o.d & 1)));
         const bool collider = gates && o.type == baked::ObjType::CollisionEntity;
-        const bool used=resolver.consumed(sm,o);
+        const bool used=resolver.consumed(sm,original);
         const bool trigger = baked_route::step_event(o)&&!used;
         if (!solid && !collider && !trigger) continue;
         for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x) {

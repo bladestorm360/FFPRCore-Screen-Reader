@@ -10,6 +10,7 @@
 #include "../unity.h"
 #include "../status/status.h"
 #include "../displayed_ui.h"
+#include <algorithm>
 
 namespace ffpr::bestiary {
 namespace {
@@ -89,48 +90,6 @@ std::wstring param_value_text(void* param)
     return {};
 }
 
-// ReadParamValueArray: LibraryInfoParamValue[] (label: value pairs), active entries only.
-void read_param_value_array(void* table, StatGroup group, std::vector<StatEntry>& entries)
-{
-    int n = unity::array_length(table);
-    for (int i = 0; i < n; ++i) {
-        void* param = unity::array_at(table, i);
-        if (!param || !unity::active_in_hierarchy(param)) continue;
-        std::wstring label = param_value_label(param);
-        std::wstring value = param_value_text(param);
-        if (!label.empty()) entries.push_back({label, value, group});
-    }
-}
-
-// ReadParamListViewArray: LibraryInfoContentParamListView[] (title + active detail texts).
-void read_param_list_view_array(void* table, StatGroup group, std::vector<StatEntry>& entries)
-{
-    int n = unity::array_length(table);
-    for (int i = 0; i < n; ++i) {
-        void* list_view = unity::array_at(table, i);
-        if (!list_view || !unity::active_in_hierarchy(list_view)) continue;
-        std::wstring title = trimmed_text(list_view, fListTitleText);
-        if (title.empty()) continue;
-
-        std::vector<std::wstring> details;
-        void* text_table = ref::rd<void*>(list_view, fListTextTable);
-        int m = unity::array_length(text_table);
-        for (int j = 0; j < m; ++j) {
-            void* param_text = unity::array_at(text_table, j);
-            if (!param_text || !unity::active_in_hierarchy(param_text)) continue;
-            std::wstring detail = trimmed_text(param_text, fDetailText);
-            if (!detail.empty()) details.push_back(detail);
-        }
-
-        std::wstring value;
-        for (size_t k = 0; k < details.size(); ++k) {
-            if (k) value += L", ";
-            value += details[k];
-        }
-        entries.push_back({title, value, group});
-    }
-}
-
 // GetGameMessage: MessageManager.GetMessage(id) (isReplace true), empty when missing.
 std::wstring game_message(const std::wstring& mes_id)
 {
@@ -177,26 +136,50 @@ std::wstring read_encounter_summary(void* list)
     return TF(L"Bestiary. Encountered: {0} of {1}", {text::num(encountered), text::num(total)});
 }
 
-std::vector<StatEntry> build_stat_buffer(void* content, void* monster_data)
+bool capture_stat_step(StatCapture& capture)
 {
-    std::vector<StatEntry> entries;
-    if (!content) return entries;
-    try {
-        // Group 1: Monster Data (Defeated, Level)
-        read_param_value_array(ref::rd<void*>(content, fMonsterDataTable), StatGroup::MonsterData, entries);
-        // Group 2: Status (HP, MP, Attack, Defense, ...)
-        read_param_value_array(ref::rd<void*>(content, fStatusTable), StatGroup::Status, entries);
-        // Group 3: Options (Gil, EXP)
-        read_param_value_array(ref::rd<void*>(content, fOptionTable), StatGroup::Options, entries);
-        // Native item rows own their reveal gate (including secret placeholder text).
-        // Do not reconstruct all master slots or bypass the game's selected volume.
-        read_param_list_view_array(ref::rd<void*>(content, fDropTable), StatGroup::Items, entries);
-        // Group 5: Hierarchy (Type, Weakness, Resistance, Absorbs, Cancels, Habitat)
-        read_param_list_view_array(ref::rd<void*>(content, fHierarchyTable), StatGroup::Properties, entries);
-    } catch (...) {
-        LOGF("[Bestiary] Error building stat buffer");
+    // A library has five short serialized tables. Reject corrupt native counts
+    // before indexing; copy at most one row/leaf field on each owner-thread step.
+    constexpr int kMaxRows = 64, kMaxDetails = 64;
+    constexpr size_t kMaxCharacters=65536, kMaxField=4096;
+    if (!unity::alive(capture.content) || capture.table >= 5 || capture.characters>=kMaxCharacters) return true;
+    const auto retain=[&](std::wstring value) {
+        value.resize(std::min({value.size(),kMaxField,kMaxCharacters-capture.characters}));
+        capture.characters+=value.size();return value;
+    };
+    ref::Field* tables[] = {&fMonsterDataTable, &fStatusTable, &fOptionTable, &fDropTable, &fHierarchyTable};
+    constexpr StatGroup groups[] = {StatGroup::MonsterData, StatGroup::Status, StatGroup::Options, StatGroup::Items, StatGroup::Properties};
+    void* table = ref::rd<void*>(capture.content, *tables[capture.table]);
+    const int count = unity::array_length(table);
+    if (count < 0 || count > kMaxRows || capture.row >= count) {
+        ++capture.table; capture.row = 0; capture.detail = -1;
+        return capture.table >= 5;
     }
-    return entries;
+    void* row = unity::array_at(table, capture.row);
+    if (!row || !unity::active_in_hierarchy(row)) {
+        ++capture.row; capture.detail = -1; return false;
+    }
+    if (capture.table < 3) {
+        auto label = retain(param_value_label(row));
+        if (!label.empty()) capture.entries.push_back({std::move(label), retain(param_value_text(row)), groups[capture.table]});
+        ++capture.row; return false;
+    }
+    if (capture.detail < 0) {
+        capture.current = {retain(trimmed_text(row, fListTitleText)), {}, groups[capture.table]};
+        capture.detail = 0;
+    }
+    void* details = ref::rd<void*>(row, fListTextTable);
+    const int detail_count = unity::array_length(details);
+    if (detail_count < 0 || detail_count > kMaxDetails || capture.detail >= detail_count || capture.current.label.empty()) {
+        if (!capture.current.label.empty()) capture.entries.push_back(std::move(capture.current));
+        ++capture.row; capture.detail = -1; return false;
+    }
+    void* leaf = unity::array_at(details, capture.detail++);
+    if (leaf && unity::active_in_hierarchy(leaf)) {
+        auto value = retain(trimmed_text(leaf, fDetailText));
+        if (!value.empty()) capture.current.parts.push_back(std::move(value));
+    }
+    return false;
 }
 
 std::wstring read_formation(int formation_index, void* party)

@@ -4,10 +4,11 @@
 #include <functional>
 #include <optional>
 #include <memory>
+#include <array>
 #include "field_api.h"
 #include "baked_router.h"
 #include "route_progress.h"
-namespace field::map_state { class Resolver; }
+namespace field::map_state { class Resolver; struct Flags; }
 
 // The game-side glue of the baked-map router (baked_router.h): the live map, the player's
 // cell and layer, the current vehicle, the owned auto-vehicles, the live blockers and the
@@ -91,6 +92,27 @@ struct MapGoal {
 /// it does not replace the manually selected destination.
 void request_route(MapGoal goal, TargetKind kind, std::wstring name,
                    std::function<void(PathInfo)> publish, bool keep_destination = true);
+// One native capture for a bounded ordered set of scenario objectives. The
+// Navigation worker picks the first currently usable target, preserving real
+// gates and encounter positions. The guide owns a preview, never the player's
+// manually selected entity/waypoint. At most 32 candidates are accepted.
+struct GuideTarget { MapGoal goal; TargetKind kind = TargetKind::Infer; std::wstring instruction; };
+struct DefenseContext {
+    MapGoal protected_actor;
+    std::vector<MapGoal> enemies;
+    std::array<std::optional<baked_route::Cell>,3> parties;
+    int current_party=0;
+    std::wstring warning;
+};
+struct DefenseAdvice {
+    std::optional<MapGoal> intercept;
+    int closest_party=-1;
+    std::wstring warning;
+};
+void request_guidance(std::vector<GuideTarget> candidates, std::function<void(PathInfo)> publish,
+                      const map_state::Flags* anticipated_release = nullptr, const DefenseContext* defense = nullptr);
+// anticipated_release, when present, is copied synchronously. Only static gates
+// are projected for departure; live NPCs retain captured positions. No game write.
 void cancel_requests();
 void interrupt_requests(); // epochs only; retain owner callbacks until normal cleanup
 bool request_pending();
@@ -103,11 +125,12 @@ void request_reachability(bool with_vehicles, std::function<void()> ready);
 // Same owned native obstacle snapshot and movement rules as explicit routes.
 // Capture functions run on the native owner; distances run only on Navigation.
 struct ExitSnapshot;
+DefenseAdvice defense_advice(ExitSnapshot& snapshot, const DefenseContext& context, std::function<bool()> cancelled);
 struct ExitTarget {
     unity::Vec3 position; int map_id = 0, destination = 0; baked_route::Cell cell;
     TargetKind kind = TargetKind::Transition;
 };
-std::shared_ptr<ExitSnapshot> begin_exit_capture(bool with_vehicles, bool indoor);
+std::shared_ptr<ExitSnapshot> begin_exit_capture(bool with_vehicles, bool indoor, bool story_filter = false);
 void capture_exit_obstacle(ExitSnapshot& snapshot, void* entity);
 void finish_exit_capture(ExitSnapshot& snapshot);
 /// Worker-only teleport clearance using the same copied native obstacles and movement rules.
@@ -116,6 +139,12 @@ bool exit_snapshot_world(const ExitSnapshot& snapshot);
 int exit_snapshot_vehicle(const ExitSnapshot& snapshot);
 std::vector<int> exit_distances(ExitSnapshot& snapshot, const std::vector<ExitTarget>& targets,
                               std::function<bool()> cancelled);
+// Worker-only batch classification, independent of translated failure text.
+// True requires a complete gated search and a usable route with only gates
+// removed. Unknown/cancelled/bounded-out routes stay visible. No active route write.
+struct StoryTarget { MapGoal goal; TargetKind kind = TargetKind::Infer; };
+std::vector<bool> story_gate_mask(ExitSnapshot& snapshot, const std::vector<StoryTarget>& targets,
+                                 std::function<bool()> cancelled);
 
 /// The first leg of the shortest way from the player to `goal`, possibly on another map: the
 /// route across the current map to the exit or warp to take (Dijkstra over the sub-map graph of

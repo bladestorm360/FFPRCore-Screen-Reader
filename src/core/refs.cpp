@@ -124,6 +124,17 @@ std::wstring rd_str(void* obj, Field& f)
     return str(rd<void*>(obj, f));
 }
 
+std::wstring rd_str_bounded(void* obj, Field& f, size_t maximum)
+{
+    void* value=rd<void*>(obj,f);
+    if(!value)return {};
+    const auto length=il2cpp::read_field<int32_t>(value,static_cast<int32_t>(il2cpp::kStringLengthOff));
+    if(length<=0||static_cast<size_t>(length)>maximum)return {};
+    std::wstring out(static_cast<size_t>(length),L'\0');
+    if(!copy_chars(out.data(),static_cast<uint8_t*>(value)+il2cpp::kStringCharsOff,out.size()))return {};
+    return out;
+}
+
 void* new_str(const std::wstring& s)
 {
     return il2cpp::new_string(s.c_str());

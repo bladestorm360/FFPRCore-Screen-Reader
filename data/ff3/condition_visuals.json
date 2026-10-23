@@ -1,0 +1,69 @@
+{
+  "36": {
+    "unique": true,
+    "types": [
+      12
+    ]
+  },
+  "37": {
+    "unique": true,
+    "types": [
+      8
+    ]
+  },
+  "38": {
+    "unique": true,
+    "types": [
+      6
+    ]
+  },
+  "39": {
+    "unique": true,
+    "types": [
+      7
+    ]
+  },
+  "40": {
+    "unique": true,
+    "types": [
+      10
+    ]
+  },
+  "41": {
+    "unique": true,
+    "types": [
+      9
+    ]
+  },
+  "53": {
+    "unique": true,
+    "types": [
+      413
+    ]
+  },
+  "127": {
+    "unique": false,
+    "types": [
+      11,
+      405
+    ]
+  },
+  "128": {
+    "unique": true,
+    "types": [
+      19
+    ]
+  },
+  "131": {
+    "unique": true,
+    "types": [
+      15
+    ]
+  },
+  "177": {
+    "unique": true,
+    "types": [
+      309
+    ]
+  }
+}

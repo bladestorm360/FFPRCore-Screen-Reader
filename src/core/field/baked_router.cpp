@@ -522,7 +522,7 @@ int transition_distance(const Request& request, const Reach& reach) {
     return best;
 }
 
-Goals goals_for(const Request& r, const Cell& target, GoalKind kind)
+Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked::Object* interaction)
 {
     Goals out;
     if (!r.submap) return out;
@@ -530,7 +530,21 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind)
     if (!baked::in_bounds(g, target.x, target.y)) return out;
     const bool world = r.submap->world;
 
-    const baked::Object* talk = object_at(g, target, talk_pred);
+    baked::Object crossing{};
+    const bool strict_crossing=interaction && interaction->type==baked::ObjType::Warp && ((interaction->d>>8)&15)!=0;
+    if(interaction && interaction->type==baked::ObjType::Warp) {
+        crossing=*interaction;crossing.a=0;crossing.b=15;
+        for(const auto& original:g.objects) {
+            if(!talk_pred(original)||original.entity_id()!=interaction->entity_id()||
+               original.tx!=interaction->tx||original.ty!=interaction->ty||original.name!=interaction->name||
+               original.group!=interaction->group)continue;
+            crossing=original;break;
+        }
+        const int mask=(interaction->d>>8)&15;
+        if(mask)crossing.b=mask;
+        interaction=&crossing;
+    }
+    const baked::Object* talk = interaction ? interaction : object_at(g, target, talk_pred);
     const baked::Object* exit = object_at(g, target, exit_pred);
     const baked::Object* pad = object_at(g, target, step_warp_pred);
     const baked::Object* warp = object_at(g, target, examine_warp_pred);
@@ -590,8 +604,8 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind)
                 }
             }
         }
-        out.cells = allowed.empty() ? any_side : allowed;
-        if (out.cells.empty()) {
+        out.cells = allowed.empty() && !strict_crossing ? any_side : allowed;
+        if (out.cells.empty() && !strict_crossing) {
             // Boxed in on every side: the diagonals, then the target's own cells (entered as a goal).
             static const int kDiag[4][2] = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
             for (const Cell& c : out.faced)

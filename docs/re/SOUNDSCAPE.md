@@ -1,9 +1,42 @@
 # Soundscape implementation — October 15, 2026
 
+October22 implementation: cue_runtime.cpp::Player::start applies an additional2x
+wall-bump gain only after HRTF actually activates. Both original and custom PCM take
+the same cue-specific adjustment; other cues, stereo/fallback, existing HRTF master,
+volume banks and mute retain their previous behavior. Actual-source soundscape_check
+covers original waveform, gain2, custom gain/user volume and sample-exact stereo;
+actual OpenAL loopback output checks remain passing. Perceived loudness/clipping
+at the player's preferred volume awaits listening confirmation.
+[Combined verification](../FIXES_2026_10_22.md). The deferred section below is the original report.
+
+
 Status: implemented, offline verified and deployed/hash-verified in all six games.
 The user lifted the deployment hold on October 15. No game
 launch/control/probe is authorized. Existing keyboard/flee/safe-teleport changes and
 unrelated dirty work must be preserved. Sol owns this implementation and validation.
+
+## Planned adjustment: HRTF wall-bump volume, October 22
+
+**Status: not started; deferred.** User reports that the wall-bump cue specifically
+is still too quiet with HRTF enabled. At the current default volume with HRTF On,
+it should be about **2x its current loudness**. Other sounds appear acceptable so
+far according to the user; this is provisional listening feedback, not an all-cue
+or all-game verification.
+
+Scope the future change to the wall-bump cue in active HRTF mode. This request is
+relative to the current output, including the existing October15 HRTF master boost
+documented below; do not apply another global boost to every sound. Preserve other
+cue levels, HRTF-off/stereo behavior, independent saved volume banks, user volume
+control and mute. Determine the appropriate cue-specific gain during implementation;
+the approximate listening target is not an independently measured amplitude or
+perceived-loudness ratio.
+
+Future checks: compare the current and adjusted wall bump at matching HRTF defaults,
+check user volume/mute and saved settings, verify unchanged stereo/other cue output,
+and confirm the audible result with the user. Check the shared producer and applicable
+game adapters. Documentation only in the current deferred-work context; no code
+investigation, implementation, build, deployment or runtime probe performed. Offline
+verification and gameplay/listening confirmation of a change remain pending.
 
 ## Accepted behavior
 

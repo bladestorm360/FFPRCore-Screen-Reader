@@ -828,5 +828,2425 @@
       12,
       1
     ]
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 43,
+    "object_id": 353,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_0802",
+    "continuation_sha256": "c0b6599a49289be86485dcc138e4a5b0e61212e8998b605572de3afe153f738c",
+    "arrival_cell": [
+      10,
+      23,
+      1
+    ],
+    "arrival_baked_cell": [
+      10,
+      23,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 42,
+    "object_id": 352,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_0803",
+    "continuation_sha256": "2c16cbd1c4014ce4d628d404a82d3c4b31bc102ec7e9b1bd943e24a21b7eeb61",
+    "arrival_cell": [
+      4,
+      23,
+      1
+    ],
+    "arrival_baked_cell": [
+      4,
+      23,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 65,
+    "object_id": 133,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0812",
+    "continuation_sha256": "1bdd3b3b7a541ca7d0e0f64a770c1f622e7e42cc5c31770ab896f304d92eaa0e",
+    "arrival_cell": [
+      44,
+      34,
+      1
+    ],
+    "arrival_baked_cell": [
+      44,
+      34,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 64,
+    "object_id": 134,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0813",
+    "continuation_sha256": "d839b12d422aaedfe76331e48c7d7379167249396dd26281ac6796109ce4a614",
+    "arrival_cell": [
+      36,
+      34,
+      1
+    ],
+    "arrival_baked_cell": [
+      36,
+      34,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 63,
+    "object_id": 135,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0814",
+    "continuation_sha256": "998a27a73ca115b4a74644580c515af674907c957fd1bcdb5b67c8631c73c2c5",
+    "arrival_cell": [
+      36,
+      31,
+      1
+    ],
+    "arrival_baked_cell": [
+      36,
+      31,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 62,
+    "object_id": 136,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0815",
+    "continuation_sha256": "811460f93b1e2f85b2c91f2d68d37e789d51096af9356d7b812c3022777c9b6f",
+    "arrival_cell": [
+      44,
+      31,
+      1
+    ],
+    "arrival_baked_cell": [
+      44,
+      31,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 23,
+    "object_id": 137,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0818",
+    "continuation_sha256": "762e6c218dc786d3d9880c6bc0d5494a186f9b0ab38f457e33ef9915e4db2ebd",
+    "arrival_cell": [
+      9,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      9,
+      17,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 24,
+    "object_id": 138,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0819",
+    "continuation_sha256": "03f2a48affa25dbeccebbfb660f7076a8e7f25519734458b587d50e0c3e7fcd5",
+    "arrival_cell": [
+      25,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      17,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 25,
+    "object_id": 139,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0820",
+    "continuation_sha256": "bbd7c2d09be43c04d7210087b785d777affb30686bbaf999621bb90c6468625b",
+    "arrival_cell": [
+      6,
+      23,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      23,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 26,
+    "object_id": 140,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0821",
+    "continuation_sha256": "bc3b98f84ef9fc73cf66946c47b1de1fffdcb9f3070872e400e62ea080e47364",
+    "arrival_cell": [
+      6,
+      19,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      19,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 27,
+    "object_id": 141,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0822",
+    "continuation_sha256": "4aab243e6b9a3d68ff4c829ee97cb5cf64ee227673fe9acfaf24367c71769442",
+    "arrival_cell": [
+      16,
+      25,
+      1
+    ],
+    "arrival_baked_cell": [
+      16,
+      25,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 28,
+    "object_id": 142,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0823",
+    "continuation_sha256": "4eaf6431a0b02bac950b6f18ac66847d2cd7321db7875c71a527e73d96f1a0ad",
+    "arrival_cell": [
+      8,
+      25,
+      1
+    ],
+    "arrival_baked_cell": [
+      8,
+      25,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 29,
+    "object_id": 143,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0824",
+    "continuation_sha256": "f2de2a0b8561cbf4edf19ff8763971af458705195ddbf0059f78019ff73f084f",
+    "arrival_cell": [
+      18,
+      15,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      15,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 30,
+    "object_id": 144,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0825",
+    "continuation_sha256": "cf5cf23c9261d56e051468b2bae10f10ca2d68efe3aabbab71a767411faf1a93",
+    "arrival_cell": [
+      18,
+      23,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      23,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 31,
+    "object_id": 145,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0826",
+    "continuation_sha256": "a8852afde69cc3bfcb1e44b3be84a3e10ef69fd383d1be052d894b76de9730be",
+    "arrival_cell": [
+      23,
+      14,
+      1
+    ],
+    "arrival_baked_cell": [
+      23,
+      14,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 32,
+    "object_id": 146,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0827",
+    "continuation_sha256": "b16d46d8b5b8563f161f93a6ae19b76ed80b89963a53786150c6d0fa2a57113c",
+    "arrival_cell": [
+      23,
+      20,
+      1
+    ],
+    "arrival_baked_cell": [
+      23,
+      20,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 38,
+    "object_id": 147,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0829",
+    "continuation_sha256": "bb141c51264575b73be14dceb8dabb22f567175ec66e04b251176042816a3149",
+    "arrival_cell": [
+      14,
+      50,
+      1
+    ],
+    "arrival_baked_cell": [
+      14,
+      50,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_2",
+    "entity_id": 39,
+    "object_id": 148,
+    "same_map": true,
+    "interaction_travel": true,
+    "destination_map": 499,
+    "original_point": 0,
+    "continuation": "sc_e_0830",
+    "continuation_sha256": "a4c38db9c7a58e6c987d249a22e4c9babc6634e9ef08ec0fdb64cb39f9e7ca4f",
+    "arrival_cell": [
+      8,
+      50,
+      1
+    ],
+    "arrival_baked_cell": [
+      8,
+      50,
+      1
+    ],
+    "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 133,
+    "object_id": 188,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0291",
+    "continuation_sha256": "8fae486c8112975b0f781ebf3e1615701dc0354f078229be2f846a98bbb10f55",
+    "arrival_cell": [
+      25,
+      39,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      39,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 135,
+    "object_id": 190,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0293",
+    "continuation_sha256": "e24f9a918668601fb93d0082db9fb1d6bc0fc2c93d1ed751b4b9bca20db68021",
+    "arrival_cell": [
+      19,
+      39,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      39,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 136,
+    "object_id": 191,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0294",
+    "continuation_sha256": "5c942255cd7aebf61acbc90ffdc00088b83f68e0f45de25822b734ee4c47b5c3",
+    "arrival_cell": [
+      21,
+      39,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      39,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 134,
+    "object_id": 197,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0292",
+    "continuation_sha256": "abd86fef24a34e726d34e47c4c2c084101309f034f6221af79fb107232a5f2b7",
+    "arrival_cell": [
+      28,
+      39,
+      1
+    ],
+    "arrival_baked_cell": [
+      28,
+      39,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 139,
+    "object_id": 211,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0297",
+    "continuation_sha256": "55d9bb6f57df0dcadf1b292be77cf739b92725a28274c51edbad3c2428395ee0",
+    "arrival_cell": [
+      28,
+      33,
+      1
+    ],
+    "arrival_baked_cell": [
+      28,
+      33,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 140,
+    "object_id": 212,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0298",
+    "continuation_sha256": "92cc203944bf0665101c588849a73f9b62428626252cb18a01d30fa3d9d6dabd",
+    "arrival_cell": [
+      25,
+      33,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      33,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 137,
+    "object_id": 213,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0295",
+    "continuation_sha256": "73b5e23b1538ff3baa97a61c8cddebed0c6e5d07d8f2c6849acbeb1442075c56",
+    "arrival_cell": [
+      21,
+      33,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      33,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30510",
+    "entity_id": 138,
+    "object_id": 214,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 383,
+    "original_point": 0,
+    "continuation": "sc_e_0296",
+    "continuation_sha256": "79cfb655331fccf3272aba614e5e4b104d441b579e8ac5c3c17c511488df448a",
+    "arrival_cell": [
+      19,
+      33,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      33,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 7,
+    "object_id": 7,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0840_1",
+    "continuation_sha256": "991c6f5217dbb6b07b761da521722f717577fab13fabfc53d9086eaabb0ad4db",
+    "arrival_cell": [
+      44,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      30,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 8,
+    "object_id": 8,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0840",
+    "continuation_sha256": "d2aec2445164bf2f28c0672ff8c84119c2dd8d1d6d9364aa24f735bb95a7d434",
+    "arrival_cell": [
+      45,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      31,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 9,
+    "object_id": 9,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0836_1",
+    "continuation_sha256": "1af1c5633ec70973fbaad3bc65e2f43cd81da433170284d4812554c542261bdd",
+    "arrival_cell": [
+      48,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      34,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 10,
+    "object_id": 10,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0836",
+    "continuation_sha256": "5da3f5f51255281dedbfbbcfaf62871f2c7f99dc667e92c48c7a59b9036c6cc0",
+    "arrival_cell": [
+      49,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      35,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 11,
+    "object_id": 11,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838",
+    "continuation_sha256": "673572f196f5c62cef443628a746d1d8a89997563fed0ca42a6cdfe46ee30cb1",
+    "arrival_cell": [
+      49,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      35,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 12,
+    "object_id": 12,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_1",
+    "continuation_sha256": "0cc54bf90e8f49d379548f66d3617f4092e5807cd77689a26357587d019eacce",
+    "arrival_cell": [
+      48,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      34,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 13,
+    "object_id": 13,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_4",
+    "continuation_sha256": "8a02959516cdd53040ea0a98991c1e160a1270aee71aa11e36995a546b1a5d6a",
+    "arrival_cell": [
+      45,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      31,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 14,
+    "object_id": 14,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_5",
+    "continuation_sha256": "0f1f1be045a48a94a022b58518a1dff54cece9ce162290167d918883e3fe5dc3",
+    "arrival_cell": [
+      44,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      30,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 15,
+    "object_id": 15,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0839",
+    "continuation_sha256": "0af64f2702975af329f61f2b80c6a9a4a49fc79a074783e9467bf46f90ebdb27",
+    "arrival_cell": [
+      41,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      27,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 16,
+    "object_id": 16,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0839_1",
+    "continuation_sha256": "1e6b133bb6406e1aa46175cfcb4cce091a0a495ddeb2a7fc177b5fd5e0f53541",
+    "arrival_cell": [
+      40,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      26,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 17,
+    "object_id": 17,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842",
+    "continuation_sha256": "b2467550cbb1ce04fa052c8f5faaadb5c2d72dbae07ce1d209d522a0a904f0c9",
+    "arrival_cell": [
+      41,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      27,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 18,
+    "object_id": 18,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_1",
+    "continuation_sha256": "39373f6721d825a70302b1f38ac268c7fd34052ca4c96190966f3fad54be082b",
+    "arrival_cell": [
+      40,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      26,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 19,
+    "object_id": 19,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_2",
+    "continuation_sha256": "4ec2b41a431a63f7f953911be239944440b9d89126be0190df0ceabee95d95d2",
+    "arrival_cell": [
+      39,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 20,
+    "object_id": 20,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_3",
+    "continuation_sha256": "25463823126ba59acd8a64b5abc46342b3da246d085439c0a5a6b00bd8709789",
+    "arrival_cell": [
+      38,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      24,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 21,
+    "object_id": 21,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_4",
+    "continuation_sha256": "46fb5d89ca7565995bc1d67025f2e6eba9710319e17c0f95309f187711495148",
+    "arrival_cell": [
+      37,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      23,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 22,
+    "object_id": 22,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846",
+    "continuation_sha256": "323518152572c3f34103caedad31ab8f35c0b8a5174a3c7c423a242b27623c17",
+    "arrival_cell": [
+      34,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      20,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 23,
+    "object_id": 23,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0847",
+    "continuation_sha256": "5d4e0d755cc52ff5e4cf0b8f20982617fc1b7ced3e72c257d102504cb932dc48",
+    "arrival_cell": [
+      29,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      15,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 24,
+    "object_id": 24,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_1",
+    "continuation_sha256": "d0c46877e5d0dfd7781b11624cc34c26b23b5d093478f6c378f9880c7a35420e",
+    "arrival_cell": [
+      33,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 26,
+    "object_id": 26,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_2",
+    "continuation_sha256": "733e29e8fcca6e81b7cea6b26daa05598b961106088467102a91e304713b763f",
+    "arrival_cell": [
+      32,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 27,
+    "object_id": 27,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_3",
+    "continuation_sha256": "fd58ee9b9a227159004753a0b1a3dc2db264044364ce713204b7e6350a695d70",
+    "arrival_cell": [
+      31,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 28,
+    "object_id": 28,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_2",
+    "continuation_sha256": "dabc20414e615aadd682854bd863ae3a795eb5ad21fe8c88bdfa1a710be2e74f",
+    "arrival_cell": [
+      32,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 29,
+    "object_id": 29,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_1",
+    "continuation_sha256": "3f2cddd12c212f9208e8cd8cdd8d9447b5d04cea5dea5553b1dfc6a37dddeba7",
+    "arrival_cell": [
+      33,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 30,
+    "object_id": 30,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844",
+    "continuation_sha256": "6b5233fdaa2a248112938ef827924968add4ef1ea6e5de58610c280a10452588",
+    "arrival_cell": [
+      34,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      20,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 31,
+    "object_id": 31,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_3",
+    "continuation_sha256": "5f293495d845c63510483086aa46df77e69d6d68e73fb933d82094a81610715a",
+    "arrival_cell": [
+      46,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      32,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 32,
+    "object_id": 32,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_2",
+    "continuation_sha256": "6071839c7a98b12415e102eb1991889c622160e2948eae58c9dc7a8bb4ce27fa",
+    "arrival_cell": [
+      47,
+      28,
+      1
+    ],
+    "arrival_baked_cell": [
+      33,
+      8,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 45,
+    "object_id": 49,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_3",
+    "continuation_sha256": "53c14798399433d54270c45e8189a96637fe20f604a2bbb373ed9b9e69cd2ecf",
+    "arrival_cell": [
+      31,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 52,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0840_1",
+    "continuation_sha256": "991c6f5217dbb6b07b761da521722f717577fab13fabfc53d9086eaabb0ad4db",
+    "arrival_cell": [
+      44,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      30,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 53,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0840",
+    "continuation_sha256": "d2aec2445164bf2f28c0672ff8c84119c2dd8d1d6d9364aa24f735bb95a7d434",
+    "arrival_cell": [
+      45,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      31,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 54,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0836_1",
+    "continuation_sha256": "1af1c5633ec70973fbaad3bc65e2f43cd81da433170284d4812554c542261bdd",
+    "arrival_cell": [
+      48,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      34,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 55,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0836",
+    "continuation_sha256": "5da3f5f51255281dedbfbbcfaf62871f2c7f99dc667e92c48c7a59b9036c6cc0",
+    "arrival_cell": [
+      49,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      35,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 56,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838",
+    "continuation_sha256": "673572f196f5c62cef443628a746d1d8a89997563fed0ca42a6cdfe46ee30cb1",
+    "arrival_cell": [
+      49,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      35,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 57,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_1",
+    "continuation_sha256": "0cc54bf90e8f49d379548f66d3617f4092e5807cd77689a26357587d019eacce",
+    "arrival_cell": [
+      48,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      34,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 58,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_4",
+    "continuation_sha256": "8a02959516cdd53040ea0a98991c1e160a1270aee71aa11e36995a546b1a5d6a",
+    "arrival_cell": [
+      45,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      31,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 59,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_5",
+    "continuation_sha256": "0f1f1be045a48a94a022b58518a1dff54cece9ce162290167d918883e3fe5dc3",
+    "arrival_cell": [
+      44,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      30,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 60,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0839",
+    "continuation_sha256": "0af64f2702975af329f61f2b80c6a9a4a49fc79a074783e9467bf46f90ebdb27",
+    "arrival_cell": [
+      41,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      27,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 61,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0839_1",
+    "continuation_sha256": "1e6b133bb6406e1aa46175cfcb4cce091a0a495ddeb2a7fc177b5fd5e0f53541",
+    "arrival_cell": [
+      40,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      26,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 62,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842",
+    "continuation_sha256": "b2467550cbb1ce04fa052c8f5faaadb5c2d72dbae07ce1d209d522a0a904f0c9",
+    "arrival_cell": [
+      41,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      27,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 63,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_1",
+    "continuation_sha256": "39373f6721d825a70302b1f38ac268c7fd34052ca4c96190966f3fad54be082b",
+    "arrival_cell": [
+      40,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      26,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 64,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_2",
+    "continuation_sha256": "4ec2b41a431a63f7f953911be239944440b9d89126be0190df0ceabee95d95d2",
+    "arrival_cell": [
+      39,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 65,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_3",
+    "continuation_sha256": "25463823126ba59acd8a64b5abc46342b3da246d085439c0a5a6b00bd8709789",
+    "arrival_cell": [
+      38,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      24,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 66,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0842_4",
+    "continuation_sha256": "46fb5d89ca7565995bc1d67025f2e6eba9710319e17c0f95309f187711495148",
+    "arrival_cell": [
+      37,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      23,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 67,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846",
+    "continuation_sha256": "323518152572c3f34103caedad31ab8f35c0b8a5174a3c7c423a242b27623c17",
+    "arrival_cell": [
+      34,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      20,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 68,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_1",
+    "continuation_sha256": "d0c46877e5d0dfd7781b11624cc34c26b23b5d093478f6c378f9880c7a35420e",
+    "arrival_cell": [
+      33,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 69,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_2",
+    "continuation_sha256": "733e29e8fcca6e81b7cea6b26daa05598b961106088467102a91e304713b763f",
+    "arrival_cell": [
+      32,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 70,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_3",
+    "continuation_sha256": "fd58ee9b9a227159004753a0b1a3dc2db264044364ce713204b7e6350a695d70",
+    "arrival_cell": [
+      31,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 71,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_2",
+    "continuation_sha256": "dabc20414e615aadd682854bd863ae3a795eb5ad21fe8c88bdfa1a710be2e74f",
+    "arrival_cell": [
+      32,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      18,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 72,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844_1",
+    "continuation_sha256": "3f2cddd12c212f9208e8cd8cdd8d9447b5d04cea5dea5553b1dfc6a37dddeba7",
+    "arrival_cell": [
+      33,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 73,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0844",
+    "continuation_sha256": "6b5233fdaa2a248112938ef827924968add4ef1ea6e5de58610c280a10452588",
+    "arrival_cell": [
+      34,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      20,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 74,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_3",
+    "continuation_sha256": "5f293495d845c63510483086aa46df77e69d6d68e73fb933d82094a81610715a",
+    "arrival_cell": [
+      46,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      32,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 75,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0838_2",
+    "continuation_sha256": "6071839c7a98b12415e102eb1991889c622160e2948eae58c9dc7a8bb4ce27fa",
+    "arrival_cell": [
+      47,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      33,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 0,
+    "object_id": 76,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0846_3",
+    "continuation_sha256": "53c14798399433d54270c45e8189a96637fe20f604a2bbb373ed9b9e69cd2ecf",
+    "arrival_cell": [
+      31,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_2",
+    "entity_id": 23,
+    "object_id": 77,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 2,
+    "destination_map": 501,
+    "original_point": 0,
+    "continuation": "sc_e_0847",
+    "continuation_sha256": "5d4e0d755cc52ff5e4cf0b8f20982617fc1b7ced3e72c257d102504cb932dc48",
+    "arrival_cell": [
+      27,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      13,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 5,
+    "object_id": 11,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0851",
+    "continuation_sha256": "944fc3a311a8594c173f445a0b42ae1c2b25d0cc438b4ee6020c5dd5c765c540",
+    "arrival_cell": [
+      15,
+      54,
+      1
+    ],
+    "arrival_baked_cell": [
+      15,
+      17,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 6,
+    "object_id": 12,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0852",
+    "continuation_sha256": "7bbbeb7fa5490668e0a9d081739ce7b67005ea5e011e2bd0f05413026fa48ca2",
+    "arrival_cell": [
+      19,
+      54,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      17,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 7,
+    "object_id": 13,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0853",
+    "continuation_sha256": "6a212180b077beab26f7e465e611d9a1474b22dce7d0f5227fc7771af2da9cc8",
+    "arrival_cell": [
+      13,
+      46,
+      1
+    ],
+    "arrival_baked_cell": [
+      13,
+      9,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 8,
+    "object_id": 14,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0854",
+    "continuation_sha256": "1ab7bdb6ca76e77230a56f29141ff7aee7fd4e00b3b3b1ff34febcea8e044303",
+    "arrival_cell": [
+      13,
+      52,
+      1
+    ],
+    "arrival_baked_cell": [
+      13,
+      15,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 9,
+    "object_id": 15,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0859",
+    "continuation_sha256": "83e81b6461b49c6cf09a6a11896bb769d2919e573632b8bf3f28edee7bc2b07e",
+    "arrival_cell": [
+      11,
+      48,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 10,
+    "object_id": 16,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0860",
+    "continuation_sha256": "099ad9d7cf1642dc7b6223b296ccfdb125378cd5043bd8c4bb7ff52620eca59b",
+    "arrival_cell": [
+      15,
+      48,
+      1
+    ],
+    "arrival_baked_cell": [
+      15,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 11,
+    "object_id": 17,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0855",
+    "continuation_sha256": "4fce73b4ca49e1de33e7322ee5b9182e7ea5a66ab9b4f499613c3fcfa09d8323",
+    "arrival_cell": [
+      17,
+      48,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 11,
+    "object_id": 17,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0855",
+    "continuation_sha256": "4fce73b4ca49e1de33e7322ee5b9182e7ea5a66ab9b4f499613c3fcfa09d8323",
+    "arrival_cell": [
+      17,
+      50,
+      1
+    ],
+    "arrival_baked_cell": [
+      17,
+      13,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 12,
+    "object_id": 18,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0863",
+    "continuation_sha256": "c0009abda04870dfc9e196d7d4cb1cec3fbb8a02972cac35dca595f50e6b45fb",
+    "arrival_cell": [
+      6,
+      48,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 13,
+    "object_id": 19,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0864",
+    "continuation_sha256": "8ded86d1c9ce19567227e808f9bbf7794177e432f050776b17d45eee266b810a",
+    "arrival_cell": [
+      6,
+      52,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      15,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 15,
+    "object_id": 21,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0862",
+    "continuation_sha256": "8f7e0aab4aa7f014eb996e401fd6d132ed8bbfbc7f09200450b0932564feec80",
+    "arrival_cell": [
+      11,
+      54,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      17,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 16,
+    "object_id": 22,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0861",
+    "continuation_sha256": "b26d00309f5b01bcf3c5a83383cc5296d0866e678ff5d7fdd2a078dc871d51f2",
+    "arrival_cell": [
+      7,
+      54,
+      1
+    ],
+    "arrival_baked_cell": [
+      7,
+      17,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30791_7",
+    "entity_id": 17,
+    "object_id": 23,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "destination_map": 506,
+    "original_point": 0,
+    "continuation": "sc_e_0858",
+    "continuation_sha256": "361c2b88b579e3d482e1331bb002c30b083ad8b99c6118dca83c816d6b3d16f0",
+    "arrival_cell": [
+      21,
+      51,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      14,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_14",
+    "entity_id": 0,
+    "object_id": 16,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 556,
+    "original_point": 0,
+    "continuation": "sc_e_1102",
+    "continuation_sha256": "aa09f9db793c4a3cc2efbfffb7486b2d13863ea8f2c87077fa64f93575df7658",
+    "arrival_cell": [
+      14,
+      10,
+      1
+    ],
+    "arrival_baked_cell": [
+      14,
+      10,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_14",
+    "entity_id": 0,
+    "object_id": 16,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 556,
+    "original_point": 0,
+    "continuation": "sc_e_1102",
+    "continuation_sha256": "aa09f9db793c4a3cc2efbfffb7486b2d13863ea8f2c87077fa64f93575df7658",
+    "arrival_cell": [
+      14,
+      12,
+      1
+    ],
+    "arrival_baked_cell": [
+      14,
+      12,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_14",
+    "entity_id": 0,
+    "object_id": 17,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 556,
+    "original_point": 0,
+    "continuation": "sc_e_1101",
+    "continuation_sha256": "a4921d4392b6f8c1a0f0cebff068ba40c992440999204afcab5effd6d08cedde",
+    "arrival_cell": [
+      11,
+      11,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_14",
+    "entity_id": 0,
+    "object_id": 17,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 556,
+    "original_point": 0,
+    "continuation": "sc_e_1101",
+    "continuation_sha256": "a4921d4392b6f8c1a0f0cebff068ba40c992440999204afcab5effd6d08cedde",
+    "arrival_cell": [
+      11,
+      13,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      13,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 58,
+    "object_id": 73,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968",
+    "continuation_sha256": "dbdaf97fdf27aa84ea3c986a66f2e054fa04d4b2805b2b228259a20d8f1cbdd8",
+    "arrival_cell": [
+      6,
+      22,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      22,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 59,
+    "object_id": 74,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_1",
+    "continuation_sha256": "cb580914cef3fc863cacbd929c0f765fe7f2c45d12476f0e3cfd51b324493232",
+    "arrival_cell": [
+      7,
+      19,
+      1
+    ],
+    "arrival_baked_cell": [
+      7,
+      19,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 61,
+    "object_id": 76,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_6",
+    "continuation_sha256": "4c0eae375d885df7cbe93d87abaeb650138084dc459cd51e53114a9e1928da32",
+    "arrival_cell": [
+      11,
+      44,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      44,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 63,
+    "object_id": 78,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_3",
+    "continuation_sha256": "debcc70d0e37de0e1f41fc603186d7a64df49b9bcbfa23809ceb5c09d2b2ad3f",
+    "arrival_cell": [
+      16,
+      45,
+      1
+    ],
+    "arrival_baked_cell": [
+      16,
+      45,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 64,
+    "object_id": 79,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_1",
+    "continuation_sha256": "cb580914cef3fc863cacbd929c0f765fe7f2c45d12476f0e3cfd51b324493232",
+    "arrival_cell": [
+      39,
+      41,
+      1
+    ],
+    "arrival_baked_cell": [
+      39,
+      41,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 66,
+    "object_id": 81,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_1",
+    "continuation_sha256": "cb580914cef3fc863cacbd929c0f765fe7f2c45d12476f0e3cfd51b324493232",
+    "arrival_cell": [
+      34,
+      49,
+      1
+    ],
+    "arrival_baked_cell": [
+      34,
+      49,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 69,
+    "object_id": 84,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_5_1",
+    "continuation_sha256": "b76a89b6dff9d390e05e2c574d2fef0c551cdc846b5d6376577a0b6661b2de69",
+    "arrival_cell": [
+      56,
+      23,
+      1
+    ],
+    "arrival_baked_cell": [
+      56,
+      23,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30870",
+    "entity_id": 70,
+    "object_id": 85,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 542,
+    "original_point": 0,
+    "continuation": "sc_e_0968_5",
+    "continuation_sha256": "382d4bc1d65e9780d7469b063e39d811d4dbb92fd4b5c169638ff189954c9231",
+    "arrival_cell": [
+      55,
+      29,
+      1
+    ],
+    "arrival_baked_cell": [
+      55,
+      29,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_17",
+    "entity_id": 0,
+    "object_id": 9,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 559,
+    "original_point": 0,
+    "continuation": "sc_e_0968_3_1",
+    "continuation_sha256": "50f2af6196b693172ba4a753c378d4076b81e72909c0c348d8db7b477c5313ef",
+    "arrival_cell": [
+      14,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      14,
+      17,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_17",
+    "entity_id": 0,
+    "object_id": 10,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 559,
+    "original_point": 0,
+    "continuation": "sc_e_0968_3",
+    "continuation_sha256": "e211ee707a34a11ed65205ad5d9dea0a15fe43cd2bcf13c65920db08341d102d",
+    "arrival_cell": [
+      9,
+      20,
+      1
+    ],
+    "arrival_baked_cell": [
+      9,
+      20,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_22",
+    "entity_id": 0,
+    "object_id": 9,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 564,
+    "original_point": 0,
+    "continuation": "sc_e_0968",
+    "continuation_sha256": "afe0611dcebe8b817c474e4c7cb9b226cbbcf83ccd84171fea050a99116d68d8",
+    "arrival_cell": [
+      36,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      10,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
   }
 ]

@@ -169,7 +169,7 @@ int main() {
         "distinct queued browse inputs in the same category both execute");
     fixture::output.clear();
     field::category_next(); // old callback for NPCs
-    for (int i = 0; i < 6; ++i) field::category_next(); // return to NPCs with new event identity
+    for (int i = 0; i < field::kCategoryCount; ++i) field::category_next(); // return to NPCs with new event identity
     fixture::finish();
     expect(fixture::output.size() == 1 && fixture::output.back().parts.front() == L"Category: NPCs",
         "returning to the same category enum cannot revive an obsolete callback");

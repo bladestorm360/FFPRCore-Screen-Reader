@@ -1,4 +1,4 @@
-// check-sources: field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
+// check-sources: field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp json.cpp text.cpp
 #include "../src/core/field/entity_filter.h"
 #include <cstdio>
 #include <thread>
@@ -6,6 +6,7 @@
 #include <fstream>
 namespace field::baked_nav {
 std::vector<int> exit_distances(ExitSnapshot&,const std::vector<ExitTarget>&,std::function<bool()>) { return {}; }
+std::vector<bool> story_gate_mask(ExitSnapshot&,const std::vector<StoryTarget>& targets,std::function<bool()>) { return std::vector<bool>(targets.size(),false); }
 }
 int main() {
     using namespace field; using namespace filter_worker;
@@ -67,7 +68,7 @@ int main() {
     input.rows[1].cell_valid = false; result = build(input);
     expect(result.continued == -1, "invalid native cell capture cannot match a live destination");
     const auto categories = build_categories(input);
-    for (int category = 0; category < 6; ++category) {
+    for (int category = 0; category < kCategoryCount; ++category) {
         input.category = static_cast<Category>(category);
         const auto expected = build(input);
         const auto& actual = categories.views[category];

@@ -24,6 +24,7 @@
 #include "../../core/modtext.h"
 #include "../../core/refs.h"
 #include "../../core/say.h"
+#include "../../core/unity.h"
 
 namespace ffpr::ff6 {
 namespace {
@@ -35,6 +36,7 @@ ref::Field  fIsPlaying{kOperaController, "isPlaying"};
 ref::Field  fClicked{kOperaController, "clickedInteractiveIconButton"};
 ref::Field  fFailed{kOperaController, "isFailedInteractiveIconButton"};
 ref::Field  fTimeup{kOperaController, "isInteractiveTimeup"};
+ref::Field  fInteractiveCanvas{kOperaController, "interactiveIconCanvasObject"};
 ref::Method mOnClickInteractiveIcon{kOperaController, "OnClickInteractiveIcon", 0};
 
 // <>4__this of each coroutine state machine (resolved at install).
@@ -43,6 +45,10 @@ int32_t g_timer_this = -1;
 
 bool flag(void* opera, ref::Field& f) { return opera && ref::rd<bool>(opera, f); }
 bool playing(void* opera) { return flag(opera, fIsPlaying); }
+bool action_prompt(void* opera) {
+    return playing(opera) && !flag(opera,fClicked) && !flag(opera,fFailed) &&
+        unity::active_self(ref::rd<void*>(opera,fInteractiveCanvas));
+}
 
 using OnClick_t = void (*)(void* self, const void* mi);
 OnClick_t o_OnClickInteractiveIcon = nullptr;
@@ -69,9 +75,15 @@ bool d_EventMoveNext(void* self, const void* mi)
 {
     void* opera = opera_of(self, g_event_this);
     bool before = hooks::guarded_r("FF6.Opera.PlayOperaEvent.prefix", true, [&] { return flag(opera, fFailed); });
+    const bool prompt_before=hooks::guarded_r("FF6.Opera.Prompt.prefix",true,[&]{return action_prompt(opera);});
     bool result = o_EventMoveNext(self, mi);
     hooks::guarded("FF6.Opera.PlayOperaEvent", [&] {
         if (!before && flag(opera, fFailed) && playing(opera)) ffpr::say(T(L"Failed"));
+        // This exact coroutine activates the interactive canvas at the native
+        // action window and checks that same canvas before accepting confirm.
+        // Its delayed failure timer is not a prompt producer. Observe each
+        // native inactive->active occurrence, never speech-content equality.
+        if(!prompt_before&&action_prompt(opera))ffpr::say(T(L"Opera action: confirm now."));
     });
     return result;
 }

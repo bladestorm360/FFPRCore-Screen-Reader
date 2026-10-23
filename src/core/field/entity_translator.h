@@ -14,6 +14,10 @@ std::wstring translate_entity_name(const std::wstring& japanese_name);
 /// Normalize a converted NPC label, then translate any descriptive remainder exposed by
 /// nested developer prefixes. Keep its source ordinal separately for stable group ordering.
 npc_names::Label npc_display_label(const std::wstring& converted_name);
+// Same resolver/normalization, with native map-name tracking disabled. Call
+// only with owned text and a copied LocaleScope after translation preparation.
+std::wstring translate_entity_name_snapshot(const std::wstring& japanese_name);
+npc_names::Label npc_display_label_snapshot(const std::wstring& converted_name);
 /// EntityTranslator.ContainsJapanese (hiragana, katakana, CJK ideographs).
 bool contains_japanese(const std::wstring& s);
 /// EntityTranslator.ClearUntranslatedTracking (MapTransitionPatches.ResetMapTracking calls it).

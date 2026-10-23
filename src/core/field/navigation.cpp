@@ -18,6 +18,7 @@
 #include <unordered_set>
 #include "baked_map.h"
 #include "baked_nav.h"
+#include "party_entities.h"
 #include "field_api.h"
 #include "field_internal.h"
 #include "object_cache.h"
@@ -213,6 +214,10 @@ bool EntityCursor::next(void*& entity)
                 if (item && r::kFieldEntity.is(item)) entity = item;
             }
         } else { ++stage; index = 0; }
+    } else if (stage == 4) {
+        // Parked corps are not in entityList. Yield one bounded native slot;
+        // the existing owner-side active/lifetime checks decide its presence.
+        if(!party_entities::next_native(fc,index,entity)){++stage;index=0;}
     } else {
         for (auto it = g_vehicle_types.begin(); it != g_vehicle_types.end();)
             if (!seen.count(it->first)) it = g_vehicle_types.erase(it); else ++it;

@@ -1,4 +1,4 @@
-// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
 // Actual browse/filter workers, real all-six bakes, no native engine access.
 #define main existing_route_worker_main
 #include "route_worker_check.cpp"
@@ -21,6 +21,7 @@ int main() {
         expect(json::parse(read("data/ff"+std::to_string(n)+"/mapstate.json"),fixture::records),"matching event guards load");
         for(int i=0;i<baked::submap_count();++i)baked::grids(*baked::submap_at(i));
         g_loaded=true;g_prepared=true;
+        bool same_name_checked=false;
         int tested=0,eligible=0,skipped=0,doors=0;
         std::thread worker([&] {
             for(int i=0;i<baked::submap_count();++i) {
@@ -63,6 +64,23 @@ int main() {
                     row.position=world_of_cell(*sm,{o.layer,o.tx,o.ty});row.name=L"Floor";row.destination=o.a;row.cell_layer=o.layer;entrances.rows.push_back(row);
                 }
                 const auto original=entrances.rows;
+                if(!same_name_checked){
+                    std::map<int,int> counts;for(const auto& row:original)++counts[row.destination];
+                    FilterInput example;example.current_map=sm->first_map_id;example.entrance_suffixes=true;
+                    for(const auto& row:original)if(counts[row.destination]==1){example.rows.push_back(row);if(example.rows.size()==2)break;}
+                    if(example.rows.size()==2){
+                        for(auto& row:example.rows)row.name=L"Exit to Coliseum";
+                        auto unmapped=example;
+                        expect(prepare_navigation_labels(example),"same-name exits to distinct native map IDs prepare");
+                        expect(example.rows[0].name!=example.rows[1].name&&example.rows[0].name.find(L" (")!=std::wstring::npos&&example.rows[1].name.find(L" (")!=std::wstring::npos,
+                            "distinct destination IDs with same displayed name receive different letters in each game");
+                        for(auto& row:unmapped.rows){row.destination=0;row.name=L"Exit";}
+                        expect(prepare_navigation_labels(unmapped)&&unmapped.rows[0].name!=unmapped.rows[1].name,
+                            "observed door/stair exits without destination IDs also receive distinct letters");
+                        same_name_checked=true;
+                    }
+                }
+
                 expect(prepare_navigation_labels(entrances),"real entrance label projection completes");
                 std::map<std::tuple<int,int,int,int>,std::wstring> labels;
                 for(const auto& row:entrances.rows) {
@@ -79,6 +97,7 @@ int main() {
             }
         });worker.join();
         total+=tested;expect(tested>0&&doors>0,"each game exercises selected events and multiple floor entrances");
+        expect(same_name_checked,"all six games exercise general same-name and unknown-destination exit lettering");
         std::printf("FF%d: %d/%d event objects replayed; %d no direct local fixture; %d labelled entrance rows\n",n,tested,eligible,skipped,doors);
         if(n!=6)continue;
         const auto* narshe=baked::submap_by_map_id(3);expect(narshe!=nullptr,"Narshe exterior exists");if(!narshe)continue;

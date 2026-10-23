@@ -1,4 +1,4 @@
-// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+// check-sources: field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
 #define main existing_route_worker_main
 #include "route_worker_check.cpp"
 #undef main

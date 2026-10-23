@@ -48,7 +48,7 @@ void prepare_game_json()
 {
     if (game_data_ready()) return;
     auto* tables = new Tables;
-    for (const char* kind : {"translation", "eventlabels", "maptitles", "mapstate", "puzzles"}) {
+    for (const char* kind : {"translation", "eventlabels", "maptitles", "mapstate", "puzzles", "conditionvisuals"}) {
         json::Value v;
         const std::string raw = game_file(kind);
         if (!raw.empty()) {

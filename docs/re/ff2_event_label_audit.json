@@ -1205,9 +1205,15 @@
     "id": 409,
     "raw": "定期船(アイコンあり)",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Ship",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1003,
+      "script": "sc_sea_ship_taxi",
+      "message_keys": [],
+      "mapobject_asset_id": 173
+    }
   },
   {
     "submap": "Map_10010",
@@ -1215,9 +1221,15 @@
     "id": 913,
     "raw": "定期船(アイコンなし)",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Ship",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1003,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 173
+    }
   },
   {
     "submap": "Map_10010",
@@ -1915,9 +1927,14 @@
     "id": 323,
     "raw": "sc_e_0044:海賊船",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Ship",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0044",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2535,9 +2552,14 @@
     "id": 405,
     "raw": "竜巻突入トリガー",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Tornado",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0081",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2635,9 +2657,14 @@
     "id": 466,
     "raw": "ジェイドへの入口①",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Cave entrance",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0087",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2645,9 +2672,14 @@
     "id": 467,
     "raw": "ジェイドへの入口②",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Cave entrance",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0087",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2655,9 +2687,14 @@
     "id": 468,
     "raw": "ジェイドへの入口③",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Cave entrance",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0087",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2665,9 +2702,14 @@
     "id": 892,
     "raw": "ジェイドへの入口④",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Cave entrance",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "sc_e_0087",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -2685,9 +2727,14 @@
     "id": 5,
     "raw": "教会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -2725,9 +2772,14 @@
     "id": 5,
     "raw": "教会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20030",
@@ -3375,9 +3427,14 @@
     "id": 38,
     "raw": "隠し通路",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hidden passage",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0216",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20031_6",
@@ -3395,9 +3452,14 @@
     "id": 5,
     "raw": "境界",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3405,9 +3467,15 @@
     "id": 184,
     "raw": "柵１",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3415,9 +3483,15 @@
     "id": 185,
     "raw": "柵２",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3425,9 +3499,15 @@
     "id": 186,
     "raw": "柵３",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3435,9 +3515,15 @@
     "id": 187,
     "raw": "柵４",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3445,9 +3531,15 @@
     "id": 188,
     "raw": "柵５",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_20041_1",
@@ -3657,7 +3749,12 @@
     "type": 5,
     "label": "Mirror",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_5",
@@ -3667,7 +3764,12 @@
     "type": 5,
     "label": "Mirror",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0080",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_5",
@@ -3687,7 +3789,12 @@
     "type": 5,
     "label": "Mirror",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0118",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_5",
@@ -3705,9 +3812,14 @@
     "id": 26,
     "raw": "飛竜の卵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Egg",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_7",
@@ -3715,9 +3827,14 @@
     "id": 59,
     "raw": "隠し通路",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Hidden passage",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0063",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_7",
@@ -3855,9 +3972,14 @@
     "id": 5,
     "raw": "協会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_2",
@@ -3865,9 +3987,14 @@
     "id": 5,
     "raw": "協会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_6",
@@ -3875,9 +4002,14 @@
     "id": 5,
     "raw": "協会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_7",
@@ -3886,8 +4018,13 @@
     "raw": "本棚",
     "type": 5,
     "label": "Bookshelf",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0177",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_7",
@@ -3896,8 +4033,13 @@
     "raw": "本棚",
     "type": 5,
     "label": "Bookshelf",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0177",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_8",
@@ -3905,9 +4047,14 @@
     "id": 3,
     "raw": "女神像",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_8",
@@ -3915,9 +4062,14 @@
     "id": 4,
     "raw": "女神像",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0065",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20131_11",
@@ -3925,9 +4077,14 @@
     "id": 5,
     "raw": "教会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20131_6",
@@ -3965,9 +4122,14 @@
     "id": 5,
     "raw": "教会",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Altar",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_chu_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3995,9 +4157,14 @@
     "id": 25,
     "raw": "通路をふさぐ岩(ヨーゼフ加入前)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4005,9 +4172,17 @@
     "id": 24,
     "raw": "sc_e_0025:隠し通路の蓋",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0025",
+      "message_keys": [
+        "E0025_00_118_a_01",
+        "E0025_00_118_a_02"
+      ]
+    }
   },
   {
     "submap": "Map_30011_10",
@@ -4415,9 +4590,16 @@
     "id": 8,
     "raw": "女神のベルトリガー用",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Bell",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0028",
+      "message_keys": [
+        "E0028_00_147_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30031_8",
@@ -4485,9 +4667,17 @@
     "id": 22,
     "raw": "扉の封印",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0030",
+      "message_keys": [
+        "E0030_00_149_a_01",
+        "E0030_00_149_a_02"
+      ]
+    }
   },
   {
     "submap": "Map_30041_1",
@@ -4495,9 +4685,14 @@
     "id": 65,
     "raw": "太陽の炎トリガー用",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Flame",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0034",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30041_1",
@@ -4565,9 +4760,14 @@
     "id": 63,
     "raw": "太陽の炎トリガー用",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Flame",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0034",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30041_1",
@@ -4945,9 +5145,14 @@
     "id": 35,
     "raw": "開かない鉄格子(メッセージ用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30051_3",
@@ -4955,9 +5160,15 @@
     "id": 36,
     "raw": "鉄格子①",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30051_3",
@@ -4965,9 +5176,14 @@
     "id": 19,
     "raw": "開く鉄格子(トリガー要)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0199",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30051_3",
@@ -4975,9 +5191,15 @@
     "id": 37,
     "raw": "鉄格子②",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0199",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30051_9",
@@ -4995,9 +5217,18 @@
     "id": 13,
     "raw": "ヒルダ救出前エンジン",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Engine",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0109",
+      "message_keys": [
+        "E0109_00_175_a_01",
+        "E0109_00_175_a_02",
+        "E0109_00_175_a_03"
+      ]
+    }
   },
   {
     "submap": "Map_30051_9",
@@ -5045,9 +5276,20 @@
     "id": 12,
     "raw": "大戦艦爆破トリガー",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Engine",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0039",
+      "message_keys": [
+        "E0039_00_175_a_01",
+        "E0039_00_175_f_02",
+        "E0039_00_175_a_03",
+        "E0039_00_175_a_04",
+        "E0039_00_175_a_05"
+      ]
+    }
   },
   {
     "submap": "Map_30061_1",
@@ -5195,9 +5437,14 @@
     "id": 15,
     "raw": "飛竜の卵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Egg",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30061_6",
@@ -5515,9 +5762,14 @@
     "id": 56,
     "raw": "命の泉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0052",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30071_5",
@@ -5525,9 +5777,14 @@
     "id": 68,
     "raw": "飛竜の卵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Egg",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30071_6",
@@ -5565,9 +5822,15 @@
     "id": 52,
     "raw": "柵１",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -5575,9 +5838,15 @@
     "id": 53,
     "raw": "柵２",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -5585,9 +5854,15 @@
     "id": 54,
     "raw": "柵３",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -5615,9 +5890,15 @@
     "id": 47,
     "raw": "上がる鉄格子A",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -5625,9 +5906,15 @@
     "id": 48,
     "raw": "上がる鉄格子B",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_2",
@@ -5635,9 +5922,15 @@
     "id": 33,
     "raw": "柵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_2",
@@ -5645,9 +5938,14 @@
     "id": 29,
     "raw": "鉄格子",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0055",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30081_5",
@@ -5655,9 +5953,15 @@
     "id": 14,
     "raw": "柵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_5",
@@ -5665,9 +5969,15 @@
     "id": 15,
     "raw": "柵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_5",
@@ -5675,9 +5985,15 @@
     "id": 16,
     "raw": "柵",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 72
+    }
   },
   {
     "submap": "Map_30081_5",
@@ -5685,9 +6001,14 @@
     "id": 8,
     "raw": "鉄格子",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Iron gate",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0056",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30091_1",
@@ -6385,9 +6706,16 @@
     "id": 18,
     "raw": "sc_e_0073",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Ship",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0073",
+      "message_keys": [
+        "S0013_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30121_1",
@@ -6405,9 +6733,15 @@
     "id": 39,
     "raw": "sc_e_0074",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Ladder",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0074_2",
+      "message_keys": [],
+      "mapobject_asset_id": 175
+    }
   },
   {
     "submap": "Map_30121_10",
@@ -6775,9 +7109,15 @@
     "id": 41,
     "raw": "精神が上がるオーブ",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0123",
+      "message_keys": [],
+      "mapobject_asset_id": 69
+    }
   },
   {
     "submap": "Map_30121_19",
@@ -6785,9 +7125,15 @@
     "id": 43,
     "raw": "知性が上がるオーブ",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0124",
+      "message_keys": [],
+      "mapobject_asset_id": 69
+    }
   },
   {
     "submap": "Map_30121_19",
@@ -6795,9 +7141,15 @@
     "id": 44,
     "raw": "素早さが上がるオーブ",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0125",
+      "message_keys": [],
+      "mapobject_asset_id": 69
+    }
   },
   {
     "submap": "Map_30121_19",
@@ -6805,9 +7157,15 @@
     "id": 45,
     "raw": "力が上がるオーブ",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0122",
+      "message_keys": [],
+      "mapobject_asset_id": 69
+    }
   },
   {
     "submap": "Map_30121_19",
@@ -6825,9 +7183,15 @@
     "id": 22,
     "raw": "アルテマの本",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0079",
+      "message_keys": [],
+      "mapobject_asset_id": 157
+    }
   },
   {
     "submap": "Map_30121_19",
@@ -7875,9 +8239,16 @@
     "id": 16,
     "raw": "ジェイドからの出口",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Exit",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0087_2",
+      "message_keys": [
+        "S0012_999_a_01"
+      ]
+    }
   },
   {
     "submap": "Map_30151_10",
@@ -7935,9 +8306,16 @@
     "id": 30,
     "raw": "壁紙",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Inscription",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "N9999_290_01_01"
+      ]
+    }
   },
   {
     "submap": "Map_30151_12",

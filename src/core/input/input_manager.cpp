@@ -213,6 +213,7 @@ void initialize_bindings()
     reg(Key::H, Mod::None, Context::Global, "Mod.AnnounceCharacterStatus", "Announce character status");
     reg(Key::M, Mod::Shift, Context::Global, "Mod.ToggleMapExitFilter", "Toggle map exit filter");
     reg(Key::P, Mod::CtrlShift, Context::Field, "Mod.ToggleEventGroupFilter", "Toggle event group filter");
+    reg(Key::Backslash, Mod::CtrlShift, Context::Field, "Mod.ToggleStoryGateFilter", "Toggle story gate filter");
     reg(Key::M, Mod::None, Context::Global, "Mod.AnnounceCurrentMap", "Announce current map");
     register_binding(Key::Tab, Mod::None, Context::Global, &handle_tab_key, "Clear battle state fallback");
 

@@ -652,6 +652,9 @@ int install()
         // last target until ordinary ready-phase cleanup, with no destructor here.
     });
     events::on(events::Kind::BattleStart, [] { stop_all(); });
+    events::on(events::Kind::PartyChanging, [] {
+        g_wall_running=g_beacon_running=g_landing_running=false;g_landing_mask=0;
+    });
     events::on(events::Kind::MapChanging, [] { stop_all(); });
     events::on(events::Kind::BattleEnd, [] { start_if_enabled(); });
 

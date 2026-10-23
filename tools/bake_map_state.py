@@ -19,6 +19,50 @@ CATEGORIES = {**{f'ScenarioFlag{i+1}': i for i in range(4)},
               'MapLocalVariable': 10, 'ScriptLocalVariable': 11,
               'MessageSelection': 12, 'ItemSelection': 13, 'imm': -1}
 OPERATORS = {'＝': 0, '≠': 1, '＜': 2, '＞': 3, '≦': 4, '≧': 5, '←': 6}
+UNSET_POSITION = -2147483648
+
+
+def puppet_navigation_effect(script, entry, region):
+    """Recover final visibility/absolute placement, not animation or story text.
+
+    FF6 Puppet.SetPos uses IMapAccessor.ConversionMapRangeCell before assigning
+    cell coordinates (native 2ECBA0). Only its absolute, unchanged-layer form is
+    accepted. Branching/moving puppets remain outside this bounded projection.
+    """
+    rows=script.get('mnemonics') or []
+    visible=-1; x=y=UNSET_POSITION; moving=False
+    for pc in range(entry,min(len(rows),entry+128)):
+        m=rows[pc];op=m['mnemonic'];v=m.get('operands')or{}
+        ints=list(v.get('iValues')or[])+[0]*8
+        if op in ('Exit','Return'):
+            if moving and visible!=0:return None
+            return [visible,x,y] if visible!=-1 or x!=UNSET_POSITION or y!=UNSET_POSITION else None
+        if op=='Hide':visible=0
+        elif op=='Show':visible=1
+        elif op=='SetPos':
+            if ints[2]!=0 or ints[3]!=0:moving=True;continue
+            if ints[0]>=0:x=ints[0]-region[0]
+            if ints[1]>=0:y=ints[1]-region[1]
+        elif op in ('Move','Lerp','MoveTo','Route'):moving=True
+        elif op not in ('Nop','Wait','CueAnim','PlayAnim','PlaySE','StopSE','SetDirection','SyncSE'):
+            return None
+    return None
+
+
+def initializer_code(script,game,region):
+    code=[]
+    for m in script.get('mnemonics')or[]:
+        op=m['mnemonic'];v=m.get('operands')or{};ints=list(v.get('iValues')or[])+[0]*8
+        if game=='ff6' and op=='SetPuppet':
+            # Zero and negative IDs include resident/player aliases rather
+            # than one unambiguous baked object. Keep them native-only.
+            effect=puppet_navigation_effect(script,ints[2],region) if ints[1]>0 else None
+            # Always replace this puppet slot, even when its new body has no
+            # navigation effect; ExecPuppet applies the ready final facts.
+            code.append([10,ints[0],ints[1],*(effect or [-1,UNSET_POSITION,UNSET_POSITION])])
+        elif game=='ff6' and op=='ExecPuppet':code.append([11,ints[0]])
+        else:code.append(instruction(m,game))
+    return code
 
 
 def instruction(m, game):
@@ -99,9 +143,23 @@ def build(game):
     for o in objects:by_sub[o['submap']].append(o)
     submaps=json.loads((DUMP/f'{game}_submaps.json').read_text(encoding='utf-8'))
     bounds={sm:bake_maps.map_bounds(info,by_sub[sm]) for sm,info in submaps.items()}
+    if game=='ff6':
+        for name,record in scripts.items():
+            record['code']=initializer_code(source[name,'sc_'+name.lower()],game,bounds[name])
     with (DUMP/f'{game}_master/script.txt').open(encoding='utf-8-sig') as f:
         masters={int(r['id']):r['script_name'] for r in csv.DictReader(line for line in f if line.strip()) if r['id']}
     guards=0
+    with (DUMP/f'{game}_master/map.txt').open(encoding='utf-8-sig') as f:
+        maps=list(csv.DictReader(line for line in f if line.strip()))
+    metadata={}
+    for row in maps:
+        if not row['id']: continue
+        key=row['map_name']
+        info=metadata.setdefault(key,dict(map_ids=[],area_id=int(row['area_id'])))
+        # A shared asset can have aliases in different native areas (FF3).
+        # Its area locals are ambiguous remotely, rather than interchangeable.
+        if info['area_id']!=int(row['area_id']): info['area_id']=0
+        info['map_ids'].append(int(row['id']))
     for o in objects:
         p=o.get('props') or {}
         if o['type']==7 and p.get('flag_id',0)>0:
@@ -114,8 +172,10 @@ def build(game):
         region=bounds[o['submap']]
         guard.update(id=p.get('entity_id',0),group=o['group'],type=o['type'],raw=o['name'],
                      cell=[bake_maps.layer_index(o['layer']),o['tx']-region[0],bake_maps.tile_row(o)-region[1]],source=name)
+        guard.update(metadata.get(o['submap'],{}))
         row=scripts.setdefault(o['submap'],{'entry':0,'code':[]})
         row.setdefault('events',[]).append(guard);guards+=1
+    for key,record in scripts.items(): record.update(metadata.get(key,{}))
     output = ROOT / 'data' / game / 'mapstate.json'
     output.write_text(json.dumps(scripts, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print(f'{game}: {len(scripts)} map-state records; {guards} bounded native entry guards')

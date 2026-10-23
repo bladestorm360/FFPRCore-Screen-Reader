@@ -99,6 +99,8 @@ inline bool wr(void* obj, Field& f, T value)
 std::wstring str(void* il2cpp_string);
 /// A string field of an object.
 std::wstring rd_str(void* obj, Field& f);
+// Snapshot readers reject oversized strings before allocating or copying them.
+std::wstring rd_str_bounded(void* obj, Field& f, size_t maximum);
 /// A new managed string (GC-owned; pass it straight into a call, never keep it).
 void* new_str(const std::wstring& s);
 

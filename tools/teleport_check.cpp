@@ -75,7 +75,7 @@ VehicleState current_vehicle() { fixture::native(); VehicleState v; v.valid = tr
 bool EntityCursor::next(void*& value) { fixture::native(); value = reinterpret_cast<void*>(4); return index++ < 2; }
 namespace baked_nav {
 struct ExitSnapshot {};
-std::shared_ptr<ExitSnapshot> begin_exit_capture(bool, bool) { fixture::native(); return std::make_shared<ExitSnapshot>(); }
+std::shared_ptr<ExitSnapshot> begin_exit_capture(bool, bool, bool) { fixture::native(); return std::make_shared<ExitSnapshot>(); }
 void capture_exit_obstacle(ExitSnapshot&, void*) { fixture::native(); ++fixture::captured; }
 void finish_exit_capture(ExitSnapshot&) { fixture::native(); }
 bool player_cell(void*, void*, baked_route::Cell& out) { fixture::native(); out = {1, static_cast<int>(fixture::position.x / 16), static_cast<int>(fixture::position.y / 16)}; return true; }

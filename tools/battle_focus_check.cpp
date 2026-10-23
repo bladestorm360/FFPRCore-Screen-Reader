@@ -54,6 +54,7 @@ namespace fixture {
 struct Node {void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
+std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
 std::map<std::string,std::wstring> guard;
@@ -98,10 +99,10 @@ void*cursor_row(void*,void*p){return fixture::cursor_row_first&&unity::list_coun
 std::wstring formation_row(void*,void*){return {};}
 std::wstring spell_row(void*p){return text_field(field(p,"view"),"spell");}
 }
-namespace ffpr {void say(std::wstring_view v,bool){fixture::spoken.emplace_back(v);}}
+namespace ffpr {void say(std::wstring_view v,bool interrupt){fixture::spoken.emplace_back(v);fixture::interruptions.push_back(interrupt);}}
 namespace ui {void*list_item(void*p,int i){return unity::list_at(p,i);}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:-1;}int cursor_index(void*p){return p?static_cast<fixture::Node*>(p)->index:-1;}std::wstring menu_position(const std::wstring&s,int i,int n){return s+L" ("+std::to_wstring(i+1)+L" of "+std::to_wstring(n)+L")";}}
 namespace game {Id current(){return fixture::game;}}
-namespace settings {bool get_bool(const char*,bool d){return d;}}
+namespace settings {bool get_bool(const char* key,bool d){return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
 namespace modtext {std::wstring T(std::wstring_view v){return std::wstring(v);}std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}}
 namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;}void set_active_exclusive(const char*n){fixture::states.clear();fixture::states[n]=true;}void register_reset(const char*,std::function<void()>){}}
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
@@ -118,7 +119,7 @@ namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
 namespace il2cpp {void*method_pointer(Method*){return nullptr;}}
 namespace ffpr::battle {
-bool formation_first_turn(){return false;}
+bool formation_first_turn(){return fixture::opening_turn;}
 void observe_target_party(void*){}
 void clear_other_menu_states(const char*){}
 bool state_active(const char*k){return menu_state::is_active(k);}void state_set(const char*k,bool v){menu_state::set_active(k,v);}void set_target_selection_active(bool v){menu_state::set_active(menu_state::BATTLE_TARGET,v);}void set_last_selected_command_index(int){}void set_current_actor(void*){}
@@ -186,5 +187,20 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  save_view.texts["emptyText"]=L"Save data is corrupted.";expect(ffpr::system::read_from_controller(&save,&save_data,0)==L"Quick Save: Save data is corrupted.","corrupted save row excludes stale hidden details and party");save_view.texts.erase("emptyText");save_view.texts.erase("charaNameText");save_view.texts.erase("levelText");auto slot=ffpr::system::read_from_controller(&save,&save_data,1);expect(slot.find(L"Lv.")==slot.npos&&slot.find(L"Underground Waterway")!=slot.npos,"missing rendered leader and level do not hide quicksave location or invent values");
  Node choice,choice_cursor,choice_row,choice_view;List choices{&choice_row};choice.cursor=&choice_cursor;choice.list=&choices;choice_row.view=&choice_view;choice_view.texts["text"]=L"Take the wheel";
  ffpr::dialogue::o_show=[](void*,int32_t,const void*){};ffpr::dialogue::o_close=&phase;spoken.clear();ffpr::dialogue::d_show(&choice,0,nullptr);frame::run_tick();expect(spoken.size()==1&&spoken[0].find(L"Take the wheel")==0,"native dialogue choice announces default focus after text population");spoken.clear();ffpr::dialogue::d_show(&choice,0,nullptr);ffpr::dialogue::d_close(&choice,nullptr);frame::run_tick();expect(spoken.empty(),"choice close cancels pending initial focus");
+ {
+     b::o_SetCommandData=+[](void*,void*,void*,void*,const void*){};
+     fixture::Node actor,owner;actor.name=L"Maria";actor.index=7;
+     for(int n=1;n<=6;++n)for(bool enabled:{false,true}) {
+         fixture::game=static_cast<game::Id>(n);fixture::interrupt_turn=enabled;fixture::opening_turn=false;
+         b::command_reset_state();dedup::reset(b::kTurnCtx);fixture::spoken.clear();fixture::interruptions.clear();
+         b::d_SetCommandData(&owner,&actor,nullptr,nullptr,nullptr);
+         expect(fixture::spoken.size()==1&&fixture::interruptions.back()==enabled,
+             "all-six automatic turn announcement follows saved interrupt preference without being disabled");
+         dedup::reset(b::kTurnCtx);fixture::opening_turn=true;fixture::interruptions.clear();
+         b::d_SetCommandData(&owner,&actor,nullptr,nullptr,nullptr);
+         expect(!fixture::interruptions.empty()&&!fixture::interruptions.back(),"opening turn preserves roster speech in both preference states");
+     }
+     fixture::opening_turn=false;fixture::interrupt_turn=true;
+ }
  std::printf("Battle/field magic, save rows, formation and choice focus: %d failures\n",failures);return failures?1:0;
 }

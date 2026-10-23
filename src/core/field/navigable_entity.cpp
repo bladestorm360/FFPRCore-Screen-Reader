@@ -232,7 +232,8 @@ Category Entity::category() const
     case Kind::NPC: return Category::NPCs;
     case Kind::MapExit: return Category::MapExits;
     case Kind::Vehicle: return Category::Vehicles;
-    default: return Category::Events;   // SavePoint, Event, ScriptTrigger
+    case Kind::SavePoint: return Category::SavePoints;
+    default: return Category::Events;   // Event, ScriptTrigger
     }
 }
 
@@ -268,8 +269,7 @@ bool Entity::is_alive() const
     if (remote()) return true;   // another floor, from the baked data: nothing live to check
     if (!game || !live_entity(game)) return false;
     if (game_class && il2cpp::object_class(game) != game_class) return false;
-    if (kind == Kind::NPC && r::mNonPlayerGetCanAction.get() &&
-        !ref::call<bool>(r::mNonPlayerGetCanAction, game)) return false;
+    if (kind == Kind::NPC && !npc_navigation_available(game)) return false;
     if (kind == Kind::Event && r::kFieldMapObjectDefault.is(game) &&
         !call_virtual_bool(r::mMapObjectGetCanAction, game)) return false;
     return entity_is_present(game);

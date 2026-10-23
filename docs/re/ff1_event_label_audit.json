@@ -935,9 +935,14 @@
     "id": 124,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -945,9 +950,14 @@
     "id": 125,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -995,9 +1005,14 @@
     "id": 122,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -1005,9 +1020,14 @@
     "id": 123,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -1015,9 +1035,14 @@
     "id": 127,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -1025,9 +1050,14 @@
     "id": 128,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -1105,9 +1135,14 @@
     "id": 35,
     "raw": "クリスタルのかけら青",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -1115,9 +1150,14 @@
     "id": 36,
     "raw": "クリスタルのかけら緑",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -1125,9 +1165,14 @@
     "id": 37,
     "raw": "クリスタルのかけら赤",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -1135,9 +1180,14 @@
     "id": 38,
     "raw": "クリスタルのかけら黄",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_2",
@@ -1197,7 +1247,12 @@
     "type": 5,
     "label": "Well",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20020",
@@ -1207,7 +1262,12 @@
     "type": 5,
     "label": "Fountain",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20020",
@@ -1645,9 +1705,14 @@
     "id": 56,
     "raw": "スミスの作品",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Weapon rack",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_1",
@@ -1655,9 +1720,14 @@
     "id": 57,
     "raw": "スミスの作品",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Weapon rack",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_1",
@@ -1665,9 +1735,14 @@
     "id": 58,
     "raw": "スミスの作品",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Weapon rack",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_1",
@@ -1705,9 +1780,14 @@
     "id": 113,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_1",
@@ -1885,9 +1965,16 @@
     "id": 70,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_ELF_CTY_16"
+      ]
+    }
   },
   {
     "submap": "Map_20060",
@@ -1895,9 +1982,16 @@
     "id": 71,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_ELF_CTY_17"
+      ]
+    }
   },
   {
     "submap": "Map_20060",
@@ -1905,9 +1999,16 @@
     "id": 72,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_ELF_CTY_17"
+      ]
+    }
   },
   {
     "submap": "Map_20060",
@@ -2155,9 +2256,14 @@
     "id": 166,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_1",
@@ -2175,9 +2281,14 @@
     "id": 170,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20071_1",
@@ -2275,9 +2386,14 @@
     "id": 184,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_1",
@@ -2295,9 +2411,14 @@
     "id": 162,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_1",
@@ -2305,9 +2426,14 @@
     "id": 163,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20081_1",
@@ -2335,9 +2461,16 @@
     "id": 100,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2345,9 +2478,16 @@
     "id": 101,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2355,9 +2495,16 @@
     "id": 102,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2365,9 +2512,16 @@
     "id": 103,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2375,9 +2529,16 @@
     "id": 104,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2385,9 +2546,16 @@
     "id": 105,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2395,9 +2563,16 @@
     "id": 106,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2405,9 +2580,16 @@
     "id": 107,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2415,9 +2597,16 @@
     "id": 108,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2425,9 +2614,16 @@
     "id": 109,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2435,9 +2631,16 @@
     "id": 110,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2445,9 +2648,16 @@
     "id": 111,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2455,9 +2665,16 @@
     "id": 112,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2465,9 +2682,16 @@
     "id": 113,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2475,9 +2699,16 @@
     "id": 114,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2485,9 +2716,16 @@
     "id": 115,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2495,9 +2733,16 @@
     "id": 116,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2505,9 +2750,16 @@
     "id": 117,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2515,9 +2767,16 @@
     "id": 118,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2525,9 +2784,16 @@
     "id": 119,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2535,9 +2801,16 @@
     "id": 120,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2545,9 +2818,16 @@
     "id": 121,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2555,9 +2835,16 @@
     "id": 122,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2565,9 +2852,16 @@
     "id": 123,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2575,9 +2869,16 @@
     "id": 124,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_MMD_CTY_25"
+      ]
+    }
   },
   {
     "submap": "Map_20090",
@@ -2746,8 +3047,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -2756,8 +3064,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -2766,8 +3081,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -2776,8 +3098,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -2786,8 +3115,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -2796,8 +3132,15 @@
     "raw": "墓石",
     "type": 5,
     "label": "Gravestone",
-    "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "reason": "reviewed physical interaction message",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [
+        "MSG_CLK_CTY_24"
+      ]
+    }
   },
   {
     "submap": "Map_20110",
@@ -3187,7 +3530,12 @@
     "type": 5,
     "label": "Well",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3197,7 +3545,12 @@
     "type": 5,
     "label": "Well",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3205,9 +3558,14 @@
     "id": 62,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3215,9 +3573,14 @@
     "id": 63,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3225,9 +3588,14 @@
     "id": 64,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3235,9 +3603,14 @@
     "id": 65,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3245,9 +3618,14 @@
     "id": 66,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3255,9 +3633,14 @@
     "id": 67,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3265,9 +3648,14 @@
     "id": 68,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3275,9 +3663,14 @@
     "id": 69,
     "raw": "墓標",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Gravestone",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3287,7 +3680,12 @@
     "type": 5,
     "label": "Fountain",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1001,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20130",
@@ -3295,9 +3693,15 @@
     "id": 92,
     "raw": "樽の潜水艦",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Submarine",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1003,
+      "script": "sc_e_0031",
+      "message_keys": [],
+      "mapobject_asset_id": 103
+    }
   },
   {
     "submap": "Map_20130",
@@ -3787,7 +4191,12 @@
     "type": 5,
     "label": "Fountain",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20160",
@@ -3835,9 +4244,15 @@
     "id": 1,
     "raw": "AnimationObject",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 117
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3915,9 +4330,14 @@
     "id": 175,
     "raw": "カギのかかった扉(確認用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3925,9 +4345,14 @@
     "id": 176,
     "raw": "カギのかかった扉(確認用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3935,9 +4360,14 @@
     "id": 177,
     "raw": "カギのかかった扉(確認用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3945,9 +4375,15 @@
     "id": 231,
     "raw": "黒色の玉",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 106
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3985,9 +4421,14 @@
     "id": 219,
     "raw": "カギのかかった扉(確認用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -3995,9 +4436,14 @@
     "id": 221,
     "raw": "カギのかかった扉(確認用)",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4025,9 +4471,15 @@
     "id": 330,
     "raw": "黒色の玉",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 106
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4045,9 +4497,14 @@
     "id": 311,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4055,9 +4512,14 @@
     "id": 312,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4125,9 +4587,15 @@
     "id": 333,
     "raw": "黒色の玉",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 106
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4175,9 +4643,15 @@
     "id": 232,
     "raw": "黒色の玉",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0038",
+      "message_keys": [],
+      "mapobject_asset_id": 106
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4185,9 +4659,14 @@
     "id": 233,
     "raw": "クリスタルのかけら青",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4195,9 +4674,14 @@
     "id": 234,
     "raw": "クリスタルのかけら緑",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4205,9 +4689,14 @@
     "id": 235,
     "raw": "クリスタルのかけら黄",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4215,9 +4704,14 @@
     "id": 236,
     "raw": "クリスタルのかけら赤",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30011_1",
@@ -4905,9 +5399,14 @@
     "id": 149,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_3",
@@ -4915,9 +5414,14 @@
     "id": 150,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_3",
@@ -4925,9 +5429,14 @@
     "id": 151,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_3",
@@ -4935,9 +5444,14 @@
     "id": 152,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_3",
@@ -4945,9 +5459,14 @@
     "id": 153,
     "raw": "カギのかかった扉",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30021_3",
@@ -5355,9 +5874,15 @@
     "id": 89,
     "raw": "石板",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Tablet",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 144
+    }
   },
   {
     "submap": "Map_30031_3",
@@ -5365,9 +5890,15 @@
     "id": 80,
     "raw": "石板",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Tablet",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 144
+    }
   },
   {
     "submap": "Map_30031_3",
@@ -5375,9 +5906,15 @@
     "id": 81,
     "raw": "土の杖で消える石板",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Tablet",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0020",
+      "message_keys": [],
+      "mapobject_asset_id": 144
+    }
   },
   {
     "submap": "Map_30031_4",
@@ -5457,7 +5994,12 @@
     "type": 5,
     "label": "Altar",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30031_5",
@@ -5495,9 +6037,15 @@
     "id": 54,
     "raw": "土色の玉（リッチ会話前）",
     "type": 10,
-    "label": "Conversation",
-    "reason": "conversation identifier; actors/outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0021",
+      "message_keys": [],
+      "mapobject_asset_id": 107
+    }
   },
   {
     "submap": "Map_30031_5",
@@ -5505,9 +6053,15 @@
     "id": 55,
     "raw": "土のクリスタル暗",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 128
+    }
   },
   {
     "submap": "Map_30031_5",
@@ -5515,9 +6069,15 @@
     "id": 56,
     "raw": "クリスタルの洞窟のワープ（黄）暗",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": [],
+      "mapobject_asset_id": 138
+    }
   },
   {
     "submap": "Map_30031_5",
@@ -5575,9 +6135,14 @@
     "id": 90,
     "raw": "クリスタルのかけら黄",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30031_5",
@@ -6047,7 +6612,12 @@
     "type": 5,
     "label": "Altar",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30051_6",
@@ -6165,9 +6735,15 @@
     "id": 61,
     "raw": "赤色の玉(マリリス会話前)",
     "type": 10,
-    "label": "Conversation",
-    "reason": "conversation identifier; actors/outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0023",
+      "message_keys": [],
+      "mapobject_asset_id": 109
+    }
   },
   {
     "submap": "Map_30051_6",
@@ -6225,9 +6801,14 @@
     "id": 77,
     "raw": "クリスタルのかけら赤",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30051_6",
@@ -6655,9 +7236,15 @@
     "id": 16,
     "raw": "浮遊石",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0024",
+      "message_keys": [],
+      "mapobject_asset_id": 117
+    }
   },
   {
     "submap": "Map_30061_5",
@@ -7107,7 +7694,12 @@
     "type": 5,
     "label": "Altar",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -7225,9 +7817,15 @@
     "id": 46,
     "raw": "水色の玉(クラーケン会話前)",
     "type": 10,
-    "label": "Conversation",
-    "reason": "conversation identifier; actors/outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "sc_e_0036",
+      "message_keys": [],
+      "mapobject_asset_id": 113
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -7245,9 +7843,14 @@
     "id": 124,
     "raw": "クリスタルのかけら青",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -7375,9 +7978,15 @@
     "id": 46,
     "raw": "水色の玉(クラーケン会話前)",
     "type": 10,
-    "label": "Conversation",
-    "reason": "conversation identifier; actors/outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "sc_e_0036",
+      "message_keys": [],
+      "mapobject_asset_id": 113
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -7405,9 +8014,14 @@
     "id": 50,
     "raw": "クリスタルのかけら青",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30081_1",
@@ -7745,9 +8359,15 @@
     "id": 52,
     "raw": "タル潜水艦",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Submarine",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "sc_e_0032",
+      "message_keys": [],
+      "mapobject_asset_id": 103
+    }
   },
   {
     "submap": "Map_30081_4",
@@ -8815,9 +9435,15 @@
     "id": 58,
     "raw": "アダマンタイト（有）",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rock",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "sc_e_0051",
+      "message_keys": [],
+      "mapobject_asset_id": 119
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8875,9 +9501,16 @@
     "id": 58,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical map/script occurrence",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": [
+        "MSG_WND_DAN_01"
+      ]
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8885,9 +9518,14 @@
     "id": 59,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8895,9 +9533,14 @@
     "id": 60,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8905,9 +9548,14 @@
     "id": 61,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8915,9 +9563,14 @@
     "id": 62,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8925,9 +9578,14 @@
     "id": 63,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8935,9 +9593,14 @@
     "id": 64,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8945,9 +9608,14 @@
     "id": 65,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -8955,9 +9623,14 @@
     "id": 66,
     "raw": "GeneralEventObject",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Computer",
+    "reason": "reviewed physical interaction subject copies",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -9035,9 +9708,14 @@
     "id": 72,
     "raw": "展望窓を覗く",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Window",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "sc_e_0050",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_3",
@@ -9137,7 +9815,12 @@
     "type": 5,
     "label": "Altar",
     "reason": "bare interactible-object noun",
-    "trap_hint": false
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3049,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_5",
@@ -9165,9 +9848,15 @@
     "id": 7,
     "raw": "ティアマットのオーブ（会話前）",
     "type": 10,
-    "label": "Conversation",
-    "reason": "conversation identifier; actors/outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "sc_e_0037",
+      "message_keys": [],
+      "mapobject_asset_id": 111
+    }
   },
   {
     "submap": "Map_30111_5",
@@ -9235,9 +9924,14 @@
     "id": 18,
     "raw": "風のクリスタル（明）",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_5",
@@ -9265,9 +9959,14 @@
     "id": 21,
     "raw": "風のクリスタル（暗）",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_5",
@@ -9275,9 +9974,14 @@
     "id": 43,
     "raw": "風のクリスタル（明）",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "neutral fallback; no supported inference",
-    "trap_hint": false
+    "label": "Crystal",
+    "reason": "reviewed physical interaction subject",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 3051,
+      "script": "",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30111_5",
@@ -9565,9 +10269,15 @@
     "id": 31,
     "raw": "石板（有）",
     "type": 5,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Tablet",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2025,
+      "script": "sc_e_0039",
+      "message_keys": [],
+      "mapobject_asset_id": 144
+    }
   },
   {
     "submap": "Map_30121_4",
@@ -9645,9 +10355,15 @@
     "id": 46,
     "raw": "強制エンカウント：リッチ",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0040",
+      "message_keys": [],
+      "mapobject_asset_id": 107
+    }
   },
   {
     "submap": "Map_30121_5",
@@ -9835,9 +10551,15 @@
     "id": 104,
     "raw": "強制エンカウント：マリリス",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0041",
+      "message_keys": [],
+      "mapobject_asset_id": 109
+    }
   },
   {
     "submap": "Map_30121_6",
@@ -10105,9 +10827,15 @@
     "id": 128,
     "raw": "強制エンカウント：クラーケン",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0042",
+      "message_keys": [],
+      "mapobject_asset_id": 113
+    }
   },
   {
     "submap": "Map_30121_7",
@@ -10155,9 +10883,15 @@
     "id": 19,
     "raw": "強制エンカウント：ティアマット",
     "type": 10,
-    "label": "Interactive object",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Orb",
+    "reason": "reviewed mapobject sprite",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2027,
+      "script": "sc_e_0043",
+      "message_keys": [],
+      "mapobject_asset_id": 111
+    }
   },
   {
     "submap": "Map_30121_8",

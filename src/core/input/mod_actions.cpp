@@ -71,6 +71,7 @@ struct Toggle {
 const Toggle kToggles[] = {
     {"Mod.ToggleMapExitFilter", prefs::kMapExitFilter, prefs::kMapExitFilterDefault, L"Map exit filter"},
     {"Mod.ToggleEventGroupFilter", prefs::kEventGroupFilter, prefs::kEventGroupFilterDefault, L"Event group filter"},
+    {"Mod.ToggleStoryGateFilter", prefs::kStoryGateFilter, prefs::kStoryGateFilterDefault, L"Hide story-gated destinations"},
     {"Mod.ToggleToLayerFilter", prefs::kToLayerFilter, prefs::kToLayerFilterDefault, L"Layer transition filter"},
     {"Mod.ToggleWallTones", prefs::kWallTones, prefs::kWallTonesDefault, L"Wall tones"},
     {"Mod.ToggleFootsteps", prefs::kFootsteps, prefs::kFootstepsDefault, L"Footsteps"},

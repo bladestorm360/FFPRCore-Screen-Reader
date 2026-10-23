@@ -227,6 +227,11 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText"
     ]
   },
   {
@@ -409,6 +414,11 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText"
     ]
   },
   {
@@ -639,6 +649,11 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText"
     ]
   },
   {
@@ -911,6 +926,11 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText"
     ]
   },
   {
@@ -1173,6 +1193,12 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText",
+      "abpValueText"
     ]
   },
   {
@@ -1403,6 +1429,11 @@
           "nextValueText"
         ]
       }
+    ],
+    "member_heading_views": 3,
+    "structured_columns": [
+      "expValueText",
+      "nextValueText"
     ]
   }
 ]

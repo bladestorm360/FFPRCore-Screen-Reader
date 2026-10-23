@@ -251,10 +251,14 @@ int main()
     auto expect = [&](bool ok, const char* message) { if (!ok) { ++failures; std::printf("FAIL %s\n", message); } };
     ui::review::install(); ffpr::battle::install();
     expect(std::find(bound.begin(), bound.end(), input::Key::L) == bound.end(), "L log binding removed");
-    Node menu, totals, get_points, members, member, skill, learned, level, status_view, stat, stat_view, item, drop, weapon;
+    Node menu, totals, get_points, members, member, member_view, member_headings, skill, learned, level, status_view, stat, stat_view, item, drop, weapon;
     menu.fields["pointController"] = &point;
     List member_list{&member}, learned_list{&learned}, level_list{&level}, stat_list{&stat}, drop_list{&drop};
     member.row = L"Firion EXP 60 of 120"; learned.row = L"Cure learned"; level.row = L"Job level 2";
+    member.fields["view"] = &member_view;
+    member_view.text = {{"nameText", L"Firion"}, {"expValueText", L"60"}, {"nextValueText", L"120"}};
+    member_headings.text = {{"expFixText", L"EXP"}, {"nextFixText", L"Next"}, {"abpFixText", L"ABP"}};
+    members.fields["view"] = &member_headings;
     stat_view.text = {{"categoryText", L"Strength"}, {"beforValueText", L"10"}, {"afterValueText", L"11"}}; stat.fields["view"] = &stat_view;
     status_view.text["nameText"] = L"Firion level 2";
     status_view.texts = {L"Firion level 2", L"Strength 10 to 11", L"Agility 8 to 9"};
@@ -280,11 +284,11 @@ int main()
         expect(queries::is("ReviewBuffer.IsResults") && !ui::review::active(), "native results owns context before buffer readiness");
         tick();
         expect(spoken.front().starts_with(n == 2 ? L"Battle results. Gil obtained 50" : L"Battle results. EXP obtained 120. Gil obtained 50") && contains(L"Cure learned") && contains(L"Job level 2"), "totals and displayed learning/level gains are essential in both Autodetail states");
-        expect(!contains(L"Firion EXP"), "animated member details wait for completion and Autodetail");
+        expect(!contains(L"Firion: EXP"), "animated member details wait for completion and Autodetail");
         steps[n - 1](&members, nullptr); tick();
-        expect(!contains(L"Firion EXP"), "partial native animation completion keeps details deferred");
+        expect(!contains(L"Firion: EXP"), "partial native animation completion keeps details deferred");
         steps[n - 1](&members, nullptr); tick();
-        expect(contains(L"Firion EXP") == (automatic && n != 2), "final member details follow Autodetail");
+        expect(contains(L"Firion: EXP") == (automatic && n != 2), "final member details follow Autodetail");
         if (n != 1 && n != 3) {
             spoken.clear(); d_skill_page(&skill, nullptr); tick();
             expect(contains(L"Cure") && contains(L"Gil obtained"), "combined skill paging announces displayed learning independently of Autodetail");
@@ -321,8 +325,8 @@ int main()
             "first buffer retains notification for deliberate line review");
         spoken.clear(); d_status(&menu,nullptr); tick();
         expect(!contains(L"Cure learned") && !contains(L"Job level 2"),"later member buffer omits already-announced notifications in both Autodetail states");
-        expect(std::find(ui::review::g_lines.begin(),ui::review::g_lines.end(),L"Cure learned") == ui::review::g_lines.end(),
-            "repeated notifications are omitted from later review buffers too");
+        expect(std::find(ui::review::g_lines.begin(),ui::review::g_lines.end(),L"Cure learned") != ui::review::g_lines.end(),
+            "repeated notifications remain available in later review buffers");
         learned.row = L"Layla sword levelled up!";
         spoken.clear(); status_rows(&status); tick();
         expect(contains(L"Layla sword levelled up!") && !contains(L"Job level 2"),"new notification remains eligible after earlier messages were consumed");
@@ -370,11 +374,11 @@ int main()
     members.end_count = 0;
     d_points(&menu, nullptr); dStep1(&members, nullptr); dStep1(&members, nullptr); tick(); tick();
     int member_announcements = 0;
-    for (auto& s : spoken) if (s.find(L"Firion EXP") != std::wstring::npos) ++member_announcements;
+    for (auto& s : spoken) if (s.find(L"Firion: EXP") != std::wstring::npos) ++member_announcements;
     expect(member_announcements == 1, "early completion has one producer announcement");
     result_reset_state(); spoken.clear(); d_points(&menu, nullptr); tick();
     oForced1 = &phase; dForced1(&members, nullptr); tick();
-    expect(contains(L"Firion EXP"), "forced native animation completion refreshes final details");
+    expect(contains(L"Firion: EXP"), "forced native animation completion refreshes final details");
     // A later native phase invalidates old pending reads.
     result_reset_state(); spoken.clear(); d_points(&menu, nullptr); d_items(&menu, nullptr); tick();
     expect(!contains(L"EXP obtained"), "phase changes cancel obsolete reads");
@@ -735,7 +739,7 @@ int main()
         expect(contains(L"Character 09") && !contains(renamed),
                "a legitimately displayed numbered name is preserved; prior character cannot leak");
         if (n != 2) {
-            detail = true; member.row = renamed + L" EXP 60 of 120"; members.end_count = 0;
+            detail = true; member_view.text["nameText"] = renamed; members.end_count = 0;
             spoken.clear(); d_points(&menu, nullptr); tick();
             steps[n - 1](&members, nullptr); steps[n - 1](&members, nullptr); tick();
             expect(contains(renamed) && !contains(L"Firion"),
@@ -747,6 +751,32 @@ int main()
                    "FF2 nested weapon rows use the displayed renamed member");
         }
     }
+    // Reproduce the tester's FF1 final countdown row. Its native name is Robyn;
+    // the generic descendant reader returns unlabelled numbers. Both automatic
+    // completion and manual review must instead use the same structured columns.
+    game_id = game::Id::FF1; detail = true;
+    member.row = L"Robyn 0 489";
+    member_view.text = {{"nameText", L"Robyn"}, {"expValueText", L"0"}, {"nextValueText", L"489"}};
+    result_reset_state(); spoken.clear(); members.end_count = 0;
+    d_points(&menu, nullptr); tick(); dStep1(&members, nullptr); dStep1(&members, nullptr); tick();
+    expect(contains(L"Robyn: EXP: 0, Next: 489") && !contains(L"Robyn 0 489"),
+           "tester countdown numbers retain their native headings and zero");
+    spoken.clear(); ui::review::last();
+    expect(contains(L"Robyn: EXP: 0, Next: 489"), "manual review uses the identical labelled final row");
+    member_view.text["beforLevelText"] = L"11"; member_view.text["afterLevelText"] = L"12";
+    member_view.text["levelUpText"] = L"Level up!";
+    expect(point_details(&point).front().find(L"Level: 11 to 12, Level up!") != std::wstring::npos,
+           "the structured reader retains the displayed level change and message");
+    member_headings.visible = false;
+    expect(point_details(&point).front().find(L"EXP: 0, Next Level: 489") != std::wstring::npos,
+           "a hidden header uses localized semantic labels without losing visible values");
+    member_headings.visible = true; member_view.text.erase("expValueText");
+    expect(point_details(&point).front().find(L"EXP") == std::wstring::npos,
+           "an absent numeric component cannot disclose stale values from recursive text");
+    game_id = game::Id::FF5; member_view.text["abpValueText"] = L"7";
+    expect(point_details(&point).front().find(L"ABP: 7") != std::wstring::npos, "FF5 retains its separate visible ABP column");
+    member.visible = false; expect(point_details(&point).empty(), "hidden pooled member rows remain excluded");
+    member.visible = true;
     result_reset_state();
     std::printf("Results: all-six phase/Autodetail/lifecycle and 10 native input entry points: %d failures\n", failures);
     return failures ? 1 : 0;

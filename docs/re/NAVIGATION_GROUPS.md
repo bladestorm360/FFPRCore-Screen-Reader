@@ -1,8 +1,72 @@
 # Scene triggers and entrance labels
 
+October23 follow-up: [current navigation contracts](NAVIGATION_FOLLOWUPS_2026_10_23.md)
+add independent default-Off StoryGateFilter (Ctrl+Shift+Backslash/F8 Navigation),
+Save Points/category6 and native-position handling for moved one-tile triggers.
+Event grouping remains independent; category iteration uses kCategoryCount.
+
+October22 extension: `field/navigation_labels.cpp` now groups physical exits by
+copied localized destination name, across destination IDs and floor/non-floor cases.
+Native exits missing a baked GotoMap get a naming-only physical footprint from their
+captured map/layer/tile/native identity. This never edits route geometry. Adjacent
+tiles join only when they represent the same doorway/arrival PointIn. Stable layer,
+y,x anchors assign uppercase(A)..(Z),(AA).. before distance/category filters. Both
+live and remote rows use the shared preparation and selected names feed directions.
+Existing EntranceSuffixes remains default Off; saved values are preserved.
+All-six actual-bake grouping checks cover same-name distinct IDs, unknown native
+exits and reversed row order. Exact six-Coliseum gameplay confirmation is pending.
+[Combined verification](../FIXES_2026_10_22.md). The requirement below is the original report.
+
+
 October 21: implementation and offline verification complete. The user reports
 substantial improvement in a brief FF6 intro test; later states and other games
 remain unconfirmed. Applies to the shared I–VI core.
+
+## Open requirement: letters for all ambiguous same-name exits, October 22
+
+**Status: not started; audit and implementation deferred.** User reports six
+distinct navigation entries with the same destination name:
+
+> Exit to Coliseum (1.0 step North) - Map Exit (1 of 6)
+>
+> Exit to Coliseum (6.7 steps Southwest) - Map Exit (2 of 6)
+>
+> Exit to Coliseum (7.3 steps South) - Map Exit (3 of 6)
+>
+> Exit to Coliseum (8.1 steps Northeast) - Map Exit (4 of 6)
+>
+> Exit to Coliseum (8.5 steps West) - Map Exit (5 of 6)
+>
+> Exit to Coliseum (14.3 steps West) - Map Exit (6 of 6)
+
+The user requests destination letters such as **Coliseum (A)**, **Coliseum (B)**,
+through **Coliseum (F)** so each physical exit is identifiable. Preserve the game's
+localized destination name and ordinary exit wording. These examples do not assign
+permanent letters according to the current distance-sorted list.
+
+This is a general requirement for **all similar ambiguous same-name exits across
+FF1–FF6**, not a Coliseum-only override and not limited to multiple floor entrances.
+The existing entrance-suffix feature described below must be audited for gaps in
+eligibility, grouping and application through shared and game-specific paths.
+The October21 completed implementation/offline checks do not verify this new scope.
+
+Future work should extend the existing lettering mechanism/settings as appropriate,
+assign stable letters to distinct physical exits before distance/sort/filter changes,
+and retain a single identity for the tiles of one doorway. Distinguish exits even
+when their displayed destination names match; do not merge their actual coordinates,
+route goals or destination identities. Keep letters consistent wherever those exit
+names are presented, including navigation listings and direction requests. Preserve
+existing preferences and route validity; no setting/default change is requested here.
+
+Future checks: reproduce the six-entry case, cover other same-name destinations in
+every applicable game, verify stable letters after movement/reordering/filter changes,
+and verify that selecting each letter still routes to its own physical exit. Include
+multi-tile doorways, floor and non-floor transitions, remote labels and relevant
+grouping settings. Record genuinely inapplicable cases and missing evidence.
+
+Documentation only at the user's request; no code audit, implementation, build,
+deployment or runtime probe performed. Exact map/exit identities and root cause are
+not independently established; offline and gameplay validation remain pending.
 
 ## Evidence and behavior
 

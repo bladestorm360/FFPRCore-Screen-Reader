@@ -37,8 +37,8 @@
 
 namespace {
 
-// V0.9.4: scene-trigger routing/grouping, entrance letters and session diagnostics.
-constexpr const char* kBuild = "Final Fantasy Pixel Master Core Screen Reader V0.9.4 (" __DATE__ " " __TIME__ ")";
+// V0.9.5: live party-aware story routes, native speech and navigation fixes.
+constexpr const char* kBuild = "Final Fantasy Pixel Master Core Screen Reader V0.9.5 (" __DATE__ " " __TIME__ ")";
 constexpr int kSpeechWaitMs = 30000;
 constexpr int kMaxWaitMs = 120000;
 constexpr int kPollMs = 50;

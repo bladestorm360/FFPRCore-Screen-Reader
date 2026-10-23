@@ -74,6 +74,7 @@ foreach(n 1 2 3 4 5 6)
     # Map titles the game's map master lacks, by map id (src/core/field/map_names.cpp).
     ffpr_embed(MAPTITLES_FF${n} data/ff${n}/map_titles.json)
     ffpr_embed(EVENTLABELS_FF${n} data/ff${n}/eventlabels.json)
+    ffpr_embed(CONDITIONVISUALS_FF${n} data/ff${n}/condition_visuals.json)
     ffpr_embed(MAPSTATE_FF${n} data/ff${n}/mapstate.json)
 endforeach()
 file(GLOB FFPR_SOUNDS CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/data/sounds/*.wav")

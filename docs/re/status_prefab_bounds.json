@@ -1,0 +1,609 @@
+{
+  "ff1": [
+    {
+      "effect_id": 83,
+      "asset_name": "ef_ff0_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 13
+    },
+    {
+      "effect_id": 84,
+      "asset_name": "ef_ff0_statparalyze",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 85,
+      "asset_name": "ef_ff0_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 86,
+      "asset_name": "ef_ff0_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 87,
+      "asset_name": "ef_ff0_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 88,
+      "asset_name": "ef_ff0_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 147,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 148,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 149,
+      "asset_name": "ef_ff0_statshell",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 151,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 152,
+      "asset_name": "ef_ff0_statslow",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 153,
+      "asset_name": "ef_ff0_statinvisibility",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    }
+  ],
+  "ff2": [
+    {
+      "effect_id": 47,
+      "asset_name": "ef_ff0_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 13
+    },
+    {
+      "effect_id": 48,
+      "asset_name": "ef_ff0_statparalyze",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 49,
+      "asset_name": "ef_ff0_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 50,
+      "asset_name": "ef_ff0_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 51,
+      "asset_name": "ef_ff0_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 52,
+      "asset_name": "ef_ff0_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 201,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 202,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 203,
+      "asset_name": "ef_ff0_statshell",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 205,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 206,
+      "asset_name": "ef_ff0_statslow",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 316,
+      "asset_name": "ef_ff2_statforget",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 317,
+      "asset_name": "ef_ff0_statcurse",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 378,
+      "asset_name": "ef_ff0_statvenom",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 388,
+      "asset_name": "ef_ff2_lastbossaura",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 19
+    }
+  ],
+  "ff3": [
+    {
+      "effect_id": 36,
+      "asset_name": "ef_ff0_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 13
+    },
+    {
+      "effect_id": 37,
+      "asset_name": "ef_ff0_statparalyze",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 38,
+      "asset_name": "ef_ff0_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 39,
+      "asset_name": "ef_ff0_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 40,
+      "asset_name": "ef_ff0_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 41,
+      "asset_name": "ef_ff0_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 53,
+      "asset_name": "ef_ff0_reflect",
+      "bundle_matches": 1,
+      "serialized_renderers": 12,
+      "serialized_gameobjects": 17
+    },
+    {
+      "effect_id": 127,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 128,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 131,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 177,
+      "asset_name": "ef_ff3_darkcloud",
+      "bundle_matches": 1,
+      "serialized_renderers": 6,
+      "serialized_gameobjects": 11
+    }
+  ],
+  "ff4": [
+    {
+      "effect_id": 47,
+      "asset_name": "ef_ff0_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 13
+    },
+    {
+      "effect_id": 48,
+      "asset_name": "ef_ff0_statparalyze",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 49,
+      "asset_name": "ef_ff0_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 50,
+      "asset_name": "ef_ff0_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 51,
+      "asset_name": "ef_ff0_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 52,
+      "asset_name": "ef_ff0_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 153,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 154,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 155,
+      "asset_name": "ef_ff0_statshell",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 156,
+      "asset_name": "ef_ff0_statstop",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 157,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 158,
+      "asset_name": "ef_ff0_statslow",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 165,
+      "asset_name": "ef_ff0_reflect",
+      "bundle_matches": 1,
+      "serialized_renderers": 12,
+      "serialized_gameobjects": 17
+    },
+    {
+      "effect_id": 217,
+      "asset_name": "ef_ff0_statcurse",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    }
+  ],
+  "ff5": [
+    {
+      "effect_id": 40,
+      "asset_name": "ef_ff0_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 10,
+      "serialized_gameobjects": 13
+    },
+    {
+      "effect_id": 41,
+      "asset_name": "ef_ff0_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 42,
+      "asset_name": "ef_ff0_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 43,
+      "asset_name": "ef_ff0_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 44,
+      "asset_name": "ef_ff0_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 64,
+      "asset_name": "ef_ff0_reflect",
+      "bundle_matches": 1,
+      "serialized_renderers": 12,
+      "serialized_gameobjects": 17
+    },
+    {
+      "effect_id": 92,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 93,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 94,
+      "asset_name": "ef_ff0_statshell",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 95,
+      "asset_name": "ef_ff0_statstop",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 96,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 97,
+      "asset_name": "ef_ff0_statslow",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 297,
+      "asset_name": "ef_ff0_statparalyze",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 320,
+      "asset_name": "ef_ff5_lastbossaura",
+      "bundle_matches": 1,
+      "serialized_renderers": 36,
+      "serialized_gameobjects": 49
+    },
+    {
+      "effect_id": 390,
+      "asset_name": "ef_ff5_racbandercoeurlinwall",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 391,
+      "asset_name": "ef_ff5_rackuzainwall",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 392,
+      "asset_name": "ef_ff5_racliquidflameinwall",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 393,
+      "asset_name": "ef_ff5_racsoulcannoninwall",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    }
+  ],
+  "ff6": [
+    {
+      "effect_id": 67,
+      "asset_name": "ef_ff6_statconfuse",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 9
+    },
+    {
+      "effect_id": 68,
+      "asset_name": "ef_ff6_statsilence",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 69,
+      "asset_name": "ef_ff6_statpoison",
+      "bundle_matches": 1,
+      "serialized_renderers": 4,
+      "serialized_gameobjects": 7
+    },
+    {
+      "effect_id": 70,
+      "asset_name": "ef_ff6_statblind",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 236,
+      "asset_name": "ef_ff6_statsleep",
+      "bundle_matches": 1,
+      "serialized_renderers": 2,
+      "serialized_gameobjects": 5
+    },
+    {
+      "effect_id": 243,
+      "asset_name": "ef_ff6_hitassassin",
+      "bundle_matches": 1,
+      "serialized_renderers": 22,
+      "serialized_gameobjects": 23
+    },
+    {
+      "effect_id": 326,
+      "asset_name": "ef_ff0_statmineralization",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 327,
+      "asset_name": "ef_ff0_statproteus",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 328,
+      "asset_name": "ef_ff0_statshell",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 329,
+      "asset_name": "ef_ff0_statstop",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 330,
+      "asset_name": "ef_ff0_stathaste",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 331,
+      "asset_name": "ef_ff0_statslow",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 334,
+      "asset_name": "ef_ff0_reflect",
+      "bundle_matches": 1,
+      "serialized_renderers": 12,
+      "serialized_gameobjects": 17
+    },
+    {
+      "effect_id": 1021,
+      "asset_name": "ef_ff6_swordthatcutsiron",
+      "bundle_matches": 1,
+      "serialized_renderers": 0,
+      "serialized_gameobjects": 1
+    },
+    {
+      "effect_id": 1165,
+      "asset_name": "ef_ff6_racvenusaura",
+      "bundle_matches": 1,
+      "serialized_renderers": 6,
+      "serialized_gameobjects": 11
+    }
+  ]
+}

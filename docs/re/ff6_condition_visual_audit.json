@@ -1,0 +1,731 @@
+{
+  "game": 6,
+  "source": "tools\\mapdump\\ff6_master\\condition.txt",
+  "source_sha256": "7f3045d3d1a1985f56d2fa261566ff3e385f5ac7979ef8e5029e27e42afd0847",
+  "conditions": [
+    {
+      "id": 1,
+      "type": 1,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 2,
+      "type": 2,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 3,
+      "type": 3,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 4,
+      "type": 4,
+      "message_key": "MSG_SYSTEM_121",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 5,
+      "type": 5,
+      "message_key": "MSG_SYSTEM_108",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 6,
+      "type": 6,
+      "message_key": "MSG_SYSTEM_119",
+      "effect_asset": 68,
+      "native_target_type": 0
+    },
+    {
+      "id": 7,
+      "type": 7,
+      "message_key": "MSG_SYSTEM_115",
+      "effect_asset": 236,
+      "native_target_type": 0
+    },
+    {
+      "id": 9,
+      "type": 9,
+      "message_key": "MSG_SYSTEM_114",
+      "effect_asset": 70,
+      "native_target_type": 0
+    },
+    {
+      "id": 10,
+      "type": 10,
+      "message_key": "MSG_SYSTEM_112",
+      "effect_asset": 69,
+      "native_target_type": 0
+    },
+    {
+      "id": 11,
+      "type": 11,
+      "message_key": "MSG_SYSTEM_109",
+      "effect_asset": 326,
+      "native_target_type": 0
+    },
+    {
+      "id": 12,
+      "type": 12,
+      "message_key": "MSG_SYSTEM_117",
+      "effect_asset": 67,
+      "native_target_type": 0
+    },
+    {
+      "id": 13,
+      "type": 601,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 14,
+      "type": 404,
+      "message_key": "MSG_SYSTEM_122",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 15,
+      "type": 34,
+      "message_key": "MSG_SYSTEM_113",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 16,
+      "type": 407,
+      "message_key": "MSG_SYSTEM_116",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 17,
+      "type": 409,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 18,
+      "type": 410,
+      "message_key": "MSG_SYSTEM_118",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 19,
+      "type": 14,
+      "message_key": "MSG_SYSTEM_120",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 20,
+      "type": 25,
+      "message_key": "MSG_SYSTEM_129",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 21,
+      "type": 15,
+      "message_key": "MSG_SYSTEM_127",
+      "effect_asset": 330,
+      "native_target_type": 0
+    },
+    {
+      "id": 22,
+      "type": 412,
+      "message_key": "MSG_SYSTEM_125",
+      "effect_asset": 328,
+      "native_target_type": 0
+    },
+    {
+      "id": 23,
+      "type": 19,
+      "message_key": "MSG_SYSTEM_124",
+      "effect_asset": 327,
+      "native_target_type": 0
+    },
+    {
+      "id": 24,
+      "type": 413,
+      "message_key": "MSG_SYSTEM_123",
+      "effect_asset": 334,
+      "native_target_type": 0
+    },
+    {
+      "id": 25,
+      "type": 16,
+      "message_key": "MSG_SYSTEM_128",
+      "effect_asset": 331,
+      "native_target_type": 0
+    },
+    {
+      "id": 26,
+      "type": 17,
+      "message_key": "MSG_SYSTEM_126",
+      "effect_asset": 329,
+      "native_target_type": 0
+    },
+    {
+      "id": 28,
+      "type": 420,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 3
+    },
+    {
+      "id": 29,
+      "type": 606,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 31,
+      "type": 602,
+      "message_key": "MSG_SYSTEM_131",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 32,
+      "type": 603,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 33,
+      "type": 604,
+      "message_key": "MSG_SYSTEM_111",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 44,
+      "type": 605,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 45,
+      "type": 608,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 46,
+      "type": 610,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 47,
+      "type": 611,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 48,
+      "type": 613,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 49,
+      "type": 615,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 50,
+      "type": 617,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 51,
+      "type": 619,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 52,
+      "type": 618,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 53,
+      "type": 607,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 54,
+      "type": 404,
+      "message_key": "MSG_SYSTEM_122",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 55,
+      "type": 609,
+      "message_key": "MSG_SYSTEM_122",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 56,
+      "type": 621,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 57,
+      "type": 612,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 58,
+      "type": 620,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 59,
+      "type": 622,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 60,
+      "type": 506,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 61,
+      "type": 626,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 62,
+      "type": 628,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 63,
+      "type": 627,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 64,
+      "type": 629,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 65,
+      "type": 656,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 66,
+      "type": 501,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 67,
+      "type": 625,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 68,
+      "type": 659,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 69,
+      "type": 614,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 70,
+      "type": 630,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 71,
+      "type": 657,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 72,
+      "type": 660,
+      "message_key": "None",
+      "effect_asset": 1021,
+      "native_target_type": 1
+    },
+    {
+      "id": 73,
+      "type": 661,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 74,
+      "type": 662,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 75,
+      "type": 664,
+      "message_key": "MSG_SYSTEM_122",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 76,
+      "type": 667,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 77,
+      "type": 668,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 78,
+      "type": 670,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 79,
+      "type": 665,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 80,
+      "type": 666,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 81,
+      "type": 669,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 82,
+      "type": 671,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 83,
+      "type": 672,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 84,
+      "type": 673,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 1
+    },
+    {
+      "id": 85,
+      "type": 515,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 86,
+      "type": 674,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 87,
+      "type": 604,
+      "message_key": "MSG_SYSTEM_111",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 88,
+      "type": 10,
+      "message_key": "MSG_SYSTEM_112",
+      "effect_asset": 69,
+      "native_target_type": 0
+    },
+    {
+      "id": 89,
+      "type": 9,
+      "message_key": "MSG_SYSTEM_114",
+      "effect_asset": 70,
+      "native_target_type": 0
+    },
+    {
+      "id": 90,
+      "type": 407,
+      "message_key": "MSG_SYSTEM_116",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 91,
+      "type": 410,
+      "message_key": "MSG_SYSTEM_118",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 92,
+      "type": 413,
+      "message_key": "MSG_SYSTEM_123",
+      "effect_asset": 334,
+      "native_target_type": 0
+    },
+    {
+      "id": 93,
+      "type": 19,
+      "message_key": "MSG_SYSTEM_124",
+      "effect_asset": 327,
+      "native_target_type": 0
+    },
+    {
+      "id": 94,
+      "type": 412,
+      "message_key": "MSG_SYSTEM_125",
+      "effect_asset": 328,
+      "native_target_type": 0
+    },
+    {
+      "id": 95,
+      "type": 15,
+      "message_key": "MSG_SYSTEM_127",
+      "effect_asset": 330,
+      "native_target_type": 0
+    },
+    {
+      "id": 96,
+      "type": 409,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 97,
+      "type": 616,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 98,
+      "type": 675,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 99,
+      "type": 676,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 100,
+      "type": 5,
+      "message_key": "MSG_SYSTEM_108",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 101,
+      "type": 677,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 102,
+      "type": 679,
+      "message_key": "None",
+      "effect_asset": 243,
+      "native_target_type": 1
+    },
+    {
+      "id": 103,
+      "type": 680,
+      "message_key": "None",
+      "effect_asset": 243,
+      "native_target_type": 1
+    },
+    {
+      "id": 104,
+      "type": 678,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 105,
+      "type": 681,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 106,
+      "type": 682,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 107,
+      "type": 683,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 108,
+      "type": 684,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 109,
+      "type": 309,
+      "message_key": "None",
+      "effect_asset": 1165,
+      "native_target_type": 0
+    },
+    {
+      "id": 110,
+      "type": 0,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 111,
+      "type": 685,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 112,
+      "type": 682,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 113,
+      "type": 612,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 114,
+      "type": 0,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    },
+    {
+      "id": 115,
+      "type": 0,
+      "message_key": "None",
+      "effect_asset": 0,
+      "native_target_type": 0
+    }
+  ],
+  "critical": [
+    {
+      "id": 4,
+      "type": 4,
+      "message_key": "MSG_SYSTEM_121",
+      "effect_asset": 0,
+      "native_target_type": 0
+    }
+  ],
+  "limits": "Asset metadata establishes candidates only. Runtime requires actual native enemy effect creation and visible renderer proof. Shared assets have no unique exact-name approval."
+}

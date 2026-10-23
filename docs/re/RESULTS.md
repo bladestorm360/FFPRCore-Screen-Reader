@@ -1,5 +1,42 @@
 # Current-screen results buffers (2026-10-12)
 
+October22 implementation: automatic notification history now filters only automatic
+speech. Every displayed notification remains in each review buffer. The existing
+ResultNotificationsOnce preference defaults On for an unset key; explicitly saved
+Off is preserved. Its approved bounded per-results-session guard resets for each
+battle and preserves distinct equal-text rows within one native page. No blanket
+deduplication was added. Actual-source all-six results/retention checks pass.
+[Combined verification and player confirmation](../FIXES_2026_10_22.md).
+
+The following open-issue section is the original report before implementation.
+
+
+## Open issue: repeated FF2 level-up announcements, October 22
+
+**Status: open; investigation not started.** User gameplay report, 2026-10-22:
+when Maria levels Thunder, “Maria: thunder levelled up!” is spoken automatically
+on every results screen where that same message appears. Automatic level-up speech
+is therefore not working as intended. Keeping the message in each applicable review
+buffer is expected and must be preserved.
+
+Requested behavior: automatically speak each distinct level-up message only once per
+battle-results screen, if possible; rebuilding or refreshing that screen must not
+reannounce it. Manual buffer review remains available. A later battle/results screen
+must still announce its own legitimate gains, including identical wording.
+
+Future investigation should trace the automatic speech producer and native
+screen/owner lifecycle, preserving valid separate events and buffer contents. Audit
+the shared path and each applicable game adapter when investigated; only FF2 is
+currently user-reported. Cause and exact lifecycle boundary are unverified; this
+record does not authorize blanket text-content deduplication.
+
+Documentation only at the user's request because usage is nearly exhausted. No code
+change, investigation, build, deployment or runtime probe performed. Future validation:
+trigger a spell gain, traverse/refresh the affected results screens, check one automatic
+announcement per message per screen with buffer review intact, then confirm a later
+battle can announce the same gain wording again. Offline and gameplay verification of
+a fix remain pending. This report qualifies the earlier implementation account below.
+
 ## FF2 screenshot review, October 13
 
 The user's later spoken example is `Firion: R. Hand Spear 5, 66%`; their attached
@@ -453,6 +490,11 @@ rendered-value policy changed. Sol performed the audit; no delegation or game la
 
 ## Result-name provenance, October 21
 
+**October22 follow-up:** the new authorized full tester log establishes an
+unlabelled-column defect in Points rows. That defect is corrected below; the
+earlier intermittent literal Character09 substitution is not established by this
+log and is not declared fixed by stripping digits or replacing player names.
+
 Diagnostic implementation status: **complete**; the existing phase reader remains
 implemented. Offline native/serialized ownership audits, canonical build/all checks
 and isolated DLL smoke pass. The original reported symptom
@@ -557,3 +599,47 @@ The initial diagnostic-build hash and focused receipts are in
 [the logging receipt](LOGGING.md#final-offline-receipt-october21); its delivery follow-up
 records the later combined deployment and 0.9.4 release preparation. This work adds evidence
 for a recurrence; it does not certify that every machine's intermittent name issue is fixed.
+
+## Labelled member columns and full tester log, October 22
+
+Implementation complete; the first canonical build/regressions pass. Combined
+object/results delivery and final checks are recorded in [the fix register](../FIXES_2026_10_22.md).
+No game was launched, controlled or probed. The user explicitly authorized reading
+Tester Logs. The read-only source is
+D:/Games/Dev/Unity/FFPR/Tester Logs/Timorensinck/ffpr_screen_reader.log,
+470707 bytes, SHA-256
+6f7bcd394b48e81f1b93fa9da8aedefb8911948d337180b004ff8a6b6e24a546.
+It is FF1 V0.9.4 from the October21 build, not confirmation of the October22 DLL.
+
+At log lines7587–7590 the native name fields contain Robyn, Laurus, Aeneas and
+Edan. The first Points capture joins189 and678 to each name without their column
+labels. At7671–7674 the native names remain correct; line7682 actually queues
+the four names with0 and489. These are the rendered EXP countdown and next-level
+values, not character IDs or generated names. The raw name, assembled buffer and
+submitted speech establish the missing-label boundary inside the mod reader.
+This file contains no literal Character09 substitution.
+
+`battle_result.cpp::point_details` now uses each native member view's own
+nameText, expValueText, nextValueText and (FF5) abpValueText. Their column headings
+come from the list controller's sibling ResultCharacterListView: expFixText,
+nextFixText and abpFixText. Previously skill_row recursively joined descendants
+of the member only, so those sibling headings never reached the buffer. Missing
+or hidden headings use existing localized EXP/Next Level/ABP labels; hidden or
+empty value components produce no numeric column. The rendered countdown zero
+is preserved; it is not relabelled as the amount earned. Native totals remain
+separate summary rows. Visible before/after levels and level/job messages are
+retained, using the existing localized comparison wording.
+
+Native phase order, completion adapters, Autodetail, manual review and notification
+guards are unchanged. Reads stay on the native owner after native population;
+at most128 visible member rows are copied. Workers receive owned text and locale,
+never a name component or a Unity pointer. Final automatic and manual review use
+the same structured reader. No content deduplication or digit stripping was added.
+
+The installed all-six serialized-bundle audit confirms the sibling heading fields
+and each row's own name/EXP/next fields, plus FF5's ABP column. The actual-source
+fixture reproduces Robyn's final0/489 row, verifies labelled automatic/manual
+agreement, hidden values/headings, visible level changes, FF5 ABP and all existing
+renamed Unicode/digit-name and lifecycle cases. Native pool reuse on the tester's
+machine and physical screen-reader output remain gameplay checks, prioritized in
+[TESTING](../TESTING.md#results-names-and-log-continuity-october-21).

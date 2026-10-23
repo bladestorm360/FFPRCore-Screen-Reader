@@ -12,11 +12,14 @@ import os
 from pathlib import Path
 import re
 import unicodedata
+from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity
 
 ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DUMP = ROOT.parent / 'tools' / 'mapdump'
 TYPES = {2, 4, 5, 10, 20, 21, 28, 30}
 NOUNS = {
+    'Iron gate': ('iron gate', 'iron bars', '鉄格子', '鉄の扉'),
+    'Gate': ('gate', '門', '門扉'),
     'Door': ('door', '扉', 'ドア'), 'Switch': ('switch', 'スイッチ'),
     'Lever': ('lever', 'レバー'), 'Button': ('button', 'ボタン'),
     'Clock': ('clock', '時計'), 'Bookshelf': ('bookshelf', '本棚'),
@@ -32,6 +35,8 @@ NOUNS = {
 SAFE = set(NOUNS) | {'Party chat', 'Conversation', 'Scene trigger', 'Trap',
                     'Event trigger', 'Interactive object', 'Layer transition',
                     'Warp Tile', 'Vehicle interaction', 'Switch trigger', 'Magic Circle', 'Dragoon'}
+SAFE.update(label for entries in SPRITES.values() for label in entries.values())
+SAFE.update(label for label, _ in RULES)
 
 
 def trap_identifier(raw):
@@ -51,7 +56,7 @@ def load(path):
     return json.loads(path.read_text(encoding='utf-8-sig'))
 
 
-def infer(o, commands, script_name=''):
+def infer(o, commands, script_name='', messages=()):
     t, raw = o['type'], o.get('name', '')
     if t == 4: return 'Layer transition', 'native layer-transition type'
     if t == 20: return 'Event trigger', 'Teleport return-cache metadata, excluded from objectives'
@@ -76,6 +81,18 @@ def infer(o, commands, script_name=''):
         bare = re.sub(r'[\d_\s]+$', '', bare).strip()
         for label, words in NOUNS.items():
             if bare in words: return label, 'bare interactible-object noun'
+        # A physical inspection sentence establishes identity, unlike a narrative
+        # reference to an object or a Msg opcode by itself. Match only the subject
+        # of a narrowly described object; never export dialogue/script bodies.
+        identities = set()
+        for message in messages:
+            for label, words in NOUNS.items():
+                noun = words[0]
+                prefix = r'(?:a|an|the)\s+(?:(?:sturdy|heavy|locked|wooden|stone|small|large|old|ancient)\s+){0,3}'
+                if re.match(prefix + re.escape(noun) + r'\b\s+(?:blocks|stands|is|has|rests|sits)\b', message, re.I):
+                    identities.add(label)
+        if len(identities) == 1:
+            return identities.pop(), 'physical-object subject in interaction message'
     # Descriptions, corpses, signs, doors, rewards and cutscenes also use Msg.
     # Unknown identities stay neutral instead of inventing a conversation.
     if o.get('props', {}).get('script_id'):
@@ -98,13 +115,30 @@ def build(n):
     if message_file.exists():
         descriptions = dict(line.split('\t',1) for line in message_file.read_text(encoding='utf-8-sig').splitlines() if '\t' in line)
     audit = []
+    with (DUMP / f'{game}_master' / 'map.txt').open(encoding='utf-8-sig', newline='') as f:
+        map_ids = collections.defaultdict(list)
+        for row in csv.DictReader(l for l in f if l.strip()):
+            if row['id']: map_ids[row['map_name']].append(int(row['id']))
     for o in objects:
         if o['type'] not in TYPES: continue
         p = o.get('props') or {}
         script_name = masters.get(p.get('script_id'), '')
         script = scripts.get((o['submap'], script_name), {})
         commands = {m['mnemonic'] for m in (script.get('mnemonics') or [])}
-        label, reason = infer(o, commands, script_name)
+        message_keys = [m.get('operands', {}).get('sValues', [''])[0]
+                        for m in script.get('mnemonics', [])
+                        if m.get('mnemonic') == 'Msg' and m.get('operands', {}).get('sValues')]
+        # Direct Talk actions bypass the script table. Their interaction text is
+        # equally strong identity evidence (e.g. unnamed FF1 gravestones).
+        if p.get('message_key'): message_keys.insert(0, p['message_key'])
+        label, reason = infer(o, commands, script_name,
+                              [descriptions[key] for key in message_keys if key in descriptions])
+        identity = reviewed_identity(n,o) or physical_identity(n,o)
+        if not identity:
+            identity = script_identity(n, o, script_name,
+                [descriptions[key] for key in message_keys if key in descriptions])
+        if identity:
+            label,reason,_ = identity
         if o['name'] in overrides:
             label, reason = overrides[o['name']], 'reviewed exact-name override'
             assert label in SAFE, f'Unknown safe label: {label}'
@@ -112,13 +146,40 @@ def build(n):
                 assert game=='ff2' and o['submap']=='Map_30071_2' and o['group']=='ev_e_0049' and p['entity_id']==32 and script_name=='sc_e_0049'
                 message = next(m['operands']['sValues'][0] for m in script['mnemonics'] if m['mnemonic']=='Msg')
                 assert descriptions[message].startswith('You come across the remains of a dragoon.')
-        if o['type'] != 20: choices[o['name']].add(label)
         audit.append(dict(submap=o['submap'], group=o['group'], id=o['id'], raw=o['name'],
                           type=o['type'], label=label, reason=reason,
                           trap_hint=trap_identifier(o['name'])))
+        if label in NOUNS or identity:
+            audit[-1]['identity_evidence'] = dict(editor_gid=o.get('gid'), script=script_name,
+                message_keys=message_keys if 'message' in reason or 'occurrence' in reason else [])
+            if identity and identity[2]: audit[-1]['identity_evidence']['mapobject_asset_id']=identity[2]
+    # Extracted entity GIDs may be editor/prefab markers rather than rendered
+    # sprites (FF2 gate gid2025 is outside its map's chip atlas). Do not propagate
+    # labels by those IDs without a verified runtime sprite/atlas mapping.
+    for o, row in zip((o for o in objects if o['type'] in TYPES), audit):
+        if o['type'] != 20: choices[o['name']].add(row['label'])
     # Shared developer names can stand for different contexts; avoid choosing one story.
     labels = {name: next(iter(values)) if len(values) == 1 else 'Event trigger'
               for name, values in sorted(choices.items()) if name}
+    # Identical developer names can describe different physical objects. Native
+    # map/entity identities disambiguate them, including unnamed objects. Only
+    # unambiguous context decisions are exported; conditional group conflicts
+    # cannot be resolved by whichever row happened to be visited last.
+    contexts = collections.defaultdict(set)
+    context_raw = {}
+    for o, row in zip((o for o in objects if o['type'] in TYPES), audit):
+        p=o.get('props',{})
+        if o['type'] in (5,10) and not (p.get('script_id') or p.get('action_id') or p.get('message_key')): continue
+        for map_id in map_ids[o['submap']]:
+            key = f"@object:{map_id}:{o['props'].get('entity_id',-1)}:{o['type']}:{o['name']}"
+            contexts[key].add(row['label'])
+            context_raw[key] = o['name']
+    labels.update({key:next(iter(values)) for key,values in sorted(contexts.items()) if len(values)==1
+                   and next(iter(values)) not in {'Interactive object','Event trigger'}
+                   and labels.get(context_raw[key]) != next(iter(values))})
+    # Live properties can identify an otherwise unnamed/ambiguous object through
+    # the verified mapobject asset ID. Remote bakes retain the raw-name fallback.
+    labels.update({f'@sprite:{asset}':label for asset,label in SPRITES[n].items()})
     (ROOT / 'data' / game / 'eventlabels.json').write_text(json.dumps(labels, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (ROOT / 'docs' / 're' / f'{game}_event_label_audit.json').write_text(json.dumps(audit, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     counts = collections.Counter(labels.values())
