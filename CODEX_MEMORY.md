@@ -1,17 +1,20 @@
 # Native FFPR durable memory
 
-- Active October23 [parked-party occupancy fix](docs/re/PARKED_PARTIES.md) and
-  V0.9.5 preparation. The user confirms prior Terra guidance works; the latest
+- Published October23 [V0.9.5](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.5);
+  [release evidence](docs/release.md#v095-publication-october23) and
+  [parked-party occupancy fix](docs/re/PARKED_PARTIES.md). The user confirms prior
+  Terra guidance works; the latest
   log reaches Guard Leader and post-defense dialogue. Separate native
   FieldController.partyEntityList was absent from route capture. Sol adds actual
   parked actors to shared snapshots. Directions retain a usable prefix ending
   one step before the blocker, then “Blocked by Party n”; standalone only when
   adjacent. Build/all checks/47-export smoke and independent28-file package checks
   pass;7,182 names/zero missing. V0.9.5 deployed to all six,144 protected files
-  unchanged; recovery/receipts:build_check/v095/. Source834d687 and local annotated
-  v0.9.5 are ready. Automatic review twice rejected public source/tag push pending
-  explicit approval; no remote mutation/publication occurred. Approval question
-  asks source/tag/ZIP publication to the existing public user-owned repository.
+  unchanged; recovery/receipts:build_check/v095/. Source834d687 and annotated
+  v0.9.5 are pushed. The user explicitly approved public source/tag/ZIP publication
+  after automatic review's earlier block. Draft and anonymous public downloads
+  match ZIP SHA256 346c943d6835852ed1de4dc25254fd2d8a9ec8642f728f9962ac10a1e51be6aa;
+  Latest verified, all five earlier releases/assets preserved.
   New occupancy behavior remains gameplay-unconfirmed.
 
 - October23 [navigation/name-entry/boss follow-ups](docs/re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
