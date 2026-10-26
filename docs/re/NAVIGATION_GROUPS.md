@@ -1,5 +1,34 @@
 # Scene triggers and entrance labels
 
+October26 [locked-door approach](LOCKED_DOORS_20261026.md) preserves manual
+Objects as Interact in both selected routes and the optional story filter.
+Automatic Events remain inferred. A locked door's adjacent approach can be
+reachable while its overlapping room exit is blocked; an external obstruction
+still gates. No category, graph or bake entry is deleted.
+
+October26 [remote return listing](REMOTE_RETURNS_20261026.md) restores a clearer
+remote exit list with structural reciprocal-door proof. It changes presentation
+only; current exits, script warps, one-way/uncertain connections and all bakes/
+routing edges remain. Native source-floor entrance-letter preparation is retained.
+
+October26 [Molten Cave B3](MOLTEN_CAVE_20261026.md): the Rock is a manual
+examination in Objects, not a world-map scene. Its native local switch199 opens
+the hidden door. Current identity and routing/state projection are verified;
+generic Story gated wording alone does not imply missing story progression.
+
+October26 [world events](WORLD_EVENTS_20261026.md): passive world-lap bookkeeping
+is @route-only metadata, excluded from live/baked targets and navigation sounds.
+FFIII pruned count1525 comprises prior1524 border tiles plus that one marker.
+Tozus Tunnel retains its native translated name and exact all-active-Mini guard;
+the generic missing-vehicle diagnostic cannot blame an already owned vehicle.
+Existing grouping controls/defaults and genuine routing geometry remain.
+
+October25 [world-border review and control change](FF3_FEEDBACK_20261025.md):
+FFIII1524 repeated travel tiles are real transitions, not animation events.
+Three exact reviewed families now say World map transition in12 locales.
+Existing event grouping gives8 entries in the reported1535-row state. The
+default toggle is now Alt+Backslash in both keymaps; custom remaps persist.
+
 October23 follow-up: [current navigation contracts](NAVIGATION_FOLLOWUPS_2026_10_23.md)
 add independent default-Off StoryGateFilter (Ctrl+Shift+Backslash/F8 Navigation),
 Save Points/category6 and native-position handling for moved one-tile triggers.
@@ -84,14 +113,14 @@ collision modes6/7 block one movement axis; other modes block entry. Existing
 classification matches. There is no basis to delete the intro's real barriers.
 Raw disassembly is outside Git at ../tools/narshe_20261021/.
 
-If a requested destination really is story gated, the worker offers directions
-to the nearest reachable active scene trigger when one exists. This uses the
-same live gates, NPCs, directional edges and trap exclusions. It identifies a
-possible action and does not claim to know the event's story outcome.
+October23 correction: a gated destination keeps its confirmed gate reason. The
+former nearest-reachable-event suggestion could point at an unrelated return
+exit, so it has been removed. Only authored guidance may connect an interaction
+to the gate it actually opens. See [Castle Fynn](CASTLE_FYNN_20261023.md).
 
 ## Controls and ownership
 
-- Navigation → Event group filter; Control+Shift+P on the field. Persistent
+- Navigation → Event group filter; Alt+Backslash on the field. Persistent
   EventGroupFilter, default off, registered in the existing remapping catalog.
 - Speech → Entrance suffixes. Persistent EntranceSuffixes, default off.
 
@@ -186,8 +215,9 @@ remains distinct from structural catalog validation.
 
 Extend event grouping only from proven native identity. Preserve unknown rows,
 consumed-state guards, cancellation, exact exit coordinates and real gates.
-The progress hint is one flood plus at most one A* per blocked request, bounded
-by the copied trigger count and map grid, with existing request cancellation.
+The former generic progress hint has been removed; no extra trigger flood/A*
+runs after a story-gated result. Authored guidance retains its own bounded planning
+and existing request cancellation.
 Labels use map/floor caches per preparation and a union of bounded map footprints;
 no additional engine traversal or wait was added to a native callback. Indoor
 grouping uses the existing count/time-limited obstacle capture. Remote target

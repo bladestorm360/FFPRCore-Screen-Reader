@@ -76,8 +76,9 @@ void tick() {
         if(!capture) return;
         capture->epoch=runtime::epoch(); capture->captured_at=at;
         capture_next=0; capture_revision=0;
-        if(const auto* sm=field::baked::submap_by_map_id(map); sm && sm->world) {
-            capture->wrap_width=float(sm->width); capture->wrap_height=float(sm->height);
+        if(const auto* sm=field::baked::submap_by_map_id(map)) {
+            capture->map_width=float(sm->width);capture->map_height=float(sm->height);
+            if(sm->world){capture->wrap_width=float(sm->width); capture->wrap_height=float(sm->height);}
         }
     }
     if(at-capture->captured_at>1.0) { cancel(); next_capture=at+.20; return; }
@@ -135,14 +136,12 @@ void play_wall_tones_looped(const std::vector<Direction>& directions) {
 }
 void stop_wall_tone() { wall_active=false; runtime::walls(0,0); }
 bool wall_tone_playing() { return wall_active; }
-void play_beacon(bool south,float pan,float volume_scale,bool low_pitch) {
+void play_beacon(float east,float north,float volume_scale,bool blocked) {
     if(!enabled() || !ensure_open()) return;
-    pan=std::clamp(pan,-1.f,1.f);
-    const float n=(south?-1.f:1.f)*std::sqrt(std::max(0.f,1-pan*pan));
     const float preference=volume(Volume::Beacon)/50.f;
-    runtime::play(low_pitch?cues::Id::BeaconBlocked:cues::Id::Beacon,pan,n,
+    runtime::beacon(east,north,
         preference==0?0:std::clamp(volume_scale*preference,
-            constants::Beacon::MIN_VOLUME,constants::Beacon::MAX_VOLUME)/constants::Beacon::MAX_VOLUME,south?.7f:1.f);
+            constants::Beacon::MIN_VOLUME,constants::Beacon::MAX_VOLUME)/constants::Beacon::MAX_VOLUME,blocked);
 }
 void play_exp_counter() {
     exp_active=enabled() && ensure_open();

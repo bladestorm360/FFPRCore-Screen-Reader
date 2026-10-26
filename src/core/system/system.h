@@ -64,6 +64,9 @@ bool input_transition_blocked();
 /// deferred reads can be reached by the game's UI pre-load (the command bars) skip when true.
 /// Query "GameStatePatches.IsFieldState".
 bool is_field_state();
+/// Positive native Menu context (state5 in all six games), outside state entry.
+/// Preloaded menu windows can be active during intro/Event/field construction.
+bool is_main_menu_state();
 /// GameStatePatches.ResetMainGameState (FF1: on the "Title" scene load).
 void reset_main_game_state();
 
@@ -73,6 +76,16 @@ void reset_main_game_state();
 void open_controls_help(void* owner, const std::vector<std::wstring>& entries);
 /// KeyHelpReader.CloseControlsHelp.
 void close_controls_help();
+/// Read a screen's own serialized KeyHelpController, bypassing the generic
+/// lifecycle cache when several visible UI bars coexist (maps/Bestiary).
+void announce_controls_for(void* controller);
+void announce_current_controls();
+void register_controls_owner(void* controller,bool published=true);
+void retire_controls_owner(void* controller);
+/// Standalone rendered KeyIconController hints also occur outside footer bars.
+void register_controls_icon(void* controller,bool published=true);
+void retire_controls_icon(void* controller);
+void cancel_controls_reading();
 /// KeyHelpReader.IsScreenActive (drives the KeyHelp key context).
 bool key_help_screen_active();
 

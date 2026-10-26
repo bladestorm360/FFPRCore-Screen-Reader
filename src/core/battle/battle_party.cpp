@@ -1,5 +1,6 @@
 #include "battle.h"
 #include "battle_util.h"
+#include "party_status.h"
 #include "../core.h"
 #include "../displayed_ui.h"
 #include "../hooks.h"
@@ -8,7 +9,9 @@
 #include "../text.h"
 #include "../unity.h"
 #include "../input/input.h"
+#include "../ui/preferences.h"
 #include "../field/object_cache.h"
+#include <algorithm>
 
 namespace ffpr::battle {
 namespace {
@@ -18,6 +21,17 @@ ref::Field fTargets{kParty, "targetSelectContentList"};
 ref::Class kCommands{"Last.UI.KeyInput", "BattleCommandSelectController"};
 ref::Field fActor{kCommands, "targetData"};
 void* g_party = nullptr;
+// Attack and spell/item targeting can own separate party controllers. A live
+// controller is not proof that its rows are the ones currently rendered.
+// Keep only owners observed by their native producers, never search the scene.
+std::vector<void*> g_party_owners;
+void remember_party(void* owner) {
+    if(!unity::alive(owner)||!kParty.is(owner))return;
+    std::erase_if(g_party_owners,[=](void* p){return p==owner||!unity::alive(p);});
+    g_party_owners.insert(g_party_owners.begin(),owner);
+    if(g_party_owners.size()>16)g_party_owners.resize(16); // defensive native-instance bound
+    g_party=owner;
+}
 ref::Method mInitialize{kParty, "Initalize", 0};
 ref::Method mUpdate{kParty, "UpdateView", 2}, mFocus{kParty, "SetFocus", 2};
 void* g_focused_player = nullptr;
@@ -26,7 +40,7 @@ Update o_update;
 void d_update(void* self, void* players, bool target, const void* mi) {
     o_update(self, players, target, mi);
     hooks::guarded("Battle.PartyViewOwner", [self] {
-        if (kParty.is(self)) { g_party = self; field::cache::register_object(kParty, self); }
+        if (kParty.is(self)) { remember_party(self); field::cache::register_object(kParty, self); }
     });
 }
 Update o_focus;
@@ -34,7 +48,7 @@ void d_focus(void* self, void* player, bool focused, const void* mi) {
     o_focus(self, player, focused, mi);
     hooks::guarded("Battle.PartyFocus", [=] {
         if (!kParty.is(self)) return;
-        g_party = self; field::cache::register_object(kParty, self);
+        remember_party(self); field::cache::register_object(kParty, self);
         if (focused) g_focused_player = player;
         else if (g_focused_player == player) g_focused_player = nullptr;
     });
@@ -44,23 +58,21 @@ Initialize o_initialize;
 void d_initialize(void* self, const void* mi) {
     o_initialize(self, mi);
     hooks::guarded("Battle.PartyOwner", [self] {
-        if (kParty.is(self)) field::cache::register_object(kParty, self);
+        if (kParty.is(self)) {remember_party(self);field::cache::register_object(kParty, self);}
     });
 }
 int g_review_slot = 0;
 void* g_execution_player = nullptr;
 std::wstring g_execution_name;
 
-std::vector<void*> rows()
+std::vector<void*> rows_for(void* party)
 {
     std::vector<void*> out;
-    if (!in_battle()) return out;
-    if (!unity::alive(g_party)) g_party = field::cache::get(kParty);
-    if (!unity::alive(g_party)) return out;
+    if (!in_battle()||!unity::alive(party)) return out;
     // The game swaps its ordinary and target-select panels. Read whichever it displays.
     // Controllers and their serialized views need not share a GameObject. The
     // rendered row owns visibility; a hidden controller must not veto its panel.
-    for (void* list : {ref::rd<void*>(g_party, fTargets), ref::rd<void*>(g_party, fContents)}) {
+    for (void* list : {ref::rd<void*>(party, fTargets), ref::rd<void*>(party, fContents)}) {
         const int count = unity::list_count(list);
         if (count <= 0 || count > 9) continue;
         std::vector<void*> slots(static_cast<size_t>(count));
@@ -74,15 +86,37 @@ std::vector<void*> rows()
     }
     return out;
 }
+std::vector<void*> rows() {
+    if(g_party_owners.empty())remember_party(field::cache::get(kParty));
+    for(auto* owner:g_party_owners)if(auto content=rows_for(owner);!content.empty())return content;
+    return {};
+}
 
-std::wstring read_row(void* row)
+std::wstring read_row(void* row, bool include_command = false)
 {
     auto line = displayed::character(displayed::field(row, "view"));
+    // Target selection reads the full rendered row. H/party review reads
+    // status only; the queued command column is not a character condition.
+    if(include_command) {
+        const auto command=displayed::text_field(displayed::field(row,"view"),"commandText");
+        if(!command.empty())line+=L", "+command;
+    }
     void* conditions = displayed::field(row, "condtionController");
     auto details = displayed::texts(displayed::field(conditions, "view"));
     if (!details.empty()) line += L", " + text::join(details, L", ");
     auto icons = displayed::conditions(conditions);
     if (!icons.empty()) line += L", " + icons;
+    // Normal command rows hide their condition column. H and the number row
+    // may still describe the same ally's visible body/effects; targeting keeps
+    // its native text/icon producer. Danger comes from the rendered HP color.
+    const auto extra = party_status::extra_lines(
+        displayed::field(row,"<TargetData>k__BackingField"), displayed::field(row,"view"),
+        details.empty() && icons.empty(), conditions);
+    if (!extra.empty()) line += L", " + text::join(extra,L", ");
+    if (ui::prefs::auto_detail_enabled()) {
+        const auto charges = displayed::charge_lines(displayed::field(row, "view"));
+        if (!charges.empty()) line += L", " + text::join(charges, L", ");
+    }
     return line;
 }
 
@@ -138,6 +172,20 @@ void cycle_party(int delta)
 
 int install()
 {
+    queries::define_text("BattleParty.ChargeDetails", [] {
+        const bool target = menu_state::is_active(menu_state::BATTLE_TARGET);
+        if (!in_battle() || (!target && !menu_state::is_active(menu_state::BATTLE_COMMAND))) return std::wstring();
+        void* selected = nullptr;
+        auto content = rows();
+        if (target) {
+            for (void* row : content)
+                if (g_focused_player && displayed::field(row, "<TargetData>k__BackingField") == g_focused_player)
+                    selected = row;
+        } else selected = active_row(content);
+        // I reads only the optional charge tail. Name/vitals/command belong
+        // to ordinary row speech, so repeating them here duplicates that read.
+        return text::join(displayed::charge_lines(displayed::field(selected, "view")), L", ");
+    });
     for (int i = 0; i < 9; ++i) {
         const auto key = static_cast<input::Key>(static_cast<int>(input::Key::Alpha1) + i);
         const std::string action = "BattleParty.Slot" + std::to_string(i + 1);
@@ -150,8 +198,8 @@ int install()
                        "BattleParty.ActiveTurn", "Battle: announce active turn");
     actions::define("BattleParty.Next", [] { cycle_party(1); });
     actions::define("BattleParty.Previous", [] { cycle_party(-1); });
-    events::on(events::Kind::BattleStart, [] { g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
-    events::on(events::Kind::BattleEnd, [] { g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
+    events::on(events::Kind::BattleStart, [] { g_party_owners.clear();g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
+    events::on(events::Kind::BattleEnd, [] { g_party_owners.clear();g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
     return (hooks::attach(mInitialize, &d_initialize, &o_initialize) ? 1 : 0) +
         (hooks::attach(mUpdate, &d_update, &o_update) ? 1 : 0) + (hooks::attach(mFocus, &d_focus, &o_focus) ? 1 : 0);
 }
@@ -163,21 +211,22 @@ std::wstring displayed_player(void* player)
     if (!player) return {};
     void* owned = player_owned_character(player);
     const int id = owned ? character_id(owned) : 0;
-    for (void* row : rows()) {
+    if(g_party_owners.empty())remember_party(field::cache::get(kParty));
+    for(auto* owner:g_party_owners)for (void* row : rows_for(owner)) {
         void* data = displayed::field(row, "<TargetData>k__BackingField");
         if (!data) continue;
-        if (data == player) return read_row(row);
+        if (data == player) return read_row(row, true);
         // Target enumerables can carry another BattlePlayerData for the same
         // character. Identity selects the rendered row, never hidden statistics.
         void* row_owned = player_owned_character(data);
-        if (owned && row_owned && (owned == row_owned || (id > 0 && id == character_id(row_owned)))) return read_row(row);
+        if (owned && row_owned && (owned == row_owned || (id > 0 && id == character_id(row_owned)))) return read_row(row, true);
     }
     return {}; // A parameter object alone is not renderer evidence.
 }
 
 void observe_target_party(void* owner)
 {
-    if (unity::alive(owner) && kParty.is(owner)) g_party = owner;
+    remember_party(owner);
 }
 
 void announce_active_status()

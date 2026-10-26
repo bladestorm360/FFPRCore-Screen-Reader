@@ -7,6 +7,8 @@ namespace ffpr::fieldnav::vehicle_landing {
 
 /// VehicleLandingPatches.ResetState: forget the last "landable" state.
 void reset_landing_state();
+/// Shared timestamp of actual landing-guide speech, including ShowLandingGuide.
+double last_announcement_time();
 /// MovementSpeechPatches.ResetState: MoveStateHelper.ResetState.
 void reset_movement_state();
 

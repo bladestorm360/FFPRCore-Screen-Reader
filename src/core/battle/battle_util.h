@@ -138,6 +138,8 @@ int param_confirmed_or_base(void* param, Stat s);
 /// CharacterParameterBase.ConfirmedConditionList() (virtual) / .CurrentConditionList.
 std::vector<void*> confirmed_conditions(void* param);
 std::vector<void*> current_conditions(void* param);
+/// Rooted current-condition storage; callers must validate count before traversal.
+void* current_condition_list(void* param);
 /// ConditionUtility.IsOutBattle(CharacterParameterBase).
 bool is_out_battle(void* param);
 
@@ -151,7 +153,7 @@ std::wstring condition_name(void* condition);
 /// BattleMessagePatches.GetConditionName(int id): master Condition by id, stripped; empty on miss.
 std::wstring condition_name_by_id(int id);
 /// BattleConditionController_Add_Patch.ResolveConditionName(condition, id).
-std::wstring resolve_condition_name(void* condition, int id);
+std::wstring resolve_condition_name(void* condition, int id, int* resolved_type = nullptr);
 
 constexpr int kConditionTypeKO = 5;      // ConditionType.UnableFight
 constexpr int kConditionTypeStone = 11;  // ConditionType.Mineralization

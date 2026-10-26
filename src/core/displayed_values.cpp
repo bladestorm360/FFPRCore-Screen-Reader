@@ -14,7 +14,13 @@ std::wstring equipment_icon(void* image)
 {
     void* sprite = image_sprite(image);
     if (!sprite) return {};
-    const auto name = unity::name(sprite);
+    auto name = unity::name(sprite);
+    // SpriteAtlas.GetSprite returns an instantiated sprite. Accept Unity's
+    // terminal clone suffix while retaining the exact known atlas identifier;
+    // arbitrary sprite names/unknown IDs still have no invented equivalent.
+    constexpr std::wstring_view clone = L"(Clone)";
+    if (name.size() >= clone.size() && name.compare(name.size()-clone.size(),clone.size(),clone)==0)
+        name.resize(name.size()-clone.size());
     constexpr std::wstring_view prefix = L"UI_Common_Icon";
     if (name.size() != prefix.size() + 2 || name.compare(0, prefix.size(), prefix) != 0) return {};
     const auto tens = name[prefix.size()], units = name.back();

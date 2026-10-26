@@ -87,6 +87,9 @@ RouterState router_state();
 bool field_active();
 /// ControllerRouter.SuppressGameInput.
 bool suppress_game_input();
+/// Persistent F9 switch: readers/shortcuts stay active while native control
+/// interception is bypassed. Mod-owned dialogs retain exclusive input.
+bool interception_enabled();
 /// ControllerRouter.SyncWithModMenu, called by ModMenu.Open/Close (also defined as the actions
 /// "ControllerRouter.SyncWithModMenuOpen" / "ControllerRouter.SyncWithModMenuClosed").
 void sync_with_mod_menu(bool menu_open);

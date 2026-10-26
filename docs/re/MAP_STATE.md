@@ -1,5 +1,22 @@
 # Persistent navigation state, October 15
 
+October26 [world event review](WORLD_EVENTS_20261026.md) copies FFIII's exact
+all-active-member Mini predicate into an optional navigation scalar. A reviewed
+SysCall becomes private entry-guard projection, never native interpreter execution
+or flag writes. Known false hides Tozus; unknown preserves it. Scalar presence/
+value participates in route signatures. Other games and optional filter defaults
+stay unchanged; all-six regressions and final install hashes pass.
+
+October25 [cross-floor follow-up](NPC_FLOORS_SHOP_LANDING_20261025.md) supersedes
+the historical eight-unmapped limitation below: those were explicit flag_id0
+objects, and zero is a valid first saved bit. The generator now includes all eight,
+with1894 real mappings (249/235/415/396/279/320) and zero unmapped. Missing native
+bits still stay unknown. The reported Tozus ordinary chest retains its remote
+state separately from the new loose-pickup Treasure label. Partial initializer
+projection retains only facts common to completed bounded branches; divergent
+actors/unsupported operations remain conservative. Native provenance and current
+tests are linked in that follow-up.
+
 October23 [story-state extension](FF6_STORY_NAVIGATION.md) adds owner-scoped area/map
 locals, additive native groups and bounded synchronous actor visibility/position
 facts. Current live observations still own actor positions; pressure-plate
@@ -7,6 +24,13 @@ departure explicitly projects released gates without changing native state or
 moving NPCs to baked homes. Metadata IDs such as PointIn remain separate. Native
 physical Event actors can be hidden/shown too, as Phoenix's two rock controls
 demonstrate. Tests now compare projected actor coordinates, not stale home tiles.
+
+October23 [Castle Fynn](CASTLE_FYNN_20261023.md) generalizes only synchronous
+initializer Hide/Show projection to all six games, based on matching native
+SetPuppet/ExecPuppet/ShowHideCommon evidence. Absolute SetPos remains FFVI-only.
+The hidden passage's persistent flag56 now hides actor22 on projected remote
+floors just as the native initializer does. Unknown/asynchronous effects remain
+conservative; no game script runs and no native state is written.
 
 The user's FFII log shows opened native chests on Deist B1 losing their state prefix
 when browsed from B2. B2's native chests then say Opened while the remote B1 chest

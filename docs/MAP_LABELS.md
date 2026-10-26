@@ -1,5 +1,23 @@
 # Map labels for untitled sub-maps
 
+October25 [Ur well/shed and character follow-up](re/UR_CHARACTERS_20261025.md):
+native map338 is Well,336 is Shed and337 is Shed Back Room. Their entrances
+already existed as Map Exits; naming hid their purpose. Treasure identities,
+routes and collection flags stay unchanged. Dahn's generic NPC uses his own
+direct-dialogue speaker name in all12 languages.
+The same record verifies Mythril Mines B2's current non-actionable wall and
+later switch/NPC clue against native flags and the actual baked router.
+
+October25: [Pandaemonium warp labels](re/WARP_LABELS_20261025.md) correct15
+neutral Scene trigger occurrences through inspected travel scripts. Their entity
+names become Warp Tile; Event activation/category and routing stay unchanged.
+
+October25: [native floor-title correction](re/MAP_FLOORS_20261025.md) uses verified
+unanimous PointIn floor keys before the numeric Floor fallback. Floor can represent
+internal ordering rather than the displayed floor (Pandaemonium map314:13 versus1F).
+Authored room overrides and explicit master titles keep precedence. Generated
+@entryFloors metadata lives in the existing per-game map_titles.json resource.
+
 October23: [navigation/speech follow-ups](re/NAVIGATION_FOLLOWUPS_2026_10_23.md)
 document Save Points/category6, exact FF6 tutorial/animation companion removal,
 the story-gate filter, live moved-trigger correction and prefix-free nearby cues.
@@ -126,6 +144,13 @@ baked (Japanese) name and translate it as the entity list does (`data/<game>/tra
 dropping a descriptor in parentheses; `{"entity": E}` is the translated name of the baked object
 E; `{"item": M}` is "<item> Room" for the key item named by message M; a list joins its parts.
 
+Exact entity corrections can also use `@map/<map ID>/<raw name>` dictionary keys.
+Native entity naming, remote rows and copied route advice pass the entity's map
+ID before ordinary translation fallback; route identities stay raw. This handles
+FFII map230's Roundworm without renaming Tropical Island's Big Horn. Authored
+room230 uses the canonical Roundworm name rather than the ambiguous raw name.
+See [scoped identity and status evidence](re/ROUNDWORM_STATUS_20261024.md).
+
 The facts below come from `tools/mapdump/<game>_objects.jsonl` and `<game>_master/map.txt`
 (report script in the session notes: untitled sub-maps with their NPCs, entities, chests, events
 and exits). "Generic" means the NPC's official name is a description ("Man (Blue Hair)").
@@ -170,7 +195,7 @@ Melmond has no church any more ("The vampire attacked, destroying our church").
 | 69 | Map_20081_2 Bafsk | Church | entity 協会 |
 | 96 | Map_20101_6 Mysidia | Church | entity 協会 |
 | 97 | Map_20101_7 Mysidia | House | entity Bookshelf only: a dwelling with an examinable, no NPC |
-| 98 | Map_20101_8 Mysidia | Masked Figure's House | NPC 仮面　色変え1 "Masked Figure", entity Goddess Statue |
+| 98 | Map_20101_8 Mysidia | Statue Room | User screenshots match central outdoor stairs and underground Goddess Statue; explicit purpose overrides staged NPC owner inference (October24) |
 | 116 | Map_20161_1 Poft (late) | Pub | the same room after Cid's death |
 | 138 | Map_30021_3 Bafsk Cave | Pass Room | chest = key item MSG_KEY_NAME_03 "Pass", plus the warp zone |
 | 169 | Map_30051_3 Dreadnought | Prison | Hilda and Cid behind "Iron Bars", "Locked Iron Bars" |
@@ -178,7 +203,7 @@ Melmond has no church any more ("The vampire attacked, destroying our church").
 | 179 | Map_30061_4 Castle Deist | House | generic NPCs Mom and Child (Blond), a Cottage chest: a dwelling in the castle |
 | 180 | Map_30061_5 Castle Deist | Wyvern's Room | NPC 飛竜 Wyvern, entity Wyvern Egg |
 | 229 | Map_30111_2 Leviathan | Ricard's Room | NPC リチャード Ricard with the swallowed villagers |
-| 230 | Map_30111_3 Leviathan | Big Horn's Room | NPC ビックホーン Big Horn (the boss), two chests |
+| 230 | Map_30111_3 Leviathan | Roundworm's Room | Shared developer NPC name ビックホーン; actual encounter MSG_MON_NAME_73 Roundworm, two chests. [Correction](re/ROUNDWORM_STATUS_20261024.md) |
 | 325-329 | Map_20131_6..10 Altair | Rebel Hideout | MSG_MAP_NAME_11, the early rooms' title (user, 2026-10-10) |
 | 327 | Map_20131_8 Altair | Rebel Hideout Tutorial Chamber | later version of map 7; ten elders teach game systems; circle is a secondary service point |
 | 330 | Map_20131_11 Altair (late) | Church | entity 教会 |
@@ -260,7 +285,9 @@ shop (132) stays unlabelled rather than borrowing "Inn & Item Shop".
 | 141 | Map_20281_3 Replito | House | generic Elder 4, hidden door, an elixir |
 | 146 | Map_20311_2 Falgabard | Resurrection | entity 生き返り |
 | 150 | Map_20311_6 Falgabard | House | generic Elder Chief 2 |
-| 336 | Map_20011_8 Ur | House | generic elder, hidden door, antidotes |
+| 336 | Map_20011_8 Ur | Shed | NPC clue calls the thicket building a shed; inspected storehouse art; rightmost-candle switch |
+| 337 | Map_20011_9 Ur | Shed Back Room | native connection from336; chest room beyond its concealed door |
+| 338 | Map_20011_10 Ur | Well | NPC clue, inspected round well entrance and underground room; native GotoMap from5 |
 
 Left unlabelled: Castle Argus 73 and Castle Saronia 105, 110, 114 (castle rooms: a white mage
 and treasure, the gate, black mages, scholars with the Nautilus event), Dwarven Hollows 85 (the
@@ -342,3 +369,11 @@ Town talk that was checked and led nowhere new: Nikeah's "thieves hanging out in
 the titled pub (217), not the untitled docks (218) where Gerad boards; Albrook's "lodging at
 the inn" is said in Leo's room, the inn itself is titled; South Figaro's "mansion" is titled
 "1F" and "2F" by the game.
+
+
+## October24 explicit NPC story-name masking
+
+The user narrows the pathfinding-identification exception for reviewed identities
+that reveal future story facts from another floor. [Exact NPC masks](re/NPC_SPOILERS_20261024.md)
+use ??? through every shared navigation label path, preserving raw native identity,
+eligibility and routes. This does not hide all remote NPCs or change native dialogue.

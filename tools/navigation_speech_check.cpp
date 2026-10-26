@@ -10,7 +10,8 @@ struct Output { std::vector<std::wstring> parts; bool interrupt; };
 std::vector<Output> output;
 std::vector<std::function<void()>> pending;
 std::function<void(field::PathInfo)> route;
-field::baked_nav::MapGoal requested_goal;
+field::baked_nav::MapGoal requested_goal, browse_goal;
+bool has_pending=false;
 std::wstring requested_name;
 std::function<void(field::baked_nav::BrowseRoute)> browse;
 bool delay_browse = false;
@@ -100,18 +101,20 @@ void clear(ref::Class&) {}
 }
 namespace field {
 int current_map_id() { return 1; }
+void* map_handle() {return reinterpret_cast<void*>(1);}
 std::wstring current_map_name() { return L"Map"; }
 bool Entity::is_alive() const { return true; }
 Category Entity::category() const { return Category::Chests; }
 unity::Vec3 Entity::position() const { return pos; }
 std::wstring Entity::display_name() const { return L"Chest"; }
 std::wstring Entity::format_description(unity::Vec3, bool direct, const std::wstring& note) const {
-    if (remote()) return L"Chest (Deist Cavern B5)";
+    if (remote()) return L"Chest (Deist Cavern B5)"+(note.empty()?std::wstring():L" ("+note+L")");
     return direct ? L"Chest, north" : L"Chest (" + note + L")";
 }
 FilterContext::FilterContext() { field_player = map_handle = reinterpret_cast<void*>(1); }
 }
 namespace field::scanner {
+void remember_selection() {} void clear_selection() {}
 void interrupt_navigation_work() { ++fixture::scan_cancels; }
 void when_filter_ready(std::function<void()> ready, bool) { fixture::pending.push_back(std::move(ready)); }
 void scan_entities() { ++fixture::scans; } void force_rescan() { ++fixture::scans; } void invalidate_map() {} void schedule_scan() {} void cancel_scan() {} void cancel_navigation_work() {++fixture::scan_cancels;}
@@ -125,11 +128,13 @@ double captured_at() { return frame::now(); }
 }
 namespace field::baked_nav {
 void interrupt_requests() { ++fixture::invalidations; }
-void clear_pending(bool) {} void continue_pending() {} void invalidate() {++fixture::invalidations;}
+void clear_pending(bool) {fixture::has_pending=false;}
+bool pending_goal(MapGoal& goal,TargetKind& kind,std::wstring& name) {if(!fixture::has_pending)return false;goal=fixture::requested_goal;kind=TargetKind::Interact;name=L"Retained chest";return true;} void continue_pending() {} void invalidate() {++fixture::invalidations;}
 void cancel_requests() { ++fixture::cancelled; }
 void cancel_browse_route() { fixture::browse = {}; }
 std::wstring map_name_of(int id) { return id == 186 ? L"Deist Cavern B2" : L""; }
-void request_browse_route(MapGoal, TargetKind, std::function<void(BrowseRoute)> publish) {
+void request_browse_route(MapGoal goal, TargetKind, std::function<void(BrowseRoute)> publish) {
+    fixture::browse_goal=std::move(goal);
     if (fixture::delay_browse) fixture::browse = std::move(publish);
     else publish(fixture::browse_path);
 }
@@ -237,8 +242,11 @@ int main() {
     field::announce_current_entity();expect(!fixture::browse,"directions cancel pending browse speech without waiting");
     fixture::entity->remote_map_id=187;fixture::output.clear();
     field::announce_entity_only();
-    expect(!fixture::browse && fixture::output.back().parts.front()==L"Chest (Deist Cavern B5) (1 of 1)",
-        "other-floor browsing preserves floor immediately and makes no route request");
+    expect(bool(fixture::browse)&&fixture::output.empty()&&fixture::browse_goal.map_id==187,
+        "other-floor browsing requests live-state routing for its actual destination floor");
+    field::baked_nav::BrowseRoute gated;gated.reason=L"Story gated";fixture::browse(gated);
+    expect(fixture::output.back().parts.front()==L"Chest (Deist Cavern B5) (Story gated) (1 of 1)",
+        "other-floor browsing preserves floor and story-gate evidence without false reachability");
     fixture::entity->remote_map_id=0;
     for(const auto transition:{events::Kind::BattleEntering,events::Kind::BattleStart,events::Kind::MapChanging}) {
         fixture::route={};field::announce_current_entity();
@@ -249,6 +257,18 @@ int main() {
             field::g_category_generation!=generation&&!fixture::route&&fixture::output.size()==before,
             "actual battle/map entry subscribers cancel every navigation owner and retire pending speech before loading");
     }
+    fixture::output.clear();fixture::route={};fixture::finish();
+    const auto selected=fixture::entity;fixture::entity.reset();fixture::has_pending=true;
+    fixture::requested_goal.map_id=187;fixture::requested_goal.entity_id=101;fixture::requested_goal.cell={0,6,8};
+    field::announce_current_entity();fixture::finish();
+    expect(bool(fixture::route)&&fixture::requested_goal.map_id==187&&fixture::requested_name==L"Retained chest"&&fixture::output.empty(),
+        "a temporarily missing remote row routes to the stable pending chest instead of No entity selected");
+    fixture::route(path);
+    expect(fixture::output.size()==1&&fixture::output.back().parts.back()==path.description,"pending destination directions remain audible while the list rebuilds");
+    fixture::route={};fixture::output.clear();fixture::has_pending=false;
+    field::announce_current_entity();fixture::finish();
+    expect(!fixture::route&&fixture::output.size()==1&&fixture::output.back().parts.front()==L"No entity selected","an intentionally cleared destination never revives an old pending chest");
+    fixture::entity=selected;
     const int refreshed=fixture::refreshes;events::fire(events::Kind::BattleEnd);
     expect(fixture::refreshes==refreshed+1,"same-map battle return requests one new state revalidation without waiting on work");
     const int before_rescan=fixture::invalidations;field::request_rescan();

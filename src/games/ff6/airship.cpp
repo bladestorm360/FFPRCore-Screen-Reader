@@ -27,7 +27,7 @@
 // airship status when flying, else runs the core's "Mod.AnnounceCharacterStatus".
 //
 // The landing line itself is the core's (src/core/fieldnav/vehicle_landing.cpp, "Can land" when
-// a vehicle enters a landable zone). This file adds a second SwitchLandable subscriber that only
+// a vehicle enters a landable zone). The shared vehicle-landing service now supplies the timestamp that
 // notes when the core spoke it, so a heading or altitude line within 0.5 s does not cut it off
 // (the C#'s interrupt: !recentLanding).
 #include <cmath>
@@ -45,6 +45,7 @@
 #include "../../core/unity.h"
 #include "../../core/field/object_cache.h"
 #include "../../core/fieldnav/move_state.h"
+#include "../../core/fieldnav/vehicle_landing.h"
 
 namespace ffpr::ff6 {
 namespace {
@@ -68,9 +69,6 @@ ref::Field  fInputEnable{kFieldPlayerController, "<InputEnable>k__BackingField"}
 ref::Class  kAirshipController{"Last.Map", "FieldPlayerKeyAirshipController", k6};
 ref::Method mSwitchInputEnable{kAirshipController, "SwitchInputEnable", 1};
 
-ref::Class  kMapUIManager{"Last.Map", "MapUIManager", k6};
-ref::Method mSwitchLandable{kMapUIManager, "SwitchLandable", 1};
-
 // MapUIManager_SwitchLandable_Patch: a line within this time of "Can land" does not interrupt it.
 constexpr double kRecentLandingSeconds = 0.5;
 
@@ -79,8 +77,6 @@ int g_last_altitude = -1;    // altitude level last spoken (C# lastAltitudeLevel
 
 void* g_airship = nullptr;   // the FieldPlayerKeyAirshipController (re-checked on every use)
 
-bool g_last_landable = false;
-double g_last_landing_time = -1.0e9;
 
 // --- AirshipNavigationReader -----------------------------------------------------------------
 
@@ -157,7 +153,7 @@ void* field_controller()
     return map ? ref::rd<void*>(map, fFieldController) : nullptr;
 }
 
-bool recent_landing() { return frame::now() - g_last_landing_time < kRecentLandingSeconds; }
+bool recent_landing() { return frame::now() - fieldnav::vehicle_landing::last_announcement_time() < kRecentLandingSeconds; }
 
 // --- AirshipNavigationPatches ----------------------------------------------------------------
 
@@ -231,20 +227,8 @@ void d_SwitchInputEnable(void* self, bool enable, const void* mi)
     });
 }
 
-using SwitchLandable_t = void (*)(void* self, bool landable, const void* mi);
-SwitchLandable_t o_SwitchLandable = nullptr;
-
-/// LastAnnouncementTime: when the core's SwitchLandable subscriber spoke "Can land" (in a
-/// vehicle, false -> true; the same test as vehicle_landing.cpp).
-void d_SwitchLandable(void* self, bool landable, const void* mi)
-{
-    o_SwitchLandable(self, landable, mi);
-    hooks::guarded("FF6.Airship.SwitchLandable", [&] {
-        if (ms::is_on_foot()) return;
-        if (landable && !g_last_landable) g_last_landing_time = frame::now();
-        g_last_landable = landable;
-    });
-}
+// Landing priority reads the shared producer's actual announcement timestamp.
+// A second observer would miss ShowLandingGuide and could drift from its guard.
 
 // --- FFVI_ScreenReaderMod --------------------------------------------------------------------
 
@@ -290,8 +274,7 @@ int install()
     if (hooks::attach(mSetZAxisRotateBirdCamera, &d_SetZAxisRotateBirdCamera, &o_SetZAxisRotateBirdCamera)) ++n;
     if (hooks::attach(mSetFlightAltitudeAndFieldOfViewRatio, &d_SetFlightAltitude, &o_SetFlightAltitude)) ++n;
     if (hooks::attach(mSwitchInputEnable, &d_SwitchInputEnable, &o_SwitchInputEnable)) ++n;
-    if (hooks::attach(mSwitchLandable, &d_SwitchLandable, &o_SwitchLandable)) ++n;
-    if (n < 4) LOGF("[Airship] %d of 4 airship hooks installed", n);
+    if (n < 3) LOGF("[Airship] %d of 3 airship hooks installed", n);
     actions::define("Mod.AnnounceAirshipOrCharacterStatus", [] { announce_airship_or_character_status(); });
     return n;
 }

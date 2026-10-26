@@ -1,5 +1,82 @@
 # Menus, dialogue and screen-owned readers
 
+[October26 Warehouse](../re/WAREHOUSE_20261026.md) closes a confirmed screen
+coverage gap. The new menus/warehouse.cpp owner follows native command/list states,
+reads rendered count/empty/description fields, and directs I/Shift+I to its exact
+description/footer. Existing Popup.Warehouse Show now uses a typed text query;
+base quantity-change hooks retain its single prompt producer and native clamps.
+Generic cursor/late discovery yield to the positive owner. No inventory writes,
+native waits, scene scan or worker pointers. Full checks/scan/all-six install pass.
+
+[October26 party status](../re/ALLY_STATUS_20261026.md) adds owner-thread completed
+form/text identity observers and bounded live renderer evidence to the shared
+H/party-number/target formatter. Visible native text/icons remain the first producer;
+red/gray HP supplies Critical/KO, with body fallback when condition columns are
+hidden. No raw status inventory, speech-text dedup, scene scan or worker pointers.
+Full checks/scan/install hashes pass all six; new listening remains pending.
+
+[October26 shop compatibility](../re/SHOP_COMPARISON_20261026.md) corrects
+product classification to Content.get_TypeId; Weapon/Armor keys are separate.
+The number row retains native portrait/arrow speech and gains the missing
+Can not equip equivalent. Full offline checks pass; the combined October26
+payload is installed/hash-verified all six. One native shop icon can summarize either permitted
+hand; Equip owns explicit hand selection.
+
+
+[October25 field-menu feedback](../re/NPC_PATROL_TARGETS_20261025.md) adds a shared
+native range owner: AllInit says All allies; SingleInit restores one rendered
+focused row, with FFV retaining its own bounded single producer. Other specific
+and generic cursor readers yield during all-target/return transitions. Close and
+native context events retire ownership. FFIII event-key-item description follows
+Autodetail and has a context-owned I action, with Event12 admission that preserves
+loading/fade guards. Enemy critical health is a separate default-off Speech
+disclosure; visible enemy effects, party status and critical-hit damage retain
+their existing producers. Settings persist through the established settings worker.
+
+[October25 map/shop/Learn ownership](../re/NPC_FLOORS_SHOP_LANDING_20261025.md):
+the positive MapPanels owner permits mod review during native Event12 while
+loading/fade guards remain. Immediate/deferred generic cursor readers yield to
+that owner; basic maps have no location counters. Detailed Items and Chests both
+support I/Autodetail/buffer review, with native WASD selection preserved. FFIII
+Magic Learn retires old list/target ownership before native preview rebuilding;
+only the current window's positive list phase can read rows. Native ready-focus
+updates/generation cancellation remain. Other adapters retain their own phases.
+Shop1..9 identifies visible assigned portraits and reads Can/Cannot equip from
+the native shop animation state independently of comparison arrows/Equipped.
+Only equipment portraits permit that lookup; idle magic/consumables do not.
+
+[October25 MP payload follow-up](../re/FF3_FEEDBACK_20261025.md) keeps the
+verified native ownership checks, but manual I returns only the visible current
+MP levels. Ordinary focus owns the short row; Autodetail appends MP once. This
+also covers actual battle command/ally-target charge queries in FF1/FFIII.
+
+[October25 character I-key follow-up](../re/INN_COUNTER_MP_20261025.md) corrects
+the mistaken IsFocus requirement: native Select clears it on the active cursor.
+Actual selection phase, visible native cursor and exact template anchors own
+manual details; passive overview List/None phases cannot steal I from another menu.
+
+October25 [alternate save/context and visible-feedback audit](../re/SAVE_CONTEXT_VISIBILITY_20261025.md)
+documents scripted/completed SaveWindow owner/popup hooks, exact slot cursor
+identity, positive MainGame Menu5 command gating and FFIII Jobs icon readiness.
+[Concise character rows](../re/UR_CHARACTERS_20261025.md) separates the eight current
+MP cells into I/Autodetail at the end of each layout. ui/character_row retains one
+native cursor/row and validates its visible serialized anchor on demand; Status
+review puts MP last. Item learning/exchange owns state6, and delayed generic
+callbacks recheck ownership. Raw identities, native input and repeated speech
+events remain intact. The same record documents Ur Well/Shed and Dahn naming.
+
+October25 [battle hand slots and controls](../re/BATTLE_GEAR_CONTROLS_20261025.md)
+adds the separate native Tab hand-slot owner to Battle.Item. It shares the current
+rendered description/I/Autodetail context, while candidates keep actual counts.
+Shift+I now includes standalone KeyIcon widgets and bounded on-request native
+KeyHelpIconManager registries; all native pointers remain on their owner and
+only copied strings reach workers. Existing map/Bestiary/config ownership remains.
+
+October24 [battle Items equipment strip](../re/BATTLE_ITEM_EQUIPMENT_20261024.md)
+adds native SelectEquipContent/UseEquipSelectInit observation to Battle.Item.
+Its rendered equipment row shares I/Autodetail and context with ordinary Items;
+native Tab equipment replacement and item usability remain game-owned.
+
 October23 adds UI.NameInput/order117 in core/ui/name_input.cpp. All-six native
 KeyboardManager.ShowKeyboard opens Last.UI.KeyInput.InputPopup; its tracked
 Unity InputField.KeyPressed supplies actual before/after text/caret edits.

@@ -417,6 +417,9 @@ void d_WarehouseShow(void* self, void* item, void* comment, void* command, int32
         if (!kWarehousePopup.is(self)) return;
         popup_state::set_active("WarehousePopup", self, nullptr);
         read_popup_when_ready(self, "Warehouse.Show", [=] {
+            // The screen-owned reader supplies typed item/Stock/transfer count
+            // labels. Keep this one native Show producer for the prompt.
+            if(const auto line=queries::text("Warehouse.QuantityPopup");!line.empty())return line;
             return read_rendered_popup(displayed::field(self, "view"));
         }, [=] { return popup_state::active_popup() == self; });
     });

@@ -103,6 +103,12 @@ double g_wall_next_check = 0;
 // Beacon state
 bool g_beacon_silenced = false;
 TargetRef g_last_beacon_target;
+// One copied corner survives a same-target replan. Pending is not evidence of a
+// blockage and must not silence or detune an already sounding route beacon.
+unity::Vec3 g_beacon_aim{},g_beacon_aim_target{};
+bool g_beacon_aim_valid=false;
+int g_beacon_aim_map=-1,g_beacon_aim_destination=0,g_beacon_aim_entity=-1;
+::field::baked_route::Cell g_beacon_aim_cell;
 double g_next_beacon_time = 0;
 
 // Map transition suppression
@@ -243,7 +249,7 @@ void beacon_iteration(double now)
     TargetRef target;
     unity::Vec3 target_pos{};
     int remote_map_id = 0;   // the selected entity is on another floor (baked data): routed by its cell
-    int remote_entity_id = -1;
+    int remote_entity_id = -1, transportation_id=0;
     ::field::baked_route::Cell remote_cell;
     switch (nav_target::last_kind()) {
     case nav_target::Kind::Entity: {
@@ -254,7 +260,7 @@ void beacon_iteration(double now)
             target.route_kind = route_kind_of_category(e.category);
             target_pos = e.position;
             remote_map_id = e.remote_map_id;
-            remote_entity_id = e.entity_id;
+            remote_entity_id = e.entity_id;transportation_id=e.transportation_id;
             remote_cell = ::field::baked_route::Cell{e.cell_layer, e.cell_x, e.cell_y};
         }
         break;
@@ -275,6 +281,7 @@ void beacon_iteration(double now)
     }
 
     if (target.kind == nav_target::Kind::None) {
+        g_beacon_aim_valid=false;
         g_next_beacon_time = now + 0.2;
         return;
     }
@@ -282,6 +289,7 @@ void beacon_iteration(double now)
     // A selection change clears the silence latch so new targets always ping.
     if (!target.same(g_last_beacon_target)) {
         g_beacon_silenced = false;
+        g_beacon_aim_valid=false;
         g_last_beacon_target = target;
     }
 
@@ -292,6 +300,12 @@ void beacon_iteration(double now)
     }
 
     unity::Vec3 player_pos = unity::local_position(unity::transform(player));
+    const int current_map=::field::current_map_id();
+    if(current_map!=g_beacon_aim_map || target_pos.x!=g_beacon_aim_target.x ||
+       target_pos.y!=g_beacon_aim_target.y || target_pos.z!=g_beacon_aim_target.z ||
+       remote_map_id!=g_beacon_aim_destination || remote_entity_id!=g_beacon_aim_entity || !(remote_cell==g_beacon_aim_cell))g_beacon_aim_valid=false;
+    g_beacon_aim_map=current_map;g_beacon_aim_target=target_pos;
+    g_beacon_aim_destination=remote_map_id;g_beacon_aim_entity=remote_entity_id;g_beacon_aim_cell=remote_cell;
 
     const bool direct=ui::prefs::beacon_mode()==ui::prefs::kBeaconObjectLocation;
     // A projected entry has no meaningful local position, even during the
@@ -340,23 +354,32 @@ void beacon_iteration(double now)
             goal.cell = remote_cell;
             goal.entity_id = remote_entity_id;
             path_valid = ::field::baked_nav::follow_goal(map, player, goal, target.route_kind, corner);
-            if (!path_valid) {
+            if (!path_valid&&!corner.pending) {
+                g_beacon_aim_valid=false;
                 g_next_beacon_time = now + 0.5;
                 return;
             }
         } else {
-            path_valid = ::field::baked_nav::follow(map, player, target_pos, target.route_kind, corner, remote_entity_id);
+            path_valid = ::field::baked_nav::follow(map, player, target_pos, target.route_kind, corner, remote_entity_id, transportation_id);
         }
-        if (path_valid) {
+        if(corner.pending) {
+            if(!g_beacon_aim_valid) {g_next_beacon_time=now+.05;return;}
+            // Continue the known corner's cadence/bearing from the CURRENT player
+            // position. A completed result, target/context change or arrival retires it.
+            aim=g_beacon_aim;dist_tiles=distance(player_pos,aim)/kTileSize;
+            following=path_valid=true;
+        } else if (path_valid) {
             if (corner.arrived) {
+                g_beacon_aim_valid=false;
                 g_beacon_silenced = true;
                 g_next_beacon_time = now + 0.2;
                 return;
             }
             following = true;
             aim = corner.point;
+            g_beacon_aim=aim;g_beacon_aim_valid=true;
             dist_tiles = distance(player_pos, aim) / kTileSize;
-        }
+        } else g_beacon_aim_valid=false;
     } else if(!direct) {
         try {
             ::field::PathInfo path_info = ::field::find_path_to_quick(player_pos, target_pos, map, player);
@@ -399,20 +422,14 @@ void beacon_iteration(double now)
     const float max_dist = 500.0f;
     float volume_scale = clamp(1.0f - (dist_tiles * kTileSize / max_dist), 0.15f, 0.60f);
 
-    // FF1 computed pan as Clamp(dx / 100, -1, 1) * 0.5 + 0.5 for its 0..1 SoundPlayer; sound.h
-    // takes -1 (left) .. 1 (right), which is the same position without the shift. The ping
-    // points at the next corner of the route when one is being followed, else at the target.
-    float delta_x = aim.x - player_pos.x;
-    float pan = clamp(delta_x / 100.0f, -1.0f, 1.0f);
-
-    bool is_south = aim.y < player_pos.y - 8.0f;
-
     // Debounce: at least 80% of the current interval since the last ping
     double time_since_last = now - g_last_beacon_played_at;
     if (time_since_last < static_cast<double>(interval) * 0.8)
         return;
 
-    sound::play_beacon(is_south, pan, volume_scale, low_pitch);
+    // Preserve BOTH components until the audio owner selects effective HRTF or
+    // stereo. Saturated stereo pan cannot reconstruct a rear diagonal bearing.
+    sound::play_beacon(aim.x-player_pos.x,aim.y-player_pos.y,volume_scale,low_pitch);
     g_last_beacon_played_at = now;
 }
 
@@ -420,6 +437,7 @@ void beacon_iteration(double now)
 void finish_beacon_loop()
 {
     g_beacon_running = false;
+    g_beacon_aim_valid=false;
     g_beacon_silenced = false;
     g_last_beacon_target = TargetRef{};
 }
@@ -441,6 +459,7 @@ void beacon_step()
     }
 
     if (audio_blocked()) {
+        g_beacon_aim_valid=false;
         g_next_beacon_time = now + 0.1;
         return;
     }
@@ -690,6 +709,7 @@ void stop_beacon_loop()
 {
     g_beacon_running = false;
     g_beacon_silenced = false;
+    g_beacon_aim_valid=false;
     g_last_beacon_target = TargetRef{};
 }
 

@@ -21,7 +21,14 @@ int main() {
                 for(int y=object.ty;y<object.ty+object.th;++y)for(int x=object.tx;x<object.tx+object.tw;++x) {
                     if(!b::in_bounds(grid,x,y))continue;
                     const auto goals=r::goals_for(request,{map->world?1:object.layer,x,y},r::GoalKind::Transition);
-                    for(const auto& cell:goals.cells)if(cell.x!=x||cell.y!=y)++failures;
+                    if(goals.face) {
+                        const bool examined=std::any_of(grid.objects.begin(),grid.objects.end(),[&](const auto& warp){
+                            return warp.type==b::ObjType::Warp&&(warp.d&255)!=1&&warp.contains(x,y)&&warp.a==object.a&&warp.b==object.b;
+                        });
+                        if(!examined||goals.faced.empty())++failures;
+                        for(const auto& cell:goals.cells)
+                            if((cell.x==x&&cell.y==y)||r::facing_direction(cell,goals)<0)++failures;
+                    } else for(const auto& cell:goals.cells)if(cell.x!=x||cell.y!=y)++failures;
                     if(!goals.cells.empty()){++exact;++exact_total;}
                 }
             }

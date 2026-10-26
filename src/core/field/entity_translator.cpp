@@ -246,6 +246,12 @@ std::wstring translate_entity_name(const std::wstring& japanese_name)
     if (japanese_name.empty()) return japanese_name;
     if (!g_initialized.load(std::memory_order_acquire) || g_count == 0) return japanese_name;
 
+    // A reviewed story-name mask is presentation policy, including in Japanese
+    // where ordinary developer labels otherwise bypass translation. Exact keys
+    // keep this separate from broad visibility/distance or narrative-word rules.
+    std::wstring masked;
+    if (try_lookup(L"@npc-mask/"+japanese_name,masked)) return masked;
+
     // When the game is in Japanese, entity names are already Japanese.
     if (modtext::lang() == L"ja") return japanese_name;
 
@@ -398,6 +404,16 @@ struct SnapshotNames {
 std::wstring translate_entity_name_snapshot(const std::wstring& raw) {
     SnapshotNames scope;
     return translate_entity_name(raw);
+}
+std::wstring translate_entity_name_for_map(const std::wstring& raw, int map_id) {
+    initialize();
+    std::wstring corrected;
+    if(map_id>0&&try_lookup(L"@map/"+std::to_wstring(map_id)+L"/"+raw,corrected))return corrected;
+    return translate_entity_name(raw);
+}
+std::wstring translate_entity_name_snapshot(const std::wstring& raw, int map_id) {
+    SnapshotNames scope;
+    return translate_entity_name_for_map(raw,map_id);
 }
 npc_names::Label npc_display_label_snapshot(const std::wstring& converted) {
     SnapshotNames scope;

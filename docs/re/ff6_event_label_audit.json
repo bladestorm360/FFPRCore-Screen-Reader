@@ -1190,13 +1190,16 @@
     "id": 215,
     "raw": "sc_e_0089:隠し通路入口",
     "type": 5,
-    "label": "Hidden passage",
-    "reason": "reviewed physical interaction subject",
+    "label": "Rock",
+    "reason": "reviewed physical map/script occurrence",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 1001,
       "script": "sc_e_0089",
-      "message_keys": []
+      "message_keys": [
+        "E0089_00_003_a_01",
+        "E0089_00_003_a_02"
+      ]
     }
   },
   {

@@ -83,6 +83,8 @@ extern ref::Field fEventScriptId;
 extern ref::Class kPropertyTalk;
 extern ref::Field fTalkMessageKey;
 extern ref::Class kPropertyDefaultEntity;
+extern ref::Class kPropertyTresureBox;
+extern ref::Field fTreasurePickUp;
 extern ref::Class kPropertyTelepoPoint;
 extern ref::Class kPropertyTransportation;
 
@@ -165,11 +167,18 @@ bool entity_is_scenery(void* field_entity);
 // this only on the native owner, after the caller validates the entity lifetime.
 // This is shared by discovery and later selected-target lifetime checks.
 inline bool npc_navigation_available(void* entity) {
-    if (!r::mNonPlayerGetCanAction.get() || ref::call<bool>(r::mNonPlayerGetCanAction, entity)) return true;
     void* property = ref::rd<void*>(entity, r::fEntityProperty);
-    return property && r::kPropertyEvent.is(property) &&
-        ref::rd<int32_t>(property, r::fEventActionId) == 9 &&
-        ref::rd<int32_t>(property, r::fEventScriptId) > 0;
+    const bool event = property && r::kPropertyEvent.is(property);
+    const int action = event ? ref::rd<int32_t>(property, r::fEventActionId) : 0;
+    const bool script = event && ref::rd<int32_t>(property, r::fEventScriptId) > 0;
+    // CanAction only classifies the dispatch kind. RunScript(2) without an
+    // assigned script is a staged actor, e.g. Mysidia's Masked Figure. A legal
+    // walking approach cannot manufacture an interaction for that actor.
+    // Preserve message-backed targets and native service actions independently.
+    if (action == 2 && !script && !(r::kPropertyTalk.is(property) &&
+        !ref::rd_str(property, r::fTalkMessageKey).empty())) return false;
+    if (!r::mNonPlayerGetCanAction.get() || ref::call<bool>(r::mNonPlayerGetCanAction, entity)) return true;
+    return action == 9 && script;
 }
 
 // --- EntityDetectionHelpers (entity_detection.cpp) ------------------------------------------
@@ -189,8 +198,8 @@ bool entity_on_current_map(void* field_entity, const std::wstring& current_map_a
 
 // --- NavigableEntity (navigable_entity.cpp) -------------------------------------------------
 // Append categories to retain the established numeric identities of old views.
-enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5, SavePoints = 6 };
-constexpr int kCategoryCount = 7;
+enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5, SavePoints = 6, Objects = 7 };
+constexpr int kCategoryCount = 8;
 
 enum class Kind { TreasureChest, NPC, MapExit, SavePoint, Event, ScriptTrigger, Vehicle };
 
@@ -207,6 +216,7 @@ struct Entity {
     bool audio_door = false;       // positive native/name door evidence, not an exit guess
     bool audio_exit = false;       // actual GotoMap detector, including unknown destination
     bool opened = false;           // TreasureChest: state when converted (fallback)
+    bool pickup = false;           // hidden loose treasure; disappears on collection
     bool opened_known = true;      // Remote chest: false if save flag/mapping is unavailable
     std::wstring asset;            // NPC
     bool shop = false;             // NPC
@@ -263,6 +273,8 @@ void cancel_scan();
 void cancel_navigation_work();
 void interrupt_navigation_work(); // epoch/flags only, safe before native loading
 void invalidate_map();
+void remember_selection();
+void clear_selection();
 bool needs_scan(int map_id);
 void force_rescan();
 void next_entity();

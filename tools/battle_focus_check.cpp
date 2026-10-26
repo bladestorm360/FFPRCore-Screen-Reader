@@ -3,6 +3,7 @@
 #include <map>
 #include <cstdio>
 #include <cstdlib>
+#include <chrono>
 #include "../src/core/frame.cpp"
 #define install command_install
 #define s_install command_registration
@@ -51,22 +52,25 @@
 #undef install
 #undef s_install
 namespace fixture {
-struct Node {void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
+struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
-std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false;
+std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
 std::map<std::string,std::wstring> guard;
 game::Id game=game::Id::FF6;
-bool player_rendered=true, nested=false,menu_open=true,side_only=false,cursor_row_first=false;Node manager;int original_calls=0;
+bool battle_active=true,player_rendered=true, nested=false,menu_open=true,side_only=false,cursor_row_first=false;Node manager;int original_calls=0;
 std::function<void()> on_item_init;
+std::function<void()> on_field_phase;
+void field_phase(void*,const void*){++original_calls;if(on_field_phase)on_field_phase();}
 void item_entry(void*,const void*){++original_calls;if(on_item_init)on_item_init();}
 void phase(void*,const void*){++original_calls;}
 void show(void* p,bool visible,const void*){++original_calls;static_cast<Node*>(p)->view=p;static_cast<Node*>(p)->visible=visible;}
 void command_cursor(void*,int32_t,const void*){++original_calls;}
 void select(void*,void*,int32_t,const void*){++original_calls;}
 void quantity(void*,void*,int32_t,const void*){++original_calls;}
+void equip_select(void*,void*p,int32_t index,int32_t,const void*){++original_calls;if(p)static_cast<Node*>(p)->index=index;}
 void show_quantity(void*,void*,void*,void*,void*,const void*){++original_calls;}
 void* managed_name(void*p,const void*){return p;}
 bool is_open(void*,const void*){return menu_open;}
@@ -80,7 +84,7 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 bool Class::is(void*p){return p!=nullptr;}il2cpp::Class*Class::get(){return nullptr;}
-int32_t Field::get(){std::string n=name;if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList"||n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
+int32_t Field::get(){std::string n=name;if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList"||n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
@@ -92,6 +96,13 @@ namespace displayed {bool visible(void*p){return unity::active_in_hierarchy(p);}
 namespace speech {void request_load(){}}
 namespace sound {void initialize(){}}
 namespace displayed {
+std::wstring character_overview(void* content,void* window){
+ auto* view=field(content,"view");auto line=target(content);
+ for(auto value:{text_field(view,"jobNameText"),pair(view,"fixedNextText","nextExpText"),pair(view,"fixedLevelText","currentLevelText"),pair(view,"fixedJobLevel","jobLevelText"),formation_row(window,content)})
+  if(!value.empty())line+=L", "+value;
+ return line;
+}
+bool image_visible(void*p){return visible(p);}
 std::wstring text(void*p){return visible(p)?unity::ui_text(p):L"";}
 std::wstring character(void*p){return text_field(p,"nameText");}std::wstring target(void*p){return visible(p)?character(field(p,"view")):L"";}
 int target_count(void*p){int n=0;for(int i=0;i<unity::list_count(p);++i)if(!target(unity::list_at(p,i)).empty())++n;return n;}
@@ -100,9 +111,12 @@ std::wstring formation_row(void*,void*){return {};}
 std::wstring spell_row(void*p){return text_field(field(p,"view"),"spell");}
 }
 namespace ffpr {void say(std::wstring_view v,bool interrupt){fixture::spoken.emplace_back(v);fixture::interruptions.push_back(interrupt);}}
+// Shared row sequencing/charge ownership is exercised with its actual source in
+// party_esper_check. This focus fixture keeps only that service boundary fake.
+namespace ui::character_row {void announce(void*,void*,std::wstring line,void*){ffpr::say(line,true);}}
 namespace ui {void*list_item(void*p,int i){return unity::list_at(p,i);}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:-1;}int cursor_index(void*p){return p?static_cast<fixture::Node*>(p)->index:-1;}std::wstring menu_position(const std::wstring&s,int i,int n){return s+L" ("+std::to_wstring(i+1)+L" of "+std::to_wstring(n)+L")";}}
 namespace game {Id current(){return fixture::game;}}
-namespace settings {bool get_bool(const char* key,bool d){return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
+namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="AutoDetail")return fixture::auto_detail;return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
 namespace modtext {std::wstring T(std::wstring_view v){return std::wstring(v);}std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}}
 namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;}void set_active_exclusive(const char*n){fixture::states.clear();fixture::states[n]=true;}void register_reset(const char*,std::function<void()>){}}
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
@@ -112,13 +126,14 @@ namespace actions {void define(const char*,Fn){}}
 namespace queries {void define(const char*,std::function<bool()>){ }void define_text(const char*,std::function<std::wstring()>){ }bool is(const char*){return false;}}
 namespace cursor {void add_suppressor(const char*){}}
 namespace log_ {void write(const char*,...){}}
-namespace ffpr::system {void clear_other_menu_states(const std::string&){}bool is_field_state(){return false;}std::wstring ability_command_name(int){return L"Use";}void announce_command(const std::wstring&s,int,int){ffpr::say(s);}}
+namespace ffpr::system {void clear_other_menu_states(const std::string&){}bool is_field_state(){return false;}bool is_main_menu_state(){return true;}std::wstring ability_command_name(int){return L"Use";}void announce_command(const std::wstring&s,int,int){ffpr::say(s);}}
 namespace ffpr::menus {std::wstring spell_description(void*){return L"Removes poison.";}std::wstring spell_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}void set_last_announced_ability(void*){}}
 
 namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref::Field&){return {};}void read_popup_when_ready(void*,const char*,std::function<std::wstring()>,std::function<bool()>){ }
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
 namespace il2cpp {void*method_pointer(Method*){return nullptr;}}
 namespace ffpr::battle {
+bool in_battle(){return fixture::battle_active;}
 bool formation_first_turn(){return fixture::opening_turn;}
 void observe_target_party(void*){}
 void clear_other_menu_states(const char*){}
@@ -139,6 +154,55 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  b::item_original=&quantity;b::o_use_init=b::o_close=&phase;spoken.clear();b::g_command_turn_ready=false;b::g_command_reannounce_pending=false;b::item_select(&item_ctl,&item_cursor,0,nullptr);
  expect(spoken.size()==1&&spoken[0].find(L"Potion, 1")==0&&b::g_command_reannounce_pending&&b::g_command_turn_ready,"all-five rendered battle item entry arms command return regardless of command index");
  spoken.clear();b::o_use_init=&item_entry;on_item_init=[&]{root.visible=false;b::item_select(&item_ctl,&item_cursor,0,nullptr);root.visible=true;};b::d_use_init(&item_ctl,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Potion, 1")==0,"native Items entry reads its first focus once after enabling the root");on_item_init={};
+ Node equip_parent,sword,shield,sword_view,shield_view,sword_icon,shield_icon,check;
+ List gear{&sword,&shield};item_view.fields["equipParent"]=&equip_parent;item_ctl.fields["equipList"]=&gear;item_ctl.fields["equipContnetList"]=&gear;
+ sword.view=&sword_view;shield.view=&shield_view;sword_view.fields["iconTextView"]=&sword_icon;shield_view.fields["iconTextView"]=&shield_icon;
+ sword_icon.texts["nameText"]=L"Wing Sword";shield_icon.texts["nameText"]=L"Diamond Shield";sword_view.fields["equipedIcon"]=&check;shield_view.fields["equipedIcon"]=&check;
+ item_view.texts["descriptionText"]=L"A light sword that is effective against flying enemies.";
+ b::o_select_equip=&equip_select;b::o_use_equip_init=&item_entry;spoken.clear();
+ on_item_init=[&]{b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);};b::d_use_equip_init(&item_ctl,nullptr);
+ expect(spoken==std::vector<std::wstring>{L"Wing Sword, Equipped (1 of 2)"},"all-six equipment entry speaks its rendered selection once, ignoring the stale ordinary-item cursor parent");
+ spoken.clear();b::d_select_equip(&item_ctl,&item_cursor,1,0,nullptr);b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);
+ expect(spoken==std::vector<std::wstring>({L"Diamond Shield, Equipped (2 of 2)",L"Wing Sword, Equipped (1 of 2)"}),"equipment navigation and deliberate return remain audible");
+ spoken.clear();b::item_description_action();expect(spoken==std::vector<std::wstring>{item_view.texts["descriptionText"]},"I reads the current rendered equipped-item description");
+ auto_detail=true;spoken.clear();b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Equipped: A light sword")!=std::wstring::npos,"Autodetail appends the actual displayed equipment description");auto_detail=false;
+ spoken.clear();on_item_init=[&]{equip_parent.visible=false;b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);equip_parent.visible=true;};b::d_use_equip_init(&item_ctl,nullptr);expect(spoken.size()==1,"native equipment entry waits until its strip is enabled and then reads once");on_item_init={};
+ check.visible=false;sword_view.texts["countText"]=L"2";spoken.clear();b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);expect(spoken[0]==L"Wing Sword, 2 (1 of 2)","only rendered equipment quantity and checkmark are spoken");
+ sword_icon.visible=false;spoken.clear();b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);expect(spoken.empty(),"hidden equipment name never falls back to undisplayed item data");sword_icon.visible=true;
+ spoken.clear();b::d_select_equip(&item_ctl,&item_cursor,2,0,nullptr);expect(spoken.empty(),"equipment index beyond the actual current list is rejected");
+ Node gear_ctl,gear_view,gear_root,hand,hand_view,hand_root,hand_icon,offhand,offhand_view,offhand_root,offhand_icon,gear_cursor;
+ List hands{&hand,&offhand};gear_ctl.view=&gear_view;gear_ctl.fields["contentList"]=&hands;gear_ctl.fields["selectCursor"]=&gear_cursor;
+ gear_view.fields["rootObject"]=&gear_root;hand.view=&hand_view;offhand.view=&offhand_view;
+ hand_view.fields["rootObject"]=&hand_root;offhand_view.fields["rootObject"]=&offhand_root;
+ hand_view.fields["iconTextView"]=&hand_icon;offhand_view.fields["iconTextView"]=&offhand_icon;
+ hand_view.texts={{"partsText",L"R. Hand"},{"dominantText",L"(Favored Hand)"},{"countText",L"99"}};
+ offhand_view.texts={{"partsText",L"L. Hand"}};hand_icon.texts["nameText"]=L"Sun Blade";offhand_icon.texts["nameText"]=L"Aegis Shield";
+ gear_view.texts["descriptionText"]=L"A sword touched by the sun's grace.";
+ b::o_gear_select=&quantity;b::o_gear_init=&item_entry;b::o_gear_close=&phase;
+ spoken.clear();on_item_init=[&]{b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);};b::d_gear_init(&gear_ctl,nullptr);on_item_init={};
+ expect(spoken==std::vector<std::wstring>({L"R. Hand (Favored Hand): Sun Blade (1 of 2)"}),"all-six Tab slot entry reads hand qualification plus name once without a hidden inventory quantity");
+ spoken.clear();b::d_gear_select(&gear_ctl,&gear_cursor,1,nullptr);b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);
+ expect(spoken==std::vector<std::wstring>({L"L. Hand: Aegis Shield (2 of 2)",L"R. Hand (Favored Hand): Sun Blade (1 of 2)"}),"both slots and deliberate return retain exact displayed labels");
+ spoken.clear();b::item_description_action();expect(spoken==std::vector<std::wstring>({gear_view.texts["descriptionText"]}),"I reads this battle hand-panel description instead of the old Items description");
+ auto_detail=true;spoken.clear();b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);expect(spoken.size()==1&&spoken[0].find(gear_view.texts["descriptionText"])!=std::wstring::npos,"slot Autodetail follows displayed description");auto_detail=false;
+ spoken.clear();on_item_init=[&]{gear_root.visible=false;b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);gear_root.visible=true;};b::d_gear_init(&gear_ctl,nullptr);on_item_init={};expect(spoken.size()==1,"battle slot entry after delayed root activation reads once");
+ hand_root.visible=false;spoken.clear();b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);expect(spoken.empty(),"hidden hand row rejected");hand_root.visible=true;
+ spoken.clear();b::d_gear_select(&gear_ctl,&gear_cursor,2,nullptr);expect(spoken.empty(),"battle hand index validates actual current list");
+ // Native candidate selection reuses BattleItemInfomationController and its
+ // rendered quantities. Closing the old slot owner must not clear that focus.
+ icon.texts["nameText"]=L"Ice Brand";row_view.texts["countText"]=L"1";item_view.texts["descriptionText"]=L"A sword encrusted with ice.";
+ item_cursor.index=0;spoken.clear();b::item_select(&item_ctl,&item_cursor,0,nullptr);b::d_gear_close(&gear_ctl,nullptr);
+ expect(spoken.size()==1&&spoken[0].find(L"Ice Brand, 1")==0&&states[menu_state::BATTLE_ITEM],"candidate list quantity stays readable when old hand owner closes");
+ spoken.clear();b::item_description_action();expect(spoken==std::vector<std::wstring>({L"A sword encrusted with ice."}),"candidate I reads only its visible description without adding absent stat panels");
+ icon.texts["nameText"]=L"Potion";row_view.texts["countText"]=L"1";
+ item_cursor.index=0;item_view.texts["descriptionText"]=L"Restores HP.";spoken.clear();b::item_select(&item_ctl,&item_cursor,0,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Potion, 1")==0,"returning to ordinary Items restores its actual row");
+ if(n==2){
+  std::vector<double> hand_samples;for(int j=0;j<2000;++j){spoken.clear();const auto start=std::chrono::steady_clock::now();b::d_gear_select(&gear_ctl,&gear_cursor,0,nullptr);hand_samples.push_back(std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-start).count());expect(spoken.size()==1,"hand-slot detour publishes one usable row");}
+  std::sort(hand_samples.begin(),hand_samples.end());std::printf("Battle hand slot capture-to-fake-speech: median %.3f us, p99 %.3f us, max %.3f us (fake native/output only)\n",hand_samples[1000],hand_samples[1980],hand_samples.back());
+  // Comparable actual-detour capture-to-first-submission timing with fake
+  // native fields/output; excludes real Unity, dispatch and audible latency.
+  for(bool equipped:{false,true}){std::vector<double> samples;for(int j=0;j<2000;++j){spoken.clear();const auto start=std::chrono::steady_clock::now();if(equipped)b::d_select_equip(&item_ctl,&item_cursor,0,0,nullptr);else b::item_select(&item_ctl,&item_cursor,0,nullptr);samples.push_back(std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-start).count());expect(spoken.size()==1,"bounded item callback publishes one usable row synchronously");}std::sort(samples.begin(),samples.end());std::printf("%s capture-to-fake-speech: median %.3f us, p99 %.3f us, max %.3f us (fake native/output only)\n",equipped?"Equipment":"Ordinary Items",samples[1000],samples[1980],samples.back());}
+ }
  if(n==6){item_ctl.machine=true;item_ctl.fields["machineContentList"]=&rows;icon.texts["nameText"]=L"Auto Crossbow";row_view.texts["countText"].clear();spoken.clear();b::item_select(&item_ctl,&item_cursor,0,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Auto Crossbow")==0,"shared FF6 reader retains rendered Tools names without hidden item counts");}
  root.visible=false;spoken.clear();b::item_select(&item_ctl,&item_cursor,0,nullptr);expect(spoken.empty(),"hidden item teardown cannot steal command context");root.visible=true;b::d_close(&item_ctl,nullptr);expect(!states[menu_state::BATTLE_ITEM],"item close releases its menu context");
  }
@@ -155,7 +219,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  for(int n:{4,5}){fixture::game=static_cast<game::Id>(n);spoken.clear();b::command_reset_state();b::d_ShowWindow(&target,false,nullptr);b::d_ShowUseSelect(&magic,nullptr,nullptr,nullptr,nullptr,nullptr);b::d_SelectContent(&magic,&magic_cursor,0,nullptr);expect(b::g_command_turn_ready&&menu_state::is_active(menu_state::BATTLE_MAGIC),"quantity list restores command input ownership after target teardown");b::d_SetCursor(&command,0,nullptr);frame::run_tick();expect(spoken.size()==2&&spoken.back().find(L"Attack")==0,"FF4/FF5 magic cancel-return announces focused battle command");
  b::d_ShowUseSelect(&magic,nullptr,nullptr,nullptr,nullptr,nullptr);b::d_SelectContent(&magic,&magic_cursor,0,nullptr);expect(spoken.back().find(L"Cura, MP 9")==0,"spell list reopen reads displayed native cost and first focus");}
  namespace fm=ffpr::ff3;fixture::game=game::Id::FF3;
- Node field_window,field_list,field_cursor,poisona,poisona_view;List field_spells{&poisona};field_window.list=&field_list;field_list.list=&field_spells;field_list.cursor=&field_cursor;poisona.data=&owned;poisona.view=&poisona_view;
+ Node field_window,field_list,field_cursor,poisona,poisona_view;List field_spells{&poisona};field_window.list=&field_list;field_list.window=&field_window;field_list.list=&field_spells;field_list.cursor=&field_cursor;poisona.data=&owned;poisona.view=&poisona_view;
  fm::o_UseListInit=fm::o_WindowUpdate=&phase;fm::o_ListSetCursor=&spell_cursor;
  menu_state::reset(menu_state::MAGIC_MENU);spoken.clear();fm::d_ListSetCursor(&field_list,&field_cursor,false,0,nullptr);expect(spoken.empty(),"native list cursor before focus does not speak during pre-entry");
  fm::d_UseListInit(&field_window,nullptr);field_window.state=1;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&fm::g_pending_spell_window,"initial spell waits for native rendered row readiness");
@@ -163,7 +227,17 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,7);spoken.clear();fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"command return cancels pending spell read");
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,2);field_window.state=2;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"spell target entry cancels pending list speech before the target owns focus");
  Node empty_first,terra,terra_view,target_cursor,field_use;empty_first.visible=false;terra.data=&ally;terra.view=&terra_view;terra_view.texts["nameText"]=L"Terra";List field_members{&empty_first,&terra};field_use.list=&field_members;target_cursor.parent=&terra;
- spoken.clear();fm::on_use_set_cursor(&field_use,&target_cursor);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken==std::vector<std::wstring>{L"Terra (1 of 1)",L"Terra (1 of 1)"},"compacted field target is read from native cursor parent and deliberate arrows repeat it");
+ menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::on_use_set_cursor(&field_use,&target_cursor);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken==std::vector<std::wstring>{L"Terra (1 of 1)",L"Terra (1 of 1)"},"compacted field target is read from native cursor parent and deliberate arrows repeat it");
+
+ // Learn exit rebuilds both old spell/tome previews before publishing Command7.
+ Node tome;List tomes{&tome};tome.name=L"Blind";field_list.items=&tomes;
+ fm::o_CommandInit=&field_phase;field_window.state=3;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();
+ fixture::on_field_phase=[&]{fm::on_list_set_cursor(&field_list,&field_cursor);fm::on_use_set_cursor(&field_use,&target_cursor);};
+ fm::d_CommandInit(&field_window,nullptr);fixture::on_field_phase={};expect(spoken.empty()&&!fm::spell_list_active()&&!fm::g_pending_spell_window,"Learn -> command retires both outgoing preview readers before native rebuild");
+ for(int state:{0,2,7,8,9,10,11}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.empty(),"command, target, popup and closed states cannot fall back to cached spell/tome lists");}
+ for(int state:{1,4,5,6}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);fixture::guard.clear();spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.size()==1&&spoken[0].find(L"Poisona")==0,"Use/Remove/Exchange/Forget still read their actual focused spell rows");}
+ field_window.state=3;menu_state::set_active(menu_state::MAGIC_MENU,true);fixture::guard.clear();spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken==std::vector<std::wstring>{L"Blind (1 of 1)"},"Learn reads the focused tome only in its native list phase");
+ fm::o_WindowSetActive=&show;field_window.state=2;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::d_WindowSetActive(&field_window,false,nullptr);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken.empty(),"closed character target cannot announce a stale character row");
  namespace f2=ffpr::ff2;Node target_window,target_list,target_cursor2,target_data[4],target_views[4],target_rows[4];List target_contents;
  target_window.state=2;target_window.view=&target_window;owners["AbilityWindowController"]=&target_window;target_cursor2.parent=&target_rows[0];
  const wchar_t* target_names[]={L"Firion",L"Maria",L"Guy",L"Leon"};for(int i=0;i<4;++i){target_data[i].name=target_names[i];target_rows[i].data=&target_data[i];target_rows[i].view=&target_views[i];target_views[i].texts["nameText"]=target_names[i];target_contents.push_back(&target_rows[i]);}
@@ -201,6 +275,41 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
          expect(!fixture::interruptions.empty()&&!fixture::interruptions.back(),"opening turn preserves roster speech in both preference states");
      }
      fixture::opening_turn=false;fixture::interrupt_turn=true;
+ }
+ // Target announcements preserve the status supplied by the shared rendered party reader.
+ for(int n=1;n<=6;++n) {
+  fixture::game=static_cast<game::Id>(n);b::command_reset_state();spoken.clear();Node status_target;status_target.name=L"Maria, Amnesia";List status_targets{&status_target};
+  expect(b::announce_player_target(&status_targets,0)&&spoken.size()==1&&spoken[0].find(L"Amnesia")!=std::wstring::npos,"all-six status-item targeting retains the displayed condition name");
+ }
+ // Return14 ends native battle ownership before live Unity views are destroyed.
+ // Replay late cursor/data/target producers and already-pending frame work.
+ b::o_SetCommandData=+[](void*,void*,void*,void*,const void*){++fixture::original_calls;};
+ for(int n=1;n<=6;++n) {
+  fixture::game=static_cast<game::Id>(n);battle_active=true;states.clear();
+  b::command_reset_state();b::clear_cached_target_controller();spoken.clear();
+  Node actor;actor.name=L"Corrad";actor.index=1;
+  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);
+  b::d_SetCursor(&command,0,nullptr);
+  expect(spoken.size()==2&&spoken.back().starts_with(L"Attack"),"all-six live turn and command speech remain available");
+  spoken.clear();b::notify_command_submenu_active();b::d_SetCursor(&command,0,nullptr);frame::run_tick();
+  expect(spoken.size()==1&&spoken[0].starts_with(L"Attack"),"ordinary submenu cancel still reads focused command");
+  spoken.clear();b::notify_command_submenu_active();b::d_SetCursor(&command,0,nullptr);
+  battle_active=false;states.clear();frame::run_tick();
+  expect(spoken.empty()&&!menu_state::is_active(menu_state::BATTLE_COMMAND),"pending cancel read stays silent after Return14");
+  b::command_reset_state();b::clear_cached_target_controller();
+  const int before=original_calls;
+  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
+  b::notify_command_submenu_active();b::d_SelectPlayer(&target,&allies,0,nullptr);
+  b::d_SelectEnemy(&target,&enemies,0,nullptr);b::d_PlayerAll(&target,nullptr);
+  b::d_EnemyAll(&target,nullptr);b::d_All(&target,nullptr);b::d_ShowWindow(&target,true,nullptr);
+  b::begin_initial_target_read(&target,true);frame::run_tick();
+  expect(original_calls==before+8,"title-return guards never suppress the native original operations");
+  expect(spoken.empty()&&!b::g_command_turn_ready&&!b::g_command_reannounce_pending&&
+         !menu_state::is_active(menu_state::BATTLE_COMMAND)&&!menu_state::is_active(menu_state::BATTLE_TARGET),
+         "late command/target callbacks cannot speak or resurrect battle ownership during title load");
+  battle_active=true;states.clear();b::command_reset_state();spoken.clear();
+  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
+  expect(spoken.size()==2&&spoken.back().starts_with(L"Attack"),"next real battle starts normally after title-return teardown");
  }
  std::printf("Battle/field magic, save rows, formation and choice focus: %d failures\n",failures);return failures?1:0;
 }

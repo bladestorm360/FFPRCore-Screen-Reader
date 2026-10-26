@@ -1,5 +1,38 @@
 # Input bindings
 
+October26 [Warehouse/Fat Chocobo](re/WAREHOUSE_20261026.md): native Store/Retrieve/
+Exit bar and item/quantity controls keep game ownership. Item rows read name/count;
+I reads the current description or quantity dialog; Shift+I reads this screen's
+exact native footer. Empty storage and changed transfer amounts are automatic.
+No new binding or keyboard mode. All-six shared adapters installed; listening pending.
+
+October25 [field targeting and event items](re/NPC_PATROL_TARGETS_20261025.md):
+native single/all switching (left/right or displayed A/D) announces All allies,
+then the focused character when returning to single. I on the positive FFIII
+event-key-item owner reads only its current description; Autodetail controls
+automatic description. Loading/fades still block review. No new key was assigned.
+Speech contains Enemy critical status, default off, an independent opt-in for
+hidden enemy low-HP condition announcements; party Critical and critical hits stay.
+
+October25: [displayed controls](re/BATTLE_GEAR_CONTROLS_20261025.md) includes
+standalone hints such as battle Tab:Change Equipment, alongside the current
+footer. Shift+I/controller controls action are unchanged. Tab's hand slots share
+I/Autodetail with battle Items; only actual candidate lists speak quantities.
+
+October24: F9 toggles persistent Control interception in native menus and mod
+dialogs. Off suspends game-context mod keyboard/controller shortcuts; native
+controls pass through. F8/mod dialogs stay usable. Restore with F9 or F8 >
+Navigation > Controls > Control interception. Physical F9 remains recovery even
+if its registered action is remapped. Unsafe loading transitions reject input.
+[Ownership and owned controls reader](re/INPUT_INTERCEPTION.md). Maps retain
+native WASD/pan/zoom/switch/cancel; I reads details, Shift+I reads controls and
+arrows review a marker/multi-detail buffer. Autodetail controls automatic details.
+[Map contract](re/MAP_PANELS.md).
+
+October24: Objects is appended after Save Points in the destination-category
+cycle. It holds manual examinations/uses; Events retains automatic triggers.
+Existing keyboard/controller category controls are unchanged.
+
 October23: Ctrl+Shift+Backslash toggles persisted StoryGateFilter, default Off,
 in either layout. The same setting is F8 > Navigation > Hide story-gated
 destinations. It refreshes the owned list filter through Settings.Changed;
@@ -51,6 +84,10 @@ fake binding boundary. All-six name checks and gameplay checks remain distinct.
 
 Battle: T reads the active turn, H the active member's rendered statistics, and 1–9 the
 visible party rows. Enemy HP's optional Numbers/Percentage/Hidden modes remain on F5.
+H and party review include visible conditions outside targeting: rendered red HP
+as Critical, gray zero as KO, completed body forms, applied tints and active visual
+effects. Native text/icons own the target condition column. Repeated requests are
+not suppressed. [Evidence and limits](re/ALLY_STATUS_20261026.md).
 Controller mod mode: North (Y/Triangle) reads the turn; shoulders review party members.
 
 Results: Up/Down review current lines; Left/Right first/last; I reads current details.
@@ -124,7 +161,7 @@ Checked in this order:
 
 | Key | Action | Context |
 |---|---|---|
-| 1 to 9 | `ShopPartyReader.AnnounceSlot1` to `AnnounceSlot9`: active-party slot N's name and equipment comparison for the focused item (Stronger / Weaker / No change, Equipped, Cannot equip) | Shop |
+| 1 to 9 | `ShopPartyReader.AnnounceSlot1` to `AnnounceSlot9`: visible party slot N's name, Can equip / Can not equip, then independent Stronger / Weaker / No change and Equipped for the focused equipment | Shop |
 | Down | `StatusNavigationReader.NavigateNext` | Status |
 | Shift+Down | `StatusNavigationReader.JumpToNextGroup` | Status |
 | Ctrl+Down | `StatusNavigationReader.JumpToBottom` | Status |
@@ -170,7 +207,7 @@ Checked in this order:
 | H | `Mod.AnnounceCharacterStatus` | Global |
 | M | `Mod.AnnounceCurrentMap` | Global |
 | Shift+M | `Mod.ToggleMapExitFilter` | Global |
-| Ctrl+Shift+P | `Mod.ToggleEventGroupFilter`: persistent Navigation event grouping, default off; both keymaps | Field |
+| Alt+Backslash | `Mod.ToggleEventGroupFilter`: persistent Navigation event grouping, default off; both keymaps | Field |
 | Tab | clears a stuck battle flag: if `BattleStateHelper.IsInBattle` and not `BattleStateHelper.IsBattleControllerAlive`, runs `BattleStateHelper.ForceClearBattleState` | Global |
 | V | `GlobalHotkeyHandler.AnnounceCurrentVehicle` (speaks text query `MoveStateHelper.GetMoveStateName`) | Global |
 | R | `MessageWindowPatches.RepeatLastDialogue` if `MessageWindowPatches.IsInDialogue` | Global |
@@ -391,3 +428,11 @@ Actual catalog tests cover all eight directions: press once, retain direction an
 route ownership for five held frames without an opposite edge, then release at
 neutral. Defaults, saved remaps, layout choice and native physical input are unchanged.
 This is a concrete input bug, separate from the unresolved intermittent battle stall.
+
+
+October25 [party shortcut repair](re/BATTLE_TITLE_PARTY_20261025.md): BattleParty.Slot1..9
+retain default1..9 and use independent catalog entries even when their descriptions
+match. The first legacy ID/remap is preserved; later different default chords get
+a deterministic suffix. No settings reset; native controls and shop bindings retain
+the existing ownership policy. Actual input/catalog/dispatch regressions cover all
+nine defaults, repeat registration and independent remapping.

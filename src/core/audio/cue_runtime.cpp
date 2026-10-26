@@ -14,7 +14,7 @@
 
 namespace sound::runtime {
 namespace {
-struct Request { cues::Id cue{}; float x=0,north=1,gain=1,pitch=1; uint64_t generation=0,field_generation=0; bool preview=false; float amplitude=1; };
+struct Request { cues::Id cue{}; float x=0,north=1,gain=1,pitch=1; uint64_t generation=0,field_generation=0; bool preview=false; float amplitude=1; bool beacon_bearing=false; };
 NonblockingQueue<Request,64> requests;
 NonblockingQueue<scape::Options,8> configurations;
 // Exactly four buffers, single producer/consumer per direction. No CAS/retry:
@@ -48,6 +48,7 @@ void recycle(std::unique_ptr<scape::Snapshot> snapshot) {
     if(!snapshot) return;
     snapshot->rows.clear(); // all row destruction stays on the audio worker
     snapshot->epoch=0; snapshot->wrap_width=0; snapshot->wrap_height=0;
+    snapshot->map_width=snapshot->map_height=0;
     spares.push(std::move(snapshot));
 }
 struct Voice {
@@ -78,8 +79,22 @@ public:
         for(size_t i=0;i<voices.size();++i) if(i!=8 && i!=15) stop(i);
         recycle(std::move(snapshot)); emitters.clear(); clocks.clear(); last_wall=0;
     }
-    void start(size_t i,cues::Id cue,float x,float north,float gain,float pitch,bool loop=false,uint64_t id=0,float amplitude=1) {
+    void start(size_t i,cues::Id cue,float x,float north,float gain,float pitch,bool loop=false,uint64_t id=0,float amplitude=1,bool beacon_bearing=false) {
         stop(i);
+        if(beacon_bearing) {
+            if(hrtf.active()) {
+                // Neither rear detuning nor the legacy blocked-route half-tone
+                // belongs to active HRTF. Preserve the true rear/diagonal angle.
+                cue=cues::Id::Beacon;pitch=1;
+                const float length=std::hypot(x,north);
+                if(length>.001f){x/=length;north/=length;}else{x=0;north=1;}
+            } else {
+                // Preserve the established map-north-forward stereo convention,
+                // including the entire rear half-plane and the side boundary.
+                pitch=north<0?.7f:1.f;x=std::clamp(x/100.f,-1.f,1.f);
+                north=(north<0?-1.f:1.f)*std::sqrt(std::max(0.f,1-x*x));
+            }
+        }
         if(bank[size_t(cue)].mono.empty()) return;
         // Wall bumps need extra headroom through the HRTF renderer. Apply this
         // only after actual activation, so stereo/unavailable-HRTF fallback and
@@ -243,6 +258,11 @@ void play(cues::Id cue,float x,float north,float gain,float pitch,float amplitud
     if(!nav_enabled.load() || size_t(cue)>=cues::count || !std::isfinite(x) || !std::isfinite(north) || !std::isfinite(gain) || !std::isfinite(pitch) || !std::isfinite(amplitude)) return;
     Request request{cue,x,north,gain,pitch,audio_epoch.load(),field_epoch.load(),false,amplitude}; requests.push(std::move(request));
 }
+void beacon(float east,float north,float gain,bool blocked) {
+    if(!nav_enabled.load()||!std::isfinite(east)||!std::isfinite(north)||!std::isfinite(gain))return;
+    Request request{blocked?cues::Id::BeaconBlocked:cues::Id::Beacon,east,north,gain,1,audio_epoch.load(),field_epoch.load(),false,1,true};
+    requests.push(std::move(request));
+}
 void preview(cues::Id cue) {
     if(!nav_enabled.load() || size_t(cue)>=cues::count) return;
     Request request{cue,0,1,1,1,audio_epoch.load(),field_epoch.load(),true}; requests.push(std::move(request));
@@ -280,7 +300,7 @@ void pump(SDL_AudioStream* stream) {
         const size_t index=size_t(request.cue);
         const float gain=request.gain*(request.preview?p.options.gains[index]*(index>=cues::first_entity?p.options.master:1):1);
         const size_t slot=request.preview?15:(index==0?0:index==1?1:index==8?8:index==9?9:6);
-        p.start(slot,request.cue,request.x,request.north,gain,request.pitch,false,0,request.amplitude);
+        p.start(slot,request.cue,request.x,request.north,gain,request.pitch,false,0,request.amplitude,request.beacon_bearing);
     }
     if(!nav_enabled.load() || !p.options.navigation) { p.stop_all(); sdl::SDL_ClearAudioStream(stream); return; }
     int queued=std::max(0,sdl::SDL_GetAudioStreamQueued(stream));

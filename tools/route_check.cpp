@@ -5,7 +5,7 @@
 // validated first. FF1 (check_ff1, 2026-10-11): the Cornelia bridge is open to walking and
 // Matoya's Cave and Pravoka route from Cornelia on foot. FF2:
 //  * FF2 Map_20011_11 (a Fynn shop), Bottom layer, the entrance tile (8,15) to the counter
-//    tile (8,8), the RelayInteraction that the shopkeeper's link_object_id names: "North 7";
+//    approach (8,9), across the relay at (8,8): "North 6";
 //  * FF2 Map_20060, a map with a ToLayer at (34,25) Ground -> Upper: cells on the upper layer
 //    are reachable from the ground layer through it;
 //  * FF2 Map_10010 (the world map): Salamand's entrance (123,34) to Semitt Falls (107,44) on
@@ -13,6 +13,7 @@
 //    (group 5) and the ship (group 4) have open cells and route between two of them.
 // Exit code 0 = every expectation holds. Run by build.bat through out/checks/route_check.exe.
 #include <windows.h>
+#include <algorithm>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -145,7 +146,7 @@ void check_ff2()
         } else expect(false, "Dreadnought entrance and engine-room exit resolve");
     }
 
-    // 1. The shop counter rule: entrance to the relay tile.
+    // 1. A one-cell counter extends the native interaction ray.
     const b::Submap* shop = b::submap_by_name(L"Map_20011_11");
     expect(shop != nullptr, "Map_20011_11 present");
     if (shop) {
@@ -170,15 +171,16 @@ void check_ff2()
             req.submap = shop;
             req.start = r::Cell{door->layer, door->tx, door->ty};
             r::Goals goals = r::goals_for(req, r::Cell{keeper->layer, keeper->tx, keeper->ty}, r::GoalKind::Interact);
-            expect(goals.cells.size() == 1 && goals.cells[0].x == relay->tx && goals.cells[0].y == relay->ty, "the shopkeeper's goal is the counter tile");
+            const r::Cell approach{relay->layer,relay->tx,relay->ty+1};
+            expect(std::find(goals.cells.begin(),goals.cells.end(),approach)!=goals.cells.end(), "the shopkeeper includes the approach beyond the counter");
             req.goals = goals.cells;
             r::Route route = r::find(req);
             std::string legs = legs_text(route.cells);
             std::printf("     shop route: door (%d,%d) to counter (%d,%d): %d steps, %s\n", door->tx, door->ty, relay->tx, relay->ty, route.steps(), legs.c_str());
-            const int expected = door->ty - relay->ty;
-            expect(route.found && route.steps() == expected && legs == "North " + std::to_string(expected), "shop: the door reaches the counter straight north");
+            const int expected = door->ty - approach.y;
+            expect(route.found && route.steps() == expected && legs == "North " + std::to_string(expected), "shop: the door reaches the usable counter approach straight north");
             r::Reach reach = r::flood(req);
-            expect(reach.distance(r::Cell{relay->layer, relay->tx, relay->ty}) == expected, "flood distance to the counter agrees");
+            expect(reach.distance(approach) == expected, "flood distance to the usable approach agrees");
             expect(!reach.reachable(r::Cell{0, 0, 0}), "a wall cell is unreachable");
         }
     }

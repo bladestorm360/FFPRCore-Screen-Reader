@@ -5,6 +5,7 @@
 #include "enemy_parts.h"
 #include <cstring>
 #include "../core.h"
+#include "../condition_labels.h"
 #include "../log.h"
 #include "../modtext.h"
 #include "../text.h"
@@ -167,29 +168,6 @@ void find_key_cb(uint64_t key, uint64_t value, void* state)
     }
 }
 
-std::wstring condition_type_fallback(int condition_type)
-{
-    switch (condition_type) {
-    case 4: return T(L"Critical");          // Dying (low HP)
-    case 5: return T(L"KO");                // UnableFight
-    case 6: return T(L"Silence");
-    case 7: return T(L"Sleep");
-    case 8: return T(L"Paralysis");
-    case 9: return T(L"Blind");
-    case 10: return T(L"Poison");
-    case 11: return T(L"Stone");            // Mineralization
-    case 12: return T(L"Confusion");
-    case 16: return T(L"Slow");
-    case 17: return T(L"Stop");
-    case 32: return T(L"Aging");
-    case 34: return T(L"Zombie");
-    case 204: return T(L"Venom");
-    case 404: return T(L"Doom");
-    case 405: return T(L"Gradual Petrify"); // SlowlyMineralization
-    case 406: return T(L"Curse");
-    default: return std::wstring();
-    }
-}
 
 ref::Method& confirmed_method(Stat s)
 {
@@ -397,6 +375,8 @@ std::vector<void*> confirmed_conditions(void* param)
     return list_items(list);
 }
 
+void* current_condition_list(void* param) { return param ? ref::rd<void*>(param,fCurrentConditionList) : nullptr; }
+
 std::vector<void*> current_conditions(void* param)
 {
     if (!param) return {};
@@ -426,35 +406,35 @@ std::wstring condition_name(void* condition)
         std::wstring localized = message(mes_id, false);
         if (!blank(localized) && !text::starts_with(localized, L"$")) return localized;
     }
-    return condition_type_fallback(cond_type);
+    return condition_labels::fallback(cond_type);
 }
 
-std::wstring condition_name_by_id(int id)
+static void* condition_master_by_id(int id)
 {
     void* mm = ref::instance(kMasterManager);
-    if (!mm) return std::wstring();
+    if (!mm) return nullptr;
     void* master_list = ref::rd<void*>(mm, fMasterList);
-    if (!master_list) return std::wstring();
+    if (!master_list) return nullptr;
     FindKey el{kDataTypeCondition, 0, false};
     unity::dict_for_each(master_list, &find_key_cb, &el, 4, 8);
     void* element = el.found ? reinterpret_cast<void*>(el.value) : nullptr;
-    if (!element) return std::wstring();
+    if (!element) return nullptr;
     int32_t off = il2cpp::field_offset(il2cpp::object_class(element), "<DataList>k__BackingField");
     void* data_list = il2cpp::read_field<void*>(element, off);
-    if (!data_list) return std::wstring();
+    if (!data_list) return nullptr;
     FindKey c{id, 0, false};
     unity::dict_for_each(data_list, &find_key_cb, &c, 4, 8);
-    void* condition = c.found ? reinterpret_cast<void*>(c.value) : nullptr;
-    if (!condition) return std::wstring();
-    std::wstring mes_id = condition_mes_id(condition);
-    if (mes_id.empty() || mes_id == L"None") return std::wstring();
-    return strip_icon(message(mes_id));
+    return c.found ? reinterpret_cast<void*>(c.value) : nullptr;
 }
+std::wstring condition_name_by_id(int id) {return strip_icon(condition_name(condition_master_by_id(id)));}
 
-std::wstring resolve_condition_name(void* condition, int id)
+std::wstring resolve_condition_name(void* condition, int id, int* resolved_type)
 {
     std::wstring name = condition ? condition_name(condition) : std::wstring();
-    if (name.empty()) name = condition_name_by_id(id);
+    if (name.empty()) {condition=condition_master_by_id(id);name=strip_icon(condition_name(condition));}
+    // Identity and name come from the same immutable master, including Add
+    // callbacks before the unit's confirmed list contains the new condition.
+    if(resolved_type)*resolved_type=condition_type(condition);
     return name;
 }
 

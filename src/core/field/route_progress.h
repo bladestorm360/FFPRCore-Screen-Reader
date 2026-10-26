@@ -14,6 +14,7 @@ struct Phase {
     std::wstring arrival_facing;
     int arrival_direction = -1; // structured cardinal heading; never parse localized speech
     bool manual_after = false;   // e.g. an examine warp; walking alone cannot activate it
+    bool wait_for_npc = false;   // temporary patrol occupancy; replan, never interact/arrive
     VehicleAction vehicle_before = VehicleAction::None;
     int transportation_id = 0;
     int vehicle_direction = -1;

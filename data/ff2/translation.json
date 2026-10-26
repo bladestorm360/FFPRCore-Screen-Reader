@@ -299,17 +299,18 @@
     "pt": "Imperador"
   },
   "皇帝（復活後）": {
-    "en": "Emperor (Resurrected)",
-    "fr": "Empereur (ressuscité)",
-    "it": "Imperatore (risorto)",
-    "de": "Imperator (auferstanden)",
-    "es": "Emperador (resucitado)",
-    "ko": "황제 (부활)",
-    "zht": "皇帝（復活後）",
-    "zhc": "皇帝（复活后）",
-    "ru": "Император (воскресший)",
-    "th": "จักรพรรดิ (คืนชีพ)",
-    "pt": "Imperador (ressuscitado)"
+    "en": "???",
+    "ja": "???",
+    "fr": "???",
+    "it": "???",
+    "de": "???",
+    "es": "???",
+    "ko": "???",
+    "zht": "???",
+    "zhc": "???",
+    "ru": "???",
+    "th": "???",
+    "pt": "???"
   },
   "武器老人": {
     "en": "Weapons Elder",
@@ -610,7 +611,7 @@
     "th": "พ่อค้าเมืองฟินน์",
     "pt": "Comerciante de Fynn"
   },
-  "フィンの町の店主\u3000色替え1": {
+  "フィンの町の店主　色替え1": {
     "en": "Fynn Shop Clerk (Variant 1)",
     "fr": "Commerçant de Fynn (variante 1)",
     "it": "Negoziante di Fynn (variante 1)",
@@ -974,7 +975,7 @@
     "th": "ทาส",
     "pt": "Escravo"
   },
-  "仮面\u3000色変え1": {
+  "仮面　色変え1": {
     "en": "Masked Figure",
     "fr": "Figure masquée",
     "it": "Figura mascherata",
@@ -1261,17 +1262,17 @@
     "pt": "Balsa (com ícone)"
   },
   "協会": {
-      "en": "Church",
-      "fr": "Église",
-      "it": "Chiesa",
-      "de": "Kirche",
-      "es": "Iglesia",
-      "ko": "교회",
-      "zht": "教堂",
-      "zhc": "教堂",
-      "ru": "Церковь",
-      "th": "โบสถ์",
-      "pt": "Igreja"
+    "en": "Church",
+    "fr": "Église",
+    "it": "Chiesa",
+    "de": "Kirche",
+    "es": "Iglesia",
+    "ko": "교회",
+    "zht": "教堂",
+    "zhc": "教堂",
+    "ru": "Церковь",
+    "th": "โบสถ์",
+    "pt": "Igreja"
   },
   "通路をふさぐ岩(ヨーゼフ加入前)": {
     "en": "Rock blocking the passage (before Josef joins)",
@@ -3521,5 +3522,75 @@
     "ru": "Черная маска",
     "th": "หน้ากากดำ",
     "pt": "Máscara Negra"
+  },
+  "ラウンドウォーム": {
+    "en": "Roundworm",
+    "ja": "ラウンドウォーム",
+    "fr": "Ver métamère",
+    "it": "Nematode",
+    "de": "Landwurm",
+    "es": "Gusano",
+    "ko": "라운드 웜",
+    "zht": "大地巨蟲",
+    "zhc": "大地巨虫",
+    "ru": "Круглый червь",
+    "th": "เพรียงกลม",
+    "pt": "Verme da Terra"
+  },
+  "@map/230/ビックホーン": {
+    "en": "Roundworm",
+    "ja": "ラウンドウォーム",
+    "fr": "Ver métamère",
+    "it": "Nematode",
+    "de": "Landwurm",
+    "es": "Gusano",
+    "ko": "라운드 웜",
+    "zht": "大地巨蟲",
+    "zhc": "大地巨虫",
+    "ru": "Круглый червь",
+    "th": "เพรียงกลม",
+    "pt": "Verme da Terra"
+  },
+  "皇帝(復活後)": {
+    "en": "???",
+    "ja": "???",
+    "fr": "???",
+    "it": "???",
+    "de": "???",
+    "es": "???",
+    "ko": "???",
+    "zht": "???",
+    "zhc": "???",
+    "ru": "???",
+    "th": "???",
+    "pt": "???"
+  },
+  "@npc-mask/皇帝（復活後）": {
+    "en": "???",
+    "ja": "???",
+    "fr": "???",
+    "it": "???",
+    "de": "???",
+    "es": "???",
+    "ko": "???",
+    "zht": "???",
+    "zhc": "???",
+    "ru": "???",
+    "th": "???",
+    "pt": "???"
+  },
+  "@npc-mask/皇帝(復活後)": {
+    "en": "???",
+    "ja": "???",
+    "fr": "???",
+    "it": "???",
+    "de": "???",
+    "es": "???",
+    "ko": "???",
+    "zht": "???",
+    "zhc": "???",
+    "ru": "???",
+    "th": "???",
+    "pt": "???"
   }
 }

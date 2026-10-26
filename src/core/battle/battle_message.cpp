@@ -3,19 +3,11 @@
 // ("X: Poison"), status removed ("X: Poison removed"), and the game's battle system messages
 // ("The party was defeated", "Preemptive strike!").
 //
-// Status removal (user decision 2026-09-24, OPEN_ISSUES.md "What was decided" 1): each game hooks
-// its condition-function removal, silent at battle end, for statuses cleared by KO/Stone, and for
-// statuses that never applied:
-//   FF1  BattleConditionController.<>c__DisplayClass45_0.<RemoveFunction>b__0 (FF1 port, unique RVA)
-//   FF2  BattleStatusControl.UpdateTempParamter(BattleUnitData) (port of FF2's BattleMessagePatches)
-//   FF3  BattleConditionController.RemoveFunction prefix (port of FF3's BattleDamagePatches)
-//   FF4  BattleConditionController.RemoveFunction prefix (port of FF4's BattleMessagePatches)
-//   FF5  BattleConditionController.RemoveFunction prefix+postfix and BattleController.StateChange
-//        (port of FF5's BattleMessagePatches)
-//   FF6  FF1's rule on <>c__DisplayClass62_0.<RemoveFunction>b__0 (FF6's C# mod announced no
-//        removal; FF6's RemoveFunction is FF1's: LastOrDefault(predicate), Remove, then
-//        UpdateTempParamter - GameAssembly.dll, 2026-10-07)
-// The FF2-FF6 variants use the shared FF1 unit and condition naming (battle_util).
+// Status removals observe the native function reconciliation in every game.
+// Both bulk reconciliation and the direct RemoveFunction path are covered;
+// persistent conditions do not require an Add announcement in this battle.
+// Battle-end and KO/Stone cleanup retain the established silent policy.
+// Exact ABI/phase evidence: docs/re/STATUS_REMOVALS_20261024.md.
 //
 // Per-game signatures: BattleBasicFunction.CreateDamageView has 4 parameters in FF1/FF3/FF4/FF6,
 // 5 in FF2 (+bool isPlaySe) and FF5 (+MissType); BattleConditionController.Add has 2 in FF1-FF4 and
@@ -25,9 +17,12 @@
 //
 // FF6 also keeps its C# mod's one existing check on the message line (BattleMenuController
 // .SetCommadnMessage: Libra/Scan results repeat the same text 40+ times); see ff6_* below.
-// FF6's HitType adds HpAbs (8), MpAbs (9) and Golem (10): they take the HP-damage branch, as in
-// FF6's C# mod (which spoke every non-recovery type as "N damage").
+// FF6 adds HpAbs (8), MpAbs (9) and Golem (10). The shared resource producer
+// preserves explicit MpAbs as MP; HP absorption/Golem keep ordinary damage feedback.
+#include <algorithm>
+#include <array>
 #include <cstdint>
+#include "../ui/preferences.h"
 #include <map>
 #include <set>
 #include <string>
@@ -36,6 +31,8 @@
 #include "battle_internal.h"
 #include "battle_message_line.h"
 #include "rendered_feedback.h"
+#include "special_feedback.h"
+#include "stat_feedback.h"
 #include "battle.h"
 #include "battle_util.h"
 #include "../core.h"
@@ -69,6 +66,7 @@ ref::Method mEndFinishingState{kActExec, "EndFinishingState", 0};
 ref::Field fInStagingActData{kActExec, "inStagingBattleActData"};
 ref::Class kActData{"Last.Battle", "BattleActData"};
 ref::Field fAttackUnitData{kActData, "<AttackUnitData>k__BackingField"};
+ref::Field fStatTargets{kActData, "<TargetUnitDatas>k__BackingField"};
 
 ref::Class kBasicFn{"Last.Battle.Function", "BattleBasicFunction", kFF1346};
 ref::Method mCreateDamageView{kBasicFn, "CreateDamageView", 4};
@@ -104,12 +102,8 @@ ref::Class kCondCtl12346{"Last.Battle", "BattleConditionController", kFF12346};
 ref::Method mAdd{kCondCtl12346, "Add", 2};
 ref::Class kCondCtlFF5{"Last.Battle", "BattleConditionController", game::kFF5};
 ref::Method mAddFF5{kCondCtlFF5, "Add", 3};
-ref::Class kCondCtl345{"Last.Battle", "BattleConditionController", kFF345};
-ref::Method mRemoveFunction{kCondCtl345, "RemoveFunction", 2};
-ref::Class kRemovePredicate{"Last.Battle", "BattleConditionController.<>c__DisplayClass45_0", game::kFF1};
-ref::Method mRemovePredicate{kRemovePredicate, "<RemoveFunction>b__0", 1};
-ref::Class kRemovePredicateFF6{"Last.Battle", "BattleConditionController.<>c__DisplayClass62_0", game::kFF6};
-ref::Method mRemovePredicateFF6{kRemovePredicateFF6, "<RemoveFunction>b__0", 1};
+ref::Method mRemoveFunction{kCondCtl, "RemoveFunction", 2};
+ref::Method mRemoveConditionFunction{kCondCtl, "RemoveConditionFunction", 3};
 ref::Class kStatusCtlFF2{"Last.Battle", "BattleStatusControl", game::kFF2};
 ref::Method mUpdateTempParamter{kStatusCtlFF2, "UpdateTempParamter", 1};
 ref::Class kBattleCtlFF5{"Last.Battle", "BattleController", game::kFF5};
@@ -118,7 +112,6 @@ ref::Method mStateChange{kBattleCtlFF5, "StateChange", 1};
 // HitType values (identical in all five dump.cs).
 constexpr int kHitMiss = 2;
 constexpr int kHitZero = 3;         // a genuine 0-value result
-constexpr int kHitRecovery = 4;     // HP recovery
 constexpr int kHitMpHit = 5;        // MP damage
 constexpr int kHitMpRecovery = 6;   // MP recovery
 
@@ -155,16 +148,6 @@ void speak_removed(void* unit, const std::wstring& condition)
     ffpr::say(TF(L"{0}: {1} removed", {unit_name(unit), condition}), false);
 }
 
-// FF2: the conditions whose add was announced, per unit (unit identity -> id -> name, type).
-struct Tracked {
-    std::wstring name;
-    int type = 0;
-};
-std::map<void*, std::map<int, Tracked>> g_ff2_tracked;
-void* g_ff2_last_unit = nullptr;
-int g_ff2_last_id = -1;
-int64_t g_ff2_last_frame = -1;
-
 // --- The action line: game text first (user rule, 2026-10-06) -------------------------------------
 // "Read game results where available; keep mod-side results only for information the game shows
 // as icons or pictures." When an action starts, the game writes its name in the battle message box
@@ -195,6 +178,7 @@ void d_InitActionState(void* self, const void* mi)
         void* unit = ref::rd<void*>(act, fAttackUnitData);
         action_actor_started(unit);
         std::wstring actor = unit_name(unit);
+        stat_feedback::observe_action(unit,actor,ref::rd<void*>(act,fStatTargets));
         action_started(actor, action_name(act));
     });
     timing::mark("Battle action initialized");
@@ -202,6 +186,12 @@ void d_InitActionState(void* self, const void* mi)
 Void_t o_EndFinishingState;
 void d_EndFinishingState(void* self, const void* mi)
 {
+    // Exact native action completion catches unique/inlined base-stat writes too.
+    // Its currently rooted participants are still alive before native teardown.
+    hooks::guarded("Battle.StatActionComplete",[&] {
+        void* act=self?ref::rd<void*>(self,fInStagingActData):nullptr;
+        if(act)stat_feedback::finish_action(ref::rd<void*>(act,fAttackUnitData),ref::rd<void*>(act,fStatTargets));
+    });
     // Finish before native completion callbacks can initialize the next command/action.
     hooks::guarded("Battle.ActionFinished", [] { action_actor_finished(); });
     { timing::Scope native("Battle EndFinishingState",timing::Kind::Original);
@@ -220,7 +210,10 @@ void damage_view(const std::wstring& target, int value, int hit_type, bool is_re
         msg = prefix + TF(L"Recovered {0} MP", {text::num(value)});
     } else if (hit_type == kHitMpHit) {
         msg = prefix + TF(L"{0} MP damage", {text::num(value)});
-    } else if (hit_type == kHitRecovery || is_recovery) {
+    } else if (is_recovery) {
+        // The innermost renderer flag controls the displayed recovery colour.
+        // A healing function's nominal Recovery hit type can still render HP
+        // damage (Cure against undead); it must not override that presentation.
         msg = prefix + TF(L"Recovered {0} HP", {text::num(value)});
     } else {
         msg = prefix + TF(L"{0} damage", {text::num(value)});
@@ -234,7 +227,7 @@ DamageView_t o_CreateDamageView;
 void d_CreateDamageView(void* self, void* data, int32_t value, int32_t hit_type, bool is_recovery, const void* mi)
 {
     DamageScope scope;
-    g_damage_context = {data, hit_type};
+    g_damage_context = {data, special_feedback::owned_damage_type(self,hit_type,is_recovery)};
     timing::Scope native("Battle CreateDamageView",timing::Kind::Original);
     o_CreateDamageView(self, data, value, hit_type, is_recovery, mi);
 }
@@ -244,7 +237,7 @@ DamageViewFF2_t o_CreateDamageViewFF2;
 void d_CreateDamageViewFF2(void* self, void* data, int32_t value, int32_t hit_type, bool is_recovery, bool is_play_se, const void* mi)
 {
     DamageScope scope;
-    g_damage_context = {data, hit_type};
+    g_damage_context = {data, special_feedback::owned_damage_type(self,hit_type,is_recovery)};
     timing::Scope native("Battle CreateDamageView FF2",timing::Kind::Original);
     o_CreateDamageViewFF2(self, data, value, hit_type, is_recovery, is_play_se, mi);
 }
@@ -254,7 +247,7 @@ DamageViewFF5_t o_CreateDamageViewFF5;
 void d_CreateDamageViewFF5(void* self, void* data, int32_t value, int32_t hit_type, bool is_recovery, int32_t miss_type, const void* mi)
 {
     DamageScope scope;
-    g_damage_context = {data, hit_type};
+    g_damage_context = {data, special_feedback::owned_damage_type(self,hit_type,is_recovery)};
     timing::Scope native("Battle CreateDamageView FF5",timing::Kind::Original);
     o_CreateDamageViewFF5(self, data, value, hit_type, is_recovery, miss_type, mi);
 }
@@ -281,7 +274,7 @@ void rendered_damage(void* self, bool recovery, bool miss)
 {
     hooks::guarded("Battle.DisplayedDamage", [=] {
         const auto name = unit_name(g_damage_context.unit);
-        const int type = miss ? kHitMiss : g_damage_context.type;
+        const int type = miss ? kHitMiss : special_feedback::damage_type(g_damage_context.type,recovery);
         rendered::damage(self, miss, [name, type, recovery](int digits) {
             damage_view(name, digits, type < 0 ? kHitZero : type, recovery);
         });
@@ -424,23 +417,20 @@ void condition_added(void* unit, int id)
             }
         }
     }
-    std::wstring name = resolve_condition_name(confirmed, id);
-    if (name.empty()) return;
-
-    // FF2: a named, announced condition's removal is announced too (UpdateTempParamter).
-    if (game::is(game::Id::FF2)) {
-        Tracked& t = g_ff2_tracked[unit][id];
-        t.name = name;
-        t.type = confirmed ? condition_type(confirmed) : 0;
-    }
-
-    ffpr::say(unit_name(unit) + L": " + name, false);
+    int type=0;
+    std::wstring name = resolve_condition_name(confirmed, id, &type);
+    // Generic enemy art has no critical-health pose/icon. This separate,
+    // default-off disclosure never mutes party critical health or critical hits.
+    if(type==4&&kBattleEnemyData.is(unit)&&!ui::prefs::enemy_critical_status_enabled())return;
+    if (stat_feedback::announce_condition(unit,name,type)) return;
+    if (!name.empty()) ffpr::say(unit_name(unit) + L": " + name, false);
 }
 
 using Add_t = void (*)(void* self, void* unit, int32_t id, const void* mi);
 Add_t o_Add;
 void d_Add(void* self, void* unit, int32_t id, const void* mi)
 {
+    stat_feedback::AddScope applied(unit);
     o_Add(self, unit, id, mi);
     hooks::guarded("BattleConditionController.Add", [&] { condition_added(unit, id); });
 }
@@ -449,6 +439,7 @@ using AddFF5_t = void (*)(void* self, void* unit, int32_t id, bool is_call_back,
 AddFF5_t o_AddFF5;
 void d_AddFF5(void* self, void* unit, int32_t id, bool is_call_back, const void* mi)
 {
+    stat_feedback::AddScope applied(unit);
     o_AddFF5(self, unit, id, is_call_back, mi);
     hooks::guarded("BattleConditionController.Add", [&] { condition_added(unit, id); });
 }
@@ -458,164 +449,88 @@ Void_t o_BattleEndRecoveryCondition;
 void d_BattleEndRecoveryCondition(void* self, const void* mi)
 {
     g_battle_end_cleanup = true;
+    stat_feedback::cleanup();
     o_BattleEndRecoveryCondition(self, mi);
     // FF1 and FF6: the scope ends with the cleanup. FF2-FF5 keep the latch until the next battle starts.
     if (game::in(kFF16)) g_battle_end_cleanup = false;
 }
 
-// --- FF1 and FF6: <RemoveFunction>b__0 predicate (postfix) ---------------------------------------
-// The predicate (f.condition.Id == id) runs only inside RemoveConditionFunction's removal loop, the
-// end of every removal path (cures, wear-off, conflicts, InterruptRemoveCondition, battle-end
-// cleanup), and only for a function Add created. __result true = the function being removed.
-// FF1's class is <>c__DisplayClass45_0, FF6's <>c__DisplayClass62_0 (one RVA each); one of them is
-// attached per process, so they share the detour and its original pointer.
-void ff1_removal(void* fn, bool result)
+// --- Native function removal: direct and bulk, all six games -----------------------
+// Recovery functions first edit CurrentConditionList, then native reconciliation
+// removes the obsolete BattleConditionFunctions. Capture the live old functions
+// on this stack, rather than relying on an Add seen in this battle. Master
+// Condition objects are immutable/rooted by the master manager throughout this
+// synchronous call; no function/condition pointer is retained for later frames.
+constexpr int kRemovalLimit = 128;
+struct RemovalSnapshot {
+    struct Entry { void* condition = nullptr; int id = 0; int type = 0; };
+    std::array<Entry,kRemovalLimit> entries{};
+    int count = 0;
+    void* parameter = nullptr;
+    bool valid = false;
+};
+RemovalSnapshot removal_before(void* unit)
 {
-    if (!result || !fn || g_battle_end_cleanup) return;
-    void* unit = function_unit(fn);
-    void* condition = function_condition(fn);
-    if (!unit || !condition) return;
-    int id = condition_id(condition);
-
-    if (void* param = unit_parameter(unit)) {
-        // Statuses cleared because the unit dropped out of the fight (KO / Stone): silent. A revive
-        // removes KO itself, so the unit is back in the fight and "KO removed" speaks.
-        if (is_out_battle(param)) return;
-        for (void* c : confirmed_conditions(param)) {
-            if (!c) continue;
-            if (condition_id(c) == id) return;                       // still present (stacked copy)
-            if (condition_type(c) == kConditionTypeKO) return;       // KO clearing other statuses
-        }
+    RemovalSnapshot result;
+    if (!unit || g_battle_end_cleanup || !is_in_battle()) return result;
+    result.parameter = unit_parameter(unit);
+    void* list = info_functions(unit_info(unit));
+    const int count = unity::list_count(list);
+    if (!result.parameter || count < 0 || count > kRemovalLimit) return result;
+    for (int i=0;i<count;++i) {
+        void* c = function_condition(unity::list_at(list,i));
+        if (c) result.entries[result.count++] = {c,condition_id(c),condition_type(c)};
     }
-
-    if (!first_this_frame(unit, id)) return;
-    std::wstring name = resolve_condition_name(condition, id);
-    if (name.empty()) return;
-    speak_removed(unit, name);
-}
-
-using Predicate_t = bool (*)(void* self, void* fn, const void* mi);
-Predicate_t o_RemovePredicate;
-bool d_RemovePredicate(void* self, void* fn, const void* mi)
-{
-    bool result = o_RemovePredicate(self, fn, mi);
-    hooks::guarded("BattleConditionController.RemoveFunction predicate", [&] { ff1_removal(fn, result); });
+    result.valid = true;
     return result;
 }
-
-// --- FF3 / FF4 / FF5: RemoveFunction(BattleUnitData, int id) --------------------------------------
-
-/// The condition of the unit's function for this id: the first (FF3, FF5) or last (FF4) match.
-void* function_condition_for(void* info, int id, bool last)
+void removal_after(void* unit, const RemovalSnapshot& before)
 {
-    void* found = nullptr;
-    for (void* fn : list_items(info_functions(info))) {
-        void* c = function_condition(fn);
-        if (c && condition_id(c) == id) {
-            found = c;
-            if (!last) break;
-        }
+    if (!before.valid || g_battle_end_cleanup || !is_in_battle() ||
+        unit_parameter(unit) != before.parameter) return;
+    void* functions = info_functions(unit_info(unit));
+    void* current = current_condition_list(before.parameter);
+    const int nf=unity::list_count(functions), nc=unity::list_count(current);
+    if (nf<0 || nf>kRemovalLimit || nc<0 || nc>kRemovalLimit) return;
+    std::array<int,kRemovalLimit*2> remaining{}; int count=0;
+    bool incapacitated=false;
+    for (int i=0;i<nf;++i) if (void* c=function_condition(unity::list_at(functions,i)))
+        remaining[count++]=condition_id(c);
+    for (int i=0;i<nc;++i) if (void* c=unity::list_at(current,i)) {
+        remaining[count++]=condition_id(c);
+        const int type=condition_type(c);
+        incapacitated |= type==kConditionTypeKO || type==kConditionTypeStone;
     }
-    return found;
-}
-
-/// KO or Stone in the unit's current list, other than the condition being removed.
-bool incapacitated_by_other(void* param, int removed_id)
-{
-    for (void* c : current_conditions(param)) {
-        if (!c || condition_id(c) == removed_id) continue;
-        int type = condition_type(c);
-        if (type == kConditionTypeKO || type == kConditionTypeStone) return true;
+    for (int i=0;i<before.count;++i) {
+        const auto& entry=before.entries[i];
+        if(entry.type==4&&kBattleEnemyData.is(unit)&&!ui::prefs::enemy_critical_status_enabled())continue;
+        if (std::find(remaining.begin(),remaining.begin()+count,entry.id)!=remaining.begin()+count) continue;
+        // Keep native stacked/permanent conditions and prior KO/Stone cleanup
+        // policy. A successful revive can still announce KO removed.
+        if (incapacitated && entry.type!=kConditionTypeKO && entry.type!=kConditionTypeStone) continue;
+        if (entry.type==kConditionTypeKO && param_current_hp(before.parameter)<=0) continue;
+        const auto name=resolve_condition_name(entry.condition,entry.id);
+        if (name.empty() || !first_this_frame(unit,entry.id)) continue;
+        speak_removed(unit,name.substr(0,256));
     }
-    return false;
 }
-
-bool has_current_condition(void* param, int id)
-{
-    for (void* c : current_conditions(param))
-        if (c && condition_id(c) == id) return true;
-    return false;
-}
-
-/// FF3 (BattleDamagePatches.RemoveFunction_Prefix).
-void ff3_removal(void* unit, int id)
-{
-    if (g_battle_end_cleanup || !unit) return;
-    void* info = unit_info(unit);
-    if (!info_functions(info)) return;
-    void* removed = function_condition_for(info, id, false);
-    if (!removed) return;   // no function: nothing is removed (never applied)
-    std::wstring name = resolve_condition_name(removed, id);
-    if (name.empty()) return;   // hidden/internal condition
-    void* param = info_parameter(info);
-    // KO / Stone clearing the unit's other statuses.
-    if (incapacitated_by_other(param, condition_id(removed))) return;
-    // KO dropped from a unit still at 0 HP is clean-up, not a revive.
-    if (condition_type(removed) == kConditionTypeKO && param && param_current_hp(param) <= 0) return;
-    if (!first_this_frame(unit, id)) return;
-    speak_removed(unit, name);
-}
-
-/// FF4 (BattleConditionController_RemoveFunction_Patch.Prefix).
-void ff4_removal(void* unit, int id)
-{
-    if (g_battle_end_cleanup || !unit) return;
-    void* info = unit_info(unit);
-    if (!info_functions(info)) return;
-    // RemoveFunction removes the LAST function with this id, and nothing when there is none.
-    void* removed = function_condition_for(info, id, true);
-    if (!removed) return;
-    if (void* param = info_parameter(info)) {
-        bool knocked_out = false;
-        for (void* c : current_conditions(param)) {
-            if (!c) continue;
-            if (condition_id(c) == id) return;   // still has it
-            if (condition_type(c) == kConditionTypeKO) knocked_out = true;
-        }
-        if (knocked_out && condition_type(removed) != kConditionTypeKO) return;
-    }
-    std::wstring name = resolve_condition_name(removed, id);
-    if (name.empty()) return;
-    if (!first_this_frame(unit, id)) return;
-    speak_removed(unit, name);
-}
-
-/// FF5 prefix: the name to announce if the removal really happens, else empty.
-std::wstring ff5_removal_prefix(void* unit, int id)
-{
-    if (g_battle_end_cleanup || !unit) return std::wstring();
-    void* info = unit_info(unit);
-    void* condition = function_condition_for(info, id, false);
-    if (!condition) return std::wstring();
-    std::wstring name = resolve_condition_name(condition, id);
-    if (name.empty()) return std::wstring();
-    if (incapacitated_by_other(info_parameter(info), id)) return std::wstring();   // KO or Stone
-    return name;
-}
-
-/// FF5 postfix: only when the condition is gone from the list and its last function went.
-void ff5_removal_postfix(void* unit, int id, const std::wstring& name)
-{
-    if (name.empty()) return;
-    void* info = unit_info(unit);
-    if (has_current_condition(info_parameter(info), id) || function_condition_for(info, id, false)) return;
-    if (!first_this_frame(unit, id)) return;
-    speak_removed(unit, name);
-}
-
-using RemoveFunction_t = void (*)(void* self, void* unit, int32_t id, const void* mi);
+using RemoveFunction_t = void (*)(void*,void*,int32_t,const void*);
 RemoveFunction_t o_RemoveFunction;
-void d_RemoveFunction(void* self, void* unit, int32_t id, const void* mi)
+void d_RemoveFunction(void* self,void* unit,int32_t id,const void* mi)
 {
-    std::wstring ff5_name;
-    hooks::guarded("BattleConditionController.RemoveFunction", [&] {
-        if (game::is(game::Id::FF3)) ff3_removal(unit, id);
-        else if (game::is(game::Id::FF4)) ff4_removal(unit, id);
-        else if (game::is(game::Id::FF5)) ff5_name = ff5_removal_prefix(unit, id);
-    });
-    o_RemoveFunction(self, unit, id, mi);
-    if (!ff5_name.empty())
-        hooks::guarded("BattleConditionController.RemoveFunction", [&] { ff5_removal_postfix(unit, id, ff5_name); });
+    RemovalSnapshot before;
+    hooks::guarded("Battle.RemovalBefore",[&]{before=removal_before(unit);});
+    o_RemoveFunction(self,unit,id,mi);
+    hooks::guarded("Battle.RemovalAfter",[&]{removal_after(unit,before);});
+}
+using RemoveConditions_t = void (*)(void*,void*,void*,void*,const void*);
+RemoveConditions_t o_RemoveConditionFunction;
+void d_RemoveConditionFunction(void* self,void* unit,void* conditions,void* functions,const void* mi)
+{
+    RemovalSnapshot before;
+    hooks::guarded("Battle.RemovalsBefore",[&]{before=removal_before(unit);});
+    o_RemoveConditionFunction(self,unit,conditions,functions,mi);
+    hooks::guarded("Battle.RemovalsAfter",[&]{removal_after(unit,before);});
 }
 
 // --- FF5: BattleController.StateChange (prefix) ---------------------------------------------------
@@ -634,58 +549,16 @@ void d_StateChange(void* self, int32_t state, const void* mi)
     o_StateChange(self, state, mi);
 }
 
-// --- FF2: BattleStatusControl.UpdateTempParamter(BattleUnitData) (postfix) ------------------------
-// Every condition-function list change is followed by UpdateTempParamter(unit), so a tracked
-// condition missing from the list here has just been removed (cure, wear-off, revive, conflict).
-bool ff2_unit_down(void* info)
-{
-    void* param = info_parameter(info);
-    if (!param) return false;
-    if (param_current_hp(param) <= 0) return true;
-    for (void* c : current_conditions(param))
-        if (c && condition_type(c) == kConditionTypeKO) return true;
-    return false;
-}
-
-void ff2_update_temp_paramter(void* unit)
-{
-    if (!unit) return;
-    auto it = g_ff2_tracked.find(unit);
-    if (it == g_ff2_tracked.end() || it->second.empty()) return;
-    std::map<int, Tracked>& tracked = it->second;
-
-    void* info = unit_info(unit);
-    std::set<int> live;
-    for (void* fn : list_items(info_functions(info))) {
-        if (void* c = function_condition(fn)) live.insert(condition_id(c));
-    }
-    std::vector<int> removed;
-    for (auto& kv : tracked)
-        if (!live.count(kv.first)) removed.push_back(kv.first);
-    if (removed.empty()) return;
-
-    bool silent = g_battle_end_cleanup || !is_in_battle();
-    bool unit_down = ff2_unit_down(info);
-    int64_t frame_now = static_cast<int64_t>(frame::count());
-    for (int id : removed) {
-        Tracked entry = tracked[id];
-        tracked.erase(id);
-        if (silent) continue;
-        if (unit_down && entry.type != kConditionTypeKO) continue;
-        if (unit == g_ff2_last_unit && id == g_ff2_last_id && frame_now == g_ff2_last_frame) continue;
-        g_ff2_last_unit = unit;
-        g_ff2_last_id = id;
-        g_ff2_last_frame = frame_now;
-        speak_removed(unit, entry.name);
-    }
-}
-
+// FFII's existing stat-refresh adapter; removal is owned by native function
+// reconciliation above, independently of Add history or temporary-stat refresh.
 using UpdateTemp_t = void (*)(void* self, void* unit, const void* mi);
 UpdateTemp_t o_UpdateTempParamter;
 void d_UpdateTempParamter(void* self, void* unit, const void* mi)
 {
+    stat_feedback::Snapshot before;
+    hooks::guarded("Battle.StatBefore", [&] { before=stat_feedback::capture(unit); });
     o_UpdateTempParamter(self, unit, mi);
-    hooks::guarded("BattleStatusControl.UpdateTempParamter", [&] { ff2_update_temp_paramter(unit); });
+    hooks::guarded("Battle.StatAfter", [&] { stat_feedback::updated(unit,before); });
 }
 
 int install()
@@ -721,11 +594,9 @@ int install()
     if (game::in(game::kFF5)) n += hooks::attach(mAddFF5, &d_AddFF5, &o_AddFF5) ? 1 : 0;
     n += hooks::attach(mBattleEndRecoveryCondition, &d_BattleEndRecoveryCondition, &o_BattleEndRecoveryCondition) ? 1 : 0;
 
-    // Status removal, per game.
-    if (game::in(game::kFF1)) n += hooks::attach(mRemovePredicate, &d_RemovePredicate, &o_RemovePredicate) ? 1 : 0;
-    if (game::in(game::kFF6)) n += hooks::attach(mRemovePredicateFF6, &d_RemovePredicate, &o_RemovePredicate) ? 1 : 0;
+    n += hooks::attach(mRemoveFunction, &d_RemoveFunction, &o_RemoveFunction) ? 1 : 0;
+    n += hooks::attach(mRemoveConditionFunction, &d_RemoveConditionFunction, &o_RemoveConditionFunction) ? 1 : 0;
     if (game::in(game::kFF2)) n += hooks::attach(mUpdateTempParamter, &d_UpdateTempParamter, &o_UpdateTempParamter) ? 1 : 0;
-    if (game::in(kFF345)) n += hooks::attach(mRemoveFunction, &d_RemoveFunction, &o_RemoveFunction) ? 1 : 0;
     if (game::in(game::kFF5)) n += hooks::attach(mStateChange, &d_StateChange, &o_StateChange) ? 1 : 0;
     return n;
 }
@@ -741,10 +612,7 @@ void removal_reset_state()
     g_battle_end_cleanup = false;
     g_spoken_this_frame.clear();
     g_spoken_frame = -1;
-    g_ff2_tracked.clear();
-    g_ff2_last_unit = nullptr;
-    g_ff2_last_id = -1;
-    g_ff2_last_frame = -1;
+
 }
 
 } // namespace ffpr::battle

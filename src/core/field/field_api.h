@@ -46,6 +46,7 @@ struct PathInfo {
     std::wstring guidance;        // owned scenario instruction, selected with the actual usable route
     int guidance_index = -1;      // index in the bounded request's authored candidate list
     std::wstring defense_warning; // concise current danger/closest-party advice
+    bool npc_approach = false;    // wait/interaction prefix; original destination is still pending
     int blocking_party = -1;      // partial route ends beside this parked corps, zero-based
 };
 
@@ -66,6 +67,7 @@ struct Target {
                                   // position is then meaningless; route by the cell below.
     int cell_layer = 1, cell_x = 0, cell_y = 0;
     int entity_id = -1;
+    int transportation_id = 0;    // vehicle model identity, independent of NPC entity IDs
 };
 
 // --- player and map ---------------------------------------------------------------------

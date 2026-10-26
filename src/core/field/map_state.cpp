@@ -39,6 +39,45 @@ ref::Field fArea{kStorage, "area"}, fLocal{kStorage, "map"}, fStorageMap{kStorag
 ref::Field fUserArea{r::kUserDataManager, "<CurrentAreaId>k__BackingField"};
 ref::Field fBits{kFlags, "bits"}, fLength{kFlags, "length"};
 ref::Method mInstance{kStorage, "get_Instance", 0};
+ref::Class kMiniUser{"Last.Management","UserDataManager",game::kFF3};
+ref::Field fMiniCorps{kMiniUser,"<corpsList>k__BackingField"}, fMiniOwned{kMiniUser,"<OwnedCharacterList>k__BackingField"};
+ref::Class kMiniCorps{"Last.Data.User","Corps",game::kFF3};
+ref::Method mMiniMember{kMiniCorps,"get_CharacterId",0};
+ref::Class kMiniCharacter{"Last.Data.User","OwnedCharacterData",game::kFF3};
+ref::Method mMiniId{kMiniCharacter,"get_Id",0};
+ref::Field fMiniParameter{kMiniCharacter,"parameter"};
+ref::Class kMiniParameter{"Last.Data","CharacterParameterBase",game::kFF3};
+ref::Field fMiniConditions{kMiniParameter,"<CurrentConditionList>k__BackingField"};
+ref::Class kMiniCondition{"Last.Data.Master","Condition",game::kFF3};
+ref::Method mMiniType{kMiniCondition,"get_ConditionType",0};
+std::optional<int> party_mini(void* user) {
+    if(!game::is(game::Id::FF3)||!user)return {};
+    if(!mMiniMember||!mMiniId||!mMiniType||fMiniCorps.get()<0||fMiniOwned.get()<0||
+        fMiniParameter.get()<0||fMiniConditions.get()<0)return {};
+    void* corps=ref::rd<void*>(user,fMiniCorps);void* owned=ref::rd<void*>(user,fMiniOwned);
+    const int nc=unity::list_count(corps),no=unity::list_count(owned);
+    if(nc<1||nc>9||no<1||no>16)return {};
+    int members=0,work=512;bool all=true;
+    for(int i=0;i<nc;++i){
+        void* slot=unity::list_at(corps,i);if(!slot)return {};
+        const int id=ref::call<int32_t>(mMiniMember,slot);if(id<=0)continue;
+        void* member=nullptr;
+        for(int j=0;j<no;++j)if(void* candidate=unity::list_at(owned,j))
+            if(ref::call<int32_t>(mMiniId,candidate)==id){member=candidate;break;}
+        if(!member)return {};
+        void* parameter=ref::rd<void*>(member,fMiniParameter);if(!parameter)return {};
+        void* conditions=ref::rd<void*>(parameter,fMiniConditions);
+        if(!conditions)return {}; // uninitialized data cannot establish a failed gate
+        const int count=unity::list_count(conditions);if(count<0||count>128||count>work)return {};work-=count;
+        bool mini=false;
+        for(int j=0;j<count&&!mini;++j){
+            void* condition=unity::list_at(conditions,j);if(!condition)return {};
+            mini=ref::call<int32_t>(mMiniType,condition)==401;
+        }
+        all&=mini;++members;
+    }
+    return members?std::optional<int>(all?1:0):std::nullopt;
+}
 int g_observed_map = 0;
 std::wstring g_observed_group;
 std::set<std::wstring> g_observed_groups;
@@ -74,7 +113,10 @@ Flags snapshot()
     };
     copy_local(fArea,result.area); copy_local(fLocal,result.local);
     result.current_map_id=ref::rd<int32_t>(storage,fStorageMap);
-    if (void* user=ref::call_static<void*>(r::mUserDataInstance)) result.current_area_id=ref::rd<int32_t>(user,fUserArea);
+    if (void* user=ref::call_static<void*>(r::mUserDataInstance)) {
+        result.current_area_id=ref::rd<int32_t>(user,fUserArea);
+        result.party_mini=party_mini(user);
+    }
     return result;
 }
 void reset_observed() {

@@ -1,4 +1,382 @@
+# October25 current character/location and save checks
+
+October26 [beacon movement/spatial fix](re/BEACON_MOVEMENT_20261026.md): full
+offline checks passed and installed all six. During ordinary play,
+walk continuously along a beacon route and around a corner in HRTF and stereo:
+expect pings while moving. HRTF's south/rear and rear diagonals should keep normal
+pitch; stereo rear should be lower. Existing map north remains audio front.
+Arrival/menu should silence it; target/floor changes must not replay an old aim.
+Listening and actual native/audio tail measurements remain unconfirmed.
+
+October26 [locked doors](re/LOCKED_DOORS_20261026.md) are fixed and installed all
+six. When next near Castle Argus's locked doors, select Objects/Door without a
+key or unlock ability. Expect directions to an adjacent facing position, then
+the native locked response when pressing Confirm. Enable Hide story-gated
+destinations: that accessible Door should remain listed. The room beyond may
+still be blocked. A separate obstacle blocking the approach must still gate.
+Report a missing Door or Story gated while already beside it. Offline21/21 FFIII
+door checks pass; native interaction/listening remains pending. No extra travel
+or save modification is required just for this check.
+
+October26 [storage](re/WAREHOUSE_20261026.md) and
+[remote return exits](re/REMOTE_RETURNS_20261026.md) are installed all six.
+Test these first when convenient:
+
+1. At Fat Chocobo, move through Store/Retrieve/Exit. Expect those labels rather
+   than inventory preview names. Empty Retrieve should say No stored items.
+2. Enter Store/Retrieve. Expect item name and visible count, without repeating
+   the mode. I reads the description; Autodetail adds it automatically when on.
+   Shift+I should read the actual Confirm/Back and any other displayed footer hints.
+3. Open quantity selection. Expect the prompt, item, Stock and selected amount.
+   Adjust it using native controls: each changed amount should speak. Confirm a
+   small transfer and verify the refreshed count; cancel should restore list/bar
+   focus without an old quantity announcement. Native minimum/maximum still apply.
+4. In Dwarven Hollows B1, the B2-to-B3 destination stays; the remote B3-to-B2
+   return should be gone. On B3, its actual return remains available. Uncertain
+   exits such as the Inn's two-cell arrival are deliberately retained; do not
+   interpret that as loss of the complete routing graph.
+
+Offline checks passed; new gameplay listening/native-audio timing is unconfirmed.
+Study was subsequently confirmed vocalizing by the user and was left unchanged.
+
+[Molten Cave B3 review](re/MOLTEN_CAVE_20261026.md): the existing Rock entry is
+in Objects. Request directions to it and press native Confirm when beside/facing
+it. After opening, request the onward route again. Offline replay verifies this
+local switch; the installed payload is unchanged. Report if Rock is missing or
+the interaction fails; no extra world-map scene or dwarf conversation is needed
+for this particular B3 door.
+
+[October26 status/world fixes](re/ALLY_STATUS_20261026.md) are installed all six;
+offline checks passed. Test these first when natural progression permits:
+
+1. With a Mini ally in FFIII, press their party number while another member
+   chooses a command. Expect Mini. When that ally is active, H should include Mini.
+   Ally targeting should retain Mini. After curing it, those reads must stop Mini.
+2. With a low-health ally, H/their number/target should include Critical. Heal them
+   and it should stop. Natural Poison/Venom/paralysis or other visible effects
+   should similarly appear in review and stop when cured. Report game, key and
+   condition if missing; VI has no ordinary Paralysis8 master condition.
+3. On the FFIII world map, the passive zero-step Chocobo scene marker should be
+   gone. Tozus Tunnel should be absent unless the entire active party is Mini;
+   owning Enterprise must not yield Requires The Enterprise. No need to change
+   the optional story-gate filter or travel out of the way solely for this check.
+
+No standard enemy low-health danger pose was found in I-VI. Enemy critical speech
+remains an independent default-off option. These checks need no visual judgment
+or code review; audio/native timing remains unmeasured until gameplay confirmation.
+
+[October26 shop number-row correction](re/SHOP_COMPARISON_20261026.md): once
+installed, highlight incompatible equipment and press that character's number.
+Expect the name followed by Can not equip. Stronger/Weaker must follow the game's
+single comparison arrow; the shop can check both permitted hand slots. Use Equip
+to inspect a particular hand. Magic/consumables must not say Can not equip.
+Robyn's Ice Staff up arrow is native; her precise other-hand cause remains
+unconfirmed by the supplied screenshots.
+
+[Battle title/party shortcut repair](re/BATTLE_TITLE_PARTY_20261025.md) is
+complete and installed all six. Test1..4 in battle, ordinary
+cancel-return focus, and pause Return to Title without stray Attack when convenient.
+All offline fixtures/build/smoke/scan/resources/delivery hashes pass; listening
+remains unconfirmed.
+
+[Chocobo/Owen follow-up](re/CHOCOBO_OWEN_20261025.md) is installed all six after
+full offline checks/smoke/final scan. When progression permits, ride toward Owen:
+expect dismount at the final approach, then one step into the tower. On foot the
+adjacent outside entrance should remain listed/reachable. Route to Hole in normal
+form, apply Toad beside it, interact, then remove Toad after passage; normal-form
+interaction still gives native dialogue. These listening/gameplay checks remain
+separate from the exact offline fixture; no early replay is required.
+
+After the [terminal-transition correction](re/TRANSITION_ROUTES_20261025.md) is
+installed, south of Tokkul request Enterprise/Caanan directions: expect a sideways
+detour around the entrance before boarding. Selecting Tokkul should still enter
+it. Cross-floor routes should still end at their required transition; mounted
+flight should still pass over towns. Offline coverage is distinct from listening.
+
+After the [patrol/companion/field-menu follow-up](re/NPC_PATROL_TARGETS_20261025.md)
+is installed, check these first when normal play permits. Implementation and
+offline source/native-data tests are distinct from these listening checks.
+
+1. A wandering NPC blocking a narrow corridor should say Wait for its name to
+   move; after it clears, the original route resumes. Static/script-only gates
+   still hand back for interaction. Companions stay passable and use proper names.
+2. Outside battle, switch a compatible spell right to all targets: All allies.
+   Switch left: only the actual focused character's displayed row. Repeat in
+   other games when a spell supports both; no keyboard remapping was added.
+3. Speech's Enemy critical status starts off: enemies' hidden Critical should be
+   silent. On restores it. Party Critical and critical hits remain audible. Use
+   naturally encountered battles; no need to replay Giant Rat or alter a save.
+4. In a scripted key-item selector, Autodetail off reads the item without its
+   description; I reads the current description repeatedly on demand. On appends
+   it once. Backing out or changing maps must not retain a prior item's detail.
+
+After the [connected-floor/map/shop follow-up](re/NPC_FLOORS_SHOP_LANDING_20261025.md)
+is installed, prioritize these when normal progression permits. Offline source,
+native-data and route tests cover these paths; gameplay listening is still pending.
+
+1. Browse the opened Tozus chest from another floor: it should still say Opened.
+   Loose hidden pickups should say Treasure and disappear after collection.
+2. On Sasune Current Map, browse Sara from another floor. In Kazus, route between
+   inn2F and town/Mines; a companion on the stair should not cause an NPC wait.
+3. On foot by an airship and while using an automatic canoe, expect no Can land.
+   A mounted manual airship/chocobo still announces a new legal landing edge.
+4. In an equipment shop, keys1..4 should identify characters and distinguish
+   Cannot equip from Can equip with Stronger/Weaker/No change. A magic-shop idle
+   sprite must not imply equipment incompatibility.
+5. Open a Gnomish Bread map: native WASD selects locations; I/Autodetail/arrows
+   review only that location's displayed services/Items/Chests. Basic maps have
+   markers and no inherited counts. Shift+I should read the current hints.
+6. Learn a spell and back out: only the newly focused menu option should speak,
+   with no old spell/tome/target preview. Real character selection remains audible.
+7. On an airship, routine world-border events should be absent regardless of
+   Alt+Backslash grouping, while real scenes and routes across borders remain.
+8. If Caanan's loose Elixir is still uncollected, its route should reach the
+   Ground-layer approach west of it, facing East. Already-collected saves cannot
+   confirm that interaction. Report a failed approach rather than altering a save.
+
+The [diagnostic startup build](re/STARTUP_HANG_20261025.md) is installed all six.
+User-started FFIII1448 reached title/gameplay normally; all boot boundaries
+completed and the cave-load log contains no initial Can land. This is one
+successful run; no startup cause/repair is established. Keep playing normally;
+a future failing trace with these boundaries is needed, without repeated
+deliberate restart tests. Flight/listening confirmation remains separate.
+
+After [silent landing initialization](re/LANDING_LOAD_20261025.md) is installed,
+load the cave save: no Can land before or when control returns. Repeat a boarded
+save when available. Then enter landable terrain during flight: one Can land
+is expected, without repeated chatter. Loading silence and live guidance are
+separate checks; neither has yet been gameplay-confirmed for this follow-up.
+
+Current priority after the [combined feedback follow-up](re/FF3_FEEDBACK_20261025.md)
+is installed: Cure against undead must say damage; ordinary healing recovered
+HP. On Cid's first FFIII airship, entering landable ground near Kazus should
+say Can land once. I on FF1/FFIII characters returns only current MP levels;
+Autodetail reads the short row once then MP once. Alt+Backslash toggles event
+grouping; the reported1535-row state becomes8. These remain user gameplay
+checks; prior manual I ownership is confirmed. No game launch/probe was used.
+
+Prioritize the [Ur clerk/I-key follow-up](re/INN_COUNTER_MP_20261025.md) once
+installed: I on highlighted FFIII equip characters and item/spell targets,
+then Ur's Item Shop clerk under Current Floor. Expected clerk approach from
+the pub doorway:2South,4East,faceNorth. FF1 character I needs the same check.
+
+After the combined build is installed, check FF1/FFIII character selection and
+item/spell targets: Autodetail off gives a short row; I reads MP levels last.
+Autodetail on keeps that order. Learning a spell should speak one row per focus
+change. Dahn should be named; Ur Map Exits should distinguish Well/Shed/Back Room.
+Check closing a target returns I to the item/spell description.
+[Evidence, ownership and limits](re/UR_CHARACTERS_20261025.md).
+
+Completed/scripted saves in any game should read slot number/details or Empty,
+the overwrite question before Yes/No, then the displayed completion result.
+Do not overwrite a wanted save just for testing. New-game intro should not say
+Use; real Items commands should. Critical-health/KO must not say Luck up/down.
+FFIII Jobs I should name the visible equippable icons.
+[All-six audit and remaining checks](re/SAVE_CONTEXT_VISIBILITY_20261025.md).
+
+# October25 floor labels, battle hand slots and controls
+
+After deployment, check naturally: load that quicksave and use the map key
+(Pandaemonium1F, matching pathfinder floor labels). In battle Items, Shift+I
+identifies Tab:Change Equipment. Tab hand slots read exact hand/favored-hand/item
+and I description; candidate choices keep displayed quantity and description.
+Check ordinary menu controls too. [Floor evidence](re/MAP_FLOORS_20261025.md),
+[battle/control contract](re/BATTLE_GEAR_CONTROLS_20261025.md). Gameplay pending.
+
+# October24 NPC identity and world-object follow-up
+
+After installing the combined follow-up, confirm naturally when progression
+permits: the reviewed unknown NPC says ???, and the cave Object route near Fynn
+includes boarding the nearby Airship, landing and the final foot approach when
+that is shorter. A one-step nearby destination should retain walking. Already
+aboard, the Object approach should include a legal landing. These remain player
+checks; the agent does not launch or control the game.
+
+# October24 combined maintenance: checks to confirm after installation
+
+Offline status and delivery hashes are in project memory and the linked feature
+records. These natural gameplay checks remain unconfirmed; no game is launched
+or controlled by the agent. Test when progression permits:
+
+1. Track Airship, cross a battle and ask for directions again at several distances.
+   It should stay Airship. A missing target should not become Ship or another chest.
+   Its nearby marker should say Interact: Airship.
+2. Route to Palamecia's landing event aboard the Airship (or from a reachable parked
+   Airship). Directions should end at the pad with land; activation remains manual.
+3. Cure persistent Poison using Antidote in battle. Hear the character and Poison
+   removed. Temporary Venom, spell cures, expiry and revival should keep their names.
+4. Press Shift+I in Items/Magic, maps and Bestiary. Hear the visible control bar.
+5. For an available stat-changing spell, hear the applied stat directions after its
+   name. Imbibe should say Attack up, Evasion down; later song changes remain audible.
+6. The Fynn throne-room exit should have no false Event warning. Paul's passage
+   objects should use their concealing wall names; the exit remains Castle Fynn3F.
+
 # Testing the native mod
+
+## October24: Imbibe's missing effect
+
+[Native mechanics and implementation](re/IMBIBE_20261024.md). Offline verification
+and delivery are in progress. After installation, check this first if Gottos uses
+Imbibe during normal play: expect its spell line followed by Gottos: Attack up,
+Evasion down. No hidden stat totals should be added. Other statuses and attacks
+should keep their existing speech. No encounter replay is needed solely to test
+this; actual audible/native timing remains gameplay-unconfirmed.
+
+## October24: H status and Roundworm labels
+
+[Implementation and offline evidence](re/ROUNDWORM_STATUS_20261024.md).
+Installed to five games; FFII awaits closing/deployment. After installation,
+check these first when naturally available; no encounter replay is required.
+
+1. Press H in battle. Expect the active character's displayed status without a
+   trailing command such as Attack. On the supplied FFII screen, Firion is
+   HP1900/1900 and MP10; maximum MP is not displayed. Repeated H remains audible.
+2. Full ally targeting should still include the displayed command. This differs
+   intentionally from the shorter H status summary.
+3. Leviathan map230 should say Roundworm's Room and identify its NPC as Roundworm.
+   Tropical Island's separate Big Horn should retain its own name.
+
+Shared all-six rendered-row checks and12-language scoped-label checks pass;
+native listening/timing and corrected labels remain gameplay-unconfirmed.
+
+## October24: Leviathan next destination
+
+The combined build is installed in all six games. From your Ship, select the
+Leviathan Scene trigger and request directions. Expect a sailing route to that
+trigger, with no instruction to disembark first. Its scene should take control
+on entry. The real-bake route/list/boarding checks pass; actual scene activation
+and MP listening remain to be confirmed during normal play.
+
+
+## October24: direct three-part Parasite result
+
+User-confirmed: the battle Items equipment row now reads correctly. No retest
+is required for that unchanged feature. The earlier MP correction failed in
+the new session; [current direct-render fix](re/PARASITE_THREE_PARTS_20261024.md)
+has separate evidence and supersedes that MP result.
+
+At the next natural Parasite attack, expect three parts: Guy's ordinary damage,
+Guy's MP damage, then Parasite recovering MP. This remains one hit; the mod does
+not count the three result parts as three hits. Misses and other HP effects
+retain their existing wording. Gameplay listening for the new correction is
+pending; no progression replay is required solely to trigger it.
+
+## October24: equipped battle Items and MP damage
+
+First check when a battle naturally permits it. [Implementation and native/offline evidence](re/BATTLE_ITEM_EQUIPMENT_20261024.md).
+
+1. Open Items and press Up from the first inventory row. Expect the selected
+   equipped gear and its visible Equipped marker. Move between slots: names
+   should follow the native selection. I reads the displayed description;
+   enabling Autodetail adds it automatically. Returning to Items restores its
+   ordinary item speech. The game's invalid-action sound can still apply to
+   equipment with no available battle action.
+2. When Parasite next attacks, its physical hit should say damage, followed
+   by MP damage for the drain and Recovered MP for Parasite. A miss stays Miss.
+   Other HP damage/recovery should retain its existing wording.
+
+Shared hooks and actual-detour fixtures cover all six games; FFVI Tools remains
+covered separately. Equipment speech is now user-confirmed; MP follow-up and audible timing remain pending;
+no progression replay is required solely to test these cases.
+
+## October24: map, Bestiary, targeting and navigation follow-up
+
+Implementation records: [maps](re/MAP_PANELS.md), [F9/controls](re/INPUT_INTERCEPTION.md),
+[Bestiary](re/BESTIARY.md), [ally targets](re/ALLY_TARGETS.md),
+[Poison/Venom](re/POISON_VENOM.md), [navigation](re/MYSIDIA_OBJECTS_20261024.md),
+[soundscape](re/SOUNDSCAPE.md#october24-physical-transition-and-trigger-groups).
+Offline checks do not establish these gameplay outcomes. After installation,
+test these first when convenient; no story replay is needed.
+
+1. In Bestiary, Items should include the displayed Gil, Potion and Antidote.
+   Shift+I should read the bottom controls. Press F9: native scrolling should
+   work without mod buffer speech. Press F9 again: mod browsing should return.
+   F8 > Navigation > Controls should offer the same interception setting.
+2. Open a basic map. Arrows should browse markers with approximate distance and
+   compass direction, without chest totals. Shift+I should read its controls.
+3. Switch to the location menu. With Autodetail Off, highlighting a place should
+   speak its name only; I should read services/counts. With Autodetail On, those
+   details should follow automatically. Current Location/Ship should never repeat
+   the preceding place's chest count. Multiple details should support arrows;
+   WASD should still move the native highlight.
+4. In battle, choose Attack and move to allies. Expect the selected displayed
+   name, HP, current MP and any visible command/condition. Hidden maximum MP
+   should stay absent. Move among allies and back to enemies, then cancel.
+5. When naturally inflicted by Poison Toad, persistent status should say Poison
+   on infliction, in status screens and when cured. Temporary battle Venom must
+   keep its separate name. Native field damage should retain its existing warning.
+6. Enable the soundscape near a multi-tile entrance: expect one ping for it.
+   Town border exits should give one source per compass direction. Changing the
+   pathfinder grouping switches should not multiply these sounds. Adjacent tiles
+   of one automatic event should likewise have one source.
+7. Mysidia's underground room should be Statue Room; manual examinations should
+   appear under Objects. Scriptless staged Masked Figure should not offer a false
+   interaction. Distant Ship should announce its walk before the boarding action.
+   Tropical Island retains its existing vehicle filter; no world-distance cut was
+   added. The logged B3 chest can route through B4 and must remain the B3 goal.
+
+
+## October23 NPC detour follow-up: test Mysidia first
+
+[Implementation and offline evidence](re/NPC_BLOCKERS.md#october23-mysidia-detour-and-temporary-occupancy-follow-up).
+Gameplay confirmation remains pending. Use the normal navigation controls:
+
+1. In Mysidia, select the inn and request directions. Expect a route around the
+   mage whenever one is open. A temporarily occupied doorway should say to wait,
+   with no Interact instruction for that open approach.
+2. With Autowalk enabled, repeat the route. If the mage enters it, expect a brief
+   pause, then a detour or automatic continuation after the mage moves. Manual
+   movement or the normal stop command should stop immediately. A continuous
+   wait ends after30 seconds; request the route again if necessary.
+3. When convenient, request a route past an NPC in a passage walled on both sides.
+   If every route around is closed, expect the existing interaction/blocker
+   guidance. A separate closed story gate must remain closed.
+
+Beacon-only guidance refreshes a waiting point without calling it arrival.
+No special capture or replay of a story sequence is required.
+
+## October23 combined navigation and battle follow-up
+
+[Navigation evidence](re/WORLD_EXIT_FOLLOWUP_20261023.md),
+[battle evidence](re/BATTLE_FEEDBACK_20261023.md). Offline checks and deployment
+are tracked there; gameplay confirmation remains separate. When progression permits:
+
+1. After Fog lands on Maria, expect “Maria: Amnesia”. Target her with a status item;
+   expect Amnesia alongside her displayed information.
+2. Parasite's extra drain should say MP damage. Swap should briefly say whose HP
+   and MP were exchanged; an unapplied attempt must not claim an exchange.
+3. In Fynn, southern exits should say “Exit to World Map”. Browse Map Exits with
+   the story-gate filter off; the previous long pause should be gone.
+4. Select Ship and request directions; expect the ordinary boarding route. The
+   same destination should work with the beacon/autowalk controls when enabled.
+
+Do not replay story sequences solely for these checks.
+
+## October23 Castle Fynn and NPC follow-up
+
+[Castle route/state evidence](re/CASTLE_FYNN_20261023.md),
+[NPC interaction behavior](re/NPC_BLOCKERS.md). Gameplay remains unconfirmed.
+When convenient, check these first:
+
+1. With the hidden passage closed, browse its side-room/basement chests from
+   2F. Expect “Story gated”, with no promised stair route or unrelated scene hint.
+2. After opening the passage normally, those same chests should have usable
+   routes across floors. The ordinary 3F side-room chest remains separate.
+3. On 1F, request directions past a soldier. Expect a legal detour when available.
+   A true choke gives directions to the soldier and an interaction action.
+   After the soldier moves, directions should clear without reentering the map.
+4. While following a chest across floors, request directions again. The same
+   destination should remain available while the navigation list rebuilds.
+
+## October23 FFII Ship directions follow-up
+
+[Implementation/evidence](re/VEHICLE_ROUTING.md#october23-live-ship-follow-up).
+Offline checks pass. The user's later deployment request lifts the FFII hold;
+this fix is included with the Castle Fynn/NPC update. Gameplay remains unconfirmed.
+Select Ship at the reported world-map location
+and request directions. Expect a usable route and Ship boarding action from the
+Canoe, including the boarding direction when adjacent. If it still fails, the
+log now records a rejected target's coordinates. No special capture is needed.
 
 ## October 23 FF6 story fixes: test Terra first
 

@@ -196,6 +196,10 @@ void clear_other_menu_states(const char* except_key)
 
 void on_battle_start()
 {
+    // Opening-presentation callbacks may finish after Return14 has begun.
+    // Only the native Battle state may reopen known lifecycle ownership.
+    // Preserve the pre-observation fallback for an unobserved main manager.
+    if (g_main_state >= 0 && g_main_state != 13) return;
     if (g_battle_ready) return;
     if (!g_in_battle) {
         g_in_battle = true;

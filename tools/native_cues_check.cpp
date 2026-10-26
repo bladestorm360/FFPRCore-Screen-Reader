@@ -9,7 +9,7 @@
 #include <fstream>
 namespace fixture {
 bool worker=false,ready=true,battle=true,status_on=true,speech=true;
-int wrong_owner=0,native_calls=0;
+int wrong_owner=0,native_calls=0,map_id=0;
 std::vector<std::function<void()>> jobs;
 json::Value visuals,labels,names;
 std::wstring locale=L"en";
@@ -39,6 +39,7 @@ void status_play(void* self,void* effect,int32_t asset,int32_t type,bool enemy,c
 void load(int n){for(auto [kind,file]:{std::pair{&visuals,"condition_visuals.json"},std::pair{&labels,"eventlabels.json"},std::pair{&names,"translation.json"}}){
     std::ifstream in("data/ff"+std::to_string(n)+"/"+file,std::ios::binary);
     const std::string raw{std::istreambuf_iterator<char>(in),{}};
+    *kind=json::Value{}; // Match production's fresh per-game resource snapshot.
     if(!json::parse(raw,*kind))std::abort();
 }}
 }
@@ -55,14 +56,16 @@ namespace displayed {
 bool world_visible(void* p){fixture::native();return container_visible(p)&&static_cast<fixture::Node*>(p)->rendered;}
 bool renderer_visible(void* p){fixture::native();return container_visible(p)&&static_cast<fixture::Node*>(p)->rendered;}
 }
-namespace fixture {int renderer_count=1;}
+namespace fixture {int renderer_count=1;void* vehicle=nullptr;int vehicle_id=0;}
 namespace unity {std::vector<void*> components_in_children(void* p,ref::Class&,bool){fixture::native();return std::vector<void*>(fixture::renderer_count,p);}void* get_component_in_children(void* p,ref::Class&,bool){fixture::native();return displayed::field(p,"shader");}}
 namespace ffpr::system {bool is_field_navigation_ready(){return fixture::ready;}}
 namespace field {
+bool vehicle_type_of(void* p,int& type,int& id,std::wstring& message){fixture::native();if(p!=fixture::vehicle)return false;type=3;id=fixture::vehicle_id;message=L"Airship";return true;}
+std::wstring vehicle_display_name(int,int,const std::wstring& message){fixture::native();return message;}
 void* entity_property(void* p){return displayed::field(p,"property");}
 std::wstring entity_name_from_property(void* p){return p?static_cast<fixture::Node*>(p)->words:L"";}
 npc_names::Label npc_display_label(const std::wstring& name){return npc_names::parse(name);}
-int current_map_id_or_user_data(){fixture::native();return 0;}
+int current_map_id_or_user_data(){fixture::native();return fixture::map_id;}
 namespace r {
 ref::Class kPropertyEntity{"Last.Map","PropertyEntity"};
 ref::Field fPropName{kPropertyEntity,"<Name>k__BackingField"};
@@ -141,11 +144,43 @@ int main(){
     interaction::hide(&icon);spoken.clear();object.kind="NPC";object.words=L"ev_e_0013: Jun";
     interaction::observed(&icon);flush();
     expect(spoken==std::vector<std::wstring>({L"Interact: Jun"}),"native NPC interaction cue omits developer script prefix and ordinal");
+    for(int n=1;n<=6;++n) {
+        fixture::game=static_cast<game::Id>(n);interaction::hide(&icon);spoken.clear();
+        object.kind="NPC";object.words=L"NPC";fixture::vehicle=&object;fixture::vehicle_id=n+10;
+        interaction::observed(&icon);flush();
+        expect(spoken==std::vector<std::wstring>({L"Interact: Airship"}),"vehicle model labels precede generic NPC inheritance in every game's interaction cue");
+    }
+    fixture::vehicle=nullptr;fixture::game=game::Id::FF2;
     interaction::hide(&icon);object.kind="Object";spoken.clear();
     interaction::observed(&icon);flush();
     raw=L"Unmapped object";integer(property,"<AssetId>k__BackingField",72);
     expect(field::safe_event_label(&object,L"Interactive Object")==L"Iron gate","verified live sprite ID names an unknown developer identifier");
     renderer.visible=false;interaction::hide(&icon);interaction::observed(&icon);flush();expect(spoken.size()==1,"hidden marker cannot announce");
+    load(2);
+    {
+        std::ifstream review_file("tools/event_warp_reviews.json",std::ios::binary);
+        const std::string review_bytes{std::istreambuf_iterator<char>(review_file),{}};json::Value reviews;
+        expect(json::parse(review_bytes,reviews)&&reviews.arr.size()==16,"exact reviewed travel corpus loads");
+        integer(property,"<AssetId>k__BackingField",0);integer(property,"<ObjectType>k__BackingField",2);
+        for(const auto& row:reviews.arr) {
+            raw=row.get(L"raw")->s;map_id=int(row.get(L"map_id")->n);
+            const int id=int(row.get(L"entity_id")->n);integer(property,"<EntityId>k__BackingField",id);
+            expect(field::safe_event_label(&object,L"Event")==L"Warp Tile","live native Event label identifies inspected warp pad");
+            worker=true;expect(field::safe_event_label(raw,L"Event",map_id,id,2)==L"Warp Tile","copied other-floor label uses the same inspected warp identity without native calls");worker=false;
+        }
+        map_id=0;
+        expect(field::safe_event_label(L"Unreviewed scene",L"Event")==L"Event trigger","unknown scene is not inferred to be a warp from routing alone");
+    }
+    expect(field::safe_event_label(L"隠し通路",L"Interactive Object",21,36,5)==L"Wall near bed" &&
+           field::safe_event_label(L"隠し通路",L"Interactive Object",43,22,5)==L"Wall",
+           "Paul's shared hidden-passage identifier names each actual concealing wall");
+    expect(field::safe_event_label(L"sc_e_0025:隠し通路の蓋",L"Interactive Object",118,14,5)==L"Rock",
+           "Josef's separate rock switch retains its physical identity");
+    load(6);
+    expect(field::safe_event_label(L"sc_e_0089:隠し通路入口",L"Interactive Object",3,132,5)==L"Rock",
+           "Narshe's passage entrance names the stone actually turned in its script");
+    expect(field::safe_event_label(L"上の建物で時計を6時10分50秒に合わせると隠し扉",L"Interactive Object")==L"Clock",
+           "a clock concealing a passage stays Clock without exposing its solution");
     load(1);
     expect(field::safe_event_label(L"GeneralEventObject",L"Interactive Object",22,55,5)==L"Gravestone",
            "an unnamed FF1 gravestone uses its reviewed native context");

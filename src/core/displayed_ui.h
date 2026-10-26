@@ -31,10 +31,16 @@ std::wstring vitals(void* view);
 std::vector<std::wstring> vital_lines(void* view);
 std::wstring bar(void* component);
 std::wstring character(void* view);
+/// Current-only spell charges, separated from short character/vital announcements.
+/// At most the eight native levels; hidden labels remain absent.
+std::vector<std::wstring> charge_lines(void* view);
+/// Main-menu character selection: vitals, job/next-level, remaining shown metadata.
+std::wstring character_overview(void* content, void* window);
 /// Only on native Formation/Order: derive row from the displayed portrait parent.
 std::wstring formation_row(void* window, void* content);
 /// Native serialized cursor anchor; row scripts can live on another GameObject.
 void* cursor_row(void* cursor, void* contents);
+bool cursor_matches(void* cursor, void* content);
 /// Read only condition icons whose native sprite is currently rendered.
 std::wstring conditions(void* content_or_controller);
 std::vector<std::wstring> condition_lines(void* content_or_controller);

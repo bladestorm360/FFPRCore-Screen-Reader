@@ -16,12 +16,15 @@
 #include "move_state.h"
 #include "vehicle_landing.h"
 #include "../core.h"
+#include "../displayed_ui.h"
+#include "../frame.h"
 #include "../hooks.h"
 #include "../log.h"
 #include "../modtext.h"
 #include "../refs.h"
 #include "../say.h"
 #include "../field/field_api.h"
+#include "../system/system.h"
 
 namespace ffpr::fieldnav::vehicle_landing {
 namespace {
@@ -30,8 +33,58 @@ namespace {
 
 ref::Class  kMapUIManager{"Last.Map", "MapUIManager"};
 ref::Method mSwitchLandable{kMapUIManager, "SwitchLandable", 1};
+ref::Method mShowLandingGuide{kMapUIManager, "ShowLandingGuide", 1};
+ref::Method mHideLandingGuide{kMapUIManager, "HideLandingGuide", 0};
+ref::Field fLandingGuide{kMapUIManager, "landingGuide"};
 
 bool g_last_landable_state = false;
+void* g_landing_guide = nullptr;
+int g_landing_vehicle_id = 0, g_landing_vehicle_type = 0;
+double g_last_announcement_time = -1.0e9;
+
+// These native TransportationType values represent mounted manual vehicles in
+// the six matching dumps. Content(5) covers automatic walk-on transport; Symbol
+// is a map marker. Neither a boardable preview nor a canoe is a landing context.
+bool manual_landing_vehicle(const ::field::VehicleState& v)
+{
+    if(!v.valid || v.id<=0)return false;
+    switch(v.type) {
+    case 2: case 3: case 6: case 7: case 8: // ship, planes, submarine
+    case 9: case 10: case 11: case 12:     // chocobos/Boko, mounted armor
+        return true;
+    default:return false;
+    }
+}
+
+void observe_landing_guide(void* self, bool landable)
+{
+    if(!kMapUIManager.is(self))return;
+    // The native current transportation is authoritative. Movement speech can
+    // still say on foot during boarding; nearby parked models aren't mounted.
+    const auto vehicle=::field::current_vehicle();
+    if(!manual_landing_vehicle(vehicle)) {reset_landing_state();return;}
+    if(vehicle.id!=g_landing_vehicle_id || vehicle.type!=g_landing_vehicle_type) {
+        reset_landing_state();
+        g_landing_vehicle_id=vehicle.id;g_landing_vehicle_type=vehicle.type;
+    }
+    void* guide=ref::rd<void*>(self,fLandingGuide);
+    if(!displayed::container_visible(guide)) {
+        if(guide==g_landing_guide) {g_landing_guide=nullptr;g_last_landable_state=false;}
+        return;
+    }
+    if(guide!=g_landing_guide) {g_landing_guide=guide;g_last_landable_state=false;}
+    // Native UI initialization can activate this guide while loading even on
+    // foot. Observe its state, but announce an edge only when field/vehicle
+    // control is ready and no transition/fade is active. Always seed the last
+    // state below, so readiness returning cannot replay a loading-time edge.
+    // Cached movement speech is not authoritative during boarding/loaded saves.
+    if(landable&&!g_last_landable_state&&system::is_field_navigation_ready()&&
+       !system::input_transition_blocked()) {
+        g_last_announcement_time=frame::now();
+        ffpr::say(T(L"Can land"),false);
+    }
+    g_last_landable_state=landable;
+}
 
 using SwitchLandable_t = void (*)(void* self, bool landable, const void* mi);
 SwitchLandable_t o_SwitchLandable = nullptr;
@@ -40,15 +93,25 @@ void d_SwitchLandable(void* self, bool landable, const void* mi)
 {
     o_SwitchLandable(self, landable, mi);
     hooks::guarded("VehicleLanding.SwitchLandable", [&] {
-        // Only announce when in a vehicle (not on foot)
-        if (move_state::is_on_foot())
-            return;
-
-        // Only announce when entering a landable zone (false -> true)
-        if (landable && !g_last_landable_state)
-            ffpr::say(T(L"Can land"), false);
-
-        g_last_landable_state = landable;
+        observe_landing_guide(self,landable);
+    });
+}
+SwitchLandable_t o_ShowLandingGuide=nullptr;
+void d_ShowLandingGuide(void* self,bool landable,const void* mi)
+{
+    o_ShowLandingGuide(self,landable,mi);
+    // FieldController.UpdateStateSwitchLandable calls ShowLandingGuide, whose
+    // native body bypasses MapUIManager.SwitchLandable. Observe both producers
+    // through one visibility/edge guard, without hooking folded UI leaf bodies.
+    hooks::guarded("VehicleLanding.ShowLandingGuide",[&]{observe_landing_guide(self,landable);});
+}
+using HideLandingGuide_t=void(*)(void*,const void*);
+HideLandingGuide_t o_HideLandingGuide=nullptr;
+void d_HideLandingGuide(void* self,const void* mi)
+{
+    o_HideLandingGuide(self,mi);
+    hooks::guarded("VehicleLanding.HideLandingGuide",[&]{
+        if(kMapUIManager.is(self)&&ref::rd<void*>(self,fLandingGuide)==g_landing_guide)reset_landing_state();
     });
 }
 
@@ -163,6 +226,10 @@ int install()
     int n = 0;
     if (hooks::attach(mSwitchLandable, &d_SwitchLandable, &o_SwitchLandable)) ++n;
     else LOGF("[Landing] Could not hook MapUIManager.SwitchLandable");
+    if(hooks::attach(mShowLandingGuide,&d_ShowLandingGuide,&o_ShowLandingGuide))++n;
+    if(hooks::attach(mHideLandingGuide,&d_HideLandingGuide,&o_HideLandingGuide))++n;
+    events::on(events::Kind::MapChanging,[]{reset_landing_state();});
+    events::on(events::Kind::BattleEntering,[]{reset_landing_state();});
 
     bool get_on = false;
     if (kFieldPlayer2.applies()) get_on = hooks::attach(mGetOn2, &d_GetOn2, &o_GetOn2);
@@ -178,7 +245,11 @@ core::Install s_install{"VehicleLanding", &install, 120};
 
 } // namespace
 
-void reset_landing_state() { g_last_landable_state = false; }
+void reset_landing_state() {
+    g_last_landable_state=false;g_landing_guide=nullptr;
+    g_landing_vehicle_id=g_landing_vehicle_type=0;
+}
+double last_announcement_time() { return g_last_announcement_time; }
 
 void reset_movement_state() { move_state::reset(); }
 

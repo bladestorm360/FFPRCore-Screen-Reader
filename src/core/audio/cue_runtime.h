@@ -2,6 +2,9 @@
 #include "soundscape.h"
 struct SDL_AudioStream;
 namespace sound::runtime {
+// Full displacement stays copied until the audio owner knows the effective
+// backend. HRTF activation failure must retain the stereo/rear-pitch fallback.
+void beacon(float east,float north,float gain,bool blocked);
 // Main/native owner: copied observations only, bounded queues, no SDK/filesystem.
 void configure(scape::Options options);
 uint64_t epoch();

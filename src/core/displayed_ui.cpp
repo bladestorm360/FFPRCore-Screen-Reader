@@ -30,6 +30,9 @@ ref::Method mSpriteColor{kSpriteRenderer,"get_color",0};
 ref::Class kAbilityRow{"Last.UI.KeyInput", "AbilityContentController"};
 ref::Class kStatusBase{"Serial.Template.UI", "StatusWindowControllerBase"};
 ref::Field fMenuCommand{kStatusBase, "callerCommandId"};
+ref::Class kStatusKeyView{"Serial.Template.UI.KeyInput", "StatusWindowContentViewBase"};
+ref::Field fStatusDefaultAnchor{kStatusKeyView, "defaultCursorParent"};
+ref::Field fStatusFocusAnchor{kStatusKeyView, "focusCursorParent"};
 struct Color { float r, g, b, a; };
 
 std::wstring meter(void* view, const char* current, const char* maximum,
@@ -143,11 +146,23 @@ std::wstring bar(void* component)
 std::vector<std::wstring> vital_lines(void* view)
 {
     std::vector<std::wstring> lines;
-    for (auto value : {meter(view, "currentHpText", "maxHpText", "hpGauge", L"HP"),
-                       meter(view, "currentMpText", "maxMpText", "mpGauge", L"MP")})
-        if (!value.empty()) lines.push_back(std::move(value));
+    auto hp = meter(view, "currentHpText", "maxHpText", "hpGauge", L"HP");
+    if (!hp.empty()) lines.push_back(std::move(hp));
+    // Charge-based panels can leave a scalar MP text populated/overlapping.
+    // The displayed eight-level layout has current counts, not a ninth MP pool.
+    if (charge_lines(view).empty()) {
+        auto mp = meter(view, "currentMpText", "maxMpText", "mpGauge", L"MP");
+        if (!mp.empty()) lines.push_back(std::move(mp));
+    }
+    return lines;
+}
+std::vector<std::wstring> charge_lines(void* view)
+{
+    std::vector<std::wstring> lines;
     void* charges = field(view, "currentLvMpTextList");
-    for (int i = 0; i < unity::list_count(charges); ++i) {
+    const int count = unity::list_count(charges);
+    if (count < 0 || count > 8) return lines;
+    for (int i = 0; i < count; ++i) {
         auto value = text(unity::list_at(charges, i));
         if (!value.empty()) lines.push_back(TF(L"Level {0}", {::text::num(i + 1)}) + L" " + T(L"MP") + L" " + value);
     }
@@ -161,6 +176,18 @@ std::wstring character(void* view)
     auto values = vitals(view);
     if (!values.empty()) name += (name.empty() ? L"" : L", ") + values;
     return name;
+}
+std::wstring character_overview(void* content, void* window)
+{
+    void* view = field(content, "view");
+    auto line = target(content);
+    auto add = [&](std::wstring value) { if (!value.empty()) line += (line.empty() ? L"" : L", ") + value; };
+    add(text_field(view, "jobNameText"));
+    add(pair(view, "fixedNextText", "nextExpText"));
+    add(pair(view, "fixedLevelText", "currentLevelText"));
+    add(pair(view, "fixedJobLevel", "jobLevelText"));
+    add(formation_row(window, content));
+    return line;
 }
 std::wstring formation_row(void* window, void* content)
 {
@@ -176,21 +203,29 @@ std::wstring formation_row(void* window, void* content)
     if (back && parent == unity::transform(back)) return T(L"Back Row");
     return {};
 }
+bool cursor_matches(void* cursor, void* content)
+{
+    if (!unity::alive(cursor) || !unity::alive(content)) return false;
+    void* parent = unity::parent(unity::transform(cursor));
+    if (!parent) return false;
+    void* view = field(content, "view");
+    if (kStatusKeyView.is(view)) {
+        // Use the exact template anchors returned by the native virtual
+        // Default/FocusCursorParent getters, independently of formation art.
+        for (auto* anchor : {ref::rd<void*>(view,fStatusDefaultAnchor),ref::rd<void*>(view,fStatusFocusAnchor)})
+            if (unity::alive(anchor) && parent==unity::transform(anchor)) return true;
+    }
+    for (const char* name : {"cursorParent", "otherCursorParent", "focusCursorParent", "defaultCursorParent"}) {
+        void* anchor=field(view,name);
+        if(unity::alive(anchor)&&parent==unity::transform(anchor))return true;
+    }
+    return false;
+}
 void* cursor_row(void* cursor, void* contents)
 {
-    if (!unity::alive(cursor)) return nullptr;
-    void* parent = unity::parent(unity::transform(cursor));
-    if (!parent) return nullptr;
     std::vector<void*> rows;
     if (!unity::enumerate_bounded(contents, rows, 9)) return nullptr;
-    for (void* row : rows) {
-        if (!unity::alive(row)) continue;
-        void* view = field(row, "view");
-        for (const char* name : {"cursorParent", "otherCursorParent", "focusCursorParent", "defaultCursorParent"}) {
-            void* anchor = field(view, name);
-            if (unity::alive(anchor) && parent == unity::transform(anchor)) return row;
-        }
-    }
+    for (void* row : rows) if (cursor_matches(cursor,row)) return row;
     return nullptr;
 }
 int target_count(void* list)

@@ -11,6 +11,7 @@
 namespace fixture {
 bool blocked = true, buttons = false, teleport = false,battle=false;int one_button=-1;
 bool soundscape=true;int single_key=-1;
+bool interception=true;
 struct Controller { void* player=reinterpret_cast<void*>(1); } controller;
 int keymap = 0;int modifier=0;
 std::string last_action;
@@ -80,10 +81,11 @@ bool get_bool(const char* key, bool fallback) {
 void set_int(const char*, int) { ++fixture::actions; }
 }
 namespace input {
+bool interception_enabled(){return fixture::interception;}
 bool key_held(Key){return false;} bool key_in_use(Key k){return fixture::single_key==int(k);}
 const char* key_name(Key){return "Key";}
 float right_stick_x(){return 0;}float right_stick_y(){return 0;}
-bool key_pressed(Key k) { return fixture::single_key<0 || fixture::single_key==int(k); } bool any_key_pressed() { return true; }
+bool key_pressed(Key k) { if(k==Key::F9)return fixture::single_key==int(k);return fixture::single_key<0 || fixture::single_key==int(k); } bool any_key_pressed() { return true; }
 bool shift_held() { return (fixture::modifier&1)!=0; } bool ctrl_held() { return (fixture::modifier&2)!=0; } bool alt_held() { return (fixture::modifier&4)!=0; }
 bool game_window_focused() { return true; } bool gamepad_available() { return true; }
 bool sdl_ready() { return true; }
@@ -144,7 +146,7 @@ int main() {
         binding(K::P, M::None, layout ? "Mod.AnnounceEntityOnly" : "Mod.NavigateToEntity");
         binding(K::P, M::Shift, layout ? "Mod.ResetToAllCategory" : "Mod.TogglePathfindingFilter");
         binding(K::P, M::Ctrl, layout ? nullptr : "Mod.ToggleToLayerFilter");
-        binding(K::P, M::CtrlShift, "Mod.ToggleEventGroupFilter");
+        binding(K::Backslash, M::Alt, "Mod.ToggleEventGroupFilter");
         binding(K::K, M::None, layout ? nullptr : "Mod.AnnounceEntityOnly");
         binding(K::K, M::Shift, layout ? nullptr : "Mod.ResetToAllCategory");
         binding(K::J, M::None, layout ? nullptr : "Mod.CyclePrevious");
@@ -194,6 +196,34 @@ int main() {
     pad_frame(16,input::Context::Battle);expect(fixture::last_action=="Mod.AnnounceCharacterStatus"&&fixture::actions==before_hp+1,"replacement battle-mode function dispatches correctly");pad_frame(-1,input::Context::Battle);
     expect(!b::set(mode,input::kBack,-1,conflict)&&conflict==L"Read Gil","restoring a mode button checks functions now assigned to its former input");
     b::reset_all();fixture::battle=false;
+    // Same-label registrations previously collapsed onto Alpha1's catalog ID.
+    // Exercise the real input manager + catalog + dispatch, not a fake matcher.
+    fixture::single_key=-2;fixture::modifier=0;fixture::keymap=0;
+    const std::string legacy="key.2.Battle: displayed party member statistics.-1";
+    auto party_keys=[] {
+        for(int i=0;i<9;++i) {
+            const std::string action="BattleParty.Slot"+std::to_string(i+1);
+            input::add_binding(K(int(K::Alpha1)+i),M::None,input::Context::Battle,
+                               action.c_str(),"Battle: displayed party member statistics");
+        }
+    };
+    party_keys();
+    const auto count=b::entries().size();
+    party_keys();expect(b::entries().size()==count,"repeat registration retains stable independent IDs");
+    const int first=index(legacy.c_str());
+    expect(first>=0&&b::entries()[first].default_primary==int(K::Alpha1),"slot1 retains its legacy persistent binding ID");
+    for(int game=1;game<=6;++game)for(int i=0;i<9;++i) {
+        fixture::last_action.clear();
+        expect(fixture::execute(K(int(K::Alpha1)+i),M::None,input::Context::Battle)&&
+               fixture::last_action=="BattleParty.Slot"+std::to_string(i+1),
+               "all-six shared battle keys1..9 dispatch only their requested party slot");
+    }
+    expect(b::set(first,int(K::F12),0,conflict),"legacy party slot1 still supports independent remapping");
+    fixture::last_action.clear();fixture::execute(K::F12,M::None,input::Context::Battle);
+    expect(fixture::last_action=="BattleParty.Slot1","saved/effective slot1 remap dispatches its original action");
+    fixture::last_action.clear();fixture::execute(K::Alpha2,M::None,input::Context::Battle);
+    expect(fixture::last_action=="BattleParty.Slot2","remapping slot1 cannot steal slot2");
+    b::reset(first);
     std::printf("Transition input: binding guards, controller retirement/held LT, both layouts and full-tick soundscape/layout regression: %d failures\n", failures);
     return failures ? 1 : 0;
 }

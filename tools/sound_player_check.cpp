@@ -55,6 +55,7 @@ std::unique_ptr<scape::Snapshot> acquire_snapshot(){return std::make_unique<scap
 void discard(std::unique_ptr<scape::Snapshot> s){if(s)++fixture::discarded;}
 bool publish(std::unique_ptr<scape::Snapshot>& s){if(!fixture::accept)return false;++fixture::published;s.reset();return true;}
 void play(cues::Id,float,float,float,float,float){++fixture::plays;}
+void beacon(float,float,float,bool){++fixture::plays;}
 void walls(unsigned mask,float){fixture::walls=mask;}
 void counter(bool on,float){fixture::counter=on;}
 void preview(cues::Id){++fixture::previews;}
@@ -102,7 +103,7 @@ int main(){
     expect(fixture::captures==before&&fixture::epoch==3,"dialogue suspends capture and active field emitters");
     fixture::dialogue=false;fixture::focused=false;sound::tick();expect(fixture::captures==before,"background field performs no entity capture");
     fixture::settings["NavigationAudio"]=0;
-    const auto plays=fixture::plays;sound::play_footstep();sound::play_wall_bump();sound::play_beacon(false,0,1);
+    const auto plays=fixture::plays;sound::play_footstep();sound::play_wall_bump();sound::play_beacon(0,16,1);
     sound::play_exp_counter();sound::play_landing_ping(0,1,660);sound::play_wall_tones_looped({sound::Direction::North});
     expect(fixture::plays==plays&&!fixture::counter&&!fixture::walls,"navigation master gates every old sound path");
     fixture::settings["NavigationAudio"]=1;sound::preview(sound::cues::Id::NPC);

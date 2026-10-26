@@ -176,7 +176,13 @@ bool capture_stat_step(StatCapture& capture)
     }
     void* leaf = unity::array_at(details, capture.detail++);
     if (leaf && unity::active_in_hierarchy(leaf)) {
+        // Item drops render their name in IconTextView, while Gil and some
+        // property rows render detailText. Read each active native renderer;
+        // neither item IDs nor unrevealed master drop slots are a fallback.
+        void* icon=displayed::field(leaf,"iconView");
+        auto name=retain(displayed::text_field(icon,"nameText"));
         auto value = retain(trimmed_text(leaf, fDetailText));
+        if(!name.empty())capture.current.parts.push_back(std::move(name));
         if (!value.empty()) capture.current.parts.push_back(std::move(value));
     }
     return false;

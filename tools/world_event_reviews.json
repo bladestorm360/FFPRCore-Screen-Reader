@@ -1,0 +1,28 @@
+[
+  {
+    "game": 3,
+    "submap": "Map_10010",
+    "group": "entity_default",
+    "id": 5426,
+    "entity_id": 2368,
+    "raw": "世界一周",
+    "script_id": 380,
+    "script_name": "sc_e_0286",
+    "script_sha256": "c92c75f66efde74fc390a57be6e8a62e3eec7956fd14f9f1dbc72100c47767ad",
+    "label": "@route-only",
+    "reason": "reviewed passive Chocobo lap flag only"
+  },
+  {
+    "game": 3,
+    "submap": "Map_10010",
+    "group": "entity_default",
+    "id": 5422,
+    "entity_id": 2367,
+    "raw": "トーザスの抜け道",
+    "script_id": 379,
+    "script_name": "sc_e_0342_1",
+    "script_sha256": "f59486c2d780d0a7686d3bd4dc9bf65bc7d523e2d3c3e193ea26e7d74398d464",
+    "label": "@name:トーザスの抜け道",
+    "reason": "reviewed Tozus tunnel Mini-gated travel"
+  }
+]

@@ -23,6 +23,10 @@ namespace {
 ref::Class kTitleLoad{"Last.UI.KeyInput", "LoadGameWindowController"};        // title screen load
 ref::Class kMenuLoad{"Last.UI.KeyInput", "LoadWindowController"};             // main menu load
 ref::Class kMenuSave{"Last.UI.KeyInput", "SaveWindowController"};             // main menu save
+// Script/endgame saves bypass MenuManager and use a different namespace and
+// state machine in every game. Its SavePopup is serialized on the view.
+ref::Class kScriptSave{"Last.UI.Save.KeyInput", "SaveWindowController"};
+ref::Class kScriptSaveView{"Last.UI.Save.KeyInput", "SaveWindowView"};
 ref::Class kInterruption{"Last.UI.KeyInput", "InterruptionWindowController"}; // quick save
 ref::Class kSavePopup{"Last.UI.KeyInput", "SavePopup"};
 ref::Class kSaveList{"Last.UI.KeyInput", "SaveListController"};
@@ -41,6 +45,17 @@ ref::Field fSavePopupTitle{kSavePopup, "titleText"};
 ref::Field fSavePopupCursor{kSavePopup, "selectCursor"};
 ref::Field fSavePopupCommands{kSavePopup, "commandList"};
 ref::Field fSaveListCursor{kSaveList, "selectCursor"};
+ref::Field fSaveListContents{kSaveList, "contentList"};
+ref::Field fScriptSaveView{kScriptSave, "view"};
+ref::Field fScriptSavePopup{kScriptSaveView, "savePopup"};
+
+ref::Method mScriptSaveOpen{kScriptSave, "Open", 2};
+ref::Method mScriptSaveClose{kScriptSave, "Close", 0};
+ref::Method mScriptSaveSelect{kScriptSave, "SaveSelectInit", 0};
+ref::Method mScriptSaveOverwrite{kScriptSave, "OverwriteConfirmInit", 0};
+ref::Method mScriptSaveComplete{kScriptSave, "CompleteInit", 0};
+void* g_script_save = nullptr; // owner thread only; Open/Close and alive checks
+void* g_save_list = nullptr;   // exact published list; no scene/singleton lookup
 
 ref::Method mTitleLoadSetPopupActive{kTitleLoad, "SetPopupActive", 1};
 ref::Method mTitleLoadSetActive{kTitleLoad, "SetActive", 1};
@@ -189,14 +204,8 @@ void read_popup_text_delayed(void* popup, const char* context)
     }, [popup] { return dialogue::popup_state::active_popup() == popup; });
 }
 
-// ReadSavePopup
-void read_save_popup(void* controller, ref::Field& save_popup_field, const char* context, const char* popup_type)
+void read_save_popup_object(void* popup, const char* context, const char* popup_type)
 {
-    if (!controller) {
-        LOGF("[SaveLoad] %s: Controller pointer is null", context);
-        return;
-    }
-    void* popup = ref::rd<void*>(controller, save_popup_field);
     if (!popup) {
         LOGF("[SaveLoad] %s: SavePopup pointer is null", context);
         return;
@@ -208,10 +217,78 @@ void read_save_popup(void* controller, ref::Field& save_popup_field, const char*
     read_popup_text_delayed(popup, context);
 }
 
+// Ordinary menu/title/quick saves serialize the popup directly on the owner.
+void read_save_popup(void* controller, ref::Field& save_popup_field, const char* context, const char* popup_type)
+{
+    if (controller) read_save_popup_object(ref::rd<void*>(controller, save_popup_field), context, popup_type);
+}
+
 void clear_popup_state()
 {
     save_load_reset_state();
     dialogue::popup_state::clear();
+}
+
+void* script_save_popup(void* self)
+{
+    void* view = ref::rd<void*>(self, fScriptSaveView);
+    return view ? ref::rd<void*>(view, fScriptSavePopup) : nullptr;
+}
+
+void clear_script_save_popup(void* self)
+{
+    // This popup is reparented outside the controller by native code. Ownership
+    // is its serialized identity, not its current Transform ancestry.
+    if (dialogue::popup_state::active_popup() == script_save_popup(self)) clear_popup_state();
+}
+
+using ScriptOpen = void (*)(void*, bool, void*, const void*);
+using ScriptPhase = void (*)(void*, const void*);
+ScriptOpen o_script_open;
+ScriptPhase o_script_close, o_script_select, o_script_overwrite, o_script_complete;
+
+void d_script_open(void* self, bool completed, void* callback, const void* mi)
+{
+    hooks::guarded("SaveLoad.ScriptOwner", [self] { if (kScriptSave.is(self)) g_script_save = self; });
+    // Open synchronously enters SaveSelectInit for completed saves: publish the
+    // owner first so its nested list/cursor events have the correct context.
+    o_script_open(self, completed, callback, mi);
+}
+
+void d_script_close(void* self, const void* mi)
+{
+    hooks::guarded("SaveLoad.ScriptClose", [self] {
+        if (g_script_save != self) return;
+        clear_script_save_popup(self);
+        g_script_save = nullptr;
+    });
+    o_script_close(self, mi);
+}
+
+void d_script_select(void* self, const void* mi)
+{
+    hooks::guarded("SaveLoad.ScriptSelect", [self] {
+        if (kScriptSave.is(self)) { g_script_save = self; clear_script_save_popup(self); }
+    });
+    o_script_select(self, mi); // existing SaveList.SetActive owns the initial row
+}
+
+void d_script_overwrite(void* self, const void* mi)
+{
+    o_script_overwrite(self, mi);
+    hooks::guarded("SaveLoad.ScriptOverwrite", [self] {
+        if (kScriptSave.is(self)) read_save_popup_object(script_save_popup(self), "ScriptOverwrite", "ScriptSavePopup");
+    });
+}
+
+void d_script_complete(void* self, const void* mi)
+{
+    o_script_complete(self, mi);
+    // CompleteInit rewrites and directly enables SavePopup. It never calls the
+    // ordinary menu's SetPopupActive hook; read its actual success/failure title.
+    hooks::guarded("SaveLoad.ScriptComplete", [self] {
+        if (kScriptSave.is(self)) read_save_popup_object(script_save_popup(self), "ScriptComplete", "ScriptSavePopup");
+    });
 }
 
 using SetPopup_t = void (*)(void* self, bool is_enable, const void* mi);
@@ -312,9 +389,10 @@ SaveListSetActive_t o_SaveListSetActive;
 void d_SaveListSetActive(void* self, bool is_active, bool is_reset, bool is_load_game, const void* mi)
 {
     o_SaveListSetActive(self, is_active, is_reset, is_load_game, mi);
-    if (!is_active || !self) return;
     hooks::guarded("SaveList.SetActive", [&] {
-        if (kSaveList.is(self)) delayed_read_slot(self);
+        if (!self || !kSaveList.is(self)) return;
+        if (is_active) { g_save_list = self; delayed_read_slot(self); }
+        else if (g_save_list == self) g_save_list = nullptr;
     });
 }
 
@@ -328,6 +406,11 @@ int install()
     if (hooks::attach(mInterruptionSetEnablePopup, &d_InterruptionSetEnablePopup, &o_InterruptionSetEnablePopup)) ++n;
     if (hooks::attach(mInterruptionInitComplite, &d_InterruptionInitComplite, &o_InterruptionInitComplite)) ++n;
     if (hooks::attach(mSaveListSetActive, &d_SaveListSetActive, &o_SaveListSetActive)) ++n;
+    if (hooks::attach(mScriptSaveOpen, &d_script_open, &o_script_open)) ++n;
+    if (hooks::attach(mScriptSaveClose, &d_script_close, &o_script_close)) ++n;
+    if (hooks::attach(mScriptSaveSelect, &d_script_select, &o_script_select)) ++n;
+    if (hooks::attach(mScriptSaveOverwrite, &d_script_overwrite, &o_script_overwrite)) ++n;
+    if (hooks::attach(mScriptSaveComplete, &d_script_complete, &o_script_complete)) ++n;
 
     queries::define("SaveLoadMenuState.IsActive", [] { return save_load_active(); });
     queries::define("SaveLoadMenuState.ShouldSuppress", [] { return save_load_should_suppress(); });
@@ -348,6 +431,7 @@ bool save_load_should_suppress() { return save_load_active() && g_in_confirmatio
 bool should_read_save_slot()
 {
     return hooks::guarded_r("SaveList.ShouldReadSaveSlot", false, [] {
+        if (g_script_save && unity::alive(g_script_save) && unity::active_in_hierarchy(g_script_save)) return true;
         if (void* mm = ref::instance(kMenuManager))
             if (ref::call<bool>(mMenuIsOpen, mm)) return true;
         void* title_load = field::cache::get(kTitleLoad);
@@ -361,6 +445,22 @@ std::wstring try_read_save_slot(void* cursor_transform, int cursor_index, int& c
     count = -1;
     if (!cursor_transform) return {};
     return hooks::guarded_r("SaveSlotReader", std::wstring(), [&]() -> std::wstring {
+        // All native save paths publish the same SaveListController. Read one
+        // serialized row in O(1), tied to this exact cursor; avoid hierarchy text
+        // discovery selecting a background label such as "File" or "World Map".
+        if (g_save_list && unity::alive(g_save_list) && unity::active_in_hierarchy(g_save_list)) {
+            void* cur = ref::rd<void*>(g_save_list, fSaveListCursor);
+            if (cur && unity::transform(cur) == cursor_transform) {
+                void* rows = ref::rd<void*>(g_save_list, fSaveListContents);
+                count = unity::list_count(rows);
+                if (cursor_index >= 0 && cursor_index < count) {
+                    void* row = unity::list_at(rows, cursor_index);
+                    if (row && displayed::container_visible(row))
+                        return read_from_controller(row, ref::call<void*>(mKeySlotData, row), cursor_index);
+                }
+                return {};
+            }
+        }
         // Walk up to the save list structure.
         void* current = cursor_transform;
         for (int depth = 0; current && depth < 15; ++depth) {

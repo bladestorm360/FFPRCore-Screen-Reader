@@ -1,5 +1,11 @@
 # Visible enemy statuses and optional speech, October 22
 
+October26 [all-six danger animation audit](ALLY_STATUS_20261026.md): generic enemy
+animators inherit empty Dying/UpdateDying methods in all six builds; players have
+their own dying pose. No generic enemy low-health pose is available as a visible
+Critical witness. Unique scripted boss changes remain separate; existing optional
+EnemyCriticalStatus default-off disclosure is unchanged.
+
 Implementation complete; default-Off **Enemy status announcements** is in the mod
 menu's Speech submenu, persisted as EnemyStatusAnnouncements. All12 UI languages
 are covered. Offline presentation/lifetime fixtures pass; gameplay confirmation is

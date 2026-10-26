@@ -89,6 +89,17 @@ int main() {
         variants.rows.pop_back();view=build(variants);
         expect(view.restored==-1&&view.continued==-1,"a missing objective never rebinds to a collocated replacement story variant");
     }
+    {
+        FilterInput chests;chests.current_map=183;chests.selected_has=true;chests.selected_map=183;
+        chests.selected_entity_id=0;chests.selected_category=Category::Chests;chests.selected_x=35;chests.selected_y=18;
+        FilterRow opened;opened.index=0;opened.kind=Kind::TreasureChest;opened.category=Category::Chests;
+        opened.entity_id=1;opened.name=L"Treasure Chest";opened.cell_valid=true;opened.cell_x=34;opened.cell_y=18;
+        auto target=opened;target.index=1;target.entity_id=0;target.cell_x=35;chests.rows={opened,target};
+        auto view=build(chests);expect(view.restored>=0&&view.order[view.restored]==1,"native chest ID zero stays selected after battle re-sort");
+        chests.rows.pop_back();view=build(chests);expect(view.restored==-1,"missing unopened chest never substitutes an opened chest");
+        chests.selected_entity_id=-1;chests.selected_name=L"Treasure Chest";
+        view=build(chests);expect(view.restored==-1,"type-only chest names are never a restoration identity fallback");
+    }
     // Large owned lists are prepared once, not recaptured/renamed for each key.
     FilterInput large;
     large.sort = true;
@@ -127,6 +138,25 @@ int main() {
                 expect(view.views[0].order.empty()==(profile==1),"actual list worker retires the native used-event branch while preserving unused/unknown states");
             }
         }
+    }
+    {
+        FilterInput split;
+        for(int i=0;i<4;++i) {
+            FilterRow object;object.index=i;object.kind=Kind::Event;object.category=i%2?Category::Events:Category::Objects;
+            object.event_type=i%2?L"Event":L"Interactive Object";object.remote_map=i>=2?98:0;object.selected=i==2;
+            split.rows.push_back(object);
+        }
+        const auto views=build_categories(split);
+        expect(views.views[0].order.size()==4&&views.views[7].order==std::vector<size_t>({0,2})&&
+            views.views[4].order==std::vector<size_t>({1,3})&&views.views[7].restored==1,
+            "Objects and Events have separate current/remote views while All and selected identity are retained");
+    }
+    {
+        FilterInput physical;
+        for(int i=0;i<3;++i){FilterRow row;row.index=i;row.kind=Kind::MapExit;row.category=Category::MapExits;row.destination=1;row.route_distance=i+1;physical.rows.push_back(row);}
+        physical.exits=false;auto ungrouped=build_categories(physical);physical.exits=true;auto grouped=build_categories(physical);
+        expect(ungrouped.views[0].order.size()==3&&grouped.views[0].order.size()==1&&ungrouped.audio_order==grouped.audio_order&&grouped.audio_order.size()==3,
+            "soundscape physical registry is independent from the pathfinder Group exits toggle");
     }
     std::printf("Entity filter: owned worker sorting, stable NPC groups, inclusion guards, selection: %d failures\n", failures);
     return failures ? 1 : 0;

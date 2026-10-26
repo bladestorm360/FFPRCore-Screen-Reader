@@ -17,6 +17,8 @@
 #include "../audio/volume_settings.h"
 
 namespace ui::prefs {
+inline constexpr const char* kControlInterception = "ControlInterception";
+inline constexpr bool kControlInterceptionDefault = true;
 
 // --- keys ---------------------------------------------------------------------------------
 // key                                                                    FF1 display name
@@ -50,6 +52,7 @@ inline constexpr const char* kAutoDetail = "AutoDetail";                    // A
 inline constexpr const char* kResultNotificationsOnce = "ResultNotificationsOnce";
 inline constexpr const char* kInterruptCharacterTurn = "InterruptCharacterTurn";
 inline constexpr const char* kEnemyStatusAnnouncements = "EnemyStatusAnnouncements";
+inline constexpr const char* kEnemyCriticalStatus = "EnemyCriticalStatus";
 inline constexpr const char* kStatusDamage = "StatusDamage";                // Status Damage Announcements
 inline constexpr const char* kModWarnings = "ModWarnings";
 inline constexpr const char* kSpoilTreasureChestContents = "SpoilTreasureChestContents";
@@ -95,6 +98,7 @@ inline constexpr bool kAutoDetailDefault = false;
 inline constexpr bool kResultNotificationsOnceDefault = true;
 inline constexpr bool kInterruptCharacterTurnDefault = true;
 inline constexpr bool kEnemyStatusAnnouncementsDefault = false;
+inline constexpr bool kEnemyCriticalStatusDefault = false;
 inline constexpr bool kStatusDamageDefault = true;
 inline constexpr bool kModWarningsDefault = true;
 inline constexpr bool kSpoilTreasureChestContentsDefault = false;
@@ -152,6 +156,7 @@ inline bool auto_detail_enabled() { return settings::get_bool(kAutoDetail, kAuto
 inline bool result_notifications_once_enabled() { return settings::get_bool(kResultNotificationsOnce, kResultNotificationsOnceDefault); }
 inline bool interrupt_character_turn_enabled() { return settings::get_bool(kInterruptCharacterTurn, kInterruptCharacterTurnDefault); }
 inline bool enemy_status_announcements_enabled() { return settings::get_bool(kEnemyStatusAnnouncements, kEnemyStatusAnnouncementsDefault); }
+inline bool enemy_critical_status_enabled() { return settings::get_bool(kEnemyCriticalStatus, kEnemyCriticalStatusDefault); }
 inline bool status_damage_enabled() { return settings::get_bool(kStatusDamage, kStatusDamageDefault); }
 inline bool mod_warnings_enabled() { return settings::get_bool(kModWarnings, kModWarningsDefault); }
 inline bool spoil_treasure_chest_contents_enabled() { return settings::get_bool(kSpoilTreasureChestContents, kSpoilTreasureChestContentsDefault); }

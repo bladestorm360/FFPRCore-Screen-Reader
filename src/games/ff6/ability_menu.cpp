@@ -364,6 +364,7 @@ void announce_change_command(void* self, int index)
 // --- AbilityUseContentListController.SelectContent (targets) ------------------------------------
 void announce_use_target(void* self, void* cursor)
 {
+    if(queries::is("FieldMagicTargets.OwnsRange"))return;
     if (!self || !cursor || !kAbilityUse.is(self)) return;   // shared body: SelectContent / SetCursor
     g_use = self;
     void* list = ref::rd<void*>(self, fUseContentList);

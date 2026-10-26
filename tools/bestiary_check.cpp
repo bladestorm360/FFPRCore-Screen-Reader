@@ -3,8 +3,12 @@
 #include <map>
 #include <cstdio>
 #include <cstddef>
+#include <thread>
+#include <atomic>
 #include "../src/core/bestiary/bestiary_patches.cpp"
 namespace fixture {
+const std::thread::id native_owner=std::this_thread::get_id();std::atomic<int> native_thread_violations{0};
+void native_read(){if(std::this_thread::get_id()!=native_owner)++native_thread_violations;}
 struct Node { void* slots[64]{}; bool alive=true,visible=true,rendered=true;std::wstring words;std::string kind; };
 using List=std::vector<void*>;
 std::map<std::string,int>& fields(){static std::map<std::string,int> v;return v;}
@@ -13,6 +17,8 @@ void set(Node& node,const char* name,void* value){*reinterpret_cast<void**>(rein
 struct Task {frame::Step run;std::string label;};
 std::vector<Task> tasks;uint64_t ticks=0;double clock=0;
 std::vector<ffpr::bestiary::StatEntry> entries;std::vector<std::wstring> spoken;int published=0;
+void* controls_owner=nullptr;
+std::map<std::string,actions::Fn> registered_actions;
 game::Id game=game::Id::FF2;
 void tick(){++ticks;auto work=std::move(tasks);tasks.clear();for(auto& task:work)if(task.run())tasks.push_back(std::move(task));}
 void native_data(void*,void*,const void*){}
@@ -26,7 +32,7 @@ namespace ref {
 Class::Class(const char* n,const char* c,uint8_t g,const char* a):ns(n),name(c),games(g),assembly(a){}
 Field::Field(Class& c,const char* n,const char* a):cls(c),name(n),alt(a){}
 Method::Method(Class& c,const char* n,int a):cls(c),name(n),argc(a){}
-int32_t Field::get(){return fixture::offset(name);}
+int32_t Field::get(){fixture::native_read();return fixture::offset(name);}
 il2cpp::Class* Class::get(){return nullptr;}
 bool Class::is(void* p){
     if(!p)return false;const auto& kind=static_cast<fixture::Node*>(p)->kind;
@@ -41,14 +47,14 @@ std::wstring rd_str(void* p,Field& f){return str(rd<void*>(p,f));}
 void call_failed_note(const char*){std::abort();}
 }
 namespace unity {
-bool alive(void* p){return p&&static_cast<fixture::Node*>(p)->alive;}
+bool alive(void* p){fixture::native_read();return p&&static_cast<fixture::Node*>(p)->alive;}
 bool active_in_hierarchy(void* p){return alive(p)&&static_cast<fixture::Node*>(p)->visible;}
-int list_count(void* p){return p?int(static_cast<fixture::List*>(p)->size()):0;}
+int list_count(void* p){fixture::native_read();return p?int(static_cast<fixture::List*>(p)->size()):0;}
 void* list_at(void* p,int i){return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 int array_length(void* p){return list_count(p);}void* array_at(void* p,int i){return list_at(p,i);}
 }
 namespace displayed {
-void* field(void* p,const char* name){if(!p)return nullptr;return *reinterpret_cast<void**>(reinterpret_cast<char*>(p)+fixture::offset(name));}
+void* field(void* p,const char* name){fixture::native_read();if(!p)return nullptr;return *reinterpret_cast<void**>(reinterpret_cast<char*>(p)+fixture::offset(name));}
 bool container_visible(void* p){return unity::active_in_hierarchy(p);}
 std::wstring text(void* p){return container_visible(p)?static_cast<fixture::Node*>(p)->words:L"";}
 std::wstring text_field(void* p,const char* name){return text(field(p,name));}
@@ -56,7 +62,7 @@ std::wstring text_field(void* p,const char* name){return text(field(p,name));}
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace log_ {void write(const char*,...) {}}
 namespace game {Id current(){return fixture::game;}}
-namespace actions {void define(const char*,Fn){}bool run(const char*){return false;}}
+namespace actions {void define(const char* name,Fn fn){fixture::registered_actions[name]=std::move(fn);}bool run(const char* name){auto it=fixture::registered_actions.find(name);if(it==fixture::registered_actions.end())return false;it->second();return true;}}
 namespace queries {void define(const char*,std::function<bool()> ){}bool is(const char*){return false;}}
 namespace events {void on(Kind,Handler){}}
 namespace menu_state {void reset(const char*){}void set_active(const char*,bool){}bool is_active(const char*){return false;}}
@@ -66,6 +72,7 @@ std::wstring T(std::wstring_view s){return std::wstring(s);}
 std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring> args){auto out=std::wstring(s);int i=0;for(const auto& a:args){auto key=L"{"+std::to_wstring(i++)+L"}";auto at=out.find(key);if(at!=out.npos)out.replace(at,key.size(),a);}return out;}
 }
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}}
+namespace ffpr::system {void announce_controls_for(void* owner){fixture::controls_owner=owner;}}
 namespace ffpr::status {std::wstring game_message(const std::wstring&,bool){return {};}void* master_entry(ref::Class&,int){return nullptr;}}
 namespace ffpr::bestiary {
 void nav_initialize(std::vector<StatEntry> e){fixture::entries=std::move(e);++fixture::published;}
@@ -120,5 +127,18 @@ int main(){
     for(int i=0;i<100&&!capture_stat_step(bounded);++i){}
     expect(bounded.characters<=65536&&bounded.entries.size()<64,"oversized text respects total capture retention bound");
     expect(!bounded.entries.empty()&&bounded.entries[0].value.size()==4096,"each retained native text field is bounded");
+    for(int number=1;number<=6;++number) {
+        fixture::game=static_cast<game::Id>(number);
+        Node panel,drop,title,gil,first,second,first_icon,second_icon,first_name,second_name;
+        title.words=L"Items";gil.words=L"4 Gil";first_name.words=L"Potion";second_name.words=L"Antidote";
+        List drops{&drop},leaves{&gil,&first,&second};set(panel,"dropTable",&drops);set(drop,"titleText",&title);set(drop,"textTable",&leaves);
+        set(gil,"detailText",&gil);set(first,"iconView",&first_icon);set(second,"iconView",&second_icon);
+        set(first_icon,"nameText",&first_name);set(second_icon,"nameText",&second_name);
+        StatCapture data;data.content=&panel;for(int i=0;i<40&&!capture_stat_step(data);++i){}
+        expect(data.entries.size()==1&&data.entries[0].parts==std::vector<std::wstring>({L"4 Gil",L"Potion",L"Antidote"}),
+            "all-six actual capture reads displayed Gil and IconTextView drop names without consulting master drop slots");
+        second_name.visible=false;data={};data.content=&panel;for(int i=0;i<40&&!capture_stat_step(data);++i){}
+        expect(data.entries.size()==1&&data.entries[0].parts==std::vector<std::wstring>({L"4 Gil",L"Potion"}),"a hidden unrevealed drop name remains absent");
+    }
     std::printf("Bestiary native-ready/capture lifecycle: %d failures\n",failures);return failures?1:0;
 }

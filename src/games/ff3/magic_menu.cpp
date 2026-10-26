@@ -1,4 +1,5 @@
 #include "../../core/displayed_ui.h"
+#include "../../core/ui/character_row.h"
 // Ports FF3 Patches/MagicMenuPatches.cs (MagicMenuState, MagicMenuPatches) and
 // Menus/AbilityCommandReader.cs, on FF3's own classes (Serial.FF3.UI.KeyInput).
 //
@@ -106,6 +107,7 @@ constexpr int kStateUseList = 1;
 constexpr int kStateUseTarget = 2;
 constexpr int kStateMemorizeList = 3;
 constexpr int kStateRemoveList = 4;
+constexpr int kStateExchange = 5, kStateForget = 6;
 constexpr int kStateCommand = 7;
 
 constexpr const char* kCtxSpell = "Magic.List";
@@ -137,7 +139,11 @@ int window_state(void* window)
 
 void* find_window() { return field::cache::get(kWindow); }
 
-void reset_state() { g_pending_spell_window = nullptr; menu_state::set_active(menu_state::MAGIC_MENU, false); }
+void reset_state() {
+    g_pending_spell_window=nullptr;g_last_description.clear();++g_command_gen;
+    menu_state::set_active(menu_state::MAGIC_MENU,false);
+}
+bool content_phase(int state) {return state==kStateUseList||state==kStateRemoveList||state==kStateExchange||state==kStateForget;}
 
 /// MagicMenuState.ShouldSuppress.
 bool should_suppress()
@@ -217,10 +223,11 @@ void on_list_set_cursor(void* self, void* cursor)
     if (!spell_list_active() || !self || !cursor) return;
     if (!unity::active_in_hierarchy(self)) return;
     const int index = ui::cursor_index(cursor);
-    const int state = window_state(ref::rd<void*>(self, fListWindow));
+    void* window=ref::rd<void*>(self,fListWindow);
+    if(window!=find_window())return;
+    const int state=window_state(window);
     const bool ready = state == kStateMemorizeList ? try_item_list(self, index) :
-        (state == kStateUseList || state == kStateRemoveList) ? try_content_list(self, index) :
-        (try_content_list(self, index) || try_item_list(self, index));
+        content_phase(state) && try_content_list(self,index);
     if (ready) g_pending_spell_window = nullptr;
 }
 
@@ -253,7 +260,8 @@ void on_set_next_state(void* self, int state)
 
 void on_use_set_cursor(void* self, void* cursor)
 {
-    if (!self || !cursor) return;
+    if(queries::is("FieldMagicTargets.OwnsRange"))return;
+    if(!self||!cursor||!spell_list_active()||window_state(find_window())!=kStateUseTarget)return;
     const int index = ui::cursor_index(cursor);
     void* list = ref::rd<void*>(self, fUseContents);
     const int count = displayed::target_count(list);
@@ -264,7 +272,7 @@ void on_use_set_cursor(void* self, void* cursor)
     if (!character) return;
     std::wstring line = displayed::target(content);
     if (line.empty()) return;
-    ffpr::say(ui::menu_position(line, index, count), true);
+    ui::character_row::announce(content, cursor, ui::menu_position(line, index, count));
 }
 
 // --- command bar (FF1 CommandBarPatches, magic bar) ------------------------------------------------
@@ -279,9 +287,9 @@ std::wstring command_name(int id)
 bool try_read_command(void* ctrl)
 {
     if (!unity::alive(ctrl) || !unity::active_in_hierarchy(ctrl)) return true;
-    // Not on the field: the UI pre-load initialises the window in its command state there
-    // (core game_state.cpp, IsFieldState).
-    if (ffpr::system::is_field_state() || window_state(find_window()) != kStateCommand) {
+    // Positive Menu5 ownership also excludes event/intro preloads, even when
+    // those leave an initialized command window active in the hierarchy.
+    if (!ffpr::system::is_main_menu_state() || window_state(find_window()) != kStateCommand) {
         dedup::reset(kCtxCommand);
         return true;
     }
@@ -334,6 +342,7 @@ void d_WindowUpdate(void* self, const void* mi)
         const int state = window_state(self);
         if (state == kStateCommand || state == kStateNone) return; // native transition not published yet
         if (state == kStateUseTarget) { g_pending_spell_window = nullptr; return; }
+        if(state!=kStateMemorizeList&&!content_phase(state)){g_pending_spell_window=nullptr;return;}
         void* list = ref::rd<void*>(self, fWindowList);
         void* cursor = list ? ref::rd<void*>(list, fListCursor) : nullptr;
         const int index = ui::cursor_index(cursor);
@@ -349,15 +358,22 @@ ListCursor_t o_ListSetCursor;
 Cursor_t o_UseSetCursor;
 
 void list_init(void* self) { if (kWindow.is(self)) field::cache::register_object(kWindow, self); hooks::guarded("FF3.Magic.ListInit", [&] { on_spell_list_init(self); }); }
-void d_UseListInit(void* self, const void* mi) { o_UseListInit(self, mi); list_init(self); }
-void d_MemorizeListInit(void* self, const void* mi) { o_MemorizeListInit(self, mi); list_init(self); }
-void d_RemoveListInit(void* self, const void* mi) { o_RemoveListInit(self, mi); list_init(self); }
-void d_ForgetInit(void* self, const void* mi) { o_ForgetInit(self, mi); list_init(self); }
-void d_ExchangeInit(void* self, const void* mi) { o_ExchangeInit(self, mi); list_init(self); }
+// Native entries rebuild background spell/tome previews synchronously while
+// the old state tag can still be visible. Retire their ownership before the
+// original; the existing native UpdateController observation reads ready focus.
+void list_entry(Void_t original,void* self,const void* mi) {
+    if(kWindow.is(self))reset_state();
+    original(self,mi);list_init(self);
+}
+void d_UseListInit(void* self, const void* mi) {list_entry(o_UseListInit,self,mi);}
+void d_MemorizeListInit(void* self, const void* mi) {list_entry(o_MemorizeListInit,self,mi);}
+void d_RemoveListInit(void* self, const void* mi) {list_entry(o_RemoveListInit,self,mi);}
+void d_ForgetInit(void* self, const void* mi) {list_entry(o_ForgetInit,self,mi);}
+void d_ExchangeInit(void* self, const void* mi) {list_entry(o_ExchangeInit,self,mi);}
 
 void d_CommandInit(void* self, const void* mi)
 {
-    if (kWindow.is(self)) field::cache::register_object(kWindow, self);
+    if(kWindow.is(self)){field::cache::register_object(kWindow,self);reset_state();}
     o_CommandInit(self, mi);
     hooks::guarded("FF3.Magic.CommandInit", [&] {
         dedup::reset(kCtxCommand);
@@ -379,6 +395,7 @@ void d_SetNextState(void* self, int32_t state, const void* mi)
 
 void d_WindowSetActive(void* self, bool active, const void* mi)
 {
+    if(!active&&kWindow.is(self))reset_state();
     o_WindowSetActive(self, active, mi);
     hooks::guarded("FF3.Magic.SetActive", [&] {
         if (!kWindow.is(self)) return;

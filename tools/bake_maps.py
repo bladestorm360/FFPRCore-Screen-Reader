@@ -46,10 +46,10 @@ Object fields: PointIn a=point(object_id) b=direction c=entity_id; GotoMap a=des
 b=point_id c=entity_id d=direction; ToLayer a=target layer b=direction c=entity_id;
 RelayInteraction a=object_id c=entity_id; NPC/ShopNPC/Entity/AnimEntity/TreasureBox
 a=link_object_id b=accept_action_direction c=entity_id d=flags(1 collision, 2 all_layers,
-4 script, 8 action, 16 wanders; a TreasureBox also carries content_id << 8 in d);
+4 script, 8 navigation action, 16 wanders, 32 loose pickup; a TreasureBox also carries content_id << 8 in d);
 Warp (baked only: an Event / Entity whose script's Main runs ChangeMap, unless the destination's
 continuation script changes map straight back, a cutscene) a=dest map_id b=dest point_id
-c=entity_id d=step_on(1 Event, 0 examined, low byte 2 reviewed manual travel + optional approach mask bits 8..11); Event/TransportationEventAction a=script_id b=action_id c=entity_id
+c=entity_id d=step_on(1 Event, 0 examined, low byte 2 reviewed manual travel + optional approach mask bits 8..11; bit16 ordinary scripted world exit); Event/TransportationEventAction a=script_id b=action_id c=entity_id
 d=ignore_route_link_object_id; OpenTrigger a=link_object_id c=entity_id; TelepoPoint
 a=goto_entity_id b=pointin_entity_id c=entity_id; CollisionEntity a=collision_type
 b=through_condition_type c=entity_id, name_str=target_transportation_ids; SavePoint
@@ -58,6 +58,7 @@ Read-only on the dumps. The C++ reader is FFPRCore-Screen-Reader/src/core/field/
 """
 import json
 import hashlib
+import re
 import os
 import struct
 import sys
@@ -77,6 +78,7 @@ BAKED_TYPES = {
     "TransportationEventAction": 21, "IgnoreRoute": 22, "NonEncountArea": 23,
     "Event": 2, "RandomEvent": 28, "SwitchEvent": 30,
     "Warp": 100,   # baked only: an event whose script changes map (a=map_id b=point_id d=step_on)
+    "TransitionHelper": 101, # reviewed native-exit companion; original identity fields retained
 }
 TALK_TYPES = {"NPC", "ShopNPC", "Entity", "AnimEntity", "TreasureBox"}
 
@@ -387,6 +389,20 @@ def bake_game(game, out_dir, check=False):
             return False
         return bool(change_map_targets(cont) & mapids_of_submap.get(origin_submap, set()))
 
+    def ordinary_world_exit(obj,script):
+        # Identify travel from matching per-game script/master facts, never from
+        # an FFVI convention or the mere presence of a script. Mixed room/world
+        # branches and narrative/encounter scripts retain their existing kind.
+        if not script or obj['type_name'] not in ('Event','RandomEvent'):return False
+        targets=change_map_targets(script)
+        if not targets or not all(submap_of_mapid.get(mid,'').startswith('Map_1') for mid in targets):return False
+        raw=obj.get('name')or'';name=script['name']
+        explicit=bool(re.fullmatch(r'sc_(?:map_)?[0-9_]+_to_(?:world(?:_[0-9]+)?|[0-9]+)',name))
+        named=bool(re.search(r'ワールドマップ|world.?map',raw,re.I))
+        travel={'Nop','Branch','Jump','Exit','Return','ChangeMap','RemoveTelepoCache','AddTelepoCache','ResetFlag','SetFlag','FadeIn','FadeOut','Wait'}
+        commands={m['mnemonic'] for m in script.get('mnemonics')or[]}
+        return explicit or (named and commands<=travel)
+
     warps = 0
     scenes = 0
     arrival_path = os.path.join(DEFAULT_OUT, game, 'warp_arrival_overrides.json')
@@ -398,6 +414,22 @@ def bake_game(game, out_dir, check=False):
     for o in objects:
         t = o["type_name"]
         if t not in BAKED_TYPES:
+            continue
+        # The one sc_transition_* object across the six shipped map sets is
+        # Fynn throne room's companion to its native GotoMap. Its script asset
+        # is not packaged. Require every reviewed identity and the exact native
+        # exit overlap; never suppress a story scene merely for sharing a tile.
+        if game=='ff2' and o['submap']=='Map_20041_7' and o['id']==104:
+            p=o['props'] or {}
+            assert t=='Event' and to_int(p.get('entity_id'))==96 and to_int(p.get('script_id'))==1504
+            assert script_names.get(1504)=='sc_transition_20041_7' and to_int(p.get('action_id'))==2
+            peers=[x for x in objects if x['submap']==o['submap'] and x['group']==o['group'] and
+                   x['layer']==o['layer'] and x['type_name']=='GotoMap' and
+                   (x['x'],x['y'],x['w'],x['h'])==(o['x'],o['y'],o['w'],o['h'])]
+            assert len(peers)==1 and to_int(peers[0]['props'].get('entity_id'))==84
+            assert to_int(peers[0]['props'].get('map_id'))==40 and to_int(peers[0]['props'].get('point_id'))==2
+            helper=dict(o,type_name='TransitionHelper')
+            by_sub.setdefault(o['submap'],[]).append(helper)
             continue
         by_sub.setdefault(o["submap"], []).append(o)
         sid = to_int((o["props"] or {}).get("script_id"))
@@ -440,6 +472,21 @@ def bake_game(game, out_dir, check=False):
                     w["type_name"] = "Warp"
                     w["props"] = {"entity_id": (o["props"] or {}).get("entity_id"), "map_id": -1 if correction and correction[1].get('same_map') else dest[0],
                                   "point_id": point, "step_on": (2 | (int(correction[1].get('approach_mask',0))<<8)) if correction and correction[1].get('interaction_travel') else 1 if t in ('Event','RandomEvent') else 0}
+                    if ordinary_world_exit(o,s):w['props']['step_on']|=1<<16
+                    # Reviewed mounted scene entry: sc_e_0070 starts Leviathan's
+                    # sea scene, then disembarks inside the script before its
+                    # ChangeMap(228,1). It must be entered while still sailing.
+                    # Bind to script identity/activation, never guessed terrain
+                    # or a coordinate exception. Other mounted entries require
+                    # their own native/script evidence before extending this set.
+                    if game=='ff2' and o['submap']=='Map_10010' and s and s['name']=='sc_e_0070':
+                        assert t=='Event' and dest[:2]==(228,1)
+                        digest=hashlib.sha256(json.dumps(s,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
+                        assert digest=='dc8afd54d6cf4c57dd07198f367116322dc09789f55d1b4f21eb9698193c7252', 'Reviewed Ship-entry script changed'
+                        assert any(c['mnemonic']=='SysCall' and
+                                   c['operands']['sValues'][0]=='乗り物から降りる(BGM変更なし)'
+                                   for c in s['mnemonics'][:next(seg['Count'] for seg in s['segments'] if seg['Label']=='Main')])
+                        w['props']['step_on']|=1<<17
                     by_sub[o["submap"]].append(w)
                     warps += 1
 
@@ -469,16 +516,23 @@ def bake_game(game, out_dir, check=False):
                 flags |= 2
             if to_int(p.get("script_id")):
                 flags |= 4
-            if to_int(p.get("action_id")):
+            # Match native NPC discovery: RunScript without a script/message
+            # is a staged actor, although native CanAction classifies it as talk.
+            # Retain its collision/identity for routing; only discovery changes.
+            action = to_int(p.get("action_id"))
+            inert_npc = t in ("NPC", "ShopNPC") and action == 2 and not (
+                to_int(p.get("script_id")) > 0 or p.get("message_key"))
+            if action and not inert_npc:
                 flags |= 8
             if t in ("NPC", "ShopNPC") and to_int(p.get("move_type")) not in (0, 1) and p.get("move_step"):
                 flags |= 16   # Native None/Stamp remain on their tile; Area/Route/Following travel.
             d = flags
             if t == "TreasureBox":
+                if p.get("pick_up") is True:d |= 32  # native disappearing loose treasure
                 # The chest's content id above the flag bits (2026-10-11): a chest on another
                 # floor is listed by its contents, as the live list names chests.
                 d |= max(0, to_int(p.get("content_id"))) << 8
-        elif t in ("Event", "TransportationEventAction", "RandomEvent", "SwitchEvent"):
+        elif t in ("Event", "TransportationEventAction", "RandomEvent", "SwitchEvent", "TransitionHelper"):
             a, b = to_int(p.get("script_id")), to_int(p.get("action_id"))
             d = to_int(p.get("ignore_route_link_object_id"), -1)
             if t == "TransportationEventAction":

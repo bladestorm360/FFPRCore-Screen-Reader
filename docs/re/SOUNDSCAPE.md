@@ -110,8 +110,9 @@ and future deploy copy this private eight-file payload; Prism remains read-only/
 Scratch fixtures verified deployment first; the user subsequently authorized real
 deployment to all six games. See the deployment receipt below.
 
-Soundscape observation traverses the already-published pathfinder All view, independent
-of the currently selected category. No database inclusion rules changed. Native pointers
+Soundscape observation traverses an independently published physical view from
+the same eligible registry with exit/event grouping disabled, independent of
+pathfinder category/group switches. No inclusion rules changed. Native pointers
 remain on the native owner. Conversion retains bounded raw identifying strings (512
 characters), positive door metadata and an actual GotoMap flag; none is spoken. Current
 position/presence/opened state is copied in at most 512 entries or a 0.25 ms elapsed slice
@@ -153,6 +154,36 @@ scenes; four-second 112-voice saturation is a limit, not a claim of unlimited po
 SDL buffering targets 60 ms (three 20 ms chunks); the worker wakes at most 20 ms apart
 without game polling and never catches up with an unbounded render loop. Driver stalls
 can extend actual delivery/cancellation; the game producer never waits for them.
+
+## October24 physical transition and trigger groups
+
+Implemented and offline verified; deployed all six. Listening/gameplay pending.
+Adjacent tiles of the same destination/layer/cue form one source at the nearest
+actual member tile. Town exits to a world map group by fixed map edge North/
+East/South/West, one per direction. This does not depend on pathfinder Group
+exits/Group events settings. Automatic event/ScriptTrigger components use native
+script/action/layer identity; separate scripts/disconnected areas stay distinct.
+Manual objects, NPCs and chests retain individual sources. Unknown identities
+are not guessed together.
+
+entity_filter::build_categories prepares audio_order alongside eight category
+views with grouping disabled locally and existing story/terrain/layer eligibility.
+FilterPublish transfers that view under CaptureBudget, then advances the audio
+revision. capture_soundscape copies real positions, layer, world-destination and
+automatic script/action on the native owner. Sound-player capture adds map size.
+
+The audio worker groups copied candidates before applying range, using a spatial
+tile map and disjoint components rather than all-pairs comparisons. It chooses
+the nearest member and stable minimum member identity. Snapshot/count/age/cancel,
+eight-start scheduling, HRTF/stereo and clock bounds remain unchanged. Grouping
+never changes route cells or destinations.
+
+soundscape_check covers multi-tile doors, four town edges, connected triggers
+with different developer names, separate/manual events and8192 connected tiles.
+entity_filter_check checks preference independence; entity_scanner_check checks
+native-owned capture. Reports distinguish offline classifier, fake-native and
+fake-device times from live frame/audible performance. Safe extension requires
+verified identity and physical adjacency, never text similarity or nearest-N cuts.
 
 ## Offline evidence and remaining limits
 
@@ -519,3 +550,22 @@ Recovery: `build_check/beacon_mode_recovery_2026_10_15`. Checked receipt/reports
 Before/deploy receipts: `build_check/beacon_mode_{before,deploy}_2026_10_15.json`.
 No game launch/control/probe, tester-file access, commit/push or public release occurred;
 prior dirty work/history and third-party attribution remain preserved.
+
+
+October24 final evidence: production8192-trigger grouping9.725ms; actual HRTF
+cold open44.526ms and128-loop20ms render mean/peak1.026/1.303ms. Snapshot to fake
+SDL submission0.017ms; dense400-source worker peak0.363ms, all400 heard with486
+deferred starts. Native capture normal2000 used4 slices (aggregate about0.2ms);
+synthetic8192 worst strings used21 slices, peak0.284ms/aggregate4.830ms. These are
+host/fake-boundary and loopback measurements, not unmodded/modded game frames,
+physical audible latency or listening confirmation. Final build/smoke/resources
+pass; deployed all six with144 protected files unchanged. Receipts are in
+build_check/mysidia_objects_20261024/.
+October26 [beacon movement/spatial repair](BEACON_MOVEMENT_20261026.md): the route
+follower indexes immutable corners once per route instead of queueing a result
+for each player tile. Pending replans retain the known ping cadence. The audio
+owner receives full displacement and uses actual HRTF bearing/original pitch;
+rear0.7x and the legacy blocked half-tone apply only to effective stereo. The
+existing map-north-forward convention, mixer/device/soundscape owners and cue
+assets remain unchanged. Connected movement/actual-loopback checks pass; new
+listening remains pending.

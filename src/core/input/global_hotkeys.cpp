@@ -65,7 +65,15 @@ void announce_current_vehicle()
 
 void handle_item_details_key()
 {
+    if(queries::is("Warehouse.IsActive")){actions::run("Warehouse.ReadDetails");return;}
     if (queries::is("ReviewBuffer.IsActive")) { actions::run("ReviewBuffer.Details"); return; }
+    if (queries::is("MapPanels.IsActive")) { actions::run("MapPanels.ReadDetails");return; }
+    if (queries::is("EventItemSelectState.IsActive")) {actions::run("EventItemSelect.ReadDetails");return;}
+    // Exact native row focus takes precedence over the item/spell that opened
+    // its target panel. All MP levels follow the selected row's short layout.
+    if (const auto row = queries::text("CharacterRow.Details"); !row.empty()) {
+        ffpr::say(row, true); return;
+    }
     // 15-puzzle: current cursor row/column.
     if (queries::is("PuzzleGameState.IsActive")) {
         actions::run("PuzzlePatches.AnnouncePosition");
@@ -128,6 +136,7 @@ void handle_item_details_key()
         actions::run("BattleItemPatches.AnnounceCurrentDescription");
         return;
     }
+    if (const auto row = queries::text("BattleParty.ChargeDetails"); !row.empty()) ffpr::say(row, true);
 }
 
 } // namespace global_hotkeys

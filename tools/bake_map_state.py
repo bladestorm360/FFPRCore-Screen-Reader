@@ -22,7 +22,7 @@ OPERATORS = {'＝': 0, '≠': 1, '＜': 2, '＞': 3, '≦': 4, '≧': 5, '←': 
 UNSET_POSITION = -2147483648
 
 
-def puppet_navigation_effect(script, entry, region):
+def puppet_navigation_effect(script, entry, region, positions=True):
     """Recover final visibility/absolute placement, not animation or story text.
 
     FF6 Puppet.SetPos uses IMapAccessor.ConversionMapRangeCell before assigning
@@ -40,6 +40,7 @@ def puppet_navigation_effect(script, entry, region):
         if op=='Hide':visible=0
         elif op=='Show':visible=1
         elif op=='SetPos':
+            if not positions:moving=True;continue
             if ints[2]!=0 or ints[3]!=0:moving=True;continue
             if ints[0]>=0:x=ints[0]-region[0]
             if ints[1]>=0:y=ints[1]-region[1]
@@ -53,14 +54,16 @@ def initializer_code(script,game,region):
     code=[]
     for m in script.get('mnemonics')or[]:
         op=m['mnemonic'];v=m.get('operands')or{};ints=list(v.get('iValues')or[])+[0]*8
-        if game=='ff6' and op=='SetPuppet':
+        if op=='SetPuppet':
             # Zero and negative IDs include resident/player aliases rather
             # than one unambiguous baked object. Keep them native-only.
-            effect=puppet_navigation_effect(script,ints[2],region) if ints[1]>0 else None
+            # Hide/Show and slot/actor/entry ownership are verified on all six
+            # native interpreters. Absolute position units remain FFVI-only.
+            effect=puppet_navigation_effect(script,ints[2],region,game=='ff6') if ints[1]>0 else None
             # Always replace this puppet slot, even when its new body has no
             # navigation effect; ExecPuppet applies the ready final facts.
             code.append([10,ints[0],ints[1],*(effect or [-1,UNSET_POSITION,UNSET_POSITION])])
-        elif game=='ff6' and op=='ExecPuppet':code.append([11,ints[0]])
+        elif op=='ExecPuppet':code.append([11,ints[0]])
         else:code.append(instruction(m,game))
     return code
 
@@ -87,6 +90,18 @@ def instruction(m, game):
     # map-layer rendering and minimap-icon visibility. It never selects an entity
     # group or writes DataStorage. Matching native manifest: docs/re/ff1_roof*.
     if game == 'ff1' and op == 'SysCall' and strings[0] == 'MapEntryRoofControl': return [0]
+    # FFIII Current.HideMist -> FieldController.HideScenery -> both map
+    # renderers' MapMultipleScroll.Hide. No flags, actors or collision writes.
+    # CheckWithCompanion conditionally writes map-local0; model that output as
+    # unknown, retaining only facts guaranteed on both resulting branches.
+    # Matching native provenance: docs/re/NPC_FLOORS_SHOP_LANDING_20261025.md.
+    if game == 'ff3' and op == 'SysCall':
+        if strings[0] == '霧を非表示に': return [0]
+        if strings[0] == '同行者がいるか': return [8, 10, 0, -2, 0]
+        # Current.CheckChild delegates to CheckConditionCommon(401), testing all
+        # active corps members and writing only map-local0. Category14 is the
+        # copied navigation result; never call that state-writing native SysCall.
+        if strings[0] == '状態異常：小人かどうか': return [8, 10, 0, 14, 401]
     # These can change control flow/state beyond this read-only model.
     if op.startswith('Branch') or op in ('Calc', 'ChangeScript', 'SysCall', 'ChangeMap', 'Encount'):
         return [9]
@@ -111,13 +126,15 @@ def entry_guard(script, game):
             nodes[pc]=[0];todo.append(pc+1)
         elif op in ('Exit','Return'):
             nodes[pc]=[6];empty_exit=True
+        elif game=='ff3' and op=='SysCall' and (m.get('operands') or {}).get('sValues',[''])[0]=='状態異常：小人かどうか':
+            nodes[pc]=instruction(m,game);todo.append(pc+1)
         elif op=='Jump':
             nodes[pc]=instruction(m,game);todo.append(nodes[pc][1])
         elif op=='Branch':
             nodes[pc]=instruction(m,game);todo.extend([pc+1,nodes[pc][6]])
         else:nodes[pc]=[1,'@action']
     if not empty_exit or not any(row[0]==1 for row in nodes.values()) or not any(
-            row[0]==2 and 0<=row[1]<=8 for row in nodes.values()):return None
+            row[0]==2 and (0<=row[1]<=8 or row[1]==10 and any(r==[8,10,0,14,401] for r in nodes.values())) for row in nodes.values()):return None
     offsets={};code=[]
     for pc,row in sorted(nodes.items()):
         offsets[pc]=len(code);code.append(list(row))
@@ -143,9 +160,8 @@ def build(game):
     for o in objects:by_sub[o['submap']].append(o)
     submaps=json.loads((DUMP/f'{game}_submaps.json').read_text(encoding='utf-8'))
     bounds={sm:bake_maps.map_bounds(info,by_sub[sm]) for sm,info in submaps.items()}
-    if game=='ff6':
-        for name,record in scripts.items():
-            record['code']=initializer_code(source[name,'sc_'+name.lower()],game,bounds[name])
+    for name,record in scripts.items():
+        record['code']=initializer_code(source[name,'sc_'+name.lower()],game,bounds[name])
     with (DUMP/f'{game}_master/script.txt').open(encoding='utf-8-sig') as f:
         masters={int(r['id']):r['script_name'] for r in csv.DictReader(line for line in f if line.strip()) if r['id']}
     guards=0
@@ -162,9 +178,13 @@ def build(game):
         info['map_ids'].append(int(row['id']))
     for o in objects:
         p=o.get('props') or {}
-        if o['type']==7 and p.get('flag_id',0)>0:
+        # Flag zero is the first real saved treasure bit, not a missing-ID
+        # sentinel. Require an explicit bounded native property so a missing
+        # extraction cannot silently become that first chest's state.
+        flag=p.get('flag_id')
+        if o['type']==7 and type(flag) is int and 0<=flag<1024:
             row=scripts.setdefault(o['submap'],{'entry':0,'code':[]})
-            row.setdefault('treasures',[]).append([p.get('entity_id',0),o['group'],p['flag_id']])
+            row.setdefault('treasures',[]).append([p.get('entity_id',0),o['group'],flag])
         if o['type'] not in (2,5,6,17,21,28,30) or not p.get('script_id') or p.get('action_id')!=2 or p.get('message_key'):continue
         name=masters.get(p['script_id'],'');s=source.get((o['submap'],name))
         guard=entry_guard(s,game) if s else None

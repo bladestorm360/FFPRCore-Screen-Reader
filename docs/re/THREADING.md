@@ -1,5 +1,129 @@
 # Read-only snapshots and worker ownership
 
+October26 [beacon movement](BEACON_MOVEMENT_20261026.md) builds one contiguous
+corner lookup per published route on Navigation. Native moving queries do a
+logarithmic immutable lookup, without another worker job/wait/route scan. One
+copied aim persists during same-goal pending work; lifecycle/identity changes
+retire it. Actual effective HRTF/stereo bearing and pitch are chosen on Audio
+through the existing bounded queue, with no new native hook/capture.2,400 warm
+cache reads use0.061ms total owner compute/zero jobs; full native/frame/audible
+tails remain gameplay-side, and cumulative >25ms application lag still blocks.
+
+October26 [locked-door approach](LOCKED_DOORS_20261026.md) adds a pure enum
+classification shared by route selection and worker category filtering. No new
+native read/callback, capture, wait, pointer transfer or mutable game state;
+existing snapshot/cancellation/planner bounds remain. Actual worker-owner tests
+pass. Engine/frame/audio latency is not measured by this offline check.
+
+October26 [Warehouse](WAREHOUSE_20261026.md) adds fixed ready UI reads with one
+generation-cancelled next-frame focus task and existing single popup/footer
+services. Original calls run once; UI pointers remain native-owned. Numeric
+quantity comparison guards a native change event, not speech text. [Remote return
+listing](REMOTE_RETURNS_20261026.md) adds only worker-owned map/PointIn/door indexes
+under the existing400-map bound, with cancellation inside all loops. Comparable
+all-six projection measurements and explicit native/frame/audio gaps are in those
+records. No new polling, game-thread wait, native mutation or pointer transfer.
+
+[October26 status/world maintenance](ALLY_STATUS_20261026.md) adds bounded ready
+body/effect reads only when a party status request needs them, plus two completed
+native observers with fixed lifecycle-cleared tables. FFIII Mini checks copy only
+an optional scalar into existing immutable navigation snapshots. No native pointer
+transfer, interpreter call, new timer/wait or native mutation. Detailed counts,
+overload limits and comparable full-path harness timings are in that record and
+[world events](WORLD_EVENTS_20261026.md); real native/audio tails remain unmeasured.
+
+[October25 battle title/party repair](BATTLE_TITLE_PARTY_20261025.md) gates
+late native battle callbacks and queued reads using the existing scalar battle
+context/generations. No new native lookup, scan, timer or worker pointer. Binding
+ID disambiguation is installation-only; per-frame dispatch is unchanged. Offline
+owner-thread and original-call regressions pass; canonical build/smoke/scan and
+all-six installed hashes pass. No runtime timing claim.
+
+[October25 chocobo/Owen geometry](CHOCOBO_OWEN_20261025.md) reuses captured
+collider IDs and immutable masks on Navigation, without adding native work.
+Partial-face tests, equal-cost dismount selection and exact examined-door matching
+remain in the existing bounded worker searches. Native landing/toad scripts are
+never run by the planner. No new hook, wait, scene search, native pointer transfer
+or deduplication is added; current-snapshot cancellation/publication remain.
+
+[October25 terminal-transition routing](TRANSITION_ROUTES_20261025.md) adds
+immutable indexed masks on Data/Navigation only. An owned Resolver caches one
+state-projected mask per visited map; loaded-floor powered triggers override
+remote script variants once per worker scope. Requests share masks across legs,
+floods and retained-route validation. No native capture, callback loop, wait or
+pointer handoff is added. Existing cancellation and graph/node bounds remain.
+
+[October25 routine/range/detail follow-up](NPC_PATROL_TARGETS_20261025.md) adds
+two scalar native NPC routine facts to existing sliced capture; owned workers
+choose wait versus interaction without corridor-width guessing. No native pointer
+is transferred. Native all/single phase callbacks retire competing row readers;
+one constant group line or at most9 rendered single rows remain bounded. Close/
+menu/map/battle generations retire ownership; no new polling, waits or text dedup.
+Enemy Critical filtering shares the existing condition name/master resolution and
+adds no HP inference. Event-item detail caches one current UI string and admits
+I only for the observed active owner; fades/loading remain authoritative. Real
+native/frame/audible timing remains unmeasured, distinct from offline fixture data.
+
+[October25 connected-floor follow-up](NPC_FLOORS_SHOP_LANDING_20261025.md) retains
+only completed-branch common facts within8192 operations/64 states/16 call levels;
+native pointers never enter that projection. Remote entrances remain graph-backed;
+1524 routine FFIII border rows are omitted before expensive grouping/filtering
+while their routing graph remains. Focused offline projection is about0.24..1.1ms
+including fixture thread join, not capture-to-audible timing. All-six geometry
+profiles report remaining gates/staged/unknown cases rather than guessing open.
+Map modal input needs positive owner evidence; native transition/fade still wins.
+Magic Learn retires outgoing reader ownership before native initializers rebuild
+previews and uses existing bounded native-update/generation cancellation. Landing
+uses a mounted manual-transport snapshot, not stale movement speech. No new waits,
+background native API access, broad polling or whole-scene discovery is added.
+
+[October25 boot investigation](STARTUP_HANG_20261025.md) records the approved
+read-only external snapshot and precise native state limits. New boot observers
+copy fixed exception prefixes on their throwing owner and use existing
+nonblocking logger ingress; no worker-native pointers, waits, scans or new timer.
+
+October25 [silent landing initialization](LANDING_LOAD_20261025.md) adds the
+existing readiness/input-transition checks only on a potential landability edge.
+State is still observed during loading; no delayed callback, new timer, queue,
+scan or native-thread wait. FF6 priority time advances only on actual speech.
+
+October25 [MP/landing/HP presentation follow-up](FF3_FEEDBACK_20261025.md)
+keeps the eight-cell charge bound and existing rendered digit callback. Landing
+Show/Switch read one current native-owned guide and state edge; the borrowed
+identity never enters a worker. Hide/map/battle reset it. No new wait, queue,
+scene scan, terrain computation or timer; actual frame/audible timing unmeasured.
+
+October24 [direct three-part damage binding](PARASITE_THREE_PARTS_20261024.md)
+keeps per-result resources on the actual typed damage callback, including native
+loops bypassing view wrappers. Only current-owner enum observation is added;
+the existing owned-name/type digit callback and speech service retain lifetime
+and scheduling ownership. No new scan, queue, wait or worker-native pointer.
+
+October24 [battle Items equipment and sibling MP drain](BATTLE_ITEM_EQUIPMENT_20261024.md)
+adds synchronous bounded one-row observation and class-specific resource reads.
+There is no new queue, pointer transfer or polling; fake-native callback/output
+timings are recorded separately from unmeasured game/audio latency.
+
+October24: [map captures/owned formatting](MAP_PANELS.md), [screen-owned controls and F9](INPUT_INTERCEPTION.md), [Attack party ownership](ALLY_TARGETS.md) and [soundscape grouping](SOUNDSCAPE.md#october24-physical-transition-and-trigger-groups) retain native-owner reads, owned worker snapshots, generation cancellation and existing budgets. No native-thread wait or new scene search is added. New reports distinguish offline/fake boundaries from physical audible/frame timing.
+
+October23 [NPC detour/doorway follow-up](NPC_BLOCKERS.md#october23-mysidia-detour-and-temporary-occupancy-follow-up)
+adds an owned wait boundary. A live edge veto/stall only marks a replan in native
+input; input_updated admits one snapshot request and Navigation searches all
+detours. Autowalk retries at most twice per second within a30-second episode;
+completed native displacement resets that episode. Cancellation generations
+reject late replies. Beacon-only waits reuse the existing two-second follower
+throttle. These are event-started bounded retries, with no game-thread wait or
+worker-native calls. Offline fixtures cover ownership/state/rate/cancellation;
+actual callback/frame, full response/data age and audible timings remain unmeasured.
+
+October23 [scripted exits/Ship/indoor search bounds](WORLD_EXIT_FOLLOWUP_20261023.md)
+and [battle resource/condition/Swap producers](BATTLE_FEEDBACK_20261023.md) add
+prepared travel indexes, transport-model identity and bounded native effect
+observations. Indoor gate proof no longer expands through the world graph.
+All planning remains on Navigation; Swap workers receive copied names/locale
+and reject obsolete battle epochs. No owner waits or new scene scans are added.
+Offline and real audible/native performance remain distinct.
+
 October23 [FF6 story guidance](FF6_STORY_NAVIGATION.md) adds owned rule/party-state
 snapshots ahead of the existing bounded route capture and Navigation worker.
 Native party/map/battle producers interrupt epochs; ready continuations clean up.
@@ -815,3 +939,12 @@ geometry parity. Broader extraction of those existing private responsibilities i
 outside this progression fix. Released flag storage is owned/immutable and shared
 between candidate results, avoiding large repeated stack copies. The test runner
 now treats negative Windows exception exits as failures as well as positive codes.
+
+
+## October25 Ur counter follow-up
+
+[Counter geometry and ownership](INN_COUNTER_MP_20261025.md) records the zero-ID
+clerk omission, active-relay snapshots and real-map all-six regression coverage.
+Quick floods copy flags once per new job; projection stays on Navigation, and
+per-entity native-side queries consume immutable relay geometry without waiting.
+Runtime callback/first-audible measurements remain unmeasured.

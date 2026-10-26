@@ -148,6 +148,10 @@ void read_cursor_now(void* cur)
 {
     // Safety checks (the cursor may be gone a frame later).
     if (!unity::alive(cur) || !unity::game_object(cur)) return;
+    // A native target callback may claim this cursor after the generic reader
+    // was scheduled. Recheck ownership at execution, rather than repeating its
+    // name one frame after the specific row read. This is not text deduplication.
+    if (queries::is("ItemMenuState.ShouldSuppress") || queries::is("MapPanels.IsActive") || queries::is("Warehouse.IsActive")) return;
     void* t = unity::transform(cur);
     if (!t) return;
 

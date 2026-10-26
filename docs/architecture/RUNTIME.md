@@ -1,5 +1,18 @@
 # Native runtime and shared service ownership
 
+[October25 floor/map context follow-up](../re/NPC_FLOORS_SHOP_LANDING_20261025.md)
+keeps bounded native observations and owned projection workers. Guaranteed facts
+from completed initializer branches survive; unsupported or divergent actor
+state stays conservative. Companion collision, staged-actor bounds, real-layer
+interaction goals and route-only world borders share the existing navigation
+epochs. Mounted landing cues require the actual manual vehicle. No new game-thread
+wait, native pointer in workers, route-distance limit or scene scan is introduced.
+
+[October25 startup investigation](../re/STARTUP_HANG_20261025.md) distinguishes
+a running Boot frame loop from successful game initialization. Narrow native
+boundaries preserve each original call and exception search; no startup
+workaround/repair is established yet. Approved snapshot evidence is outside Git.
+
 Current source audit: October22. One name-resolved native hid.dll proxy serves Steam
 FF1–FF6. The paused managed repositories provide historical behavior/attribution;
 they are not deployment targets. The shared runtime is implemented and offline
@@ -81,3 +94,15 @@ snapshot/worker publication are tightly coupled. This task changes those shared
 paths without an unrelated planner split; the focused worker/route fixtures cover
 its boundaries. A future extraction should preserve those private interfaces and
 actual-consumer tests. No new wrapper/process is required for every responsibility.
+
+
+October24 budget review: battle_message.cpp is reduced to610 lines by replacing
+per-game removal tracking with native reconciliation. stat_feedback.cpp and the
+shared controls reader are cohesive separate modules. entity_scanner.cpp remains
+an explicit1251-line exception: its exact selection anchors/revisions are used
+inside the same private native-capture, worker and publication lifecycle. This
+fix keeps those ownership boundaries together; pure filtering remains in
+entity_filter.cpp. baked_nav.cpp's existing private-planner exception now also
+covers mounted pad phases and shared list floods (roughly3300 lines). Pure pad parsing
+and sparse indices live in baked_map.cpp. No unrelated split or wrapper was added;
+future extractions must retain actual-consumer cancellation/lifetime fixtures.

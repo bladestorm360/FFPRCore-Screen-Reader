@@ -80,11 +80,30 @@ bool open(const Request& r, const baked::Grids& g, const Cell& c)
 
 bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
 {
-    for (const auto& gate : r.directional)
+    const bool world=r.submap&&r.submap->world;
+    const int direction=step_direction(from,to,world?r.submap->width:0,world?r.submap->height:0);
+    for (const auto& gate : r.directional) {
         if (gate.cell.x == to.x && gate.cell.y == to.y &&
             (gate.cell.layer < 0 || gate.cell.layer == to.layer) &&
             ((gate.axis == 1 && from.y != to.y) || (gate.axis == 2 && from.x != to.x))) return false;
+        if(gate.axis||direction<0)continue;
+        const bool entered=gate.cell.x==to.x&&gate.cell.y==to.y&&(gate.cell.layer<0||gate.cell.layer==to.layer);
+        const bool left=gate.cell.x==from.x&&gate.cell.y==from.y&&(gate.cell.layer<0||gate.cell.layer==from.layer);
+        if((entered&&!(gate.mask&kBits[kReverse[direction]]))||(left&&!(gate.mask&kBits[direction])))return false;
+    }
     return true;
+}
+
+void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>& directional,const Cell& cell,int id)
+{
+    // Same MapConstants.CollisionFilter used by the native map parser. Partial
+    // colliders constrain both entering and leaving their cell, rather than
+    // turning the whole cell into a fictional story gate. Triangle connectors
+    // require surrounding native geometry and retain the prior conservative wall.
+    constexpr int masks[]={15,0,14,11,7,13,6,9};
+    if(id==0)return;
+    if(id>=2&&id<=7)directional.push_back({cell,0,masks[id]});
+    else blocked.push_back(cell);
 }
 
 bool trap_cell(const Request& r, const baked::Grids& g, const Cell& c)
@@ -105,14 +124,26 @@ int step_direction(const Cell& from, const Cell& to, int w, int h) {
     for (int dir=0; dir<8; ++dir) if (dx==kDirs[dir][0] && dy==kDirs[dir][1]) return dir;
     return -1;
 }
+bool terminal_transition(const Request& r,const baked::Grids& g,const Cell& cell) {
+    if(!baked::in_bounds(g,cell.x,cell.y))return false;
+    const bool world=r.submap&&r.submap->world;
+    const int layer=world?0:cell.layer;if(layer<0||layer>2)return false;
+    const auto& mask=(r.transitions?*r.transitions:g.transitions)[layer];
+    if(mask.empty())return false;
+    const int bits=mask[static_cast<size_t>(cell.y)*g.width+cell.x];
+    return (bits&2) || ((bits&1)&&(!world||r.vehicle_group<=0||native_ground_entry(r.vehicle_type)));
+}
 bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, const Cell& to) {
     const bool world = r.submap && r.submap->world;
+    // A door/warp terminates this map leg. It stays usable as the actual goal,
+    // including a graph-selected exit; ignoring scene hazards cannot bypass it.
+    if(terminal_transition(r,g,to)&&!(r.goals_open&&is_goal_cell(r,to)))return false;
     const int dir = step_direction(from,to,world ? g.width : 0,world ? g.height : 0);
     if (dir < 0 || (world && dir >= 4) || !direction_allowed(r,from,to)) return false;
     if (world) {
         if (!is_goal_cell(r,to) || !r.goals_open) return true;
         for (const auto& object : g.objects)
-            if ((object.type==baked::ObjType::GotoMap || (object.type==baked::ObjType::Warp && object.d==1)) && object.contains(to.x,to.y))
+            if ((object.type==baked::ObjType::GotoMap || (object.type==baked::ObjType::Warp && (object.d&255)==1)) && object.contains(to.x,to.y))
                 return transition_enterable(r,g,to.x,to.y);
         return world_enterable(r,g,to.x,to.y);
     }
@@ -178,6 +209,7 @@ bool safe_landing(const Request& movement, const baked::Grids& g, const Cell& la
     r.start = landing;
     r.goals.clear(); r.goals_open = false; r.allow_trap_goal = false; r.ignore_hazards = false;
     if (!open(r, g, landing) || blocked_by_caller(r, landing) || trap_cell(r, g, landing)) return false;
+    if(terminal_transition(r,g,landing))return false;
     if (r.live_hazards) {
         for (const auto& hazard : r.hazards)
             if (hazard.x == landing.x && hazard.y == landing.y && (hazard.layer < 0 || hazard.layer == landing.layer)) return false;
@@ -342,6 +374,10 @@ Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector
         else { cur=fifo.front(); fifo.pop(); }
         const uint16_t dc = out.dist[cur.layer][static_cast<size_t>(cur.y) * g.width + cur.x];
         if (weighted && dc != item.first) continue;
+        // Flood goals may be entered to report reachability, but cannot open a
+        // route on their far side. Explicit reverse-flood seeds may leave them.
+        if(terminal_transition(r,g,cur)&&is_goal_cell(r,cur)&&
+           std::find(starts.begin(),starts.end(),cur)==starts.end())continue;
         neighbours(r, g, cur, [&](const Cell& next) {
             uint16_t& dn = out.dist[next.layer][static_cast<size_t>(next.y) * g.width + next.x];
             const auto cost = static_cast<uint16_t>(std::min(0xFFFE,dc+1));
@@ -418,8 +454,8 @@ const baked::Object* object_at(const baked::Grids& g, const Cell& c, bool (*pred
 
 bool talk_pred(const baked::Object& o) { return is_talk(o.type); }
 bool exit_pred(const baked::Object& o) { return o.type == baked::ObjType::GotoMap && o.a > 0; }
-bool step_warp_pred(const baked::Object& o) { return o.type == baked::ObjType::Warp && o.d == 1; }
-bool examine_warp_pred(const baked::Object& o) { return o.type == baked::ObjType::Warp && o.d != 1; }
+bool step_warp_pred(const baked::Object& o) { return o.type == baked::ObjType::Warp && (o.d&255) == 1; }
+bool examine_warp_pred(const baked::Object& o) { return o.type == baked::ObjType::Warp && (o.d&255) != 1; }
 
 void footprint_of(const baked::Object& o, std::vector<Cell>& out, int layer)
 {
@@ -497,8 +533,15 @@ constexpr int kAcceptBitOfSide[4] = {1, 2, 4, 8};   // north, east, south, west
 } // namespace
 
 bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y) {
-    return !(r.submap && r.submap->world) ||
-        ((r.vehicle_group<=0 || r.vehicle_type==5) && world_enterable(r,g,x,y));
+    if(!(r.submap && r.submap->world))return true;
+    if(r.vehicle_group<=0 || native_ground_entry(r.vehicle_type))return world_enterable(r,g,x,y);
+    if(r.vehicle_type==2 && world_enterable(r,g,x,y)) {
+        // Only an explicitly reviewed step-on script permits sailing into the
+        // transition. Native GotoMap towns retain their dismount requirement.
+        for(const auto& object:g.objects)
+            if(baked::ship_entry(object)&&object.contains(x,y))return true;
+    }
+    return false;
 }
 int transition_distance(const Request& request, const Reach& reach) {
     if (!request.submap || !reach.submap) return -1;
@@ -548,6 +591,16 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
     const baked::Object* exit = object_at(g, target, exit_pred);
     const baked::Object* pad = object_at(g, target, step_warp_pred);
     const baked::Object* warp = object_at(g, target, examine_warp_pred);
+    // An examined entrance may overlap its native destination tile (Owen's
+    // Toad hole). The object remains usable before its script condition passes;
+    // walking onto its solid cell is never the interaction approach.
+    if(exit)for(const auto& object:g.objects)
+        if(object.type==baked::ObjType::Warp&&(object.d&255)!=1&&object.layer==exit->layer&&
+           object.contains(target.x,target.y)&&object.a==exit->a&&object.b==exit->b) {
+            warp=&object;
+            if(kind==GoalKind::Infer||kind==GoalKind::Transition)kind=GoalKind::Interact;
+            break;
+        }
     if (kind == GoalKind::Infer) {
         if (exit || pad) kind = GoalKind::Transition;
         else if (talk || warp) kind = GoalKind::Interact;
@@ -577,14 +630,32 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
         const baked::Object* object = talk ? talk : warp;
         if (object) footprint_of(*object, out.faced, world ? target.layer : object->layer);
         else out.faced.push_back(target);
-        // The game's own counter tile: a service NPC's link_object_id names the RelayInteraction
-        // the player stands on to talk across the counter (every game, 2026-10-10). NPCs only:
-        // a chest's link_object_id is its own object id (FF1/FF2 chests: 100) and names nothing.
+        // A one-cell relay extends the interaction ray when the tile immediately
+        // in front of the player is that relay. It does not require matching IDs:
+        // Ur's item clerk and counter both use zero. The player may stand beyond
+        // a solid counter, rather than on its impassable tile.
         const bool npc = talk && (talk->type == baked::ObjType::NPC || talk->type == baked::ObjType::ShopNPC);
+        // InteractiveTargetObserver separates native object layers. Ordinary
+        // objects/chests return AllLayerTarget=false; NPCs opt in explicitly.
+        // A bridge or river tile at the same X/Y on another layer is not an
+        // interaction approach (Caanan's hidden treasure is Ground, not Bottom).
+        const bool all_layers=!object || (npc && (talk->d&2));
+        std::vector<const baked::Object*> relays;
+        if (npc && !world) for (const auto& o : r.live_relays ? r.relays : g.objects) {
+            if (o.type != baked::ObjType::RelayInteraction) continue;
+            if (!r.live_relays) {
+                const auto group = baked::str(o.group);
+                if (!group.empty() && group != L"entity_default" && group != L"default" && o.group != talk->group) continue;
+            }
+            relays.push_back(&o);
+        }
+        // Preserve the existing multi-cell linked approach until its native
+        // rectangle-origin mapping is independently established. One-cell
+        // relays below use the verified native probe/range contract instead.
         if (npc && !world && talk->a > 0) {
-            for (const baked::Object& o : g.objects) {
-                if (o.type == baked::ObjType::RelayInteraction && o.a == talk->a) {
-                    out.cells.push_back(Cell{o.layer, o.tx, o.ty});
+            for (const auto* o : relays) {
+                if ((o->tw > 1 || o->th > 1) && o->a == talk->a) {
+                    out.cells.push_back(Cell{o->layer, o->tx, o->ty});
                     return out;
                 }
             }
@@ -597,10 +668,27 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
                 const int x = c.x + kSide[d][0], y = c.y + kSide[d][1];
                 if (contains_cell(out.faced, x, y)) continue;
                 std::vector<Cell> here;
-                add_open_layers(r, g, x, y, -1, here);
+                if(all_layers)add_open_layers(r,g,x,y,-1,here);
+                else if(open(r,g,{c.layer,x,y}))here.push_back({c.layer,x,y});
                 for (const Cell& h : here) {
+                    if(terminal_transition(r,g,h))continue;
                     push_unique(any_side, h);
                     if (mask == 0 || (mask & kAcceptBitOfSide[d])) push_unique(allowed, h);
+                }
+            }
+            if (npc && !world) for (int d = 0; d < 4; ++d) {
+                if (!(mask & kAcceptBitOfSide[d])) continue;
+                // At most one extra tile per overlapping one-cell relay.
+                // Bounds come from actual relay count/map geometry, not route distance.
+                const int limit = std::min<int>(1 + relays.size(), std::max(g.width, g.height));
+                for (int distance = 2; distance <= limit; ++distance) {
+                    const Cell stand{c.layer,c.x+kSide[d][0]*distance,c.y+kSide[d][1]*distance};
+                    if (!baked::in_bounds(g,stand.x,stand.y)) break;
+                    const int probe_x=stand.x-kSide[d][0], probe_y=stand.y-kSide[d][1];
+                    int range=1;
+                    for (const auto* relay : relays)
+                        if (relay->tw==1 && relay->th==1 && relay->layer==c.layer && relay->tx==probe_x && relay->ty==probe_y) ++range;
+                    if (distance <= range && open(r,g,stand) && !terminal_transition(r,g,stand)) push_unique(allowed,stand);
                 }
             }
         }
@@ -609,9 +697,13 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
             // Boxed in on every side: the diagonals, then the target's own cells (entered as a goal).
             static const int kDiag[4][2] = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
             for (const Cell& c : out.faced)
-                for (const auto& d : kDiag) add_open_layers(r, g, c.x + d[0], c.y + d[1], -1, out.cells);
+                for (const auto& d : kDiag) {
+                    if(all_layers)add_open_layers(r,g,c.x+d[0],c.y+d[1],-1,out.cells);
+                    else {const Cell at{c.layer,c.x+d[0],c.y+d[1]};if(open(r,g,at))push_unique(out.cells,at);}
+                }
             if (out.cells.empty()) out.cells = out.faced;
         }
+        out.cells.erase(std::remove_if(out.cells.begin(),out.cells.end(),[&](const auto& cell){return terminal_transition(r,g,cell);}),out.cells.end());
         return out;
     }
 

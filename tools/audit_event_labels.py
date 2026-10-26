@@ -7,12 +7,13 @@ Exact per-name overrides can be added to event_label_overrides.json after review
 """
 import collections
 import csv
+import hashlib
 import json
 import os
 from pathlib import Path
 import re
 import unicodedata
-from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity
+from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity, reviewed_warp_identity, WORLD_TRAVEL_REVIEWS, reviewed_world_event_identity
 
 ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DUMP = ROOT.parent / 'tools' / 'mapdump'
@@ -34,7 +35,7 @@ NOUNS = {
 }
 SAFE = set(NOUNS) | {'Party chat', 'Conversation', 'Scene trigger', 'Trap',
                     'Event trigger', 'Interactive object', 'Layer transition',
-                    'Warp Tile', 'Vehicle interaction', 'Switch trigger', 'Magic Circle', 'Dragoon'}
+                    'Warp Tile', 'Vehicle interaction', 'Switch trigger', 'Magic Circle', 'Dragoon', 'World map transition'}
 SAFE.update(label for entries in SPRITES.values() for label in entries.values())
 SAFE.update(label for label, _ in RULES)
 
@@ -133,11 +134,15 @@ def build(n):
         if p.get('message_key'): message_keys.insert(0, p['message_key'])
         label, reason = infer(o, commands, script_name,
                               [descriptions[key] for key in message_keys if key in descriptions])
-        identity = reviewed_identity(n,o) or physical_identity(n,o)
+        identity = reviewed_world_event_identity(n,o,script_name,script) or reviewed_warp_identity(n,o,script_name,script) or reviewed_identity(n,o) or physical_identity(n,o)
         if not identity:
             identity = script_identity(n, o, script_name,
                 [descriptions[key] for key in message_keys if key in descriptions])
         if identity:
+            if identity[0]=='World map transition':
+                review=WORLD_TRAVEL_REVIEWS[(n,o['submap'],o['name'],p.get('script_id'))]
+                digest=hashlib.sha256(json.dumps(script,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
+                assert digest==review['script_sha256'],'Reviewed world travel changed; inspect before relabelling'
             label,reason,_ = identity
         if o['name'] in overrides:
             label, reason = overrides[o['name']], 'reviewed exact-name override'

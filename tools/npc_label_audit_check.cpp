@@ -51,6 +51,18 @@ int main(int argc, char** argv)
         std::puts("FAIL dictionary load"); return 1;
     }
     field::prepare_entity_translations();
+    if(game=="ff3"){
+        for(const wchar_t* locale:{L"en",L"ja",L"fr",L"it",L"de",L"es",L"ko",L"zht",L"zhc",L"ru",L"th",L"pt"}){
+            fixture::language=locale;
+            const auto expected=fixture::dictionary.get(L"@map/11/NPC")->get(locale)->s;
+            if(field::translate_entity_name_for_map(L"NPC",11)!=expected ||
+               field::translate_entity_name_snapshot(L"NPC",11)!=expected ||
+               field::translate_entity_name_for_map(L"NPC",12)==expected){
+                std::puts("FAIL Dahn live/remote/locale/scope");return 1;
+            }
+        }
+        fixture::language=L"en";
+    }
     std::ifstream objects("../tools/mapdump/" + game + "_objects.jsonl", std::ios::binary);
     if (!objects) { std::puts("FAIL object data load"); return 1; }
     std::vector<Record> records;
@@ -73,6 +85,26 @@ int main(int argc, char** argv)
     };
     for (const wchar_t* lang : {L"en", L"ja", L"fr", L"it", L"de", L"es", L"ko", L"zht", L"zhc", L"ru", L"th", L"pt"}) {
         fixture::language = lang;
+        if(game=="ff2") {
+            // Reviewed unrevealed variant: all live/remote/snapshot consumers
+            // share this translator. Mask presentation, never native identity.
+            for(const wchar_t* raw:{L"皇帝（復活後）",L"皇帝(復活後)",L"6:皇帝（復活後）",L"6:皇帝(復活後)"}) {
+                if(field::npc_display_label(field::translate_entity_name_for_map(raw,278)).base!=L"???" ||
+                   field::npc_display_label_snapshot(field::translate_entity_name_snapshot(raw,278)).base!=L"???")
+                    {++failures;std::printf("FAIL unrevealed NPC identity leaked through a navigation label path\n");}
+            }
+            const auto* ordinary=fixture::dictionary.get(L"皇帝");
+            const auto* known=ordinary?ordinary->get(lang):nullptr;
+            if(!known&&ordinary)known=ordinary->get(L"en");
+            if(!known||field::translate_entity_name(L"皇帝")!=(fixture::language==L"ja"?L"皇帝":known->s))
+                {++failures;std::printf("FAIL ordinary known NPC identity was masked\n");}
+            const auto* roundworm=fixture::dictionary.get(L"ラウンドウォーム");
+            const auto* expected=roundworm?roundworm->get(lang):nullptr;
+            if(!expected||field::translate_entity_name_for_map(L"ビックホーン",230)!=expected->s||
+               field::translate_entity_name_snapshot(L"ビックホーン",230)!=expected->s||
+               field::translate_entity_name_for_map(L"ビックホーン",205)!=field::translate_entity_name(L"ビックホーン"))
+                {++failures;std::printf("FAIL scoped Roundworm identity or unchanged Tropical Island Big Horn\n");}
+        }
         std::map<std::wstring, int> scopes;
         std::vector<std::wstring> outputs(records.size());
         std::vector<field::npc_names::Entry> entries;

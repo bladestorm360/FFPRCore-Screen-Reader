@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <memory>
 #include "baked_map.h"
 
 // The baked-map router: A* over one sub-map's baked grids, the mod-side replacement for the
@@ -31,7 +32,7 @@ struct Cell {
 // Ordinary exits, vehicle pads and layer switches are never story-event hazards.
 inline bool step_event(const baked::Object& object) {
     return ((object.type == baked::ObjType::Event || object.type == baked::ObjType::RandomEvent) && (object.a != 0 || object.b != 0)) ||
-           (object.type == baked::ObjType::Warp && object.d == 1);
+           (object.type == baked::ObjType::Warp && (object.d&255) == 1 && !baked::world_exit(object));
 }
 inline bool crosses_event(const std::vector<Cell>& path, const std::vector<Cell>& events) {
     // The initial cell is already occupied; only subsequent displacement can trigger one.
@@ -51,8 +52,13 @@ struct Request {
     int vehicle_type = 0, landing_group = 0; // owned riding/landing rules for filter handoff
     std::vector<int> auto_groups;     // on foot: groups ridden automatically when owned
     std::vector<Cell> blocked;        // live blockers; layer -1 = every layer
-    struct Directional { Cell cell; int axis; }; // 1 blocks north/south, 2 blocks east/west
+    bool live_relays = false;        // active projected counter tiles, when state is known
+    std::vector<baked::Object> relays; // owned geometry only; no native references
+    struct Directional { Cell cell; int axis; int mask=15; }; // legacy axis1/2; axis0 uses native cardinal mask
     std::vector<Directional> directional;
+    // State-projected immutable mask; null uses the prepared conservative bake.
+    // Shared across all legs/floods of one owned snapshot, never native pointers.
+    std::shared_ptr<const baked::TransitionGrid> transitions;
     bool ignore_hazards = false;     // filter reachability includes destinations behind events
     bool live_hazards = false;       // current map: replace baked variants with active triggers
     std::vector<Cell> hazards;
@@ -81,7 +87,7 @@ Route find(const Request& r);
 
 /// How a route may end at its target (user, 2026-10-11: "pinpoint", never "within 1 step").
 ///  Interact    an NPC, chest, switch: end on a neighbouring cell the target is used from (a
-///              service NPC: its counter's RelayInteraction tile) and say which way to face;
+///              service NPC: a legal approach across its counter) and say which way to face;
 ///  Transition  an exit, a town tile, a warp pad: end ON it, on a cell the player can really
 ///              step onto, at the selected x/y (no sibling/footprint substitution). World
 ///              maps validate terrain against the current transport; decorative walls are excluded;
@@ -131,8 +137,14 @@ int transition_distance(const Request& request, const Reach& reach);
 bool open(const Request& r, const baked::Grids& g, const Cell& c);
 bool trap_cell(const Request& r, const baked::Grids& g, const Cell& c);
 bool direction_allowed(const Request& r, const Cell& from, const Cell& to);
+/// Preserve native partial collision geometry; unknown/triangle IDs stay conservative.
+void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>& directional,const Cell& cell,int id);
+/// Native trigger table enables ordinary map entry for these mounted types.
+inline bool native_ground_entry(int type) {return type==5||type==11||type==12;}
 // Native baked cardinal masks and the parser's explicit diagonal stair edges.
 bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, const Cell& to);
+/// Entering this cell changes maps; it cannot be an intermediate walking tile.
+bool terminal_transition(const Request& r, const baked::Grids& g, const Cell& cell);
 /// A teleport landing must be open, clear of blockers/traps/events and have a legal way out.
 /// Uses the same owned movement snapshot as routing; no path search or native calls.
 bool safe_landing(const Request& movement, const baked::Grids& grids, const Cell& landing);

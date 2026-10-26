@@ -259,6 +259,12 @@ const Grids& grids(const Submap& s)
                 o.d = r.d;
                 o.name = r.name;
                 o.group = r.group;
+                if(world_exit(o))g->world_exits[o.entity_id()].push_back(g->objects.size());
+                if(o.type==ObjType::TransitionHelper)g->transition_helpers[o.entity_id()].push_back(g->objects.size());
+                if(s.world && o.type==ObjType::TransportationEventAction && (o.a||o.b))
+                    for(int y=std::max(0,int(o.ty));y<std::min(g->height,int(o.ty)+o.th);++y)
+                        for(int x=std::max(0,int(o.tx));x<std::min(g->width,int(o.tx)+o.tw);++x)
+                            g->vehicle_pads[y*g->width+x].push_back(g->objects.size());
                 g->objects.push_back(o);
             }
         }
@@ -266,6 +272,13 @@ const Grids& grids(const Submap& s)
     // Step-on warps and trapdoors: cells an ordinary route must not cross.
     if (cells) {
         for (const Object& o : g->objects) {
+            if(const int bits=transition_bits(o)) {
+                auto& mask=g->transitions[s.world?0:o.layer];
+                if(mask.empty())mask.assign(cells,0);
+                for(int y=std::max(0,int(o.ty));y<std::min(g->height,int(o.ty)+o.th);++y)
+                    for(int x=std::max(0,int(o.tx));x<std::min(g->width,int(o.tx)+o.tw);++x)
+                        mask[static_cast<size_t>(y)*g->width+x]|=static_cast<uint8_t>(bits);
+            }
             if (is_trap(o) && o.layer < 3) {
                 auto& traps = g->traps[o.layer];
                 if (traps.empty()) traps.assign(cells, 0);
@@ -273,7 +286,7 @@ const Grids& grids(const Submap& s)
                     if (x >= 0 && y >= 0 && x < g->width && y < g->height)
                         traps[static_cast<size_t>(y) * g->width + x] = 1;
             }
-            if (o.type != ObjType::Warp || o.d != 1) continue;
+            if (o.type != ObjType::Warp || (o.d&255) != 1) continue;
             if (g->hazard.empty()) g->hazard.assign(cells, 0);
             for (int y = o.ty; y < o.ty + o.th; ++y)
                 for (int x = o.tx; x < o.tx + o.tw; ++x)
@@ -285,6 +298,40 @@ const Grids& grids(const Submap& s)
     return *g;
 }
 
+bool vehicle_pad_accepts(const Object& object,int transportation_id) {
+    if(object.type!=ObjType::TransportationEventAction || transportation_id<=0)return false;
+    const auto& value=str(object.name);const auto end=value.find(L'|');
+    if(end==std::wstring::npos)return false;
+    if(end==0)return true;
+    int id=0;bool digits=false,matched=false;
+    for(size_t i=0;i<=end;++i) {
+        const wchar_t c=i==end?L',':value[i];
+        if(c>=L'0'&&c<=L'9') {if(id>1000000)return false;id=id*10+c-L'0';digits=true;}
+        else if(c==L',' || c==L' ') {if(digits)matched|=id==transportation_id;id=0;digits=false;}
+        else return false;
+    }
+    return matched;
+}
+bool transition_helper_at(const Grids& grid,int id,const std::wstring& raw,int x,int y) {
+    const auto found=grid.transition_helpers.find(id);
+    if(found==grid.transition_helpers.end())return false;
+    for(size_t index:found->second) {
+        const auto& object=grid.objects[index];
+        if(object.contains(x,y)&&object_identifier(object)==raw)return true;
+    }
+    return false;
+}
+const Object* world_exit_at(const Grids& grid,int id,const std::wstring& raw,int x,int y) {
+    const auto found=grid.world_exits.find(id);if(found==grid.world_exits.end())return nullptr;
+    const Object* result=nullptr;
+    for(size_t index:found->second) {
+        const auto& object=grid.objects[index];
+        if(!object.contains(x,y)||object_identifier(object)!=raw)continue;
+        if(result&&result->a!=object.a)return nullptr;
+        result=&object;
+    }
+    return result;
+}
 bool in_bounds(const Grids& g, int x, int y) { return x >= 0 && y >= 0 && x < g.width && y < g.height; }
 
 bool walkable(const Grids& g, int layer, int x, int y, bool passages)

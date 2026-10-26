@@ -123,6 +123,9 @@ void* content_list(void* controller) { return controller ? ref::rd<void*>(contro
 /// by command id.
 void announce_command_at(void* list, int index)
 {
+    // Active Unity objects outlive native battle ownership while returning to
+    // title. Teardown cursor resets are not selectable command events.
+    if (!in_battle()) return;
     int count = unity::list_count(list);
     if (count == 0) return;
     if (index < 0 || index >= count) return;
@@ -174,6 +177,7 @@ bool check_and_update_target_selection_active()
 
 bool announce_player_target(void* list, int index)
 {
+    if (!in_battle()) return false;
     std::vector<void*> targets;
     if (!unity::enumerate_bounded(list, targets, 64)) return false;
     int count = static_cast<int>(targets.size());
@@ -198,6 +202,7 @@ bool announce_player_target(void* list, int index)
 /// True once a ready focus was observed, including a repeated FF6 refresh.
 bool announce_enemy_target(void* list, int index)
 {
+    if (!in_battle()) return false;
     std::vector<void*> targets;
     if (!unity::enumerate_bounded(list, targets, 64)) return false;
     int count = static_cast<int>(targets.size());
@@ -244,16 +249,14 @@ bool announce_enemy_target(void* list, int index)
 /// can never speak for this instance), false to retry.
 bool try_read_initial_target(void* instance, bool is_enemy)
 {
+    if (!in_battle()) return true; // ownership ended: finish the bounded retry
     void* controller = instance;
     if (!controller || !unity::alive(controller)) return true;
     observe_target_party(displayed::field(controller, "playerInfomationController"));
 
-    // Attack's targeting path presents an INACTIVE controller (magic/item an active one), so
-    // activeInHierarchy is not required; prefer an active instance when this one is inactive.
-    if (!unity::active_in_hierarchy(controller)) {
-        void* active = field::cache::get(kTargetSelect);
-        if (active && unity::active_in_hierarchy(active)) controller = active;
-    }
+    // Attack can keep this controller inactive while its independently rooted
+    // party rows/cursor remain displayed. The producer's exact owner is still
+    // authoritative; an active spell/item instance may describe another target.
 
     void* cursor = ref::rd<void*>(controller, fSelectCursor);
     if (!cursor) return false;
@@ -280,6 +283,7 @@ bool try_read_initial_target(void* instance, bool is_enemy)
 /// cursor/list are not ready yet a bounded retry (started from this event) waits for them.
 void begin_initial_target_read(void* instance, bool is_enemy)
 {
+    if (!in_battle()) { ++g_target_read_gen; return; }
     if (kTargetSelect.is(instance)) {
         g_cached_target_controller = instance;
         field::cache::register_object(kTargetSelect, instance);
@@ -310,6 +314,7 @@ void d_SetCommandData(void* self, void* data, void* targets, void* items, const 
     });
     o_SetCommandData(self, data, targets, items, mi);
     hooks::guarded("BattleCommandSelectController.SetCommandData", [&] {
+        if (!in_battle()) return;
         if (kCmdSelect.is(self)) field::cache::register_object(kCmdSelect, self);
         if (!data) return;
         // Open the window before any early return: a same-character re-entry (cancel from target
@@ -347,6 +352,7 @@ void d_SetCursor(void* self, int32_t index, const void* mi)
     hooks::guarded("BattleCommandSelectController.SetCursor", [&] {
         if (!self) return;
         int my_gen = ++g_reannounce_gen;
+        if (!in_battle()) return;
 
         // The cursor resets to Attack one frame before the menu goes inactive at end of turn.
         if (!unity::active_in_hierarchy(self)) return;
@@ -369,6 +375,7 @@ void d_SetCursor(void* self, int32_t index, const void* mi)
             int seq = g_set_command_data_seq;
             frame::next_frame(
                 [controller, idx, my_gen, seq] {
+                    if (!in_battle()) return;                       // native field/title return
                     if (my_gen != g_reannounce_gen) return;         // a newer cursor event superseded it
                     if (!g_command_turn_ready) return;              // a commit's ShowWindow(false)
                     if (seq != g_set_command_data_seq) return;      // a turn handoff: a commit
@@ -394,6 +401,7 @@ void d_SelectPlayer(void* self, void* list, int32_t index, const void* mi)
 {
     o_SelectPlayer(self, list, index, mi);
     hooks::guarded("BattleTargetSelectController.SelectContent(Player)", [&] {
+        if (!in_battle()) return;
         observe_target_party(displayed::field(self, "playerInfomationController"));
         if (kTargetSelect.is(self)) { g_cached_target_controller = self; field::cache::register_object(kTargetSelect, self); }
         set_target_selection_active(true);
@@ -405,6 +413,7 @@ void d_SelectEnemy(void* self, void* list, int32_t index, const void* mi)
 {
     o_SelectEnemy(self, list, index, mi);
     hooks::guarded("BattleTargetSelectController.SelectContent(Enemy)", [&] {
+        if (!in_battle()) return;
         if (kTargetSelect.is(self)) { g_cached_target_controller = self; field::cache::register_object(kTargetSelect, self); }
         set_target_selection_active(true);
         if (announce_enemy_target(list, index)) ++g_enemy_spoken_seq;
@@ -420,9 +429,10 @@ void d_ShowWindow(void* self, bool is_show, const void* mi)
     hooks::guarded("BattleTargetSelectController.ShowWindow", [&] {
         if (!kTargetSelect.is(self)) return;
         reset_target_focus();
-        if (is_show) { g_cached_target_controller = self; field::cache::register_object(kTargetSelect, self); }
-        set_target_selection_active(is_show);
-        if (!is_show) {
+        const bool selected = is_show && in_battle();
+        if (selected) { g_cached_target_controller = self; field::cache::register_object(kTargetSelect, self); }
+        set_target_selection_active(selected);
+        if (!selected) {
             // Hide = the actor committed / target torn down: close the command-announce window and
             // drop any pending initial-target read.
             g_command_turn_ready = false;
@@ -440,6 +450,7 @@ Init_t o_PlayerInit;
 Init_t o_PlayerAll, o_EnemyAll;
 Init_t o_All, o_SidePlayerAll, o_SideEnemyAll;
 void announce_group(void* self, std::wstring label) {
+    if (!in_battle()) return;
     if (!kTargetSelect.is(self)) return;
     g_cached_target_controller = self; field::cache::register_object(kTargetSelect, self);
     g_command_reannounce_pending = true;
@@ -467,7 +478,7 @@ void d_All(void* self, const void* mi) {
 void d_SidePlayerAll(void* self, const void* mi) {
     o_SidePlayerAll(self, mi);
     hooks::guarded("BattleTarget.SidePlayerAll", [self] {
-        if (!kTargetSelectFF6.is(self)) return;
+        if (!in_battle() || !kTargetSelectFF6.is(self)) return;
         const bool side_only = ref::call_static<bool>(mPlayerSideOnly, ref::rd<int32_t>(self, fRangeType));
         announce_group(self, T(side_only ? L"All allies on this side" : L"All allies"));
     });
@@ -475,7 +486,7 @@ void d_SidePlayerAll(void* self, const void* mi) {
 void d_SideEnemyAll(void* self, const void* mi) {
     o_SideEnemyAll(self, mi);
     hooks::guarded("BattleTarget.SideEnemyAll", [self] {
-        if (!kTargetSelectFF6.is(self)) return;
+        if (!in_battle() || !kTargetSelectFF6.is(self)) return;
         const bool side_only = ref::call_static<bool>(mEnemySideOnly, ref::rd<int32_t>(self, fRangeType));
         announce_group(self, T(side_only ? L"All enemies on this side" : L"All enemies"));
     });
@@ -564,6 +575,7 @@ core::Install s_install{"Battle.Command", &install, 110};
 
 void notify_command_submenu_active()
 {
+    if (!in_battle()) return;
     // The magic/item list gained focus: re-open the command-announce window (a target cancel's
     // ShowWindow(false) closed it) and arm the command back-out re-announce.
     g_command_turn_ready = true;
@@ -577,6 +589,7 @@ void command_reset_state()
     g_command_turn_ready = false;
     dedup::reset(kCommandCtx);
     g_command_reannounce_pending = false;
+    ++g_reannounce_gen;   // retire a queued cancel-return across battle lifetimes
     ++g_target_read_gen;   // drop any pending initial-target read
     // Selection reset also runs when entering child menus. The battle lifecycle owns
     // clearing the actor; H must retain its owner while Magic/Items has focus.

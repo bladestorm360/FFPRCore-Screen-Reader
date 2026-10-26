@@ -414,7 +414,7 @@ bool field_active() { return g_field_active; }
 /// True when the game should receive no input at all.
 bool suppress_game_input()
 {
-    return g_state == RouterState::ModMode
+    return (interception_enabled() && g_state == RouterState::ModMode)
         || g_state == RouterState::ModMenu
         || ui::any_modal_open();   // ModMenu.IsOpen || TextInputWindow.IsOpen || ConfirmationDialog.IsOpen
 }
@@ -485,6 +485,11 @@ void update(Context game_context)
     const auto old_state=g_state;
     handle_state_transitions();
     if(old_state!=g_state)return;
+    // Keep Start/F8 restoration and mod-dialog navigation, while suspended
+    // game-context shortcuts no longer consume or act on native scrolling.
+    if(!interception_enabled() && g_state!=RouterState::ModMenu) {
+        g_state=RouterState::Normal;return;
+    }
     update_stick_clicks();
 
     switch (g_state) {

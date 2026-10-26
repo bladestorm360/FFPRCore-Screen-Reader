@@ -44,7 +44,13 @@ int main() {
                 const auto objects=connected_objects_snapshot(map,resolver);
                 worst=std::max(worst,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-started).count());
                 ++projections;largest=std::max(largest,static_cast<int>(objects.size()));
-                std::set<Identity> actual;
+                std::set<Identity> actual,world_exits;
+                for(const auto& object:objects)if(object.world_exit) {
+                    const auto* destination=baked::submap_by_map_id(object.dest_map_id);
+                    expect(object.event_type.empty()&&destination&&destination->world,
+                        "scripted world travel projects as an exit with a real world destination, without a scene label");
+                    world_exits.insert(identity(object));
+                }
                 for(const auto& object:objects)if(!object.event_type.empty()) {
                     ++rows;actual.insert(identity(object));
                     expect(object.type!=baked::ObjType::AnimEntity&&object.type!=baked::ObjType::ToLayer&&object.type!=baked::ObjType::TelepoPoint,
@@ -73,6 +79,11 @@ int main() {
                     if(!event||!resolver.active(*floor.submap,original)||resolver.consumed(*floor.submap,original))continue;
                     const auto& grid=baked::grids(*floor.submap);
                     if(object.tx>=grid.width||object.ty>=grid.height||object.tx+object.tw<=0||object.ty+object.th<=0)continue;
+                    if(baked::world_exit_at(grid,object.entity_id(),baked::str(object.name),object.tx,object.ty)) {
+                        expect(world_exits.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),
+                            "all active scripted world exits remain present in their exit category");
+                        continue;
+                    }
                     expect(actual.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),
                         "all active scripted/actionable connected-floor events reach the projection");
                 }

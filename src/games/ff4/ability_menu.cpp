@@ -144,6 +144,7 @@ void d_UseSelectContent(void* self, void* target_contents, void* cursor, const v
 {
     o_UseSelectContent(self, target_contents, cursor, mi);
     hooks::guarded("FF4 AbilityUseContentListController.SelectContent", [&] {
+        if(queries::is("FieldMagicTargets.OwnsRange"))return;
         if (!kAbilityUseList.is(self)) return;
         int index = ui::cursor_index(cursor);
         if (index < 0) return;

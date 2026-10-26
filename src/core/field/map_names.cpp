@@ -200,7 +200,20 @@ std::wstring resolve_map_name_by_id(int map_id)
                 title = message(title_key);
         }
 
-        // No title from the message table: the Floor field
+        // PointIn titles are the native save/location labels. The map master's
+        // Floor is also used as an internal ordering value (FFII Pandaemonium
+        // starts at13), so it must not outrank a verified native floor label.
+        // Offline extraction accepts only a unanimous nonempty floor title
+        // across every entrance, with AreaAndMapName/SilenceAreaAndMapName.
+        // Keep authored room names and explicit master titles ahead of this
+        // generated fallback; no native scanning or route identity changes.
+        if (title.empty()) {
+            const auto* floors = data::game_json("maptitles").get(L"@entryFloors");
+            const auto* key = floors ? floors->get(std::to_wstring(map_id)) : nullptr;
+            if (key && key->is_string() && !key->s.empty()) title = message(key->s);
+        }
+
+        // Last resort when no reliable native or authored label exists.
         if (title.empty()) {
             int floor = ref::call<int32_t>(r::mMapGetFloor, map);
             if (floor > 0) title = std::to_wstring(floor) + L"F";

@@ -160,6 +160,9 @@ void initialize()
     v.push_back(toggle(L"Enemy status announcements", p::kEnemyStatusAnnouncements, p::kEnemyStatusAnnouncementsDefault,
                        L"On. Announce visually displayed enemy conditions.",
                        L"Off. Do not automatically announce enemy conditions."));
+    v.push_back(toggle(L"Enemy critical status", p::kEnemyCriticalStatus, p::kEnemyCriticalStatusDefault,
+                       L"On. Announce enemies' hidden critical HP status.",
+                       L"Off. Keep enemies' hidden critical HP status silent."));
     v.push_back(enumeration(L"Stat delta detail", {L"Verbose", L"Brief"},
                             p::kStatDeltaMode, p::kStatDeltaModeDefault, p::kStatDeltaModeMax,
                             L"Stat delta detail help"));
@@ -216,6 +219,10 @@ void initialize()
 
     const int controls_page=int(v.size());
     Item controls=header(L"Controls");controls.kind=Kind::Submenu;controls.desc=L"Keyboard bindings help";v.push_back(controls);
+    auto interception=toggle(L"Control interception",p::kControlInterception,p::kControlInterceptionDefault,
+        L"On. Mod controls intercept native input. F9 toggles this setting.",
+        L"Off. Game controls pass through and game-context mod shortcuts pause. Mod dialogs remain usable. F9 restores shortcuts in any menu.");
+    interception.parent=controls_page;v.push_back(std::move(interception));
     for(bool controller:{false,true}) {
         const int list_page=int(v.size());
         Item list=header(controller?L"Controller bindings":L"Keyboard bindings");list.kind=Kind::Submenu;list.parent=controls_page;list.desc=controller?L"Controller bindings help":L"Keyboard bindings help";v.push_back(list);

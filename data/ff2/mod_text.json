@@ -1,4 +1,18 @@
 {
+  "Statue Room": {
+    "en": "Statue Room",
+    "ja": "像の間",
+    "fr": "Salle de la statue",
+    "it": "Sala della statua",
+    "de": "Statuenraum",
+    "es": "Sala de la estatua",
+    "ko": "석상실",
+    "zht": "雕像室",
+    "zhc": "雕像室",
+    "ru": "Зал статуи",
+    "th": "ห้องรูปปั้น",
+    "pt": "Sala da estátua"
+  },
   "Ability": {
     "en": "Ability",
     "ja": "アビリティ",
@@ -740,5 +754,19 @@
     "ru": "Уклонение +{0}",
     "th": "การหลีกหนี +{0}",
     "pt": "Evasão +{0}"
+  },
+  "Venom": {
+    "en": "Poison",
+    "ja": "猛毒",
+    "fr": "Poison",
+    "it": "Tossina",
+    "de": "Toxin",
+    "es": "Veneno",
+    "ko": "맹독",
+    "zht": "猛毒",
+    "zhc": "猛毒",
+    "ru": "Отравление",
+    "th": "ยาพิษ",
+    "pt": "Envenenamento"
   }
 }

@@ -1,3 +1,8 @@
+October23 [damage/status/Swap follow-up](BATTLE_FEEDBACK_20261023.md) preserves
+rendered numeric amounts while carrying MP absorption resource identity and
+centralizing missing condition names. Battle-results phase/growth behavior below
+is unchanged; gameplay confirmation for the new reports remains separate.
+
 # Current-screen results buffers (2026-10-12)
 
 October22 implementation: automatic notification history now filters only automatic

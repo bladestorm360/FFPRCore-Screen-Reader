@@ -8,6 +8,7 @@
 #include <cwctype>
 #include <set>
 #include "field_internal.h"
+#include "field_api.h"
 #include "entity_translator.h"
 #include "map_names.h"
 #include "../hooks.h"
@@ -270,14 +271,14 @@ std::wstring entity_name_from_property(void* fe)
     if (starts_with_ci(name, L"mes_") || starts_with_ci(name, L"sys_") || starts_with_ci(name, L"field_")) {
         std::wstring localized = get_message(name);
         if (!text::is_blank(localized) && localized != name)
-            return translate_entity_name(localized);
+            return translate_entity_name_for_map(localized,current_map_id());
     }
 
     std::wstring lower = text::lower(name);
     if (lower == L"event" || lower == L"eventtrigger" || lower == L"event trigger" || lower == L"pointin")
         return L"";
 
-    return translate_entity_name(name);
+    return translate_entity_name_for_map(name,current_map_id());
 }
 
 /// CleanObjectName: "(Clone)" removed, trimmed, numeric/underscore/too-short names replaced by

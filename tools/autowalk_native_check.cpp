@@ -1,6 +1,7 @@
 // check-sources: text.cpp
 // Actual movement/input detours with bounded native owners; no game is launched.
 #include <map>
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include "../src/core/text.h"
@@ -10,7 +11,7 @@ namespace fixture {
 struct Node { void* player=nullptr; void* controller=nullptr; bool enabled=true, airship=false, moving=false, up=false, down=false; float angle=0; unity::Vec2 cached{}; int mode=0;float acceleration=0,left_scale=1,right_scale=1;bool translation=false; };
 Node player, controller, map, field_controller;
 uint64_t tick=10; double seconds=1;
-bool ready=true, focus=true, menu=false, manual=false;
+bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
 game::Id game=game::Id::FF1;
 field::VehicleState vehicle{true,1,1,L""};
 field::baked_route::Cell cell{1,1,1};
@@ -18,6 +19,8 @@ unity::Vec2 native{};
 unity::Vec2 moved{};int calls=0, airship_calls=0, key_calls=0, cleaned=0; bool shoulders=false;
 std::map<events::Kind,std::vector<events::Handler>> handlers;
 std::vector<frame::Step> waits;int requests=0;
+std::vector<std::function<void(field::PathInfo)>> route_results;
+std::vector<std::wstring> spoken;
 void step() { ++tick; seconds+=.016; }
 bool moving(void* o,const void*) { return static_cast<Node*>(o)->moving; }
 float angle(void* o,const void*) { return static_cast<Node*>(o)->angle; }
@@ -61,21 +64,21 @@ namespace log_ {void write(const char*,...){} }
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return true;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
 namespace frame {uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
-namespace actions {void define(const char*,Fn){} }
+namespace actions {void define(const char*,Fn){} bool run(const char*){return false;}bool defined(const char*){return false;} }
 namespace events {void on(Kind kind,Handler handler){fixture::handlers[kind].push_back(std::move(handler));} void fire(Kind kind){for(auto& handler:fixture::handlers[kind])handler();} }
 namespace queries {void define(const char*,std::function<bool()>){}bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldNavigationReady"?fixture::ready:false;} }
-namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){return std::string(k)=="Autowalk"?true:d;} }
+namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){return std::string(k)=="Autowalk"?true:d;}void set_bool(const char*,bool){} }
 namespace menu_state {bool any_active(){return fixture::menu;} }
 namespace field::cache {void*get(ref::Class&t){return std::string(t.name)=="FieldMap"?&fixture::map:&fixture::controller;}void*get_or_refresh(ref::Class&t){return get(t);} }
 namespace field {
 void*player_controller(){return &fixture::controller;}
 void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return 1;}bool face_player(void*,int){return true;}Target selected(){return {};}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
-namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3,baked_route::Cell&c){c=fixture::cell;return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return true;}
-void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal,TargetKind,std::wstring,std::function<void(PathInfo)>,bool){++fixture::requests;} }
+namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3,baked_route::Cell&c){c=fixture::cell;return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
+void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
 }
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);} }
-namespace ffpr {void say(std::wstring_view,bool){} }
+namespace ffpr {void say(std::wstring_view value,bool){fixture::spoken.emplace_back(value);} }
 namespace input {
 bool game_window_focused(){return fixture::focus;}bool suppress_game_input(){return false;}bool field_active(){return true;}bool any_key_pressed(){return fixture::manual;}bool key_pressed(Key k){return fixture::manual && k==Key::W;}bool key_in_use(Key){return false;}
 bool shift_held(){return false;}bool ctrl_held(){return false;}bool alt_held(){return false;}float left_trigger(){return 0;}float right_trigger(){return 0;}float left_stick_x(){return 0;}float left_stick_y(){return 0;}float right_stick_x(){return 0;}float right_stick_y(){return 0;}
@@ -154,5 +157,47 @@ int main(){
  fixture::controller.enabled=false;a::start(p,&goal);auto expires=fixture::waits.back();fixture::seconds+=1;
  expect(!expires()&&!a::active(),"input readiness timeout retires the pending request");fixture::controller.enabled=true;
  a::start(p);fixture::manual=true;a::input_updated();expect(!a::active(),"fresh physical movement key cancels the active route");fixture::manual=false;
+ // Exercise the actual native owner, not just the pure route follower. A failed
+ // live edge schedules one worker request outside the input-axis callback.
+ field::PathInfo detour=p;detour.step_count=2;detour.walk_phases.front().cells={{1,2,1},{1,2,2},{1,3,2}};
+ field::PathInfo waiting=p;waiting.step_count=0;waiting.npc_approach=true;waiting.walk_phases.resize(1);
+ waiting.walk_phases.front()={};waiting.walk_phases.front().cells={{1,2,1}};
+ waiting.walk_phases.front().wait_for_npc=true;waiting.walk_phases.front().action_after=L"Wait for Black Mage to move.";
+ for(int number=1;number<=6;++number) {
+  fixture::game=game::Id(number);fixture::cell={1,2,1};fixture::edge_open=false;
+  a::start(p,&goal);const int before=fixture::requests;
+  auto paused=a::d_InputAxis(nullptr,nullptr);
+  expect(a::active()&&a::g_replan_needed&&paused.x==0&&paused.y==0&&fixture::requests==before,
+   "live NPC collision pauses without declaring blocked or capturing inside the axis hook in all six games");
+  a::input_updated();expect(fixture::requests==before+1&&a::g_planning,"owner update admits exactly one fresh detour request");
+  a::input_updated();a::d_InputAxis(nullptr,nullptr);
+  expect(fixture::requests==before+1&&a::active(),"pending worker cannot accumulate duplicate reroutes or move on the old path");
+  fixture::route_results.back()(detour);fixture::edge_open=true;auto rerouted=a::d_InputAxis(nullptr,nullptr);
+  expect(rerouted.x==0&&rerouted.y==-1&&a::active(),"fresh detour resumes through native movement without walking into the old obstruction");
+  a::cancel();a::start(waiting,&goal);a::d_InputAxis(nullptr,nullptr);a::input_updated();
+  const auto notice_count=[&]{return std::count(fixture::spoken.begin(),fixture::spoken.end(),L"Wait for Black Mage to move.");};
+  const auto notices=notice_count();expect(notices>0,"temporary doorway supplies its wait notice");
+  fixture::route_results.back()(waiting);const int first=fixture::requests;
+  fixture::seconds+=.25;a::input_updated();expect(fixture::requests==first,"temporary wait retries are rate bounded");
+  fixture::seconds+=.3;a::input_updated();expect(fixture::requests==first+1,"temporary wait obtains a new actor snapshot after its retry interval");
+  a::input_updated();expect(fixture::requests==first+1&&notice_count()==notices,"one in-flight retry and one semantic wait notice are retained");
+  auto stale=fixture::route_results.back();fixture::manual=true;a::input_updated();fixture::manual=false;
+  expect(!a::active(),"manual input cancels a doorway retry immediately");
+  a::start(detour,&goal);stale(waiting);auto still_current=a::d_InputAxis(nullptr,nullptr);
+  expect(still_current.y==-1&&!a::g_replan_needed,"cancelled wait callback cannot replace a newer walk");
+  a::cancel();a::start(waiting,&goal);a::d_InputAxis(nullptr,nullptr);a::input_updated();
+  fixture::route_results.back()(detour);fixture::edge_open=false;a::d_InputAxis(nullptr,nullptr);
+  fixture::seconds+=31;a::input_updated();
+  expect(!a::active(),"a fresh-looking route to the same native-vetoed edge cannot extend the bounded wait forever");
+  fixture::edge_open=true;
+  a::start(detour,&goal);a::d_InputAxis(nullptr,nullptr);fixture::seconds+=2.1;
+  a::d_InputAxis(nullptr,nullptr);
+  expect(a::active()&&a::g_replan_needed,"native movement stalled after an accepted edge also requests a fresh detour");
+  a::cancel();
+  a::start(waiting,&goal);a::d_InputAxis(nullptr,nullptr);a::input_updated();auto focus_stale=fixture::route_results.back();
+  fixture::focus=false;a::input_updated();fixture::focus=true;focus_stale(detour);
+  expect(!a::active(),"focus loss retires a pending obstacle route and its completion");
+ }
+ std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
  std::printf("Autowalk native input/vehicle waits/FF6 flight: %d failures\n",failures);return failures?1:0;
 }

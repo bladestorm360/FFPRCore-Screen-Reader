@@ -1,5 +1,467 @@
 # Native FFPR durable memory
 
+- October26 [release1.0](docs/release.md#v10-preparation-october26): in progress
+  (~70%), Open pending source/tag/upload publication. Beacon installed/verified
+  all six; release metadata/README/full build/smoke and28-file ZIP/exact29-file
+  payload+outer scan pass. DLL35a59650... / ZIPa3b3c385...; package is6199100 bytes.
+  Only two metadata substitutions differ from334 otherwise verified runtime files.
+  Prior systems Closed, gameplay gaps preserved. Ledger:build_check/v10_20261026/.
+
+- October26 [beacon movement/spatial follow-up](docs/re/BEACON_MOVEMENT_20261026.md):
+  complete, Closed; offline verified and installed/hash-verified all six after
+  the user closed FFIII. Immutable per-route corner lookup removes idle-frame
+  dependence; pending replans retain the known cadence. Full HRTF bearing/original
+  pitch, stereo rear0.7x; existing north-up orientation retained.11,872 corner
+  comparisons,2,400 moving cache reads/0 jobs/0.061ms, full8275/0 names/141/348/0
+  wiring, smoke/scan pass. DLL10993152 SHA256
+  ea355feca25bf1c7bad59630a2c994ec0fb711a1c3cdd8d75fab111742c64079.
+  Scope/closed register, remaining gameplay/native-audio limits and recovery:
+  build_check/beacon_movement_20261026/. Mallet/Items read user-confirmed correct;
+  no spell-menu fix. User next requests release1.0 via the established procedure.
+
+- October26 [locked-door interaction](docs/re/LOCKED_DOORS_20261026.md): complete/
+  offline verified/installed all six. Shared Objects->Interact classification in
+  selection and story filter separates door approach from collocated transition;
+  Argus pair reproduced/fixed, all21 FFIII doors pass. Separate obstructions still
+  gate; native locks/graph and six bake hashes unchanged. Full8275/0 names,
+  141/348/0 wiring,47-export smoke/resources/22-file scan pass;132 installed
+  hashes/144 protected files verified. DLL10983424 SHA256
+  574da7fc17ed8c8a0b2dcc7697566b0833370263f8b31f1bf61cd322da77aa2b.
+  Includes all prior fixes below; recovery:build_check/locked_doors_20261026/.
+  Gameplay pending;36 non-III inactive/no-approach candidates remain explicit gaps.
+
+- October26 [Warehouse/Fat Chocobo reader](docs/re/WAREHOUSE_20261026.md):
+  complete/offline verified/installed all six shared adapters. Native command
+  labels own bar focus, list reads item/count without mode prefixes, empty text
+  and descriptions audible, Shift+I uses exact footer, popup's one Show producer
+  reads typed fields and changed quantities speak with native labels/clamps.
+  Full8275/0 names,141/348/0 wiring,47-export smoke/resources/exact22-file Defender
+  pass;132 installed hashes/144 protected files verified. DLL10983424 SHA256
+  bc93b87173047349cf8d6e74ca3a7b1eb654445c72d5812f7fbafa740db3b8e4.
+  Combined checks/scan/install/recovery:build_check/remote_returns_20261026/;
+  initial storage evidence:build_check/warehouse_20261026/. Gameplay pending.
+  Study request withdrawn after user confirmed vocalizing; no ability changes.
+
+- October26 [remote return-exit listing](docs/re/REMOTE_RETURNS_20261026.md):
+  complete/offline verified/installed with Warehouse above. Listing-only depth
+  plus exact reciprocal ordinary-door/PointIn proof; graph/bakes/current exits
+  and one-way/ambiguous connections preserved. Dwarven root84 remote exits17->11
+  (total19->13); two-cell Inn arrival stays conservative. All2454 roots/7362 state
+  projections retain2504 event identities and all six bake hashes. Actual
+  forward/reverse routing and all-six largest-graph regressions pass.
+  Evidence/recovery:build_check/remote_returns_20261026/. Gameplay pending.
+
+- October26 [Molten Cave gate review](docs/re/MOLTEN_CAVE_20261026.md): complete,
+  offline verified; no production/deployment change. User already on III B3,
+  map191(8,25)L1. Local Rock entity9 at(22,5) is reachable in37 steps; native
+  switch199 retires it and door11, opening local(20,6) and onward map192 routes.
+  Existing Objects/Rock identity and gate projection are correct; Story gated
+  is generic wording for this manual puzzle door. Actual-source regression plus
+  full canonical checks pass; installed/scanned b88ebc08... payload unchanged.
+  Evidence/recovery:build_check/molten_cave_20261026/. Activation user-side pending.
+
+- October26 [ally battle danger/status review](docs/re/ALLY_STATUS_20261026.md):
+  complete/offline verified/installed all six, including [world event fixes](docs/re/WORLD_EVENTS_20261026.md).
+  H/number/target share rendered Critical/KO plus completed body forms, applied
+  tints and active effects when the HUD hides condition columns. All525 masters/
+  85 effect bundles audited; generic enemy danger methods empty all six.
+  FFIII passive Chocobo bookkeeping pruned, Tozus all-active-Mini guard/name
+  copied read-only; owned vehicles no longer blamed as missing. No script writes.
+  Canonical8191/0 names,137/344/0 wiring,47-export smoke,49data/18sound resources,
+  exact22-file Defender pass.132 installed hashes match/144 protected files
+  unchanged. DLL10959872 SHA256 b88ebc08a531a1bb841aa99942da0ba54d85750fb0c49a5fbf7d8bfcd669cf74.
+  Evidence/recovery:build_check/ally_status_20261026/ and world_events_20261026/.
+  Mini targeting user-confirmed; new H/numbers, world behavior/audio pending.
+  No game control/probe/delegation/release/dependency/security-setting change.
+
+- October26 [shop compatibility and hand comparisons](docs/re/SHOP_COMPARISON_20261026.md):
+  complete/offline verified; scanned payload installed/hash-verified I/II/IV/V/VI.
+  Superseded by the combined all-six installed payload above; FFIII no longer
+  deferred. Correct ContentId/Weapon-Armor
+  key confusion; Can not equip in12 locales, native arrows retained. Shop can
+  compare both eligible hand slots, first attack increase wins; no hand selector.
+  Canonical7994/0 names,137/344/0 wiring,47-export smoke,49data/18sounds and22-file
+  Defender pass;110 installed hashes match/144 protected files unchanged. DLL
+  1b5f454bc8d4f3e0c7e9f482c5a634f9ee855c8336fb2e8d1d349299dad637b7. Evidence/recovery:
+  build_check/shop_comparison_20261026/. New listening pending; III installed above.
+  No game control/probe/delegation/dependency/release change.
+
+- October25 [battle title/party shortcuts](docs/re/BATTLE_TITLE_PARTY_20261025.md):
+  complete/offline verified/installed all six. Late command/target/opening-ready
+  callbacks cannot reopen Return14; existing queued reads/generations retire.
+  Same-label party controls now have independent IDs/defaults1..9; first legacy
+  saved remap retained. Actual shared input/catalog/dispatch, four rendered rows,
+  live cancel/new-battle and ended-context regressions pass. Full build7994/0
+  native names,137/344/0 wiring;47-export smoke/49data+18sounds/exact22-file
+  Defender pass. DLL10949632 bytes SHA256
+  ca11df243fda6fb1b90ae5405974080e6ed7facfcc7cf0783f7d4d9495ed56bd.
+  All132 installed hashes match/144 protected files unchanged. Recovery, first
+  failing lifecycle regression, final reports/scan/receipts:build_check/
+  battle_title_party_20261025/. Gameplay/native-audible timing pending. No game
+  control/probe/delegation, dependency/security/release change; signing/exclusion
+  query limits remain explicit.
+
+- October25 [chocobo/Owen follow-up](docs/re/CHOCOBO_OWEN_20261025.md): complete,
+  offline verified/installed all six. Exact log/bake/native facts isolate early equal-cost dismount choice,
+  HALF_TOP2 wrongly treated as full wall at Owen(64,31), and examined Hole10/Warp
+  losing to overlapping walk-on GotoMap at(19,19). Shared partial masks, late
+  chocobo dismount, native Boko/Magitek entry and examined-door approaches are
+  implemented; all canonical/47-export smoke/resource checks pass. Native Toad
+  script/hints and actual dismount terrain remain authoritative. Hole routing
+  reaches normal-form interaction position; Owen foot/filter distance1 passes;
+  Chocobo stays mounted to(63,31), dismount then1 step. Native mounted map-entry
+  exception does not change on-foot NPC/object requirements. All12 dismount
+  translations match recipe. DLL10948608 bytes SHA256
+  807984be33160338bef7f87e4a5fdf5fe2d818dc5a121f250208157b5fc733ad.
+  Exact22-file Defender pass;132 installed hashes match/144 protected files
+  unchanged. No game control/probe/delegation/dependency/release change; listening
+  and actual native/audible timing pending, signing/exclusion limits unchanged.
+  Evidence/recovery:build_check/chocobo_owen_20261025/ final verification, scan2,
+  deploy_after.json and installed_payloads_verified.json; native facts outside Git.
+
+- October25 [transition-route correction](docs/re/TRANSITION_ROUTES_20261025.md)
+  complete/offline verified/installed all six;132 scanned payload hashes match,
+  144 protected files unchanged. Exact III replay now detours around Tokkul(61,83)
+  while approaching Enterprise(61,79) from(61,84):47 legal steps versus45 through
+  the town. Shared immutable terminal masks preserve selected exits, boarding,
+  landing, flight, graph/trap goals and current/remote trigger ownership. All7422
+  doors/2888 step warps checked; retained-plan/sideways/direct-boat/arrival cases
+  pass. Full checks,7994/0 native names,137/344/0 wiring,47-export smoke,49data+
+  18sounds, exact22-file Defender pass. DLL10948096 bytes SHA256
+  0a58ff0667c5f5bcd4ec0674e7026423fa4c0d87317f430fefe8b71241905265.
+  Includes all pending patrol/companion/menu fixes below; Desch35 is covered.
+  III was closed when guarded deployment ran. Recovery/receipts/evidence in
+  build_check/transition_routes_20261025/. Listening/native timing pending; no
+  game control/probe/delegation/dependency/release change. Signing/exclusion limits
+  unchanged. Narshe future-variant and explicit trap-goal regression facts retained.
+
+- October25 [patrol/companion/field-menu follow-up](docs/re/NPC_PATROL_TARGETS_20261025.md)
+  complete/offline verified; subsequently delivered in all six with the combined
+  transition-route payload above. Earlier five-game DLL10944000 bytes SHA256
+  37ab60d98b07119717a883e49fd540a22d7a5b2a4d1e8511721897f34cb9e09a.
+  Corridor width no longer turns patrols into gatekeepers; native routine facts
+  override stale/ambiguous bake identities. Generated III companion properties
+  leave AssetId0; name now follows its owned native saved base identity. All-six
+  native field range phases announce All allies and restore actual single focus;
+  FFV keeps its existing single producer. Enemy Critical has no generic icon/pose,
+  now a default-off Speech disclosure, independent of hits/party status. III event
+  key-item descriptions follow Autodetail, with I and positive Event12 ownership.
+  Full build/all checks/47-export smoke/exact22-file Defender pass;7994 names/0
+  missing,137/344/0 wiring;49data+18sounds match. All6962 native/bake routine records
+  match.110 installed hashes match,120 protected files unchanged. Recovery and
+  deploy_partial.json retained; final all-six delivery/132 hashes recorded above. Listening
+  remains pending; no game control/probe/delegation, dependency or release change.
+  Archive:build_check/npc_patrol_companion_20261025/. Signing/exclusion limits remain.
+
+- October25 [Vikings' Cove shop audit](docs/re/VIKINGS_COVE_SHOPS_20261025.md):
+  complete, no missing shops. All four III submaps51..54 source/bake/scripts agree:
+  only Magic5/group17 and Item6/group16 on53, plus scripted Inn7. Pirate NPCs do
+  not hide weapon/armor vendors. Own log matches. No production/build/deploy/game
+  control/probe; evidence:build_check/vikings_cove_20261025/.
+
+- October25 [connected NPCs/shop/landing follow-up](docs/re/NPC_FLOORS_SHOP_LANDING_20261025.md)
+  complete/offline verified; installed/hash-verified all six after III closed.
+  Bounded branch intersections restore guaranteed remote NPC groups. Room27 is
+  Underground Spring with staged Sara; bedroom35 stays selectable. Kazus2F/Mines/
+  Woman actual-worker routes pass; native companions retain names/talk and swap
+  without false blockers. Caanan uses Ground-layer approach/faces East. PickUp
+  labels Treasure; ordinary chests retain state. Tozus exposed older flag0 omission:
+  all1894 chest mappings now verified, including eight zero-flag objects across
+  five games. Actual scanner omits1524 routine borders, retaining14 meaningful
+  event sources and routing graph. Shared landing requires mounted manual vehicles.
+  Shop1..9 reads names/compatibility separately from comparison arrows. Map Event12
+  permits I/arrow buffers with Items/Chests only on detailed screens; Learn exit
+  retires old spell/target previews. Full build/offline tests/47-export smoke pass,
+  7945 names/0missing,133/341/0 wiring;49data+18sounds match. Exact22-file Defender
+  no threats/hashes stable;132 installed hashes match,144 protected files unchanged.
+  DLL10932224 bytes SHA256
+  a9f44da03d374418d02e031f17256ee0f34190915c0d33d4c8516a6e42aaefee.
+  Evidence/recovery:build_check/npc_floors_shop_landing_20261025/; final
+  deploy_after.json/installed_payloads_verified.json; partial receipt retained.
+  Listening/native-frame latency remain pending. No game control/probe/delegation,
+  dependency upgrade or release change; signing/exclusion-query limits remain.
+
+- October25 [startup hang investigation](docs/re/STARTUP_HANG_20261025.md):
+  investigation in progress (~55%); diagnostics complete/offline verified and
+  installed/hash-verified all six. No established root cause/repair. User approved
+  read-only FFIII11736 inspection; one normal thread/module dump plus bounded
+  known-pointer reads, no input/writes/launch. Game-memory evidence outside Git:
+  ../tools/startup_hang_20261025/; own logs/recovery in build_check of same name.
+  Boot frames continue; Steam initialized, ResourceManager singleton unbound,
+  no scene-load task. Three boot observers preserve original calls/error search;
+  four bounded exception prefixes. Full checks/smoke/exact22-file Defender pass;
+  7867 names/0missing,133/341/0 wiring. DLL10918912 bytes SHA256
+  07d54d2c8069fa309cd739e8c558e95d47ccbac1949c047fd3a4121fc407ece3.
+  All132 installed hashes match,144 protected files unchanged. User-started1448
+  reached title/gameplay; six successful boot boundaries, no boot error. Landing
+  initialization silent in the cave-load log; listening/flight checks pending.
+  A future failing diagnostic trace is needed. Do not claim startup repaired or
+  the historical FFII cause; final receipts/successful-run evidence are retained.
+
+- October25 [silent landing initialization](docs/re/LANDING_LOAD_20261025.md):
+  complete/offline verified/installed all six in the combined diagnostic build.
+  Own FFIII log shows the prior cue during ChangeMap1 before FieldReady2/Player3.
+  Shared readiness/transition/fade gates now seed landability silently, retaining
+  later live flight edges and FF6 priority. All-six actual-source regressions pass.
+  User-started1448 cave-load log confirms no initial cue; flight/listening pending.
+  Evidence:build_check/landing_load_20261025/ and startup_hang_20261025/.
+  Separate read-only startup-probe approval/evidence is recorded above.
+
+- October25 [MP-only details/world transitions/landing/undead damage](docs/re/FF3_FEEDBACK_20261025.md):
+  implementation complete/offline verified; exact scanned payload installed and
+  hash-verified all six after the user closed III. All132 payload hashes match,
+  144 protected files unchanged; final receipts deploy_after.json and
+  installed_payloads_verified.json preserve the prior deferral separately. I returns
+  only visible current MP levels; Autodetail keeps one short row then MP.
+  FFIII1535 events include1524 genuine world-border tiles, not animations;
+  exact three families now World map transition,12 locales. Existing grouping
+  gives8 in the reported state; Alt+Backslash is the new default in both keymaps.
+  Native ShowLandingGuide bypassed SwitchLandable; shared visible-guide edge
+  covers both, resets on hide/context and preserves FF6 speech priority. Cure
+  against undead now follows the actual rendered HP recovery flag, preserving
+  MP/Miss/KO. All-six actual-source checks/build/smoke/22-file Defender pass;
+  7843 names/0missing,133/341/0 wiring,49data+18sounds match. DLL10916864 bytes
+  SHA256ab54b0b0b99100c191d998a8e89df0172d4bf826e84ce9bb82d425d3376c8389.
+  Evidence/recovery:build_check/ff3_feedback_20261025/. Gameplay pending; no
+  launch/probe/delegation/dependency/release change. Prior I ownership now
+  user-confirmed; the new MP-only payload still needs listening.
+
+- October25 [Ur clerk/I-key follow-up](docs/re/INN_COUNTER_MP_20261025.md):
+  correct the native IsFocus=false selection-state check and exact cursor ownership,
+  and zero-ID one-cell counter approaches with state-projected relay geometry.
+  Build/offline checks/smoke/Defender pass; exact scanned payload installed and
+  hash-verified all six. Gameplay confirmation pending. No game launch.
+
+- October25 [Ur locations/concise character rows](docs/re/UR_CHARACTERS_20261025.md)
+  complete/offline verified; installed/hash-verified all six after FFIII deploy reply.
+  Well and shed are native Map Exits; distinguish Well, Shed and Shed Back Room.
+  Dahn's scoped generic NPC now uses his own12-language native speaker name.
+  All-six physical well/fountain and bare direct-speaker audits pass. Short
+  character/target reads omit per-level MP; I/Autodetail appends current-only
+  levels last. Native learning/exchange state6 retains its specific reader;
+  delayed generic callbacks recheck ownership. Full Status MP moves to buffer end.
+  Full build/all checks:7791 names/0 missing,133/341/0 wiring;47-export smoke;
+  49 data+18 sounds match. Exact22-file enabled/current Defender scan/no threats;
+  all22 installed files match all six,144 protected files unchanged. DLL
+  10913792 bytes SHA25693a86252635f32ded6c2c6cf62f29d791f5cf6efa8baef8d24b01fd3100415f9.
+  Evidence:build_check/ur_well_20261025/, final security_final_predeploy2 and
+  deploy_after.json/installed_payloads_verified.json; post-close baseline
+  deploy_preclosed.json. Prior partial/intermediate scan/receipts retained.
+  No game control/probe, new delegation or dependency change.
+  Mythril Mines B2 review: genuine non-actionable wall; switch and NPC hint only
+  exist in a later native state. Actual resolver/router verifies all three
+  states and the reachable switch; no early fabricated warning/production change.
+
+- October25 [alternate saves/menu preload/visible stat feedback/Jobs icons](docs/re/SAVE_CONTEXT_VISIBILITY_20261025.md)
+  complete/offline verified. Full build, smoke, resource and exact22-file Defender
+  checks pass;6c6a8045a0aeeedd33c220f1439837e597b06f5725f3a4cdc2c9fe628fca16c1
+  originally installed/hash-verified in I/II/IV/V/VI. Current combined follow-up
+  above supersedes it and is installed all six; III's prior deferral is history. Speaker screenshots
+  show no per-line identity cues; no names guessed. Goblin trace is consistent
+  with normal initiative; existing special-opening producer verified. Gameplay
+  listening remains pending; recovery/receipts:build_check/save_paths_20261025/.
+
+- October25 [Pandaemonium warp labels](docs/re/WARP_LABELS_20261025.md) complete/
+  offline verified. Reviewed16 exact pads (Panda15 plus Jade connection);15 occurrences
+  misnamed via9 Scene trigger keys. Generator now uses reviewed script hashes/
+  exact occurrences and existing Warp Tile locale key. Event activation/category
+  stays, routes/identities and production C++ unchanged. All-six regenerated
+  labels/audits differ only in FFII. Full checks/build/smoke/scan pass; combined
+  follow-up payload above is now installed all six. Evidence/recovery:
+  build_check/warp_labels_20261025/ and save_paths_20261025/. No probe/delegation.
+
+- October25 [floor labels](docs/re/MAP_FLOORS_20261025.md) and
+  [battle hands/controls](docs/re/BATTLE_GEAR_CONTROLS_20261025.md) complete/offline
+  verified and installed/hash-verified in all six. FFII deployment succeeded
+  after the user's deploy reply; prior deferral is history. Quicksave displays1F; internal Floor13
+  was our fallback bug. Native unanimous PointIn titles fix all11 Pandaemonium
+  maps (side room321=5F),385 English labels across II/III/V/VI.412 active keys/
+  4944 resolver cases; all12 native locales verified. Tab hand owner reads exact
+  hand/favored-hand/name and I/Autodetail description. Candidates retain visible
+  counts/descriptions, no absent stats. Shift+I includes standalone widgets and
+  native hint registries, sliced on owner with worker strings; no scene search
+  or text deduplication. Full build/all checks:7719 names/0 missing,131/339/0
+  wiring;47-export smoke;49 data+18 sounds match. Exact22-file current enabled
+  Defender scan/no threats/hash stable; all22 installed files match in all six,
+  144 protected files unchanged. DLL10902016 bytes SHA256
+  8e47ebf353835ccb715241973848462bc2e06f885ae099b73debf516d32a1155.
+  Recovery/reports/partial receipt/security/failures:build_check/map_floor_20261025/.
+  Final receipts:deploy_after.json, installed_payloads_verified.json; fresh
+  protected baseline:deploy_preff2.json. Gameplay/audio/frame timing pending. Signing/
+  exclusion limits remain; no game probe, delegation, install or release action.
+
+- October24 [world-object vehicle comparisons](docs/re/OBJECT_VEHICLE_SHORTCUTS_20261024.md)
+  and [NPC story-name masking](docs/re/NPC_SPOILERS_20261024.md) are complete,
+  offline verified and installed/hash-verified all six. The reviewed pre-reveal
+  NPC variant is ??? in all12 locales, including before Japanese's bypass.
+  Known ordinary names/native dialogue and raw identity/routes stay unchanged.
+  The logged cave route now compares walking258 versus Airship153 steps; already
+  mounted149, with legal landing/final facing. Vehicle/map filter modes permit
+  shorter candidates; floor mode, exact targets, model availability and hazards
+  remain. No distance cap. Full build/all checks/47-export smoke pass;7671 names/
+  zero missing;131/339/0 wiring;49 data+18 sounds match. Exact22-file Defender
+  stage/no threats/hash stable; all six installed manifests match,144 protected
+  files unchanged. DLL10874880 bytes SHA256
+  d75864ec918d7eaeb0300d5a342ff3e9a520983b3aadd27f8554d7117535d627.
+  Evidence/recovery/failures:build_check/emperor_spoiler_20261024/. Existing
+  signing/exclusion-query limits remain; gameplay/audible/frame response pending.
+  No game probe, delegation, dependency upgrade, commit/push or release change.
+
+- October24 [combined maintenance](docs/re/COMBINED_MAINTENANCE_20261024.md) is
+  complete/offline verified and installed/hash-verified in all six games.
+  FFII final deployment succeeded after the user closed it; prior deferral is history.
+  Includes all-six stat effects/Imbibe/removal paths, Shift+I controls, physical
+  passage labels, exact Airship/chest retention and vehicle interaction names,
+  Palamecia mounted/parked Airship routing and the throne exit companion.
+  Full build/all checks/47-export smoke pass;7671 names/0 missing,131/339/0 wiring.
+  49 data+18 sounds match; exact22-file Defender stage/no threats/hash stable.
+  DLL10871808 bytes SHA256
+  cac7266d799931e353f9a445498ee57abc4e417b5a145ee582f74804a533870b.
+  All six installed payloads match all22 scanned files;144 protected files unchanged
+  against fresh post-close deploy_preff2.json. Final installed manifest is retained.
+  Recovery/reports/failures/source/resource/security receipts:
+  build_check/stat_effects_20261024/. All gameplay/listening pending. No game
+  probe, dependency install, commit/push or public release change. Luna's13
+  localized keys were reviewed/integrated by Sol; no further delegation.
+
+- October24 [Roundworm room/NPC and H summary](docs/re/ROUNDWORM_STATUS_20261024.md)
+  is complete/offline verified; five games updated, FFII awaits close/deploy.
+  Map230 reused Big Horn's developer name; scoped official
+  Roundworm names preserve Tropical Island Big Horn. H omits the separate
+  command column while ally targeting retains it. Current/max HP and visible
+  current MP already match the screenshot. Full build/checks/47-export smoke pass;
+  exact22-file Defender stage has no threats. DLL10805760 bytes SHA256
+  0c5721b60b27935db3a5912ac68c54302f9c1c421b00a6196f54b83db822fe9f.
+  Existing signing/exclusion limits remain; gameplay listening pending. Evidence:
+  build_check/roundworm_room_20261024/. No game probe or delegation.
+
+- October24 [Leviathan ship-entry routing](docs/re/LEVIATHAN_20261024.md) is
+  complete/offline verified and deployed/hash-verified all six, including FFII.
+  Reviewed script96 now accepts Ship entry; disembarking stays inside its scene.
+  Logged Ship(30,194) reaches exact(57,132) in375 steps; Event listing, shore
+  boarding, missing-Ship and story-completion cases pass. The three-part MP
+  fix is included; equipment speech is user-confirmed. Build/all checks/47-export
+  smoke pass;7409 names/zero missing.49 data+18 sounds match,144 protected files
+  unchanged.10803712-byte DLL SHA256
+  c3a7160030c86c010aad513c139f3a8b9b78d01a3a68c350724657773b3aede7.
+  Exact22-file predeploy Defender scan reports no threats; all installed payloads
+  match. Existing signature/exclusion gaps remain. Evidence/recovery:
+  build_check/leviathan_20261024/. Gameplay listening/scene activation pending;
+  no game probe, delegation, dependency install, push or public release change.
+
+- October24 [Parasite three-part follow-up](docs/re/PARASITE_THREE_PARTS_20261024.md)
+  was implemented/offline verified and installed to five initially. FFII now
+  has the combined Leviathan build above; earlier hash below is historical.
+  User confirms equipment row works; earlier MP labeling failed. Native direct
+  draws bypass wrappers, and the same FFII handler keeps primary physical plus
+  secondary MP results. Typed-producer binding and actual after-batch phase now
+  distinguish them. Same-owner/direct/delayed all-six fixtures pass;7409 names/
+  zero missing, full suite and47-export smoke pass. Final10798592-byte DLL SHA256
+  73c8332982e078689efd6e6d0c14452503cfdad00948cc1b14305171e646fafc.
+  Defender scanned final22-file stage before deployment: no threats; prior
+  signature/exclusion gaps remain. Source/results/recovery in
+  build_check/parasite_three_parts_20261024/. Gameplay listening pending.
+  Coexistence fixture initializes its heap before fencing the crowded test hole;
+  production allocator unchanged. No game probe, delegation or publication.
+
+- October24 [equipment-strip/MP follow-up](docs/re/BATTLE_ITEM_EQUIPMENT_20261024.md)
+  was offline verified and deployed/hash-verified all six. Equipment is now
+  user-confirmed; its MP attempt failed and is superseded above. Equipped
+  battle Items reads actual gear/marker with I/Autodetail. Separate FFII/III
+  absorption siblings use their own resource fields; the earlier MP fixture
+  missed FFII's actual class. Build/all checks/47-export smoke pass;7403 names,
+  zero missing.144 protected files unchanged;49 data+18 sounds match. DLL10797056
+  bytes SHA256 3fbaf55870aa9886bd1124aa8f2e3f808a12159fa67e2d598bc125c573dfe457.
+  Predeployment Defender scan22 exact files: no threats; installed hashes match.
+  Existing exclusion/signing gaps remain. Evidence/recovery:
+  build_check/battle_item_equipment_20261024/. Gameplay/listening pending;
+  no game launch/probe, delegation, push or public release change.
+
+- October24 [security/distribution record](docs/SECURITY_AND_DISTRIBUTION.md):
+  exact final installed22-file payload/dependencies matched across all six games.
+  Enabled Defender with current local definitions reports no threats; hashes
+  unchanged. Exclusion inspection is administrator-protected/unverified (0x80070005).
+  Four DLLs are unsigned; no CurrentUser/LocalMachine signing certificate exists.
+  No security settings changed, external upload or game probe. Full manifests,
+  signatures, PE hardening and scan/version/time/output/event receipts:
+  build_check/mysidia_objects_20261024/security_verified/. No outer package or
+  downloaded-file reputation test in this follow-up; do not imply universal AV
+  acceptance. Future releases sign when a trusted identity is available and
+  scan exact inner payload plus final outer archive/installer before publishing.
+
+- October24 follow-up is implemented/offline verified and deployed/hash-verified
+  all six: [maps](docs/re/MAP_PANELS.md), [F9/owned controls](docs/re/INPUT_INTERCEPTION.md),
+  [Bestiary drops](docs/re/BESTIARY.md), [Attack ally rows](docs/re/ALLY_TARGETS.md),
+  [FFII Poison/Venom](docs/re/POISON_VENOM.md), [Statue Room/Objects/Ship](docs/re/MYSIDIA_OBJECTS_20261024.md)
+  and [soundscape groups](docs/re/SOUNDSCAPE.md#october24-physical-transition-and-trigger-groups).
+  Map details follow Autodetail/I; blank panels clear counts. F9 works in menus,
+  suspending game-context shortcuts while preserving mod-dialog recovery. Enum204
+  is FFII persistent Poison; native type10/MSG_SYSTEM_042 is temporary Venom.
+  B3 chest entity20 remains selected through its required B4 leg and battle refresh.
+  Actual distant island routes395/380 steps pass; existing vehicle filters remain.
+  Build/all checks/47-export smoke pass;7373 names/zero missing,131 used/339 defined/
+  zero undefined.49 data+18 sound resources match;144 protected files unchanged.
+  DLL10793984 bytes SHA256 3c8562206a2fe22ca9540a4349cff82ec04c68ee645e34db8f7e5f8df73b5b82.
+  Recovery/evidence:build_check/mysidia_objects_20261024/. Gameplay/listening pending;
+  no game launch/probe, delegation or public release/push. [Retest first](docs/TESTING.md#october24-map-bestiary-targeting-and-navigation-follow-up).
+  New17 catalog recipes/204 locale values are retained; the legacy whole-catalog
+  regeneration check still has earlier follow-up drift (receipt in this folder).
+  Do not overwrite current catalogs with a full legacy merge before reconciling it.
+
+- October23 [NPC detours and temporary doorway occupancy](docs/re/NPC_BLOCKERS.md#october23-mysidia-detour-and-temporary-occupancy-follow-up):
+  complete/offline verified. Every complete detour wins. Open-approach patrols wait;
+  narrow channels/area gatekeepers retain interaction. Autowalk queues a fresh
+  snapshot after a native edge veto/stall; beacon wait points refresh. Actual
+  Mysidia/true gate and all-six native-owner/cancel/rate fixtures added.
+  Clean canonical build/all checks/47-export smoke and resource verification pass.
+  Installed/hash-verified all six after the user closed FFII and requested deployment.
+  Its newer live-session preferences are preserved; all144 protected files match
+  the fresh pre-deploy baseline. Recovery/reports:build_check/npc_detours_20261023/. Gameplay
+  unconfirmed; no runtime launch/control/probe or public release replacement.
+
+- October23 [world exits/Ship/lag](docs/re/WORLD_EXIT_FOLLOWUP_20261023.md) and
+  [MP drain/Swap/Fog status feedback](docs/re/BATTLE_FEEDBACK_20261023.md): complete,
+  offline verified and deployed/hash-verified all six. Per-game scripted travel
+  remains MapExit; vehicle goals bind to real transport models, and indoor gate
+  searches stay off the world graph. Resource scopes preserve MP drain labels;
+  native Swap operations get brief result feedback. Shared condition names cover
+  Fog's Amnesia in combat and rendered item targets. Canonical build/all checks/
+  47-export smoke pass;7,301 names/zero missing,125 used/333 defined/zero undefined.
+  43 embedded data resources match;144 protected files unchanged. DLL
+  10687488 bytes, SHA256 7dc3d8623711796ea965b219ae278392f517dfe32336042f38a7f6cd52ca8e70.
+  Recovery/reports/receipts:build_check/world_exit_labels_20261023/. Gameplay
+  unconfirmed; no game launch/control/probe or public release replacement.
+  Luna/gpt-6-luna supplied7 bounded catalog keys; Sol reviewed/corrected5 values
+  and verified all8 combined keys/96 locale values. No remaining delegation issue.
+
+- October23 [Castle Fynn repairs](docs/re/CASTLE_FYNN_20261023.md) and
+  [live NPC obstruction routing](docs/re/NPC_BLOCKERS.md): complete/offline verified,
+  deployed/hash-verified all six (FFII hold lifted by user). Native NPC collider
+  passability, legal interaction prefixes/manual handback and remote chest route
+  validation share live snapshots. FFII initializer Hide/Show now follows passage
+  flag56; all-six visibility projection and gate-reason proofs cover future floors.
+  Original map42 chest remains reachable separately from gated map38/map75.
+  Directions retain a valid pending chest while its selected row rebuilds.
+  Unrelated nearest-event advice removed; missing return-event body remains an
+  explicit limit. Build/all checks/47-export smoke pass;7,206 names/zero missing,
+  125 used/333 defined/zero undefined. All144 protected files unchanged; recovery,
+  reports/receipts:build_check/npc_fynn_20261023/. DLL10647552 bytes, SHA256
+  3883266ace174e8b81fb0808260ec2b11cb3ae9caf7a7c21711fc107f101cd40.
+  Includes the Ship correction below, now also in FFII. Gameplay unconfirmed;
+  no game launch/control/probe, delegation, commit/push or release replacement.
+
+- October23 [Ship follow-up](docs/re/VEHICLE_ROUTING.md): implemented/offline verified;
+  latest FFII V0.9.5 log rejects Ship from current Canoe without search
+  evidence. Shared cell_of now canonicalizes world copies, keeps indoor bounds
+  and rejects invalid observations. Actual-source Canoe/Ship and five world-copy
+  fixtures and all-six cases pass; canonical build/7,182 names/zero missing and
+  47-export smoke pass. Installed/hash-verified FF1/III/IV/V/VI. FFII was running;
+  user explicitly holds its deployment, and its DLL/SDL remain unchanged.
+  All 144 protected files unchanged; recovery/receipts:build_check/ship_route_20261023/.
+  Built DLL SHA256 ce462c5f92002e182661a9e899b7836c80856ebbc21eb252592d7cda12a708a0.
+  Rejected-goal coordinates are now logged. Exact live Ship coordinate was absent
+  from the log; gameplay confirmation remains pending. No runtime probe or launch.
+
 - Published October23 [V0.9.5](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v0.9.5);
   [release evidence](docs/release.md#v095-publication-october23) and
   [parked-party occupancy fix](docs/re/PARKED_PARTIES.md). The user confirms prior
@@ -64,7 +526,7 @@
   established: all-six asset0 and inherited no-op Dying poses; no hidden-HP inference.
   [Prioritized remaining player checks](docs/TESTING.md#october-22-fixes-test-these-first).
 
-- [Current complete feature/source index](docs/FEATURE_INDEX.md) maps125 registrations
+- [Current complete feature/source index](docs/FEATURE_INDEX.md) maps126 registrations
   to owning source/functions and subsystem contracts; historical FEATURES.md is the
   port checklist. [Runtime](docs/architecture/RUNTIME.md), [screen readers](docs/architecture/MENUS_AND_DIALOGUE.md),
   [game adapters](docs/architecture/GAME_ADAPTERS.md). New research stays outside Git;

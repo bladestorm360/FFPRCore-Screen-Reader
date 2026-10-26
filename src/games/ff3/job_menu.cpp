@@ -23,6 +23,7 @@
 #include <string>
 #include "../../core/core.h"
 #include "../../core/dedup.h"
+#include "../../core/frame.h"
 #include "../../core/hooks.h"
 #include "../../core/log.h"
 #include "../../core/modtext.h"
@@ -62,8 +63,10 @@ ref::Method mOwnedJobLevel{kOwnedJob, "get_Level", 0};
 constexpr const char* kJobMenuKey = "JobMenu";        // MenuStateRegistry.JOB_MENU
 constexpr const char* kCtxSelect = "JobMenu.Select";
 
-// JobMenuState.FocusedJob: kept only as its description text (no game pointer is kept).
-std::wstring g_focused_description;
+// Native owner only. I reads the current rendered panel, rather than text cached
+// during UpdateJobInfo before Unity has refreshed the new icons' culling state.
+void* g_focused_window = nullptr;
+uint64_t g_focus_generation = 0;
 bool g_has_focused_job = false;
 
 /// LocalizationHelper.GetText: MessageManager.GetMessage(mesId, false), markup stripped; empty
@@ -118,6 +121,25 @@ int job_level(void* window, void* character, int job_id)
     return 1;
 }
 
+std::wstring current_job_description()
+{
+    if (!g_has_focused_job || !g_focused_window || !unity::alive(g_focused_window) ||
+        !unity::active_in_hierarchy(g_focused_window)) return {};
+    void* view = ref::rd<void*>(g_focused_window, fJobWindowView);
+    const auto heading = displayed::text_field(view, "infoFixedEquipText");
+    const auto all = displayed::text_field(view, "infoAllEquipText");
+    std::vector<std::wstring> types;
+    void* icons = displayed::field(view, "infoEquipIconList");
+    const int count = unity::list_count(icons);
+    if (count > 0 && count <= 32) for (int i = 0; i < count; ++i) {
+        auto type = displayed::equipment_icon(unity::list_at(icons, i));
+        if (!type.empty()) types.push_back(std::move(type));
+    }
+    if (!all.empty()) return heading.empty() ? all : heading + L": " + all;
+    const auto equipment = text::join(types, L", ");
+    return equipment.empty() ? heading : heading.empty() ? equipment : heading + L": " + equipment;
+}
+
 // UpdateJobInfo_Postfix
 void on_update_job_info(void* self, void* character, void* job)
 {
@@ -137,29 +159,25 @@ void on_update_job_info(void* self, void* character, void* job)
     // Active only after validation: the menu is confirmed open with valid data.
     menu_state::set_active_exclusive(kJobMenuKey);
     g_has_focused_job = true;
-    void* view = ref::rd<void*>(self, fJobWindowView);
-    const auto heading = displayed::text_field(view, "infoFixedEquipText");
-    const auto all = displayed::text_field(view, "infoAllEquipText");
-    std::vector<std::wstring> types;
-    void* icons = displayed::field(view, "infoEquipIconList");
-    const int count = unity::list_count(icons);
-    if (count > 0 && count <= 32) for (int i = 0; i < count; ++i) {
-        auto type = displayed::equipment_icon(unity::list_at(icons, i));
-        if (!type.empty()) types.push_back(std::move(type));
-    }
-    g_focused_description = heading;
-    if (!all.empty()) g_focused_description += L": " + all;
-    else if (!types.empty()) g_focused_description += L": " + text::join(types, L", ");
-    if (ui::prefs::auto_detail_enabled() && !g_focused_description.empty())
-        ffpr::say_sequence({announcement, g_focused_description}, true);
-    else ffpr::say(announcement, true);
+    g_focused_window = self;
+    const auto generation = ++g_focus_generation;
+    if (!ui::prefs::auto_detail_enabled()) { ffpr::say(announcement, true); return; }
+    // Event-driven one-frame handoff, not polling. Obsolete focus/close cancels
+    // before native reads. Names and descriptions then enter one speech sequence.
+    frame::next_frame([generation, announcement] {
+        if (generation != g_focus_generation || !g_has_focused_job) return;
+        const auto description = current_job_description();
+        if (description.empty()) return;
+        ffpr::say_sequence({announcement, description}, true);
+    }, "FF3.JobMenu.Detail");
 }
 
 void reset_job_menu()
 {
     dedup::reset(kCtxSelect);
     g_has_focused_job = false;
-    g_focused_description.clear();
+    g_focused_window = nullptr;
+    ++g_focus_generation;
 }
 
 using UpdateJobInfo_t = void (*)(void* self, void* character, void* job, const void* mi);
@@ -202,7 +220,7 @@ int install()
     // The I key (see the header): FF3's job description in the slot of FF1's class description.
     queries::define("JobSelectionPatches.IsActive", [] { return menu_state::is_active(kJobMenuKey); });
     queries::define_text("JobSelectionPatches.GetCurrentDescription",
-                         [] { return g_has_focused_job ? g_focused_description : std::wstring(); });
+                         [] { return current_job_description(); });
     return n;
 }
 

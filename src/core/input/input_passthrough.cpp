@@ -16,6 +16,9 @@
 #include "../hooks.h"
 #include "../refs.h"
 #include "../fieldnav/autowalk.h"
+#include "../ui/preferences.h"
+#include "../modtext.h"
+#include "../say.h"
 
 namespace input {
 namespace {
@@ -31,10 +34,12 @@ ref::Method mAnyHeld{kListener, "AnyKey", 1}, mAnyDown{kListener, "AnyKeyDown", 
 ref::Class kInputValue{"System.Input", "InputValue"};
 ref::Field fKeyName{kInputValue, "Name"};
 bool g_owned_buttons[kButtonCount]{};
+bool g_interception = true; // native-owner cache; no preference lookup in native hooks
 
 bool native_input_blocked()
 {
     if (suppress_game_input()) return true;
+    if (!g_interception) return false;
     if(bindings::remapped_keyboard_in_use())return true;
     if (queries::is("ReviewBuffer.IsInformation")) {
         // Arrows review the copied comparison. WASD, native confirm/cancel and
@@ -77,7 +82,7 @@ int stick_button_for(int32_t action)
 
 bool pass(int button, Check check)
 {
-    return !router::is_button_consumed(button) && check(button);
+    return (!g_interception || !router::is_button_consumed(button)) && check(button);
 }
 
 /// Directional passthrough depends on the context:
@@ -111,7 +116,7 @@ bool check_directional(int32_t action, Check check, bool use_edge)
     if(action==kActionDown)stick=bindings::kLeftDown;
     if(action==kActionLeft)stick=bindings::kLeftLeft;
     if(action==kActionRight)stick=bindings::kLeftRight;
-    return pass(dpad,check) || (lstick&&!bindings::consumed(stick));
+    return pass(dpad,check) || (lstick&&(!g_interception || !bindings::consumed(stick)));
 }
 
 bool check_sdl(int32_t action, Check check, bool use_direction_edge)
@@ -130,9 +135,9 @@ bool check_sdl(int32_t action, Check check, bool use_direction_edge)
     case kActionSwitchRight: return pass(kRightShoulder, check);
     case kActionPageUp:
         // Left trigger: the mod's pathfind key on the active field, the game's elsewhere.
-        return !bindings::consumed(bindings::kLeftTrigger) && left_trigger() > 0.5f;
+        return (!g_interception || !bindings::consumed(bindings::kLeftTrigger)) && left_trigger() > 0.5f;
     case kActionPageDown:
-        return !bindings::consumed(bindings::kRightTrigger) && right_trigger() > 0.5f;
+        return (!g_interception || !bindings::consumed(bindings::kRightTrigger)) && right_trigger() > 0.5f;
     case kActionStart:
         return pass(kStart,check);
     case kActionStickL: return pass(kLeftStick, check);
@@ -240,7 +245,7 @@ bool result_listener_passthrough(bool native, int32_t device, F&& read_sdl)
 {
     // Preserve other native screens. Results need SDL too because this caller
     // bypasses the manager, and Unity gamepad devices are disabled by the mod.
-    if (native || (!queries::is("ReviewBuffer.IsResults") && !queries::is("ReviewBuffer.IsInformation")) ||
+    if (native || (g_interception && !queries::is("ReviewBuffer.IsResults") && !queries::is("ReviewBuffer.IsInformation")) ||
         (device != 1 && device != 3)) return native;
     return gamepad_available() && read_sdl();
 }
@@ -296,6 +301,18 @@ bool d_any_up(void* self, const void* mi)
 
 int install()
 {
+    auto refresh=[] {
+        g_interception=settings::get_bool(ui::prefs::kControlInterception,ui::prefs::kControlInterceptionDefault);
+        // Old consumed-button ownership must not survive a bypass/restore.
+        for(auto& button:g_owned_buttons)button=false;
+        if(!g_interception && actions::defined("Autowalk.Cancel"))actions::run("Autowalk.Cancel");
+    };
+    refresh();
+    actions::define("Settings.Changed.ControlInterception",refresh);
+    actions::define("Input.ToggleControlInterception",[refresh] {
+        settings::set_bool(ui::prefs::kControlInterception,!g_interception);refresh();
+        ffpr::say(TF(L"{0}: {1}",{T(L"Control interception"),T(g_interception?L"On":L"Off")}),true);
+    });
     int n = 0;
     n += hooks::attach(mGetKeyDown, &d_GetKeyDown, &o_GetKeyDown) ? 1 : 0;
     n += hooks::attach(mGetKey, &d_GetKey, &o_GetKey) ? 1 : 0;
@@ -313,6 +330,7 @@ int install()
 core::Install s_install{"InputPassthrough", &install, 60};
 
 } // namespace
+bool interception_enabled() { return g_interception; }
 void update_native_input_ownership()
 {
     const bool owned = suppress_game_input();

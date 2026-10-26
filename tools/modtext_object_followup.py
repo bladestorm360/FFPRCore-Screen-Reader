@@ -1,6 +1,7 @@
 """Mod-owned object nouns; native actor names reuse the per-game catalog."""
 from modtext_object_labels import LANGS
 ROWS = (
+ ('World map transition','ワールドマップの移動地点','Transition de carte du monde','Passaggio alla mappa del mondo','Weltkartenübergang','Transición del mapamundi','세계 지도 전환 지점','世界地圖轉換點','世界地图转换点','Переход на карту мира','จุดเปลี่ยนแผนที่โลก','Transição do mapa-múndi'),
  ('Air pocket','空気だまり','Poche d’air','Sacca d’aria','Luftblase','Bolsa de aire','공기 주머니','氣穴','气穴','Воздушный карман','ช่องอากาศ','Bolsa de ar'),
  ('Antenna','アンテナ','Antenne','Antenna','Antenne','Antena','안테나','天線','天线','Антенна','เสาอากาศ','Antena'),
  ('Armor shop','防具屋','Armurerie','Negozio di armature','Rüstungsladen','Tienda de armaduras','방어구점','防具店','防具店','Магазин брони','ร้านเกราะ','Loja de armaduras'),
@@ -46,6 +47,9 @@ ROWS = (
  ('Note','メモ','Note','Appunto','Notiz','Nota','쪽지','便條','便条','Записка','บันทึก','Bilhete'),
  ('Poster','ポスター','Affiche','Manifesto','Plakat','Cartel','포스터','海報','海报','Плакат','โปสเตอร์','Cartaz'),
  ('Sarcophagus','石棺','Sarcophage','Sarcofago','Sarkophag','Sarcófago','석관','石棺','石棺','Саркофаг','โลงหิน','Sarcófago'),
+ # Ur's NPC calls this building a shed; it is a transition destination, not
+ # a new interactible. Keep the authored title reproducible on catalog merges.
+ ('Shed','倉庫','Remise','Capanno','Schuppen','Cobertizo','창고','倉庫','仓库','Сарай','โรงเก็บของ','Depósito'),
  ('Skull','頭蓋骨','Crâne','Teschio','Schädel','Cráneo','해골','頭骨','头骨','Череп','กะโหลก','Crânio'),
  ('Stage','舞台','Scène','Palco','Bühne','Escenario','무대','舞台','舞台','Сцена','เวที','Palco'),
  ('Stove','ストーブ','Poêle','Stufa','Ofen','Estufa','난로','火爐','火炉','Печь','เตา','Fogão'),
@@ -57,6 +61,7 @@ ROWS = (
  ('Tree','木','Arbre','Albero','Baum','Árbol','나무','樹','树','Дерево','ต้นไม้','Árvore'),
  ('Turtle','亀','Tortue','Tartaruga','Schildkröte','Tortuga','거북','烏龜','乌龟','Черепаха','เต่า','Tartaruga'),
  ('Vent','通気口','Conduit d’aération','Condotto di ventilazione','Lüftungsschacht','Conducto de ventilación','환기구','通風口','通风口','Вентиляционный канал','ช่องระบายอากาศ','Duto de ventilação'),
+ ('Wall near bed','ベッド脇の壁','Mur près du lit','Parete vicino al letto','Wand neben dem Bett','Pared junto a la cama','침대 옆 벽','床邊的牆壁','床边的墙壁','Стена у кровати','ผนังข้างเตียง','Parede ao lado da cama'),
  ('Wall','壁','Mur','Muro','Wand','Pared','벽','牆壁','墙壁','Стена','กำแพง','Parede'),
  ('Waterway','水路','Voie d’eau','Canale','Wasserweg','Canal','수로','水道','水道','Водный путь','ทางน้ำ','Canal'),
  ('Weapon rack','武器掛け','Râtelier d’armes','Rastrelliera per armi','Waffenständer','Soporte de armas','무기 거치대','武器架','武器架','Стойка для оружия','ชั้นวางอาวุธ','Suporte de armas'),

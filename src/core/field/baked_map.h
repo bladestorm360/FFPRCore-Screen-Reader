@@ -2,6 +2,8 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <array>
 
 // The baked maps: every sub-map's collision, hidden-passage, terrain-attribute and
 // per-vehicle-group grids, its routing objects, and the transportation masters, extracted
@@ -23,11 +25,15 @@ enum class ObjType : uint8_t {
     /// Baked only: an event whose script changes map (ChangeMap in its Main segment): a warp
     /// pad, a trapdoor. a = destination map id, b = destination PointIn point id, d = 1 when
     /// stepping on it fires (an Event), 0 when it is examined (an Entity). Low byte 2 is
-    /// reviewed manual travel; bits 8..11 optionally restrict native approach sides.
+    /// reviewed manual travel; bits 8..11 optionally restrict native approach sides;
+    /// bit16 identifies ordinary scripted world travel separately from scenes.
     /// A cutscene whose
     /// destination script changes map straight back (FF1's bridge credits) is not one
     /// (bake_maps.py round_trip, 2026-10-11).
     Warp = 100,
+    // Reviewed companion of a collocated native GotoMap. Identity is retained
+    // for live suppression, but the real GotoMap alone owns route/exit semantics.
+    TransitionHelper = 101,
 };
 
 /// One baked routing object (34 bytes in the file). Fields a-d per type: see bake_maps.py.
@@ -46,6 +52,22 @@ struct Object {
     int chest_content_id() const { return type == ObjType::TreasureBox ? (d >> 8) : 0; }
 };
 
+// High Warp flags describe navigation semantics independently of activation's
+// low byte. Ordinary scripted world exits remain real transitions, not scenes.
+constexpr int kWorldExit = 1 << 16;
+inline bool world_exit(const Object& object) {return object.type==ObjType::Warp && (object.d&kWorldExit)!=0;}
+inline bool pickup_treasure(const Object& object) {return object.type==ObjType::TreasureBox && (object.d&32)!=0;}
+// Reviewed scripted sea scenes disembark after entry, unlike native town doors.
+// This flag permits Ship entry only; terrain, route and story state still apply.
+constexpr int kShipEntry = 1 << 17;
+inline bool ship_entry(const Object& object) {return object.type==ObjType::Warp && (object.d&255)==1 && (object.d&kShipEntry)!=0;}
+// Terminal entry is independent of optional story-event warnings. Bit1 is a
+// native door (world vehicles fly/sail over it); bit2 is a step-on script warp.
+using TransitionGrid = std::array<std::vector<uint8_t>,3>;
+inline int transition_bits(const Object& object) {
+    if(object.type==ObjType::GotoMap && object.a>0)return 1;
+    return object.type==ObjType::Warp && (object.d&255)==1 ? 2 : 0;
+}
 struct TransportRow { int id, group, landing_group, type; uint32_t message; };
 
 struct Submap {
@@ -71,9 +93,13 @@ struct Grids {
     std::vector<uint8_t> attribute;      // world maps: terrain attribute id per cell
     std::vector<std::vector<uint8_t>> transport;   // [group - 1]: 1 = blocked for the group
     std::vector<Object> objects;
+    std::unordered_map<int,std::vector<size_t>> world_exits; // prepared on Data, read-only on native/Navigation owners
+    std::unordered_map<int,std::vector<size_t>> transition_helpers;
+    std::unordered_map<int,std::vector<size_t>> vehicle_pads; // world cell -> prepared object indices
     std::vector<uint8_t> hazard;         // 1 = a step-on warp / trapdoor cell: never crossed by
                                          // an ordinary route, only entered as its goal
     std::vector<uint8_t> traps[3];       // identified pitfalls, retaining their native layer
+    TransitionGrid transitions;        // prepared immutable terminal-entry lookup
 };
 
 /// Bind the baked data (the bytes must outlive the process; a resource does). False when the
@@ -99,6 +125,12 @@ const Grids& grids(const Submap& s);
 
 /// Cell tests. A layer absent from the sub-map is closed.
 bool in_bounds(const Grids& g, int x, int y);
+// Exact native identity/footprint lookup in the prepared per-ID exit index. No
+// decoding, script execution, engine access or map-wide scan at a call site.
+const Object* world_exit_at(const Grids& grid,int id,const std::wstring& raw,int x,int y);
+bool transition_helper_at(const Grids& grid,int id,const std::wstring& raw,int x,int y);
+/// Native vehicle-action pad's target model IDs (empty list permits any vehicle).
+bool vehicle_pad_accepts(const Object& object,int transportation_id);
 /// Has native movement directions on `layer`, or is a hidden passage when requested.
 bool walkable(const Grids& g, int layer, int x, int y, bool passages);
 bool is_passage(const Grids& g, int layer, int x, int y);

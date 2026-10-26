@@ -13,11 +13,14 @@ struct Row {
     bool door=false, opened=false;
     std::wstring hint, event_type;
     bool verified_exit=false;
+    bool world_exit=false;
+    int script=0,action=0; // copied automatic-trigger identity, not spoken text
 };
 struct Snapshot {
     uint64_t epoch=0; double captured_at=0;
     float player_x=0,player_north=0,wrap_width=0,wrap_height=0;
-    std::vector<Row> rows; // pathfinder All view order, current floor only
+    std::vector<Row> rows; // ungrouped physical registry, current floor only
+    float map_width=0,map_height=0; // fixed indoor center/edges for compass exits
 };
 struct Options {
     bool operator==(const Options&) const = default;

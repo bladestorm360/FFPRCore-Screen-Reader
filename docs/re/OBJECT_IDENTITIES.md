@@ -130,3 +130,9 @@ verifies99 changed/new entries in12 locales and all generated labels' locale set
 These do not prove physical screen-reader timing or every map instance. The
 prioritized nonvisual procedure is in TESTING. Keep the observer tied to native
 appearance/Hide ownership, not repeated wording or an independently guessed range.
+# October24 passage-label refinement
+
+[Concealing-object evidence](HIDDEN_PASSAGES_20261024.md) now identifies Paul's
+wall near his bed, Castle Fynn's wall and Narshe's rock at exact native map/entity
+identities. Shared raw names stay context-qualified. Existing Clock/Fireplace and
+treasure/category rules remain unchanged; final combined verification is pending.

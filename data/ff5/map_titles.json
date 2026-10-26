@@ -1,21 +1,81 @@
 {
   "_comment": "Titles for maps the game's map master leaves untitled (map.txt map_title None, floor 0), by map id; resolved by src/core/field/map_names.cpp override_title: a string is a game message key; {\"text\": mod text key}; {\"owner\": baked NPC name} = N's House; {\"room\": baked NPC name} = N's Room; {\"entity\": baked object name} = that object's translated name; {\"item\": item message} = I Room; a list joins its parts. Labels inferred from the baked contents under the user's rules of 2026-10-11 (a named NPC's house, a generic NPC's House, else the defining event or point, else nothing). MSG_ARA_NAME_02 = 'Item Shop', the title the other item shops carry: Moore's and Castle of Bal's untitled shops sell product group 35/36, both 'Items'. Evidence per entry: docs/MAP_LABELS.md.",
-  "49": {"text": "House"},
-  "94": {"text": "House"},
-  "137": {"text": "House"},
-  "138": {"entity": "モーグリの着ぐるみ"},
-  "139": {"text": "House"},
+  "49": {
+    "text": "House"
+  },
+  "94": {
+    "text": "House"
+  },
+  "137": {
+    "text": "House"
+  },
+  "138": {
+    "entity": "モーグリの着ぐるみ"
+  },
+  "139": {
+    "text": "House"
+  },
   "150": "MSG_ARA_NAME_02",
   "170": "MSG_ARA_NAME_02",
-  "185": {"text": "House"},
-  "188": {"text": "House"},
-  "197": {"room": "ボコ"},
-  "209": {"entity": "クリスタル"},
-  "313": {"entity": "sc_e_0527:回復の泉"},
-  "382": {"entity": "回復の泉"},
-  "471": {"text": "House"},
-  "535": {"text": "House"},
-  "536": {"text": "House"},
-  "537": {"text": "House"},
-  "540": {"text": "House"}
+  "185": {
+    "text": "House"
+  },
+  "188": {
+    "text": "House"
+  },
+  "197": {
+    "room": "ボコ"
+  },
+  "209": {
+    "entity": "クリスタル"
+  },
+  "313": {
+    "entity": "sc_e_0527:回復の泉"
+  },
+  "382": {
+    "entity": "回復の泉"
+  },
+  "471": {
+    "text": "House"
+  },
+  "535": {
+    "text": "House"
+  },
+  "536": {
+    "text": "House"
+  },
+  "537": {
+    "text": "House"
+  },
+  "540": {
+    "text": "House"
+  },
+  "@entryFloors": {
+    "66": "MSG_ARA_NAME_24",
+    "170": "MSG_ARA_NAME_24",
+    "202": "MSG_ARA_NAME_24",
+    "204": "MSG_ARA_NAME_25",
+    "234": "MSG_ARA_NAME_24",
+    "289": "MSG_ARA_NAME_16",
+    "311": "MSG_ARA_NAME_24",
+    "312": "MSG_ARA_NAME_24",
+    "313": "MSG_ARA_NAME_24",
+    "354": "MSG_ARA_NAME_24",
+    "365": "MSG_ARA_NAME_33",
+    "385": "MSG_ARA_NAME_24",
+    "386": "MSG_ARA_NAME_24",
+    "387": "MSG_ARA_NAME_24",
+    "398": "MSG_ARA_NAME_30",
+    "402": "MSG_ARA_NAME_33",
+    "404": "MSG_ARA_NAME_35",
+    "418": "MSG_ARA_NAME_27",
+    "427": "MSG_ARA_NAME_24",
+    "429": "MSG_ARA_NAME_24",
+    "431": "MSG_ARA_NAME_24",
+    "432": "MSG_ARA_NAME_24",
+    "433": "MSG_ARA_NAME_24",
+    "462": "MSG_ARA_NAME_16",
+    "480": "MSG_ARA_NAME_19",
+    "495": "MSG_ARA_NAME_24"
+  }
 }

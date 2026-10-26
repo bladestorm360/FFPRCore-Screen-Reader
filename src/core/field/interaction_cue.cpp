@@ -2,6 +2,7 @@
 // own the range/selection decision; Hide and draw-disable retire that occurrence.
 // Only copied labels/locale go to the formatting worker. See docs/MAP_LABELS.md.
 #include "field_internal.h"
+#include "field_api.h"
 #include "event_labels.h"
 #include "entity_translator.h"
 #include "../core.h"
@@ -45,6 +46,11 @@ bool ready(void* icon) {
         displayed::renderer_visible(ref::rd<void*>(icon,fRenderer));
 }
 std::wstring object_label(void* object) {
+    // Resident vehicle sprites also inherit FieldNonPlayer. Resolve their
+    // actual Transportation model before the generic NPC branch, as discovery
+    // does; the native entity's placeholder name may be just "NPC".
+    int type=0,id=0; std::wstring message;
+    if(vehicle_type_of(object,type,id,message))return vehicle_display_name(id,type,message);
     if(r::kFieldTresureBox.is(object))return T(L"Treasure Chest"); // type only, never contents
     if(r::kFieldNonPlayer.is(object)) {
         // NPC labels use the same prefix parser/translation as pathfinding.

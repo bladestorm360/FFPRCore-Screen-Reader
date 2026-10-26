@@ -17,6 +17,7 @@
 #include <memory>
 #include "menus.h"
 #include "menus_internal.h"
+#include "../ui/character_row.h"
 #include "../core.h"
 #include "../dedup.h"
 #include "../frame.h"
@@ -273,11 +274,11 @@ void d_WindowSetActive(void* self, bool is_active, const void* mi)
 // --- MagicTargetPatches: AbilityUseContentListController -----------------------------------
 
 /// MagicTargetPatches.AnnounceTargetCharacter: "Name: HP: a / b status, status (X of Y)".
-void announce_target_character(void* content, int index, int count)
+void announce_target_character(void* content, int index, int count, void* cursor)
 {
     auto announcement = displayed::target(content);
     if (announcement.empty()) return;
-    ffpr::say(ui::menu_position(announcement, index, count), true);
+    ui::character_row::announce(content, cursor, ui::menu_position(announcement, index, count));
 }
 
 using UseSetCursor_t = void (*)(void* self, void* cursor, const void* mi);
@@ -287,6 +288,7 @@ void d_UseSetCursor(void* self, void* cursor, const void* mi)
 {
     o_UseSetCursor(self, cursor, mi);
     hooks::guarded("AbilityUseContentListController.SetCursor", [&] {
+        if(queries::is("FieldMagicTargets.OwnsRange"))return;
         if (!self || !cursor) return;
         if (!kFF1AbilityUseContentListController.is(self) || !unity::active_in_hierarchy(self)) return;
 
@@ -303,7 +305,7 @@ void d_UseSetCursor(void* self, void* cursor, const void* mi)
         if (!content) return;
         void* character = ref::rd<void*>(content, fFF1MagicTargetCurrentData);
         if (!character) return;
-        announce_target_character(content, index, count);
+        announce_target_character(content, index, count, cursor);
     });
 }
 

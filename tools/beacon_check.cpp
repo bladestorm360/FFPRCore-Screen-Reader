@@ -15,7 +15,7 @@ field::baked::Submap submap{};
 ffpr::fieldnav::nav_target::Kind kind=ffpr::fieldnav::nav_target::Kind::Entity;
 ffpr::fieldnav::waypoints::EntityPtr waypoint;
 bool ready=true,focus=true,field=true,suppress=false,dialogue=false,fading=false;
-bool map_available=true,route_found=true,arrived=false;
+bool map_available=true,route_found=true,arrived=false,route_pending=false;
 int pings=0,follow=0,across=0,quick=0,map_reads=0;float pan=0,volume=0;bool south=false,low=false;
 int planned_entity=-1;
 double at=10;
@@ -61,8 +61,8 @@ PathInfo find_path_to_quick(unity::Vec3,unity::Vec3,void*,void*,TargetKind,bool)
 namespace field::baked {const Submap* submap_by_map_id(int){return &fixture::submap;} }
 namespace field::baked_nav {
 bool available(void*){return fixture::map_available;}
-bool follow(void*,void*,unity::Vec3,TargetKind,Corner& out,int entity){++fixture::follow;fixture::planned_entity=entity;out.point=fixture::corner;out.arrived=fixture::arrived;return fixture::route_found;}
-bool follow_goal(void*,void*,const MapGoal& goal,TargetKind,Corner& out){++fixture::across;fixture::planned_entity=goal.entity_id;out.point=fixture::corner;out.arrived=fixture::arrived;return fixture::route_found;}
+bool follow(void*,void*,unity::Vec3,TargetKind,Corner& out,int entity,int){++fixture::follow;fixture::planned_entity=entity;out.point=fixture::corner;out.arrived=fixture::arrived;out.pending=fixture::route_pending;return fixture::route_found;}
+bool follow_goal(void*,void*,const MapGoal& goal,TargetKind,Corner& out){++fixture::across;fixture::planned_entity=goal.entity_id;out.point=fixture::corner;out.arrived=fixture::arrived;out.pending=fixture::route_pending;return fixture::route_found;}
 }
 namespace ffpr::fieldnav {
 float distance(unity::Vec3 a,unity::Vec3 b){return std::sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)+(a.z-b.z)*(a.z-b.z));}
@@ -74,7 +74,7 @@ namespace landing_spots {bool riding_watercraft(){return false;}void nearby(void
 namespace sound {
 bool wall_tone_playing(){return false;}void stop_wall_tone(){}
 void play_wall_tones_looped(const std::vector<Direction>&){}void play_landing_ping(float,float,int){}
-void play_beacon(bool south,float pan,float volume,bool low){++fixture::pings;fixture::south=south;fixture::pan=pan;fixture::volume=volume;fixture::low=low;}
+void play_beacon(float east,float north,float volume,bool low){++fixture::pings;fixture::south=north<0;fixture::pan=std::clamp(east/100.f,-1.f,1.f);fixture::volume=volume;fixture::low=low;}
 }
 int main(){
     using namespace ffpr::fieldnav::audio_loops;
@@ -88,6 +88,20 @@ int main(){
     const float corner_volume=fixture::volume;
     fixture::reset();fixture::route_found=false;beacon_iteration(10.5);
     expect(fixture::pings==1&&fixture::follow==1&&fixture::low,"route mode preserves its blocked-route lower ping");
+    fixture::route_found=true;
+    for(int hrtf=0;hrtf<2;++hrtf){
+        fixture::values["HRTF"]=hrtf;
+        for(int step=0;step<80;++step){
+            fixture::player={float(step*16),0,0};fixture::corner={float(step*16),80,0};
+            fixture::reset();beacon_iteration(20+step*2+hrtf*200);
+            expect(fixture::pings==1&&!fixture::low,"continuous movement retains ordinary beacon cadence in both audio modes");
+        }
+        fixture::route_found=false;fixture::route_pending=true;
+        fixture::player.x+=16;fixture::reset();beacon_iteration(400+hrtf*2);
+        expect(fixture::pings==1&&!fixture::low,"pending replan continues the known corner rather than silence/blocked pitch");
+        fixture::route_pending=false;fixture::route_found=true;
+    }
+    fixture::player={};fixture::corner={0,80,0};fixture::values["HRTF"]=1;
     actions::run("Mod.ToggleBeaconMode");
     expect(ui::prefs::beacon_mode()==1&&fixture::values["AudioBeacons"]==1&&fixture::values["Soundscape"]==1&&fixture::values["HRTF"]==1,
         "mode action persists Object and preserves beacon enable/soundscape/HRTF settings");

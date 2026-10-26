@@ -73,6 +73,9 @@ int main() {
                 Cell start;
                 field::baked_route::Request movement;movement.submap=room;
                 for(const auto& object:grid.objects) if(object.type==field::baked::ObjType::Warp && object.a==-1) {
+                    // Probe this explicit graph leg, rather than permitting an
+                    // unselected warp as an ordinary intermediate walking cell.
+                    movement.goals={{object.layer,object.tx,object.ty}};
                     for(const auto& side:std::vector<Cell>{{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}}) {
                         Cell candidate{object.layer,object.tx+side.x,object.ty+side.y};
                         if(field::baked_route::open(movement,grid,candidate) && !field::baked_route::trap_cell(movement,grid,candidate) &&

@@ -1,46 +1,339 @@
 {
   "_comment": "Titles for maps the game's map master leaves untitled (map.txt map_title None, floor 0), by map id; resolved by src/core/field/map_names.cpp override_title: a string is a game message key; {\"text\": mod text key}; {\"owner\": baked NPC name} = N's House; {\"room\": baked NPC name} = N's Room; {\"entity\": baked object name} = that object's translated name; {\"item\": item message} = I Room; a list joins its parts. Labels inferred from the baked contents under the user's rules of 2026-10-11 (a named NPC's house, a generic NPC's House, else the defining event or point, else nothing); castle, airship, dungeon and cutscene rooms stay unlabelled. Evidence per entry: docs/MAP_LABELS.md.",
-  "10": {"text": "Back Room"},
-  "14": {"owner": "NP村長"},
-  "15": {"text": "House"},
-  "16": {"text": "House"},
-  "17": {"owner": "ジュン"},
-  "25": {"text": "Bedroom"},
-  "34": {"text": "Throne Room"},
-  "46": {"text": "Bedroom"},
-  "56": {"text": "House"},
-  "60": {"text": "House"},
-  "61": {"text": "House"},
-  "63": {"text": "House"},
-  "65": {"text": "House"},
-  "83": {"text": "Throne Room"},
-  "88": {"text": "House"},
-  "89": {"text": "House"},
-  "90": {"text": "House"},
-  "96": {"text": "House"},
-  "100": {"owner": "レイチェル"},
-  "102": {"text": "House"},
-  "142": {"owner": "ローラ"},
-  "145": {"text": "House"},
-  "151": {"text": "House"},
-  "185": {"owner": "ストラゴス"},
-  "186": {"room": "リルム"},
-  "187": {"text": "House"},
-  "191": {"owner": "シド"},
-  "210": {"owner": "ディーン"},
-  "212": {"owner": "ティナ"},
-  "225": {"text": "House"},
-  "227": {"text": "House"},
-  "237": {"text": "House"},
-  "242": {"text": "House"},
-  "244": {"text": "House"},
-  "251": {"text": "Bedroom"},
-  "267": {"text": "House"},
-  "278": {"owner": "ローラ"},
-  "310": {"owner": "ストラゴス"},
-  "311": {"room": "リルム"},
-  "312": {"text": "House"},
-  "329": {"entity": "回復の泉"},
-  "352": {"entity": "回復の泉"},
-  "611": "MSG_MAP_NAME_40"
+  "10": {
+    "text": "Back Room"
+  },
+  "14": {
+    "owner": "NP村長"
+  },
+  "15": {
+    "text": "House"
+  },
+  "16": {
+    "text": "House"
+  },
+  "17": {
+    "owner": "ジュン"
+  },
+  "25": {
+    "text": "Bedroom"
+  },
+  "34": {
+    "text": "Throne Room"
+  },
+  "46": {
+    "text": "Bedroom"
+  },
+  "56": {
+    "text": "House"
+  },
+  "60": {
+    "text": "House"
+  },
+  "61": {
+    "text": "House"
+  },
+  "63": {
+    "text": "House"
+  },
+  "65": {
+    "text": "House"
+  },
+  "83": {
+    "text": "Throne Room"
+  },
+  "88": {
+    "text": "House"
+  },
+  "89": {
+    "text": "House"
+  },
+  "90": {
+    "text": "House"
+  },
+  "96": {
+    "text": "House"
+  },
+  "100": {
+    "owner": "レイチェル"
+  },
+  "102": {
+    "text": "House"
+  },
+  "142": {
+    "owner": "ローラ"
+  },
+  "145": {
+    "text": "House"
+  },
+  "151": {
+    "text": "House"
+  },
+  "185": {
+    "owner": "ストラゴス"
+  },
+  "186": {
+    "room": "リルム"
+  },
+  "187": {
+    "text": "House"
+  },
+  "191": {
+    "owner": "シド"
+  },
+  "210": {
+    "owner": "ディーン"
+  },
+  "212": {
+    "owner": "ティナ"
+  },
+  "225": {
+    "text": "House"
+  },
+  "227": {
+    "text": "House"
+  },
+  "237": {
+    "text": "House"
+  },
+  "242": {
+    "text": "House"
+  },
+  "244": {
+    "text": "House"
+  },
+  "251": {
+    "text": "Bedroom"
+  },
+  "267": {
+    "text": "House"
+  },
+  "278": {
+    "owner": "ローラ"
+  },
+  "310": {
+    "owner": "ストラゴス"
+  },
+  "311": {
+    "room": "リルム"
+  },
+  "312": {
+    "text": "House"
+  },
+  "329": {
+    "entity": "回復の泉"
+  },
+  "352": {
+    "entity": "回復の泉"
+  },
+  "611": "MSG_MAP_NAME_40",
+  "@entryFloors": {
+    "22": "MSG_ARA_NAME_13",
+    "25": "MSG_ARA_NAME_14",
+    "26": "MSG_ARA_NAME_13",
+    "27": "MSG_ARA_NAME_14",
+    "28": "MSG_ARA_NAME_14",
+    "29": "MSG_ARA_NAME_13",
+    "30": "MSG_ARA_NAME_14",
+    "31": "MSG_ARA_NAME_14",
+    "34": "MSG_ARA_NAME_14",
+    "35": "MSG_ARA_NAME_15",
+    "76": "MSG_ARA_NAME_13",
+    "77": "MSG_ARA_NAME_13",
+    "78": "MSG_ARA_NAME_13",
+    "79": "MSG_ARA_NAME_13",
+    "80": "MSG_ARA_NAME_14",
+    "81": "MSG_ARA_NAME_14",
+    "82": "MSG_ARA_NAME_15",
+    "83": "MSG_ARA_NAME_14",
+    "166": "MSG_ARA_NAME_13",
+    "167": "MSG_ARA_NAME_13",
+    "168": "MSG_ARA_NAME_14",
+    "169": "MSG_ARA_NAME_14",
+    "170": "MSG_ARA_NAME_15",
+    "171": "MSG_ARA_NAME_13",
+    "172": "MSG_ARA_NAME_14",
+    "173": "MSG_ARA_NAME_14",
+    "174": "MSG_ARA_NAME_14",
+    "175": "MSG_ARA_NAME_15",
+    "176": "MSG_ARA_NAME_15",
+    "178": "MSG_ARA_NAME_16",
+    "179": "MSG_ARA_NAME_17",
+    "248": "MSG_ARA_NAME_13",
+    "251": "MSG_ARA_NAME_14",
+    "252": "MSG_ARA_NAME_13",
+    "253": "MSG_ARA_NAME_14",
+    "254": "MSG_ARA_NAME_14",
+    "255": "MSG_ARA_NAME_13",
+    "256": "MSG_ARA_NAME_14",
+    "257": "MSG_ARA_NAME_14",
+    "260": "MSG_ARA_NAME_14",
+    "261": "MSG_ARA_NAME_15",
+    "290": "MSG_ARA_NAME_13",
+    "291": "MSG_ARA_NAME_14",
+    "292": "MSG_ARA_NAME_14",
+    "293": "MSG_ARA_NAME_14",
+    "294": "MSG_ARA_NAME_14",
+    "295": "MSG_ARA_NAME_15",
+    "297": "MSG_ARA_NAME_13",
+    "298": "MSG_ARA_NAME_13",
+    "299": "MSG_ARA_NAME_13",
+    "300": "MSG_ARA_NAME_13",
+    "301": "MSG_ARA_NAME_14",
+    "302": "MSG_ARA_NAME_14",
+    "303": "MSG_ARA_NAME_15",
+    "304": "MSG_ARA_NAME_14",
+    "317": "MSG_ARA_NAME_15",
+    "318": "MSG_ARA_NAME_14",
+    "319": "MSG_ARA_NAME_14",
+    "320": "MSG_ARA_NAME_15",
+    "321": "MSG_ARA_NAME_14",
+    "322": "MSG_ARA_NAME_13",
+    "323": "MSG_ARA_NAME_13",
+    "324": "MSG_ARA_NAME_13",
+    "325": "MSG_ARA_NAME_13",
+    "326": "MSG_ARA_NAME_14",
+    "327": "MSG_ARA_NAME_15",
+    "329": "MSG_ARA_NAME_13",
+    "330": "MSG_ARA_NAME_13",
+    "331": "MSG_ARA_NAME_14",
+    "332": "MSG_ARA_NAME_14",
+    "333": "MSG_ARA_NAME_13",
+    "335": "MSG_ARA_NAME_13",
+    "336": "MSG_ARA_NAME_14",
+    "337": "MSG_ARA_NAME_14",
+    "338": "MSG_ARA_NAME_15",
+    "339": "MSG_ARA_NAME_14",
+    "340": "MSG_ARA_NAME_15",
+    "341": "MSG_ARA_NAME_13",
+    "374": "MSG_ARA_NAME_13",
+    "379": "MSG_ARA_NAME_13",
+    "380": "MSG_ARA_NAME_13",
+    "381": "MSG_ARA_NAME_14",
+    "382": "MSG_ARA_NAME_13",
+    "391": "MSG_ARA_NAME_18",
+    "396": "MSG_ARA_NAME_13",
+    "397": "MSG_ARA_NAME_08",
+    "398": "MSG_ARA_NAME_09",
+    "399": "MSG_ARA_NAME_09",
+    "400": "MSG_ARA_NAME_09",
+    "404": "MSG_ARA_NAME_08",
+    "405": "MSG_ARA_NAME_13",
+    "409": "MSG_ARA_NAME_10",
+    "410": "MSG_ARA_NAME_10",
+    "411": "MSG_ARA_NAME_11",
+    "422": "MSG_ARA_NAME_13",
+    "424": "MSG_ARA_NAME_14",
+    "425": "MSG_ARA_NAME_14",
+    "426": "MSG_ARA_NAME_15",
+    "430": "MSG_ARA_NAME_14",
+    "433": "MSG_ARA_NAME_13",
+    "434": "MSG_ARA_NAME_08",
+    "436": "MSG_ARA_NAME_10",
+    "438": "MSG_ARA_NAME_10",
+    "439": "MSG_ARA_NAME_09",
+    "441": "MSG_ARA_NAME_10",
+    "442": "MSG_ARA_NAME_13",
+    "443": "MSG_ARA_NAME_13",
+    "444": "MSG_ARA_NAME_08",
+    "445": "MSG_ARA_NAME_08",
+    "446": "MSG_ARA_NAME_08",
+    "448": "MSG_ARA_NAME_13",
+    "449": "MSG_ARA_NAME_13",
+    "450": "MSG_ARA_NAME_14",
+    "451": "MSG_ARA_NAME_14",
+    "452": "MSG_ARA_NAME_13",
+    "453": "MSG_ARA_NAME_13",
+    "454": "MSG_ARA_NAME_13",
+    "468": "MSG_ARA_NAME_09",
+    "470": "MSG_ARA_NAME_13",
+    "472": "MSG_ARA_NAME_14",
+    "474": "MSG_ARA_NAME_13",
+    "478": "MSG_ARA_NAME_20",
+    "479": "MSG_ARA_NAME_19",
+    "481": "MSG_ARA_NAME_30",
+    "483": "MSG_ARA_NAME_31",
+    "485": "MSG_ARA_NAME_33",
+    "487": "MSG_ARA_NAME_32",
+    "488": "MSG_ARA_NAME_13",
+    "490": "MSG_ARA_NAME_08",
+    "491": "MSG_ARA_NAME_09",
+    "492": "MSG_ARA_NAME_08",
+    "493": "MSG_ARA_NAME_08",
+    "494": "MSG_ARA_NAME_09",
+    "495": "MSG_ARA_NAME_08",
+    "496": "MSG_ARA_NAME_09",
+    "498": "MSG_ARA_NAME_08",
+    "499": "MSG_ARA_NAME_09",
+    "500": "MSG_ARA_NAME_08",
+    "501": "MSG_ARA_NAME_09",
+    "502": "MSG_ARA_NAME_10",
+    "503": "MSG_ARA_NAME_10",
+    "504": "MSG_ARA_NAME_10",
+    "505": "MSG_ARA_NAME_10",
+    "506": "MSG_ARA_NAME_10",
+    "507": "MSG_ARA_NAME_10",
+    "508": "MSG_ARA_NAME_08",
+    "509": "MSG_ARA_NAME_08",
+    "510": "MSG_ARA_NAME_08",
+    "511": "MSG_ARA_NAME_09",
+    "513": "MSG_ARA_NAME_13",
+    "514": "MSG_ARA_NAME_13",
+    "515": "MSG_ARA_NAME_13",
+    "516": "MSG_ARA_NAME_13",
+    "517": "MSG_ARA_NAME_13",
+    "518": "MSG_ARA_NAME_13",
+    "519": "MSG_ARA_NAME_08",
+    "530": "MSG_ARA_NAME_13",
+    "531": "MSG_ARA_NAME_13",
+    "532": "MSG_ARA_NAME_13",
+    "533": "MSG_ARA_NAME_13",
+    "535": "MSG_ARA_NAME_15",
+    "536": "MSG_ARA_NAME_14",
+    "537": "MSG_ARA_NAME_14",
+    "538": "MSG_ARA_NAME_14",
+    "539": "MSG_ARA_NAME_08",
+    "540": "MSG_ARA_NAME_09",
+    "541": "MSG_ARA_NAME_10",
+    "543": "MSG_ARA_NAME_14",
+    "546": "MSG_ARA_NAME_08",
+    "547": "MSG_ARA_NAME_13",
+    "548": "MSG_ARA_NAME_13",
+    "550": "MSG_ARA_NAME_14",
+    "551": "MSG_ARA_NAME_13",
+    "552": "MSG_ARA_NAME_13",
+    "553": "MSG_ARA_NAME_14",
+    "554": "MSG_ARA_NAME_14",
+    "555": "MSG_ARA_NAME_14",
+    "556": "MSG_ARA_NAME_14",
+    "557": "MSG_ARA_NAME_14",
+    "558": "MSG_ARA_NAME_13",
+    "559": "MSG_ARA_NAME_15",
+    "560": "MSG_ARA_NAME_08",
+    "561": "MSG_ARA_NAME_14",
+    "562": "MSG_ARA_NAME_08",
+    "563": "MSG_ARA_NAME_13",
+    "564": "MSG_ARA_NAME_17",
+    "566": "MSG_ARA_NAME_16",
+    "567": "MSG_ARA_NAME_16",
+    "568": "MSG_ARA_NAME_16",
+    "569": "MSG_ARA_NAME_18",
+    "570": "MSG_ARA_NAME_17",
+    "577": "MSG_ARA_NAME_09",
+    "591": "MSG_ARA_NAME_14",
+    "626": "MSG_ARA_NAME_13",
+    "627": "MSG_ARA_NAME_13",
+    "628": "MSG_ARA_NAME_14",
+    "629": "MSG_ARA_NAME_14",
+    "630": "MSG_ARA_NAME_13",
+    "632": "MSG_ARA_NAME_13",
+    "633": "MSG_ARA_NAME_13",
+    "634": "MSG_ARA_NAME_13",
+    "635": "MSG_ARA_NAME_14",
+    "636": "MSG_ARA_NAME_15",
+    "637": "MSG_ARA_NAME_15",
+    "638": "MSG_ARA_NAME_13",
+    "639": "MSG_ARA_NAME_14",
+    "643": "MSG_ARA_NAME_13"
+  }
 }

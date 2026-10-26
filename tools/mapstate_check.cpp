@@ -16,6 +16,15 @@ std::string read(const std::string& path)
 }
 int main()
 {
+    {
+        json::Value sample;map_state::Flags unknown;
+        expect(json::parse(R"({"code":[[2,10,0,0,-1,1,3],[1,"optional"],[3,4],[0],[1,"guaranteed"],[6]]})",sample),"partial-state fixture parses");
+        auto projected=map_state::project(sample,unknown);
+        expect(!projected.known&&projected.groups==std::set<std::wstring>{L"guaranteed"},"unknown local keeps only groups activated on every complete branch");
+        expect(json::parse(R"({"code":[[1,"earlier"],[9],[6]]})",sample),"unsupported fixture parses");
+        projected=map_state::project(sample,unknown);
+        expect(!projected.known&&projected.groups.empty(),"unsupported instructions or incomplete exploration certify no partial facts");
+    }
     for (int n = 1; n <= 6; ++n) {
         const std::string root = "data/ff" + std::to_string(n) + "/";
         const std::string bytes = read(root + "maps.bin");
@@ -56,6 +65,51 @@ int main()
         for (auto& v : flags.treasure) v = 0;
         for (auto& v : flags.global) v = 0;
         map_state::Resolver resolver(flags, records);
+        if(n==3) {
+            const auto* world=baked::submap_by_map_id(1);const auto& grid=baked::grids(*world);
+            const baked::Object* tunnel=nullptr;for(const auto& o:grid.objects)if(o.type==baked::ObjType::Event&&o.entity_id()==2367)tunnel=&o;
+            expect(tunnel!=nullptr,"reported Tozus tunnel trigger has its exact real world identity");
+            if(tunnel)for(int state:{-1,0,1}){
+                auto form=flags;if(state>=0)form.party_mini=state;
+                map_state::Resolver current(form,records);
+                expect(current.consumed(*world,*tunnel)==(state==0),"Tozus event is inactive only when all-member Mini is known false; unknown remains conservative");
+            }
+            auto post=flags;post.scenario[16]=1;
+            for(int id:{23,24,25,26,27,35}) {
+                const auto* floor=baked::submap_by_map_id(id);const auto* row=records.get(baked::name_of(*floor));
+                const auto selection=map_state::project(*row,post);
+                expect(selection.groups.count(L"ev_e_0017")!=0,"Sasune post-curse NPC group survives its visual mist call and unrelated unknown companion branch");
+            }
+            const auto* mine=baked::submap_by_map_id(159);
+            expect(mine!=nullptr,"Mythril Mines native floor is baked");
+            if(mine) {
+                const baked::Object* wall=nullptr;const baked::Object* lever=nullptr;
+                for(const auto& o:baked::grids(*mine).objects) {
+                    if(o.type==baked::ObjType::Entity&&o.entity_id()==10)wall=&o;
+                    if(o.type==baked::ObjType::Entity&&o.entity_id()==8)lever=&o;
+                }
+                expect(wall&&lever,"Mythril wall and switch retain distinct native identities");
+                if(wall&&lever) {
+                    for(int phase=0;phase<3;++phase) {
+                        auto state=flags;state.scenario[16]=phase>=1;state.scenario[180]=phase==2;
+                        map_state::Resolver mine_state(state,records);
+                        expect(mine_state.active(*mine,*wall)==(phase<2),"mine wall persists until its own switch flag");
+                        expect(mine_state.active(*mine,*lever)==(phase==1),"mine switch only exists in the native enabled story phase");
+                        baked_route::Request path;path.submap=mine;path.start={1,10,20};path.goals={{1,10,7}};
+                        map_state::add_obstacles(mine_state,*mine,path);
+                        expect(baked_route::find(path).found==(phase==2),"B2 stays gated until the actual wall is removed");
+                        if(phase<2) {
+                            auto ungated=path;ungated.blocked.clear();
+                            expect(baked_route::find(ungated).found,"only the mine wall closes the baked B2 route");
+                        }
+                        if(phase==1) {
+                            path.goals=baked_route::goals_for(path,{lever->layer,lever->tx,lever->ty},baked_route::GoalKind::Interact).cells;
+                            expect(baked_route::find(path).found,"enabled mine switch is reachable before opening B2");
+                        }
+                    }
+                }
+            }
+        }
         if(n==6) {
             auto state=flags;state.scenario[13]=1;
             const auto defense=map_state::project(*records.get(L"Map_30011_2"),state);
@@ -89,7 +143,7 @@ int main()
             state.current_area_id+=1000;
             expect(!map_state::project(cave,state).known,"another area's local variables cannot certify Phoenix Cave state");
         }
-        int known = 0, unknown = 0, solid = 0, known_chests = 0, unknown_chests = 0;
+        int known = 0, unknown = 0, solid = 0, known_chests = 0, unknown_chests = 0, zero_chests = 0;
         for (int i = 0; i < baked::submap_count(); ++i) {
             const auto& sm = *baked::submap_at(i);
             resolver.known(sm) ? ++known : ++unknown;
@@ -110,6 +164,7 @@ int main()
                             if (r.size() < 3 || static_cast<int>(r[0].n) != o.entity_id() || r[1].s != baked::str(o.group)) continue;
                             const int bit = static_cast<int>(r[2].n);
                             if (bit < 0 || bit >= 1024) continue;
+                            if(bit==0)++zero_chests;
                             auto changed = flags; changed.treasure[static_cast<size_t>(bit)] = 1;
                             map_state::Resolver collected(changed, records);
                             expect(collected.treasure_opened(sm, o) == std::optional<bool>(true),
@@ -149,6 +204,8 @@ int main()
             }
         }
         expect(known_chests > 0, "each game has verified saved chest flags");
+        expect(unknown_chests==0,"every extracted real treasure flag, including zero, has a cross-floor mapping");
+        expect(zero_chests==(n==2?0:n==5?4:1),"all eight real flag-zero chest objects retain unopened/opened/unknown-bit tests across all six games");
         std::printf("FF%d: %d saved chest mappings verified; %d unmapped chests remain unknown\n", n, known_chests, unknown_chests);
         std::printf("FF%d: %d known, %d conservative maps; %d solid NPC checks; all grids decoded %.1f ms offline\n",
                     n, known, unknown, solid, decode_ms);

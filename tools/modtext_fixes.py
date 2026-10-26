@@ -799,3 +799,9 @@ ADDITIONS = [
 # Current follow-up catalog is kept together with its translation/placeholder checks.
 from modtext_oct22 import extend as extend_oct22
 extend_oct22(ADDITIONS)
+
+from modtext_oct24 import extend as extend_oct24
+extend_oct24(ADDITIONS)
+
+from modtext_stat_feedback import extend as extend_stat_feedback
+extend_stat_feedback(ADDITIONS)

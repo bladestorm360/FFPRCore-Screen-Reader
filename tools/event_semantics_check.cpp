@@ -31,6 +31,22 @@ int main() {
         }
         const auto bytes=read("data/"+game+"/maps.bin");
         expect(field::baked::load(bytes.data(),bytes.size()),"matching bake loads");
+        if(n==2) {
+            json::Value reviews;expect(json::parse(read("tools/event_warp_reviews.json"),reviews),"reviewed warp locators parse");
+            for(const auto& row:reviews.arr) {
+                const auto* map=field::baked::submap_by_name(row.get(L"submap")->s);
+                expect(map!=nullptr,"reviewed pad has an actual baked submap");if(!map)continue;
+                const auto& objects=field::baked::grids(*map).objects;bool native=false,arc=false;
+                for(const auto& object:objects) {
+                    if(object.entity_id()!=int(row.get(L"entity_id")->n)||field::baked::object_identifier(object)!=row.get(L"raw")->s||
+                       field::baked::str(object.group)!=row.get(L"group")->s)continue;
+                    native|=object.type==field::baked::ObjType::Event;
+                    if(object.type==field::baked::ObjType::Warp&&object.a==int(row.get(L"destination_map")->n)&&object.b==int(row.get(L"destination_point")->n))
+                        arc|=(object.d&255)==1&&!field::baked::is_trap(object)&&!field::baked::world_exit(object);
+                }
+                expect(native&&arc,"renamed pad retains its real step-on warp arc, destination, activation and non-trap classification");
+            }
+        }
         int transitions=0,traps=0;
         for(int i=0;i<field::baked::submap_count();++i)for(const auto& object:field::baked::grids(*field::baked::submap_at(i)).objects) {
             if(object.type!=field::baked::ObjType::Warp)continue;

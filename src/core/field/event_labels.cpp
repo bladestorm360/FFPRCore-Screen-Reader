@@ -3,11 +3,18 @@
 #include "../modtext.h"
 
 namespace field {
+bool event_route_only(const std::wstring& raw) {
+    const auto* identity=data::game_json("eventlabels").get(raw);
+    return identity && identity->is_string() && (identity->s==L"World map transition" || identity->s==L"@route-only");
+}
 namespace {
 ref::Class kDefaultProperty{"Last.Map","PropertyDefaultEntity"};
 ref::Field fAsset{kDefaultProperty,"<AssetId>k__BackingField"};
 std::wstring label_text(const std::wstring& label)
 {
+    // This reviewed metadata is pruned by both navigation producers. Keep a
+    // safe generic fallback for callers that format before the baked filter.
+    if (label == L"@route-only") return T(L"Event trigger");
     // Exact reviewed actor names reuse the game-specific entity catalog. This
     // payload is a proper name, never a script description or future outcome.
     constexpr std::wstring_view prefix = L"@name:";

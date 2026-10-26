@@ -1,31 +1,245 @@
 {
   "_comment": "Titles for maps the game's map master leaves untitled (map.txt map_title None, floor 0), by map id; resolved by src/core/field/map_names.cpp override_title. A string is a message key of the game's own text. An object is a label inferred from the map's baked contents under the user's rules of 2026-10-11 (a named NPC's house, a generic NPC's House, else the event or key item the room holds, else nothing): {\"text\": mod text key}, {\"owner\": baked NPC name} = N's House, {\"room\": baked NPC name} = N's Room, {\"item\": item message} = I Room; a list joins its parts. Evidence per entry is in docs/MAP_LABELS.md. FF2's late-game Altair rebel hideout rooms (map_20131_6 to _10) carry no title, so the mod said plain 'Altair' there (user, 2026-10-10); MSG_MAP_NAME_11 = 'Rebel Hideout', the early rooms' title.",
-  "4": {"text": "Church"},
-  "7": ["MSG_MAP_NAME_11", {"text": "Tutorial Chamber"}],
-  "19": {"text": "Church"},
-  "26": {"text": "Pub"},
-  "27": {"room": "スコット"},
-  "43": {"text": "Throne Room"},
-  "53": {"text": "Pub"},
-  "60": {"owner": "ヨーゼフ"},
-  "64": {"text": "Church"},
-  "69": {"text": "Church"},
-  "96": {"text": "Church"},
-  "97": {"text": "House"},
-  "98": {"owner": "仮面　色変え1"},
-  "116": {"text": "Pub"},
-  "138": {"item": "MSG_KEY_NAME_03"},
-  "169": {"text": "Prison"},
-  "175": {"text": "Engine Room"},
-  "179": {"text": "House"},
-  "180": {"room": "飛竜"},
-  "229": {"room": "リチャード"},
-  "230": {"room": "ビックホーン"},
+  "4": {
+    "text": "Church"
+  },
+  "7": [
+    "MSG_MAP_NAME_11",
+    {
+      "text": "Tutorial Chamber"
+    }
+  ],
+  "19": {
+    "text": "Church"
+  },
+  "26": {
+    "text": "Pub"
+  },
+  "27": {
+    "room": "スコット"
+  },
+  "43": {
+    "text": "Throne Room"
+  },
+  "53": {
+    "text": "Pub"
+  },
+  "60": {
+    "owner": "ヨーゼフ"
+  },
+  "64": {
+    "text": "Church"
+  },
+  "69": {
+    "text": "Church"
+  },
+  "96": {
+    "text": "Church"
+  },
+  "97": {
+    "text": "House"
+  },
+  "98": {
+    "text": "Statue Room"
+  },
+  "116": {
+    "text": "Pub"
+  },
+  "138": {
+    "item": "MSG_KEY_NAME_03"
+  },
+  "169": {
+    "text": "Prison"
+  },
+  "175": {
+    "text": "Engine Room"
+  },
+  "179": {
+    "text": "House"
+  },
+  "180": {
+    "room": "飛竜"
+  },
+  "229": {
+    "room": "リチャード"
+  },
+  "230": {
+    "room": "ラウンドウォーム"
+  },
   "325": "MSG_MAP_NAME_11",
   "326": "MSG_MAP_NAME_11",
-  "327": ["MSG_MAP_NAME_11", {"text": "Tutorial Chamber"}],
+  "327": [
+    "MSG_MAP_NAME_11",
+    {
+      "text": "Tutorial Chamber"
+    }
+  ],
   "328": "MSG_MAP_NAME_11",
   "329": "MSG_MAP_NAME_11",
-  "330": {"text": "Church"},
-  "331": {"text": "Church"}
+  "330": {
+    "text": "Church"
+  },
+  "331": {
+    "text": "Church"
+  },
+  "@entryFloors": {
+    "32": "MSGARA_NAME_02",
+    "38": "MSGARA_NAME_01",
+    "42": "MSGARA_NAME_03",
+    "43": "MSGARA_NAME_04",
+    "44": "MSGARA_NAME_04",
+    "45": "MSGARA_NAME_03",
+    "75": "MSGARA_NAME_15",
+    "76": "MSGARA_NAME_11",
+    "77": "MSGARA_NAME_12",
+    "78": "MSGARA_NAME_12",
+    "79": "MSGARA_NAME_13",
+    "80": "MSGARA_NAME_13",
+    "81": "MSGARA_NAME_13",
+    "82": "MSGARA_NAME_14",
+    "83": "MSGARA_NAME_14",
+    "84": "MSGARA_NAME_15",
+    "85": "MSGARA_NAME_15",
+    "86": "MSGARA_NAME_15",
+    "87": "MSGARA_NAME_15",
+    "88": "MSGARA_NAME_15",
+    "119": "MSGARA_NAME_11",
+    "120": "MSGARA_NAME_12",
+    "121": "MSGARA_NAME_12",
+    "122": "MSGARA_NAME_13",
+    "123": "MSGARA_NAME_13",
+    "124": "MSGARA_NAME_13",
+    "125": "MSGARA_NAME_14",
+    "126": "MSGARA_NAME_15",
+    "127": "MSGARA_NAME_15",
+    "129": "MSGARA_NAME_12",
+    "130": "MSGARA_NAME_12",
+    "132": "MSGARA_NAME_13",
+    "135": "MSGARA_NAME_15",
+    "138": "MSGARA_NAME_01",
+    "140": "MSGARA_NAME_15",
+    "142": "MSGARA_NAME_12",
+    "148": "MSGARA_NAME_14",
+    "150": "MSGARA_NAME_04",
+    "151": "MSGARA_NAME_04",
+    "152": "MSGARA_NAME_04",
+    "153": "MSGARA_NAME_04",
+    "154": "MSGARA_NAME_05",
+    "155": "MSGARA_NAME_05",
+    "157": "MSGARA_NAME_01",
+    "161": "MSGARA_NAME_04",
+    "163": "MSGARA_NAME_05",
+    "164": "MSGARA_NAME_01",
+    "165": "MSGARA_NAME_01",
+    "166": "MSGARA_NAME_01",
+    "167": "MSGARA_NAME_01",
+    "168": "MSGARA_NAME_01",
+    "169": "MSGARA_NAME_02",
+    "170": "MSGARA_NAME_03",
+    "171": "MSGARA_NAME_03",
+    "172": "MSGARA_NAME_04",
+    "173": "MSGARA_NAME_03",
+    "174": "MSGARA_NAME_05",
+    "175": "MSGARA_NAME_05",
+    "176": "MSGARA_NAME_01",
+    "177": "MSGARA_NAME_01",
+    "178": "MSGARA_NAME_01",
+    "179": "MSGARA_NAME_02",
+    "180": "MSGARA_NAME_02",
+    "181": "MSGARA_NAME_02",
+    "182": "MSGARA_NAME_01",
+    "188": "MSGARA_NAME_15",
+    "189": "MSGARA_NAME_15",
+    "190": "MSGARA_NAME_15",
+    "193": "MSGARA_NAME_12",
+    "194": "MSGARA_NAME_12",
+    "196": "MSGARA_NAME_12",
+    "197": "MSGARA_NAME_12",
+    "198": "MSGARA_NAME_12",
+    "199": "MSGARA_NAME_12",
+    "205": "MSGARA_NAME_15",
+    "206": "MSGARA_NAME_01",
+    "209": "MSGARA_NAME_15",
+    "210": "MSGARA_NAME_11",
+    "211": "MSGARA_NAME_11",
+    "212": "MSGARA_NAME_11",
+    "213": "MSGARA_NAME_12",
+    "214": "MSGARA_NAME_12",
+    "215": "MSGARA_NAME_12",
+    "216": "MSGARA_NAME_12",
+    "217": "MSGARA_NAME_13",
+    "218": "MSGARA_NAME_11",
+    "219": "MSGARA_NAME_14",
+    "220": "MSGARA_NAME_14",
+    "222": "MSGARA_NAME_12",
+    "224": "MSGARA_NAME_13",
+    "226": "MSGARA_NAME_14",
+    "227": "MSGARA_NAME_14",
+    "228": "MSGARA_NAME_01",
+    "229": "MSGARA_NAME_02",
+    "230": "MSGARA_NAME_03",
+    "233": "MSGARA_NAME_06",
+    "235": "MSGARA_NAME_07",
+    "237": "MSGARA_NAME_08",
+    "239": "MSGARA_NAME_09",
+    "241": "MSGARA_NAME_10",
+    "243": "MSGARA_NAME_02",
+    "244": "MSGARA_NAME_06",
+    "245": "MSGARA_NAME_08",
+    "246": "MSGARA_NAME_03",
+    "247": "MSGARA_NAME_03",
+    "248": "MSGARA_NAME_03",
+    "249": "MSGARA_NAME_06",
+    "250": "MSGARA_NAME_07",
+    "251": "MSGARA_NAME_07",
+    "252": "MSGARA_NAME_07",
+    "254": "MSGARA_NAME_08",
+    "255": "MSGARA_NAME_08",
+    "256": "MSGARA_NAME_08",
+    "257": "MSGARA_NAME_08",
+    "258": "MSGARA_NAME_09",
+    "259": "MSGARA_NAME_09",
+    "260": "MSGARA_NAME_09",
+    "261": "MSGARA_NAME_03",
+    "264": "MSGARA_NAME_05",
+    "266": "MSGARA_NAME_06",
+    "267": "MSGARA_NAME_06",
+    "273": "MSGARA_NAME_07",
+    "274": "MSGARA_NAME_06",
+    "275": "MSGARA_NAME_06",
+    "279": "MSGARA_NAME_01",
+    "280": "MSGARA_NAME_07",
+    "281": "MSGARA_NAME_07",
+    "286": "MSGARA_NAME_04",
+    "289": "MSGARA_NAME_14",
+    "291": "MSGARA_NAME_15",
+    "293": "MSGARA_NAME_11",
+    "294": "MSGARA_NAME_11",
+    "295": "MSGARA_NAME_12",
+    "296": "MSGARA_NAME_12",
+    "297": "MSGARA_NAME_12",
+    "298": "MSGARA_NAME_12",
+    "300": "MSGARA_NAME_13",
+    "301": "MSGARA_NAME_13",
+    "302": "MSGARA_NAME_13",
+    "303": "MSGARA_NAME_13",
+    "304": "MSGARA_NAME_13",
+    "305": "MSGARA_NAME_14",
+    "306": "MSGARA_NAME_15",
+    "307": "MSGARA_NAME_11",
+    "309": "MSGARA_NAME_12",
+    "311": "MSGARA_NAME_13",
+    "313": "MSGARA_NAME_14",
+    "314": "MSGARA_NAME_01",
+    "315": "MSGARA_NAME_09",
+    "316": "MSGARA_NAME_10",
+    "317": "MSGARA_NAME_02",
+    "318": "MSGARA_NAME_03",
+    "319": "MSGARA_NAME_04",
+    "320": "MSGARA_NAME_05",
+    "321": "MSGARA_NAME_05",
+    "322": "MSGARA_NAME_06",
+    "323": "MSGARA_NAME_07",
+    "324": "MSGARA_NAME_08"
+  }
 }

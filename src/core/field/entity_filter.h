@@ -21,6 +21,7 @@ struct FilterRow {
     bool cell_valid = false;
     int route_distance = -1;
     int entity_id = -1;
+    int transportation_id = 0; // native transport-model identity, independent of entity IDs
     // Owned bake identity, derived on the worker; never group translated labels.
     std::wstring event_group;
 };
@@ -38,6 +39,7 @@ struct FilterInput {
     bool world = false;
     int selected_entity_id = -1, continued_entity_id = -1;
     int selected_map = 0;
+    int selected_transportation_id = 0;
     std::wstring selected_raw,continued_raw;
     std::shared_ptr<baked_nav::ExitSnapshot> navigation;
     std::function<bool()> cancelled;
@@ -53,6 +55,11 @@ struct Filtered {
 Filtered build(FilterInput& input);
 // One worker pass prepares every category. Only view 0 owns names/exits; the
 // other views share those source rows and contain their own selection indices.
-struct Categories { std::array<Filtered, kCategoryCount> views; };
+struct Categories {
+    std::array<Filtered, kCategoryCount> views;
+    // Soundscape owns physical grouping independently from pathfinder toggles.
+    // Availability/story/terrain guards are shared; exit/event/pad grouping is not.
+    std::vector<size_t> audio_order;
+};
 Categories build_categories(FilterInput& input);
 }

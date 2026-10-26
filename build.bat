@@ -35,6 +35,20 @@ if not exist "out\hid.dll" (
     exit /b 1
 )
 
+echo Checking routes avoid unintended map transitions...
+"out\checks\vehicle_transition_check.exe" > build_check\vehicle_transition_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Vehicle transition route check FAILED - see build_check\vehicle_transition_report.txt
+    exit /b 1
+)
+
+echo Checking chocobo routing and Tower of Owen approaches...
+"out\checks\chocobo_owen_check.exe" > build_check\chocobo_owen_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Chocobo/Owen check FAILED - see build_check\chocobo_owen_report.txt
+    exit /b 1
+)
+
 echo Checking exports and imports...
 python tools\import_check.py out\hid.dll
 if not "%errorlevel%"=="0" exit /b 1
@@ -52,6 +66,26 @@ if not "%errorlevel%"=="0" (
 )
 
 echo Checking the baked-map router against FF2 and FF1 routes known from the dumps...
+"out\checks\cursor_handoff_check.exe" > build_check\cursor_handoff_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Cursor handoff check FAILED - see build_check\cursor_handoff_report.txt
+    exit /b 1
+)
+python tools\ur_locations_check.py > build_check\ur_locations_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Ur location check FAILED - see build_check\ur_locations_report.txt
+    exit /b 1
+)
+python tools\map_entry_floors.py > build_check\map_entry_floors_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native entrance floor audit FAILED - see build_check\map_entry_floors_report.txt
+    exit /b 1
+)
+"out\checks\map_names_check.exe" > build_check\map_names_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native floor resolver check FAILED - see build_check\map_names_report.txt
+    exit /b 1
+)
 "out\checks\map_exit_check.exe" > build_check\map_exit_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Map exit check FAILED - see build_check\map_exit_report.txt
@@ -65,6 +99,57 @@ if not "%errorlevel%"=="0" (
 "out\checks\route_worker_check.exe" > build_check\route_worker_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Route worker check FAILED - see build_check\route_worker_report.txt
+    exit /b 1
+)
+"out\checks\npc_geometry_check.exe" > build_check\npc_geometry_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo All-six NPC geometry audit FAILED - see build_check\npc_geometry_report.txt
+    exit /b 1
+)
+"out\checks\locked_door_check.exe" > build_check\locked_door_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Locked-door interaction check FAILED - see build_check\locked_door_report.txt
+    exit /b 1
+)
+"out\checks\warehouse_check.exe" > build_check\warehouse_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Warehouse accessibility check FAILED - see build_check\warehouse_report.txt
+    exit /b 1
+)
+"out\checks\remote_exit_check.exe" > build_check\remote_exit_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Remote return-exit check FAILED - see build_check\remote_exit_report.txt
+    exit /b 1
+)
+"out\checks\npc_floors_check.exe" > build_check\npc_floors_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Connected NPC floor check FAILED - see build_check\npc_floors_report.txt
+    exit /b 1
+)
+"out\checks\npc_gate_check.exe" > build_check\npc_gate_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo NPC and story-gate route check FAILED - see build_check\npc_gate_report.txt
+    exit /b 1
+)
+
+"out\checks\field_targets_check.exe" > build_check\field_targets_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Field magic range check FAILED - see build_check\field_targets_report.txt
+    exit /b 1
+)
+python tools\npc_patrol_check.py > build_check\npc_patrol_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo All-six NPC movement metadata check FAILED - see build_check\npc_patrol_report.txt
+    exit /b 1
+)
+"out\checks\event_item_select_check.exe" > build_check\event_item_select_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Event-item Autodetail check FAILED - see build_check\event_item_select_report.txt
+    exit /b 1
+)
+"out\checks\navigation_followup_check.exe" > build_check\navigation_followup_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Scripted exit, Ship and indoor graph check FAILED - see build_check\navigation_followup_report.txt
     exit /b 1
 )
 
@@ -247,9 +332,49 @@ if not "%errorlevel%"=="0" (
     echo Battle focus check FAILED - see build_check\battle_focus_report.txt
     exit /b 1
 )
+"out\checks\save_load_check.exe" > build_check\save_load_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Save path check FAILED - see build_check\save_load_report.txt
+    exit /b 1
+)
+python tools\save_paths_audit.py > build_check\save_paths_native_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo All-six native save path audit FAILED - see build_check\save_paths_native_report.txt
+    exit /b 1
+)
+"out\checks\command_bar_check.exe" > build_check\command_bar_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Command preload context check FAILED - see build_check\command_bar_report.txt
+    exit /b 1
+)
+"out\checks\job_menu_check.exe" > build_check\job_menu_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo FFIII job equipment detail check FAILED - see build_check\job_menu_report.txt
+    exit /b 1
+)
 "out\checks\party_esper_check.exe" > build_check\party_esper_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Party and Esper check FAILED - see build_check\party_esper_report.txt
+    exit /b 1
+)
+"out\checks\shop_party_check.exe" > build_check\shop_party_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Shop portrait comparison check FAILED - see build_check\shop_party_report.txt
+    exit /b 1
+)
+"out\checks\vehicle_landing_check.exe" > build_check\vehicle_landing_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Vehicle landing check FAILED - see build_check\vehicle_landing_report.txt
+    exit /b 1
+)
+"out\checks\startup_diagnostics_check.exe" > build_check\startup_diagnostics_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Startup diagnostics check FAILED - see build_check\startup_diagnostics_report.txt
+    exit /b 1
+)
+"out\checks\battle_feedback_check.exe" > build_check\battle_feedback_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Battle feedback check FAILED - see build_check\battle_feedback_report.txt
     exit /b 1
 )
 "out\checks\battle_results_check.exe" > build_check\battle_results_report.txt 2>&1
@@ -262,6 +387,21 @@ if not "%errorlevel%"=="0" (
     echo Native presentation cues check FAILED - see build_check\native_cues_report.txt
     exit /b 1
 )
+"out\checks\interception_check.exe" > build_check\interception_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Control interception check FAILED - see build_check\interception_report.txt
+    exit /b 1
+)
+"out\checks\map_panels_check.exe" > build_check\map_panels_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Map panels check FAILED - see build_check\map_panels_report.txt
+    exit /b 1
+)
+"out\checks\key_help_check.exe" > build_check\key_help_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Screen-owned controls check FAILED - see build_check\key_help_report.txt
+    exit /b 1
+)
 "out\checks\bestiary_check.exe" > build_check\bestiary_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Bestiary check FAILED - see build_check\bestiary_report.txt
@@ -272,6 +412,16 @@ if not "%errorlevel%"=="0" (
     echo Enemy status data check FAILED - see build_check\enemy_status_audit_report.txt
     exit /b 1
 )
+python tools\condition_labels_check.py > build_check\condition_labels_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Condition label audit FAILED - see build_check\condition_labels_report.txt
+    exit /b 1
+)
+python tools\oct24_navigation_check.py > build_check\oct24_navigation_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo October24 navigation catalog/data check FAILED - see build_check\oct24_navigation_report.txt
+    exit /b 1
+)
 python tools\oct22_catalog_check.py > build_check\oct22_catalog_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo October22 catalog check FAILED - see build_check\oct22_catalog_report.txt
@@ -280,6 +430,11 @@ if not "%errorlevel%"=="0" (
 python tools\event_identity_check.py > build_check\event_identity_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Object identity coverage check FAILED - see build_check\event_identity_report.txt
+    exit /b 1
+)
+python tools\event_warp_check.py > build_check\event_warp_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Reviewed warp label check FAILED - see build_check\event_warp_report.txt
     exit /b 1
 )
 "out\checks\prism_check.exe" > build_check\prism_report.txt 2>&1

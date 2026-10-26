@@ -1,27 +1,126 @@
 {
   "_comment": "Titles for maps the game's map master leaves untitled (map.txt map_title None, floor 0), by map id; resolved by src/core/field/map_names.cpp override_title: a string is a game message key; {\"text\": mod text key}; {\"owner\": baked NPC name} = N's House; {\"room\": baked NPC name} = N's Room; {\"entity\": baked object name} = that object's translated name; {\"item\": item message} = I Room; a list joins its parts. Labels inferred from the baked contents under the user's rules of 2026-10-11 (a named NPC's house, a generic NPC's House, else the defining event or point, else nothing). Evidence per entry: docs/MAP_LABELS.md. FF3's towns revive at an 'Resurrection' point (いきかえり / 生き返り), named with the game's own word for it.",
-  "11": {"entity": "sc_e_0209:回復の泉"},
-  "12": {"owner": "sc_e_0010:トパパ"},
-  "19": {"text": "House"},
-  "20": {"entity": "回復"},
-  "27": {"room": "サラ"},
-  "38": {"owner": "サリーナ（女性2）"},
-  "42": {"entity": "いきかえり"},
-  "43": {"owner": "シド"},
-  "46": {"owner": "シェルコ"},
-  "54": {"entity": "いきかえり"},
-  "56": {"text": "House"},
-  "57": {"text": "House"},
-  "58": {"text": "House"},
-  "62": {"entity": "いきかえり"},
-  "82": {"entity": "いきかえり"},
-  "94": {"room": "エリア"},
-  "98": {"entity": "いきかえり"},
-  "99": {"text": "Pub"},
-  "117": {"owner": "デブチョコボ"},
-  "118": {"entity": "生き返り"},
-  "141": {"text": "House"},
-  "146": {"entity": "生き返り"},
-  "150": {"text": "House"},
-  "336": {"text": "House"}
+  "11": {
+    "entity": "sc_e_0209:回復の泉"
+  },
+  "12": {
+    "owner": "sc_e_0010:トパパ"
+  },
+  "19": {
+    "text": "House"
+  },
+  "20": {
+    "entity": "回復"
+  },
+  "27": {
+    "text": "Underground Spring"
+  },
+  "38": {
+    "owner": "サリーナ（女性2）"
+  },
+  "42": {
+    "entity": "いきかえり"
+  },
+  "43": {
+    "owner": "シド"
+  },
+  "46": {
+    "owner": "シェルコ"
+  },
+  "54": {
+    "entity": "いきかえり"
+  },
+  "56": {
+    "text": "House"
+  },
+  "57": {
+    "text": "House"
+  },
+  "58": {
+    "text": "House"
+  },
+  "62": {
+    "entity": "いきかえり"
+  },
+  "82": {
+    "entity": "いきかえり"
+  },
+  "94": {
+    "room": "エリア"
+  },
+  "98": {
+    "entity": "いきかえり"
+  },
+  "99": {
+    "text": "Pub"
+  },
+  "117": {
+    "owner": "デブチョコボ"
+  },
+  "118": {
+    "entity": "生き返り"
+  },
+  "141": {
+    "text": "House"
+  },
+  "146": {
+    "entity": "生き返り"
+  },
+  "150": {
+    "text": "House"
+  },
+  "336": {
+    "text": "Shed"
+  },
+  "@entryFloors": {
+    "54": "MSG_ARA_NAME_12",
+    "71": "MSG_ARA_NAME_04",
+    "73": "MSG_ARA_NAME_04",
+    "74": "MSG_ARA_NAME_04",
+    "85": "MSG_ARA_NAME_12",
+    "90": "MSG_ARA_NAME_13",
+    "93": "MSG_ARA_NAME_11",
+    "94": "MSG_ARA_NAME_12",
+    "96": "MSG_ARA_NAME_02",
+    "110": "MSG_ARA_NAME_01",
+    "111": "MSG_ARA_NAME_11",
+    "112": "MSG_ARA_NAME_12",
+    "113": "MSG_ARA_NAME_13",
+    "114": "MSG_ARA_NAME_01",
+    "132": "MSG_ARA_NAME_02",
+    "133": "MSG_ARA_NAME_02",
+    "167": "MSG_ARA_NAME_12",
+    "191": "MSG_ARA_NAME_13",
+    "192": "MSG_ARA_NAME_13",
+    "207": "MSG_ARA_NAME_11",
+    "216": "MSG_ARA_NAME_14",
+    "217": "MSG_ARA_NAME_14",
+    "220": "MSG_ARA_NAME_01",
+    "221": "MSG_ARA_NAME_01",
+    "222": "MSG_ARA_NAME_01",
+    "223": "MSG_ARA_NAME_01",
+    "228": "MSG_ARA_NAME_01",
+    "234": "MSG_ARA_NAME_17",
+    "235": "MSG_ARA_NAME_16",
+    "243": "MSG_ARA_NAME_11",
+    "244": "MSG_ARA_NAME_11",
+    "254": "MSG_ARA_NAME_11",
+    "255": "MSG_ARA_NAME_11",
+    "281": "MSG_ARA_NAME_12",
+    "292": "MSG_ARA_NAME_11",
+    "306": "MSG_ARA_NAME_01",
+    "314": "MSG_ARA_NAME_09",
+    "315": "MSG_ARA_NAME_11"
+  },
+  "337": [
+    {
+      "text": "Shed"
+    },
+    {
+      "text": "Back Room"
+    }
+  ],
+  "338": {
+    "text": "Well"
+  }
 }

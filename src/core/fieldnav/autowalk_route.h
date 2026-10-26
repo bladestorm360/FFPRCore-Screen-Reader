@@ -9,7 +9,7 @@ namespace ffpr::fieldnav::autowalk {
 using Cell = field::baked_route::Cell;
 using Phase = field::route_progress::Phase;
 using VehicleAction = field::route_progress::VehicleAction;
-enum class Result { Move, Arrived, Action, OffRoute };
+enum class Result { Move, Arrived, Action, Wait, OffRoute };
 struct Step {
     Result result = Result::OffRoute;
     Cell next;
@@ -62,6 +62,7 @@ public:
                 return {Result::Move, to, dx, -dy, {}, cell_ + 2 == p.cells.size(), -1,
                     automatic && cell_ == 0 ? p.vehicle_before : VehicleAction::None, p.transportation_id};
             }
+            if (p.wait_for_npc) return {Result::Wait, {}, 0, 0, p.action_after};
             if (p.manual_after) return {Result::Action, {}, 0, 0, p.action_after, false, p.arrival_direction};
             if (phase_ + 1 == phases_.size())
                 return {Result::Arrived, {}, 0, 0, p.arrival_facing, false, p.arrival_direction};

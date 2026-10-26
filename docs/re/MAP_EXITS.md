@@ -1,5 +1,22 @@
 # Floor and world exits, October 13, 2026
 
+October26 [locked-door approach](LOCKED_DOORS_20261026.md): an Objects/Door row
+uses Interact even when a GotoMap shares its tile. The room's Transition remains
+blocked by the native lock, while an accessible Door can be examined without a
+key. Selection and story filtering share the policy; separate approach barriers
+still gate. FFIII21/21 Door replay and all-six regressions pass; bakes unchanged.
+
+October26 [remote return listing](REMOTE_RETURNS_20261026.md) omits only proven
+reciprocal ordinary return doors from other floors. Native PointIn/footprints and
+directed minimum depth establish the pair; one-way/uncertain and current-floor
+doors remain. Complete bakes and routing graph are unchanged. All-six replay/
+preservation tests and scanned deployment pass; new listening remains pending.
+
+October23 [script-backed world exit correction](WORLD_EXIT_FOLLOWUP_20261023.md)
+classifies direct native Event travel as MapExit from per-game script evidence.
+Prepared flags/indexes preserve ordinary GotoMap behavior, category grouping and
+physical terminal tiles, without false scene-trigger route warnings.
+
 The user relayed missing South Figaro floor exits, especially houses, and requested
 an FF5/FF6 bake audit plus reachable world transition tiles and nearest-exit grouping
 in all six games. Sol handled discovery, implementation and verification alone.

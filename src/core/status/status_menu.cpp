@@ -23,6 +23,7 @@
 #include "../say.h"
 #include "../text.h"
 #include "../unity.h"
+#include "../ui/character_row.h"
 #include "../system/system.h"
 
 namespace ffpr::status {
@@ -133,19 +134,10 @@ void on_select_content(void* contents, int index, void* cursor, void* window = n
     menu_state::set_active(menu_state::STATUS_MENU, true);
     if (!data) { ffpr::say(T(L"Empty"), true); return; }
 
-    void* view = displayed::field(content, "view");
-    std::wstring announcement = displayed::character(view);
-    auto job = displayed::text_field(view, "jobNameText");
-    auto level = displayed::pair(view, "fixedLevelText", "currentLevelText");
-    auto next = displayed::pair(view, "fixedNextText", "nextExpText");
-    auto row = displayed::formation_row(window, content);
-    if (!job.empty()) announcement += L", " + job;
-    if (!level.empty()) announcement += L", " + level;
-    if (!next.empty()) announcement += L", " + next;
-    if (!row.empty()) announcement += L", " + row;
+    std::wstring announcement = displayed::character_overview(content, window);
     if (announcement.empty()) return;
 
-    ffpr::say(announcement, true);
+    ui::character_row::announce(content, cursor, std::move(announcement), window);
 }
 
 using SelectContent_t = void (*)(void* self, void* contents, int32_t index, void* cursor, const void* mi);

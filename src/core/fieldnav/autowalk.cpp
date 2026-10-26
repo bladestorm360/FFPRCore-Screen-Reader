@@ -68,6 +68,13 @@ using AxisFn = unity::Vec2 (*)(void*, const void*);
 AxisFn o_InputAxis = nullptr;
 bool g_hooked = false, g_active = false, g_has_goal = false;
 bool g_planning = false;
+// Native input only marks a blocked edge. The existing owner update requests
+// one fresh snapshot at a time; the Navigation worker does every detour search.
+// A wait episode has bounded duration and never repeats its spoken notice.
+bool g_replan_needed=false, g_wait_announced=false;
+double g_retry_at=0, g_retry_until=0;
+uint64_t g_walk_generation=0;
+std::wstring g_wait_instruction;
 bool g_battle_interrupted = false;
 bool g_exit_approach = false;
 Transition g_transition;
@@ -132,7 +139,7 @@ bool player_cell(void* map, void* pl, Cell& cell)
     return true;
 }
 
-void begin(const field::PathInfo& path)
+void begin(const field::PathInfo& path, bool speak_path=true)
 {
     if (!g_route) g_route = new Route();
     g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps);
@@ -149,8 +156,16 @@ void begin(const field::PathInfo& path)
     // token even on the final floor until arrival/cancellation, so it and the beacon select
     // the same target rather than the first entry on that floor.
     if (g_has_goal) field::baked_nav::remember_destination(*g_goal, g_kind, *g_name);
-    if (ui::prefs::speak_autowalk_path_enabled())
+    if (speak_path && ui::prefs::speak_autowalk_path_enabled())
         ffpr::say(path.full_description.empty() ? path.description : path.full_description, false);
+}
+
+void retry_obstacle(std::wstring instruction={})
+{
+    if(!g_replan_needed && g_retry_at<frame::now())g_retry_at=frame::now();
+    if(g_retry_until==0)g_retry_until=frame::now()+30.0;
+    g_replan_needed=true;
+    if(!instruction.empty())g_wait_instruction=std::move(instruction);
 }
 
 unity::Vec2 axis(unity::Vec2 native)
@@ -160,6 +175,7 @@ unity::Vec2 axis(unity::Vec2 native)
         cancel(true); return native; // native remaps/touch input take immediate priority
     }
     if (!safe_context()) { cancel(); return native; }
+    if(g_planning || g_replan_needed)return {}; // release movement until a fresh route is published
     if (g_transition.waiting()) return native;
     if (g_vehicle_action != VehicleAction::None) {
         const auto vehicle = field::current_vehicle();
@@ -212,13 +228,28 @@ unity::Vec2 axis(unity::Vec2 native)
         if (!correct) { cancel(); ffpr::say(T(L"Autowalk stopped. Route changed.")); return {}; }
     }
     if (!g_have_cell || !(at == g_last_cell)) {
+        // Publishing another route to the same vetoed edge is not progress.
+        // Only an actual completed displacement resets the retry episode.
+        if(!(at==g_last_cell)) {
+            g_retry_at=g_retry_until=0;g_wait_announced=false;g_wait_instruction.clear();
+        }
         g_last_cell = at; g_have_cell = true; g_progress_at = frame::now();
     }
     const Step step = g_route->next(at);
     if (step.result == Result::Move) {
-        if (frame::now() - g_progress_at > 2.0 || !field::baked_nav::walk_edge(map, pl, at, step.next, step.goal_edge,
+        if (frame::now() - g_progress_at > 2.0) {
+            // An actor can enter after walk_edge's check but before native
+            // movement accepts the axis. A stalled tile needs the same fresh
+            // obstacle search as an immediate native veto.
+            if(g_has_goal)retry_obstacle();
+            else {cancel();ffpr::say(T(L"Autowalk blocked"));}
+            return {};
+        }
+        if(!field::baked_nav::walk_edge(map, pl, at, step.next, step.goal_edge,
             step.vehicle_action, step.transportation_id)) {
-            cancel(); ffpr::say(T(L"Autowalk blocked")); return {};
+            if(g_has_goal)retry_obstacle();
+            else {cancel();ffpr::say(T(L"Autowalk blocked"));}
+            return {};
         }
         g_exit_approach = step.goal_edge && g_next_map > 0;
         if (step.vehicle_action == VehicleAction::WalkOn || step.vehicle_action == VehicleAction::WalkOff) {
@@ -251,6 +282,9 @@ unity::Vec2 axis(unity::Vec2 native)
                       -wanted.x * std::sin(radians) + wanted.y * std::cos(radians)};
         }
         return wanted;
+    }
+    if(step.result==Result::Wait && g_has_goal) {
+        retry_obstacle(step.instruction);return {};
     }
     if (step.result == Result::Arrived && g_next_map > 0 && g_has_goal) {
         g_transition.begin(frame::now()); return {};
@@ -388,6 +422,8 @@ void cancel(bool announce)
     if (g_planning) field::baked_nav::cancel_requests();
     g_planning = false;
     g_active = false;
+    ++g_walk_generation;
+    g_replan_needed=g_wait_announced=false;g_retry_at=g_retry_until=0;g_wait_instruction.clear();
     g_turning=false;
     g_vehicle_action = VehicleAction::None; g_key_action = -1; g_key_frame = 0; g_boundary_deadline = 0;
     g_transition.clear();
@@ -494,6 +530,37 @@ void input_updated()
     if (queries::is("BattleStateHelper.IsInBattle") || menu_state::any_active()
         || queries::is("MessageWindowPatches.IsInDialogue") || queries::is("PuzzleGameState.IsActive")) {
         cancel(); return;
+    }
+    if(g_replan_needed) {
+        if(!g_has_goal || !context_ok() || !controller_ok(field::player()) || field::current_map_id()!=g_map) {cancel();return;}
+        if(frame::now()>=g_retry_until) {cancel();ffpr::say(T(L"Autowalk stopped"));return;}
+        if(!g_wait_announced&&!g_wait_instruction.empty()) {
+            ffpr::say(g_wait_instruction,false);g_wait_announced=true;
+        }
+        if(g_planning || frame::now()<g_retry_at)return;
+        g_planning=true;
+        const auto generation=g_walk_generation;
+        field::baked_nav::request_route(*g_goal,g_kind,*g_name,[generation](field::PathInfo path) {
+            if(generation!=g_walk_generation || !g_active || !g_planning || !g_replan_needed)return;
+            g_planning=false;
+            if(!context_ok() || field::current_map_id()!=g_map) {cancel();return;}
+            if(!path.success || path.walk_phases.empty()) {
+                cancel();ffpr::say(path.reason.empty()?T(L"No path"):path.reason);return;
+            }
+            const auto& terminal=path.walk_phases.back();
+            const bool waiting=terminal.wait_for_npc;
+            // Standing beside the same patrol: keep zero input and retry with
+            // a new capture twice a second. No growing queue or repeated speech.
+            if(waiting && path.step_count==0) {
+                g_wait_instruction=terminal.action_after;g_retry_at=frame::now()+.5;
+                return;
+            }
+            g_replan_needed=false;g_retry_at=frame::now()+.5;
+            // Announce a usable changed route under the existing path-speech
+            // setting; repeated temporary prefixes remain one wait episode.
+            begin(path,!waiting);
+        });
+        return;
     }
     if (g_planning && !g_active) return; // no native movement while worker plans or input handoff settles
     if (g_transition.waiting()) {

@@ -109,6 +109,7 @@ bool query_is(const char* query, const char* fallback_key)
 void cursor_navigation_postfix(void* cur)
 {
     if (!cur || !kCursor.is(cur)) return;
+    if(queries::is("MapPanels.IsActive"))return; // native map owns location/marker speech
 
     // === BUILD CURSOR PATH FOR DETECTION === (grandparent/parent/cursor)
     void* t = unity::transform(cur);

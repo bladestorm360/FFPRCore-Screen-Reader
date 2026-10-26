@@ -1,4 +1,5 @@
 #include "entity_filter.h"
+#include "target_kind.h"
 #include "navigation_labels.h"
 #include "save_points.h"
 #include <algorithm>
@@ -30,6 +31,15 @@ void restore_selection(Filtered& result, const FilterInput& input) {
     if (input.selected_has) {
         for (size_t i = 0; i < result.order.size(); ++i) {
             const auto& row = input.rows[result.order[i]];
+            // Vehicle FieldEntities can share a default entity ID/name. The
+            // Transportation model ID owns identity across native recreation,
+            // distance re-sorts and battle. Never substitute the nearest ship.
+            if (input.selected_transportation_id > 0) {
+                if (row.kind != Kind::Vehicle || row.transportation_id != input.selected_transportation_id) continue;
+                const int map = row.remote_map ? row.remote_map : input.current_map;
+                if (map == input.selected_map) { result.restored = static_cast<int>(i); return; }
+                continue;
+            }
             if (input.selected_entity_id >= 0 && row.entity_id != input.selected_entity_id) continue;
             if (!input.selected_raw.empty()&&row.raw_name!=input.selected_raw)continue;
             if (input.selected_map > 0) {
@@ -49,14 +59,8 @@ void restore_selection(Filtered& result, const FilterInput& input) {
                 : !row.remote_map && row.category == input.selected_category && point_distance(row.position, input.selected_position) < 0.5f;
             if (match) { result.restored = static_cast<int>(i); return; }
         }
-        if (!input.selected_name.empty() && !input.selected_remote && input.selected_entity_id < 0)
-            for (size_t i = 0; i < result.order.size(); ++i) {
-                const auto& row = input.rows[result.order[i]];
-                if (!row.remote_map && (!input.selected_map || input.selected_map == input.current_map)
-                    && row.category == input.selected_category && row.name == input.selected_name) {
-                    result.restored = static_cast<int>(i); break;
-                }
-            }
+        // A translated name is not identity (especially type-only chests).
+        // With no native ID, require the exact map/category/anchor above.
     }
 }
 }
@@ -173,13 +177,7 @@ static Categories categories_impl(FilterInput& input) {
                 cell.x=static_cast<int>(std::floor(sm->width*.5+row.position.x/16));
                 cell.y=static_cast<int>(std::floor(sm->height*.5-row.position.y/16));
             }
-            TargetKind kind=TargetKind::Infer;
-            switch(row.kind) {
-            case Kind::NPC:case Kind::TreasureChest:kind=TargetKind::Interact;break;
-            case Kind::MapExit:kind=TargetKind::Transition;break;
-            case Kind::Vehicle:kind=TargetKind::Spot;break;
-            default:break;
-            }
+            const TargetKind kind=navigation_target_kind(row.kind,row.category);
             baked_nav::MapGoal goal;goal.map_id=map;goal.cell=cell;
             goal.entity_id=row.entity_id;goal.raw_name=row.raw_name;
             targets.push_back({std::move(goal),kind});indices.push_back(i);
@@ -216,6 +214,10 @@ static Categories categories_impl(FilterInput& input) {
     }
     for (size_t category = 1; category < result.views.size(); ++category)
         restore_selection(result.views[category], input);
+    const bool exits=input.exits,events=input.events,pads=input.pads;
+    input.exits=input.events=input.pads=false;
+    result.audio_order=build_impl(input).order;
+    input.exits=exits;input.events=events;input.pads=pads;
     return result;
 }
 Categories build_categories(FilterInput& input) {

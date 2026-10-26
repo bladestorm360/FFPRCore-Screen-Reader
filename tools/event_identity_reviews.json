@@ -10194,5 +10194,77 @@
       ]
     },
     "layer": "UpperObject"
+  },
+  {
+    "submap": "Map_20031_1",
+    "group": "entity_default",
+    "id": 38,
+    "game": 2,
+    "raw": "隠し通路",
+    "entity_id": 36,
+    "script_id": 249,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Wall near bed",
+    "evidence": {
+      "script": "sc_e_0216",
+      "context_message_keys": [
+        "E0128_00_021_d_02"
+      ],
+      "map_art": "Map_20031/Map_20031_1/tilemap",
+      "tile": [
+        18,
+        12
+      ]
+    },
+    "layer": "BottomObject"
+  },
+  {
+    "submap": "Map_20041_7",
+    "group": "entity_default",
+    "id": 59,
+    "game": 2,
+    "raw": "隠し通路",
+    "entity_id": 22,
+    "script_id": 87,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Wall",
+    "evidence": {
+      "script": "sc_e_0063",
+      "context_message_keys": [
+        "E0063_00_043_a_02"
+      ],
+      "map_art": "Map_20041/Map_20041_7/tilemap",
+      "tile": [
+        41,
+        7
+      ]
+    },
+    "layer": "BottomObject"
+  },
+  {
+    "submap": "Map_20010",
+    "group": "ev_e_0089",
+    "id": 215,
+    "game": 6,
+    "raw": "sc_e_0089:隠し通路入口",
+    "entity_id": 132,
+    "script_id": 118,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Rock",
+    "evidence": {
+      "script": "sc_e_0089",
+      "context_message_keys": [
+        "E0089_00_003_a_02"
+      ],
+      "map_art": "Map_20010/Map_20010/tilemap",
+      "tile": [
+        15,
+        56
+      ]
+    },
+    "layer": "GroundObject"
   }
 ]

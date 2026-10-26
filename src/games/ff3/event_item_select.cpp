@@ -1,7 +1,7 @@
 // Ports FF3 Patches/EventItemSelectPatches.cs (EventItemSelectState, EventItemSelectPatches).
 //
 // NPC item selection events (Last.UI.KeyInput.SelectFieldContentController, opened by
-// Last.UI.SelectFieldContentManager): "Item: description (n of N)" on each focus change.
+// Last.UI.SelectFieldContentManager): item focus, optional Autodetail, manual I.
 //
 // Dedup: the C#'s lastAnnouncement compared the text before the position was appended and was
 // cleared by the manager's Close (DEDUP_INVENTORY FF3 tracker #19); moved to dedup:: as it was.
@@ -19,6 +19,8 @@
 #include "../../core/unity.h"
 #include "../../core/status/status.h"
 #include "../../core/system/cursor_event.h"
+#include "../../core/ui/preferences.h"
+#include "../../core/modtext.h"
 
 namespace ffpr::ff3 {
 namespace {
@@ -36,6 +38,8 @@ ref::Field fNameMessageId{kContentData, "<NameMessageId>k__BackingField"};
 ref::Field fDescriptionMessageId{kContentData, "<DescriptionMessageId>k__BackingField"};
 
 constexpr const char* kCtxRow = "EventItemSelect.Row";
+void* g_controller=nullptr;
+std::wstring g_description;
 
 std::wstring clean(const std::wstring& s) { return text::trim(text::strip_markup(s)); }
 
@@ -43,8 +47,10 @@ std::wstring clean(const std::wstring& s) { return text::trim(text::strip_markup
 bool should_suppress()
 {
     if (!menu_state::is_active(menu_state::EVENT_ITEM_SELECT)) return false;
-    if (!ref::instance(kManager)) {
+    if (!ref::instance(kManager)||!unity::alive(g_controller)||!unity::active_in_hierarchy(g_controller)) {
         menu_state::set_active(menu_state::EVENT_ITEM_SELECT, false);
+        g_controller=nullptr;g_description.clear();
+        dedup::reset(kCtxRow);
         return false;
     }
     return true;
@@ -53,7 +59,9 @@ bool should_suppress()
 // SelectContent_Postfix
 void on_select_content(void* self, int index)
 {
-    if (!self || index < 0) return;
+    if (!self || index < 0 || !kSelectController.is(self)||!unity::active_in_hierarchy(self)) return;
+    if(g_controller!=self||!menu_state::is_active(menu_state::EVENT_ITEM_SELECT))dedup::reset(kCtxRow);
+    g_controller=self;g_description.clear();
     menu_state::set_active(menu_state::EVENT_ITEM_SELECT, true);
 
     void* list = ref::rd<void*>(self, fContentDataList);
@@ -72,7 +80,8 @@ void on_select_content(void* self, int index)
     const std::wstring desc_id = ref::rd_str(item, fDescriptionMessageId);
     if (!desc_id.empty()) {
         const std::wstring desc = ffpr::status::game_message(desc_id, true);
-        if (!desc.empty()) announcement = name + L": " + clean(desc);
+        g_description=clean(desc);
+        if (ui::prefs::auto_detail_enabled()&&!g_description.empty()) announcement = name + L": " + g_description;
     }
 
     if (!dedup::text(kCtxRow, announcement, dedup::Scope::Session)) return;
@@ -82,6 +91,7 @@ void on_select_content(void* self, int index)
 void on_manager_close()
 {
     menu_state::set_active(menu_state::EVENT_ITEM_SELECT, false);
+    g_controller=nullptr;g_description.clear();
     dedup::reset(kCtxRow);
 }
 
@@ -109,11 +119,15 @@ int install()
     n += hooks::attach(mManagerClose, &d_ManagerClose, &o_ManagerClose) ? 1 : 0;
     LOGF("[FF3 EventItemSelect] %d hooks", n);
 
-    queries::define("EventItemSelectState.IsActive", [] { return menu_state::is_active(menu_state::EVENT_ITEM_SELECT); });
+    queries::define("EventItemSelectState.IsActive", [] { return should_suppress(); });
+    actions::define("EventItemSelect.ReadDetails", [] {
+        if(should_suppress())ffpr::say(g_description.empty()?T(L"No description"):g_description,true);
+    });
     queries::define("EventItemSelectState.ShouldSuppress", [] { return should_suppress(); });
     cursor::add_suppressor("EventItemSelectState.ShouldSuppress");
     // FFIII_ScreenReaderMod.ClearMenuFlagsForMapTransition also cleared EVENT_ITEM_SELECT.
-    events::on(events::Kind::MapChanged, [] { menu_state::reset(menu_state::EVENT_ITEM_SELECT); });
+    events::on(events::Kind::MapChanging, [] { on_manager_close(); });
+    events::on(events::Kind::MapChanged, [] { on_manager_close(); });
     return n;
 }
 

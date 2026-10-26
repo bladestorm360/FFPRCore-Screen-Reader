@@ -152,6 +152,30 @@ int main(int argc,char** argv) {
     o.enabled[size_t(cues::Id::NPC)-cues::first_entity]=false;
     expect(scape::classify(s,o).size()==7,"individual category switch");
     expect(scape::wrapped(99,100)==-1,"world edge uses nearest wrapped position");
+    {
+        scape::Snapshot entrance;auto options=fixture::options();options.range=25;
+        for(int i=0;i<3;++i){scape::Row row;row.id=100+i;row.kind=scape::Kind::Exit;row.destination=123;row.x=float(i);row.north=3;entrance.rows.push_back(row);}
+        auto separate=entrance.rows.front();separate.id=110;separate.x=7;entrance.rows.push_back(separate);
+        auto grouped=scape::classify(entrance,options);
+        expect(grouped.size()==2&&grouped[0].distance==3,"contiguous transition tiles produce one nearest actual-tile source while a separate doorway stays separate");
+        scape::Snapshot borders;borders.map_width=borders.map_height=20;
+        uint64_t id=200;for(int side=0;side<4;++side)for(int offset:{-8,0,8}) {
+            scape::Row row;row.id=id++;row.kind=scape::Kind::Exit;row.destination=1;row.world_exit=true;
+            row.x=side==1?9:side==3?-9:float(offset);row.north=side==0?9:side==2?-9:float(offset);borders.rows.push_back(row);
+        }
+        auto compass=scape::classify(borders,options);expect(compass.size()==4,"town world exits produce exactly one source per compass side independently from destination-list grouping");
+        for(const auto& source:compass)expect(source.distance==9,"compass source uses the nearest real transition tile rather than a nonwalkable centroid");
+        scape::Snapshot events;
+        for(int i=0;i<3;++i){scape::Row row;row.id=300+i;row.kind=scape::Kind::Event;row.event_type=L"Event";row.script=65;row.action=2;row.hint=L"scene"+std::to_wstring(i);row.x=float(i);events.rows.push_back(row);}
+        auto other=events.rows.front();other.id=310;other.script=66;events.rows.push_back(other);
+        auto manual=events.rows.front();manual.id=311;manual.event_type=L"Interactive Object";events.rows.push_back(manual);
+        auto distant=events.rows.front();distant.id=312;distant.x=7;events.rows.push_back(distant);
+        expect(scape::classify(events,options).size()==4,"automatic trigger components collapse by native script identity; separate scripts, separate areas and manual objects retain distinct sounds");
+        scape::Snapshot busy;for(int i=0;i<8192;++i){auto row=events.rows.front();row.id=1000+i;row.x=float(i%128);row.north=float(i/128);busy.rows.push_back(row);}
+        const auto began=std::chrono::steady_clock::now();auto bulk=scape::classify(busy,options);
+        expect(bulk.size()==1,"bounded busy trigger grid produces one source without dropping reachable member tiles");
+        std::printf("Soundscape8192 trigger grouping %.3f ms offline classifier\n",std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-began).count());
+    }
     scape::Snapshot unknown;
     unknown.rows={{20,scape::Kind::Exit,0,2}};unknown.rows[0].verified_exit=true;
     auto generic=scape::classify(unknown,fixture::options());
@@ -180,7 +204,27 @@ int main(int argc,char** argv) {
     reference.bank[size_t(cues::Id::WallBump)].custom=false;
     reference.render(legacy_hrtf_pcm.data(),441);
     expect(fixture::energy(legacy_hrtf_pcm,0)>0,"actual production HRTF legacy voice renders");reference.stop_all();
+    const auto original_beacon=legacy::make(cues::Id::Beacon,0,1,1,1,true).mono;
+    for(const auto bearing:std::array<std::pair<float,float>,8>{{{0,160},{160,160},{160,0},{160,-160},{0,-160},{-160,-160},{-160,0},{-160,160}}}){
+        reference.stop_all();
+        reference.start(6,cues::Id::BeaconBlocked,bearing.first,bearing.second,1,.7f,false,0,1,true);
+        const auto& voice=reference.voices[6];const float length=std::hypot(bearing.first,bearing.second);
+        expect(voice.cue==cues::Id::Beacon&&voice.pitch==1&&voice.reference.mono==original_beacon,
+            "effective HRTF beacon retains original pitch in every hemisphere, including blocked/pending legacy flags");
+        expect(std::fabs(voice.x-bearing.first/length)<.001f&&std::fabs(voice.north-bearing.second/length)<.001f,
+            "actual HRTF beacon receives the full normalized front/rear/diagonal bearing");
+        reference.render(legacy_hrtf_pcm.data(),441);
+        expect(fixture::energy(legacy_hrtf_pcm,0)>0&&fixture::energy(legacy_hrtf_pcm,1)>0,"actual spatial beacon renders through loopback");
+    }
+    reference.stop_all();
     reference.hrtf.open(L"",bank); // production has one loopback context per audio worker
+    for(float east:{-300.f,-50.f,0.f,50.f,300.f})for(float north:{-160.f,0.f,160.f}){
+        reference.start(6,cues::Id::Beacon,east,north,1,1,false,0,1,true);
+        const float pitch=north<0?.7f:1.f,pan=std::clamp(east/100.f,-1.f,1.f);
+        expect(reference.voices[6].x==pan&&reference.voices[6].reference.mono==legacy::make(cues::Id::Beacon,pan,1,pitch,1,false).mono,
+            "HRTF off/unavailable retains legacy stereo pan and rear-hemisphere pitch, with unshifted side boundary");
+    }
+    reference.stop_all();
     // Actual loopback output: the single HRTF master doubles amplitude (four
     // times energy), across all effects, without another per-source boost.
     Hrtf boosted;std::vector<int16_t> level_pcm(cues::rate*2);

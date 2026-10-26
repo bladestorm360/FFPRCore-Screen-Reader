@@ -45,12 +45,14 @@ namespace fixture {
 struct Node {int effect=0;bool has=true;void* animation=nullptr;void* list=nullptr;void* view=nullptr;void* description=nullptr;Node* parent=nullptr;bool alive=true,active=true,enabled=true;int state=0,id=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> text;};
 using List=std::vector<void*>;
 std::map<std::string,void*> owners;std::map<std::string,actions::Fn> actions;std::map<std::string,bool> states, bools;std::map<std::string,std::function<void()>> resets;
+std::map<int,Node*> shop_content;
 std::vector<std::wstring> spoken;int delta=0,native_calls=0,wrong_thread=0;bool battle=false;
 DWORD thread=GetCurrentThreadId();game::Id game=game::Id::FF2;
 void native(){if(GetCurrentThreadId()!=thread)++wrong_thread;}
 void tick(){frame::run_tick();DWORD end=GetTickCount()+5000;while(ui::review::g_build_pending && GetTickCount()<end){std::this_thread::yield();frame::run_tick();}}
 bool contains(std::wstring_view s){for(const auto&x:spoken)if(x.find(s)!=x.npos)return true;return false;}
 std::function<void(bool)> on_parameter;std::function<void(int)> on_equipment_page;
+int shop_type(void*p,const void*){native();return static_cast<Node*>(p)->state;}
 void phase(void*,const void*){++native_calls;}
 void parameter_flag(void*,bool p,const void*){++native_calls;if(on_parameter)on_parameter(p);}
 void equipment_page(void*,int p,const void*){++native_calls;if(on_equipment_page)on_equipment_page(p);}
@@ -69,7 +71,7 @@ namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n)
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){} Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
-bool Class::is(void*p){fixture::native();return p!=nullptr;}void*Method::ptr(){fixture::native();return nullptr;}il2cpp::Method*Method::get(){return nullptr;}
+bool Class::is(void*p){fixture::native();return p!=nullptr;}void*Method::ptr(){fixture::native();return std::string(name)=="get_TypeId"?reinterpret_cast<void*>(&fixture::shop_type):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 int32_t Field::get(){fixture::native();std::string n=name;if(n=="<IsActive>k__BackingField")return offsetof(fixture::Node,enabled);if(n=="<ContentId>k__BackingField")return offsetof(fixture::Node,id);if(n=="iconTextView")return offsetof(fixture::Node,animation);if(n=="shopListItemContentView")return offsetof(fixture::Node,view);if(n=="nameText"||n=="priceText")return offsetof(fixture::Node,description);if(n=="attributeType")return offsetof(fixture::Node,id);if(n=="contentList"||n=="contentDataList"||n=="targetSelectContentList")return offsetof(fixture::Node,list);if(n=="view")return offsetof(fixture::Node,view);if(n=="descriptionText")return offsetof(fixture::Node,description);if(n=="currentEffect")return offsetof(fixture::Node,effect);if(n=="animationController")return offsetof(fixture::Node,animation);return -1;}
 std::wstring rd_str(void*p,Field&){fixture::native();return p?static_cast<fixture::Node*>(p)->name:L"";}void call_failed_note(const char*){std::abort();}
 }
@@ -83,7 +85,9 @@ namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}s
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}void say_parts(std::vector<std::wstring>p,bool){fixture::spoken.emplace_back(text::join(p,L". "));}void say_sequence(std::vector<std::wstring>p,bool){say_parts(std::move(p),true);} }
 namespace ui {std::wstring menu_position(const std::wstring&s,int,int){return s;}int cursor_index(void*p){return static_cast<fixture::Node*>(p)->id;}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:0;} }
 namespace unity {bool alive(void*p){fixture::native();return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->active&&(!static_cast<fixture::Node*>(p)->parent||active_in_hierarchy(static_cast<fixture::Node*>(p)->parent));}void*transform(void*p){fixture::native();return p;}void*get_component_in_parent(void*p,ref::Class&){fixture::native();return p?static_cast<fixture::Node*>(p)->parent:nullptr;}Vec3 local_position(void*){fixture::native();return {};}Vec3 position(void*){fixture::native();return {};}std::wstring ui_text(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;} }
+namespace ffpr::battle::party_status {std::vector<std::wstring> extra_lines(void*,void*,bool,void*){return {};}}
 namespace displayed {
+std::vector<std::wstring> charge_lines(void*){return {};}
 bool container_visible(void*p){return unity::active_in_hierarchy(p);}bool visible(void*p){return container_visible(p)&&static_cast<fixture::Node*>(p)->enabled;}bool world_visible(void*p){return visible(p);}void*image_sprite(void*p){return visible(p)?p:nullptr;}
 void*field(void*p,const char*n){fixture::native();if(!p)return nullptr;auto&o=*static_cast<fixture::Node*>(p);if(std::string(n)=="view")return o.view;if(std::string(n)=="contentList")return o.list;auto i=o.fields.find(n);return i==o.fields.end()?nullptr:i->second;}
 std::wstring text(void*p){return visible(p)?static_cast<fixture::Node*>(p)->name:L"";}std::wstring text_field(void*p,const char*n){fixture::native();if(!container_visible(p))return {};auto&node=*static_cast<fixture::Node*>(p);auto f=node.fields.find(n);if(f!=node.fields.end())return text(f->second);auto i=node.text.find(n);return i==node.text.end()?L"":i->second;}
@@ -92,13 +96,24 @@ std::vector<std::wstring>texts(void*){return {};}std::wstring comparison_arrow(v
 namespace field::cache {void*get(ref::Class&c){auto i=fixture::owners.find(c.name);return i==fixture::owners.end()?nullptr:i->second;}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}void clear(ref::Class&c){fixture::owners.erase(c.name);} }
 namespace field {bool live_entity(void*p){return p!=nullptr;}bool treasure_opened(void*){return false;}bool entity_is_present(void*){return true;}std::wstring get_message(const std::wstring&s,bool){return s;} }
 namespace field::r {ref::Class kFieldMapObjectDefault{"Last.Entity.Field","FieldMapObjectDefault"};ref::Method mMapObjectGetCanAction{kFieldMapObjectDefault,"get_CanAction",0};}
+// The actual Entity lifetime implementation now reads native action assignment.
+// These owner fakes keep that lookup explicit even though this fixture has no NPC.
+namespace field::r {
+ref::Field fEntityProperty{kFieldMapObjectDefault,"<Property>k__BackingField"};
+ref::Field fEventActionId{kFieldMapObjectDefault,"<ActionId>k__BackingField"};
+ref::Field fEventScriptId{kFieldMapObjectDefault,"<ScriptId>k__BackingField"};
+ref::Field fTalkMessageKey{kFieldMapObjectDefault,"<MessageKey>k__BackingField"};
+}
 namespace field {bool call_virtual_bool(ref::Method&,void* p){fixture::native();return p&&static_cast<fixture::Node*>(p)->enabled;}}
 namespace il2cpp {Class*object_class(void*){return nullptr;} }
 namespace ffpr::menus::detail {bool auto_detail(){return ui::prefs::auto_detail_enabled();}bool blank(std::wstring_view s){return s.empty();}std::wstring strip_icon(std::wstring_view s){return std::wstring(s);}void clear_other_menu_states(const char*){}bool shop_menu_active(){return false;}void shop_clear_for_equipment_submenu(){}void shop_set_menu_active(){} }
 namespace ffpr::battle {bool in_battle(){return fixture::battle;}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:-1;}void*player_owned_character(void*p){return displayed::field(p,"owned");}void*current_actor(){return nullptr;}std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";} }
 namespace menu_state {void reset_all(){}void set_active(const char*n,bool b){fixture::states[n]=b;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;auto i=fixture::resets.find(n);if(i!=fixture::resets.end())i->second();}void register_reset(const char*n,std::function<void()>f){fixture::resets[n]=std::move(f);} }
 namespace dedup {bool index(const char*,long long,Scope){return true;}void reset(const char*){} }
-namespace ffpr::shop {bool live(void*p,ref::Class&){return unity::alive(p);}void*master_get_data(ref::Class&,int){return nullptr;}std::wstring strip_icon_markup(std::wstring_view s){return std::wstring(s);}void magic_reset_state(){} }
+namespace ffpr::shop {bool live(void*p,ref::Class&){return unity::alive(p);}void*master_get_data(ref::Class& k,int id){fixture::native();auto it=fixture::shop_content.find(id);return std::string(k.name)=="Content"&&it!=fixture::shop_content.end()?it->second:nullptr;}std::wstring strip_icon_markup(std::wstring_view s){return std::wstring(s);}void magic_reset_state(){} }
+namespace field {void*map_handle(){return nullptr;}int current_map_id(){return 0;}}
+namespace field::baked {const Submap*submap_by_map_id(int){return nullptr;}}
+namespace field::baked_nav {bool cell_at(void*,unity::Vec3,field::baked_route::Cell&){return false;}}
 namespace input {void add_binding(Key,Mod,Context,const char*,const char*){} }
 namespace log_ {void write(const char*,...){} }
 namespace sound {void initialize(){} }
@@ -164,10 +179,33 @@ int main(){background::prepare();using namespace fixture;using namespace ffpr::m
  item_window.state=7;item_window.active=false;ffpr::menus::d_enter(&item_window,nullptr);ffpr::menus::d_window_update(&item_window,nullptr);tick();expect(!ui::review::active()&&!ffpr::menus::g_pending_entry,"closed equipment owner cancels pending entry");
  ui::review::clear();
  Node shop,shop_info,shop_view,shop_panel,shop_item,shop_icon,shop_name,shop_item_view,shop_price;shop.state=2;shop.fields["infoController"]=&shop_info;shop_info.view=&shop_view;shop_view.description=&shop_panel;shop_item.animation=&shop_icon;shop_icon.description=&shop_name;shop_name.name=L"Spear";shop_item.view=&shop_item_view;shop_item_view.description=&shop_price;shop_price.name=L"100 Gil";shop_panel.name=L"Attack +11";ffpr::shop::set_cached_controller(&shop);ffpr::shop::set_shop_menu_active(true);
+ // Real all-six product IDs differ from the equipment tables' primary keys.
+ // Exercise native Content classification through focused-item cache publication;
+ // unknown/magic/consumable records must not make idle portraits incompatible.
+ const int product_ids[6][4]={{62,130,2,209},{47,102,2,212},{50,135,2,203},{127,224,2,311},{27,174,2,267},{93,197,2,331}};
+ for(int n=1;n<=6;++n){
+  fixture::game=static_cast<game::Id>(n);
+  for(int kind=0;kind<4;++kind){
+   Node record;record.state=kind==0?2:kind==1?3:kind==2?1:4;
+   shop_content.clear();shop_item.id=product_ids[n-1][kind];shop_content[shop_item.id]=&record;
+   spoken.clear();ffpr::shop::announce_focused_item(&shop_item,0,1);
+   const int expected=kind<2?record.state:-1;
+   expect(ffpr::shop::last_item_content_id()==shop_item.id&&ffpr::shop::last_item_content_type()==expected,"all-six focused Content record controls equipment classification, not overlapping Weapon/Armor IDs");
+  }
+  shop_content.clear();shop_item.id=999999;spoken.clear();ffpr::shop::announce_focused_item(&shop_item,0,1);
+  expect(ffpr::shop::last_item_content_type()==-1,"missing product data retires old equipment classification");
+ }
+ shop_content.clear();
  const std::pair<const wchar_t*,const wchar_t*> shop_examples[]={{L"Potion",L"50 Gil"},{L"Mythril Sword",L"100 Gil"},{L"Bronze Shield",L"75 Gil"},{L"Fire",L"200 Gil"},{L"Mythril Ring",L"300 Gil"}};
  for(int n=1;n<=6;++n){fixture::game=static_cast<game::Id>(n);for(const auto&example:shop_examples){shop_name.name=example.first;shop_price.name=example.second;for(bool autodetail:{false,true}){bools["AutoDetail"]=autodetail;for(const auto*panel_text:{L"Attack +11",L"A metal-tipped spear."}){shop_panel.name=panel_text;spoken.clear();ffpr::shop::announce_focused_item(&shop_item,0,1);std::wstring expected=shop_name.name+L". "+shop_price.name;if(autodetail)expected+=L". "+shop_panel.name;expect(spoken.size()==1&&spoken[0]==expected,"shop focus always speaks rendered price before optional current panel across all games, item types and panel states");}shop_panel.name=L"A metal-tipped spear.";spoken.clear();ffpr::shop::announce_current_item_details();expect(spoken.size()==1&&spoken[0]==shop_panel.name,"shop I reads currently toggled description in both Autodetail states");shop_panel.name=L"Attack +11";}}}
  bools["AutoDetail"]=false;shop_name.name=L"Mythril Ring";shop_price.enabled=false;spoken.clear();ffpr::shop::announce_focused_item(&shop_item,0,1);expect(spoken.size()==1&&spoken[0]==L"Mythril Ring","hidden shop price is not fabricated");shop_price.enabled=true;shop_price.name=L"  ";spoken.clear();ffpr::shop::announce_focused_item(&shop_item,0,1);expect(spoken.size()==1&&spoken[0]==L"Mythril Ring","blank shop price is not fabricated");shop_price.name=L"300 Gil";
  shop_panel.enabled=false;expect(ffpr::shop::description_from_ui().empty(),"hidden shop description cannot disclose cached content");shop_panel.enabled=true;ffpr::shop::clear_state();
+ // Exercise the actual Entity category implementation, including remote copies.
+ for(const auto* activation:{L"Interactive Object",L"Interactive",L"Event",L"ToLayer",L"Warp Tile"}) {
+  field::Entity object;object.kind=field::Kind::Event;object.event_type=activation;
+  const auto expected=object.event_type==L"Interactive Object"||object.event_type==L"Interactive"?field::Category::Objects:field::Category::Events;
+  for(int floor:{0,98}){object.remote_map_id=floor;expect(object.category()==expected,"manual activation selects Objects; automatic activation stays Events on current and remote floors");}
+ }
  field::Entity consumed;consumed.kind=field::Kind::Event;consumed.game=&shop_item;
  shop_item.enabled=true;expect(consumed.is_alive(),"native-actionable inspection remains available");
  shop_item.enabled=false;expect(!consumed.is_alive(),"a consumed native action is unavailable even before its graphics are removed");shop_item.enabled=true;
@@ -196,5 +234,8 @@ int main(){background::prepare();using namespace fixture;using namespace ffpr::m
   expect(chest.format_description({})==(opened?L"Opened Treasure Chest (Deist Cavern B5) - Treasure Chest":L"Unopened Treasure Chest (Deist Cavern B5) - Treasure Chest"),
    "known remote chest state updates preserve the exact cross-floor label");
  }
+ chest.pickup=true;chest.opened=false;
+ expect(chest.display_name()==L"Treasure"&&chest.format_description({})==L"Treasure (Deist Cavern B5) - Treasure","loose pickups have no chest or unopened wording and retain their floor");
+ chest.pickup=false;expect(chest.display_name()==L"Unopened Treasure Chest","ordinary chest labels remain distinct from loose treasure");
  std::printf("Equipment/party/status warning/chest disclosure and object floor labels: %d failures\n",failures);return failures?1:0;
 }

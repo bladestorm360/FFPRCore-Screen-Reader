@@ -1,14 +1,14 @@
-Final Fantasy Pixel Master Core Screen Reader V0.9.5
+Final Fantasy Pixel Master Core Screen Reader V1.0
 
 Purpose
 
 Adds speech, menu and battle reading, pathfinding, optional autowalk and audio navigation to FINAL FANTASY I-VI Pixel Remaster on Steam. One set of files supports all six games. Keyboard and controller controls are supported.
 
-V0.9.5 adds brief, party-aware FFVI story guidance, Terra/Banon danger warnings and routes that respect parked parties. It also adds the story-gate filter, a Save Points category, boss-part labels and native name-entry letter speech. Shared fixes improve battle results, Bestiary refresh, object names, vehicle routes and navigation audio.
+V1.0 improves battle status and results reading, equipment comparisons, Fat Chocobo storage, connected-floor and vehicle routes, and access to locked doors. Route beacons now keep pinging while you walk, with full HRTF bearings and rear pitch cues only in stereo fallback. It includes the existing FFVI story guidance, puzzle guidance, soundscape and remappable controls.
 
 Known Issues
 
-V0.9.5 is an early combined release. Some game-specific screens, airships and scripted map exits still need gameplay testing. Intermittent stalls are still under investigation; automatic timing logs remain enabled. FFIII and FFVI automatic airship boarding is disabled: board and take the wheel manually before requesting a flying route. FFVI flight autowalk has passed offline checks but still needs gameplay confirmation. A report of a numbered character name in battle results remains unreproduced; additional diagnostics are included. Report missing or repeated speech with the game's ffpr_screen_reader.log and a short description of what happened.
+Some game-specific screens, airships and scripted map exits still need gameplay confirmation. The latest beacon, storage, status and navigation corrections passed offline checks; their remaining listening checks are documented separately. Intermittent stalls are still under investigation; automatic timing logs remain enabled. FFIII and FFVI automatic airship boarding is disabled: board and take the wheel manually before requesting a flying route. FFVI flight autowalk has passed offline checks but still needs gameplay confirmation. A report of a numbered character name in battle results remains unreproduced; additional diagnostics are included. Report missing or repeated speech with the game's ffpr_screen_reader.log and a short description of what happened.
 
 Timing diagnostics run automatically in every session and use that same log. If intermittent lag returns, note what you were doing and report it. The five previous log files are retained as ffpr_screen_reader.1.log through .5.log, so the affected run can still be checked after restarting.
 
@@ -16,12 +16,12 @@ Logger health is recorded every ten seconds, with session and part identifiers. 
 
 Install
 
-Requires 64-bit Windows, a Steam Pixel Remaster game and a running screen reader such as NVDA or JAWS. Release bundles include Prism 0.18.3 and SDL3; builds with the soundscape also include OpenAL Soft for optional HRTF. MelonLoader, BepInEx, Python and separate dependency downloads are not required.
+Requires 64-bit Windows, a Steam Pixel Remaster game and a running screen reader such as NVDA or JAWS. The release includes Prism 0.18.3, SDL3 and OpenAL Soft with its HRTF data and notices. MelonLoader, BepInEx, Python and separate dependency downloads are not required.
 
 1. Close the game and extract the zip.
 2. Open the game's installation folder using Steam's Manage, Browse local files command. This is the folder containing FINAL FANTASY.exe, FINAL FANTASY II.exe, and so on.
 3. If an older screen reader is installed, remove its DLL from the game's Mods folder: FFI_ScreenReader.dll, FFII_ScreenReader.dll, FFIII_ScreenReader.dll, FFIV_ScreenReader.dll, FFV_ScreenReader.dll or FFVI_ScreenReader.dll, as appropriate. Keep your UserData folder.
-4. Open the extracted Final Fantasy Pixel Master Core Screen Reader folder. Copy its contents into the game folder, including the .ffpr-deps folder. hid.dll and SDL3.dll must sit beside the game's EXE. Keep Prism at .ffpr-deps/prism/prism.dll and the soundscape build's OpenAL Soft at .ffpr-deps/openal-soft/soft_oal.dll, with their notices.
+4. Open the extracted Final Fantasy Pixel Master Core Screen Reader folder. Copy its contents into the game folder, including the .ffpr-deps folder. hid.dll and SDL3.dll must sit beside the game's EXE. Keep Prism at .ffpr-deps/prism/prism.dll and OpenAL Soft at .ffpr-deps/openal-soft/soft_oal.dll, with their notices.
 5. Start your screen reader, then the game. The title screen should speak. Repeat these steps for each game you use.
 
 The included license files should stay with the mod. Other mods' MelonLoader or BepInEx installations may remain; remove only the old screen reader DLL.
@@ -81,20 +81,21 @@ Common commands in both layouts:
 
 - Backtick, above Tab: rescan the map.
 - Shift+M: toggle the map exit filter, grouping exits by destination and preferring the nearest reachable entrance.
-- Ctrl+Shift+P: toggle the event group filter, grouping repeated triggers for the same event and preferring the closest reachable trigger. Also available under Navigation in the mod menu.
+- Alt+Backslash: toggle the event group filter, grouping repeated triggers for the same event and preferring the closest reachable trigger. Also available under Navigation in the mod menu.
 - Ctrl+Shift+Backslash: toggle Hide story-gated destinations (default Off). Also under F8 > Navigation. This hides proven story barriers while keeping uncertain destinations and ordinary NPC obstructions.
 - Ctrl+arrow: teleport north, south, west or east of the selected destination, if Navigation / Teleport shortcuts is enabled (default off).
 - Shift+G: start or repeat the current puzzle-guide step.
 - FF6 story guidance gives brief directions and necessary party-switch instructions. Parked parties block both guidance and normal paths; when approaches are occupied, directions stop one step before the party and append “Blocked by Party n”. Terra/Banon defenses warn once when an enemy enters three tiles; Shift+G repeats the danger and identifies the closest party when all positions are known. Otherwise guidance aims for the commander who ends the defense.
 - Save points have their own Save Points category. FF6 animation/tutorial companions do not add duplicate destinations.
+- Objects contains things examined or used, such as statues, fountains and gravestones. Events contains automatic walk-on triggers; classification follows each object's actual activation.
 - Native name entry speaks letters crossed with arrows and letters erased with Backspace. Boss targets distinguish verified heads/shells, Chadarnook forms and FF5 Neo Exdeath body areas.
 - Ctrl+G: stop the puzzle guide.
 - G: announce gil.
 - M: announce the current map.
 - V: announce walking or the current vehicle.
-- H: announce the active character's vitals in battle; party information elsewhere. FFVI also reports airship heading and altitude when applicable.
+- H: announce the active character's vitals and visible conditions in battle; party information elsewhere. FFVI also reports airship heading and altitude when applicable.
 - T in battle: announce the active turn.
-- 1-9 in battle: read the corresponding party member's vitals. In shops: read that party member's equipment comparison.
+- 1-9 in battle: read the corresponding party member's vitals and visible conditions, including Critical. In shops: read that party member's equipment comparison, including Can not equip. Each party shortcut has its own remappable binding.
 - R: repeat the current dialogue or message.
 - I: read the highlighted item's, spell's or setting's details. In equipment and shops, read the current stats/description panel, following Q or X/Square. In the mod menu, I describes the highlighted setting.
 - Shift+I: read the controls for the current screen.
@@ -106,6 +107,8 @@ Use Current map to keep eligible events and interactive objects available while 
 Each individual map exit routes to its highlighted tile, including entrances that lead to the same floor. World map exit lists include reachable transition trigger tiles. The map exit filter updates the nearest entrance after movement; turn it off to browse individual reachable entrances.
 
 Speech / Entrance suffixes adds stable letters to distinct exits sharing a destination name, including different destination IDs and floors, such as Coliseum (A) and (B). Adjacent tiles of one doorway share a letter. Both entrance suffixes and event grouping default off and are saved per game.
+Reachable locked doors remain in Objects even without a key or unlocking ability. Directions lead beside the door so you can examine it; the room behind it can still be blocked. Separate obstacles preventing access to the door still count as barriers. In Current map, proven reverse exits from future floors are omitted from the list while their forward entrances and the complete routing graph remain. Uncertain or one-way connections stay listed.
+
 Scene triggers can be selected as destinations. For a story-gated destination, directions to a reachable scene trigger are included when one is available.
 
 Waypoints (field only)
@@ -132,7 +135,7 @@ Other toggles
 - F7: toggle Autodetail.
 - F8 on the field: open the mod menu. F8 closes it directly.
 
-The October 22 development build adds two Speech settings: Interrupt speech on character turn (default on) and Enemy status announcements (default off). Turning turn interruption off queues automatic turn speech; manual T still interrupts. Enemy status speech follows actual visible effects, sprite transformations or material changes. Indistinguishable effects use a generic label; hidden Critical is not inferred from enemy HP. Battle results notifications once defaults on when unset and keeps every displayed message in the review buffer. Existing saved settings are preserved.
+Speech includes two independent settings: Interrupt speech on character turn (default on) and Enemy status announcements (default off). Turning turn interruption off queues automatic turn speech; manual T still interrupts. Enemy status speech follows actual visible effects, sprite transformations or material changes. The separate Enemy critical status option defaults off; it can disclose low enemy HP without a standard visible danger pose. Indistinguishable effects use a generic label; hidden Critical is not inferred from enemy HP. Battle results notifications once defaults on when unset and keeps every displayed message in the review buffer. Existing saved settings are preserved.
 
 The mod menu has Speech, Navigation, Navigation audio and Battle categories. Speech starts with Game speech (default on). Turning it off mutes game and gameplay announcements; the speech-only mod menu continues speaking, including its help and close announcement. Speech also includes Autodetail, Verbose/Brief stat deltas, Status damage (default on) and Spoil treasure chest contents (default off). Navigation includes Autowalk, Navigation keymap, Teleport shortcuts, Speak autowalk path, filters and Stick Click Normalization. Navigation audio starts with its master switch (default on), followed by HRTF, Soundscape and Soundscape settings. The audio master silences every mod sound while preserving individual preferences. It also contains the existing sound toggles and volumes, Beacon with directions, the EXP counter where supported, and Sound previews. Autowalk, Speak autowalk path, Beacon with directions, Soundscape and HRTF remain independently default off.
 
@@ -142,7 +145,7 @@ Teleport shortcuts require clear terrain and an unoccupied landing with a legal 
 
 In the mod menu, Up/Down selects a category or setting, Enter/Space opens or toggles it, Left/Right changes a value, I reads its description, and Escape returns to the parent menu or closes from the root. Controller navigation uses the same menu and settings.
 
-Beacon mode is also available in F8 > Navigation audio. Follow route (the default) guides you to each leg of the route. Object location pings the selected entity or waypoint directly, even through walls, without checking whether you can walk straight to it. Object mode works on the current floor; for a destination on another floor, use Follow route. On world maps, object bearings follow the shortest direction across the map edges. Both modes keep the existing arrival silence and resume when you move away. F6 stays the on/off switch, and Beacon with directions can still be used with either mode. Soundscape, the Autowalk setting, spoken directions and volume settings remain independent. Like other manual keys, Shift+F6 stops an active autowalk.
+Beacon mode is also available in F8 > Navigation audio. Follow route (the default) guides you to each leg of the route. Object location pings the selected entity or waypoint directly, even through walls, without checking whether you can walk straight to it. Object mode works on the current floor; for a destination on another floor, use Follow route. On world maps, object bearings follow the shortest direction across the map edges. Both modes keep the existing arrival silence and resume when you move away. Follow route keeps its ping cadence during continuous movement and temporary replanning; moving along the known route does not require an idle frame. F6 stays the on/off switch, and Beacon with directions can still be used with either mode. Soundscape, the Autowalk setting, spoken directions and volume settings remain independent. Like other manual keys, Shift+F6 stops an active autowalk.
 
 Soundscape and spatial audio
 
@@ -175,7 +178,7 @@ Use uncompressed 16-bit PCM WAV, mono or stereo, 8,000–96,000 Hz, at most four
 - wall_bump.wav: collision thud.
 - wall_north.wav, wall_south.wav, wall_east.wav, wall_west.wav: continuous wall proximity tones. Retain distinct pitches if you want the existing direction cues.
 - beacon.wav: ordinary route or object beacon; fallback rear-direction pitch is applied by the mod.
-- beacon_blocked.wav: lower beacon for a blocked or distant route.
+- beacon_blocked.wav: lower beacon for a blocked or distant route in stereo fallback. Active HRTF uses beacon.wav at its original pitch.
 - exp_counter.wav: looping battle-results EXP tick, where supported.
 - landing.wav: vehicle landing ping, where supported; fallback directional pitches are applied by the mod.
 - npc.wav: NPC chirp.
@@ -191,6 +194,12 @@ These are all mod-generated sound effects. Native game music, footsteps and menu
 
 Battle results and information buffers
 
+Battle command lists can have multiple pages. Left/Right (A/D with the native defaults) switches the page where the arrows and page number appear. FFIII Scholar uses Study and Alchemy; Alchemy replaces regular Items, and that job has no Magic command. Having MP does not add a command to the job.
+
+Ally targeting, H and the party number shortcuts include conditions represented by visible status icons, body changes, colors or effects, even when the ordinary command HUD omits the condition column. Critical/KO follow the visible danger and knockout indicators. Generic enemies have no standard low-health danger pose in these games.
+
+In battle Items, moving up to the equipped-gear row reads the selected gear and its visible Equipped marker. I reads its displayed description; Autodetail includes it automatically. Tab retains the game's Change Equipment action.
+
 At battle entry in all six games, the mod announces the enemy formation with each enemy name and count, for example, "Enemy formation. 3 Goblin. 2 Hornet." Native opening messages such as "Ambushed!" and "Pre-emptive strike!" are spoken before the formation, followed by the first character’s turn and command. Pressing Control can still stop this speech. The formation is announced once per battle, independently of Autodetail; Game speech controls it along with other gameplay speech.
 
 - Up/Down: previous/next line.
@@ -199,6 +208,10 @@ At battle entry in all six games, the mod announces the enemy formation with eac
 - Enter: advance the native results phase normally.
 
 Speech / Battle results: notifications once is off by default. Turn it on to announce a level-up or learned-ability notification once per battle, omitting its repeats from later results buffers. New notifications, displayed totals and manual review of the first buffer are preserved. Shops always announce the highlighted product’s displayed price, regardless of Autodetail or the native description/stat panel toggle.
+
+Shop comparisons follow the game's single stronger/weaker/equal/equipped icon; the game can consider both eligible hands. Use Equip and choose a hand or slot to review its displayed before/after statistics. The ordinary Items list and item/job eligibility view show the item's own statistics, without comparison deltas.
+
+In FFIII Fat Chocobo storage, Store, Retrieve and Exit speak on the command bar. Item rows read their name and visible quantity. Empty Retrieve speaks No stored items. Quantity selection reads the item, stock and selected amount, then speaks changed amounts. I reads the description; Shift+I reads the displayed controls.
 
 Equipment replacement comparisons, extra item-detail screens and FFVI Esper information use an arrow-key buffer. W/A/S/D retains native equipment selection. I reads the current item panel for comparisons and the full current buffer on an extra item-detail screen. Equipment slots speak the slot label, displayed Favored Hand and item name; Autodetail adds the current panel. Extra item-detail entry includes the displayed quantity once; its buffer follows the current native page. The old U equipment-information key has been removed.
 
@@ -293,3 +306,14 @@ Credits
 
 Mod source: https://github.com/bladestorm360/FFPRCore-Screen-Reader
 Prism source: https://github.com/ethindp/prism/tree/94329ebeccbaee7f70b3494a290c9dfaac0184ee
+
+
+Map accessibility: basic maps offer an arrow-key marker buffer with approximate
+bearing/distance. The location map reads highlighted names; Autodetail adds
+visible services and counters, or press I manually. Shift+I reads screen controls.
+Multiple location details use arrows; native WASD/pan/zoom/switch/cancel remain.
+F9 suspends game-context mod shortcuts so native controls can be used, including
+inside menus. Press F9 again to restore them. The same persistent switch is in
+F8 > Navigation > Controls. F8 and mod-owned dialogs remain usable while Off.
+Soundscape entrances and automatic trigger tiles group independently from the
+pathfinder's grouping filters, with one town-border exit source per direction.

@@ -9,6 +9,8 @@
 #include <cstdio>
 #include <cwctype>
 #include "field_internal.h"
+#include "baked_map.h"
+#include "baked_nav.h"
 #include "../game.h"
 #include "../modtext.h"
 #include "../text.h"
@@ -233,6 +235,11 @@ Category Entity::category() const
     case Kind::MapExit: return Category::MapExits;
     case Kind::Vehicle: return Category::Vehicles;
     case Kind::SavePoint: return Category::SavePoints;
+    // Activation belongs to the native entity class, not to the script's
+    // contents/name. Keep Kind::Event for shared script/consumption tracking.
+    case Kind::Event:
+        return event_type == L"Interactive Object" || event_type == L"Interactive"
+            ? Category::Objects : Category::Events;
     default: return Category::Events;   // Event, ScriptTrigger
     }
 }
@@ -270,6 +277,11 @@ bool Entity::is_alive() const
     if (!game || !live_entity(game)) return false;
     if (game_class && il2cpp::object_class(game) != game_class) return false;
     if (kind == Kind::NPC && !npc_navigation_available(game)) return false;
+    if(kind==Kind::TreasureChest && pickup && is_opened())return false;
+    if(kind==Kind::NPC && baked::submap_by_map_id(current_map_id())) {
+        baked_route::Cell cell;
+        if(!baked_nav::cell_at(field::map_handle(),position(),cell))return false;
+    }
     if (kind == Kind::Event && r::kFieldMapObjectDefault.is(game) &&
         !call_virtual_bool(r::mMapObjectGetCanAction, game)) return false;
     return entity_is_present(game);
@@ -296,7 +308,8 @@ std::wstring Entity::display_name() const
 {
     // Remote chests use copied save flags; unknown state must not become Unopened.
     const auto chest_name = kind == Kind::TreasureChest && !ui::prefs::spoil_treasure_chest_contents_enabled()
-        ? T(L"Treasure Chest") : name;
+        ? T(pickup?L"Treasure":L"Treasure Chest") : name;
+    if(kind==Kind::TreasureChest && pickup)return chest_name;
     if (remote() && kind == Kind::TreasureChest && !opened_known) return chest_name;
     switch (kind) {
     case Kind::TreasureChest:
@@ -318,7 +331,7 @@ std::wstring Entity::display_name() const
 std::wstring Entity::type_name() const
 {
     switch (kind) {
-    case Kind::TreasureChest: return T(L"Treasure Chest");
+    case Kind::TreasureChest: return T(pickup?L"Treasure":L"Treasure Chest");
     case Kind::NPC: return T(L"NPC");
     case Kind::MapExit: return T(L"Map Exit");
     case Kind::SavePoint: return T(L"Save Point");
@@ -333,7 +346,8 @@ std::wstring Entity::format_description(unity::Vec3 player_pos, bool directly_re
 {
     // Another floor (user, 2026-10-11): "{name} ({floor}) - {type}". Steps and a direction
     // mean nothing across floors.
-    if (remote()) return display_name() + L" (" + floor_name + L") - " + type_name();
+    if (remote()) return display_name() + L" (" + floor_name + L")" +
+        (route_note.empty()?std::wstring():L" ("+route_note+L")") + L" - " + type_name();
     if (!directly_reachable)
         return display_name() + (route_note.empty() ? std::wstring() : L" (" + route_note + L")") + L" - " + type_name();
     unity::Vec3 p = position();

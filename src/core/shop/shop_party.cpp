@@ -7,7 +7,11 @@
 //
 // Rendered text is read as the game shows it (the equipped mark's text, the impossible text,
 // unless they are bare symbols). The arrows are icons, so their words are the mod's
-// ("Stronger" / "Weaker"); no arrow, no mark and no text is "No change". The panel carries no
+// ("Stronger" / "Weaker"). Native CharacterImageController's current rendered
+// animation distinguishes Can equip (win) from Can not equip (Default_00); an
+// absent arrow alone cannot distinguish those states. Equipment classification
+// comes from the selected Content record, not Weapon/Armor primary-key guesses.
+// The panel carries no
 // stat numbers: the item's own stat line is the shop's description, read by the I key.
 #include <cwctype>
 #include <string>
@@ -39,6 +43,14 @@ ref::Class  kListMain{"Last.UI.KeyInput", "ShopListMainContentController"};
 ref::Field  fCharacterContentList{kListMain, "characterContentList"};
 ref::Class  kCharaStatus{"Last.UI.KeyInput", "ShopCharaStatusContentController"};
 ref::Field  fCharaView{kCharaStatus, "view"};
+ref::Field  fCharacterController{kCharaStatus,"characterController"};
+ref::Field  fCharacterData{kCharaStatus,"<Data>k__BackingField"};
+ref::Class kCharacterImage{"Last.UI","CharacterImageController"};
+ref::Field fAnimation{kCharacterImage,"currentState"},fImageView{kCharacterImage,"view"};
+ref::Class kCharacterImageView{"Last.UI","CharacterImageView"};
+ref::Field fMainImage{kCharacterImageView,"mainImage"};
+ref::Class kOwnedCharacter{"Last.Data.User","OwnedCharacterData"};
+ref::Method mGetName{kOwnedCharacter,"get_Name",0};
 ref::Class  kCharaView{"Last.UI.KeyInput", "ShopCharaStatusContentView"};
 ref::Field  fNameText{kCharaView, "charaNameText"};
 ref::Field  fUpImage{kCharaView, "stateUpImage"};
@@ -87,7 +99,16 @@ void announce_slot(int slot)
         if (!view) return;
 
         std::vector<std::wstring> parts;
+        void* portrait=ref::rd<void*>(content,fCharacterController);
+        const bool portrait_visible=displayed::image_visible(ref::rd<void*>(ref::rd<void*>(portrait,fImageView),fMainImage));
         std::wstring name = displayed::text(ref::rd<void*>(view, fNameText));
+        // KeyInput draws the character/job sprite instead of charaNameText.
+        // Its own assigned Data identifies that visible portrait; never use a
+        // different party index or disclose a character from a hidden slot.
+        if(name.empty()&&portrait_visible) {
+            void* data=ref::rd<void*>(content,fCharacterData);
+            if(kOwnedCharacter.is(data))name=ref::call_str(mGetName,data);
+        }
         if (!name.empty()) parts.push_back(name);
 
         const std::wstring impossible = displayed::text(ref::rd<void*>(view, fImpossibleText));
@@ -96,10 +117,16 @@ void announce_slot(int slot)
         const std::wstring equipped_text = displayed::text(ref::rd<void*>(view, fEquippedText));
         const bool equipped = !equipped_text.empty() || displayed::image_visible(ref::rd<void*>(view, fEquippedImage));
 
-        if (!impossible.empty()) parts.push_back(has_letter_or_digit(impossible) ? impossible : T(L"Cannot equip"));
-        else if (up) parts.push_back(T(L"Stronger"));
-        else if (down) parts.push_back(T(L"Weaker"));
-        else if (!equipped) parts.push_back(T(L"No change"));
+        const bool equipment=last_item_content_type()==2 || last_item_content_type()==3;
+        const auto animation=equipment&&portrait_visible?ref::rd_str_bounded(portrait,fAnimation,32):std::wstring();
+        const bool cannot=!impossible.empty()||animation==L"Default_00";
+        if(cannot) parts.push_back(has_letter_or_digit(impossible)?impossible:T(L"Can not equip"));
+        else {
+            if(animation==L"win")parts.push_back(T(L"Can equip"));
+            if(up)parts.push_back(T(L"Stronger"));
+            else if(down)parts.push_back(T(L"Weaker"));
+            else if(!equipped && animation==L"win")parts.push_back(T(L"No change"));
+        }
         if (equipped) parts.push_back(has_letter_or_digit(equipped_text) ? equipped_text : T(L"Equipped"));
 
         if (parts.empty()) return;

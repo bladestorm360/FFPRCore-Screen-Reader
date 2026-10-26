@@ -23,7 +23,13 @@ def main():
         names=json.loads((ROOT/f'data/ff{n}/translation.json').read_text(encoding='utf8'))
         for asset,label in SPRITES[n].items():
             assert labels[f'@sprite:{asset}']==label
-        for label in labels.values():
+        for raw,label in labels.items():
+            if label=='@route-only':
+                # Reviewed navigation metadata is filtered before speech. Its
+                # defensive formatter yields the existing Event trigger key.
+                assert n==3 and raw=='世界一周', (n,raw,label)
+                assert set(common['Event trigger'])==langs
+                continue
             if label.startswith('@name:'):
                 entry=names.get(label[6:])
                 assert entry and all(entry.get(lang) for lang in langs-{'ja'}), (n,label)

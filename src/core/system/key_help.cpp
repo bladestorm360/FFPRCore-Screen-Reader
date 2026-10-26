@@ -16,23 +16,54 @@
 #include "ui_util.h"
 #include "unity.h"
 #include "system/system.h"
-#include "field/object_cache.h"
 
 namespace ffpr::system {
 namespace {
 
 ref::Class kKeyHelpController{"Last.UI.KeyInput", "KeyHelpController"};
-ref::Class kKeyHelpView{"Last.UI.KeyInput", "KeyHelpView"};
-ref::Field fKeyHelpView{kKeyHelpController, "view"};                        // private, no accessor
-ref::Field fKeyHelpContentsParent{kKeyHelpView, "keyHelpContentsParent"};    // KeyHelpView.ContentsParent
 ref::Method mInitialize{kKeyHelpController, "Initialize", 0};
+ref::Method mUpdateView{kKeyHelpController,"UpdateView",1};
+ref::Method mDestroy{kKeyHelpController,"OnDestroy",0};
 using Initialize = void (*)(void*, const void*);
 Initialize o_initialize;
 void d_initialize(void* self, const void* mi) {
     o_initialize(self, mi);
     hooks::guarded("KeyHelp.Owner", [self] {
-        if (kKeyHelpController.is(self)) field::cache::register_object(kKeyHelpController, self);
+        if (kKeyHelpController.is(self)) register_controls_owner(self,false);
     });
+}
+using UpdateView=void(*)(void*,void*,const void*);
+UpdateView o_update_view;
+void d_update_view(void* self,void* values,const void* mi) {
+    o_update_view(self,values,mi);
+    hooks::guarded("KeyHelp.Published",[=]{register_controls_owner(self);});
+}
+Initialize o_destroy;
+void d_destroy(void* self,const void* mi) {
+    hooks::guarded("KeyHelp.Retired",[=]{retire_controls_owner(self);});
+    o_destroy(self,mi);
+}
+// Battle Items/Equip and several ordinary screens render standalone widgets,
+// not a KeyHelpController. Observe the common final renderer and lifecycle so
+// Shift+I can read their actual glyph text/caption without searching the scene.
+ref::Class kKeyIconController{"Last.UI.KeyInput","KeyIconController"};
+ref::Method mIconInitialize{kKeyIconController,"Initialize",1};
+ref::Method mIconRender{kKeyIconController,"UpdateView",4};
+ref::Method mIconDestroy{kKeyIconController,"OnDestroy",0};
+using IconInitialize=void(*)(void*,bool,const void*);
+using IconRender=void(*)(void*,void*,void*,void*,bool,const void*);
+IconInitialize o_icon_initialize;IconRender o_icon_render;Initialize o_icon_destroy;
+void d_icon_initialize(void* self,bool change,const void* mi) {
+    o_icon_initialize(self,change,mi);
+    hooks::guarded("KeyHelp.WidgetOwner",[=]{register_controls_icon(self,false);});
+}
+void d_icon_render(void* self,void* message,void* second,void* keys,bool comma,const void* mi) {
+    o_icon_render(self,message,second,keys,comma,mi);
+    hooks::guarded("KeyHelp.WidgetPublished",[=]{register_controls_icon(self);});
+}
+void d_icon_destroy(void* self,const void* mi) {
+    hooks::guarded("KeyHelp.WidgetRetired",[=]{retire_controls_icon(self);});
+    o_icon_destroy(self,mi);
 }
 
 // NavigationBuffer over pre-rendered entries.
@@ -58,9 +89,6 @@ bool g_primed = false;
 // cannot leave the KeyHelp key context stuck.
 bool g_help_active = false;
 void* g_help_owner = nullptr;   // ConfigKeysSettingController (identity; alive-checked)
-
-// GameObjectCache.Get<KeyHelpController>() ?? Refresh: cleared on every scene load.
-void* g_controller_cache = nullptr;
 
 void speak(const std::wstring& s)
 {
@@ -103,58 +131,13 @@ void jump_to_bottom()
     speak(g_buffer.bottom());
 }
 
-void* key_help_controller()
-{
-    if (unity::alive(g_controller_cache)) return g_controller_cache;
-    g_controller_cache = field::cache::get(kKeyHelpController);
-    return g_controller_cache;
-}
-
-// ReadVisibleEntries: "{action}: {key}" for each visible hint of the on-screen KeyHelpController.
-std::vector<std::wstring> read_visible_entries()
-{
-    std::vector<std::wstring> entries;
-    void* controller = key_help_controller();
-    if (!controller || !unity::active_in_hierarchy(controller)) return entries;
-
-    void* view = ref::rd<void*>(controller, fKeyHelpView);
-    if (!view) return entries;
-    void* contents_parent = ref::rd<void*>(view, fKeyHelpContentsParent);
-    if (!contents_parent) return entries;
-    void* contents = unity::transform(contents_parent);
-    if (!contents) return entries;
-    const int n = unity::child_count(contents);
-    if (n == 0) return entries;
-
-    // Each child is one entry (KeyIconController); entries on other pages are deactivated.
-    for (int i = 0; i < n; ++i) {
-        void* child = unity::child(contents, i);
-        if (!child || !unity::active_in_hierarchy(child)) continue;
-        std::vector<std::wstring> parts;
-        for (void* t : unity::texts(child, false)) {
-            std::wstring s = unity::ui_text(t);
-            if (!text::is_blank(s)) parts.push_back(text::trim(s));
-        }
-        if (!parts.empty()) entries.push_back(text::join(parts, L": "));
-    }
-    return entries;
-}
-
 // AnnounceKeyHelp (Shift+I)
 void announce_key_help()
 {
-    bool ok = false;
-    std::wstring result;
-    hooks::guarded("KeyHelpReader.AnnounceKeyHelp", [&] {
-        std::vector<std::wstring> entries = read_visible_entries();
-        result = entries.empty() ? T(L"No controls displayed") : text::join(entries, L", ");
-        ok = true;
-    });
-    if (!ok) {
-        LOGF("Error in AnnounceKeyHelp");
-        result = T(L"Error reading controls");
-    }
-    ffpr::say(result, true);
+    if(queries::is("Warehouse.IsActive")){actions::run("Warehouse.ReadControls");return;}
+    if(queries::is("MapPanels.IsActive")){actions::run("MapPanels.ReadControls");return;}
+    if(queries::is("BestiaryStateTracker.IsInDetail")){actions::run("Bestiary.ReadControls");return;}
+    hooks::guarded("KeyHelpReader.AnnounceKeyHelp", [] { announce_current_controls(); });
 }
 
 int install()
@@ -167,13 +150,20 @@ int install()
     actions::define("KeyHelpReader.CloseControlsHelp", [] { close_controls_help(); });
     queries::define("KeyHelpReader.IsScreenActive", [] { return key_help_screen_active(); });
 
-    // FF1 OnSceneLoaded: the controls help never survives a scene change, and GameObjectCache is
-    // cleared.
+    // Requests/popups retire at scene changes. Lifecycle-owned bars may survive
+    // additive preload and are still validated by their real view on each read.
     events::on(events::Kind::SceneLoaded, [] {
-        g_controller_cache = nullptr;
+        cancel_controls_reading();
         close_controls_help();
     });
-    return hooks::attach(mInitialize, &d_initialize, &o_initialize) ? 1 : 0;
+    int count=0;
+    count+=hooks::attach(mInitialize,&d_initialize,&o_initialize)?1:0;
+    count+=hooks::attach(mUpdateView,&d_update_view,&o_update_view)?1:0;
+    count+=hooks::attach(mDestroy,&d_destroy,&o_destroy)?1:0;
+    count+=hooks::attach(mIconInitialize,&d_icon_initialize,&o_icon_initialize)?1:0;
+    count+=hooks::attach(mIconRender,&d_icon_render,&o_icon_render)?1:0;
+    count+=hooks::attach(mIconDestroy,&d_icon_destroy,&o_icon_destroy)?1:0;
+    return count;
 }
 
 core::Install s_install{"KeyHelpReader", &install, 100};

@@ -6,6 +6,7 @@ docs/re/OBJECT_IDENTITIES.md. Asset 0 supplies no sprite identity.
 """
 import re
 import json
+import hashlib
 from pathlib import Path
 
 # Factual object locators and mod-owned classifications only. Full scripts and
@@ -13,6 +14,47 @@ from pathlib import Path
 _review_path = Path(__file__).parent / 'event_identity_reviews.json'
 REVIEWS = {(r['game'],r['submap'],r['group'],r['id']):r
            for r in json.loads(_review_path.read_text(encoding='utf-8'))} if _review_path.exists() else {}
+WARP_REVIEWS = {(r['game'],r['submap'],r['group'],r['id']):r for r in
+               json.loads((Path(__file__).parent/'event_warp_reviews.json').read_text(encoding='utf-8'))}
+WORLD_TRAVEL_REVIEWS = {(r['game'],r['submap'],r['raw'],r['script_id']):r for r in
+                       json.loads((Path(__file__).parent/'world_transition_reviews.json').read_text(encoding='utf-8'))}
+
+
+WORLD_EVENT_REVIEWS=json.loads((Path(__file__).parent/'world_event_reviews.json').read_text(encoding='utf-8'))
+
+
+def reviewed_world_event_identity(n, obj, script_name, script):
+    # Exact occurrences and whole-script hashes: pure bookkeeping must not
+    # become a scene destination; actual conditional travel keeps its own name.
+    row=next((r for r in WORLD_EVENT_REVIEWS if (r['game'],r['submap'],r['group'],r['id'])==(n,obj['submap'],obj['group'],obj['id'])),None)
+    if not row:return None
+    p=obj.get('props') or {}
+    assert obj['type']==2 and p.get('action_id')==2 and row['raw']==obj['name']
+    assert row['entity_id']==p.get('entity_id') and row['script_id']==p.get('script_id') and row['script_name']==script_name
+    digest=hashlib.sha256(json.dumps(script,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+    assert digest==row['script_sha256'],'Reviewed world event changed; inspect before classifying'
+    return row['label'],row['reason'],None
+
+
+def reviewed_warp_identity(n, obj, script_name, script):
+    """Reviewed travel pads, never all scripts which happen to change maps.
+
+    Pandaemonium's generic numbered scripts only play the warp animation/sound,
+    fade, optionally maintain the teleport cache and change maps. Their native
+    identifiers often omit 'warp'. Bind the complete inspected script and exact
+    occurrence so narrative scenes, traps and shared numbered names stay separate.
+    Only facts/hashes are kept here; script bodies remain outside Git.
+    """
+    row = WARP_REVIEWS.get((n,obj['submap'],obj['group'],obj['id']))
+    if not row:
+        return None
+    p = obj.get('props') or {}
+    assert obj['type'] == 2 and p.get('action_id') == 2, 'Reviewed warp activation changed'
+    assert row['raw'] == obj['name'] and row['entity_id'] == p.get('entity_id')
+    assert row['script_id'] == p.get('script_id') and row['script_name'] == script_name
+    digest = hashlib.sha256(json.dumps(script,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
+    assert row['script_sha256'] == digest, 'Reviewed warp script changed; inspect before relabelling'
+    return 'Warp Tile', 'reviewed warp animation and direct map travel', None
 _subjects = {}
 _chest_copies={(r['game'],r['submap'],r['layer'],*r['evidence']['tile']) for r in REVIEWS.values() if r['label']=='Treasure Chest'}
 for _r in REVIEWS.values():
@@ -118,6 +160,14 @@ def physical_identity(n, obj):
 
 def script_identity(n, obj, script_name, messages):
     """Only inspected physical subjects; no reward or future action is a name."""
+    p=obj.get('props') or {}
+    travel=WORLD_TRAVEL_REVIEWS.get((n,obj['submap'],obj.get('name',''),p.get('script_id')))
+    if travel:
+        # A repeated world border is real conditional map travel, not animation
+        # scenery. Identity is family-specific; other scenes keep their labels.
+        assert obj['type']==2 and p.get('action_id')==2 and obj['group']==travel['group']
+        assert script_name==travel['script_name']
+        return 'World map transition','reviewed airship world-border transition family',None
     if obj['type'] not in (5,10): return None
     # The reviewed Phoenix Tower interaction copies operate the same physical
     # wall panels on its other floors. Do not speak their future battle/stair

@@ -45,6 +45,69 @@ TARGETS = {
 if NUMBER!=6:
     TARGETS={key:TARGETS[key] for key in ('FieldNonPlayer','EventActionDefine','FieldController')}
     TARGETS['FieldNonPlayer']={'SetProperty','get_CanAction'}
+if '--visibility' in sys.argv:
+    # Shared visibility/collision maintenance uses its own evidence directory;
+    # never replace the earlier story/party investigation's native outputs.
+    OUT=ROOT.parent/'tools/npc_fynn_20261023'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'External.Puppet':{'SetPuppet','ExecPuppet'},
+             'Integrator':{'AddPuppetCore','ExecutePuppetCores'},
+             'Puppet':{'Hide','Show','ShowHideCommon'},'FieldNonPlayer':{'CanEnter'},
+             'FieldCharaEntity':{'CanEnter'}}
+if '--npc-detours' in sys.argv:
+    # Keep doorway/movement evidence separate from completed visibility exports.
+    OUT=ROOT.parent/'tools/npc_detours_20261023'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'FieldPlayerKeyController':{'OnTouchPadCallback'},
+             'FieldPlayer':{'MoveTo'},'FieldSpriteEntity':{'MoveTo'},'FieldEntity':{'MoveTo'},
+             'FieldController':{'IsCanMoveToDestPosition'}}
+if '--npc-actions' in sys.argv:
+    # Exact unanswered question: can action 2 with no script/message interact?
+    # Inspect dispatch and the script runner, retaining native text outside Git.
+    OUT=ROOT.parent/'tools/mysidia_objects_20261024'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'FieldNonPlayer':{'TakeAction','IsAcceptActionDirection'},
+             'EventAction':{'Talk','CraeteTask'},'EventActionDefine':{'.cctor'},
+             'EventActionScript':{'RequestEventRunScript','RunScript'},
+             'EventActionScript.<EventRunScript>d__9':{'MoveNext'},
+             'EventProcedure':{'EventTalk','EventTalkTask'},'EventActionScript.<EventRunScript>d__8':{'MoveNext'}}
+if '--map-panels' in sys.argv:
+    # Known displayed map producers: settle positions/units, visible counts,
+    # service-icon visibility and exact Show/Close ownership before hooking.
+    OUT=ROOT.parent/'tools/map_panels_20261024'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'ExpandMinimapMapController':{'Show','SetupPointList','SetupPoint','UpdatePointItem'},
+             'ExpandMinimapUIManager':{'SetMapResource'},
+             'ExpandMinimapController':{'Show','Hide'},
+             'GpsMenuInfoController':{'UpdateView'},
+             'GpsMenuController':{'Close','SetupKeyHelp','SetupKeyHelpFromExpandMinimap'},
+             'GpsIconContentView':{'SetIcon'},
+             'GpsMenuInfoView':{'SetEnableContentParent','SetNumChestValue','SetMaxChestValue','SetEnableShopSign'}}
+if '--ally-targets' in sys.argv:
+    OUT=ROOT.parent/'tools/ally_targets_20261024'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'BattleTargetSelectController':{'PlayerInit','PlayerUpdate','SelectContent','ShowWindow'},
+             'BattlePlayerInfomationController':{'UpdateView','SetTargetFocus','SetFocus','UseTargetSelectContent','UsePlayerInfoContent'},
+             'BattlePlayerInfomationTargetSelectContentController':{'UpdateView','SetFocus'},
+             'BattlePlayerInfomationContentController':{'UpdateView'}}
+if '--poison-status' in sys.argv:
+    OUT=ROOT.parent/'tools/poison_status_20261024'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'BattleConditionController':{'BattleEndRecoveryCondition'},
+             'ConditionUtility':{'IsOutBattle'},'ConditionDamage':{'Last.Map.IFootMonitor.Excute'},
+             'PoisonConditionFunction':{'Start','UpdateParameter'}}
+if '--battle-item-equipment' in sys.argv:
+    OUT=ROOT.parent/'tools/battle_item_equipment_20261024'/f'ff{NUMBER}'
+    OUT.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(OUT),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    TARGETS={'BattleItemInfomationController':{'SelectEquipContent','UseEquipSelectInit','UseEquipSelectUpdate','UseSelectUpdate','SetEquipDescription','UpdateEquipFocus','EquipmentSelectInit','SelectContent','SetEquipList'},
+             'BattleEquipContentController':{'UpdateView'}}
 names, targets = {}, {}
 for block in DUMP.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
     ns = block.splitlines()[0]
@@ -55,7 +118,7 @@ for block in DUMP.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
         rva = int(m[1], 16)
         label = ns + '.' + cls[1] + '.' + m[2] + '(' + m[3] + ')'
         names.setdefault(rva, []).append(label)
-        if m[2] in TARGETS.get(cls[1], set()):
+        if m[2] in TARGETS.get(cls[1], set()) or ('--ally-targets' in sys.argv and cls[1].startswith('BattleTargetSelectController.') and '<PlayerUpdate>' in m[2]):
             targets[label] = rva
 ordered = sorted(names)
 pe = pefile.PE(str(DLL), fast_load=True)

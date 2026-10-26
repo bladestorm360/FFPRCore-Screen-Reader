@@ -50,8 +50,9 @@ struct Corner {
     unity::Vec3 point{};           // the corner to steer at (map local space)
     int steps_to_corner = 0;
     int steps_left = 0;            // to the end of the route
+    bool pending = false;          // owned work underway; distinct from a proved blocked route
 };
-bool follow(void* map_handle, void* player, unity::Vec3 target, TargetKind kind, Corner& out, int entity_id = -1);
+bool follow(void* map_handle, void* player, unity::Vec3 target, TargetKind kind, Corner& out, int entity_id = -1, int transportation_id = 0);
 
 /// The player's cell and layer on the current map's baked grid (false off the field).
 bool player_cell(void* map_handle, void* player, baked_route::Cell& out);
@@ -82,6 +83,7 @@ struct MapGoal {
     baked_route::Cell cell;
     bool examine = false;   // the target is examined from a neighbouring cell (a switch, a clock)
     std::vector<baked_route::Cell> cells;   // explicit goal cells (baked_router goals_for), else from cell/examine
+    int transportation_id = 0;     // a selected vehicle uses its captured native model position
     int entity_id = -1;            // -1 for coordinate-only goals; zero is a valid native identity
     std::wstring raw_name;         // developer identity only, never spoken; separates story variants
 };
@@ -160,6 +162,7 @@ struct CrossLeg {
     bool trap_repeat_blocked = false;
     bool transition_repeat_blocked = false;
     bool event_on_route = false, incomplete = false;
+    int visited_maps = 0;          // owned search-work evidence for bounded regression checks
     bool on_this_map = false;        // the goal itself is the end of this leg
     int next_map_id = 0;             // the map the exit / warp leads to (when !on_this_map)
     std::vector<baked_route::Cell> cells;
@@ -171,7 +174,7 @@ struct CrossLeg {
 /// `with_gates`: the current map's live story gates (a sealed door, a locked gate) close the
 /// cells and exits they stand on; false ignores them, which tells whether a gate alone is
 /// what cuts the goal off.
-CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false);
+CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false, bool with_npcs = true);
 /// Retain a bounded completed-trap history for the current destination, preventing repeated legs.
 bool note_trap_start(int map_id, const baked_route::Cell& at);
 void record_map_arrival(int map_id, const baked_route::Cell& at);
@@ -187,6 +190,7 @@ std::wstring map_name_of(int map_id);
 /// teleport/vehicle pad or outward exit. `raw_name` is the developer's name (PropertyEntity.Name,
 /// to be translated like a live entity's).
 struct RemoteObject {
+    bool pickup=false;
     int map_id = 0;                 // the floor's map master id (the id its exit was reached by)
     baked_route::Cell cell;
     baked::ObjType type = baked::ObjType::Event;
@@ -194,7 +198,8 @@ struct RemoteObject {
     std::wstring group;             // the object's Tiled group ("entity_default" or an "ev_e_N" variant)
     int content_id = 0;             // TreasureBox: its contents
     std::optional<bool> opened;     // TreasureBox: copied native save flag; absent when unknown
-    int dest_map_id = 0;            // GotoMap: where it leads (never a floor of this group)
+    bool world_exit = false;       // verified script-backed travel; native identity/type retained
+    int dest_map_id = 0;            // GotoMap: its real destination, including connected floors
     bool shop = false;              // ShopNPC
     bool scripted = false;          // NPC/ShopNPC: an interaction script, not a name-only placeholder
     int entity_id = -1;

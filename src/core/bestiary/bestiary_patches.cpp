@@ -27,6 +27,7 @@
 #include "../say.h"
 #include "../text.h"
 #include "../unity.h"
+#include "../system/system.h"
 
 namespace ffpr::bestiary {
 namespace {
@@ -580,6 +581,11 @@ void d_PreviousMap(void* self, const void* mi)
 
 int install()
 {
+    actions::define("Bestiary.ReadControls",[] {
+        auto* controller=tracker().active_controller;
+        auto* view=unity::alive(controller)?displayed::field(controller,"view"):nullptr;
+        ffpr::system::announce_controls_for(displayed::field(view,"keyHelpController"));
+    });
     int n = 0;
     auto add = [&n](bool ok, const char* what) {
         if (ok) ++n;

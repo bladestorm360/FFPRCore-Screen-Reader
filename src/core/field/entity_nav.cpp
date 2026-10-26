@@ -16,6 +16,7 @@
 #include "baked_nav.h"
 #include "field_api.h"
 #include "field_internal.h"
+#include "target_kind.h"
 #include "map_names.h"
 #include "object_cache.h"
 #include "scene_events.h"
@@ -42,6 +43,7 @@ std::wstring category_name(Category c)
     case Category::Events: return T(L"Events");
     case Category::Vehicles: return T(L"Vehicles");
     case Category::SavePoints: return T(L"Save Points");
+    case Category::Objects: return T(L"Objects");
     }
     return T(L"Unknown");
 }
@@ -52,6 +54,7 @@ void speak(const std::wstring& t) { ffpr::say(t, true); }
 
 void mark_entity()
 {
+    scanner::remember_selection();
     if (actions::defined("NavigationTargetTracker.MarkEntity")) actions::run("NavigationTargetTracker.MarkEntity");
 }
 
@@ -109,16 +112,7 @@ void refresh_entities_if_needed()
 /// chest, on an exit, on a vehicle or save point; an event by what is baked at its cell.
 TargetKind target_kind_of(const Entity& e)
 {
-    switch (e.kind) {
-    case Kind::NPC:
-    case Kind::TreasureChest: return TargetKind::Interact;
-    case Kind::MapExit: return TargetKind::Transition;
-    // Infer recognizes the save point's own overlapping tutorial trigger as
-    // the selected action, so it is not announced as an event along the route.
-    case Kind::SavePoint: return TargetKind::Infer;
-    case Kind::Vehicle: return TargetKind::Spot;
-    default: return TargetKind::Infer;
-    }
+    return navigation_target_kind(e.kind,e.category());
 }
 
 /// Only the selected object is evaluated. Native capture and owned route work are
@@ -129,14 +123,15 @@ void format_current_entity(std::function<void(std::wstring)> publish)
     const auto e = scanner::current_entity();
     if (!e) { publish({}); return; }
     const auto ordinal = L" " + TF(L"({0} of {1})", {text::num(scanner::current_index() + 1), text::num(scanner::count())});
-    if (e->remote()) { publish(e->format_description({}) + ordinal); return; }
     FilterContext ctx;
     const auto position = e->position();
     baked_nav::MapGoal goal;
-    goal.map_id = current_map_id();
+    goal.map_id = e->remote()?e->remote_map_id:current_map_id();
     goal.entity_id = e->entity_id;
+    if(e->kind==Kind::Vehicle)goal.transportation_id=e->transportation_id;
     if (e->raw_name_known) goal.raw_name = e->audio_hint;
-    if (!baked_nav::cell_at(ctx.map_handle, position, goal.cell)) {
+    if(e->remote())goal.cell={e->cell_layer,e->cell_x,e->cell_y};
+    else if (!baked_nav::cell_at(ctx.map_handle, position, goal.cell)) {
         publish(e->format_description({}, false, T(L"Navigation map data unavailable")) + ordinal); return;
     }
     const auto generation = g_category_generation;
@@ -161,47 +156,55 @@ void format_current_entity(std::function<void(std::wstring)> publish)
 
 void announce_ready_entity(bool walking, double requested_at)
 {
-    EntityPtr e = scanner::current_entity();
-    if (!e) {
-        speak(T(L"No entity selected"));
-        return;
-    }
-    mark_entity();
-
-    FilterContext ctx;
-    if (!ctx.field_player || !unity::transform(ctx.field_player)) {
-        speak(T(L"Cannot determine directions"));
-        return;
-    }
-    const TargetKind kind = target_kind_of(*e);
+    const EntityPtr e = scanner::current_entity();
     baked_nav::MapGoal walk_goal;
-    if (e->remote()) {
-        // Another floor (user, 2026-10-11): the first leg, and the destination is remembered so
-        // that the next leg follows the transition (baked_nav::continue_pending).
-        baked_nav::MapGoal goal;
-        goal.map_id = e->remote_map_id;
-        goal.cell = baked_route::Cell{e->cell_layer, e->cell_x, e->cell_y};
-        walk_goal = goal;
-    } else {
-        baked_route::Cell walk_cell;
-        if (baked_nav::cell_at(ctx.map_handle, e->position(), walk_cell)) {
-            walk_goal.map_id = current_map_id();
-            walk_goal.cell = walk_cell;
-        } else {
-            speak(T(L"Navigation map data unavailable")); return;
+    TargetKind kind=TargetKind::Infer;
+    std::wstring name;
+    if(!e) {
+        // During a floor transition local rows can publish before the remote
+        // target is restored. The stable pending destination owns that gap;
+        // category/browse changes already clear it. Never select another chest.
+        if(!baked_nav::pending_goal(walk_goal,kind,name)) {
+            speak(T(L"No entity selected"));return;
         }
+    } else {
+        mark_entity();
+        FilterContext ctx;
+        if (!ctx.field_player || !unity::transform(ctx.field_player)) {
+            speak(T(L"Cannot determine directions"));return;
+        }
+        kind=target_kind_of(*e);
+        if(e->remote()) {
+            walk_goal.map_id=e->remote_map_id;
+            walk_goal.cell={e->cell_layer,e->cell_x,e->cell_y};
+        } else {
+            if(!baked_nav::cell_at(ctx.map_handle,e->position(),walk_goal.cell)) {
+                speak(T(L"Navigation map data unavailable"));return;
+            }
+            walk_goal.map_id=current_map_id();
+        }
+        walk_goal.entity_id=e->entity_id;
+        if(e->kind==Kind::Vehicle)walk_goal.transportation_id=e->transportation_id;
+        if(e->raw_name_known&&e->audio_hint.size()<256)walk_goal.raw_name=e->audio_hint;
+        const auto floor=e->remote()?e->floor_name:current_map_name();
+        name=e->display_name()+(floor.empty()?std::wstring():L" ("+floor+L")");
     }
-    walk_goal.entity_id = e->entity_id;
-    if(e->raw_name_known&&e->audio_hint.size()<256)walk_goal.raw_name=e->audio_hint;
-    // No route: the reason when the router knows it ("Story gated", "Blocked by an NPC",
-    // "Requires Ship"; user, 2026-10-11), else "No path".
-    const auto floor = e->remote() ? e->floor_name : current_map_name();
-    const auto name = e->display_name() + (floor.empty() ? std::wstring() : L" (" + floor + L")");
     if (walking) {
         ffpr::fieldnav::autowalk::request(walk_goal, kind, name);
     } else {
-        baked_nav::request_route(walk_goal, kind, name, [e, category_generation = g_category_generation, requested_at](PathInfo p) {
-            if (category_generation != g_category_generation || !ensure_field_context() || scanner::current_entity() != e || !e->is_alive()) return;
+        baked_nav::request_route(walk_goal, kind, name, [e, walk_goal, category_generation = g_category_generation, requested_at](PathInfo p) {
+            if(category_generation!=g_category_generation||!ensure_field_context())return;
+            const auto selected=scanner::current_entity();
+            if(e) {if(selected!=e||!e->is_alive())return;}
+            else if(selected) {
+                // A restored row may appear while the worker runs. Accept only
+                // the same destination; a new manual selection owns its output.
+                baked_route::Cell cell{selected->cell_layer,selected->cell_x,selected->cell_y};
+                const int map=selected->remote()?selected->remote_map_id:current_map_id();
+                if(!selected->remote()&&!baked_nav::cell_at(field::map_handle(),selected->position(),cell))return;
+                if(map!=walk_goal.map_id||!(cell==walk_goal.cell)||selected->entity_id!=walk_goal.entity_id||
+                   (!walk_goal.raw_name.empty()&&selected->audio_hint!=walk_goal.raw_name))return;
+            }
             auto message = p.success && !p.description.empty() ? p.description : (!p.reason.empty() ? p.reason : T(L"No path"));
             const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
             if (!p.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({p.warning, message}, true, timing);
@@ -467,6 +470,7 @@ int install()
     });
     events::on(events::Kind::SceneLoaded, [] {
         if (scene_name() == L"Title") {
+            scanner::clear_selection();
             scanner::invalidate_map(); baked_nav::clear_pending(true); baked_nav::invalidate();
         }
     });
@@ -502,6 +506,7 @@ Target selected()
         t.cell_x = e->cell_x;
         t.cell_y = e->cell_y;
         t.entity_id = e->entity_id;
+        t.transportation_id=e->kind==Kind::Vehicle?e->transportation_id:0;
     });
     return t;
 }

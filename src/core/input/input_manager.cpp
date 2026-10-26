@@ -76,7 +76,16 @@ void register_binding(Key key, Mod mod, Context ctx, std::function<void()> fn, c
         g_bindings.push_back(KeyEntry{key, {}});
         e = &g_bindings.back();
     }
-    const std::string id = "key." + std::to_string(int(ctx)) + "." + (description ? description : "") + "." + std::to_string(navigation_keymap);
+    std::string id = "key." + std::to_string(int(ctx)) + "." + (description ? description : "") + "." + std::to_string(navigation_keymap);
+    // Repeated descriptions (party slots 1..9) are distinct controls. Keep the
+    // first legacy ID, including its saved remap, but disambiguate later default
+    // chords. Otherwise bindings::add reuses key 1's entry for every party slot.
+    for (const auto& existing : bindings::entries()) {
+        if (existing.id == id && (existing.default_primary != int(key) || existing.default_modifier != int(mod))) {
+            id += ".default." + std::to_string(int(key)) + "." + std::to_string(int(mod));
+            break;
+        }
+    }
     const int index=bindings::add(id.c_str(),description?description:"",false,int(ctx),int(key),int(mod),navigation_keymap);
     Binding b{key, mod, index, ctx, std::move(fn), description ? description : "", navigation_keymap};
     auto before = [](const Binding& x, const Binding& y) {
@@ -212,7 +221,7 @@ void initialize_bindings()
     reg(Key::G, Mod::None, Context::Global, "Mod.AnnounceGilAmount", "Announce Gil");
     reg(Key::H, Mod::None, Context::Global, "Mod.AnnounceCharacterStatus", "Announce character status");
     reg(Key::M, Mod::Shift, Context::Global, "Mod.ToggleMapExitFilter", "Toggle map exit filter");
-    reg(Key::P, Mod::CtrlShift, Context::Field, "Mod.ToggleEventGroupFilter", "Toggle event group filter");
+    reg(Key::Backslash, Mod::Alt, Context::Field, "Mod.ToggleEventGroupFilter", "Toggle event group filter");
     reg(Key::Backslash, Mod::CtrlShift, Context::Field, "Mod.ToggleStoryGateFilter", "Toggle story gate filter");
     reg(Key::M, Mod::None, Context::Global, "Mod.AnnounceCurrentMap", "Announce current map");
     register_binding(Key::Tab, Mod::None, Context::Global, &handle_tab_key, "Clear battle state fallback");
@@ -225,6 +234,7 @@ void initialize_bindings()
 
     // --- Global: Shift+I (context-aware controls) ---
     register_binding(Key::I, Mod::Shift, Context::Global, &announce_context_controls, "Announce controls");
+    reg(Key::F9, Mod::None, Context::Global, "Input.ToggleControlInterception", "Toggle control interception");
 
     // --- Global: I (cascading menu priority) ---
     register_binding(Key::I, Mod::None, Context::Global, &global_hotkeys::handle_item_details_key, "Item details");
@@ -265,6 +275,7 @@ bool both(const char* a, const char* b)
 Context determine_context(bool on_demand)
 {
     if (queries::is("GameStatePatches.IsInputTransitionBlocked")) return Context::Global;
+    if (queries::is("Warehouse.IsActive")) return Context::Global;
     if (queries::is("ReviewBuffer.IsResults")) return Context::Results;
     // The key-help / controls overlay takes priority while shown.
     if (queries::is("KeyHelpReader.IsScreenActive")) return Context::KeyHelp;
@@ -284,6 +295,7 @@ Context determine_context(bool on_demand)
 void dispatch_registered_bindings(Context active)
 {
     for(int pass=0;pass<2;++pass) for(const auto& entry:g_bindings) for(const auto& b:entry.list) {
+        if(!interception_enabled() && b.key!=Key::F9 && b.key!=Key::F8)continue;
         if((pass==0 ? b.ctx!=active : b.ctx!=Context::Global || active==Context::Global))continue;
         if(b.navigation_keymap>=0 && b.navigation_keymap!=ui::prefs::navigation_keymap())continue;
         if(!bindings::pressed(b.binding))continue;
@@ -341,6 +353,11 @@ void update()
 
     if (queries::is("GameStatePatches.IsInputTransitionBlocked")) {
         return; // discard input edges; never replay hotkeys when loading finishes
+    }
+    // Recovery toggle remains available in every game menu and mod dialog,
+    // before modal dispatch. It never depends on an intercepted native key.
+    if(game_window_focused() && key_pressed(Key::F9) && !shift_held() && !ctrl_held() && !alt_held()) {
+        actions::run("Input.ToggleControlInterception");return;
     }
 
     // Per-frame footstep tile-crossing poll (field-active gated, silent in vehicles).

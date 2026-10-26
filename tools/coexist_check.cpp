@@ -213,11 +213,19 @@ void foreign_then_ours(int slot_index, bool fourteen, size_t fn_off)
 // hide the FF2 failure: 4 KiB blocks use only 31 of the slots that hole permits.
 void crowded_address_check()
 {
+    // MH_Initialize creates its private bookkeeping heap. Create that ordinary
+    // heap BEFORE fencing off the synthetic address range: otherwise Windows
+    // can place the heap in our sole free 64 KiB trampoline hole, making the
+    // fixture fail at hook zero for reasons unrelated to trampoline capacity.
+    // Production MinHook and the crowded 384-hook acceptance remain unchanged.
+    const auto initialized = MH_Initialize();
+    check(initialized == MH_OK, "initialize hook bookkeeping before the crowded layout");
+    if (initialized != MH_OK) return;
     constexpr SIZE_T range = 0x40000000, granularity = 0x10000;
     constexpr SIZE_T span = 2 * range + 3 * granularity;
     auto* base = static_cast<unsigned char*>(VirtualAlloc(nullptr, span, MEM_RESERVE, PAGE_NOACCESS));
     check(base != nullptr, "reserve isolated crowded address layout (no physical 2 GiB allocation)");
-    if (!base) return;
+    if (!base) { MH_Uninitialize(); return; }
     VirtualFree(base, 0, MEM_RELEASE);
     void* lower = VirtualAlloc(base, range, MEM_RESERVE, PAGE_NOACCESS);
     auto* upper = static_cast<unsigned char*>(VirtualAlloc(base + range + granularity,
@@ -227,7 +235,10 @@ void crowded_address_check()
     check(lower == base && upper == base + range + granularity && code == upper,
         "only one 64 KiB free region remains near the targets");
     if (code && lower == base) {
-        check(MH_Initialize() == MH_OK, "initialize crowded-layout hooks");
+        MEMORY_BASIC_INFORMATION before{};
+        VirtualQuery(base + range, &before, sizeof before);
+        check(before.State == MEM_FREE && before.RegionSize >= granularity,
+            "bookkeeping leaves the sole trampoline hole free");
         std::memset(code, 0xCC, granularity);
         int created = 0;
         bool originals_ok = true;
@@ -260,6 +271,7 @@ void crowded_address_check()
         VirtualQuery(base + range, &region, sizeof region);
         check(region.State == MEM_FREE, "last slot release frees the entire reserved hook block");
     }
+    else MH_Uninitialize();
     if (lower) VirtualFree(lower, 0, MEM_RELEASE);
     if (upper) VirtualFree(upper, 0, MEM_RELEASE);
 }

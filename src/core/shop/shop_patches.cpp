@@ -67,8 +67,8 @@ ref::Field  fPriceText{kListItemView, "priceText"};
 ref::Class  kIconTextView{"Last.UI", "IconTextView"};
 ref::Field  fIconNameText{kIconTextView, "nameText"};
 
-ref::Class  kWeapon{"Last.Data.Master", "Weapon"};
-ref::Class  kArmor{"Last.Data.Master", "Armor"};
+ref::Class  kShopContent{"Last.Data.Master", "Content"};
+ref::Method mShopContentType{kShopContent, "get_TypeId", 0};
 
 // Last.Defaine.ShopCommandId (identical in all five games).
 constexpr int CMD_BUY = 1, CMD_SELL = 2, CMD_EQUIPMENT = 3, CMD_BACK = 4;
@@ -114,9 +114,14 @@ std::wstring extract_price(void* content)
 int resolve_shop_item_type(int content_id)
 {
     if (content_id <= 0) return -1;
-    if (master_get_data(kWeapon, content_id)) return 2;   // CONTENT_TYPE_WEAPON
-    if (master_get_data(kArmor, content_id)) return 3;    // CONTENT_TYPE_ARMOR
-    return -1;
+    // Product IDs index Content, not Weapon/Armor. Their separate primary keys
+    // overlap unrelated items; probing those tables misclassified most equipment
+    // and suppressed the portrait's cannot-equip state. Read the product's own
+    // native type; never recalculate job eligibility or infer it from no arrow.
+    void* content = master_get_data(kShopContent, content_id);
+    if (!content) return -1;
+    const int type = ref::call<int32_t>(mShopContentType, content);
+    return type == 2 || type == 3 ? type : -1;
 }
 
 std::wstring command_name(int command_id)

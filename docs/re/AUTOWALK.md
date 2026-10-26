@@ -1,5 +1,12 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+October23 [NPC detour/temporary doorway behavior](NPC_BLOCKERS.md#october23-mysidia-detour-and-temporary-occupancy-follow-up)
+replans after a newly obstructed native edge or stalled tile instead of stopping
+immediately. Complete detours win. Open-approach patrol waits retain the selected
+goal and release movement while fresh snapshots are searched; true narrow gates
+retain manual handback. Retry cadence, bounds, cancellation, locales and offline
+versus gameplay evidence are maintained in that linked feature record.
+
 ## October 16 controller/mode audit
 
 The tester's exact game, native mode and input device remain unknown. Two concrete defects
@@ -261,3 +268,12 @@ inverse rotation and pre-existing shoulder holds. It passes. The safe controller
 check accepts the FF6 flight controller as well as ordinary walking input. A bounded
 off-route diagnostic records map/cell/layer/native vehicle identity if a user-side
 retest still stops. Real Falcon flight/handback timing remains gameplay-unconfirmed.
+
+
+## October25 Ur counter follow-up
+
+[Counter geometry and ownership](INN_COUNTER_MP_20261025.md) records the zero-ID
+clerk omission, active-relay snapshots and real-map all-six regression coverage.
+Quick floods copy flags once per new job; projection stays on Navigation, and
+per-entity native-side queries consume immutable relay geometry without waiting.
+Runtime callback/first-audible measurements remain unmeasured.

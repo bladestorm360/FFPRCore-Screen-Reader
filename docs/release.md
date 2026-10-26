@@ -1,5 +1,83 @@
 # Release procedure
 
+## V1.0 preparation, October26
+
+Status: in progress (~70%), Open pending source/tag/upload publication. Human request: deploy the checked beacon fix in
+closed FFIII, then prepare release1.0 through this established public-release
+procedure. The beacon deployment is complete/all132 payload hashes and144
+protected entries verified; its source milestone is Closed. Mallet/Items reading
+was user-confirmed correct and needs no battle/menu correction.
+
+One active system is release preparation. Checkpoints: R1 freeze current verified
+features, update1.0 metadata and player guide; R2 canonical build/smoke, complete
+locked dependency ZIP, exact payload/outer-archive security checks; R3 review and
+commit/push the intended mod-only diff, annotated tag, verified draft upload and
+download, publish; R4 final records, remote source and clean-tree acceptance.
+Expected effort30-45 minutes with publication/scan uncertainty reported if it
+overruns. No feature refactor, game launch/probe, dependency update, history rewrite
+or replacement of any earlier release. Closed feature interfaces remain preserved.
+
+Version changes are1.0.0.0 in both PE fields/strings and V1.0 in the boot stamp.
+Player controls are checked against the existing input/controller owners and
+current verified feature records. README/TXT include storage, visible ally status,
+equipment comparisons, locked doors, reciprocal remote exits and continuous/full
+HRTF beacon behavior, with gameplay and intermittent-lag limits retained.
+
+The existing public user-owned bladestorm360/FFPRCore-Screen-Reader repository
+was verified as ID1414637134, master, with push permission. Six earlier releases
+are snapshotted and v1.0 does not exist. Their tags/assets/history remain intact.
+Evidence/recovery/scope ledger:build_check/v10_20261026/. Prior source/DLL/install
+and exact security evidence remain in build_check/beacon_movement_20261026/.
+Public source/tag/ZIP delivery follows the standing prepare-release convention
+and the user's previously explicit publication approval for this named repository.
+
+Scope checked at resume and before R1: all source behavior is the completed
+candidate. Only release metadata and necessary documentation/packaging evidence
+change. No additional feature or speculative repair becomes a release dependency.
+
+R1/R2 complete:334 runtime source files match the verified deployed beacon
+candidate; the only two runtime changes are exact version/build-stamp substitutions.
+Current intended content was reviewed as mod-owned code, metadata, tests and
+documentation; no raw commercial-game source/analysis, credentials, logs, saves
+or settings are added. Native source-bearing evidence remains external to Git.
+Documentation has no code-body fences; genuine short operating commands remain.
+History/remotes are preserved; this is not a full historic-blob compliance claim.
+
+Canonical build/all offline checks pass:8275 native names/0 missing,141 used/
+348 defined/0 undefined wiring,47 proxy exports. Isolated smoke passes forwarding,
+boot and logger. All67 embedded resources (49data/18sounds) retain their verified
+source identities. PE is x64, numeric/string versions1.0.0.0, ASLR/NX/high-entropy
+VA enabled and truthful mod publisher/proxy description retained. No game launch
+or new gameplay confirmation. Sol owns implementation/review/verification; no
+delegation. Existing known-issue and listening records remain in TESTING.md.
+
+Prepared folder/ZIP: releases/Final Fantasy Pixel Master Core Screen Reader V1.0.
+7-Zip creation/test plus independent CRC, exact28-file single root, source/folder/
+archive byte equality, README/TXT conversion, complete SHA256SUMS and pinned
+Prism0.18.3/SDL/OpenAL Soft1.25.2/HRTF data/notices all pass.
+
+- DLL:10993152 bytes; SHA25635a59650e5d86cfded076263d5f2b58c7352eaf218ca3a861ee83af1f03565e4.
+- ZIP:6199100 bytes; SHA256a3b3c385bb446f0746cdcd14f9ee0ddb8e037604bc950b75f042f98eb795419f.
+
+Enabled/current Defender1.461.211.0 scans the final outer ZIP and all28 contained
+files together:29 exact staged files, no threats, zero matching detections and
+unchanged hashes. The signed installed Microsoft scanner is verified. Exclusion
+query remains denied/unverified; no code-signing certificate is available and
+payload DLLs remain unsigned. Download-origin/reputation, other scanner acceptance
+and protected-policy visibility remain untested; no security setting was changed.
+Official Microsoft signing and MpCmdRun guidance rechecked October26; links and
+limits remain in [security/distribution](SECURITY_AND_DISTRIBUTION.md).
+
+The user's requested deployment happened before release preparation: all six
+installed beacon DLLs are ea355feca25bf1c7bad59630a2c994ec0fb711a1c3cdd8d75fab111742c64079.
+The release candidate differs only in version/build metadata; packaging does not
+write game folders or change installed dependencies/preferences. Prior failed
+compiles, partial deployment refusal and recovery remain archived. Scope checked
+before R3: only the reviewed current mod-only candidate and requested new v1.0
+publication are allowed; preserve all six older releases and existing history.
+
+## Maintained procedure
+
 When the user says **prepare release X.X**, complete this procedure through the public
 GitHub release and uploaded ZIP. The user's October 13 instructions establish that
 convention and authorize committing, pushing and publishing the requested release.
@@ -587,3 +665,19 @@ final_verification.json and the corresponding source/API snapshots. The read-onl
 verify_publication.py retains the exact checks. No game launch or new gameplay
 confirmation was part of publication; the new occupancy refinement remains
 gameplay-unconfirmed as recorded in the testing and mechanics documents.
+
+
+## Security gate for subsequent releases, October24
+
+Follow [security and distribution](SECURITY_AND_DISTRIBUTION.md) alongside the
+existing release/recovery procedure. Verify build/dependency provenance, PE
+hardening and truthful product metadata; sign/timestamp with an established
+trusted identity where available and verify signatures. Scan the exact final
+contained executable/DLL/dependency payload and the final outer ZIP/installer
+with current local definitions before publication. Record hashes, scanner/
+definition/time/results, missing signing identity and coverage limits. Recheck
+any changed artifact. Retain protections/origin metadata and distinguish real
+detections from unsigned/reputation warnings. Private sample uploads, vendor
+submissions, installations/purchases and game runtime tests keep their existing
+permission requirements. The October24 local extracted-payload result is
+recorded separately and does not certify a future release archive.

@@ -5900,5 +5900,19 @@
     "ru": "Воздушный корабль разбит",
     "th": "เรือเหาะพังยับ",
     "pt": "Navio Voador Destruído"
+  },
+  "@map/11/NPC": {
+    "en": "Dahn",
+    "ja": "ダーン",
+    "fr": "Dahn",
+    "it": "Dahn",
+    "de": "Dahn",
+    "es": "Dahn",
+    "ko": "던",
+    "zht": "達恩",
+    "zhc": "达恩",
+    "ru": "Дан",
+    "th": "ดาห์น",
+    "pt": "Dahn"
   }
 }

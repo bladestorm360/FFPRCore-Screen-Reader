@@ -1,0 +1,35 @@
+[
+  {
+    "game": 3,
+    "submap": "Map_10010",
+    "group": "entity_default",
+    "raw": "地上全体へ：エンタープライズ",
+    "script_id": 341,
+    "script_name": "sc_e_0336",
+    "script_sha256": "4cd0f2fcfaf830448149d11683c36b902ef9654ae076a45fe53bf9d7ad57b129",
+    "copies": 508,
+    "label": "World map transition"
+  },
+  {
+    "game": 3,
+    "submap": "Map_10010",
+    "group": "entity_default",
+    "raw": "地上全体へ：ノーチラス",
+    "script_id": 345,
+    "script_name": "sc_e_0338",
+    "script_sha256": "28278ca5803b15b508e1af48a027ce1cf087e20c60182f132e28584fa614a0ef",
+    "copies": 508,
+    "label": "World map transition"
+  },
+  {
+    "game": 3,
+    "submap": "Map_10010",
+    "group": "entity_default",
+    "raw": "地上全体へ：インビンシブル",
+    "script_id": 349,
+    "script_name": "sc_e_0340",
+    "script_sha256": "d3229f57b49d1d635d4acf7c41d16519100a22deb649779a798b97fcf3069430",
+    "copies": 508,
+    "label": "World map transition"
+  }
+]

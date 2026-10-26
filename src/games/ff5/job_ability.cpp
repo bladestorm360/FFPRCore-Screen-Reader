@@ -560,6 +560,7 @@ bool announce_equip_command(void* self, int index)
 // --- AbilityUseContentListController.SelectContent (targets) -----------------------------------
 bool announce_use_target(void* self, int index)
 {
+    if(queries::is("FieldMagicTargets.OwnsRange"))return false;
     if (!self) return false;
     void* list = ref::rd<void*>(self, fUseContentList);
     void* cursor = ref::rd<void*>(self, fUseSelectCursor);
@@ -794,6 +795,7 @@ void d_UseSelectContent(void* self, void* contents, void* cursor, const void* mi
 
 void use_list_init(void* self)
 {
+    if(queries::is("FieldMagicTargets.OwnsRange"))return;
     if (!kAbilityUse.is(self)) return;
     dedup::reset(kCtxUseTarget);
     focus::request("AbilityTarget", [self] {
@@ -807,6 +809,7 @@ void use_list_init(void* self)
 V_t o_UseSingleInit;
 void d_UseSingleInit(void* self, const void* mi)
 {
+    if(kAbilityUse.is(self))actions::run("FieldMagicTargets.SingleFF5");
     o_UseSingleInit(self, mi);
     hooks::guarded("FF5.AbilityUse.SingleInit", [&] { use_list_init(self); });
 }

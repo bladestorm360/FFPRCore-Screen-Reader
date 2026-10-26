@@ -99,6 +99,25 @@ int main() {
         total+=tested;expect(tested>0&&doors>0,"each game exercises selected events and multiple floor entrances");
         expect(same_name_checked,"all six games exercise general same-name and unknown-destination exit lettering");
         std::printf("FF%d: %d/%d event objects replayed; %d no direct local fixture; %d labelled entrance rows\n",n,tested,eligible,skipped,doors);
+        if(n==3) {
+            const auto* world=baked::submap_by_map_id(1);
+            FilterInput events;events.current_map=1;events.world=true;events.category=Category::Events;
+            for(const auto& o:baked::grids(*world).objects) {
+                if(o.type!=baked::ObjType::Event)continue;
+                const auto group=baked::str(o.group);
+                if(group!=L"entity_default"&&group!=L"ev_e_0024")continue;
+                FilterRow row;row.index=events.rows.size();row.kind=Kind::Event;row.category=Category::Events;
+                row.raw_name=baked::object_identifier(o);row.entity_id=o.entity_id();row.event_type=L"Event";
+                row.name=L"World map transition";row.position=world_of_cell(*world,{o.layer,o.tx,o.ty});row.cell_layer=o.layer;
+                events.rows.push_back(std::move(row));
+            }
+            expect(events.rows.size()==1535,"real FFIII world snapshot reproduces the user's1535 event tiles");
+            expect(build_categories(events).views[static_cast<size_t>(Category::Events)].order.size()==1535,"grouping off preserves all distinct native tiles");
+            events.events=true;
+            const auto grouped=build_categories(events);
+            expect(grouped.views[static_cast<size_t>(Category::Events)].order.size()==8,"grouping collapses1524 border copies to3 families plus5 other native events");
+            expect(grouped.audio_order.size()==1535,"soundscape physical grouping stays independent from the pathfinder toggle");
+        }
         if(n!=6)continue;
         const auto* narshe=baked::submap_by_map_id(3);expect(narshe!=nullptr,"Narshe exterior exists");if(!narshe)continue;
         RouteSnapshot intro(map_state::Resolver(map_state::Flags{},fixture::records));
@@ -139,10 +158,12 @@ int main() {
             intro.obstacles.pop_back();
             intro.goal.cell={1,33,54};intro.kind=TargetKind::Transition;
             const auto blocked=plan_browse_snapshot(intro);
-            expect(!blocked.route.direct&&blocked.route.reason==L"Story gated. Reachable scene trigger: 1 South.",
-                "a real gated school exit offers exact directions to an active reachable trigger");
+            std::printf("Narshe closed exit: direct%d reason%ls\n",blocked.route.direct,blocked.route.reason.c_str());
+            expect(!blocked.route.direct&&blocked.route.reason==L"Story gated",
+                "a real gate never recommends an unrelated nearby scene as progression");
             intro.obstacles.erase(std::remove_if(intro.obstacles.begin(),intro.obstacles.end(),[](const auto& o){return o.trigger;}),intro.obstacles.end());
             const auto no_event=plan_browse_snapshot(intro);
+            std::printf("Narshe closed exit without scene: direct%d reason%ls\n",no_event.route.direct,no_event.route.reason.c_str());
             expect(!no_event.route.direct&&no_event.route.reason==L"Story gated","missing reachable trigger never invents a progression route");
             expect(prepare_navigation_labels(repeated),"Narshe native event grouping completes");
             std::vector<size_t> edge;

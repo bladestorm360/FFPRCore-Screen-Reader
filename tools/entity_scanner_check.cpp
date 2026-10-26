@@ -6,6 +6,7 @@
 #include <chrono>
 #include <cstdio>
 #include <cstring>
+#include <fstream>
 #include "../src/core/field/entity_scanner.cpp"
 #define contains ff2_placeholder_contains
 #include "../src/games/ff2/module.cpp"
@@ -13,10 +14,11 @@
 namespace fixture {
 const DWORD owner = GetCurrentThreadId();
 int wrong_owner = 0, map = 1, next_task = 0, native_reads=0;
+game::Id selected_game=game::Id::FF2;
 bool ready = true, transition = false, route_pending = false;
-struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; int action=2; } talk;
+struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; int action=2; int id=-1; } talk;
 struct Actor { void* property = &talk; } npc, object;
-bool can_action = true;
+bool can_action = true, manual_object = false;
 bool capture_cells = false;
 std::vector<void*> candidates;
 int action_reads=0;
@@ -55,11 +57,11 @@ Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 il2cpp::Class* Class::get() { fixture::native(); return nullptr; }
 bool Class::is(void* p) { fixture::native();
  if(p==&fixture::npc)return std::strcmp(name,"FieldNonPlayer")==0||std::strcmp(name,"FieldEntity")==0;
- if(p==&fixture::object)return std::strcmp(name,"EventTriggerEntity")==0||std::strcmp(name,"FieldEntity")==0;
+ if(p==&fixture::object)return std::strcmp(name,fixture::manual_object?"FieldMapObjectDefault":"EventTriggerEntity")==0||std::strcmp(name,"FieldEntity")==0;
  if(p==&fixture::talk)return std::strcmp(name,"PropertyEvent")==0||std::strcmp(name,"PropertyTalk")==0;
  return false;
 }
-int32_t Field::get() { fixture::native(); return std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):std::strcmp(name,"<ActionId>k__BackingField")==0?offsetof(fixture::TalkProperty,action):-1; }
+int32_t Field::get() { fixture::native(); return std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):std::strcmp(name,"<ActionId>k__BackingField")==0?offsetof(fixture::TalkProperty,action):std::strcmp(name,"<EntityId>k__BackingField")==0?offsetof(fixture::TalkProperty,id):-1; }
 il2cpp::Method* Method::get() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<il2cpp::Method*>(1):nullptr; }
 void* Method::ptr() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<void*>(&fixture::get_can_action):nullptr; }
 std::wstring str(void*) { fixture::native(); return {}; }
@@ -68,13 +70,21 @@ void* instance(Class&) { fixture::native(); return nullptr; }
 void call_failed_note(const char*) {}
 void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
 }
-namespace field::party_entities {bool is_native(void*){fixture::native();return false;}}
+namespace field::party_entities {bool is_native(void*){fixture::native();return false;}std::wstring companion_name(void*){fixture::native();return {};}}
+// Exercise the real route-only identity reader; keep unrelated label stubs
+// deterministic for the older scanner tests in this fixture.
+namespace fixture {json::Value event_metadata;}
+namespace data {const json::Value& game_json(const char*){return fixture::event_metadata;}}
+namespace field {std::wstring tested_safe_event_label(const std::wstring&,const std::wstring&,int,int,int=-1);}
+#define safe_event_label tested_safe_event_label
+#include "../src/core/field/event_labels.cpp"
+#undef safe_event_label
 namespace il2cpp {
 Class* object_class(void*) { fixture::native(); return nullptr; }
 const char* object_class_name(void*) { fixture::native(); return "FieldEntity"; }
 Method* find_method_overload_param(Class*, const char*, int, Class*, int) { fixture::native(); return nullptr; }
-void* method_pointer(Method*) { fixture::native(); return nullptr; }
-Method* virtual_method(void*, Method*) { fixture::native(); return nullptr; }
+void* method_pointer(Method*) { fixture::native(); return reinterpret_cast<void*>(&fixture::get_can_action); }
+Method* virtual_method(void*, Method* method) { fixture::native(); return method; }
 }
 namespace unity {
 bool alive(void* p) { fixture::native(); return p != nullptr; }
@@ -105,7 +115,7 @@ bool post(std::function<void()> task, Lane lane) {
 }
 namespace hooks { void note_fault(const char* label) { std::printf("FAIL native fixture fault: %s\n",label);std::fflush(stdout);std::abort(); } }
 namespace log_ { void write(const char*, ...) {} }
-namespace game { Id current() { return Id::FF2; } const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
+namespace game { Id current() { return fixture::selected_game; } const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
 namespace settings {
 int get_int(const char*, int fallback) { return fallback; }
 bool get_bool(const char*, bool fallback) { return fallback; }
@@ -121,7 +131,11 @@ LocaleScope::LocaleScope(std::wstring) {}
 LocaleScope::~LocaleScope() {}
 const std::wstring& lang() { fixture::native(); static std::wstring value = L"en"; return value; }
 std::wstring T(std::wstring_view value) { return std::wstring(value); }
-std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring>) { return std::wstring(value); }
+std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring> args) {
+    auto result = std::wstring(value); int i = 0;
+    for (const auto& arg : args) { const auto token = L"{" + std::to_wstring(i++) + L"}"; const auto at = result.find(token); if (at != result.npos) result.replace(at, token.size(), arg); }
+    return result;
+}
 }
 namespace field::cache {
 void* get(ref::Class& type) { fixture::native(); return std::strcmp(type.name, "FieldPlayerController") == 0 ? &fixture::controller : nullptr; }
@@ -154,12 +168,13 @@ std::wstring resolve_map_name(int) { fixture::native(); return {}; }
 std::wstring resolve_item_name(int) { fixture::native(); return {}; }
 std::wstring current_map_asset_name() { fixture::native(); return {}; }
 std::wstring translate_entity_name(const std::wstring& name) { fixture::native(); return name; }
+std::wstring translate_entity_name_for_map(const std::wstring& name,int) { fixture::native(); return name; }
 npc_names::Label npc_display_label(const std::wstring& name) { fixture::native(); return npc_names::parse(name); }
 bool is_decimal_digit(wchar_t c) { return c >= L'0' && c <= L'9'; }
 bool EntityCursor::next(void*& entity) { fixture::native();entity=nullptr;if(index>=static_cast<int>(fixture::candidates.size()))return false;entity=fixture::candidates[index++];seen.insert(entity);return true; }
 bool Entity::is_alive() const { fixture::native(); return game != reinterpret_cast<void*>(2); }
 bool Entity::is_opened() const { fixture::native(); return opened; }
-Category Entity::category() const { return kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : Category::Events; }
+Category Entity::category() const { return kind == Kind::Vehicle ? Category::Vehicles : kind == Kind::TreasureChest ? Category::Chests : kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : kind == Kind::Event && (event_type==L"Interactive Object"||event_type==L"Interactive") ? Category::Objects : Category::Events; }
 unity::Vec3 Entity::position() const { fixture::native(); return pos; }
 PathInfo find_path_to_quick(unity::Vec3, unity::Vec3, void*, void*, TargetKind, bool) { fixture::native(); return {}; }
 }
@@ -204,8 +219,23 @@ int main() {
     }
     fixture::talk.script=0;
     expect(npc_detector(talk).result==Result::Skip,"action 9 without a script does not admit a cutscene placeholder");
+    fixture::talk.script=0;fixture::talk.action=2;fixture::can_action=true;
+    talk.go_name=L"Masked Figure";talk.go_lower=L"masked figure";fixture::talk.name=L"仮面　色変え1";
+    expect(npc_detector(talk).result==Result::Skip,"Mysidia's scriptless Masked Figure is staging, not a usable talk target");
+    fixture::talk.script=89;expect(npc_detector(talk).result==Result::Detected,"assigning a real script restores a previously staged NPC");
+    fixture::talk.script=0;fixture::talk.action=8;expect(npc_detector(talk).result==Result::Detected,"native shop actions remain available without a dialogue script");
     fixture::talk.script=65;fixture::talk.action=2;fixture::can_action=true;
-    for(const auto* name:{L"太陽の炎トリガー用",L"女神のベルトリガー用"}){fixture::talk.name=name;Context object;object.fe=&fixture::object;object.is_event_trigger=true;object.go_name=name;object.go_lower=text::lower(name);expect(npc_detector(object).result==Result::NotHandled,"keyword objects are not reclassified as NPCs by dialogue");auto event=event_trigger_detector(object);expect(event.result==Result::Detected&&event.entity->kind==Kind::Event,"keyword objects retain the event interaction category");}
+    for(const auto* name:{L"太陽の炎トリガー用",L"女神のベルトリガー用"}) {
+        fixture::talk.name=name;fixture::manual_object=true;
+        Context object;object.fe=&fixture::object;object.go_name=name;object.go_lower=text::lower(name);
+        expect(npc_detector(object).result==Result::NotHandled,"manual keyword objects never become NPCs by dialogue");
+        auto manual=interactive_detector(object);
+        expect(manual.result==Result::Detected&&manual.entity->event_type==L"Interactive Object"&&manual.entity->category()==Category::Objects,
+            "actual manual entity classes put Sunfire/Bell examinations in Objects regardless of trigger names");
+        fixture::manual_object=false;object.is_event_trigger=true;
+        auto event=event_trigger_detector(object);
+        expect(event.result==Result::Detected&&event.entity->category()==Category::Events,"actual walk-on classes retain Events with the same script/name");
+    }
     RemoteInput remote;RemoteRow row;row.object.type=baked::ObjType::NPC;row.object.map_id=180;row.object.raw_name=L"飛竜";row.object.scripted=true;row.name=L"Wyvern";row.floor=L"Castle Deist: Wyvern's Room";remote.rows.push_back(row);
     auto built=build_remote(remote);expect(built.size()==1&&built[0]->kind==Kind::NPC&&built[0]->name==L"Wyvern","scripted Wyvern remains an NPC target across floors");
     RemoteBuilder scripted({row.object});scripted.step();expect(scripted.input.rows.size()==1,"remote name capture accepts scripted Wyvern despite placeholder filter");row.object.scripted=false;RemoteBuilder marker({row.object});marker.step();expect(marker.input.rows.empty(),"remote cutscene Wyvern without interaction script remains excluded");
@@ -244,7 +274,7 @@ int main() {
             const double begin=frame::now(); result=field::capture_soundscape(snapshot,next,revision);
             const double cost=frame::now()-begin; peak=std::max(peak,cost);total+=cost;++calls;
         }
-        expect(result==1&&snapshot.rows.size()==g_category_views[0].size(),"soundscape captures every published row across bounded native slices");
+        expect(result==1&&snapshot.rows.size()==g_audio_entities.size(),"soundscape captures every published row across bounded native slices");
         expect(calls>1&&calls>=int((next+511)/512),"soundscape enforces the per-slice count bound");
         expect(!fixture::wrong_owner,"soundscape never accesses a native pointer off its owner");
         ++g_audio_revision;
@@ -271,14 +301,14 @@ int main() {
         "continuous production soundscape capture preserves actual scanner browse/directions readiness, selection and category");
     scanner::cancel_navigation_work(); // synthetic rows below have no native collection
     scanner::set_category(Category::All);
-    auto saved_audio_view=g_category_views[0];
-    g_category_views[0].resize(sound::scape::max_rows,saved_audio_view.front());
-    for(auto& e:g_category_views[0]) e->audio_hint=std::wstring(512,L'x');
+    auto saved_audio_view=g_audio_entities;
+    g_audio_entities.resize(sound::scape::max_rows,saved_audio_view.front());
+    for(auto& e:g_audio_entities) e->audio_hint=std::wstring(512,L'x');
     measure_capture("busy");
-    g_category_views[0].push_back(saved_audio_view.front());
+    g_audio_entities.push_back(saved_audio_view.front());
     sound::scape::Snapshot invalid;size_t invalid_next=0;uint64_t invalid_revision=0;
     expect(field::capture_soundscape(invalid,invalid_next,invalid_revision)==-1&&invalid.rows.empty(),"over-bound registry fails closed before traversal/allocation");
-    g_category_views[0]=std::move(saved_audio_view);
+    g_audio_entities=std::move(saved_audio_view);
     const auto started = frame::now();
     const auto task_count = fixture::tasks.size();
     for (int i = 0; i < 1000; ++i) { scanner::set_category(Category::NPCs); scanner::set_category(Category::MapExits); }
@@ -354,12 +384,12 @@ int main() {
     ++fixture::map; fixture::tick(); fixture::work(); fixture::tick();
     expect(!spoken && !g_views_ready, "changed map retires pending input and cannot publish stale categories");
     for(int id:{0,32}) {
-        scanner::invalidate_map();fixture::map=183;g_last_scanned_map_id=183;g_category=Category::Events;fixture::capture_cells=true;
+        scanner::invalidate_map();fixture::map=183;g_last_scanned_map_id=183;g_category=Category::Objects;fixture::capture_cells=true;
         auto make_event=[&](int map,int identity){auto e=std::make_shared<Entity>();e->kind=Kind::Event;e->name=L"Conversation";
             e->event_type=L"Interactive Object";e->entity_id=identity;e->remote_map_id=map;e->cell_x=35;e->cell_y=18;e->floor_name=L"B2";return e;};
         auto target=make_event(184,id),other=make_event(184,id+100),wrong_floor=make_event(185,id);
         g_entities={other,wrong_floor,target};g_sel.reset();g_sel_has=true;g_sel_map=184;g_sel_entity_id=id;
-        g_sel_cx=35;g_sel_cy=18;g_sel_category=Category::Events;
+        g_sel_cx=35;g_sel_cy=18;g_sel_category=Category::Objects;
         apply_filter();for(int tick=0;g_filter_pending&&tick<100;++tick){fixture::tick();fixture::work();}
         expect(scanner::current_entity()==target&&g_sel==target,"cross-floor publication restores the exact event and binds its new owner-side handle, including native ID zero");
         fixture::map=184;g_last_scanned_map_id=184;
@@ -371,6 +401,40 @@ int main() {
         expect(scanner::current_entity()==nullptr&&g_index==-1,"missing event never silently selects an unrelated or collocated destination");
         scanner::previous_entity();expect(scanner::current_entity()==other,"explicit browsing safely resumes after a target disappears");
     }
+    // Battle/state invalidation rebuilds native handles. Ship and Airship may
+    // have the same default entity ID/raw placeholder; model ID is authoritative.
+    for(int game=1;game<=6;++game) {
+        fixture::selected_game=static_cast<game::Id>(game);
+        scanner::invalidate_map();scanner::clear_selection();fixture::map=1;g_last_scanned_map_id=1;
+        g_category=Category::Vehicles;fixture::capture_cells=true;
+        auto vehicle=[](int id,float x){auto e=std::make_shared<Entity>();e->kind=Kind::Vehicle;
+            e->name=id==2?L"Ship":L"Airship";e->audio_hint=L"NPC";e->raw_name_known=true;
+            e->entity_id=0;e->transportation_id=id;e->game=reinterpret_cast<void*>(1);e->pos={x,0,0};return e;};
+        auto ship=vehicle(2,10),airship=vehicle(3,200);
+        g_entities={ship,airship};apply_filter();for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        g_index=static_cast<int>(std::find(filtered_view().begin(),filtered_view().end(),airship)-filtered_view().begin());scanner::remember_selection();
+        expect(g_sel==airship&&g_sel_transportation_id==3,"fixture selects the actual Airship after distance sorting");
+        for(float distance:{190.f,100.f,20.f,2.f,250.f}) {
+            scanner::invalidate_map();g_last_scanned_map_id=1;
+            ship=vehicle(2,10);airship=vehicle(3,distance);g_entities={ship,airship};
+            expect(!scanner::current_entity(),"retired native list never exposes a different default target during battle restoration");
+            apply_filter();for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+            expect(scanner::current_entity()==airship&&g_sel_transportation_id==3,"recreated Airship survives battle and all distance-order changes despite shared default NPC identity");
+        }
+        g_entities={ship};apply_filter();for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(!scanner::current_entity()&&g_sel_transportation_id==3,"temporarily missing Airship cannot fall back to regular Ship");
+        g_entities={ship,airship};apply_filter();for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(scanner::current_entity()==airship,"Airship identity restores when its native model becomes available again");
+        // Native recreation can be captured while the player changes focus
+        // in the still-published list. An old worker index must not win.
+        g_index=static_cast<int>(std::find(filtered_view().begin(),filtered_view().end(),ship)-filtered_view().begin());scanner::remember_selection();
+        auto replacement_ship=vehicle(2,10),replacement_airship=vehicle(3,250);
+        g_entities={replacement_ship,replacement_airship};apply_filter();
+        scanner::next_entity();expect(g_sel==airship,"new browse input selects the still-published Airship during recreation");
+        for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(scanner::current_entity()==replacement_airship&&g_sel_transportation_id==3,"a newer selection revision supersedes the older worker's Ship restoration index");
+    }
+    fixture::selected_game=game::Id::FF2;
     expect(fixture::wrong_owner==0,"event capture/publication and identity matching preserve native thread ownership");
     {
         scanner::invalidate_map();fixture::candidates={&fixture::npc};fixture::can_action=true;fixture::action_reads=0;
@@ -400,6 +464,44 @@ int main() {
         !g_filter_pending && !scanner::g_scan_running,"transition cancellation retires both scan and filter worker epochs before native loading");
     std::printf("Scanner: 2,000 rows prepared in %d capture/publication ticks; warm category %.3f us; %d failures\n",
         frames, category_us, failures);
+    {
+        std::ifstream file("data/ff2/maps.bin",std::ios::binary);const std::string bytes{std::istreambuf_iterator<char>(file),{}};
+        expect(baked::load(bytes.data(),bytes.size()),"scripted exit detector loads matching FFII bake");
+        const auto* map=baked::submap_by_map_id(20);const auto& grid=baked::grids(*map);
+        const baked::Object* exit=nullptr;
+        for(const auto& object:grid.objects)if(baked::world_exit(object)&&object.tx==20&&object.ty==38){exit=&object;break;}
+        expect(exit!=nullptr,"Fynn south boundary is a verified scripted world exit");
+        if(exit) {
+            fixture::map=20;fixture::capture_cells=true;fixture::talk.name=baked::object_identifier(*exit);fixture::talk.id=exit->entity_id();
+            Context context;context.fe=&fixture::object;context.is_event_trigger=true;context.is_active=true;
+            context.position={20,38,0};context.go_lower=L"event";
+            const auto converted=goto_map_detector(context);
+            expect(converted.result==Result::Detected&&converted.entity->kind==Kind::MapExit&&converted.entity->dest_map_id==1&&
+                converted.entity->name==L"Exit to World Map","actual live detector labels/categories Fynn's script exit before generic Scene trigger");
+            baked_nav::RemoteObject source;source.world_exit=true;source.map_id=20;source.type=baked::ObjType::Event;source.dest_map_id=1;
+            source.raw_name=fixture::talk.name;source.entity_id=fixture::talk.id;source.cell={0,20,38};
+            RemoteBuilder builder({source});builder.step();auto rows=build_remote(builder.input);
+            expect(rows.size()==1&&rows[0]->kind==Kind::MapExit&&rows[0]->name==L"Exit to World Map"&&rows[0]->remote_map_id==20,
+                "remote scripted exits use the same world destination and Map Exits category");
+        }
+    }
+    scanner::invalidate_map();
+    {
+        std::ifstream f("data/ff3/maps.bin",std::ios::binary);const std::string bytes((std::istreambuf_iterator<char>(f)),{});
+        expect(baked::load(bytes.data(),bytes.size()),"FFIII border audit loads the actual bake");
+        std::ifstream labels("data/ff3/eventlabels.json");const std::string json_text((std::istreambuf_iterator<char>(labels)),{});
+        expect(json::parse(json_text,fixture::event_metadata),"actual reviewed event identity catalog loads");
+        const auto* world=baked::submap_by_name(L"Map_10010");int pruned=0,scenes=0;
+        fixture::selected_game=game::Id::FF3;fixture::capture_cells=true;fixture::manual_object=false;fixture::map=world->first_map_id;
+        for(const auto& o:baked::grids(*world).objects)if(o.type==baked::ObjType::Event) {
+            Context row;row.fe=&fixture::object;row.is_event_trigger=true;row.position={float(o.tx),float(o.ty),0};fixture::talk.name=baked::object_identifier(o);fixture::talk.id=o.entity_id();
+            const auto result=goto_map_detector(row);
+            if(event_route_only(fixture::talk.name)){expect(result.result==Result::Skip,"actual detector removes every routine world-border source, independently of event grouping");++pruned;}
+            else if(result.result!=Result::Skip)++scenes;
+        }
+        expect(pruned==1525&&scenes>0,"all three 508-tile border families and passive Chocobo bookkeeping disappear while meaningful scene triggers remain");
+        std::printf("FFIII actual discovery: %d routine borders pruned, %d meaningful event sources retained; baked graph objects unchanged\n",pruned,scenes);
+    }
     std::printf("Selected destination after movement: %.3f us native-fixture dispatch, zero list-readiness ticks (offline)\n",selected_us);
     // Retire intentionally blocked fixture work before C++ static registries
     // tear down. Production workers/queues live for the entire game process.

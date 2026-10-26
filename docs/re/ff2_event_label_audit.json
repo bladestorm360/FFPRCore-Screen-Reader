@@ -3427,13 +3427,15 @@
     "id": 38,
     "raw": "隠し通路",
     "type": 5,
-    "label": "Hidden passage",
-    "reason": "reviewed physical interaction subject",
+    "label": "Wall near bed",
+    "reason": "reviewed physical map/script occurrence",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2025,
       "script": "sc_e_0216",
-      "message_keys": []
+      "message_keys": [
+        "N999_C12_021_01_01"
+      ]
     }
   },
   {
@@ -3827,13 +3829,16 @@
     "id": 59,
     "raw": "隠し通路",
     "type": 5,
-    "label": "Hidden passage",
-    "reason": "reviewed physical interaction subject",
+    "label": "Wall",
+    "reason": "reviewed physical map/script occurrence",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2025,
       "script": "sc_e_0063",
-      "message_keys": []
+      "message_keys": [
+        "N999_C12_021_01_01",
+        "E0063_00_043_a_02"
+      ]
     }
   },
   {
@@ -8343,9 +8348,14 @@
     "id": 9,
     "raw": "パンデモニウムの入り口",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0088",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30151_13",
@@ -8804,8 +8814,13 @@
     "raw": "ジェイドへのワープ",
     "type": 2,
     "label": "Warp Tile",
-    "reason": "explicit travel identifier; no trap/failure evidence",
-    "trap_hint": false
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0201",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_10",
@@ -8833,9 +8848,14 @@
     "id": 14,
     "raw": "パンデモニウム8へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0213",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_10",
@@ -8843,9 +8863,14 @@
     "id": 16,
     "raw": "パンデモニウム10へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0214",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_11",
@@ -8863,9 +8888,14 @@
     "id": 12,
     "raw": "パンデモニウム9へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0215",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_11",
@@ -8903,9 +8933,14 @@
     "id": 17,
     "raw": "パンデモニウム3へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0202",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_3",
@@ -8933,9 +8968,14 @@
     "id": 17,
     "raw": "パンデモニウム2へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0203",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_3",
@@ -8943,9 +8983,14 @@
     "id": 21,
     "raw": "パンデモニウム4へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0204",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_4",
@@ -9023,9 +9068,14 @@
     "id": 43,
     "raw": "パンデモニウム3へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0205",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_4",
@@ -9033,9 +9083,14 @@
     "id": 45,
     "raw": "パンデモニウム7へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_4",
@@ -9043,9 +9098,14 @@
     "id": 47,
     "raw": "パンデモニウム6へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0206",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_5",
@@ -9123,9 +9183,14 @@
     "id": 30,
     "raw": "パンデモニウム4へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0208",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_8",
@@ -9153,9 +9218,14 @@
     "id": 17,
     "raw": "パンデモニウム4へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0209",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_8",
@@ -9163,9 +9233,14 @@
     "id": 19,
     "raw": "パンデモニウム8へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0210",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_9",
@@ -9193,9 +9268,14 @@
     "id": 21,
     "raw": "パンデモニウム7へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0211",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30161_9",
@@ -9203,8 +9283,13 @@
     "id": 23,
     "raw": "パンデモニウム9へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Warp Tile",
+    "reason": "reviewed warp animation and direct map travel",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0212",
+      "message_keys": []
+    }
   }
 ]

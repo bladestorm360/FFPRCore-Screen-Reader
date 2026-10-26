@@ -8,6 +8,7 @@
 #include "menus.h"
 #include "menus_internal.h"
 #include "../core.h"
+#include "../condition_labels.h"
 #include "../hooks.h"
 #include "../modtext.h"
 #include "../say.h"
@@ -49,31 +50,6 @@ void clear_magic_fields()
     g_current_character = nullptr;
     g_last_ability_valid = false;
     g_last_ability_description_id.clear();
-}
-
-/// Fallback names for conditions with an empty/missing MesIdName, localized at call time.
-std::wstring condition_type_fallback(int condition_type)
-{
-    switch (condition_type) {
-    case 4: return T(L"Critical");          // Dying (low HP)
-    case 5: return T(L"KO");                // UnableFight
-    case 6: return T(L"Silence");
-    case 7: return T(L"Sleep");
-    case 8: return T(L"Paralysis");
-    case 9: return T(L"Blind");
-    case 10: return T(L"Poison");
-    case 11: return T(L"Stone");            // Mineralization
-    case 12: return T(L"Confusion");
-    case 16: return T(L"Slow");
-    case 17: return T(L"Stop");
-    case 32: return T(L"Aging");
-    case 34: return T(L"Zombie");
-    case 204: return T(L"Venom");
-    case 404: return T(L"Doom");
-    case 405: return T(L"Gradual Petrify"); // SlowlyMineralization
-    case 406: return T(L"Curse");
-    default: return {};
-    }
 }
 
 /// Dictionary<int, int>.TryGetValue.
@@ -138,7 +114,7 @@ std::wstring condition_name(void* condition)
         std::wstring localized = detail::message(mes_id, false);
         if (!detail::blank(localized) && localized[0] != L'$') return localized;
     }
-    return condition_type_fallback(condition_type);
+    return condition_labels::fallback(condition_type);
 }
 
 std::wstring spell_name(void* owned_ability)

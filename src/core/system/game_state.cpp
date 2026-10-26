@@ -190,17 +190,22 @@ bool is_field_navigation_ready()
 bool input_transition_blocked()
 {
     if (g_state_change_depth || fieldnav::map_transition::is_state_changing()) return true;
+    // Gnomish Bread and equivalent native scripts wait in Event12 while a
+    // modal map owns input. Its observed Show/Close lifetime and visible owner
+    // permit map review/I controls, without treating the field as controllable.
+    const bool event_ui=queries::is("MessageWindowPatches.IsInDialogue") || queries::is("MapPanels.IsActive") ||
+        queries::is("EventItemSelectState.IsActive");
     if (g_requested_state == 0 || g_requested_state == 1 || g_requested_state == 2 || g_requested_state == 14 ||
-        (g_requested_state == 12 && !queries::is("MessageWindowPatches.IsInDialogue"))) return true;
+        (g_requested_state == 12 && !event_ui)) return true;
     if (fieldnav::map_transition::is_screen_fading()) return true;
-    return hooks::guarded_r("GameState.InputTransition", true, [] {
+    return hooks::guarded_r("GameState.InputTransition", true, [event_ui] {
         if (!g_main_game) return field::scene_name() != L"Title"; // allow the stable title; block boot/loading before a manager exists
         if (!kMainGame.is(g_main_game)) return true;
         const int state = ref::call<int32_t>(mGetCurrentState, g_main_game);
         // Matching all-six native enum: map construction, event/encounter preparation,
         // and return to title. A displayed event dialogue remains manually reviewable.
         return state == 0 || state == 1 || state == 2 || state == 14 ||
-            (state == 12 && !queries::is("MessageWindowPatches.IsInDialogue"));
+            (state == 12 && !event_ui);
     });
 }
 
@@ -221,6 +226,18 @@ bool is_field_state()
         if (!mg || !kMainGame.is(mg)) return true;
         const int32_t state = ref::call<int32_t>(mGetCurrentState, mg);
         return state >= 0 && state <= kStateTransport;
+    });
+}
+
+bool is_main_menu_state()
+{
+    // A visible/preloaded window's own command state is insufficient: FFIII's
+    // intro preloads SecondMenu while the main game is Event12. Read only from
+    // the real Menu5 context, and reject an obsolete Menu read during departure.
+    if (g_state_change_depth || g_requested_state != 5) return false;
+    return hooks::guarded_r("GameState.IsMainMenuState", false, [] {
+        return g_main_game && kMainGame.is(g_main_game) &&
+            ref::call<int32_t>(mGetCurrentState, g_main_game) == 5;
     });
 }
 

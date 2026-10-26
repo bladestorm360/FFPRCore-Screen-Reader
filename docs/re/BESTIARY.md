@@ -80,3 +80,30 @@ The fixture proves producer/lifecycle behavior, not the actual user's Leg Eater
 values. Remaining simple player checks are in [TESTING](../TESTING.md#october-22-fixes-test-these-first).
 Extend the reader through the native completed producer and bounded cursor; never
 restore a time-based placeholder read or bypass native discovery/reveal gates.
+
+
+## October24 drops, controls and resistance wording
+
+Implemented/offline verified and deployed all six; gameplay pending. Item leaves
+are LibraryInfoParamText with both iconView and detailText. Gil renders in the
+latter; item names render in iconView.nameText. capture_stat_step now copies both
+active renderers under the existing field/total bounds. It does not consult
+hidden master drops or deduplicate repeated native rows. All-six declarations
+have these fields. bestiary_check exercises real Gil/icon-name capture and hidden
+name exclusion for every adapter.
+
+Shift+I now uses the detail screen's serialized keyHelpController, excluding the
+unrelated top monster-page bar that spoke only2,3. Bounded native capture and
+F9 recovery are documented in [input interception](INPUT_INTERCEPTION.md).
+
+Psychic and Spectral are the game's actual FFII English resistance labels:
+MSG_SYSTEM_272/275 (Japanese 神経/精神). The reader copies the rendered native
+property labels and their lists; no mod element-enum substitution creates those
+words. Names are retained, without inventing interpretations of their mechanics.
+The lower panel can be scrolled with native controls while interception is Off.
+
+
+October24 final build/all required checks and47-export smoke pass. Item capture,
+owned controls, F9 and real map/review fixtures pass in all applicable adapters.
+Recovery/resource/deployment receipts: build_check/mysidia_objects_20261024/.
+[Shared delivery and remaining gameplay checks](../TESTING.md#october24-map-bestiary-targeting-and-navigation-follow-up).

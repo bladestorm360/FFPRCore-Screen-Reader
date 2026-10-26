@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include "menus_internal.h"
+#include "../ui/character_row.h"
 #include "../displayed_ui.h"
 #include "../core.h"
 #include "../hooks.h"
@@ -58,6 +59,7 @@ constexpr int STATE_USE_SELECT = 2;       // Item list for Use
 constexpr int STATE_IMPORTANT_SELECT = 3; // Key Items list
 constexpr int STATE_ORGANIZE_SELECT = 4;  // Sort list
 constexpr int STATE_TARGET_SELECT = 5;    // Target selection
+constexpr int STATE_INTERCHANGE_SELECT = 6; // Spell learning/swapping target
 constexpr int STATE_EQUIPMENT = 7;
 
 // ItemMenuState.LastSelectedItem, kept as the values the detail keys read: the row object itself
@@ -104,7 +106,8 @@ bool should_suppress()
             return false;
         }
         if (state == STATE_USE_SELECT || state == STATE_IMPORTANT_SELECT ||
-            state == STATE_ORGANIZE_SELECT || state == STATE_TARGET_SELECT || state == STATE_EQUIPMENT)
+            state == STATE_ORGANIZE_SELECT || state == STATE_TARGET_SELECT ||
+            state == STATE_INTERCHANGE_SELECT || state == STATE_EQUIPMENT)
             return true;
     }
     // Fallback: clear state if we can't determine.
@@ -145,7 +148,7 @@ bool announce_item_list_data(void* item, int index, int count)
 }
 
 /// ItemMenuState.AnnounceItemUseTarget: name, HP, status effects, "(X of Y)".
-bool announce_item_use_target(void* content, int index, int count)
+bool announce_item_use_target(void* content, int index, int count, void* cursor)
 {
     void* character = ref::rd<void*>(content, fItemTargetCurrentData);
     if (!character) return false;
@@ -156,7 +159,7 @@ bool announce_item_use_target(void* content, int index, int count)
     detail::clear_other_menu_states("Item");
     set_item_menu_active(true);
 
-    ffpr::say(ui::menu_position(announcement, index, count), true);
+    ui::character_row::announce(content, cursor, ui::menu_position(announcement, index, count));
     return true;
 }
 
@@ -215,7 +218,7 @@ void d_ItemUseSelectContent(void* self, void* contents, void* cursor, const void
         void* content = list[static_cast<size_t>(index)];
         if (!content) return;
         if (g_in_single_exit) return;   // the game's own reset call while leaving the target list
-        if (announce_item_use_target(content, index, static_cast<int>(list.size()))) ++g_item_target_spoken_seq;
+        if (announce_item_use_target(content, index, static_cast<int>(list.size()), cursor)) ++g_item_target_spoken_seq;
     });
 }
 
@@ -277,7 +280,7 @@ bool try_announce_item_target_initial(void* controller)
     void* content = displayed::cursor_row(cursor, content_list);
     if (!content) content = unity::get_component_in_parent(cursor, kItemTargetSelectContentController);
     if (!content) return false;
-    return announce_item_use_target(content, index, count);
+    return announce_item_use_target(content, index, count, cursor);
 }
 
 void item_list_init(void* self)

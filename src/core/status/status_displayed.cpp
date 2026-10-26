@@ -89,6 +89,11 @@ std::vector<std::wstring> lines(void* owner, std::vector<int>& groups)
         add(text::join(displayed::texts(displayed::field(unity::list_at(abilities, i), "view")), L" "));
     add(displayed::pair(dv, "fixedMagicalStoneText", "magicalStoneText"));
     add(displayed::pair(dv, "fixedLevelUpBonusText", "levelUpBonusText"));
+    // The long per-level MP layout belongs at the very end of I/Autodetail and
+    // remains individually browsable through the status review buffer.
+    const auto charges = displayed::charge_lines(sv);
+    if (!charges.empty()) group();
+    out.insert(out.end(), charges.begin(), charges.end());
     while (!groups.empty() && groups.back() >= static_cast<int>(out.size())) groups.pop_back();
     return out;
 }

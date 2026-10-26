@@ -23,8 +23,9 @@ void play_wall_tones_looped(const std::vector<Direction>& directions);
 void stop_wall_tone();
 bool wall_tone_playing();
 
-/// One beacon ping. pan -1 (left) .. 1 (right); volume_scale 0..1.
-void play_beacon(bool is_south, float pan, float volume_scale, bool low_pitch = false);
+/// One beacon ping at the full map-space displacement from the player.
+/// The audio worker chooses actual HRTF bearing or legacy stereo/rear pitch.
+void play_beacon(float east, float north, float volume_scale, bool blocked = false);
 
 /// Battle-result EXP counter tick (a rapid ticking tone while the bar animates).
 void play_exp_counter();

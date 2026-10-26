@@ -2,6 +2,7 @@
 #include "map_state.h"
 #include <vector>
 #include <climits>
+#include <algorithm>
 
 namespace field::map_state {
 namespace {
@@ -16,6 +17,7 @@ std::optional<int> value(int category, int index, const Flags& flags, const std:
         const size_t bit = static_cast<size_t>((category % 4) * 256 + index);
         return category < 4 ? flags.scenario[bit] : flags.treasure[bit];
     }
+    if (category == 14 && index == 401) return flags.party_mini;
     if (category == 8 && index < 16) return flags.global[static_cast<size_t>(index)];
     if (category == 9 && index < 8) return flags.area[static_cast<size_t>(index)];
     if (category == 10 && index < 8) return flags.local[static_cast<size_t>(index)];
@@ -78,8 +80,8 @@ Selection project(const json::Value& record, const Flags& input)
                 if (i(3) < 0 || i(3) > 5) return {false, {}};
                 const auto lhs = value(i(1), i(2), flags, state.shadow), rhs = value(i(4), i(5), flags, state.shadow);
                 if (!lhs || !rhs) {
-                    // An unknown local may only control animation. Accept the selection
-                    // only when every possible branch ends with the same entity group.
+                    // Explore both paths. Completed branches retain their
+                    // intersection, never a guessed story-group selection.
                     branches.push_back(state);
                     state.pc = i(6);
                 } else {
@@ -127,8 +129,24 @@ Selection project(const json::Value& record, const Flags& input)
             default: return {false, {}};
             }
         }
-        if (agreed && (agreed->groups != state.groups || agreed->entities != state.entities)) return {false, {}};
-        agreed = Selection{true, state.group, std::move(state.groups),std::move(state.entities)};
+        if(!agreed) {
+            agreed=Selection{true,state.group,std::move(state.groups),std::move(state.entities)};
+        } else {
+            agreed->known &= agreed->groups==state.groups && agreed->entities==state.entities;
+            if(agreed->group!=state.group)agreed->group.clear();
+            for(auto it=agreed->groups.begin();it!=agreed->groups.end();)
+                if(!state.groups.count(*it))it=agreed->groups.erase(it);else ++it;
+            for(const auto& [id,effect]:state.entities) {
+                const auto at=agreed->entities.find(id);
+                if(at==agreed->entities.end() || !(at->second==effect))agreed->uncertain_entities.insert(id);
+            }
+            for(auto it=agreed->entities.begin();it!=agreed->entities.end();) {
+                const auto at=state.entities.find(it->first);
+                if(at==state.entities.end() || !(at->second==it->second)) {
+                    agreed->uncertain_entities.insert(it->first);it=agreed->entities.erase(it);
+                } else ++it;
+            }
+        }
     }
     return agreed.value_or(Selection{});
 }
@@ -149,13 +167,14 @@ bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool
     const bool puppet = object.type==baked::ObjType::Entity || object.type==baked::ObjType::AnimEntity ||
         object.type==baked::ObjType::NPC || object.type==baked::ObjType::ShopNPC || object.type==baked::ObjType::Warp ||
         object.type==baked::ObjType::Event || object.type==baked::ObjType::RandomEvent || object.type==baked::ObjType::SwitchEvent;
-    if(selected.known && puppet) {
+    if(puppet) {
+        if(!obstacle && selected.uncertain_entities.count(object.entity_id()))return false;
         const auto entity=selected.entities.find(object.entity_id());
         if(entity!=selected.entities.end()&&entity->second.visible==std::optional<bool>(false))return false;
     }
     const auto group = baked::str(object.group);
     if (group.empty() || group == L"entity_default" || group == L"default") return true;
-    return selected.known ? selected.groups.count(group) != 0 : obstacle;
+    return selected.groups.count(group)!=0 || (!selected.known && obstacle);
 }
 baked::Object Resolver::effective(const baked::Submap& sm,const baked::Object& object) {
     auto result=object;
@@ -163,7 +182,6 @@ baked::Object Resolver::effective(const baked::Submap& sm,const baked::Object& o
        object.type!=baked::ObjType::NPC && object.type!=baked::ObjType::ShopNPC && object.type!=baked::ObjType::Warp &&
        object.type!=baked::ObjType::Event && object.type!=baked::ObjType::RandomEvent && object.type!=baked::ObjType::SwitchEvent)return result;
     const auto& selected=selection(sm);
-    if(!selected.known)return result;
     const auto at=selected.entities.find(object.entity_id());
     if(at==selected.entities.end())return result;
     // The bake's supported dimensions fit signed tile fields. Keep malformed
@@ -183,7 +201,7 @@ bool Resolver::consumed(const baked::Submap& sm, const baked::Object& object) {
         if (!id||!group||!type||!cell||cell->arr.size()!=3||!raw||!code||code->arr.empty()) continue;
         const int native_type=number(*type);
         const bool same_type=static_cast<int>(object.type)==native_type ||
-            (object.type==baked::ObjType::Warp && (object.d==1 ? native_type==2||native_type==28 : native_type==5));
+            (object.type==baked::ObjType::Warp && ((object.d&255)==1 ? native_type==2||native_type==28 : native_type==5));
         auto name=baked::object_identifier(object);
         if (!same_type||number(*id)!=object.entity_id()||group->s!=baked::str(object.group)||raw->s!=name||
             cell->arr[0].n!=object.layer||cell->arr[1].n!=object.tx||cell->arr[2].n!=object.ty) continue;
@@ -201,7 +219,9 @@ uint64_t Resolver::signature() const {
             hash *= 1099511628211ull;
         }
     };
-    bank(flags_.scenario); bank(flags_.treasure); bank(flags_.global); bank(flags_.area); bank(flags_.local);
+    bank(flags_.scenario); bank(flags_.treasure); bank(flags_.global);
+    hash ^= flags_.party_mini ? (static_cast<uint64_t>(*flags_.party_mini)<<1)|1 : 0;
+    hash *= 1099511628211ull; bank(flags_.area); bank(flags_.local);
     hash ^= static_cast<uint64_t>(flags_.current_map_id); hash *= 1099511628211ull;
     hash ^= static_cast<uint64_t>(flags_.current_area_id); hash *= 1099511628211ull;
     return hash;
@@ -223,8 +243,36 @@ std::optional<bool> Resolver::treasure_opened(const baked::Submap& sm, const bak
     }
     return {};
 }
+void add_relays(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request)
+{
+    request.live_relays = true;
+    request.relays.clear();
+    if (sm.world) return;
+    for (const auto& object : baked::grids(sm).objects)
+        if (object.type == baked::ObjType::RelayInteraction && resolver.active(sm, object))
+            request.relays.push_back(object);
+}
+std::shared_ptr<const baked::TransitionGrid> Resolver::transitions(const baked::Submap& sm)
+{
+    const int key=baked::submap_index(&sm);
+    if(const auto found=transitions_.find(key);found!=transitions_.end())return found->second;
+    const auto& grid=baked::grids(sm);auto mask=std::make_shared<baked::TransitionGrid>();
+    for(const auto& original:grid.objects) {
+        const int bits=baked::transition_bits(original);
+        if(!bits||!active(sm,original,true)||consumed(sm,original))continue;
+        const auto object=effective(sm,original);
+        auto& layer=(*mask)[sm.world?0:object.layer];
+        if(layer.empty())layer.assign(static_cast<size_t>(grid.width)*grid.height,0);
+        for(int y=std::max(0,int(object.ty));y<std::min(grid.height,int(object.ty)+object.th);++y)
+            for(int x=std::max(0,int(object.tx));x<std::min(grid.width,int(object.tx)+object.tw);++x)
+                layer[static_cast<size_t>(y)*grid.width+x]|=static_cast<uint8_t>(bits);
+    }
+    transitions_[key]=mask;return mask;
+}
 void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates, bool geometry_only)
 {
+    request.transitions=resolver.transitions(sm);
+    if (!geometry_only) add_relays(resolver, sm, request);
     request.live_hazards = true;
     request.live_traps = true;
     for (const auto& original : baked::grids(sm).objects) {
@@ -238,17 +286,18 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
             (gates && ((o.type == baked::ObjType::Entity || o.type == baked::ObjType::AnimEntity) && (o.d & 1)));
         const bool collider = gates && o.type == baked::ObjType::CollisionEntity;
         const bool used=resolver.consumed(sm,original);
-        const bool trigger = baked_route::step_event(o)&&!used;
-        if (!solid && !collider && !trigger) continue;
+        const bool terminal=baked::world_exit(o)&&!used;
+        const bool exit_source=baked::world_exit_at(baked::grids(sm),o.entity_id(),baked::object_identifier(o),o.tx,o.ty)!=nullptr;
+        const bool trigger = baked_route::step_event(o)&&!used&&!exit_source;
+        if (!solid && !collider && !trigger&&!terminal) continue;
         for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x) {
             baked_route::Cell cell{sm.world || (npc && (o.d & 2)) ? -1 : o.layer, x, y};
             if (solid) request.blocked.push_back(cell);
             if (collider) {
-                if (o.a == 6 || o.a == 7) request.directional.push_back({cell, o.a == 6 ? 1 : 2});
-                else request.blocked.push_back(cell);
+                baked_route::add_collision(request.blocked,request.directional,cell,o.a);
             }
             if (trigger) request.hazards.push_back(cell);
-            if (!used&&baked::is_trap(o)) request.traps.push_back(cell);
+            if (terminal||(!used&&baked::is_trap(o))) request.traps.push_back(cell);
         }
     }
 }

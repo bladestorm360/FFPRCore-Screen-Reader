@@ -477,6 +477,7 @@ void d_UseSetCursor(void* self, void* cursor, const void* mi)
 {
     o_UseSetCursor(self, cursor, mi);
     hooks::guarded("FF2.Magic.TargetSetCursor", [&] {
+        if(queries::is("FieldMagicTargets.OwnsRange"))return;
         if (!self || !cursor || !unity::active_in_hierarchy(self)) return;
         if (void* window = field::cache::get(kWindow)) {
             const int state = window_state(window);

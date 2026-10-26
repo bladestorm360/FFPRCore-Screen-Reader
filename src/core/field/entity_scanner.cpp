@@ -259,6 +259,26 @@ Detection goto_map_detector(Context& c)
     if (r::kGotoMapEventEntity.is(c.fe)) return detected(create_map_exit(c));
     if (contains(c.go_lower, L"gotomap") || c.object_type() == 3) return detected(create_map_exit(c));
 
+    if(c.is_event_trigger&&baked_nav::prepared()&&!entity_is_scenery(c.fe)&&!placeholder(c)) {
+        // Prepared immutable ID index: no script parsing/grid decoding or
+        // whole-map scan on this native callback. Each game supplies its own bake.
+        const auto* map=baked::submap_by_map_id(current_map_id_or_user_data());
+        auto* property=c.property();
+        if(map&&property) {
+            baked_route::Cell cell;
+            if(baked_nav::cell_at(field::map_handle(),c.position,cell)) {
+                const int id=ref::rd<int32_t>(property,r::fPropEntityId);
+                const auto raw=ref::rd_str(property,r::fPropName);
+                if(map->world && event_route_only(raw))return skip();
+                if(baked::transition_helper_at(baked::grids(*map),id,raw,cell.x,cell.y))return skip();
+                if(const auto* exit=baked::world_exit_at(baked::grids(*map),id,raw,cell.x,cell.y)) {
+                    const auto destination=T(L"World Map");
+                    auto entity=make_exit(c,TF(L"Exit to {0}",{destination}),exit->a,destination);
+                    entity->audio_exit=true;return detected(entity);
+                }
+            }
+        }
+    }
     void* prop = c.property();
     if (prop && r::kPropertyTelepoPoint.is(prop)) {
         return skip(); // Teleport return-cache metadata; no native entity is created
@@ -280,6 +300,9 @@ Detection treasure_detector(Context& c)
     std::wstring contents = ui::prefs::spoil_treasure_chest_contents_enabled() ? treasure_contents(c.property()) : std::wstring();
     EntityPtr e = make(Kind::TreasureChest, c, !contents.empty() ? contents : T(L"Treasure Chest"));
     e->opened = opened;
+    e->pickup=r::kPropertyTresureBox.is(c.property()) && ref::rd<bool>(c.property(),r::fTreasurePickUp);
+    if(e->pickup && opened)return skip();
+    if(e->pickup && contents.empty())e->name=T(L"Treasure");
     return detected(e);
 }
 
@@ -289,6 +312,13 @@ Detection npc_detector(Context& c)
 {
     if (!r::kFieldNonPlayer.is(c.fe)) return not_handled();
     if (!npc_navigation_available(c.fe)) return skip();
+    if(baked::submap_by_map_id(current_map_id_or_user_data())) {
+        baked_route::Cell cell;
+        // Native staging can leave a script-bearing actor active at (30000,
+        // 30000). Physical map bounds, not distance from the player, decide
+        // whether that live actor can be a destination.
+        if(!baked_nav::cell_at(field::map_handle(),c.position,cell))return skip();
+    }
     // FF2's vehicle spawn NPCs (the Dreadnought flying over the world map, the airship) have an
     // action but no script or message; the game's CanAction cannot tell (user, 2026-10-10).
     if (placeholder(c)) {
@@ -300,7 +330,8 @@ Detection npc_detector(Context& c)
         if (!scripted && !message) return skip();
     }
 
-    std::wstring name = entity_name_from_property(c.fe);
+    std::wstring name = party_entities::companion_name(c.fe);
+    if(name.empty())name=entity_name_from_property(c.fe);
     if (name.empty() || name == L"NPC") name = clean_object_name(c.go_name, T(L"NPC"));
     EntityPtr e = make(Kind::NPC, c, name);
     e->shop = contains(c.go_lower, L"shop") || contains(c.go_lower, L"merchant");
@@ -433,6 +464,7 @@ EntityPtr convert(void* fe)
 std::vector<std::pair<void*, EntityPtr>> g_entity_map;   // FieldEntity -> conversion, in insertion order
 std::vector<EntityPtr> g_entities;
 std::array<std::vector<EntityPtr>, kCategoryCount> g_category_views;
+std::vector<EntityPtr> g_audio_entities; // ungrouped physical current-map registry
 uint64_t g_audio_revision = 1;
 std::vector<Vec3> g_exit_positions; // worker-compiled unfiltered live exits, for wall tones
 int g_index = 0;
@@ -465,6 +497,8 @@ int g_sel_remote = 0;            // another floor's entry: its floor and cell id
 int g_sel_cx = 0, g_sel_cy = 0;
 int g_sel_entity_id = -1;
 int g_sel_map = 0;
+int g_sel_transportation_id = 0;
+uint64_t g_selection_revision = 0;
 
 bool player_local_position(Vec3& out)
 {
@@ -522,6 +556,9 @@ struct RemoteBuilder {
         for (; next < objects.size() && budget.available(); ++next) {
             const auto& object = objects[next];
             RemoteRow row; row.object = object; row.floor = resolve_map_name(object.map_id);
+            if(object.world_exit) {
+                row.destination=T(L"World Map");input.rows.push_back(std::move(row));continue;
+            }
             if (!object.event_type.empty()) {
                 if (object.event_type != L"Warp Tile" && placeholder_fn && placeholder_fn(object.raw_name.c_str())) continue;
                 input.rows.push_back(std::move(row));
@@ -531,7 +568,7 @@ struct RemoteBuilder {
             case baked::ObjType::NPC:
             case baked::ObjType::ShopNPC:
                 if (placeholder_fn && placeholder_fn(object.raw_name.c_str()) && !object.scripted) continue;
-                row.name = object.raw_name.empty() ? std::wstring() : translate_entity_name(object.raw_name);
+                row.name = object.raw_name.empty() ? std::wstring() : translate_entity_name_for_map(object.raw_name,object.map_id);
                 break;
             case baked::ObjType::TreasureBox:
                 if (ui::prefs::spoil_treasure_chest_contents_enabled() && object.content_id > 0) row.name = resolve_item_name(object.content_id);
@@ -559,7 +596,11 @@ std::vector<EntityPtr> build_remote(RemoteInput& input) {
         entity->remote_map_id = object.map_id; entity->cell_layer = object.cell.layer;
         entity->cell_x = object.cell.x; entity->cell_y = object.cell.y; entity->floor_name = std::move(row.floor);
         std::wstring base;
-        if (!object.event_type.empty()) {
+        if(object.world_exit) {
+            entity->kind=Kind::MapExit;entity->dest_map_id=object.dest_map_id;
+            entity->dest_name=row.destination;entity->audio_exit=true;
+            entity->name=TF(L"Exit to {0}",{entity->dest_name});
+        } else if (!object.event_type.empty()) {
             entity->kind = Kind::Event; entity->event_type = object.event_type;
             entity->name = safe_event_label(object.raw_name, object.event_type, object.map_id, object.entity_id, static_cast<int>(object.type));
             if (object.type == baked::ObjType::TransportationEventAction) entity->vehicle_pad = object.raw_name;
@@ -571,8 +612,9 @@ std::vector<EntityPtr> build_remote(RemoteInput& input) {
             base = remote_guard_base(entity->name); break;
         case baked::ObjType::TreasureBox:
             entity->kind = Kind::TreasureChest;
+            entity->pickup=object.pickup;
             entity->opened_known = object.opened.has_value(); entity->opened = object.opened.value_or(false);
-            entity->name = row.name.empty() ? T(L"Treasure Chest") : std::move(row.name); break;
+            entity->name = row.name.empty() ? T(object.pickup?L"Treasure":L"Treasure Chest") : std::move(row.name); break;
         case baked::ObjType::SavePoint: entity->kind = Kind::SavePoint; entity->name = T(L"Save Point"); break;
         case baked::ObjType::GotoMap:
             entity->kind = Kind::MapExit; entity->dest_map_id = object.dest_map_id; entity->dest_name = std::move(row.destination);
@@ -607,6 +649,7 @@ void apply_filter() {
     const double captured_at = frame::now();
     g_filter_pending = true;
     const auto generation = g_filter_generation;
+    const auto selection_revision = g_selection_revision;
     const auto map_id = current_map_id_or_user_data();
     auto entities = std::make_shared<std::vector<EntityPtr>>(g_entities); // owner registry only
     auto input = std::make_shared<FilterInput>();
@@ -630,6 +673,7 @@ void apply_filter() {
     input->selected_remote = g_sel_remote; input->selected_x = g_sel_cx; input->selected_y = g_sel_cy;
     input->selected_entity_id = g_sel_entity_id;
     input->selected_map = g_sel_map;
+    input->selected_transportation_id = g_sel_transportation_id;
     input->selected_raw=g_sel&&g_sel->raw_name_known?g_sel->audio_hint:std::wstring();
     baked_nav::MapGoal continued;
     TargetKind continued_kind;
@@ -643,7 +687,7 @@ void apply_filter() {
     const int continued_map = input->continued_map, continued_x = input->continued_x, continued_y = input->continued_y,
         continued_id = input->continued_entity_id;
     auto obstacles = std::make_shared<EntityCursor>(); // native pointers remain in this closure
-    frame::every_frame([entities, input, obstacles, captured = false, next = size_t(0), generation, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, captured_at, navigation_filtered, vehicle]() mutable {
+    frame::every_frame([entities, input, obstacles, captured = false, next = size_t(0), generation, selection_revision, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, captured_at, navigation_filtered, vehicle]() mutable {
         if (generation != g_filter_generation) return false;
         if (!ffpr::system::is_field_navigation_ready() || map_id != current_map_id_or_user_data()) { cancel_filter(); return false; }
         CaptureBudget budget;
@@ -652,6 +696,7 @@ void apply_filter() {
             FilterRow row;
             row.index = next; row.kind = entity->kind; row.category = entity->category();
             row.entity_id = entity->entity_id;
+            row.transportation_id = entity->transportation_id;
             row.raw_name=entity->raw_name_known?entity->audio_hint:std::wstring();
             row.position = entity->position(); row.numbering_position = entity->pos;
             row.remote_map = entity->remote_map_id; row.cell_x = entity->cell_x; row.cell_y = entity->cell_y;
@@ -691,12 +736,13 @@ void apply_filter() {
         }
         const auto origin = input->sort ? std::optional<Vec3>(input->player) : std::nullopt;
         worker_job::start(g_filter_work, std::move(*input), &filter_worker::build_categories,
-            [entities, generation, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle](Categories filtered) {
+            [entities, generation, selection_revision, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle](Categories filtered) {
                 if (generation != g_filter_generation || map_id != current_map_id_or_user_data()) return;
                 auto result = std::make_shared<Categories>(std::move(filtered));
                 auto handles = std::make_shared<std::array<std::vector<EntityPtr>, kCategoryCount>>(); // native owner registry only
+                auto audio_handles=std::make_shared<std::vector<EntityPtr>>();
                 frame::every_frame([entities, result, handles, named = size_t(0), ordered = size_t(0), view = size_t(0),
-                                    generation, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle]() mutable {
+                                    audio_handles,audio_next=size_t(0),generation, selection_revision, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle]() mutable {
                     if (generation != g_filter_generation) return false;
                     if (!ffpr::system::is_field_navigation_ready() || map_id != current_map_id_or_user_data()) {
                         cancel_filter(); return false;
@@ -712,6 +758,9 @@ void apply_filter() {
                         if (ordered < order.size()) return true;
                     }
                     if (named < all.names.size() || view < handles->size()) return true;
+                    for(;audio_next<result->audio_order.size()&&budget.available();++audio_next)
+                        audio_handles->push_back((*entities)[result->audio_order[audio_next]]);
+                    if(audio_next<result->audio_order.size())return true;
                     if (navigation_filtered) {
                         Vec3 at; const auto transport = field::current_vehicle();
                         if (!origin || !player_local_position(at) || at.x!=origin->x || at.y!=origin->y || at.z!=origin->z ||
@@ -719,7 +768,16 @@ void apply_filter() {
                             g_views_ready=false; apply_filter(); return false;
                         }
                     }
+                    // An input selecting a newly recreated handle can race this
+                    // older snapshot. Its old restoration index has no authority
+                    // over the newer user choice. Rebuild from that identity.
+                    const auto& incoming=(*handles)[static_cast<size_t>(g_category)];
+                    if(selection_revision!=g_selection_revision && g_sel_has &&
+                       std::find(incoming.begin(),incoming.end(),g_sel)==incoming.end()) {
+                        apply_filter();return false;
+                    }
                     g_category_views.swap(*handles); g_exit_positions.swap(all.exits);
+                    g_audio_entities.swap(*audio_handles);
                     ++g_audio_revision;
                     auto& current = result->views[static_cast<size_t>(g_category)];
                     // Input can move selection while this refresh is running. Keep
@@ -733,7 +791,7 @@ void apply_filter() {
                         && goal.map_id == continued_map && goal.cell.x == continued_x && goal.cell.y == continued_y
                         && goal.entity_id == continued_id && goal.raw_name==continued_raw;
                     if (continued_current) g_index = current.continued;
-                    if (g_index >= static_cast<int>(filtered_view().size())) g_index = 0;
+                    if (g_index >= static_cast<int>(filtered_view().size())) g_index = g_sel_has ? -1 : 0;
                     g_views_ready = true;
                     g_view_origin = origin;
                     g_navigation_filtered = navigation_filtered; g_view_vehicle = vehicle;
@@ -754,18 +812,21 @@ void apply_filter() {
 
 void clear_selected_identifier()
 {
+    ++g_selection_revision;
     g_sel.reset();
     g_sel_has = false;
     g_sel_name.clear();
     g_sel_remote = 0;
     g_sel_entity_id = -1;
     g_sel_map = 0;
+    g_sel_transportation_id = 0;
 }
 
 void save_selected_identifier()
 {
     EntityPtr e = scanner::current_entity();
     if (!e) return;
+    ++g_selection_revision;
     g_sel = e;
     g_sel_has = true;
     g_sel_pos = e->position();
@@ -776,6 +837,7 @@ void save_selected_identifier()
     g_sel_cy = e->cell_y;
     g_sel_entity_id = e->entity_id;
     g_sel_map = e->remote() ? e->remote_map_id : current_map_id_or_user_data();
+    g_sel_transportation_id = e->kind == Kind::Vehicle ? e->transportation_id : 0;
     if (!e->remote()) {
         baked_route::Cell cell;
         if (baked_nav::cell_at(field::map_handle(), e->position(), cell)) { g_sel_cx = cell.x; g_sel_cy = cell.y; }
@@ -794,6 +856,8 @@ void ensure_correct_map()
 // scanner API
 // =========================================================================================
 namespace scanner {
+void remember_selection() { save_selected_identifier(); }
+void clear_selection() { clear_selected_identifier(); }
 void when_filter_ready(std::function<void()> ready, bool existing_selection) {
     if (!ffpr::system::is_field_navigation_ready() || ffpr::system::input_transition_blocked()) return;
     ensure_correct_map();
@@ -857,7 +921,7 @@ void finish_scan(int map_id, bool remote_ready = false)
     }
     g_last_scanned_map_id = map_id;
     apply_filter();
-    if (g_index >= static_cast<int>(filtered_view().size())) g_index = 0;
+    if (g_index >= static_cast<int>(filtered_view().size())) g_index = g_sel_has ? -1 : 0;
     // Selection is restored by the asynchronous filter publication.
 }
 }
@@ -901,7 +965,8 @@ void invalidate_map()
     g_navigation_filtered=false; g_view_vehicle=0;
     g_view_captured_at = 0;
     g_exit_positions.clear();
-    g_index = 0;
+    g_audio_entities.clear();
+    g_index = g_sel_has ? -1 : 0;
     g_last_scanned_map_id = -1;
 }
 bool needs_scan(int map_id) { return map_id != g_last_scanned_map_id && !g_scan_running; }
@@ -1157,7 +1222,7 @@ std::vector<unity::Vec3> map_exit_positions() { return scanner::map_exit_positio
 
 int capture_soundscape(sound::scape::Snapshot& output,size_t& next,uint64_t& revision)
 {
-    const auto& entities=g_category_views[0];
+    const auto& entities=g_audio_entities;
     if(g_last_scanned_map_id!=current_map_id_or_user_data()) return -1;
     if(!revision) revision=g_audio_revision;
     if(revision!=g_audio_revision || entities.size()>sound::scape::max_rows) return -1;
@@ -1180,6 +1245,15 @@ int capture_soundscape(sound::scape::Snapshot& output,size_t& next,uint64_t& rev
         const auto position=e->position();
         row.x=position.x/16; row.north=position.y/16; row.layer=e->cell_layer;
         row.destination=e->dest_map_id; row.door=e->audio_door;
+        if(const auto* destination=baked::submap_by_map_id(row.destination))row.world_exit=destination->world;
+        if(e->game) {
+            const int layer=game_object_layer(e->game)-9;if(layer>=0&&layer<=2)row.layer=layer;
+            auto* property=entity_property(e->game);
+            if(property&&r::kPropertyEvent.is(property)) {
+                row.script=ref::rd<int32_t>(property,r::fEventScriptId);
+                row.action=ref::rd<int32_t>(property,r::fEventActionId);
+            }
+        }
         row.verified_exit=e->audio_exit;
         row.hint=e->audio_hint; row.event_type=e->event_type;
         output.rows.push_back(std::move(row));

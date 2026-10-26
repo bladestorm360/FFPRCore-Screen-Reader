@@ -14,13 +14,15 @@
 #include "../src/core/battle/battle_result.cpp"
 #include "../src/core/input/input_passthrough.cpp"
 #include "../src/core/battle/rendered_feedback.h"
+#include "../src/core/condition_labels.h"
 
 namespace fixture {
 struct Node {
     bool alive = true, visible = true;
     int end_count = 0;
     int weapon_type = 0;
-    bool skill = false;
+    bool skill = false, condition_icon = false;
+    int condition_type = 0;
     Node* parent = nullptr;
     std::map<std::string, void*> fields;
     std::map<std::string, std::wstring> text;
@@ -68,6 +70,14 @@ using DataHook = void (*)(void*, void*, const void*);
 WeaponHook weapon_hook = nullptr;
 DataHook hands_hook = nullptr, ability_hook = nullptr;
 int hands_calls = 0;
+using ConditionIcon = void* (*)(void*,void*,const void*);
+using ConditionUpdate = void (*)(void*,void*,const void*);
+ConditionIcon condition_icon_hook=nullptr;
+ConditionUpdate condition_update_hook=nullptr;
+void* native_condition_icon(void*,void* condition,const void*) {return static_cast<Node*>(condition)->sprite;}
+void native_condition_update(void* self,void* values,const void*) {
+    for(void* condition:*static_cast<List*>(values))condition_icon_hook(self,condition,nullptr);
+}
 void weapon_icon(void*, const void*) {}
 void ability_icon(void*, void*, const void*) {}
 void hands_icon(void* self, void* data, const void*) {
@@ -126,11 +136,13 @@ void* Method::ptr() {
     return nullptr;
 }
 void call_failed_note(const char*) { std::abort(); }
-bool Class::is(void* o) { return o && (std::string(name)!="SkillLevelContentController" || static_cast<fixture::Node*>(o)->skill); }
+bool Class::is(void* o) { return o && (std::string(name)!="SkillLevelContentController" || static_cast<fixture::Node*>(o)->skill) && (std::string(name)!="ConditionIconController" || static_cast<fixture::Node*>(o)->condition_icon); }
 std::wstring rd_str(void* key, Field&) { return key ? static_cast<fixture::Node*>(key)->name : L"Action"; }
 }
 namespace hooks {
 bool attach_raw(ref::Method& method, void* hook, void** original) {
+    if(std::string(method.cls.name)=="ConditionIconController" && std::string(method.name)=="GetIcon") {fixture::condition_icon_hook=reinterpret_cast<fixture::ConditionIcon>(hook);*original=reinterpret_cast<void*>(&fixture::native_condition_icon);return true;}
+    if(std::string(method.cls.name)=="ConditionIconController" && std::string(method.name)=="UpdateView") {fixture::condition_update_hook=reinterpret_cast<fixture::ConditionUpdate>(hook);*original=reinterpret_cast<void*>(&fixture::native_condition_update);return true;}
     if(std::string(method.name)=="SetWeaponIcon") { fixture::weapon_hook=reinterpret_cast<fixture::WeaponHook>(hook); *original=reinterpret_cast<void*>(&fixture::weapon_icon); return true; }
     if(std::string(method.name)=="SetBothHandsData") { fixture::hands_hook=reinterpret_cast<fixture::DataHook>(hook); *original=reinterpret_cast<void*>(&fixture::hands_icon); return true; }
     if(std::string(method.name)=="SetAbilityIcon") { fixture::ability_hook=reinterpret_cast<fixture::DataHook>(hook); *original=reinterpret_cast<void*>(&fixture::ability_icon); return true; }
@@ -142,10 +154,10 @@ namespace queries {
 void define(const char* key, std::function<bool()> fn) { fixture::queries[key] = std::move(fn); }
 bool is(const char* key) { auto i = fixture::queries.find(key); return i != fixture::queries.end() && i->second(); }
 }
-namespace actions { void define(const char*, Fn) {} bool run(const char*) { ++fixture::panel_reads; return true; } }
+namespace actions { void define(const char*, Fn) {} bool run(const char*) { ++fixture::panel_reads; return true; } bool defined(const char*){return false;} }
 namespace events { void on(Kind, Handler) {} }
 namespace game { Id current() { return fixture::game_id; } }
-namespace settings { int get_int(const char* key, int def) { return std::string(key) == "StatDeltaMode" ? fixture::delta_mode : def; } bool get_bool(const char* key, bool def) { return std::string(key) == "ResultNotificationsOnce" ? fixture::notifications_once : std::string(key) == "SpeechEnabled" ? fixture::game_speech : std::string(key) == "AnnounceResultStatChanges" ? fixture::changed_stats : std::string(key) == "AutoDetail" ? fixture::detail : std::string(key) == "ExpCounter" ? false : def; } }
+namespace settings { void set_bool(const char*,bool){} int get_int(const char* key, int def) { return std::string(key) == "StatDeltaMode" ? fixture::delta_mode : def; } bool get_bool(const char* key, bool def) { return std::string(key) == "ResultNotificationsOnce" ? fixture::notifications_once : std::string(key) == "SpeechEnabled" ? fixture::game_speech : std::string(key) == "AnnounceResultStatChanges" ? fixture::changed_stats : std::string(key) == "AutoDetail" ? fixture::detail : std::string(key) == "ExpCounter" ? false : def; } }
 namespace ffpr {
 void say(std::wstring_view s, bool) { if (fixture::game_speech) fixture::spoken.emplace_back(s); }
 void say_parts(std::vector<std::wstring> parts, bool) { if (fixture::game_speech) fixture::spoken.emplace_back(text::join(parts, L". ")); }
@@ -160,7 +172,7 @@ void state_set(const char*, bool) {}
 void command_reset_state() {}
 void magic_reset_state() {}
 }
-namespace menus { std::wstring condition_name(void* value) { return static_cast<fixture::Node*>(value)->name; } }
+namespace menus { std::wstring condition_name(void* value) {auto* condition=static_cast<fixture::Node*>(value);return condition->name.empty()?condition_labels::fallback(condition->condition_type):condition->name;} }
 }
 namespace modtext { std::wstring T(std::wstring_view s) { return std::wstring(s); }
 std::wstring TF(std::wstring_view s, std::initializer_list<std::wstring> args) { return text::format(s, args); }
@@ -460,6 +472,17 @@ int main()
     equipment.sprite = &icon_sprite;
     skill_content.fields["view"] = &skill_view;
     expect(icon_install && icon_install() >= 3 && hands_hook && weapon_hook && ability_hook, "actual icon producer hooks include the distinct results hand-data path");
+    Node condition_owner,condition_icons,condition_view,condition_image,amnesia_sprite,amnesia_condition;
+    condition_icons.condition_icon=true;condition_icons.fields["view"]=&condition_view;
+    condition_owner.fields["iconController"]=&condition_icons;
+    List condition_images{&condition_image},condition_values{&amnesia_condition};
+    condition_view.fields["iconImageList"]=&condition_images;
+    amnesia_condition.condition_type=205;amnesia_condition.sprite=&amnesia_sprite;condition_image.sprite=&amnesia_sprite;
+    expect(condition_update_hook&&condition_icon_hook,"native condition icon producers are installed");
+    condition_update_hook(&condition_icons,&condition_values,nullptr);
+    expect(displayed::conditions(&condition_owner)==L"Amnesia","actual party/item-target condition reader names the rendered Fog icon");
+    condition_image.visible=false;expect(displayed::conditions(&condition_owner).empty(),"a hidden Amnesia icon is not disclosed");condition_image.visible=true;
+    Node stale_sprite;condition_image.sprite=&stale_sprite;expect(displayed::conditions(&condition_owner).empty(),"reused condition image cannot retain a stale status label");
     hands_hook(&skill_content, &equipment, nullptr);
     expect(hands_calls==1 && displayed::skill_name(&skill_content)==L"Sword", "results SetBothHandsData captures its visible type without SetWeaponIcon");
     static const wchar_t* weapon_names[] = {L"Sword",L"Knife",L"Spear",L"Axe",L"Staff",L"Bow",L"Shield",L"Unarmed"};
@@ -470,6 +493,8 @@ int main()
     fixture::Node equip_image,equip_sprite;equip_image.sprite=&equip_sprite;equip_sprite.name=L"UI_Common_Icon05";
     expect(displayed::equipment_icon(&equip_image)==L"Daggers","FF3 equippable sprite maps to its textual equipment class");
     equip_sprite.name=L"UI_Common_Icon29";expect(displayed::equipment_icon(&equip_image)==L"Shields","rendered armor classes are decoded as well as weapons");
+    equip_sprite.name=L"UI_Common_Icon29(Clone)";expect(displayed::equipment_icon(&equip_image)==L"Shields","native atlas clone retains its exact equipment equivalent");
+    equip_sprite.name=L"UI_Common_Icon05(Clone)";expect(displayed::equipment_icon(&equip_image)==L"Daggers","weapon atlas clones are decoded as well as armor");
     equip_image.visible=false;expect(displayed::equipment_icon(&equip_image).empty(),"hidden job equipment icon remains undisclosed");
     equip_image.visible=true;equip_sprite.name=L"UI_Common_Icon99";expect(displayed::equipment_icon(&equip_image).empty(),"unknown icon is not assigned an invented equipment class");
     icon_image.visible=false; expect(displayed::skill_name(&skill_content).empty(), "hidden weapon icon cannot disclose its type"); icon_image.visible=true;
