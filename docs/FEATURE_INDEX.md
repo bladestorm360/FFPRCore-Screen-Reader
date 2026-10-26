@@ -1,9 +1,10 @@
 # Current feature and source index
 
-[Release1.0](release.md#v10-preparation-october26): in progress (~70%), Open pending
-public source/tag/ZIP delivery. Metadata/guide, full checks/smoke, exact28-file
-package and outer-ZIP/payload scan pass. Completed features remain closed;
-beacon installed all six, gameplay confirmations remain separate.
+[Release1.0](release.md#v10-preparation-october26): complete, Closed.
+[Public V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0)
+and Latest verified; source/tag0746410, draft/public downloads match the exact
+28-file package. Full checks/smoke and outer-ZIP/payload scan pass; six earlier
+releases preserved. Beacon installed all six; gameplay confirmations stay separate.
 
 [October26 beacon movement/spatial follow-up](re/BEACON_MOVEMENT_20261026.md):
 complete, Closed; offline verified and installed/hash-verified all six. Moving cadence across both audio modes uses a per-route corner index;

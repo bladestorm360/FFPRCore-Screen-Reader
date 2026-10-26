@@ -11,8 +11,10 @@ detections/stable hashes, enabled/current definitions1.461.211.0. Evidence:
 build_check/v10_20261026/security_release/ and package_verification.json.
 No signing identity available; DLLs unsigned, exclusions unverified after denied
 query. Download reputation/other scanner acceptance remain untested. No protection
-or dependency change. User-authorized public source/tag/ZIP publication is the
-remaining step; no game launch/probe. Microsoft [signing guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options)
+or dependency change. User-authorized [public V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0)
+is published and Latest, with draft and anonymous public downloaded bytes matching
+the scanned archive. Six prior releases preserved; no game launch/probe.
+Microsoft [signing guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options)
 and [MpCmdRun guidance](https://learn.microsoft.com/en-us/defender-endpoint/command-line-arguments-microsoft-defender-antivirus)
 rechecked October26. No paid signing service/tool install is introduced.
 

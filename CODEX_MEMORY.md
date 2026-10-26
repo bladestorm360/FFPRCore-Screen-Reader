@@ -1,11 +1,14 @@
 # Native FFPR durable memory
 
-- October26 [release1.0](docs/release.md#v10-preparation-october26): in progress
-  (~70%), Open pending source/tag/upload publication. Beacon installed/verified
-  all six; release metadata/README/full build/smoke and28-file ZIP/exact29-file
-  payload+outer scan pass. DLL35a59650... / ZIPa3b3c385...; package is6199100 bytes.
-  Only two metadata substitutions differ from334 otherwise verified runtime files.
-  Prior systems Closed, gameplay gaps preserved. Ledger:build_check/v10_20261026/.
+- October26 [release1.0](docs/release.md#v10-preparation-october26): complete,
+  Closed. [Public V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0),
+  Latest; source/tag074641016fbcb2cb6c48168446c75c654d23a590, release424738576,
+  asset679391553. Full checks/smoke/28-file ZIP and29-file payload+outer scan pass.
+  ZIP6199100 SHA256a3b3c385bb446f0746cdcd14f9ee0ddb8e037604bc950b75f042f98eb795419f;
+  DLL35a59650e5d86cfded076263d5f2b58c7352eaf218ca3a861ee83af1f03565e4.
+  Draft/anonymous public downloads match; all six prior releases preserved.
+  Beacon installed all six; release differs only in metadata. Gameplay gaps
+  remain separate. Ledger/evidence:build_check/v10_20261026/.
 
 - October26 [beacon movement/spatial follow-up](docs/re/BEACON_MOVEMENT_20261026.md):
   complete, Closed; offline verified and installed/hash-verified all six after

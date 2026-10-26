@@ -2,7 +2,8 @@
 
 ## V1.0 preparation, October26
 
-Status: in progress (~70%), Open pending source/tag/upload publication. Human request: deploy the checked beacon fix in
+Status: complete, Closed. Source/tag/ZIP published and public download verified.
+Human request: deploy the checked beacon fix in
 closed FFIII, then prepare release1.0 through this established public-release
 procedure. The beacon deployment is complete/all132 payload hashes and144
 protected entries verified; its source milestone is Closed. Mallet/Items reading
@@ -75,6 +76,37 @@ write game folders or change installed dependencies/preferences. Prior failed
 compiles, partial deployment refusal and recovery remain archived. Scope checked
 before R3: only the reviewed current mod-only candidate and requested new v1.0
 publication are allowed; preserve all six older releases and existing history.
+
+### V1.0 publication and closure
+
+Published [V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0)
+October26 at20:34:54 UTC; public API confirms Latest, draft=false and
+prerelease=false. Annotated v1.0 resolves locally/remotely to tested source
+074641016fbcb2cb6c48168446c75c654d23a590. Master was pushed normally; final
+documentation follows that tagged source without changing the package.
+
+Release424738576/asset679391553 were verified as a draft before publication:
+tag/title/notes, one ZIP, size6199100 and GitHub SHA256 digest all match. The
+authenticated draft download and anonymous public download both match the local
+scanned ZIP byte for byte. All six older releases retain IDs, titles, notes,
+source targets, publication dates and asset identities/content metadata.
+
+Player download:
+[Final.Fantasy.Pixel.Master.Core.Screen.Reader.V1.0.zip](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/download/v1.0/Final.Fantasy.Pixel.Master.Core.Screen.Reader.V1.0.zip).
+GitHub normalizes filename spaces to periods; the internal single folder keeps
+the requested spaced name. DLL/archive hashes are unchanged from the scan above.
+No automatic approval-review rejection or new permission request blocked this
+release; standing public-source/tag/ZIP authorization was honored.
+
+Scope checked at acceptance: R1-R4 complete, closed feature interfaces preserved,
+no optional implementation work added. Source/release milestones Closed at
+v1.0/source0746410; further refactoring needs a human-scoped follow-up. Existing
+gameplay/listening/native timing gaps remain in TESTING.md. Sol completed the
+work without delegation or game launch/control/probe. Evidence in
+build_check/v10_20261026/ includes scope/source/staged reviews, canonical reports,
+smoke, package/PE/resources/feature coverage, exact ZIP/payload scan, source/tag
+pushes and draft/public downloaded copies/verification. Final verification records
+the documentation HEAD, remote branch/tag and clean tree. Prior recovery remains.
 
 ## Maintained procedure
 
