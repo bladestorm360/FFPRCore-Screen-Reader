@@ -82,6 +82,8 @@ extern ref::Field fEventActionId;
 extern ref::Field fEventScriptId;
 extern ref::Class kPropertyTalk;
 extern ref::Field fTalkMessageKey;
+extern ref::Field fTalkChangeCharacterStatusId;
+extern ref::Field fTalkCloseMessageKey;
 extern ref::Class kPropertyDefaultEntity;
 extern ref::Class kPropertyTresureBox;
 extern ref::Field fTreasurePickUp;
@@ -170,13 +172,21 @@ inline bool npc_navigation_available(void* entity) {
     void* property = ref::rd<void*>(entity, r::fEntityProperty);
     const bool event = property && r::kPropertyEvent.is(property);
     const int action = event ? ref::rd<int32_t>(property, r::fEventActionId) : 0;
-    const bool script = event && ref::rd<int32_t>(property, r::fEventScriptId) > 0;
+    const int script_id = event ? ref::rd<int32_t>(property, r::fEventScriptId) : 0;
+    const bool script = script_id > 0;
     // CanAction only classifies the dispatch kind. RunScript(2) without an
     // assigned script is a staged actor, e.g. Mysidia's Masked Figure. A legal
     // walking approach cannot manufacture an interaction for that actor.
     // Preserve message-backed targets and native service actions independently.
     if (action == 2 && !script && !(r::kPropertyTalk.is(property) &&
         !ref::rd_str(property, r::fTalkMessageKey).empty())) return false;
+    // Empty Talk dispatch has no message or status effect. Check every optional
+    // field before reading it: missing metadata must retain a possible target.
+    if (action == 4 && script_id == 0 && r::kPropertyTalk.is(property) &&
+        r::fEventScriptId && r::fTalkMessageKey && r::fTalkChangeCharacterStatusId &&
+        r::fTalkCloseMessageKey && ref::rd_str(property, r::fTalkMessageKey).empty() &&
+        ref::rd<int32_t>(property, r::fTalkChangeCharacterStatusId) == 0 &&
+        ref::rd_str(property, r::fTalkCloseMessageKey).empty()) return false;
     if (!r::mNonPlayerGetCanAction.get() || ref::call<bool>(r::mNonPlayerGetCanAction, entity)) return true;
     return action == 9 && script;
 }

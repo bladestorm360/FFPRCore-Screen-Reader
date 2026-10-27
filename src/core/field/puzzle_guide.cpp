@@ -206,6 +206,7 @@ void stop()
 void on_move(bool interrupt = true)
 {
     if (!field_ready()) return;
+    if (game::is(game::Id::FF3) && queries::is("GameModule.PuzzleGuideActive")) { actions::run("GameModule.PuzzleGuideMove"); return; }
     const Puzzle* p = active();
     if (!p || g_step >= static_cast<int>(p->steps.size()) || g_arrived_step == g_step) return;
     const Step& s = p->steps[static_cast<size_t>(g_step)];

@@ -100,6 +100,72 @@ int main() {
         chests.selected_entity_id=-1;chests.selected_name=L"Treasure Chest";
         view=build(chests);expect(view.restored==-1,"type-only chest names are never a restoration identity fallback");
     }
+    {
+        // A remote objective must remain the sole representative after it becomes live.
+        FilterInput handoff; handoff.current_map=80; handoff.exits=true;
+        handoff.continued_goal=true; handoff.continued_map=77; handoff.continued_x=4;
+        handoff.continued_y=6; handoff.continued_entity_id=0; handoff.continued_raw=L"target";
+        FilterRow target; target.index=0; target.kind=Kind::MapExit; target.category=Category::MapExits;
+        target.remote_map=77; target.cell_x=4; target.cell_y=6; target.entity_id=0;
+        target.raw_name=L"target"; target.destination=1; target.route_distance=1;
+        auto sibling=target; sibling.index=1; sibling.cell_x=5; sibling.entity_id=1;
+        sibling.raw_name=L"sibling"; sibling.route_distance=10; handoff.rows={target,sibling};
+        auto remote=build(handoff);
+        expect(remote.continued>=0 && remote.order[remote.continued]==0 && remote.order.size()==1,
+            "remote grouped objective initially retained");
+        handoff.current_map=77; handoff.rows[0].remote_map=handoff.rows[1].remote_map=0;
+        handoff.rows[0].cell_valid=handoff.rows[1].cell_valid=true;
+        handoff.rows[0].route_distance=20; handoff.rows[1].route_distance=1;
+        auto live=build(handoff); auto views=build_categories(handoff);
+        expect(live.continued>=0 && live.order[live.continued]==0 && live.order.size()==1,
+            "grouped live handoff preserves exact objective despite closer sibling");
+        expect(views.views[0].continued>=0 && views.views[0].order[views.views[0].continued]==0 &&
+            views.views[3].continued>=0 && views.views[3].order[views.views[3].continued]==0 &&
+            views.audio_order.size()==2, "category publication preserves objective and physical audio exits");
+        handoff.sort=true; live=build(handoff);
+        expect(live.continued>=0 && live.order[live.continued]==0, "sorting cannot displace the objective");
+        handoff.continued_goal=false; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "clearing objective restores nearest grouping");
+        handoff.continued_goal=true; handoff.exits=false; live=build(handoff);
+        expect(live.order.size()==2 && live.continued>=0 && live.order[live.continued]==0, "grouping disabled preserves both exits");
+        handoff.exits=true; handoff.rows[0].available=false; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "unavailable objective cannot bind sibling");
+        handoff.rows[0].available=true; handoff.rows[0].story_gated=true; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "story-hidden objective cannot bind sibling");
+        handoff.rows[0].story_gated=false; handoff.continued_entity_id=2; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "wrong native ID cannot bind sibling including ID zero");
+        handoff.continued_entity_id=0; handoff.continued_raw=L"wrong"; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "wrong raw identity cannot bind sibling");
+        handoff.continued_raw=L"target"; handoff.world=true; handoff.rows[0].route_distance=-1; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==1 && live.continued==-1, "unreachable world objective leaves usable sibling browsable");
+        handoff.world=false; live=build(handoff);
+        expect(live.order.size()==1 && live.order[0]==0 && live.continued==0, "blocked indoor objective remains available for explanation");
+        handoff.cancelled=[] { return true; }; live=build(handoff);
+        expect(live.order.empty(), "cancelled grouped work produces no result");
+    }
+    {
+        // Identity and geometry come from the actual FFIII Gysahl town bake.
+        std::ifstream f("data/ff3/maps.bin",std::ios::binary); const std::string bytes{std::istreambuf_iterator<char>(f),{}};
+        expect(baked::load(bytes.data(),bytes.size()), "FFIII Gysahl bake loads");
+        const auto* sm=baked::submap_by_map_id(77); const baked::Object *a=nullptr,*b=nullptr;
+        if(sm) for(const auto& object:baked::grids(*sm).objects) {
+            if(object.entity_id()==6 && object.tx==16 && object.ty==31 && object.a==1) a=&object;
+            if(object.entity_id()==13 && object.tx==17 && object.ty==31 && object.a==1) b=&object;
+        }
+        expect(a && b, "Gysahl boundary sibling identities and cells exist in bake");
+        if(a && b) {
+            FilterInput actual;actual.exits=true;actual.current_map=80;actual.continued_goal=true;actual.continued_map=77;
+            actual.continued_x=a->tx;actual.continued_y=a->ty;actual.continued_entity_id=a->entity_id();actual.continued_raw=baked::object_identifier(*a);
+            FilterRow one;one.index=0;one.kind=Kind::MapExit;one.category=Category::MapExits;one.remote_map=77;
+            one.cell_x=a->tx;one.cell_y=a->ty;one.entity_id=a->entity_id();one.raw_name=baked::object_identifier(*a);one.destination=1;one.route_distance=1;
+            auto two=one;two.index=1;two.cell_x=b->tx;two.cell_y=b->ty;two.entity_id=b->entity_id();two.raw_name=baked::object_identifier(*b);two.route_distance=2;
+            actual.rows={one,two};actual.current_map=77;actual.rows[0].remote_map=actual.rows[1].remote_map=0;
+            actual.rows[0].cell_valid=actual.rows[1].cell_valid=true;actual.rows[0].route_distance=20;actual.rows[1].route_distance=1;
+            auto result=build_categories(actual);
+            expect(result.views[3].order.size()==1 && result.views[3].continued==0 && result.views[3].order[0]==0 && result.audio_order.size()==2,
+                "real Gysahl boundary objective survives controlled distance flip");
+        }
+    }
     // Large owned lists are prepared once, not recaptured/renamed for each key.
     FilterInput large;
     large.sort = true;
@@ -120,6 +186,15 @@ int main() {
     const auto retired=build_categories(large);
     expect(retired.views[0].order.empty()&&checks==12001,
         "obsolete destination refresh exits during row preparation/sort without finishing all six views");
+    const auto cancel_start=std::chrono::steady_clock::now();
+    int retired_count=0;
+    for(int iteration=0;iteration<100;++iteration) {
+        int checks_this=0; large.cancelled=[&] { return ++checks_this>100; };
+        if(build_categories(large).views[0].order.empty() && checks_this>=101) ++retired_count;
+    }
+    const auto cancel_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-cancel_start).count();
+    expect(retired_count==100, "rapid obsolete work is cancelled on every iteration");
+    std::printf("100 rapid cancellations, 10,000 owned rows: %.3f ms aggregate (offline worker)\n",cancel_ms);
     {
         const auto read=[](const char* path){std::ifstream f(path,std::ios::binary);return std::string(std::istreambuf_iterator<char>(f),{});};
         const auto bytes=read("data/ff1/maps.bin");expect(baked::load(bytes.data(),bytes.size()),"real FF1 entry-guard bake loads");

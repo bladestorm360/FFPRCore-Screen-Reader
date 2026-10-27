@@ -1,5 +1,24 @@
 # October25 current character/location and save checks
 
+October26 combined maintenance is installed all six after full canonical/smoke/
+resource/scan/hash checks. Prioritize these during ordinary progression: Group
+exits on and route across a floor; the upgraded Enterprise route; then Shift+G
+while riding a chocobo on its world map. Existing procedures below give expected
+results and failure symptoms. No extra travel, game launch or save changes are
+requested. Gameplay/listening and actual native response timing remain unconfirmed.
+
+## October26: repeated map-name components
+
+After the canonical build and offline checks are complete, during ordinary
+progression naturally enter a town or request M. Expect a repeated area/title
+component such as Caanan to be spoken once. A distinct label such as Caanan Cid's
+House or a real floor title must remain intact. Request M repeatedly and confirm
+each request still speaks; this change removes an identical label component, not
+repeated speech events. No extra travel or replay is requested. Expected check:
+5–10 minutes. Offline/source evidence and pending status:
+[map-name component record](re/MAP_NAME_PARTS_20261026.md). Gameplay confirmation
+is pending; report the game, map and spoken label if it fails.
+
 October26 [beacon movement/spatial fix](re/BEACON_MOVEMENT_20261026.md): full
 offline checks passed and installed all six. During ordinary play,
 walk continuously along a beacon route and around a corner in HRTF and stereo:
@@ -1663,3 +1682,76 @@ current fixes. These checks are retained for when ordinary progression permits:
    from the offline route replays.
 
 [Source/native evidence and explicit limits](re/BASELINE_FIXES_2026_10_16.md).
+
+## Grouped exit continuation — October 26
+
+After the combined checks and authorized installation, when ordinary progression
+permits, enable Group exits and select a remote World Map exit. Cross floors and
+confirm that the same physical objective remains selected and routeable. Manually
+select another exit; the previous pin should release. Confirm physical exit audio
+rows remain independent of grouping. This check does not require seeking or
+revealing a reward. Implementation and offline fixtures are complete; canonical
+verification, installation, native/frame/audible timing and gameplay confirmation
+are pending. See [grouped exit evidence](re/GROUPED_EXIT_CONTINUATION_20261026.md).
+
+## FFIII upgraded Enterprise flight — October 26
+
+Run these after the combined full build, smoke, exact-payload scan and authorized install
+are complete. No gameplay confirmation is claimed yet. Test when the relevant upgrade
+and route are naturally available; do not wait for an unearned future variant.
+
+1. While actually aboard the upgraded Enterprise in flight, browse world exits in each
+   of the three existing filter modes. A reachable known town should remain listed.
+2. Select that town and request directions. Expect the route to explain water landing,
+   sailing to shore and walking to entry. Follow the guidance and confirm entry works.
+3. If already aboard the upgraded ship and the chosen route requires flight, request
+   directions. Expect takeoff before the flight leg. A nearshore route may remain entirely
+   in the ship when that is the legal shorter route.
+4. If available, compare the original non-upgraded ship: it must not gain flight. Do not
+   infer or force an upgrade state. If autowalk is already enabled, optionally use its
+   existing control on a route; manual input should cancel it.
+
+Failure symptoms include no exits despite an unlocked airborne route, missing/incorrect
+conversion instructions, an illegal shore/entry, or the original ship taking off. Report
+game, actual vehicle, destination and where the route stopped. Offline replay and native
+contract evidence are in [the Enterprise record](re/ENTERPRISE_FLIGHT_20261026.md);
+actual native response timing and audible behavior remain gameplay-side.
+
+## October 26 Gysahl pub Elder
+
+After the combined build, smoke test, exact payload scan and authorized install
+are complete, check the pub during ordinary progression; no extra travel is
+needed. Browse NPCs and confirm the sealed-pocket Elder at (7, 8) is no longer
+offered as a reachable destination. The nearby dialogue-backed girl, dancer and
+both pub exits should remain listed and usable. Check that a normally reachable
+named Elder elsewhere still appears with its dialogue. If an ordinary
+interactive NPC status or service is available there, confirm it remains usable
+too. Do not infer an interaction from an actor being visible.
+
+Report the game and map, whether the Elder still appears, and whether the girl,
+exits or another normal NPC changed. Distinguish a missing ordinary NPC from the
+specific removed decorative actor. No visual judgment, extra travel, wall
+testing or reward investigation is needed. Gameplay listening remains
+unconfirmed; see [the Gysahl source and evidence record](re/GYSAHL_ELDER_20261026.md).
+
+## FFIII chocobo circuit guide
+
+After the combined full build, smoke check, exact-payload scan and authorized
+installation are complete, and when ordinary progression permits, mount a chocobo
+on world map 1. Press Shift+G. Expect directions to the starting area; continue
+using the game's normal movement until the guide advances each step. Press Shift+G
+again to repeat directions from the current position. Follow the full circuit and
+return to its start. Ctrl+G should stop an active guide. Existing manual navigation
+selection should remain usable alongside the preview.
+
+The guide should stay silent in menus and battle, stop if you dismount, and not
+activate on another map or vehicle. If the game's native record is already set,
+Shift+G reports that the circuit is recorded without asking you to repeat it. At
+completion, it reports whether the native record is set; coordinates alone never
+count as completion. This check does not require investigating the prize.
+
+Report whether directions began, whether the guide advanced at each step, whether
+repeat/stop and the manual target behaved correctly, and whether any menu/battle/
+dismount case spoke unexpectedly. Gameplay confirmation and native/frame/audible
+latency remain pending; offline implementation is not evidence of those results.
+See [the circuit evidence and native contract](re/CHOCOBO_CIRCUIT_20261026.md).

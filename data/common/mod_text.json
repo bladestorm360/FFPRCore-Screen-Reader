@@ -19080,5 +19080,33 @@
     "ru": "спешьтесь",
     "th": "ลงจากพาหนะ",
     "pt": "desmonte"
+  },
+  "take off": {
+    "en": "take off",
+    "ja": "離陸",
+    "fr": "décollez",
+    "it": "decolla",
+    "de": "abheben",
+    "es": "despega",
+    "ko": "이륙",
+    "zht": "起飛",
+    "zhc": "起飞",
+    "ru": "взлетите",
+    "th": "บินขึ้น",
+    "pt": "decole"
+  },
+  "land on water": {
+    "en": "land on water",
+    "ja": "着水",
+    "fr": "amerrissez",
+    "it": "atterra sull’acqua",
+    "de": "auf dem Wasser landen",
+    "es": "ameriza",
+    "ko": "착수",
+    "zht": "降落水面",
+    "zhc": "降落水面",
+    "ru": "приводнитесь",
+    "th": "ลงจอดบนน้ำ",
+    "pt": "pouse na água"
   }
 }

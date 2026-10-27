@@ -948,3 +948,96 @@ clerk omission, active-relay snapshots and real-map all-six regression coverage.
 Quick floods copy flags once per new job; projection stays on Navigation, and
 per-entity native-side queries consume immutable relay geometry without waiting.
 Runtime callback/first-audible measurements remain unmeasured.
+
+## Enterprise flight route ownership — October 26
+
+[Enterprise unlocked flight routing](ENTERPRISE_FLIGHT_20261026.md) adds no native
+capture or hook. The observed transport ID joins the existing immutable snapshot;
+the four-state search runs on Navigation with the shared collision, wrapping,
+transition and cancellation rules. No native pointer crosses to the worker and
+no game-thread wait or state write is introduced.
+
+The source checkpoint passes the canonical suite and actual-data checks. Coverage
+uses 7.539 ms, 23,250 expansions under a 65,536-state ceiling, and a peak queue of
+242. Fifty rapid cancellations use 3.118 ms cumulatively. Plan, browse, three
+filters and story checks together use 74.996–80.308 ms of worker time per vehicle
+identity. The same-cell two-search regression uses 2.142 ms; moving beacon cache
+reads are unchanged. These are worker measurements, not native frame costs.
+
+Prior own game logs separately observed 1.2–1.4 ms aggregate native work across
+three slices, 32–34 ms elapsed capture and 2–6 ms old worker compute. Full audible
+and application response timing remains unmeasured. Combined delivery and gameplay
+are pending; the cumulative 25 ms application-lag blocker still applies.
+
+October26 [Gysahl pub Elder](GYSAHL_ELDER_20261026.md) adds a fixed native-owner
+classification check at existing NPC discovery and selected-target lifetime
+validation, plus the matching authored predicate in the map baker. Reads follow
+candidate lifetime and exact action/script/type guards; unknown fields retain the
+actor. No hook, scan, timer, native write, worker pointer transfer or new worker
+work is added. The bake clears only discovery bit 8 and retains collision, script,
+movement, geometry, entities and exits. The reviewed all-six byte diff is 104
+single-bit bytes; combined canonical/smoke/scan/deploy checks are pending. The
+30–42 ms across-floor fallback observation is worker elapsed time, not owner lag
+or a measured speedup. Actual native/frame/audible cost and gameplay confirmation
+remain open. The after-install, nonvisual NPC check is in [TESTING.md](../TESTING.md#october-26-gysahl-pub-elder).
+
+
+Gysahl source acceptance: the canonical suite passes with 8,287 bound names and
+0 missing. The actual scanner batch uses 13,000 fake native reads for 1,000 owner
+detections in 0.309 ms cumulatively, without native reads on workers. The real
+remote collector removes only the inert Elder in this pub test, retaining the
+girl and two exits. All six bakes pass; exactly 104 discovery bits change, with
+no collision or exit-byte changes. Actual native/audible timing and combined
+installation remain pending; this fixture is not a frame-lag measurement.
+
+## Grouped exit continuation — October 26
+
+`MapExitFilter` now retains the exact eligible pending physical exit as the sole
+representative for its destination before sibling pruning. Its identity check
+uses owned live/remote source-map, verified-cell, native-ID (including0), and
+raw-identity values. The existing capture, worker and owner-publication pipeline
+is unchanged: workers use owned snapshots, publication validates pending identity
+and map generation, and manual selection cancels stale continuation. No native
+read/hook, pointer transfer, timer or wait was added. Actual-source fixtures cover
+remote-to-live handoff, manual clear and stale publication. A 10,000-row offline
+filter sample measured 6.446–8.906ms after, versus7.920ms before in a single
+baseline; it is not controlled speedup evidence or a frame-cost measurement.
+Final canonical checks, installation, gameplay, and native/frame/audible timing
+remain pending. Full implementation and evidence:
+[grouped exit continuation](GROUPED_EXIT_CONTINUATION_20261026.md).
+
+## FFIII chocobo circuit guide — October 26
+
+FFIII registers a dedicated guide only for map 1 while mounted on transport 12
+(chocobo). The core puzzle-guide dispatcher checks the FFIII guide query and routes
+Shift+G, Ctrl+G and existing movement callbacks to its game module; other games'
+registered guide behavior is unchanged. The module owns one active step, last-cell
+sample and monotonically advanced epoch on the field owner. It samples player cell
+on movement callbacks, ignores unchanged cells, and advances only at its authored
+waypoint. There is no new timer, poll, hook, movement injection, script execution
+or flag write.
+
+Route previews call the existing baked navigation route service with a copied map-1
+spot goal and an epoch-checked callback. Route computation/publication remains in the
+existing navigation worker/owner pipeline; the manual selected objective remains
+separate. Callback speech rechecks the guide epoch, step, field readiness, map,
+menu/battle/transition state and vehicle. Map change, battle entry and title entry
+retire the state without engine reads or speech. A valid stop clears only this guide's
+preview. Dismount or vehicle mismatch during an active guide retires it and reports
+that chocobo riding is required.
+
+Starting reads native ScenarioFlag1 index 192 once; finishing reads it once again.
+The shared map-state reader resolves the appropriate owned flag word and reads only
+that word after validating references and bounds. At start, a true value reports
+recorded and does not force another lap. At finish, true reports recorded; false says
+the game did not record the route; unavailable data is reported as unchecked.
+Waypoint arrival is never treated as proof of quest completion. The native event's
+flag predicate does not define a lap sequence, so the guide uses the separately
+verified authored route and native flag only as its completion acceptance signal.
+Detailed evidence: [circuit research](CHOCOBO_CIRCUIT_20261026.md).
+
+Canonical fixture/checkpoint and combined deployment are pending. No native callback,
+frame-lag, first-usable-direction or audible-response cost has been measured for this
+feature. Worker timing, when recorded, will not establish application responsiveness;
+the cumulative mod-caused 25 ms application-lag blocker applies. Gameplay remains a
+separate user-side confirmation after combined checks and installation.

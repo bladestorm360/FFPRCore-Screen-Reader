@@ -522,7 +522,13 @@ def bake_game(game, out_dir, check=False):
             action = to_int(p.get("action_id"))
             inert_npc = t in ("NPC", "ShopNPC") and action == 2 and not (
                 to_int(p.get("script_id")) > 0 or p.get("message_key"))
-            if action and not inert_npc:
+            # Blank Talk with no status or closing message has no dispatch effect.
+            # Keep its collider and identity; nonzero scripts remain conservative.
+            inert_talk = (t in ("NPC", "ShopNPC") and action == 4 and
+                          to_int(p.get("script_id")) == 0 and not p.get("message_key") and
+                          to_int(p.get("target_character_status_id")) == 0 and
+                          not p.get("close_message_key"))
+            if action and not inert_npc and not inert_talk:
                 flags |= 8
             if t in ("NPC", "ShopNPC") and to_int(p.get("move_type")) not in (0, 1) and p.get("move_step"):
                 flags |= 16   # Native None/Stamp remain on their tile; Area/Route/Following travel.

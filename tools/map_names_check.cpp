@@ -17,7 +17,7 @@ void* get_asset(void* p,const void*){return &static_cast<Map*>(p)->asset;}
 void* get_area_name(void*,const void*){return &area;}
 void* provision(const void*){return &current;}
 void* user(const void*){return nullptr;}
-std::wstring localized(const std::wstring& key){return language+L":"+key;}
+std::wstring localized(const std::wstring& key){return language+L":"+(key==L"same_text_alias"?L"area":key);}
 }
 namespace core {Install::Install(const char* n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){}}
 namespace queries {void define_text(const char*,std::function<std::wstring()> f){fixture::map_key=std::move(f);}}
@@ -75,6 +75,24 @@ int main(){
   if(!floors)continue;
   for(const wchar_t* locale:{L"en",L"ja",L"fr",L"it",L"de",L"es",L"ko",L"zht",L"zhc",L"ru",L"th",L"pt"}){
    language=locale;field::clear_map_name_cache();
+   // Compare resolved labels, including different keys with the same text. Each
+   // consumer must continue returning the label on repeated requests.
+   current=999999;maps={{current,&map}};map.floor=0;area=L"area";
+   for(const wchar_t* key:{L"area",L"same_text_alias"}){
+    map.title=key;field::clear_map_name_cache();
+    const auto expected=localized(area);
+    for(int repeat=0;repeat<2;++repeat){
+     expect(field::current_map_name()==expected,"equal resolved parts current map");
+     expect(map_key()==expected,"equal resolved parts map-key query");
+     expect(field::map_exit_name(current)==expected,"equal resolved parts exit and cache");
+    }
+   }
+   map.title=L"area room";field::clear_map_name_cache();
+   expect(field::current_map_name()==localized(area)+L" "+localized(L"area room"),"distinct prefixed title remains intact");
+   area=L"";map.title=L"room";
+   expect(field::current_map_name()==localized(L"room"),"title only");
+   map.title=L"None";expect(field::resolve_map_name_by_id(current).empty(),"empty area and title");
+   area=L"area";expect(field::current_map_name()==localized(area),"area only");
    // Ur's well and shed are genuine GotoMap destinations. Check the actual
    // authored resources through all current/map-key/remote consumers so these
    // entrances cannot collapse back to indistinguishable area-only names.

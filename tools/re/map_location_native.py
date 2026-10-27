@@ -270,6 +270,36 @@ if '--warehouse' in sys.argv:
                'WarehousePopupController': {'Show','Close','UpdateCotroller','UpdateArrowImage'},
                'WarehousePopupControllerBase': {'SetInitData','AddSelectedCount','TakeSelectedCount'},
                'WarehouseControlleBase': {'CreateState'}}
+if '--enterprise' in sys.argv:
+    out = ROOT.parent / 'tools/enterprise_flight_20261026' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'MapUtility': {'BranchTransportationAction'},
+               'FieldController': {'GetCombineLandingGroupMappingData','AirshipSpecialAction','TransportationPlaneLanding','TransportationLanding','TransportationEnabled','ChangeTransportation'},
+               'TransportationController': {'SetData','OverrideData','ChangeTransportation'},
+               'Transportation': {'SetupInfoData','GetInfoData','LandingGroupValueTable','TransportationGroupValueTable'},
+               'TransportationInfo': {'get_Enable','set_Enable'},
+               'TransportationEvent': {'OnAirshipSpecialEvent'},
+               'Current': {'RemodelEnterprise','RemodelTranportationCommon','TransfarShip','TransfarAirShip','TransfarShipInSubmerged','TransfarAirShipInSubmerged','TransformAnimByShipAndAirShip','TransferTranportationCommon'},
+               'MapUIManager': {'OnRiseAirshipButton','OnFallAirshipButton'},
+               'FieldPlayerKeyTwoStepController': {'OnKeyDown','SetAction','SwitchSelectAction'}}
+if '--gysahl-talk' in sys.argv:
+    out = ROOT.parent / 'tools/gysahl_elder_20261026' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'EventAction': {'Talk'},
+               'EventProcedure': {'EventTalkTask'},
+               'EventProcedure.<EventTalkTask>d__44': {'MoveNext'},
+               'FieldNonPlayer': {'get_CanAction'},
+               'MessageManager': {'GetMessage'},
+               'InputTypeMessageProvider': {'GetMessageId'}}
+if '--chocobo-circuit' in sys.argv:
+    out = ROOT.parent / 'tools/chocobo_circuit_20261026' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'PropertyEntity': {'CheckIfNeedTargetTransportation','CheckTargetTransportationIds'},
+               'DataStorage.Flags': {'Get','IsValidIndex'},
+               'DataStorage': {'Get','GetFlag','get_Instance'}}
 names, wanted = {}, {}
 for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
     ns = block.splitlines()[0]

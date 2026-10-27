@@ -220,6 +220,9 @@ std::wstring resolve_map_name_by_id(int map_id)
             else if (floor < 0) title = L"B" + std::to_wstring(-floor);
         }
 
+        // Some maps resolve both fields to the same localized label. Compose
+        // that label once, while retaining every distinct floor or room title.
+        if (!area_name.empty() && area_name == title) return area_name;
         if (!area_name.empty() && !title.empty()) return area_name + L" " + title;
         if (!area_name.empty()) return area_name;
         if (!title.empty()) return title;

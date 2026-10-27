@@ -436,3 +436,12 @@ match. The first legacy ID/remap is preserved; later different default chords ge
 a deterministic suffix. No settings reset; native controls and shop bindings retain
 the existing ownership policy. Actual input/catalog/dispatch regressions cover all
 nine defaults, repeat registration and independent remapping.
+
+October26 FFIII addition: on world map 1 while riding a chocobo, Shift+G starts or
+repeats the circuit guide; Ctrl+G stops it. Repeating Shift+G checks whether the
+current step was reached before repeating directions. Movement advances the guide
+only when the player reaches its authored checkpoint. Menus, battle, transitions,
+other maps and other vehicles suppress the guide. Dismounting during an active guide
+stops it. The new FFIII labels are localized in the game's 12-language catalog and
+follow the existing Auto/manual mod-language setting. Other games retain their
+existing puzzle guide behavior. See [circuit testing](TESTING.md#ffiii-chocobo-circuit-guide).

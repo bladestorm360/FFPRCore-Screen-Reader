@@ -1,5 +1,28 @@
 # Native FFPR durable memory
 
+- October26 navigation maintenance: complete, Closed; installed/hash-verified all6.
+  [Grouped exit continuation](docs/re/GROUPED_EXIT_CONTINUATION_20261026.md) keeps
+  the exact eligible physical objective across floors while grouping remains on;
+  normal nearest grouping returns after manual clear. Actual before2/after0 proof.
+  [Chocobo circuit](docs/re/CHOCOBO_CIRCUIT_20261026.md): mounted world1 Shift+G
+  start/repeat, Ctrl+G stop;13-leg484-step loop, nativecheckpoint/flag192 verified,
+  9keys/12locales; prize withheld. [Enterprise](docs/re/ENTERPRISE_FLIGHT_20261026.md)
+  native13/6,16/15 water/flight/shore routing, original5 locked; same-cell actions
+  preserved. [Gysahl Elder](docs/re/GYSAHL_ELDER_20261026.md) is inert decorative
+  blank Talk: omit destination live/remote; exactly104 discovery bits acrossII–VI,
+  no collision/exit changes. [Map labels](docs/re/MAP_NAME_PARTS_20261026.md)
+  compose identical area/title once without suppressing repeated speech events.
+  Final8287/0 names,142/349/0 wiring,47-export smoke,67 resources/134 indexed
+  registrations, exact22-file Defender pass;132 installed hashes match/144
+  protected files unchanged. DLL11032064 SHA25673115338cf025dc45b46673fbaabcf69dca62730756c623fcd42530359154013.
+  Terra bounded code/Luna verified docs for each source checkpoint reviewed bySol;
+  detailed outcomes/failures/limits in topic/checkpoint records. Native/frame/audio
+  and gameplay unmeasured. Existing route_worker intermittent offline exits were
+  retained; unchanged retries/finalcanonical pass, causeunknown/separate finding.
+  Recovery/final verification:build_check/ff3_navigation_20261026/. All5 source
+  checkpoints and combinedlocaldelivery Closed; public1.0 archive/tag unchanged.
+  No active implementation task remains from this queue.
+
 - October26 [release1.0](docs/release.md#v10-preparation-october26): complete,
   Closed. [Public V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0),
   Latest; source/tag074641016fbcb2cb6c48168446c75c654d23a590, release424738576,

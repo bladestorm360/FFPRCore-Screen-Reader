@@ -35,6 +35,8 @@ struct Selection {
 };
 Selection project(const json::Value& record, const Flags& flags);
 Flags snapshot();
+// Read one native scenario bit on the owning thread; unavailable state is unknown.
+std::optional<int> scenario_flag(int absolute_index);
 void observe_current(int map_id, std::wstring group);
 void reset_observed(); // map reload, including a reload of the same map ID
 

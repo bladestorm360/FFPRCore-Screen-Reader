@@ -77,6 +77,8 @@ ref::Field fEventActionId{kPropertyEvent, "<ActionId>k__BackingField"};
 ref::Field fEventScriptId{kPropertyEvent, "<ScriptId>k__BackingField"};
 ref::Class kPropertyTalk{"", "PropertyTalk"};
 ref::Field fTalkMessageKey{kPropertyTalk, "<MessageKey>k__BackingField"};
+ref::Field fTalkChangeCharacterStatusId{kPropertyTalk, "<ChangeCharacterStatusId>k__BackingField"};
+ref::Field fTalkCloseMessageKey{kPropertyTalk, "<CloseMessageKey>k__BackingField"};
 ref::Class kPropertyDefaultEntity{"Last.Map", "PropertyDefaultEntity"};
 ref::Class kPropertyTresureBox{"Last.Map","PropertyTresureBox"};
 ref::Field fTreasurePickUp{kPropertyTresureBox,"<PickUp>k__BackingField"};

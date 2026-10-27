@@ -670,6 +670,7 @@ void world_mode(baked_route::Request& req)
 {
     req.vehicle_group = 0;
     req.vehicle_type = req.landing_group = 0;
+    req.transportation_id = 0;
     req.auto_groups.clear();
     if (!req.submap || !req.submap->world) return;
     req.auto_groups = planning_auto_groups();
@@ -678,11 +679,24 @@ void world_mode(baked_route::Request& req)
         if (const baked::TransportRow* row = baked::transport(v.id)) {
             if (row->type != kTransportContent) {
                 req.vehicle_group = row->group;
+                req.transportation_id = row->id;
                 req.vehicle_type = row->type; req.landing_group = row->landing_group;
                 return;
             }
         }
     }
+}
+
+// Only ordinary entry and interaction targets require a foot approach. Vehicle
+// pads, reviewed ship scenes, arbitrary spots and step events keep their own rules.
+bool enterprise_foot_target(const baked_route::Request& req, const Cell& target, TargetKind kind, bool face) {
+    if(!req.submap||!req.submap->world||!game::is(game::Id::FF3)||!baked_route::enterprise_pair(req.transportation_id))return false;
+    if(face||kind==TargetKind::Interact)return true;
+    if(kind==TargetKind::Spot)return false;
+    const auto& g=baked::grids(*req.submap);
+    return std::any_of(g.objects.begin(),g.objects.end(),[&](const baked::Object& o){
+        return !baked::ship_entry(o)&&(o.type==baked::ObjType::GotoMap||baked::world_exit(o))&&o.contains(target.x,target.y);
+    });
 }
 
 /// Test hypothetical terrain access from an actually missing vehicle group,
@@ -798,6 +812,8 @@ std::vector<Vec3> world_path_of(const baked::Submap& sm, const std::vector<Cell>
 baked_route::Reach land_after_ride(const baked_route::Request& riding, const baked_route::Reach& ride)
 {
     if (!riding.submap || !riding.submap->world || riding.vehicle_group <= 0 || !ride.submap) return {};
+    if (game::is(game::Id::FF3) && baked_route::enterprise_pair(riding.transportation_id))
+        return baked_route::enterprise_route(riding,false).foot;
     const auto& g = baked::grids(*riding.submap);
     auto foot = riding;
     foot.vehicle_group = 0; foot.vehicle_type = foot.landing_group = 0;
@@ -849,12 +865,16 @@ baked_route::Reach parked_vehicle_reach(const baked_route::Request& walking, con
         if (planning_cancelled()) return {};
         const auto* row=baked::transport(vehicle.transportation_id);
         if (!row || row->type==kTransportContent || row->type==1 || row->group<1 || row->group>static_cast<int>(grid.transport.size())) continue;
+        // A parked FFIII flight deck requires its existing manual approach;
+        // only an observed ship has the native adjacent WalkOn edge.
+        if(game::is(game::Id::FF3)&&(row->id==6||row->id==15))continue;
         const auto at=cell_of(sm,vehicle.pos,walking.start.layer);
         if (!baked::in_bounds(grid,at.x,at.y)) continue;
         int approach=-1;
         for (const auto& side:sides) {
             const Cell beside{at.layer,(at.x+side[0]+grid.width)%grid.width,(at.y+side[1]+grid.height)%grid.height};
             if (!baked_route::open(walking,grid,beside)) continue;
+            if(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)&&!baked_route::direction_allowed(walking,beside,at))continue;
             const int distance=walk.distance(beside);
             if (distance>=0 && (approach<0 || distance<approach)) approach=distance;
         }
@@ -862,6 +882,7 @@ baked_route::Reach parked_vehicle_reach(const baked_route::Request& walking, con
         auto riding=walking;
         riding.start=at;riding.goals.clear();riding.goals_open=false;
         riding.vehicle_group=row->group;riding.vehicle_type=row->type;riding.landing_group=row->landing_group;
+        riding.transportation_id=row->id;
         const auto sea=baked_route::flood(riding);
         const auto land=land_after_ride(riding,sea);
         if (planning_cancelled()) return {};
@@ -919,7 +940,7 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
     for (const VehicleOnMap& v : vehicles) {
         const baked::TransportRow* row = baked::transport(v.transportation_id);
         if (!row || row->type == kTransportContent || row->type == 1) continue;
-        if(ship_scene&&row->type!=kTransportShip)continue;
+        if(ship_scene&&row->type!=kTransportShip&&!(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)))continue;
         if(action_pad&&!baked::vehicle_pad_accepts(*action_pad,row->id))continue;
         // Native NotPossibleVoluntaryGetOffTable contains Boko/Magitek. Their
         // map-entry trigger tables permit ordinary doors while still mounted;
@@ -941,7 +962,9 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
         for (const auto& d : kSide) {
             Cell c{walk.start.layer, vcell.x + d[0], vcell.y + d[1]};
             c.x = (c.x + g.width) % g.width; c.y = (c.y + g.height) % g.height;
-            if (baked_route::open(foot, g, c)) to_vehicle.goals.push_back(c);
+            if (baked_route::open(foot, g, c) &&
+                !(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)&&sails&&!baked_route::direction_allowed(foot,c,vcell)))
+                to_vehicle.goals.push_back(c);
         }
         baked_route::Route leg1;
         if (!riding) {
@@ -972,6 +995,50 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
             board.action_before=TF(L"board the {0}",{name})+L" "+T(direction_key(board.vehicle_direction));
             best_total=total;best={std::move(before),std::move(board)};
             continue;
+        }
+
+        // The observed upgraded Enterprise identity alone authorizes its ordered
+        // flight conversions. Parked flight decks retain the existing manual path.
+        if(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)&&!action_pad&&
+           (riding||sails)) {
+            auto request=walk; request.start=vcell;request.goals=goals;request.transportation_id=row->id;
+            // The final foot or ship-scene goal has its own entry policy; the
+            // original air movement deliberately keeps town goals closed.
+            request.goals_open=true;
+            auto route=baked_route::enterprise_route(request,true,ship_scene);
+            if(route.steps<0||route.segments.empty())continue;
+            const int total=leg1.steps()+route.steps+(riding?0:1);
+            if(total>=best_total)continue;
+            std::vector<Phase> candidate;
+            if(!riding) { Phase before;before.cells=leg1.cells;candidate.push_back(std::move(before)); }
+            const int ship=(row->id==15||row->id==16)?16:13, air=ship==13?6:15;
+            for(size_t i=0;i<route.segments.size();++i) {
+                const auto& segment=route.segments[i]; Phase p;p.cells=segment.cells;
+                p.transportation_id=segment.mode==1?air:ship;
+                if(i==0&&!riding) {
+                    const auto approach=leg1.cells.back();
+                    if(!baked_route::direction_allowed(foot,approach,vcell)) { candidate.clear();break; }
+                    p.cells.insert(p.cells.begin(),approach);p.action_cell=approach;
+                    p.vehicle_before=route_progress::VehicleAction::WalkOn;
+                    p.vehicle_direction=baked_route::step_direction(approach,vcell,g.width,g.height);
+                    auto name=planning_vehicle_name(v.transportation_id,v.type,v.message_id);if(name.empty())name=T(L"Vehicle");
+                    p.action_before=TF(L"board the {0}",{name})+L" "+T(direction_key(p.vehicle_direction));
+                } else if(i>0) {
+                    const Cell prior=route.segments[i-1].cells.back(); p.action_cell=prior;
+                    if(segment.mode==1||segment.mode==2) {
+                        p.vehicle_before=route_progress::VehicleAction::ConfirmBoard;
+                        p.action_before=T(segment.mode==1?L"take off":L"land on water");
+                    } else if(segment.mode==3) {
+                        p.cells.insert(p.cells.begin(),prior);
+                        p.vehicle_before=route_progress::VehicleAction::WalkOff;
+                        p.vehicle_direction=baked_route::step_direction(prior,segment.cells.front(),g.width,g.height);
+                        p.action_before=T(L"land")+L" "+T(direction_key(p.vehicle_direction));
+                    }
+                }
+                candidate.push_back(std::move(p));
+            }
+            if(candidate.empty())continue;
+            best_total=total;best=std::move(candidate);continue;
         }
 
         // 2. Ride to where the target's area is entered.
@@ -1646,6 +1713,18 @@ bool remaining_from(const ActiveRoute& r, const Cell& at, std::vector<Phase>& ou
     return route_progress::remaining(r.phases, at, out, &planning_cancelled);
 }
 
+// Same-cell Enterprise conversions make a cell occur in consecutive phases.
+// The legacy last-occurrence shortcut can skip the pending Confirm action, so
+// recompute these uncommon plans from the newly captured vehicle identity.
+bool enterprise_conversion_plan(const ActiveRoute& route) {
+    if(!game::is(game::Id::FF3))return false;
+    return std::any_of(route.phases.begin(),route.phases.end(),[](const Phase& phase) {
+        return phase.vehicle_before==route_progress::VehicleAction::ConfirmBoard &&
+            baked_route::enterprise_pair(phase.transportation_id) && phase.action_cell &&
+            !phase.cells.empty() && *phase.action_cell==phase.cells.front();
+    });
+}
+
 void fill_result(const baked::Submap& sm, const std::vector<Phase>& phases, PathInfo& out)
 {
     out.success = true;
@@ -1748,7 +1827,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         };
         // The route already planned to this target, while the player is still on it.
         const int map_id = planning_map_id();
-        if (g_active && g_active->blocking_party<0 && !g_active->npc_approach && g_active->vehicle_shortcuts==g_route_snapshot->vehicle_shortcuts && g_active->target_vehicle==g_route_snapshot->goal.transportation_id && g_active->transportation_id == (g_route_snapshot->vehicle.valid ? g_route_snapshot->vehicle.id : 0) &&
+        if (g_active && !enterprise_conversion_plan(*g_active) && g_active->blocking_party<0 && !g_active->npc_approach && g_active->vehicle_shortcuts==g_route_snapshot->vehicle_shortcuts && g_active->target_vehicle==g_route_snapshot->goal.transportation_id && g_active->transportation_id == (g_route_snapshot->vehicle.valid ? g_route_snapshot->vehicle.id : 0) &&
             same_target(*g_active, map_id, target, map_id)) {
             std::vector<Phase> rest;
             if (remaining_from(*g_active, req.start, rest)) {
@@ -1808,6 +1887,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         // ride/landing/walk planner instead of exhausting the whole sea first.
         const auto current_transport=planning_vehicle();
         const bool pad_ready=(!action_pad || (req.vehicle_group>0 && current_transport.valid && baked::vehicle_pad_accepts(*action_pad,current_transport.id))) &&
+            (action_pad || !enterprise_foot_target(req,target,kind,goals.face)) &&
             !(sm->world&&req.vehicle_group>0&&goals.face);
         if (pad_ready && (req.vehicle_group == 0 || riding_goal)) route = baked_route::find(req);
         if (!route.found && game::flags().has_hidden_passages && !sm->world) {
@@ -2583,7 +2663,7 @@ void cancel_quick_work() {
 }
 bool same_movement(const baked_route::Request& a, const baked_route::Request& b) {
     return a.submap == b.submap && a.start == b.start && a.vehicle_group == b.vehicle_group &&
-        a.vehicle_type == b.vehicle_type && a.landing_group == b.landing_group && a.auto_groups == b.auto_groups;
+        a.vehicle_type == b.vehicle_type && a.landing_group == b.landing_group && a.transportation_id == b.transportation_id && a.auto_groups == b.auto_groups;
 }
 baked_route::Request quick_movement(Vec3 from, void* map, void* player, bool with_vehicles) {
     baked_route::Request req;
@@ -2639,6 +2719,13 @@ bool quick_query(Vec3 from, Vec3 to, void* map, void* player, TargetKind kind, b
     ensure_quick(req);
     if (!g_quick_grid || !same_movement(req, g_quick_grid->movement)) { out.pending = true; return true; }
     const auto goals = goals_for(*req.submap, cell_of(*req.submap, to, 1), kind, &g_quick_grid->movement);
+    const Cell target=cell_of(*req.submap,to,1);
+    if(enterprise_foot_target(req,target,kind,goals.face)) {
+        auto foot=req;foot.vehicle_group=foot.vehicle_type=foot.landing_group=0;foot.goals=goals.cells;foot.goals_open=true;
+        out.success=baked_route::transition_distance(foot,g_quick_grid->landed)>=0;
+        if(!out.success)out.error=T(L"No path found");
+        return true;
+    }
     out.success = any_reachable(g_quick_grid->reach, goals.cells) || any_reachable(g_quick_grid->passages, goals.cells) ||
         any_reachable(g_quick_grid->landed, goals.cells);
     if (!out.success) out.error = T(L"No path found");

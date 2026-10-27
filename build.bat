@@ -36,6 +36,11 @@ if not exist "out\hid.dll" (
 )
 
 echo Checking routes avoid unintended map transitions...
+"out\checks\enterprise_flight_check.exe" > build_check\enterprise_flight_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Enterprise flight check FAILED - see build_check\enterprise_flight_report.txt
+    exit /b 1
+)
 "out\checks\vehicle_transition_check.exe" > build_check\vehicle_transition_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Vehicle transition route check FAILED - see build_check\vehicle_transition_report.txt
@@ -48,6 +53,12 @@ if not "%errorlevel%"=="0" (
     echo Chocobo/Owen check FAILED - see build_check\chocobo_owen_report.txt
     exit /b 1
 )
+
+echo Checking FFIII chocobo circuit controller and production routes...
+"out\checks\chocobo_circuit_check.exe" > build_check\chocobo_circuit_report.txt 2>&1
+if not "%errorlevel%"=="0" exit /b 1
+"out\checks\chocobo_circuit_route_check.exe" > build_check\chocobo_circuit_route_report.txt 2>&1
+if not "%errorlevel%"=="0" exit /b 1
 
 echo Checking exports and imports...
 python tools\import_check.py out\hid.dll
@@ -485,6 +496,11 @@ if not "%errorlevel%"=="0" (
 "out\checks\entity_filter_check.exe" > build_check\entity_filter_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Entity filter check FAILED - see build_check\entity_filter_report.txt
+    exit /b 1
+)
+"out\checks\gysahl_elder_check.exe" > build_check\gysahl_elder_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Gysahl Elder check FAILED - see build_check\gysahl_elder_report.txt
     exit /b 1
 )
 "out\checks\entity_scanner_check.exe" > build_check\entity_scanner_report.txt 2>&1

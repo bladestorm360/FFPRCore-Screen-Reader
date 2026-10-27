@@ -11,6 +11,7 @@ namespace fixture {
 const DWORD owner = GetCurrentThreadId();
 std::atomic<int> wrong_owner{0};
 int failures = 0;
+bool unresolved_flag_field=false;
 void native() { if (GetCurrentThreadId() != owner) ++wrong_owner; }
 void expect(bool ok, const char* label) { if (!ok) { ++failures; std::printf("FAIL %s\n", label); } }
 template<class T, size_t N> struct Array {
@@ -46,6 +47,7 @@ Field::Field(Class& c, const char* n, const char* a) : cls(c), name(n), alt(a) {
 Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 int32_t Field::get() {
     fixture::native();
+    if(fixture::unresolved_flag_field && (std::strcmp(name,"scenario")==0 || std::strcmp(name,"bits")==0 || std::strcmp(name,"length")==0)) return -1;
     if(std::strcmp(cls.name,"UserDataManager")==0){
         if(std::strcmp(name,"<corpsList>k__BackingField")==0)return offsetof(fixture::User,corps);
         if(std::strcmp(name,"<OwnedCharacterList>k__BackingField")==0)return offsetof(fixture::User,owned);
@@ -117,6 +119,16 @@ int main()
     for (size_t i = 32; i < 128; ++i) { scenario.values[i] = 0xdeadbeefu; treasure.values[i] = 0xffffffffu; }
     for (size_t i = 0; i < 16; ++i) global.values[i] = static_cast<int>(i) - 8;
     for(size_t i=0;i<8;++i){area.values[i]=static_cast<int>(i)-3;local.values[i]=static_cast<int>(i)+20;}
+    scenario.values[0]=1u; scenario.values[6]=1u; scenario.values[31]=0x80000000u;
+    expect(map_state::scenario_flag(0)==1 && map_state::scenario_flag(192)==1 && map_state::scenario_flag(1023)==1,"single-bit reader selects first, circuit and last bits");
+    expect(map_state::scenario_flag(190)==0 && !map_state::scenario_flag(-1) && !map_state::scenario_flag(1024),"single-bit reader handles clear and out of range");
+    current=nullptr;expect(!map_state::scenario_flag(192),"missing singleton is unknown");current=&storage;
+    storage.scenario=nullptr;expect(!map_state::scenario_flag(192),"missing bank is unknown");storage.scenario=&scenario_flags;
+    scenario_flags.bits=nullptr;expect(!map_state::scenario_flag(192),"missing words are unknown");scenario_flags.bits=&scenario;
+    scenario.length=31;expect(!map_state::scenario_flag(192),"short backing array is unknown");scenario.length=128;
+    scenario_flags.length=1000;expect(!map_state::scenario_flag(192),"invalid bank length is unknown");scenario_flags.length=1024;
+    unresolved_flag_field=true;expect(!map_state::scenario_flag(192),"unresolved native fields are unknown");unresolved_flag_field=false;
+    for (size_t i = 0; i < 32; ++i) scenario.values[i] = 0x80000001u;
     auto captured = map_state::snapshot();
     bool exact = true;
     for (size_t i = 0; i < 1024; ++i) {

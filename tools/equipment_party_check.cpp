@@ -103,6 +103,8 @@ ref::Field fEntityProperty{kFieldMapObjectDefault,"<Property>k__BackingField"};
 ref::Field fEventActionId{kFieldMapObjectDefault,"<ActionId>k__BackingField"};
 ref::Field fEventScriptId{kFieldMapObjectDefault,"<ScriptId>k__BackingField"};
 ref::Field fTalkMessageKey{kFieldMapObjectDefault,"<MessageKey>k__BackingField"};
+ref::Field fTalkChangeCharacterStatusId{kFieldMapObjectDefault,"<ChangeCharacterStatusId>k__BackingField"};
+ref::Field fTalkCloseMessageKey{kFieldMapObjectDefault,"<CloseMessageKey>k__BackingField"};
 }
 namespace field {bool call_virtual_bool(ref::Method&,void* p){fixture::native();return p&&static_cast<fixture::Node*>(p)->enabled;}}
 namespace il2cpp {Class*object_class(void*){return nullptr;} }

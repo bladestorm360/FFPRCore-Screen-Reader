@@ -1,5 +1,16 @@
 # Build and distribution security
 
+October26 navigation maintenance: final DLL11032064 bytes, SHA256
+73115338cf025dc45b46673fbaabcf69dca62730756c623fcd42530359154013. Canonical8287/0 names/142/349/0 wiring,
+47-export smoke and67 resources pass. Exact22-file built payload scan with enabled,
+current Defender1.461.216.0 reports no threats/zero matching detections/stable hashes.
+Installed132 hashes match all6 games;144 protected settings/dependency files
+unchanged. Evidence/recovery:build_check/ff3_navigation_20261026/. Exclusion query
+remains denied/unverified, signing certificates0; DLL unsigned. No outer archive,
+download reputation or other scanner result is claimed. No game launch/probe,
+security/dependency installation or public-release replacement. Detailed source
+scope and remaining native/gameplay timing limits are linked from memory.
+
 Release1.0 candidate, October26: x64 DLL10993152 SHA256
 35a59650e5d86cfded076263d5f2b58c7352eaf218ca3a861ee83af1f03565e4;
 6199100-byte ZIP SHA256

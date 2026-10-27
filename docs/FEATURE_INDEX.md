@@ -1,5 +1,14 @@
 # Current feature and source index
 
+October26 maintenance: all five source checkpoints and combined delivery are
+complete, Closed; installed/hash-verified all six. [Grouped exits](re/GROUPED_EXIT_CONTINUATION_20261026.md),
+[chocobo circuit](re/CHOCOBO_CIRCUIT_20261026.md), [Enterprise flight](re/ENTERPRISE_FLIGHT_20261026.md),
+[Gysahl Elder](re/GYSAHL_ELDER_20261026.md) and [map-name parts](re/MAP_NAME_PARTS_20261026.md).
+Final8287/0 names,142/349/0 wiring,47-export smoke,67 embedded resources/134
+indexed registrations and exact22-file scan pass;132 installed hashes match/144
+protected files unchanged. Gameplay/native/frame/audio confirmations remain
+separate. No active implementation task remains; public1.0 archive/tag preserved.
+
 [Release1.0](release.md#v10-preparation-october26): complete, Closed.
 [Public V1.0](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.0)
 and Latest verified; source/tag0746410, draft/public downloads match the exact
@@ -297,6 +306,7 @@ This index is checked against source when adding/removing a registration.
 | FF2.NewGameNaming | [src/games/ff2/new_game.cpp](../src/games/ff2/new_game.cpp) / install | 510 | game::kFF2 |
 | FF2.ShopCommandReader | [src/games/ff2/shop_command.cpp](../src/games/ff2/shop_command.cpp) / install | 520 | game::kFF2 |
 | FF3.BattleMagic | [src/games/ff3/battle_magic.cpp](../src/games/ff3/battle_magic.cpp) / install | 506 | game::kFF3 |
+| FF3.ChocoboCircuit | [src/games/ff3/chocobo_circuit.cpp](../src/games/ff3/chocobo_circuit.cpp) / install | 515 | game::kFF3 |
 | FF3.EventItemSelect | [src/games/ff3/event_item_select.cpp](../src/games/ff3/event_item_select.cpp) / install | 502 | game::kFF3 |
 | FF3.JobMenu | [src/games/ff3/job_menu.cpp](../src/games/ff3/job_menu.cpp) / install | 500 | game::kFF3 |
 | FF3.LineFade | [src/games/ff3/line_fade.cpp](../src/games/ff3/line_fade.cpp) / install | 503 | game::kFF3 |

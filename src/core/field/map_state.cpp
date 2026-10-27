@@ -96,6 +96,22 @@ void copy_flags(void* source, std::array<std::optional<int>, 1024>& target)
     }
 }
 }
+std::optional<int> scenario_flag(int absolute_index)
+{
+    if (absolute_index < 0 || absolute_index >= 1024 || !mInstance ||
+        fScenario.get() < 0 || fBits.get() < 0 || fLength.get() < 0) return {};
+    void* storage = ref::call_static<void*>(mInstance);
+    if (!storage) return {};
+    void* bank = ref::rd<void*>(storage, fScenario);
+    if (!bank) return {};
+    void* bits = ref::rd<void*>(bank, fBits);
+    if (!bits || ref::rd<int32_t>(bank, fLength) != 1024) return {};
+    const int words = unity::array_length(bits);
+    if (words < 32 || words > 128) return {};
+    // Native Get indexes 32 bits per word even though the constructor overallocates.
+    const uint32_t word = unity::array_value<uint32_t>(bits, absolute_index >> 5);
+    return static_cast<int>((word >> (absolute_index & 31)) & 1u);
+}
 Flags snapshot()
 {
     Flags result;

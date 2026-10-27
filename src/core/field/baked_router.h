@@ -50,6 +50,7 @@ struct Request {
     bool passages = false;            // hidden passages open
     int vehicle_group = 0;            // riding: that group's world layer; 0 = on foot
     int vehicle_type = 0, landing_group = 0; // owned riding/landing rules for filter handoff
+    int transportation_id = 0;         // observed identity, never an inferred unlock
     std::vector<int> auto_groups;     // on foot: groups ridden automatically when owned
     std::vector<Cell> blocked;        // live blockers; layer -1 = every layer
     bool live_relays = false;        // active projected counter tiles, when state is known
@@ -130,6 +131,12 @@ Reach flood(const Request& r);
 /// Invalid seeds are ignored; every seed belongs to the request's movement mode.
 Reach flood(const Request& r, const std::vector<Cell>& starts);
 Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector<int>& costs);
+// FFIII unlocked Enterprise: ordered owned-data modes, at most four states per cell.
+// Result segments include both endpoints of each movement mode.
+struct EnterpriseSegment { int mode; std::vector<Cell> cells; };
+struct EnterpriseResult { Reach foot; std::vector<EnterpriseSegment> segments; int steps = -1; size_t expansions = 0, peak_queue = 0; };
+bool enterprise_pair(int id);
+EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship = false);
 bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y);
 int transition_distance(const Request& request, const Reach& reach);
 

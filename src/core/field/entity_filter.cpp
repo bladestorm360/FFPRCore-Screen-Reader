@@ -14,15 +14,16 @@ float point_distance(Vec3 a, Vec3 b) {
     const auto x=a.x-b.x, y=a.y-b.y, z=a.z-b.z;
     return static_cast<float>(std::sqrt(static_cast<double>(x*x+y*y+z*z)));
 }
+// Exact copied identity only: the native ID zero is a valid identity too.
+bool continued_row(const FilterRow& row, const FilterInput& input) {
+    return input.continued_goal && (row.remote_map ? row.remote_map : input.current_map) == input.continued_map &&
+        (row.remote_map || row.cell_valid) && row.cell_x == input.continued_x && row.cell_y == input.continued_y &&
+        (input.continued_entity_id < 0 || row.entity_id == input.continued_entity_id) &&
+        (input.continued_raw.empty() || row.raw_name == input.continued_raw);
+}
 void restore_selection(Filtered& result, const FilterInput& input) {
     if (input.continued_goal) for (size_t i = 0; i < result.order.size(); ++i) {
-        const auto& row = input.rows[result.order[i]];
-        if(!input.continued_raw.empty()&&row.raw_name!=input.continued_raw)continue;
-        const bool map_matches = row.remote_map ? row.remote_map == input.continued_map
-            : input.current_map == input.continued_map;
-        if (map_matches && (row.remote_map || row.cell_valid)
-            && (input.continued_entity_id < 0 || row.entity_id == input.continued_entity_id)
-            && row.cell_x == input.continued_x && row.cell_y == input.continued_y) {
+        if (continued_row(input.rows[result.order[i]], input)) {
             result.continued = static_cast<int>(i); break;
         }
     }
@@ -107,9 +108,15 @@ static Filtered build_impl(FilterInput& input) {
         check_cancelled(input);
         const auto& row = input.rows[index];
         if (row.kind != Kind::MapExit || row.destination <= 0) continue;
+        // World-unreachable rows are pruned below and cannot represent a group.
+        if (input.world && row.route_distance < 0) continue;
         const auto found = exits.find(row.destination);
         if (found == exits.end()) { exits.emplace(row.destination,index); continue; }
         const auto& old = input.rows[found->second];
+        // Keep the exact pending physical exit until the objective is cleared.
+        const bool pinned = continued_row(row, input);
+        if (continued_row(old, input)) continue;
+        if (pinned) { found->second = index; continue; }
         // Grouping is independent from list sorting. Prefer the shortest usable
         // route; if every indoor exit is blocked, retain one for its explanation.
         const bool better = row.route_distance >= 0 &&
@@ -128,11 +135,7 @@ static Filtered build_impl(FilterInput& input) {
         if (input.events && !row.event_group.empty() && events[row.event_group] != index) {
             // A remembered explicit objective is never rebound to the group's
             // newly nearest sibling during movement or a floor continuation.
-            const bool continued=input.continued_goal && (row.remote_map?row.remote_map:input.current_map)==input.continued_map &&
-                (row.remote_map || row.cell_valid) && row.cell_x==input.continued_x && row.cell_y==input.continued_y &&
-                (input.continued_entity_id<0 || row.entity_id==input.continued_entity_id) &&
-                (input.continued_raw.empty() || row.raw_name==input.continued_raw);
-            if(!continued)return true;
+            if(!continued_row(row, input))return true;
         }
         return input.layer && row.kind == Kind::Event && row.event_type == L"ToLayer";
     }), result.order.end());

@@ -6,7 +6,8 @@
 #include "../src/core/field/puzzle_guide.cpp"
 namespace fixture {
 json::Value puzzles;
-bool ready=true,blocked=false;
+bool ready=true,blocked=false,module_active=false;
+game::Id running_game=game::Id::FF2; int module_moves=0;
 int map=185,requests=0,retired=0;
 field::baked_route::Cell cell{0,15,27};
 std::vector<std::wstring> spoken;
@@ -15,12 +16,13 @@ frame::Step step;
 std::wstring scene=L"Field";
 std::map<events::Kind,events::Handler> handlers;
 }
+namespace game {Id current(){return fixture::running_game;}}
 namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){} }
 namespace hooks {void note_fault(const char*){std::abort();} }
 namespace log_ {void write(const char*,...){} }
 namespace data {bool game_data_ready(){return true;} const json::Value& game_json(const char*){return fixture::puzzles;} }
-namespace actions {void define(const char*,Fn){} bool run(const char*){return false;} }
-namespace queries {bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldNavigationReady" ? fixture::ready : std::string(n)=="GameStatePatches.IsInputTransitionBlocked" ? fixture::blocked : false;} void define(const char*,std::function<bool()>){ } }
+namespace actions {void define(const char*,Fn){} bool run(const char* n){if(std::string(n)=="GameModule.PuzzleGuideMove")++fixture::module_moves;return true;} }
+namespace queries {bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldNavigationReady" ? fixture::ready : std::string(n)=="GameStatePatches.IsInputTransitionBlocked" ? fixture::blocked : std::string(n)=="GameModule.PuzzleGuideActive" ? fixture::module_active : false;} void define(const char*,std::function<bool()>){ } }
 namespace events {void on(Kind kind,Handler fn){fixture::handlers[kind]=std::move(fn);} }
 namespace frame {int every_frame(Step s,const char*,int){fixture::step=std::move(s);return 1;} void cancel_label(const char*){fixture::step={};} }
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);} void say_sequence(std::vector<std::wstring> parts,bool){for(auto& s:parts)fixture::spoken.push_back(std::move(s));} }
@@ -58,5 +60,9 @@ int main(){
     fixture::map=185;start_or_repeat();fixture::scene=L"Title";
     fixture::handlers[events::Kind::SceneLoaded]();
     expect(!active(),"return to title retires the guide before another game load");
+    fixture::module_active=true;fixture::running_game=game::Id::FF3;on_move();
+    expect(fixture::module_moves==1,"FFIII active guide receives movement dispatch");
+    fixture::running_game=game::Id::FF6;on_move();expect(fixture::module_moves==1,"FFVI story guide receives no circuit movement dispatch");
+    fixture::running_game=game::Id::FF3;fixture::blocked=true;on_move();expect(fixture::module_moves==1,"blocked FFIII movement is not dispatched");
     std::printf("Puzzle guide check: %d failures\n",failures);return failures?1:0;
 }

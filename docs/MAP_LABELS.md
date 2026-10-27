@@ -1,5 +1,12 @@
 # Map labels for untitled sub-maps
 
+October26 follow-up: [repeated identical area/title components](re/MAP_NAME_PARTS_20261026.md).
+The shared map-label composer now emits an identical resolved area/title once;
+distinct room/floor labels and repeated announcements remain. Source review is
+complete and the canonical build/offline checks pass; combined deployment and
+gameplay remain pending. Enterprise flight is now the active checkpoint; the
+chocobo circuit guide is queued without prize disclosure.
+
 October25 [Ur well/shed and character follow-up](re/UR_CHARACTERS_20261025.md):
 native map338 is Well,336 is Shed and337 is Shed Back Room. Their entrances
 already existed as Map Exits; naming hid their purpose. Treasure identities,

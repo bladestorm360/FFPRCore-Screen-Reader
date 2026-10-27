@@ -1,6 +1,7 @@
 // The baked-map router: see baked_router.h.
 #include <algorithm>
 #include <cstdlib>
+#include <deque>
 #include <queue>
 #include <unordered_map>
 #include <unordered_set>
@@ -201,6 +202,80 @@ void neighbours(const Request& r, const baked::Grids& g, const Cell& from, F&& v
 }
 
 } // namespace
+
+bool enterprise_pair(int id) { return id==6 || id==13 || id==15 || id==16; }
+
+// Keep the state search beside the shared neighbour implementation so every
+// mode retains its wrap, collision, hazard and transition semantics. Modes
+// are ship before flight, air, ship after flight and foot. Native conversions
+// change modes on the same cell; only the shore edge displaces the player.
+EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship)
+{
+    EnterpriseResult result;
+    if (!request.submap || !request.submap->world || !enterprise_pair(request.transportation_id)) return result;
+    const auto& g=baked::grids(*request.submap);
+    if (!baked::in_bounds(g,request.start.x,request.start.y)) return result;
+    const int ship_id=(request.transportation_id==15||request.transportation_id==16)?16:13;
+    const int air_id=ship_id==13?6:15;
+    const auto* ship=baked::transport(ship_id); const auto* air=baked::transport(air_id);
+    if(!ship||!air) return result;
+    Request modes[4]={request,request,request,request};
+    for(int m=0;m<4;++m) { modes[m].goals.clear(); modes[m].goals_open=false; }
+    for(int m:{0,2}) { modes[m].vehicle_group=ship->group; modes[m].vehicle_type=ship->type; modes[m].landing_group=ship->landing_group; }
+    modes[1].vehicle_group=air->group; modes[1].vehicle_type=air->type; modes[1].landing_group=air->landing_group;
+    modes[3].vehicle_group=0; modes[3].vehicle_type=modes[3].landing_group=0;
+    if(reconstruct) {
+        auto& goal_mode=modes[final_ship?2:3]; goal_mode.goals=request.goals; goal_mode.goals_open=request.goals_open;
+        if(final_ship) { modes[0].goals=request.goals; modes[0].goals_open=request.goals_open; }
+    }
+    // Four owned states per world cell. No native objects enter this search,
+    // and each iteration checks the snapshot's cancellation token.
+    const int cells=g.width*g.height, count=4*cells;
+    std::vector<int> dist(count,INT_MAX), prev(reconstruct?count:0,-1);
+    std::deque<int> queue;
+    const int start_mode=(request.transportation_id==air_id)?1:0;
+    const int start=start_mode*cells+request.start.y*g.width+request.start.x;
+    dist[start]=0;queue.push_back(start); int reached=-1;
+    auto cell=[&](int node) { const int n=node%cells; return Cell{request.start.layer,n%g.width,n/g.width}; };
+    auto clear=[&](const Request& r,const Cell& c) {
+        if(!open(r,g,c)||blocked_by_caller(r,c)||trap_cell(r,g,c)||terminal_transition(r,g,c))return false;
+        if(!r.ignore_hazards) {
+            if(r.live_hazards) { for(const auto& h:r.hazards) if(h.x==c.x&&h.y==c.y&&(h.layer<0||h.layer==c.layer))return false; }
+            else if(!g.hazard.empty()&&g.hazard[static_cast<size_t>(c.y)*g.width+c.x])return false;
+        }
+        return true;
+    };
+    auto add=[&](int from,int mode,const Cell& to,int cost) {
+        const int node=mode*cells+to.y*g.width+to.x, candidate=dist[from]+cost;
+        if(candidate>=dist[node])return;
+        dist[node]=candidate; if(reconstruct)prev[node]=from;
+        if(cost)queue.push_back(node);else queue.push_front(node);
+    };
+    while(!queue.empty()) {
+        if(request.cancelled&&request.cancelled())return {};
+        ++result.expansions;result.peak_queue=std::max(result.peak_queue,queue.size());
+        const int node=queue.front(); queue.pop_front(); const int mode=node/cells; const Cell here=cell(node);
+        if(reconstruct && ((final_ship&&(mode==0||mode==2))||(!final_ship&&mode==3)) &&
+           std::find(request.goals.begin(),request.goals.end(),here)!=request.goals.end()) { reached=node;break; }
+        if(terminal_transition(modes[mode],g,here))continue;
+        neighbours(modes[mode],g,here,[&](const Cell& next){add(node,mode,next,1);return true;});
+        if(mode==0 && clear(modes[0],here) && clear(modes[1],here)) add(node,1,here,0);
+        if(mode==1 && baked::group_lands(air->landing_group,baked::attribute(g,here.x,here.y)) && clear(modes[2],here)) add(node,2,here,0);
+        if(mode==0||mode==2) neighbours(modes[3],g,here,[&](const Cell& next) {
+            if(baked::group_lands(ship->landing_group,baked::attribute(g,next.x,next.y)))add(node,3,next,1);
+            return true;
+        });
+    }
+    result.foot.submap=request.submap;result.foot.width=g.width;result.foot.height=g.height;
+    result.foot.dist[0].resize(cells,0xffff);
+    for(int i=0;i<cells;++i)if(dist[3*cells+i]!=INT_MAX)result.foot.dist[0][i]=static_cast<uint16_t>(std::min(dist[3*cells+i],0xfffe));
+    if(reached<0)return result;
+    result.steps=dist[reached]; std::vector<int> path;
+    for(int n=reached;n>=0;n=prev[n])path.push_back(n);
+    std::reverse(path.begin(),path.end());
+    for(int n:path) { const int mode=n/cells; if(result.segments.empty()||result.segments.back().mode!=mode)result.segments.push_back({mode,{}}); result.segments.back().cells.push_back(cell(n)); }
+    return result;
+}
 
 bool safe_landing(const Request& movement, const baked::Grids& g, const Cell& landing)
 {

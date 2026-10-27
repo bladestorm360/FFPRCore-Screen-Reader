@@ -16,7 +16,10 @@ const DWORD owner = GetCurrentThreadId();
 int wrong_owner = 0, map = 1, next_task = 0, native_reads=0;
 game::Id selected_game=game::Id::FF2;
 bool ready = true, transition = false, route_pending = false;
-struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; int action=2; int id=-1; } talk;
+bool grouped_exits=false, has_goal=false;
+field::baked_nav::MapGoal goal;
+struct TalkProperty { int script = 65; std::wstring name = L"飛竜", message; int action=2; int id=-1; int status=0; std::wstring close; } talk;
+bool optional_fields=true;
 struct Actor { void* property = &talk; } npc, object;
 bool can_action = true, manual_object = false;
 bool capture_cells = false;
@@ -61,11 +64,11 @@ bool Class::is(void* p) { fixture::native();
  if(p==&fixture::talk)return std::strcmp(name,"PropertyEvent")==0||std::strcmp(name,"PropertyTalk")==0;
  return false;
 }
-int32_t Field::get() { fixture::native(); return std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):std::strcmp(name,"<ActionId>k__BackingField")==0?offsetof(fixture::TalkProperty,action):std::strcmp(name,"<EntityId>k__BackingField")==0?offsetof(fixture::TalkProperty,id):-1; }
+int32_t Field::get() { fixture::native(); if (!fixture::optional_fields && (std::strcmp(name,"<ChangeCharacterStatusId>k__BackingField")==0 || std::strcmp(name,"<CloseMessageKey>k__BackingField")==0)) return -1; return std::strcmp(name,"<MessageKey>k__BackingField")==0 || std::strcmp(name,"<CloseMessageKey>k__BackingField")==0 ? 1 : std::strcmp(name,"<ChangeCharacterStatusId>k__BackingField")==0 ? offsetof(fixture::TalkProperty,status) : std::strcmp(name,"fieldPlayer")==0||std::strcmp(name,"<Property>k__BackingField")==0?0:std::strcmp(name,"<ScriptId>k__BackingField")==0?offsetof(fixture::TalkProperty,script):std::strcmp(name,"<ActionId>k__BackingField")==0?offsetof(fixture::TalkProperty,action):std::strcmp(name,"<EntityId>k__BackingField")==0?offsetof(fixture::TalkProperty,id):-1; }
 il2cpp::Method* Method::get() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<il2cpp::Method*>(1):nullptr; }
 void* Method::ptr() { fixture::native(); return std::strcmp(name,"get_CanAction")==0?reinterpret_cast<void*>(&fixture::get_can_action):nullptr; }
 std::wstring str(void*) { fixture::native(); return {}; }
-std::wstring rd_str(void* p, Field& f) { fixture::native();if(p!=&fixture::talk)return {};return std::strcmp(f.name,"<MessageKey>k__BackingField")==0?fixture::talk.message:fixture::talk.name; }
+std::wstring rd_str(void* p, Field& f) { fixture::native();if(p!=&fixture::talk)return {};return std::strcmp(f.name,"<MessageKey>k__BackingField")==0?fixture::talk.message:std::strcmp(f.name,"<CloseMessageKey>k__BackingField")==0?fixture::talk.close:fixture::talk.name; }
 void* instance(Class&) { fixture::native(); return nullptr; }
 void call_failed_note(const char*) {}
 void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
@@ -118,7 +121,7 @@ namespace log_ { void write(const char*, ...) {} }
 namespace game { Id current() { return fixture::selected_game; } const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
 namespace settings {
 int get_int(const char*, int fallback) { return fallback; }
-bool get_bool(const char*, bool fallback) { return fallback; }
+bool get_bool(const char* key, bool fallback) { return std::strcmp(key,"MapExitFilter")==0 ? fixture::grouped_exits : fallback; }
 }
 namespace ffpr { void say(std::wstring_view, bool) { fixture::native(); } }
 namespace ffpr::system {
@@ -189,7 +192,7 @@ std::vector<bool> story_gate_mask(ExitSnapshot&,const std::vector<StoryTarget>& 
 bool available(void*) { fixture::native(); return true; }
 bool prepared() { fixture::native(); return true; }
 bool cell_at(void*, unity::Vec3 position, baked_route::Cell& cell) { fixture::native();if(!fixture::capture_cells)return false;cell={0,static_cast<int>(position.x),static_cast<int>(position.y)};return true; }
-bool pending_goal(MapGoal&, TargetKind&, std::wstring&) { fixture::native(); return false; }
+bool pending_goal(MapGoal& goal, TargetKind& kind, std::wstring& name) { fixture::native(); if (!fixture::has_goal) return false; goal=fixture::goal; kind=TargetKind::Transition; name=L"World"; return true; }
 bool request_pending() { fixture::native(); return fixture::route_pending; }
 void request_reachability(bool, std::function<void()> ready) { fixture::native(); ready(); }
 std::vector<RemoteObject> connected_objects_snapshot(int, map_state::Resolver&,std::function<bool()>) { return {}; }
@@ -208,6 +211,27 @@ int main() {
     fixture::transition = false;
     Context talk; talk.fe=&fixture::npc; talk.go_name=L"Wyvern"; talk.go_lower=L"wyvern";
     for(int script:{65,189}){fixture::talk.script=script;auto result=npc_detector(talk);expect(result.result==Result::Detected&&result.entity->kind==Kind::NPC&&result.entity->name==L"Wyvern","native-actionable Deist Wyvern dialogue scripts are NPC targets despite placeholder name");}
+    // Regression: the actual scanner must omit a blank, effectless Talk actor.
+    fixture::talk.action=4;fixture::talk.script=0;fixture::talk.message.clear();
+    talk.go_name=L"Elder";talk.go_lower=L"elder";fixture::talk.name=L"Elder";
+    expect(npc_detector(talk).result==Result::Skip,"blank effectless Talk is not an NPC destination");
+    for (auto game : {game::Id::FF1,game::Id::FF2,game::Id::FF3,game::Id::FF4,game::Id::FF5,game::Id::FF6}) {
+        fixture::selected_game=game;
+        expect(npc_detector(talk).result==Result::Skip,"all-six blank Talk excluded");
+        fixture::talk.message=L" ";expect(npc_detector(talk).result==Result::Detected,"whitespace message retained");fixture::talk.message.clear();
+        fixture::talk.script=1;expect(npc_detector(talk).result==Result::Detected,"scripted Talk retained");fixture::talk.script=0;
+        fixture::talk.status=1;expect(npc_detector(talk).result==Result::Detected,"status-changing Talk retained");fixture::talk.status=0;
+        fixture::talk.close=L"close";expect(npc_detector(talk).result==Result::Detected,"closing message retained");fixture::talk.close.clear();
+        fixture::optional_fields=false;expect(npc_detector(talk).result==Result::Detected,"unknown optional field retains actor");fixture::optional_fields=true;
+        fixture::talk.message=L"new metadata";expect(npc_detector(talk).result==Result::Detected,"live message update restores actor");fixture::talk.message.clear();
+    }
+    fixture::selected_game=game::Id::FF2;
+    const int native_before=fixture::native_reads;const auto talk_started=std::chrono::steady_clock::now();
+    for (int i=0;i<1000;++i) expect(npc_detector(talk).result==Result::Skip,"bounded blank Talk batch");
+    const double batch_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-talk_started).count();
+    std::printf("Blank Talk fixture: 1000 owner detections, %d fake native calls, %.3f ms cumulative; not native/game-frame latency\n",fixture::native_reads-native_before,batch_ms);
+    expect(fixture::wrong_owner==0,"blank Talk reads stay on owner");
+    fixture::talk.action=2;talk.go_name=L"Wyvern";talk.go_lower=L"wyvern";fixture::talk.name=L"飛竜";
     fixture::talk.script=0;fixture::talk.message=L"VisibleDialogueKey";
     expect(npc_detector(talk).result==Result::Detected,"message-only animal NPC bypasses the placeholder name filter");
     fixture::talk.message.clear();expect(npc_detector(talk).result==Result::Skip,"scriptless/message-less cutscene or vehicle NPC remains excluded");
@@ -400,6 +424,42 @@ int main() {
         g_entities={other};apply_filter();for(int tick=0;g_filter_pending&&tick<100;++tick){fixture::tick();fixture::work();}
         expect(scanner::current_entity()==nullptr&&g_index==-1,"missing event never silently selects an unrelated or collocated destination");
         scanner::previous_entity();expect(scanner::current_entity()==other,"explicit browsing safely resumes after a target disappears");
+    }
+    {
+        fixture::selected_game=game::Id::FF3;
+        scanner::invalidate_map(); scanner::clear_selection(); fixture::map=80; g_last_scanned_map_id=80;
+        fixture::capture_cells=true; fixture::grouped_exits=true; fixture::has_goal=true;
+        fixture::goal={}; fixture::goal.map_id=77; fixture::goal.cell={1,4,6}; fixture::goal.entity_id=0; fixture::goal.raw_name=L"target";
+        g_category=Category::MapExits;
+        auto exit=[](int map,int id,int x,const wchar_t* raw){auto e=std::make_shared<Entity>();e->kind=Kind::MapExit;
+            e->entity_id=id;e->remote_map_id=map;e->cell_x=x;e->cell_y=6;e->dest_map_id=1;
+            e->audio_hint=raw;e->raw_name_known=true;e->name=e->converted_name=L"World";
+            if (!map) {e->game=reinterpret_cast<void*>(1);e->pos={static_cast<float>(x),6,0};} return e;};
+        auto remote=exit(77,0,4,L"target"), sibling=exit(77,1,5,L"sibling");
+        g_entities={remote,sibling}; apply_filter(); for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(scanner::current_entity()==remote && g_sel==remote, "grouped pending remote exit is owner selected");
+        fixture::map=77;g_last_scanned_map_id=77;
+        auto live=exit(0,0,4,L"target"); sibling=exit(0,1,5,L"sibling");
+        // Position makes the sibling nearer under the actual fallback comparator.
+        fixture::pose={5,6,0}; g_entities={sibling,live}; apply_filter();
+        for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(scanner::current_entity()==live && g_sel==live && fixture::goal.entity_id==0 && fixture::goal.raw_name==L"target",
+            "floor handoff publishes exact new live handle without changing pending goal");
+        // A cleared pending goal cannot authorize an older worker publication.
+        apply_filter(); fixture::tick(); fixture::work();
+        fixture::has_goal=false; scanner::clear_selection(); g_index=-1;
+        for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(g_index==-1 && !g_sel, "cleared pending goal cannot restore an older captured target");
+        // A map generation change retires the old captured handles.
+        fixture::has_goal=true; apply_filter(); fixture::tick(); fixture::work();
+        fixture::map=78; scanner::invalidate_map(); fixture::tick(); fixture::work(); fixture::tick();
+        expect(!g_filter_pending && !g_sel, "changed map cannot publish a stale live handle");
+        fixture::map=77; g_last_scanned_map_id=77; g_entities={sibling,live};
+        fixture::has_goal=false; scanner::clear_selection(); apply_filter();
+        for(int t=0;g_filter_pending&&t<100;++t){fixture::tick();fixture::work();}
+        expect(filtered_view().size()==1 && filtered_view()[0]==sibling, "manual clear releases grouped pin");
+        fixture::grouped_exits=false; fixture::capture_cells=false; fixture::pose={}; scanner::invalidate_map(); scanner::clear_selection();
+        fixture::selected_game=game::Id::FF2;
     }
     // Battle/state invalidation rebuilds native handles. Ship and Airship may
     // have the same default entity ID/raw placeholder; model ID is authoritative.
