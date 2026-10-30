@@ -1,5 +1,16 @@
 # Native FFPR accessibility mod
 
+Hard rule reaffirmed by the user, October30: game source, recovered/decompiled
+implementations, disassembly and implementation snippets must never be written
+inside this or any other Git repository, even ignored paths, nor committed or
+pushed to GitHub for any reason. Keep all such analysis in verified workspace
+directories outside every Git tree; only factual locators/hashes/behavioral
+documentation and original mod/tool code belong here. Preserve legitimate
+third-party ownership. The user authorizes a history rewrite to remove old
+violations while preserving releases; do not delete/recreate the remote. If a
+GitHub permission error occurs, stop GitHub attempts without opening a browser
+or starting an authentication workaround. The user will handle the alternative.
+
 Active source for all six games is this repository, on `master`. FF1–FF5 belong to bladestorm360; FF6 retains ZKline/BlindGuyNW attribution and inclusion permission recorded in `../OPEN_ISSUES.md`. The older managed repositories are paused references. Preserve existing uncommitted work. User explicitly authorized 2026-10-11: after the full audit, deploy all six games, commit/push everything to the public user-owned `FFPR-screen-reader` remote (create if absent), and make the user-owned FF1–FF5 remotes private. Preserve old history and existing named remotes.
 
 Read `CODEX_MEMORY.md`, the shared `../../../AGENTS.md`, and `../../../codex/MODEL_POLICY.md`. Sol handles research, implementation, documentation, review and verification itself by default (user update, 2026-10-27). No automatic Terra/Luna or other agent handoffs. Every delegation requires explicit user authorization, including Astra; its documented substantive-blocker/two-completed-different-approaches gate permits one permission request, never automatic dispatch. Summarize any authorized delegation, including outcome and remaining issues.

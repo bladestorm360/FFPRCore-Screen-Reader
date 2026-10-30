@@ -1,5 +1,18 @@
 # Native FFPR durable memory
 
+October30 user authorizes history rewrite now, preserving releases, with no
+browser/auth workaround on GitHub permission error. Active/queued scope is in
+the single ledger below. Recovery bundle outside Git verified at
+../tools/history_rewrite_20261030/before.bundle (4020ebc0;87 commits/8 tags).
+GitHub reads succeed noninteractively; release/asset IDs and refs recorded.
+All-reachable scan2703 blobs finds36 body versions across30 known paths, current
+working tree0. Staged/build content gate plus versioned commit hook and CI added;
+actual external disassembly rejection control passes. No production navigation
+edit yet. Queued: unboarded Maze/nearby landing; live vehicle changes incl winds;
+cross-world surface/underwater routes and fourth World map filter (world-map
+destinations only, not town/dungeon contents). Sol only; no game launch.
+Older defer-until-PC wording below is superseded by this explicit rewrite request.
+
 Current audit milestone/status/Closed list: [single checkpoint record](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
 Finite all-six map/event/reachability assignment source/offline/delivery Closed.
 Installed all6 cf805c2e8e05ff0235f51f5228a916bb23c80e1e6251e31c95bc86cf34a5e86b,

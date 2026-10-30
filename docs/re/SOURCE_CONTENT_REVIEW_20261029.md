@@ -1,5 +1,30 @@
 # Preserved native analysis and historical source exposure
 
+October30 follow-up: the user now explicitly authorizes a history rewrite,
+retaining the repository and releases. No browser or authentication workaround
+is allowed after a GitHub permission error. The exact active task and queued
+navigation additions are in the single scope ledger. A verified full recovery
+bundle and original refs/config/working-change archive are outside all Git trees
+at D:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/.
+
+The complete reachable-history scan finds36 recovered disassembly versions
+across the same30 paths (2703 blobs inspected); the cleaned working tree has0.
+Only those36 exact Git blob IDs will be replaced with source-free hash/location
+references. Mod implementations, legitimate dependencies and current contents
+are preserved. All87 original commits and8 tag names are retained, with remapped
+identities as required by removing their historical bodies. The existing
+release/asset metadata is saved before the operation and will be compared after.
+
+The hard rule applies even before staging and even in ignored folders. Native
+exports must validate an external directory without a Git ancestor. The new
+tools/repository_content_check.py rejects known recovered-body formats, original
+script exports and game dump filenames. A versioned pre-commit hook checks the
+actual index; build.bat checks the current tree before compilation; CI checks
+the current tree and full fetched history. An actual preserved external game
+body is rejected by the same checker, without copying it into Git. Original
+mod/tool code and factual metadata remain valid. An unfamiliar source format is
+still prohibited even if it is not recognized by these checks.
+
 This is a release-content finding in the final combined milestone of the
 [single scope ledger](MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
 It does not reopen any Closed gameplay subsystem. No game was launched or

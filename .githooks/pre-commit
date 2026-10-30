@@ -1,0 +1,3 @@
+#!/bin/sh
+# Recovered game source is prohibited even in a private repository.
+exec python tools/repository_content_check.py --staged

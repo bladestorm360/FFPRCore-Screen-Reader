@@ -5,6 +5,14 @@ REM Nothing is written to any game folder: installing is deploy.bat, a separate 
 setlocal
 cd /d "%~dp0"
 
+REM Hard rule: reject recovered game source before compiling any payload.
+if not exist build_check mkdir build_check
+python tools\repository_content_check.py > build_check\repository_content_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Game-source boundary check FAILED - see build_check\repository_content_report.txt
+    exit /b 1
+)
+
 set "CMAKE=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
 if not exist "%CMAKE%" (
     echo ERROR: bundled CMake not found at:

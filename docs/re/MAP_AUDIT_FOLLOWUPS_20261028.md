@@ -5,6 +5,43 @@
 This is the single checkpoint, scope and Closed-system record; feature topics
 hold evidence and link here rather than create parallel plans.
 
+### Active October30: source-history removal and prevention
+
+| Field | Current decision |
+| --- | --- |
+| Capability/scope | User explicitly authorizes rewriting shared native repository history to remove every recovered game-source/disassembly body, retain mod history and release history, and enforce the never-in-Git rule. Do not delete/recreate the repository. On a GitHub permission error, stop GitHub attempts without any browser/authentication fallback and report it; continue independent navigation work. |
+| Boundary/evidence | Current shared HEAD71d53fb is clean and deployed in all6 games;30 historical raw files/53757 native instruction lines are already confirmed. Inspect all reachable local/remote heads and release tags for additional recovered bodies, preserve a verified recovery bundle outside every Git tree, sanitize only the identified game-source blobs, preserve current tree, names, ownership, legitimate vendor code and release assets. User authorization supersedes the previous defer-until-at-PC instruction for the rewrite itself. |
+| Done/bounds | Source-free reachable-history check; exact pre/post current tree and mod/dependency parity; original refs/bundle/remotes preserved externally; unchanged release metadata/assets and tag names; explicit lease/atomic remote update when permitted; durable hard rule plus staged/build prevention. No tool installs, game launch, source dump inside Git, new release or unrelated visibility changes. |
+| Effort/status | In progress (~10%);45–90min expected including full reachable-blob review, protected recovery, rewrite/verification and guarded remote attempt. A network sandbox DNS/thread error is not a GitHub permission denial; next read uses authorized network access with all interactive credential/browser prompts disabled. |
+| Recovery | Existing all-six cf805c2e/11374080 bytes remain unchanged; canonical/security/recovery receipts frozen. Start from71d53fb and preserve all87 reachable commits/8 tag names before rewriting. Sol only; no delegation or browser fallback. |
+
+### Queued October30: Maze and vehicle/world-map journeys
+
+User-triggered follow-up to Closed navigation, completed one slice at a time:
+
+1. Ancients' Maze/Crystal Tower reachability while on foot or aboard another
+   vehicle, using an actual reachable parked Invincible when required; investigate
+   the latest reported Invincible landing26 tiles west despite legal nearer
+   landing at the Maze. Preserve actual terrain, statues, wind and native actions.
+2. Choose required vehicles from live parked positions and real capabilities,
+   including Invincible -> land -> Nautilus for Doga's Manor winds. Preserve manual
+   boarding/landing actions and consistent browse/selected-route eligibility.
+3. Connect actual world-map transitions including surface/underwater, prefer
+   flying near an underwater entrance then diving when legal, preserve a valid
+   slower underwater route, and support Doga's Village's tunnel/surface journey.
+   Add a fourth World map filter limited to destinations on connected world-map
+   bakes, including town/dungeon entrances there; do not flood it with interior
+   town/dungeon contents. Existing literal Current map mode retains its contract.
+
+Fixed acceptance: actual source/data/production-consumer before/after checks,
+current/browse/retained route consistency, locked/missing/stale vehicles, actual
+map boundaries, bounded owned-worker cancellation and cost, affected12-language
+controls/docs, then serial canonical/smoke/exact-payload scan/guarded deployment.
+No native probing/game launch or broad all-game redesign. Initial45–90min proof
+checkpoint for the Maze/landing and existing transport planner, then scope the
+necessary connected journey slice from its actual missing consumer/source facts.
+Installed candidate remains frozen until required connected functionality passes.
+
 ### Closed: final combined candidate and coverage reconciliation
 
 | Field | Current decision |
