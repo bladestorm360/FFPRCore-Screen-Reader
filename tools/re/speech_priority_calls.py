@@ -1,4 +1,6 @@
 """Read-only matching PE call evidence for native naming entry/focus ordering."""
+
+from evidence_paths import external_directory
 from pathlib import Path
 from collections import defaultdict
 import hashlib
@@ -7,8 +9,8 @@ import capstone
 import pefile
 
 ROOT = Path(__file__).resolve().parents[2]
-OUTPUT = ROOT / 'build_check/re'
-OUTPUT.mkdir(parents=True, exist_ok=True) # local commercial-code evidence, never public source
+OUTPUT = external_directory('build_check/re')
+OUTPUT.mkdir(parents=True, exist_ok=True) # outside every Git tree
 STEAM = Path('D:/Games/SteamLibrary/steamapps/common')
 GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR']
 for number, folder in enumerate(GAMES, 1):

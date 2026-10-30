@@ -1,4 +1,8 @@
-Recovered game implementation removed from versioned history.
-Original Git blob: 70c5baf1b0ac4412beb3a832b16ec494a3500359
-The original is preserved only in the verified external recovery bundle.
-See docs/re/SOURCE_CONTENT_REVIEW_20261029.md.
+Local native analysis reference
+
+Recovered game implementation is preserved outside every Git tree.
+Archive: D:\Games\Dev\Unity\FFPR\tools\repository_sources_20261029\docs\re\ff5_arrival_calls.txt
+SHA-256: f149ce8025757122fd32e7ba55a4e2bd58e22faff80f78366dfe4e27c2fe04d8
+Original bytes: 41217
+
+See SOURCE_CONTENT_REVIEW_20261029.md for historical exposure and scope.

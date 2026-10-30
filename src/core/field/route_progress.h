@@ -19,7 +19,16 @@ struct Phase {
     int transportation_id = 0;
     int vehicle_direction = -1;
     std::optional<baked_route::Cell> action_cell;
+    // Movement after this phase's native vehicle action. The action's vehicle
+    // can be the craft being left; it must not govern the final walking leg.
+    int movement_transportation_id=-1; // -1 current mode, 0 foot/owned auto-use
+    // Native manual movement between this phase's last cell and the next phase
+    // (Invincible mountain crossing). These tiles are not ordinary walk inputs.
+    int manual_displacement_steps=0;
 };
+inline int steps(const Phase& phase) {
+    return (phase.cells.empty()?0:static_cast<int>(phase.cells.size())-1)+phase.manual_displacement_steps;
+}
 
 inline bool remaining(const std::vector<Phase>& phases, const baked_route::Cell& at,
                       std::vector<Phase>& out, const std::function<bool()>& cancelled = {})

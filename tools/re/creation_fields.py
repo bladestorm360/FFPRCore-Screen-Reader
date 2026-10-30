@@ -1,4 +1,6 @@
 """Bounded offline creation-field producer audit. No game launch, attach or calls."""
+
+from evidence_paths import external_directory
 from pathlib import Path
 import hashlib
 import json
@@ -12,7 +14,7 @@ GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR',
 
 
 def main():
-    out = ROOT / 'build_check/navigation_baseline_2026_10_16'
+    out = external_directory('build_check/navigation_baseline_2026_10_16')
     out.mkdir(exist_ok=True)
     receipt = []
     fields_of = {'Last.UI.KeyInput.CharacterContentController',

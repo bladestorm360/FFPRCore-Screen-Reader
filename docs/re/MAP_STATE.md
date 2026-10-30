@@ -1,5 +1,13 @@
 # Persistent navigation state, October 15
 
+October28 [all-six audit](MAP_EVENT_AUDIT_20261028.md) corrects the observed-group
+integration: SetEntities observations are additive positive evidence, never a
+complete inventory. Capture copies the bounded observed set; existing lazy worker
+projection merges it with initializer certainty, visibility and position facts.
+All-six real native-cache witnesses7 before failures→0; no eager owner projection.
+See that record for rectangular counters, complete source/capture limits and
+the separate per-leg vehicle applicability follow-up.
+
 October26 [world event review](WORLD_EVENTS_20261026.md) copies FFIII's exact
 all-active-member Mini predicate into an optional navigation scalar. A reviewed
 SysCall becomes private entry-guard projection, never native interpreter execution

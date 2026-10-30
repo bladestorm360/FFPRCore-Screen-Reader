@@ -30,9 +30,11 @@
 #include <vector>
 #include "battle_internal.h"
 #include "battle_message_line.h"
+#include "scan_feedback.h"
 #include "rendered_feedback.h"
 #include "special_feedback.h"
 #include "stat_feedback.h"
+#include "action_effects.h"
 #include "battle.h"
 #include "battle_util.h"
 #include "../core.h"
@@ -165,9 +167,53 @@ using message_line::game_message;
 // --- InitActionState (postfix): the action's actor ------------------------------------------------
 using Void_t = void (*)(void* self, const void* mi);
 Void_t o_InitActionState;
+ref::Class kActionMessageProvider{"Last.Battle","ActFunctionProvider",game::kFF3};
+ref::Method mViewActionMessage{kActionMessageProvider,"ViewMessage",1};
+ref::Method mHitActionMessage{kActionMessageProvider,"HitViewMessage",2};
+// Copied action receipt only, never a retained native pointer. The conclusion
+// can be presented during native completion, so retire at the next action or
+// battle/scene boundary, rather than before EndFinishingState's original call.
+bool g_artillery_cue_prepared=false;
+thread_local unsigned g_artillery_conclusion=0;
+struct ArtilleryConclusionSource {
+    bool silent;
+    explicit ArtilleryConclusionSource(bool value):silent(value){if(silent)++g_artillery_conclusion;}
+    ~ArtilleryConclusionSource(){if(silent)--g_artillery_conclusion;}
+};
+using HitActionMessage_t=bool(*)(void* ability,void* attacker,const void* mi);
+HitActionMessage_t o_HitActionMessage=nullptr;
+bool d_HitActionMessage(void* ability,void* attacker,const void* mi) {
+    const bool repeat=hooks::guarded_r("Battle.ArtilleryConclusion",false,[&]{
+        return g_artillery_cue_prepared&&action_effects::invincible_artillery_result(ability);
+    });
+    // The exact native producer only presents the selected ability's conclusion.
+    // 141's row is the opening cue again. Preserve native UI, return and damage/
+    // miss producers; do not wrap the original in a queued-speech scope.
+    ArtilleryConclusionSource source(repeat);
+    timing::Scope native("Battle HitViewMessage",timing::Kind::Original);
+    return o_HitActionMessage(ability,attacker,mi);
+}
+thread_local unsigned g_redundant_boost_name=0;
+struct BoostNameSource {
+    bool silent;
+    explicit BoostNameSource(bool value):silent(value){if(silent)++g_redundant_boost_name;}
+    ~BoostNameSource(){if(silent)--g_redundant_boost_name;}
+};
+using ViewActionMessage_t=bool(*)(void* act,const void* mi);
+ViewActionMessage_t o_ViewActionMessage=nullptr;
+bool d_ViewActionMessage(void* act,const void* mi) {
+    const bool child=hooks::guarded_r("Battle.BoostChildUse",false,[&]{return action_effects::redundant_boost_use(act);});
+    // Source classification only, not a queued-speech scope. Native UI still
+    // receives the name exactly once. HitViewMessage/outcome producers run
+    // outside this scope and retain all of their displayed result text.
+    BoostNameSource source(child);
+    timing::Scope native("Battle ViewMessage",timing::Kind::Original);
+    return o_ViewActionMessage(act,mi);
+}
 
 void d_InitActionState(void* self, const void* mi)
 {
+    g_artillery_cue_prepared=false;
     timing::mark("Battle action begin");
     { timing::Scope native("Battle InitActionState",timing::Kind::Original);
       o_InitActionState(self, mi); }
@@ -178,8 +224,13 @@ void d_InitActionState(void* self, const void* mi)
         void* unit = ref::rd<void*>(act, fAttackUnitData);
         action_actor_started(unit);
         std::wstring actor = unit_name(unit);
+        const auto description=action_name(act);
+        if(game::is(game::Id::FF3))action_effects::observe_action(act,actor,description);
         stat_feedback::observe_action(unit,actor,ref::rd<void*>(act,fStatTargets));
-        action_started(actor, action_name(act));
+        const bool artillery=action_effects::invincible_artillery_action();
+        if(artillery)actor.clear(); // anonymous support has no character name
+        if(!action_effects::redundant_boost_use(act))action_started(actor, description);
+        g_artillery_cue_prepared=artillery&&!description.empty();
     });
     timing::mark("Battle action initialized");
 }
@@ -193,7 +244,7 @@ void d_EndFinishingState(void* self, const void* mi)
         if(act)stat_feedback::finish_action(ref::rd<void*>(act,fAttackUnitData),ref::rd<void*>(act,fStatTargets));
     });
     // Finish before native completion callbacks can initialize the next command/action.
-    hooks::guarded("Battle.ActionFinished", [] { action_actor_finished(); });
+    hooks::guarded("Battle.ActionFinished", [] { if(game::is(game::Id::FF3))action_effects::finish_action();action_actor_finished(); });
     { timing::Scope native("Battle EndFinishingState",timing::Kind::Original);
       o_EndFinishingState(self, mi); }
     timing::mark("Battle action finished");
@@ -228,8 +279,9 @@ void d_CreateDamageView(void* self, void* data, int32_t value, int32_t hit_type,
 {
     DamageScope scope;
     g_damage_context = {data, special_feedback::owned_damage_type(self,hit_type,is_recovery)};
-    timing::Scope native("Battle CreateDamageView",timing::Kind::Original);
-    o_CreateDamageView(self, data, value, hit_type, is_recovery, mi);
+    { timing::Scope native("Battle CreateDamageView",timing::Kind::Original);
+      o_CreateDamageView(self, data, value, hit_type, is_recovery, mi); }
+    if(game::is(game::Id::FF3))hooks::guarded("Battle.TargetEffectResult",[&]{action_effects::observe_result(self,data,value,hit_type);});
 }
 
 using DamageViewFF2_t = void (*)(void* self, void* data, int32_t value, int32_t hit_type, bool is_recovery, bool is_play_se, const void* mi);
@@ -314,6 +366,7 @@ void battle_system_message(void* message_str)
     clean = text::trim(clean);
     while (text::contains(clean, L"  ")) clean = text::replace_all(clean, L"  ", L" ");
     if (clean.empty()) return;
+    if (!scan_feedback::accept_message()) return;
     // The defeat message interrupts.
     bool is_defeat = text::contains(text::lower(clean), L"defeated");
     game_message(clean, is_defeat);
@@ -324,14 +377,14 @@ SetMessage_t o_SetMessage;
 void d_SetMessage(void* self, void* message_str, const void* mi)
 {
     o_SetMessage(self, message_str, mi);
-    hooks::guarded("BattleCommandMessageController.SetMessage", [&] { battle_system_message(message_str); });
+    hooks::guarded("BattleCommandMessageController.SetMessage", [&] { if(!g_redundant_boost_name&&!g_artillery_conclusion)battle_system_message(message_str); });
 }
 
 SetMessage_t o_SetSystemMessage;
 void d_SetSystemMessage(void* self, void* message_str, const void* mi)
 {
     o_SetSystemMessage(self, message_str, mi);
-    hooks::guarded("BattleCommandMessageController.SetSystemMessage", [&] { battle_system_message(message_str); });
+    hooks::guarded("BattleCommandMessageController.SetSystemMessage", [&] { if(!g_redundant_boost_name&&!g_artillery_conclusion)battle_system_message(message_str); });
 }
 
 // --- FF6: the same two hooks, (string message, bool isLeft) --------------------------------------
@@ -564,10 +617,15 @@ void d_UpdateTempParamter(void* self, void* unit, const void* mi)
 int install()
 {
     events::on(events::Kind::BattleEnd, [] {
+        g_artillery_cue_prepared=false;
         frame::cancel_label("Battle.HitCount");
         frame::cancel_label("Battle.DamageDisplay");
     });
+    events::on(events::Kind::SceneLoaded, [] {g_artillery_cue_prepared=false;});
+    events::on(events::Kind::BattleEntering, [] {g_artillery_cue_prepared=false;});
     int n = 0;
+    if(game::is(game::Id::FF3))n+=hooks::attach(mViewActionMessage,&d_ViewActionMessage,&o_ViewActionMessage)?1:0;
+    if(game::is(game::Id::FF3))n+=hooks::attach(mHitActionMessage,&d_HitActionMessage,&o_HitActionMessage)?1:0;
     n += hooks::attach(mInitActionState, &d_InitActionState, &o_InitActionState) ? 1 : 0;
     n += hooks::attach(mEndFinishingState, &d_EndFinishingState, &o_EndFinishingState) ? 1 : 0;
     if (game::in(kFF1346)) n += hooks::attach(mCreateDamageView, &d_CreateDamageView, &o_CreateDamageView) ? 1 : 0;
@@ -606,6 +664,7 @@ core::Install s_install{"Battle.Message", &install, 110};
 
 void removal_reset_state()
 {
+    g_artillery_cue_prepared=false;
     frame::cancel_label("Battle.HitCount");
     frame::cancel_label("Battle.DamageDisplay");
     // Battle start: a missed postfix can never silence the next battle.

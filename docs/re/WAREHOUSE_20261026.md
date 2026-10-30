@@ -1,6 +1,6 @@
 # Warehouse/Fat Chocobo storage, October26
 
-Status: implementation complete, offline verified and installed/hash-verified in
+October26 base status: implementation complete, offline verified and installed/hash-verified in
 all six games' shared adapters. FFIII gameplay/listening remains pending. All six
 builds contain this Warehouse UI; this does not establish that every game's story
 opens a storage service. No game launch/control/runtime probe or inventory change.
@@ -22,9 +22,9 @@ speaks initial/changed transfer quantity. Existing native controls remain intact
 
 ## Native implementation and ownership
 
-src/core/menus/warehouse.cpp registers Warehouse at119. It owns ten native hooks:
+src/core/menus/warehouse.cpp registers Warehouse at119. It owns nine native hooks:
 WarehouseController.Open/Close, SelectCommand, SelectContent, ContentUpdate,
-SelectingCommandInit, SelectingEntrustTargetInit, SelectingWithdrawTargetInit;
+SelectEntrustTargetInit, SelectWithdrawTargetInit;
 WarehousePopupControllerBase.AddSelectedCount/TakeSelectedCount. All six names,
 arities, fields and shared state values were checked against matching dumps.
 
@@ -37,8 +37,13 @@ scene/title retire pending work. Hidden preload cannot claim another screen.
 SelectCommand reads the current selectCommandCursor and serialized
 WarehouseView.commandContentList/CommonCommandContentView.text. Entry adds the
 native title and greeting once; later focus reads only the actual command and
-any visible noContensMessageText (native spelling). The inventory preview cannot
-steal command speech.
+no empty-message appendix. SelectEntrustTargetInit/SelectWithdrawTargetInit own
+the one empty response through noContensMessageText (native spelling). Both
+empty branches return through state1 to the existing command bar, not a separate
+empty list. The following native command restoration is consumed once; ordinary
+command navigation remains audible even with that text still visible. State1
+preparation and SelectingCommandInit delegate setup cannot double-read focus.
+The inventory preview cannot steal command speech.
 
 List focus validates contentDataList/current cursor index, calls the ready
 InfiniteScrollView.GetContentObject for that one index, then reads the actual
@@ -65,7 +70,9 @@ Native AddSelectedCount clamps to maxCount; TakeSelectedCount clamps to1 and bot
 finish by updating the target Text. Hooks call the original exactly once and
 observe numeric selectedCount before/after solely as a quantity-change event
 guard. For an actual change on the current visible Warehouse popup, speech reads
-the completed targetCountText and targetCountNameText. Clamp attempts create no
+the completed targetCountText/targetCountNameText and the displayed
+possessionCountText/fixedPossessionText stock figure. Stock is read afresh, without
+inventing a projected inventory total. Clamp attempts create no
 false change. A closed/foreign/hidden popup cannot speak.
 
 ## Controls, localization and lifecycle
@@ -142,3 +149,15 @@ Final shared evidence/recovery, complete reports, smoke, scan and receipts:
 build_check/remote_returns_20261026/. Storage-specific initial log/recovery/failures:
 build_check/warehouse_20261026/. New gameplay/listening remains unconfirmed.
 [Prioritized simple checks](../TESTING.md).
+
+## October27 empty-Retrieve follow-up: scope ledger
+
+Status: source checkpoint complete, Closed; final combined delivery pending.
+
+User-initiated scope: correct empty Retrieve prompt/command ownership and read the displayed stock and transfer amounts on actual quantity changes. `src/core/menus/warehouse.cpp` now owns nine hooks: `WarehouseController.Open/Close`, `SelectCommand`, `SelectContent`, `ContentUpdate`, `SelectEntrustTargetInit`, `SelectWithdrawTargetInit`, and popup `AddSelectedCount/TakeSelectedCount`. Empty target-init branches return native state1 to bar2; a prompt is emitted only for the real confirm target-init, with one following native bar restoration consumed. No stale empty append occurs on bar navigation, and `SelectingCommandInit` is not a second focus producer. Repeated explicit confirmations remain audible; no text deduplication was added. The original popup `Warehouse Show` remains the single initial quantity-popup prompt producer. Quantity hooks observe native selected-count before/after as an event guard, preserve native clamps, and read the completed target label/value plus exact displayed Stock label/value; no projected inventory arithmetic is used. I/Shift+I and existing controls are unchanged.
+
+Native anchors and matched archive provenance are in `build_check/warehouse_command_20261027/native_contract.json`; FFIII target-init anchors: Store `0x8D3860`, Retrieve `0x8D3E80`, command init `0x8D27F0`; `SelectingCommandInit` at `0x8D42A0` only sets up delegates. Existing shared generation-cancelled focus task, owner-thread native reads, bounded ready UI fields and owned speech strings remain. No new poller, worker native pointer, wait or hook for popup Show. Actual callback/frame/audio cost remains unmeasured; cumulative mod-caused application lag above25ms remains a blocker.
+
+The actual-source six-game fixture covers prompt/return order, repeated confirms, subsequent bar navigation, empty Store, both populated lists, quantity increase/decrease and clamps, labels/stock in both modes, foreign/hidden popup, footer identity and lifecycle cancellation:366 original callbacks,0 failures. Native name check8287/0 missing and47-export smoke pass. Source checkpoint DLL is11,033,600 bytes, SHA256 `00a1b01194bdcb18ce11cb09bc67e25cdbf1c0fc4acb11bfce528ca593952344`. The initial restricted build stalled; an accidental overlapping run used stale binaries and is invalid evidence. Neither failed/stale candidate was installed. A later corrected selected-exit checkpoint completed the full canonical suite with Warehouse source unchanged; its final build reports8287/0 names and142/349/0 wiring. Preserve the original attempted reports and authoritative follow-up evidence in `build_check/warehouse_command_20261027/` and `build_check/selected_exit_20261027/`.
+
+October26 installed baseline/history above remains distinct. The October27 candidate is not installed and has no new gameplay confirmation. No game launch/control/probe or inventory mutation occurred. Warehouse source is Closed; do not reopen it absent a new user-scoped request. The separately authorized active work continues with outward and return floating-continent transitions, then Temple of Water native vehicle-state investigation; Libra HP/weakness and Study display completeness remain separately queued. See [WORLD_EVENTS](WORLD_EVENTS_20261026.md) for the authoritative current ledger.

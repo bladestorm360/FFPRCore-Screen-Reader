@@ -43,7 +43,7 @@ bool whitespace(uint32_t c)
 
 bool numeric_prefix_separator(uint32_t c)
 {
-    return whitespace(c) || c == L':' || c == L'.' || c == 0xFF1A || c == 0xFF0E;
+    return whitespace(c) || c == L':' || c == L'.' || c == L';' || c == 0xFF1B || c == 0xFF1A || c == 0xFF0E;
 }
 
 bool npc_separator(uint32_t c)

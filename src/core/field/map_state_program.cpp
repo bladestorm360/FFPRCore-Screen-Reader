@@ -36,6 +36,9 @@ std::optional<bool> compare(int op, int a, int b)
 
 Selection project(const json::Value& record, const Flags& input)
 {
+    // Selector-only metadata must not turn a missing initializer into a known
+    // empty group set. Preserve the prior conservative unknown projection.
+    if(const auto* unknown=record.get(L"initializer_unknown");unknown&&unknown->b)return {false,{}};
     // Area locals survive floor switches within their native area. Map locals
     // belong only to that exact loaded map. Never borrow another floor's state.
     Flags flags=input;
@@ -55,6 +58,7 @@ Selection project(const json::Value& record, const Flags& input)
         std::set<std::wstring> groups;
         std::map<int,std::pair<int,EntityState>> puppets;
         std::map<int,EntityState> entities;
+        std::map<int,int> routes;
     };
     std::vector<Machine> branches{{entry ? number(*entry) : 0, {}, {}, {}}};
     std::optional<Selection> agreed;
@@ -126,11 +130,16 @@ Selection project(const json::Value& record, const Flags& input)
                 if(state.entities.size()>4096)return {false,{}};
                 state.puppets.clear(); // completed native cores sleep until another SetPuppet
                 break;
+            case 12:
+                if(row.size()!=3||i(1)<=0||state.routes.size()>=64)return {false,{}};
+                if(i(2)>0)state.routes[i(1)]=i(2);else state.routes.erase(i(1));
+                break;
             default: return {false, {}};
             }
         }
         if(!agreed) {
             agreed=Selection{true,state.group,std::move(state.groups),std::move(state.entities)};
+            agreed->routes=std::move(state.routes);
         } else {
             agreed->known &= agreed->groups==state.groups && agreed->entities==state.entities;
             if(agreed->group!=state.group)agreed->group.clear();
@@ -146,6 +155,10 @@ Selection project(const json::Value& record, const Flags& input)
                     agreed->uncertain_entities.insert(it->first);it=agreed->entities.erase(it);
                 } else ++it;
             }
+            for(auto it=agreed->routes.begin();it!=agreed->routes.end();) {
+                const auto at=state.routes.find(it->first);
+                if(at==state.routes.end()||at->second!=it->second)it=agreed->routes.erase(it);else ++it;
+            }
         }
     }
     return agreed.value_or(Selection{});
@@ -157,6 +170,10 @@ const Selection& Resolver::selection(const baked::Submap& sm)
     if (auto it = cache_.find(id); it != cache_.end()) return it->second;
     const auto* record = records_.get(baked::name_of(sm));
     auto selected = record ? project(*record, flags_) : Selection{};
+    // SetEntities enables groups additively. A later callback proves presence
+    // of those groups, not absence of earlier ones, nor actor placement/show
+    // changes. Preserve the initializer's certainty and effective-actor facts.
+    if(id==observed_index_)selected.groups.insert(observed_groups_.begin(),observed_groups_.end());
     return cache_.emplace(id,std::move(selected)).first->second;
 }
 bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool obstacle)
@@ -164,7 +181,7 @@ bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool
     const auto& selected = selection(sm);
     // PointIn/ToLayer and other graph metadata have their own ID domains. A
     // puppet changes a physical actor (and its derived Warp), never those IDs.
-    const bool puppet = object.type==baked::ObjType::Entity || object.type==baked::ObjType::AnimEntity ||
+    const bool puppet = object.type==baked::ObjType::Entity || object.type==baked::ObjType::AnimEntity || object.type==baked::ObjType::EffectEntity ||
         object.type==baked::ObjType::NPC || object.type==baked::ObjType::ShopNPC || object.type==baked::ObjType::Warp ||
         object.type==baked::ObjType::Event || object.type==baked::ObjType::RandomEvent || object.type==baked::ObjType::SwitchEvent;
     if(puppet) {
@@ -178,7 +195,7 @@ bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool
 }
 baked::Object Resolver::effective(const baked::Submap& sm,const baked::Object& object) {
     auto result=object;
-    if(object.type!=baked::ObjType::Entity && object.type!=baked::ObjType::AnimEntity &&
+    if(object.type!=baked::ObjType::Entity && object.type!=baked::ObjType::AnimEntity && object.type!=baked::ObjType::EffectEntity &&
        object.type!=baked::ObjType::NPC && object.type!=baked::ObjType::ShopNPC && object.type!=baked::ObjType::Warp &&
        object.type!=baked::ObjType::Event && object.type!=baked::ObjType::RandomEvent && object.type!=baked::ObjType::SwitchEvent)return result;
     const auto& selected=selection(sm);
@@ -191,11 +208,41 @@ baked::Object Resolver::effective(const baked::Submap& sm,const baked::Object& o
     return result;
 }
 bool Resolver::known(const baked::Submap& sm) { return selection(sm).known; }
+std::vector<baked_route::Cell> Resolver::route_positions(const baked::Submap& sm,const baked::Object& object) {
+    std::vector<baked_route::Cell> result;
+    if(object.type!=baked::ObjType::NPC&&object.type!=baked::ObjType::ShopNPC)return result;
+    const auto& selected=selection(sm);
+    const auto assignment=selected.routes.find(object.entity_id());
+    // Route0 is a separately source-pinned native Area2/Route3 default, not a
+    // guessed assignment. Unknown initializers or stationary actors cannot use
+    // it; a reviewed assigned controller always owns its positive route ID.
+    const int route_id=assignment==selected.routes.end()?0:assignment->second;
+    if((!route_id&&(!selected.known||!(object.d&16)))||!active(sm,object))return result;
+    const auto* record=records_.get(baked::name_of(sm));
+    const auto* patrols=record?record->get(L"patrols"):nullptr;
+    if(!patrols||patrols->arr.size()>64)return result;
+    for(const auto& patrol:patrols->arr) {
+        const auto *id=patrol.get(L"id"),*route=patrol.get(L"route"),*group=patrol.get(L"group"),
+            *raw=patrol.get(L"raw"),*home=patrol.get(L"home"),*cells=patrol.get(L"cells");
+        if(!id||!route||!group||!raw||!home||!cells||home->arr.size()!=3||cells->arr.empty()||cells->arr.size()>32)continue;
+        if(number(*id)!=object.entity_id()||number(*route)!=route_id||group->s!=baked::str(object.group)||
+            raw->s!=baked::object_identifier(object)||number(home->arr[0])!=object.layer||
+            number(home->arr[1])!=object.tx||number(home->arr[2])!=object.ty)continue;
+        if(!result.empty())return {}; // ambiguous source fingerprint grants no path
+        for(const auto& row:cells->arr) {
+            if(row.arr.size()!=3)return {};
+            const baked_route::Cell cell{number(row.arr[0]),number(row.arr[1]),number(row.arr[2])};
+            if(cell.layer<0||cell.layer>2||cell.x<0||cell.x>=sm.width||cell.y<0||cell.y>=sm.height)return {};
+            result.push_back(cell);
+        }
+    }
+    return result;
+}
 bool Resolver::consumed(const baked::Submap& sm, const baked::Object& object) {
     if (const auto it=consumed_.find(&object);it!=consumed_.end()) return it->second;
     const auto* record=records_.get(baked::name_of(sm));
     const auto* guards=record?record->get(L"events"):nullptr;
-    bool found=false,all=true;
+    bool found=false,all=true,destination_guard=false;
     if (guards) for (const auto& guard:guards->arr) {
         const auto* id=guard.get(L"id"),*group=guard.get(L"group"),*type=guard.get(L"type"),*cell=guard.get(L"cell"),*raw=guard.get(L"raw"),*code=guard.get(L"code");
         if (!id||!group||!type||!cell||cell->arr.size()!=3||!raw||!code||code->arr.empty()) continue;
@@ -205,12 +252,53 @@ bool Resolver::consumed(const baked::Submap& sm, const baked::Object& object) {
         auto name=baked::object_identifier(object);
         if (!same_type||number(*id)!=object.entity_id()||group->s!=baked::str(object.group)||raw->s!=name||
             cell->arr[0].n!=object.layer||cell->arr[1].n!=object.tx||cell->arr[2].n!=object.ty) continue;
+        if(const auto* target=guard.get(L"destination")) {
+            // One native Event can transfer to different real floors. This
+            // bounded prefix grants only the matching derived Warp; it never
+            // hides the physical event or overwrites the initializer state.
+            if(object.type!=baked::ObjType::Warp||target->arr.size()!=2||number(target->arr[0])!=object.a||number(target->arr[1])!=object.b)continue;
+            if(!destination_guard){found=false;all=true;destination_guard=true;}
+        } else if(destination_guard)continue;
         found=true;
         const auto availability=project(guard,flags_);
         all &= availability.known&&availability.group.empty();
     }
     return consumed_[&object]=found&&all;
 }
+uint64_t Resolver::transportation_mask(const baked::Submap& sm,const baked::Object& object) {
+    if(const auto cached=transportation_.find(&object);cached!=transportation_.end())return cached->second;
+    const baked::Object* source=&object;
+    if(object.type==baked::ObjType::Warp) {
+        // Derived arcs retain their real native actor's exact type. Ambiguous
+        // coincident sources cannot grant a vehicle-specific opening.
+        source=nullptr;
+        for(const auto& native:baked::grids(sm).objects) {
+            if(native.type!=baked::ObjType::Event&&native.type!=baked::ObjType::RandomEvent&&native.type!=baked::ObjType::Entity)continue;
+            if(native.entity_id()!=object.entity_id()||native.layer!=object.layer||native.tx!=object.tx||native.ty!=object.ty||
+                baked::object_identifier(native)!=baked::object_identifier(object)||baked::str(native.group)!=baked::str(object.group))continue;
+            if(source)return transportation_[&object]=~uint64_t(0);
+            source=&native;
+        }
+        if(!source)return transportation_[&object]=~uint64_t(0);
+        return transportation_[&object]=transportation_mask(sm,*source);
+    }
+    const auto* row=records_.get(baked::name_of(sm));row=row?row->get(L"transport"):nullptr;
+    const auto key=std::to_wstring(static_cast<int>(source->type))+L":"+std::to_wstring(source->entity_id())+L":"+
+        std::to_wstring(source->layer)+L":"+std::to_wstring(source->tx)+L":"+std::to_wstring(source->ty);
+    row=row?row->get(key):nullptr;row=row?row->get(baked::str(source->group)):nullptr;
+    row=row?row->get(baked::object_identifier(*source)):nullptr;
+    uint64_t result=~uint64_t(0);
+    if(row) {
+        result=0;
+        if(row->type!=json::Value::Type::Array||row->arr.size()>64)result=~uint64_t(0);
+        else for(const auto& id:row->arr) {
+            const int value=number(id);if(value<=0||value>=64){result=~uint64_t(0);break;}
+            result|=uint64_t(1)<<value;
+        }
+    }
+    return transportation_[&object]=result;
+}
+
 uint64_t Resolver::signature() const {
     uint64_t hash = 1469598103934665603ull;
     const auto bank = [&](const auto& values) {
@@ -259,7 +347,7 @@ std::shared_ptr<const baked::TransitionGrid> Resolver::transitions(const baked::
     const auto& grid=baked::grids(sm);auto mask=std::make_shared<baked::TransitionGrid>();
     for(const auto& original:grid.objects) {
         const int bits=baked::transition_bits(original);
-        if(!bits||!active(sm,original,true)||consumed(sm,original))continue;
+        if(!bits||!active(sm,original,true)||consumed(sm,original)||transportation_mask(sm,original)!=~uint64_t(0))continue;
         const auto object=effective(sm,original);
         auto& layer=(*mask)[sm.world?0:object.layer];
         if(layer.empty())layer.assign(static_cast<size_t>(grid.width)*grid.height,0);
@@ -269,36 +357,57 @@ std::shared_ptr<const baked::TransitionGrid> Resolver::transitions(const baked::
     }
     transitions_[key]=mask;return mask;
 }
-void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates, bool geometry_only)
+void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates, bool geometry_only, bool with_npcs)
 {
+    if(request.transport_rules&&request.transport_rules->submap!=&sm)request.transport_rules.reset();
+    request.transport_gates=gates;
     request.transitions=resolver.transitions(sm);
     if (!geometry_only) add_relays(resolver, sm, request);
     request.live_hazards = true;
     request.live_traps = true;
+    using Rules=baked_route::TransportRules;
+    std::shared_ptr<Rules> prepared;
+    const auto mark=[&](Rules::Kind kind,const baked_route::Cell& cell,uint64_t ids) {
+        if(!ids)return;
+        if(!prepared)prepared=request.transport_rules?std::make_shared<Rules>(*request.transport_rules):std::make_shared<Rules>();
+        baked_route::add_transport_cell(*prepared,kind,sm,cell,ids);
+    };
     for (const auto& original : baked::grids(sm).objects) {
-        if(geometry_only && original.type!=baked::ObjType::Entity && original.type!=baked::ObjType::AnimEntity &&
+        if(geometry_only && original.type!=baked::ObjType::Entity && original.type!=baked::ObjType::AnimEntity && original.type!=baked::ObjType::EffectEntity &&
            original.type!=baked::ObjType::CollisionEntity)continue;
         if (!resolver.active(sm, original, true)) continue;
         const auto o=resolver.effective(sm,original);
+        const uint64_t ids=resolver.transportation_mask(sm,original);
+        const bool restricted=ids!=~uint64_t(0);
         const bool npc = o.type == baked::ObjType::NPC || o.type == baked::ObjType::ShopNPC;
+        if(npc&&!with_npcs)continue;
         const bool solid = o.type == baked::ObjType::TreasureBox ||
             (npc && (o.d & 1)) ||
-            (gates && ((o.type == baked::ObjType::Entity || o.type == baked::ObjType::AnimEntity) && (o.d & 1)));
+            (gates && ((o.type == baked::ObjType::Entity || o.type == baked::ObjType::AnimEntity || o.type == baked::ObjType::EffectEntity) && (o.d & 1)));
         const bool collider = gates && o.type == baked::ObjType::CollisionEntity;
         const bool used=resolver.consumed(sm,original);
         const bool terminal=baked::world_exit(o)&&!used;
         const bool exit_source=baked::world_exit_at(baked::grids(sm),o.entity_id(),baked::object_identifier(o),o.tx,o.ty)!=nullptr;
         const bool trigger = baked_route::step_event(o)&&!used&&!exit_source;
-        if (!solid && !collider && !trigger&&!terminal) continue;
+        const int transition_bits=used?0:baked::transition_bits(o);
+        if (!solid && !collider && !trigger&&!terminal&&!(restricted&&transition_bits)) continue;
         for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x) {
             baked_route::Cell cell{sm.world || (npc && (o.d & 2)) ? -1 : o.layer, x, y};
-            if (solid) request.blocked.push_back(cell);
-            if (collider) {
-                baked_route::add_collision(request.blocked,request.directional,cell,o.a);
+            if(restricted&&transition_bits)mark((transition_bits&2)?Rules::Terminal:Rules::GroundTerminal,cell,ids);
+            if (solid) {
+                if(restricted)mark((npc||o.type==baked::ObjType::TreasureBox)?Rules::Solid:Rules::Gate,cell,ids);
+                else request.blocked.push_back(cell);
             }
-            if (trigger) request.hazards.push_back(cell);
-            if (terminal||(!used&&baked::is_trap(o))) request.traps.push_back(cell);
+            if (collider) {
+                if(restricted&&o.a!=0) {
+                    if(!prepared)prepared=request.transport_rules?std::make_shared<Rules>(*request.transport_rules):std::make_shared<Rules>();
+                    baked_route::add_transport_collision(*prepared,sm,cell,o.a,ids);
+                } else if(!restricted)baked_route::add_collision(request.blocked,request.directional,cell,o.a);
+            }
+            if (trigger) {if(restricted)mark(Rules::Hazard,cell,ids);else request.hazards.push_back(cell);}
+            if (terminal||(!used&&baked::is_trap(o))) {if(restricted)mark(Rules::Trap,cell,ids);else request.traps.push_back(cell);}
         }
     }
+    if(prepared)request.transport_rules=std::move(prepared);
 }
 }

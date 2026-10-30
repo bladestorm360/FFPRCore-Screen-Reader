@@ -12,6 +12,7 @@
 // FF6 (no landing or boarding speech in its own mod) gets FF1's: its TransportationType 5 is an
 // internal marker there (Content, skipped by FF6's vehicle list), not a canoe, so it has no name.
 #include <cstdint>
+#include <cmath>
 #include <string>
 #include "move_state.h"
 #include "vehicle_landing.h"
@@ -24,6 +25,7 @@
 #include "../refs.h"
 #include "../say.h"
 #include "../field/field_api.h"
+#include "../field/object_cache.h"
 #include "../system/system.h"
 
 namespace ffpr::fieldnav::vehicle_landing {
@@ -38,6 +40,15 @@ ref::Method mHideLandingGuide{kMapUIManager, "HideLandingGuide", 0};
 ref::Field fLandingGuide{kMapUIManager, "landingGuide"};
 
 bool g_last_landable_state = false;
+// The native boolean stays true across land<->dive terrain. Remember the
+// available action, rather than treating those distinct native choices as one.
+enum class LandingAction { Unknown, Land, Dive, Surface };
+LandingAction g_landing_action=LandingAction::Unknown;
+ref::Class kLandingFieldMap{"","FieldMap",game::kFF3};
+ref::Class kLandingFieldController{"Last.Map","FieldController",game::kFF3};
+ref::Field fLandingFieldController{kLandingFieldMap,"fieldController"};
+ref::Method mLandingCell{kLandingFieldController,"ConvertWorldPositionToCellPosition",1};
+ref::Method mLandingAttribute{kLandingFieldController,"GetCellAttribute",1};
 void* g_landing_guide = nullptr;
 int g_landing_vehicle_id = 0, g_landing_vehicle_type = 0;
 double g_last_announcement_time = -1.0e9;
@@ -54,6 +65,39 @@ bool manual_landing_vehicle(const ::field::VehicleState& v)
         return true;
     default:return false;
     }
+}
+
+LandingAction available_action(const ::field::VehicleState& vehicle) {
+    // Native Submarine(6) is FFIII's underwater Nautilus14 or FFV's two
+    // submarine models8/13. A ready guide in this mode offers surfacing.
+    // Its own native availability/edge remains authoritative; no extra query.
+    if(vehicle.type==6)return LandingAction::Surface;
+    // FFIII transportation9 alone has confirm_landing_foot_id16 and the
+    // reviewed end-landing script358: surface world4 -> underwater world3.
+    // Native guide availability still owns collision/overlap/landing validity.
+    if(!game::is(game::Id::FF3)||vehicle.id!=9||vehicle.type!=3||::field::current_map_id()!=4)
+        return LandingAction::Land;
+    void* map=::field::cache::get(kLandingFieldMap);
+    void* controller=map?ref::rd<void*>(map,fLandingFieldController):nullptr;
+    void* actor=::field::player();void* tr=actor?unity::transform(actor):nullptr;
+    if(!controller||!tr)return LandingAction::Unknown;
+    const auto pos=unity::position(tr);
+    if(!std::isfinite(pos.x)||!std::isfinite(pos.y)||!std::isfinite(pos.z))return LandingAction::Unknown;
+    auto* convert=mLandingCell.ptr();auto* attribute=mLandingAttribute.ptr();
+    if(!convert||!attribute)return LandingAction::Unknown;
+    try {
+        using Convert=unity::Vec3(*)(void*,unity::Vec3,const void*);
+        using Attribute=int32_t(*)(void*,unity::Vec2,const void*);
+        auto cell=reinterpret_cast<Convert>(convert)(controller,pos,mLandingCell.get());
+        if(!std::isfinite(cell.x)||!std::isfinite(cell.y))return LandingAction::Unknown;
+        // Native GetCellAttribute wraps its negative coordinates with loops.
+        // Surface world4 is exactly256x256: normalize first to bound that work.
+        cell.x=std::fmod(cell.x,256.f);if(cell.x<0)cell.x+=256;
+        cell.y=std::fmod(cell.y,256.f);if(cell.y<0)cell.y+=256;
+        const int foot=reinterpret_cast<Attribute>(attribute)(controller,{cell.x,cell.y},mLandingAttribute.get());
+        if(foot<1||foot>32)return LandingAction::Unknown;
+        return foot==16?LandingAction::Dive:LandingAction::Land;
+    } catch(...) {return LandingAction::Unknown;}
 }
 
 void observe_landing_guide(void* self, bool landable)
@@ -78,12 +122,17 @@ void observe_landing_guide(void* self, bool landable)
     // control is ready and no transition/fade is active. Always seed the last
     // state below, so readiness returning cannot replay a loading-time edge.
     // Cached movement speech is not authoritative during boarding/loaded saves.
-    if(landable&&!g_last_landable_state&&system::is_field_navigation_ready()&&
-       !system::input_transition_blocked()) {
+    const bool ready=landable&&system::is_field_navigation_ready()&&!system::input_transition_blocked();
+    const auto action=landable&&ready?available_action(vehicle):LandingAction::Unknown;
+    if(landable&&ready&&action!=LandingAction::Unknown&&
+       (!g_last_landable_state||(g_landing_action!=LandingAction::Unknown&&action!=g_landing_action))) {
         g_last_announcement_time=frame::now();
-        ffpr::say(T(L"Can land"),false);
+        const auto* line=action==LandingAction::Surface?L"Can surface":
+                         action==LandingAction::Dive?L"Can dive":L"Can land";
+        ffpr::say(T(line),false);
     }
     g_last_landable_state=landable;
+    g_landing_action=action;
 }
 
 using SwitchLandable_t = void (*)(void* self, bool landable, const void* mi);
@@ -179,6 +228,19 @@ void on_get_on(int type_id)
         return;
     }
 
+    // A script can restore remembered transport context while the constructed
+    // local player still uses the walking asset. Do not announce that context
+    // as a real canoe/ship boarding (for example after Shrine dialogue).
+    const auto state=::field::player_movement_state();
+    if(state&&(*state==move_state::kWalk||*state==move_state::kDush)) {
+        const auto applied=::field::player_uses_vehicle_asset();
+        if(applied&&!*applied) {
+            const bool riding=!move_state::is_on_foot();move_state::set_on_foot();
+            if(riding)ffpr::say(T(L"On foot"),true);
+            return;
+        }
+    }
+
     std::wstring vehicle_name = boarded_vehicle_name(type_id);
     if (!vehicle_name.empty()) {
         std::wstring announcement = TF(L"On {0}", {vehicle_name});
@@ -247,6 +309,7 @@ core::Install s_install{"VehicleLanding", &install, 120};
 
 void reset_landing_state() {
     g_last_landable_state=false;g_landing_guide=nullptr;
+    g_landing_action=LandingAction::Unknown;
     g_landing_vehicle_id=g_landing_vehicle_type=0;
 }
 double last_announcement_time() { return g_last_announcement_time; }

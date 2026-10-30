@@ -1,12 +1,13 @@
 """All-six offline environmental trap arrival survey; no capture or game launch.
 
 Flag continuation scripts that reposition the player rather than silently treating
-their ChangeMap PointIn as final. Raw script evidence stays local/ignored.
+their ChangeMap PointIn as final. Raw script evidence stays outside every Git tree.
 """
 from pathlib import Path
 import json
 import re
 import sys
+import subprocess
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import bake_maps as b
 from audit_event_labels import trap_identifier
@@ -86,8 +87,9 @@ for n in range(1, 7):
                        'script_id':o['props'].get('script_id'),'action_id':o['props'].get('action_id'),
                        'script_name':script.get('name'), 'command_kinds':sorted({m['mnemonic'] for m in script.get('mnemonics',[])}),'changes':changes})
     print(f'FF{n}: {candidates} named environmental traps; {position_changes} continuation branches with player position commands')
-out=ROOT/'build_check/re/trap_arrival_audit.json'
+out=ROOT.parent/'tools/trap_arrival_audit_20261029/trap_arrival_audit.json'
 out.parent.mkdir(parents=True,exist_ok=True)
+assert subprocess.run(['git','-C',str(out.parent),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
 out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 for row in report:
     for change in row['changes']:

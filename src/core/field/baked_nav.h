@@ -144,6 +144,16 @@ std::vector<int> exit_distances(ExitSnapshot& snapshot, const std::vector<ExitTa
 // Worker-only batch classification, independent of translated failure text.
 // True requires a complete gated search and a usable route with only gates
 // removed. Unknown/cancelled/bounded-out routes stay visible. No active route write.
+// One selected local baked trigger; contains owned values only, never native pointers.
+struct AirTransitionTarget { MapGoal goal; unity::Vec3 position; std::wstring name; int distance=-1, destination_map=0; };
+// Same owned marker payload for manual Nautilus surfacing. No native trigger
+// exists here; source-to-output verification pins the real paired basin tile.
+std::optional<AirTransitionTarget> nautilus_surface_target(ExitSnapshot& snapshot,
+    std::function<bool()> cancelled,bool require_reachable=true);
+// require_reachable=false is unfiltered discovery: retain one real nearest
+// trigger even without a current ride, with distance=-1 rather than invented access.
+std::optional<AirTransitionTarget> air_transition_target(ExitSnapshot& snapshot,
+    const std::optional<MapGoal>& continued,const std::optional<MapGoal>& selected,std::function<bool()> cancelled,bool story_entry=false,bool require_reachable=true);
 struct StoryTarget { MapGoal goal; TargetKind kind = TargetKind::Infer; };
 std::vector<bool> story_gate_mask(ExitSnapshot& snapshot, const std::vector<StoryTarget>& targets,
                                  std::function<bool()> cancelled);
@@ -174,7 +184,12 @@ struct CrossLeg {
 /// `with_gates`: the current map's live story gates (a sealed door, a locked gate) close the
 /// cells and exits they stand on; false ignores them, which tells whether a gate alone is
 /// what cuts the goal off.
-CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false, bool with_npcs = true);
+// A failed complete search may retry later-floor NPCs as interaction stops. Its
+// current leg always retains with_npcs; native recapture owns each floor handoff.
+// Optional worker-only world target batch shares this exact bounded search for
+// list eligibility; pointers refer only to the immutable bake, never game objects.
+CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false, bool with_npcs = true, bool with_remote_npcs = true,
+    const std::vector<const baked::Object*>* world_targets = nullptr, std::vector<int>* distances = nullptr);
 /// Retain a bounded completed-trap history for the current destination, preventing repeated legs.
 bool note_trap_start(int map_id, const baked_route::Cell& at);
 void record_map_arrival(int map_id, const baked_route::Cell& at);

@@ -1,7 +1,9 @@
 """Read-only, bounded all-six fade readiness and FF2 pitfall operand evidence.
 
-Native bytes/disassembly remain in ignored build_check/re. No game is started.
+Native bytes/disassembly remain in the external local analysis archive. No game is started.
 """
+
+from evidence_paths import external_directory
 from pathlib import Path
 from collections import defaultdict
 import hashlib
@@ -13,7 +15,7 @@ import pefile
 ROOT = Path(__file__).resolve().parents[2]
 GAMES = ['FINAL FANTASY', 'FINAL FANTASY II', 'FINAL FANTASY III',
          'FINAL FANTASY IV', 'FINAL FANTASY V', 'FINAL FANTASY VI']
-OUT = ROOT / 'build_check/re/trap_fade'
+OUT = external_directory('build_check/re/trap_fade')
 OUT.mkdir(parents=True, exist_ok=True)
 for number, title in enumerate(GAMES, 1):
     dump_root = ROOT.parent / ('FF4' if number == 4 else 'FF5' if number == 5 else f'ff{number}')

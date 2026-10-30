@@ -1,5 +1,93 @@
 # Build and distribution security
 
+October29 final six-game map audit delivery:11374080 bytes, SHA256
+cf805c2e8e05ff0235f51f5228a916bb23c80e1e6251e31c95bc86cf34a5e86b.
+Canonical/offline/isolated smoke,67 resources and12 locales pass. Defender
+reported no threats in22 exact staged files, stable hashes/0 matching detection
+events. All132 installed payload hashes match;144 protected files unchanged.
+Evidence/recovery: build_check/map_audit_final_20261029/. First full compile
+21m42s; two legacy test assumptions corrected, production candidate unchanged;
+final canonical2m37s pass. One compiler /m:1 /MP1 retained. Exclusion inspection
+remains OS-denied/unknown, signing certificates0, no outer-package/reputation
+claim. No game launch, protection change, prerequisite repair or upload.
+[Current content cleanup and deferred historical-content issue](re/SOURCE_CONTENT_REVIEW_20261029.md):
+200 raw files preserved externally;30 source-free tracked references, old bodies
+still in existing history. No destructive history action was performed.
+
+## Earlier security receipts
+
+October29 Invincible FFIII delivery:11327488 bytes, SHA256
+ad0d80c154698e08a954ac820341c8e522211c0f5c538ad2ece19e8bdf0d0555.
+Serial build/smoke,67 exact resources and12 locales pass. Defender reports no
+threats for22 staged final files; hashes unchanged,0 matching detections.
+All22 installed hashes match,144 protected files/other5 games unchanged.
+Evidence/recovery: build_check/invincible_20261029/. Exclusion status remains
+OS-denied/unknown and no signing certificate is available. No outer package,
+external upload, dependency installation, security change, game launch or probe.
+
+October28 equipment/vehicle FFIII delivery:11311104 bytes, SHA256
+d3053479822a982e454e10e243bfb665a96d87dcbe6d4c545d2f8bd78b686200.
+Full serial build and smoke pass; Defender reports no threats for22 exact staged
+files, hashes unchanged/0 matching detections. Installed22 hashes match;
+144 protected files and other5 installations unchanged. Evidence/recovery:
+build_check/item_buffer_pages_20261028/. Authorized local scan used protected
+status access; exclusion status remains OS-denied/unknown, signing identity0.
+No security setting, dependency, outer package, upload, game launch or probe.
+Deployment's process guard passed without an additional close request.
+
+October28 Boost/Guard/category FFIII delivery:11107328 bytes, SHA256
+9146ae033c305a4564f9f26bc5df2b003d210ad1c2f0bc4b2823ca2ed9f7ba6a.
+Full serial/offline/smoke/resource/localization checks pass; Defender reports
+no threats for22 exact staged files with unchanged hashes/no matching detections.
+Evidence/recovery: build_check/boost_use_20261028/. The first restricted status
+query was denied; its partial evidence is retained in security_predeploy_restricted.
+The normal authorized scan then completed with protected status access. Exclusion
+visibility remains OS-denied/unknown; no signing identity, outer-package or
+reputation certification. No security setting, dependency, upload or game launch
+changed. Installation followed human save/close and verified process closure;
+all22 installed payload hashes match.144 protected files and the other five
+game payloads are unchanged. Source/delivery Closed; gameplay/audio unconfirmed.
+
+October28 Nautilus/startup FFIII delivery:11103232 bytes, SHA256
+b2cacd6fab1b71d4d7cab5ff52567c151d8c0e24b2e2ea1d549a49e71b1a257b.
+Full serial build/offline checks, isolated47-export smoke and67-resource/locales
+verification pass. Defender reports no threats for22 exact staged files; hashes
+remain stable. All22 installed FFIII hashes match;144 protected files and the
+other five game payloads are unchanged. Evidence/recovery:
+build_check/nautilus_access_20261028/. No signing identity, outer-package or
+reputation certification; protected-exclusion inspection remains unavailable.
+No protection setting, dependency prerequisite, game launch/control, upload or
+publication changed. [Scope and native limits](re/NAUTILUS_ACCESS_20261028.md).
+
+October28 cross-floor NPC candidate:11098112 bytes, SHA256
+c23a8fa9bca219e5c41b104eb6a9984822d661a67391c2ab775a7c7e63a78b59.
+Full canonical/smoke/resources/locales pass. Fresh Defender scan reports no
+threats for22 exact staged files; stable hashes/no matching detection events.
+Evidence/recovery:build_check/cross_floor_npc_20261028/. Exclusions remain
+OS-denied/unknown; no signing identity, outer package/reputation check, upload
+or game probe. Installation waits for game closure; the running-game guard
+blocked the first copy without installing the update.
+
+October28 Boost sentence update supersedes the preceding FFIII payload:
+11097600 bytes, SHA256a7a97a14d23101e044fbb1825c9222741e33ad873a0464924aa103981c50a6b1.
+Full build/smoke/resources/12 locales pass; Defender reports no threats for22
+exact staged files, unchanged hashes and no matching detections.22 installed
+FFIII hashes match;144 protected unchanged, other five payloads unchanged.
+Evidence/recovery:build_check/boost_wording_20261028/. Exclusion visibility
+OS-denied/unknown; no signing certificate, outer package/reputation test, upload
+or game probe. The actual action/result producer is unchanged.
+
+Latest October28 FFIII delivery:11096576-byte DLL, SHA256
+9aff428068b6a6f37d795f91a73f67dfc74ed5db7a989d6cdc6c27c46e16aa62.
+Full canonical/smoke/resources/locale checks pass. Fresh Defender scan reports
+no threats for22 exact staged files; hashes unchanged, no matching detections.
+All22 FFIII installed payload hashes match the scanned manifest;144 protected
+files unchanged and other five games' payloads unchanged. Recovery, scanner/
+definition/time records, signatures and coverage limits are preserved under
+build_check/map_event_audit_20261028/. Exclusions remain OS-denied/unknown,
+no signing certificate; no outer package/reputation test or external upload.
+No game launch/control/probe. Earlier delivery records below remain historical.
+
 October26 navigation maintenance: final DLL11032064 bytes, SHA256
 73115338cf025dc45b46673fbaabcf69dca62730756c623fcd42530359154013. Canonical8287/0 names/142/349/0 wiring,
 47-export smoke and67 resources pass. Exact22-file built payload scan with enabled,
@@ -293,6 +381,18 @@ downloaded-file trust prompts remain untested. No private binary/source was
 uploaded to a public scanner or vendor, and no game was launched or probed.
 
 ## Maintained workflow and safe extension
+
+October28 per-target Draw/Boost candidate:11095040 bytes, SHA256
+3e3be68a07fe9b2cb6ffa506724c8f2f0582c6b06134ef2fda62422457280d72.
+Fresh Defender scan reports no threats across22 exact staged payload files;
+all hashes remain unchanged, with no matching detection/remediation events.
+Evidence:build_check/ability_targets_20261028/security_predeploy/ contains the
+manifest, scanner/version/definition/time records, signatures and coverage limits.
+Exclusion query remains OS-denied/unknown; no signing certificate, outer package,
+reputation test or external upload. After player closure, FFIII-only installation
+passes22 scanned installed hashes,144 protected unchanged and other five games'
+payloads unchanged. The running-game guard blocked the first copy. No game
+launched/probed. Receipts/recovery are adjacent to the scan evidence.
 
 tools/security_payload_check.ps1 accepts a fresh EvidenceDirectory under the
 workspace, adjacent to the verified deployment receipt. It stages only intended

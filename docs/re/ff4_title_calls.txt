@@ -1,4 +1,8 @@
-Recovered game implementation removed from versioned history.
-Original Git blob: 0897ac62c8fff06dbbe9108c049bba470e4b5a3c
-The original is preserved only in the verified external recovery bundle.
-See docs/re/SOURCE_CONTENT_REVIEW_20261029.md.
+Local native analysis reference
+
+Recovered game implementation is preserved outside every Git tree.
+Archive: D:\Games\Dev\Unity\FFPR\tools\repository_sources_20261029\docs\re\ff4_title_calls.txt
+SHA-256: 19a7fc3e5b94258956e18075ee2d263bdd56c2375e9d996954dd1863cb0a2215
+Original bytes: 16538
+
+See SOURCE_CONTENT_REVIEW_20261029.md for historical exposure and scope.

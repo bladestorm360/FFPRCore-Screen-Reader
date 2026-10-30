@@ -1,4 +1,6 @@
 """Offline movement ABI/call-path evidence. Reads PE bytes, never loads a game."""
+
+from evidence_paths import external_directory
 import pathlib
 import re
 import struct
@@ -59,5 +61,5 @@ for n, folder in enumerate(GAMES, 1):
             offset = int(literal[2], 16) * (1 if literal[1] == '+' else -1)
             scales.append(struct.unpack('<f', pe.get_data(ins.address + ins.size + offset - pe.OPTIONAL_HEADER.ImageBase, 4))[0])
     assert 16.0 in scales, 'Native movement displacement changed'
-    (ROOT / 'docs/re' / ('ff%d_movement_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
+    (external_directory('docs/re') / ('ff%d_movement_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
     print('FF%d: axis call, Vector2 ABI and native 16-unit movement verified' % n)

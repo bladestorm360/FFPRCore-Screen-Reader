@@ -1,5 +1,47 @@
 # Read-only snapshots and worker ownership
 
+October29 finite map-audit integration is documented in
+[NPC geometry](NPC_GEOMETRY_CONTEXT_20261029.md),
+[arrival/trigger power](ARRIVALS_TRIGGER_POWER_20261029.md),
+[contextual events](SILENT_EVENT_CONTEXT_20261029.md) and
+[script-source ownership](FINAL_SCRIPT_CASES_20261029.md). Remote motion facts,
+native-stair edges and six destination-specific entry guards remain pure owned
+worker computation under existing cancellation/VM/graph limits. Live floors
+retain native actors; no pointer is handed to those workers. SwitchEvent30
+uses existing bounded capture of class/scenery/current power for the17 actual
+VI actors; there is no new hook or independent capture pass. Source-bank and
+contextual-label authoring runs offline. Native detector/publication and owned
+planner checks distinguish actual output from source inference. Reported worker
+times are not native frame/audio timings; no asynchronous placement is presented
+as a responsiveness guarantee, and the cumulative25ms application-lag rule applies.
+
+October29 [Crystal Tower world-return routing](CRYSTAL_TOWER_APPROACH_20261029.md)
+extends the existing owned graph to legal initial aircraft landfalls and batches
+world-local exit eligibility/story-gate proofs. At most512 baked targets share
+each400-state search and one existing remote-NPC retry. Related gated/ungated/
+eligibility/selected passes are counted separately in that topic; never present
+400 as the whole episode limit. No native capture/hook/wait/pointer transfer.
+[Doga surfacing](DOGA_SURFACE_MARKER_20261029.md) adds one cancellable owned route
+proof and the existing owner publication. Complete worker-category/route costs
+and unmeasured native/game-frame/audible tails are recorded in those topics.
+
+October29 [current ally status follow-up](BATTLE_LIVE_STATUS_20261029.md) removes
+the two old presentation observers/caches. Existing H/number/ally-target readers
+copy two ready native condition sources, each bounded128 before traversal, with
+fixed256-ID coalescing and no cross-request pointer retention. Existing visible
+row/identity ownership and early repeated-target guard remain. No hook, polling,
+worker transfer, allocating native union, wait or backlog is added. Full request
+episode timings/native-call counts and actual frame/audible limits are recorded
+in that topic; the earlier October26 status paragraph below is historical.
+
+October28 [cross-floor NPC correction](CROSS_FLOOR_NPC_20261028.md) adds at most
+one bounded later-floor NPC continuation retry after a complete failed search.
+All current-floor physical blockers remain authoritative. It stays within the
+existing cancellable navigation worker and400-state bound per attempt, with no
+new native getter, hook, owner capture, wait or pointer handoff. Next-floor
+native capture and the existing interaction prefix own actual movement access.
+Offline/native/frame/audible evidence remains separately reported in that topic.
+
 October26 [beacon movement](BEACON_MOVEMENT_20261026.md) builds one contiguous
 corner lookup per published route on Navigation. Native moving queries do a
 logarithmic immutable lookup, without another worker job/wait/route scan. One

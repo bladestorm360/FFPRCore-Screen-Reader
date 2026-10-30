@@ -9,6 +9,7 @@ import json
 import pathlib
 import sys
 import collections
+import hashlib
 import bake_maps
 
 ROOT = pathlib.Path(__file__).absolute().parents[1]
@@ -20,6 +21,7 @@ CATEGORIES = {**{f'ScenarioFlag{i+1}': i for i in range(4)},
               'MessageSelection': 12, 'ItemSelection': 13, 'imm': -1}
 OPERATORS = {'＝': 0, '≠': 1, '＜': 2, '＞': 3, '≦': 4, '≧': 5, '←': 6}
 UNSET_POSITION = -2147483648
+PATROLS = json.loads((ROOT / 'tools/npc_route_positions.json').read_text(encoding='utf-8'))
 
 
 def puppet_navigation_effect(script, entry, region, positions=True):
@@ -52,6 +54,19 @@ def puppet_navigation_effect(script, entry, region, positions=True):
 
 def initializer_code(script,game,region):
     code=[]
+    patrols=[p for p in PATROLS if p['game']==game and p['submap']==script.get('submap')]
+    if patrols:
+        digest=hashlib.sha256(json.dumps(script,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        assert all(p['source_sha256']==digest for p in patrols)
+    # Exact reviewed FFIII exception: cleared statue triggers are parked away
+    # from their old corridor. Other non-VI absolute placement remains opaque.
+    # Matching SetPos9419A0, MoveEntityLayer93D900 and range conversion285040:
+    # docs/re/CRYSTAL_TOWER_APPROACH_20261029.md. No broad layer/position inference.
+    statues=game=='ff3' and script.get('submap')=='Map_10040' and script.get('name')=='sc_map_10040'
+    if statues:
+        digest=hashlib.sha256(json.dumps(script,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        assert digest=='cb8e2a844de521a5ad58bd0422e5faa62691019d7191d98e32d16371cc674392'
+        assert list(region[:2])==[0,0]
     for m in script.get('mnemonics')or[]:
         op=m['mnemonic'];v=m.get('operands')or{};ints=list(v.get('iValues')or[])+[0]*8
         if op=='SetPuppet':
@@ -60,10 +75,20 @@ def initializer_code(script,game,region):
             # Hide/Show and slot/actor/entry ownership are verified on all six
             # native interpreters. Absolute position units remain FFVI-only.
             effect=puppet_navigation_effect(script,ints[2],region,game=='ff6') if ints[1]>0 else None
+            if statues and ints[1] in (202,203,204,205):
+                assert ints[2]=={202:127,203:154,204:181,205:208}[ints[1]]
+                effect=[-1,145,59] # absolute XY; the world router normalizes its layer
             # Always replace this puppet slot, even when its new body has no
             # navigation effect; ExecPuppet applies the ready final facts.
             code.append([10,ints[0],ints[1],*(effect or [-1,UNSET_POSITION,UNSET_POSITION])])
         elif op=='ExecPuppet':code.append([11,ints[0]])
+        elif op=='AssignMoveRoute' and any(p['id']==ints[0] for p in patrols):
+            # One opcode per native PC retains every existing branch/call target.
+            # Only a reviewed exact route receives placement facts. A replacement
+            # assignment to another route clears this fact rather than retaining it.
+            match=next((p for p in patrols if p['id']==ints[0] and p['route']==ints[1]),None)
+            if match:assert match['loop']==bool(ints[2])
+            code.append([12,ints[0],ints[1] if match else -1])
         else:code.append(instruction(m,game))
     return code
 
@@ -90,6 +115,14 @@ def instruction(m, game):
     # map-layer rendering and minimap-icon visibility. It never selects an entity
     # group or writes DataStorage. Matching native manifest: docs/re/ff1_roof*.
     if game == 'ff1' and op == 'SysCall' and strings[0] == 'MapEntryRoofControl': return [0]
+    # Exact FFVI registrations resolve to IMapAccessor.ScalingAlphaMask and
+    # ForegroundAlphaMask's material/scroll animation, without navigation-state
+    # effects. Skipping only these visual commands lets later native Hide facts
+    # be projected; opaque calls remain conservative. Native proof and actual
+    # initializer regression: docs/re/NPC_MASK_PROJECTION_20261029.md.
+    if game == 'ff6' and op == 'SysCall' and strings[0] in {
+            '帝国軍陣地マスクあり', '帝国軍陣地マスクなし',
+            '帝国軍陣地マスク拡大', '帝国軍陣地マスク縮小'}: return [0]
     # FFIII Current.HideMist -> FieldController.HideScenery -> both map
     # renderers' MapMultipleScroll.Hide. No flags, actors or collision writes.
     # CheckWithCompanion conditionally writes map-local0; model that output as
@@ -108,7 +141,7 @@ def instruction(m, game):
     return [0]
 
 
-def entry_guard(script, game):
+def entry_guard(script, game, destination=None):
     """Only the native control-flow prefix before the first real action.
 
     Calls and every unmodelled command remain actionable. No dialogue, outcome,
@@ -124,6 +157,15 @@ def entry_guard(script, game):
         m=ms[pc];op=m['mnemonic']
         if op in ('Nop','Wait'):
             nodes[pc]=[0];todo.append(pc+1)
+        elif destination is not None and (op=='RemoveTelepoCache' or
+                op=='SysCall'and (m.get('operands')or{}).get('sValues',[''])[0]=='ジャコールのギミック解除'):
+            # Exact reviewed Jacohl departure cleanup changes the local gimmick/
+            # teleport cache, not the ScenarioFlag1/125 tested immediately next.
+            nodes[pc]=[0];todo.append(pc+1)
+        elif destination is not None and op=='ChangeMap':
+            target=(m.get('operands')or{}).get('iValues',[])[:2]
+            nodes[pc]=[1,'@action']if target==list(destination)else[6]
+            empty_exit|=nodes[pc]==[6]
         elif op in ('Exit','Return'):
             nodes[pc]=[6];empty_exit=True
         elif game=='ff3' and op=='SysCall' and (m.get('operands') or {}).get('sValues',[''])[0]=='状態異常：小人かどうか':
@@ -162,6 +204,11 @@ def build(game):
     bounds={sm:bake_maps.map_bounds(info,by_sub[sm]) for sm,info in submaps.items()}
     for name,record in scripts.items():
         record['code']=initializer_code(source[name,'sc_'+name.lower()],game,bounds[name])
+        patrols=[p for p in PATROLS if p['game']==game and p['submap']==name]
+        if patrols:
+            # Bind the native assignment to its original actor, never a coincident
+            # ID in a different group. Facts only; no original route/script body.
+            record['patrols']=[{k:p[k] for k in ('id','group','raw','home','route','cells')} for p in patrols]
     with (DUMP/f'{game}_master/script.txt').open(encoding='utf-8-sig') as f:
         masters={int(r['id']):r['script_name'] for r in csv.DictReader(line for line in f if line.strip()) if r['id']}
     guards=0
@@ -176,8 +223,23 @@ def build(game):
         # Its area locals are ambiguous remotely, rather than interchangeable.
         if info['area_id']!=int(row['area_id']): info['area_id']=0
         info['map_ids'].append(int(row['id']))
+    transport_selectors=collections.defaultdict(dict)
     for o in objects:
         p=o.get('props') or {}
+        selectors=p.get('target_transportation_ids')
+        if selectors:
+            # Preserve exact native selectors independently from presentation
+            # names. Warp aliases match the original native actor fingerprint.
+            ids=[int(v.strip()) for v in str(selectors).split(',') if v.strip()]
+            assert ids and len(ids)<=64 and all(0<value<64 for value in ids),(game,o['submap'],o['id'])
+            region=bounds[o['submap']]
+            row=transport_selectors[o['submap']]
+            layer=bake_maps.layer_index(o['layer']);layer=1 if layer<0 else layer
+            key=f"{o['type']}:{p.get('entity_id',0)}:{layer}:{o['tx']-region[0]}:{bake_maps.tile_row(o)-region[1]}"
+            bucket=row.setdefault('transport',{}).setdefault(key,{}).setdefault(o['group'],{})
+            raw=str(selectors) if o['type']==19 else o['name']
+            assert raw not in bucket or bucket[raw]==ids,(game,o['submap'],key,raw)
+            bucket[raw]=ids
         # Flag zero is the first real saved treasure bit, not a missing-ID
         # sentinel. Require an explicit bounded native property so a missing
         # extraction cannot silently become that first chest's state.
@@ -187,14 +249,23 @@ def build(game):
             row.setdefault('treasures',[]).append([p.get('entity_id',0),o['group'],flag])
         if o['type'] not in (2,5,6,17,21,28,30) or not p.get('script_id') or p.get('action_id')!=2 or p.get('message_key'):continue
         name=masters.get(p['script_id'],'');s=source.get((o['submap'],name))
+        pending=[]
         guard=entry_guard(s,game) if s else None
-        if guard is None:continue
+        if guard is not None:pending.append(guard)
+        for destination in bake_maps.reviewed_conditional_destinations(game,o,s):
+            branch=entry_guard(s,game,destination[:2]);assert branch,'Reviewed conditional prefix is not supported'
+            branch['destination']=list(destination[:2]);pending.append(branch)
+        if not pending:continue
         region=bounds[o['submap']]
-        guard.update(id=p.get('entity_id',0),group=o['group'],type=o['type'],raw=o['name'],
-                     cell=[bake_maps.layer_index(o['layer']),o['tx']-region[0],bake_maps.tile_row(o)-region[1]],source=name)
-        guard.update(metadata.get(o['submap'],{}))
-        row=scripts.setdefault(o['submap'],{'entry':0,'code':[]})
-        row.setdefault('events',[]).append(guard);guards+=1
+        for guard in pending:
+            guard.update(id=p.get('entity_id',0),group=o['group'],type=o['type'],raw=o['name'],
+                         cell=[bake_maps.layer_index(o['layer']),o['tx']-region[0],bake_maps.tile_row(o)-region[1]],source=name)
+            guard.update(metadata.get(o['submap'],{}))
+            row=scripts.setdefault(o['submap'],{'entry':0,'code':[]})
+            row.setdefault('events',[]).append(guard);guards+=1
+    for key,selectors in transport_selectors.items():
+        if key not in scripts:scripts[key]={'entry':0,'code':[],'initializer_unknown':True}
+        scripts[key]['transport']=selectors['transport']
     for key,record in scripts.items(): record.update(metadata.get(key,{}))
     output = ROOT / 'data' / game / 'mapstate.json'
     output.write_text(json.dumps(scripts, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')

@@ -1,5 +1,200 @@
 # Current feature and source index
 
+Current October29 audit scope/status is maintained in the
+[single checkpoint record](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+The finite map/event/reachability findings and combined checks are source/
+offline/all-six delivery Closed. All six games now use cf805c2e/11374080 bytes;
+132 installed payload hashes match the scanned candidate and144 protected files
+are unchanged. [Final evidence and limits](re/MAP_AUDIT_DELIVERY_20261029.md).
+Live gameplay/audio/frame confirmation and the separate startup hang remain
+distinct. Historical source cleanup is deferred until the user is at the PC;
+ordinary commits of the cleaned current changes are explicitly authorized.
+
+| Current affected responsibility | Source/behavior contract and evidence |
+| --- | --- |
+| Live battle party conditions | [Current statuses](re/BATTLE_LIVE_STATUS_20261029.md): target/H/number reads share current native condition sources; obsolete observers removed. |
+| World goals and final actions | [Crystal Tower](re/CRYSTAL_TOWER_APPROACH_20261029.md), [Doga surface marker and browse annotation](re/DOGA_SURFACE_MARKER_20261029.md). |
+| Future-floor interactions and native movement | [All22 NPC contexts](re/NPC_GEOMETRY_CONTEXT_20261029.md):14 moving actors/79 positions, live-floor ownership, source guards and native stair integration. [Objects](re/REMOTE_INTERACTIVE_OBJECTS_20261029.md) retain Lute/Fang. |
+| Native collision and scene state | [Field effects](re/FIELD_EFFECT_COLLISION_20261029.md), [render-only masks](re/NPC_MASK_PROJECTION_20261029.md), [shore landing](re/SCRIPTED_SHORE_LANDING_20261029.md), [sheep entry](re/ISTORY_SHEEP_ENTRY_20261029.md). |
+| Arrival and powered-event ownership | [Native arrivals/power](re/ARRIVALS_TRIGGER_POWER_20261029.md):24 exact arrival choices,17 real pressure switches, fresh power/rearm and per-leg transportation. |
+| Physical event labels and ordinary transfers | [245 contextual families](re/SILENT_EVENT_CONTEXT_20261029.md):381 actual native/remote cases, conditional doors, complete chained landing, underwater entry preservation and12-language labels. |
+| Script banks and continuation closure | [Final source cases](re/FINAL_SCRIPT_CASES_20261029.md):15 native actors, correct Resident save-point source, dance markers, source-bank fence and finite narrative callbacks. |
+| Repository content and history | [Preserved source analysis](re/SOURCE_CONTENT_REVIEW_20261029.md):200 raw files preserved outside Git,30 tracked references; historical source in the shared native repo is confirmed, cleanup deferred until user is at PC. Current cleaned changes can be committed. |
+
+Each topic identifies producers, ownership, bounds, safe extension and source/
+offline/gameplay limits. No offline result certifies actual frame/audio response
+or every gameplay state. Startup's naturally failed-log diagnosis remains a
+separate known issue. The remaining entries below preserve historical receipts;
+their old active/remaining instructions are superseded by the single current ledger.
+
+## Earlier checkpoint history
+
+Human-priority [cross-floor animated objects](re/REMOTE_INTERACTIVE_OBJECTS_20261029.md):
+Lute/Fang now survive the actual other-floor collector.20→0, exact real labels/
+Objects/identity publication and all-six regressions pass. Installed FFIII63a24c76
+passes canonical/smoke/8458 names/67 resources/12 locales/22-file scan; the
+22 installed files/144 protected/other5 unchanged are verified. Existing bakes/
+gates/collected state are preserved. Source/offline/FFIII delivery Closed.
+
+Active [NPC context audit](re/NPC_GEOMETRY_CONTEXT_20261029.md): bounded ready
+instruction capture prevents both missed patrol waits and waits after a one-shot
+route completes. Source/offline/FFIII63a24c76 delivery of capture is Closed.
+11 of22 geometry contexts
+have actual-motion acceptance; remaining scene/entry/region contexts stay open.
+
+Current FFIII75de3594: [command commit focus](re/COMMAND_COMMIT_FOCUS_20261029.md),
+[opening artillery](re/INVINCIBLE_ARTILLERY_20261029.md),
+[confirmed exit suffixes](re/CONFIRMED_EXIT_SUFFIXES_20261029.md) and
+[ladder/Elder labels](re/INVINCIBLE_LADDER_ELDER_20261029.md) are source/offline/
+FFIII delivery Closed. Full canonical/smoke/security/installed-file checks pass.
+Other installations remain unchanged. [Full map audit](re/MAP_AUDIT_FOLLOWUPS_20261028.md)
+resumes at field effects and the retained scene/geometry/arrival uncertainties.
+Older candidate/checkpoint entries below are superseded by this delivery status.
+
+Latest human follow-up: [accepted-command focus](re/COMMAND_COMMIT_FOCUS_20261029.md)
+closes the old command's speech window before native teardown for Boost/Guard
+and other accepted actions. All-six before48→0; combined FFIII delivery pending.
+
+Active checked source, combined FFIII delivery pending:
+[Invincible opening artillery](re/INVINCIBLE_ARTILLERY_20261029.md) reads one
+anonymous cue while preserving results; [confirmed exit suffixes](re/CONFIRMED_EXIT_SUFFIXES_20261029.md)
+count exact available names/physical doors, including Falgabard's layer overlap.
+[Invincible ladder/Elder](re/INVINCIBLE_LADDER_ELDER_20261029.md) corrects both
+ladder labels in12 languages and the existing semicolon Elder translation.
+[Torna Canal/IV–VI world events](re/TORNA_WORLD_EVENTS_20261029.md) fixes actual
+ship entry/scene eligibility; all221 scripted world actors survive conversion.
+Installed FFIII remains ad0d80c1 until combined release checks complete.
+
+Active audit integration: [solid field effects](re/FIELD_EFFECT_COLLISION_20261029.md).
+Exact native/asset evidence proves101 collision-enabled type11 records omitted
+across III/IV/V. Before-source fixture in progress; no production correction yet.
+Decorative effects remain excluded from destinations. Installed FFIII ad0d80c1.
+
+[Equipment page readiness](re/ITEM_BUFFER_PAGES_20261028.md): current rendered
+jobs/parameters refresh after native page animation; all-six checks36→0.
+Can surface is localized and checked for actual submarine models. Exact parked
+vehicle prompts and the Duster/Ancient Ruins retained-mode correction also pass.
+Installed in FFIII d3053479; broad six-game audit remains open.
+
+Active audit capability: [Invincible mountain crossing/Falgabard](re/INVINCIBLE_MOUNTAINS_20261029.md).
+Native/real-bake and actual owned parked-provider/category/manual-guidance
+checks pass. Source/delivery Closed in FFIII ad0d80c1; serial build/smoke,
+67 resources/12 locales/22-file scan and installed hashes pass.
+
+[FFIII displayed turn order](re/TURN_ORDER_DISPLAY_20261028.md): exact native/
+asset investigation found no rendered upcoming-order list. Conditional Shift+T
+feature is inapplicable; no new hook, key binding or hidden schedule reader.
+
+[Save-point category applicability](re/SAVE_CATEGORY_20261028.md): FFI–FFIII
+skip the inapplicable category in both directions; FFIV–FFVI retain it. Existing
+category/announcement integration checks24→0. Included in FFIII9146ae03;
+other five installations await their separately applicable delivery.
+
+Active human follow-up: [Boost use and Guard visual feedback](re/ABILITY_FEEDBACK_TARGETS_20261028.md).
+Actual producer/result checks pass: one Boost use, meaningful Guard barrier,
+separate Self-Destruct/outcomes and12 locales. Full serial build/scan and FFIII
+delivery9146ae03 pass;22 installed hashes match,144 protected/other5 unchanged.
+Source/delivery Closed; the full map audit resumes at capture/per-leg applicability.
+
+Delivered human follow-up: [Nautilus dive/underwater entrances](re/NAUTILUS_ACCESS_20261028.md).
+Can dive distinguishes real upgraded-model terrain from landing. Four existing
+underwater arcs become named Map Exits and accept actual submarine entry from
+the logged origin. [Audit ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md) preserves
+all-unlocked-vehicle, unfiltered synthetic-provider discovery and remaining
+six-game work; no claim of full audit completion. Installed FFIII b2cacd6f.
+
+Native-mod [startup fault diagnosis](re/STARTUP_HANG_20261025.md) has its checked
+early-readiness safety correction and richer same-hook evidence installed in
+FFIII; exact failure cause remains open for the user's next natural launch.
+The full map audit resumes; Doga's Manor landing is corrected/offline verified.
+
+[Scripted entrances and Falgabard](re/SCRIPTED_ENTRANCES_20261028.md):
+42 verified physical transfers promoted to named Map Exits; real narrative
+events remain Events. Source/offline category proof passes, delivery pending.
+Native Invincible crossing is a separate active vehicle-audit integration gap.
+
+[Nearby walking and repeated object labels](re/LOCAL_GUIDANCE_20261028.md):
+human-scoped15-tile proximity policy and stable Book1/Book2 suffixes, using the
+existing planner/naming service. Required crossings and boarded guidance remain.
+
+Active urgent October28 [cross-floor NPC regression](re/CROSS_FLOOR_NPC_20261028.md):
+restore routing to the blocking NPC's floor, retaining the original objective
+and current physical blockers. The actual Saronia case reproduces2 failures;
+minimal bounded continuation proof passes the initial fixture, expanded/full
+checks and FFIII delivery pending. Full audit resumes afterward under explicit
+human authorization to address all recorded uncertainties. Sol only/no game probe.
+
+Latest October28 delivery: [per-target Draw Attacks and Boost glow](re/ABILITY_FEEDBACK_TARGETS_20261028.md)
+source/delivery Closed, FFIII installed9aff4280. Sprite changes are not results;
+native per-enemy hits and misses own feedback. Full offline/security checks pass.
+[Six-game map audit](re/MAP_EVENT_AUDIT_20261028.md) delivered proven additive-group,
+counter and980 exact functional-label corrections in the shared candidate;
+only FFIII is installed. [Open context/evidence findings](re/MAP_AUDIT_FOLLOWUPS_20261028.md)
+remain distinct from accepted repairs. Native/gameplay/audible confirmation pending.
+
+Current October28 follow-up: [Saronia complete-capture correction](re/SARONIA_CAPTURE_20261028.md).
+Saved-state/full-trigger reproduction exposed the terminal-goal rejection that
+earlier fixtures omitted. Source/delivery checks pass; FFIII is deployed. Latest
+human request resumes the all-six event/reachability audit after deployment.
+Older completion/deferral entries below are historical, superseded for this scope.
+
+Urgent Saronia follow-up complete/Closed October28: Events > Saronia Airspace,
+exact prerequisite independent of partial native group cache, both Enterprise
+pairs, and four Statue barrier labels. All offline/scan checks pass; FFIII only
+redeployed/hash-verified. [Current evidence](re/SARONIA_LIVE_20261028.md).
+Gameplay pending. All-six audit remains explicitly deferred by the human.
+
+Urgent human follow-up October28: [Saronia Airspace live discovery](re/SARONIA_LIVE_20261028.md)
+active. Prior offline acceptance missed the native observed-group cache and
+second Enterprise pair. All-six audit explicitly deferred. Redeploy FFIII only
+after scoped checks/scan; other accepted systems remain Closed. Sol only.
+
+October28 FFIII completion installed/hash-verified, Closed: returns, battle
+effects, vehicle state and functional event labels included. Canonical/smoke,
+67 resources/136 registrations,12 locales/six unchanged bakes and22-file Defender
+scan pass; other five games unchanged. [Delivery](re/MAINTENANCE_REMAINING_20261027.md).
+Active: human-requested all-six event/bake/reachability audit. Sol only.
+
+October28 completion: [Boost/Draw visible effects](re/ABILITY_FEEDBACK_20261028.md)
+source Closed; [inter-map vehicle state](re/VEHICLE_MAPS_20261028.md) final offline
+checks running. Next specific FFIII event labels, then FFIII deployment before
+the requested all-six event/bake/reachability audit. Sol only.
+
+October28 [Amur/Replito return-exit follow-up](re/REMOTE_RETURNS_20261028.md):
+source Closed, full build/smoke pass; combined installation pending. Native inward
+PointIn facing certifies the normal two-cell shop arrival, without changing
+route graphs or current-floor exits. Active: Boost/Draw Attacks displayed feedback.
+
+October27 progress blocker: [Saronia native airborne story entry](re/SARONIA_ENTRY_20261027.md),
+Events correction complete, Closed October28; installed/hash-verified all six.
+Events > Castle Saronia (Airship) uses owned discovery, independent from native
+scene-actor enumeration. Ordinary ground gates and transition targets remain;
+full offline checks/smoke/exact-payload scan pass, gameplay pending. No new registration.
+
+October27 completed-work deployment: installed/hash-verified all six at the user's
+explicit request after the budget stop. Full build/smoke/resources/locale/index/
+bake checks and exact22-file Defender scan pass;132 installed payload files match,
+144 protected files unchanged. [Delivery receipt and remaining work](re/MAINTENANCE_REMAINING_20261027.md).
+Source/delivery Closed; gameplay pending. Earlier pending-delivery notes below
+are historical. Amur/Boost remain queued; no further delegation.
+
+October27 scoped follow-ups: [storage event ownership and stock feedback](re/WAREHOUSE_20261026.md#october27-empty-retrieve-follow-up-scope-ledger)
+and [same-map grouped selection](re/GROUPED_EXIT_CONTINUATION_20261026.md#october27-same-map-selected-exit-scope-ledger)
+source checkpoints Closed; complete canonical suite/smoke pass, final delivery
+pending. [Enterprise landing choice](re/ENTERPRISE_FLIGHT_20261026.md#october27-landing-position-follow-up-scope-ledger)
+source checkpoint Closed; user confirms later near-island water landing works.
+[Vehicle wording](re/VEHICLE_ROUTING.md#october27-movement-wording-scope-ledger)
+source checkpoint Closed across12 locales. Full canonical/smoke pass.
+[continent outward/return transitions](re/WORLD_EVENTS_20261026.md#october27-continent-travel-scope-ledger),
+[Temple/canoe vehicle state](re/TEMPLE_VEHICLE_20261027.md) source checkpoints
+Closed. [Libra/Study displayed events](re/SCAN_DISPLAY_20261027.md) source Closed.
+[Multiple-NPC route oscillation](re/NPC_OSCILLATION_20261027.md) source Closed.
+[EXP-counter Enter silence](re/RESULTS_ENTER_20261027.md) source Closed.
+User budget stop: no active source checkpoint. [Remaining work and delivery](re/MAINTENANCE_REMAINING_20261027.md).
+Next: Amur Weapons
+remote return-exit preview/listing (Backslash works). Combined delivery pending.
+Own FFIII logs preserved; other Closed subsystems remain outside scope.
+
 October26 maintenance: all five source checkpoints and combined delivery are
 complete, Closed; installed/hash-verified all six. [Grouped exits](re/GROUPED_EXIT_CONTINUATION_20261026.md),
 [chocobo circuit](re/CHOCOBO_CIRCUIT_20261026.md), [Enterprise flight](re/ENTERPRISE_FLIGHT_20261026.md),
@@ -216,6 +411,8 @@ This index is checked against source when adding/removing a registration.
 | Battle.Item | [src/core/battle/battle_item.cpp](../src/core/battle/battle_item.cpp) / install | 110 | all six |
 | Battle.Magic | [src/core/battle/battle_magic.cpp](../src/core/battle/battle_magic.cpp) / install | 110 | game::kFF1 |
 | Battle.Message | [src/core/battle/battle_message.cpp](../src/core/battle/battle_message.cpp) / install | 110 | all six |
+| Battle.ScanFeedback | [src/core/battle/scan_feedback.cpp](../src/core/battle/scan_feedback.cpp) / install; [display events](re/SCAN_DISPLAY_20261027.md) | 109 | FFIII |
+| Battle.ActionEffects | [src/core/battle/action_effects.cpp](../src/core/battle/action_effects.cpp) / metadata, observe_action, observe_result, finish_action; [target results and Boost glow](re/ABILITY_FEEDBACK_TARGETS_20261028.md); existing result hook, no aura/sprite hooks | 109 | FFIII |
 | Battle.SpecialFeedback | [src/core/battle/special_feedback.cpp](../src/core/battle/special_feedback.cpp) / install | 109 | all six; Swap FFII only |
 | Battle.StatFeedback | [src/core/battle/stat_feedback.cpp](../src/core/battle/stat_feedback.cpp) / install | 109 | all six; FFII reuses existing unit refresh hook |
 | Battle.Party | [src/core/battle/battle_party.cpp](../src/core/battle/battle_party.cpp) / install | 110 | all six |

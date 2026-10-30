@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import capstone
 import pefile
+from evidence_paths import external_directory
 
 ROOT = Path(os.path.abspath(__file__)).parents[2]
 STEAM = Path('D:/Games/SteamLibrary/steamapps/common')
@@ -21,7 +22,7 @@ METHODS = {'Init','SwtichInputEnable','SwitchInputEnable','OnTouchPadCallback',
 
 
 def main():
-    out = ROOT/'build_check/autowalk_controls_2026_10_16/native'
+    out = external_directory('build_check/autowalk_controls_2026_10_16/native')
     out.mkdir(parents=True, exist_ok=True)
     manifest = []
     for n, game in enumerate(GAMES,1):

@@ -1,4 +1,187 @@
+# Current natural-play confirmation priorities
+
+October29: cf805c2e is installed in all six games. Finite map/event/reachability
+source, canonical/offline/smoke/security and delivery checks are Closed in the
+[single ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+Offline checks do not certify live audio, every story state or frame timing.
+No extra trip or game launch is requested for this audit. When normal progression
+reaches these situations, confirm in this order:
+
+1. FFIII: after revival or Reflect changes, target the ally and use H/the number
+   row. Current conditions should agree; a living ally must not retain KO.
+2. FFIII: with the statues cleared, approach Crystal Tower in Invincible.
+   Directions should use the real Ancients' Maze approach and continue between
+   its floors. Nautilus must retain its genuine mountain limitation.
+3. FFIII: in the underwater tunnel near Doga's Village, choose Surface near
+   Doga's Village. Directions should reach the correct surfacing location and
+   describe the manual surface action.
+4. Any game: a later-floor NPC/object should remain selectable with its real
+   floor, and directions should preserve the first floor transition or blocking
+   NPC interaction. Report a disappearing target, No path, or immediate reversal.
+5. FFIV/FFV as progression permits: Devil Road should arrive at the real final
+   location; conditional doors should choose their current story destination;
+   underwater entrances should remain reachable in the submarine. Physical
+   mechanisms should have useful names, ordinary travel should be in Map Exits,
+   and actual narrative scenes should retain Scene trigger.
+
+For a failure, keep the own session log and describe the selected target, map,
+vehicle and last spoken instruction. For responsiveness, report the whole
+action/transition episode, not just an isolated hook duration. The startup hang
+still needs a naturally failed own log; it is a separate known issue.
+
+## Earlier checkpoint history
+
 # October25 current character/location and save checks
+
+October29 installed FFIII63a24c76 after human save/close, hashes verified:
+cross-floor Lute/Fang now pass from every earlier connected floor. Objects
+retains their real floor/name/identity; collected items stay absent. Canonical,
+all-six tracking, smoke and exact-payload scan pass. After guarded installation,
+normal play should show applicable animated objects before reaching their floor.
+Items already collected in this save should remain absent. No extra
+game trip is needed solely to test these two collected objects.
+
+October29 installed FFIII75de3594: command commit, artillery and label fixes are
+checked and delivered. On normal play, Boost/Guard selection should go straight
+to the next turn without an extra Attack; its actual first Attack selection and
+cancel returns remain audible. Invincible's opening artillery cue should read
+once with damage/misses preserved. Ladder/Elder/single-House labels are corrected.
+All-six offline cases, serial/smoke/scan/installed hashes pass. Listening/gameplay
+confirmation remains pending; full map audit continues separately. Older “not
+installed” candidate wording below describes the earlier checkpoint.
+
+October29 candidate, not installed yet: Invincible artillery should say its
+opening cue once and still read actual damage/misses. The ladder should be named
+Invincible ladder; Falgabard's Elder should use the game language; its single
+House should have no letter suffix. Native-producer/offline checks pass; final
+guarded FFIII installation and listening confirmation remain separate. Do not
+launch a game or make an extra trip solely for these offline checks.
+
+October29 installed FFIII ad0d80c1: [Invincible mountain crossing](re/INVINCIBLE_MOUNTAINS_20261029.md).
+When normal progression unlocks Invincible, Falgabard should appear under Map
+Exits in Current map with vehicles before boarding. Directions should include
+boarding, “fly over the mountains” with a direction, landing, then the entrance.
+At a crossing, face that direction and use the game's normal mountain action;
+autowalk stops for this manual action. Ask for directions afterward to continue.
+Nautilus must not offer this Invincible-only crossing. These listening/gameplay
+checks are pending; real-bake ownership/category/route/boundary checks pass.
+Do not make extra trips or launch a game solely for this offline audit.
+
+October28 installed FFIII d3053479: [equipment pages and vehicle follow-ups](re/ITEM_BUFFER_PAGES_20261028.md).
+Offline checks pass for current-page jobs/parameters after animation, Can surface,
+exact vehicle names before discovery, and repeated Duster→Ancient Ruins boarding
+guidance. After the checked installation, first confirm Protect Ring page2/1
+retains the current page's jobs; underwater guidance says Can surface; exiting
+beside Nautilus names it; repeated directions before boarding retain boarding.
+No new control or gameplay probe; broad map audit remains separately open.
+
+Previous FFIII installed9146ae03 includes the category/Boost/Guard and aerial
+provider corrections below. Full offline/security/installed-file checks pass;
+gameplay/audio remain unconfirmed. Other five installations are unchanged.
+
+[Save-point categories](re/SAVE_CATEGORY_20261028.md), after installation:
+cycling categories in FFIII should go directly between Vehicles and Objects,
+in either direction. FFI/FFII share that policy when updated; FFIV–FFVI still
+include Save Points. The full six-game category cycles pass offline.
+
+[Boost/Guard follow-up](re/ABILITY_FEEDBACK_TARGETS_20261028.md), after its new
+installation: Boost speaks one use, then its actual glow when successful. A
+separate later Boost must still be read. Guard should say A glowing barrier
+appears around the acting character at its visual result. Persistent animation
+updates must stay quiet; misses and Self-Destruct/explosion text remain audible.
+These changes are included in9146ae03, superseding b2cacd6f.
+
+[Nautilus dive and underwater entrances](re/NAUTILUS_ACCESS_20261028.md), after
+installation: flying the upgraded Nautilus over a valid dive zone should say
+Can dive; moving onto legal ground should say Can land even if the guide stayed
+available. Repeated movement within the same available action should stay quiet.
+Underwater Map Exits must name Saronia Catacombs, Temple of Time and Sunken Cave
+and give usable routes from the reported area. Ordinary surface entrances require
+landing and the final walking approach. Current map keeps blocked destinations
+visible; directions still explain real blockers. These are gameplay/audio checks,
+separate from the passing real-data/source fixtures and63-case landing survey.
+
+[Nearby walking/object labels](re/LOCAL_GUIDANCE_20261028.md), after installation:
+on foot near Castle Saronia, both northern town entrances should give walking
+directions. Boarding the aircraft must update guidance. Repeated library Books
+should have distinct suffixes that remain stable when changing category/sorting.
+Unique object names keep no suffix. Offline production checks precede this check.
+
+Urgent cross-floor NPC correction: from Castle Saronia's bedroom, select the
+unopened1F chest. Directions should lead to the castle map containing the Soldier;
+after entering, the route should stop beside him with Interact: Soldier. The
+original chest stays selected, and directions should continue when he moves.
+No path before reaching his map is the reported failure. Offline reproduction
+and preserved-blocker checks are in [the current fix](re/CROSS_FLOOR_NPC_20261028.md);
+final build/scan/deployment pending. This adds no extra travel request.
+
+Latest FFIII install October28 is9aff4280. Normal progression checks only:
+Draw Attacks should name each affected enemy or native Miss; later sprite
+changes stay silent. Successful Boost says A glowing aura appears around Rae
+(using the actual character name),
+without inventing a charge/stat explanation. This needs listening confirmation;
+the producer/joint/full offline checks pass. Saronia Airspace remains in Events
+while eligible and flying; Falgabard's travel trigger says Map entrance.
+The [map-audit register](re/MAP_AUDIT_FOLLOWUPS_20261028.md) lists22 unresolved
+geometry contexts and other source gaps; these are not requests for extra travel
+or a claim that every remaining scene/reachability state is certified.
+
+Current Draw/Boost correction: during a Draw Attacks action, each successful
+enemy says Affected by Draw Attacks; each native Miss keeps that enemy's name.
+Later sprite changes must be silent. A separate real use can report again.
+Boost's actual successful result says A glowing aura appears around {character name}; the game does not
+display a charge/stat explanation. Preserve its existing failure text.
+[Producer/evidence](re/ABILITY_FEEDBACK_TARGETS_20261028.md). Source/joint checks
+pass, including the full build, smoke and payload scan. FFIII is installed and
+hash-verified after player closure; gameplay pending. No agent game control/probe.
+
+Latest Saronia offline regression now uses the saved state's full powered-trigger
+capture (263 objects/17 gates/91 triggers). It verifies actual filter listing and
+exact airborne selected arrival, completed removal and preservation of native
+ground gates. [Evidence/limits](re/SARONIA_CAPTURE_20261028.md). Previous sparse
+fixtures were insufficient. Final checks pass and FFIII is deployed; gameplay
+confirmation remains pending.
+
+Current urgent October28 correction: use Events > Saronia Airspace while flying
+Enterprise. It should appear with Current map with vehicles and StoryGateFilter
+off, without selecting an ordinary castle/district exit first. Co-located statue
+controls should say Statue barrier; aircraft repel events say Airship barrier.
+Earlier Castle Saronia (Airship) test wording below is superseded. The previous
+deployed candidate failed actual discovery and is not gameplay-confirmed.
+
+October28 FFIII completion candidate: all source checkpoints and final offline
+checks pass; combined FFIII scan/deployment is the remaining delivery step.
+Do these during ordinary progression after installation; no agent game control:
+
+1. While flying Enterprise near Saronia, open Events and select Castle Saronia
+   (Airship). Directions should remain airborne to the scene. Ordinary ground
+   doors retain genuine story gates.
+2. In Amur/Replito, Map Exits should show the shop entrance without listing the
+   shop's return to the town as an extra remote destination before entering it.
+3. Use Boost and Draw Attacks. Draw must name each successful enemy and each
+   native Miss at the result phase; later sprite changes must be silent.
+   Successful Boost describes its glowing aura. Separate real uses can repeat.
+4. Enter/leave Unei's Shrine and speak to the parrot. V should follow the actual
+   local vehicle; a remembered world canoe must not manufacture boarding, and
+   an actually applied canoe must not be lost just because its saved map differs.
+5. Tozus entry should say Tozus entrance. The closed forest and movement barriers
+   should have functional labels. Narrative scenes should keep Scene trigger.
+
+Source/native evidence, bounds and remaining gameplay limits:
+[returns](re/REMOTE_RETURNS_20261028.md), [ability effects](re/ABILITY_FEEDBACK_20261028.md),
+[vehicle state](re/VEHICLE_MAPS_20261028.md), [functional events](re/FUNCTIONAL_EVENTS_20261028.md).
+The earlier October27 full maintenance checklist below remains relevant; it was
+already installed. No prior gameplay confirmation is implied by offline passes.
+
+October27 candidate (final installation pending): with Group exits on, select
+the forest World Map exit and request directions while walking past moving
+Chocobos. Expect the selected physical exit to remain selected and routeable;
+No entity selected is a failure. Manual selection/clear should still work.
+Storage checks below include the one-time empty-confirm response and stock
+feedback on each quantity change. While aboard an airship or ship, browse a
+destination that requires later landing: expect Fly or Sail before the landing
+action. Mount/foot approaches retain Walk. Check the newer Enterprise route stays
+airborne to a later clear water tile without unnecessary sailing.
 
 October26 combined maintenance is installed all six after full canonical/smoke/
 resource/scan/hash checks. Prioritize these during ordinary progression: Group
@@ -42,12 +225,15 @@ October26 [storage](re/WAREHOUSE_20261026.md) and
 Test these first when convenient:
 
 1. At Fat Chocobo, move through Store/Retrieve/Exit. Expect those labels rather
-   than inventory preview names. Empty Retrieve should say No stored items.
+   than inventory preview names. Confirm empty Retrieve: expect No stored items
+   once and remain on the command bar. Later navigation must read only its command.
+   Confirm Retrieve again: the new explicit request should speak its prompt once.
 2. Enter Store/Retrieve. Expect item name and visible count, without repeating
    the mode. I reads the description; Autodetail adds it automatically when on.
    Shift+I should read the actual Confirm/Back and any other displayed footer hints.
 3. Open quantity selection. Expect the prompt, item, Stock and selected amount.
-   Adjust it using native controls: each changed amount should speak. Confirm a
+   Adjust it using native controls: each change should speak its selected amount
+   and displayed Stock figure, with the native labels. Confirm a
    small transfer and verify the refreshed count; cancel should restore list/bar
    focus without an old quantity announcement. Native minimum/maximum still apply.
 4. In Dwarven Hollows B1, the B2-to-B3 destination stays; the remote B3-to-B2
@@ -64,6 +250,23 @@ it. After opening, request the onward route again. Offline replay verifies this
 local switch; the installed payload is unchanged. Report if Rock is missing or
 the interaction fails; no extra world-map scene or dwarf conversation is needed
 for this particular B3 door.
+
+[October29 live ally conditions](re/BATTLE_LIVE_STATUS_20261029.md): after delivery,
+H, the affected character's number and ally targeting should all include current
+Reflect on Corrad/Ryko. After its removal, those reads should immediately stop
+Reflect. After reviving an ally, positive HP must no longer be followed by KO.
+These are natural-progression checks; offline source/boundary verification is
+separate from gameplay/audio confirmation.
+
+[October29 FFIII navigation follow-ups](re/CRYSTAL_TOWER_APPROACH_20261029.md):
+with the Invincible near the cleared statues, select Crystal Tower. Expect a
+route to Ancients' Maze1F, including landing, then the remaining real dungeon
+legs when requested after entering. The final destination must stay Crystal
+Tower. Nautilus alone cannot make the initial mountain crossing.
+Underwater, Map Exits should include Surface near Doga's Village. Follow it
+through the tunnel; arrival says surface here. Surface using the game's normal
+control, then select the village entrance and follow its landing/walking route.
+These checks require no visual judgment or special travel solely for testing.
 
 [October26 status/world fixes](re/ALLY_STATUS_20261026.md) are installed all six;
 offline checks passed. Test these first when natural progression permits:
@@ -1755,3 +1958,35 @@ repeat/stop and the manual target behaved correctly, and whether any menu/battle
 dismount case spoke unexpectedly. Gameplay confirmation and native/frame/audible
 latency remain pending; offline implementation is not evidence of those results.
 See [the circuit evidence and native contract](re/CHOCOBO_CIRCUIT_20261026.md).
+# October27 budget stop: pending gameplay checks
+
+Saronia progress blocker follow-up: after its separate verified deployment,
+board Enterprise and take off, then select Events > Castle Saronia (Airship).
+Backslash should keep the route airborne through the native entry event, with
+no instruction to land on the distant coast. Ground district entrances can
+remain story gated until that native event completes. Evidence/status:
+[Saronia entry](re/SARONIA_ENTRY_20261027.md).
+
+These changes are source-complete, offline verified and now installed/hash-verified
+all six at the user's explicit request. Amur listing and Boost audit remain queued
+in [the continuation record](re/MAINTENANCE_REMAINING_20261027.md).
+Prioritize these short checks when progression permits:
+
+- Empty Fat Chocobo Retrieve: hear the prompt once per deliberate Retrieve press;
+  moving along Store/Retrieve/Exit must not repeat it. Quantity changes must read
+  the updated displayed stock figures.
+- Grouped forest exit: selection must survive NPC movement. Pub-to-inn routing
+  must continue forward while the route is clear; a real blocker may reroute it.
+- Enterprise: Fly/Sail wording, later valid water landing, one nearest unlocked
+  continent crossing in each direction. Temple entry on foot must report On foot;
+  an actual canoe ride must retain Canoe.
+- Libra/Study: ordinary scannable enemies include displayed HP and weaknesses.
+  Kraken deliberately hides HP in the native game.
+- With Autodetail off, press Enter during EXP counting: hear EXP tally complete
+  while the same panel remains. The next Enter follows the native next phase.
+  Autodetail on keeps the full final member rows.
+
+Failures: repeated empty prompts, lost selection, clear-route north/south loops,
+missing vehicle crossing, stale Enterprise on a foot floor, missing visible scan
+line, or silent forced tally completion. Gameplay/native-frame/audio latency
+remain unverified; retain the user's25ms cumulative mod-lag threshold.

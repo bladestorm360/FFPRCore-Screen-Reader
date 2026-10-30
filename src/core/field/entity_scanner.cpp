@@ -21,6 +21,8 @@
 #include "event_labels.h"
 #include "field_api.h"
 #include "field_internal.h"
+#include "airship_transitions.h"
+#include "nautilus_surface.h"
 #include "map_names.h"
 #include "object_cache.h"
 #include "path_search.h"
@@ -60,6 +62,10 @@ FilterContext::FilterContext()
 namespace {
 
 using Vec3 = unity::Vec3;
+bool surface_target(const Entity& e) {
+    return nautilus_surface::matches(static_cast<int>(game::current()),e.local_baked_map_id,
+        {e.cell_layer,e.cell_x,e.cell_y},e.entity_id,e.audio_hint);
+}
 constexpr int kCanoe = 5;   // FF1Constants.TransportTypes.CANOE (the Content slot)
 constexpr int kObjTransportationEventAction = 21;
 
@@ -84,6 +90,9 @@ bool pathfinding_enabled() { return pathfinding_mode() != ui::prefs::kFilterCurr
 bool pathfinding_passes(const EntityPtr& e, const FilterContext& ctx)
 {
     if (!e || !e->is_alive()) return false;
+    // This local synthetic row was already proved reachable in the current
+    // owned vehicle snapshot; publication invalidates it on map/vehicle movement.
+    if((e->aerial_transition||surface_target(*e)) && e->local_baked_map_id==current_map_id_or_user_data())return true;
     // Another floor's entry exists only under "Current map", which lists everything.
     if (e->remote()) return pathfinding_mode() == ui::prefs::kFilterCurrentMap;
     if (!pathfinding_enabled()) return true;
@@ -269,10 +278,17 @@ Detection goto_map_detector(Context& c)
             if(baked_nav::cell_at(field::map_handle(),c.position,cell)) {
                 const int id=ref::rd<int32_t>(property,r::fPropEntityId);
                 const auto raw=ref::rd_str(property,r::fPropName);
+                // The owned worker publishes one reachable Saronia event,
+                // independently of native scene-actor detector availability.
+                if(game::is(game::Id::FF3)&&current_map_id_or_user_data()==4&&raw==L"飛空艇大破"&&r::kPropertyEvent.is(property)&&
+                   air_transitions::saronia_entry(3,4,ref::rd<int32_t>(property,r::fEventScriptId),raw))return skip();
                 if(map->world && event_route_only(raw))return skip();
+                if(map->world && air_transitions::possible_raw(static_cast<int>(game::current()),current_map_id_or_user_data(),raw) && r::kPropertyEvent.is(property) &&
+                   air_transitions::match(3,current_map_id_or_user_data(),ref::rd<int32_t>(property,r::fEventScriptId),raw))return skip();
                 if(baked::transition_helper_at(baked::grids(*map),id,raw,cell.x,cell.y))return skip();
                 if(const auto* exit=baked::world_exit_at(baked::grids(*map),id,raw,cell.x,cell.y)) {
-                    const auto destination=T(L"World Map");
+                    const auto* target=baked::submap_by_map_id(exit->a);
+                    const auto destination=target&&target->world?T(L"World Map"):resolve_map_name(exit->a);
                     auto entity=make_exit(c,TF(L"Exit to {0}",{destination}),exit->a,destination);
                     entity->audio_exit=true;return detected(entity);
                 }
@@ -557,7 +573,9 @@ struct RemoteBuilder {
             const auto& object = objects[next];
             RemoteRow row; row.object = object; row.floor = resolve_map_name(object.map_id);
             if(object.world_exit) {
-                row.destination=T(L"World Map");input.rows.push_back(std::move(row));continue;
+                const auto* target=baked::submap_by_map_id(object.dest_map_id);
+                row.destination=target&&target->world?T(L"World Map"):resolve_map_name(object.dest_map_id);
+                input.rows.push_back(std::move(row));continue;
             }
             if (!object.event_type.empty()) {
                 if (object.event_type != L"Warp Tile" && placeholder_fn && placeholder_fn(object.raw_name.c_str())) continue;
@@ -657,9 +675,10 @@ void apply_filter() {
     input->category = g_category; input->sort = player_local_position(input->player);
     input->pads = game::flags().has_vehicle_pads; input->exits = settings::get_bool("MapExitFilter", false);
     input->events = settings::get_bool(ui::prefs::kEventGroupFilter,ui::prefs::kEventGroupFilterDefault);
-    input->story_gates = settings::get_bool(ui::prefs::kStoryGateFilter,ui::prefs::kStoryGateFilterDefault);
+    input->reachable_only=pathfinding_mode()!=ui::prefs::kFilterCurrentMap;
+    input->story_gates = input->reachable_only&&settings::get_bool(ui::prefs::kStoryGateFilter,ui::prefs::kStoryGateFilterDefault);
     input->entrance_suffixes = settings::get_bool(ui::prefs::kEntranceSuffixes,ui::prefs::kEntranceSuffixesDefault);
-    input->navigation = baked_nav::begin_exit_capture(pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,
+    input->navigation = baked_nav::begin_exit_capture(!input->reachable_only||pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,
         input->exits || input->events || input->story_gates,input->story_gates);
     input->world = input->navigation && baked_nav::exit_snapshot_world(*input->navigation);
     const bool navigation_filtered = input->navigation != nullptr;
@@ -676,9 +695,10 @@ void apply_filter() {
     input->selected_transportation_id = g_sel_transportation_id;
     input->selected_raw=g_sel&&g_sel->raw_name_known?g_sel->audio_hint:std::wstring();
     baked_nav::MapGoal continued;
-    TargetKind continued_kind;
+    TargetKind continued_kind=TargetKind::Infer;
     std::wstring continued_name;
     input->continued_goal = baked_nav::pending_goal(continued, continued_kind, continued_name);
+    input->continued_aerial=continued_kind==TargetKind::AirshipTransition;
     input->current_map = map_id; input->continued_map = continued.map_id;
     input->continued_x = continued.cell.x; input->continued_y = continued.cell.y;
     input->continued_entity_id = continued.entity_id;
@@ -713,12 +733,14 @@ void apply_filter() {
                 if (row.cell_valid) { row.cell_x = cell.x; row.cell_y = cell.y; }
             }
             row.destination = entity->dest_map_id;
+            row.destination_name=entity->dest_name.substr(0,256);
             // Reapply from the original label so toggle changes never accumulate
             // suffixes, and disabling the preference restores the game label.
-            row.name = entity->kind == Kind::MapExit ? entity->converted_name : entity->name;
+            row.name = entity->kind == Kind::MapExit || row.category==Category::Objects ? entity->converted_name : entity->name;
             row.event_type = entity->event_type;
             if (input->pads) row.pad = vehicle_pad_name(entity);
             if (row.kind == Kind::NPC) row.label = npc_display_label(entity->converted_name);
+            else if(row.category==Category::Objects)row.label={row.name,-1};
             row.selected = entity == g_sel;
             input->rows.push_back(std::move(row));
         }
@@ -738,6 +760,18 @@ void apply_filter() {
         worker_job::start(g_filter_work, std::move(*input), &filter_worker::build_categories,
             [entities, generation, selection_revision, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, origin, captured_at, navigation_filtered, vehicle](Categories filtered) {
                 if (generation != g_filter_generation || map_id != current_map_id_or_user_data()) return;
+                for(const auto& [candidate,kind]:std::array<std::pair<const std::optional<baked_nav::AirTransitionTarget>*,Kind>,3>{{
+                    {&filtered.surface_target,Kind::MapExit},{&filtered.air_target,Kind::MapExit},{&filtered.story_target,Kind::Event}}})if(*candidate) {
+                    const auto& target=**candidate;auto entity=std::make_shared<Entity>();
+                    const bool surface=candidate==&filtered.surface_target;
+                    entity->kind=kind;entity->local_baked_map_id=map_id;entity->aerial_transition=!surface;entity->audio_exit=kind==Kind::MapExit;
+                    entity->entity_id=target.goal.entity_id;entity->audio_hint=target.goal.raw_name;entity->raw_name_known=true;
+                    entity->cell_layer=target.goal.cell.layer;entity->cell_x=target.goal.cell.x;entity->cell_y=target.goal.cell.y;
+                    entity->pos=target.position;entity->name=entity->converted_name=target.name;entity->dest_map_id=target.destination_map;
+                    if(kind==Kind::MapExit)entity->dest_name=T(surface||map_id==1?L"Surface World":L"Floating Continent");
+                    else entity->event_type=L"Event";
+                    entities->push_back(std::move(entity));
+                }
                 auto result = std::make_shared<Categories>(std::move(filtered));
                 auto handles = std::make_shared<std::array<std::vector<EntityPtr>, kCategoryCount>>(); // native owner registry only
                 auto audio_handles=std::make_shared<std::vector<EntityPtr>>();
@@ -1245,7 +1279,8 @@ int capture_soundscape(sound::scape::Snapshot& output,size_t& next,uint64_t& rev
         const auto position=e->position();
         row.x=position.x/16; row.north=position.y/16; row.layer=e->cell_layer;
         row.destination=e->dest_map_id; row.door=e->audio_door;
-        if(const auto* destination=baked::submap_by_map_id(row.destination))row.world_exit=destination->world;
+        row.world_exit=(e->aerial_transition||surface_target(*e))&&e->kind==Kind::MapExit;
+        if(const auto* destination=baked::submap_by_map_id(row.destination))row.world_exit|=destination->world;
         if(e->game) {
             const int layer=game_object_layer(e->game)-9;if(layer>=0&&layer<=2)row.layer=layer;
             auto* property=entity_property(e->game);

@@ -32,6 +32,9 @@ struct EntityState {
 struct Selection {
     bool known=true; std::wstring group; std::set<std::wstring> groups;
     std::map<int,EntityState> entities; std::set<int> uncertain_entities;
+    // Only assignments common to all completed initializer branches. Patrol
+    // uncertainty does not hide an otherwise known visible actor or change gates.
+    std::map<int,int> routes;
 };
 Selection project(const json::Value& record, const Flags& flags);
 Flags snapshot();
@@ -49,7 +52,13 @@ public:
     std::optional<bool> treasure_opened(const baked::Submap& sm, const baked::Object& object) const;
     bool known(const baked::Submap& sm);
     bool consumed(const baked::Submap& sm, const baked::Object& object);
+    uint64_t transportation_mask(const baked::Submap& sm,const baked::Object& object);
     baked::Object effective(const baked::Submap& sm, const baked::Object& object);
+    // Reviewed native patrol poses for a future floor. These are first-leg
+    // evidence only; the loaded floor still requires its live actor snapshot.
+    std::vector<baked_route::Cell> route_positions(const baked::Submap& sm,const baked::Object& object);
+    // Read only the already copied scenario bank; no native access on workers.
+    std::optional<int> scenario_value(size_t index) const { return index < flags_.scenario.size() ? flags_.scenario[index] : std::nullopt; }
     uint64_t signature() const; // copied persistent state only; worker-safe
     // Lazily projected once per map in this owned resolver. Shared immutable
     // masks avoid scanning transition objects on every A*/flood edge or leg.
@@ -58,11 +67,19 @@ private:
     const Selection& selection(const baked::Submap& sm);
     Flags flags_;
     const json::Value& records_;
+    // Positive native observations are additive, never a complete inventory.
+    // Merge lazily with initializer facts on the navigation worker; capture
+    // only copies the bounded native-owned group set.
+    int observed_index_ = -1;
+    std::set<std::wstring> observed_groups_;
     std::map<int, Selection> cache_;
     std::map<const baked::Object*,bool> consumed_;
+    std::map<const baked::Object*,uint64_t> transportation_;
     std::map<int,std::shared_ptr<const baked::TransitionGrid>> transitions_;
 };
-void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates = true, bool geometry_only = false);
+// NPC omission is only a cross-floor continuation proof. Current-floor movement
+// still uses authoritative live blockers and stops at an actual interaction.
+void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates = true, bool geometry_only = false, bool with_npcs = true);
 // Counter geometry follows active groups, separately from collision/hazards.
 void add_relays(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request);
 }

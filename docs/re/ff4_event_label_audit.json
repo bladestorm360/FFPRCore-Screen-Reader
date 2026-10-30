@@ -1747,9 +1747,14 @@
     "id": 99,
     "raw": "門が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Gate",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20010_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1757,9 +1762,14 @@
     "id": 100,
     "raw": "門が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Gate",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20010_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1767,9 +1777,14 @@
     "id": 161,
     "raw": "ドアが開く（手前）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_barondoor_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1777,9 +1792,14 @@
     "id": 162,
     "raw": "ドアが開く（手前）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_barondoor_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1787,9 +1807,14 @@
     "id": 163,
     "raw": "ドアが開く（奥側）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_barondoor_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1797,9 +1822,14 @@
     "id": 164,
     "raw": "ドアが開く（奥側）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_barondoor_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20010_1",
@@ -1922,9 +1952,14 @@
     "id": 80,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20011_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_1",
@@ -2022,9 +2057,14 @@
     "id": 28,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20011_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20011_16",
@@ -2521,9 +2561,14 @@
     "id": 38,
     "raw": "扉を開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20021_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_3",
@@ -2667,9 +2712,14 @@
     "id": 16,
     "raw": "隠し扉が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20021_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20021_5",
@@ -2868,9 +2918,14 @@
     "id": 17,
     "raw": "HP回復",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Pot",
+    "reason": "reviewed healing-pot effect helper shares its physical pot identity; action0 is not a narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0103",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_3",
@@ -2998,9 +3053,14 @@
     "id": 18,
     "raw": "MP回復",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Pot",
+    "reason": "reviewed healing-pot effect helper shares its physical pot identity; action0 is not a narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0104",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20041_3",
@@ -3153,9 +3213,14 @@
     "id": 24,
     "raw": "扉を開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20041_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20050_1",
@@ -3288,9 +3353,14 @@
     "id": 11,
     "raw": "スイッチ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20051_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_3",
@@ -3308,9 +3378,14 @@
     "id": 29,
     "raw": "扉を開ける",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20051_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20051_3",
@@ -3489,9 +3564,14 @@
     "id": 5,
     "raw": "デビルロード",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage",
+    "reason": "ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0031",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20070_1",
@@ -3734,9 +3814,14 @@
     "id": 18,
     "raw": "扉を開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_s_20091_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20091_9",
@@ -3804,9 +3889,14 @@
     "id": 38,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20101_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_6",
@@ -3846,9 +3936,14 @@
     "id": 36,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20101_4",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_7",
@@ -3942,9 +4037,14 @@
     "id": 18,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20101_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_9",
@@ -3977,9 +4077,14 @@
     "id": 36,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20101_3",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20101_9",
@@ -3987,9 +4092,14 @@
     "id": 38,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20101_3",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_2",
@@ -4084,9 +4194,14 @@
     "id": 54,
     "raw": "スイッチ（1→2→3→4→終了）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_6",
@@ -4094,9 +4209,14 @@
     "id": 55,
     "raw": "扉1のスイッチ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_6",
@@ -4104,9 +4224,14 @@
     "id": 56,
     "raw": "扉3のスイッチ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_6",
@@ -4114,9 +4239,14 @@
     "id": 57,
     "raw": "扉2のスイッチ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_6",
@@ -4124,9 +4254,14 @@
     "id": 58,
     "raw": "扉4のスイッチ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Switch",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20111_8",
@@ -4144,9 +4279,14 @@
     "id": 9,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20111_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20120",
@@ -4290,9 +4430,14 @@
     "id": 6,
     "raw": "望遠鏡を覗く",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Telescope",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0161",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20121_2",
@@ -4503,9 +4648,14 @@
     "id": 28,
     "raw": "Event",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Door",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_s_20151_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20151_8",
@@ -4533,9 +4683,14 @@
     "id": 23,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20161_5",
@@ -4950,9 +5105,14 @@
     "id": 9,
     "raw": "HP回復",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_e_0103",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20201_1",
@@ -4960,9 +5120,14 @@
     "id": 10,
     "raw": "MP回復",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Fountain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_e_0104",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20201_1",
@@ -5467,9 +5632,14 @@
     "id": 20,
     "raw": "月の魔導船から降りる",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0008",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20271_1",
@@ -5477,9 +5647,14 @@
     "id": 21,
     "raw": "月の魔導船から降りる",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0008",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20271_1",
@@ -5619,9 +5794,14 @@
     "id": 2,
     "raw": "地上に出る",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "return from airship interior to the same native vehicle",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0007",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20271_2",
@@ -5629,9 +5809,14 @@
     "id": 3,
     "raw": "地上に出る",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "return from airship interior to the same native vehicle",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0007",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20271_2",
@@ -6230,9 +6415,16 @@
     "id": 14,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "native local/resident lookup selects the complete Resident save-point message and effect; unrelated map variant is inaccessible",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint",
+      "message_keys": [
+        "N999_C09_999_1_01"
+      ]
+    }
   },
   {
     "submap": "Map_30021_4",
@@ -6630,9 +6822,14 @@
     "id": 16,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30031_3",
@@ -6977,9 +7174,14 @@
     "id": 16,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30060",
@@ -7167,9 +7369,14 @@
     "id": 22,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30110",
@@ -7435,9 +7642,14 @@
     "id": 13,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30131_1",
@@ -7581,9 +7793,14 @@
     "id": 14,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30131_6",
@@ -7661,9 +7878,14 @@
     "id": 15,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30141_1",
@@ -7871,9 +8093,14 @@
     "id": 10,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30141_7",
@@ -8219,9 +8446,14 @@
     "id": 7,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30151_16",
@@ -8429,9 +8661,14 @@
     "id": 8,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30151_8",
@@ -8639,9 +8876,14 @@
     "id": 11,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30171_1",
@@ -8917,9 +9159,14 @@
     "id": 7,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30171_5",
@@ -9097,9 +9344,14 @@
     "id": 42,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30181_2",
@@ -9432,9 +9684,14 @@
     "id": 9,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_13",
@@ -9609,9 +9866,14 @@
     "id": 45,
     "raw": "綱渡り①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0009",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_17",
@@ -9619,9 +9881,14 @@
     "id": 46,
     "raw": "綱渡り②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0010",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_17",
@@ -9803,9 +10070,14 @@
     "id": 18,
     "raw": "綱渡り①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0001",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_2",
@@ -9813,9 +10085,14 @@
     "id": 19,
     "raw": "綱渡り②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0002",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_2",
@@ -9823,9 +10100,14 @@
     "id": 20,
     "raw": "綱渡り④",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0004",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_2",
@@ -9833,9 +10115,14 @@
     "id": 21,
     "raw": "綱渡り③",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0003",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_2",
@@ -9927,9 +10214,14 @@
     "id": 13,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_21",
@@ -9937,9 +10229,14 @@
     "id": 8,
     "raw": "綱渡り①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0011",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_21",
@@ -9947,9 +10244,14 @@
     "id": 9,
     "raw": "綱渡り①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0012",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_21",
@@ -10180,9 +10482,14 @@
     "id": 68,
     "raw": "綱渡り①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0005",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_7",
@@ -10190,9 +10497,14 @@
     "id": 69,
     "raw": "綱渡り②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0006",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_7",
@@ -10200,9 +10512,14 @@
     "id": 70,
     "raw": "綱渡り③",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0007",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_7",
@@ -10210,9 +10527,14 @@
     "id": 71,
     "raw": "綱渡り④",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Rope crossing",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_rope_0008",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30201_7",
@@ -10569,9 +10891,14 @@
     "id": 14,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30231_6",
@@ -10699,9 +11026,14 @@
     "id": 11,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30251_12",
@@ -10859,9 +11191,14 @@
     "id": 7,
     "raw": "セーブポイント",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Save Point",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_savepoint_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30251_16",

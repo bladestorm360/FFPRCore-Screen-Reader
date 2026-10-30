@@ -27,9 +27,46 @@ void policy_cases(){
     altered=pair;altered[0].arrival.reset();expect(!remote_exits::return_mask(altered)[1],"missing or ambiguous native arrival metadata stays visible");
     altered=pair;altered[0].arrival->layer=0;expect(!remote_exits::return_mask(altered)[1],"different layers do not become a reciprocal doorway");
     altered=pair;altered[1].footprint.tx=30;expect(!remote_exits::return_mask(altered)[1],"another physical exit to an earlier floor remains selectable");
+    altered=pair;altered[0].arrival=baked_route::Cell{1,20,18};altered[0].arrival_direction=1;
+    expect(remote_exits::return_mask(altered)[1],"native straight two-cell inward arrival certifies the reciprocal return");
+    altered[0].arrival_direction=4;expect(!remote_exits::return_mask(altered)[1],"outward facing two-cell arrival stays uncertain");
+    altered[0].arrival_direction=0;expect(!remote_exits::return_mask(altered)[1],"missing facing never broadens the arrival radius");
+    altered[0].arrival=baked_route::Cell{1,19,19};altered[0].arrival_direction=1;
+    expect(!remote_exits::return_mask(altered)[1],"diagonal two-cell proximity is not an inward doorway");
     altered=pair;altered.erase(altered.begin());expect(!remote_exits::return_mask(altered)[0],"unpaired one-way returns and drops are preserved");
     altered=pair;altered.push_back(pair[0]);expect(!remote_exits::return_mask(altered)[1],"multiple possible reverse matches remain conservative");
     int cancelled=0;expect(remote_exits::return_mask(pair,[&]{++cancelled;return true;}).empty()&&cancelled==1,"cancelled policy work publishes no partial mask");
+}
+void animated_object_floors(){
+    // The real game uses AnimEntity10 for both reported key-item objects.
+    // Their original bakes, state predicates and routes are already present;
+    // verify the actual cross-floor collector rather than a synthetic row.
+    for(const auto& item:std::vector<std::tuple<int,int,int,const wchar_t*>>{
+        {242,252,79,L"\u30ea\u30e5\u30fc\u30c8"},{280,290,84,L"\u571f\u306e\u7259"}}){
+        const auto [first,destination,collected,raw]=item;
+        const auto* sm=baked::submap_by_map_id(destination);const baked::Object* target=nullptr;
+        for(const auto& o:baked::grids(*sm).objects)if(o.type==baked::ObjType::AnimEntity&&o.entity_id()==5&&baked::object_identifier(o)==raw)target=&o;
+        expect(target&&(target->d&(4|8)),"reported object is a genuinely actionable animated source");if(!target)continue;
+        for(int origin=first;origin<destination;++origin){
+            map_state::Flags flags;flags.scenario.fill(0);flags.treasure.fill(0);flags.global.fill(0);flags.scenario[78]=1;
+            flags.current_map_id=origin;flags.current_area_id=first==242?45:51;
+            map_state::Resolver state(flags,fixture::records);std::vector<RemoteObject> objects;
+            std::thread worker([&]{objects=connected_objects_snapshot(origin,state);});worker.join();
+            int matching=0;for(const auto& row:objects)if(row.map_id==destination&&row.entity_id==5&&row.raw_name==raw){
+                ++matching;expect(row.type==baked::ObjType::AnimEntity&&row.event_type==L"Interactive Object"&&
+                    row.cell==Cell{target->layer,target->tx,target->ty},"remote object preserves actual native type, Objects category and exact layer/cell");
+            }
+            expect(matching==1,"Lute/Fang is listed exactly once from every other connected floor");
+        }
+        map_state::Flags flags;flags.scenario.fill(0);flags.treasure.fill(0);flags.global.fill(0);flags.scenario[78]=1;flags.scenario[collected]=1;
+        map_state::Resolver consumed(flags,fixture::records);const auto absent=connected_objects_snapshot(first,consumed);
+        expect(std::none_of(absent.begin(),absent.end(),[&](const auto& o){return o.map_id==destination&&o.entity_id==5&&o.raw_name==raw;}),"collected key item remains absent under its actual native flag");
+        flags.scenario[collected]=0;map_state::Resolver local(flags,fixture::records);const auto native_floor=connected_objects_snapshot(destination,local);
+        expect(std::none_of(native_floor.begin(),native_floor.end(),[&](const auto& o){return o.map_id==destination;}),"own floor remains native-owned without a duplicate animated object");
+        if(destination==252){flags.scenario[78]=0;map_state::Resolver unavailable(flags,fixture::records);const auto before=connected_objects_snapshot(first,unavailable);
+            expect(std::none_of(before.begin(),before.end(),[&](const auto& o){return o.map_id==destination&&o.entity_id==5&&o.raw_name==raw;}),"real Lute availability prerequisite is preserved");}
+        std::printf("Animated object map%d: %d earlier floors, collected state, native-floor ownership checked\n",destination,destination-first);
+    }
 }
 bool has(const std::vector<RemoteObject>& objects,int source,int destination){
     return std::any_of(objects.begin(),objects.end(),[&](const auto& row){return row.map_id==source&&row.type==baked::ObjType::GotoMap&&row.dest_map_id==destination;});
@@ -42,10 +79,9 @@ void dwarven(const map_state::Flags& flags){
     expect(!has(remote,85,84),"the remote B2-to-current-B1 return is omitted");
     expect(has(remote,90,185)&&!has(remote,185,90),"Subterranean Lake entrance stays while its paired return is hidden remotely");
     expect(has(remote,85,88),"the Inn/Item Shop room entrance remains selectable remotely");
-    // This actual room spawns two cells away from its return footprint. That
-    // exceeds the policy's direct doorway witness, so keep the uncertain row
-    // instead of weakening the preservation rule to make the list shorter.
-    expect(has(remote,88,85),"the Inn's non-adjacent arrival remains conservatively listed");
+    // Its native two-cell inward PointIn now provides the same doorway proof
+    // as the reported Amur and Replito shops, without changing the route graph.
+    expect(!has(remote,88,85),"the Inn's verified inward arrival identifies its reciprocal return");
     int exits=0;for(const auto& row:remote)exits+=row.type==baked::ObjType::GotoMap;
     std::printf("Dwarven B1: %d remote exits (baseline17), %zu total remote objects\n",exits,remote.size());
     // The list mask never enters selected-route planning or native map data.
@@ -65,6 +101,22 @@ void dwarven(const map_state::Flags& flags){
     std::thread listing_back([&]{elsewhere=connected_objects_snapshot(90,from_b3);});listing_back.join();
     expect(has(elsewhere,85,84),"changing current floor to B3 exposes the route onward toward B1");
 }
+void town_returns(const map_state::Flags& flags){
+    for(const auto& pair:{std::pair{97,102},std::pair{138,139}}){
+        const auto* town=baked::submap_by_map_id(pair.first);const auto* room=baked::submap_by_map_id(pair.second);
+        expect(town&&room,"reported town/shop bakes exist");if(!town||!room)continue;
+        map_state::Resolver state(flags,fixture::records);std::vector<RemoteObject> listed;
+        std::thread worker([&]{listed=connected_objects_snapshot(pair.first,state);});worker.join();
+        bool static_portals=true;int portals=0;
+        for(const auto& o:baked::grids(*room).objects)if(o.type==baked::ObjType::GotoMap||o.type==baked::ObjType::PointIn){
+            ++portals;const auto group=baked::str(o.group);static_portals&=group.empty()||group==L"entity_default"||group==L"default";
+        }
+        std::printf("town%d room%d: map-known=%d/%d static-portals=%d count=%d remote-return=%d\n",pair.first,pair.second,state.known(*town),state.known(*room),static_portals,portals,has(listed,pair.second,pair.first));
+        expect(!has(listed,pair.second,pair.first),"reported shop's reciprocal return is omitted before entering the room");
+        bool native_return=false;for(const auto& o:baked::grids(*room).objects)native_return|=o.type==baked::ObjType::GotoMap&&o.a==pair.first;
+        expect(native_return,"shop's actual return remains in the routing bake");
+    }
+}
 }
 int main(){
     std::setvbuf(stdout,nullptr,_IONBF,0);policy_cases();
@@ -78,7 +130,7 @@ int main(){
         expect(json::parse(text,fixture::records),"real all-six state programs load");
         for(int i=0;i<baked::submap_count();++i)baked::grids(*baked::submap_at(i));g_loaded=g_prepared=true;
         auto flags=std::make_unique<map_state::Flags>();flags->scenario.fill(0);flags->treasure.fill(0);flags->global.fill(0);
-        if(number==3)dwarven(*flags);
+        if(number==3){dwarven(*flags);town_returns(*flags);animated_object_floors();}
         int largest=0,root=0;
         for(int i=0;i<baked::submap_count();++i){
             const auto* sm=baked::submap_at(i);if(sm->world||sm->first_map_id<=0)continue;

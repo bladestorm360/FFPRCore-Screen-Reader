@@ -47,23 +47,24 @@ int main() {
                 std::set<Identity> actual,world_exits;
                 for(const auto& object:objects)if(object.world_exit) {
                     const auto* destination=baked::submap_by_map_id(object.dest_map_id);
-                    expect(object.event_type.empty()&&destination&&destination->world,
-                        "scripted world travel projects as an exit with a real world destination, without a scene label");
+                    expect(object.event_type.empty()&&destination,
+                        "reviewed physical travel projects as an exit with its actual destination, without a scene label");
                     world_exits.insert(identity(object));
                 }
                 for(const auto& object:objects)if(!object.event_type.empty()) {
                     ++rows;actual.insert(identity(object));
-                    expect(object.type!=baked::ObjType::AnimEntity&&object.type!=baked::ObjType::ToLayer&&object.type!=baked::ObjType::TelepoPoint,
-                        "animations, layer markers and native non-entity Teleport-cache markers never become remote objectives");
+                    expect(object.type!=baked::ObjType::ToLayer&&object.type!=baked::ObjType::TelepoPoint,
+                        "layer markers and native non-entity Teleport-cache markers never become remote objectives");
                     const auto* floor=baked::submap_by_map_id(object.map_id);
                     expect(floor&&floor!=source,"every remote event retains its real different-floor map");
                     if(checked_events.insert(identity(object)).second) {
-                        filter_worker::FilterInput input;input.current_map=map;input.category=Category::Events;
-                        input.selected_has=true;input.selected_map=object.map_id;input.selected_category=Category::Events;
+                        const auto category=object.event_type==L"Interactive Object"||object.event_type==L"Interactive"?Category::Objects:Category::Events;
+                        filter_worker::FilterInput input;input.current_map=map;input.category=category;
+                        input.selected_has=true;input.selected_map=object.map_id;input.selected_category=category;
                         input.selected_entity_id=object.entity_id;input.selected_x=object.cell.x;input.selected_y=object.cell.y;
                         input.continued_goal=true;input.continued_map=object.map_id;input.continued_entity_id=object.entity_id;
                         input.continued_x=object.cell.x;input.continued_y=object.cell.y;
-                        filter_worker::FilterRow target;target.kind=Kind::Event;target.category=Category::Events;
+                        filter_worker::FilterRow target;target.kind=Kind::Event;target.category=category;
                         target.remote_map=object.map_id;target.entity_id=object.entity_id;target.cell_x=object.cell.x;target.cell_y=object.cell.y;
                         auto wrong=target;wrong.entity_id=object.entity_id+100000;wrong.index=0;target.index=1;
                         input.rows={wrong,target};const auto filtered=filter_worker::build(input);
@@ -74,7 +75,12 @@ int main() {
                 // one named event or the floors reached in a single play session.
                 for(const auto& floor:connected_floors(source,map,resolver))for(const auto& original:baked::grids(*floor.submap).objects) {
                     const auto object=resolver.effective(*floor.submap,original);
-                    const bool event=(object.type==baked::ObjType::Entity&&(object.d&12))||
+                    if(object.type==baked::ObjType::AnimEntity&&!(object.d&12)){
+                        expect(!actual.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),
+                            "decorative animation without an action/script remains excluded on every connected floor");
+                        continue;
+                    }
+                    const bool event=((object.type==baked::ObjType::Entity||object.type==baked::ObjType::AnimEntity)&&(object.d&12))||
                         ((object.type==baked::ObjType::Event||object.type==baked::ObjType::RandomEvent||object.type==baked::ObjType::SwitchEvent||object.type==baked::ObjType::TransportationEventAction)&&(object.a||object.b));
                     if(!event||!resolver.active(*floor.submap,original)||resolver.consumed(*floor.submap,original))continue;
                     const auto& grid=baked::grids(*floor.submap);

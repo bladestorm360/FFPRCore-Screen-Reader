@@ -30,11 +30,14 @@ ref::Class kPopupBase{"Last.UI","WarehousePopupControllerBase"};
 ref::Field fPopupView{kPopup,"view"},fCount{kPopupBase,"selectedCount"};
 ref::Method mOpen{kWindow,"Open",2},mClose{kWindow,"Close",0};
 ref::Method mCommand{kWindow,"SelectCommand",1},mSelect{kWindow,"SelectContent",2},mUpdate{kWindow,"ContentUpdate",2};
-ref::Method mCommandInit{kWindow,"SelectingCommandInit",0},mStoreInit{kWindow,"SelectingEntrustTargetInit",0},mRetrieveInit{kWindow,"SelectingWithdrawTargetInit",0};
+ref::Method mStoreInit{kWindow,"SelectEntrustTargetInit",0},mRetrieveInit{kWindow,"SelectWithdrawTargetInit",0};
 ref::Method mAdd{kPopupBase,"AddSelectedCount",1},mTake{kPopupBase,"TakeSelectedCount",1};
 void* owner=nullptr;
 unsigned generation=0;
 bool opening=false,entry_pending=false;
+// Empty target initialization returns through state1 and reselects the same
+// bar command on the next native update. That restoration is not a new focus.
+bool empty_return=false;
 constexpr int kListBound=4096,kCommandBound=8;
 
 void* view(){return ref::rd<void*>(owner,fView);}
@@ -46,14 +49,22 @@ bool active(){
     return tag>0&&tag<=10&&displayed::container_visible(displayed::field(view(),"rootObject"));
 }
 bool list_phase(int tag){return tag==3||tag==4||tag==5||tag==6;}
-std::wstring quantity_value(void* popup){
+std::wstring quantity_value(void* popup,bool include_stock=false){
     if(!kPopup.is(popup)||!unity::alive(popup))return {};
     void* panel=ref::rd<void*>(popup,fPopupView);
     if(!displayed::container_visible(panel))return {};
     const auto number=displayed::text_field(panel,"targetCountText");
     if(number.empty())return {};
     const auto label=displayed::text_field(panel,"targetCountNameText");
-    return label.empty()?number:label+L": "+number;
+    auto line=label.empty()?number:label+L": "+number;
+    if(include_stock){
+        // Read the same displayed stock figure as initial Show. The native
+        // popup changes only selectedCount; do not invent post-transfer totals.
+        const auto stock=displayed::text_field(panel,"possessionCountText");
+        const auto stock_label=displayed::text_field(panel,"fixedPossessionText");
+        if(!stock.empty())line+=L". "+(stock_label.empty()?stock:stock_label+L": "+stock);
+    }
+    return line;
 }
 std::wstring popup_line(){
     void* popup=dialogue::popup_state::active_popup();
@@ -75,11 +86,17 @@ void* selected_object(){
     if(!selected_data())return nullptr;
     return ref::call<void*>(mContent,displayed::field(view(),"scrollView"),ui::cursor_index(ref::rd<void*>(owner,fCursor)));
 }
-void read_focus(){
+void read_focus(bool empty_event){
     if(!active())return;
     const int tag=phase();
+    if(empty_event){
+        // The empty response leaves the player on the command bar. Only its
+        // target-init event owns this text, even while it remains rendered.
+        if(tag==1||tag==2){const auto line=displayed::text_field(view(),"noContensMessageText");if(!line.empty())ffpr::say(line,true);}
+        return;
+    }
     std::vector<std::wstring> parts;
-    if(tag==1||tag==2){
+    if(tag==2){ // state1 is still preparing the command bar, not a ready focus
         void* commands=displayed::field(view(),"commandContentList");
         const int count=unity::list_count(commands),index=ui::cursor_index(ref::rd<void*>(owner,fCommandCursor));
         if(count<1||count>kCommandBound||index<0||index>=count)return;
@@ -90,10 +107,7 @@ void read_focus(){
             parts.push_back(displayed::text_field(view(),"commentText"));entry_pending=false;
         }
         parts.push_back(ui::menu_position(label,index,count));
-        parts.push_back(displayed::text_field(view(),"noContensMessageText"));
     }else if(list_phase(tag)){
-        const auto empty=displayed::text_field(view(),"noContensMessageText");
-        if(!empty.empty()){ffpr::say(empty,true);return;}
         void* row=unity::get_component(selected_object(),kItem);
         void* row_view=displayed::field(row,"view");
         if(!displayed::container_visible(row_view))return;
@@ -106,12 +120,12 @@ void read_focus(){
     }else return; // quantity popup owns its independent typed reader
     ffpr::say_sequence(std::move(parts),true);
 }
-void schedule(){
+void schedule(bool empty_event=false){
     const auto token=++generation;frame::cancel_label("Warehouse.Focus");
-    frame::next_frame([token]{if(token==generation)hooks::guarded("Warehouse.ReadFocus",[]{read_focus();});},"Warehouse.Focus");
+    frame::next_frame([token,empty_event]{if(token==generation)hooks::guarded("Warehouse.ReadFocus",[=]{read_focus(empty_event);});},"Warehouse.Focus");
 }
 void retire(){
-    ++generation;frame::cancel_label("Warehouse.Focus");owner=nullptr;opening=entry_pending=false;
+    ++generation;frame::cancel_label("Warehouse.Focus");owner=nullptr;opening=entry_pending=empty_return=false;
 }
 using Open=void(*)(void*,bool,void*,const void*);Open o_open;
 void d_open(void* self,bool vegetable,void* cancel,const void* mi){
@@ -119,13 +133,27 @@ void d_open(void* self,bool vegetable,void* cancel,const void* mi){
     o_open(self,vegetable,cancel,mi);
     hooks::guarded("Warehouse.Opened",[=]{if(owner==self){opening=false;schedule();}});
 }
-using Void=void(*)(void*,const void*);Void o_close,o_command_init,o_store_init,o_retrieve_init;
+using Void=void(*)(void*,const void*);Void o_close,o_store_init,o_retrieve_init;
 void d_close(void* self,const void* mi){if(owner==self){retire();system::cancel_controls_reading();}o_close(self,mi);}
-void d_command_init(void* self,const void* mi){o_command_init(self,mi);hooks::guarded("Warehouse.CommandReady",[=]{if(owner==self)schedule();});}
-void d_store_init(void* self,const void* mi){o_store_init(self,mi);hooks::guarded("Warehouse.StoreReady",[=]{if(owner==self)schedule();});}
-void d_retrieve_init(void* self,const void* mi){o_retrieve_init(self,mi);hooks::guarded("Warehouse.RetrieveReady",[=]{if(owner==self)schedule();});}
+void target_ready(void* self){
+    if(owner!=self)return;
+    // Both native empty branches return to state1 instead of entering a list.
+    // Replace nested preview callbacks with one prompt; consume the following
+    // native command restoration without repeating either prompt or command.
+    empty_return=phase()==1;
+    schedule(empty_return);
+}
+void d_store_init(void* self,const void* mi){o_store_init(self,mi);hooks::guarded("Warehouse.StoreReady",[=]{target_ready(self);});}
+void d_retrieve_init(void* self,const void* mi){o_retrieve_init(self,mi);hooks::guarded("Warehouse.RetrieveReady",[=]{target_ready(self);});}
 using Command=void(*)(void*,int32_t,const void*);Command o_command;
-void d_command(void* self,int32_t index,const void* mi){o_command(self,index,mi);hooks::guarded("Warehouse.CommandFocus",[=]{if(owner==self)schedule();});}
+void d_command(void* self,int32_t index,const void* mi){
+    o_command(self,index,mi);
+    hooks::guarded("Warehouse.CommandFocus",[=]{
+        if(owner!=self||phase()!=2)return;
+        if(empty_return){empty_return=false;return;}
+        schedule();
+    });
+}
 using Select=void(*)(void*,int32_t,int32_t,const void*);Select o_select;
 void d_select(void* self,int32_t index,int32_t scroll,const void* mi){
     o_select(self,index,scroll,mi);
@@ -143,7 +171,7 @@ void d_update(void* self,void* data,void* object,const void* mi){
 using Count=void(*)(void*,void*,const void*);Count o_add,o_take;
 void changed_count(void* self,int before){
     if(dialogue::popup_state::active_popup()!=self||ref::rd<int>(self,fCount)==before)return;
-    const auto line=quantity_value(self);if(!line.empty())ffpr::say(line,true);
+    const auto line=quantity_value(self,true);if(!line.empty())ffpr::say(line,true);
 }
 void d_add(void* self,void* text,const void* mi){
     const int before=ref::rd<int>(self,fCount);o_add(self,text,mi);
@@ -166,7 +194,7 @@ int install(){
     events::on(events::Kind::SceneLoaded,[]{retire();});events::on(events::Kind::TitleScreen,[]{retire();});
     return (hooks::attach(mOpen,&d_open,&o_open)?1:0)+(hooks::attach(mClose,&d_close,&o_close)?1:0)+
         (hooks::attach(mCommand,&d_command,&o_command)?1:0)+(hooks::attach(mSelect,&d_select,&o_select)?1:0)+
-        (hooks::attach(mUpdate,&d_update,&o_update)?1:0)+(hooks::attach(mCommandInit,&d_command_init,&o_command_init)?1:0)+
+        (hooks::attach(mUpdate,&d_update,&o_update)?1:0)+
         (hooks::attach(mStoreInit,&d_store_init,&o_store_init)?1:0)+(hooks::attach(mRetrieveInit,&d_retrieve_init,&o_retrieve_init)?1:0)+
         (hooks::attach(mAdd,&d_add,&o_add)?1:0)+(hooks::attach(mTake,&d_take,&o_take)?1:0);
 }

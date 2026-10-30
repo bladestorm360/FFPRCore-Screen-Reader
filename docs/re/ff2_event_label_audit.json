@@ -2542,9 +2542,14 @@
     "id": 973,
     "raw": "Event",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage barrier",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 998,
+      "script": "sc_e_0081_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",

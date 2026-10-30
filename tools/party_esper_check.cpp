@@ -28,12 +28,6 @@ std::set<std::string> active_menus;
 DWORD owner=GetCurrentThreadId();int wrong=0;uint64_t native_calls=0;bool autodetail=false;game::Id game=game::Id::FF6;
 bool main_menu=true,palette_ready=true;
 int red_palette=static_cast<int>(0xff4040ffu);
-int(*party_status_install)()=nullptr;
-using FormHook=void(*)(void*,void*,int32_t,int32_t,int32_t,const void*);
-FormHook form_hook=nullptr;
-using ConditionTextHook=void(*)(void*,void*,const void*);
-ConditionTextHook condition_text_hook=nullptr;
-void* next_motions=nullptr;
 void native(){++native_calls;if(GetCurrentThreadId()!=owner)++wrong;}
 int offset(const char*n){auto [i,inserted]=offsets.emplace(n,static_cast<int>(offsets.size()));return static_cast<int>(offsetof(Node,fields))+i->second*static_cast<int>(sizeof(void*));}
 void set(Node&n,const char*k,void*v){*reinterpret_cast<void**>(reinterpret_cast<char*>(&n)+offset(k))=v;}
@@ -48,19 +42,11 @@ std::function<void()> on_details_show;
 void show(void*p,void*,void*,void*,const void*){static_cast<Node*>(p)->active=true;if(on_details_show)on_details_show();}void details_update(void*,void*,void*,const void*){}void list_select(void*,int,int,const void*){}
 void tick(){const auto until=GetTickCount64()+5000;do{frame::run_tick();std::this_thread::yield();}while(ui::review::g_build_pending&&GetTickCount64()<until);}
 Node make_text(const wchar_t*v){Node n;n.kind=1;n.value=v;return n;}
-void native_form(void*,void* entity,int32_t,int32_t,int32_t,const void*){
- native();auto* animation=static_cast<Node*>(get(*static_cast<Node*>(entity),"spriteAnimBattle"));
- if(animation)set(*animation,"<battleCharaSpriteList>k__BackingField",next_motions);
-}
-void native_condition_text(void* self,void* condition,const void*){
- native();auto* view=static_cast<Node*>(get(*static_cast<Node*>(self),"view"));
- auto* text=static_cast<Node*>(get(*view,"conditionText"));text->value=static_cast<Node*>(condition)->value;
-}
 Node sprite_node;
 Node image(){Node n;n.kind=2;n.sprite=&sprite_node;return n;}
 bool contains(std::wstring_view s){for(auto&v:spoken)if(v.find(s)!=v.npos)return true;return false;}
 }
-namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){if(std::string(n)=="Battle.PartyStatus")fixture::party_status_install=f;}}
+namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){}}
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}
@@ -76,26 +62,20 @@ namespace unity {
 bool alive(void*p){fixture::native();return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->active&&(!static_cast<fixture::Node*>(p)->parent||active_in_hierarchy(static_cast<fixture::Node*>(p)->parent));}
 void*transform(void*p){fixture::native();return p;}void*parent(void*p){fixture::native();return p?static_cast<fixture::Node*>(p)->parent:nullptr;}void*get_component(void*p,ref::Class& k){fixture::native();if(!p)return nullptr;if(std::string(k.name)=="EffectReactionInspector")return fixture::get(*static_cast<fixture::Node*>(p),"inspector");if(std::string(k.name)=="Renderer")return static_cast<fixture::Node*>(p)->kind==8?p:fixture::get(*static_cast<fixture::Node*>(p),"renderer");return p;}void*get_component_in_parent(void*p,ref::Class&){return parent(p);}
 std::wstring ui_text(void*p){fixture::native();return static_cast<fixture::Node*>(p)->value;}
-std::vector<void*>texts(void*,bool){return {};}std::vector<void*>components_in_children(void*,ref::Class&,bool){return {};}
+std::vector<void*>texts(void*p,bool){fixture::native();auto* list=p?static_cast<fixture::List*>(fixture::get(*static_cast<fixture::Node*>(p),"texts")):nullptr;return list?*list:fixture::List{};}std::vector<void*>components_in_children(void*,ref::Class&,bool){return {};}
 void*get_component_in_children(void*p,ref::Class&,bool){fixture::native();return p?fixture::get(*static_cast<fixture::Node*>(p),"child_renderer"):nullptr;}
 int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 }
 namespace unity {int array_length(void*p){return list_count(p);}void*array_at(void*p,int i){return list_at(p,i);}}
 namespace unity {bool enumerate_bounded(void*p,std::vector<void*>&out,int bound){fixture::native();out.clear();if(!p||list_count(p)>bound)return false;out=*static_cast<fixture::List*>(p);return true;}}
 namespace displayed {std::wstring conditions(void*p){return p&&visible(p)?static_cast<fixture::Node*>(p)->value:std::wstring();}}
-namespace hooks {bool attach_raw(ref::Method& method,void* hook,void** original){
- if(std::string(method.cls.name)=="InstantiateManager"&&std::string(method.name)=="ChangePlayerMotions"){
-  fixture::form_hook=reinterpret_cast<fixture::FormHook>(hook);*original=reinterpret_cast<void*>(&fixture::native_form);return true;
- }
- if(std::string(method.cls.ns)=="Last.UI"&&std::string(method.cls.name)=="BattleConditionController"&&std::string(method.name)=="SetConditionText"){
-  fixture::condition_text_hook=reinterpret_cast<fixture::ConditionTextHook>(hook);*original=reinterpret_cast<void*>(&fixture::native_condition_text);return true;
- }
- return false;
-}void note_fault(const char*){std::abort();}}
+namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
 namespace field::cache {void*get(ref::Class&c){return fixture::owners[c.name];}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}}
 namespace ffpr::battle {ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};bool in_battle(){return true;}void*player_owned_character(void*p){return displayed::field(p,"owned");}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}void*current_actor(){return nullptr;}std::wstring unit_name(void*){return {};}
 void* unit_info(void*p){return displayed::field(p,"info");}
+void* info_parameter(void*p){return displayed::field(p,"parameter");}
+void* current_condition_list(void*p){return displayed::field(p,"conditions");}
 void* info_functions(void*p){return displayed::field(p,"functions");}
 void* function_condition(void*p){return displayed::field(p,"condition");}
 int condition_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}
@@ -176,98 +156,28 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
  hp.value=maximum.value=L"1900";command_text.value=L"Attack";
  ffpr::battle::g_execution_player=&unit;
  for(int n=1;n<=6;++n){fixture::game=static_cast<game::Id>(n);spoken.clear();ffpr::battle::announce_active_status();ffpr::battle::announce_active_status();expect(spoken==std::vector<std::wstring>({L"Firion, HP 1900/1900, MP 10",L"Firion, HP 1900/1900, MP 10"}),"all-six H status reads current/max HP and only displayed current MP, without appending the separate command or suppressing repeated requests");expect(ffpr::battle::displayed_player(&copy)==L"Firion, HP 1900/1900, MP 10, Attack","ally targeting still includes the displayed command column independently from H status");}
- // All-six danger colors and visible body/effect status review. This is a
- // native-boundary fixture, not a parallel status implementation or game launch.
- expect(party_status_install&&party_status_install()==2&&form_hook&&condition_text_hook,"completed native form producer is installed");
- Node info,entity,body,body_renderer,body_sprite,animation,ordinary_motions,changed_motions,condition,function,effects_owner;
- entity.kind=4;body_renderer.kind=8;
- set(unit,"info",&info);set(info,"<BattleSpriteEntity>k__BackingField",&entity);
- set(entity,"characterSR",&body);set(body,"meshRenderer",&body_renderer);set(body,"sprite",&body_sprite);
- set(entity,"spriteAnimBattle",&animation);set(animation,"<battleCharaSpriteList>k__BackingField",&ordinary_motions);
- set(function,"condition",&condition);List functions{&function};set(info,"functions",&functions);
- set(entity,"ConditionEffectEntityController",&effects_owner);
+ // Keep the native danger-color equivalent. A Critical function alone is
+ // not proof of current low health, and gray HP cannot substitute for live KO.
+ Node info,parameter,critical_condition,critical_function,ko_condition;
+ critical_condition.command=4;critical_condition.id=4;critical_condition.value=L"Critical";
+ ko_condition.command=5;ko_condition.id=5;ko_condition.value=L"KO";
+ set(unit,"info",&info);set(info,"parameter",&parameter);
+ set(critical_function,"condition",&critical_condition);List functions{&critical_function},conditions;
+ set(info,"functions",&functions);set(parameter,"conditions",&conditions);
  for(int n=1;n<=6;++n){
   fixture::game=static_cast<game::Id>(n);name.value=L"Rae";hp.value=L"21";maximum.value=L"297";
   hp.r=1;hp.g=hp.b=64.0f/255;spoken.clear();ffpr::battle::g_execution_player=&unit;
   ffpr::battle::announce_active_status();ffpr::battle::announce_active_status();
-  expect(spoken==std::vector<std::wstring>({L"Rae, HP 21/297, MP 10, Critical",L"Rae, HP 21/297, MP 10, Critical"}),"all-six H translates the actual red HP cue and preserves repeat requests");
-  expect(ffpr::battle::displayed_player(&copy)==L"Rae, HP 21/297, MP 10, Attack, Critical","ally targeting includes the same visible low-health equivalent");
-  spoken.clear();ffpr::battle::announce_slot(1);expect(contains(L"Critical"),"number row includes visible danger outside targeting");
-  hp.r=hp.g=hp.b=153.0f/255;hp.value=L"0";spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical")&&contains(L"KO"),"KO gray zero HP has its own visible equivalent, not Critical");
-  if(n==6){
-   hp.value=L"21";hp.r=1;hp.g=hp.b=64.0f/255;
-   Node ui_conditions,ui_view,ui_text=make_text(L""),critical=make_text(L"Critical");critical.command=4;
-   set(ui_conditions,"view",&ui_view);set(ui_view,"conditionText",&ui_text);set(row,"condtionController",&ui_conditions);
-   condition_text_hook(&ui_conditions,&critical,nullptr);
-   auto extra=ffpr::battle::party_status::extra_lines(&unit,&view,false,&ui_conditions);
-   expect(extra.empty(),"FFVI native Critical text owns its label without text-content deduplication");
-   ui_text.active=false;extra=ffpr::battle::party_status::extra_lines(&unit,&view,false,&ui_conditions);
-   expect(extra==std::vector<std::wstring>{L"Critical"},"hidden rotating condition text yields to the visible HP cue");set(row,"condtionController",nullptr);
-  }
-  hp.r=hp.g=hp.b=1;hp.value=L"21";spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"low numeric HP alone is not renderer evidence");
-  hp.r=1;hp.g=hp.b=64.0f/255;hp.alpha=0;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"transparent HP cannot disclose a cached danger cue");hp.alpha=1;
-  palette_ready=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"unavailable native palette fails closed");palette_ready=true;hp.r=hp.g=hp.b=1;
-  // Mini is genuinely supported in II-V; VI has Imp, I has neither transform.
-  if(n!=1){
-   condition.command=n==6?601:401;condition.id=condition.command;condition.value=n==6?L"Imp":L"Mini";
-   next_motions=&changed_motions;form_hook(nullptr,&entity,1,1,condition.command,nullptr);
-   spoken.clear();ffpr::battle::announce_active_status();expect(contains(condition.value),"H reads a completed visible ally form while the command HUD hides status icons");
-   spoken.clear();ffpr::battle::announce_slot(1);expect(contains(condition.value),"number row reads the inactive visible ally form");
-   expect(ffpr::battle::displayed_player(&copy).ends_with(condition.value),"target reader shares form fallback if no condition column is rendered");
-   body_renderer.enabled=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(condition.value),"hidden body cannot prove a form");body_renderer.enabled=true;
-   next_motions=&ordinary_motions;form_hook(nullptr,&entity,1,1,0,nullptr);spoken.clear();ffpr::battle::announce_active_status();expect(!contains(condition.value),"native form restoration retires its old status");
-  }
-  // Tint flags and actual visible effect renderers are independent witnesses.
-  condition.command=10;condition.id=10;condition.value=n==2?L"Venom":L"Poison";function.kind=5;
-  set(function,"changedSkinColor",reinterpret_cast<void*>(1));set(function,"effectRender",&body_renderer);
-  spoken.clear();ffpr::battle::announce_active_status();expect(contains(condition.value),"all-six H includes a currently applied visible poison tint");
-  set(function,"changedSkinColor",nullptr);spoken.clear();ffpr::battle::announce_active_status();expect(!contains(condition.value),"unapplied tint cannot expose the raw condition list");function.kind=0;
-  Node effect,effect_renderer,particle;effect.kind=6;effect_renderer.kind=8;condition.command=8;condition.id=8;condition.value=L"Paralysis";
-  set(effect,"conditionType",reinterpret_cast<void*>(8));set(particle,"renderer",&effect_renderer);List particles{&particle},effects{&effect};
-  set(effect,"particleSystems",&particles);set(effects_owner,"conditionEffectList",&effects);
-  spoken.clear();ffpr::battle::announce_active_status();expect(contains(L"Paralysis"),"visible playing particles identify the ally's native paralysis effect");
-  effect_renderer.enabled=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Paralysis"),"disabled effect renderer cannot expose an internal paralysis flag");effect_renderer.enabled=true;
-  particle.enabled=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Paralysis"),"stopped particles are not an active visual cue");particle.enabled=true;
-  effects.assign(65,&effect);spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Paralysis"),"over-bound effect storage is rejected before traversal");effects.clear();
-  functions.assign(129,&function);spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Paralysis"),"over-bound function storage is rejected before traversal");functions.assign(1,&function);
-  Node inspector,reaction;List target_meshes{&body};condition.command=19;condition.id=19;condition.value=L"Protect";
-  effects={&effect};set(effect,"conditionType",reinterpret_cast<void*>(19));set(effect,"particleSystems",nullptr);
-  set(effect,"inspector",&inspector);set(inspector,"currentType",reinterpret_cast<void*>(13));
-  set(inspector,"isStart",reinterpret_cast<void*>(1));set(inspector,"currentReaction",&reaction);set(reaction,"entityMeshRenderers",&target_meshes);
-  spoken.clear();ffpr::battle::announce_active_status();expect(contains(L"Protect"),"all-six H reads a started native shader reaction bound to the actual visible ally mesh");
-  set(inspector,"isEnd",reinterpret_cast<void*>(1));spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Protect"),"completed shader reactions cannot expose a lingering condition flag");set(inspector,"isEnd",nullptr);
-  target_meshes={&body_sprite};spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Protect"),"another renderer's shader cannot be borrowed as ally evidence");
-  if(n==6){
-   set(effect,"inspector",nullptr);set(effect,"conditionType",reinterpret_cast<void*>(6));set(effect,"effectId",reinterpret_cast<void*>(68));
-   condition.command=6;condition.id=6;condition.value=L"Silence";set(effect,"child_renderer",&effect_renderer);
-   spoken.clear();ffpr::battle::announce_active_status();expect(contains(L"Silence"),"FFVI's verified bubble prefab is read through its one visible child sprite renderer");
-   effect_renderer.enabled=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Silence"),"hidden FFVI silence bubble cannot disclose its condition");effect_renderer.enabled=true;
-   set(effect,"effectId",reinterpret_cast<void*>(69));spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Silence"),"unreviewed prefabs do not receive a hierarchy lookup");
-  }
-  set(effects_owner,"conditionEffectList",nullptr);
+  expect(spoken==std::vector<std::wstring>({L"Rae, HP 21/297, MP 10, Critical",L"Rae, HP 21/297, MP 10, Critical"}),"all-six H reads red HP once per explicit request, independent of a Critical function");
+  expect(ffpr::battle::displayed_player(&copy)==L"Rae, HP 21/297, MP 10, Attack, Critical","target preserves command and native danger equivalent");
+  spoken.clear();ffpr::battle::announce_slot(1);expect(contains(L"Critical"),"number row retains the shared danger cue");
+  hp.r=hp.g=hp.b=153.0f/255;hp.value=L"0";conditions={&ko_condition};
+  spoken.clear();ffpr::battle::announce_active_status();expect(contains(L"KO")&&!contains(L"Critical"),"native current KO is read at zero HP");
+  conditions.clear();hp.value=L"643";spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"KO"),"revival retires KO even while the old gray presentation remains");
+  hp.r=hp.g=hp.b=1;hp.value=L"21";spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"a persistent Critical function and white low HP do not invent danger");
+  hp.r=1;hp.g=hp.b=64.0f/255;hp.alpha=0;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"transparent HP cannot disclose danger");hp.alpha=1;
+  palette_ready=false;spoken.clear();ffpr::battle::announce_active_status();expect(!contains(L"Critical"),"unavailable native palette fails closed");palette_ready=true;
  }
- // The entry boundary precedes native initial forms; BattleStart must preserve
- // them. End/return-to-title retire observations, even if an address is reused.
- fixture::game=game::Id::FF3;condition.command=401;condition.id=401;condition.value=L"Mini";
- for(auto boundary:{events::Kind::BattleEntering,events::Kind::BattleEnd,events::Kind::TitleScreen}){
-  next_motions=&changed_motions;set(animation,"<battleCharaSpriteList>k__BackingField",&ordinary_motions);form_hook(nullptr,&entity,1,1,401,nullptr);
-  for(auto& fn:status_events[events::Kind::BattleStart])fn();
-  expect(!ffpr::battle::party_status::extra_lines(&unit,&view,true,nullptr).empty(),"BattleStart preserves a form loaded during battle entry");
-  for(auto& fn:status_events[boundary])fn();
-  expect(ffpr::battle::party_status::extra_lines(&unit,&view,true,nullptr).empty(),"entry/end/title boundaries retire prior battle form identities");
- }
- // Compare the complete H formatting/dispatch path with the same fake native
- // owner. These timings exclude real Unity/render/audio cost; counts expose
- // added work, while the wall-clock numbers are harness measurements only.
- auto measure_h=[&](const char* label){
-  const auto calls=native_calls;const auto start=std::chrono::steady_clock::now();double peak=0;
-  for(int i=0;i<1000;++i){spoken.clear();const auto begin=std::chrono::steady_clock::now();ffpr::battle::announce_active_status();peak=std::max(peak,std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-begin).count());}
-  std::printf("H harness %s: 1000 requests %.3f ms aggregate, %.3f us peak; %llu fake-native boundary calls/request; audible latency unmeasured\n",label,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count(),peak,static_cast<unsigned long long>((native_calls-calls)/1000));
- };
- set(unit,"info",nullptr);measure_h("text baseline");set(unit,"info",&info);
- next_motions=&changed_motions;set(animation,"<battleCharaSpriteList>k__BackingField",&ordinary_motions);form_hook(nullptr,&entity,1,1,401,nullptr);measure_h("visible Mini");
- functions.assign(128,&function);Node dense_effect;dense_effect.kind=6;List dense_effects(64,&dense_effect);set(effects_owner,"conditionEffectList",&dense_effects);measure_h("128 functions/64 effects, total renderer budget64");
- set(effects_owner,"conditionEffectList",nullptr);functions.assign(1,&function);
  // Leave the shared party fixture in its original ready state.
  set(unit,"info",nullptr);name.value=L"Firion";hp.value=maximum.value=L"1900";hp.r=hp.g=hp.b=1;
  ffpr::battle::g_execution_player=nullptr;
@@ -353,5 +263,85 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
  }
  four_views[1].active=false;spoken.clear();party_actions.at("BattleParty.Slot2")();party_actions.at("BattleParty.Slot4")();
  expect(spoken==std::vector<std::wstring>{L"Ryco, HP 255/255"},"hidden slot2 stays silent without renumbering visible slot4");
+ // Current ally conditions must own all three readers even when the native
+ // rotating status column still displays a previous condition. This boundary
+ // fixture reproduces the reported revived Robyn/Reflect cases on actual code.
+ Node live_owner,live_row,live_view,live_unit,live_copy,live_owned,live_info,live_parameter;
+ Node live_name=make_text(L"Robyn"),live_hp=make_text(L"643"),live_max=make_text(L"1430");
+ Node status_ui,live_status_view,stale_text=make_text(L"KO"),reflect=make_text(L"Reflect"),reflect_function;
+ reflect.id=413;reflect.command=413;live_owned.id=3;
+ set(live_unit,"owned",&live_owned);set(live_copy,"owned",&live_owned);
+ set(live_unit,"info",&live_info);set(live_info,"parameter",&live_parameter);
+ set(reflect_function,"condition",&reflect);List live_functions{&reflect_function},live_conditions{&reflect};
+ set(live_info,"functions",&live_functions);set(live_parameter,"conditions",&live_conditions);
+ set(live_row,"view",&live_view);set(live_row,"<TargetData>k__BackingField",&live_unit);
+ set(live_view,"nameText",&live_name);set(live_view,"currentHpText",&live_hp);set(live_view,"maxHpText",&live_max);
+ set(live_row,"condtionController",&status_ui);set(status_ui,"view",&live_status_view);
+ List stale_texts{&stale_text};set(live_status_view,"texts",&stale_texts);List live_rows{&live_row};
+ set(live_owner,"contentList",&live_rows);set(live_owner,"targetSelectContentList",&empty);
+ ffpr::battle::g_party_owners.clear();ffpr::battle::observe_target_party(&live_owner);
+ ffpr::battle::g_execution_player=&live_unit;autodetail=false;
+ for(int n=1;n<=6;++n){
+  fixture::game=static_cast<game::Id>(n);stale_text.value=L"KO";live_functions={&reflect_function};live_conditions={&reflect};
+  for(int reader=0;reader<3;++reader){
+   spoken.clear();if(reader==0)ffpr::battle::announce_active_status();else if(reader==1)ffpr::battle::announce_slot(1);else spoken.push_back(ffpr::battle::displayed_player(&live_copy));
+   expect(contains(L"Reflect")&&!contains(L"KO"),"all-six H/number/target use current Reflect and reject the stale KO column");
+  }
+  stale_text.value=L"Reflect";live_functions.clear();live_conditions.clear();
+  for(int reader=0;reader<3;++reader){
+   spoken.clear();if(reader==0)ffpr::battle::announce_active_status();else if(reader==1)ffpr::battle::announce_slot(1);else spoken.push_back(ffpr::battle::displayed_player(&live_copy));
+   expect(!contains(L"Reflect"),"all-six H/number/target immediately retire removed Reflect despite a stale rendered column");
+  }
+  live_conditions={&reflect};
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view)==std::vector<std::wstring>{L"Reflect"},"current parameter conditions work independently of battle functions");
+  live_conditions.clear();live_functions={&reflect_function,&reflect_function};
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view)==std::vector<std::wstring>{L"Reflect"},"permanent/function-only conditions and stacked functions retain one native identity");
+  live_conditions={&reflect};
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view)==std::vector<std::wstring>{L"Reflect"},"same native ID in both sources is one condition, without text deduplication");
+  Node same_label=reflect,unnamed,invalid; same_label.id=414;unnamed.id=999;invalid.value=L"invalid";
+  live_conditions={&reflect,&same_label,&unnamed,&invalid,nullptr};live_functions={nullptr,&reflect_function};
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view)==std::vector<std::wstring>({L"Reflect",L"Reflect"}),"distinct IDs with equal labels remain distinct; unnamed/null/invalid conditions are skipped");
+  live_conditions.assign(129,&reflect);const auto before_calls=native_calls;
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view).empty()&&native_calls-before_calls<32,"oversized current storage is rejected before traversal");
+  live_conditions.clear();live_functions.assign(129,&reflect_function);
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view).empty(),"oversized function storage is rejected before traversal");
+  live_functions.clear();set(live_info,"parameter",nullptr);
+  expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view).empty(),"unready parameter and empty functions cannot reuse an old status");set(live_info,"parameter",&live_parameter);
+  expect(ffpr::battle::party_status::current_lines(nullptr,&live_view).empty(),"missing ally data cannot borrow another ally's conditions");
+  live_conditions={&reflect};live_view.active=false;spoken.clear();ffpr::battle::announce_slot(1);
+  expect(spoken.empty()&&ffpr::battle::displayed_player(&live_copy).empty(),"hidden rows cannot expose current internal ally state");live_view.active=true;
+ }
+ // Corrad and Ryko carry independent current conditions. Reordering visible
+ // rows changes number ownership, while H/targeting retain native ally identity.
+ Node second_row,second_view,second_unit,second_owned,second_info,second_parameter;
+ Node second_name=make_text(L"Ryko"),second_hp=make_text(L"100"),second_max=make_text(L"500");
+ second_owned.id=4;set(second_unit,"owned",&second_owned);set(second_unit,"info",&second_info);
+ set(second_info,"parameter",&second_parameter);List second_conditions{&reflect};set(second_parameter,"conditions",&second_conditions);
+ set(second_row,"view",&second_view);set(second_row,"<TargetData>k__BackingField",&second_unit);
+ set(second_view,"nameText",&second_name);set(second_view,"currentHpText",&second_hp);set(second_view,"maxHpText",&second_max);
+ live_name.value=L"Corrad";live_conditions={&reflect};live_functions.clear();live_rows={&live_row,&second_row};
+ for(int n=1;n<=6;++n){
+  fixture::game=static_cast<game::Id>(n);spoken.clear();ffpr::battle::announce_slot(1);ffpr::battle::announce_slot(2);
+  expect(spoken==std::vector<std::wstring>({L"Corrad, HP 643/1430, Reflect",L"Ryko, HP 100/500, Reflect"}),"two allies each read their current Reflect on the number row");
+  live_rows={&second_row,&live_row};spoken.clear();ffpr::battle::announce_slot(1);ffpr::battle::announce_active_status();
+  expect(spoken==std::vector<std::wstring>({L"Ryko, HP 100/500, Reflect",L"Corrad, HP 643/1430, Reflect"}),"numbering follows displayed rows while H remains on the current actor");
+  second_conditions.clear();expect(ffpr::battle::displayed_player(&second_unit)==L"Ryko, HP 100/500","removing one ally's Reflect does not use the other ally's state");
+  second_conditions={&reflect};live_rows={&live_row,&second_row};
+ }
+ live_rows={&live_row};fixture::game=game::Id::FF3;
+ auto measure_episode=[&](const char* label){
+  const auto calls=native_calls;const auto start=std::chrono::steady_clock::now();double peak=0;
+  for(int i=0;i<1000;++i){
+   spoken.clear();const auto begin=std::chrono::steady_clock::now();ffpr::battle::announce_active_status();ffpr::battle::announce_slot(1);spoken.push_back(ffpr::battle::displayed_player(&live_copy));
+   peak=std::max(peak,std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-begin).count());
+  }
+  std::printf("Live-status H+number+target episode %s: 1000 episodes %.3f ms aggregate, %.3f us peak; %llu fake-native calls/episode; game-frame/audible cost unmeasured\n",label,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count(),peak,static_cast<unsigned long long>((native_calls-calls)/1000));
+ };
+ live_conditions.clear();measure_episode("no conditions");live_conditions={&reflect};measure_episode("current Reflect");
+ std::array<Node,256> dense_conditions;std::array<Node,128> dense_functions;
+ live_conditions.clear();live_functions.clear();
+ for(int i=0;i<256;++i){dense_conditions[i].id=1000+i;dense_conditions[i].value=L"Reflect";if(i<128)live_conditions.push_back(&dense_conditions[i]);else{set(dense_functions[i-128],"condition",&dense_conditions[i]);live_functions.push_back(&dense_functions[i-128]);}}
+ expect(ffpr::battle::party_status::current_lines(&live_unit,&live_view).size()==256,"both maximum ready sources fit the fixed native-ID bound without truncation");
+ measure_episode("128 current + 128 distinct functions");
  expect(wrong==0,"renderer/native pointers remain exclusively on their owner thread");std::printf("Party/Esper actual-source renderer, targeting, formation and page buffers: %d failures\n",failed);return failed?1:0;
 }

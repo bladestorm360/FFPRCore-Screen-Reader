@@ -758,5 +758,51 @@
       8,
       0
     ]
+  },
+  {
+    "submap": "Map_30381_7",
+    "entity_id": 10,
+    "object_id": 11,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 0,
+    "destination_map": 375,
+    "original_point": 0,
+    "continuation": "sc_e_0436",
+    "continuation_sha256": "cb797d4ea8762cc17cb39e46e1eecda714f0d7e50a1277958219b983d90870e3",
+    "arrival_cell": [
+      12,
+      32,
+      1
+    ],
+    "arrival_baked_cell": [
+      12,
+      32,
+      1
+    ],
+    "evidence": "Complete reviewed controlled-player SetPos/MoveTo sequence, native absolute Y and keep-layer semantics; docs/re/SCRIPTED_SHORE_LANDING_20261029.md"
+  },
+  {
+    "submap": "Map_20090",
+    "entity_id": 21,
+    "object_id": 79,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "destination_map": 118,
+    "original_point": 0,
+    "continuation": "sc_e_0195",
+    "continuation_sha256": "f067ebffac1dbcd8dec7f1f74645eca72ce6baad0276b413ce5d74b632f3b212",
+    "arrival_cell": [
+      33,
+      19,
+      1
+    ],
+    "arrival_baked_cell": [
+      33,
+      19,
+      1
+    ],
+    "evidence": "Complete east-facing sheep interaction; controlled-player Lerp preserves current layer at33,19; docs/re/ISTORY_SHEEP_ENTRY_20261029.md"
   }
 ]

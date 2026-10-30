@@ -1,5 +1,18 @@
 # Patrol guidance, companion identity and field-menu feedback
 
+October29 human-initiated all-six NPC audit follow-up:
+[native instruction patrol correction](NPC_GEOMETRY_CONTEXT_20261029.md).
+The earlier blanket stationary treatment of RoutePuppet102 is superseded only
+for III/V/VI, whose active controller sets102, reports moving and restores the
+original type on destruction. I/II/IV's older controllers do not publish102 and
+their extracted scripts contain no AssignMoveRoute; retain their existing policy.
+All-six native getters report moving even after one-shot completion;102 alone
+therefore does not certify a patrol. The later correction checks a bounded ready
+controller for remaining movement. Completion/animation/overload/Wait/manual
+checks pass; combined delivery pending. The initial scalar-only candidate was
+never deployed. See the linked audit for exact native lifecycle/budgets/evidence.
+Accepted route/blocker/companion architecture stays Closed and unchanged.
+
 Status: implementation complete and offline verified. All fixes are now delivered
 in the all-six final transition-route payload linked below. Earlier five-game
 receipts and37ab60d9 payload facts are historical; final receipts belong there.

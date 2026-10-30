@@ -1,4 +1,4 @@
-// check-sources: text.cpp json.cpp
+// check-sources: text.cpp json.cpp battle/scan_feedback.cpp
 // Actual damage, condition-add and special-effect producers; no game is run.
 #include <cstdio>
 #include <cstdlib>
@@ -10,12 +10,21 @@
 #include "../src/core/battle/battle_message.cpp"
 #include "../src/core/battle/special_feedback.cpp"
 #include "../src/core/battle/stat_feedback.cpp"
+#include "../src/core/battle/action_effects.cpp"
 #include "../src/core/condition_labels.h"
 namespace fixture {
-struct Node {void* functions=nullptr;void* act=nullptr;void* targets=nullptr;void* actor=nullptr;void* after_results=nullptr;void* temporary=nullptr;void* modifiers=nullptr;std::array<int32_t,29> temporary_values{},base_values{};int value=0,type=0,id=0,sibling_type=0,hp=10;std::wstring name,kind;std::vector<void*> conditions;};
+struct Node {void* functions=nullptr;void* act=nullptr;void* targets=nullptr;void* actor=nullptr;void* after_results=nullptr;void* temporary=nullptr;void* modifiers=nullptr;std::array<int32_t,29> temporary_values{},base_values{};int value=0,type=0,id=0,sibling_type=0,hp=10;std::wstring name,kind;std::vector<void*> conditions;void* abilities=nullptr;void* command=nullptr;};
 using List=std::vector<void*>;using Dict=std::vector<std::pair<void*,void*>>;
 std::vector<std::wstring> spoken;std::vector<std::function<void()>> work;
 std::vector<frame::Task> native_posts;std::vector<frame::Step> admission_retries;bool background_busy=false;
+std::vector<frame::Task> effect_ui_posts;bool omit_zero_digits=false;
+std::vector<frame::Task> action_ui_posts;
+std::vector<std::pair<events::Kind,events::Handler>> event_handlers;
+using ViewMessage=bool(*)(void*,const void*);
+ViewMessage view_message_dispatch=nullptr;
+ViewMessage native_action_original=nullptr;
+using HitMessage=bool(*)(void*,void*,const void*);
+HitMessage hit_message_dispatch=nullptr,native_hit_original=nullptr;
 bool defer_digits=false;std::vector<std::function<void()>> digit_callbacks;
 bool enemy_critical=false;
 Dict* next_modifiers=nullptr;bool direct_applies=true,ff5_callback=false;
@@ -33,7 +42,8 @@ void* utility(void*,int32_t value,bool recovery,bool miss,const void*) {
  return nullptr;
 }
 void* utility2(void* unit,int32_t value,bool recovery,bool miss,bool,const void* mi) {return utility(unit,value,recovery,miss,mi);}
-void basic(void*,void* unit,int32_t value,int32_t hit,bool recovery,const void*) {ffpr::battle::d_utility_damage(unit,value,recovery,hit==2,nullptr);}
+void basic(void*,void* unit,int32_t value,int32_t hit,bool recovery,const void*) {if(omit_zero_digits&&value==0&&hit==0)return;ffpr::battle::d_utility_damage(unit,value,recovery,hit==2,nullptr);}
+int ability_id(void* p,const void*){return p?static_cast<Node*>(p)->id:0;}
 void basic2(void*,void* unit,int32_t value,int32_t hit,bool recovery,bool se,const void*) {ffpr::battle::d_utility_damage2(unit,value,recovery,hit==2,se,nullptr);}
 void basic5(void* self,void* unit,int32_t value,int32_t hit,bool recovery,int32_t,const void* mi) {basic(self,unit,value,hit,recovery,mi);}
 void result_view(void* self,void* target,bool recovery,const void*) {
@@ -77,6 +87,10 @@ bool Class::is(void*p){if(!p)return false;const auto&kind=static_cast<fixture::N
 il2cpp::Class* Class::get(){return nullptr;}
 int32_t Field::get(){
  const std::string n=name;
+ if(n=="abilityList")return offsetof(fixture::Node,abilities);
+ if(n=="<Command>k__BackingField")return offsetof(fixture::Node,command);
+ if(n=="<CurrentActType>k__BackingField")return offsetof(fixture::Node,type);
+ if(n=="inStagingBattleActData")return offsetof(fixture::Node,act);
  if(n=="<functionBases>k__BackingField")return offsetof(fixture::Node,functions);
  if(n=="<battleActData>k__BackingField")return offsetof(fixture::Node,act);
  if(n=="TargetUnitDatas"||n=="<TargetUnitDatas>k__BackingField")return offsetof(fixture::Node,targets);
@@ -92,12 +106,18 @@ int32_t Field::get(){
   return static_cast<int32_t>(offsetof(fixture::Node,base_values)+i*sizeof(int32_t));
  return -1;
 }
-il2cpp::Method* Method::get(){return nullptr;}void* Method::ptr(){return nullptr;}
+il2cpp::Method* Method::get(){return (std::strcmp(name,"get_Id")==0&&std::strcmp(cls.name,"Ability")==0)||std::strcmp(name,"get_AbilityId")==0?reinterpret_cast<il2cpp::Method*>(1):nullptr;}
+void* Method::ptr(){return get()?reinterpret_cast<void*>(&fixture::ability_id):nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}
 void call_failed_note(const char*){std::abort();}
 }
 namespace game{Id current(){return fixture::game_id;}}
-namespace hooks{bool attach_raw(ref::Method&,void*,void**){return false;}bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
+namespace hooks{bool attach_raw(ref::Method& method,void* detour,void** original){
+ if(std::string(method.cls.name)!="ActFunctionProvider")return false;
+ if(fixture::native_action_original&&std::string(method.name)=="ViewMessage"){*original=reinterpret_cast<void*>(fixture::native_action_original);fixture::view_message_dispatch=reinterpret_cast<fixture::ViewMessage>(detour);return true;}
+ if(fixture::native_hit_original&&std::string(method.name)=="HitViewMessage"){*original=reinterpret_cast<void*>(fixture::native_hit_original);fixture::hit_message_dispatch=reinterpret_cast<fixture::HitMessage>(detour);return true;}
+ return false;
+}bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace il2cpp{void* method_pointer(Method*){return nullptr;}Method* virtual_method(void*,Method*){return nullptr;}}
 namespace unity{
 int list_count(void*p){return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}
@@ -112,15 +132,16 @@ namespace ffpr{void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s
 namespace modtext{std::wstring T(std::wstring_view s){if(fixture::game_id==game::Id::FF2)if(const auto* key=fixture::status_catalog.get(std::wstring(s));key)if(const auto* value=key->get(L"en");value&&value->is_string())return value->s;return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);}const std::wstring& lang(){static const std::wstring value=L"en";return value;}LocaleScope::LocaleScope(std::wstring){}LocaleScope::~LocaleScope(){}}
 namespace background{bool post(std::function<void()>f,Lane){if(fixture::background_busy)return false;fixture::work.push_back(std::move(f));return true;}}
 
-namespace frame{uint64_t count(){return 1;}double now(){return 1;}void cancel_label(const char*){}void after_frames(int,Task,const char*){}void post(Task t){fixture::native_posts.push_back(std::move(t));}int every_frame(Step s,const char*,int){fixture::admission_retries.push_back(std::move(s));return int(fixture::admission_retries.size());}}
-namespace events{void on(Kind,Handler){}}
+namespace frame{bool on_main_thread(){return true;}uint64_t count(){return 1;}double now(){return 1;}void cancel_label(const char*){}void after_frames(int,Task task,const char* label){if(std::strcmp(label,"Battle.TargetEffectResult")==0)fixture::effect_ui_posts.push_back(std::move(task));else fixture::action_ui_posts.push_back(std::move(task));}void post(Task t){fixture::native_posts.push_back(std::move(t));}int every_frame(Step s,const char*,int){fixture::admission_retries.push_back(std::move(s));return int(fixture::admission_retries.size());}}
+namespace events{void on(Kind kind,Handler handler){fixture::event_handlers.emplace_back(kind,std::move(handler));}void fire(Kind kind){for(auto& entry:fixture::event_handlers)if(entry.first==kind)entry.second();}}
 namespace dedup{bool text(const char*,std::wstring_view,Scope){return true;}void reset(const char*){}}
 
 namespace ffpr::battle::rendered {void damage(void*,bool,std::function<void(int)>f){if(fixture::defer_digits){const int digits=fixture::drawn;fixture::digit_callbacks.push_back([f=std::move(f),digits]{f(digits);});}else f(fixture::drawn);}void hit_count(void*){}}
 namespace ffpr::battle {
+bool in_battle(){return true;}
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
 std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"Unknown";}
-std::wstring action_name(void*){return {};}
+std::wstring action_name(void* p){return p?static_cast<fixture::Node*>(p)->name:L"";}
 void action_actor_started(void*){}void action_actor_finished(){}
 void* unit_parameter(void*p){return p;}void* unit_info(void*p){return p;}void* info_parameter(void*p){return p;}void* info_functions(void*p){return p?static_cast<fixture::Node*>(p)->functions:nullptr;}
 void* function_condition(void*p){return p;}void* function_unit(void*p){return p;}
@@ -183,6 +204,21 @@ int main(){using namespace fixture;namespace b=ffpr::battle;namespace s=b::speci
  enemy_critical=false;b::removal_reset_state();spoken.clear();
  b::o_CreateDamageView=&basic;b::o_CreateDamageViewFF2=&basic2;b::o_CreateDamageViewFF5=&basic5;
  b::o_utility_damage=&utility;b::o_utility_damage2=&utility2;b::o_render_damage=&render;b::o_render_damage6=&render6;
+ // Joint production postfix -> actual target-effect module -> speech, without
+ // stubbing the helper result. The native zero-Hit path has no digit renderer.
+ {
+  namespace a=b::action_effects;game_id=game::Id::FF3;
+  Node user,ability,act,function,enemy;user.name=L"Rae";ability.id=96;List abilities{&ability};
+  act.actor=&user;act.abilities=&abilities;function.act=&act;enemy.name=L"Enemy1";enemy.kind=L"BattleEnemyData";
+  a::install();a::observe_action(&act,L"Rae",L"Draw Attacks");spoken.clear();omit_zero_digits=true;
+  b::d_CreateDamageView(&function,&enemy,0,0,false,nullptr);
+  expect(spoken.empty()&&effect_ui_posts.size()==1,"actual zero-value result postfix captures its own function and target");
+  auto posted=std::move(effect_ui_posts);effect_ui_posts.clear();for(auto& task:posted)task();
+  expect(spoken==std::vector<std::wstring>{L"Enemy1: Affected by Draw Attacks"},"joint actual result and effect producer names the affected enemy");
+  spoken.clear();b::d_CreateDamageView(&function,&enemy,0,2,false,nullptr);
+  expect(spoken==std::vector<std::wstring>{L"Enemy1: Miss"}&&effect_ui_posts.empty(),"native rendered Miss is retained without a success overlay");
+  a::finish_action();a::enabled=false;omit_zero_digits=false;spoken.clear();
+ }
  s::o_view=s::o_after=s::o_attack=s::o_after_attack=&result_view;
  s::o_after_batch=&after_batch;
  // Nominal healing intent must not override the innermost displayed colour.

@@ -12,9 +12,10 @@ struct FilterRow {
     Category category = Category::All;
     Vec3 position, numbering_position;
     int remote_map = 0, cell_x = 0, cell_y = 0, cell_layer = 1, destination = 0;
-    std::wstring name, pad, event_type;
+    std::wstring name, pad, event_type, destination_name;
     npc_names::Label label;
     bool selected = false;
+    bool aerial_transition = false;
     bool available = true;
     bool story_gated = false; // inclusion only; NPC numbering uses unpruned rows
     std::wstring raw_name;
@@ -31,10 +32,13 @@ struct FilterInput {
     bool sort = false, pads = false, exits = false, layer = false, selected_has = false;
     bool events = false, entrance_suffixes = false;
     bool story_gates = false;
+    // Current map is the unfiltered discovery mode. Route evidence can rank
+    // rows/group siblings there, but cannot remove a blocked destination.
+    bool reachable_only = true;
     int selected_remote = 0, selected_x = 0, selected_y = 0;
     Category category = Category::All, selected_category = Category::All;
     std::wstring selected_name;
-    bool continued_goal = false;
+    bool continued_goal = false, continued_aerial = false;
     int continued_map = 0, continued_x = 0, continued_y = 0, current_map = 0;
     bool world = false;
     int selected_entity_id = -1, continued_entity_id = -1;
@@ -60,6 +64,9 @@ struct Categories {
     // Soundscape owns physical grouping independently from pathfinder toggles.
     // Availability/story/terrain guards are shared; exit/event/pad grouping is not.
     std::vector<size_t> audio_order;
+    std::optional<baked_nav::AirTransitionTarget> air_target;
+    std::optional<baked_nav::AirTransitionTarget> story_target;
+    std::optional<baked_nav::AirTransitionTarget> surface_target;
 };
 Categories build_categories(FilterInput& input);
 }

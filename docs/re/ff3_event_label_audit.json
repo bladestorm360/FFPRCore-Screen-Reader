@@ -1195,9 +1195,14 @@
     "id": 3813,
     "raw": "トーザスへ移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Tozus entrance",
+    "reason": "reviewed Mini-conditional entry without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0342",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24215,9 +24220,14 @@
     "id": 5461,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24225,9 +24235,14 @@
     "id": 5462,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24235,9 +24250,14 @@
     "id": 5463,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24245,9 +24265,14 @@
     "id": 5464,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24255,9 +24280,14 @@
     "id": 5465,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24265,9 +24295,14 @@
     "id": 5466,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24275,9 +24310,14 @@
     "id": 5467,
     "raw": "ドールの湖に移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0281",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24375,9 +24415,14 @@
     "id": 5468,
     "raw": "生きている森で回る",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Closed forest entrance",
+    "reason": "reviewed closed entrance repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0265",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10010",
@@ -24635,9 +24680,14 @@
     "id": 240,
     "raw": "各種牙を所持して通行すると発生",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue barrier",
+    "reason": "reviewed statue barrier check/removal or generic repulsion, no narrative dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0088",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24645,9 +24695,14 @@
     "id": 241,
     "raw": "各種牙を所持して通行すると発生",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue barrier",
+    "reason": "reviewed statue barrier check/removal or generic repulsion, no narrative dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0328",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24655,9 +24710,14 @@
     "id": 242,
     "raw": "各種牙を所持して通行すると発生",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue barrier",
+    "reason": "reviewed statue barrier check/removal or generic repulsion, no narrative dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0329",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24665,9 +24725,14 @@
     "id": 243,
     "raw": "各種牙を所持して通行すると発生",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Statue barrier",
+    "reason": "reviewed statue barrier check/removal or generic repulsion, no narrative dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0330",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24835,9 +24900,14 @@
     "id": 301,
     "raw": "バリアではじかれる：インビンシブル①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24845,9 +24915,14 @@
     "id": 303,
     "raw": "バリアではじかれる：インビンシブル②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24855,9 +24930,14 @@
     "id": 304,
     "raw": "バリアではじかれる：インビンシブル③",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24865,9 +24945,14 @@
     "id": 305,
     "raw": "バリアではじかれる：インビンシブル④",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24875,9 +24960,14 @@
     "id": 310,
     "raw": "バリアではじかれる：ノーチラス①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24885,9 +24975,14 @@
     "id": 311,
     "raw": "バリアではじかれる：ノーチラス②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24895,9 +24990,14 @@
     "id": 312,
     "raw": "バリアではじかれる：ノーチラス③",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24905,9 +25005,14 @@
     "id": 313,
     "raw": "バリアではじかれる：ノーチラス④",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24915,9 +25020,14 @@
     "id": 314,
     "raw": "バリアではじかれる：エンタープライズ①",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24925,9 +25035,14 @@
     "id": 315,
     "raw": "バリアではじかれる：エンタープライズ②",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24935,9 +25050,14 @@
     "id": 316,
     "raw": "バリアではじかれる：エンタープライズ③",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24945,9 +25065,14 @@
     "id": 317,
     "raw": "バリアではじかれる：エンタープライズ④",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Airship barrier",
+    "reason": "reviewed aircraft barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0207_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24955,9 +25080,14 @@
     "id": 346,
     "raw": "ファルガバード入口",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "complete travel graph with flag/phase maintenance; no narrative actor, dialogue, battle or opaque call",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0354",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24965,9 +25095,14 @@
     "id": 347,
     "raw": "ファルガバード入口",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "complete travel graph with flag/phase maintenance; no narrative actor, dialogue, battle or opaque call",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0354",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24975,9 +25110,14 @@
     "id": 348,
     "raw": "ファルガバード入口",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Map entrance",
+    "reason": "complete travel graph with flag/phase maintenance; no narrative actor, dialogue, battle or opaque call",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0354",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24985,9 +25125,14 @@
     "id": 362,
     "raw": "ドーガの館に行けない（プレイヤー）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage barrier",
+    "reason": "reviewed passage barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0355",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -24995,9 +25140,14 @@
     "id": 365,
     "raw": "ドーガの館に行けない（インビンシブル）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage barrier",
+    "reason": "reviewed passage barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0358",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -25005,9 +25155,14 @@
     "id": 367,
     "raw": "ドーガの館に行けない（エンタープライズ）",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage barrier",
+    "reason": "reviewed passage barrier repels movement without narrative scene",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0357",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -25385,9 +25540,14 @@
     "id": 354,
     "raw": "船が鎖でつながれている１",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0068",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -25395,9 +25555,14 @@
     "id": 355,
     "raw": "船が鎖でつながれている２",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0068_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -25405,9 +25570,14 @@
     "id": 357,
     "raw": "船が鎖でつながれている４",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0068_3",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -25415,9 +25585,14 @@
     "id": 381,
     "raw": "船が鎖でつながれている３",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Chain",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0068_2",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_10040",
@@ -27235,9 +27410,14 @@
     "id": 50,
     "raw": "見えない壁に阻まれる",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Passage barrier",
+    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1510,
+      "script": "sc_e_0250",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20161_2",
@@ -28907,9 +29087,14 @@
     "id": 50,
     "raw": "地上全体へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Invincible ladder",
+    "reason": "reviewed Invincible ladder: physical return transfer with sound/fade, no story dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0007",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20301_1",
@@ -28994,9 +29179,14 @@
     "id": 69,
     "raw": "ファルガバードからワールドマップへ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "complete travel-only body and continuation grammar; no dialogue, actor staging or encounter",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 1510,
+      "script": "sc_e_0354_1",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20310",
@@ -29310,9 +29500,14 @@
     "id": 50,
     "raw": "浮遊大陸へ",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Invincible ladder",
+    "reason": "reviewed Invincible ladder: physical return transfer with sound/fade, no story dialogue",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_ship_0004",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_20351_1",
@@ -31987,9 +32182,14 @@
     "id": 11,
     "raw": "海底へ移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0348",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30151_1",
@@ -32147,9 +32347,14 @@
     "id": 17,
     "raw": "海底へ移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0352",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30171_1",
@@ -32922,9 +33127,14 @@
     "id": 7,
     "raw": "海底へ移動",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0350",
+      "message_keys": []
+    }
   },
   {
     "submap": "Map_30191_1",

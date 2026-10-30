@@ -35,7 +35,7 @@ template<class Position> BeaconCornerIndex build_beacon_corner_index(const baked
         for(size_t i=phase.cells.size();i-->0;) {
             if(cancelled && cancelled())return {};
             const auto at=phase.cells[i];Corner corner;corner.found=true;
-            corner.steps_left=later_steps+int(phase.cells.size()-1-i);
+            corner.steps_left=later_steps+int(phase.cells.size()-1-i)+phase.manual_displacement_steps;
             corner.arrived=corner.steps_left==0&&!partial;
             corner.point=world_of_cell(sm,at);
             if(i+1<phase.cells.size()) {
@@ -51,7 +51,7 @@ template<class Position> BeaconCornerIndex build_beacon_corner_index(const baked
                     else if(first_dir==2)corner.point.y-=length;
                     else corner.point.x-=length;
                 }
-            } else if(next_phase) {
+            } else if(next_phase&&!phase.manual_after) {
                 corner.point=world_of_cell(sm,*next_phase);corner.steps_to_corner=1;
             }
             // A patrol endpoint is a temporary stop, never completed arrival.
@@ -59,7 +59,7 @@ template<class Position> BeaconCornerIndex build_beacon_corner_index(const baked
             out.entries.push_back({at,corner,out.entries.size()});
         }
         if(!phase.cells.empty()) {
-            next_phase=phase.cells.front();later_steps+=int(phase.cells.size()-1);
+            next_phase=phase.cells.front();later_steps+=route_progress::steps(phase);
         }
     }
     // remaining() picks the final matching occurrence, including revisited cells

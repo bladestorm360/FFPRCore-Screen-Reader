@@ -1,11 +1,13 @@
 """Bounded offline PE evidence for objective creation, FFII target focus and shop prices.
 Reads matching installed binaries as files; never loads, attaches to, or starts a game.
-Uses existing pefile/capstone. Outputs are ignored, with native/dump SHA256 provenance.
+Uses existing pefile/capstone. Outputs stay outside every Git tree, with native/dump SHA256 provenance.
 """
+
+from evidence_paths import external_directory
 import os
 from pathlib import Path
 import re,hashlib,capstone,pefile,json
-root=Path(os.path.abspath(__file__)).parents[2];out=root/'build_check/event_audit_2026_10_16';out.mkdir(parents=True,exist_ok=True)
+root=Path(os.path.abspath(__file__)).parents[2];out=external_directory('build_check/event_audit_2026_10_16');out.mkdir(parents=True,exist_ok=True)
 games=['FINAL FANTASY PR','FINAL FANTASY II PR','FINAL FANTASY III PR','FINAL FANTASY IV PR','FINAL FANTASY V PR','FINAL FANTASY VI PR'];folders=['ff1','ff2','ff3','FF4','FF5','ff6'];report=[]
 # Reviewed ObjectType20 switch destinations in MapManager.CreateEntity.
 null_branches=[0x2c4ab3,0x2b9e33,0x2ad3df,0x2a7db4,0x2a27b0,0x330a8e]

@@ -1,5 +1,9 @@
 # Input bindings
 
+October28: [FFIII turn-order investigation](re/TURN_ORDER_DISPLAY_20261028.md)
+found no rendered upcoming-actor list. The requested conditional Shift+T binding
+is inapplicable and has not been added.
+
 October26 [Warehouse/Fat Chocobo](re/WAREHOUSE_20261026.md): native Store/Retrieve/
 Exit bar and item/quantity controls keep game ownership. Item rows read name/count;
 I reads the current description or quantity dialog; Shift+I reads this screen's

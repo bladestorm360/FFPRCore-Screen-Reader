@@ -178,6 +178,61 @@ int main() {
         expect(captured.movement_known&&captured.wanders==((move.first==2||move.first==3)&&move.second>0),
             "actual native capture distinguishes autonomous Area/Route from stationary, facing and scripted movement");
     }
+    const auto prior_game=fixture::game_id;
+    fixture::capture_routine=true;
+    fixture::routine_controllers.values={&fixture::routine_controller};
+    fixture::routine_instructions.values={&fixture::routine_move,&fixture::routine_animation};
+    for(int game_number=1;game_number<=6;++game_number)for(int steps:{0,1}){
+        inn->routine_actors=0;inn->routine_work=0;
+        fixture::game_id=static_cast<game::Id>(game_number);
+        fixture::movement_property.type=102;fixture::movement_property.steps=steps;
+        const auto captured=capture_obstacle(&fixture::movement_actor,*inn);
+        const bool native_patrol=game_number==3||game_number==5||game_number==6;
+        expect(captured.movement_known&&captured.wanders==native_patrol,
+            "active native RoutePuppet patrol follows each game's real controller, independently of authored step count");
+        inn->obstacles.front().movement_known=captured.movement_known;inn->obstacles.front().wanders=captured.wanders;
+        const auto assigned=run(*inn);
+        expect(assigned.path.npc_approach&&assigned.path.walk_phases.back().wait_for_npc==native_patrol,
+            "captured assigned patrol uses Wait while older scripted controllers retain manual interaction");
+        fixture::routine_controller.current=nullptr;
+        const auto completed=capture_obstacle(&fixture::movement_actor,*inn);
+        expect(completed.movement_known&&!completed.wanders,"completed native route retains102 but cannot authorize waiting");
+        fixture::routine_controller.current=&fixture::routine_animation;fixture::routine_controller.index=1;fixture::routine_controller.loop=false;
+        expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"one-shot animation tail cannot reuse a past move as future movement");
+        fixture::routine_controller.loop=true;
+        expect(capture_obstacle(&fixture::movement_actor,*inn).wanders==native_patrol,"looping delay/animation keeps its later movement while older versions remain manual");
+        fixture::routine_instructions.values={&fixture::routine_animation};fixture::routine_controller.index=0;
+        expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"animation-only looping instructions cannot cause endless waiting");
+        fixture::routine_instructions.values={&fixture::routine_move,&fixture::routine_animation};fixture::routine_controller.current=&fixture::routine_move;
+        fixture::movement_property.type=0;
+        expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"destruction restoring the ordinary type remains stationary");
+    }
+    fixture::game_id=game::Id::FF6;fixture::movement_property.type=102;
+    inn->routine_work=0;fixture::routine_controller.index=-1;
+    expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"invalid native instruction index stays manual");
+    fixture::routine_controller.index=0;fixture::routine_controllers.count_override=1025;
+    expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"oversized controller registry stays manual without scanning");
+    fixture::routine_controllers.count_override=INT_MIN;fixture::routine_instructions.count_override=257;
+    expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"oversized instruction list stays manual without scanning");
+    fixture::routine_instructions.count_override=INT_MIN;
+    fixture::routine_controllers.values.assign(1024,nullptr);fixture::routine_controllers.values.back()=&fixture::routine_controller;
+    fixture::routine_instructions.values.assign(256,&fixture::routine_animation);
+    std::vector<double> costs;costs.reserve(1000);
+    for(int sample=0;sample<1000;++sample) {
+        inn->routine_work=0;inn->routine_actors=0;const auto begun=std::chrono::steady_clock::now();
+        for(int actor=0;actor<8;++actor)expect(!capture_obstacle(&fixture::movement_actor,*inn).wanders,"whole snapshot overload remains manual");
+        costs.push_back(std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-begun).count());
+        expect(inn->routine_work==4096,"all actors share one finite4096-work capture budget");
+    }
+    std::sort(costs.begin(),costs.end());
+    std::printf("Instruction capture,1000 complete overloaded8-actor episodes: median%.3fus p99%.3fus max%.3fus (fake native metadata, no frame/audible claim)\n",costs[500],costs[990],costs.back());
+    fixture::routine_controllers.values.clear();inn->routine_actors=0;inn->routine_work=0;
+    for(int i=0;i<64;++i)expect(!instruction_will_move(&fixture::movement_actor,*inn),"empty native registry remains manual");
+    const int capped_reads=fixture::native_reads;
+    for(int i=0;i<64;++i)expect(!instruction_will_move(&fixture::movement_actor,*inn),"exhausted actor budget remains manual");
+    expect(inn->routine_actors==64&&fixture::native_reads==capped_reads,"empty/invalid registries cannot repeat native accessor queries beyond the whole-capture actor limit");
+    fixture::routine_controllers.values.clear();fixture::routine_instructions.values.clear();fixture::capture_routine=false;
+    fixture::game_id=prior_game;
     fixture::capture_ready=fixture::capture_movement=false;
     std::printf("Mysidia inn: complete patrol detour, logged temporary doorway, fresh movement, narrow channel and gatekeeper checked\n");
     std::printf("Mysidia compute sample ms: detour %.3f, occupied doorway %.3f, cleared doorway %.3f (offline, not native/audible latency)\n",

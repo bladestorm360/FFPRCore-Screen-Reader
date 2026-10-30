@@ -272,6 +272,7 @@ bool Entity::is_interactive() const
 /// the game hides them for another vehicle). A ScriptTrigger has no backing entity.
 bool Entity::is_alive() const
 {
+    if (local_baked_map_id) return local_baked_map_id == current_map_id();
     if (kind == Kind::ScriptTrigger) return true;
     if (remote()) return true;   // another floor, from the baked data: nothing live to check
     if (!game || !live_entity(game)) return false;

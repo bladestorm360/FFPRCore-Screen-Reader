@@ -1,4 +1,6 @@
 """Read-only native facing/transition evidence from the six installed matching PEs."""
+
+from evidence_paths import external_directory
 import pathlib
 import re
 import hashlib
@@ -57,7 +59,7 @@ for n, folder in enumerate(GAMES, 1):
     for offset in (0x50, 0x54):
         assert any(ins.mnemonic == 'movss' and ins.op_str.startswith('dword ptr [rbx + 0x%x],' % offset)
                    for ins in direction_writer), 'Native direction write changed'
-    (ROOT / 'docs/re' / ('ff%d_arrival_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
+    (external_directory('docs/re') / ('ff%d_arrival_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
     (ROOT / 'docs/re' / ('ff%d_arrival_manifest.tsv' % n)).write_text(
         ''.join('%X\t%s\n' % (pe.OPTIONAL_HEADER.ImageBase + rva, name) for name, rva in targets.items()), encoding='utf-8')
     print('FF%d: facing/transition call evidence exported (%d entry points)' % (n, len(targets)))

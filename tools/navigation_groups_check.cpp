@@ -77,6 +77,14 @@ int main() {
                         for(auto& row:unmapped.rows){row.destination=0;row.name=L"Exit";}
                         expect(prepare_navigation_labels(unmapped)&&unmapped.rows[0].name!=unmapped.rows[1].name,
                             "observed door/stair exits without destination IDs also receive distinct letters");
+                        auto aliases=example;for(auto& row:aliases.rows)row.name=L"First exit";
+                        aliases.rows[1].name=L"Second exit";
+                        expect(prepare_navigation_labels(aliases)&&aliases.rows[0].name==L"First exit"&&aliases.rows[1].name==L"Second exit",
+                            "only confirmed exact displayed names can create a suffix");
+                        auto unavailable=example;for(auto& row:unavailable.rows)row.name=L"Confirmed exit";
+                        unavailable.rows[1].available=false;
+                        expect(prepare_navigation_labels(unavailable)&&unavailable.rows[0].name==L"Confirmed exit",
+                            "unavailable rows do not confirm another same-name doorway");
                         same_name_checked=true;
                     }
                 }
@@ -100,6 +108,20 @@ int main() {
         expect(same_name_checked,"all six games exercise general same-name and unknown-destination exit lettering");
         std::printf("FF%d: %d/%d event objects replayed; %d no direct local fixture; %d labelled entrance rows\n",n,tested,eligible,skipped,doors);
         if(n==3) {
+            const auto* falgabard=baked::submap_by_map_id(144);expect(falgabard!=nullptr,"real Falgabard source exists");
+            if(falgabard){
+                FilterInput house;house.current_map=144;house.entrance_suffixes=true;
+                for(const auto& o:baked::grids(*falgabard).objects)if(o.type==baked::ObjType::GotoMap&&o.a==150){
+                    FilterRow row;row.index=house.rows.size();row.kind=Kind::MapExit;row.category=Category::MapExits;
+                    row.position=world_of_cell(*falgabard,{o.layer,o.tx,o.ty});row.name=L"Exit to Falgabard House";
+                    row.destination=o.a;row.cell_layer=o.layer;house.rows.push_back(row);
+                }
+                expect(house.rows.size()==2&&house.rows[0].cell_layer!=house.rows[1].cell_layer,"two native layer records reproduce the single Falgabard doorway");
+                auto single=house;single.rows.resize(1);
+                expect(prepare_navigation_labels(single)&&single.rows[0].name==L"Exit to Falgabard House","one confirmed House has no letter despite unobserved bake siblings");
+                expect(prepare_navigation_labels(house)&&std::all_of(house.rows.begin(),house.rows.end(),[](const auto& row){return row.name==L"Exit to Falgabard House";}),
+                    "overlapping source layers to the same point count as one doorway");
+            }
             const auto* world=baked::submap_by_map_id(1);
             FilterInput events;events.current_map=1;events.world=true;events.category=Category::Events;
             for(const auto& o:baked::grids(*world).objects) {

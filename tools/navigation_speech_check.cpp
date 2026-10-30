@@ -5,6 +5,7 @@
 #include <map>
 #include "../src/core/field/entity_nav.cpp"
 namespace fixture {
+game::Id game_id=game::Id::FF6;
 struct Controller { void* player = reinterpret_cast<void*>(1); } controller;
 struct Output { std::vector<std::wstring> parts; bool interrupt; };
 std::vector<Output> output;
@@ -27,6 +28,7 @@ std::map<events::Kind,std::vector<events::Handler>> handlers;
 int index = 0, total = 1;
 void finish() { auto callbacks = std::move(pending); pending.clear(); for (auto& callback : callbacks) callback(); }
 }
+namespace game { Id current() { return fixture::game_id; } }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace ref {
 Class::Class(const char* n, const char* c, uint8_t g, const char* a) : ns(n), name(c), games(g), assembly(a) {}
@@ -274,6 +276,31 @@ int main() {
     const int before_rescan=fixture::invalidations;field::request_rescan();
     expect(fixture::invalidations==before_rescan+1&&fixture::refreshes==refreshed+2,
         "native script return retires old captured routes before revalidating reusable and consumed actions");
+    // Exercise the actual shared keyboard/controller category producers, not a
+    // parallel category table. Numeric view identities remain unchanged.
+    fixture::delay_browse=false;fixture::browse_path={};fixture::browse_path.direct=true;
+    for(int n=1;n<=6;++n) {
+        fixture::game_id=static_cast<game::Id>(n);
+        std::vector<field::Category> cycle={field::Category::Chests,field::Category::NPCs,
+            field::Category::MapExits,field::Category::Events,field::Category::Vehicles};
+        if(n>=4)cycle.push_back(field::Category::SavePoints);
+        cycle.push_back(field::Category::Objects);cycle.push_back(field::Category::All);
+        field::g_current_category=field::Category::All;
+        for(const auto expected:cycle) {
+            fixture::output.clear();field::category_next();fixture::finish();
+            expect(field::g_current_category==expected&&fixture::category==expected&&fixture::output.size()==1&&
+                fixture::output.back().parts.front()==L"Category: "+field::category_name(expected),
+                "forward category cycle skips Save Points only in FF1-FF3 and announces the selected view");
+        }
+        cycle.pop_back();std::reverse(cycle.begin(),cycle.end());cycle.push_back(field::Category::All);
+        field::g_current_category=field::Category::All;
+        for(const auto expected:cycle) {
+            fixture::output.clear();field::category_previous();fixture::finish();
+            expect(field::g_current_category==expected&&fixture::category==expected&&fixture::output.size()==1&&
+                fixture::output.back().parts.front()==L"Category: "+field::category_name(expected),
+                "reverse category cycle skips Save Points only in FF1-FF3 and preserves wraparound");
+        }
+    }
     std::printf("Navigation speech: ordered category/focus, stale-event rejection, FIFO browse, route-aware distance/floors and concurrent soundscape/beacon/directions: %d failures\n", failures);
     return failures ? 1 : 0;
 }

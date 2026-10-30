@@ -147,8 +147,10 @@ void observe_current(int map_id, std::wstring group)
 }
 Resolver::Resolver() : Resolver(snapshot(), data::game_json("mapstate"))
 {
-    if (const auto* sm = baked::submap_by_map_id(g_observed_map))
-        cache_[baked::submap_index(sm)] = {true, g_observed_group, g_observed_groups};
+    if (const auto* sm = baked::submap_by_map_id(g_observed_map)) {
+        observed_index_=baked::submap_index(sm);
+        observed_groups_=g_observed_groups;
+    }
 }
 }
 }

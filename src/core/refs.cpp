@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <cstring>
+#include <atomic>
 #include "refs.h"
 #include "log.h"
 
@@ -9,6 +10,7 @@ Class*  g_classes = nullptr;
 Field*  g_fields  = nullptr;
 Method* g_methods = nullptr;
 volatile LONG g_call_faults = 0;
+std::atomic<unsigned> g_boot_lookup_records{0};
 
 bool copy_chars(wchar_t* dst, const void* src, size_t n)
 {
@@ -148,13 +150,23 @@ void call_failed_note(const char* name)
 
 void* instance(Class& c)
 {
+    // Targeted FFIII startup causality evidence. Record at most16 mod-origin
+    // singleton requests before the first input frame, including their actual
+    // outcomes. No getter/call order/result changes; no recurring log or poll.
+    unsigned ordinal=0;
+    if(game::is(game::Id::FF3)&&timing::frame.load(std::memory_order_relaxed)==0&&
+       g_boot_lookup_records.load(std::memory_order_relaxed)<16) {
+        const unsigned next=g_boot_lookup_records.fetch_add(1,std::memory_order_relaxed)+1;
+        if(next<=16)ordinal=next;
+    }
+    if(ordinal)LOGF("[Startup] mod singleton request=%u class=%s.%s thread=%lu",ordinal,c.ns?c.ns:"",c.name,GetCurrentThreadId());
     timing::Scope measured("Singleton lookup", timing::Kind::Native, c.name);
     il2cpp::Class* k = c.get();
-    if (!k) return nullptr;
-    il2cpp::Method* m = il2cpp::find_method(k, "get_Instance", 0);
-    if (!m) m = il2cpp::find_method(k, "get_instance", 0);
-    if (!m) return nullptr;
-    return il2cpp::invoke_ptr(m, nullptr, nullptr, 0);
+    il2cpp::Method* m = k?il2cpp::find_method(k, "get_Instance", 0):nullptr;
+    if (!m&&k) m = il2cpp::find_method(k, "get_instance", 0);
+    void* result=m?il2cpp::invoke_ptr(m, nullptr, nullptr, 0):nullptr;
+    if(ordinal)LOGF("[Startup] mod singleton request=%u class-ready=%d getter-ready=%d instance-present=%d",ordinal,k!=nullptr,m!=nullptr,result!=nullptr);
+    return result;
 }
 
 } // namespace ref

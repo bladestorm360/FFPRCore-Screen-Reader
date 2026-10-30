@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <deque>
 #include <queue>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 #include "baked_router.h"
@@ -32,7 +33,9 @@ bool blocked_by_caller(const Request& r, const Cell& c)
 {
     for (const Cell& b : r.blocked)
         if (b.x == c.x && b.y == c.y && (b.layer < 0 || b.layer == c.layer)) return true;
-    return false;
+    if(!r.transport_rules||!r.submap)return false;
+    const auto& grid=baked::grids(*r.submap);
+    return transport_rule_at(r,grid,c,TransportRules::Gate)||transport_rule_at(r,grid,c,TransportRules::Solid);
 }
 
 /// A goal cell of the request (a world map has one layer: the layer is ignored there).
@@ -83,14 +86,22 @@ bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
 {
     const bool world=r.submap&&r.submap->world;
     const int direction=step_direction(from,to,world?r.submap->width:0,world?r.submap->height:0);
-    for (const auto& gate : r.directional) {
+    const auto permits=[&](const auto& gate) {
         if (gate.cell.x == to.x && gate.cell.y == to.y &&
             (gate.cell.layer < 0 || gate.cell.layer == to.layer) &&
             ((gate.axis == 1 && from.y != to.y) || (gate.axis == 2 && from.x != to.x))) return false;
-        if(gate.axis||direction<0)continue;
+        if(gate.axis||direction<0)return true;
         const bool entered=gate.cell.x==to.x&&gate.cell.y==to.y&&(gate.cell.layer<0||gate.cell.layer==to.layer);
         const bool left=gate.cell.x==from.x&&gate.cell.y==from.y&&(gate.cell.layer<0||gate.cell.layer==from.layer);
         if((entered&&!(gate.mask&kBits[kReverse[direction]]))||(left&&!(gate.mask&kBits[direction])))return false;
+        return true;
+    };
+    for(const auto& gate:r.directional)if(!permits(gate))return false;
+    if(r.transport_rules&&r.transport_rules->submap==r.submap&&r.transport_gates&&r.submap&&
+        !r.transport_rules->directional.empty()) {
+        const auto ids=transportation_bit(transportation_at(r,baked::grids(*r.submap),to));
+        for(const auto& gate:r.transport_rules->directional)
+            if((gate.ids&ids)&&!permits(gate))return false;
     }
     return true;
 }
@@ -109,6 +120,7 @@ void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>&
 
 bool trap_cell(const Request& r, const baked::Grids& g, const Cell& c)
 {
+    if(transport_rule_at(r,g,c,TransportRules::Trap))return true;
     if (r.live_traps) {
         for (const auto& trap : r.traps)
             if (c.x == trap.x && c.y == trap.y && (trap.layer < 0 || c.layer == trap.layer)) return true;
@@ -127,7 +139,10 @@ int step_direction(const Cell& from, const Cell& to, int w, int h) {
 }
 bool terminal_transition(const Request& r,const baked::Grids& g,const Cell& cell) {
     if(!baked::in_bounds(g,cell.x,cell.y))return false;
+    if(transport_rule_at(r,g,cell,TransportRules::Terminal))return true;
     const bool world=r.submap&&r.submap->world;
+    if((!world||r.vehicle_group<=0||native_ground_entry(r.vehicle_type))&&
+        transport_rule_at(r,g,cell,TransportRules::GroundTerminal))return true;
     const int layer=world?0:cell.layer;if(layer<0||layer>2)return false;
     const auto& mask=(r.transitions?*r.transitions:g.transitions)[layer];
     if(mask.empty())return false;
@@ -138,7 +153,7 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
     const bool world = r.submap && r.submap->world;
     // A door/warp terminates this map leg. It stays usable as the actual goal,
     // including a graph-selected exit; ignoring scene hazards cannot bypass it.
-    if(terminal_transition(r,g,to)&&!(r.goals_open&&is_goal_cell(r,to)))return false;
+    if(terminal_transition(r,g,to)&&!((r.goals_open||r.terminal_goal)&&is_goal_cell(r,to)))return false;
     const int dir = step_direction(from,to,world ? g.width : 0,world ? g.height : 0);
     if (dir < 0 || (world && dir >= 4) || !direction_allowed(r,from,to)) return false;
     if (world) {
@@ -165,6 +180,20 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
 
 namespace {
 
+bool hazardous(const Request& r,const baked::Grids& g,const Cell& cell,bool respect_ignore=true) {
+    if(respect_ignore&&r.ignore_hazards)return false;
+    if(transport_rule_at(r,g,cell,TransportRules::Hazard))return true;
+    if(!r.live_hazards)return !g.hazard.empty()&&g.hazard[static_cast<size_t>(cell.y)*g.width+cell.x];
+    for(const auto& hazard:r.hazards)
+        if(hazard.x==cell.x&&hazard.y==cell.y&&(hazard.layer<0||hazard.layer==cell.layer))return true;
+    return false;
+}
+int edge_distance(const Request& request,const baked::Grids& grid,const Cell& from,const Cell& to) {
+    if(!request.submap||!request.submap->world)return 1;
+    const int dx=std::abs(to.x-from.x),dy=std::abs(to.y-from.y);
+    return std::min(dx,grid.width-dx)+std::min(dy,grid.height-dy);
+}
+
 /// Cardinal edges and native stair diagonals; `visit(next)` returns false to stop.
 template <typename F>
 void neighbours(const Request& r, const baked::Grids& g, const Cell& from, F&& visit)
@@ -189,15 +218,28 @@ void neighbours(const Request& r, const baked::Grids& g, const Cell& from, F&& v
         if (!ok || blocked_by_caller(r, moved)) continue;
         if (trap_cell(r, g, moved) && !(r.allow_trap_goal && is_goal_cell(r, moved))) continue;
         // A step-on warp or trapdoor is crossed only as the goal itself.
-        bool hazard = false;
-        if (!r.ignore_hazards) {
-            if (r.live_hazards) {
-                for (const Cell& c : r.hazards)
-                    if (c.x == moved.x && c.y == moved.y && (c.layer < 0 || c.layer == moved.layer)) { hazard = true; break; }
-            } else hazard = !g.hazard.empty() && g.hazard[static_cast<size_t>(n.y) * g.width + n.x];
-        }
-        if (hazard && !is_goal_cell(r, moved)) continue;
+        if (hazardous(r,g,moved) && !is_goal_cell(r, moved)) continue;
         if (!visit(moved)) return;
+    }
+    if(!mountain_vehicle(r))return;
+    for(int direction=0;direction<4;++direction) {
+        const auto jump=mountain_edge(r,g,from,direction);
+        if(!jump)continue;
+        bool clear=true;Cell previous=from;
+        for(int distance=1;distance<=jump->distance;++distance) {
+            const auto& delta=kDirs[direction];
+            const Cell at{from.layer,(from.x+delta[0]*distance+g.width)%g.width,
+                                     (from.y+delta[1]*distance+g.height)%g.height};
+            // A native action is not permission to route through a captured
+            // barrier, partial collider or unselected scripted transition.
+            const bool intermediate=distance<jump->distance;
+            if(!edge_allowed(r,g,previous,at)||blocked_by_caller(r,at)||
+               (intermediate&&(terminal_transition(r,g,at)||trap_cell(r,g,at)||hazardous(r,g,at,false)))||
+               (trap_cell(r,g,at)&&!(r.allow_trap_goal&&is_goal_cell(r,at)))||
+               (hazardous(r,g,at)&&!is_goal_cell(r,at))) {clear=false;break;}
+            previous=at;
+        }
+        if(clear&&open(r,g,jump->to)&&!visit(jump->to))return;
     }
 }
 
@@ -209,7 +251,7 @@ bool enterprise_pair(int id) { return id==6 || id==13 || id==15 || id==16; }
 // mode retains its wrap, collision, hazard and transition semantics. Modes
 // are ship before flight, air, ship after flight and foot. Native conversions
 // change modes on the same cell; only the shore edge displaces the player.
-EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship)
+EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship, bool final_air)
 {
     EnterpriseResult result;
     if (!request.submap || !request.submap->world || !enterprise_pair(request.transportation_id)) return result;
@@ -221,25 +263,48 @@ EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool
     if(!ship||!air) return result;
     Request modes[4]={request,request,request,request};
     for(int m=0;m<4;++m) { modes[m].goals.clear(); modes[m].goals_open=false; }
-    for(int m:{0,2}) { modes[m].vehicle_group=ship->group; modes[m].vehicle_type=ship->type; modes[m].landing_group=ship->landing_group; }
+    for(int m:{0,2}) { modes[m].vehicle_group=ship->group; modes[m].vehicle_type=ship->type; modes[m].landing_group=ship->landing_group; modes[m].transportation_id=ship_id; }
     modes[1].vehicle_group=air->group; modes[1].vehicle_type=air->type; modes[1].landing_group=air->landing_group;
+    modes[1].transportation_id=air_id;
     modes[3].vehicle_group=0; modes[3].vehicle_type=modes[3].landing_group=0;
+    modes[3].transportation_id=0;
     if(reconstruct) {
-        auto& goal_mode=modes[final_ship?2:3]; goal_mode.goals=request.goals; goal_mode.goals_open=request.goals_open;
-        if(final_ship) { modes[0].goals=request.goals; modes[0].goals_open=request.goals_open; }
+        auto& goal_mode=modes[final_air?1:final_ship?2:3]; goal_mode.goals=request.goals; goal_mode.goals_open=request.goals_open;
+        if(final_ship && !final_air) { modes[0].goals=request.goals; modes[0].goals_open=request.goals_open; }
     }
     // Four owned states per world cell. No native objects enter this search,
     // and each iteration checks the snapshot's cancellation token.
     const int cells=g.width*g.height, count=4*cells;
     std::vector<int> dist(count,INT_MAX), prev(reconstruct?count:0,-1);
+    std::vector<int> nonflight(reconstruct?count:0,INT_MAX);
     std::deque<int> queue;
+    // Selected routes use a lexicographic A* frontier. The reachability flood
+    // retains its existing cheap 0/1 deque and never allocates this state.
+    using SelectedItem=std::tuple<int,int,int,int>; // estimated total, non-flight, total, node
+    std::priority_queue<SelectedItem,std::vector<SelectedItem>,std::greater<SelectedItem>> selected;
     const int start_mode=(request.transportation_id==air_id)?1:0;
     const int start=start_mode*cells+request.start.y*g.width+request.start.x;
-    dist[start]=0;queue.push_back(start); int reached=-1;
     auto cell=[&](int node) { const int n=node%cells; return Cell{request.start.layer,n%g.width,n/g.width}; };
+    auto heuristic=[&](const Cell& c) {
+        int best=0;
+        if(!request.goals.empty()) {
+            best=INT_MAX;
+            for(const auto& goal:request.goals) {
+                const int dx=std::abs(goal.x-c.x),dy=std::abs(goal.y-c.y);
+                // Invalid goals cannot safely contribute a wrapped lower bound.
+                if(dx>=g.width||dy>=g.height)return 0;
+                best=std::min(best,std::min(dx,g.width-dx)+std::min(dy,g.height-dy));
+            }
+        }
+        return best;
+    };
+    dist[start]=0; int reached=-1;
+    if(reconstruct) { nonflight[start]=0; selected.emplace(heuristic(request.start),0,0,start); }
+    else queue.push_back(start);
     auto clear=[&](const Request& r,const Cell& c) {
         if(!open(r,g,c)||blocked_by_caller(r,c)||trap_cell(r,g,c)||terminal_transition(r,g,c))return false;
         if(!r.ignore_hazards) {
+            if(transport_rule_at(r,g,c,TransportRules::Hazard))return false;
             if(r.live_hazards) { for(const auto& h:r.hazards) if(h.x==c.x&&h.y==c.y&&(h.layer<0||h.layer==c.layer))return false; }
             else if(!g.hazard.empty()&&g.hazard[static_cast<size_t>(c.y)*g.width+c.x])return false;
         }
@@ -247,15 +312,29 @@ EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool
     };
     auto add=[&](int from,int mode,const Cell& to,int cost) {
         const int node=mode*cells+to.y*g.width+to.x, candidate=dist[from]+cost;
-        if(candidate>=dist[node])return;
-        dist[node]=candidate; if(reconstruct)prev[node]=from;
-        if(cost)queue.push_back(node);else queue.push_front(node);
+        if(reconstruct) {
+            const int secondary=nonflight[from]+(cost && mode!=1 ? 1 : 0);
+            if(candidate>dist[node] || (candidate==dist[node] && secondary>=nonflight[node]))return;
+            dist[node]=candidate;nonflight[node]=secondary;prev[node]=from;
+            selected.emplace(candidate+heuristic(to),secondary,candidate,node);
+        } else {
+            if(candidate>=dist[node])return;
+            dist[node]=candidate;
+            if(cost)queue.push_back(node);else queue.push_front(node);
+        }
     };
-    while(!queue.empty()) {
+    while(reconstruct ? !selected.empty() : !queue.empty()) {
         if(request.cancelled&&request.cancelled())return {};
-        ++result.expansions;result.peak_queue=std::max(result.peak_queue,queue.size());
-        const int node=queue.front(); queue.pop_front(); const int mode=node/cells; const Cell here=cell(node);
-        if(reconstruct && ((final_ship&&(mode==0||mode==2))||(!final_ship&&mode==3)) &&
+        result.peak_queue=std::max(result.peak_queue,reconstruct?selected.size():queue.size());
+        int node;
+        if(reconstruct) {
+            const auto [estimate,secondary,total,n]=selected.top();selected.pop();
+            if(total!=dist[n] || secondary!=nonflight[n])continue; // obsolete owned frontier entry
+            node=n;
+        } else { node=queue.front();queue.pop_front(); }
+        ++result.expansions;
+        const int mode=node/cells; const Cell here=cell(node);
+        if(reconstruct && ((final_air&&mode==1)||(!final_air&&final_ship&&(mode==0||mode==2))||(!final_air&&!final_ship&&mode==3)) &&
            std::find(request.goals.begin(),request.goals.end(),here)!=request.goals.end()) { reached=node;break; }
         if(terminal_transition(modes[mode],g,here))continue;
         neighbours(modes[mode],g,here,[&](const Cell& next){add(node,mode,next,1);return true;});
@@ -269,6 +348,11 @@ EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool
     result.foot.submap=request.submap;result.foot.width=g.width;result.foot.height=g.height;
     result.foot.dist[0].resize(cells,0xffff);
     for(int i=0;i<cells;++i)if(dist[3*cells+i]!=INT_MAX)result.foot.dist[0][i]=static_cast<uint16_t>(std::min(dist[3*cells+i],0xfffe));
+    if(final_air) {
+        result.air.submap=request.submap;result.air.width=g.width;result.air.height=g.height;
+        result.air.dist[0].resize(cells,0xffff);
+        for(int i=0;i<cells;++i)if(dist[cells+i]!=INT_MAX)result.air.dist[0][i]=static_cast<uint16_t>(std::min(dist[cells+i],0xfffe));
+    }
     if(reached<0)return result;
     result.steps=dist[reached]; std::vector<int> path;
     for(int n=reached;n>=0;n=prev[n])path.push_back(n);
@@ -284,7 +368,7 @@ bool safe_landing(const Request& movement, const baked::Grids& g, const Cell& la
     r.start = landing;
     r.goals.clear(); r.goals_open = false; r.allow_trap_goal = false; r.ignore_hazards = false;
     if (!open(r, g, landing) || blocked_by_caller(r, landing) || trap_cell(r, g, landing)) return false;
-    if(terminal_transition(r,g,landing))return false;
+    if(terminal_transition(r,g,landing)||transport_rule_at(r,g,landing,TransportRules::Hazard))return false;
     if (r.live_hazards) {
         for (const auto& hazard : r.hazards)
             if (hazard.x == landing.x && hazard.y == landing.y && (hazard.layer < 0 || hazard.layer == landing.layer)) return false;
@@ -302,6 +386,7 @@ Route find(const Request& r)
     if (g.width <= 0 || g.height <= 0) return out;
     if (!baked::in_bounds(g, r.start.x, r.start.y)) return out;
 
+    const bool mountain=mountain_vehicle(r);
     const int layers = r.submap->world ? 1 : 3;
     const int total = layers * g.width * g.height;
     Cell start = r.start;
@@ -343,21 +428,28 @@ Route find(const Request& r)
     const int headings = r.submap->world ? 4 : 8;
     const int states = total * headings;
     std::vector<int32_t> cost(static_cast<size_t>(states), -1);
+    std::vector<uint16_t> crossings(mountain?static_cast<size_t>(states):0,0xFFFF);
     std::vector<int32_t> came(static_cast<size_t>(states), -1);   // -1 = reached from the start
-    using Item = std::pair<int, int>;   // f, state (node * 4 + direction)
+    // Required manual actions outrank distance/turns. This is lexicographic,
+    // not a guessed animation-time penalty: any legal zero-crossing route wins.
+    using Item = std::tuple<int,int,int>; // crossings, f, state
     std::priority_queue<Item, std::vector<Item>, std::greater<Item>> frontier;
     auto h = [&](const Cell& c) { return heuristic(c) * kStep; };
-    auto relax = [&](const Cell& next, int dir, int ng, int from_state) {
+    auto relax = [&](const Cell& next, int dir, int ng, int nc, int from_state) {
         const int st = node_of(g, next) * headings + dir;
-        if (cost[static_cast<size_t>(st)] < 0 || ng < cost[static_cast<size_t>(st)]) {
+        const int old_crossings=mountain?crossings[st]:0;
+        if (cost[st] < 0 || nc<old_crossings || (nc==old_crossings&&ng<cost[st])) {
             cost[static_cast<size_t>(st)] = ng;
+            if(mountain)crossings[st]=static_cast<uint16_t>(nc);
             came[static_cast<size_t>(st)] = from_state;
-            frontier.push({ng + h(next), st});
+            frontier.push({nc,ng + h(next),st});
         }
     };
     // The start has no direction: its exits cost a step each, never a turn.
     neighbours(r, g, start, [&](const Cell& next) {
-        relax(next, step_direction(start, next, r.submap->world ? g.width : 0, r.submap->world ? g.height : 0), kStep, -1);
+        const int direction=mountain?direction_towards(start,next,g.width,g.height):step_direction(start,next,r.submap->world?g.width:0,r.submap->world?g.height:0);
+        const int distance=mountain?edge_distance(r,g,start,next):1;
+        relax(next,direction,kStep*distance,distance>1?1:0,-1);
         return true;
     });
     int expansions = 0;
@@ -367,19 +459,21 @@ Route find(const Request& r)
         if (r.cancelled && r.cancelled()) return out;
         Item top = frontier.top();
         frontier.pop();
-        const int st = top.second;
+        const int st = std::get<2>(top);
         const int dir = st % headings;
         const Cell cur = cell_of(g, st / headings);
         const int gcost = cost[static_cast<size_t>(st)];
-        if (top.first - h(cur) > gcost) continue;   // stale entry
+        const int count=mountain?crossings[st]:0;
+        if(std::get<0>(top)!=count||std::get<1>(top)-h(cur)>gcost)continue;
         if (is_goal(cur)) {
             goal_state = st;
             break;
         }
         if (r.max_expansions > 0 && ++expansions > r.max_expansions) break;
         neighbours(r, g, cur, [&](const Cell& next) {
-            const int nd = step_direction(cur, next, r.submap->world ? g.width : 0, r.submap->world ? g.height : 0);
-            relax(next, nd, gcost + kStep + (nd != dir ? kTurn : 0), st);
+            const int nd = mountain?direction_towards(cur,next,g.width,g.height):step_direction(cur,next,r.submap->world?g.width:0,r.submap->world?g.height:0);
+            const int distance=mountain?edge_distance(r,g,cur,next):1;
+            relax(next,nd,gcost+kStep*distance+(nd!=dir?kTurn:0),count+(distance>1?1:0),st);
             return true;
         });
     }
@@ -392,6 +486,11 @@ Route find(const Request& r)
     if (r.submap->world)
         for (Cell& c : path) c.layer = r.start.layer;
     out.found = !path.empty() && path.front().x == start.x && path.front().y == start.y;
+    if(mountain) {
+        out.mountain_actions=crossings[goal_state];
+        out.displacement_steps=0;
+        for(size_t i=1;i<path.size();++i)out.displacement_steps+=edge_distance(r,g,path[i-1],path[i]);
+    }
     out.cells = std::move(path);
     return out;
 }
@@ -405,6 +504,10 @@ int Reach::distance(const Cell& c) const
     if (dist[layer].empty()) return -1;
     const uint16_t d = dist[layer][static_cast<size_t>(c.y) * width + c.x];
     return d == 0xFFFF ? -1 : d;
+}
+int Reach::crossings(const Cell& c) const {
+    if(!reachable(c))return -1;
+    return mountain_actions.empty()?0:mountain_actions[static_cast<size_t>(c.y)*width+c.x];
 }
 
 Reach flood(const Request& r)
@@ -425,10 +528,12 @@ Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector
     const int layers = r.submap->world ? 1 : 3;
     for (int l = 0; l < layers; ++l) out.dist[l].assign(static_cast<size_t>(g.width) * g.height, 0xFFFF);
 
-    using Pending = std::pair<int,int>;
+    using Pending = std::tuple<int,int,int>; // crossings, physical distance, node
     std::priority_queue<Pending,std::vector<Pending>,std::greater<Pending>> q;
     std::queue<Cell> fifo;
-    const bool weighted = !costs.empty();
+    const bool mountain=mountain_vehicle(r);
+    if(mountain)out.mountain_actions.assign(static_cast<size_t>(g.width)*g.height,0xFFFF);
+    const bool weighted = !costs.empty()||mountain;
     for (size_t i=0; i<starts.size(); ++i) {
         Cell start = starts[i];
         if (r.cancelled && r.cancelled()) return Reach{};
@@ -439,26 +544,33 @@ Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector
         const int cost = costs.empty() ? 0 : (i<costs.size() ? costs[i] : 0);
         if (cost<0 || cost>=d0) continue;
         d0 = static_cast<uint16_t>(std::min(0xFFFE,cost));
-        if (weighted) q.push({d0,node_of(g,start)}); else fifo.push(start);
+        if(mountain)out.mountain_actions[static_cast<size_t>(start.y)*g.width+start.x]=0;
+        if (weighted) q.push({0,d0,node_of(g,start)}); else fifo.push(start);
     }
     while (weighted ? !q.empty() : !fifo.empty()) {
         if (r.cancelled && r.cancelled()) return Reach{};
         Pending item{};
         Cell cur;
-        if (weighted) { item=q.top(); cur=cell_of(g,item.second); q.pop(); }
+        if (weighted) { item=q.top(); cur=cell_of(g,std::get<2>(item)); q.pop(); }
         else { cur=fifo.front(); fifo.pop(); }
         const uint16_t dc = out.dist[cur.layer][static_cast<size_t>(cur.y) * g.width + cur.x];
-        if (weighted && dc != item.first) continue;
+        const int count=mountain?out.mountain_actions[static_cast<size_t>(cur.y)*g.width+cur.x]:0;
+        if(weighted&&(dc!=std::get<1>(item)||count!=std::get<0>(item)))continue;
         // Flood goals may be entered to report reachability, but cannot open a
         // route on their far side. Explicit reverse-flood seeds may leave them.
         if(terminal_transition(r,g,cur)&&is_goal_cell(r,cur)&&
            std::find(starts.begin(),starts.end(),cur)==starts.end())continue;
         neighbours(r, g, cur, [&](const Cell& next) {
             uint16_t& dn = out.dist[next.layer][static_cast<size_t>(next.y) * g.width + next.x];
-            const auto cost = static_cast<uint16_t>(std::min(0xFFFE,dc+1));
-            if (cost < dn) {
+            const int distance=mountain?edge_distance(r,g,cur,next):1;
+            const auto cost=static_cast<uint16_t>(std::min(0xFFFE,dc+distance));
+            const int nc=count+(distance>1?1:0);
+            const auto index=static_cast<size_t>(next.y)*g.width+next.x;
+            const int old_count=mountain?out.mountain_actions[index]:0;
+            if(nc<old_count||(nc==old_count&&cost<dn)) {
                 dn = cost;
-                if (weighted) q.push({dn,node_of(g,next)}); else fifo.push(next);
+                if(mountain)out.mountain_actions[index]=static_cast<uint16_t>(nc);
+                if (weighted) q.push({nc,dn,node_of(g,next)}); else fifo.push(next);
             }
             return true;
         });
@@ -610,6 +722,9 @@ constexpr int kAcceptBitOfSide[4] = {1, 2, 4, 8};   // north, east, south, west
 bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y) {
     if(!(r.submap && r.submap->world))return true;
     if(r.vehicle_group<=0 || native_ground_entry(r.vehicle_type))return world_enterable(r,g,x,y);
+    if(r.vehicle_type==6&&open(r,g,{1,x,y}))
+        for(const auto& object:g.objects)
+            if(baked::submarine_entry(object)&&object.contains(x,y))return true;
     if(r.vehicle_type==2 && world_enterable(r,g,x,y)) {
         // Only an explicitly reviewed step-on script permits sailing into the
         // transition. Native GotoMap towns retain their dismount requirement.
@@ -618,14 +733,14 @@ bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y)
     }
     return false;
 }
-int transition_distance(const Request& request, const Reach& reach) {
+int transition_distance(const Request& request, const Reach& reach,GoalKind kind) {
     if (!request.submap || !reach.submap) return -1;
     const auto& g = baked::grids(*request.submap);
     const bool world = request.submap->world;
     int best = -1;
     for (const Cell& goal : request.goals) {
         if (!baked::in_bounds(g,goal.x,goal.y) || blocked_by_caller(request,goal) ||
-            !transition_enterable(request,g,goal.x,goal.y)) continue;
+            !(kind==GoalKind::Infer?open(request,g,goal):transition_enterable(request,g,goal.x,goal.y))) continue;
         int distance = reach.distance(goal);
         for (int dir=0;dir<(world ? 4 : 8);++dir) {
             Cell source{goal.layer,goal.x-kDirs[dir][0],goal.y-kDirs[dir][1]};
@@ -705,7 +820,7 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
         const baked::Object* object = talk ? talk : warp;
         if (object) footprint_of(*object, out.faced, world ? target.layer : object->layer);
         else out.faced.push_back(target);
-        // A one-cell relay extends the interaction ray when the tile immediately
+        // A counter relay extends the interaction ray when the tile immediately
         // in front of the player is that relay. It does not require matching IDs:
         // Ur's item clerk and counter both use zero. The player may stand beyond
         // a solid counter, rather than on its impassable tile.
@@ -723,17 +838,6 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
                 if (!group.empty() && group != L"entity_default" && group != L"default" && o.group != talk->group) continue;
             }
             relays.push_back(&o);
-        }
-        // Preserve the existing multi-cell linked approach until its native
-        // rectangle-origin mapping is independently established. One-cell
-        // relays below use the verified native probe/range contract instead.
-        if (npc && !world && talk->a > 0) {
-            for (const auto* o : relays) {
-                if ((o->tw > 1 || o->th > 1) && o->a == talk->a) {
-                    out.cells.push_back(Cell{o->layer, o->tx, o->ty});
-                    return out;
-                }
-            }
         }
         // NPCs, chests and examinable objects all carry accept_action_direction (bake field b).
         const int mask = talk && talk->b > 0 ? talk->b : 15;
@@ -753,17 +857,24 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
             }
             if (npc && !world) for (int d = 0; d < 4; ++d) {
                 if (!(mask & kAcceptBitOfSide[d])) continue;
-                // At most one extra tile per overlapping one-cell relay.
-                // Bounds come from actual relay count/map geometry, not route distance.
-                const int limit = std::min<int>(1 + relays.size(), std::max(g.width, g.height));
-                for (int distance = 2; distance <= limit; ++distance) {
-                    const Cell stand{c.layer,c.x+kSide[d][0]*distance,c.y+kSide[d][1]*distance};
+                // Native ParseMapObjectGroupData centers the full rectangle;
+                // SearchInteractiveArea probes one tile ahead and adds each
+                // overlapping relay's size along the facing axis. IDs are not
+                // involved. The sum bounds the ray even for overlapping desks.
+                int limit=1;
+                for(const auto* relay:relays)limit+=d==0||d==2?relay->th:relay->tw;
+                limit=std::min(limit,std::max(g.width,g.height));
+                for(int layer=0;layer<3;++layer) {
+                 if(!all_layers&&layer!=c.layer)continue;
+                 for (int distance = 2; distance <= limit; ++distance) {
+                    const Cell stand{layer,c.x+kSide[d][0]*distance,c.y+kSide[d][1]*distance};
                     if (!baked::in_bounds(g,stand.x,stand.y)) break;
                     const int probe_x=stand.x-kSide[d][0], probe_y=stand.y-kSide[d][1];
                     int range=1;
                     for (const auto* relay : relays)
-                        if (relay->tw==1 && relay->th==1 && relay->layer==c.layer && relay->tx==probe_x && relay->ty==probe_y) ++range;
+                        if (relay->layer==layer && relay->contains(probe_x,probe_y))range+=d==0||d==2?relay->th:relay->tw;
                     if (distance <= range && open(r,g,stand) && !terminal_transition(r,g,stand)) push_unique(allowed,stand);
+                 }
                 }
             }
         }

@@ -3,6 +3,7 @@
 #include "../core.h"
 #include "../modtext.h"
 #include "../say.h"
+#include "../frame.h"
 #include "../field/field_api.h"
 #include "../system/system.h"
 
@@ -21,6 +22,7 @@ constexpr int kTransportBlackChocobo = 10;
 int g_move_state = kWalk;
 int g_transportation_type = 0;
 int g_last_announced_state = -1;
+uint64_t g_map_generation = 0;
 std::wstring* g_vehicle_name = nullptr;   // heap: no static destructor at process exit
 
 std::wstring& vehicle_name_storage()
@@ -44,6 +46,18 @@ int transport_type_to_move_state(int transportation_type)
     }
 }
 
+bool native_foot(int state,const ::field::VehicleState& vehicle)
+{
+    if(state != kWalk && state != kDush) return false;
+    if(!vehicle.valid||vehicle.type<=1)return true;
+    // Canoe/Submarine also use Walk. Their saved StayMapId can remain on the
+    // world after entry; the asset actually applied to this player is decisive.
+    if(const auto applied=::field::player_uses_vehicle_asset())return !*applied;
+    // Uninitialized assets cannot prove a dismount. Preserve the native
+    // transportation context until an actual ready observation/GetOff edge.
+    return false;
+}
+
 int install()
 {
     queries::define("MoveStateHelper.IsOnFoot", [] { return is_on_foot(); });
@@ -51,6 +65,30 @@ int install()
     queries::define("MoveStateHelper.IsInCanoe", [] { return is_in_canoe(); });
     queries::define("MoveStateHelper.IsControllingAirship", [] { return is_controlling_airship(); });
     queries::define_text("MoveStateHelper.GetMoveStateName", [] { return current_name(); });
+    events::on(events::Kind::MapChanging, [] { ++g_map_generation; });
+    events::on(events::Kind::BattleEntering, [] { ++g_map_generation; });
+    events::on(events::Kind::MapChanged, [] {
+        const auto generation = ++g_map_generation;
+        // MapChanged fires inside the native state-change stack. Its single
+        // next-frame read sees the new owner after that stack has unwound.
+        frame::next_frame([generation] {
+            if (generation != g_map_generation || !system::is_field_navigation_ready()) return;
+            const auto state = ::field::player_movement_state();
+            if (!state) return; // missing data cannot manufacture a dismount
+            const auto vehicle = ::field::current_vehicle();
+            if (native_foot(*state,vehicle)) {
+                const bool was_riding = !is_on_foot();
+                set_on_foot();
+                if (was_riding) ffpr::say(T(L"On foot"), false);
+            } else {
+                if (!vehicle.valid || vehicle.type <= 1) return;
+                // A native GetOn during loading already owns its announcement.
+                // Seed the cache without repeating that same boarding event.
+                const auto name = ::field::vehicle_display_name(vehicle.id,vehicle.type,vehicle.message_id);
+                set_vehicle_state(vehicle.type,name);
+            }
+        }, "MoveState.MapReady");
+    });
     return 0;
 }
 core::Install s_install{"MoveStateHelper", &install, 90};
@@ -77,7 +115,9 @@ std::wstring current_name()
     // Explicit V/controller query: loading a boarded save need not emit GetOn.
     // Read the same ready native transportation owner as the route snapshot.
     if (system::is_field_navigation_ready()) {
+        const auto state = ::field::player_movement_state();
         const auto vehicle = ::field::current_vehicle();
+        if (state && native_foot(*state,vehicle)) return move_state_name(*state);
         if (vehicle.valid) {
             if (vehicle.type <= 1) return move_state_name(kWalk);
             auto name = ::field::vehicle_display_name(vehicle.id, vehicle.type, vehicle.message_id);

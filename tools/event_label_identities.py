@@ -21,15 +21,50 @@ WORLD_TRAVEL_REVIEWS = {(r['game'],r['submap'],r['raw'],r['script_id']):r for r 
 
 
 WORLD_EVENT_REVIEWS=json.loads((Path(__file__).parent/'world_event_reviews.json').read_text(encoding='utf-8'))
+_functional_scripts={}
+
+def reviewed_event_script(n,obj,script_name,script):
+    """Resolve only a pinned review when its script lives in a shared asset.
+
+    Unreviewed inference keeps its existing source rules. Missing/shared script
+    ownership cannot silently turn a reviewed transfer back into a scene.
+    """
+    row=next((r for r in WORLD_EVENT_REVIEWS if (r['game'],r['submap'],r['group'],r['id'])==(n,obj['submap'],obj['group'],obj['id'])
+              and r['raw']==obj['name'] and r.get('object_type',2)==obj['type']),None)
+    if not row:return script
+    if n not in _functional_scripts:
+        path=Path(__file__).resolve().parents[2]/'tools/mapdump'/f'ff{n}_scripts.jsonl'
+        _functional_scripts[n]=[json.loads(line) for line in path.open(encoding='utf-8-sig')]
+    sources=_functional_scripts[n]
+    if row.get('source_variants'):
+        actual={hashlib.sha256(json.dumps(s.get('mnemonics'),sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+                for s in sources if s['name']==script_name}
+        assert actual==set(row['source_variants']),'Reviewed global script variants changed'
+    if not script:
+        candidates=[s for s in sources if s['name']==script_name and
+            hashlib.sha256(json.dumps(s,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()==row['script_sha256']]
+        assert candidates,'Reviewed shared script missing or changed'
+        script=candidates[0]
+    if row.get('action_id',2)!=0:
+        # Native GetScriptData tries the loaded map and resident script bank.
+        # A same-named body in another map is not executable source evidence.
+        # Current reviewed roots are all exact local or Resident bindings.
+        assert script and script['submap']in(obj['submap'],'Resident'),'Reviewed source is outside the native local/resident bank'
+    for child in row.get('continuations',[]):
+        assert any(s['submap']==child['submap'] and s['name']==child['script'] and
+            hashlib.sha256(json.dumps(s.get('mnemonics'),sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()==child['body_sha256']
+            for s in sources),'Reviewed travel continuation changed'
+    return script
 
 
 def reviewed_world_event_identity(n, obj, script_name, script):
-    # Exact occurrences and whole-script hashes: pure bookkeeping must not
-    # become a scene destination; actual conditional travel keeps its own name.
-    row=next((r for r in WORLD_EVENT_REVIEWS if (r['game'],r['submap'],r['group'],r['id'])==(n,obj['submap'],obj['group'],obj['id'])),None)
+    # Exact occurrences and whole-script hashes: reviewed entrances, barriers
+    # and bookkeeping keep functional identities without revealing story scenes.
+    row=next((r for r in WORLD_EVENT_REVIEWS if (r['game'],r['submap'],r['group'],r['id'])==(n,obj['submap'],obj['group'],obj['id'])
+              and r['raw']==obj['name'] and r.get('object_type',2)==obj['type']),None)
     if not row:return None
     p=obj.get('props') or {}
-    assert obj['type']==2 and p.get('action_id')==2 and row['raw']==obj['name']
+    assert obj['type']==row.get('object_type',2) and p.get('action_id')==row.get('action_id',2) and row['raw']==obj['name']
     assert row['entity_id']==p.get('entity_id') and row['script_id']==p.get('script_id') and row['script_name']==script_name
     digest=hashlib.sha256(json.dumps(script,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
     assert digest==row['script_sha256'],'Reviewed world event changed; inspect before classifying'

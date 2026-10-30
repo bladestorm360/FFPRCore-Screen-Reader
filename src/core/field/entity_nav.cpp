@@ -17,11 +17,13 @@
 #include "field_api.h"
 #include "field_internal.h"
 #include "target_kind.h"
+#include "nautilus_surface.h"
 #include "map_names.h"
 #include "object_cache.h"
 #include "scene_events.h"
 #include "../core.h"
 #include "../frame.h"
+#include "../game.h"
 #include "../fieldnav/autowalk.h"
 #include "../fieldnav/audio_loops.h"
 #include "../ui/preferences.h"
@@ -112,7 +114,9 @@ void refresh_entities_if_needed()
 /// chest, on an exit, on a vehicle or save point; an event by what is baked at its cell.
 TargetKind target_kind_of(const Entity& e)
 {
-    return navigation_target_kind(e.kind,e.category());
+    if(nautilus_surface::matches(static_cast<int>(game::current()),e.local_baked_map_id,
+        {e.cell_layer,e.cell_x,e.cell_y},e.entity_id,e.audio_hint))return TargetKind::Spot;
+    return navigation_target_kind(e.kind,e.category(),e.aerial_transition);
 }
 
 /// Only the selected object is evaluated. Native capture and owned route work are
@@ -287,6 +291,18 @@ void cycle(bool next)
 // =========================================================================================
 Category g_current_category = Category::All;
 
+Category adjacent_category(Category from, bool next)
+{
+    const int step=next?1:-1;
+    int index=(static_cast<int>(from)+step+kCategoryCount)%kCategoryCount;
+    // FFI-FFIII have no physical save points. Keep enum/view identities stable
+    // and skip only this browse stop; empty categories in applicable games stay.
+    if(index==static_cast<int>(Category::SavePoints)&&
+        !game::in(game::kFF4|game::kFF5|game::kFF6))
+        index=(index+step+kCategoryCount)%kCategoryCount;
+    return static_cast<Category>(index);
+}
+
 void announce_category_change(double requested_at)
 {
     const auto generation = ++g_category_generation;
@@ -321,7 +337,7 @@ void category_next()
 {
     const double requested_at = frame::now();
     if (!ensure_field_context()) return;
-    g_current_category = static_cast<Category>((static_cast<int>(g_current_category) + 1) % kCategoryCount);
+    g_current_category = adjacent_category(g_current_category,true);
     scanner::set_category(g_current_category);
     announce_category_change(requested_at);
 }
@@ -330,9 +346,7 @@ void category_previous()
 {
     const double requested_at = frame::now();
     if (!ensure_field_context()) return;
-    int prev = static_cast<int>(g_current_category) - 1;
-    if (prev < 0) prev = kCategoryCount - 1;
-    g_current_category = static_cast<Category>(prev);
+    g_current_category = adjacent_category(g_current_category,false);
     scanner::set_category(g_current_category);
     announce_category_change(requested_at);
 }

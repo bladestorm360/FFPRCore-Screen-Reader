@@ -1,5 +1,144 @@
 # Boot scene fails to progress, October25
 
+Current delivery: FFIII b2cacd6f/11103232 bytes includes the early-readiness guard,
+bounded pre-first-frame singleton request evidence and refined same-three-hook
+state/trace observer. Full canonical/offline/smoke/22-file security checks pass;
+22 installed hashes match,144 protected/other five games unchanged. Evidence is
+build_check/nautilus_access_20261028/; initial candidate0a6c18a3 was never installed
+because the game guard refused it, then the human requested Nautilus corrections
+first. The exact intermittent fault producer remains open; do not describe this
+as a confirmed hang repair. The user's next natural launch can supply the missing
+state/trace evidence without an agent launch/control/probe. Full map audit resumes
+after this delivered checkpoint; Doga's Manor landing is also corrected.
+
+Most recent human clarification: Dalg destination was already present and had
+been misheard. Its reported transition issue is withdrawn; continue startup
+diagnosis. No Dalg code/data change is authorized by that withdrawn report.
+
+The next actual navigation regression is Doga's Manor: the user confirms that
+Nautilus guidance flies through its entrance without landing/walking. Address
+after startup, then resume the full audit. The earlier northern-Saronia boarding
+fixture only asserted changed vehicle guidance after its landing assertion was
+weakened; this missed the actual general-aircraft landing bug. Retain that as a
+test-coverage correction, not evidence that the game's entrance accepts flight.
+
+Latest human steering October28 explicitly reopens startup repair as the active
+priority. The user reports many clean vanilla and MelonLoader restarts, with
+this failure specific to the native mod. Accept that comparison as strong causal
+evidence of native-mod interference; the unresolved question is the exact
+producer/null object, not whether to believe the report. Pause the map audit
+with source/evidence intact. After startup, fix Doga's Manor landing and the
+parked-Nautilus Current map with vehicles list, then resume the full audit.
+Dalg was found by the user and requires no change. No agents or game probes.
+
+Finite startup checkpoint: locate the interfering native-mod producer, apply
+the smallest correction preserving original game calls/exception behavior,
+verify source-to-output and native ownership with actual-source offline hosts,
+then serial full build/smoke/exact-payload scan and FFIII delivery. Initial
+estimate60–90minutes; exact failed-call evidence may require a narrowly improved
+existing diagnostic if retained logs/static code cannot identify it. Do not add
+arbitrary startup delays, consume the exception, fabricate missing managers,
+retry game initialization or reset native singleton fields. Existing navigation/
+battle/input designs remain Closed except minimal actual startup integration.
+Current cause investigation remains open (~35%); diagnostic refinement is
+implemented and its actual-source offline check passes. No startup repair is
+claimed.
+
+An actual-source before/after check now establishes a specific unsafe native-mod
+producer: input_transition_blocked queried FadeManager before rejecting Boot
+with no main-game manager. A host getter model matching the native first-lookup
+cache semantics reproduces2 failures: the readiness read performs the cold
+lookup and subsequent native setup inherits its cached null after the prefab
+exists. The minimal guard now rejects already-blocked Boot/loading before any
+manager query. The stable-title fade path and direct settings exception remain.
+Expanded actual battle_context_check passes0 failures across all-six state,
+event UI, transition and title-fade cases. This fixes the proven unsafe order;
+it does not establish that this path caused pid21320, whose first input frame
+was later than its exception. Root-cause/gameplay confirmation remains open.
+
+refs.cpp::instance also records at most16 native-mod singleton requests before
+the first input frame in FFIII, plus their actual class/getter/result presence.
+Native calls and returns are unchanged; no retry, search, reset, new runtime hook
+or native pointer transfer. Logging stops after that phase/budget. The actual
+producer fixture bootstrap_singleton_check verifies one original call, null/
+present results, capacity, no logs in1000 running-frame calls, missing metadata
+and other-game abstention. It passes0 failures and is in the canonical build.
+This makes the remaining premature-lookup hypothesis observable rather than
+claiming it from missing slow-scope records.
+
+October28 source findings: failed pid21320's first input frame is AFTER the
+exception, so an ordinary later frame callback is not evidence for the cause of
+that particular failure. The earlier null ResourceManager snapshot likewise
+does not prove it was the failing object: CreateInstance can fail earlier and
+never reach resource setup. Its native pre-resource dependencies are FadeOut,
+tracker/updater setup, SerialTypeManager, SteamSDKManager, ProviderManager and
+SystemConfig. Direct-call comparison against the312 installed hooks finds only
+the ResourceManager observer among its direct callees, and that boundary never
+began. Deeper/earlier native-mod callbacks and bootstrap timing remain open.
+No arbitrary delay, exception swallow, manager creation or static-field reset
+has been added as a guessed repair.
+
+The existing3-hook observer now copies ready FFIII-only evidence. Native
+PrepareForThrow209F90 fills Exception._stackTrace0x38 before Raise20A840;
+StackTrace.get_trace(911FE0→1E6240) consumes one MethodInfo pointer per IntPtr
+array element. The observer reads only a12-method prefix, validates array length
+≤4096 and code addresses against the loaded game module, and logs relative
+method addresses. It does not walk OS stacks or call a managed trace/message
+getter. This is not native_trace_ips0x80. Exact native exports/provenance remain
+outside Git in parent tools/startup_hang_20261028/ff3_exception_native/.
+
+Three game-manager watches (FadeManager, SteamSDKManager, ResourceManager) resolve
+only immutable metadata before hook enable. Native owners then read the actual
+static instance/lookup-completed storage, with valid/unavailable distinction,
+at CreateInstance before/completed/fault boundaries. They never call a singleton
+getter or change its cached state. The matching FFIII native singleton getter
+searches once and retains even a null result, so premature mod lookups are a
+concrete causal hypothesis to test, not an established producer. Required named
+field offsets0/8 and verified Class.static_fields0xB8 fail closed. Other games do
+not receive this unverified profile. Cached class metadata has process lifetime;
+no thread-affine game pointer goes to a worker, only copied booleans/RVAs.
+
+All new work stays on the existing event boundaries: no extra hook/timer/poll,
+runtime launch/control, native snapshot tool or direct game operation. Existing
+4-exception/process capacity remains; each prefix adds at most12 method records.
+Normal construction adds3 before/3 completed scalar records. Actual-source host
+checks original call counts/SEH and MSVC propagation, malformed/oversized arrays,
+foreign addresses,12-prefix bounds, cached-null versus unsearched state, no getter/
+metadata call or native-state write during observation, and other-game abstention.
+It passes0 failures;100 independent fake-owner failure captures cost0.808ms
+aggregate/0.028ms peak. That excludes real native game, logger worker/frame/audio
+cost and does not certify the cumulative25ms application-lag limit. Full serial
+build/security/FFIII installation are pending. This is diagnostic refinement,
+not a startup repair. Root-cause completion still needs decisive failing-state
+evidence and then a minimal producer correction.
+allowed scope: dllmain/runtime_gate, startup observer and only a proven earlier
+native-mod callback/dependency. Native capture/launch/control still needs its
+existing explicit authorization; user log inspection alone is not that approval.
+
+October28 human recurrence: the installed de3e075d build's failed session21320
+started12:22:24 and now supplies decisive exception evidence. At startup tick
+374334.281 the observer records managed NullReferenceException in
+SceneBoot.CreateInstance, then the same propagating exception in SceneBoot.Start,
+with the standard null-object message. ResourceManager.Initialize never begins;
+no completed CreateInstance/Start is logged. Boot input frames continue through
+frame2084, with no logger drops/write failures in the failed archived session.
+These two boundary records describe propagation, not two separate failures.
+The following session27160, started12:23:19 with the same installed DLL, completes
+Boot/CreateInstance/resource initialization and reaches Title/MainGame/FieldMap.
+The observer caught a managed setup failure rather than an established stopped
+frame-loop deadlock. It does not identify the null object or establish whether
+the mod caused the failure. Do not label this as a repaired startup issue.
+
+Both whole sessions and the preceding gameplay tail are preserved under ignored
+build_check/startup_hang_20261028/. The newest filename was transiently zero bytes
+while rotation/startup occurred, so evidence was correlated by pid/start tick.
+Installed payload hash remains de3e075d6bf3a089f2a8fde529ccbb8fc75c67f68c1a31a85ed1374eb0f211c9;
+newer scripted-entrance/vehicle audit changes are unbuilt and uninstalled.
+This log inspection adds no game launch/control, process-memory capture,
+diagnostic hook or startup design change. User asked whether diagnostics caught
+the hang; that question is answered. Preserve this open causal finding separately
+and resume the authorized full map audit unless the human expands startup scope.
+
 Status: investigation in progress (~55%). Diagnostic implementation is complete,
 offline verified and installed/hash-verified in all six games. The user's next
 FFIII launch reached the title and loaded a save normally. Root cause and a

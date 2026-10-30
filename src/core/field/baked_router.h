@@ -4,6 +4,7 @@
 #include <vector>
 #include <functional>
 #include <memory>
+#include <optional>
 #include "baked_map.h"
 
 // The baked-map router: A* over one sub-map's baked grids, the mod-side replacement for the
@@ -29,9 +30,23 @@ struct Cell {
     bool operator==(const Cell& o) const { return layer == o.layer && x == o.x && y == o.y; }
 };
 
+// Owned selectors for native actors that change presence with transportation.
+// Sparse allocation: a plane exists only when this floor has that rule kind.
+// Rules are shared by copied requests; each leg evaluates its own actual mode.
+struct TransportRules {
+    const baked::Submap* submap=nullptr; // immutable bake, process lifetime
+    enum Kind { Gate, Hazard, Trap, Terminal, Solid, GroundTerminal, Count };
+    using Plane=std::array<std::vector<uint64_t>,3>;
+    std::array<Plane,Count> cells;
+    struct Directional { Cell cell;int axis=0,mask=15;uint64_t ids=0; };
+    std::vector<Directional> directional;
+};
+
 // Ordinary exits, vehicle pads and layer switches are never story-event hazards.
 inline bool step_event(const baked::Object& object) {
-    return ((object.type == baked::ObjType::Event || object.type == baked::ObjType::RandomEvent) && (object.a != 0 || object.b != 0)) ||
+    // FFVI pressure switches inherit EventTriggerEntity. Their press/release
+    // scripts are physical step events too, not ordinary passable scenery.
+    return ((object.type == baked::ObjType::Event || object.type == baked::ObjType::RandomEvent || object.type == baked::ObjType::SwitchEvent) && (object.a != 0 || object.b != 0)) ||
            (object.type == baked::ObjType::Warp && (object.d&255) == 1 && !baked::world_exit(object));
 }
 inline bool crosses_event(const std::vector<Cell>& path, const std::vector<Cell>& events) {
@@ -51,6 +66,8 @@ struct Request {
     int vehicle_group = 0;            // riding: that group's world layer; 0 = on foot
     int vehicle_type = 0, landing_group = 0; // owned riding/landing rules for filter handoff
     int transportation_id = 0;         // observed identity, never an inferred unlock
+    std::shared_ptr<const TransportRules> transport_rules;
+    bool transport_gates = true;       // gates-free explanation proof only
     std::vector<int> auto_groups;     // on foot: groups ridden automatically when owned
     std::vector<Cell> blocked;        // live blockers; layer -1 = every layer
     bool live_relays = false;        // active projected counter tiles, when state is known
@@ -66,6 +83,9 @@ struct Request {
     bool live_traps = false;
     std::vector<Cell> traps;
     bool allow_trap_goal = false;     // only an explicitly selected trap or required transition leg
+    // Reviewed airborne scene entries terminate the leg but keep the aircraft's
+    // terrain rules. They must not inherit goals_open's ground-door override.
+    bool terminal_goal = false;       // only the exact selected terminal cell
     bool goals_open = true;           // a closed transition goal may be entered, retaining
                                       // native terrain/transport and directional restrictions: the
                                       // game opens a GotoMap entity's cells for the route
@@ -74,11 +94,28 @@ struct Request {
     int max_expansions = 0;           // 0 = whole map
 };
 
+// Preparation runs on owned workers, never inside a native capture hook.
+uint64_t transportation_bit(int id);
+int transportation_at(const Request&,const baked::Grids&,const Cell&);
+void add_transport_cell(TransportRules&,TransportRules::Kind,const baked::Submap&,const Cell&,uint64_t ids);
+void add_transport_collision(TransportRules&,const baked::Submap&,const Cell&,int collision,uint64_t ids);
+void merge_transport_rules(TransportRules&,const TransportRules&);
+bool transport_rule_at(const Request&,const baked::Grids&,const Cell&,TransportRules::Kind);
+
 struct Route {
     bool found = false;
-    std::vector<Cell> cells;          // start .. goal, one tile per step
-    int steps() const { return cells.empty() ? 0 : static_cast<int>(cells.size()) - 1; }
+    std::vector<Cell> cells;          // start .. goal; native mountain actions skip closed cells
+    int displacement_steps = -1;      // exact distance when native actions skip cells
+    int mountain_actions = 0;         // preference metric, never spoken as distance
+    int steps() const { return displacement_steps >= 0 ? displacement_steps : cells.empty() ? 0 : static_cast<int>(cells.size()) - 1; }
 };
+
+// Native FFIII Invincible action: one/two mountain cells then the first legal
+// far side. Geometry only; shared neighbour policy still validates actors,
+// partial collisions, events and terminal cells along the displacement.
+struct MountainEdge { Cell to; int distance=0; int direction=-1; };
+bool mountain_vehicle(const Request&);
+std::optional<MountainEdge> mountain_edge(const Request&,const baked::Grids&,const Cell&,int direction);
 
 /// A* for the shortest route with turns priced (BDFFHD's model; user decision 2026-10-11):
 /// a change of direction costs 1.5 steps, so an open room is crossed in two long runs and not
@@ -123,8 +160,12 @@ struct Reach {
     const baked::Submap* submap = nullptr;
     int width = 0, height = 0;
     std::vector<uint16_t> dist[3];    // 0xFFFF = unreachable
+    // Invincible only: minimize manual mountain actions before distance. Keep
+    // physical distances separate so descriptions never speak an artificial cost.
+    std::vector<uint16_t> mountain_actions;
     bool reachable(const Cell& c) const;
     int distance(const Cell& c) const;   // -1 when unreachable
+    int crossings(const Cell& c) const;  // -1 unreachable; zero for other modes
 };
 Reach flood(const Request& r);
 /// Multi-source reachability, used to include legal shores after an onboard ride.
@@ -134,11 +175,13 @@ Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector
 // FFIII unlocked Enterprise: ordered owned-data modes, at most four states per cell.
 // Result segments include both endpoints of each movement mode.
 struct EnterpriseSegment { int mode; std::vector<Cell> cells; };
-struct EnterpriseResult { Reach foot; std::vector<EnterpriseSegment> segments; int steps = -1; size_t expansions = 0, peak_queue = 0; };
+struct EnterpriseResult { Reach foot, air; std::vector<EnterpriseSegment> segments; int steps = -1; size_t expansions = 0, peak_queue = 0; };
 bool enterprise_pair(int id);
-EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship = false);
+EnterpriseResult enterprise_route(const Request& request, bool reconstruct, bool final_ship = false, bool final_air = false);
 bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y);
-int transition_distance(const Request& request, const Reach& reach);
+// Infer is used only for a proved native mounted step-on event. Ordinary map
+// exits keep the default landing/entry policy and the same final-edge checks.
+int transition_distance(const Request& request, const Reach& reach,GoalKind kind=GoalKind::Transition);
 
 /// Cell tests shared with the callers: open for the request's movement rules.
 bool open(const Request& r, const baked::Grids& g, const Cell& c);

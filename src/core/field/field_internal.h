@@ -238,6 +238,8 @@ struct Entity {
     std::wstring message_id;       // Vehicle: the master's message_id (its official name)
     // An entry from another floor of this map, listed from the baked data under the "Current
     // map" filter (user, 2026-10-11): no FieldEntity, no live position. Routed by its cell.
+    int local_baked_map_id = 0; // owned local synthetic target; valid only on this map
+    bool aerial_transition = false;
     int remote_map_id = 0;         // that floor's map id; 0 = a live entity on this floor
     int cell_layer = 1, cell_x = 0, cell_y = 0;
     std::wstring floor_name;       // the floor's title, spoken after the name
@@ -314,6 +316,9 @@ struct EntityCursor {
     bool next(void*& entity);
 };
 bool native_position_walkable(void* player, unity::Vec3 position);
+// Native-owner keyed identity proof used before discovery populates its cache.
+bool vehicle_identity_from_model(void* object, void* models, int map,
+                                int& type, int& id, std::wstring& message);
 // map_names.cpp: EntityScanner.GetCurrentMapId / MapNameResolver.GetCurrentMapIdInternal
 int current_map_id_or_user_data();  // FieldMapProvisionInformation (> 0), then UserDataManager
 

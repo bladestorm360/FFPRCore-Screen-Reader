@@ -12,7 +12,10 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")   # static CRT: no redistributab
 set(FFPR_DEFS WIN32_LEAN_AND_MEAN NOMINMAX UNICODE _UNICODE)
 # /EHa: catch (...) in hooks::guarded and ref::call also takes access violations, and
 # destructors run while unwinding them. /GR-: no RTTI. /utf-8: sources and literals are UTF-8.
-set(FFPR_OPTS /W4 /permissive- /GR- /EHa /utf-8 /MP4 /Gy /wd4100 /wd4505)
+# Keep one compiler per project: MSBuild and compiler parallelism otherwise
+# multiply (formerly four projects times four compiler processes), exhausting
+# the user's RAM. This changes scheduling only, not optimization or codegen.
+set(FFPR_OPTS /W4 /permissive- /GR- /EHa /utf-8 /MP1 /Gy /wd4100 /wd4505)
 
 set(FFPR_INCLUDES
     "${CMAKE_SOURCE_DIR}/third_party/sdl3/include"
@@ -134,7 +137,21 @@ foreach(c ${FFPR_CHECKS})
             endif()
         endforeach()
     endif()
+    # Actual filter/nav fixtures share the native-free FFIII rule classifier.
+    if(first MATCHES "field/baked_router.cpp")
+        list(APPEND extra "${CMAKE_SOURCE_DIR}/src/core/field/transport_rules.cpp")
+        list(APPEND extra "${CMAKE_SOURCE_DIR}/src/core/field/mountain_crossing.cpp")
+    endif()
+    if(first MATCHES "field/entity_filter.cpp")
+        list(APPEND extra "${CMAKE_SOURCE_DIR}/src/core/field/airship_transitions.cpp")
+    endif()
     add_executable(${cn} "${c}" ${extra})
+    if(cn STREQUAL "route_worker_check")
+        # This combined fixture keeps many copied Flags/RouteSnapshots in main.
+        # Its measured MSVC frame is 923736 bytes before nested owner dispatch,
+        # exceeding the default 1MiB stack. This affects only the offline host.
+        target_link_options(${cn} PRIVATE /STACK:4194304)
+    endif()
     target_include_directories(${cn} PRIVATE "${CMAKE_SOURCE_DIR}/src/core" ${FFPR_INCLUDES})
     target_compile_definitions(${cn} PRIVATE ${FFPR_DEFS} FFPR_OFFLINE_CHECK)
     target_compile_options(${cn} PRIVATE /W4 /EHa /utf-8)

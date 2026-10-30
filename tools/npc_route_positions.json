@@ -1,0 +1,649 @@
+[
+  {
+    "game": "ff5",
+    "submap": "Map_20041_9",
+    "id": 5,
+    "group": "entity_default",
+    "raw": "老人（紫）",
+    "home": [
+      1,
+      16,
+      6
+    ],
+    "route": 1,
+    "loop": false,
+    "cells": [
+      [
+        1,
+        16,
+        10
+      ]
+    ],
+    "source_sha256": "909015769990bcf159e9fdd820d4be150dd48cb406398b00ae8e5375a4a83e45",
+    "asset_sha256": "2b962c339edf69af81ac5f14f6c151f3546eae8a9c05c3f0ec9a758a9ea46602"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_20051_3",
+    "id": 12,
+    "group": "entity_default",
+    "raw": "NPC2ならず者",
+    "home": [
+      2,
+      6,
+      14
+    ],
+    "route": 0,
+    "loop": true,
+    "cells": [
+      [
+        2,
+        6,
+        12
+      ],
+      [
+        2,
+        6,
+        13
+      ],
+      [
+        2,
+        6,
+        14
+      ],
+      [
+        2,
+        6,
+        15
+      ]
+    ],
+    "source_sha256": "7470f719d576f3a9fdbf41015384bd313fe789e8d5bd6a28057199427a367e33",
+    "asset_sha256": "0bb69c444e3f34b788beae70072ac7fea3cb914aea8a7aab52a7573074170aa8"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_20051_3",
+    "id": 14,
+    "group": "entity_default",
+    "raw": "NPC4ならず者",
+    "home": [
+      2,
+      15,
+      14
+    ],
+    "route": 0,
+    "loop": true,
+    "cells": [
+      [
+        2,
+        15,
+        12
+      ],
+      [
+        2,
+        15,
+        13
+      ],
+      [
+        2,
+        15,
+        14
+      ],
+      [
+        2,
+        15,
+        15
+      ]
+    ],
+    "source_sha256": "7470f719d576f3a9fdbf41015384bd313fe789e8d5bd6a28057199427a367e33",
+    "asset_sha256": "f31b0cb12ccb0600fca686f8054f31c411ce91877cbb07bebda0fc511fd43782"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_20051_3",
+    "id": 15,
+    "group": "entity_default",
+    "raw": "NPC5幻獣A2",
+    "home": [
+      2,
+      18,
+      13
+    ],
+    "route": 0,
+    "loop": true,
+    "cells": [
+      [
+        2,
+        18,
+        12
+      ],
+      [
+        2,
+        18,
+        13
+      ],
+      [
+        2,
+        18,
+        14
+      ],
+      [
+        2,
+        18,
+        15
+      ]
+    ],
+    "source_sha256": "7470f719d576f3a9fdbf41015384bd313fe789e8d5bd6a28057199427a367e33",
+    "asset_sha256": "d4cd1598ae3952610cf8576f347c293dbff4d062ad647693a801928026e7870f"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_20090",
+    "id": 24,
+    "group": "ev_e_0095",
+    "raw": "NPC1チョコボ乗りの道具屋",
+    "home": [
+      1,
+      21,
+      11
+    ],
+    "route": 95,
+    "loop": false,
+    "cells": [
+      [
+        1,
+        14,
+        10
+      ]
+    ],
+    "source_sha256": "a41931c6feb3d1b382022284f3dd9cb10004fc203738b737af9fc257bc6f08de",
+    "asset_sha256": "f56b0a76a4727c226103a986d0a5f6af3c8be53b5de714ecb400f35e05045dae"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 13,
+    "group": "entity_default",
+    "raw": "NPC7ならず者",
+    "home": [
+      0,
+      3,
+      27
+    ],
+    "route": 305117,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 7,
+    "group": "entity_default",
+    "raw": "NPC1ならず者",
+    "home": [
+      0,
+      19,
+      31
+    ],
+    "route": 305111,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 8,
+    "group": "entity_default",
+    "raw": "NPC2ならず者",
+    "home": [
+      0,
+      17,
+      33
+    ],
+    "route": 305112,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 9,
+    "group": "entity_default",
+    "raw": "NPC3ならず者",
+    "home": [
+      0,
+      13,
+      33
+    ],
+    "route": 305113,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 10,
+    "group": "entity_default",
+    "raw": "NPC4ならず者",
+    "home": [
+      0,
+      9,
+      33
+    ],
+    "route": 305114,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 11,
+    "group": "entity_default",
+    "raw": "NPC5ならず者",
+    "home": [
+      0,
+      5,
+      33
+    ],
+    "route": 305115,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30511_7",
+    "id": 12,
+    "group": "entity_default",
+    "raw": "NPC6ならず者",
+    "home": [
+      0,
+      3,
+      31
+    ],
+    "route": 305116,
+    "loop": true,
+    "cells": [
+      [
+        0,
+        19,
+        31
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        9,
+        12
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        0,
+        4,
+        6
+      ]
+    ],
+    "source_sha256": "12e961707d567888a9e87c2c79b2be710f14339b7f5fafe7fb00d34e1a2ef329",
+    "asset_sha256": "0125909aa9cb0ef4b8dccb2fa3912af633e3c345dcb84159f116235d69ff4402"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30641_1",
+    "id": 16,
+    "group": "entity_default",
+    "raw": "亀:常駐",
+    "home": [
+      1,
+      7,
+      10
+    ],
+    "route": 306411,
+    "loop": true,
+    "cells": [
+      [
+        1,
+        9,
+        10
+      ],
+      [
+        1,
+        11,
+        10
+      ],
+      [
+        1,
+        7,
+        10
+      ]
+    ],
+    "source_sha256": "d0e65233f20e9c96505f651eec1622f000653c83a13e4139c815eded1b145c70",
+    "asset_sha256": "d127cc95f52349a52aecba7323e3681d6142d48cb6e7715e39f899631141f622"
+  },
+  {
+    "game": "ff6",
+    "submap": "Map_30671_1",
+    "id": 2,
+    "group": "ev_e_0734",
+    "raw": "ストームドラゴン",
+    "home": [
+      1,
+      16,
+      9
+    ],
+    "route": 306711,
+    "loop": true,
+    "cells": [
+      [
+        1,
+        22,
+        15
+      ],
+      [
+        1,
+        21,
+        16
+      ],
+      [
+        1,
+        20,
+        17
+      ],
+      [
+        1,
+        19,
+        18
+      ],
+      [
+        1,
+        18,
+        19
+      ],
+      [
+        1,
+        18,
+        23
+      ],
+      [
+        1,
+        15,
+        26
+      ],
+      [
+        1,
+        18,
+        29
+      ],
+      [
+        1,
+        18,
+        31
+      ],
+      [
+        1,
+        18,
+        32
+      ],
+      [
+        1,
+        18,
+        33
+      ],
+      [
+        1,
+        17,
+        32
+      ],
+      [
+        1,
+        16,
+        31
+      ],
+      [
+        1,
+        15,
+        30
+      ],
+      [
+        1,
+        14,
+        29
+      ],
+      [
+        1,
+        13,
+        28
+      ],
+      [
+        1,
+        12,
+        27
+      ],
+      [
+        1,
+        11,
+        26
+      ],
+      [
+        1,
+        10,
+        25
+      ],
+      [
+        1,
+        5,
+        20
+      ],
+      [
+        1,
+        7,
+        18
+      ],
+      [
+        1,
+        8,
+        17
+      ],
+      [
+        1,
+        9,
+        16
+      ],
+      [
+        1,
+        10,
+        15
+      ],
+      [
+        1,
+        11,
+        14
+      ],
+      [
+        1,
+        12,
+        13
+      ],
+      [
+        1,
+        16,
+        9
+      ]
+    ],
+    "source_sha256": "62f89dcf360b4e57843fd9ff4ce76b242307a7df2f9f365a1a7f40e708af6529",
+    "asset_sha256": "f69365c16c54a82115d1c658927e537eef0ae3cc28954968502a7e9d96d60423"
+  }
+]

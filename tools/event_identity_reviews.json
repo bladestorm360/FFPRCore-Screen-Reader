@@ -10266,5 +10266,56 @@
       ]
     },
     "layer": "GroundObject"
+  },
+  {
+    "game": 5,
+    "submap": "Map_20051_2",
+    "group": "ev_e_0126",
+    "id": 54,
+    "raw": "ダンスにぶつかる(マップ移動後)左",
+    "entity_id": 54,
+    "script_id": 2762,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Dance floor",
+    "layer": "GroundObject",
+    "evidence": {
+      "kind": "exact native dance-collision area; master name is not bound in loaded or resident scripts",
+      "object_sha256": "84980f4977c919f75b8e3c644bcc08e0fdba1259953267615b42dfe97dfad9a3"
+    }
+  },
+  {
+    "game": 5,
+    "submap": "Map_20051_2",
+    "group": "ev_e_0126",
+    "id": 55,
+    "raw": "ダンスにぶつかる(マップ移動後)中",
+    "entity_id": 55,
+    "script_id": 2763,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Dance floor",
+    "layer": "GroundObject",
+    "evidence": {
+      "kind": "exact native dance-collision area; master name is not bound in loaded or resident scripts",
+      "object_sha256": "9c2d589e6ea62fe6772f095eecbf61d8e8b46a605d1181c30a80ad29a7422004"
+    }
+  },
+  {
+    "game": 5,
+    "submap": "Map_20051_2",
+    "group": "ev_e_0126",
+    "id": 56,
+    "raw": "ダンスにぶつかる(マップ移動後)右",
+    "entity_id": 56,
+    "script_id": 2764,
+    "message_key": "",
+    "asset_id": 0,
+    "label": "Dance floor",
+    "layer": "GroundObject",
+    "evidence": {
+      "kind": "exact native dance-collision area; master name is not bound in loaded or resident scripts",
+      "object_sha256": "0375afc0b91090b98cd3eb62f5d91764bbc297e76fcc54370e26a0386edacd43"
+    }
   }
 ]

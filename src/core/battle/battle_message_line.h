@@ -24,7 +24,7 @@ inline int pair_id = 0;
 inline void flush_action(int id) {
     if (!pending_action.set || pending_action.id != id) return;
     const auto a = std::move(pending_action); pending_action = {};
-    ffpr::say(a.action.empty() ? a.actor : a.actor + L": " + a.action, false);
+    ffpr::say(a.actor.empty() ? a.action : a.action.empty() ? a.actor : a.actor + L": " + a.action, false);
 }
 inline void flush_message(int id) {
     if (!pending_message.set || pending_message.id != id) return;

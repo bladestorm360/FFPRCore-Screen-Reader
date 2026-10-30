@@ -1,0 +1,22 @@
+[
+  {
+    "submap": "Map_20061_9",
+    "entity_id": 5,
+    "object_id": 5,
+    "destination_map": 29,
+    "original_point": 1,
+    "continuation": "sc_e_0031_2",
+    "continuation_sha256": "d2843bd943c09ac83ca9c7761af7ddcc11b53aae1379e808abcb29daebcb9381",
+    "arrival_cell": [
+      6,
+      6,
+      0
+    ],
+    "arrival_baked_cell": [
+      6,
+      6,
+      0
+    ],
+    "evidence": "Complete native Main chain through an intermediate world scene; final controlled player and first-party SetPos6,6, unchanged Bottom layer; source hashes in tools/silent_family_decisions.json"
+  }
+]

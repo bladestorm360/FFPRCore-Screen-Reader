@@ -5,7 +5,8 @@
 #include "field_api.h"
 
 namespace field {
-inline TargetKind navigation_target_kind(Kind kind,Category category){
+inline TargetKind navigation_target_kind(Kind kind,Category category,bool aerial=false){
+    if(aerial)return TargetKind::AirshipTransition;
     if(category==Category::Objects)return TargetKind::Interact;
     switch(kind){
     case Kind::NPC:case Kind::TreasureChest:return TargetKind::Interact;

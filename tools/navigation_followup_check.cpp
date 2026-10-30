@@ -66,6 +66,72 @@ bool check_ship(const baked::Submap& world) {
     std::printf("FF%d: water-only Ship target (%d,%d), native NPC/model identity and missing-model handback verified\n",baked::game_number(),boat.x,boat.y);
     return true;
 }
+void check_duster_boarding_overlap() {
+    const auto* world=baked::submap_by_map_id(4);
+    auto flags=std::make_unique<map_state::Flags>();
+    flags->scenario.fill(0);flags->treasure.fill(0);flags->global.fill(0);
+    flags->scenario[73]=flags->scenario[905]=1;
+    auto snapshot=std::make_unique<RouteSnapshot>(map_state::Resolver(*flags,fixture::records));
+    snapshot->map_id=4;snapshot->submap=world;snapshot->layer=1;snapshot->locale=L"en";
+    snapshot->position=world_of_cell(*world,{1,114,111});snapshot->vehicle={true,1,1,L""};
+    snapshot->vehicle_shortcuts=true;snapshot->kind=TargetKind::Transition;
+    snapshot->goal.map_id=4;snapshot->goal.cell={1,46,56};
+    VehicleOnMap nautilus;nautilus.transportation_id=9;nautilus.type=3;
+    nautilus.pos=world_of_cell(*world,{1,114,113});snapshot->vehicles={nautilus};
+    snapshot->vehicle_names[9]=L"The Nautilus";
+    Planned first,repeated,boarded;
+    std::thread initial([&]{first=plan_snapshot(*snapshot);});initial.join();
+    expect(first.path.success&&first.path.walk_phases.size()==3,"actual Duster coast to Ancient Ruins has a complete walking/boarding/flight/landing route");
+    if(!first.path.success)return;
+    const Cell start{1,114,111};
+    const bool overlap=std::any_of(first.path.walk_phases.begin(),first.path.walk_phases.end(),[&](const auto& phase){
+        return phase.transportation_id==9&&phase.movement_transportation_id==9&&phase.action_cell&&
+               std::find(phase.cells.begin()+1,phase.cells.end(),start)!=phase.cells.end();});
+    expect(overlap,"real Nautilus flight crosses the initial walkable tile after boarding to the south");
+    snapshot->previous_active=first.active;
+    std::thread again([&]{repeated=plan_snapshot(*snapshot);});again.join();
+    auto boards=[](const Planned& plan){return std::any_of(plan.path.walk_phases.begin(),plan.path.walk_phases.end(),[](const auto& phase){
+        return phase.transportation_id==9&&phase.movement_transportation_id==9&&phase.action_cell&&!phase.action_before.empty();});};
+    expect(repeated.path.success&&boards(repeated)&&repeated.path.step_count==first.path.step_count,
+        "repeating directions while on foot cannot jump into the future flight through the same tile or drop Nautilus boarding");
+    const int repeated_initial_steps=repeated.path.step_count;
+    for(const auto& cell:first.path.walk_phases.front().cells){
+        snapshot->position=world_of_cell(*world,cell);snapshot->previous_active=first.active;
+        std::thread walk([&]{repeated=plan_snapshot(*snapshot);});walk.join();
+        expect(repeated.path.success&&boards(repeated),"each foot approach step preserves the pending boarding even when flight overlaps the approach");
+    }
+    snapshot->vehicle={true,9,3,L""};snapshot->position=nautilus.pos;snapshot->previous_active=first.active;
+    std::thread fly([&]{boarded=plan_snapshot(*snapshot);});fly.join();
+    expect(boarded.path.success&&!boards(boarded)&&std::any_of(boarded.path.walk_phases.begin(),boarded.path.walk_phases.end(),[](const auto& phase){
+        return phase.vehicle_before==route_progress::VehicleAction::ConfirmLand;}),"confirmed Nautilus boarding switches to flight and still lands before the Ruins entrance");
+    std::printf("Duster/Ancient Ruins overlap: first%d/repeated%d/boarded%d steps; native riding state determines valid phase\n",
+        first.path.step_count,repeated_initial_steps,boarded.path.step_count);
+}
+void check_transport_suffix_modes() {
+    const auto found=std::find_if(baked::transports().begin(),baked::transports().end(),[](const auto& row){return row.type==3||row.type==7||row.type==8;});
+    if(found==baked::transports().end())return;
+    auto snapshot=std::make_unique<RouteSnapshot>(map_state::Resolver(map_state::Flags{},fixture::records));
+    snapshot->vehicle={true,1,1,L""};
+    ActiveRoute active;Phase walk,fly,land;
+    walk.cells={{1,10,10},{1,10,11}};walk.movement_transportation_id=0;
+    fly.cells={{1,10,11},{1,10,10},{1,10,9}};fly.transportation_id=found->id;fly.movement_transportation_id=found->id;
+    fly.action_cell=fly.cells.front();fly.action_before=L"board";fly.vehicle_before=route_progress::VehicleAction::ConfirmBoard;
+    land.cells={{1,10,9},{1,10,8}};land.transportation_id=found->id;land.movement_transportation_id=0;
+    land.action_cell=land.cells.front();land.action_before=L"land";land.vehicle_before=route_progress::VehicleAction::ConfirmLand;
+    active.phases={walk,fly,land};std::vector<Phase> rest;
+    std::thread work([&]{SnapshotScope scope(*snapshot);
+        expect(!remaining_from(active,{1,10,10},rest),"all-six on-foot overlap rejects a suffix in a future aircraft mode");
+        expect(remaining_from(active,{1,10,11},rest)&&rest.front().vehicle_before==route_progress::VehicleAction::ConfirmBoard,
+            "all-six exact boarding boundary retains its pending native action");
+        active.phases[1].vehicle_before=route_progress::VehicleAction::None;
+        expect(remaining_from(active,{1,10,11},rest)&&!rest.front().action_before.empty(),"manual deck boarding retains its action without an automated input enum");
+        snapshot->vehicle={true,found->id,found->type,L""};
+        expect(remaining_from(active,{1,10,10},rest)&&rest.front().movement_transportation_id==found->id&&rest.front().action_before.empty(),
+            "all-six actual flight can retain its overlapping airborne suffix");
+        expect(remaining_from(active,{1,10,9},rest)&&rest.front().vehicle_before==route_progress::VehicleAction::ConfirmLand,
+            "all-six exact landing boundary retains its action before entering the walking phase");
+    });work.join();
+}
 void check_object_vehicle_shortcuts() {
     const auto* world=baked::submap_by_map_id(1);const auto& grid=baked::grids(*world);
     const baked::Object* entrance=nullptr;
@@ -111,6 +177,47 @@ void check_object_vehicle_shortcuts() {
     fixture::filter_mode=-1;fixture::legacy_filter=true;expect(!capture_vehicle_shortcuts_policy(),"legacy enabled floor filter keeps walking-only preference");fixture::legacy_filter=false;
     expect(capture_vehicle_shortcuts_policy(),"legacy unfiltered map mode permits vehicle comparisons");
     std::printf("Logged cave: land %d steps, Airship-assisted %d, mounted %d; %.3f ms full+browse offline compute\n",walking.path.step_count,assisted.path.step_count,mounted.path.step_count,elapsed);
+}
+void check_saronia_short_walks() {
+    const auto* world=baked::submap_by_map_id(4);
+    map_state::Flags flags;flags.scenario.fill(1);flags.treasure.fill(0);flags.global.fill(0);flags.current_map_id=4;
+    auto snapshot=std::make_unique<RouteSnapshot>(map_state::Resolver(flags,fixture::records));
+    snapshot->map_id=4;snapshot->submap=world;snapshot->layer=1;snapshot->locale=L"en";
+    snapshot->position=world_of_cell(*world,{1,83,62});snapshot->vehicle_shortcuts=true;snapshot->auto_groups={3};
+    const auto* nautilus=baked::transport(9);
+    expect(nautilus!=nullptr,"FFIII has its actual later aircraft model");if(!nautilus)return;
+    VehicleOnMap model;model.transportation_id=nautilus->id;model.type=nautilus->type;model.pos=world_of_cell(*world,{1,83,63});
+    snapshot->vehicles={model};snapshot->vehicle_names[model.transportation_id]=L"The Nautilus";
+    for(const auto target:std::vector<Cell>{{1,91,65},{1,74,64}}) {
+        snapshot->goal.map_id=4;snapshot->goal.cell=target;snapshot->kind=TargetKind::Transition;
+        Planned walking,assisted,boarded;BrowsePlanned browse;
+        snapshot->vehicle_shortcuts=false;
+        std::thread base([&]{walking=plan_snapshot(*snapshot);});base.join();
+        expect(walking.path.success,"logged nearby northern Saronia entrance has a legal walking route");
+        snapshot->vehicle_shortcuts=true;
+        std::thread short_route([&]{assisted=plan_snapshot(*snapshot);browse=plan_browse_snapshot(*snapshot);});short_route.join();
+        expect(assisted.path.success&&assisted.path.step_count==walking.path.step_count&&assisted.path.walk_phases.size()==1&&
+            assisted.path.walk_phases.front().transportation_id==0,"short Saronia directions retain walking despite an adjacent aircraft");
+        expect(browse.route.reason.find(L"board")==std::wstring::npos,"short Saronia browse never advertises boarding");
+        std::vector<Phase> prior_flight;
+        std::thread old_plan([&]{SnapshotScope scope(*snapshot);auto request=walk_request(*world,{1,83,62});
+            request.auto_groups={3};request.goals={target};request.live_hazards=request.live_traps=true;
+            boarding_route(*world,baked::grids(*world),request,request.goals,prior_flight);});old_plan.join();
+        expect(prior_flight.size()>1,"the former optional aircraft shortcut is reproducible on real Saronia terrain");
+        auto old=std::make_shared<ActiveRoute>(*assisted.active);old->phases=prior_flight;snapshot->previous_active=old;
+        Planned refreshed;std::thread reuse([&]{refreshed=plan_snapshot(*snapshot);});reuse.join();
+        expect(refreshed.path.success&&refreshed.path.walk_phases.size()==1&&refreshed.path.step_count==walking.path.step_count,
+            "a retained optional flight is replaced by the legal nearby walking route");
+        snapshot->previous_active.reset();
+        auto mounted=std::make_unique<RouteSnapshot>(*snapshot);mounted->position=model.pos;mounted->vehicle={true,model.transportation_id,3,L""};mounted->previous_active=assisted.active;
+        std::thread riding([&]{boarded=plan_snapshot(*mounted);});riding.join();
+        expect(boarded.path.success&&boarded.active&&boarded.active->transportation_id==model.transportation_id&&
+            boarded.path.step_count!=walking.path.step_count&&boarded.path.full_description.find(L"board")==std::wstring::npos,
+            "already-boarded aircraft replaces the prior short walking plan without a new boarding instruction");
+        expect(std::any_of(boarded.path.walk_phases.begin(),boarded.path.walk_phases.end(),[](const auto& phase){return phase.vehicle_before==route_progress::VehicleAction::ConfirmLand;}),
+            "already-boarded Nautilus must land before entering an ordinary Saronia town");
+        std::printf("Saronia (%d,%d): walking%d, assisted%d tiles, %zu phases\n",target.x,target.y,walking.path.step_count,assisted.path.step_count,assisted.path.walk_phases.size());
+    }
 }
 void check_palamecia() {
     const auto* world=baked::submap_by_map_id(1);const auto& grid=baked::grids(*world);
@@ -234,8 +341,8 @@ void check_mysidia_followup() {
         "logged Ship start has a genuine walking approach before boarding");
     if(full.path.walk_phases.size()==2) {
         const auto count=full.path.walk_phases[0].cells.size()-1;
-        expect(browse.route.reason==L"Walk "+std::to_wstring(count)+L".0 steps, then "+full.path.walk_phases[1].action_before,
-            "distant Ship listing identifies the approach before its later boarding heading");
+        expect(browse.route.reason==L"Sail "+std::to_wstring(count)+L".0 steps, then "+full.path.walk_phases[1].action_before,
+            "distant Ship listing uses the current Canoe's Sail approach before its later boarding heading");
         std::printf("Logged Ship: %zu approach steps before boarding; full route %d steps\n",count,full.path.step_count);
     }
     const auto* statue=baked::submap_by_map_id(98);expect(statue!=nullptr,"actual Statue Room exists");
@@ -264,16 +371,31 @@ int main() {
             const auto& map=*baked::submap_at(i);const auto& grid=baked::grids(map);
             for(const auto& object:grid.objects)if(baked::world_exit(object)) {
                 ++world_exits;const auto* dest=baked::submap_by_map_id(object.a);
-                expect(dest&&dest->world,"every scripted world exit points at a real world map for that game");
+                expect(dest!=nullptr,"every reviewed scripted transfer points at a real destination for that game");
                 expect(!baked_route::step_event(object),"ordinary scripted exits are not story scene warnings");
                 const auto* found=baked::world_exit_at(grid,object.entity_id(),baked::object_identifier(object),object.tx,object.ty);
-                expect(found&&found->a==object.a,"native detector can use exact prepared identity/footprint without a map scan");
+                // The immutable native detector must not invent one destination
+                // for a real conditional door. Its branch is selected later by
+                // the owned state-aware planner (conditional_transfer_check).
+                std::set<int> destinations;
+                const auto indexed=grid.world_exits.find(object.entity_id());
+                if(indexed!=grid.world_exits.end())for(const auto index:indexed->second) {
+                    const auto& candidate=grid.objects[index];
+                    if(candidate.contains(object.tx,object.ty)&&baked::object_identifier(candidate)==baked::object_identifier(object))
+                        destinations.insert(candidate.a);
+                }
+                if(destinations.size()>1) {
+                    expect(!found,"ambiguous native door does not advertise an arbitrary story destination");
+                    std::printf("FF%d: conditional door map%d actor%d retains %zu branch destinations for owned planning\n",n,map.first_map_id,object.entity_id(),destinations.size());
+                } else expect(found&&found->a==object.a,"native detector can use exact prepared identity/footprint without a map scan");
             }
         }
         std::printf("FF%d: %d script-backed world exits indexed; ordinary native doorways retained\n",n,world_exits);
         bool ship_checked=false;
         for(int i=0;i<baked::submap_count()&&!ship_checked;++i)if(baked::submap_at(i)->world)ship_checked=check_ship(*baked::submap_at(i));
         if(!ship_checked)std::printf("FF%d: no applicable Ship/shore pair in its world grids; native transport coverage retained elsewhere\n",n);
+        check_transport_suffix_modes();
+        if(n==3){check_saronia_short_walks();check_duster_boarding_overlap();}
         if(n==2) {
             {
                 auto throne=room(43,{0,28,12});throne->goal.map_id=43;throne->goal.cell={0,26,30};throne->kind=TargetKind::Transition;

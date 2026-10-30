@@ -97,3 +97,39 @@ party Mini, and owned Enterprise no longer produces missing-ship advice. Unknown
 gates and unrelated future scripts remain conservative. Extend only with exact
 native semantics and real-data tests. [Gameplay steps](../TESTING.md) require no
 user code/architecture review.
+
+
+## October27 continent travel: scope ledger
+
+User-requested scope: restore one nearest reachable unlocked airship transition in each direction for Map Exits, with an airborne terminal route and ordinary owned-vehicle boarding/takeoff when existing policy permits. Do not restore the full rough 1,535 border-trigger population or the passive Chocobo lap marker. The native producer omission was confirmed: live `goto_map_detector` skipped reviewed World map transition metadata, while ordinary world goals intentionally become foot/landing destinations. The correction adds a typed airborne travel goal, preserving ordinary town-exit behavior. Other games have no FFIII floating-continent mechanic.
+
+### Exact native families and coordinate contract
+
+The seven reviewed event families remain exact-data gated; native object/script evidence is outside Git at parent `tools/continent_transition_20261027/`, with game data under parent `tools/mapdump/ff3_objects.jsonl` and `ff3_scripts.jsonl`. Full hashes, IDs, script IDs, map IDs, counts and cells are recorded in `build_check/continent_transitions_20261027/native_contract.json`:
+
+- Map1 Enterprise outward: script341, transportation ID6,508 routine-border copies; known ScenarioFlag1/66 false selects map2, true map4, unknown leaves destination unspecified.
+- Map1 other outward families: script345, IDs8/9,508 copies; script349, ID11,508 copies; each targets map4.
+- Map2 return: script356, ID15, one event at canonical baked cell(33,216), targets map1.
+- Map4 return families: script343 ID6, script347 IDs8/9, script351 ID10; each has five-cell cross footprint at canonical center(33,217), target map1.
+
+The native event properties authorize these precise transportation groups; candidate selection also checks active event/vehicle eligibility and reachability. Tiled gid cells anchor at the bottom-left: `bake_maps.tile_row` subtracts tile height and map-bounds origin. Tests therefore derive their endpoints from the matching baked Event, not raw Tiled `ty`. The initial `before_goal` and first typed endpoint report used raw map2(33,217) rather than canonical(33,216); those endpoint assertions are invalid and retained. They do not invalidate the separate native producer-omission finding. Canonical endpoint evidence is the later actual-bake test.
+
+### Implementation and state flow
+
+Shared `field/airship_transitions.h/.cpp` holds the native-free seven-family resolver, gated to FFIII factual data; core has no per-game engine classes. `TargetKind` appends the typed airship transition. `baked_nav::air_transition_target` runs on the existing Navigation worker, selects one eligible active baked Event and prefers the continued/selected exact physical identity before shortest reachable eligible target. It consumes copied `ExitSnapshot` state, family masks and owned paired-vehicle data; Enterprise pairs are13→6 and16→15. Known ScenarioFlag66 false/true resolves map2/map4; unknown returns no guessed destination. Parked aircraft remain allowed only through existing policy. No native pointer reaches the worker.
+
+`entity_scanner` suppresses the16 exact native return actors and preserves the prior1,524 outward-border suppression. It publishes one pointer-free `local_baked` map/generation entity row through All, Exits and audio flows; native ID0 recreation/selection is covered. `world_exit` remains true even when a destination is unknown/zero. The existing four-state search accepts an optional `final_air` mode for this typed goal. Aerial-only goals keep `goals_open=false` so flight terrain stays eligible; ordinary town foot goals are unchanged. Existing landing design, native actions and route phase ownership remain intact. No script execution, flag/vehicle writes, input path, new hook or bake change was added. Labels “Surface World” and “Floating Continent” are present in all12 locales; no language policy changed.
+
+### Source acceptance and limits
+
+Root reviewed and accepted the implementation; source checkpoint is complete, Closed. Final canonical build `build_check/continent_transitions_20261027/final_build.txt` passes:8,287 native-name checks/0 missing,142 used/349 defined/0 undefined. `final_goal_report.txt` and `final_scanner_report.txt` each report0 failures. DLL is11,055,616 bytes, SHA256 `8c49dd6d57f11e31918c1385554a009cfbf2571416bcb69e330bcb38566cdb79`. The final actual-bake map2 test from(33,215) fails as ordinary Transition but succeeds as typed one-step goal to canonical(33,216), final vehicle15, with no landing. Map4 current aircraft6/8/9/10 and ship13 selected routes pass; map1 current6/8/9/11/13 worker target checks pass, and parked13 boards/takes off to final aircraft6. Wrong craft, cancellation, explicit FFII representative and FFIII game guard, and preservation of a distinct continued pin are covered. The full offline report and final build log are the evidence; no proprietary source excerpts belong here.
+
+Earlier invalid evidence retained: raw map2 coordinate proof and first typed endpoint report; ninth fixture resolver-assignment compile failure, corrected to independent snapshots; an initial mounted/parked aerial-goal `goals_open` failure, corrected with the new eligibility evidence. The tenth verification attempt intermittently stopped in the existing `route_worker` fixture with stack overflow; it is retained separately. The eighth full pass and final full canonical pass both succeed, superseding neither the recorded failure history nor the current offline-only limits. The FFIII game-ID guard and explicit FFII exclusion check do not constitute a five-game runtime test. The failure history and receipts remain under `build_check/continent_transitions_20261027/`.
+
+Offline aggregate worker measurements: ten evaluations total55.145ms on map1 and205.165ms on map4; the latter includes five selected plans. The worker evaluates one flood per eligible aircraft, not per candidate/NPC; each object uses a single four-neighbor pass, with cancellation tokens across vehicle/object/search work. No hard cap exists beyond captured game assets. These are offline computation figures only; native callback/frame cost, queue backlog/tail and audible/user response are unmeasured. No cumulative responsiveness claim is made; the >25ms mod-caused application-lag threshold remains applicable.
+
+The October27 source candidate is not deployed or gameplay-confirmed. Other parked-aircraft combinations, real gameplay and map transfers, frame/audio response and final combined delivery remain unverified. No game was launched or probed. Preserve the October26 installed baseline/history above as a separate record; this source checkpoint does not replace it.
+
+### Closed-system register and next authorized work
+
+Continent transition source is Closed; no further refactor follows from review alone. Current active work moves to the separately authorized Temple of Water native boarding/vehicle-state investigation, followed by the Libra HP/weakness and Study displayed-information audit. The user’s later-reported multiple-NPC route oscillation is a separate queued checkpoint. Keep each scope independent and update this register only when its work is explicitly opened. Combined delivery and gameplay confirmation for this candidate remain pending.

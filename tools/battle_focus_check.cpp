@@ -62,6 +62,9 @@ std::map<std::string,std::wstring> guard;
 game::Id game=game::Id::FF6;
 bool battle_active=true,player_rendered=true, nested=false,menu_open=true,side_only=false,cursor_row_first=false;Node manager;int original_calls=0;
 std::function<void()> on_item_init;
+using Commit=void(*)(void*,void*,const void*);
+Commit commit_dispatch=nullptr,native_commit=nullptr;
+std::string commit_hook;
 std::function<void()> on_field_phase;
 void field_phase(void*,const void*){++original_calls;if(on_field_phase)on_field_phase();}
 void item_entry(void*,const void*){++original_calls;if(on_item_init)on_item_init();}
@@ -89,7 +92,11 @@ void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
 }
-namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
+namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** original){
+ if(fixture::native_commit&&std::string(method.cls.name)=="BattleMenuController"&&std::string(method.name).starts_with("<CommandSelectingInit>b__")){
+  *original=reinterpret_cast<void*>(fixture::native_commit);fixture::commit_dispatch=reinterpret_cast<fixture::Commit>(detour);fixture::commit_hook=method.name;return true;
+ }return false;
+}bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace unity {void*transform(void*p){return p;}void*parent(void*p){return p?static_cast<fixture::Node*>(p)->parent:nullptr;}void*get_component_in_parent(void*p,ref::Class&){return parent(p);}void*get_component(void*p,ref::Class&){return p;}void*get_component_in_children(void*p,ref::Class&,bool){return p;}void*find_descendant(void*,const wchar_t*,int){return nullptr;}int child_count(void*){return 0;}void*child(void*,int){return nullptr;}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring ui_text(void*p){return name(p);}bool alive(void*p){return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->visible;}int list_count(void*p){return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 bool enumerate_bounded(void*p,std::vector<void*>&out,int bound){out.clear();if(!p||list_count(p)>bound)return false;out=*static_cast<fixture::List*>(p);return true;}}
 namespace displayed {bool visible(void*p){return unity::active_in_hierarchy(p);}bool container_visible(void*p){return visible(p);}void*field(void*p,const char*n){if(!p)return nullptr;auto&v=*static_cast<fixture::Node*>(p);if(std::string(n)=="view")return v.view;auto it=v.fields.find(n);return it==v.fields.end()?nullptr:it->second;}std::wstring text_field(void*p,const char*n){if(!visible(p))return {};auto&v=*static_cast<fixture::Node*>(p);auto it=v.texts.find(n);return it==v.texts.end()?L"":it->second;}std::wstring pair(void*p,const char*a,const char*b){auto x=text_field(p,a),y=text_field(p,b);return x.empty()||y.empty()?L"":x+L" "+y;}}

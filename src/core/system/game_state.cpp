@@ -190,6 +190,10 @@ bool is_field_navigation_ready()
 bool input_transition_blocked()
 {
     if (g_state_change_depth || fieldnav::map_transition::is_state_changing()) return true;
+    // Boot/loading is already blocked without consulting any game manager.
+    // A cold FadeManager getter searches only once and can retain a null
+    // result before its prefab exists. Keep the stable-title fade check below.
+    if(!g_main_game&&field::scene_name()!=L"Title")return true;
     // Gnomish Bread and equivalent native scripts wait in Event12 while a
     // modal map owns input. Its observed Show/Close lifetime and visible owner
     // permit map review/I controls, without treating the field as controllable.

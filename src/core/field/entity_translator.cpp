@@ -255,6 +255,12 @@ std::wstring translate_entity_name(const std::wstring& japanese_name)
     // When the game is in Japanese, entity names are already Japanese.
     if (modtext::lang() == L"ja") return japanese_name;
 
+    // Exact authored keys can themselves include native instance decorations
+    // (FFIII's 7;老人2). Honor their real translation before parsing those tags;
+    // the shared NPC label service still owns display numbering afterward.
+    std::wstring exact;
+    if(try_lookup(japanese_name,exact))return exact;
+
     // Trailing enumeration suffix [①-⑳]+$ ("①"): lookups target the base name and the
     // suffix is re-appended to whichever tier succeeds.
     std::wstring enum_suffix;

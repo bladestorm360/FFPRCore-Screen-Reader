@@ -1,0 +1,4862 @@
+[
+  {
+    "game": 1,
+    "script": "sc_e_0006",
+    "body_sha256": "1b1c31b0ac9e2acaa84eabce5fb208b3f90b5e16b7a3322b59dbb93511cbfe11",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "opening bridge presentation or destruction of the canal barrier; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0006",
+        "body_sha256": "1b1c31b0ac9e2acaa84eabce5fb208b3f90b5e16b7a3322b59dbb93511cbfe11"
+      },
+      {
+        "submap": "Map_40001",
+        "script": "sc_e_0006_1",
+        "body_sha256": "fee0f1935fff21e60fd8492aef875df8557a98fe9b9014337b2e9a188a387db4"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0006_3",
+        "body_sha256": "73eafb42a7515a69d7f3a9860fd789e6c007665e38b697c144d55f7d44de5d0c"
+      }
+    ]
+  },
+  {
+    "game": 1,
+    "script": "sc_e_0028",
+    "body_sha256": "8342e4ddfd6c8193e5af7bd5c07917f7fa3432239db7e96607b0cb974eb904a8",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "opening bridge presentation or destruction of the canal barrier; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_20150",
+        "script": "sc_e_0028",
+        "body_sha256": "8342e4ddfd6c8193e5af7bd5c07917f7fa3432239db7e96607b0cb974eb904a8"
+      }
+    ]
+  },
+  {
+    "game": 2,
+    "script": "sc_map_20030_to_10010",
+    "body_sha256": "b0412553f93e62b297ba1f06f30c46dda79950ee3da79758aaf6ec3727f8884b",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "native physical world exit already indexed separately; arrival can start a narrative scene",
+    "bodies": [
+      {
+        "submap": "Map_20030",
+        "script": "sc_map_20030_to_10010",
+        "body_sha256": "b0412553f93e62b297ba1f06f30c46dda79950ee3da79758aaf6ec3727f8884b"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0083_1",
+        "body_sha256": "3ecfd2710079914a5b76977449adcbace98d505b774679c0a0b32cc6ef6b48ec"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "dedddf214da24f4fdd519b67726c35643156686c17c5b6d3dead543e38417d7c"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "dedddf214da24f4fdd519b67726c35643156686c17c5b6d3dead543e38417d7c"
+      }
+    ]
+  },
+  {
+    "game": 2,
+    "script": "sc_map_20041_1_to_10010",
+    "body_sha256": "2771fb05ef017abcee013462a4370587df781ce007671a3e25eacdccc41044f8",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "native physical world exit already indexed separately; arrival can start a narrative scene",
+    "bodies": [
+      {
+        "submap": "Map_20041_1",
+        "script": "sc_map_20041_1_to_10010",
+        "body_sha256": "2771fb05ef017abcee013462a4370587df781ce007671a3e25eacdccc41044f8"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0086_4",
+        "body_sha256": "ac56aab32a0842cb3491f539ee964e32ca7e43776be1e2ef5f4b6a9f05901aa3"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "dedddf214da24f4fdd519b67726c35643156686c17c5b6d3dead543e38417d7c"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "dedddf214da24f4fdd519b67726c35643156686c17c5b6d3dead543e38417d7c"
+      }
+    ]
+  },
+  {
+    "game": 2,
+    "script": "sc_e_0035_1",
+    "body_sha256": "58308a746ceac33e895d8abe074cbb68677fecd04f31dd2aad7d317f46e0b7de",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "airship capture and vehicle loss; silent story staging",
+    "bodies": [
+      {
+        "submap": "Map_30041_1",
+        "script": "sc_e_0035_1",
+        "body_sha256": "58308a746ceac33e895d8abe074cbb68677fecd04f31dd2aad7d317f46e0b7de"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0035",
+        "body_sha256": "5c42f7dee7c8670314f8a183e491baf0ca8eb9da12dca347d4a88725129ee104"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0025",
+    "body_sha256": "fef924d27ea803f01ab21fc2cfd49b3e33c72902ea9ed1e71075d6f24d0c7d8c",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "first-visit flight/destruction/abduction scene; full continuation is narrative despite no dialogue",
+    "bodies": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0025",
+        "body_sha256": "fef924d27ea803f01ab21fc2cfd49b3e33c72902ea9ed1e71075d6f24d0c7d8c"
+      },
+      {
+        "submap": "Map_30031_1",
+        "script": "sc_e_0025_1",
+        "body_sha256": "f9312a594a03630dc1589f6da8d2f87bce5d8028a0b2cee2b66f7ab3495c4a76"
+      },
+      {
+        "submap": "Map_30031_1",
+        "script": "sc_map_30031_1",
+        "body_sha256": "ac719774e9c525a5e3e71d7fb59f675f4d7a23baa123b9cf6c5ea9acb7437c0e"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0021",
+    "body_sha256": "c369a1dd8aacc06a76a0095c73995908e3ec147c8b6572df4efdb52df840303d",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "first-visit flight/destruction/abduction scene; full continuation is narrative despite no dialogue",
+    "bodies": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0021",
+        "body_sha256": "c369a1dd8aacc06a76a0095c73995908e3ec147c8b6572df4efdb52df840303d"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0337",
+    "body_sha256": "6e57b5c6af2b39f0f9cb8dc05df6a29301b6595b8c5b0d05edabd7c5cb66762f",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted continent provider owns the named destination; native helper is suppressed",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0337",
+        "body_sha256": "6e57b5c6af2b39f0f9cb8dc05df6a29301b6595b8c5b0d05edabd7c5cb66762f"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0337_1",
+        "body_sha256": "7eccb3b551fb9cf636a3acc02af6d5afc59a37665ee9a08493ca9e2954777c15"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e47be5316e401d297d5fb73366a31ed29a93239f9c5974574418e88975fb2983"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0339",
+    "body_sha256": "6821770bbc67d1e115c2be546f80e8dcd1e6fb070f59f808191cd8f1e4b66198",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted continent provider owns the named destination; native helper is suppressed",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0339",
+        "body_sha256": "6821770bbc67d1e115c2be546f80e8dcd1e6fb070f59f808191cd8f1e4b66198"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0339_1",
+        "body_sha256": "73540b4f97a502402a5dd4e54a55c50c2d04146d911b55c2fdd6ce04d34ed795"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e47be5316e401d297d5fb73366a31ed29a93239f9c5974574418e88975fb2983"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0341",
+    "body_sha256": "23d1255ff7864df3eb2d310d73717bfa39958e2b8befdadf441cd6369466cc96",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted continent provider owns the named destination; native helper is suppressed",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0341",
+        "body_sha256": "23d1255ff7864df3eb2d310d73717bfa39958e2b8befdadf441cd6369466cc96"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0341_1",
+        "body_sha256": "0d03c78c506e1c7a78bc6f186cb193b0698ca63b013193b79fb0ff70af356da3"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e47be5316e401d297d5fb73366a31ed29a93239f9c5974574418e88975fb2983"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0281",
+    "body_sha256": "e39e80ffdc7baf3f69b87023ab1c1a1a644539eeb171e4b81f9bd495813392db",
+    "disposition": "transfer",
+    "label": "Map entrance",
+    "reason": "lake entry movement and teleport-cache maintenance, not the later encounter",
+    "bodies": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0281",
+        "body_sha256": "e39e80ffdc7baf3f69b87023ab1c1a1a644539eeb171e4b81f9bd495813392db"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0344",
+    "body_sha256": "8ec41063e6dc7cd3145ce5d94c940a8e5f54645d38c1da48e074a90fcfa0a6f0",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted continent provider owns the named destination; native helper is suppressed",
+    "bodies": [
+      {
+        "submap": "Map_10020",
+        "script": "sc_e_0344",
+        "body_sha256": "8ec41063e6dc7cd3145ce5d94c940a8e5f54645d38c1da48e074a90fcfa0a6f0"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0344_1",
+        "body_sha256": "4bfb1b541b5c256e700fe51582b465c04320e65baefa177bce9dc684cd7b8540"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e47be5316e401d297d5fb73366a31ed29a93239f9c5974574418e88975fb2983"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0351",
+    "body_sha256": "3abff2f874d1eceb5a0f094a82fd0dfcc6e65851c1baac8a0abfe6da0b276647",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "accepted mounted underwater entrance already has ordinary/submarine exit flags",
+    "bodies": [
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0351",
+        "body_sha256": "3abff2f874d1eceb5a0f094a82fd0dfcc6e65851c1baac8a0abfe6da0b276647"
+      },
+      {
+        "submap": "Map_30171_1",
+        "script": "sc_e_0351_1",
+        "body_sha256": "fa720f30b09ecdd7865056f58bf6f332c05efa1d44b7d56bc550b1a553136118"
+      },
+      {
+        "submap": "Map_30171_1",
+        "script": "sc_map_30171_1",
+        "body_sha256": "9433f976d3c3720e9cd0b7b9a1aa889384015ef0a02536801449fe6b73acacda"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0347",
+    "body_sha256": "4d7522ce1a75bf452b29ba6deff15b6768a024d820fd952fb91a8fc6bcf3386b",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "accepted mounted underwater entrance already has ordinary/submarine exit flags",
+    "bodies": [
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0347",
+        "body_sha256": "4d7522ce1a75bf452b29ba6deff15b6768a024d820fd952fb91a8fc6bcf3386b"
+      },
+      {
+        "submap": "Map_30151_1",
+        "script": "sc_e_0347_1",
+        "body_sha256": "fa8f93cfc745699485368257f40772760ca693a9b50fef665b8fabb0568fbea4"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0349",
+    "body_sha256": "0db1497eff5b662423f74f54b02de7991032f8cc70268490a53dde5f42321398",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "accepted mounted underwater entrance already has ordinary/submarine exit flags",
+    "bodies": [
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0349",
+        "body_sha256": "0db1497eff5b662423f74f54b02de7991032f8cc70268490a53dde5f42321398"
+      },
+      {
+        "submap": "Map_30191_1",
+        "script": "sc_e_0349_1",
+        "body_sha256": "2f755f1180fd20601719c917638e76d6afc9c9c7ad2be7b499e09cfee4f306ff"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_ship_0007",
+    "body_sha256": "90640fd1e198164de937c7218fd2a33d6a1a18e610bec7dec17696eb524de985",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted interior vehicle-return/ladder producer owns the action",
+    "bodies": [
+      {
+        "submap": "Map_20301_1",
+        "script": "sc_ship_0007",
+        "body_sha256": "90640fd1e198164de937c7218fd2a33d6a1a18e610bec7dec17696eb524de985"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_ship_0007_1",
+        "body_sha256": "873b7d0ad593f6d968c385385a2fa8eb22e3c2341db6e9a9138ad4aef6ec430e"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_map_10040",
+        "body_sha256": "cc574751e734c17f14c8a9e0c07dd6d9122faa9123fc63809736eb0117bcdc04"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_ship_0004",
+    "body_sha256": "c526f21935cdc2e758495e175e6161d96a30f4cf73ae2de63d28bd2d47ab3a32",
+    "disposition": "existing_provider",
+    "label": null,
+    "reason": "accepted interior vehicle-return/ladder producer owns the action",
+    "bodies": [
+      {
+        "submap": "Map_20351_1",
+        "script": "sc_ship_0004",
+        "body_sha256": "c526f21935cdc2e758495e175e6161d96a30f4cf73ae2de63d28bd2d47ab3a32"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_ship_0004_1",
+        "body_sha256": "a34429461b4e44f3bcef9c030073af6b268d399713fe0e6e622cb92901a8fd5b"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e47be5316e401d297d5fb73366a31ed29a93239f9c5974574418e88975fb2983"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0353",
+    "body_sha256": "769f80d3e30395ed9984bd52f100c7b5249af6665b2749eb2a91267f8ac1eb7f",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "first-visit flight/destruction/abduction scene; full continuation is narrative despite no dialogue",
+    "bodies": [
+      {
+        "submap": "Map_30031_1",
+        "script": "sc_e_0353",
+        "body_sha256": "769f80d3e30395ed9984bd52f100c7b5249af6665b2749eb2a91267f8ac1eb7f"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0026",
+        "body_sha256": "a09356eb4118b1024a0d4ff0de4d29c4677738f0f6fb6160ed5adc58d95f7b90"
+      },
+      {
+        "submap": "Map_30041_1",
+        "script": "sc_e_0026_1",
+        "body_sha256": "48f5b42598701fc5c4ad0949ec1870a1c76bc2e37ec84099ed441217439e9e41"
+      },
+      {
+        "submap": "Map_30041_1",
+        "script": "sc_map_30041_1",
+        "body_sha256": "8db6184f8c1cfb2867921ef6d38b67ee2722f5bc5817953d551c2104198f5703"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0348",
+    "body_sha256": "32075cf13513b67ac72feadfcdf4acd0c4c78a99c080e373ead415c36b1ba4ad",
+    "disposition": "transfer",
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "bodies": [
+      {
+        "submap": "Map_30151_1",
+        "script": "sc_e_0348",
+        "body_sha256": "32075cf13513b67ac72feadfcdf4acd0c4c78a99c080e373ead415c36b1ba4ad"
+      },
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0348_1",
+        "body_sha256": "3d550242acf06136477b461689e530f1ff0778564c3338835d5041adf038d41a"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0352",
+    "body_sha256": "93618bf26a672ee9429f50b51dc9212ec18472bd521070c5bf680ef8d3f345f3",
+    "disposition": "transfer",
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "bodies": [
+      {
+        "submap": "Map_30171_1",
+        "script": "sc_e_0352",
+        "body_sha256": "93618bf26a672ee9429f50b51dc9212ec18472bd521070c5bf680ef8d3f345f3"
+      },
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0352_1",
+        "body_sha256": "20b8728740236434e6989bef0f4ae33558fc37a171d344d9eada45107fe22326"
+      }
+    ]
+  },
+  {
+    "game": 3,
+    "script": "sc_e_0350",
+    "body_sha256": "0e737f8257e1cd09d292ddb84ed5412580af1ffa23fef5d34caaaadc33d0b3de",
+    "disposition": "transfer",
+    "label": "World map transition",
+    "reason": "underwater return; native script restores submarine and world position",
+    "bodies": [
+      {
+        "submap": "Map_30191_1",
+        "script": "sc_e_0350",
+        "body_sha256": "0e737f8257e1cd09d292ddb84ed5412580af1ffa23fef5d34caaaadc33d0b3de"
+      },
+      {
+        "submap": "Map_10030",
+        "script": "sc_e_0350_1",
+        "body_sha256": "92453d7d0f807fde68167f5d5faa8fe66a7167df69f56646e9d14d2ea518c140"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_e_0015",
+    "body_sha256": "03cf0fe5b8c042d93a57dc83342ec315c85ff55b1d69ec5be35bb31aed0033b1",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "bombardment/vehicle attack presentation; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0015",
+        "body_sha256": "03cf0fe5b8c042d93a57dc83342ec315c85ff55b1d69ec5be35bb31aed0033b1"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_e_0048",
+    "body_sha256": "25c48b94347c443fa31eb84e4b393fd5857e617a0d22ce3c211f94140d5a8c92",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "bombardment/vehicle attack presentation; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_10020",
+        "script": "sc_e_0048",
+        "body_sha256": "25c48b94347c443fa31eb84e4b393fd5857e617a0d22ce3c211f94140d5a8c92"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_e_0049",
+    "body_sha256": "4b2ed2131f55039388398972f41763d258de647db438c21c8eb415c8a9d51cce",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "bombardment/vehicle attack presentation; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_10020",
+        "script": "sc_e_0049",
+        "body_sha256": "4b2ed2131f55039388398972f41763d258de647db438c21c8eb415c8a9d51cce"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_e_0050",
+    "body_sha256": "83c01a7d2d3475b9152898ab39f4b971222c39c922eace4ace52bcd87b8c8e94",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "bombardment/vehicle attack presentation; multi-actor story staging",
+    "bodies": [
+      {
+        "submap": "Map_10020",
+        "script": "sc_e_0050",
+        "body_sha256": "83c01a7d2d3475b9152898ab39f4b971222c39c922eace4ace52bcd87b8c8e94"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_e_0031",
+    "body_sha256": "a25f2f6236b8e1616e2eb3f51777528d47d6694f1350fd19b2e774e32212685c",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6",
+    "bodies": [
+      {
+        "submap": "Map_20061_9",
+        "script": "sc_e_0031",
+        "body_sha256": "a25f2f6236b8e1616e2eb3f51777528d47d6694f1350fd19b2e774e32212685c"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0031_1",
+        "body_sha256": "aac5e4698a75374c1fe87187be49cb71a6304aee4758efb639d126dcae4f2f03"
+      },
+      {
+        "submap": "Map_20021_5",
+        "script": "sc_e_0031_2",
+        "body_sha256": "35943c0a22e9f5647b0797d1d4661042fbf22ba6c37224bdd6a21b99671f222c"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_ship_0007",
+    "body_sha256": "1b3737e2197d34289481e53c256fcc62a8f24314041ba7748cc07de9036f5e25",
+    "disposition": "transfer",
+    "label": "World map transition",
+    "reason": "return from airship interior to the same native vehicle",
+    "bodies": [
+      {
+        "submap": "Map_20271_2",
+        "script": "sc_ship_0007",
+        "body_sha256": "1b3737e2197d34289481e53c256fcc62a8f24314041ba7748cc07de9036f5e25"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_ship_0007_1",
+        "body_sha256": "221205856f5610e2285057bc93aefa885e126e16c634fe7ce240e74191db4575"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "49a6d08affa6745275833975fc9212b47b5c784bb83b785df372d78d9b443475"
+      }
+    ]
+  },
+  {
+    "game": 4,
+    "script": "sc_godown_1",
+    "body_sha256": "cf26a403189f748b920061483e482145e904306f3ef6a5a55284550c19537b18",
+    "disposition": "existing_exit",
+    "label": null,
+    "reason": "already an indexed world exit; arrival includes story staging",
+    "bodies": [
+      {
+        "submap": "Map_30141_1",
+        "script": "sc_godown_1",
+        "body_sha256": "cf26a403189f748b920061483e482145e904306f3ef6a5a55284550c19537b18"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_godown_1_1",
+        "body_sha256": "acc7ddb016763b11b490a5dccee925a7319240aa9f54b4dbbd86a679f62e2922"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "49a6d08affa6745275833975fc9212b47b5c784bb83b785df372d78d9b443475"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10030_to_30391_2",
+    "body_sha256": "8f8d84e29add5c2259f52c043f9518471a45f7486f66df0df4042aee538004d7",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10030",
+        "script": "sc_10030_to_30391_2",
+        "body_sha256": "8f8d84e29add5c2259f52c043f9518471a45f7486f66df0df4042aee538004d7"
+      },
+      {
+        "submap": "Map_30391_2",
+        "script": "sc_10030_to_30391_2_1",
+        "body_sha256": "ba40bdc6f2e05133ab83eb6fa3ef16307c17661e0699c4f9940d4355e0781bcb"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10030_to_30381_8",
+    "body_sha256": "9f5c815e484b469e249d4e03aef030ad82236940956b4802d6750a54de5d990f",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10030",
+        "script": "sc_10030_to_30381_8",
+        "body_sha256": "9f5c815e484b469e249d4e03aef030ad82236940956b4802d6750a54de5d990f"
+      },
+      {
+        "submap": "Map_30381_8",
+        "script": "sc_10030_to_30381_8_1",
+        "body_sha256": "eca7a6228c1e854d2130ee78bf17c1b35dd850aede2a823b7d7ef8f99a962270"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_world_3_to_20050",
+    "body_sha256": "bc358595fd604bac3430ddcc83a10f7002cc7818f40d5758423d9a386426f2e3",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_world_3_to_20050",
+        "body_sha256": "bc358595fd604bac3430ddcc83a10f7002cc7818f40d5758423d9a386426f2e3"
+      },
+      {
+        "submap": "Map_20050",
+        "script": "sc_world_3_to_20050_1",
+        "body_sha256": "4285997ed66f67bd503578257cc29b716e685bb3d030ea5a7271f8f439b478d3"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10040_to_20200",
+    "body_sha256": "bb2a9cfbf9076904663c6d1c418cf7efb9f149bdabff60a81ec73d7fd4b07c37",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_10040_to_20200",
+        "body_sha256": "bb2a9cfbf9076904663c6d1c418cf7efb9f149bdabff60a81ec73d7fd4b07c37"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0278_4",
+    "body_sha256": "a88718add0bf1d616f3cc6ebbca75c6e8db1439212b82bf4a997297b24d34711",
+    "disposition": "physical",
+    "label": "Checkpoint",
+    "reason": "lap progress flag and hiding its own checkpoint actor; no story scene or reward disclosure",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0278_4",
+        "body_sha256": "a88718add0bf1d616f3cc6ebbca75c6e8db1439212b82bf4a997297b24d34711"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0278_2",
+    "body_sha256": "6a12e93cbc3deb25e117515ab886e01207583341b5199c4f3f7f70d04ec27ba2",
+    "disposition": "physical",
+    "label": "Checkpoint",
+    "reason": "lap progress flag and hiding its own checkpoint actor; no story scene or reward disclosure",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0278_2",
+        "body_sha256": "6a12e93cbc3deb25e117515ab886e01207583341b5199c4f3f7f70d04ec27ba2"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0278_3",
+    "body_sha256": "cf834302068c7d302c0765ad26ad7d59109bacd7c9e9a66641058606d8cef2e5",
+    "disposition": "physical",
+    "label": "Checkpoint",
+    "reason": "lap progress flag and hiding its own checkpoint actor; no story scene or reward disclosure",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0278_3",
+        "body_sha256": "cf834302068c7d302c0765ad26ad7d59109bacd7c9e9a66641058606d8cef2e5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0278_1",
+    "body_sha256": "7542979fcd47fada5031d6d1b99f7bd6247deef0cbff7df3503f1f510079ebbe",
+    "disposition": "physical",
+    "label": "Checkpoint",
+    "reason": "lap progress flag and hiding its own checkpoint actor; no story scene or reward disclosure",
+    "bodies": [
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0278_1",
+        "body_sha256": "7542979fcd47fada5031d6d1b99f7bd6247deef0cbff7df3503f1f510079ebbe"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10050_to_20211_3",
+    "body_sha256": "85984ee237e92214c44d91553b10e595e76d389cb76f2dbc9a4f87254e0d481d",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10050",
+        "script": "sc_10050_to_20211_3",
+        "body_sha256": "85984ee237e92214c44d91553b10e595e76d389cb76f2dbc9a4f87254e0d481d"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10050_to_30511_2",
+    "body_sha256": "d579b6faa34fee2b40d99b8dbf1cb40ff59ea6ad41e4976c50875bd837c46ab7",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10050",
+        "script": "sc_10050_to_30511_2",
+        "body_sha256": "d579b6faa34fee2b40d99b8dbf1cb40ff59ea6ad41e4976c50875bd837c46ab7"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10050_to_30611_14",
+    "body_sha256": "93112ead53cbe38d8d38e7f7dcf30559e3c491007aa64f1d35c80f258d1eb71a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10050",
+        "script": "sc_10050_to_30611_14",
+        "body_sha256": "93112ead53cbe38d8d38e7f7dcf30559e3c491007aa64f1d35c80f258d1eb71a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_10050_to_30531_11",
+    "body_sha256": "99be880376c9043832f06e15e06d1b663710ac1792a8cbe0b2633a703afd9dd8",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_10050",
+        "script": "sc_10050_to_30531_11",
+        "body_sha256": "99be880376c9043832f06e15e06d1b663710ac1792a8cbe0b2633a703afd9dd8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0173_1",
+    "body_sha256": "fdb445d4338ba3b2fbdccee751c052220c6713c2ca46c13a57332e23549a8608",
+    "disposition": "physical",
+    "label": "Service area",
+    "reason": "pub service cleanup returns the service actor and clears temporary area triggers",
+    "bodies": [
+      {
+        "submap": "Map_20011_3",
+        "script": "sc_e_0173_1",
+        "body_sha256": "fdb445d4338ba3b2fbdccee751c052220c6713c2ca46c13a57332e23549a8608"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20050_gate_2",
+    "body_sha256": "8c5a3c66e9bf793332af279d51af8ada5c26a77f2e939ea4f58f1af4900132d4",
+    "disposition": "physical",
+    "label": "Gate",
+    "reason": "gate tiles animate and disappear; guards face the gate, without dialogue or a story transfer",
+    "bodies": [
+      {
+        "submap": "Map_20050",
+        "script": "sc_map_20050_gate_2",
+        "body_sha256": "8c5a3c66e9bf793332af279d51af8ada5c26a77f2e939ea4f58f1af4900132d4"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20050_gate_1",
+    "body_sha256": "110e49331438423b5d2ea094096c02d53fdad757fdf7a387e5a44cb2f11f9151",
+    "disposition": "physical",
+    "label": "Gate",
+    "reason": "gate tiles animate and disappear; guards face the gate, without dialogue or a story transfer",
+    "bodies": [
+      {
+        "submap": "Map_20050",
+        "script": "sc_map_20050_gate_1",
+        "body_sha256": "110e49331438423b5d2ea094096c02d53fdad757fdf7a387e5a44cb2f11f9151"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_1",
+    "body_sha256": "12f08cb1f0ebbe13a1ecdc4a8ed13eab914d6d81644bb315a12e97896af96cc3",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_1",
+        "body_sha256": "12f08cb1f0ebbe13a1ecdc4a8ed13eab914d6d81644bb315a12e97896af96cc3"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_after_1",
+        "body_sha256": "5687a3e40e4957c520f5a7f134858fbe9e69f8010a59f172e0dd7f828401abd0"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_1",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_2",
+    "body_sha256": "d53a52561d19236e923ab124ad1aadaa2ee36f131cd8dcbc5026530c79d3fd52",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_2",
+        "body_sha256": "d53a52561d19236e923ab124ad1aadaa2ee36f131cd8dcbc5026530c79d3fd52"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_3",
+    "body_sha256": "281d30be783e07d7f65b2e39315f887a380ada8c13d19259441794ddc36b729c",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_3",
+        "body_sha256": "281d30be783e07d7f65b2e39315f887a380ada8c13d19259441794ddc36b729c"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_4",
+    "body_sha256": "92c575b3aeaa34dff7cbaa2341fc1e163545b5e43dfdc9b172d8e1bcf6c76c82",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_4",
+        "body_sha256": "92c575b3aeaa34dff7cbaa2341fc1e163545b5e43dfdc9b172d8e1bcf6c76c82"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_5",
+    "body_sha256": "6da8f633267e8e404418478880e48150d56e05e9c551b4950449d0281e49f5fe",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_5",
+        "body_sha256": "6da8f633267e8e404418478880e48150d56e05e9c551b4950449d0281e49f5fe"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_6",
+    "body_sha256": "6f8cf9146a31176b2dff9402f5f8dd87b5842003c827c423f6617a8cecc93047",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_6",
+        "body_sha256": "6f8cf9146a31176b2dff9402f5f8dd87b5842003c827c423f6617a8cecc93047"
+      },
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_after_11",
+        "body_sha256": "3ca7f3fa805c95e5dfc8cd1bde187ff65e3158ed2e611bebd2a8551efd4eb791"
+      },
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_11",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20070_move_7",
+    "body_sha256": "dbab007b76ca85eefec62d91e4b6356c51892d2b51cc80a621cebbf5b3780514",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_move_7",
+        "body_sha256": "dbab007b76ca85eefec62d91e4b6356c51892d2b51cc80a621cebbf5b3780514"
+      },
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_after_14",
+        "body_sha256": "83915148d2e7cfd85f819a08793ee88ec67f551f75af1f23060c6dec74207c11"
+      },
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_14",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_1",
+    "body_sha256": "8e33aec0edde2027d3efd0beb74e907fbbbebcdf8393d04eb66d0247ee6945ad",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_move_1",
+        "body_sha256": "8e33aec0edde2027d3efd0beb74e907fbbbebcdf8393d04eb66d0247ee6945ad"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_2",
+    "body_sha256": "9811e20d7b47024db5d8081c925e489f5b657be2b02f1fb7615da3eaa8207c9c",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_move_2",
+        "body_sha256": "9811e20d7b47024db5d8081c925e489f5b657be2b02f1fb7615da3eaa8207c9c"
+      },
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_after_3",
+        "body_sha256": "f35a403125769e0c0ba7e951287a6da1b48b4d77012a07131b68b42ce2a81bba"
+      },
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_3",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_3",
+    "body_sha256": "1cc995828602aebcfaed0374a43571391020086effa94f752822fd5292af0605",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_move_3",
+        "body_sha256": "1cc995828602aebcfaed0374a43571391020086effa94f752822fd5292af0605"
+      },
+      {
+        "submap": "Map_20071_2",
+        "script": "sc_map_20071_after_2",
+        "body_sha256": "9589d98161b74e5cb050127f7667743ad1264913a13a98fb4279cd02f280084c"
+      },
+      {
+        "submap": "Map_20071_2",
+        "script": "sc_map_20071_2",
+        "body_sha256": "975a9c54a40b1b9314ccf3a4223105d3de81dd22be4acb95cd8523f08c6710e5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_4",
+    "body_sha256": "ff1f24d1dcedf6e7bfc35ea44b75291b479078be80794eab658337b9a724dcb4",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_move_4",
+        "body_sha256": "ff1f24d1dcedf6e7bfc35ea44b75291b479078be80794eab658337b9a724dcb4"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_5",
+    "body_sha256": "3e126d98a809aacdf248f782b345c2bfdcf977585642c1f22a415c1ef2b339e7",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_move_5",
+        "body_sha256": "3e126d98a809aacdf248f782b345c2bfdcf977585642c1f22a415c1ef2b339e7"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_after_10",
+        "body_sha256": "ae4c7a46320045a1c20dd7fc0272b0801cbd6820d21e7f17ddbdae8eeb244217"
+      },
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_10",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_20",
+    "body_sha256": "da374959ba596e71442e1b625d4ff0ef9869d26b5750e96ec32871aaac5ce352",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_20",
+        "body_sha256": "da374959ba596e71442e1b625d4ff0ef9869d26b5750e96ec32871aaac5ce352"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_after_1",
+        "body_sha256": "5687a3e40e4957c520f5a7f134858fbe9e69f8010a59f172e0dd7f828401abd0"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_1",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_21",
+    "body_sha256": "9603d7fa49280e1ba9694aed3bf59dd92fa2b2b4679c3ad57782c46a55741c64",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_21",
+        "body_sha256": "9603d7fa49280e1ba9694aed3bf59dd92fa2b2b4679c3ad57782c46a55741c64"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_after_1",
+        "body_sha256": "5687a3e40e4957c520f5a7f134858fbe9e69f8010a59f172e0dd7f828401abd0"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_1",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_22",
+    "body_sha256": "77706657419a6eeec176cb3cccd75abb4f51213ef55795cfb366f3c4fad35ee0",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_22",
+        "body_sha256": "77706657419a6eeec176cb3cccd75abb4f51213ef55795cfb366f3c4fad35ee0"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_23",
+    "body_sha256": "9b22b06c54a2f0845fa50fe204d46e0c8bd37aafa9152730aeeca25c9baa2dfb",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_23",
+        "body_sha256": "9b22b06c54a2f0845fa50fe204d46e0c8bd37aafa9152730aeeca25c9baa2dfb"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_24",
+    "body_sha256": "3600950e19bd8db95e46e85860e8d4764ebade4364bfdfcbbbf67e63214dffbd",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_24",
+        "body_sha256": "3600950e19bd8db95e46e85860e8d4764ebade4364bfdfcbbbf67e63214dffbd"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_25",
+    "body_sha256": "65984e225ae2e6502685b82b3fd1a3f5daa7a884507ee5c199d3adc0b916dec7",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_10",
+        "script": "sc_map_20071_move_25",
+        "body_sha256": "65984e225ae2e6502685b82b3fd1a3f5daa7a884507ee5c199d3adc0b916dec7"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_27",
+    "body_sha256": "8eb1af24aea9cea8d4762e96a495beff77abc85e8e574991b1a215bd99693f46",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_move_27",
+        "body_sha256": "8eb1af24aea9cea8d4762e96a495beff77abc85e8e574991b1a215bd99693f46"
+      },
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_after_12",
+        "body_sha256": "2006caaf9476fbcde7fef9ae4e08f458ea0c8b83b02a63a9a240626394921c8c"
+      },
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_12",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_26",
+    "body_sha256": "cacaaf74b964c36054b27974812fbb016b42d55a8365612b8f54520aaa001202",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_move_26",
+        "body_sha256": "cacaaf74b964c36054b27974812fbb016b42d55a8365612b8f54520aaa001202"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_28",
+    "body_sha256": "d75dbd7276d3f159dc839fa124324c32e9b05b3502bf8a63f3a202922e9ca68c",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_move_28",
+        "body_sha256": "d75dbd7276d3f159dc839fa124324c32e9b05b3502bf8a63f3a202922e9ca68c"
+      },
+      {
+        "submap": "Map_20071_13",
+        "script": "sc_map_20071_after_13",
+        "body_sha256": "78db4d0f4bd3bd97eb667ecbbb3ad90f70d4945fc3cd5c5bc690150d171857af"
+      },
+      {
+        "submap": "Map_20071_13",
+        "script": "sc_map_20071_13",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_29",
+    "body_sha256": "cad412ef08b35689c8cde23223ead319a0adab641d400f5a6009fdbe0208efe7",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_move_29",
+        "body_sha256": "cad412ef08b35689c8cde23223ead319a0adab641d400f5a6009fdbe0208efe7"
+      },
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_after_11",
+        "body_sha256": "3ca7f3fa805c95e5dfc8cd1bde187ff65e3158ed2e611bebd2a8551efd4eb791"
+      },
+      {
+        "submap": "Map_20071_11",
+        "script": "sc_map_20071_11",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_30",
+    "body_sha256": "7b02f2ebb6bd6e3916cac24c1a533e5cd68fc321f1c6c39bfe1d2718e3b30379",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_13",
+        "script": "sc_map_20071_move_30",
+        "body_sha256": "7b02f2ebb6bd6e3916cac24c1a533e5cd68fc321f1c6c39bfe1d2718e3b30379"
+      },
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_after_12",
+        "body_sha256": "2006caaf9476fbcde7fef9ae4e08f458ea0c8b83b02a63a9a240626394921c8c"
+      },
+      {
+        "submap": "Map_20071_12",
+        "script": "sc_map_20071_12",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_32",
+    "body_sha256": "c9e92225d9884b2c50d348f541680004809a392b655bab149b265c9416cb8083",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_move_32",
+        "body_sha256": "c9e92225d9884b2c50d348f541680004809a392b655bab149b265c9416cb8083"
+      },
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_after_15",
+        "body_sha256": "a65ddbac3c170eaf8756c6582c1ac0a70d851b8a7ef5537f44a4e51618a596e1"
+      },
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_15",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_31",
+    "body_sha256": "aac92ebded697e2d19858eb3c0928cc01800afa426cd84f5b5194005d1b3ac4a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_move_31",
+        "body_sha256": "aac92ebded697e2d19858eb3c0928cc01800afa426cd84f5b5194005d1b3ac4a"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070_after",
+        "body_sha256": "3709098b5b4dffb8de3f40bd7d9cf3bc0b794c4e81bbda009e6818e225da77a8"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "c2476db1cd0531adad1210cd37210085ccca1aea50a6fb7876e34351203a4300"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_33",
+    "body_sha256": "049c0dc1b38d65dab08a49846527607ae53cae83625d4eb0e6933a3e2693be02",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_move_33",
+        "body_sha256": "049c0dc1b38d65dab08a49846527607ae53cae83625d4eb0e6933a3e2693be02"
+      },
+      {
+        "submap": "Map_20071_16",
+        "script": "sc_map_20071_after_16",
+        "body_sha256": "4327b88ee074cefa4158d802948b96f72a4d3a57db8239ac5e463df7ad34b9f0"
+      },
+      {
+        "submap": "Map_20071_16",
+        "script": "sc_map_20071_16",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_34",
+    "body_sha256": "f187b1f60dde9117f015182145deff262694f07f0266b4c0186882075916cc20",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_move_34",
+        "body_sha256": "f187b1f60dde9117f015182145deff262694f07f0266b4c0186882075916cc20"
+      },
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_after_14",
+        "body_sha256": "83915148d2e7cfd85f819a08793ee88ec67f551f75af1f23060c6dec74207c11"
+      },
+      {
+        "submap": "Map_20071_14",
+        "script": "sc_map_20071_14",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_35",
+    "body_sha256": "417a7becf4fc581b65feb3b82d0e613adfda92fa39d1e761e0a2bd573f97b837",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_16",
+        "script": "sc_map_20071_move_35",
+        "body_sha256": "417a7becf4fc581b65feb3b82d0e613adfda92fa39d1e761e0a2bd573f97b837"
+      },
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_after_15",
+        "body_sha256": "a65ddbac3c170eaf8756c6582c1ac0a70d851b8a7ef5537f44a4e51618a596e1"
+      },
+      {
+        "submap": "Map_20071_15",
+        "script": "sc_map_20071_15",
+        "body_sha256": "d92b2edc77cd947d5c97d71ee9d8c1e98a719de63a2f4396413ddb60083ba69a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_6",
+    "body_sha256": "b632bb9efb084d1a367cf721b2b1fffa5cf80790676d903bc41b063a6af0fcdd",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_2",
+        "script": "sc_map_20071_move_6",
+        "body_sha256": "b632bb9efb084d1a367cf721b2b1fffa5cf80790676d903bc41b063a6af0fcdd"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_after_1",
+        "body_sha256": "5687a3e40e4957c520f5a7f134858fbe9e69f8010a59f172e0dd7f828401abd0"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_1",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_7",
+    "body_sha256": "b6603591d16ed4d33b2eb1ea7d38ea410b4ed9a87648759c19125043a711a319",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_move_7",
+        "body_sha256": "b6603591d16ed4d33b2eb1ea7d38ea410b4ed9a87648759c19125043a711a319"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_after_1",
+        "body_sha256": "5687a3e40e4957c520f5a7f134858fbe9e69f8010a59f172e0dd7f828401abd0"
+      },
+      {
+        "submap": "Map_20071_1",
+        "script": "sc_map_20071_1",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_8",
+    "body_sha256": "f5611341565c3a639a8aaadb775e92415ab9790ad447c22299bde89894513cb5",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_move_8",
+        "body_sha256": "f5611341565c3a639a8aaadb775e92415ab9790ad447c22299bde89894513cb5"
+      },
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_after_4",
+        "body_sha256": "eabd50899856d725973deddea70af55bfcf68d77ba89cacf152d707a87feb4b6"
+      },
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_4",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_9",
+    "body_sha256": "87820ab46db5fded43a934e3386ff1aa3497cef9c079c330adf5c5314f979fc9",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_move_9",
+        "body_sha256": "87820ab46db5fded43a934e3386ff1aa3497cef9c079c330adf5c5314f979fc9"
+      },
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_after_5",
+        "body_sha256": "ada2b17d97eb1a129f1dd6586385ea9fdced9121844c36e3d1dc11678268ef43"
+      },
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_5",
+        "body_sha256": "ac30f6f2f04a6b939d5cef895b4d68a5f8f26c0565bd20377dfdf51de9232260"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_10",
+    "body_sha256": "ab6479c03bc2f331dc9cdbb6f1e424b2b1aab04314d05fc60e3de9eb6822d41c",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_move_10",
+        "body_sha256": "ab6479c03bc2f331dc9cdbb6f1e424b2b1aab04314d05fc60e3de9eb6822d41c"
+      },
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_after_3",
+        "body_sha256": "f35a403125769e0c0ba7e951287a6da1b48b4d77012a07131b68b42ce2a81bba"
+      },
+      {
+        "submap": "Map_20071_3",
+        "script": "sc_map_20071_3",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_11",
+    "body_sha256": "1e813bf4442ccb9092eefc26a2984c0e9f48416908e1fb9507cece151959a169",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_move_11",
+        "body_sha256": "1e813bf4442ccb9092eefc26a2984c0e9f48416908e1fb9507cece151959a169"
+      },
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_after_4",
+        "body_sha256": "eabd50899856d725973deddea70af55bfcf68d77ba89cacf152d707a87feb4b6"
+      },
+      {
+        "submap": "Map_20071_4",
+        "script": "sc_map_20071_4",
+        "body_sha256": "271b2721589ddb90bafb1c1c6e64be2c262e6dffbcfcd3bd7d3f2789f8dce38a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_12",
+    "body_sha256": "8355e6bbf8a64e3c21c2f464cfb3d226b5ea4c06272bfe9d7cb569120312bb80",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_move_12",
+        "body_sha256": "8355e6bbf8a64e3c21c2f464cfb3d226b5ea4c06272bfe9d7cb569120312bb80"
+      },
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_after_6",
+        "body_sha256": "9c1bc2388518beb75a0454e3a955080f02a59cd6b1d65c6b1a47ce1d9b53c2bb"
+      },
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_6",
+        "body_sha256": "252f0818fe3fcae0d6f005df41a7301d02fae643c7c7e93d34bfffaa7a002174"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_13",
+    "body_sha256": "c41d3b3542bddadd6243198c4bf5e6d12e2a7377ae5897a24a1f6e5edc222b4a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_move_13",
+        "body_sha256": "c41d3b3542bddadd6243198c4bf5e6d12e2a7377ae5897a24a1f6e5edc222b4a"
+      },
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_after_5",
+        "body_sha256": "ada2b17d97eb1a129f1dd6586385ea9fdced9121844c36e3d1dc11678268ef43"
+      },
+      {
+        "submap": "Map_20071_5",
+        "script": "sc_map_20071_5",
+        "body_sha256": "ac30f6f2f04a6b939d5cef895b4d68a5f8f26c0565bd20377dfdf51de9232260"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_14",
+    "body_sha256": "c31972646318a8e526cb78e9b24c2db3fb20d632578fe2447b85d0334ef1a50a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_move_14",
+        "body_sha256": "c31972646318a8e526cb78e9b24c2db3fb20d632578fe2447b85d0334ef1a50a"
+      },
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_after_7",
+        "body_sha256": "60fd2818ca99faa9011d888f887d6996f0e39d92870a522283cd1656479daa8a"
+      },
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_7",
+        "body_sha256": "855d0dc9b3418d944593128c9f2b19a5fdc95010ed5879d6414c2c735cb7e484"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0043",
+    "body_sha256": "1e4ffee299c6cf65d809225f57ea30e891e5d8c7c5afcaf236079620e97c7ee9",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_e_0043",
+        "body_sha256": "1e4ffee299c6cf65d809225f57ea30e891e5d8c7c5afcaf236079620e97c7ee9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_16",
+    "body_sha256": "4bfd9aeb8fef0f3f0bac54efe3871717dfc81134b272d86c891f3ea61c337e88",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_move_16",
+        "body_sha256": "4bfd9aeb8fef0f3f0bac54efe3871717dfc81134b272d86c891f3ea61c337e88"
+      },
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_after_8",
+        "body_sha256": "8c7ac927ccdb158764fe57ea46ccff55d0186674fc5c7355c2e4de00b1797aaa"
+      },
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_8",
+        "body_sha256": "a4b00b941b0e98569be37c0caecb1920fccdc3e5c5defb2ad7bf7d5bad3cde33"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_15",
+    "body_sha256": "169c83ea54623616dbabe01b58ad98c96d6fbbfdd66c13dd23989dbe599c9470",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_move_15",
+        "body_sha256": "169c83ea54623616dbabe01b58ad98c96d6fbbfdd66c13dd23989dbe599c9470"
+      },
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_after_6",
+        "body_sha256": "9c1bc2388518beb75a0454e3a955080f02a59cd6b1d65c6b1a47ce1d9b53c2bb"
+      },
+      {
+        "submap": "Map_20071_6",
+        "script": "sc_map_20071_6",
+        "body_sha256": "252f0818fe3fcae0d6f005df41a7301d02fae643c7c7e93d34bfffaa7a002174"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_17",
+    "body_sha256": "786310437bb355a62d051d53982600db1fff4326766bb5a4483a2ca42e178ee3",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_move_17",
+        "body_sha256": "786310437bb355a62d051d53982600db1fff4326766bb5a4483a2ca42e178ee3"
+      },
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_after_7",
+        "body_sha256": "60fd2818ca99faa9011d888f887d6996f0e39d92870a522283cd1656479daa8a"
+      },
+      {
+        "submap": "Map_20071_7",
+        "script": "sc_map_20071_7",
+        "body_sha256": "855d0dc9b3418d944593128c9f2b19a5fdc95010ed5879d6414c2c735cb7e484"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_18",
+    "body_sha256": "4fd48ccc08084e132f9849904cb9d139216f22cb5a35acdb51504c71044cec00",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_move_18",
+        "body_sha256": "4fd48ccc08084e132f9849904cb9d139216f22cb5a35acdb51504c71044cec00"
+      },
+      {
+        "submap": "Map_20071_9",
+        "script": "sc_map_20071_after_9",
+        "body_sha256": "7371174a0e1e60d894701af3ae2a16ca6bceb9202f2edd9f23d937cfb8dfca07"
+      },
+      {
+        "submap": "Map_20071_9",
+        "script": "sc_map_20071_9",
+        "body_sha256": "c23c16b52150213ed623ecc45684bf9266bc84a09e094df7ab4a4027f7934483"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_map_20071_move_19",
+    "body_sha256": "6ccd1cef56f25caa0035d25be8f9f4bb3c31e5034f73dec56651267e7f044540",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary room-to-room door; arrival color/fade and map initializer restore room state",
+    "bodies": [
+      {
+        "submap": "Map_20071_9",
+        "script": "sc_map_20071_move_19",
+        "body_sha256": "6ccd1cef56f25caa0035d25be8f9f4bb3c31e5034f73dec56651267e7f044540"
+      },
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_after_8",
+        "body_sha256": "8c7ac927ccdb158764fe57ea46ccff55d0186674fc5c7355c2e4de00b1797aaa"
+      },
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_map_20071_8",
+        "body_sha256": "a4b00b941b0e98569be37c0caecb1920fccdc3e5c5defb2ad7bf7d5bad3cde33"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0193_2",
+    "body_sha256": "6687ffc2c67a3ea8ccab03ca32da39ea7834d11288f8842daa2006d7fd826d66",
+    "disposition": "physical",
+    "label": "Puzzle trigger",
+    "reason": "three local progress flags hide their own contact markers and enable another puzzle marker; no reward name",
+    "bodies": [
+      {
+        "submap": "Map_20090",
+        "script": "sc_e_0193_2",
+        "body_sha256": "6687ffc2c67a3ea8ccab03ca32da39ea7834d11288f8842daa2006d7fd826d66"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0193_1",
+    "body_sha256": "0cf3d1a18e7c12194fd9d8c7d6ab43d6e301e0643504ab0417901380bb647c00",
+    "disposition": "physical",
+    "label": "Puzzle trigger",
+    "reason": "three local progress flags hide their own contact markers and enable another puzzle marker; no reward name",
+    "bodies": [
+      {
+        "submap": "Map_20090",
+        "script": "sc_e_0193_1",
+        "body_sha256": "0cf3d1a18e7c12194fd9d8c7d6ab43d6e301e0643504ab0417901380bb647c00"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0193_3",
+    "body_sha256": "931844ccf9537a6618db50d1ba2de1df123017cb6b96190ef57dcd38cfe4ced5",
+    "disposition": "physical",
+    "label": "Puzzle trigger",
+    "reason": "three local progress flags hide their own contact markers and enable another puzzle marker; no reward name",
+    "bodies": [
+      {
+        "submap": "Map_20090",
+        "script": "sc_e_0193_3",
+        "body_sha256": "931844ccf9537a6618db50d1ba2de1df123017cb6b96190ef57dcd38cfe4ced5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0488",
+    "body_sha256": "33e0c4e54f67429ae49ad08e1815be4e0614b086560049e038654952a5c520da",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20130",
+        "script": "sc_e_0488",
+        "body_sha256": "33e0c4e54f67429ae49ad08e1815be4e0614b086560049e038654952a5c520da"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0094",
+    "body_sha256": "d2a3099b493308f59efeba647fda6d8d5e88f582681bd8ac2133a48b4f68847c",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20130",
+        "script": "sc_e_0094",
+        "body_sha256": "d2a3099b493308f59efeba647fda6d8d5e88f582681bd8ac2133a48b4f68847c"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0095_2",
+    "body_sha256": "8259a42e97e36063286ec646819e9ce5d0bbd5df39a7c2e0ecdb48d469077672",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20130",
+        "script": "sc_e_0095_2",
+        "body_sha256": "8259a42e97e36063286ec646819e9ce5d0bbd5df39a7c2e0ecdb48d469077672"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0223",
+    "body_sha256": "b32b57aeb58db0863089759500dbe44136e115c992dbd4aff8eb4950c5b6b4b5",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_10",
+        "script": "sc_e_0223",
+        "body_sha256": "b32b57aeb58db0863089759500dbe44136e115c992dbd4aff8eb4950c5b6b4b5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_5",
+    "body_sha256": "180e95d98b38e4b72c2e23941ebed2c95fcdb365a51ae609e3cd9dd05a5e1908",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_5",
+        "body_sha256": "180e95d98b38e4b72c2e23941ebed2c95fcdb365a51ae609e3cd9dd05a5e1908"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_6",
+    "body_sha256": "b5bd8de3c1dc57b3627588cbb46ffe5f951399864227d6aac15ef7015af590ca",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_6",
+        "body_sha256": "b5bd8de3c1dc57b3627588cbb46ffe5f951399864227d6aac15ef7015af590ca"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_2",
+    "body_sha256": "2df96dfe4df35aa7788a4b64ef7bb8c7c742a1ebd0558d3a62dd057d14e6ec36",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_2",
+        "body_sha256": "2df96dfe4df35aa7788a4b64ef7bb8c7c742a1ebd0558d3a62dd057d14e6ec36"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_3",
+    "body_sha256": "743d813c9ae615e3f390cf202fa4e83658def84dde07045449ce53a89a1248a6",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_3",
+        "body_sha256": "743d813c9ae615e3f390cf202fa4e83658def84dde07045449ce53a89a1248a6"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_4",
+    "body_sha256": "2eeffd59c35d7138d83cf4f3e3d21384a378dc36131e548b2d1223e18b4b59fd",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_4",
+        "body_sha256": "2eeffd59c35d7138d83cf4f3e3d21384a378dc36131e548b2d1223e18b4b59fd"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_1",
+    "body_sha256": "b2c15de5954b5ce78d18ef7c7b66352598ca5d3616e40ff78a325565cd61faaa",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_1",
+        "body_sha256": "b2c15de5954b5ce78d18ef7c7b66352598ca5d3616e40ff78a325565cd61faaa"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_7",
+    "body_sha256": "b83f1e18e998395990db45107c0e4c80266de293be9cd799220cdcaf26136736",
+    "disposition": "physical",
+    "label": "Bookshelf",
+    "reason": "bookshelf animation/visibility changes and puzzle flags",
+    "bodies": [
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_7",
+        "body_sha256": "b83f1e18e998395990db45107c0e4c80266de293be9cd799220cdcaf26136736"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0220_9",
+    "body_sha256": "671b8b883ade86e00bf0ce545b29bb2d35de96e9183799add0a6016bf4df411a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_20221_5",
+        "script": "sc_e_0220_9",
+        "body_sha256": "671b8b883ade86e00bf0ce545b29bb2d35de96e9183799add0a6016bf4df411a"
+      },
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_e_0220_10",
+        "body_sha256": "5386621ce7cd99653440c554751b4aa52ec4aaffcc7a20682d926bae688572a5"
+      },
+      {
+        "submap": "Map_20221_4",
+        "script": "sc_map_20221_4",
+        "body_sha256": "2ed36b03b61f1c3170e84c031daff159b4eea8c9a35da7c715919086e1917209"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_20231_3_to_20231_4_1",
+    "body_sha256": "630d6bdca2e4e82ec0d52d790959929494ff661203681373dda1b92df1b404fc",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_20231_3",
+        "script": "sc_20231_3_to_20231_4_1",
+        "body_sha256": "630d6bdca2e4e82ec0d52d790959929494ff661203681373dda1b92df1b404fc"
+      },
+      {
+        "submap": "Map_20231_4",
+        "script": "sc_20231_3_to_20231_4_2",
+        "body_sha256": "3415cc6f6f1c1e417856b6f795412bf7f029a09a88713f0415cab63a73d2d9f3"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30031_1_to_ship",
+    "body_sha256": "08c84f81ca32c3b91a48e2bc2d8952b0f39becb9fcb7410be0af4cad7172c06a",
+    "disposition": "conditional_transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30031_1",
+        "script": "sc_30031_1_to_ship",
+        "body_sha256": "08c84f81ca32c3b91a48e2bc2d8952b0f39becb9fcb7410be0af4cad7172c06a"
+      },
+      {
+        "submap": "Map_30030",
+        "script": "sc_30031_1_to_ship_1",
+        "body_sha256": "f55843aec5d1a856e8b2c94253730e62097dc2d7103b1c7c513c69964b50c5ed"
+      },
+      {
+        "submap": "Map_30030",
+        "script": "sc_map_30030",
+        "body_sha256": "20e22067f9769ac3ccf0f0dac9d13e2331a2bbe05dcc5fb85260c580b3089a09"
+      },
+      {
+        "submap": "Map_30060",
+        "script": "sc_30031_1_to_ship_2",
+        "body_sha256": "1ae00374d23700e275f64f7d83b5acfebc259b59b08cd263dd688c31c47c819d"
+      },
+      {
+        "submap": "Map_30060",
+        "script": "sc_map_30060",
+        "body_sha256": "be87254ff69b992039eaa7b578ae11ac3937204646e281de7dfdf7f403c7fa65"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30031_1_to_30031_3_1",
+    "body_sha256": "89c897688ae207dc6b144d18eaf0862b2ac7f5c7617cdca1bfd079e503695405",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30031_1",
+        "script": "sc_30031_1_to_30031_3_1",
+        "body_sha256": "89c897688ae207dc6b144d18eaf0862b2ac7f5c7617cdca1bfd079e503695405"
+      },
+      {
+        "submap": "Map_30031_3",
+        "script": "sc_30031_1_to_30031_3_2",
+        "body_sha256": "0aba63a36990bf7db902fb25b2b284cca0cc59e22f23fee545ca8cd57a7d48e6"
+      },
+      {
+        "submap": "Map_30031_3",
+        "script": "sc_map_30031_3",
+        "body_sha256": "233e050cf7280e743347629ca34972b9083b70a948db50432e74e4fa2b4ebd6b"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30060_timer_start",
+    "body_sha256": "2d6e43fda416c697eac242be1a9d5114d6509e3856220f456867d2f52c6ed5d1",
+    "disposition": "physical",
+    "label": "Timer start",
+    "reason": "native timer starts/finishes and its timer-marker actor changes presence",
+    "bodies": [
+      {
+        "submap": "Map_30060",
+        "script": "sc_30060_timer_start",
+        "body_sha256": "2d6e43fda416c697eac242be1a9d5114d6509e3856220f456867d2f52c6ed5d1"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30060_timer_stop",
+    "body_sha256": "c9808210d1af6f7e6b9715c8ec44b1c0e4478ec2f08715509129ac4c56909dab",
+    "disposition": "physical",
+    "label": "Timer stop",
+    "reason": "native timer starts/finishes and its timer-marker actor changes presence",
+    "bodies": [
+      {
+        "submap": "Map_30060",
+        "script": "sc_30060_timer_stop",
+        "body_sha256": "c9808210d1af6f7e6b9715c8ec44b1c0e4478ec2f08715509129ac4c56909dab"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30151_1_to_fire_ship",
+    "body_sha256": "f9a28cd7dc47a59be22da1200616527abb61246e807a3661a07d3628d0c39e28",
+    "disposition": "conditional_transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30151_1",
+        "script": "sc_30151_1_to_fire_ship",
+        "body_sha256": "f9a28cd7dc47a59be22da1200616527abb61246e807a3661a07d3628d0c39e28"
+      },
+      {
+        "submap": "Map_30150",
+        "script": "sc_30151_1_to_fire_ship_1",
+        "body_sha256": "8319809caaa257b6a206dc74e76203a258170cbfdcb2d9fc038c1319315a047f"
+      },
+      {
+        "submap": "Map_30150",
+        "script": "sc_map_30150",
+        "body_sha256": "c5517c01ea67006e018f0ae3e570684f9326f97247d766585f6276d40586e053"
+      },
+      {
+        "submap": "Map_20231_7",
+        "script": "sc_30151_1_to_fire_ship_2",
+        "body_sha256": "1c738c851c2bf2aa3679baa4f2f777b5bd0fe758b13e8431a34ecb8a95d2738f"
+      },
+      {
+        "submap": "Map_20231_7",
+        "script": "sc_map_20231_7",
+        "body_sha256": "c7d63b25e5a3ecf9a0900adef724068c7ee31377997098b36803252f4dc1e29f"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0217_1_1",
+    "body_sha256": "69a56be4fca17aab83c704b37e5d4a87021a18c47712397234c1ffccdd101e05",
+    "disposition": "transfer",
+    "label": "Water current",
+    "reason": "player is carried through a passage; actor is the moving floor/current visual",
+    "bodies": [
+      {
+        "submap": "Map_30151_15",
+        "script": "sc_e_0217_1_1",
+        "body_sha256": "69a56be4fca17aab83c704b37e5d4a87021a18c47712397234c1ffccdd101e05"
+      },
+      {
+        "submap": "Map_30151_11",
+        "script": "sc_e_0217_1_2",
+        "body_sha256": "31d588272767bf3e1f6b3c0742e5d31a427a9eda58a93a267328557158f7c556"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0217_2_1",
+    "body_sha256": "aaf4839e5d424f469b3e60738168a73554d3b25c1688ae264ed63267b6917f44",
+    "disposition": "transfer",
+    "label": "Water current",
+    "reason": "player is carried through a passage; actor is the moving floor/current visual",
+    "bodies": [
+      {
+        "submap": "Map_30151_15",
+        "script": "sc_e_0217_2_1",
+        "body_sha256": "aaf4839e5d424f469b3e60738168a73554d3b25c1688ae264ed63267b6917f44"
+      },
+      {
+        "submap": "Map_30151_11",
+        "script": "sc_e_0217_2_2",
+        "body_sha256": "e0dfa1a8de163875391e298137fb01976d58ce5f2861b27315bc1fdb0f18c06e"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0217_3_1",
+    "body_sha256": "990cc3736d601e21ecfb1901aae10be4218f9ccfc7bcbc7de4dd3756fb7c2f93",
+    "disposition": "transfer",
+    "label": "Water current",
+    "reason": "player is carried through a passage; actor is the moving floor/current visual",
+    "bodies": [
+      {
+        "submap": "Map_30151_15",
+        "script": "sc_e_0217_3_1",
+        "body_sha256": "990cc3736d601e21ecfb1901aae10be4218f9ccfc7bcbc7de4dd3756fb7c2f93"
+      },
+      {
+        "submap": "Map_30151_11",
+        "script": "sc_e_0217_3_2",
+        "body_sha256": "a44c27fc594b31a7c9a3bfc4e39773cb90ba3475ee90821369cc34cf25b0dd75"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0217_4_1",
+    "body_sha256": "1d06c50357e62f3610ad6d91f1f4e40fb081b97435121130a51184336b2191e5",
+    "disposition": "transfer",
+    "label": "Water current",
+    "reason": "player is carried through a passage; actor is the moving floor/current visual",
+    "bodies": [
+      {
+        "submap": "Map_30151_15",
+        "script": "sc_e_0217_4_1",
+        "body_sha256": "1d06c50357e62f3610ad6d91f1f4e40fb081b97435121130a51184336b2191e5"
+      },
+      {
+        "submap": "Map_30151_11",
+        "script": "sc_e_0217_4_2",
+        "body_sha256": "5c7e289c0ba40ec862daa9d743d99fc39ddc8c2a8d0def65f9bea76a90f6e8d8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30161_1_to_world",
+    "body_sha256": "057fb0a3c81f0879d3a1d5f1794b8304026832408f9d028430d4e598fa363de8",
+    "disposition": "conditional_transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30161_1",
+        "script": "sc_30161_1_to_world",
+        "body_sha256": "057fb0a3c81f0879d3a1d5f1794b8304026832408f9d028430d4e598fa363de8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0366",
+    "body_sha256": "d2a69918f06b4e558ec80496bc988192906bfd9586a6953f0223fee676d1de47",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30180",
+        "script": "sc_e_0366",
+        "body_sha256": "d2a69918f06b4e558ec80496bc988192906bfd9586a6953f0223fee676d1de47"
+      },
+      {
+        "submap": "Map_30180",
+        "script": "sc_map_30180",
+        "body_sha256": "58e7055e0c44a99f3f5d57ca8f845ccf8282073df44365235152a905cb31c6a0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0367",
+    "body_sha256": "834b6d63ad94f91b4fcdac3f9f6391db3de6bf5e7da2354c3da212735232819c",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30180",
+        "script": "sc_e_0367",
+        "body_sha256": "834b6d63ad94f91b4fcdac3f9f6391db3de6bf5e7da2354c3da212735232819c"
+      },
+      {
+        "submap": "Map_30180",
+        "script": "sc_map_30180",
+        "body_sha256": "58e7055e0c44a99f3f5d57ca8f845ccf8282073df44365235152a905cb31c6a0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0368",
+    "body_sha256": "78fb9006bd430d9b286f78957a0d417d7f5b641b9846bc0ba3436b6036d50dbd",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30180",
+        "script": "sc_e_0368",
+        "body_sha256": "78fb9006bd430d9b286f78957a0d417d7f5b641b9846bc0ba3436b6036d50dbd"
+      },
+      {
+        "submap": "Map_30180",
+        "script": "sc_map_30180",
+        "body_sha256": "58e7055e0c44a99f3f5d57ca8f845ccf8282073df44365235152a905cb31c6a0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30190_to_30191_8",
+    "body_sha256": "a5dc4787f4fe9457d8a1c7c65b583dc3753c903555f96306f1e22e5b1f1ad323",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30190",
+        "script": "sc_30190_to_30191_8",
+        "body_sha256": "a5dc4787f4fe9457d8a1c7c65b583dc3753c903555f96306f1e22e5b1f1ad323"
+      },
+      {
+        "submap": "Map_30191_8",
+        "script": "sc_30190_to_30191_8_1",
+        "body_sha256": "e89d3128f0cc1701987858aa6167bd674c7b8c23217fbc0405eb40768b37ba1c"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30190_to_world",
+    "body_sha256": "c656481353c58d2cf4e6eee8c78af14a8827c1efcf6ea8976db30cad94516d12",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30190",
+        "script": "sc_30190_to_world",
+        "body_sha256": "c656481353c58d2cf4e6eee8c78af14a8827c1efcf6ea8976db30cad94516d12"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_30190_to_world_1",
+        "body_sha256": "23a80bd7084dbf5574ac02ff7b09c9ba594152dfc188dfe784834a5b0e5c41f6"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_map_10010",
+        "body_sha256": "e3efda7242ef2d0d826324c3e8af8aa626dff04d9ab91c18305c495ffb5f7315"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30191_5_to_30191_6_1",
+    "body_sha256": "bfd09be6357f48ee45f5f70204c939cfc1f6e43fd2e175701f37e6f540cb6b5d",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30191_12",
+        "script": "sc_30191_5_to_30191_6_1",
+        "body_sha256": "bfd09be6357f48ee45f5f70204c939cfc1f6e43fd2e175701f37e6f540cb6b5d"
+      },
+      {
+        "submap": "Map_30191_11",
+        "script": "sc_30191_5_to_30191_6_2",
+        "body_sha256": "87ee3bcfd21ccad79f071057e0a7a109bc2c0ea300cdd388697d8b29c00ff3f8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30191_5_to_30191_6_1",
+    "body_sha256": "47dec6551477e24f66bf8d646ebe1e73b1e1d4396ecf5d6fe5afc3f09abf51c9",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30191_6",
+        "script": "sc_30191_5_to_30191_6_1",
+        "body_sha256": "47dec6551477e24f66bf8d646ebe1e73b1e1d4396ecf5d6fe5afc3f09abf51c9"
+      },
+      {
+        "submap": "Map_30191_5",
+        "script": "sc_30191_5_to_30191_6_2",
+        "body_sha256": "87ee3bcfd21ccad79f071057e0a7a109bc2c0ea300cdd388697d8b29c00ff3f8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0247_reset",
+    "body_sha256": "d8a9e1410fe2f0b13d45c161e9a124f7c56e1c0a6c703e6e29d44b72a49309c0",
+    "disposition": "physical",
+    "label": "Passage",
+    "reason": "leaving the low passage clears crawl condition and restores the standing actor",
+    "bodies": [
+      {
+        "submap": "Map_30221_4",
+        "script": "sc_e_0247_reset",
+        "body_sha256": "d8a9e1410fe2f0b13d45c161e9a124f7c56e1c0a6c703e6e29d44b72a49309c0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0250_1",
+    "body_sha256": "f91bbc3a0a76976551b4bf9edfa06340e50587aa49383f7011639bdd7d7e3478",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30291_2",
+        "script": "sc_e_0250_1",
+        "body_sha256": "f91bbc3a0a76976551b4bf9edfa06340e50587aa49383f7011639bdd7d7e3478"
+      },
+      {
+        "submap": "Map_30291_1",
+        "script": "sc_e_0250_2",
+        "body_sha256": "66b390c56a5a957ed554afd1bfb4979167c9ac22265175687638d6ae1071db13"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0326",
+    "body_sha256": "2a3dc86e5ad921f77ce5674b6bad0c7a85d22b3f2cc7a627f839c45cba266bbb",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30311_4",
+        "script": "sc_e_0326",
+        "body_sha256": "2a3dc86e5ad921f77ce5674b6bad0c7a85d22b3f2cc7a627f839c45cba266bbb"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_3",
+    "body_sha256": "289100329ba67a3d484b9638a640eae0a7df1f8d0d5cf8aced1e6705d84cf97f",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_2",
+        "script": "sc_e_0108_3",
+        "body_sha256": "289100329ba67a3d484b9638a640eae0a7df1f8d0d5cf8aced1e6705d84cf97f"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_e_0108_9",
+        "body_sha256": "9b31c91d4f473add0dfda41e52210231ead0376503b4fabc9f9b20085ebe57c1"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_map_30321_3",
+        "body_sha256": "86ae21e1af8be355605b2858917828f41eed658a13b23da81aef829e01d980a1"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_4",
+    "body_sha256": "5e5352b70f48e10484019f3605e171f11e30067391661d7c0ac04f5bc4ebad60",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_2",
+        "script": "sc_e_0108_4",
+        "body_sha256": "5e5352b70f48e10484019f3605e171f11e30067391661d7c0ac04f5bc4ebad60"
+      },
+      {
+        "submap": "Map_30320",
+        "script": "sc_e_0108_1",
+        "body_sha256": "a1f8348c107ae146e59bd981d067cfcc9653722ceaf6bb960e0e8b7fe1773d28"
+      },
+      {
+        "submap": "Map_30320",
+        "script": "sc_map_30320",
+        "body_sha256": "474011742e135d24902b057fbbda756f4849e6f2c938e230d01e72eefde1a32a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_6",
+    "body_sha256": "d71fef9a71a0d997d0e526906fbf086d8ed414d117227572de19bf6e70fc0af2",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_e_0108_6",
+        "body_sha256": "d71fef9a71a0d997d0e526906fbf086d8ed414d117227572de19bf6e70fc0af2"
+      },
+      {
+        "submap": "Map_30321_5",
+        "script": "sc_e_0108_13",
+        "body_sha256": "bd37ca358f909aad6461270098e87ed1ca23d1c2f0953e01fecbadd13278b24c"
+      },
+      {
+        "submap": "Map_30321_5",
+        "script": "sc_map_30321_5",
+        "body_sha256": "16320689c72bc217c2c3d128021680b9ee4b569774aa5bc9684de97c7a66ed11"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_8",
+    "body_sha256": "37e781f6d8cc4d69c3f5a1498265aea64671cc6cd84d3c314565cc3b6ec8eae2",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_e_0108_8",
+        "body_sha256": "37e781f6d8cc4d69c3f5a1498265aea64671cc6cd84d3c314565cc3b6ec8eae2"
+      },
+      {
+        "submap": "Map_30321_4",
+        "script": "sc_e_0108_11",
+        "body_sha256": "262f52732424dbabb1cec95607c5f42a029117a364be86a9040f296c9495d630"
+      },
+      {
+        "submap": "Map_30321_4",
+        "script": "sc_map_30321_4",
+        "body_sha256": "18308059b42beb3c962f1de2b6a3c4e38a667b09b1040b6fbe66cda65e255042"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_10",
+    "body_sha256": "a459644813f71db25ed6496ec29eb7d76d8a0017c3d3c42c94e5dfbd78df5d25",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_4",
+        "script": "sc_e_0108_10",
+        "body_sha256": "a459644813f71db25ed6496ec29eb7d76d8a0017c3d3c42c94e5dfbd78df5d25"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_e_0108_9",
+        "body_sha256": "9b31c91d4f473add0dfda41e52210231ead0376503b4fabc9f9b20085ebe57c1"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_map_30321_3",
+        "body_sha256": "86ae21e1af8be355605b2858917828f41eed658a13b23da81aef829e01d980a1"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0108_12",
+    "body_sha256": "d65933f5dea12be22ceef5da4184d4e2109c3fb1779f0122755bf371bcd82fb0",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30321_5",
+        "script": "sc_e_0108_12",
+        "body_sha256": "d65933f5dea12be22ceef5da4184d4e2109c3fb1779f0122755bf371bcd82fb0"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_e_0108_9",
+        "body_sha256": "9b31c91d4f473add0dfda41e52210231ead0376503b4fabc9f9b20085ebe57c1"
+      },
+      {
+        "submap": "Map_30321_3",
+        "script": "sc_map_30321_3",
+        "body_sha256": "86ae21e1af8be355605b2858917828f41eed658a13b23da81aef829e01d980a1"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0252_8",
+    "body_sha256": "5ed542858ff8476f4cef0ada52969043e549f607046880d0fb23579be1a25c92",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30381_2",
+        "script": "sc_e_0252_8",
+        "body_sha256": "5ed542858ff8476f4cef0ada52969043e549f607046880d0fb23579be1a25c92"
+      },
+      {
+        "submap": "Map_30381_3",
+        "script": "sc_e_0252_9",
+        "body_sha256": "48b148f8c7e9bd47b5e19c3e3aa61361f32f6e5fc7408eab055e50d9b99c130b"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0252_6",
+    "body_sha256": "322fb5a2daff23b17cbdac9726525f815df70bef72fb5c8ddb51735e7671b721",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30381_2",
+        "script": "sc_e_0252_6",
+        "body_sha256": "322fb5a2daff23b17cbdac9726525f815df70bef72fb5c8ddb51735e7671b721"
+      },
+      {
+        "submap": "Map_30381_3",
+        "script": "sc_e_0252_7",
+        "body_sha256": "70c55c3ff3419051df486a33a16a7424a7fdfbb45df85811050a93fb4397825e"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30401_1_to_30400_1",
+    "body_sha256": "0dfcac68a6e72de1ea406e1b6ee6587bf4170bdf11cf0b3afe85c1692546eaae",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30401_1",
+        "script": "sc_30401_1_to_30400_1",
+        "body_sha256": "0dfcac68a6e72de1ea406e1b6ee6587bf4170bdf11cf0b3afe85c1692546eaae"
+      },
+      {
+        "submap": "Map_30400",
+        "script": "sc_30401_1_to_30400_2",
+        "body_sha256": "158b38d3285b72b301278b44bf3f25afaee1d0f0f15e2d6d67f0aac4f724e60c"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30411_1_to_30410_1",
+    "body_sha256": "5fc27e0b72248954dbdda68c73b2b7f6f57eee0c4bc8d2fc57ac72b6f48aefb5",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30411_1",
+        "script": "sc_30411_1_to_30410_1",
+        "body_sha256": "5fc27e0b72248954dbdda68c73b2b7f6f57eee0c4bc8d2fc57ac72b6f48aefb5"
+      },
+      {
+        "submap": "Map_30410",
+        "script": "sc_30411_1_to_30410_2",
+        "body_sha256": "93b61414a56a044031cae02eabb160422993ad893343bbd79fac16dab28bb18c"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_1_to_30441_2",
+    "body_sha256": "56a5e69364b1575b49a0c4b684a5844a3993480346921a7fc5f3373943d596f2",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_1",
+        "script": "sc_30441_1_to_30441_2",
+        "body_sha256": "56a5e69364b1575b49a0c4b684a5844a3993480346921a7fc5f3373943d596f2"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_1_to_30441_7",
+    "body_sha256": "a9a490cef0a4c4654628b084e3994249306e8bbe12434b310e23eed9c85048d9",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_1",
+        "script": "sc_30441_1_to_30441_7",
+        "body_sha256": "a9a490cef0a4c4654628b084e3994249306e8bbe12434b310e23eed9c85048d9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_11_to_30441_12",
+    "body_sha256": "8b842591d61547fd49e11c97df6aef664af1355d49d405d1b8dbc0d8b4242ac9",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_11",
+        "script": "sc_30441_11_to_30441_12",
+        "body_sha256": "8b842591d61547fd49e11c97df6aef664af1355d49d405d1b8dbc0d8b4242ac9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0266",
+    "body_sha256": "50884806babacc0df57348a71e3f780826af00e29b5e26741fd5d98561c5af98",
+    "disposition": "physical",
+    "label": "Moving passage",
+    "reason": "floor animation and exact passage collision actors toggle; no narrative actor",
+    "bodies": [
+      {
+        "submap": "Map_30441_13",
+        "script": "sc_e_0266",
+        "body_sha256": "50884806babacc0df57348a71e3f780826af00e29b5e26741fd5d98561c5af98"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0266_11",
+    "body_sha256": "69bdd0e767cef0572299a696cd57811116e0362b5859815714b14c87fd4ba15a",
+    "disposition": "physical",
+    "label": "Moving passage",
+    "reason": "floor animation and exact passage collision actors toggle; no narrative actor",
+    "bodies": [
+      {
+        "submap": "Map_30441_13",
+        "script": "sc_e_0266_11",
+        "body_sha256": "69bdd0e767cef0572299a696cd57811116e0362b5859815714b14c87fd4ba15a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_15_to_30441_16",
+    "body_sha256": "69d106b69102153a5b9406973e074a7ca1a6cf47fafcad3cef509603392886b3",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_15",
+        "script": "sc_30441_15_to_30441_16",
+        "body_sha256": "69d106b69102153a5b9406973e074a7ca1a6cf47fafcad3cef509603392886b3"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0438_1",
+    "body_sha256": "f0d3d1681ca6bbe2b80c06955ecff7c9674d9c14cd6e24ca6c191bedf215ad6c",
+    "disposition": "physical",
+    "label": "Warp Tile",
+    "reason": "same-floor player movement and matching warp effect; no unrelated actor",
+    "bodies": [
+      {
+        "submap": "Map_30441_16",
+        "script": "sc_e_0438_1",
+        "body_sha256": "f0d3d1681ca6bbe2b80c06955ecff7c9674d9c14cd6e24ca6c191bedf215ad6c"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0267",
+    "body_sha256": "b0be1ec8492b1e60fa42af3258a1bd61ac999fd28074a6aacea2c57526499e85",
+    "disposition": "physical",
+    "label": "Moving passage",
+    "reason": "floor animation and exact passage collision actors toggle; no narrative actor",
+    "bodies": [
+      {
+        "submap": "Map_30441_17",
+        "script": "sc_e_0267",
+        "body_sha256": "b0be1ec8492b1e60fa42af3258a1bd61ac999fd28074a6aacea2c57526499e85"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0437",
+    "body_sha256": "667e91599e470dc8507ddf7d0a4efadb5235d0ff29fe2a26f525853087273a18",
+    "disposition": "physical",
+    "label": "Moving passage",
+    "reason": "floor animation and exact passage collision actors toggle; no narrative actor",
+    "bodies": [
+      {
+        "submap": "Map_30441_17",
+        "script": "sc_e_0437",
+        "body_sha256": "667e91599e470dc8507ddf7d0a4efadb5235d0ff29fe2a26f525853087273a18"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0268_1",
+    "body_sha256": "f7cda798f891e35071e3e5ae76c0b8ff7c23ec977201ab8ba43587c3185ecf81",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "player warp and matching effect; no unrelated story participant",
+    "bodies": [
+      {
+        "submap": "Map_30441_17",
+        "script": "sc_e_0268_1",
+        "body_sha256": "f7cda798f891e35071e3e5ae76c0b8ff7c23ec977201ab8ba43587c3185ecf81"
+      },
+      {
+        "submap": "Map_30441_17",
+        "script": "sc_e_0268_2",
+        "body_sha256": "d3e06843269575b4814e1628fc317bd09daec26c4dc6231f7b27d075ead93390"
+      },
+      {
+        "submap": "Map_30441_17",
+        "script": "sc_map_30441_17",
+        "body_sha256": "f97341ff8db7859e0330b4945160d367c943e7e283be175e485a02c521a5f596"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_18_to_30441_17",
+    "body_sha256": "4996e758f7413356212d34907e191323ce5683d50f3dcf92d6de55187983f8b0",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_18",
+        "script": "sc_30441_18_to_30441_17",
+        "body_sha256": "4996e758f7413356212d34907e191323ce5683d50f3dcf92d6de55187983f8b0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_2_to_30441_3",
+    "body_sha256": "4f47c5c5a658e422f28b1b9e1727ffeabc571f94641044fdb050bb33fb5cde78",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_2",
+        "script": "sc_30441_2_to_30441_3",
+        "body_sha256": "4f47c5c5a658e422f28b1b9e1727ffeabc571f94641044fdb050bb33fb5cde78"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30441_21_to_30441_22",
+    "body_sha256": "5d0b28c1d357900238b9afebaee485af7a073a0b203adb68b60fa559f1517c15",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30441_21",
+        "script": "sc_30441_21_to_30441_22",
+        "body_sha256": "5d0b28c1d357900238b9afebaee485af7a073a0b203adb68b60fa559f1517c15"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30450_to_10040",
+    "body_sha256": "8c4435d1e949555065d4212169c748ae13707eb1cfad920f140c665e69205036",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30450",
+        "script": "sc_30450_to_10040",
+        "body_sha256": "8c4435d1e949555065d4212169c748ae13707eb1cfad920f140c665e69205036"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_30450_to_10040_1",
+        "body_sha256": "db698693012187bf7fe057c31b07273432cede201c21504c7d24eba6c751c801"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_map_10040",
+        "body_sha256": "5992d5ff6369b3f9769c66493bcffb33f2bda9fdab2c7090f82c6649654c5b4a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0132_1",
+    "body_sha256": "226f855902f37d08cafeee2793e5df27bea69f7487df83cf9dea1ce1a4672fb8",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30451_1",
+        "script": "sc_e_0132_1",
+        "body_sha256": "226f855902f37d08cafeee2793e5df27bea69f7487df83cf9dea1ce1a4672fb8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0490",
+    "body_sha256": "25a5b3f5e0a1badafd72ae2ca9fef2ad4f5d5eb61f7b4301637174a2172d08c7",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30451_1",
+        "script": "sc_e_0490",
+        "body_sha256": "25a5b3f5e0a1badafd72ae2ca9fef2ad4f5d5eb61f7b4301637174a2172d08c7"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0491",
+    "body_sha256": "4fb16a306adc8dd4add0fe02a558da11732c08e02f2cc7c2860d56644a16e4b5",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30451_1",
+        "script": "sc_e_0491",
+        "body_sha256": "4fb16a306adc8dd4add0fe02a558da11732c08e02f2cc7c2860d56644a16e4b5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0132",
+    "body_sha256": "3e27af68eccb2a827a2f17d5deb0a9baa8f195082899983bf431576610bb59b4",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30451_1",
+        "script": "sc_e_0132",
+        "body_sha256": "3e27af68eccb2a827a2f17d5deb0a9baa8f195082899983bf431576610bb59b4"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0290",
+    "body_sha256": "b4766ef3ea61fa0001ed4e89abf468934695555dbb6699578707d8fb5e9a0d28",
+    "disposition": "transfer",
+    "label": "Quicksand",
+    "reason": "quicksand movement and native floor transfer",
+    "bodies": [
+      {
+        "submap": "Map_30461_1",
+        "script": "sc_e_0290",
+        "body_sha256": "b4766ef3ea61fa0001ed4e89abf468934695555dbb6699578707d8fb5e9a0d28"
+      },
+      {
+        "submap": "Map_30461_2",
+        "script": "sc_e_0290_1",
+        "body_sha256": "e9348e05d4d59fe164042860639fbda15bde50937d06a21416377516f1f1e2e7"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0440",
+    "body_sha256": "e9dbaa48f9cf2ad0db5fdbd663ced043cc2cff60c0aad96c5a9e5529da484ba9",
+    "disposition": "physical",
+    "label": "Coffin",
+    "reason": "coffin animation and local floor/collision reaction; no reward/enemy name",
+    "bodies": [
+      {
+        "submap": "Map_30461_1",
+        "script": "sc_e_0440",
+        "body_sha256": "e9dbaa48f9cf2ad0db5fdbd663ced043cc2cff60c0aad96c5a9e5529da484ba9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0519",
+    "body_sha256": "d30eafc2e56203c4d1c8609020e5b92c728af576c4299de204abe8d8c81a15b9",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable local wall/floor hazard animation; future enemy identity withheld",
+    "bodies": [
+      {
+        "submap": "Map_30461_10",
+        "script": "sc_e_0519",
+        "body_sha256": "d30eafc2e56203c4d1c8609020e5b92c728af576c4299de204abe8d8c81a15b9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0293",
+    "body_sha256": "7fc6a6a7e498ae59f8056a8cd9fbb263eebf6708acae5b18f31635990db76db5",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable local wall/floor hazard animation; future enemy identity withheld",
+    "bodies": [
+      {
+        "submap": "Map_30461_3",
+        "script": "sc_e_0293",
+        "body_sha256": "7fc6a6a7e498ae59f8056a8cd9fbb263eebf6708acae5b18f31635990db76db5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0294",
+    "body_sha256": "cb1c80a3203ab6bc2721fc63927577ac7cef62bed771689c5d51e26fed3f026b",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable local wall/floor hazard animation; future enemy identity withheld",
+    "bodies": [
+      {
+        "submap": "Map_30461_5",
+        "script": "sc_e_0294",
+        "body_sha256": "cb1c80a3203ab6bc2721fc63927577ac7cef62bed771689c5d51e26fed3f026b"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30461_6_to_30461_7_1",
+    "body_sha256": "368739c6756c03f3662b19d27ff616f86f309eb6eb3c1480ebd4a75243095cff",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30461_6",
+        "script": "sc_30461_6_to_30461_7_1",
+        "body_sha256": "368739c6756c03f3662b19d27ff616f86f309eb6eb3c1480ebd4a75243095cff"
+      },
+      {
+        "submap": "Map_30461_7",
+        "script": "sc_30461_6_to_30461_7_2",
+        "body_sha256": "cd5b48d35f659e908d770d472d1e47fa28cdd1cf4881446979cc4c1169a635d1"
+      },
+      {
+        "submap": "Map_30461_7",
+        "script": "sc_map_30461_7",
+        "body_sha256": "04b7738780c1b3f110f7dbd179d31124f22a5d600473d4e60fb0b268d0eeca95"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0296",
+    "body_sha256": "94f7cd723e6f6b1f5b4753473696f9066d2d887a73f333c634e46cac3edcf878",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable local wall/floor hazard animation; future enemy identity withheld",
+    "bodies": [
+      {
+        "submap": "Map_30461_6",
+        "script": "sc_e_0296",
+        "body_sha256": "94f7cd723e6f6b1f5b4753473696f9066d2d887a73f333c634e46cac3edcf878"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0300",
+    "body_sha256": "f15ff601c9c615a7433580da9e85c3fc2ee8937770ab36f3c392334ec7efd0f8",
+    "disposition": "physical",
+    "label": "Coffin",
+    "reason": "coffin animation and local floor/collision reaction; no reward/enemy name",
+    "bodies": [
+      {
+        "submap": "Map_30461_7",
+        "script": "sc_e_0300",
+        "body_sha256": "f15ff601c9c615a7433580da9e85c3fc2ee8937770ab36f3c392334ec7efd0f8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0443",
+    "body_sha256": "a3a3ec98d389d8cda999c66a8b5b7a276ee3ca8478267880e967dad5bcececfd",
+    "disposition": "physical",
+    "label": "Coffin",
+    "reason": "coffin animation and local floor/collision reaction; no reward/enemy name",
+    "bodies": [
+      {
+        "submap": "Map_30461_7",
+        "script": "sc_e_0443",
+        "body_sha256": "a3a3ec98d389d8cda999c66a8b5b7a276ee3ca8478267880e967dad5bcececfd"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0444",
+    "body_sha256": "912a6cf0c12b42bf3ff47de8194f360b7ee4fa9971bd3b283a02eddc0b3a5a3a",
+    "disposition": "physical",
+    "label": "Coffin",
+    "reason": "coffin animation and local floor/collision reaction; no reward/enemy name",
+    "bodies": [
+      {
+        "submap": "Map_30461_7",
+        "script": "sc_e_0444",
+        "body_sha256": "912a6cf0c12b42bf3ff47de8194f360b7ee4fa9971bd3b283a02eddc0b3a5a3a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0301_1",
+    "body_sha256": "48fbc40ed0724d37e5078462d5b3c8823c2add9318e243c463d193a5b21494f9",
+    "disposition": "physical",
+    "label": "Door",
+    "reason": "exact door collision29, passage collision30 and door animation33 toggle",
+    "bodies": [
+      {
+        "submap": "Map_30461_9",
+        "script": "sc_e_0301_1",
+        "body_sha256": "48fbc40ed0724d37e5078462d5b3c8823c2add9318e243c463d193a5b21494f9"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0301_2",
+    "body_sha256": "a67b33be99c5fe8a6d8183ec972368ae5dda04f25671d03bada57c10f3673ba8",
+    "disposition": "physical",
+    "label": "Door",
+    "reason": "exact door collision29, passage collision30 and door animation33 toggle",
+    "bodies": [
+      {
+        "submap": "Map_30461_9",
+        "script": "sc_e_0301_2",
+        "body_sha256": "a67b33be99c5fe8a6d8183ec972368ae5dda04f25671d03bada57c10f3673ba8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0304",
+    "body_sha256": "17eaa82e303835f6960d2f9070f667efef6908d2d1e9d30b2435f79c368d9cc9",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_3",
+        "script": "sc_e_0304",
+        "body_sha256": "17eaa82e303835f6960d2f9070f667efef6908d2d1e9d30b2435f79c368d9cc9"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0304_1",
+        "body_sha256": "ffcffedcf85cc6e5814461b5afa61949c1f63f1de10a9c7fd34e18c32cbb5003"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0304_2",
+        "body_sha256": "fc04100e9f61a3cde62a9c6b1cc24f1983a95f7b0e9ec450d09e79f118108e66"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_map_30471_4",
+        "body_sha256": "d0c9c2d03f6e080863fd25208c160409dcca2f84345574662bbe18b207d87ea5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0306",
+    "body_sha256": "a72abcdfed1f7deab739b5c9da105d7facf9c86d19a5986228766bdf2d3a1b69",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0306",
+        "body_sha256": "a72abcdfed1f7deab739b5c9da105d7facf9c86d19a5986228766bdf2d3a1b69"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0306_1",
+        "body_sha256": "2ce1aa40fed1ed5dd8759507cf07cd3152bafd40eee523f1bfa2b683f9fd33a2"
+      },
+      {
+        "submap": "Map_30471_5",
+        "script": "sc_e_0306_2",
+        "body_sha256": "ce16ac1588a718dd58982fccce18e5966e668df2fba175923e666bbbe7ed2232"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0307",
+    "body_sha256": "4343c81e7c7afdeb2eee58cfc04debdf3aac95f13732cc01ef236d2dc84006f5",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0307",
+        "body_sha256": "4343c81e7c7afdeb2eee58cfc04debdf3aac95f13732cc01ef236d2dc84006f5"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0307_1",
+        "body_sha256": "5618d414d79b8f54becbc88af3b771c0397ae097551fdb6ad4a204cd891901df"
+      },
+      {
+        "submap": "Map_30471_6",
+        "script": "sc_e_0307_2",
+        "body_sha256": "1719a04be4df452e1f853847c800fb509fc2e175f12f1e32894430c80245a4c7"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0308",
+    "body_sha256": "2935cd93c13815a65f5be9819ee6e388e131ebf1f5bd89392f5dceb7f96a11bc",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0308",
+        "body_sha256": "2935cd93c13815a65f5be9819ee6e388e131ebf1f5bd89392f5dceb7f96a11bc"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0308_1",
+        "body_sha256": "4396bcdbc9333406931caced4782a94971cdcee9af1a6484553925dee20884c6"
+      },
+      {
+        "submap": "Map_30471_7",
+        "script": "sc_e_0308_2",
+        "body_sha256": "7a4b16bbb30813823916801ef05239d9a45544ac96698740c59aff86d362dac1"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0497",
+    "body_sha256": "dfb30c45f78b8b02559d67ab9d559a8fb7e2d5fc65714e9666b97d4e9bb99989",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0497",
+        "body_sha256": "dfb30c45f78b8b02559d67ab9d559a8fb7e2d5fc65714e9666b97d4e9bb99989"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0497_1",
+        "body_sha256": "402fede47b0141f267251ff21111c3dc2aced7abe0e42da08fa5465dd09e1ec6"
+      },
+      {
+        "submap": "Map_30471_3",
+        "script": "sc_e_0497_2",
+        "body_sha256": "3be3c4656a2042169676c4f71cdaf21c0dd76de91c733d5d0e0e700154a22c2a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0447",
+    "body_sha256": "8d78dce13d5dcf4831c34aa35a44d87a456adda5a7180f40a94f9e8fc3d6b539",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_5",
+        "script": "sc_e_0447",
+        "body_sha256": "8d78dce13d5dcf4831c34aa35a44d87a456adda5a7180f40a94f9e8fc3d6b539"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0447_1",
+        "body_sha256": "5306e0addbca7c2179cb9d5452267a11f3e4f78f9ef5f5deb1c54dd145ba11e3"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0304_2",
+        "body_sha256": "fc04100e9f61a3cde62a9c6b1cc24f1983a95f7b0e9ec450d09e79f118108e66"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_map_30471_4",
+        "body_sha256": "d0c9c2d03f6e080863fd25208c160409dcca2f84345574662bbe18b207d87ea5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0448",
+    "body_sha256": "91239b42e00a652b2c39b873c554843a906e9e8fd1904740d0d05474a7fdefcd",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_6",
+        "script": "sc_e_0448",
+        "body_sha256": "91239b42e00a652b2c39b873c554843a906e9e8fd1904740d0d05474a7fdefcd"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0448_1",
+        "body_sha256": "0fd859a0ccd6454d1824ecbdd75de8d075716cc8f02d09eda6bf58d08c97eb07"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0304_2",
+        "body_sha256": "fc04100e9f61a3cde62a9c6b1cc24f1983a95f7b0e9ec450d09e79f118108e66"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_map_30471_4",
+        "body_sha256": "d0c9c2d03f6e080863fd25208c160409dcca2f84345574662bbe18b207d87ea5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0449",
+    "body_sha256": "d25aa4322690982cdafe11b8360db18c34df7ca7053b85376d4487fe563dbb20",
+    "disposition": "transfer",
+    "label": "Vent",
+    "reason": "player crawl animation and vent-room transfer",
+    "bodies": [
+      {
+        "submap": "Map_30471_7",
+        "script": "sc_e_0449",
+        "body_sha256": "d25aa4322690982cdafe11b8360db18c34df7ca7053b85376d4487fe563dbb20"
+      },
+      {
+        "submap": "Map_30471_2",
+        "script": "sc_e_0449_1",
+        "body_sha256": "45087960b225052cb3c893e6a4f3a5ba96004672728bcc22fd76a10cbc7bae98"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_e_0304_2",
+        "body_sha256": "fc04100e9f61a3cde62a9c6b1cc24f1983a95f7b0e9ec450d09e79f118108e66"
+      },
+      {
+        "submap": "Map_30471_4",
+        "script": "sc_map_30471_4",
+        "body_sha256": "d0c9c2d03f6e080863fd25208c160409dcca2f84345574662bbe18b207d87ea5"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0144",
+    "body_sha256": "4f601e3a11b242e8119acf1a011651832e0e3f08d5fea658a24bace5875d8c07",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30490",
+        "script": "sc_e_0144",
+        "body_sha256": "4f601e3a11b242e8119acf1a011651832e0e3f08d5fea658a24bace5875d8c07"
+      },
+      {
+        "submap": "Map_30500",
+        "script": "sc_e_0144_1",
+        "body_sha256": "52e219832f37b2ec1515ff48e3a712a12bdbc6c9d726beaa1d933be600121368"
+      },
+      {
+        "submap": "Map_30500",
+        "script": "sc_map_30500",
+        "body_sha256": "bbb53255bc44abccce3f1be6ebc879bcf02e22573df60c216c5ee93c158306d2"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0321_1",
+    "body_sha256": "99eaae10169427b2c41c025dbbecfff090b3bdf96739d16cb533342bad1e316b",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "mechanical passage to a different floor, with the matching local effect",
+    "bodies": [
+      {
+        "submap": "Map_30521_8",
+        "script": "sc_e_0321_1",
+        "body_sha256": "99eaae10169427b2c41c025dbbecfff090b3bdf96739d16cb533342bad1e316b"
+      },
+      {
+        "submap": "Map_30521_9",
+        "script": "sc_e_0321_2",
+        "body_sha256": "a1650f6a595ad4c7a73cb70b9e9a6a5e7ba5a983022cb7e8c59f26d01fc48eb9"
+      },
+      {
+        "submap": "Map_30521_9",
+        "script": "sc_map_30521_9",
+        "body_sha256": "6eb310c6e4c8c67e75b9fd417d896d5d695ab741abe14b4de9fba2cada63f344"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30521_9_to_10040",
+    "body_sha256": "db6dbeafbba2d0e15984fe357c2d41407e4fc79d4bd20a1eb33d362f50089a8f",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30521_9",
+        "script": "sc_30521_9_to_10040",
+        "body_sha256": "db6dbeafbba2d0e15984fe357c2d41407e4fc79d4bd20a1eb33d362f50089a8f"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_30521_9_to_10040_1",
+        "body_sha256": "0d23c80771b081b4c784c045e8d87e7a613bb0e9f85c10f6b5c579866f2599d3"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_map_10040",
+        "body_sha256": "5992d5ff6369b3f9769c66493bcffb33f2bda9fdab2c7090f82c6649654c5b4a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0323_1",
+    "body_sha256": "def9a1f49efc5e54ab625f00ec49b0f24e47f00de91f6754a8138b48d7ff85b3",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30521_9",
+        "script": "sc_e_0323_1",
+        "body_sha256": "def9a1f49efc5e54ab625f00ec49b0f24e47f00de91f6754a8138b48d7ff85b3"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_e_0323_2",
+        "body_sha256": "817b28680b704c6ef134b35450fa61dd496a762562ca94931691ba3d0718f6f6"
+      },
+      {
+        "submap": "Map_10040",
+        "script": "sc_map_10040",
+        "body_sha256": "5992d5ff6369b3f9769c66493bcffb33f2bda9fdab2c7090f82c6649654c5b4a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30571_1_to_30570_1",
+    "body_sha256": "ce7d1869b80b0e4b629e10e28dfe8c0fc0b17faeede3c6f9a7c81b33281574a2",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30571_1",
+        "script": "sc_30571_1_to_30570_1",
+        "body_sha256": "ce7d1869b80b0e4b629e10e28dfe8c0fc0b17faeede3c6f9a7c81b33281574a2"
+      },
+      {
+        "submap": "Map_30570",
+        "script": "sc_30571_1_to_30570_2",
+        "body_sha256": "cfc2e90ecc9e04fddf65ae26f845b0120e883e8e43273c36f7b8b9a3f55b3ec0"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0351_1",
+    "body_sha256": "fcb4c6777c11ecb55589546dd890668de9d4dcd369e5cb1b599daf922c21d686",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30590",
+        "script": "sc_e_0351_1",
+        "body_sha256": "fcb4c6777c11ecb55589546dd890668de9d4dcd369e5cb1b599daf922c21d686"
+      },
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_e_0351_2",
+        "body_sha256": "bdc425006c169c5bf90388520dbc5274828b0de9eaab341279829dc13566452f"
+      },
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_map_30601_1",
+        "body_sha256": "9e17e1bbeeb2079dfc712db654bebeccb03704d946e13434e63a3d48c4217057"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30591_1_to_30590_1",
+    "body_sha256": "dcc7a0a7ab885588968ec09251b5f3532959538af7c83f073a5a3ac8445030f0",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30591_1",
+        "script": "sc_30591_1_to_30590_1",
+        "body_sha256": "dcc7a0a7ab885588968ec09251b5f3532959538af7c83f073a5a3ac8445030f0"
+      },
+      {
+        "submap": "Map_30590",
+        "script": "sc_30591_1_to_30590_2",
+        "body_sha256": "4c1428911365134379820a7ef765847fba61311552cc7e82ada0b5f3ce8f2fb8"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0415",
+    "body_sha256": "d0dae4725fa1392c919f04a9109478a2a736b37f3a61cba61de7ee4576b09587",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30591_10",
+        "script": "sc_e_0415",
+        "body_sha256": "d0dae4725fa1392c919f04a9109478a2a736b37f3a61cba61de7ee4576b09587"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0415_1",
+    "body_sha256": "8647f27b1d10c8192457ee2b2a072da18cf5c04e90f96a7eaf59ae3c0239fb0c",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30591_10",
+        "script": "sc_e_0415_1",
+        "body_sha256": "8647f27b1d10c8192457ee2b2a072da18cf5c04e90f96a7eaf59ae3c0239fb0c"
+      },
+      {
+        "submap": "Map_30591_10",
+        "script": "sc_e_0415",
+        "body_sha256": "d0dae4725fa1392c919f04a9109478a2a736b37f3a61cba61de7ee4576b09587"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0509_1",
+    "body_sha256": "7f03561305803c764d51c1e060097829753b83292bcd7ec4a9427dca8bbad795",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary door/portal/waterfall transfer and its arrival animation",
+    "bodies": [
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_e_0509_1",
+        "body_sha256": "7f03561305803c764d51c1e060097829753b83292bcd7ec4a9427dca8bbad795"
+      },
+      {
+        "submap": "Map_30590_1",
+        "script": "sc_e_0509_2",
+        "body_sha256": "67299e417c475c1fc84e5f81d88e8f09c278c0f9e3376411c5c6fcb9e4948029"
+      },
+      {
+        "submap": "Map_30590_1",
+        "script": "sc_map_30590_1",
+        "body_sha256": "5b047219eed8c4aedba1e0bfeb8653c036aba8d166f918fb209b727e25561213"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_1_to_30601_2",
+    "body_sha256": "85e10c6036855e57a521f50b76df62014b6f7315e8bdbd88f764359e7f50af9e",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_30601_1_to_30601_2",
+        "body_sha256": "85e10c6036855e57a521f50b76df62014b6f7315e8bdbd88f764359e7f50af9e"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_2_to_30601_3",
+    "body_sha256": "9c0e98c353711ec5f4b58140ff184a9b849b73606e8f2763f2fcd4faad51e176",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_2",
+        "script": "sc_30601_2_to_30601_3",
+        "body_sha256": "9c0e98c353711ec5f4b58140ff184a9b849b73606e8f2763f2fcd4faad51e176"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_2_to_30601_1",
+    "body_sha256": "7d312dcbcbae95288ea619a40daff7a8bd3fa55da5cf5a11f51202a933ecbfcd",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_2",
+        "script": "sc_30601_2_to_30601_1",
+        "body_sha256": "7d312dcbcbae95288ea619a40daff7a8bd3fa55da5cf5a11f51202a933ecbfcd"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_3_to_30601_2",
+    "body_sha256": "a3c42879d4d57640a45e2742f039cbc223d71373d0b4ffefea30b9851d7d754a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_3",
+        "script": "sc_30601_3_to_30601_2",
+        "body_sha256": "a3c42879d4d57640a45e2742f039cbc223d71373d0b4ffefea30b9851d7d754a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_3_to_30601_4",
+    "body_sha256": "9b47c3bffe84fc7583a9223b9157473cff254f7823e78cfe4e44737a18771b16",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_3",
+        "script": "sc_30601_3_to_30601_4",
+        "body_sha256": "9b47c3bffe84fc7583a9223b9157473cff254f7823e78cfe4e44737a18771b16"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_4_to_30601_3",
+    "body_sha256": "c546095847c2f67d8f69cae089c18016d745349c9348b4426674d06d21f9c506",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_4",
+        "script": "sc_30601_4_to_30601_3",
+        "body_sha256": "c546095847c2f67d8f69cae089c18016d745349c9348b4426674d06d21f9c506"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_4_to_30601_5",
+    "body_sha256": "8fa2bc2adb84c15fc2650f82ec10383d55baf7c33323337f9c60c1139a902b9f",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_4",
+        "script": "sc_30601_4_to_30601_5",
+        "body_sha256": "8fa2bc2adb84c15fc2650f82ec10383d55baf7c33323337f9c60c1139a902b9f"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_30601_5_to_30601_4",
+    "body_sha256": "a8e97c3c58d92ac89ef79942361460c9cfa665ce03326f04981797976f7c9544",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary named map/room transfer with movement, vehicle or map setup continuation",
+    "bodies": [
+      {
+        "submap": "Map_30601_5",
+        "script": "sc_30601_5_to_30601_4",
+        "body_sha256": "a8e97c3c58d92ac89ef79942361460c9cfa665ce03326f04981797976f7c9544"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0478",
+    "body_sha256": "69a8cb4aaf0ab8b58f00fa4d5a2f9a857710570337bab70887fa83112c0bb53a",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_40001",
+        "script": "sc_e_0478",
+        "body_sha256": "69a8cb4aaf0ab8b58f00fa4d5a2f9a857710570337bab70887fa83112c0bb53a"
+      }
+    ]
+  },
+  {
+    "game": 5,
+    "script": "sc_e_0007",
+    "body_sha256": "4a4416d8b46cc1ac8ceb8be97bdd32b87fc457ff9b203746c3649b2d54ad66b9",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "character encounter/rescue/search/destruction or party-story staging; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_40001",
+        "script": "sc_e_0007",
+        "body_sha256": "4a4416d8b46cc1ac8ceb8be97bdd32b87fc457ff9b203746c3649b2d54ad66b9"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0434",
+    "body_sha256": "c341232092d07cf5049b61b78d14a691c13d8f7a6eefb7d59f38fb482b0d04e9",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20010",
+        "script": "sc_e_0434",
+        "body_sha256": "c341232092d07cf5049b61b78d14a691c13d8f7a6eefb7d59f38fb482b0d04e9"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0436",
+    "body_sha256": "88ddbc23438df9ad23e356b59085a8b5c47ce0c0b7289aefdc0833b36d8cb0e4",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20040",
+        "script": "sc_e_0436",
+        "body_sha256": "88ddbc23438df9ad23e356b59085a8b5c47ce0c0b7289aefdc0833b36d8cb0e4"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1048",
+    "body_sha256": "047fb689c5aa95bde9602930af98773c068d12117447d12d05c6fd2e8a448d7a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_20071_19",
+        "script": "sc_e_1048",
+        "body_sha256": "047fb689c5aa95bde9602930af98773c068d12117447d12d05c6fd2e8a448d7a"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_e_1048_1",
+        "body_sha256": "2a4b3625ae1900b43dc1aba54a11bcef4ee3434445dca8e962ab02dfd93e6a5f"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "1dbe2f03f42f12b2ae8c8b46be815d751a3388e52b56d1846686d69f1cfe28bc"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1047",
+    "body_sha256": "0ed34cef765ad82bd996f5df46303720cc1c8bce572e6b91ece774e820b62003",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_20071_20",
+        "script": "sc_e_1047",
+        "body_sha256": "0ed34cef765ad82bd996f5df46303720cc1c8bce572e6b91ece774e820b62003"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_e_1047_1",
+        "body_sha256": "6472a8305c14361b0f33747d0e0e48ce5f30df6c8e9e223f4d23dff0fe74eea5"
+      },
+      {
+        "submap": "Map_20070",
+        "script": "sc_map_20070",
+        "body_sha256": "1dbe2f03f42f12b2ae8c8b46be815d751a3388e52b56d1846686d69f1cfe28bc"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1080",
+    "body_sha256": "f6d26e6f4c3d5c8912b1b35e13dae16f31fcf7a6d3966e7972d355ca6ffa1c52",
+    "disposition": "physical",
+    "label": "Hidden passage",
+    "reason": "draft sound at the bedroom secret entrance; local cue markers clear without narrative dialogue or travel",
+    "bodies": [
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_e_1080",
+        "body_sha256": "f6d26e6f4c3d5c8912b1b35e13dae16f31fcf7a6d3966e7972d355ca6ffa1c52"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1080_1",
+    "body_sha256": "507631870009c64428901962b5720758abfb5c795deadece45905d9e0d37f522",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_20071_9",
+        "script": "sc_e_1080_1",
+        "body_sha256": "507631870009c64428901962b5720758abfb5c795deadece45905d9e0d37f522"
+      },
+      {
+        "submap": "Map_20071_8",
+        "script": "sc_e_1080_2",
+        "body_sha256": "7c9837d197036058f9271f19c05fab5cedc4b44eab7268b6dc85b0e45d93aa3e"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0370",
+    "body_sha256": "c805abc1e031efab0d251958c37170a52ca45067ef426148450ee3bc354ced1b",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20250",
+        "script": "sc_e_0370",
+        "body_sha256": "c805abc1e031efab0d251958c37170a52ca45067ef426148450ee3bc354ced1b"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0634",
+    "body_sha256": "5fc9a976eda015bf3c817e4636d9e0662c727fe733e609da0018fc5ba83199e9",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20330",
+        "script": "sc_e_0634",
+        "body_sha256": "5fc9a976eda015bf3c817e4636d9e0662c727fe733e609da0018fc5ba83199e9"
+      },
+      {
+        "submap": "Map_20330",
+        "script": "sc_map_20330",
+        "body_sha256": "2738d531a3f5058aefea47703cb41bb136df0b828f8f7649c13d22b4b61b4403"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0706",
+    "body_sha256": "86ab3d33777d899d5143042e81e8337056d65d546a967a213bbf3ecba76a634e",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_20341_6",
+        "script": "sc_e_0706",
+        "body_sha256": "86ab3d33777d899d5143042e81e8337056d65d546a967a213bbf3ecba76a634e"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_7",
+    "body_sha256": "2d6feabc9daf5ec4a6d2cbd940d4c0c83120e4ba096b92502314862aa4570960",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_7",
+        "body_sha256": "2d6feabc9daf5ec4a6d2cbd940d4c0c83120e4ba096b92502314862aa4570960"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_8",
+    "body_sha256": "75e8b417242f7c78cce7c925f52caa1087a1c45a0bf6304eedfc7785f11968c6",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_8",
+        "body_sha256": "75e8b417242f7c78cce7c925f52caa1087a1c45a0bf6304eedfc7785f11968c6"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092",
+    "body_sha256": "c5575ceca590b43843334aea46a7998aa445646a5986a46b04ee9647cb3bd261",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092",
+        "body_sha256": "c5575ceca590b43843334aea46a7998aa445646a5986a46b04ee9647cb3bd261"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_13",
+    "body_sha256": "280f7ca2fd950d8d754fdd637b3e018f481a0496ad8cb81ba3a9798082501c3c",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_13",
+        "body_sha256": "280f7ca2fd950d8d754fdd637b3e018f481a0496ad8cb81ba3a9798082501c3c"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_9",
+    "body_sha256": "63db2560877cf6bca366e4b74d8e9905fb337418514dc3db1763e32ea58e29e2",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_9",
+        "body_sha256": "63db2560877cf6bca366e4b74d8e9905fb337418514dc3db1763e32ea58e29e2"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_6",
+    "body_sha256": "4b1211e16ff546197833b68440e5d344a978dc5e73f7dcd49889145405b953fc",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_6",
+        "body_sha256": "4b1211e16ff546197833b68440e5d344a978dc5e73f7dcd49889145405b953fc"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_5",
+    "body_sha256": "a784a647f16cb15c32f0b43fd44f24957c25b39706de851b8891cb94a3edce6a",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_5",
+        "body_sha256": "a784a647f16cb15c32f0b43fd44f24957c25b39706de851b8891cb94a3edce6a"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_3",
+    "body_sha256": "5fcedb3635d450e6194980f3c55d4b98d06826019b5efe067b44aab1b10fb4ef",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_3",
+        "body_sha256": "5fcedb3635d450e6194980f3c55d4b98d06826019b5efe067b44aab1b10fb4ef"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_2",
+    "body_sha256": "e0cc4464d5d70cad681aaf9da08d8fc9bcbd927927a15bdb3b474c74ffade00f",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_2",
+        "body_sha256": "e0cc4464d5d70cad681aaf9da08d8fc9bcbd927927a15bdb3b474c74ffade00f"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_4",
+    "body_sha256": "bf2665b908f179262f4df56d9ad11e952ced0fc6c1b5937d491a5121dc36e1f0",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_4",
+        "body_sha256": "bf2665b908f179262f4df56d9ad11e952ced0fc6c1b5937d491a5121dc36e1f0"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_11",
+    "body_sha256": "14b5d148eb91be913cff5bffea9b39a757ae871baf71bb9c095725035e3be7a1",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_11",
+        "body_sha256": "14b5d148eb91be913cff5bffea9b39a757ae871baf71bb9c095725035e3be7a1"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_12",
+    "body_sha256": "8c112ab6061064bb7588f8f8a6d79f3aad6898d6199c68f0c2bfd04c13ad3756",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_12",
+        "body_sha256": "8c112ab6061064bb7588f8f8a6d79f3aad6898d6199c68f0c2bfd04c13ad3756"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_1",
+    "body_sha256": "da812811384ceea6d32d766636bc29e8af60fefb653f54c6a30a3727752b5a00",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_1",
+        "body_sha256": "da812811384ceea6d32d766636bc29e8af60fefb653f54c6a30a3727752b5a00"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0092_10",
+    "body_sha256": "6aca970642eefd42dbb0ad2698f4da7d8e87636d59d570fb302beb7fcefadf3b",
+    "disposition": "physical",
+    "label": "Light path",
+    "reason": "local path index, light markers and exact light-polyline start/stop calls; puzzle reaction",
+    "bodies": [
+      {
+        "submap": "Map_30011_4",
+        "script": "sc_e_0092_10",
+        "body_sha256": "6aca970642eefd42dbb0ad2698f4da7d8e87636d59d570fb302beb7fcefadf3b"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0085_2",
+    "body_sha256": "9de20f4d2689c38b1766bef026011d7019f49efb6adda1844031f750f8a67ef9",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30031_2",
+        "script": "sc_e_0085_2",
+        "body_sha256": "9de20f4d2689c38b1766bef026011d7019f49efb6adda1844031f750f8a67ef9"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0085_1",
+    "body_sha256": "8204dec5e7896c8d17e44f47edd0d17fd16bc16bfa66f37562dcfc5f98af4eb8",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30031_4",
+        "script": "sc_e_0085_1",
+        "body_sha256": "8204dec5e7896c8d17e44f47edd0d17fd16bc16bfa66f37562dcfc5f98af4eb8"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1072_0",
+    "body_sha256": "d2ea4dedb12ae070ea688b043e57d9fb1a3058043cdcb44ca11af43c3c886d33",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30041_1",
+        "script": "sc_e_1072_0",
+        "body_sha256": "d2ea4dedb12ae070ea688b043e57d9fb1a3058043cdcb44ca11af43c3c886d33"
+      },
+      {
+        "submap": "Map_30040",
+        "script": "sc_e_1072",
+        "body_sha256": "0cd33f0d2e74258e8aba7c1198cc8be4f263805ca47ec8a13a97e1b634d97488"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0052_0",
+    "body_sha256": "f3612633a76eb32ad36a72e74a430beadd954d0b572168b9a026d0b5a5021c17",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30041_2",
+        "script": "sc_e_0052_0",
+        "body_sha256": "f3612633a76eb32ad36a72e74a430beadd954d0b572168b9a026d0b5a5021c17"
+      },
+      {
+        "submap": "Map_30040",
+        "script": "sc_e_0052",
+        "body_sha256": "4fafb79cc95acf63bd661a1743b361c3bf2dc0ee2312b5c5ecc363dcaea53ba9"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0053_0",
+    "body_sha256": "c0c46ac2748844720529ca5a78a08c2bf1f8fafcd38b8f14b1021a56b6ca82ac",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30041_5",
+        "script": "sc_e_0053_0",
+        "body_sha256": "c0c46ac2748844720529ca5a78a08c2bf1f8fafcd38b8f14b1021a56b6ca82ac"
+      },
+      {
+        "submap": "Map_30040",
+        "script": "sc_e_0053",
+        "body_sha256": "2901300652ffe0e9824d2fb3b82ebf03a3f10c0532b3eeea26f37eb6c9a7d44f"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0054",
+    "body_sha256": "f9ec3574e007f1079200fd27a9c760e5baa31f0a46b92d94045b3d07ea25a3f4",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30360",
+        "script": "sc_e_0054",
+        "body_sha256": "f9ec3574e007f1079200fd27a9c760e5baa31f0a46b92d94045b3d07ea25a3f4"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0111_off",
+    "body_sha256": "27800401ae74ed16e4d7caea8eb0ed15046068c83e19c0d22af584537d032463",
+    "disposition": "physical",
+    "label": "Telescope",
+    "reason": "scope mask and corresponding far-scene visibility toggle; mask is render-only",
+    "bodies": [
+      {
+        "submap": "Map_30410",
+        "script": "sc_e_0111_off",
+        "body_sha256": "27800401ae74ed16e4d7caea8eb0ed15046068c83e19c0d22af584537d032463"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0111_on",
+    "body_sha256": "9f9087d7978a384f26589bc5b903fd1a754e85a3a4cf134e8061e9345732cf7f",
+    "disposition": "physical",
+    "label": "Telescope",
+    "reason": "scope mask and corresponding far-scene visibility toggle; mask is render-only",
+    "bodies": [
+      {
+        "submap": "Map_30410",
+        "script": "sc_e_0111_on",
+        "body_sha256": "9f9087d7978a384f26589bc5b903fd1a754e85a3a4cf134e8061e9345732cf7f"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1078",
+    "body_sha256": "915654ff4f1b824398583ccd49e7f41a787213caa8fb6c5b63fcdb3c3699c064",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "one-time party/other-character surprise or escape choreography across the transfer, not an ordinary entry animation",
+    "bodies": [
+      {
+        "submap": "Map_30440_1",
+        "script": "sc_e_1078",
+        "body_sha256": "915654ff4f1b824398583ccd49e7f41a787213caa8fb6c5b63fcdb3c3699c064"
+      },
+      {
+        "submap": "Map_30441_4",
+        "script": "sc_e_1078_1",
+        "body_sha256": "ee440442535cc20dd86a866dffab93cb0b545b668fc0ea5124edbb547f15330a"
+      },
+      {
+        "submap": "Map_30441_4",
+        "script": "sc_map_30441_4",
+        "body_sha256": "7aae2b6a97eed74f8a8966499cd3699bf3bd782ed355777b2d97926e08e8038c"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1050",
+    "body_sha256": "4662850b1c1325d13c4b63e688f077e28fd42e107be94836737584f51d3c1223",
+    "disposition": "physical",
+    "label": "Passage barrier",
+    "reason": "exit obstruction actor moves into place and local contact markers clear; no enemy/story identity disclosed",
+    "bodies": [
+      {
+        "submap": "Map_30441_5",
+        "script": "sc_e_1050",
+        "body_sha256": "4662850b1c1325d13c4b63e688f077e28fd42e107be94836737584f51d3c1223"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_1502",
+    "body_sha256": "f3be9dbbbd04e9313eadbeae76ee489e67fd21a0ce93bb6c14aa43511b3e0acc",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30501_4",
+        "script": "sc_e_1502",
+        "body_sha256": "f3be9dbbbd04e9313eadbeae76ee489e67fd21a0ce93bb6c14aa43511b3e0acc"
+      },
+      {
+        "submap": "Map_40001",
+        "script": "sc_e_1502_1",
+        "body_sha256": "d1f63bcbe418084db021de9107b0286b579d24a8c448b879690655247babef58"
+      },
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_1502_2",
+        "body_sha256": "92de3bffce584725287d51df54e9eea9bdfa9ede7711edfb17a34b2bc076feba"
+      },
+      {
+        "submap": "Map_20121_4",
+        "script": "sc_e_1502_3",
+        "body_sha256": "83ea888b07c67697677e82fa1bb36edfc999a4e18ab20742ac7f81e5a979f5e6"
+      },
+      {
+        "submap": "Map_20121_4",
+        "script": "sc_map_20121_4",
+        "body_sha256": "b3d9f648fc791c01a8cf717f10e10c542343ae403251b276845dc64e351c890a"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0300",
+    "body_sha256": "9b0a39b9cef085e23232ade31cd5223660e599732abd529e710d5883ab110453",
+    "disposition": "physical",
+    "label": "Switch",
+    "reason": "wall contact switches local floor/collision animation and local progress",
+    "bodies": [
+      {
+        "submap": "Map_30511_3",
+        "script": "sc_e_0300",
+        "body_sha256": "9b0a39b9cef085e23232ade31cd5223660e599732abd529e710d5883ab110453"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0541",
+    "body_sha256": "66f07eea32bc5b3ec5d6733d36231b60e1cbfddc8ed09fb38a93130328d99e1d",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30551_1",
+        "script": "sc_e_0541",
+        "body_sha256": "66f07eea32bc5b3ec5d6733d36231b60e1cbfddc8ed09fb38a93130328d99e1d"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0542",
+    "body_sha256": "513a0417fb4f3c2856a0af07e32f30cc6673e7c77e66c22e702cd6fe65a0107d",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30561_1",
+        "script": "sc_e_0542",
+        "body_sha256": "513a0417fb4f3c2856a0af07e32f30cc6673e7c77e66c22e702cd6fe65a0107d"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0591",
+    "body_sha256": "e55e7c92468b21fd8f1d1981d6eb7be89d4df0c560874c1b3398d8e0e3320d1a",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0591",
+        "body_sha256": "e55e7c92468b21fd8f1d1981d6eb7be89d4df0c560874c1b3398d8e0e3320d1a"
+      },
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_e_0591_1",
+        "body_sha256": "1d8c0ecebd534a01ee8dead235a77115aeff6cac28fee170a6e405e069b847fe"
+      },
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_map_30601_1",
+        "body_sha256": "0fa2becba939236e994df6e82047786cfc347b1d097f73bda04aa94d9381b237"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0595",
+    "body_sha256": "377568de16fe621546c787c08314e315ade1c7d95aa7ee37e630bf89b46002c4",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0595",
+        "body_sha256": "377568de16fe621546c787c08314e315ade1c7d95aa7ee37e630bf89b46002c4"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0596",
+    "body_sha256": "e2174fb4d209ca9ff051635a75bd4ccad9d6309339b19b353ef78edd6321ef11",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0596",
+        "body_sha256": "e2174fb4d209ca9ff051635a75bd4ccad9d6309339b19b353ef78edd6321ef11"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0597",
+    "body_sha256": "438f3f7cb0c1c79be03ff6adf10e164180034a3b869d33c28697d478bb41451e",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0597",
+        "body_sha256": "438f3f7cb0c1c79be03ff6adf10e164180034a3b869d33c28697d478bb41451e"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0598",
+    "body_sha256": "218751c6a2ca2d15cb4bf9ad9ad6578aee4cd94da0e515885877eff85a9a51bb",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0598",
+        "body_sha256": "218751c6a2ca2d15cb4bf9ad9ad6578aee4cd94da0e515885877eff85a9a51bb"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0599",
+    "body_sha256": "94113e0a4cb303d4184bbe3f3442dc4414c625cb8a3e2870726ad2165fbe3ed0",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0599",
+        "body_sha256": "94113e0a4cb303d4184bbe3f3442dc4414c625cb8a3e2870726ad2165fbe3ed0"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0601",
+    "body_sha256": "e81fe837fc26c1e8dd31becf6f149bde85181f4313bddd80dd0328c43603baaa",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0601",
+        "body_sha256": "e81fe837fc26c1e8dd31becf6f149bde85181f4313bddd80dd0328c43603baaa"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0602",
+    "body_sha256": "038509851d8db189e539c40df5f9bb2a283c3c9a1c79f2a32f0c5cc09e8aa53d",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0602",
+        "body_sha256": "038509851d8db189e539c40df5f9bb2a283c3c9a1c79f2a32f0c5cc09e8aa53d"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0600",
+    "body_sha256": "ad14ba0b244df2a84f1a42f520a48a699702836d0257cce029baee3678e14896",
+    "disposition": "physical",
+    "label": "Trap",
+    "reason": "repeatable collapsing ground during the existing escape timer; no narrative outcome disclosure",
+    "bodies": [
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0600",
+        "body_sha256": "ad14ba0b244df2a84f1a42f520a48a699702836d0257cce029baee3678e14896"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0538",
+    "body_sha256": "62f94a5ced08e7432f10a64757dae72b9f6c75d52a40d69e2eb356790230c557",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "one-time party/other-character surprise or escape choreography across the transfer, not an ordinary entry animation",
+    "bodies": [
+      {
+        "submap": "Map_30601_1",
+        "script": "sc_e_0538",
+        "body_sha256": "62f94a5ced08e7432f10a64757dae72b9f6c75d52a40d69e2eb356790230c557"
+      },
+      {
+        "submap": "Map_30600",
+        "script": "sc_e_0538_1",
+        "body_sha256": "df081b52ffc9ef5f6c9e340963a0686a4641218d3101588aca331c528d57bd4e"
+      },
+      {
+        "submap": "Map_30600",
+        "script": "sc_map_30600",
+        "body_sha256": "1b7b0dc3a0a30b2161ae854b501a5fd2378dbb9e9416894f4be6d760e7013239"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0764",
+    "body_sha256": "955eddafba48fcaab816bd71186ad6b307552b92453f8a7912b3baf65a262844",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "false-door return and ordinary mansion puzzle reset; no dialogue/encounter",
+    "bodies": [
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0764",
+        "body_sha256": "955eddafba48fcaab816bd71186ad6b307552b92453f8a7912b3baf65a262844"
+      },
+      {
+        "submap": "Map_30631_3",
+        "script": "sc_e_0764_1",
+        "body_sha256": "1565873270e1e2adf446acd309bc68d0e60a00dcfa38b58b869d55796830f9cf"
+      },
+      {
+        "submap": "Map_30631_3",
+        "script": "sc_map_30631_3",
+        "body_sha256": "d5b70dc53b03ac894f30b621f8d423bb845ec7a59293f0b7b6bbd35e0dafe7c0"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0766",
+    "body_sha256": "4aa505a48448710cef33d1d7661c39ef9e44f4bd02dd0e9f229c479ff268bd5f",
+    "disposition": "physical",
+    "label": "Passage",
+    "reason": "local puzzle reposition and direction, retaining its native mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0766",
+        "body_sha256": "4aa505a48448710cef33d1d7661c39ef9e44f4bd02dd0e9f229c479ff268bd5f"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0772",
+    "body_sha256": "b9ca85888cfcf93b0bb4c738dd93811228de0406efde87964f1e67219994dc0e",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "false-door return and ordinary mansion puzzle reset; no dialogue/encounter",
+    "bodies": [
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0772",
+        "body_sha256": "b9ca85888cfcf93b0bb4c738dd93811228de0406efde87964f1e67219994dc0e"
+      },
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0772_1",
+        "body_sha256": "6a6eed81b046708066d2e3d57653b85409675f19fda5719a88c6a19b142d8d50"
+      },
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_map_30631_4",
+        "body_sha256": "8ed56662b207815ce39f1ab5c4a1102315322ba1c620e112978269406111b15c"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0766_1",
+    "body_sha256": "15e9e73e0586377ae4be02af1b9ab40d5bd1f84d4c5eb7d30207f8107dad7bbe",
+    "disposition": "physical",
+    "label": "Passage",
+    "reason": "local puzzle reposition and direction, retaining its native mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0766_1",
+        "body_sha256": "15e9e73e0586377ae4be02af1b9ab40d5bd1f84d4c5eb7d30207f8107dad7bbe"
+      },
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_e_0766_2",
+        "body_sha256": "5689a07242a6f282a11190fb7acac10bf5be987a8bbcf5d394b11f26becb0e80"
+      },
+      {
+        "submap": "Map_30631_4",
+        "script": "sc_map_30631_4",
+        "body_sha256": "8ed56662b207815ce39f1ab5c4a1102315322ba1c620e112978269406111b15c"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0687",
+    "body_sha256": "b52af75563db1a888e2aeca7430610739fd340e37844075b73e4f53b1d05b827",
+    "disposition": "transfer",
+    "label": "Passage",
+    "reason": "ordinary secret passage/door/warp/ride transfer; arrival restores the destination mechanism",
+    "bodies": [
+      {
+        "submap": "Map_30651_8",
+        "script": "sc_e_0687",
+        "body_sha256": "b52af75563db1a888e2aeca7430610739fd340e37844075b73e4f53b1d05b827"
+      },
+      {
+        "submap": "Map_30651_7",
+        "script": "sc_e_0687_1",
+        "body_sha256": "ef1628a14671ad4fcb42957cf0ad3bb4b43339fdef5cee5946485cd14edd343f"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0903",
+    "body_sha256": "1a5587f91d58d8f023cf77b93fcc41a9648d6ab1155d948181c972f5a2accbcd",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30830",
+        "script": "sc_e_0903",
+        "body_sha256": "1a5587f91d58d8f023cf77b93fcc41a9648d6ab1155d948181c972f5a2accbcd"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0906",
+    "body_sha256": "b73e532c180e5909e4d82e18c826698b5531740fe3d2cb03b76f62e71f3c24d4",
+    "disposition": "physical",
+    "label": "Treasure Chest",
+    "reason": "chest movement/animation mechanism; contents remain undisclosed",
+    "bodies": [
+      {
+        "submap": "Map_30831_2",
+        "script": "sc_e_0906",
+        "body_sha256": "b73e532c180e5909e4d82e18c826698b5531740fe3d2cb03b76f62e71f3c24d4"
+      }
+    ]
+  },
+  {
+    "game": 6,
+    "script": "sc_e_0934",
+    "body_sha256": "399b5f46f0fc23950bde3e258fde0aa2e6ad3eaf436aa6c6848bc27031227518",
+    "disposition": "narrative",
+    "label": null,
+    "reason": "story character movement, discovery, warning or memory; no plot names exposed",
+    "bodies": [
+      {
+        "submap": "Map_30841_1",
+        "script": "sc_e_0934",
+        "body_sha256": "399b5f46f0fc23950bde3e258fde0aa2e6ad3eaf436aa6c6848bc27031227518"
+      },
+      {
+        "submap": "Map_30841_2",
+        "script": "sc_e_0934_1",
+        "body_sha256": "c1de62259d345f98d65259196d6e6b4b2d69fbd0a3d7d280e55588028771fe82"
+      }
+    ]
+  }
+]

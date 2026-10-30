@@ -1,4 +1,4 @@
-// check-sources: bestiary/bestiary_reader.cpp field/event_labels.cpp field/npc_names.cpp text.cpp dedup.cpp json.cpp
+// check-sources: bestiary/bestiary_reader.cpp field/event_labels.cpp field/npc_names.cpp field/vehicle_identity.cpp text.cpp dedup.cpp json.cpp
 // Real interaction/status detours, real all-six policy and labels; fake native
 // renderers and parked workers. No game, device, runtime probe or hidden stats.
 #define main bestiary_fixture_main
@@ -10,6 +10,7 @@
 namespace fixture {
 bool worker=false,ready=true,battle=true,status_on=true,speech=true;
 int wrong_owner=0,native_calls=0,map_id=0;
+std::map<int,Node*> vehicle_models;int model_count_override=-1,model_lookups=0;
 std::vector<std::function<void()>> jobs;
 json::Value visuals,labels,names;
 std::wstring locale=L"en";
@@ -60,7 +61,9 @@ namespace fixture {int renderer_count=1;void* vehicle=nullptr;int vehicle_id=0;}
 namespace unity {std::vector<void*> components_in_children(void* p,ref::Class&,bool){fixture::native();return std::vector<void*>(fixture::renderer_count,p);}void* get_component_in_children(void* p,ref::Class&,bool){fixture::native();return displayed::field(p,"shader");}}
 namespace ffpr::system {bool is_field_navigation_ready(){return fixture::ready;}}
 namespace field {
-bool vehicle_type_of(void* p,int& type,int& id,std::wstring& message){fixture::native();if(p!=fixture::vehicle)return false;type=3;id=fixture::vehicle_id;message=L"Airship";return true;}
+bool vehicle_type_of(void* p,int& type,int& id,std::wstring& message){fixture::native();
+    if(p!=fixture::vehicle)return vehicle_identity_from_model(p,&fixture::vehicle_models,fixture::map_id,type,id,message);
+    type=3;id=fixture::vehicle_id;message=L"Airship";return true;}
 std::wstring vehicle_display_name(int,int,const std::wstring& message){fixture::native();return message;}
 void* entity_property(void* p){return displayed::field(p,"property");}
 std::wstring entity_name_from_property(void* p){return p?static_cast<fixture::Node*>(p)->words:L"";}
@@ -74,6 +77,11 @@ ref::Field fPropObjectType{kPropertyEntity,"<ObjectType>k__BackingField"};
 ref::Class kFieldTresureBox{"Last.Entity.Field","FieldTresureBox"};
 ref::Class kFieldNonPlayer{"Last.Entity.Field","FieldNonPlayer"};
 }
+}
+namespace unity {
+int dict_count(void* p){fixture::native();return fixture::model_count_override>=0?fixture::model_count_override:p?int(static_cast<std::map<int,fixture::Node*>*>(p)->size()):0;}
+void* dict_reference(void* p,int32_t id){fixture::native();++fixture::model_lookups;if(!p)return nullptr;
+    auto& models=*static_cast<std::map<int,fixture::Node*>*>(p);auto at=models.find(id);return at==models.end()?nullptr:at->second;}
 }
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
@@ -151,6 +159,33 @@ int main(){
         expect(spoken==std::vector<std::wstring>({L"Interact: Airship"}),"vehicle model labels precede generic NPC inheritance in every game's interaction cue");
     }
     fixture::vehicle=nullptr;fixture::game=game::Id::FF2;
+    // A freshly recreated world-map vehicle has native identity before the
+    // asynchronous discovery cache is populated. Ordinary NPCs can reuse the
+    // same ObjectId, so verify the exact actor/map/enabled model relationship.
+    Node model,other_actor;std::wstring native_name=L"The Nautilus";
+    for(int n=1;n<=6;++n){
+        fixture::game=static_cast<game::Id>(n);fixture::map_id=n==3?4:1;
+        const int ids[]={3,3,9,3,7,4};const int id=ids[n-1];
+        integer(property,"<ObjectId>k__BackingField",id);
+        integer(model,"id",id);integer(model,"type",n==6?8:3);
+        integer(model,"<StayMapId>k__BackingField",fixture::map_id);integer(model,"<Enable>k__BackingField",1);
+        set(model,"<MapObject>k__BackingField",&object);set(model,"messageId",&native_name);
+        fixture::vehicle_models={{id,&model}};object.kind="NPC";object.words=L"NPC";
+        interaction::hide(&icon);spoken.clear();const int before=fixture::model_lookups;
+        interaction::observed(&icon);flush();
+        expect(spoken==std::vector<std::wstring>{L"Interact: The Nautilus"}&&fixture::model_lookups==before+1,
+            "all-six cold discovery prompts resolve the exact native vehicle with one keyed model lookup");
+        for(int invalid=0;invalid<5;++invalid){
+            set(model,"<MapObject>k__BackingField",invalid==0?&other_actor:&object);
+            integer(model,"<StayMapId>k__BackingField",fixture::map_id+(invalid==1));
+            integer(model,"<Enable>k__BackingField",invalid==2?0:1);
+            integer(model,"id",invalid==3?id+1:id);fixture::model_count_override=invalid==4?65:-1;
+            interaction::hide(&icon);spoken.clear();interaction::observed(&icon);flush();
+            expect(spoken==std::vector<std::wstring>{L"Interact: NPC"},"reused ID, other map, disabled/mismatched or oversized native models cannot name an ordinary NPC as a vehicle");
+        }
+        fixture::model_count_override=-1;fixture::vehicle_models.clear();
+    }
+    fixture::game=game::Id::FF2;fixture::map_id=0;
     interaction::hide(&icon);object.kind="Object";spoken.clear();
     interaction::observed(&icon);flush();
     raw=L"Unmapped object";integer(property,"<AssetId>k__BackingField",72);
@@ -188,8 +223,9 @@ int main(){
            "the same generic identifier can resolve to a different physical object");
     load(4);
     expect(field::safe_event_label(L"MP回復",L"Interactive Object",41,3,5)==L"Pot" &&
-           field::safe_event_label(L"MP回復",L"Event",41,3,2)==L"Scene trigger",
-           "a healing pot and its scripted helper retain distinct native object types");
+           field::safe_event_label(L"MP回復",L"Event",41,3,2)==L"Pot" &&
+           field::safe_event_label(L"MP回復",L"Event",153,6,2)==L"Fountain",
+           "healing-pot helper is functional and retains its identity independently of the fountain's script context");
     load(5);
     expect(field::safe_event_label(L"sc_e_0362",L"Interactive Object",40,151,5)==L"Barrel" &&
            field::safe_event_label(L"sc_e_0362",L"Interactive Object",78,5,5)==L"Pot",

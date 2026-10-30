@@ -25,7 +25,10 @@ if not "%errorlevel%"=="0" (
 echo Building...
 set "CLEAN_BUILD="
 if /I "%~1"=="--clean" set "CLEAN_BUILD=--clean-first"
-"%CMAKE%" --build build --config Release %CLEAN_BUILD% -- /m:4 /nr:false /v:minimal >> build_log.txt 2>&1
+REM User preference: one project and one compiler at a time, even on large PCs.
+REM Together with CMake's /MP1 this prevents multiplied compiler RAM pressure.
+set "CMAKE_BUILD_PARALLEL_LEVEL=1"
+"%CMAKE%" --build build --config Release %CLEAN_BUILD% -- /m:1 /nr:false /v:minimal >> build_log.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Build FAILED - see build_log.txt
     exit /b 1
@@ -36,6 +39,31 @@ if not exist "out\hid.dll" (
 )
 
 echo Checking routes avoid unintended map transitions...
+"out\checks\cross_floor_npc_check.exe" > build_check\cross_floor_npc_report.txt 2>&1
+if errorlevel 1 (
+    echo Cross-floor NPC guidance check FAILED - see build_check\cross_floor_npc_report.txt
+    exit /b 1
+)
+"out\checks\map_geometry_check.exe" --verify-relays > build_check\map_geometry_report.txt 2>&1
+if errorlevel 1 (
+    echo Native counter geometry check FAILED - see build_check\map_geometry_report.txt
+    exit /b 1
+)
+"out\checks\saronia_entry_check.exe" > build_check\saronia_entry_report.txt 2>&1
+if errorlevel 1 (
+    echo Saronia entry check FAILED - see build_check\saronia_entry_report.txt
+    exit /b 1
+)
+"out\checks\enterprise_landing_check.exe" > build_check\enterprise_landing_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Enterprise landing check FAILED - see build_check\enterprise_landing_report.txt
+    exit /b 1
+)
+"out\checks\continent_transition_check.exe" > build_check\continent_transition_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Continent transition check FAILED - see build_check\continent_transition_report.txt
+    exit /b 1
+)
 "out\checks\enterprise_flight_check.exe" > build_check\enterprise_flight_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Enterprise flight check FAILED - see build_check\enterprise_flight_report.txt
@@ -47,7 +75,41 @@ if not "%errorlevel%"=="0" (
     exit /b 1
 )
 
+echo Checking native Invincible mountain actions and Falgabard access...
+"out\checks\invincible_route_check.exe" > build_check\invincible_route_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Invincible crossing check FAILED - see build_check\invincible_route_report.txt
+    exit /b 1
+)
+
+echo Checking ordinary-flight preference...
+"out\checks\invincible_preference_check.exe" > build_check\invincible_preference_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Invincible preference check FAILED - see build_check\invincible_preference_report.txt
+    exit /b 1
+)
+
 echo Checking chocobo routing and Tower of Owen approaches...
+"out\checks\invincible_artillery_check.exe" > build_check\invincible_artillery_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Invincible artillery check FAILED - see build_check\invincible_artillery_report.txt
+    exit /b 1
+)
+"out\checks\command_commit_check.exe" > build_check\command_commit_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Command commit focus check FAILED - see build_check\command_commit_report.txt
+    exit /b 1
+)
+"out\checks\torna_canal_check.exe" > build_check\torna_canal_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Torna Canal check FAILED - see build_check\torna_canal_report.txt
+    exit /b 1
+)
+"out\checks\field_effect_check.exe" > build_check\field_effect_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Field effect collision check FAILED - see build_check\field_effect_report.txt
+    exit /b 1
+)
 "out\checks\chocobo_owen_check.exe" > build_check\chocobo_owen_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Chocobo/Owen check FAILED - see build_check\chocobo_owen_report.txt
@@ -112,6 +174,81 @@ if not "%errorlevel%"=="0" (
     echo Route worker check FAILED - see build_check\route_worker_report.txt
     exit /b 1
 )
+python tools\re\arrival_contexts.py > build_check\arrival_contexts_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native arrival context check FAILED - see build_check\arrival_contexts_report.txt
+    exit /b 1
+)
+"out\checks\arrival_choice_check.exe" > build_check\arrival_choice_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native arrival choice check FAILED - see build_check\arrival_choice_report.txt
+    exit /b 1
+)
+"out\checks\transport_guard_check.exe" > build_check\transport_guard_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native transportation selector and trigger check FAILED - see build_check\transport_guard_report.txt
+    exit /b 1
+)
+"out\checks\contextual_scanner_check.exe" > build_check\contextual_scanner_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Contextual event native and remote output check FAILED - see build_check\contextual_scanner_report.txt
+    exit /b 1
+)
+python tools\re\final_script_cases.py > build_check\final_script_cases_source_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native script source and continuation check FAILED - see build_check\final_script_cases_source_report.txt
+    exit /b 1
+)
+"out\checks\final_script_cases_check.exe" > build_check\final_script_cases_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native script actor publication check FAILED - see build_check\final_script_cases_report.txt
+    exit /b 1
+)
+"out\checks\conditional_transfer_check.exe" > build_check\conditional_transfer_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Conditional native door check FAILED - see build_check\conditional_transfer_report.txt
+    exit /b 1
+)
+"out\checks\devil_road_check.exe" > build_check\devil_road_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Chained native teleport landing check FAILED - see build_check\devil_road_report.txt
+    exit /b 1
+)
+"out\checks\contextual_submarine_check.exe" > build_check\contextual_submarine_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Contextual underwater vehicle entry check FAILED - see build_check\contextual_submarine_report.txt
+    exit /b 1
+)
+"out\checks\npc_future_check.exe" > build_check\npc_future_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Future-floor native NPC check FAILED - see build_check\npc_future_report.txt
+    exit /b 1
+)
+"out\checks\npc_region_check.exe" > build_check\npc_region_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native area and stair-route check FAILED - see build_check\npc_region_report.txt
+    exit /b 1
+)
+"out\checks\npc_motion_check.exe" > build_check\npc_motion_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native moving-NPC and scene-control check FAILED - see build_check\npc_motion_report.txt
+    exit /b 1
+)
+python tools\re\npc_remote_routes.py > build_check\npc_route_assets_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native patrol fact audit FAILED - see build_check\npc_route_assets_report.txt
+    exit /b 1
+)
+"out\checks\npc_oscillation_check.exe" > build_check\npc_oscillation_oracle_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo NPC oscillation oracle check FAILED - see build_check\npc_oscillation_oracle_report.txt
+    exit /b 1
+)
+"out\checks\npc_oscillation_check.exe" --verify > build_check\npc_oscillation_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo NPC oscillation retention check FAILED - see build_check\npc_oscillation_report.txt
+    exit /b 1
+)
 "out\checks\npc_geometry_check.exe" > build_check\npc_geometry_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo All-six NPC geometry audit FAILED - see build_check\npc_geometry_report.txt
@@ -142,6 +279,23 @@ if not "%errorlevel%"=="0" (
     echo NPC and story-gate route check FAILED - see build_check\npc_gate_report.txt
     exit /b 1
 )
+"out\checks\npc_entry_check.exe" > build_check\npc_entry_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo NPC scripted-entry check FAILED - see build_check\npc_entry_report.txt
+    exit /b 1
+)
+
+
+"out\checks\istory_entry_check.exe" > build_check\istory_entry_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Istory prerequisite check FAILED - see build_check\istory_entry_report.txt
+    exit /b 1
+)
+"out\checks\mask_projection_check.exe" > build_check\mask_projection_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Imperial Camp projection check FAILED - see build_check\mask_projection_report.txt
+    exit /b 1
+)
 
 "out\checks\field_targets_check.exe" > build_check\field_targets_report.txt 2>&1
 if not "%errorlevel%"=="0" (
@@ -161,6 +315,26 @@ if not "%errorlevel%"=="0" (
 "out\checks\navigation_followup_check.exe" > build_check\navigation_followup_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Scripted exit, Ship and indoor graph check FAILED - see build_check\navigation_followup_report.txt
+    exit /b 1
+)
+"out\checks\doga_surface_check.exe" > build_check\doga_surface_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Nautilus surfacing marker check FAILED - see build_check\doga_surface_report.txt
+    exit /b 1
+)
+"out\checks\crystal_tower_check.exe" > build_check\crystal_tower_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Crystal Tower world return check FAILED - see build_check\crystal_tower_report.txt
+    exit /b 1
+)
+"out\checks\nautilus_route_check.exe" > build_check\nautilus_route_report.txt 2>&1
+if errorlevel 1 (
+    echo Nautilus underwater entry and landing check FAILED - see build_check\nautilus_route_report.txt
+    exit /b 1
+)
+python tools\submarine_entrances.py > build_check\submarine_entrance_report.txt 2>&1
+if errorlevel 1 (
+    echo Underwater source-to-bake check FAILED - see build_check\submarine_entrance_report.txt
     exit /b 1
 )
 
@@ -383,6 +557,36 @@ if not "%errorlevel%"=="0" (
     echo Startup diagnostics check FAILED - see build_check\startup_diagnostics_report.txt
     exit /b 1
 )
+"out\checks\bootstrap_singleton_check.exe" > build_check\bootstrap_singleton_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Early singleton producer check FAILED - see build_check\bootstrap_singleton_report.txt
+    exit /b 1
+)
+"out\checks\scan_feedback_check.exe" > build_check\scan_feedback_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Scan feedback check FAILED - see build_check\scan_feedback_report.txt
+    exit /b 1
+)
+"out\checks\action_effect_check.exe" > build_check\action_effect_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Action effect feedback check FAILED - see build_check\action_effect_report.txt
+    exit /b 1
+)
+"out\checks\boost_use_check.exe" > build_check\boost_use_report.txt 2>&1
+if errorlevel 1 (
+    echo Boost use producer check FAILED - see build_check\boost_use_report.txt
+    exit /b 1
+)
+python tools\re\boost_guard_facts.py > build_check\boost_guard_facts_report.txt 2>&1
+if errorlevel 1 (
+    echo Boost and Guard visual source check FAILED - see build_check\boost_guard_facts_report.txt
+    exit /b 1
+)
+"out\checks\unfiltered_air_check.exe" > build_check\unfiltered_air_report.txt 2>&1
+if errorlevel 1 (
+    echo Unfiltered and parked aircraft discovery check FAILED - see build_check\unfiltered_air_report.txt
+    exit /b 1
+)
 "out\checks\battle_feedback_check.exe" > build_check\battle_feedback_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Battle feedback check FAILED - see build_check\battle_feedback_report.txt
@@ -423,6 +627,11 @@ if not "%errorlevel%"=="0" (
     echo Enemy status data check FAILED - see build_check\enemy_status_audit_report.txt
     exit /b 1
 )
+python tools\functional_events_check.py > build_check\functional_events_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Functional event audit FAILED - see build_check\functional_events_report.txt
+    exit /b 1
+)
 python tools\condition_labels_check.py > build_check\condition_labels_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Condition label audit FAILED - see build_check\condition_labels_report.txt
@@ -441,6 +650,11 @@ if not "%errorlevel%"=="0" (
 python tools\event_identity_check.py > build_check\event_identity_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Object identity coverage check FAILED - see build_check\event_identity_report.txt
+    exit /b 1
+)
+python tools\functional_map_events_check.py > build_check\functional_map_events_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Functional map source and contextual scene check FAILED - see build_check\functional_map_events_report.txt
     exit /b 1
 )
 python tools\event_warp_check.py > build_check\event_warp_report.txt 2>&1

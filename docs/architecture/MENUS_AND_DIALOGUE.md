@@ -5,6 +5,9 @@ coverage gap. The new menus/warehouse.cpp owner follows native command/list stat
 reads rendered count/empty/description fields, and directs I/Shift+I to its exact
 description/footer. Existing Popup.Warehouse Show now uses a typed text query;
 base quantity-change hooks retain its single prompt producer and native clamps.
+October27 empty responses belong to their target-init event, with the native
+bar restoration consumed once; command focus never appends lingering empty text.
+Quantity changes include the displayed stock figure with the selected amount.
 Generic cursor/late discovery yield to the positive owner. No inventory writes,
 native waits, scene scan or worker pointers. Full checks/scan/all-six install pass.
 

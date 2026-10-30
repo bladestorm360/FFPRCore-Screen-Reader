@@ -3,8 +3,10 @@
 
 // Ports FF1 Utils/MoveStateHelper.cs: the player's movement state (walking, ship, canoe,
 // airship), cached from the FieldPlayer.GetOn / GetOff hooks in vehicle_landing.cpp.
-// Explicit vehicle-name queries use the ready native transportation owner, so
-// a loaded boarded save does not require a new boarding event.
+// Explicit queries first check native movement and the actually applied vehicle
+// asset, then name its transportation. Saved craft map IDs do not prove riding.
+// Map changes reconcile a constructed walking player
+// once, after the native state change, without requiring a GetOff event.
 //
 // Other areas read it without this header through queries:
 //   "MoveStateHelper.IsOnFoot", "MoveStateHelper.IsControllingShip",

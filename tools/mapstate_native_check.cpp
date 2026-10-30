@@ -1,6 +1,7 @@
 // check-sources: field/map_state_program.cpp field/baked_map.cpp field/baked_router.cpp json.cpp text.cpp
 // Actual native snapshot reader against build-matched IL2CPP layouts; no game loaded.
 #include <cstdio>
+#include <algorithm>
 #include <cstring>
 #include <fstream>
 #include <thread>
@@ -164,6 +165,38 @@ int main()
         expect(json::parse(read(root + "mapstate.json"),records),"matching real saved-flag records parse");
         for (int i = 0; i < baked::submap_count(); ++i) baked::grids(*baked::submap_at(i));
         scenario.values.fill(0); treasure.values.fill(0);
+        // A real later additive group is not a complete native group inventory.
+        // Check every game against its actual initializer and native snapshot.
+        bool additive_case=false;
+        for(int i=0;i<baked::submap_count()&&!additive_case;++i) {
+            const auto& sm=*baked::submap_at(i);if(sm.first_map_id<=0)continue;
+            map_state::Resolver projected(map_state::snapshot(),records);
+            for(const auto& object:baked::grids(sm).objects) {
+                const auto group=baked::str(object.group);
+                if(group.empty()||group==L"entity_default"||group==L"default"||!projected.active(sm,object))continue;
+                const auto& objects=baked::grids(sm).objects;
+                auto later=std::find_if(objects.begin(),objects.end(),[&](const auto& o){const auto g=baked::str(o.group);return !g.empty()&&g!=L"entity_default"&&g!=L"default"&&g!=group;});
+                if(later==objects.end())continue;
+                map_state::observe_current(sm.first_map_id,baked::str(later->group));map_state::Resolver observed;
+                map_state::reset_observed();bool retained=false;
+                std::thread observed_worker([&]{retained=observed.active(sm,object);});observed_worker.join();
+                expect(retained,"later additive native observation preserves initialized groups on worker after owner reset");
+                std::printf("FF%d additive observation: map%d initialized group retained=%d\n",game,sm.first_map_id,retained);
+                additive_case=true;break;
+            }
+        }
+        expect(additive_case,"real initialized/observed group witness exists for every game");
+        if(game==3) {
+            map_state::observe_current(4,L"ev_e_0185");
+            map_state::Resolver observed;
+            const auto* world=baked::submap_by_map_id(4);
+            const auto& objects=baked::grids(*world).objects;
+            const auto at=std::find_if(objects.begin(),objects.end(),[](const auto& o){return o.entity_id()==213&&o.type==baked::ObjType::Event;});
+            expect(at!=objects.end()&&observed.scenario_value(73)==0,"actual native default capture retains Saronia prerequisite despite observed group updates");
+            expect(at!=objects.end()&&observed.active(*world,*at),"native observed chain group cannot erase initialized Saronia scene group");
+            std::printf("Actual native observed-group cache: Saronia flag73=%d, ordinary group active=%d (entry must use its reviewed prerequisite)\n",observed.scenario_value(73).value_or(-1),at!=objects.end()&&observed.active(*world,*at));
+            map_state::reset_observed();
+        }
         map_state::Resolver closed;
         treasure.values.fill(0xffffffffu);
         map_state::Resolver opened;

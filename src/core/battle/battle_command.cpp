@@ -37,6 +37,18 @@ namespace {
 ref::Class kCmdSelect{"Last.UI.KeyInput", "BattleCommandSelectController"};
 ref::Method mSetCommandData{kCmdSelect, "SetCommandData", 3};
 ref::Method mSetCursor{kCmdSelect, "SetCursor", 1};
+// Exact accepted-command callback, before the original forwards the action list
+// and tears down its menu. Non-targeting abilities reach this callback directly;
+// OnCommandSelect inlines CommandDone, so hooking that helper would miss them.
+// All six bodies are unique; generated suffixes differ in IV, V and VI.
+ref::Class kCommit123{"Last.UI.KeyInput","BattleMenuController",game::kFF1|game::kFF2|game::kFF3};
+ref::Class kCommit4{"Last.UI.KeyInput","BattleMenuController",game::kFF4};
+ref::Class kCommit5{"Last.UI.KeyInput","BattleMenuController",game::kFF5};
+ref::Class kCommit6{"Last.UI.KeyInput","BattleMenuController",game::kFF6};
+ref::Method mCommit123{kCommit123,"<CommandSelectingInit>b__71_0",1};
+ref::Method mCommit4{kCommit4,"<CommandSelectingInit>b__73_0",1};
+ref::Method mCommit5{kCommit5,"<CommandSelectingInit>b__72_0",1};
+ref::Method mCommit6{kCommit6,"<CommandSelectingInit>b__77_0",1};
 ref::Field fContentList{kCmdSelect, "contentList"};
 ref::Class kCmdContent{"Last.UI.KeyInput", "BattleCommandSelectContentController"};
 ref::Field fTargetCommand{kCmdContent, "<TargetCommand>k__BackingField"};
@@ -73,6 +85,8 @@ constexpr const char* kCommandCtx = "BattleCommand.Command";
 // Command-announce window: opened by the SetCommandData postfix ("X's turn"); closed by the
 // SetCommandData prefix and by ShowWindow(false) (the actor's commit/teardown, where the spurious
 // "Attack" bursts fire). SetCursor only announces while it is open.
+// The accepted-action callback also closes it before a command without targeting
+// resets the cursor; Unity remains active until the later native actor handoff.
 bool g_command_turn_ready = false;
 
 // Cached target controller (identity only; re-checked with unity::alive before use).
@@ -301,6 +315,19 @@ void begin_initial_target_read(void* instance, bool is_enemy)
 // --- SetCommandData (prefix + postfix) ----------------------------------------------------------
 using SetCommandData_t = void (*)(void* self, void* data, void* targets, void* items, const void* mi);
 SetCommandData_t o_SetCommandData;
+using CommandCommit_t=void(*)(void* self,void* actions,const void* mi);
+CommandCommit_t o_CommandCommit=nullptr;
+void d_CommandCommit(void* self,void* actions,const void* mi) {
+    hooks::guarded("Battle.CommandCommitted",[] {
+        g_command_turn_ready=false;
+        g_command_reannounce_pending=false;
+        ++g_reannounce_gen; // retire an already-queued cancel-return read
+        state_set(menu_state::BATTLE_COMMAND,false);
+    });
+    // Original may synchronously begin the next actor. A postfix must not close
+    // that new actor's legitimate window or suppress its initial command.
+    o_CommandCommit(self,actions,mi);
+}
 
 void d_SetCommandData(void* self, void* data, void* targets, void* items, const void* mi)
 {
@@ -541,6 +568,9 @@ int install()
     int n = 0;
     n += hooks::attach(mSetCommandData, &d_SetCommandData, &o_SetCommandData) ? 1 : 0;
     n += hooks::attach(mSetCursor, &d_SetCursor, &o_SetCursor) ? 1 : 0;
+    auto& committed=game::in(game::kFF1|game::kFF2|game::kFF3)?mCommit123:
+        game::is(game::Id::FF4)?mCommit4:game::is(game::Id::FF5)?mCommit5:mCommit6;
+    n += hooks::attach(committed,&d_CommandCommit,&o_CommandCommit)?1:0;
 
     il2cpp::Class* k = kTargetSelect.get();
     il2cpp::Method* player = find_method_param_type(k, "SelectContent", 2, 0, "BattlePlayerData");

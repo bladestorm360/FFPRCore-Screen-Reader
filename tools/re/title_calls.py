@@ -2,9 +2,11 @@
 
 No DLL is loaded. Disassemble only metadata-sized function ranges; retain direct
 call names and complete instructions so inlined SetActive paths are inspectable.
-New raw exports stay in ignored build_check/re; preserve the historical archive.
+New raw exports stay outside Git in the local native-evidence archive.
 Requires the already-installed pefile and capstone packages.
 """
+
+from evidence_paths import external_directory
 import pathlib
 import re
 import hashlib
@@ -12,7 +14,7 @@ import capstone
 import pefile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-OUTPUT = ROOT / 'build_check/re'
+OUTPUT = external_directory('build_check/re')
 OUTPUT.mkdir(parents=True, exist_ok=True)
 STEAM = pathlib.Path('D:/Games/SteamLibrary/steamapps/common')
 GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR',

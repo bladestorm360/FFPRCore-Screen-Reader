@@ -19,11 +19,15 @@ namespace hooks { bool attach_raw(ref::Method&, void*, void**) { return false; }
 namespace log_ { void write(const char*, ...) {} }
 namespace unity { void* find_object(ref::Class&) { ++fixture::scans; return nullptr; } }
 namespace fixture { std::wstring scene = L"Title"; }
+namespace fixture {
+int fade_reads=0;bool model_cold_singleton=false,prefab_ready=false,lookup_done=false,cached_fade=false;
+void* fade_instance(){if(!lookup_done){cached_fade=prefab_ready;lookup_done=true;}return cached_fade?&cached_fade:nullptr;}
+}
 namespace field { const std::wstring& scene_name() { return fixture::scene; } }
 namespace actions { bool defined(const char*) { return false; } bool run(const char*) { return false; } void define(const char*, Fn) {} }
 namespace fixture {bool map_open=false,event_item_open=false;}
 namespace queries { bool defined(const char*) { return false; } bool is(const char* name) {const std::string key=name;return key=="MapPanels.IsActive"?fixture::map_open:key=="EventItemSelectState.IsActive"?fixture::event_item_open:fixture::dialogue;} void define(const char*, std::function<bool()>) {} }
-namespace ffpr::fieldnav::map_transition { bool is_screen_fading() { return fixture::fade; } bool is_state_changing() { return false; } }
+namespace ffpr::fieldnav::map_transition { bool is_screen_fading() { ++fixture::fade_reads;if(fixture::model_cold_singleton)fixture::fade_instance();return fixture::fade; } bool is_state_changing() { return false; } }
 namespace events {
 void on(Kind, Handler) {}
 void fire(Kind kind) { if (kind == Kind::BattleEntering) ++fixture::entering; if (kind == Kind::BattleStart) ++fixture::starts; if (kind == Kind::BattleEnd) ++fixture::ends; }
@@ -117,8 +121,16 @@ int main() {
     --ffpr::system::g_state_change_depth;
     ffpr::system::reset_main_game_state(); fixture::scene=L"Boot";
     expect(ffpr::system::input_transition_blocked(),"boot loading blocks input before the main-game manager exists");
+    fixture::model_cold_singleton=true;fixture::prefab_ready=fixture::lookup_done=fixture::cached_fade=false;
+    const int boot_reads=fixture::fade_reads;
+    expect(ffpr::system::input_transition_blocked(),"cold native setup remains blocked");
+    expect(fixture::fade_reads==boot_reads&&!fixture::lookup_done,"boot readiness check must not query a not-yet-created FadeManager singleton");
+    fixture::prefab_ready=true;
+    expect(fixture::fade_instance()!=nullptr,"native first lookup succeeds after prefab creation instead of inheriting the mod's cached null");
+    fixture::model_cold_singleton=false;
     fixture::scene=L"Title";
     expect(!ffpr::system::input_transition_blocked(),"stable title keeps the direct settings exception");
+    fixture::fade=true;expect(ffpr::system::input_transition_blocked(),"stable-title fade guard is preserved even before the main-game manager exists");fixture::fade=false;
     for(int game=1;game<=6;++game) {
         fixture::game_id=static_cast<game::Id>(game);
         ffpr::system::d_ChangeState(manager,13,nullptr);ffpr::battle::on_battle_start();

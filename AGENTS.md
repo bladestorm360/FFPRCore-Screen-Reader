@@ -2,7 +2,7 @@
 
 Active source for all six games is this repository, on `master`. FF1–FF5 belong to bladestorm360; FF6 retains ZKline/BlindGuyNW attribution and inclusion permission recorded in `../OPEN_ISSUES.md`. The older managed repositories are paused references. Preserve existing uncommitted work. User explicitly authorized 2026-10-11: after the full audit, deploy all six games, commit/push everything to the public user-owned `FFPR-screen-reader` remote (create if absent), and make the user-owned FF1–FF5 remotes private. Preserve old history and existing named remotes.
 
-Read `CODEX_MEMORY.md`, the shared `../../../AGENTS.md`, and `../../../codex/MODEL_POLICY.md`. Sol owns research, implementation, review and verification. Use Luna only for an economical bounded mechanical handoff; Astra only for the documented emergency criteria. Summarize any delegation, including outcome and remaining issues.
+Read `CODEX_MEMORY.md`, the shared `../../../AGENTS.md`, and `../../../codex/MODEL_POLICY.md`. Sol handles research, implementation, documentation, review and verification itself by default (user update, 2026-10-27). No automatic Terra/Luna or other agent handoffs. Every delegation requires explicit user authorization, including Astra; its documented substantive-blocker/two-completed-different-approaches gate permits one permission request, never automatic dispatch. Summarize any authorized delegation, including outcome and remaining issues.
 
 Current repository identity, October 13: local `FFPRCore-Screen-Reader`, branch `master`,
 named remote `FFPRCore-Screen-Reader`, public user-owned
@@ -22,10 +22,10 @@ checks are read-only; an unchanged verified prerequisite install performs zero w
 Detailed contract/evidence: `docs/PRISM_MIGRATION.md`. The user explicitly requested removal
 of game-root Tolk.dll after successful migration deployment; retain recovery copies outside
 the games, without deleting other dependencies or the preserved historical source.
-Luna eligibility requires known behavior/correctness criteria and a verified pattern with
-clear scope/checks. Sol retains discovery, design, unfamiliar lifetimes/pointers/callbacks
-and game-state judgment. A conceptual misunderstanding in the first Luna result means Sol
-takes over; minor localized corrections remain appropriate (user instructions, 2026-10-12).
+The previous automatic Luna eligibility/routing rule is superseded by the Sol-only default.
+For an explicit user-directed handoff, follow the shared policy for scope/file ownership,
+supplied research/contracts, acceptance/offline checks and return-to-Sol conditions.
+Preserve the current task, uncommitted work and all native/thread/lifetime/approval rules.
 
 Build with `build.bat`, then `smoketest.bat`; deployment is separate (`deploy.bat [ffN]`). These scripts must never launch a game. Gameplay testing and runtime probes are user-side unless explicitly authorized. Complete the current audit and offline checks before requesting gameplay tests.
 

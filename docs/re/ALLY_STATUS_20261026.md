@@ -1,5 +1,12 @@
 # Ally battle danger and status review, October26
 
+October29 scoped human follow-up supersedes the presentation-only status source:
+[current ally conditions](BATTLE_LIVE_STATUS_20261029.md). H, number-row and ally
+targeting now read current native ally conditions; stale rotating text/icons and
+animation visibility no longer own status presence. The two old observers/caches
+are removed. Critical retains the native red-HP equivalent. The implementation
+and release facts below describe the historical October26 checkpoint.
+
 Status: implementation complete, offline verified and installed/hash-verified in
 all six games. Gameplay/audio confirmation remains pending. No game was launched,
 controlled or probed. The user's latest correction is authoritative: Mini was

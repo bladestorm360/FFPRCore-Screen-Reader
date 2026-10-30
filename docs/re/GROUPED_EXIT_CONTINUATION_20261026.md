@@ -110,3 +110,16 @@ build_check/ff3_navigation_20261026/. No game launch/control/runtime probe.
 All five scoped source checkpoints and combined local delivery are Closed;
 actual gameplay/native/frame/audible confirmations remain separate. Published
 release1.0 was preserved; this maintenance does not replace its archive/tag.
+
+
+## October27 same-map selected exit: scope ledger
+
+Status: source checkpoint complete, Closed; final combined delivery pending.
+
+User-initiated scope: preserve the exact eligible saved static exit through same-map grouped refreshes when no cross-map pending goal exists. In `entity_filter.cpp`, representative priority is: eligible continued objective, live selected row, exact saved static-exit identity, then nearest usable sibling. The shared saved-selection matcher retains previous vehicle/chest/NPC semantics; native ID0 and raw identity behavior are preserved. Availability, story and reachability guards still apply; an unreachable world row cannot displace a usable sibling. Manual clear/change releases the pin and ordinary grouping resumes. No native hook/capture, route graph, NPC collision, bake, setting, or pointer/thread change.
+
+The corrected owner regression calls `remember_selection`, has no pending goal, and proves old source1 failure versus fixed0; scanner/filter report0 failures. The first owner fixture omitted remembered selection and is invalid proof. An earlier restored source timestamp caused reuse of a newer object, also invalid; both reports are retained. The intermittent empty `entity_filter` report came from fixture-owned bake bytes expiring while `baked::load` retained their pointer; FFIII/FFI fixture storage now lives through main. Production embedded bytes are process-lifetime and were not redesigned. Terra (`gpt-6.1-terra`, medium) owned `entity_filter.cpp` and two fixtures; Sol supplied the contract and reviewed the matcher/priority, found the test lifetime bug and validated the corrected result. Final canonical build passes:8287 names/0 missing,142 used/349 defined/0 undefined, filter/scanner0 failures, wrong-owner spy0; smoke resolves/forwards all47 exports and exits normally. DLL11,033,600 bytes, SHA256 `9593d22225d849a2643b5b30a0b28bda34a61b37cffacce24dc408b0dd07eb5d`.
+
+Timing evidence is offline only: one10,000-row/six-view sample5.540ms;100 cancellations2.877ms aggregate. Synthetic cells(4,6)/(5,6) test the distance flip and are not claimed as map343 geometry. Existing real Gysahl handoff and audio/stale/manual-clear checks pass. No comparable game-frame, native callback or audible latency measurement is available. Evidence and recovery: `build_check/selected_exit_20261027/`, including `before_rebuilt_scanner.log`, `final_build.log`, scanner/filter reports and `smoke.txt`.
+
+October26 installed baseline/history above remains distinct. October27 candidate is uninstalled and gameplay-unconfirmed; no game launch/control/probe occurred. Selection source is Closed; do not reopen without a new user-scoped request. Enterprise landing/wording source checkpoints are also Closed. Continue the separately authorized outward/return continent transitions and Temple investigation tracked by [WORLD_EVENTS](WORLD_EVENTS_20261026.md). Libra/Study audit remains separately queued.

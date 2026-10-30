@@ -1,4 +1,4 @@
-"""Full offline fresh-asset/bake comparison. Outputs remain in ignored build_check."""
+"""Fresh-asset comparison; script-bearing inputs remain outside every Git tree."""
 import collections
 import hashlib
 import json
@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import bake_maps as bake
 
 DEST = ROOT / 'build_check/map_audit_2026_10_14'
-FRESH = DEST / 'fresh'
+FRESH = ROOT.parent / 'tools/repository_sources_20261029/build_check/map_audit_2026_10_14/fresh'
 OLD = pathlib.Path(bake.MAPDUMP)
 SUB = struct.Struct('<IihhBBBB10I')
 

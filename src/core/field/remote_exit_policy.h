@@ -13,16 +13,23 @@ struct Door {
     int source=-1,destination=-1,source_depth=-1,destination_depth=-1;
     baked::Object footprint{};
     std::optional<baked_route::Cell> arrival;
+    int arrival_direction=0; // native PointIn facing: Up1,Right2,Down4,Left8
     bool known=false;
 };
 
-inline bool at_door(const baked_route::Cell& point,const baked::Object& door) {
+inline bool at_door(const baked_route::Cell& point,const baked::Object& door,int facing=0) {
     if(point.layer!=door.layer||door.tw==0||door.th==0)return false;
     // Native PointIn stands on or immediately beside the corresponding door's
     // footprint. Larger/ambiguous separations are not certified return pairs.
     const int dx=point.x<door.tx?door.tx-point.x:point.x>=door.tx+door.tw?point.x-(door.tx+door.tw-1):0;
     const int dy=point.y<door.ty?door.ty-point.y:point.y>=door.ty+door.th?point.y-(door.ty+door.th-1):0;
-    return dx+dy<=1;
+    if(dx+dy<=1)return true;
+    // Native shops can place PointIn two cells inside, facing into the room.
+    // Certify only that straight inward placement, not a larger radius around
+    // arbitrary doors. Exact unique reciprocal IDs/arrivals still own the pair.
+    if(dx+dy!=2||(!dx&&!dy)||(dx&&dy))return false;
+    if(!dx)return point.y<door.ty?facing==1:facing==4;
+    return point.x<door.tx?facing==8:facing==2;
 }
 
 inline std::vector<bool> return_mask(const std::vector<Door>& doors,const std::function<bool()>& cancelled={}) {
@@ -44,7 +51,8 @@ inline std::vector<bool> return_mask(const std::vector<Door>& doors,const std::f
         for(const size_t index:back->second){
             if(cancelled&&cancelled())return {};
             const auto& forward=doors[index];
-            if(at_door(*door.arrival,forward.footprint)&&at_door(*forward.arrival,door.footprint))++matches;
+            if(at_door(*door.arrival,forward.footprint,door.arrival_direction)&&
+               at_door(*forward.arrival,door.footprint,forward.arrival_direction))++matches;
         }
         // A unique reciprocal physical doorway is the only suppression proof.
         // Keep one-way drops, alternative entrances, loops and uncertain pairs.

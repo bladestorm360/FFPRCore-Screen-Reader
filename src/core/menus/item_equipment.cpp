@@ -27,6 +27,10 @@ ref::Class kEquipment{"Last.UI.KeyInput", "ItemEquipmentController"};
 ref::Method mPage{kEquipment, "SetPage", 1}, mUpdate{kEquipment, "UpdateView", 2};
 ref::Method mPanelDescription{kEquipment, "SetDescriptionText", 1};
 ref::Method mParameterFlag{kEquipment, "SetParameterFlag", 1};
+ref::Class kEquipablePage{"Last.UI.KeyInput", "ItemEquipableController"};
+ref::Class kDetailPage{"Last.UI.KeyInput", "ItemEquipmentDetailController"};
+ref::Method mEquipableIdle{kEquipablePage, "StartIdle", 0};
+ref::Method mDetailIdle{kDetailPage, "StartIdle", 0};
 ref::Class kAttribute{"Last.UI", "ItemEquipmentAttributeImage"};
 ref::Field fAttribute{kAttribute, "attributeType"};
 ref::Class kAttributeController{"Last.UI", "ItemEquipmentAttributeController"};
@@ -112,7 +116,7 @@ bool capture(void* equipment, bool announce)
         field::CaptureBudget budget;
         void* view = displayed::field(detail, "view");
         while (state->table < 4 && budget.available()) {
-            if (!displayed::container_visible(detail)) { state->table = 4; break; }
+            if (!displayed::container_visible(detail)) { state->table = 4; state->index = 0; break; }
             void* list = displayed::field(view, tables[state->table]);
             const int count = unity::list_count(list);
             if (count < 0 || count > 64) { ui::review::clear(); return false; }
@@ -205,6 +209,43 @@ void d_page(void* self, int32_t page, const void* mi) {
     o_page(self, page, mi);
     hooks::guarded("ItemEquipment.Page", [self] { if (kEquipment.is(self)) capture(self, false); });
 }
+// SetPage activates the incoming page before its fade-in. Its Text renderers can
+// still have zero inherited alpha, so that first snapshot correctly has no job
+// names. Both native paging coroutines request StartIdle only after StartIn has
+// finished. Observe that finite producer to refresh actual rendered fields;
+// never retain hidden-page rows, poll for text or guess an animation delay.
+void refresh_after_animation(void* self, bool detail_page) {
+    void* window = field::cache::get(kWindow);
+    if (!window || !g_owner || ui::state_tag(window, fState) != 7 ||
+        displayed::field(window, "itemEquipController") != g_owner || !ui::review::owns(g_owner)) return;
+    if (detail_page) {
+        if (displayed::field(g_owner, "detailController") != self) return;
+    } else {
+        void* pages = displayed::field(g_owner, "equipableList");
+        const int count = unity::list_count(pages);
+        if (count < 0 || count > 8) return;
+        bool belongs = false;
+        for (int i = 0; i < count; ++i) if (unity::list_at(pages, i) == self) { belongs = true; break; }
+        if (!belongs) return;
+    }
+    if (displayed::container_visible(self)) capture(g_owner, false);
+}
+using Idle = void* (*)(void*, const void*);
+Idle o_equipable_idle, o_detail_idle;
+void* d_equipable_idle(void* self, const void* mi) {
+    void* result = o_equipable_idle(self, mi);
+    hooks::guarded("ItemEquipment.JobsReady", [self] {
+        if (kEquipablePage.is(self)) refresh_after_animation(self, false);
+    });
+    return result;
+}
+void* d_detail_idle(void* self, const void* mi) {
+    void* result = o_detail_idle(self, mi);
+    hooks::guarded("ItemEquipment.ParametersReady", [self] {
+        if (kDetailPage.is(self)) refresh_after_animation(self, true);
+    });
+    return result;
+}
 using Update = void (*)(void*, void*, bool, const void*);
 Update o_update;
 void d_update(void* self, void* item, bool parameter, const void* mi) {
@@ -230,6 +271,8 @@ int install() {
         (hooks::attach(mUpdate, &d_update, &o_update) ? 1 : 0) +
         (hooks::attach(mPanelDescription, &d_panel_description, &o_panel_description) ? 1 : 0) +
         (hooks::attach(mParameterFlag, &d_parameter_flag, &o_parameter_flag) ? 1 : 0) +
+        (hooks::attach(mEquipableIdle, &d_equipable_idle, &o_equipable_idle) ? 1 : 0) +
+        (hooks::attach(mDetailIdle, &d_detail_idle, &o_detail_idle) ? 1 : 0) +
         (hooks::attach(mAllAttributes, &d_all_attributes, &o_all_attributes) ? 1 : 0) +
         (hooks::attach(mOneAttribute, &d_one_attribute, &o_one_attribute) ? 1 : 0);
 }

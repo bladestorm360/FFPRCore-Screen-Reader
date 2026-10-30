@@ -1,4 +1,6 @@
 """Read-only PE evidence for field lifecycle and bounded transport capture."""
+
+from evidence_paths import external_directory
 from pathlib import Path
 from collections import defaultdict
 import re
@@ -63,5 +65,5 @@ for number, folder in enumerate(GAMES, 1):
         required += ('ScreenTimerController.Initialize', 'FieldGrobalTimer.Init')
     for label in required:
         assert label in targets, 'FF%d missing %s' % (number, label)
-    (ROOT / 'docs/re' / ('ff%d_field_capture.txt' % number)).write_text('\n'.join(output) + '\n', encoding='utf-8')
+    (external_directory('docs/re') / ('ff%d_field_capture.txt' % number)).write_text('\n'.join(output) + '\n', encoding='utf-8')
     print('FF%d: lifecycle/transport/collision bodies recorded (%d functions)' % (number, len(targets)))

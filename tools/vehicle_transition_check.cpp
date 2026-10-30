@@ -14,14 +14,17 @@ bool crosses_town(const Planned& plan) {
     return false;
 }
 void all_doors() {
-    int doors=0,warps=0,flight=0,selected=0,projected=0;
+    int doors=0,warps=0,flight=0,selected=0,projected=0,conditional=0;
     map_state::Flags flags;flags.scenario.fill(0);flags.treasure.fill(0);flags.global.fill(0);
     map_state::Resolver state(flags,fixture::records);
     for(int index=0;index<baked::submap_count();++index) {
         const auto* sm=baked::submap_at(index);const auto& grid=baked::grids(*sm);
         baked_route::Request movement;movement.submap=sm;movement.ignore_hazards=true;
         auto mask=state.transitions(*sm);expect(mask==state.transitions(*sm),"state mask is cached and shared within its owned resolver");
-        auto live=movement;live.transitions=mask;
+        auto live=movement;
+        // Production combines the shared unconditional mask with owned per-leg
+        // selector rules. A foot request must not inherit aircraft-only exits.
+        map_state::add_obstacles(state,*sm,live,false,false,false);
         for(const auto& object:grid.objects)if(baked::transition_bits(object)) {
             const Cell target{object.layer,object.tx,object.ty};
             if(!baked::in_bounds(grid,target.x,target.y))continue;
@@ -30,7 +33,18 @@ void all_doors() {
             if(state.active(*sm,object,true)&&!state.consumed(*sm,object)) {
                 const auto current=state.effective(*sm,object);
                 if(baked::in_bounds(grid,current.tx,current.ty)) {
-                    expect(baked_route::terminal_transition(live,grid,{current.layer,current.tx,current.ty}),"projected active/effective transitions retain their terminal mask");++projected;
+                    const Cell cell{current.layer,current.tx,current.ty};
+                    const auto ids=state.transportation_mask(*sm,object);
+                    if(ids&baked_route::transportation_bit(baked_route::transportation_at(live,grid,cell)))
+                        expect(baked_route::terminal_transition(live,grid,cell),"projected transition applies to the actual current walking mode");
+                    if(ids!=~uint64_t(0))for(const auto& row:baked::transports()) {
+                        auto modal=live;modal.transportation_id=row.id;modal.vehicle_group=row.id==1?0:row.group;modal.vehicle_type=row.type;
+                        if(!(ids&baked_route::transportation_bit(row.id)))continue;
+                        const bool terminates=(baked::transition_bits(current)&2)||!sm->world||modal.vehicle_group<=0||baked_route::native_ground_entry(row.type);
+                        if(terminates)expect(baked_route::terminal_transition(modal,grid,cell),"conditional transition retains its terminal rule for each matching native vehicle");
+                        ++conditional;
+                    }
+                    ++projected;
                 }
             }
             for(const auto& d:std::vector<Cell>{{0,0,-1},{0,1,0},{0,0,1},{0,-1,0}}) {
@@ -55,7 +69,7 @@ void all_doors() {
         }
     }
     expect(doors>0&&projected>0,"each game audits real native doors and state-projected masks");
-    std::printf("FF%d: %d native doors, %d step warps, %d projected, %d explicit town edges, %d flight crossings checked\n",baked::game_number(),doors,warps,projected,selected,flight);
+    std::printf("FF%d: %d native doors, %d step warps, %d projected, %d conditional mode witnesses, %d explicit town edges, %d flight crossings checked\n",baked::game_number(),doors,warps,projected,conditional,selected,flight);
 }
 void logged_enterprise() {
     const auto* world=baked::submap_by_map_id(1);const auto& grid=baked::grids(*world);

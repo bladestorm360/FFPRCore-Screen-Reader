@@ -54,6 +54,8 @@ int main()
 
 #define CHECK_LABEL(input, base, ordinal) if (!expect(input, base, ordinal)) return 1
     CHECK_LABEL(L"10: Female", L"Female", 10);
+    CHECK_LABEL(L"7;老人2", L"老人", 7);
+    CHECK_LABEL(L"７；老人２", L"老人", 7);
     CHECK_LABEL(L"２：女性", L"女性", 2);
     CHECK_LABEL(L"①女性", L"女性", 1);
     CHECK_LABEL(L"㉑女性", L"女性", 21);

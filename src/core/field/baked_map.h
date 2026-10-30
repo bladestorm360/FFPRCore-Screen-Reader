@@ -19,7 +19,9 @@ namespace field::baked {
 /// MapConstants.ObjectType values that are baked (bake_maps.py BAKED_TYPES).
 enum class ObjType : uint8_t {
     PointIn = 0, Event = 2, GotoMap = 3, ToLayer = 4, Entity = 5, NPC = 6, TreasureBox = 7,
-    OpenTrigger = 8, SavePoint = 9, AnimEntity = 10, MoveArea = 13, RelayInteraction = 16,
+    OpenTrigger = 8, SavePoint = 9, AnimEntity = 10,
+    EffectEntity = 11, // native collision-only effect; never a destination
+    MoveArea = 13, RelayInteraction = 16,
     ShopNPC = 17, CollisionEntity = 19, TelepoPoint = 20, TransportationEventAction = 21,
     IgnoreRoute = 22, NonEncountArea = 23, RandomEvent = 28, SwitchEvent = 30,
     /// Baked only: an event whose script changes map (ChangeMap in its Main segment): a warp
@@ -53,7 +55,8 @@ struct Object {
 };
 
 // High Warp flags describe navigation semantics independently of activation's
-// low byte. Ordinary scripted world exits remain real transitions, not scenes.
+// low byte. The legacy WorldExit name also covers reviewed scripted entrances
+// and passages: their actual destination is named, and they are not scenes.
 constexpr int kWorldExit = 1 << 16;
 inline bool world_exit(const Object& object) {return object.type==ObjType::Warp && (object.d&kWorldExit)!=0;}
 inline bool pickup_treasure(const Object& object) {return object.type==ObjType::TreasureBox && (object.d&32)!=0;}
@@ -61,6 +64,10 @@ inline bool pickup_treasure(const Object& object) {return object.type==ObjType::
 // This flag permits Ship entry only; terrain, route and story state still apply.
 constexpr int kShipEntry = 1 << 17;
 inline bool ship_entry(const Object& object) {return object.type==ObjType::Warp && (object.d&255)==1 && (object.d&kShipEntry)!=0;}
+// Reviewed underwater entrances disembark inside their transfer script. Only
+// submarine movement may enter them aboard; surface towns still need landing.
+constexpr int kSubmarineEntry=1<<18;
+inline bool submarine_entry(const Object& object) {return object.type==ObjType::Warp&&(object.d&255)==1&&(object.d&kSubmarineEntry)!=0;}
 // Terminal entry is independent of optional story-event warnings. Bit1 is a
 // native door (world vehicles fly/sail over it); bit2 is a step-on script warp.
 using TransitionGrid = std::array<std::vector<uint8_t>,3>;

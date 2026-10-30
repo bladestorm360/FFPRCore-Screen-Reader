@@ -21,7 +21,9 @@ inline std::optional<Approach> approach(baked_route::Request request,
     const std::vector<Actor>& actors, const std::vector<baked_route::Cell>& proof) {
     using namespace baked_route;
     // The caller has already failed every legal full route. Its proof removes
-    // only current-floor NPCs, preserving parties, gates, terrain and trap rules.
+    // current-floor NPCs, preserving parties, gates, terrain and trap rules.
+    // Cross-floor proofs may include later interaction stops; this helper sees
+    // only the current map's cells and actual captured actors.
     for(size_t step=1;step<proof.size();++step) {
         if(request.cancelled && request.cancelled())return {};
         for(size_t index=0;index<actors.size();++index) {

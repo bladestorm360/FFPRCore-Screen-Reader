@@ -35,9 +35,22 @@ void native_command(void* self,int32_t index,const void*){
  // The reader must keep the command as producer while state2 owns input.
  wh::d_select(self,0,0,nullptr);
 }
-void native_open(void* self,bool,void*,const void*){++originals;native();current->window.command=2;current->root.active=true;wh::d_command(self,0,nullptr);}
+void native_open(void*,bool,void*,const void*){++originals;native();current->window.command=1;current->root.active=true;}
 void native_close(void*,const void*){++originals;native();current->window.command=0;current->root.active=false;}
-void native_phase(void*,const void*){++originals;native();}
+// Empty target init briefly restores command focus in state3/5, then returns
+// through state1; command initialization runs on a later native update.
+void native_target(void* self,bool retrieve){
+ ++originals;native();
+ if(!current->empty.value.empty()){
+  wh::d_command(self,retrieve?1:0,nullptr);current->window.command=1;
+ }else{
+  wh::d_select(self,0,0,nullptr);current->window.command=retrieve?6:4;
+ }
+}
+void native_store(void* self,const void*){native_target(self,false);}
+void native_retrieve(void* self,const void*){native_target(self,true);}
+void command_ready(){current->window.command=2;wh::d_command(&current->window,current->bar.id,nullptr);}
+void drain(){tick();tick();tick();}
 void native_update(void*,void*,void*,const void*){++originals;native();}
 int selected(void* self){return ref::rd<int>(self,wh::fCount);}
 void write_count(void* self,void* target,int change){
@@ -59,16 +72,38 @@ int main(){
  using namespace fixture;using namespace warehouse_fixture;
  background::prepare();int failed=0;auto expect=[&](bool ok,const char* why){if(!ok){++failed;std::printf("FAIL %s\n",why);}};
  wh::install();wh::o_open=&native_open;wh::o_close=&native_close;wh::o_command=&native_command;wh::o_select=&native_select;wh::o_update=&native_update;
- wh::o_command_init=wh::o_store_init=wh::o_retrieve_init=&native_phase;wh::o_add=&native_add;wh::o_take=&native_take;
+ wh::o_store_init=&native_store;wh::o_retrieve_init=&native_retrieve;wh::o_add=&native_add;wh::o_take=&native_take;
  expect(std::find(suppressors.begin(),suppressors.end(),"Warehouse.IsActive")!=suppressors.end(),"warehouse owns the generic cursor while its native window is open");
  for(int number=1;number<=6;++number){
   fixture::game=static_cast<game::Id>(number);Screen screen;current=&screen;autodetail=false;
   spoken.clear();wh::d_open(&screen.window,false,nullptr,nullptr);tick();
+  expect(spoken.empty(),"transitional command-init state cannot read the bar before native focus is ready");
+  command_ready();drain();
   expect(contains(L"Fat Chocobo")&&contains(L"Store")&&!contains(L"Hi-Potion"),"all-six entry announces title/greeting/Store instead of the preview inventory");
   expect(spoken.size()==1&&wh::active(),"nested native preview callbacks produce one current command announcement");
   for(int index:{1,2,0}){spoken.clear();wh::d_command(&screen.window,index,nullptr);tick();const wchar_t* names[]{L"Store",L"Retrieve",L"Exit"};expect(spoken.size()==1&&contains(names[index])&&!contains(L"Hi-Potion"),"Store/Retrieve/Exit own their actual native command focus");}
-  screen.empty.value=L"No stored\nitems.";spoken.clear();wh::d_command(&screen.window,1,nullptr);tick();
-  expect(contains(L"Retrieve")&&contains(L"No stored items."),"visible empty-storage text is read on Retrieve preview with normal whitespace cleanup");screen.empty.value.clear();
+  screen.empty.value=L"No stored\nitems.";
+  spoken.clear();wh::d_command(&screen.window,1,nullptr);drain();
+  expect(spoken==std::vector<std::wstring>{L"Retrieve"},"lingering empty text is not a new prompt when merely highlighting Retrieve");
+  // Run both frame orders: prompt before command return, or command return
+  // before prompt. Each confirm must speak once and leave native bar control.
+  for(bool prompt_first:{false,true}){
+   spoken.clear();screen.window.command=5;wh::d_retrieve_init(&screen.window,nullptr);
+   if(prompt_first)tick();command_ready();drain();
+   expect(spoken==std::vector<std::wstring>{L"No stored items."},"empty Retrieve confirm speaks one prompt across native transient/return frames");
+   for(int index:{2,0,1}){
+    spoken.clear();wh::d_command(&screen.window,index,nullptr);drain();
+    const wchar_t* names[]{L"Store",L"Retrieve",L"Exit"};
+    expect(spoken==std::vector<std::wstring>{names[index]},"later command navigation stays single and never replays the lingering empty prompt");
+   }
+  }
+  screen.empty.value=L"No items to store.";spoken.clear();screen.window.command=3;wh::d_store_init(&screen.window,nullptr);command_ready();drain();
+  expect(spoken==std::vector<std::wstring>{L"No items to store."},"empty Store shares one-event ownership without borrowing Retrieve text");
+  screen.empty.value.clear();
+  screen.window.command=3;spoken.clear();wh::d_store_init(&screen.window,nullptr);drain();
+  expect(spoken.size()==1&&contains(L"Hi-Potion, quantity 11"),"nonempty Store initialization and its nested row callback speak once");
+  screen.window.command=5;spoken.clear();wh::d_retrieve_init(&screen.window,nullptr);drain();
+  expect(spoken.size()==1&&contains(L"Hi-Potion, quantity 11"),"nonempty Retrieve initialization and its nested row callback speak once");
   for(int phase:{4,6})for(bool details:{false,true}){
    screen.window.command=phase;autodetail=details;spoken.clear();wh::d_select(&screen.window,0,0,nullptr);tick();
    expect(spoken.size()==1&&contains(L"Hi-Potion, quantity 11")&&!contains(L"Store")&&!contains(L"Retrieve")&&contains(L"Restores 500 HP.")==details,"both native list modes read rendered item/count and optional description without mode prefixes");
@@ -88,10 +123,10 @@ int main(){
   set(popup_view,"fixedPossessionText",&stock_label);set(popup_view,"possessionCountText",&stock);set(popup_view,"targetCountNameText",&amount_label);set(popup_view,"targetCountText",&amount);set(popup_owner,"selectedCount",reinterpret_cast<void*>(10));
   screen.window.command=8;auto initial=text_queries.at("Warehouse.QuantityPopup")();
   expect(initial==L"How many are you giving me?. Hi-Potion. Stock: 11. Stored: 10","quantity Show reads prompt/item/stock/selected amount from exact rendered fields");
-  spoken.clear();wh::d_add(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Stored: 11"},"quantity increase reads the new displayed amount only");
+  spoken.clear();wh::d_add(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Stored: 11. Stock: 11"},"quantity increase reads selected amount and displayed stock");
   spoken.clear();wh::d_add(&popup_owner,&amount,nullptr);expect(spoken.empty(),"native maximum clamp creates no false quantity-change event");
-  spoken.clear();wh::d_take(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Stored: 10"},"quantity decrease is spoken");
-  amount_label.value=L"Retrieved";screen.window.command=10;spoken.clear();wh::d_take(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Retrieved: 9"},"Retrieve uses its own displayed amount label");
+  spoken.clear();wh::d_take(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Stored: 10. Stock: 11"},"quantity decrease includes displayed stock");
+  amount_label.value=L"Retrieved";screen.window.command=10;spoken.clear();wh::d_take(&popup_owner,&amount,nullptr);expect(spoken==std::vector<std::wstring>{L"Retrieved: 9. Stock: 11"},"Retrieve reads its own displayed amount label and stock");
   set(popup_owner,"selectedCount",reinterpret_cast<void*>(1));amount.value=L"1";spoken.clear();wh::d_take(&popup_owner,&amount,nullptr);expect(spoken.empty(),"native minimum clamp is respected");
   popup_view.active=false;spoken.clear();wh::d_add(&popup_owner,&amount,nullptr);expect(spoken.empty()&&text_queries.at("Warehouse.QuantityPopup")().empty(),"hidden popup quantities cannot speak or populate initial details");popup_view.active=true;
   popup=nullptr;spoken.clear();wh::d_add(&popup_owner,&amount,nullptr);expect(spoken.empty(),"closed/foreign popup callbacks cannot publish a quantity");

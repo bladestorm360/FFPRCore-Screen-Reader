@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 import re
 import unicodedata
-from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity, reviewed_warp_identity, WORLD_TRAVEL_REVIEWS, reviewed_world_event_identity
+from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity, reviewed_warp_identity, WORLD_TRAVEL_REVIEWS, reviewed_world_event_identity, reviewed_event_script
 
 ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DUMP = ROOT.parent / 'tools' / 'mapdump'
@@ -38,6 +38,7 @@ SAFE = set(NOUNS) | {'Party chat', 'Conversation', 'Scene trigger', 'Trap',
                     'Warp Tile', 'Vehicle interaction', 'Switch trigger', 'Magic Circle', 'Dragoon', 'World map transition'}
 SAFE.update(label for entries in SPRITES.values() for label in entries.values())
 SAFE.update(label for label, _ in RULES)
+SAFE.add('Invincible ladder') # exact pinned physical-return occurrences only
 
 
 def trap_identifier(raw):
@@ -124,7 +125,7 @@ def build(n):
         if o['type'] not in TYPES: continue
         p = o.get('props') or {}
         script_name = masters.get(p.get('script_id'), '')
-        script = scripts.get((o['submap'], script_name), {})
+        script = reviewed_event_script(n,o,script_name,scripts.get((o['submap'], script_name), {}))
         commands = {m['mnemonic'] for m in (script.get('mnemonics') or [])}
         message_keys = [m.get('operands', {}).get('sValues', [''])[0]
                         for m in script.get('mnemonics', [])
@@ -139,7 +140,7 @@ def build(n):
             identity = script_identity(n, o, script_name,
                 [descriptions[key] for key in message_keys if key in descriptions])
         if identity:
-            if identity[0]=='World map transition':
+            if identity[0]=='World map transition' and (n,o['submap'],o['name'],p.get('script_id')) in WORLD_TRAVEL_REVIEWS:
                 review=WORLD_TRAVEL_REVIEWS[(n,o['submap'],o['name'],p.get('script_id'))]
                 digest=hashlib.sha256(json.dumps(script,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
                 assert digest==review['script_sha256'],'Reviewed world travel changed; inspect before relabelling'

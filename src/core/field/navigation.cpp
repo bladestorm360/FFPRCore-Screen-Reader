@@ -40,6 +40,21 @@ struct VehicleInfo { int type; int id; std::wstring message_id; int map_id; };
 std::unordered_map<void*, VehicleInfo> g_vehicle_types;
 std::vector<int> g_auto_groups;
 int g_auto_map = 0;
+ref::Field fPlayerMoveState{r::kFieldPlayer, "moveState"};
+ref::Method mCurrentVehicleMap{r::kTransportationInfo,"get_StayMapId",0};
+ref::Class kPlayerSprite{"Last.Entity.Field","FieldSpriteEntity"};
+ref::Field fPlayerAsset{kPlayerSprite,"<AssetStructure>k__BackingField"};
+ref::Field fVehicleAsset{r::kTransportationInfo,"<Structure>k__BackingField"};
+ref::Class kFrontVehicle{"Last.Map","TransportationInfo",game::kFF3|game::kFF5|game::kFF6};
+ref::Field fVehicleFrontAsset{kFrontVehicle,"<FrontStructure>k__BackingField"};
+
+// Keep a failed native read distinct from walking (enum zero). This owner-only
+// observation never retains the player pointer or asks a worker to dereference it.
+int read_move_state(void* player, int offset)
+{
+    __try { return *reinterpret_cast<const int*>(static_cast<const uint8_t*>(player)+offset); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { return -1; }
+}
 
 using Vec3 = unity::Vec3;
 
@@ -87,7 +102,20 @@ void* field_map() { return cache::get_or_refresh(r::kFieldMap); }
 bool vehicle_type_of(void* fe, int& type, int& transportation_id, std::wstring& message_id)
 {
     auto it = g_vehicle_types.find(fe);
-    if (it == g_vehicle_types.end() || it->second.map_id != current_map_id()) return false;
+    const int map_id = current_map_id();
+    if (it == g_vehicle_types.end() || it->second.map_id != map_id) {
+        // A vehicle's interaction marker can appear on the first frame after
+        // leaving a town, before EntityCursor reaches its vehicle stage. Resolve
+        // this exact actor through its native model rather than consuming an
+        // occurrence labelled by the generic inherited NPC name.
+        void* map = cache::get(r::kFieldMap);
+        void* controller = map ? ref::rd<void*>(map, r::fFieldController) : nullptr;
+        void* transport = controller ? ref::rd<void*>(controller, r::fTransportation) : nullptr;
+        void* data = transport ? ref::rd<void*>(transport, r::fInfoData) : nullptr;
+        void* models = data ? ref::rd<void*>(data, r::fModelList) : nullptr;
+        return vehicle_identity_from_model(fe, models, map_id, type, transportation_id, message_id) &&
+               !skip_transport_type(type);
+    }
     type = it->second.type;
     transportation_id = it->second.id;
     message_id = it->second.message_id;
@@ -119,6 +147,15 @@ std::vector<int> owned_auto_vehicle_groups()
 
 // --- field_api.h vehicles --------------------------------------------------------------------
 
+std::optional<int> player_movement_state()
+{
+    void* p = current_native_player();
+    const int offset = fPlayerMoveState.get();
+    if (!p || offset < 0 || !r::kFieldPlayer.is(p)) return {};
+    const int state = read_move_state(p,offset);
+    return state >= 0 && state <= 7 ? std::optional<int>(state) : std::nullopt;
+}
+
 VehicleState current_vehicle()
 {
     VehicleState v;
@@ -132,9 +169,33 @@ VehicleState current_vehicle()
         v.id = ref::call<int32_t>(r::mInfoGetId, info);
         v.type = ref::call<int32_t>(r::mInfoGetType, info);
         v.message_id = ref::call_str(r::mInfoGetMessageId, info);
+        v.map_id = ref::call<int32_t>(mCurrentVehicleMap,info);
         v.valid = true;
     });
     return v;
+}
+
+std::optional<bool> player_uses_vehicle_asset()
+{
+    return hooks::guarded_r("Field.PlayerVehicleAsset",std::optional<bool>{},[]() -> std::optional<bool> {
+        void* p=current_native_player();
+        if(!p||!r::kFieldPlayer.is(p)||fPlayerAsset.get()<0||fVehicleAsset.get()<0)return {};
+        const bool front=kFrontVehicle.applies();
+        if(front&&fVehicleFrontAsset.get()<0)return {};
+        void* map=field_map();
+        void* fc=map?ref::rd<void*>(map,r::fFieldController):nullptr;
+        void* controller=fc?ref::rd<void*>(fc,r::fTransportation):nullptr;
+        void* info=controller?ref::call<void*>(r::mGetCurrentTransportation,controller):nullptr;
+        if(!info||!r::kTransportationInfo.is(info))return {};
+        // Native ITransportation.SetupCharaAsset applies FrontStructure when
+        // present, otherwise Structure. Compare that exact shared asset owner;
+        // a craft's saved map location is not the player's current appearance.
+        void* expected=front?ref::rd<void*>(info,fVehicleFrontAsset):nullptr;
+        if(!expected)expected=ref::rd<void*>(info,fVehicleAsset);
+        void* applied=ref::rd<void*>(p,fPlayerAsset);
+        if(!expected||!applied)return {};
+        return applied==expected;
+    });
 }
 
 // --- field_api.h ---------------------------------------------------------------------------

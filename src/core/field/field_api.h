@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <optional>
 #include <vector>
 #include "../unity.h"
 #include "route_progress.h"
@@ -89,7 +90,7 @@ std::vector<unity::Vec3> map_exit_positions();
 /// interaction (NPC, chest, switch) is reached from a neighbouring cell and then faced; a
 /// transition (exit, town tile, warp pad) is stepped on; a spot (waypoint, vehicle, save point)
 /// is stood on. Infer decides by what is baked at the target cell.
-enum class TargetKind { Infer = 0, Interact, Transition, Spot };
+enum class TargetKind { Infer = 0, Interact, Transition, Spot, AirshipTransition };
 PathInfo find_path_to(unity::Vec3 from, unity::Vec3 to, void* map_handle, void* player = nullptr,
                       TargetKind kind = TargetKind::Infer);
 bool is_direction_near_map_exit(unity::Vec3 player_pos, unity::Vec3 direction,
@@ -111,8 +112,17 @@ struct VehicleState {
     int id = 0;                 // transportation master id (FF2: 2 canoe, 5 snowcraft)
     int type = 0;               // MapConstants.TransportationType
     std::wstring message_id;    // the master's message_id ("MSG_SYSTEM_200"), or empty
+    int map_id = 0;             // native ownership; 0 unknown (e.g. unavailable fixture)
 };
 VehicleState current_vehicle();
+/// Ready native FieldPlayer movement mode (0 walking, 1 dashing). Missing owner
+/// or unreadable state stays unknown; a remembered world vehicle is not proof
+/// that the newly constructed player is riding it inside another map.
+std::optional<int> player_movement_state();
+/// Owner-only comparison with the native transport's applied character asset.
+/// Unknown means missing/uninitialized metadata, not an inferred dismount.
+/// Automatic canoe ownership may legitimately retain a different StayMapId.
+std::optional<bool> player_uses_vehicle_asset();
 
 /// The vehicle's name for speech, one rule for every game and every reader (the boarding
 /// line, the V key, the Vehicles category): the game's own text first - the master's

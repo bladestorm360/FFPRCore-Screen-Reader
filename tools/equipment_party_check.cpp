@@ -52,6 +52,13 @@ void native(){if(GetCurrentThreadId()!=thread)++wrong_thread;}
 void tick(){frame::run_tick();DWORD end=GetTickCount()+5000;while(ui::review::g_build_pending && GetTickCount()<end){std::this_thread::yield();frame::run_tick();}}
 bool contains(std::wstring_view s){for(const auto&x:spoken)if(x.find(s)!=x.npos)return true;return false;}
 std::function<void(bool)> on_parameter;std::function<void(int)> on_equipment_page;
+std::map<std::string,void*> idle_hooks;
+int idle_calls=0;Node iterator_result;
+void* native_idle(void*,const void*){native();++idle_calls;return &iterator_result;}
+void* page_idle(const char* owner,void* self){
+ auto found=idle_hooks.find(owner);
+ return found==idle_hooks.end()?native_idle(self,nullptr):reinterpret_cast<void*(*)(void*,const void*)>(found->second)(self,nullptr);
+}
 int shop_type(void*p,const void*){native();return static_cast<Node*>(p)->state;}
 void phase(void*,const void*){++native_calls;}
 void parameter_flag(void*,bool p,const void*){++native_calls;if(on_parameter)on_parameter(p);}
@@ -75,7 +82,10 @@ bool Class::is(void*p){fixture::native();return p!=nullptr;}void*Method::ptr(){f
 int32_t Field::get(){fixture::native();std::string n=name;if(n=="<IsActive>k__BackingField")return offsetof(fixture::Node,enabled);if(n=="<ContentId>k__BackingField")return offsetof(fixture::Node,id);if(n=="iconTextView")return offsetof(fixture::Node,animation);if(n=="shopListItemContentView")return offsetof(fixture::Node,view);if(n=="nameText"||n=="priceText")return offsetof(fixture::Node,description);if(n=="attributeType")return offsetof(fixture::Node,id);if(n=="contentList"||n=="contentDataList"||n=="targetSelectContentList")return offsetof(fixture::Node,list);if(n=="view")return offsetof(fixture::Node,view);if(n=="descriptionText")return offsetof(fixture::Node,description);if(n=="currentEffect")return offsetof(fixture::Node,effect);if(n=="animationController")return offsetof(fixture::Node,animation);return -1;}
 std::wstring rd_str(void*p,Field&){fixture::native();return p?static_cast<fixture::Node*>(p)->name:L"";}void call_failed_note(const char*){std::abort();}
 }
-namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
+namespace hooks {bool attach_raw(ref::Method&m,void* detour,void** original){
+ if(std::string(m.name)!="StartIdle")return false;
+ fixture::idle_hooks[m.cls.name]=detour;*original=reinterpret_cast<void*>(&fixture::native_idle);return true;
+}void note_fault(const char*){std::abort();}}
 namespace actions {void define(const char*n,Fn f){fixture::actions[n]=std::move(f);}bool run(const char*n){auto i=fixture::actions.find(n);if(i==fixture::actions.end())return false;i->second();return true;}bool defined(const char*n){return fixture::actions.count(n)!=0;}}
 namespace queries {void define(const char*,std::function<bool()>){}void define_text(const char*,std::function<std::wstring()>){}bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldPlayerState";} }
 namespace events {void on(Kind,Handler){} }
@@ -85,7 +95,7 @@ namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}s
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}void say_parts(std::vector<std::wstring>p,bool){fixture::spoken.emplace_back(text::join(p,L". "));}void say_sequence(std::vector<std::wstring>p,bool){say_parts(std::move(p),true);} }
 namespace ui {std::wstring menu_position(const std::wstring&s,int,int){return s;}int cursor_index(void*p){return static_cast<fixture::Node*>(p)->id;}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:0;} }
 namespace unity {bool alive(void*p){fixture::native();return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->active&&(!static_cast<fixture::Node*>(p)->parent||active_in_hierarchy(static_cast<fixture::Node*>(p)->parent));}void*transform(void*p){fixture::native();return p;}void*get_component_in_parent(void*p,ref::Class&){fixture::native();return p?static_cast<fixture::Node*>(p)->parent:nullptr;}Vec3 local_position(void*){fixture::native();return {};}Vec3 position(void*){fixture::native();return {};}std::wstring ui_text(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;} }
-namespace ffpr::battle::party_status {std::vector<std::wstring> extra_lines(void*,void*,bool,void*){return {};}}
+namespace ffpr::battle::party_status {std::vector<std::wstring> current_lines(void*,void*){return {};}}
 namespace displayed {
 std::vector<std::wstring> charge_lines(void*){return {};}
 bool container_visible(void*p){return unity::active_in_hierarchy(p);}bool visible(void*p){return container_visible(p)&&static_cast<fixture::Node*>(p)->enabled;}bool world_visible(void*p){return visible(p);}void*image_sprite(void*p){return visible(p)?p:nullptr;}
@@ -176,8 +186,36 @@ int main(){background::prepare();using namespace fixture;using namespace ffpr::m
   expect(contains(L"Page 1/2")&&contains(L"A light sword.")&&!contains(L"Mage"),"rapid page/description return publishes only latest rendered panel");
  }
 
+ // Real native SetPage activates the incoming list before its animated CanvasGroup
+ // fades in. The page coroutine calls StartIdle only after the incoming animation
+ // completes. A one-shot SetPage capture therefore observes no rendered labels.
+ // Drive the actual registered producer; on the old source this is native-only.
+ ffpr::menus::extra_install();
+ Node warrior_text,mage_text;warrior_text.name=L"Warrior";mage_text.name=L"Mage";
+ eligible_view.fields["nameText"]=&warrior_text;ineligible_view.fields["nameText"]=&mage_text;
+ Node stat_text;stat_text.name=L"Attack";extra_view.fields["nameText"]=&stat_text;
+ Node unrelated_page;
+ for(int n=1;n<=6;++n){fixture::game=static_cast<game::Id>(n);
+  for(int page:{1,0,1,0}){
+   on_equipment_page=[&](int p){detail.active=p==0;page_visible.active=p==0;page_hidden.active=p==1;
+    warrior_text.enabled=mage_text.enabled=stat_text.enabled=false;pager_view.text["currentPageText"]=p==0?L"1":L"2";};
+   d_page(&equipment,page,nullptr);tick();
+   warrior_text.enabled=page==0;mage_text.enabled=page==1;stat_text.enabled=page==0;
+   const auto before=idle_calls;auto* result=page_idle(page==0?"ItemEquipmentDetailController":"ItemEquipableController",page==0?&detail:&page_hidden);
+   tick();spoken.clear();ui::review::details();
+   expect(result==&iterator_result&&idle_calls==before+1,"page-ready hook preserves native iterator and calls original once");
+   expect(contains(page==0?L"Warrior, Can equip":L"Mage, Cannot equip")&&
+          !contains(page==0?L"Mage":L"Warrior"),"all-six animated page readiness restores only current visible equip jobs on repeated switches");
+   expect(page!=0||contains(L"Attack +12"),"returning to animated stat page restores current visible parameters");
+  }
+  auto generation=ffpr::menus::g_generation;
+  page_idle("ItemEquipableController",&unrelated_page);tick();
+  expect(ffpr::menus::g_generation==generation,"unrelated page-ready producers cannot replace the equipment buffer");
+ }
  on_parameter={};on_equipment_page={};
  item_window.state=0;ffpr::menus::d_window_update(&item_window,nullptr);tick();expect(!ui::review::active(),"native equipment-state exit releases its buffer");
+ auto closed_generation=ffpr::menus::g_generation;page_idle("ItemEquipableController",&page_hidden);tick();
+ expect(!ui::review::active()&&ffpr::menus::g_generation==closed_generation,"late page-animation completion cannot reopen a closed equipment buffer");
  item_window.state=7;item_window.active=false;ffpr::menus::d_enter(&item_window,nullptr);ffpr::menus::d_window_update(&item_window,nullptr);tick();expect(!ui::review::active()&&!ffpr::menus::g_pending_entry,"closed equipment owner cancels pending entry");
  ui::review::clear();
  Node shop,shop_info,shop_view,shop_panel,shop_item,shop_icon,shop_name,shop_item_view,shop_price;shop.state=2;shop.fields["infoController"]=&shop_info;shop_info.view=&shop_view;shop_view.description=&shop_panel;shop_item.animation=&shop_icon;shop_icon.description=&shop_name;shop_name.name=L"Spear";shop_item.view=&shop_item_view;shop_item_view.description=&shop_price;shop_price.name=L"100 Gil";shop_panel.name=L"Attack +11";ffpr::shop::set_cached_controller(&shop);ffpr::shop::set_shop_menu_active(true);

@@ -63,6 +63,8 @@ import os
 import struct
 import sys
 from audit_event_labels import trap_identifier
+from scripted_transition_identity import destination as reviewed_transition_destination, entry_flags as reviewed_transition_entry_flags, conditional_destinations as reviewed_conditional_destinations
+from submarine_entrances import reviewed as reviewed_submarine_entrance
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MAPDUMP = os.path.abspath(os.path.join(HERE, "..", "..", "tools", "mapdump"))
@@ -73,7 +75,7 @@ GAMES = ["ff1", "ff2", "ff3", "ff4", "ff5", "ff6"]
 # MapConstants.ObjectType (dump_map_objects.OBJ_TYPE_NAME); the baked type byte is the same id.
 BAKED_TYPES = {
     "PointIn": 0, "GotoMap": 3, "ToLayer": 4, "Entity": 5, "NPC": 6, "TreasureBox": 7,
-    "OpenTrigger": 8, "SavePoint": 9, "AnimEntity": 10, "MoveArea": 13,
+    "OpenTrigger": 8, "SavePoint": 9, "AnimEntity": 10, "EffectEntity": 11, "MoveArea": 13,
     "RelayInteraction": 16, "ShopNPC": 17, "CollisionEntity": 19, "TelepoPoint": 20,
     "TransportationEventAction": 21, "IgnoreRoute": 22, "NonEncountArea": 23,
     "Event": 2, "RandomEvent": 28, "SwitchEvent": 30,
@@ -415,6 +417,11 @@ def bake_game(game, out_dir, check=False):
         t = o["type_name"]
         if t not in BAKED_TYPES:
             continue
+        # Native FieldEffectBoardEntity owns a solid, non-trigger collider only
+        # when PropertyEffectEntity.Collision is true. Retain those route walls,
+        # not the thousands of purely decorative effects or new destinations.
+        if t == "EffectEntity" and (o.get("props") or {}).get("collision") is not True:
+            continue
         # The one sc_transition_* object across the six shipped map sets is
         # Fynn throne room's companion to its native GotoMap. Its script asset
         # is not packaged. Require every reviewed identity and the exact native
@@ -433,13 +440,20 @@ def bake_game(game, out_dir, check=False):
             continue
         by_sub.setdefault(o["submap"], []).append(o)
         sid = to_int((o["props"] or {}).get("script_id"))
-        if sid and t in ("Event", "RandomEvent", "Entity", "AnimEntity"):
+        # A reviewed NPC can itself provide a manual physical crossing (Istory's
+        # sheep). Ordinary conversations must never become automatic graph edges.
+        reviewed_npc_crossing = t == 'NPC' and any(
+            row.get('same_map') and row.get('interaction_travel') and row['submap'] == o['submap']
+            and row['entity_id'] == to_int((o['props'] or {}).get('entity_id'))
+            and row.get('object_id') == o['id'] for row in arrival_overrides)
+        if sid and (t in ("Event", "RandomEvent", "Entity", "AnimEntity") or reviewed_npc_crossing):
             s = shared_trap_script(o, script_names.get(sid, ""))
             corrections = [(index, row) for index, row in enumerate(arrival_overrides)
                            if row['submap'] == o['submap'] and row['entity_id'] == to_int((o['props'] or {}).get('entity_id'))
                            and ('object_id' not in row or row['object_id'] == o['id'])]
             for correction in corrections or [None]:
-                dest = main_change_map(s) if s else None
+                reviewed_dest=reviewed_transition_destination(game,o,script_names.get(sid,''),scripts_by_key,scripts_by_parent)
+                dest = reviewed_dest or (main_change_map(s) if s else None)
                 if correction and correction[1].get('same_map'):
                     index, row = correction
                     assert dest is None
@@ -472,7 +486,13 @@ def bake_game(game, out_dir, check=False):
                     w["type_name"] = "Warp"
                     w["props"] = {"entity_id": (o["props"] or {}).get("entity_id"), "map_id": -1 if correction and correction[1].get('same_map') else dest[0],
                                   "point_id": point, "step_on": (2 | (int(correction[1].get('approach_mask',0))<<8)) if correction and correction[1].get('interaction_travel') else 1 if t in ('Event','RandomEvent') else 0}
-                    if ordinary_world_exit(o,s):w['props']['step_on']|=1<<16
+                    if reviewed_dest or ordinary_world_exit(o,s):w['props']['step_on']|=1<<16
+                    if reviewed_dest:w['props']['step_on']|=reviewed_transition_entry_flags(game,o)
+                    if reviewed_submarine_entrance(game,o,s,scripts_by_key,submap_of_mapid,dest):
+                        # The native entry script owns dismounting. These are
+                        # destinations reached in submarine mode, not land doors
+                        # or narrative scenes. Whole bodies/arrivals are pinned.
+                        w['props']['step_on']|=(1<<16)|(1<<18)
                     # Reviewed mounted scene entry: sc_e_0070 starts Leviathan's
                     # sea scene, then disembarks inside the script before its
                     # ChangeMap(228,1). It must be entered while still sailing.
@@ -487,8 +507,23 @@ def bake_game(game, out_dir, check=False):
                                    c['operands']['sValues'][0]=='乗り物から降りる(BGM変更なし)'
                                    for c in s['mnemonics'][:next(seg['Count'] for seg in s['segments'] if seg['Label']=='Main')])
                         w['props']['step_on']|=1<<17
+                    if game=='ff5' and o['submap']=='Map_10010' and s and s['name']=='sc_10010_to_30050':
+                        # The canal's native event keeps Ship2 aboard and moves
+                        # that same model inside. A town-style landing is invalid.
+                        assert t=='Event' and dest[:2]==(210,1)
+                        entry_properties=o['props']or{}
+                        assert (entry_properties.get('entity_id'),entry_properties.get('script_id'),entry_properties.get('action_id'),entry_properties.get('target_transportation_ids'))==(63,1004,2,'1,2')
+                        digest=hashlib.sha256(json.dumps(s,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
+                        assert digest=='9ba57213b9254e7423bfcb2ac32fdf8a4716cb2d3e1191d2e76a02714cb7fada','Reviewed Torna Ship-entry script changed'
+                        w['props']['step_on']|=1<<17
                     by_sub[o["submap"]].append(w)
                     warps += 1
+                    variants=reviewed_conditional_destinations(game,o,s)
+                    if variants:
+                        assert not correction and tuple(dest)==variants[0]
+                        for alternate in variants[1:]:
+                            extra=dict(w);extra['props']=dict(w['props'],map_id=alternate[0],point_id=alternate[1])
+                            by_sub[o['submap']].append(extra);warps+=1
 
     assert len(used_arrivals) == len(arrival_overrides), 'Reviewed arrival override did not match its object'
 
@@ -506,6 +541,8 @@ def bake_game(game, out_dir, check=False):
             a, b = to_int(p.get("layer"), -1), to_int(p.get("direction"))
         elif t == "RelayInteraction":
             a = to_int(p.get("object_id"))
+        elif t == "EffectEntity":
+            d = 1 # collision-only role; never an interactive/scene destination
         elif t in TALK_TYPES:
             a = to_int(p.get("link_object_id"))
             b = to_int(p.get("accept_action_direction"), 15) or 15

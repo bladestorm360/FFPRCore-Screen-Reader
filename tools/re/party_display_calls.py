@@ -1,4 +1,6 @@
 """Bounded all-game party/formation/battle display evidence from the matching PE; never executes it."""
+
+from evidence_paths import external_directory
 import hashlib
 import pathlib
 import re
@@ -53,7 +55,7 @@ for name, args, rva in targets:
             labels = names.get(int(ins.op_str, 16), [])
             annotation = ' ; ' + (' / '.join(labels) if len(labels) <= 5 else f'folded ({len(labels)} aliases)')
         out.append(f'{ins.address:X} {ins.mnemonic} {ins.op_str}{annotation}')
-dest = ROOT / 'build_check/re'
+dest = external_directory('build_check/re')
 dest.mkdir(parents=True, exist_ok=True)
 (dest / ('ff%d_party_display_calls.txt' % NUMBER)).write_text('\n'.join(out) + '\n', encoding='utf-8')
 (dest / ('ff%d_party_display_schema.txt' % NUMBER)).write_text('\n'.join(schemas), encoding='utf-8')

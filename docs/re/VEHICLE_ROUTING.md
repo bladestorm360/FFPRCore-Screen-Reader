@@ -1,5 +1,40 @@
 # Vehicle goals, reasons and mounted filtering, October 22
 
+Later October29 human follow-up: [ordinary-flight preference](INVINCIBLE_PREFERENCE_20261029.md)
+minimizes required Invincible mountain actions before distance, including landing
+selection. The human confirmed Doga's Manor needs Nautilus through the winds;
+that restriction is correct and unchanged. Installed FFIII0a511191 passed canonical/smoke/package/scan checks.
+
+Current October29: [Invincible mountain crossing](INVINCIBLE_MOUNTAINS_20261029.md)
+source/delivery Closed in FFIII ad0d80c1. Worker geometry matches native model10/11
+cardinal1/2-mountain action, physical2/3-tile costs and real far-side legality.
+Owned parked-provider/category/full-route checks publish Falgabard in Map Exits,
+manual crossing/facing boundaries stop autowalk, then legal landing and entrance.
+No new native capture/hook/input or bake terrain. Nautilus and other games retain
+their capability boundary; original page/surface/vehicle-name/Duster fixes remain.
+
+Current audit source after b2cacd6f delivery: [vehicle applicability ledger](MAP_AUDIT_FOLLOWUPS_20261028.md)
+records a valid native Player1 skipping parked aircraft and unfiltered synthetic
+entries depending on flight reachability. Actual provider/category host3→0;
+existing Saronia/continent checks pass. New require_reachable policy preserves
+strict vehicle-aware proof and one nearest physical unfiltered representative
+with unknown distance. This later source is not yet deployed. Per-leg target-ID
+and vehicle-hidden actor capture remain open, including automatic canoe order.
+
+October28 explicit human follow-up: [Nautilus dive/underwater](NAUTILUS_ACCESS_20261028.md)
+adds real native Can dive guidance and reviewed submarine-entry Map Exits. Ordinary
+world doors now use the existing legal landing/final walking planner for every
+manual vehicle, including Nautilus8/9; only verified mounted entry/pad/scene rules
+retain aboard arrival. Doga's Manor and northern Saronia landing assertions pass.
+Current map disables accessibility/story-gate pruning while preserving real
+object presence and explicit physical grouping; selected directions still report
+actual blockers. All-unlocked-vehicle capture/per-leg applicability remains an
+open audit checkpoint, not declared fixed by these entry/filter corrections.
+
+October28 human follow-up: [nearby destinations](LOCAL_GUIDANCE_20261028.md)
+with a legal ground route retain walking within15-tile proximity; required
+crossings and already-boarded movement keep their existing behavior.
+
 [October25 chocobo/Owen follow-up](CHOCOBO_OWEN_20261025.md) preserves native
 partial collision faces, restores Owen's adjacent on-foot entrance/filter, and
 keeps chocobo riding to the closest equally short legal dismount approach.
@@ -207,3 +242,14 @@ world destinations; current floor retains walking when available. Current mounts
 land before ground interactions. Native vehicle-action pads retain their separate
 contract. Exact target/model identity, native landing, cancellation and manual
 special-flight controls remain unchanged.
+
+
+## October27 movement wording: scope ledger
+
+Status: source checkpoint complete, Closed; final combined delivery pending.
+
+User-scoped wording correction at `field/baked_nav.cpp::plan_browse_snapshot`: the pre-action movement phrase now comes from the captured current `RouteSnapshot.vehicle`, not the destination craft. Airships type3/8 say Fly; ships/submarines type2/6 say Sail; mounts and foot say Walk. Native type7 is game-specific: FFIV Hovercraft is a watercraft/Sail; FFV Wind Drake is a mount/Walk. Auto Content type5 uses Sail for I-III Canoe ID2; FFII Snowcraft ID5 remains Walk. Parked-vehicle boarding approaches remain Walk because the snapshot begins on foot. No geometry, timing, native observation, route phase or action changed.
+
+Two mod-owned phrase keys, `Fly {0}, then {1}` and `Sail {0}, then {1}`, have all12 supported locale values with each placeholder once. Auto/manual language policy is unchanged; `tools/modtext_vehicle_wording.py` maintains the entries. Actual production browse assertions pass for airborne Enterprise before water landing and FFII ridden-Canoe distant-Ship browse before boarding. An earlier Walk expectation failed as expected and was updated. Full navigation and landing follow-ups pass. Canonical evidence:8287 names/0 missing;142 used/349 defined/0 undefined; `route_worker`0 failures; 47-export smoke pass. Earlier intermittent standalone `route_worker` 0xC00000FD is retained as a known fixture issue, not a universal stability claim. DLL11,037,696 bytes, SHA256 `9a4a87e3082b709a78a407035abc0f9b9e2d5f4c82d78e94fe03d5140bd6e8ab`. Localization, navigation, Enterprise and worker reports are in `build_check/vehicle_wording_20261027/`.
+
+Fixed formatting is on the existing worker path; no additional hook, capture, native read or queue was added. Reported route-worker samples are offline computation only; native/frame/audio/request-to-audible cost remains unmeasured against the cumulative25ms application-lag blocker. October26 installed baseline/history above remains distinct. October27 candidate is uninstalled and gameplay-unconfirmed; no game launch/control/probe occurred. Wording source is Closed. Continue the explicitly authorized outward and return floating-continent transition work, then Temple of Water investigation; Libra/Study display audit remains separately queued. See [WORLD_EVENTS](WORLD_EVENTS_20261026.md) for the current scope ledger.

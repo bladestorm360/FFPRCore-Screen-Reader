@@ -1,4 +1,6 @@
 """Offline result phase/input evidence; never loads the six GameAssembly DLLs."""
+
+from evidence_paths import external_directory
 import pathlib
 import re
 import capstone
@@ -47,7 +49,7 @@ for n, folder in enumerate(GAMES, 1):
                     calls.append('%s\t%X\t%s' % (name, ins.address,
                         label_text))
             output.append('%X %s %s%s' % (ins.address, ins.mnemonic, ins.op_str, annotation))
-    (ROOT / 'docs/re' / ('ff%d_results_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
+    (external_directory('docs/re') / ('ff%d_results_calls.txt' % n)).write_text('\n'.join(line.rstrip() for line in output) + '\n', encoding='utf-8')
     (ROOT / 'docs/re' / ('ff%d_results_edges.tsv' % n)).write_text('\n'.join(line.rstrip() for line in calls) + '\n', encoding='utf-8')
     (ROOT / 'docs/re' / ('ff%d_results_manifest.tsv' % n)).write_text(
         ''.join('%X\t%s\n' % (pe.OPTIONAL_HEADER.ImageBase + rva, name) for name, rva in targets.items()), encoding='utf-8')

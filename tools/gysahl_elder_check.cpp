@@ -25,10 +25,10 @@ int main(int argc, char** argv) {
     for(auto start:{baked_route::Cell{1,10,8},baked_route::Cell{1,10,11}}){req.start=start;expect(!baked_route::find(req).found,"forced Elder remains unreachable");}
     map_state::Resolver state(map_state::Flags{},records);std::vector<RemoteObject> remote;
     std::thread worker([&]{remote=connected_objects_snapshot(77,state);});worker.join();
-    bool remote_elder=false,remote_girl=false;int remote_exits=0;
-    for(const auto& row:remote)if(row.map_id==80){if(row.type==baked::ObjType::NPC&&row.entity_id==11)remote_elder=true;if(row.type==baked::ObjType::NPC&&row.entity_id==12)remote_girl=true;if(row.type==baked::ObjType::GotoMap)++remote_exits;}
+    bool remote_elder=false,remote_girl=false,return_to_town=false,forward_exit=false;int remote_exits=0;
+    for(const auto& row:remote)if(row.map_id==80){if(row.type==baked::ObjType::NPC&&row.entity_id==11)remote_elder=true;if(row.type==baked::ObjType::NPC&&row.entity_id==12)remote_girl=true;if(row.type==baked::ObjType::GotoMap){++remote_exits;return_to_town|=row.dest_map_id==77;forward_exit|=row.dest_map_id!=77;}}
     expect(remote_elder==baseline&&remote_girl,"real remote collector applies Elder discovery and retains girl");
-    expect(remote_exits==2,"pub exits retained in remote collector");
+    expect(remote_exits==1&&!return_to_town&&forward_exit,"remote pub keeps its onward exit while omitting the verified town return");
     expect(!fixture::wrong_owner,"collector worker uses no native reads");
     std::printf("pub remote Elder=%d girl=%d exits=%d; forced goals=%zu; %d failures\n",remote_elder,remote_girl,remote_exits,goals.cells.size(),failures);
     return failures?1:0;

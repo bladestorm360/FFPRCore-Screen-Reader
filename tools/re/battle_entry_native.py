@@ -3,6 +3,8 @@
 Reads matching local dumps/GameAssembly only. No launch, attach or game calls.
 Stores reproducible RVA/body/hash evidence and bounded disassembly for inspection.
 """
+
+from evidence_paths import external_directory
 import hashlib
 import json
 import os
@@ -35,7 +37,7 @@ TARGETS = [
 
 
 def main():
-    output = ROOT / 'build_check/battle_entry_2026_10_16'
+    output = external_directory('build_check/battle_entry_2026_10_16')
     output.mkdir(parents=True, exist_ok=True)
     manifest = []
     for n, game in enumerate(GAMES, 1):

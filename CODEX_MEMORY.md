@@ -1,5 +1,669 @@
 # Native FFPR durable memory
 
+Current audit milestone/status/Closed list: [single checkpoint record](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+Finite all-six map/event/reachability assignment source/offline/delivery Closed.
+Installed all6 cf805c2e8e05ff0235f51f5228a916bb23c80e1e6251e31c95bc86cf34a5e86b,
+11374080 bytes. Full serial compile21m42s; two outdated test assumptions corrected
+without production changes, final canonical2m37s pass.8290 native names0missing,
+142used/349defined/0undefined, isolated47-export smoke,67 exact resources/12locales/
+667 source inputs,22-file Defender/stable hashes,132 installed hashes/144 protected
+files unchanged. Recovery for all6 retained. [Delivery and evidence limits](docs/re/MAP_AUDIT_DELIVERY_20261029.md);
+receipt build_check/map_audit_final_20261029/completion.json. No compiler/session/
+question pending. Source cleanup200 external originals/30 tracked references,
+14 legacy exporters external, hashes verified. Those30 bodies remain in HEAD
+history in this shared native repo (October12 commits),53757 instruction lines;
+archive/HEAD content matches after Git CRLF/LF normalization. User October29
+directs committing all current cleaned changes and confirms this means the one
+shared mod in all6 games.132 installed files reverified. Ordinary current commit
+proceeds; history rewrite/recreation deferred until user is at PC. Earlier
+blanket commit/publication hold was too broad. No destructive history action.
+[Content limits](docs/re/SOURCE_CONTENT_REVIEW_20261029.md).
+Startup hang still needs a naturally failed own log; gameplay/audio/frame
+confirmation separate. No game probe/agents/publication. Older status paragraphs
+below are frozen prior checkpoint evidence, not current active work.
+
+Final script-source cases source/targeted offline Closed:7 fixed cases plus
+matching dance marker54,15 actual native/remote actors8→0, owner0. Native local/
+Resident lookup selects IV save marker; dormant demo/Fynn helper preserved;
+three V dance markers now consistently named,1 false foreign-root review retired
+and actionable reviewed source is fenced to exact local/Resident. VI contact
+callback is live actor ScriptId; two post-win SCC paths terminate after flag
+change.1362 functional/12-language and245/41 scene-preservation checks0; all6
+bake/state hashes unchanged. [Topic](docs/re/FINAL_SCRIPT_CASES_20261029.md);
+receipt build_check/final_script_cases_20261029/completion.json, final_inputs.json.
+No compiler running. Active final milestone:coverage reconciliation, canonical/
+smoke/security/recovery/applicable all-game delivery (30–60min). Installed FFIII
+b61153fc unchanged. No game probe/agents/publication during checks. The single
+ledger is authoritative; older resume paragraphs below are historical.
+
+Silent-event context source/data/targeted offline Closed:all245 dispositions
+(41 narrative/66 physical/123 transfers/3 conditional/12 existing owners).
+381 actual native/remote cases0;1362 source/localization checks0. Three V doors
+now have second native arcs and six destination-only prefix guards:3/6→6/6
+actual entrance plans, power/unknown/native-door controls0. IV Devil Road now
+resolves the real chain/final6,6 landing:0/2→2/2, locked/fresh continuation pass;
+ordinary6,12 PointIn preserved. Six V underwater entries retain mounted access
+and actual old foot behavior. All-six planner/transport/17 switches0.
+[Topic](docs/re/SILENT_EVENT_CONTEXT_20261029.md); frozen source/input hashes:
+build_check/silent_context_20261029/completion.json and final_inputs.json.
+No compiler running. Next:2 VI closure cases/5 source owners (45–75min), then
+final coverage/combined/security/applicable all-game delivery. Installed FFIII
+b61153fc unchanged; no game probe/agents/publication. Do not rerun earlier frozen
+exact-source verifiers against these later integration edits.
+
+Arrivals/power source and targeted offline Closed:8 actual doors/24 native
+choices/24 owned continuations0; no arrival bake change. All-six native power
+lifetime reconciled;17 real VI SwitchEvent30 omitted from capture/step_event,
+minimal native type correction86→0,34 powered/rearmed observations/17 future
+hazards, native-owner0; all-six planner0. Receipt and current source hashes:
+build_check/trigger_power_20261029/completion.json. Detailed evidence:
+[ARRIVALS_TRIGGER_POWER_20261029.md](docs/re/ARRIVALS_TRIGGER_POWER_20261029.md).
+No compiler running. Next finite milestone:245 silent scene families, then
+2 closures/5 source owners, final coverage/combined/security/all-game delivery.
+Installed FFIII b61153fc unchanged; no game launch/probe/agents/publication.
+
+NPC22 source/data/targeted offline Closed:14 native moving actors79 positions,
+assigned11→0/default3→0/all14 live continuations, three FFII active scene controls,
+bedroom/Darill and all-six planner/initializer0. Frozen receipt/input hashes:
+build_check/npc_future_20261029/completion.json and final_candidate_inputs.json.
+Later exact Doga browse annotation is source/offline Closed2→0; native provider/
+terrain/action unchanged,147-step/zero-step/wrong-vehicle/other-game checks pass.
+Receipt build_check/doga_browse_20261029/completion.json. Do not rerun earlier
+frozen exact-source verifiers against later changes. No compiler running/sessions/
+questions. Canonical/security/all-game delivery pending final audit milestone.
+Installed FFIII b61153fc unchanged. Next:7 conditional arrivals/native trigger
+power ownership (30–60min); then245 scenes/2 closure/5 source owners and final
+coverage/combined checks/delivery. Current source has no temporary region trace.
+Sol only/no game probe/agents/publication.
+
+Current FFIII installed b61153fc/11357184 bytes: [live ally statuses](docs/re/BATTLE_LIVE_STATUS_20261029.md),
+[Doga surfacing marker](docs/re/DOGA_SURFACE_MARKER_20261029.md) and
+[Crystal Tower via Ancients' Maze](docs/re/CRYSTAL_TOWER_APPROACH_20261029.md) source/offline/
+FFIII delivery Closed. Exact cleared flags hide8 statues and relocate4 triggers;
+Tower current-map/selected/landing/pending/maze continuation/gates pass. Canonical
+18m04s shared-header serial rebuild,8290 names0missing/67resources/12locales/
+22-file Defender scan pass;22 installed hashes/144 protected/other5 unchanged.
+Recovery0a511191. No compiler running. Frozen receipts are under
+build_check/crystal_tower_20261029/; do not rerun its exact-source verifier after
+later audit changes. Sol only/no game launch/probe/delegation/publication.
+Resume full map audit at22 NPC-context acceptance/future-floor moving targets,
+then7 conditional arrivals/power,245 silent families,2 closures/5 source owners.
+Istory and FFVI mask now pass canonical; applicable other-game delivery remains
+pending. Source-owner resume inventory is saved in
+build_check/map_event_audit_20261028/source_ownership_resume_20261029.json.
+
+
+
+
+- Current [FFVI mask projection](docs/re/NPC_MASK_PROJECTION_20261029.md) source/data/
+  targeted offline Closed: four exact native render-only registrations; two
+  initializer opcodes9→0, every other field/all6 bakes/other5 state files unchanged.
+  Real dog branch8 failures→0; unknown remote local flags retain guaranteed Hide21;
+  visible-stage projected geometry admits home and scene poses. All-six event
+  tracking2454 roots/2523 identities0fail. No runtime interpreter/hook change.
+  Canonical/applicable delivery pending. No compiler running. Resume Istory sheep
+  prerequisite routing/remaining22 contexts, then7 arrivals/power/245 scenes/2
+  closures/5 owners. Source actor scripts remain outside Git. Sol only.
+
+- [Invincible preference](docs/re/INVINCIBLE_PREFERENCE_20261029.md) source/offline/
+  FFIII delivery Closed: installed0a511191/11348480 bytes, canonical/smoke/8458
+  names/67 resources/12 locales/22-file scan pass;22 installed files/144 protected/
+  other5 games verified. Recovery63a24c76. Human confirmed Manor needs Nautilus;
+  no Manor change. Optional real ridge5 ordinary steps beats3-tile action;
+  required valley87 versus old85 shortcut. Resumed full shared-header build17m01s,
+  single compiler; observed individual compiler peak232MB, not whole-build peak.
+  Broader audit remains open. FFVI mask source data now differs from this frozen
+  delivered candidate; do not rerun its old exact-source verifier against later data.
+
+- Active audit data checkpoint [Ghido shore landing](docs/re/SCRIPTED_SHORE_LANDING_20261029.md).
+  FFV375 Event10/sc_e_0436 moves player from native trigger12,35 to12,32,L1.
+  Four actual planner before failures (NPC2/16 ×PointIn1/2); all already reach
+  from the true landing. Existing override mechanism adds one companion edge/
+  landing; exact delta preserves all originals/terrain/masters. After4→0 with
+  exact trigger, destination retention and fresh landing snapshot. All-six
+  tracking2454 roots/2523 identities and980 functional/12-locale checks pass.
+  Source/data/targeted offline complete; canonical/applicable delivery pending.
+  No compiler running. Next exact dog dependency: FFVI Imperial Camp's four
+  NearMask SysCalls; determine render versus collision/state effects offline.
+  Installed
+  FFIII63a24c76 unchanged; no FFV deployment/game probe. Resume remaining dog,
+  other geometry/7 arrivals/power/245 silent families/2 closure/5 owners afterward.
+
+- Human priority [cross-floor animated objects](docs/re/REMOTE_INTERACTIVE_OBJECTS_20261029.md).
+  Collector omitted AnimEntity10; Lute252/Fang290 were already baked and live
+  on their own floors. Minimal shared enum correction20→0 from ten earlier
+  floors each; real capture/label/publication checks pass. Collected/gate flags,
+  native-floor ownership and all-six regressions preserved; no data change.
+  Installed FFIII63a24c76/11341824 bytes: canonical120s, smoke,8458 names0missing,
+  67 resources/12 locales/22-file Defender scan pass. All-six tracking2454 master
+  roots/2523 identities0fail. Initial full rebuild655.6s stopped only at the old
+  test requiring all animations hidden; the test now admits usable objects and
+  checks decorative exclusion/actual Objects selection. Human then closed the
+  game; guarded deployment verified22 files/144 protected/other5 unchanged.
+  Recovery75de3594 retained. Object inclusion and bounded instruction capture
+  are source/offline/FFIII delivery Closed; broader audit remains open. No compiler
+  running. Resume the exact Ghido shore landing/dog context and other saved
+  geometry/arrival/scene-owner cases below. Sol
+  only; no game launch/probe/agents. Evidence build_check/remote_objects_20261029/.
+
+- Active [22 NPC geometry contexts](docs/re/NPC_GEOMETRY_CONTEXT_20261029.md).
+  Native completion retains102: initial scalar-only candidate superseded, never
+  deployed. Current correction copies future-movement bool from ready III/V/VI
+  controller; completed/animation-only/malformed/overloaded stays manual.4096
+  total work across whole capture, no hook/method call/pointer handoff. Actual
+  capture→Wait/manual/completion checks0;1000 overloaded8-actor episodes max1.117ms
+  offline, not frame/audible proof.8458 native names0missing. Included in installed
+  FFIII63a24c76; capture component Closed.11 motion cases accepted:
+  V1/VI10 exact route assets,78 native positions/51 entry-connected,11 contexts
+  still open. Exact identities/assets and native completion evidence are under
+  ../tools/npc_geometry_context_20261029/. No compiler running. Continue case
+  prerequisites/positions; do not invent reachable homes or loosen relay layers
+  (native IsInRange compares exact Z). Keep7 arrivals/power,245 silent families,
+ 2 closure/5 owners and startup question. Sol only/no runtime probe/agents.
+
+- Resume [full audit](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md) at22 NPC geometry
+  contexts (45–90min finite checkpoint). Field effects source/offline Closed:
+ 101/101,14 Karnak bare/blocked witnesses/11detours, actual world Enterprise13/
+  Invincible11 and native movement/raycast chain pass. Check-only extension did
+  not change installed75de3594. No compiler running. Retain7 arrivals/power,
+ 245 silent families/2 closure/5 source owners and separate startup question.
+
+- Current FFIII installed75de3594/11340288 bytes; [delivery receipt](build_check/ff3_oct29_followups/completion.json).
+  Artillery/command-commit/suffix/ladder/Elder source and FFIII delivery Closed.
+  Full serial build142s, smoke,8419 native names/0missing,67 resources,12 locales,
+  22-file Defender scan pass;22 installed hashes match,144 protected/other5 unchanged.
+  Recoveryad0d80c1 retained. First guard blocked; human then confirmed closed/deploy.
+  No game launched/probed, agent or publication. FFV Torna source/offline complete,
+  actual FFV installation remains pending later all-six delivery.
+  Resume [full audit](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md): field-effect flight
+  applicability/Karnak route acceptance, then22 geometry,7 arrivals/power,
+  245 silent families/2 closure/5 owners. New native field-flight facts outside
+  Git in ../tools/map_event_audit_20261028/ff3_effect_flight/. No compiler running.
+  The following checkpoint entries are historical and superseded by this status.
+
+- Latest human steering: [non-target command reset Attack](docs/re/COMMAND_COMMIT_FOCUS_20261029.md).
+  Own populated latest log confirms orphan Attack16ms before Robyn's turn.
+  Native OnCommandSelect inlines CommandDone; exact accepted-list callback in
+  BattleMenuController is the reliable producer. All-six ABI/unique bodies
+  verified; one game-specific prefix closes only committed command ownership.
+  Before48→0; existing focus regression0. Additional synchronous actor case and
+  canonical/scan/delivery pending. No added delay/poll/text guard. Build22383
+  failed only missing artillery stubs in isolated scan host; repaired. Installed
+  ad0d80c1/recovery retained; source not deployed. Broader audit remains held.
+
+- Current active human follow-ups: [Invincible opening artillery](docs/re/INVINCIBLE_ARTILLERY_20261029.md)
+  and [confirmed exit suffixes](docs/re/CONFIRMED_EXIT_SUFFIXES_20261029.md).
+  Ability141's opening name and hit conclusion use the same displayed message;
+  preserve first plus damage/misses, suppress only its later producer. Falgabard's
+  two overlapping layer records lead to one House; count confirmed exact names.
+  Artillery12→0, suffixes8→0; source/targeted offline complete, canonical serial
+  build22383 running. No C++/embedded-data edits until it ends. Sol only;
+  no game launch/probe. Installed ad0d80c1; recovery/unchanged-game baseline in
+  build_check/ff3_oct29_followups/. Preserve broader audit and field-flight proof.
+  Prior canonical build18351 stopped on an offline fixture assigning a Resolver
+  containing a reference. Fixture now constructs the owned future snapshot;
+ 101 effect cases pass. Torna's three new boarding assertions expected ConfirmBoard
+  but native Ship uses WalkOn; corrected fixture passes all route/category cases.
+  No production change was required for either check repair. The candidate's
+  Torna/ladder/Elder/effect source still awaits combined final build/scan/delivery.
+
+- Active human steering: [Torna Canal/IV–VI world events](docs/re/TORNA_WORLD_EVENTS_20261029.md).
+  No tester log exists; do not search logs. FFV native world event63/script1004
+  (170,88) is baked/named Map Exit but lacks Ship-entry flag; initial code-only
+  route-policy finding. Verify native SetVehicle/full provider/category and IV/VI
+  pruned scripted events. Corrected inventory IV61/V118/VI42: all221 baked,
+  0 label-pruned. Additional actual gap: Vworld1events15/16 (Ship2/helm scene)
+  use town landing policy in bulk eligibility. Preserve vehicle selectors and
+  native event footprint before boarding when fixing this scoped integration.
+  Collision source/data preserved. Serial before-build76673 running: no C++ or
+  build-input edits until it ends. Installed FFIII remains ad0d80c1. Sol only.
+  Actual Torna route/category before4 failures;221 scanner cases pass unchanged
+  runtime. Collision source actual live capture/bake passes but41 aggregate
+  future-visibility assertions remain (collocated geometry may invalidate the
+  boolean expectation). Resolve before candidate acceptance, not a claimed
+  additional game defect. Current native Scene37/source15/16 are Ship2-only.
+
+- Current FFIII installed ad0d80c1/11327488 bytes:
+  [Invincible mountain crossing/Falgabard](docs/re/INVINCIBLE_MOUNTAINS_20261029.md)
+  source/delivery Closed. Parked ownership/category publication, manual crossing,
+  exact landing/entrances, model11 floating world, cancellation and other-game
+  abstention pass. Full serial/smoke/8406 names0missing/67 resources/12 locales/
+  22-file scan pass;22 installed hashes match,144 protected/other5 unchanged.
+  Previous d305 recovery retained; no game launched/probed/agent/publication.
+  Active [solid field effects](docs/re/FIELD_EFFECT_COLLISION_20261029.md):
+  exact native/prefab evidence proves101 collision-enabled effects omitted
+  across III4/IV1/V96, beyond8 scripted Karnak flames. Decorative4234 stay excluded.
+  Before-fixture serial build running75101; no C++ edits until completion.
+  Resume [full audit ledger](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md)
+  after this minimal collision integration at22 geometry,7 conditional arrivals/power,
+  245 silent families,2 closure/5 owner questions. Startup cause remains open.
+
+- Current FFIII installed d3053479/11311104 bytes: [page/vehicle follow-ups](docs/re/ITEM_BUFFER_PAGES_20261028.md)
+  source/delivery Closed. Jobs/parameters survive page animations; Can surface
+  (12 locales); exact native vehicle prompts before discovery; Duster→Ancient
+  Ruins keeps boarding when flight overlaps the foot approach (144/144/141 tiles).
+  Serial build/smoke/8406 names/0 missing/22-file scan pass;22 installed hashes
+  match,144 protected/other5 unchanged. No game launched/probed. Full audit
+  resumes at [Invincible mountain crossing](docs/re/INVINCIBLE_MOUNTAINS_20261029.md),
+  then all retained six-game event/reachability cases. Power-origin/rearming is
+  explicitly paired with later conditional arrivals; no speculative revival.
+  Auto-terrain selector audit finds0 foot/automatic membership differences in
+  all6 current bakes. Sol only. Invincible source/pipeline checks now pass:
+  parked ownership publishes Falgabard under Map Exits,85-tile valley route,
+  native manual mountain boundaries, landing then all3 real entrances; Nautilus
+  remains blocked. Initial full build caught a cancellation-only fixture that
+  stopped on conservative story terminals before cancellation. Corrected its
+  observed plane and strengthened token assertions; production unchanged.
+  Canonical rerun running (session6026); do not edit C++ until it completes.
+  Exact new build/scan/delivery still pending.
+
+- Historical implementation checkpoint: [equipment page readiness and vehicle reports](docs/re/ITEM_BUFFER_PAGES_20261028.md).
+  Native fade-in/StartIdle producer fix passes actual registered-hook/all-six
+  checks36→0; Can surface (FFIII14/FFV8/13),12 locales passes4→0. Combined build/
+  scan/delivery pending; installed9146ae03 unchanged. Parked-vehicle naming now
+  uses an exact keyed native model/actor proof before cache discovery (all-six
+  cue checks0). Duster→Ancient Ruins reproduced144→141-step boarding loss at
+  an overlapping future flight cell; movement-mode suffix validation passes2→0,
+  with all-six pending-action/airborne suffix checks added. Serial canonical
+  build running; do not edit C++ until it completes. Recovery9146 DLL/baselines
+  are under build_check/item_buffer_pages_20261028/.
+  Full audit held at vehicle-mask checkpoint;7 targeted integration checks now
+  pass, but native power-history/remaining combined checks are still open.
+
+- [FFIII turn-order display investigation](docs/re/TURN_ORDER_DISPLAY_20261028.md)
+  Closed:37 battle prefab addresses/39 roots/4330 descendants,113 UI classes,
+  0 unresolved scripts show no upcoming-order display. Native provider349E40
+  returns Command1; UpdateView selects command text and hides shared ATB gauges.
+  Conditional Shift+T addition is therefore inapplicable; no runtime changes.
+  Sol only/no game probe. Full audit resumes at the preserved incomplete vehicle
+  masks/phase validation checkpoint; installed FFIII9146ae03 unchanged.
+
+- Resumed [vehicle applicability checkpoint](docs/re/VEHICLE_APPLICABILITY_20261028.md):
+  typed native/list capture host4 before failures, no production mask/capture
+  changes. Null/empty and hidden triggers are real gaps; all-six restrictions
+  maxlist4/maxID19. Auto groups are terrain-disjoint, but FFIII native Move task
+  detaches with ChangeTransportation(-1,false) before final Change; its exact
+  trigger/collision ordering is still being resolved. Keep this distinction;
+  no guessed destination-ID mask semantics. Current installed FFIII9146ae03.
+
+- Current FFIII installed9146ae03/11107328 bytes: [category applicability](docs/re/SAVE_CATEGORY_20261028.md),
+  [single Boost use/Guard barrier](docs/re/ABILITY_FEEDBACK_TARGETS_20261028.md)
+  and parked/unfiltered aerial provider corrections. Full serial build, smoke,
+  67 resources/136 registrations/12 locales/22-file scan pass;22 installed hashes
+  match,144 protected/other5 unchanged. Source/delivery Closed; gameplay/audio
+  unconfirmed. [Full audit](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md) resumes at
+  checkpoint1 capture/per-leg vehicle applicability, then all retained cases.
+  No game launch/control/probe/publication or delegation. Sol only.
+
+- Latest human follow-up: [save-point category applicability](docs/re/SAVE_CATEGORY_20261028.md).
+  Native save-point counts0/0/0/19/32/42: both category directions skip Save
+  Points only in FFI–FFIII, preserve FFIV–FFVI and stable view identities. Actual
+  category/announcement checks24→0; combined battle/provider build/scan/FFIII
+  delivery pending. Full map audit remains open and resumes after delivery.
+
+- Human priority now [Boost use/Guard feedback](docs/re/ABILITY_FEEDBACK_TARGETS_20261028.md).
+  Boost parent94/commandless NotDelete5 child137/139 both speak use;138 blank.
+  Source guards only native ViewMessage's duplicate use and corresponding actor
+  call; Self-Destruct140 and HitViewMessage outcomes preserved. Actual integration/
+  all-six resource tests0; exceptions/other-game abstention pass. Guard87 effect154
+  exact assets show blue-white dome/shell barrier; new successful self-result cue
+  A glowing barrier appears around {0},12 locales, result tests3→0. Full build/
+  scan/FFIII deployment pending; installed b2cacd6f. Navigation source/passing
+  provider+adapter checks held for combined delivery; resume entire audit afterward.
+
+- Active checkpoint1 source after installation: parked/unfiltered aerial provider
+  actual host3 failures→0. Valid native Player1 previously skipped parked aircraft;
+  Current map now has discovery policy independent from immediate flight proof.
+  Existing continent/Saronia checks pass. Scanner/filter adapter checks next,
+  then retained vehicle-hidden actors + per-leg trigger/collider masks and native
+  auto-canoe order; Invincible mountain crossing still open. Later source NOT
+  rebuilt/scanned/deployed; installed FFIII b2cacd6f remains the verified delivery.
+  [Exact scope/evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md). Sol only.
+
+- Current FFIII installed b2cacd6f/11103232 bytes: [Nautilus checkpoint](docs/re/NAUTILUS_ACCESS_20261028.md)
+  Closed source/delivery for Can dive (native9/terrain16),4 named underwater exits,
+  general manual landing and ordinary Current map blocked-exit retention, plus
+  startup safety/diagnostic update. Full serial/smoke/67 resources/12 locales/
+  22-file scan pass;22 installed hashes match,144 protected/other5 unchanged.
+  63 all-six aircraft/door witnesses,98 broader boarded cases, logged113,118→all4
+  underwater entries pass. Gameplay/audio/hang cause remain unconfirmed.
+  Resume [full audit](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md), checkpoint1 Active:
+  all-unlocked-vehicle capture and per-leg masks; also unfiltered Current map
+  synthetic air providers still require discovery when no immediate ride exists.
+  Keep exact source/data validity, grouping and nearest-marker policy. Sol only.
+
+- Active before deployment: [Nautilus dive/underwater correction](docs/re/NAUTILUS_ACCESS_20261028.md).
+  User clarifies separate underwater world3. Terrain/arcs exist; production
+  entry policy/classification reproduces12 failures→0 from logged113,118, all4
+  entrance tiles reachable. No synthetic markers needed for that reported origin.
+  Can dive uses actual upgraded9/native guide +terrain16, hook checks5→0.
+  Native end_landing358, not down_script. Combined landing/current-map checks and
+  final serial build/scan/delivery in progress; installed remains de3e075d.
+
+- Latest navigation scope: ALL unlocked vehicles must contribute legal boarding/
+  riding destinations before boarding; inspect Nautilus dive/surface/underwater
+  arcs. Current map retains real baked destinations despite inaccessibility or
+  route story-gate failure. [Scope/evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md).
+  Startup candidate0a6c18a3/11101696 bytes passes serial build/smoke/67 resources/
+  22-file scan; deployment refused running FFIII, save/close request pending.
+  Sol only, no game run/probe; installed FFIII remains de3e075d.
+
+- Startup source safety correction: real input_transition_blocked queried a cold
+  FadeManager before rejecting Boot/no main manager. Native-cache host reproduces
+  2 failures→0 after early Boot guard; all-six state/title-fade checks pass. This
+  fixes unsafe order, not yet proves pid21320's cause (first frame followed fault).
+  refs::instance now records ≤16 FFIII pre-first-frame requests/results, with
+  actual-source fixture0 failures; no new hook/native call order/result changes.
+  Same3-hook manager/method-prefix observer checks pass. Final serial build,
+  scan and FFIII delivery pending; no game launch/control/probe authorized.
+
+- Startup diagnosis current source: same3 hooks now have FFIII-only raw singleton
+  storage and ready managed-trace prefixes; no new hook/getter/native control.
+  Actual-source diagnostic check0 failures;100 fake-owner captures0.808ms aggregate/
+  0.028ms peak, native/game/audio unmeasured. This is NOT a startup repair.
+  Exact null object/cause still needs the next failed-launch evidence. Full serial
+  build/scan/deployment pending; installed FFIII remains de3e075d.
+  Next confirmed navigation fix after startup: Doga's Manor route needs landing
+  then walking, not flight through entry. Earlier boarding test missed this.
+  Current map with vehicles must also account for the parked Nautilus: legal
+  boarding/riding destinations must appear before boarding. Verify both states
+  through actual capture/publication/routing; keep real vehicle requirements.
+
+- Current human priority: repair native-mod startup interference first. User
+  reports many clean vanilla/MelonLoader restarts and failures only with native
+  mod; accept this comparison as strong causal evidence and investigate the
+  native integration, not whether the report is real. Exact null object/site
+  remains unknown. [Startup scope](docs/re/STARTUP_HANG_20261025.md) is reopened
+  by this human follow-up; map audit deferred with work preserved. Sol only,
+  one compiler/project, no game launch/control/memory probe authorized.
+  Dalg report withdrawn: user found the destination and had misheard the list.
+  Do not change Dalg availability/routing for that report. Continue startup
+  diagnosis, then resume Falgabard/vehicle applicability and full-audit cases.
+
+- October28 startup-log question answered: [boot observer](docs/re/STARTUP_HANG_20261025.md)
+  caught NullReferenceException inside native SceneBoot.CreateInstance in failed
+  pid21320/12:22:24; it propagates through Start before ResourceManager.Initialize.
+  Input frames continue; next pid27160/12:23:19 reaches gameplay with same installed
+  de3e075d. Null object/mod causation unknown, no repair claimed. Whole sessions
+  archived build_check/startup_hang_20261028/. No new runtime probe/hook; user asked
+  for log inspection, not a startup redesign. Resume full map/vehicle audit.
+
+- Full audit resumed, active [scripted entrance/category evidence](docs/re/SCRIPTED_ENTRANCES_20261028.md):
+  missing hidden village is Falgabard, world4/IDs888–890/script381→map144/point1.
+  Reviewed pure facing/flag travel labelled Map entrance but not Map Exits.
+  Human requires ordinary transfers in Map Exits; Saronia Airspace stays Events.
+  Actual reachability also exposes native Invincible mountain crossing (10/11)
+  absent from router; verify before claiming corrected later-vehicle access.
+  No production classification/vehicle changes yet. Current FFIII de3e075d;
+  future builds serial /m:1 and compiler ProcessorNumber1, no parallel builds.
+
+- Current FFIII installation: nearby walking/object suffixes plus cross-floor
+  NPC repair deployed/hash-verified de3e075d/11099136 bytes. Full build/smoke/
+  22-file scan pass,67 resources/136 registrations/12 languages/6 unchanged bakes;
+  22 installed hashes match,144 protected unchanged, other five games unchanged.
+  [Local guidance](docs/re/LOCAL_GUIDANCE_20261028.md) and
+  [NPC repair](docs/re/CROSS_FLOOR_NPC_20261028.md) source/delivery Closed;
+  gameplay/native/audio remain unconfirmed. Full audit resumes; newest explicit
+  case is the missing hidden village west of Saronia. Sol only/no game probe.
+
+- October28 human reports severe build RAM pressure: one compiler/project at a
+  time, even if slower. build.bat uses /m:1 and CMAKE_BUILD_PARALLEL_LEVEL=1;
+  CMake uses /MP1. All targeted commands must use /m:1; no simultaneous builds.
+  Also trace the hidden village west of Saronia through actual world discovery
+  and publication in the full audit; the library clue reports a missing row.
+
+- Active human follow-ups: [nearby walking and repeated object labels](docs/re/LOCAL_GUIDANCE_20261028.md).
+  Include with the ready cross-floor NPC repair, then deploy FFIII and resume
+  the full audit. Under15 proximity with a proven ground route stays on foot;
+  required crossings/current riding remain. Repeated Objects use independent
+  stable suffixes through existing NPC naming service. Source/checks in progress.
+
+- Urgent current human regression: [cross-floor NPC guidance](docs/re/CROSS_FLOOR_NPC_20261028.md)
+  reopens the narrow route integration. Saronia map105→106 fails while map104
+  correctly approaches Soldier24 at17,29. Exact native visibility flag74 gives
+  2 before failures→0 after bounded later-floor NPC continuation proof, preserving
+  current actors/gates/traps/objective. Expanded/full checks and scan pass.
+  Candidatec23a8fa9/11098112 bytes; installation waits for human game closure
+  (deploy.bat running-game guard blocked copy). Audit checkpoint1 is held at its native/capture
+  reproduction (valid vehicle-hidden actor is dropped,1 failure); no production
+  vehicle-rule changes yet. Sol only/no game probe. Resume all uncertainties
+  immediately after this urgent deployment.
+
+- Latest human steering October28: deploy Boost wording A glowing aura appears
+  around {character name}, then continue the FULL six-game audit and address
+  every [recorded uncertainty](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md). This
+  explicitly authorizes the necessary scoped vehicle/effect/geometry/scene
+  follow-ups; Sol only, no game probe/publication. Sequential checkpoints and
+  initial3–6hour estimate are in that register. Do not stop after the wording
+  deployment or leave the prior first-pass findings as the completed audit.
+  Wording now source/delivery Closed: FFIII installeda7a97a14/11097600 bytes;
+  full build/smoke/22-file scan pass,22 installed hashes match,144 protected
+  unchanged, other five payloads unchanged. No game probe. Audit checkpoint1
+  (per-leg vehicle applicability) is now Active; continue sequentially.
+
+- October28 final FFIII build installed/hash-verified9aff4280/11096576 bytes:
+  per-target Draw Attacks results and meaningful Boost glow; Saronia complete
+  capture and reviewed map fixes preserved. Full build/smoke/980 new exact
+  functional labels/12 locales/22-file scan pass;22 installed hashes match,
+  144 protected unchanged, other five games unchanged. No game probe.
+  [Six-game audit checkpoint](docs/re/MAP_EVENT_AUDIT_20261028.md) and
+  [remaining evidence/follow-ups](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md): all-six
+  bakes reproduce; additive-group7→0 and counter15→0 repairs delivered in FFIII.
+  Remaining245 silent contexts/2 closure gaps,22 geometry candidates, per-leg
+  vehicle applicability and8 FFV scripted fire effects are explicit open findings;
+  no automatic Closed-system redesign or claim of complete runtime coverage.
+
+- Human steering October28: [per-target Draw Attacks / Boost display feedback](docs/re/ABILITY_FEEDBACK_TARGETS_20261028.md)
+  explicitly reopens the Closed battle-effect producer. Sprite/aura reinitialization
+  is not a result; Draw must name each enemy success/miss at native result timing.
+  Determine actual Boost display without hidden mechanics. Source complete;
+  full build/smoke/22-file scan pass. FFIII deployed3e3be68a/11095040 bytes after
+  human closure;22 installed hashes match,144 protected unchanged, other five
+  payloads unchanged. Source/delivery Closed; gameplay pending. Sol only,
+  no game probe. Map audit resumes at its preserved triage checkpoint.
+
+- October28 actual Saronia cause fixed and FFIII deployed, source/delivery Closed:
+  [complete powered-trigger capture](docs/re/SARONIA_CAPTURE_20261028.md).
+  Read-only saved state confirms map4/Enterprise6/scenario73=0. All263 active
+  objects reproduce17 gates/91 triggers and16 failures before correction;
+  terminal-goal/ground-opening distinction fixes actual discovery and selected
+  airborne arrival, now0 failures for6/13/15/16. Canonical fixture includes all
+  powered triggers. Full build/smoke/scan pass;22 installed hashes match,
+  144 protected unchanged, other five payloads unchanged. DLL11097600 SHA256
+  10598fd6db714359712e9c136d2a005c9710529a37b459f48db96ae908d9120d.
+  No game probe; gameplay pending. All-six event/reachability audit now Active
+  under latest human request, including missing capture/publication paths.
+
+- Human reopened missing Saronia Airspace October28; previous deployed result
+  still fails gameplay. Active [capture investigation](docs/re/SARONIA_CAPTURE_20261028.md)
+  must establish actual user state and production discovery/publication behavior,
+  then correct, verify offline and deploy FFIII. Prior mocked/manual fixtures
+  were insufficient. Sol only, no game probe. Latest human request resumes the
+  all-six event/reachability audit after that deployment; old deferral superseded.
+
+- Urgent Saronia correction deployed October28, Closed: [Saronia Airspace](docs/re/SARONIA_LIVE_20261028.md).
+  Prior native group-cache blind spot reproduced16 failures; discovery correction
+  exposed8 additional selected-route lifetime failures, now0 across Enterprise
+  6/13/15/16 using the exact copied flag73 prerequisite. No shared-state refactor.
+  Event label Saronia Airspace; four statue checks now Statue barrier in12 locales.
+  Full canonical8321/0 names,142/349/0 wiring,21 functional cases, owner/category/
+  route checks, smoke47/67 resources/136 registrations/six unchanged bakes pass.
+  FFIII only redeployed:22 scanned installed hashes match,144 protected unchanged,
+  other five payloads unchanged. DLL11096576 SHA2566785a04e77ff2903898c9960eac3fcd1abf369bbcb9efbc2e31a09f9310ce9b4.
+  Defender no threats; recovery:build_check/saronia_live_20261028/. No game probe;
+  actual gameplay/native/frame/audio pending. All-six audit explicitly Deferred
+  by human; preserve results and do not resume automatically. Sol only.
+
+- Human reopened urgent FFIII Saronia October28: prior deployed Events fix still
+  missing; all-six audit explicitly deferred, not resumed automatically. Active
+  [live Saronia correction](docs/re/SARONIA_LIVE_20261028.md), name Saronia Airspace.
+  New actual-cache/pipeline fixture reproduces16 failures with native prerequisite
+  clear and a partial observed-group selection; actual native snapshot test
+  confirms flag73=0 while generic group-active=false. Narrow fix uses reviewed
+  copied prerequisite (no shared-state refactor), covers Enterprise6/13/15/16,
+  and labels four co-located Fang checks Statue barrier after full script review.
+  Final checks running:build_check/saronia_live_20261028/. Redeploy FFIII only.
+  Sol only; no game control/probe. Other source/delivery checkpoints stay Closed.
+
+- October28 FFIII completion deployed, Closed: only FFIII updated;22 scanned
+  installed payload hashes match,144 protected files unchanged and other five
+  games' payloads unchanged. DLL11096064 SHA256960a0c64da4755f17af7b0f4d6a38b6b231e8743a88ca32c3edded43b9583699.
+  Defender no threats, exclusions query OS-denied/unknown, no signing certificate;
+  no game launched. Recovery/receipts:build_check/ff3_completion_20261028/.
+  All requested FFIII source/delivery checkpoints Closed, gameplay pending.
+  Next active human-authorized scope: all-six event-label/bake/reachability audit;
+  preserve Closed route/vehicle designs, inspect actual scripts/data. Sol only.
+
+- October28 FFIII source completion: Saronia, remote returns, Boost/Draw, vehicle
+  tracking and [functional labels](docs/re/FUNCTIONAL_EVENTS_20261028.md) all
+  source Closed.17 exact entrance/barrier labels reviewed against full scripts,
+  four12-locale labels; narrative scenes preserved. Final build8321/0 native names,
+  142/349/0 wiring, smoke47,67 resources/136 registrations and six unchanged bakes
+  pass. Candidate11096064 SHA256960a0c64da4755f17af7b0f4d6a38b6b231e8743a88ca32c3edded43b9583699.
+  Delivery active:build_check/ff3_completion_20261028/. Deploy FFIII only, then
+  open the separately authorized all-six map/event/reachability audit. Sol only.
+
+- October28 [inter-map vehicle state](docs/re/VEHICLE_MAPS_20261028.md): source
+  complete, Closed; use native applied player/transport asset identity for
+  Walk/Dash, preserving automatic canoe across a foreign saved StayMapId and
+  rejecting a remembered craft on an actual foot player. GetOn restoration shares
+  that evidence. Exact all-six native layouts reviewed (front asset only III/V/VI),
+  both actual-source fixtures0 failures, full8321/0 names/142/349/0 wiring and
+  smoke47 pass. Candidate11090944 SHA25668e2648ee8fad0629ceab0888579741d51473591a59aba3ba39e0a0d75cc8368.
+  Combined FFIII delivery pending. Next: specific FFIII event labels, then deploy
+  FFIII; only afterward all-six map/event/reachability audit. Sol only.
+
+- October28 [Boost/Draw Attacks](docs/re/ABILITY_FEEDBACK_20261028.md): source
+  complete, Closed; actual visible prefab effects now announce success once per
+  native effect lifecycle,12 locales, no hidden charge/status disclosure. Exact
+  ABI/assets verified outside Git, owner-only bounded Init/Update capture and
+  generation-cancelled copied worker speech. Actual-source fixture0 failures;
+  full canonical8303/0 names,142/349/0 wiring and smoke47 pass. Candidate11089408,
+  SHA25652de7af6a23392e526d07b905bab9b78d4dd3194657703a0740397d862e10e0c.
+  Evidence:build_check/action_effects_20261028/. Combined FFIII deploy pending.
+  Next active checkpoint: inter-map vehicle-state regression; then specific
+  FFIII event labels, deploy FFIII, then all-six bake audit. Sol only.
+
+- October28 [Amur/Replito remote returns](docs/re/REMOTE_RETURNS_20261028.md):
+  source complete, Closed; final combined deployment pending. Real-bake before2/
+  after0, all-six graph/preservation checks and full canonical/smoke pass. DLL
+  0e8f7886e3923dd21569bfa51c1f967e871fe8204db55b74a13c393590b39ede.
+  Real-bake before-case2 failures; whole-map states already known. Shops' arrivals
+  are2 cells inside, facing inward, not the previously claimed1. Listing policy
+  now uses native PointIn facing for that exact aligned case; graph unchanged.
+  Next active source checkpoint: Boost/Draw Attacks displayed feedback (shared
+  native add-condition/view pipeline), then inter-map vehicle state. Sol only.
+
+- Saronia Events follow-up complete, Closed October28: installed all six,
+  DLL11073536 SHA2563c8df27ff8b9157b5334c5f77b71a76e0b79e7ac545cf608ec3cdefb7c03e1b9.
+  Actual category/owner publication from zero native scene entities passes;
+  Events > Castle Saronia (Airship), airborne6/13 routes, completed-state removal,
+  unchanged ordinary castle targets. Full canonical/smoke/resources/scan pass;
+  132 installed hashes match/144 protected unchanged. Evidence/recovery:
+  build_check/saronia_events_20261027/. Gameplay/native timing pending.
+  Only offline route_worker host stack raised4MiB after measured923736-byte
+  test frame overflow; production stacks unchanged. Current queued completion
+  resumed by human October28: return-exit listing active, then Boost, Draw Attacks
+  and inter-map vehicle state. Sol only; prior usage stop lifted for this scope.
+
+- Historical Saronia failure: first deployed candidate did not expose event in
+  gameplay. User explicitly wants Events discovery, not transition rerouting
+  unless all entrances are inherently airborne (native doors are ground).
+  Unshipped castle-redirection attempt removed. Owned active/reachable scene
+  publication now targets Events as Castle Saronia (Airship), distinct from
+  ordinary map exits and continent crossings. Full actual category/owner-path
+  tests now required; previous direct-scene-goal-only coverage was insufficient.
+  [Current ledger](docs/re/SARONIA_ENTRY_20261027.md#human-reported-failure-and-events-follow-up).
+  Evidence:build_check/saronia_events_20261027/. Sol only; conserve usage.
+
+- October27 [Saronia airborne entry](docs/re/SARONIA_ENTRY_20261027.md): complete,
+  Closed; efficient user-authorized progress-blocker fix installed all six. Exact
+  active scene120 leads Castle105; native localized Map Exit, airborne endpoint
+  via existing Enterprise takeoff, genuine ground gate892 preserved. Air6/ship13
+  actual-source routes/filter distances22/22,0 failures; full build/smoke/67
+  resources/135 registrations/unchanged bakes/12 locales pass.22-file Defender
+  scan pass,132 installed hashes match/144 protected unchanged. DLL11069952,
+  7bc895c545df476cabae33b61471d8ce5a7a14b090888a82024f9bf451d6d9be.
+  Recovery/evidence:build_check/saronia_entry_20261027/. Gameplay/native-frame/
+  audible confirmation pending; no game probe. Sol only, other queues unchanged.
+
+- October27 return-exit listing follow-up: Replito also lists Exit to Replito
+  (Replito Magic), requiring travel through Replito Magic, before entering that
+  shop. Exact7-of-8 example added to the existing
+  [Amur/return-exit queue](docs/re/MAINTENANCE_REMAINING_20261027.md#amur-weapons-return-exit-listing).
+  Documentation only; no implementation or model-policy change requested.
+
+- October27 documentation-only vehicle regression report after deployment:
+  canoe entry can announce On foot; talking to Unai's Shrine parrot then reports
+  Canoe. Actual native mode unresolved: persistent canoe or incorrect later
+  canoe attribution. Human-initiated follow-up to Closed Temple/canoe state;
+  no investigation/code yet. Include Enterprise interaction and potential later
+  Invincible coverage without assuming a confirmed Invincible defect.
+  [Pending vehicle-state report](docs/re/MAINTENANCE_REMAINING_20261027.md#vehicle-state-across-maps-queued-not-started).
+
+- October27 documentation-only follow-up: Draw Attacks currently reads misses
+  only. Queue investigation/readout of success text or visible success indicator
+  if the game displays one; existence not verified, no hidden-state inference.
+  [Pending report](docs/re/MAINTENANCE_REMAINING_20261027.md#draw-attacks-success-feedback-queued-not-started).
+  No code change/probe/deployment for this report; preserve usage.
+
+- October27 user explicitly requested deployment of completed work despite the
+  budget stop. Installed/hash-verified all six; no game launched. Full accepted
+  build/smoke,67 resources/135 indexed registrations, six unchanged bakes and12
+  locales verified. Defender reports no threats in22 exact payload files;
+  132 installed hashes match and144 protected files unchanged. DLL11067904,
+  cad99d69cff18c4e2ea4f0c1c77f100cd87b881c1e6e33873b89c6b3d63211e7.
+  Recovery/scan/install receipts:build_check/maintenance_deploy_20261027/.
+  [Delivery and remaining work](docs/re/MAINTENANCE_REMAINING_20261027.md).
+  Completed source/delivery checkpoint Closed; gameplay confirmation pending.
+  Amur preview and Boost audit remain queued; Sol alone, preserve usage.
+
+- User budget stop October27:1% remaining/no resets; finish only critical work,
+  preserve source, document the rest and stop. Subsequent explicit deployment
+  completed as recorded above. [Exact continuation and remaining work](docs/re/MAINTENANCE_REMAINING_20261027.md)
+  includes Amur reciprocal-coordinate correction, Boost native/display facts and
+  combined verification/delivery. Sol alone; no further handoffs.
+
+- October27 temporary user override for this maintenance: Sol alone. Stop further
+  Terra/Luna handoffs; user reports excessive usage from delegation. Existing
+  edits/evidence are preserved and reviewed by Sol; do not redo completed work.
+
+- October27 user maintenance queue: source complete, Closed for
+  [storage prompt/stock](docs/re/WAREHOUSE_20261026.md#october27-empty-retrieve-follow-up-scope-ledger),
+  [selected grouped exit](docs/re/GROUPED_EXIT_CONTINUATION_20261026.md#october27-same-map-selected-exit-scope-ledger),
+  [later Enterprise landing](docs/re/ENTERPRISE_FLIGHT_20261026.md#october27-landing-position-follow-up-scope-ledger),
+  [vehicle verbs](docs/re/VEHICLE_ROUTING.md#october27-movement-wording-scope-ledger),
+  [nearest continent transitions both ways](docs/re/WORLD_EVENTS_20261026.md#october27-continent-travel-scope-ledger)
+  and [Temple/canoe vehicle state](docs/re/TEMPLE_VEHICLE_20261027.md).
+  Full canonical/smoke47 pass. Latest accepted DLL11067904,
+  cad99d69cff18c4e2ea4f0c1c77f100cd87b881c1e6e33873b89c6b3d63211e7.
+  Each topic retains actual evidence, failed attempts and ownership. No changes
+  installed this turn; final combined scan/delivery/gameplay pending.
+  [Libra/Study displayed scan events](docs/re/SCAN_DISPLAY_20261027.md) source
+  complete, Closed; Terra code, Sol critical review, Luna verified docs reviewed.
+  Both use identical native scan50 parameters; Kraken204 flag14 deliberately
+  hidesHP, but repeated native scan-line refresh can erase earlier reader events.
+  Native index-event guard preserves earlier displayed lines;8291/0 names.
+  [Multiple-NPC route oscillation](docs/re/NPC_OSCILLATION_20261027.md) source
+  complete, Closed; real-bake legal patrol toggle reverses before, continues23/23
+  steps after. Terra bounded implementation, Sol reviewed/verified; no further
+  delegation. Own log build_check/npc_oscillation_20261027/.
+  [EXP-counter Enter](docs/re/RESULTS_ENTER_20261027.md) source complete, Closed:
+  native forced tally completion now acknowledges with Autodetail off; full
+  actual-source tests/build/smoke pass. No active source checkpoint at budget
+  stop. Remaining queued: Amur/Boost and final combined delivery. Original
+  EXP-counter Enter report:
+  silence (480gil/1500EXP, Rae20→21 screenshot/log in
+  build_check/results_phase_20261027/). User clarifies Enter may finish counter
+  without advancing the visible phase; inspect that exact native input path.
+  Then Amur remote return-exit preview/listing: Exit to Amur (Amur Weapons)
+  asks travel through Weapons while already on Amur; Backslash works. User
+  explicitly initiates follow-up to closed remote-return policy. Own log in
+  build_check/amur_exit_preview_20261027/. Keep scoped source checkpoints
+  sequential. Then audit Boost displayed feedback (own latest log only says
+  Rae:Boost); evidence build_check/boost_display_20261027/. Do not invent
+  hidden stat/effect information if the native game shows none. No game
+  launch/control/probe; installed October26 baseline retained.
 - October26 navigation maintenance: complete, Closed; installed/hash-verified all6.
   [Grouped exit continuation](docs/re/GROUPED_EXIT_CONTINUATION_20261026.md) keeps
   the exact eligible physical objective across floors while grouping remains on;

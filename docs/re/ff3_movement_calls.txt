@@ -1,4 +1,8 @@
-Recovered game implementation removed from versioned history.
-Original Git blob: ae96f8a6b7a225717d6cc2baf7a7f1c2290ca0cd
-The original is preserved only in the verified external recovery bundle.
-See docs/re/SOURCE_CONTENT_REVIEW_20261029.md.
+Local native analysis reference
+
+Recovered game implementation is preserved outside every Git tree.
+Archive: D:\Games\Dev\Unity\FFPR\tools\repository_sources_20261029\docs\re\ff3_movement_calls.txt
+SHA-256: 5c1660cbee1a09471ce30207ed6f5cc83b6a5ac49842f6b8bece7142b8ad93ad
+Original bytes: 23101
+
+See SOURCE_CONTENT_REVIEW_20261029.md for historical exposure and scope.

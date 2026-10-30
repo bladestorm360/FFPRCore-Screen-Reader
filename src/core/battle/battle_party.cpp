@@ -101,17 +101,11 @@ std::wstring read_row(void* row, bool include_command = false)
         const auto command=displayed::text_field(displayed::field(row,"view"),"commandText");
         if(!command.empty())line+=L", "+command;
     }
-    void* conditions = displayed::field(row, "condtionController");
-    auto details = displayed::texts(displayed::field(conditions, "view"));
-    if (!details.empty()) line += L", " + text::join(details, L", ");
-    auto icons = displayed::conditions(conditions);
-    if (!icons.empty()) line += L", " + icons;
-    // Normal command rows hide their condition column. H and the number row
-    // may still describe the same ally's visible body/effects; targeting keeps
-    // its native text/icon producer. Danger comes from the rendered HP color.
-    const auto extra = party_status::extra_lines(
-        displayed::field(row,"<TargetData>k__BackingField"), displayed::field(row,"view"),
-        details.empty() && icons.empty(), conditions);
+    // The native rotating condition text/icons can lag after a removal and can
+    // be hidden by commands. All three readers use the same current ally state,
+    // without borrowing an old label or requiring a transient effect animation.
+    const auto extra = party_status::current_lines(
+        displayed::field(row,"<TargetData>k__BackingField"), displayed::field(row,"view"));
     if (!extra.empty()) line += L", " + text::join(extra,L", ");
     if (ui::prefs::auto_detail_enabled()) {
         const auto charges = displayed::charge_lines(displayed::field(row, "view"));

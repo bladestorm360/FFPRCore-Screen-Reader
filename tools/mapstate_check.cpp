@@ -51,6 +51,18 @@ int main()
                         baked::object_identifier(row)==guard.get(L"raw")->s&&baked::str(row.group)==guard.get(L"group")->s&&
                         row.layer==guard.get(L"cell")->arr[0].n&&row.tx==guard.get(L"cell")->arr[1].n&&row.ty==guard.get(L"cell")->arr[2].n)object=&row;
                 expect(object!=nullptr,"every native entry guard has its exact original bake identity");if(!object)continue;
+                // A destination-scoped predicate controls its exact companion
+                // arc, not consumption of the native physical door. Preserve
+                // the original identity assertion above for every predicate.
+                if(const auto* destination=guard.get(L"destination")) {
+                    object=nullptr;
+                    for(const auto& row:baked::grids(sm).objects)
+                        if(row.type==baked::ObjType::Warp&&row.entity_id()==guard.get(L"id")->n&&
+                           baked::object_identifier(row)==guard.get(L"raw")->s&&baked::str(row.group)==guard.get(L"group")->s&&
+                           row.layer==guard.get(L"cell")->arr[0].n&&row.tx==guard.get(L"cell")->arr[1].n&&row.ty==guard.get(L"cell")->arr[2].n&&
+                           row.a==destination->arr[0].n&&row.b==destination->arr[1].n)object=&row;
+                    expect(object!=nullptr,"each destination guard has its exact real companion arc");if(!object)continue;
+                }
                 for(int profile=0;profile<3;++profile) {
                     map_state::Flags copied;if(profile<2){for(auto& v:copied.scenario)v=profile;for(auto& v:copied.treasure)v=profile;for(auto& v:copied.global)v=profile;}
                     map_state::Resolver state(copied,records);const auto availability=map_state::project(guard,copied);

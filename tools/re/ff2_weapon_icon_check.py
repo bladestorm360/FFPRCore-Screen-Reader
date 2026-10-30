@@ -1,4 +1,6 @@
 """Bounded read-only FF2 weapon-icon producer evidence; raw code stays local."""
+
+from evidence_paths import external_directory
 from pathlib import Path
 from collections import defaultdict
 import hashlib
@@ -8,7 +10,7 @@ import pefile
 
 ROOT = Path(__file__).resolve().parents[2]
 BINARY = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
-OUTPUT = ROOT / 'build_check/re/ff2_weapon_icon.txt'
+OUTPUT = external_directory('build_check/re') / 'ff2_weapon_icon.txt'
 names, targets = defaultdict(list), {}
 for block in (ROOT.parent / 'ff2/dump.cs').read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
     namespace = block.splitlines()[0]

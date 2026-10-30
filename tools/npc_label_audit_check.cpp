@@ -85,6 +85,14 @@ int main(int argc, char** argv)
     };
     for (const wchar_t* lang : {L"en", L"ja", L"fr", L"it", L"de", L"es", L"ko", L"zht", L"zhc", L"ru", L"th", L"pt"}) {
         fixture::language = lang;
+        if(game=="ff3"){
+            const auto* alias=fixture::dictionary.get(L"7;老人2");
+            const auto* localized=alias?alias->get(lang):nullptr;
+            const auto expected=std::wstring(lang)==L"ja"?L"老人":localized?field::npc_names::parse(localized->s).base:L"";
+            const auto live=field::npc_display_label(field::translate_entity_name(L"7;老人2"));
+            const auto copied=field::npc_display_label_snapshot(field::translate_entity_name_snapshot(L"7;老人2"));
+            if(expected.empty()||live.base!=expected||copied.base!=expected){++failures;std::puts("FAIL native semicolon Elder alias must use its existing localized dictionary entry");}
+        }
         if(game=="ff2") {
             // Reviewed unrevealed variant: all live/remote/snapshot consumers
             // share this translator. Mask presentation, never native identity.

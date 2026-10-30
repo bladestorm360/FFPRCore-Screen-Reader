@@ -1,5 +1,16 @@
 # Map labels for untitled sub-maps
 
+October28 [vehicle prompt/route follow-ups](re/ITEM_BUFFER_PAGES_20261028.md):
+native model identity resolves a parked vehicle's first interaction prompt even
+before discovery reaches vehicles. Exact actor/map/enable checks prevent NPC
+misidentification. Repeated directions validate movement mode before keeping an
+overlapping route suffix, so a future flight cannot erase pending boarding.
+Full offline/security/installed-file checks pass; delivered in FFIII d3053479.
+
+October28 [save-point category applicability](re/SAVE_CATEGORY_20261028.md):
+Save Points is skipped in FFI–FFIII, which have no native save-point records.
+FFIV–FFVI retain the category. Enum identities and other empty categories stay.
+
 October26 follow-up: [repeated identical area/title components](re/MAP_NAME_PARTS_20261026.md).
 The shared map-label composer now emits an identical resolved area/title once;
 distinct room/floor labels and repeated announcements remain. Source review is

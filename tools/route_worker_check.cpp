@@ -17,7 +17,29 @@ bool capture_ready=false;
 bool capture_movement=false;
 struct MovementProperty {int type=2,steps=1;} movement_property;
 struct MovementActor {MovementProperty* property=&movement_property;} movement_actor;
+// Owner-only instruction-controller observations. Lists/objects are fixture
+// owned and never supplied to planning workers; named fields match native RE.
+struct RoutineInstruction {int kind=3;};
+struct RoutineList {std::vector<void*> values;int count_override=INT_MIN;};
+RoutineInstruction routine_move{1},routine_lerp{7},routine_animation{3};
+RoutineList routine_controllers,routine_instructions;
+struct RoutineController {
+    void* actor=&movement_actor;void* current=&routine_move;
+    RoutineList* instructions=&routine_instructions;int index=0;bool loop=true;
+} routine_controller;
+struct RoutineManager {RoutineList* controllers=&routine_controllers;} routine_manager;
+struct RoutineHandle {RoutineManager* manager=&routine_manager;} routine_handle;
+bool capture_routine=false;
 bool capture_companion=false;
+bool capture_entity_alive=false,capture_entity_active=false,capture_entity_vehicle_hidden=false;
+// Optional IL2CPP-shaped value-list owner for actual transportation capture.
+// Other planner fixtures keep their old null-property/native-free behavior.
+struct TransportArray {uint8_t header[24]{};uintptr_t count=0;int32_t values[8]{};};
+struct TransportList {uint8_t header[16]{};TransportArray* items=nullptr;int32_t count=0;};
+struct TransportProperty {int32_t type=19,id=0;TransportList* targets=nullptr;} transport_property;
+struct TransportActor {TransportProperty* property=&transport_property;bool enabled=true;int32_t collision=1;bool power=true;} transport_actor;
+bool capture_transport=false;
+std::wstring capture_raw_name;
 int current_map=0;
 unity::Vec3 current_position;
 std::vector<int> auto_groups;
@@ -36,10 +58,46 @@ Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 void* Method::ptr() { fixture::native(); return nullptr; }
 il2cpp::Method* Method::get() { fixture::native(); return nullptr; }
 il2cpp::Class* Class::get() { fixture::native(); return nullptr; }
-bool Class::is(void*p) { fixture::native();return (fixture::capture_companion||fixture::capture_movement)&&std::string(name)=="FieldNonPlayer" || fixture::capture_movement&&p==&fixture::movement_property&&std::string(name)=="PropertyNpc"; }
-int32_t Field::get() { fixture::native();return fixture::capture_movement&&std::strcmp(name,"<Property>k__BackingField")==0?offsetof(fixture::MovementActor,property):std::strcmp(name,"<MoveType>k__BackingField")==0?offsetof(fixture::MovementProperty,type):std::strcmp(name,"<MoveStep>k__BackingField")==0?offsetof(fixture::MovementProperty,steps):-1; }
+bool Class::is(void*p) { fixture::native();
+    if(fixture::capture_routine) {
+        const std::string cls=name;
+        if(cls=="FieldController")return p==&fixture::routine_handle;
+        if(cls=="FieldNonPlayerRouteMoveInstructionController")return p==&fixture::routine_controller;
+        if(cls=="MoveToInstruction")return p==&fixture::routine_move;
+        if(cls=="MoveLerpInstruction")return p==&fixture::routine_lerp;
+    }
+    if(fixture::capture_transport&&p==&fixture::transport_actor) {
+        if(std::strcmp(name,"FieldColliderEntity")==0)return fixture::transport_property.type==19;
+        // Match the actual inheritance: RandomEvent and SwitchEvent are also
+        // EventTriggerEntity instances. Otherwise the host would conceal a
+        // production type-filter omission instead of exercising it.
+        if(std::strcmp(name,"EventTriggerEntity")==0)return fixture::transport_property.type==2||fixture::transport_property.type==28||fixture::transport_property.type==30;
+    }
+    return fixture::capture_entity_alive&&std::string(name)=="FieldEntity" || (fixture::capture_companion||fixture::capture_movement)&&std::string(name)=="FieldNonPlayer" || fixture::capture_movement&&p==&fixture::movement_property&&std::string(name)=="PropertyNpc";
+}
+int32_t Field::get() { fixture::native();
+    if(fixture::capture_routine) {
+        const std::string field=name;
+        if(field=="nonPlayerControllerManager")return offsetof(fixture::RoutineHandle,manager);
+        if(field=="nonPlayerControllerList")return offsetof(fixture::RoutineManager,controllers);
+        if(field=="nonPlayerEntity")return offsetof(fixture::RoutineController,actor);
+        if(field=="currentInstruction")return offsetof(fixture::RoutineController,current);
+        if(field=="instructionList")return offsetof(fixture::RoutineController,instructions);
+        if(field=="instructionIndex")return offsetof(fixture::RoutineController,index);
+        if(field=="loop")return offsetof(fixture::RoutineController,loop);
+    }
+    if(fixture::capture_transport) {
+        if(std::strcmp(name,"<Property>k__BackingField")==0)return offsetof(fixture::TransportActor,property);
+        if(std::strcmp(name,"<TargetTransportationIdList>k__BackingField")==0)return offsetof(fixture::TransportProperty,targets);
+        if(std::strcmp(name,"<EntityId>k__BackingField")==0)return offsetof(fixture::TransportProperty,id);
+        if(std::strcmp(name,"enable")==0)return offsetof(fixture::TransportActor,enabled);
+        if(std::strcmp(name,"collisionId")==0)return offsetof(fixture::TransportActor,collision);
+        if(std::strcmp(name,"<TriggerPower>k__BackingField")==0)return offsetof(fixture::TransportActor,power);
+    }
+    return fixture::capture_movement&&std::strcmp(name,"<Property>k__BackingField")==0?offsetof(fixture::MovementActor,property):std::strcmp(name,"<MoveType>k__BackingField")==0?offsetof(fixture::MovementProperty,type):std::strcmp(name,"<MoveStep>k__BackingField")==0?offsetof(fixture::MovementProperty,steps):-1;
+}
 std::wstring str(void*) { fixture::native(); return {}; }
-std::wstring rd_str(void*,Field&) {fixture::native();return {};}
+std::wstring rd_str(void*,Field&) {fixture::native();return fixture::capture_transport?fixture::capture_raw_name:std::wstring();}
 void call_failed_note(const char*) {}
 void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
 void* instance(Class&) { fixture::native(); return nullptr; }
@@ -52,13 +110,25 @@ Method* virtual_method(void*, Method*) { fixture::native(); return nullptr; }
 Class* object_class(void*) { fixture::native(); return nullptr; }
 }
 namespace unity {
-bool alive(void*) { fixture::native(); return false; }
+bool alive(void*) { fixture::native(); return fixture::capture_entity_alive; }
 void* game_object(void*) { fixture::native(); return nullptr; }
 void* transform(void* p) { fixture::native(); return fixture::capture_ready?p:nullptr; }
 Vec3 local_position(void*) { fixture::native(); return fixture::current_position; }
-int list_count(void*) { fixture::native(); return 0; }
-void* list_at(void*, int) { fixture::native(); return nullptr; }
-int array_length(void*) { fixture::native(); return 0; }
+int list_count(void* p) { fixture::native();
+    if(fixture::capture_routine&&(p==&fixture::routine_controllers||p==&fixture::routine_instructions)) {
+        const auto& list=*static_cast<fixture::RoutineList*>(p);
+        return list.count_override==INT_MIN?int(list.values.size()):list.count_override;
+    }
+    return fixture::capture_transport&&p?static_cast<fixture::TransportList*>(p)->count:0;
+}
+void* list_at(void* p, int i) { fixture::native();
+    if(fixture::capture_routine&&(p==&fixture::routine_controllers||p==&fixture::routine_instructions)) {
+        const auto& list=*static_cast<fixture::RoutineList*>(p);
+        if(i>=0&&i<int(list.values.size()))return list.values[i];
+    }
+    return nullptr;
+}
+int array_length(void* p) { fixture::native(); return fixture::capture_transport&&p?static_cast<int>(static_cast<fixture::TransportArray*>(p)->count):0; }
 }
 namespace log_ { void write(const char*, ...) {} }
 namespace hooks { void note_fault(const char*) { std::abort(); } }
@@ -76,7 +146,17 @@ bool get_bool(const char* key, bool value) { return std::string(key)==ui::prefs:
 int get_int(const char* key,int value){return std::string(key)==ui::prefs::kPathfindingFilterMode?fixture::filter_mode:value;}
 }
 namespace ffpr::system { bool is_field_navigation_ready() { fixture::native(); return fixture::capture_ready; } }
-namespace game { Id current() { return fixture::game_id; } const Flags& flags() { static Flags f; return f; } const char* key() { return "ff2"; } }
+namespace game {
+Id current() { return fixture::game_id; }
+const Flags& flags() {
+    // Match the real navigation feature in games/ff3..ff6/module.cpp. A default
+    // false flag made private-room/passage proofs differ from production. Keep
+    // immutable per-game rows so concurrent fixture workers never mutate them.
+    static const auto rows=[] {std::array<Flags,7> table{};for(size_t i=3;i<table.size();++i)table[i].has_hidden_passages=true;return table;}();
+    const auto index=static_cast<size_t>(fixture::game_id);return rows[index<rows.size()?index:0];
+}
+const char* key() { return "ff2"; }
+}
 namespace modtext {
 LocaleScope::LocaleScope(std::wstring) {}
 LocaleScope::~LocaleScope() {}
@@ -100,7 +180,7 @@ std::wstring translate_entity_name_snapshot(const std::wstring& value) { return 
 std::wstring translate_entity_name_snapshot(const std::wstring& value,int) { return value; }
 npc_names::Label npc_display_label_snapshot(const std::wstring& value) { return npc_names::parse(value); }
 int current_map_id() { fixture::native(); return fixture::current_map; }
-void* map_handle() { fixture::native(); return nullptr; }
+void* map_handle() { fixture::native(); return fixture::capture_routine?&fixture::routine_handle:nullptr; }
 void* player() { fixture::native(); return fixture::capture_ready?reinterpret_cast<void*>(1):nullptr; }
 unity::Vec3 player_position() { fixture::native(); return {}; }
 VehicleState current_vehicle() { fixture::native(); return {}; }
@@ -109,9 +189,10 @@ std::vector<VehicleOnMap> vehicles_on_map() { fixture::native(); return {}; }
 std::wstring vehicle_display_name(int, int, const std::wstring&) { fixture::native(); return {}; }
 bool EntityCursor::next(void*&) { fixture::native(); return false; }
 bool native_position_walkable(void*, unity::Vec3) { fixture::native(); return false; }
-bool entity_is_active(void*) { fixture::native(); return false; }
+bool entity_is_active(void*) { fixture::native(); return fixture::capture_entity_active; }
+bool entity_is_present(void*) { fixture::native(); return fixture::capture_entity_active||fixture::capture_entity_vehicle_hidden; }
 bool entity_is_scenery(void*) { fixture::native(); return false; }
-int object_type_of(void*) { fixture::native(); return 0; }
+int object_type_of(void*) { fixture::native(); return fixture::capture_transport?fixture::transport_property.type:0; }
 std::wstring resolve_map_name_by_id(int) { fixture::native(); return {}; }
 }
 namespace field::map_state {
@@ -160,7 +241,7 @@ __declspec(noinline) int check_counter_routes(int number, const field::map_state
             const auto& grid=baked::grids(*inn);
             const auto clerk=std::find_if(grid.objects.begin(),grid.objects.end(),[](const auto& o){return o.type==baked::ObjType::ShopNPC&&o.entity_id()==10;});
             expect(clerk!=grid.objects.end()&&clerk->tx==12&&clerk->ty==18&&clerk->a==0,"Ur's actual zero-link clerk resolves");
-            baked_route::Request movement;movement.submap=inn;movement.start={1,8,18};
+            baked_route::Request movement;movement.submap=inn;movement.start={1,8,18};movement.transportation_id=1;
             map_state::Resolver state(chest_flags,chest_records);map_state::add_relays(state,*inn,movement);
             auto goals=baked_route::goals_for(movement,{1,12,18},baked_route::GoalKind::Interact,&*clerk);
             movement.goals=goals.cells;const auto route=baked_route::find(movement);
@@ -172,8 +253,10 @@ __declspec(noinline) int check_counter_routes(int number, const field::map_state
             auto published=std::make_shared<QuickGrid>();published->map_id=6;published->movement=movement;published->reach=reach;
             const auto prior_grid=g_quick_grid;g_quick_grid=published;
             field::PathInfo quick;
+            const auto prior_jobs=fixture::queued.size();
             expect(quick_query(world_of_cell(*inn,movement.start),world_of_cell(*inn,{1,12,18}),nullptr,nullptr,TargetKind::Infer,false,quick)&&quick.success&&!quick.pending,
                 "actual current-floor quick filter uses the published active relay geometry");
+            expect(fixture::queued.size()==prior_jobs,"published native-foot relay geometry needs no asynchronous refresh");
             g_quick_grid=prior_grid;fixture::current_map=prior_map;
             movement.relays.clear();auto absent=baked_route::goals_for(movement,{1,12,18},baked_route::GoalKind::Interact,&*clerk);
             expect(!any_reachable(reach,absent.cells),"inactive counter cannot grant a false interaction route");
