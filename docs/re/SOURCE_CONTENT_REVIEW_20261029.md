@@ -1,5 +1,25 @@
 # Preserved native analysis and historical source exposure
 
+## October30 completed rewrite
+
+The authorized rewrite and atomic leased GitHub update succeeded. All88 prepared
+commits and8 tag names remain; the current tree is byte-for-byte identical.
+Only36 confirmed disassembly versions were substituted with source-free
+references. Those36 original blobs are absent from the local object store;
+2711 reachable blobs now pass the history gate. Remote master and all8 tags
+match their rewritten OIDs. All7 existing releases,7 assets, IDs, hashes, sizes
+and other recorded metadata are unchanged. There are no advertised PR refs.
+GitHub content CI41053005400 passed for2a214aa. No permission error occurred;
+no browser, repository deletion/recreation, dependency install or game launch.
+
+Exact recovery bundles, original refs/config and commit/ref maps are preserved
+outside Git at D:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/. Factual
+verification is build_check/history_rewrite_20261030/completion.json. The normal
+reachable branches/tags are clean; other people's clones and GitHub internal
+unreferenced-object caches were not inspected or claimed purged. All-six
+installed cf805c2e is unchanged. The statements below preserve the original
+finding and operation preparation, superseded by this completed result.
+
 October30 follow-up: the user now explicitly authorizes a history rewrite,
 retaining the repository and releases. No browser or authentication workaround
 is allowed after a GitHub permission error. The exact active task and queued

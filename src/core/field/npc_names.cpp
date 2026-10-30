@@ -302,6 +302,22 @@ Label parsed_base(std::wstring_view raw, std::wstring_view base, long long prefi
         base = suffix_base;
         if (!has_prefix_ordinal) prefix_ordinal = suffix_ordinal;
     }
+    // Translated descriptive tags can put their instance decoration inside
+    // the last parenthesis: Magic Shop (Black Mage 1). Preserve the job/tag,
+    // removing only its trailing enumeration before our one per-floor suffix.
+    // An explicit outer prefix/suffix remains the ordering authority.
+    if(!base.empty()&&(base.back()==L')'||base.back()==L'\xFF09')) {
+        const wchar_t opening=base.back()==L')'?L'(':L'\xFF08';
+        const auto at=base.find_last_of(opening);
+        if(at!=std::wstring_view::npos&&at>0) {
+            const auto inside=trim(base.substr(at+1,base.size()-at-2));
+            std::wstring_view descriptive;long long inner_ordinal=-1;
+            if(strip_suffix_number(inside,descriptive,inner_ordinal)) {
+                auto label=materialize(base.substr(0,at+1));label+=descriptive;label+=base.back();
+                return {std::move(label),prefix_ordinal>=0?prefix_ordinal:inner_ordinal};
+            }
+        }
+    }
     return {materialize(base), prefix_ordinal};
 }
 

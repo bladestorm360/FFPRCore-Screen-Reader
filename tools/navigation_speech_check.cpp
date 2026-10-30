@@ -23,7 +23,8 @@ int next = 0, previous = 0, cancelled = 0;
 bool selectable = true, transition = false, field_ready = true, battle = false;
 bool soundscape=true,beacons=false,combined=false;int beacon_requests=0;
 int scans = 0, cache_reads = 0;
-int refreshes=0,scan_cancels=0,invalidations=0;
+int refreshes=0,scan_cancels=0,invalidations=0,view_invalidations=0,map_id=1;
+actions::Fn main_menu_opening;
 std::map<events::Kind,std::vector<events::Handler>> handlers;
 int index = 0, total = 1;
 void finish() { auto callbacks = std::move(pending); pending.clear(); for (auto& callback : callbacks) callback(); }
@@ -73,7 +74,7 @@ std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring> arg
     return result;
 }
 }
-namespace actions { bool defined(const char*) { return false; } bool run(const char* name) { if(std::strcmp(name,"Mod.RestartEntityBeacon")==0)++fixture::beacon_requests;return true; } void define(const char*, Fn) {} }
+namespace actions { bool defined(const char*) { return false; } bool run(const char* name) { if(std::strcmp(name,"Mod.RestartEntityBeacon")==0)++fixture::beacon_requests;return true; } void define(const char* name, Fn fn) {if(std::strcmp(name,"EntityScanner.MainMenuOpening")==0)fixture::main_menu_opening=std::move(fn);} }
 namespace queries {
 bool is(const char* name) {
     if (std::strcmp(name, "GameStatePatches.IsInputTransitionBlocked") == 0) return fixture::transition;
@@ -102,7 +103,7 @@ void* refresh(ref::Class& type) { return get_or_refresh(type); }
 void clear(ref::Class&) {}
 }
 namespace field {
-int current_map_id() { return 1; }
+int current_map_id() { return fixture::map_id; }
 void* map_handle() {return reinterpret_cast<void*>(1);}
 std::wstring current_map_name() { return L"Map"; }
 bool Entity::is_alive() const { return true; }
@@ -119,7 +120,7 @@ namespace field::scanner {
 void remember_selection() {} void clear_selection() {}
 void interrupt_navigation_work() { ++fixture::scan_cancels; }
 void when_filter_ready(std::function<void()> ready, bool) { fixture::pending.push_back(std::move(ready)); }
-void scan_entities() { ++fixture::scans; } void force_rescan() { ++fixture::scans; } void invalidate_map() {} void schedule_scan() {} void cancel_scan() {} void cancel_navigation_work() {++fixture::scan_cancels;}
+void scan_entities() { ++fixture::scans; } void force_rescan() { ++fixture::scans; } void invalidate_map() {++fixture::view_invalidations;} void schedule_scan() {} void cancel_scan() {} void cancel_navigation_work() {++fixture::scan_cancels;}
 void reapply_filter() {} void set_filter_to_layer(bool) {}
 void refresh_state() {++fixture::refreshes;}
 void next_entity() { ++fixture::next; } void previous_entity() { ++fixture::previous; }
@@ -300,6 +301,18 @@ int main() {
                 fixture::output.back().parts.front()==L"Category: "+field::category_name(expected),
                 "reverse category cycle skips Save Points only in FF1-FF3 and preserves wraparound");
         }
+    }
+    expect(static_cast<bool>(fixture::main_menu_opening),"field owner registers actual menu-entry invalidation");
+    if(fixture::main_menu_opening) {
+        const int routes=fixture::invalidations,views=fixture::view_invalidations,scans=fixture::scans;
+        fixture::game_id=game::Id::FF3;fixture::map_id=1;fixture::main_menu_opening();
+        expect(fixture::invalidations==routes+1&&fixture::view_invalidations==views+1&&fixture::scans==scans,
+            "Menu5 retires world1 routes and reusable views without scanning inside the menu");
+        fixture::map_id=4;fixture::main_menu_opening();
+        fixture::map_id=1;
+        for(int n:{1,2,4,5,6}) {fixture::game_id=static_cast<game::Id>(n);fixture::main_menu_opening();}
+        expect(fixture::invalidations==routes+1&&fixture::view_invalidations==views+1&&fixture::scans==scans,
+            "menu action leaves the other worlds and five games unchanged");
     }
     std::printf("Navigation speech: ordered category/focus, stale-event rejection, FIFO browse, route-aware distance/floors and concurrent soundscape/beacon/directions: %d failures\n", failures);
     return failures ? 1 : 0;

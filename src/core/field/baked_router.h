@@ -193,6 +193,9 @@ void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>&
 inline bool native_ground_entry(int type) {return type==5||type==11||type==12;}
 // Native baked cardinal masks and the parser's explicit diagonal stair edges.
 bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, const Cell& to);
+// Owned multi-world planning shares every ordinary neighbour guard. Fixed
+// storage covers eight indoor directions or four world steps/four mountain actions.
+size_t successors(const Request& r,const Cell& from,std::array<Cell,8>& cells);
 /// Entering this cell changes maps; it cannot be an intermediate walking tile.
 bool terminal_transition(const Request& r, const baked::Grids& g, const Cell& cell);
 /// A teleport landing must be open, clear of blockers/traps/events and have a legal way out.

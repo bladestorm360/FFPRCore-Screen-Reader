@@ -272,7 +272,7 @@ Labels follow the pad family (A/B/X/Y, Cross/Circle/Square/Triangle, Nintendo).
 | Right stick up / down / left / right | `Mod.CyclePrevious` / `Mod.CycleNext` / `Mod.CyclePreviousCategory` / `Mod.CycleNextCategory` | up: `GlobalHotkeyHandler.HandleItemDetailsKey`; down: `KeyHelpReader.AnnounceKeyHelp` |
 | Left trigger | `WaypointHandler.PathfindToCurrentWaypoint` if waypoint; `Mod.NavigateToEntity` if entity; else "No target selected". Both use the same autowalk/settings policy. | game (Page Up) |
 | L3 (released alone) | Stick Click Normalization off: `Mod.ToggleAudioBeacons`; on: a one-frame L3 press to the game | game |
-| R3 (released alone) | off: `Mod.TogglePathfindingFilter` (cycles the three filter modes); on: one-frame R3 press to the game | game |
+| R3 (released alone) | off: `Mod.TogglePathfindingFilter` (cycles the four filter modes); on: one-frame R3 press to the game | game |
 | L3 + R3 | `Mod.ToggleStickClickNormalization` | game |
 | LB / RB / RT | game | game |
 | Puzzle (`PuzzleGameState.IsActive`) | right stick up: `PuzzlePatches.AnnouncePosition`; nothing else | same |

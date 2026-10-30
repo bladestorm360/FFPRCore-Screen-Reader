@@ -60,6 +60,7 @@ Filtered build(FilterInput& input);
 // One worker pass prepares every category. Only view 0 owns names/exits; the
 // other views share those source rows and contain their own selection indices.
 struct Categories {
+    bool stationary_inventory=false; // qualified current actor snapshot, not inferred from bake population
     std::array<Filtered, kCategoryCount> views;
     // Soundscape owns physical grouping independently from pathfinder toggles.
     // Availability/story/terrain guards are shared; exit/event/pad grouping is not.

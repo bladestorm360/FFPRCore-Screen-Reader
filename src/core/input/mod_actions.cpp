@@ -95,8 +95,8 @@ void run_toggle(const Toggle& t)
     prefs::notify_changed(t.key);
 }
 
-/// The pathfinding filter cycles its three modes (user, 2026-10-11): current floor, current
-/// map with vehicles, current map. The old on/off value seeds the first cycle.
+/// Cycle current floor, current map with vehicles, current map and connected
+/// world maps. Preserve old saved values; the old on/off seeds the first cycle.
 void cycle_pathfinding_filter()
 {
     int mode = settings::get_int(prefs::kPathfindingFilterMode, -1);

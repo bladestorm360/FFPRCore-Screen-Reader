@@ -259,6 +259,7 @@ const Grids& grids(const Submap& s)
                 o.d = r.d;
                 o.name = r.name;
                 o.group = r.group;
+                g->objects_by_entity[o.entity_id()].push_back(g->objects.size());
                 if(world_exit(o))g->world_exits[o.entity_id()].push_back(g->objects.size());
                 if(o.type==ObjType::TransitionHelper)g->transition_helpers[o.entity_id()].push_back(g->objects.size());
                 if(s.world && o.type==ObjType::TransportationEventAction && (o.a||o.b))
@@ -269,6 +270,7 @@ const Grids& grids(const Submap& s)
             }
         }
     }
+    g->entity_index_prepared=true;
     // Step-on warps and trapdoors: cells an ordinary route must not cross.
     if (cells) {
         for (const Object& o : g->objects) {

@@ -52,7 +52,7 @@
 #undef install
 #undef s_install
 namespace fixture {
-struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
+struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
@@ -87,7 +87,7 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 bool Class::is(void*p){return p!=nullptr;}il2cpp::Class*Class::get(){return nullptr;}
-int32_t Field::get(){std::string n=name;if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList"||n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
+int32_t Field::get(){std::string n=name;if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList"||n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
@@ -233,7 +233,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  poisona_view.texts["spell"]=L"Poisona, Lv. 1, MP 25/25";fm::d_WindowUpdate(&field_window,nullptr);fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Poisona, Lv. 1, MP 25/25")==0,"FF3 Use entry speaks its first ready spell exactly once");
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,7);spoken.clear();fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"command return cancels pending spell read");
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,2);field_window.state=2;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"spell target entry cancels pending list speech before the target owns focus");
- Node empty_first,terra,terra_view,target_cursor,field_use;empty_first.visible=false;terra.data=&ally;terra.view=&terra_view;terra_view.texts["nameText"]=L"Terra";List field_members{&empty_first,&terra};field_use.list=&field_members;target_cursor.parent=&terra;
+ Node empty_first,terra,terra_view,target_cursor,field_use;empty_first.visible=false;terra.data=&ally;terra.view=&terra_view;terra_view.texts["nameText"]=L"Terra";List field_members{&empty_first,&terra};field_use.list=&field_members;target_cursor.parent=&terra;field_window.use=&field_use;field_use.cursor=&target_cursor;
  menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::on_use_set_cursor(&field_use,&target_cursor);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken==std::vector<std::wstring>{L"Terra (1 of 1)",L"Terra (1 of 1)"},"compacted field target is read from native cursor parent and deliberate arrows repeat it");
 
  // Learn exit rebuilds both old spell/tome previews before publishing Command7.
@@ -241,9 +241,45 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  fm::o_CommandInit=&field_phase;field_window.state=3;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();
  fixture::on_field_phase=[&]{fm::on_list_set_cursor(&field_list,&field_cursor);fm::on_use_set_cursor(&field_use,&target_cursor);};
  fm::d_CommandInit(&field_window,nullptr);fixture::on_field_phase={};expect(spoken.empty()&&!fm::spell_list_active()&&!fm::g_pending_spell_window,"Learn -> command retires both outgoing preview readers before native rebuild");
- for(int state:{0,2,7,8,9,10,11}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.empty(),"command, target, popup and closed states cannot fall back to cached spell/tome lists");}
- for(int state:{1,4,5,6}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);fixture::guard.clear();spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.size()==1&&spoken[0].find(L"Poisona")==0,"Use/Remove/Exchange/Forget still read their actual focused spell rows");}
+ for(int state:{0,2,5,7,8,9,10,11}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.empty(),"command, character picker, popup and closed states cannot fall back to cached spell/tome lists");}
+ for(int state:{1,4,6}) {field_window.state=state;menu_state::set_active(menu_state::MAGIC_MENU,true);fixture::guard.clear();spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken.size()==1&&spoken[0].find(L"Poisona")==0,"Use/Remove/Forget still read their actual focused spell rows");}
  field_window.state=3;menu_state::set_active(menu_state::MAGIC_MENU,true);fixture::guard.clear();spoken.clear();fm::on_list_set_cursor(&field_list,&field_cursor);expect(spoken==std::vector<std::wstring>{L"Blind (1 of 1)"},"Learn reads the focused tome only in its native list phase");
+ // Actual Exchange5 uses useController's three character rows, not the hidden
+ // spell grid. Its native Init sets focus twice before the state is published.
+ Node exchange_rows[3],exchange_views[3],exchange_data[3],source_status,source_view;
+ List exchange_members;const wchar_t* exchange_names[]={L"Corrad, HP 2510/2510",L"Rae, HP 2376/2376",L"Robyn, HP 1881/1881"};
+ for(int i=0;i<3;++i){exchange_rows[i].data=&exchange_data[i];exchange_rows[i].view=&exchange_views[i];exchange_views[i].texts["nameText"]=exchange_names[i];exchange_members.push_back(&exchange_rows[i]);}
+ field_use.list=&exchange_members;field_window.status=&source_status;source_status.view=&source_view;
+ source_view.texts={{"nameText",L"Ryco, HP 1818/1818"},{"jobNameText",L"Summoner"}};
+ fm::o_ExchangeInit=&field_phase;fm::o_UseSetCursor=&use_target_cursor;spoken.clear();fixture::guard.clear();field_window.state=7;
+ fixture::on_field_phase=[&]{target_cursor.index=0;target_cursor.parent=&exchange_rows[0];fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);};
+ fm::d_ExchangeInit(&field_window,nullptr);fixture::on_field_phase={};expect(spoken.empty(),"Exchange native intermediate focus cannot speak before entry settles");
+ field_window.state=5;fm::d_WindowUpdate(&field_window,nullptr);fm::d_WindowUpdate(&field_window,nullptr);
+ expect(spoken==std::vector<std::wstring>{L"Exchange: Ryco, HP 1818/1818, Summoner. Corrad, HP 2510/2510 (1 of 3)"},"Exchange entry reads rendered source and focused recipient once");
+ spoken.clear();for(int index:{1,2,1,0,0}){target_cursor.index=index;target_cursor.parent=&exchange_rows[index];fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);}
+ expect(spoken.size()==5&&spoken[0]==L"Rae, HP 2376/2376 (2 of 3)"&&spoken[1]==L"Robyn, HP 1881/1881 (3 of 3)"&&spoken[3]==spoken[4],"Exchange arrows read the actual recipient and deliberate repeats remain audible");
+ spoken.clear();fm::d_ExchangeInit(&field_window,nullptr);source_view.texts["nameText"]=L"Robyn, HP 1881/1881";target_cursor.index=1;target_cursor.parent=&exchange_rows[1];fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);fm::d_WindowUpdate(&field_window,nullptr);
+ expect(spoken.size()==1&&spoken[0].starts_with(L"Exchange: Robyn, HP 1881/1881"),"source-character reentry reads the updated header and native cursor fulfils pending entry");
+ spoken.clear();Node foreign_use;foreign_use.list=&exchange_members;foreign_use.cursor=&target_cursor;fm::d_UseSetCursor(&foreign_use,&target_cursor,nullptr);
+ field_use.visible=false;fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);field_use.visible=true;
+ target_cursor.visible=false;fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);target_cursor.visible=true;
+ for(int state:{0,1,3,4,6,7,8,9,10,11}){field_window.state=state;fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);}
+ expect(spoken.empty(),"foreign, hidden and inactive Exchange cursors cannot read retained rows");
+ field_window.state=5;fm::d_ExchangeInit(&field_window,nullptr);source_view.texts["nameText"].clear();spoken.clear();fm::d_WindowUpdate(&field_window,nullptr);
+ expect(spoken.empty()&&fm::g_pending_spell_window,"Exchange waits for its visible source header");
+ for(int i=0;i<12;++i)fm::d_WindowUpdate(&field_window,nullptr);expect(!fm::g_pending_spell_window&&spoken.empty(),"unready Exchange observation remains bounded to the existing entry event");
+ source_view.texts["nameText"]=L"Ryco";fm::d_ExchangeInit(&field_window,nullptr);fm::on_set_next_state(&field_window,7);field_window.state=7;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty(),"Exchange cancel retires pending focus before command return");
+ std::vector<double> exchange_times;const int exchange_originals=original_calls;
+ for(int episode=0;episode<1000;++episode){
+  spoken.clear();const auto begin=std::chrono::steady_clock::now();
+  field_window.state=7;fm::d_ExchangeInit(&field_window,nullptr);field_window.state=5;fm::d_WindowUpdate(&field_window,nullptr);
+  for(int index=0;index<3;++index){target_cursor.index=index;target_cursor.parent=&exchange_rows[index];fm::d_UseSetCursor(&field_use,&target_cursor,nullptr);}
+  fm::on_set_next_state(&field_window,7);field_window.state=7;fm::d_WindowUpdate(&field_window,nullptr);
+  exchange_times.push_back(std::chrono::duration<double,std::micro>(std::chrono::steady_clock::now()-begin).count());
+ }
+ expect(original_calls-exchange_originals==6000,"Exchange episode preserves every original entry, update and cursor call");
+ std::sort(exchange_times.begin(),exchange_times.end());
+ std::printf("Exchange full entry/three arrows/cancel capture-to-fake-speech: median %.3f us, p99 %.3f us, max %.3f us (fake native/output only)\n",exchange_times[500],exchange_times[990],exchange_times.back());
  fm::o_WindowSetActive=&show;field_window.state=2;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::d_WindowSetActive(&field_window,false,nullptr);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken.empty(),"closed character target cannot announce a stale character row");
  namespace f2=ffpr::ff2;Node target_window,target_list,target_cursor2,target_data[4],target_views[4],target_rows[4];List target_contents;
  target_window.state=2;target_window.view=&target_window;owners["AbilityWindowController"]=&target_window;target_cursor2.parent=&target_rows[0];

@@ -7,9 +7,23 @@ int main(){
  using namespace field;using namespace baked_nav;
  const auto read=[](const char*p){std::ifstream f(p,std::ios::binary);return std::string(std::istreambuf_iterator<char>(f),{});};
  const auto data=read("data/ff3/maps.bin");if(!baked::load(data.data(),data.size())||!json::parse(read("data/ff3/mapstate.json"),fixture::records))return 2;
- fixture::game_id=game::Id::FF3;const auto* world=baked::submap_by_map_id(4);if(!world)return 2;
+ fixture::game_id=game::Id::FF3;g_loaded=g_prepared=true;const auto* world=baked::submap_by_map_id(4);if(!world)return 2;
  auto flags=std::make_unique<map_state::Flags>();flags->scenario.fill(1);flags->treasure.fill(1);flags->global.fill(1);flags->current_map_id=4;flags->current_area_id=1;
  int failures=0;const auto expect=[&](bool ok,const char*why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
+ {
+  auto state=map_state::Resolver(*flags,fixture::records);std::vector<RemoteObject> remote;filter_worker::FilterInput list;
+  list.current_map=301;list.exits=true;list.reachable_only=false;
+  std::thread projection([&]{remote=connected_objects_snapshot(301,state);});projection.join();
+  for(const auto& object:remote)if(object.type==baked::ObjType::GotoMap&&object.dest_map_id==4) {
+   filter_worker::FilterRow row;row.index=list.rows.size();row.kind=Kind::MapExit;row.category=Category::MapExits;
+   row.name=L"Exit to World Map";row.remote_map=object.map_id;row.destination=4;
+   row.entity_id=object.entity_id;row.cell_x=object.cell.x;row.cell_y=object.cell.y;row.route_distance=object.map_id==304?1:200;
+   list.rows.push_back(std::move(row));
+  }
+  expect(list.rows.size()==2,"actual connected-floor provider retains both Maze World Map exits before grouping");
+  const auto filtered=filter_worker::build_categories(list);
+  expect(filtered.views[static_cast<size_t>(Category::MapExits)].order.size()==2,"actual provider-to-category pipeline keeps one world exit on each Maze source floor");
+ }
  for(const auto start:std::vector<baked_route::Cell>{{1,151,74},{1,46,57},{1,197,42},{1,197,38}})for(int model:{0,9,10}){
   auto snapshot=std::make_unique<RouteSnapshot>(map_state::Resolver(*flags,fixture::records));
   snapshot->map_id=4;snapshot->submap=world;snapshot->layer=1;snapshot->locale=L"en";
@@ -20,6 +34,18 @@ int main(){
    snapshot->goal.cell={1,197,41};snapshot->goal.entity_id=173;maze=plan_snapshot(*snapshot);});worker.join();
   std::printf("FFIII start(%d,%d) model%d: Tower%d next%d reason=%ls; graph%d next%d visited%d; Maze%d next%d\n",start.x,start.y,model,
    tower.path.success,tower.path.next_map_id,tower.path.reason.c_str(),graph.found,graph.next_map_id,graph.visited_maps,maze.path.success,maze.path.next_map_id);
+  if(model==10&&(start==baked_route::Cell{1,151,74}||start==baked_route::Cell{1,46,57})) {
+   expect(maze.path.success&&!maze.path.walk_phases.empty(),"Invincible Maze approach is planned from both real world origins");
+   if(maze.path.success&&!maze.path.walk_phases.empty()) {
+    const auto& last=maze.path.walk_phases.back();
+    expect(!last.cells.empty(),"Maze landing has an actual walking continuation");
+    if(!last.cells.empty()) {
+     const auto landing=last.cells.front();
+     std::printf("Maze from(%d,%d): landing(%d,%d), final walk%zu, total%d\n",start.x,start.y,landing.x,landing.y,last.cells.size()-1,maze.path.step_count);
+     expect(last.cells.size()<=2,"equally short legal flight lands beside the Maze rather than adding a long walk");
+    }
+   }
+  }
   if(model==10&&start.x==151)expect(tower.path.success,"Invincible at the cleared-statue approach must route through the real maze to Crystal Tower");
   if(model==10&&start.x==151){
    expect(tower.path.next_map_id==299&&!tower.path.walk_phases.empty(),"first leg enters the actual southern maze entrance");
@@ -34,6 +60,44 @@ int main(){
   route.map_id=4;route.submap=world;route.layer=1;route.locale=L"en";route.position=world_of_cell(*world,start);
   route.vehicle={model!=0,model,model?baked::transport(model)->type:0,{}};return capture;
  };
+ // An observed parked Invincible is a real boarding candidate before the
+ // player boards it. The same nearby craft must also be usable after landing
+ // a different aircraft; this is the required multi-vehicle dependency.
+ for(int current:{0,9}) {
+  auto capture=make_capture(current,{1,151,74});auto& route=capture->route;route.vehicle_shortcuts=true;
+  route.goal.map_id=4;route.goal.cell={1,197,37};route.goal.entity_id=175;route.kind=TargetKind::Transition;
+  std::vector<int> eligible;Planned selected;bool placed=false;
+  std::thread worker([&]{
+   {SnapshotScope scope(route);auto foot=walk_request(*world,{1,151,74});const auto reach=baked_route::flood(foot);const auto& grid=baked::grids(*world);const auto* craft=baked::transport(10);
+    for(int dy=-3;dy<=3&&!placed;++dy)for(int dx=-3;dx<=3&&!placed;++dx) {
+     baked_route::Cell at{1,151+dx,74+dy};if(at==foot.start||!baked_route::open(foot,grid,at)||!reach.reachable(at)||baked_route::terminal_transition(foot,grid,at))continue;
+     if(craft->landing_group>0&&!baked::group_lands(craft->landing_group,baked::attribute(grid,at.x,at.y)))continue;
+     VehicleOnMap vehicle;vehicle.transportation_id=10;vehicle.type=craft->type;vehicle.pos=world_of_cell(*world,at);route.vehicles={vehicle};route.vehicle_names[10]=L"Invincible";placed=true;
+     std::printf("Parked Invincible native-legal fixture(%d,%d), current%d\n",at.x,at.y,current);
+    }
+   }
+   selected=plan_snapshot(route);
+   const std::vector<ExitTarget> targets{{world_of_cell(*world,{1,197,37}),4,305,{1,197,37},TargetKind::Transition}};
+   eligible=exit_distances(*capture,targets,{});
+  });worker.join();
+  expect(placed,"parked Invincible fixture uses a real reachable legal landing cell");
+  const bool board=std::any_of(selected.path.walk_phases.begin(),selected.path.walk_phases.end(),[](const auto& phase){return phase.transportation_id==10&&phase.action_before.find(L"board")!=std::wstring::npos;});
+  expect(selected.path.success&&selected.path.next_map_id==299&&board,"Tower route reaches and boards the actual parked Invincible before entering the Maze");
+  expect(eligible.size()==1&&eligible[0]>=0,"Current map with vehicles lists Tower before the required vehicle is boarded");
+  std::printf("Unboarded Tower current%d: selected%d board%d next%d listed%d\n",current,selected.path.success,board,selected.path.next_map_id,eligible.empty()?-1:eligible[0]);
+ }
+ // Walking through the real Maze must remain valid without boarding an
+ // aircraft after already reaching its ground approach. List and selection
+ // use the same actual graph; neither may impose a vehicle requirement there.
+ {
+  auto capture=make_capture(0,{1,197,42});capture->route.vehicle_shortcuts=true;
+  std::vector<ExitTarget> targets;
+  for(const auto& object:baked::grids(*world).objects)if(object.type==baked::ObjType::GotoMap&&object.a==305)
+   targets.push_back({world_of_cell(*world,{1,object.tx,object.ty}),4,object.a,{1,object.tx,object.ty},TargetKind::Transition});
+  std::vector<int> distances;std::thread worker([&]{distances=exit_distances(*capture,targets,{});});worker.join();
+  expect(targets.size()==1&&distances.size()==1&&distances[0]>=0,"on-foot Current map with vehicles retains the actual Tower via Maze route");
+  std::printf("Tower on-foot ground-approach eligibility: %d\n",distances.empty()?-1:distances[0]);
+ }
  for(int model:{9,10}){
   auto capture=make_capture(model,{1,151,74});std::vector<ExitTarget> targets;
   for(const auto& object:baked::grids(*world).objects)if(object.type==baked::ObjType::GotoMap&&capture->route.state.active(*world,object))

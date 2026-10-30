@@ -13,6 +13,9 @@ if not "%errorlevel%"=="0" (
     exit /b 1
 )
 
+REM Focused development check; normal build remains required for delivery.
+if /I "%~1"=="--check" goto one_check
+
 set "CMAKE=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
 if not exist "%CMAKE%" (
     echo ERROR: bundled CMake not found at:
@@ -48,17 +51,17 @@ if not exist "out\hid.dll" (
 
 echo Checking routes avoid unintended map transitions...
 "out\checks\cross_floor_npc_check.exe" > build_check\cross_floor_npc_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Cross-floor NPC guidance check FAILED - see build_check\cross_floor_npc_report.txt
     exit /b 1
 )
 "out\checks\map_geometry_check.exe" --verify-relays > build_check\map_geometry_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Native counter geometry check FAILED - see build_check\map_geometry_report.txt
     exit /b 1
 )
 "out\checks\saronia_entry_check.exe" > build_check\saronia_entry_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Saronia entry check FAILED - see build_check\saronia_entry_report.txt
     exit /b 1
 )
@@ -182,6 +185,37 @@ if not "%errorlevel%"=="0" (
     echo Route worker check FAILED - see build_check\route_worker_report.txt
     exit /b 1
 )
+
+"out\checks\vehicle_journey_check.exe" > build_check\vehicle_journey_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo vehicle_journey check FAILED - see build_check\vehicle_journey_report.txt
+    exit /b 1
+)
+
+"out\checks\world_map_journey_check.exe" > build_check\world_map_journey_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo world_map_journey check FAILED - see build_check\world_map_journey_report.txt
+    exit /b 1
+)
+
+"out\checks\saved_vehicles_check.exe" > build_check\saved_vehicles_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo saved_vehicles check FAILED - see build_check\saved_vehicles_report.txt
+    exit /b 1
+)
+
+echo Checking Floating Continent navigation cost and native capture ownership...
+"out\checks\floating_navigation_check.exe" > build_check\floating_navigation_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Floating Continent navigation check FAILED - see build_check\floating_navigation_report.txt
+    exit /b 1
+)
+"out\checks\entity_cursor_check.exe" > build_check\entity_cursor_report.txt 2>&1
+if not "%errorlevel%"=="0" (
+    echo Native collection cursor check FAILED - see build_check\entity_cursor_report.txt
+    exit /b 1
+)
+
 python tools\re\arrival_contexts.py > build_check\arrival_contexts_report.txt 2>&1
 if not "%errorlevel%"=="0" (
     echo Native arrival context check FAILED - see build_check\arrival_contexts_report.txt
@@ -336,12 +370,12 @@ if not "%errorlevel%"=="0" (
     exit /b 1
 )
 "out\checks\nautilus_route_check.exe" > build_check\nautilus_route_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Nautilus underwater entry and landing check FAILED - see build_check\nautilus_route_report.txt
     exit /b 1
 )
 python tools\submarine_entrances.py > build_check\submarine_entrance_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Underwater source-to-bake check FAILED - see build_check\submarine_entrance_report.txt
     exit /b 1
 )
@@ -581,17 +615,17 @@ if not "%errorlevel%"=="0" (
     exit /b 1
 )
 "out\checks\boost_use_check.exe" > build_check\boost_use_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Boost use producer check FAILED - see build_check\boost_use_report.txt
     exit /b 1
 )
 python tools\re\boost_guard_facts.py > build_check\boost_guard_facts_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Boost and Guard visual source check FAILED - see build_check\boost_guard_facts_report.txt
     exit /b 1
 )
 "out\checks\unfiltered_air_check.exe" > build_check\unfiltered_air_report.txt 2>&1
-if errorlevel 1 (
+if not "%errorlevel%"=="0" (
     echo Unfiltered and parked aircraft discovery check FAILED - see build_check\unfiltered_air_report.txt
     exit /b 1
 )
@@ -804,3 +838,8 @@ echo Build OK: out\hid.dll
 for %%F in ("out\hid.dll") do echo   %%~zF bytes
 echo NOT deployed. Run smoketest.bat, then deploy.bat.
 endlocal
+exit /b 0
+
+:one_check
+python tools\build_one_check.py "%~2"
+exit /b %errorlevel%

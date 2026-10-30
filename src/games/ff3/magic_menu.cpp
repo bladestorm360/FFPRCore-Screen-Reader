@@ -57,6 +57,8 @@ namespace {
 ref::Class kWindow{"Serial.FF3.UI.KeyInput", "AbilityWindowController", game::kFF3};
 ref::Field fWindowCommand{kWindow, "commandController"};
 ref::Field fWindowList{kWindow, "listController"};
+ref::Field fWindowUse{kWindow, "useController"};
+ref::Field fWindowStatus{kWindow, "statusController"};
 ref::Field fWindowState{kWindow, "stateMachine"};
 ref::Method mUseListInit{kWindow, "UseListInit", 0};
 ref::Method mMemorizeListInit{kWindow, "MemorizeListSelectInit", 0};
@@ -78,6 +80,7 @@ ref::Method mListSetCursor{kList, "SetCursor", 3};
 
 ref::Class kUseList{"Serial.FF3.UI.KeyInput", "AbilityUseContentListController", game::kFF3};
 ref::Field fUseContents{kUseList, "contentList"};
+ref::Field fUseCursor{kUseList, "selectCursor"};
 ref::Method mUseSetCursor{kUseList, "SetCursor", 1};
 
 ref::Class kCommand{"Serial.FF3.UI.KeyInput", "AbilityCommandController", game::kFF3};
@@ -143,7 +146,7 @@ void reset_state() {
     g_pending_spell_window=nullptr;g_last_description.clear();++g_command_gen;
     menu_state::set_active(menu_state::MAGIC_MENU,false);
 }
-bool content_phase(int state) {return state==kStateUseList||state==kStateRemoveList||state==kStateExchange||state==kStateForget;}
+bool content_phase(int state) {return state==kStateUseList||state==kStateRemoveList||state==kStateForget;}
 
 /// MagicMenuState.ShouldSuppress.
 bool should_suppress()
@@ -177,7 +180,7 @@ void announce_spell(void* ability, void* content, int index, int count)
     ffpr::say(line, true);
 }
 
-/// TryAnnounceFromContentList: the spell slots (Use, Remove, Forget, Exchange).
+/// TryAnnounceFromContentList: the spell slots (Use, Remove, Forget).
 bool try_content_list(void* list_ctrl, int index)
 {
     void* list = ref::rd<void*>(list_ctrl, fListContents);
@@ -258,21 +261,44 @@ void on_set_next_state(void* self, int state)
 
 // --- targets (AbilityUseContentListController.SetCursor) -----------------------------------------
 
-void on_use_set_cursor(void* self, void* cursor)
+bool on_use_set_cursor(void* self, void* cursor)
 {
-    if(queries::is("FieldMagicTargets.OwnsRange"))return;
-    if(!self||!cursor||!spell_list_active()||window_state(find_window())!=kStateUseTarget)return;
+    if(queries::is("FieldMagicTargets.OwnsRange"))return false;
+    if(!spell_list_active()||!ffpr::system::is_main_menu_state()||
+       !unity::active_in_hierarchy(self)||!unity::active_in_hierarchy(cursor))return false;
+    void* window=live_window(find_window());
+    const int state=window_state(window);
+    // Exchange5 owns the same character controller as UseTarget2. Its spell
+    // grid is hidden; only this live window's actual character cursor owns speech.
+    if((state!=kStateUseTarget&&state!=kStateExchange)||
+       ref::rd<void*>(window,fWindowUse)!=self||ref::rd<void*>(self,fUseCursor)!=cursor)return false;
     const int index = ui::cursor_index(cursor);
     void* list = ref::rd<void*>(self, fUseContents);
     const int count = displayed::target_count(list);
-    if (index < 0 || index >= count) return;
+    if (index < 0 || index >= count) return false;
     void* content = displayed::cursor_row(cursor, list);
     if (!content) content = unity::get_component_in_parent(cursor, kTargetContent);
     void* character = content ? ref::rd<void*>(content, fTargetContentData) : nullptr;
-    if (!character) return;
+    if (!character) return false;
     std::wstring line = displayed::target(content);
-    if (line.empty()) return;
-    ui::character_row::announce(content, cursor, ui::menu_position(line, index, count));
+    if (line.empty()) return false;
+    line=ui::menu_position(line,index,count);
+    if(state==kStateExchange&&g_pending_spell_window==window){
+        // The source header changes with native 2/3 (L/R) re-entry. Copy only
+        // rendered name/job/vitals once per entry, then leave arrows recipient-only.
+        void* status=ref::rd<void*>(window,fWindowStatus);
+        void* view=displayed::field(status,"view");
+        if(!displayed::container_visible(status)||displayed::text_field(view,"nameText").empty())return false;
+        auto source=displayed::character(view);
+        auto job=displayed::text_field(view,"jobNameText");
+        if(!job.empty())source+=L", "+job;
+        line=T(L"Exchange")+L": "+source+L". "+line;
+    }
+    ui::character_row::announce(content,cursor,std::move(line));
+    // A native arrow arriving before the deferred initial read satisfies the
+    // same event. No text dedup: subsequent deliberate arrows remain audible.
+    if(state==kStateExchange)g_pending_spell_window=nullptr;
+    return true;
 }
 
 // --- command bar (FF1 CommandBarPatches, magic bar) ------------------------------------------------
@@ -342,6 +368,11 @@ void d_WindowUpdate(void* self, const void* mi)
         const int state = window_state(self);
         if (state == kStateCommand || state == kStateNone) return; // native transition not published yet
         if (state == kStateUseTarget) { g_pending_spell_window = nullptr; return; }
+        if(state==kStateExchange){
+            void* use=ref::rd<void*>(self,fWindowUse);
+            on_use_set_cursor(use,use?ref::rd<void*>(use,fUseCursor):nullptr);
+            return;
+        }
         if(state!=kStateMemorizeList&&!content_phase(state)){g_pending_spell_window=nullptr;return;}
         void* list = ref::rd<void*>(self, fWindowList);
         void* cursor = list ? ref::rd<void*>(list, fListCursor) : nullptr;

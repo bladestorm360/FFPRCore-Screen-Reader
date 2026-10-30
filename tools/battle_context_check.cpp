@@ -24,7 +24,12 @@ int fade_reads=0;bool model_cold_singleton=false,prefab_ready=false,lookup_done=
 void* fade_instance(){if(!lookup_done){cached_fade=prefab_ready;lookup_done=true;}return cached_fade?&cached_fade:nullptr;}
 }
 namespace field { const std::wstring& scene_name() { return fixture::scene; } }
-namespace actions { bool defined(const char*) { return false; } bool run(const char*) { return false; } void define(const char*, Fn) {} }
+namespace fixture { int menu_opens=0; }
+namespace actions {
+bool defined(const char* name) { return std::string(name)=="EntityScanner.MainMenuOpening"; }
+bool run(const char* name) { if (!defined(name)) return false; ++fixture::menu_opens; return true; }
+void define(const char*, Fn) {}
+}
 namespace fixture {bool map_open=false,event_item_open=false;}
 namespace queries { bool defined(const char*) { return false; } bool is(const char* name) {const std::string key=name;return key=="MapPanels.IsActive"?fixture::map_open:key=="EventItemSelectState.IsActive"?fixture::event_item_open:fixture::dialogue;} void define(const char*, std::function<bool()>) {} }
 namespace ffpr::fieldnav::map_transition { bool is_screen_fading() { ++fixture::fade_reads;if(fixture::model_cold_singleton)fixture::fade_instance();return fixture::fade; } bool is_state_changing() { return false; } }
@@ -143,6 +148,10 @@ int main() {
     }
     ffpr::system::reset_main_game_state();fixture::scene=L"Title";
     expect(!ffpr::system::input_transition_blocked(),"title settings remain accessible after all-six return checks");
+    ffpr::system::d_ChangeState(manager,5,nullptr);
+    expect(fixture::menu_opens==1,"actual native Menu5 entry notifies the stationary field-view owner");
+    ffpr::system::d_ChangeState(manager,3,nullptr);
+    expect(fixture::menu_opens==1,"return to field does not repeat the menu-entry action");
     expect(fixture::scans == 0, "automatic transition detection has no scene scan, native query or shutdown polling");
     std::printf("%s: native context gates, one cleanup per transition, no game queries/scans; %d failures\n", failures ? "FAIL" : "PASS", failures);
     return failures ? 1 : 0;

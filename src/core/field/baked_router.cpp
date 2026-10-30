@@ -247,6 +247,15 @@ void neighbours(const Request& r, const baked::Grids& g, const Cell& from, F&& v
 
 bool enterprise_pair(int id) { return id==6 || id==13 || id==15 || id==16; }
 
+size_t successors(const Request& request,const Cell& from,std::array<Cell,8>& cells) {
+    size_t count=0;
+    neighbours(request,baked::grids(*request.submap),from,[&](const Cell& at) {
+        if(count<cells.size())cells[count++]=at;
+        return count<cells.size();
+    });
+    return count;
+}
+
 // Keep the state search beside the shared neighbour implementation so every
 // mode retains its wrap, collision, hazard and transition semantics. Modes
 // are ship before flight, air, ship after flight and foot. Native conversions

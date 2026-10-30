@@ -108,6 +108,15 @@ if '--landing-guidance' in sys.argv:
                'FieldController': {'UpdateStateSwitchLandable', 'ChangeTransportation'},
                'FieldMap': {'UpdateStateSwitchLandable'},
                'TransportationController': {'get_CurrentTransportation', 'ChangeTransportation'}}
+if '--world-vehicle' in sys.argv:
+    out = ROOT.parent / 'tools/world_vehicle_20261030' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'FieldController': {'TransportationEnabled','Last.Map.IMapAccessor.SetPositionToTransportation','ConvertCellPositionToWorldPosition','CellPositionToWorldPosition','Last.Map.IMapAccessor.ConversionMapRangeCell'},
+               'TransportationController': {'TransportationEnabled','SetTransportation','SetPosition','SetData','UpdateController','SetStayMapId','OverrideData'},
+               'TransportationInfo': {'SetData','SetPosition','UpdatePosition'},
+               'OwnedTransportationData': {'get_Enable','get_Position'},
+               'External.Vehicle': {'SetVehicle'}}
 if '--doga-surface' in sys.argv:
     out = ROOT.parent / 'tools/doga_surface_20261029' / f'ff{number}'
     out.mkdir(parents=True, exist_ok=True)
@@ -640,6 +649,15 @@ if '--boost-use' in sys.argv:
     targets = {'BattleActExection': {'InitActionState'}, 'BattleFunction46': {'CreateAbility'}, 'ActFunctionProvider': {'ViewMessage','HitViewMessage'},
                'ContentUtitlity': {'GetMesIdBattle','GetMesIdAbilityName'},
                'BattleUIManager': {'SetCommandText'}, 'BattleMenuController': {'SetCommandText'}}
+if '--magic-exchange' in sys.argv:
+    out = ROOT.parent / 'tools/magic_exchange_20261030' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'AbilityWindowController': {'ExchangeInit','ExchangeUpdate','UpdateController','SetNextState','UpdateExchangeView','UpdateView'},
+               'AbilityWindowControllerBase': {'SetNextPlayer','SetPrevPlayer'},
+               'AbilityWindowController.<>c__DisplayClass75_0': {'<ExchangeInit>b__0','<ExchangeInit>b__1','<ExchangeInit>b__2','<ExchangeInit>b__3'},
+               'AbilityUseContentListController': {'Show','SetCursor','SingleInit','SelectInit','SetData'},
+               'ItemTargetSelectContentController': {'SetData'}}
 names, wanted = {}, {}
 for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
     ns = block.splitlines()[0]

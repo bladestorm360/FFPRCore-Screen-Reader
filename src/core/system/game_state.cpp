@@ -76,6 +76,10 @@ void config_bestiary_exit()
 void change_state_postfix(void* self, int state)
 {
     if (self) g_main_game = self;
+    // A menu can change field entry conditions without moving the party or
+    // running a field script (for example Mini). The field owner retires its
+    // stationary view; this observer neither scans nor schedules menu work.
+    if (state == 5) run_action("EntityScanner.MainMenuOpening");
 
     const bool was_in_bestiary = queries::is("ConfigBestiaryStateHandler.WasInConfigBestiary");
     if (state == kStateChangeMap || state == kStateFieldReady || state == kStatePlayer) {

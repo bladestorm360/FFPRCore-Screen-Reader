@@ -1,6 +1,37 @@
 # Native FFPR durable memory
 
-October30 user authorizes history rewrite now, preserving releases, with no
+October30 vehicle/world journeys, Magic Exchange and Floating Continent lag
+source/offline/all-six delivery Closed. All6 installed a6d9b4ce19dfb6ad,
+11460096 bytes;132 installed hashes match,144 protected files unchanged.
+683 frozen inputs,67 exact embedded resources,12 languages,154 fresh reports,
+8304 native names0missing,143used/350defined/0undefined,47-export isolated smoke,
+Defender22 exact files/no detections/stable bytes. Exclusion query remains
+unverified and no signing certificate is available. Final warm canonical3m23s;
+prior full-suite recompiles35m48s/19m and their two corrected integration failures
+are preserved, not passed off as successful candidates. Serial /m:1 /MP1.
+Recovery/completion: build_check/navigation_delivery_20261030/.
+Maze landing34->1 walking tile at equal total cost; actual parked craft changes,
+Nautilus-only winds, saved off-map craft, connected continent/surface/underwater
+routes and fourth World map filter pass. Per-floor exit groups, Nautilus browse
+and NPC ordinals corrected. [Journey contract](docs/re/WORLD_MAP_JOURNEYS_20261030.md).
+[Magic Exchange](docs/re/MAGIC_EXCHANGE_20261030.md) source/recipient entry,
+arrows and I/Autodetail MP pass actual-consumer checks. Human-scoped world1 lag
+correction preserves all routes/categories in foot/Nautilus/Invincible modes;
+frame-local root reads and stationary-refresh backlog reduced. Live NPC, pose,
+vehicle, scripts and native Menu5 retain invalidation. [Performance/limits](docs/re/FLOATING_NAVIGATION_LAG_20261030.md).
+Actual game-frame/audible timing and natural gameplay remain unconfirmed;
+no game launch/probe, no agents. Prior finite all-six audit remains Closed;
+startup-hang natural-failure log remains a separate issue. Single ledger below.
+
+October30 history rewrite also Closed:36 disassembly versions removed,88 commits/
+8 tags/current tree preserved, old36 local objects absent,2711 reachable blobs
+0reject. Atomic leased9-ref GitHub update succeeded;7 releases/7 assets/metadata
+unchanged; CI41053005400 passed at2a214aa. External recovery ../tools/history_rewrite_20261030/;
+factual build_check/history_rewrite_20261030/completion.json. No deletion/browser/
+permission error; stage/build/CI hard rule installed. Other clones/GitHub hidden
+unreferenced caches are not claimed purged. No game source ever enters Git.
+
+Earlier October30 preparation: user authorizes history rewrite now, preserving releases, with no
 browser/auth workaround on GitHub permission error. Active/queued scope is in
 the single ledger below. Recovery bundle outside Git verified at
 ../tools/history_rewrite_20261030/before.bundle (4020ebc0;87 commits/8 tags).

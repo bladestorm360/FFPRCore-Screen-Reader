@@ -1,5 +1,48 @@
 # Current natural-play confirmation priorities
 
+October30 follow-up is source/offline checked and installed in all six games:
+a6d9b4ce19dfb6ad. Full canonical/smoke/exact-payload security and installed hashes
+pass. No game launch/probe or extra progression trip is requested.
+When these cases arise in normal play, prioritize:
+
+The latest Floating Continent lag report comes first: on foot, Nautilus or
+Invincible, cycle categories and destinations while stationary, then move and
+repeat; also request Backslash directions. Report the full delay to usable
+speech and any game input stall. Surface/underwater remain comparison controls.
+The [performance topic](re/FLOATING_NAVIGATION_LAG_20261030.md) separates tested
+callback/worker improvements from still-unconfirmed native/audible timing.
+
+1. FFIII Magic -> Exchange: entry reads source and recipient, arrows read each
+   recipient with HP, I reads displayed MP charges, native2/3 reads the new
+   source, and Back returns cleanly. Silent arrows, old source/recipient or a
+   hidden spell name indicate failure. Autodetail should add MP after the row.
+2. Shift+P now cycles four modes. World map lists connected world destinations
+   including underwater entrances, without the contents of towns/dungeons.
+   Switch back to Current map and confirm other-world rows leave the list.
+3. From the surface choose an underwater entrance. Directions should fly to
+   nearby valid water and say dive here. Dive manually; the retained destination
+   should continue underwater. Original Nautilus without its dive upgrade must
+   not receive this route. From an underwater tunnel choose Doga's Village:
+   route to its basin, surface manually, then land/walk to the entrance.
+4. With Invincible and Nautilus available at their real parked positions, choose
+   Doga's Manor. The route must change to Nautilus for the actual wind passage.
+   Parked Nautilus browse should describe an action/distance when Backslash has
+   a valid route, rather than only Not directly reachable.
+5. Maze/Crystal Tower: choose before boarding Invincible; routing should find
+   the actual parked required craft. Invincible's Maze approach should favor
+   the legal landing just outside its entrance. With Group exits enabled, both
+   Maze1F and5F World Map exits remain, with duplicates grouped on each floor.
+   Magic Shop (Black Mage) duplicate names should have one clear final ordinal.
+
+Actual audible timing, native frame cost and every live story state remain
+gameplay limits; fake-native and owned-worker timing do not certify those.
+The cumulative25ms mod-caused application-lag threshold applies across the
+complete related action, transition and repeated callback episode. Details and
+offline evidence: [journeys](re/WORLD_MAP_JOURNEYS_20261030.md),
+[Exchange](re/MAGIC_EXCHANGE_20261030.md), and the single ledger linked below.
+
+## Previous installed audit priorities
+
 October29: cf805c2e is installed in all six games. Finite map/event/reachability
 source, canonical/offline/smoke/security and delivery checks are Closed in the
 [single ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).

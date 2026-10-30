@@ -152,6 +152,10 @@ struct VehicleOnMap {
     unity::Vec3 pos{};
 };
 std::vector<VehicleOnMap> vehicles_on_map();
+// Native saved cell positions for enabled craft on other world maps. No Unity
+// object is retained; current-map craft still use their actual live transforms.
+struct SavedWorldVehicle {int id=0,map=0;unity::Vec3 cell;};
+std::vector<SavedWorldVehicle> saved_world_vehicles();
 /// The transportation groups of the party's enabled auto-ridden vehicles (type 5 "Content":
 /// FF1-FF3's canoe, FF2's snowcraft), read from Transportation.ModelList now. On a world map
 /// they extend walking: the player boards them by stepping onto their terrain.
@@ -313,6 +317,15 @@ struct EntityCursor {
     int stage = 0, index = 0;
     std::unordered_set<void*> seen;
     std::vector<int> auto_groups;
+    // Opt-in only for the measured FFIII Floating Continent consumer. Roots
+    // and collection headers are reused inside one read-only owner frame;
+    // a resumed frame replaces them before dereferencing any cached pointer.
+    bool cache_frame_roots=false;
+    uint64_t roots_frame=~uint64_t(0);
+    void* frame_controller=nullptr;
+    void* frame_info=nullptr;
+    void* frame_collection=nullptr;
+    int collection_stage=-1,collection_count=0;
     bool next(void*& entity);
 };
 bool native_position_walkable(void* player, unity::Vec3 position);

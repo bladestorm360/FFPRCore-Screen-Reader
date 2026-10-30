@@ -24,6 +24,7 @@
 #include "object_cache.h"
 #include "path_search.h"
 #include "../game.h"
+#include "../frame.h"
 #include "../hooks.h"
 #include "../il2cpp.h"
 #include "../log.h"
@@ -227,67 +228,7 @@ int current_map_id()
 
 bool native_position_walkable(void* pl, Vec3 position) { return position_walkable(pl, position); }
 
-bool EntityCursor::next(void*& entity)
-{
-    entity = nullptr;
-    void* map = field_map();
-    void* fc = map ? ref::rd<void*>(map, r::fFieldController) : nullptr;
-    if (!fc) return false;
-    void* transportation = ref::rd<void*>(fc, r::fTransportation);
-    void* info_data = transportation ? ref::rd<void*>(transportation, r::fInfoData) : nullptr;
-    if (stage < 2) {
-        void* list = ref::rd<void*>(fc, stage == 0 ? r::fEntityList : r::fColliderEntityList);
-        if (index < unity::list_count(list)) entity = unity::list_at(list, index++);
-        else { ++stage; index = 0; }
-    } else if (stage == 2) {
-        void* dict = info_data ? ref::rd<void*>(info_data, r::fModelList) : nullptr;
-        if (index < unity::dict_count(dict)) {
-            uint64_t key = 0, value = 0;
-            if (unity::dict_entry(dict, index++, key, value, 4, 8)) {
-                void* info = reinterpret_cast<void*>(value);
-                if (info) {
-                    void* object = ref::call<void*>(r::mInfoGetMapObject, info);
-                    // NeedInteractiveList is only this model dictionary filtered by
-                    // CheckNeedInteractive(id,true). Avoid allocating/walking its list.
-                    if (object && ref::call<bool>(r::mCheckNeedInteractive, info_data, static_cast<int32_t>(key), true)
-                        && r::kFieldEntity.is(object)) entity = object;
-                    const int type = ref::call<int32_t>(r::mInfoGetType, info);
-                    if (object && !skip_transport_type(type) && ref::call<bool>(r::mInfoGetEnable, info)) {
-                        entity = object;
-                        g_vehicle_types[object] = VehicleInfo{type, ref::call<int32_t>(r::mInfoGetId, info),
-                            ref::call_str(r::mInfoGetMessageId, info), current_map_id()};
-                    } else if (object) g_vehicle_types.erase(object);
-                    if (type == 5 && ref::call<bool>(r::mInfoGetEnable, info)) {
-                        if (const auto* row = baked::transport(ref::call<int32_t>(r::mInfoGetId, info)))
-                            if (row->group > 0 && std::find(auto_groups.begin(), auto_groups.end(), row->group) == auto_groups.end())
-                                auto_groups.push_back(row->group);
-                    }
-                }
-            }
-        } else { g_auto_map = current_map_id(); g_auto_groups = auto_groups; ++stage; index = 0; }
-    } else if (stage == 3) {
-        void* foot = ref::rd<void*>(fc, r::fFootEvent);
-        void* dict = foot ? ref::rd<void*>(foot, r::fStepOnTriggerList) : nullptr;
-        if (index < unity::dict_count(dict)) {
-            uint64_t key = 0, value = 0;
-            if (unity::dict_entry(dict, index++, key, value, 4, 8)) {
-                void* item = reinterpret_cast<void*>(value);
-                if (item && r::kFieldEntity.is(item)) entity = item;
-            }
-        } else { ++stage; index = 0; }
-    } else if (stage == 4) {
-        // Parked corps are not in entityList. Yield one bounded native slot;
-        // the existing owner-side active/lifetime checks decide its presence.
-        if(!party_entities::next_native(fc,index,entity)){++stage;index=0;}
-    } else {
-        for (auto it = g_vehicle_types.begin(); it != g_vehicle_types.end();)
-            if (!seen.count(it->first)) it = g_vehicle_types.erase(it); else ++it;
-        return false;
-    }
-    // Retain the established cross-list inclusion guard, not speech deduplication.
-    if (entity && !seen.insert(entity).second) entity = nullptr;
-    return true;
-}
+#include "entity_cursor.inl"
 
 bool is_direction_near_map_exit(unity::Vec3 player_pos, unity::Vec3 dir, const std::vector<unity::Vec3>& exits)
 {

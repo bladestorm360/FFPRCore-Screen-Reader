@@ -186,6 +186,7 @@ unity::Vec3 player_position() { fixture::native(); return {}; }
 VehicleState current_vehicle() { fixture::native(); return {}; }
 std::vector<int> owned_auto_vehicle_groups() { fixture::native(); return fixture::auto_groups; }
 std::vector<VehicleOnMap> vehicles_on_map() { fixture::native(); return {}; }
+std::vector<SavedWorldVehicle> saved_world_vehicles() {fixture::native();return {};}
 std::wstring vehicle_display_name(int, int, const std::wstring&) { fixture::native(); return {}; }
 bool EntityCursor::next(void*&) { fixture::native(); return false; }
 bool native_position_walkable(void*, unity::Vec3) { fixture::native(); return false; }

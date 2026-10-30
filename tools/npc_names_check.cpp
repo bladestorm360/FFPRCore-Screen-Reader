@@ -88,6 +88,11 @@ int main()
     CHECK_LABEL(L"999999999999999999999999999999: Guard", L"Guard", 9223372036854775807LL);
     CHECK_LABEL(L"  ①:  女性  ", L"女性", 1);
     CHECK_LABEL(L"2: Woman10", L"Woman", 2); // a prefix ordinal wins over a suffix
+    CHECK_LABEL(L"Magic Shop (Black Mage 1)",L"Magic Shop (Black Mage)",1);
+    CHECK_LABEL(L"Magic Shop (Black Mage 1)2",L"Magic Shop (Black Mage)",2);
+    CHECK_LABEL(L"Boutique de magie (Mage noir ４)",L"Boutique de magie (Mage noir)",4);
+    CHECK_LABEL(L"魔法屋（黒魔導士1）",L"魔法屋（黒魔導士）",1);
+    CHECK_LABEL(L"Guard (2nd shift)",L"Guard (2nd shift)",-1);
     CHECK_LABEL(L"1: Soldier4", L"Soldier", 1);
     CHECK_LABEL(L"①村人②", L"村人", 1);
     CHECK_LABEL(L"NPC2_Merchant7", L"Merchant", 2);

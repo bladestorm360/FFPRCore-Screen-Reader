@@ -64,7 +64,8 @@ Letters layout:
 - P: request directions or beacon navigation. With Autowalk enabled, start walking; press again to stop.
 - Shift+J / Shift+L: previous / next destination category.
 - Shift+K: reset to All.
-- Shift+P: cycle Current floor, Current map with vehicles, Current map.
+- Shift+P: cycle Current floor, Current map with vehicles, Current map, World map.
+- World map lists destinations and town/dungeon entrances across connected world maps. Use Current map for objects inside towns or dungeons.
 - Ctrl+P: toggle the layer transition filter.
 
 Brackets and backslash layout:
@@ -74,13 +75,13 @@ Brackets and backslash layout:
 - Backslash: request directions or beacon navigation; start/stop Autowalk when enabled.
 - Shift+left bracket / Shift+right bracket: previous / next destination category.
 - Shift+P: reset to All.
-- Shift+Backslash: cycle Current floor, Current map with vehicles, Current map.
+- Shift+Backslash: cycle Current floor, Current map with vehicles, Current map, World map.
 - Ctrl+Backslash: toggle the layer transition filter.
 
 Common commands in both layouts:
 
 - Backtick, above Tab: rescan the map.
-- Shift+M: toggle the map exit filter, grouping exits by destination and preferring the nearest reachable entrance.
+- Shift+M: toggle the map exit filter, grouping exits by destination on each floor and retaining the nearest usable exit per floor.
 - Alt+Backslash: toggle the event group filter, grouping repeated triggers for the same event and preferring the closest reachable trigger. Also available under Navigation in the mod menu.
 - Ctrl+Shift+Backslash: toggle Hide story-gated destinations (default Off). Also under F8 > Navigation. This hides proven story barriers while keeping uncertain destinations and ordinary NPC obstructions.
 - Ctrl+arrow: teleport north, south, west or east of the selected destination, if Navigation / Teleport shortcuts is enabled (default off).

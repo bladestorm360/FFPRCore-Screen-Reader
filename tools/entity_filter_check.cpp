@@ -5,6 +5,7 @@
 #include <chrono>
 #include <fstream>
 namespace field::baked_nav {
+bool exit_snapshot_stationary_inventory(const ExitSnapshot&){return false;}
 std::optional<AirTransitionTarget> air_transition_target(ExitSnapshot&,const std::optional<MapGoal>&,const std::optional<MapGoal>&,std::function<bool()>,bool,bool) { return {}; }
 std::optional<AirTransitionTarget> nautilus_surface_target(ExitSnapshot&,std::function<bool()>,bool) { return {}; }
 
@@ -292,6 +293,30 @@ int main() {
         physical.exits=false;auto ungrouped=build_categories(physical);physical.exits=true;auto grouped=build_categories(physical);
         expect(ungrouped.views[0].order.size()==3&&grouped.views[0].order.size()==1&&ungrouped.audio_order==grouped.audio_order&&grouped.audio_order.size()==3,
             "soundscape physical registry is independent from the pathfinder Group exits toggle");
+    }
+    {
+        // The real Maze has world exits on two distinct floors. Moving closer
+        // to its northern floor must not erase the southern floor's world exit.
+        std::ifstream file("data/ff3/maps.bin",std::ios::binary);const std::string bytes{std::istreambuf_iterator<char>(file),{}};
+        expect(baked::load(bytes.data(),bytes.size()),"Maze grouping loads its actual baked floor exits");
+        FilterInput maze;maze.current_map=301;maze.exits=true;maze.reachable_only=false;
+        std::set<int> floors;
+        for(int map=299;map<=304;++map)if(const auto* floor=baked::submap_by_map_id(map))
+            for(const auto& door:baked::grids(*floor).objects)if(door.type==baked::ObjType::GotoMap&&door.a==4) {
+                FilterRow row;row.index=maze.rows.size();row.kind=Kind::MapExit;row.category=Category::MapExits;
+                row.name=L"Exit to World Map";row.destination=4;row.remote_map=map;row.cell_x=door.tx;row.cell_y=door.ty;
+                row.entity_id=door.entity_id();row.route_distance=map==304?1:200;maze.rows.push_back(row);floors.insert(map);
+            }
+        expect(floors.size()==2,"actual Maze contains two distinct floors with world exits");
+        auto grouped=build(maze);
+        expect(grouped.order.size()==2,"Maze keeps one World Map exit per actual source floor, even near the other floor");
+        if(!maze.rows.empty()) {
+            auto sibling=maze.rows[0];sibling.index=maze.rows.size();sibling.entity_id+=10000;sibling.route_distance+=1;maze.rows.push_back(sibling);
+            grouped=build(maze);expect(grouped.order.size()==2,"extra same-floor world exits still collapse within that floor");
+            maze.exits=false;expect(build(maze).order.size()==maze.rows.size(),"disabling grouped exits restores every physical entrance");
+            maze.exits=true;maze.current_map=maze.rows[0].remote_map;maze.rows[0].remote_map=maze.rows.back().remote_map=0;
+            grouped=build(maze);expect(grouped.order.size()==2,"current-floor and remote-floor exits keep distinct grouping owners after entry");
+        }
     }
     std::printf("Entity filter: owned worker sorting, stable NPC groups, inclusion guards, selection: %d failures\n", failures);
     return failures ? 1 : 0;

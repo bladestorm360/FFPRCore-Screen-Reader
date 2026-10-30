@@ -30,6 +30,7 @@ inline constexpr const char* kPathfindingFilterMode = "PathfindingFilterMode";
 inline constexpr int kFilterCurrentFloor = 0;
 inline constexpr int kFilterCurrentMapWithVehicles = 1;
 inline constexpr int kFilterCurrentMap = 2;
+inline constexpr int kFilterWorldMap = 3;
 inline constexpr const char* kMapExitFilter = "MapExitFilter";              // Map Exit Filter
 inline constexpr const char* kEventGroupFilter = "EventGroupFilter";
 inline constexpr const char* kStoryGateFilter = "StoryGateFilter";
@@ -126,10 +127,10 @@ inline constexpr int kEnemyHPDisplayMax = 2;
 inline constexpr int kMultiHitDamageMax = 1;
 inline constexpr int kStatDeltaModeMax = 1;
 inline constexpr int kPathfindingFilterModeDefault = kFilterCurrentMap;
-inline constexpr int kPathfindingFilterModeMax = 2;
+inline constexpr int kPathfindingFilterModeMax = 3;
 inline constexpr int kNavigationKeymapMax = 1;
-/// The spoken names of the three modes, mod-text keys in mode order.
-inline const wchar_t* const kPathfindingFilterModeNames[3] = {L"Current floor", L"Current map with vehicles", L"Current map"};
+/// The spoken names of the four modes, mod-text keys in mode order.
+inline const wchar_t* const kPathfindingFilterModeNames[4] = {L"Current floor", L"Current map with vehicles", L"Current map", L"World map"};
 
 // --- change notification ------------------------------------------------------------------
 /// Run "Settings.Changed.<key>" when an area defines it.

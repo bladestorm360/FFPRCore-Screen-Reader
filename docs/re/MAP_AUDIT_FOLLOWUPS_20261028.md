@@ -5,17 +5,181 @@
 This is the single checkpoint, scope and Closed-system record; feature topics
 hold evidence and link here rather than create parallel plans.
 
-### Active October30: source-history removal and prevention
+### Closed October30: source-history removal and prevention
 
 | Field | Current decision |
 | --- | --- |
 | Capability/scope | User explicitly authorizes rewriting shared native repository history to remove every recovered game-source/disassembly body, retain mod history and release history, and enforce the never-in-Git rule. Do not delete/recreate the repository. On a GitHub permission error, stop GitHub attempts without any browser/authentication fallback and report it; continue independent navigation work. |
 | Boundary/evidence | Current shared HEAD71d53fb is clean and deployed in all6 games;30 historical raw files/53757 native instruction lines are already confirmed. Inspect all reachable local/remote heads and release tags for additional recovered bodies, preserve a verified recovery bundle outside every Git tree, sanitize only the identified game-source blobs, preserve current tree, names, ownership, legitimate vendor code and release assets. User authorization supersedes the previous defer-until-at-PC instruction for the rewrite itself. |
 | Done/bounds | Source-free reachable-history check; exact pre/post current tree and mod/dependency parity; original refs/bundle/remotes preserved externally; unchanged release metadata/assets and tag names; explicit lease/atomic remote update when permitted; durable hard rule plus staged/build prevention. No tool installs, game launch, source dump inside Git, new release or unrelated visibility changes. |
-| Effort/status | In progress (~10%);45–90min expected including full reachable-blob review, protected recovery, rewrite/verification and guarded remote attempt. A network sandbox DNS/thread error is not a GitHub permission denial; next read uses authorized network access with all interactive credential/browser prompts disabled. |
-| Recovery | Existing all-six cf805c2e/11374080 bytes remain unchanged; canonical/security/recovery receipts frozen. Start from71d53fb and preserve all87 reachable commits/8 tag names before rewriting. Sol only; no delegation or browser fallback. |
+| Effort/status | Complete within45–90min estimate. Full scan2703 blobs/36 body versions across30 paths; prepared backup88 commits verified. Exact36 blob substitutions preserve all88 commits/11 local refs, current tree byte-for-byte and8 tag names. Old36 bodies removed from local object store; rewritten reachable history2711 blobs/0 rejects. Atomic leased GitHub update9 refs succeeded, all7 releases/7 assets and metadata unchanged, no PR refs; GitHub content CI41053005400 succeeded. No permission error/browser, no repository deletion/recreation. Durable stage/build/CI checks and external known-body rejection control pass. |
+| Recovery | External before/prepared bundles and refs/config/commit maps at ../tools/history_rewrite_20261030/; factual completion build_check/history_rewrite_20261030/completion.json. Guard commit remaps6a24252 ->2a214aa, shared remote master2a214aa; previous71d53fb also remapped in external commit-map. All-six installed cf805c2e unchanged. Other clones/GitHub internal unreferenced caches were not inspected and are not claimed purged by this normal-ref rewrite. Sol only/no game launch. |
 
-### Queued October30: Maze and vehicle/world-map journeys
+### Closed October30: vehicle/world journeys, Exchange and lag delivery
+
+Source/offline/all-six delivery is Closed at a6d9b4ce19dfb6ad/11460096 bytes.
+All132 installed payload hashes match;144 protected files are unchanged.
+Completion/recovery: build_check/navigation_delivery_20261030/completion.json.
+683 frozen inputs,67 exact resources,12 languages,154 current reports;8304 native
+names0missing,143used/350defined/0undefined,47-export isolated smoke pass.
+Defender reported no threats in22 exact files with stable hashes; exclusion
+query is unverified and no signing certificate is available. Final warm canonical
+3m23s uses /m:1 /MP1. FFIII was deployed first, then the other five, with successful
+closed-process queries before every copy. No game launch/probe or agents.
+
+Accepted interface boundary: bounded owned world/craft graph and saved values,
+exact current live capture, four filter modes, source-floor grouping, action-aware
+browse, contextual ordinals, existing Exchange producers, and world1-only native
+root/view reuse. Current menu/NPC/pose/vehicle/script invalidation remains fresh.
+All finite acceptance/offline/release checks are complete. Actual game frame,
+audible timing and natural play remain separate confirmation, with the25ms
+cumulative mod-caused lag rule unchanged. Startup-hang follow-up remains separate.
+Further refactoring needs a human-triggered scoped task. Ordinary source-safe
+commit/push is authorized; publication receipt belongs with this completion.
+
+The following paragraphs preserve implementation decisions and failed-attempt
+receipts. Their preparation/future-tense wording is historical, not open work.
+
+Current checkpoint update: Maze landing and same-world craft-change source/
+targeted checks complete. Connected continent/surface/underwater routes, real
+saved off-map craft and fourth World map controls are implemented and in final
+integration verification. Actual forced-wind rejection is retained; a negative
+future-world test caught an inappropriate ignore-hazards proof, now removed.
+No terrain/gate is relaxed. Current-map/world-mode scanner transitions pass.
+World category baseline2.554s owned worker; deferring unused unique remote-row
+routes reduces it to1.732s with identical grouped rows/order. It remains owned
+asynchronous compute, not game-frame latency certification. Native saved reader
+abstains outside ready FFIII owner and performs no clone/serialization/new hook.
+
+Human steering: Group exits must retain one destination per source floor,
+so Maze1F/5F World Map exits remain independently listed. Own current log shows
+map301 changing from the local World Map entry to only the5F remote entry;
+the old grouping table was keyed solely by destination. The minimal source-floor
+key correction passes the actual Maze bake regression. Same-floor
+nearest/selection/continuation rules and independent physical soundscape remain.
+Raw log archive ../tools/navigation_journeys_20261030/maze_exit_group_20261030.log.
+
+Navigation source is frozen for combined verification while the latest human
+request is implemented: FFIII Magic -> Exchange character picker is silent.
+Native Exchange5 uses useController, while the mod erroneously treats it as a
+spell-list phase and only accepts character cursor events in UseTarget2. Exact
+native Init/SetCursor/state/source-change evidence is external at
+../tools/magic_exchange_20261030/ff3/. Six failing production-consumer checks
+reproduce the gap. Finite25–45min slice: same existing12 hooks, entry/source
+header and recipient navigation, displayed vitals and existing I/Autodetail MP
+charges; cancellation/visibility/readiness and no extra text dedup or polling.
+Other games' equivalent target mechanisms are inspected without unrelated edits.
+
+Nautilus browse now describes the first manual mountain boundary instead of
+claiming unreachable while directions succeed; exact own-log origin/parked-cell
+reproduction passes. NPC name parsing removes inner developer ordinals before
+adding the actual duplicate suffix, retaining descriptive job text.
+
+Latest human steering, October30: significant category/destination cycling lag
+and smaller Backslash lag is confirmed only on Floating Continent world1, on
+foot and in Nautilus/Invincible; surface/underwater are unaffected. This is the
+active performance blocker before delivery. The in-progress canonical build was
+explicitly interrupted, its logs retained, and no candidate was installed.
+Own six rotating logs are preserved outside Git at
+../tools/floating_navigation_lag_20261030/. Observed world1 route capture154–184ms
+over10–12 native slices at about5–6ms aggregate native observation; selected
+response216–270ms. All-map browse p95~422ms/max1482ms, category p95~453ms/max709ms
+are contextual log statistics, not isolated world1 certification.
+
+Actual production world1 fixture has1524 captured air-border actors/3174 baked
+objects. Before change, category119/295/315ms (foot/Nautilus/Invincible), selected
+foot219–236ms and aircraft23–30ms, browse foot239–253ms and aircraft41–50ms.
+Pure worker/native-owner calls0. Repeated full object-ID scans per actor are
+being replaced by a prepared immutable identity index, preserving nearest,
+duplicate/zero-ID, raw-name and conditional-companion semantics. First finite
+60–90min blocker checkpoint: prove that consumer improvement, qualify/reduce
+redundant native capture reads without caching NPC/gate state, then replay all
+three real-data modes and current/browse/category/cancellation controls. Keep
+the native copy/episode bounds, with no game launch/probe or broad redesign.
+
+Floating Continent source/offline checkpoint is complete within its60–90min
+estimate. Legal foot/parked-craft, Nautilus and Invincible runs preserve every
+route tile/action/browse result/category order. Cursor boundary reads24628 ->4713;
+stationary category inputs cause no rescan backlog. Pose/vehicle/script/live-NPC
+controls refresh. Rejected bake-no-NPC and borrowed-byte lifetime fixtures are
+preserved with corrections. Eligibility uses current native actor facts; no
+callback budget was raised. [Evidence/limits](FLOATING_NAVIGATION_LAG_20261030.md).
+Final serial candidate is frozen at683 source inputs in
+build_check/navigation_delivery_20261030/. Earlier interrupted evidence remains
+in navigation_journeys_20261030/. No new payload is installed yet.
+
+Final integration: MainMenu5 can change Mini without movement or a field-script
+revision. The existing native producer now calls a field-owned action retiring
+only FFIII/world1 routes/views, with no scan in the menu. Actual producer/action
+checks cover native entry/return and other-world/game controls. Eight top-level
+legacy build guards now check exact nonzero status: benign negative, positive
+and zero controls pass. Nested NPC and smoke guards already handle both signs.
+The initial combined build compiled all129 programs but failed eight FFV parked
+ship list/route parity controls. The new ExitSnapshot vehicle policy is now
+FFIII-only, preserving the other five games' existing policy; the actual all-six
+route_worker_check rerun passes0 failures. Initial683 inputs/build/exit/report/
+scan remain preserved. Refresh only these explicit integration deltas, rerun
+canonical checks and scan the exact final DLL. No C++/embedded-data/build-script
+edits while a compiler runs. No terrain/gate relaxation or new audit branch.
+
+The corrected C++ candidate compiled and passed every code/name/wiring check
+(8304 native names0missing;143used/350defined/0undefined). Its19m serial
+recompile/test run returned1 only because the newly added development-check
+label followed normal endlocal without an exit. Add the explicit successful
+return; no C++/data change or further compiler work is required. Preserve that
+entire input/compile/test/exit receipt in before_build_exit_fix/, then rerun the
+normal warm canonical command. Initial full129-program compile35m48s and this
+19m integration run remain separate from the final warm-run duration. These are
+offline-suite builds, not evidence that the game DLL alone takes that long.
+
+Final canonical/smoke/security/guarded all-six installation and affected
+feature documentation are complete. All five new journey/reader/capture/cost
+checks are in the ordinary canonical runner. Sol only, no game launch/probe.
+[Current topic](WORLD_MAP_JOURNEYS_20261030.md).
+The following paragraphs preserve the initial before-proof and finite estimate.
+
+The next complete production slice is the user's Maze/Crystal Tower approach,
+including on-foot/other-vehicle origins and the reported26-tile-west landing.
+Pre-change proof uses the preserved own session and actual production planner,
+native landing grids/real entrances and parked vehicle snapshots. Preserve
+existing gates, actual aircraft capabilities and owned-worker/interface bounds.
+First45–90min proof/integration checkpoint; implement only the actual missing
+consumer, with current/browse/retained-route checks and no new native hook.
+No compiler runs concurrently with C++/embedded-data edits. Frozen all-six
+cf805c2e remains installed until the required connected candidate passes checks.
+
+Pre-change proof: actual Maze route from151,74 and46,57 lands165,41 and adds34
+walking tiles, although equal-cost legal land197,42 leaves1 tile. Airship
+landing ties lacked the existing chocobo short-walk preference. Minimal worker
+comparison correction produces1 final tile at unchanged total81/265 and unchanged
+mountain priority; two failures become0. Ground approach197,42 already lists
+Tower on foot (334 steps). A real native-legal parked Invincible150,71 also
+works before boarding from on-foot151,74 (selected route and category416).
+The same captured craft while currently on Nautilus9 fails selection and list:
+2 failures, selected0/list-1. Exact consumer gap: boarding_route deliberately
+considers only the current craft when mounted, and first-world graph coverage
+uses only its own landfalls. This is the required vehicle-change dependency,
+not a reason to relax terrain or force an aircraft onto an ordinary foot route.
+
+Next bounded integration: FFIII-only transitive parked-vehicle coverage and a
+small deterministic vehicle-journey search reusing the qualified single-vehicle
+leg builder. Same immutable captured positions/names, existing boarding/landing
+phases and cancellation; no new native hook/read for this same-world slice.
+At most32 captured candidates (actual masters<=19), one vehicle node per
+physical craft, no cycles, explicit cancellation, and all-six legacy behavior
+preserved outside FFIII. Initial60–120min implementation/offline estimate for
+the shared selected/list/browse/retained-route connection; whole-world-mode
+transitions remain the next declared slice. Actual cost must be measured,
+with owned worker time distinct from game-thread impact.
+
+Development proof runs now use build.bat --check NAME with the same one-compiler
+CMake configuration and exact production-consumer executable. Before whole
+canonical177.203s; one changed targeted check27.166s, warm9.716s. This development
+mode explicitly does not certify or install a payload; final full canonical,
+smoke/security/deployment remain required. Records under
+build_check/navigation_journeys_20261030/ preserve before/after and source limits.
+
+### Ordered October30 vehicle/world-map journey scope
 
 User-triggered follow-up to Closed navigation, completed one slice at a time:
 

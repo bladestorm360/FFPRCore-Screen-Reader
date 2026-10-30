@@ -244,7 +244,11 @@ bool Resolver::consumed(const baked::Submap& sm, const baked::Object& object) {
     const auto* guards=record?record->get(L"events"):nullptr;
     bool found=false,all=true,destination_guard=false;
     if (guards) for (const auto& guard:guards->arr) {
-        const auto* id=guard.get(L"id"),*group=guard.get(L"group"),*type=guard.get(L"type"),*cell=guard.get(L"cell"),*raw=guard.get(L"raw"),*code=guard.get(L"code");
+        // Most world-map guards belong to another actor. Do not decode all
+        // guard fields or allocate its name before this exact identity check.
+        const auto* id=guard.get(L"id");
+        if(!id||number(*id)!=object.entity_id())continue;
+        const auto *group=guard.get(L"group"),*type=guard.get(L"type"),*cell=guard.get(L"cell"),*raw=guard.get(L"raw"),*code=guard.get(L"code");
         if (!id||!group||!type||!cell||cell->arr.size()!=3||!raw||!code||code->arr.empty()) continue;
         const int native_type=number(*type);
         const bool same_type=static_cast<int>(object.type)==native_type ||
@@ -272,14 +276,20 @@ uint64_t Resolver::transportation_mask(const baked::Submap& sm,const baked::Obje
         // Derived arcs retain their real native actor's exact type. Ambiguous
         // coincident sources cannot grant a vehicle-specific opening.
         source=nullptr;
-        for(const auto& native:baked::grids(sm).objects) {
-            if(native.type!=baked::ObjType::Event&&native.type!=baked::ObjType::RandomEvent&&native.type!=baked::ObjType::Entity)continue;
+        bool ambiguous=false;
+        const auto consider=[&](const baked::Object& native) {
+            if(native.type!=baked::ObjType::Event&&native.type!=baked::ObjType::RandomEvent&&native.type!=baked::ObjType::Entity)return;
             if(native.entity_id()!=object.entity_id()||native.layer!=object.layer||native.tx!=object.tx||native.ty!=object.ty||
-                baked::object_identifier(native)!=baked::object_identifier(object)||baked::str(native.group)!=baked::str(object.group))continue;
-            if(source)return transportation_[&object]=~uint64_t(0);
+                baked::object_identifier(native)!=baked::object_identifier(object)||baked::str(native.group)!=baked::str(object.group))return;
+            if(source){ambiguous=true;return;}
             source=&native;
-        }
-        if(!source)return transportation_[&object]=~uint64_t(0);
+        };
+        const auto& grid=baked::grids(sm);
+        if(grid.entity_index_prepared) {
+            const auto found=grid.objects_by_entity.find(object.entity_id());
+            if(found!=grid.objects_by_entity.end())for(size_t index:found->second)consider(grid.objects[index]);
+        } else for(const auto& native:grid.objects)consider(native);
+        if(!source||ambiguous)return transportation_[&object]=~uint64_t(0);
         return transportation_[&object]=transportation_mask(sm,*source);
     }
     const auto* row=records_.get(baked::name_of(sm));row=row?row->get(L"transport"):nullptr;

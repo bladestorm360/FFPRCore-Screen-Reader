@@ -17,6 +17,8 @@ int wrong_owner = 0, map = 1, next_task = 0, native_reads=0;
 game::Id selected_game=game::Id::FF2;
 bool ready = true, transition = false, route_pending = false;
 bool grouped_exits=false, has_goal=false, air_capture=false;
+int filter_mode=-1,world_projections=0,vehicle_id=0;
+std::vector<field::baked_nav::RemoteObject> world_rows;
 std::optional<field::baked_nav::AirTransitionTarget> air_target;
 std::optional<field::baked_nav::AirTransitionTarget> story_target;
 std::optional<field::baked_nav::AirTransitionTarget> surface_target;
@@ -126,7 +128,7 @@ namespace hooks { void note_fault(const char* label) { std::printf("FAIL native 
 namespace log_ { void write(const char*, ...) {} }
 namespace game { Id current() { return fixture::selected_game; } const Flags& flags() { static Flags value; static bool configured=(kFF2Module.configure(value),true); return value; } const char* key() { return "ff2"; } }
 namespace settings {
-int get_int(const char*, int fallback) { return fallback; }
+int get_int(const char* key, int fallback) { return !std::strcmp(key,"PathfindingFilterMode")&&fixture::filter_mode>=0?fixture::filter_mode:fallback; }
 bool get_bool(const char* key, bool fallback) { return std::strcmp(key,"MapExitFilter")==0 ? fixture::grouped_exits : fallback; }
 }
 namespace ffpr { void say(std::wstring_view, bool) { fixture::native(); } }
@@ -155,7 +157,7 @@ int current_map_id_or_user_data() { fixture::native(); return fixture::map; }
 int current_map_id() { return current_map_id_or_user_data(); }
 void* player() { fixture::native(); return nullptr; }
 void* map_handle() { fixture::native(); return nullptr; }
-VehicleState current_vehicle() { fixture::native(); return {}; }
+VehicleState current_vehicle() { fixture::native();const int id=fixture::vehicle_id;return {id!=0,id,id?baked::transport(id)->type:0,{}}; }
 bool entity_is_active(void*) { fixture::native(); return true; }
 bool entity_is_hidden_by_vehicle(void*) { fixture::native(); return false; }
 bool entity_is_scenery(void*) { fixture::native(); return false; }
@@ -192,6 +194,7 @@ unity::Vec3 Entity::position() const { fixture::native(); return pos; }
 PathInfo find_path_to_quick(unity::Vec3, unity::Vec3, void*, void*, TargetKind, bool) { fixture::native(); return {}; }
 }
 namespace field::baked_nav {
+bool exit_snapshot_stationary_inventory(const ExitSnapshot&){return fixture::map==1;}
 std::optional<AirTransitionTarget> air_transition_target(ExitSnapshot&,const std::optional<MapGoal>&,const std::optional<MapGoal>&,std::function<bool()>,bool story,bool) { return story?fixture::story_target:fixture::air_target; }
 std::optional<AirTransitionTarget> nautilus_surface_target(ExitSnapshot&,std::function<bool()>,bool) { return fixture::surface_target; }
 
@@ -209,6 +212,7 @@ bool pending_goal(MapGoal& goal, TargetKind& kind, std::wstring& name) { fixture
 bool request_pending() { fixture::native(); return fixture::route_pending; }
 void request_reachability(bool, std::function<void()> ready) { fixture::native(); ready(); }
 std::vector<RemoteObject> connected_objects_snapshot(int, map_state::Resolver&,std::function<bool()>) { return {}; }
+std::vector<RemoteObject> world_objects_snapshot(int,map_state::Resolver&,std::function<bool()>) {++fixture::world_projections;return fixture::world_rows;}
 }
 namespace field::map_state { Resolver::Resolver() : Resolver(Flags{}, []()->const json::Value&{static const json::Value empty;return empty;}()) { fixture::native(); } }
 int main() {
@@ -734,6 +738,50 @@ int main() {
         expect(scripted==221,"all221 IV/V/VI scripted world occurrences exercise the actual scanner");
         fixture::manual_object=fixture::capture_cells=false;fixture::captured_object_type=0;fixture::captured_class="FieldEntity";fixture::captured_go_name=L"Entity";
         std::printf("IV/V/VI native scanner: %d actual scripted world events\n",scripted);
+    }
+    {
+        scanner::invalidate_map();fixture::selected_game=game::Id::FF3;fixture::map=4;
+        std::ifstream source("data/ff3/maps.bin",std::ios::binary);const std::string bytes{std::istreambuf_iterator<char>(source),{}};
+        expect(baked::load(bytes.data(),bytes.size()),"World filter scanner loads the actual FFIII world identities");
+        fixture::candidates.clear();fixture::has_goal=fixture::air_capture=false;fixture::world_projections=0;
+        baked_nav::RemoteObject door;door.map_id=3;door.cell={1,95,77};door.type=baked::ObjType::Event;
+        door.world_exit=true;door.dest_map_id=234;door.entity_id=6;fixture::world_rows={door};
+        g_remote_map_id=4;g_remote_filter_mode=2;fixture::filter_mode=3;
+        scanner::schedule_scan();
+        for(int i=0;(scanner::g_scan_running||g_filter_pending)&&i<100;++i){fixture::tick();fixture::work();}
+        expect(fixture::world_projections==1&&g_remote_filter_mode==3&&g_remote.size()==1&&g_remote[0]->remote_map_id==3&&
+            g_remote[0]->kind==Kind::MapExit,"fourth mode invalidates the same-map old projection and publishes underwater entrances as Map Exits");
+        fixture::filter_mode=2;scanner::schedule_scan();
+        for(int i=0;(scanner::g_scan_running||g_filter_pending)&&i<100;++i){fixture::tick();fixture::work();}
+        expect(g_remote_filter_mode==2&&g_remote.empty(),"returning to literal Current map removes other-world rows on the same map");
+        fixture::filter_mode=-1;fixture::world_rows.clear();
+    }
+    {
+        fixture::selected_game=game::Id::FF3;fixture::map=1;fixture::filter_mode=2;
+        // baked::load borrows these bytes. Keep the new fixture's real bake
+        // alive through all guard/vehicle reads, outside the previous block.
+        std::ifstream source("data/ff3/maps.bin",std::ios::binary);const std::string bytes{std::istreambuf_iterator<char>(source),{}};
+        expect(baked::load(bytes.data(),bytes.size()),"stationary world fixture owns its complete bake lifetime");
+        const auto prime=[&](int vehicle){
+            scanner::invalidate_map();fixture::vehicle_id=vehicle;fixture::pose={};
+            auto door=std::make_shared<Entity>();door->kind=Kind::MapExit;door->name=L"Exit";
+            g_entities={door};g_category_views[0]={door};g_category_views[static_cast<size_t>(Category::MapExits)]={door};
+            g_last_scanned_map_id=1;g_views_ready=g_view_stationary_inventory=g_navigation_filtered=true;g_view_origin=fixture::pose;g_view_vehicle=vehicle;
+            scanner::g_converted_revision=scanner::g_state_revision;g_filter_pending=scanner::g_scan_running=false;
+        };
+        for(int vehicle:{0,8,11}){
+            prime(vehicle);const auto tasks=fixture::tasks.size();const auto begin=std::chrono::steady_clock::now();
+            for(int i=0;i<100;++i){scanner::scan_entities();scanner::set_category(i%2?Category::All:Category::MapExits);}
+            expect(fixture::tasks.size()==tasks&&!scanner::g_scan_running&&!g_filter_pending,"stationary foot/Nautilus/Invincible category cycling schedules no redundant full scan");
+            std::printf("Floating stationary view mode%d: 100 category inputs %.3fms, no recapture backlog\n",vehicle,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-begin).count());
+        }
+        prime(0);fixture::pose.x=16;scanner::scan_entities();expect(scanner::g_scan_running,"movement refreshes Floating Continent views");
+        prime(0);fixture::vehicle_id=11;scanner::scan_entities();expect(scanner::g_scan_running,"boarding/changing vehicle refreshes Floating Continent views");
+        prime(0);++scanner::g_state_revision;scanner::scan_entities();expect(scanner::g_scan_running,"native script revision refreshes Floating Continent views");
+        prime(0);auto npc=std::make_shared<Entity>();npc->kind=Kind::NPC;g_entities.push_back(npc);scanner::scan_entities();expect(scanner::g_scan_running,"an actual live NPC opts out of stationary world reuse");
+        prime(0);g_view_stationary_inventory=false;scanner::scan_entities();expect(scanner::g_scan_running,"a captured unlisted native NPC also opts out of stationary world reuse");
+        prime(0);fixture::map=4;g_last_scanned_map_id=4;scanner::scan_entities();expect(scanner::g_scan_running,"surface world retains its previous refresh behavior");
+        fixture::vehicle_id=0;fixture::filter_mode=-1;
     }
     std::printf("Selected destination after movement: %.3f us native-fixture dispatch, zero list-readiness ticks (offline)\n",selected_us);
     // Retire intentionally blocked fixture work before C++ static registries

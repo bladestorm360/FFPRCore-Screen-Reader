@@ -4,9 +4,14 @@
 #include "save_points.h"
 #include <algorithm>
 #include <cmath>
+#include <map>
 namespace field::filter_worker {
 namespace {
 struct Cancelled {};
+using ExitGroup=std::pair<int,int>; // source floor, actual destination map
+ExitGroup exit_group(const FilterRow& row,const FilterInput& input) {
+    return {row.remote_map?row.remote_map:input.current_map,row.destination};
+}
 void check_cancelled(const FilterInput& input) {
     if (input.cancelled && input.cancelled()) throw Cancelled{};
 }
@@ -93,7 +98,7 @@ static Filtered build_impl(FilterInput& input) {
         return distance(a) < distance(b);
     });
     std::unordered_set<std::wstring> pads;
-    std::unordered_map<int,size_t> exits;
+    std::map<ExitGroup,size_t> exits;
     std::unordered_map<std::wstring,size_t> events;
     if(input.events)for(size_t index:result.order) {
         check_cancelled(input);
@@ -110,8 +115,9 @@ static Filtered build_impl(FilterInput& input) {
         if (row.kind != Kind::MapExit || row.aerial_transition || row.destination <= 0) continue;
         // World-unreachable rows are pruned below and cannot represent a group.
         if (input.reachable_only && input.world && row.route_distance < 0) continue;
-        const auto found = exits.find(row.destination);
-        if (found == exits.end()) { exits.emplace(row.destination,index); continue; }
+        const auto key=exit_group(row,input);
+        const auto found = exits.find(key);
+        if (found == exits.end()) { exits.emplace(key,index); continue; }
         const auto& old = input.rows[found->second];
         // Pending continuation wins; otherwise preserve the player's physical
         // selection before considering distance. Both candidates already passed
@@ -145,7 +151,7 @@ static Filtered build_impl(FilterInput& input) {
         if (input.reachable_only && input.world && row.kind == Kind::MapExit && row.route_distance < 0) return true;
         // Group only explicitly enabled native identities, never spoken text.
         if (input.pads && !row.pad.empty() && !pads.insert(row.pad).second) return true;
-        if (input.exits && row.kind == Kind::MapExit && !row.aerial_transition && row.destination > 0 && exits[row.destination] != index) return true;
+        if (input.exits && row.kind == Kind::MapExit && !row.aerial_transition && row.destination > 0 && exits[exit_group(row,input)] != index) return true;
         if (input.events && !row.event_group.empty() && events[row.event_group] != index) {
             // A remembered explicit objective is never rebound to the group's
             // newly nearest sibling during movement or a floor continuation.
@@ -206,10 +212,19 @@ static Categories categories_impl(FilterInput& input) {
     if (input.navigation) {
         std::vector<baked_nav::ExitTarget> targets;
         std::vector<size_t> indices;
+        std::map<ExitGroup,int> world_exit_counts;
+        if(!input.reachable_only&&input.exits)for(const auto& row:input.rows)
+            if(row.available&&row.kind==Kind::MapExit)++world_exit_counts[exit_group(row,input)];
         for (size_t i=0; i<input.rows.size(); ++i) {
             check_cancelled(input);
             const auto& row = input.rows[i];
             if (row.kind != Kind::MapExit && (!input.events || row.event_group.empty())) continue;
+            // Literal discovery never prunes by distance and sorts by physical
+            // location. Only repeated exit/event groups need routes here.
+            // Explicit selection/browse still captures/proves the real route.
+            if(!input.reachable_only&&row.kind==Kind::MapExit&&
+               (!input.events||row.event_group.empty())&&
+               (!input.exits||world_exit_counts[exit_group(row,input)]<=1))continue;
             targets.push_back({row.position,row.remote_map,row.destination,{row.cell_layer,row.cell_x,row.cell_y},
                 row.kind==Kind::MapExit?TargetKind::Transition:TargetKind::Infer});
             indices.push_back(i);
@@ -219,6 +234,7 @@ static Categories categories_impl(FilterInput& input) {
         for (size_t i=0; i<distances.size(); ++i) input.rows[indices[i]].route_distance = distances[i];
     }
     Categories result;
+    result.stationary_inventory=input.navigation&&baked_nav::exit_snapshot_stationary_inventory(*input.navigation);
     if(input.navigation) {
         std::optional<baked_nav::MapGoal> continued,selected;
         if(input.continued_goal&&input.continued_aerial) {

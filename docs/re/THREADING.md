@@ -1,5 +1,36 @@
 # Read-only snapshots and worker ownership
 
+October30 [Floating Continent lag](FLOATING_NAVIGATION_LAG_20261030.md) reduces
+repeated native root/header reads within the same owner frame. Resumed frames
+replace pointers before use; actor payloads stay live and no pointer is handed
+to a worker. The0.5ms capture/scheduler budgets are unchanged. Data prepares an
+immutable ID index; lookup/guard work stays owned. Qualified stationary views
+use complete current no-live-NPC facts, exact pose/vehicle/script revision and
+existing invalidation, while browse/directions retain fresh capture. Native
+MainMenu5 also retires world1 routes/views through the field-owned action,
+without starting a scan in the menu; spell changes can affect entry guards at
+the same position. Any listed or unlisted NPC disables reuse. Old list-row age and fresh route-capture timing
+are reported separately; no fake-native/worker timing certifies native lag.
+
+October30 [vehicle/world journeys](WORLD_MAP_JOURNEYS_20261030.md) add no hook,
+input producer, native wait or worker-side game call. Same-world craft search
+is FFIII-only, at most32 copied physical craft. The water connection uses at
+most three65536-cell stages and shared native neighbour semantics, with
+cancellation at every pop; continent proofs have depth3. These are owned
+Navigation-worker searches, separate from native-frame/audible certification.
+The bounded native saved-craft reader checks already existing user/interpreter
+instances and copies enabled map/cell values only. Main-map positions remain
+live; future maps use native departure saves. Native capture episode timing
+includes these reads and existing vehicle-name resolution. Expanded scenario
+worker time1.404s is not application-lag evidence. Final coverage remains active.
+World-mode/fresh cross-world request capture alone reads saved craft, bounded32;
+ordinary current-map requests do not add that native walk. The latest
+[Magic Exchange](MAGIC_EXCHANGE_20261030.md) correction reuses the same12 hooks
+and one native initial-focus event, bounded10 updates,9 target slots/8 displayed
+MP levels, with no idle reread after consumption. Its complete entry/three-arrow/
+cancel fixture measures combined observation-to-fake-output work, not a native
+frame or audible guarantee. No new text dedup, pointer handoff or native write.
+
 October29 finite map-audit integration is documented in
 [NPC geometry](NPC_GEOMETRY_CONTEXT_20261029.md),
 [arrival/trigger power](ARRIVALS_TRIGGER_POWER_20261029.md),

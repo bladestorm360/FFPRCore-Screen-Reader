@@ -138,6 +138,8 @@ void finish_exit_capture(ExitSnapshot& snapshot);
 /// Worker-only teleport clearance using the same copied native obstacles and movement rules.
 bool teleport_landing_safe(ExitSnapshot& snapshot, unity::Vec3 target);
 bool exit_snapshot_world(const ExitSnapshot& snapshot);
+/// Owned worker fact: current FFIII world1 snapshot has no live NPC/party actor.
+bool exit_snapshot_stationary_inventory(const ExitSnapshot& snapshot);
 int exit_snapshot_vehicle(const ExitSnapshot& snapshot);
 std::vector<int> exit_distances(ExitSnapshot& snapshot, const std::vector<ExitTarget>& targets,
                               std::function<bool()> cancelled);
@@ -228,6 +230,10 @@ std::vector<RemoteObject> connected_objects(void* map_handle);
 /// Pure immutable bake/state projection, safe on the data worker after prepared().
 std::vector<RemoteObject> connected_objects_snapshot(int map_id, map_state::Resolver& state,
                                                   std::function<bool()> cancelled = {});
+// Fourth filter: objects physically on connected world bakes, including town/
+// dungeon entrance tiles there; never the interiors behind those entrances.
+std::vector<RemoteObject> world_objects_snapshot(int map_id,map_state::Resolver& state,
+                                               std::function<bool()> cancelled = {});
 
 /// The route to `goal` wherever it is: on this floor the ordinary kept route (find); on another
 /// floor the first leg ("..., take the exit to X") and `out.next_map_id`. A route that goes on

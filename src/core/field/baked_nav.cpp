@@ -11,6 +11,7 @@
 #include <atomic>
 #include <unordered_map>
 #include <unordered_set>
+#include <queue>
 #include "baked_nav.h"
 #include "airship_transitions.h"
 #include "nautilus_surface.h"
@@ -89,6 +90,9 @@ Vec3 snapshot_position();
 VehicleState planning_vehicle();
 std::vector<int> planning_auto_groups();
 std::vector<VehicleOnMap> planning_vehicles();
+int journey_vehicle_family(int);
+std::vector<VehicleOnMap> journey_vehicles();
+int phase_steps(const std::vector<Phase>&);
 std::wstring planning_vehicle_name(int id, int type, const std::wstring& message);
 map_state::Resolver planning_state();
 bool planning_object_active(const baked::Submap&,const baked::Object&);
@@ -405,6 +409,7 @@ struct RouteSnapshot {
     VehicleState vehicle;
     std::vector<int> auto_groups;
     std::vector<VehicleOnMap> vehicles; // every .game is null before handoff
+    std::vector<SavedWorldVehicle> saved_vehicles; // ready native save values, not engine objects
     std::unordered_map<int, std::wstring> vehicle_names;
     std::vector<NativeObstacle> obstacles;
     std::shared_ptr<const baked::TransitionGrid> live_transitions; // per worker scope, rebuilt from captured triggers
@@ -424,6 +429,7 @@ struct RouteSnapshot {
     Pending pending;
     bool keep_destination = true;
     bool vehicle_shortcuts = false;
+    bool projected_origin = false; // worker-only future world; no live actor inventory exists there
     std::shared_ptr<std::atomic<uint64_t>> epoch;
     uint64_t generation = 0;
     std::function<bool()> cancelled;
@@ -494,6 +500,10 @@ std::wstring planning_vehicle_name(int id, int type, const std::wstring& message
 void capture_vehicle_names(RouteSnapshot& snapshot) {
     snapshot.auto_groups = field::owned_auto_vehicle_groups();
     snapshot.vehicles = field::vehicles_on_map();
+    const auto* destination=baked::submap_by_map_id(snapshot.goal.map_id);
+    const bool world_scope=settings::get_int(ui::prefs::kPathfindingFilterMode,-1)==ui::prefs::kFilterWorldMap||
+        (snapshot.submap->world&&destination&&destination->world&&snapshot.goal.map_id!=snapshot.map_id);
+    if(world_scope&&snapshot.vehicle_shortcuts&&game::is(game::Id::FF3))snapshot.saved_vehicles=field::saved_world_vehicles();
     for (auto& vehicle : snapshot.vehicles) {
         vehicle.game = nullptr;
         snapshot.vehicle_names.emplace(vehicle.transportation_id,
@@ -502,6 +512,9 @@ void capture_vehicle_names(RouteSnapshot& snapshot) {
     for (const auto& row : baked::transports())
         if (std::find(snapshot.auto_groups.begin(), snapshot.auto_groups.end(), row.group) != snapshot.auto_groups.end())
             snapshot.vehicle_names.emplace(row.id, field::vehicle_display_name(row.id, row.type, baked::str(row.message)));
+    for(const auto& saved:snapshot.saved_vehicles)if(!snapshot.vehicle_names.contains(saved.id))
+        if(const auto* row=baked::transport(saved.id))snapshot.vehicle_names.emplace(saved.id,
+            field::vehicle_display_name(row->id,row->type,baked::str(row->message)));
 }
 map_state::Resolver planning_state() { return g_route_snapshot ? g_route_snapshot->state : map_state::Resolver(); }
 void current_relays(const baked::Submap& sm, baked_route::Request& request) {
@@ -567,7 +580,7 @@ const baked::Object* baked_by_entity_id(const baked::Grids& g, int entity_id, ba
     if (entity_id < 0) return nullptr;
     const baked::Object* best = nullptr;
     int nearest = INT_MAX;
-    for (const baked::Object& o : g.objects)
+    const auto consider=[&](const baked::Object& o) {
         if (o.type == type && o.entity_id() == entity_id &&
             (raw_name.empty() || baked::object_identifier(o) == raw_name) &&
             (entity_id != 0 || !raw_name.empty() || o.contains(live.x,live.y))) {
@@ -575,10 +588,15 @@ const baked::Object* baked_by_entity_id(const baked::Grids& g, int entity_id, ba
             // terminal masks must use its currently selected branch, rather
             // than match the consumed first companion and lose the boundary.
             if(type==baked::ObjType::Warp&&g_route_snapshot&&g_route_snapshot->submap&&
-               &baked::grids(*g_route_snapshot->submap)==&g&&g_route_snapshot->state.consumed(*g_route_snapshot->submap,o))continue;
+               &baked::grids(*g_route_snapshot->submap)==&g&&g_route_snapshot->state.consumed(*g_route_snapshot->submap,o))return;
             const int d = std::abs(o.tx - live.x) + std::abs(o.ty - live.y);
             if (d < nearest) { best = &o; nearest = d; }
         }
+    };
+    if(g.entity_index_prepared) {
+        const auto found=g.objects_by_entity.find(entity_id);
+        if(found!=g.objects_by_entity.end())for(size_t index:found->second)consider(g.objects[index]);
+    } else for(const auto& object:g.objects)consider(object); // original/synthetic grid compatibility
     return best;
 }
 
@@ -1031,41 +1049,48 @@ baked_route::Reach parked_vehicle_reach(const baked_route::Request& walking, con
     if (!walking.submap || !walking.submap->world || walking.vehicle_group || !walk.submap) return {};
     const auto& sm=*walking.submap;
     const auto& grid=baked::grids(sm);
-    baked_route::Reach best;
+    const bool chained=game::is(game::Id::FF3)&&g_route_snapshot;
+    const auto vehicles=chained?journey_vehicles():planning_vehicles();
+    if(chained&&vehicles.size()>32)return {};
+    baked_route::Reach best,combined=walk;
+    std::vector<bool> done(vehicles.size(),false);
     constexpr int sides[4][2]={{0,-1},{1,0},{0,1},{-1,0}};
-    for (const auto& vehicle : planning_vehicles()) {
-        if (planning_cancelled()) return {};
-        const auto* row=baked::transport(vehicle.transportation_id);
-        if (!row || row->type==kTransportContent || row->type==1 || row->group<1 || row->group>static_cast<int>(grid.transport.size())) continue;
-        // A parked FFIII flight deck requires its existing manual approach;
-        // only an observed ship has the native adjacent WalkOn edge.
-        if(game::is(game::Id::FF3)&&(row->id==6||row->id==15))continue;
-        const auto at=cell_of(sm,vehicle.pos,walking.start.layer);
-        if (!baked::in_bounds(grid,at.x,at.y)) continue;
-        int approach=-1;
-        for (const auto& side:sides) {
-            const Cell beside{at.layer,(at.x+side[0]+grid.width)%grid.width,(at.y+side[1]+grid.height)%grid.height};
-            if (!baked_route::open(walking,grid,beside)) continue;
-            if(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)&&!baked_route::direction_allowed(walking,beside,at))continue;
-            const int distance=walk.distance(beside);
-            if (distance>=0 && (approach<0 || distance<approach)) approach=distance;
+    for(size_t expanded=0;expanded<vehicles.size();++expanded) {
+        if(planning_cancelled())return {};
+        int chosen=-1,approach=INT_MAX;
+        for(size_t index=0;index<vehicles.size();++index) {
+            if(done[index])continue;
+            const auto* row=baked::transport(vehicles[index].transportation_id);
+            if(!row||row->type==kTransportContent||row->type==1||row->group<1||row->group>static_cast<int>(grid.transport.size()))continue;
+            if(game::is(game::Id::FF3)&&(row->id==6||row->id==15))continue;
+            const auto at=cell_of(sm,vehicles[index].pos,walking.start.layer);
+            if(!baked::in_bounds(grid,at.x,at.y))continue;
+            for(const auto& side:sides) {
+                const Cell beside{at.layer,(at.x+side[0]+grid.width)%grid.width,(at.y+side[1]+grid.height)%grid.height};
+                if(!baked_route::open(walking,grid,beside)||(chained&&baked_route::terminal_transition(walking,grid,beside)))continue;
+                if(game::is(game::Id::FF3)&&baked_route::enterprise_pair(row->id)&&!baked_route::direction_allowed(walking,beside,at))continue;
+                const int distance=(chained?combined:walk).distance(beside);
+                if(distance>=0&&distance<approach){chosen=static_cast<int>(index);approach=distance;}
+            }
         }
-        if (approach<0) continue;
-        auto riding=walking;
-        riding.start=at;riding.goals.clear();riding.goals_open=false;
-        riding.vehicle_group=row->group;riding.vehicle_type=row->type;riding.landing_group=row->landing_group;
-        riding.transportation_id=row->id;
-        const auto sea=baked_route::flood(riding);
-        const auto land=land_after_ride(riding,sea);
-        if (planning_cancelled()) return {};
-        if (!land.submap) continue;
-        if (!best.submap) {
+        if(chosen<0)break;
+        done[static_cast<size_t>(chosen)]=true;
+        const auto& vehicle=vehicles[static_cast<size_t>(chosen)];const auto* row=baked::transport(vehicle.transportation_id);
+        auto riding=walking;riding.start=cell_of(sm,vehicle.pos,walking.start.layer);riding.goals.clear();riding.goals_open=false;
+        riding.vehicle_group=row->group;riding.vehicle_type=row->type;riding.landing_group=row->landing_group;riding.transportation_id=row->id;
+        const auto sea=baked_route::flood(riding);const auto land=land_after_ride(riding,sea);
+        if(planning_cancelled())return {};
+        if(!land.submap)continue;
+        if(!best.submap) {
             best.submap=&sm;best.width=grid.width;best.height=grid.height;
             best.dist[0].assign(static_cast<size_t>(grid.width)*grid.height,0xffff);
         }
-        for (size_t i=0;i<land.dist[0].size();++i) {
-            if (planning_cancelled()) return {};
-            if (land.dist[0][i]!=0xffff) best.dist[0][i]=static_cast<uint16_t>(std::min<int>(best.dist[0][i],std::min(0xfffe,approach+1+land.dist[0][i])));
+        for(size_t i=0;i<land.dist[0].size();++i) {
+            if(planning_cancelled())return {};
+            if(land.dist[0][i]==0xffff)continue;
+            const auto cost=static_cast<uint16_t>(std::min(0xfffe,approach+1+land.dist[0][i]));
+            best.dist[0][i]=std::min(best.dist[0][i],cost);
+            if(chained&&i<combined.dist[0].size())combined.dist[0][i]=std::min(combined.dist[0][i],cost);
         }
     }
     return best;
@@ -1250,6 +1275,7 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
         ride.live_hazards = walk.live_hazards; ride.hazards = walk.hazards;
         ride.live_traps = walk.live_traps; ride.traps = walk.traps;
         ride.allow_trap_goal = walk.allow_trap_goal;
+        ride.terminal_goal = aerial!=nullptr; // keep the exact airborne event endpoint through boarding
         ride.ignore_hazards = walk.ignore_hazards;
         if(ship_scene||submarine_scene||action_pad||aerial) {
             // Reuse the normal native WalkOn boarding edge, then sail all the
@@ -1306,12 +1332,13 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
                     if (row->landing_group > 0 && !baked::group_lands(row->landing_group, attr)) continue;
                     const int cost = distance + land.distance(here);
                     const int walking=land.distance(here);
-                    const bool chocobo=row->type==9||row->type==10;
                     const int crossings=reachable_ride.crossings(here);
                     // Choose an ordinary-flight landing before a mountain
-                    // shortcut. A* and the landing flood share this priority.
+                    // shortcut. For equal crossing/tile costs prefer the
+                    // shortest final walk for aircraft too: scanning west-to-
+                    // east must not choose an early landing and a long walk.
                     if(crossings<best_crossings||(crossings==best_crossings&&
-                       (cost<best_landing||(chocobo&&cost==best_landing&&walking<best_walking)))) {
+                       (cost<best_landing||(cost==best_landing&&walking<best_walking)))) {
                         best_crossings=crossings;
                         best_landing=cost;best_walking=walking;ride.goals={here};land_start=here;
                     }
@@ -1387,6 +1414,8 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
     prepare_mountain_phases(sm,phases);
     return true;
 }
+
+#include "world_vehicle_journey.inl"
 
 // A native mountain action skips closed cells. Keep it as a manual boundary,
 // never a fictitious sequence of ordinary movement inputs. The following phase
@@ -1793,9 +1822,19 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 // Ancients' Maze). The first graph edge needs the same legal
                 // owned aircraft landing/boarding coverage as a local exit.
                 const auto vehicle=planning_vehicle();const auto* model=vehicle.valid?baked::transport(vehicle.id):nullptr;
-                if(model&&(model->type==3||model->type==7||model->type==8)) {
+                const bool leave_current=model&&(model->type==3||model->type==7||model->type==8||
+                    (game::is(game::Id::FF3)&&(model->type==kTransportShip||model->type==9||model->type==10)));
+                if(leave_current) {
                     auto ride=req;world_mode(ride);live.apply_transport(ride,with_gates);
                     reach=land_after_ride(ride,baked_route::flood(ride));
+                    if(game::is(game::Id::FF3)&&g_route_snapshot&&g_route_snapshot->vehicle_shortcuts&&reach.submap) {
+                        auto foot=req;foot.transportation_id=0;
+                        const auto parked=parked_vehicle_reach(foot,reach);
+                        if(parked.submap)for(size_t i=0;i<reach.dist[0].size()&&i<parked.dist[0].size();++i) {
+                            if(planning_cancelled())return out;
+                            reach.dist[0][i]=std::min(reach.dist[0][i],parked.dist[0][i]);
+                        }
+                    }
                 } else if(!vehicle.valid&&g_route_snapshot&&g_route_snapshot->vehicle_shortcuts) {
                     const auto parked=parked_vehicle_reach(req,reach);
                     // Assistance adds legal landfalls; it must never discard
@@ -1944,7 +1983,7 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
             });
             if(here->world) {
                 auto movement=req;world_mode(movement);live.apply_transport(movement,with_gates);
-                if(boarding_route(*here,gh,movement,req.goals,phases)) {
+                if(vehicle_journey_route(*here,gh,movement,req.goals,phases)) {
                     out.on_this_map=true;out.phases=phases;out.description=describe(phases);
                     for(const auto& phase:phases)out.cells.insert(out.cells.end(),phase.cells.begin(),phase.cells.end());
                     out.steps_here=phase_steps(phases);out.steps_total=goal_steps;out.found=true;return out;
@@ -1992,7 +2031,7 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
             auto movement=req;world_mode(movement);live.apply_transport(movement,with_gates);
             const auto vehicle=planning_vehicle();
             if(vehicle.valid||!route.found) {
-                if(!boarding_route(*here,gh,movement,req.goals,phases))return out;
+                if(!vehicle_journey_route(*here,gh,movement,req.goals,phases))return out;
             }
         }
         if(phases.empty()) {
@@ -2331,18 +2370,18 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             // same legal boarding/riding/landing/final-approach planner.
             if(may_shorten_with_vehicle(req,route.steps())) {
                 std::vector<Phase> assisted;
-                if(boarding_route(*sm,g,req,req.goals,assisted,aerial)&&phase_steps(assisted)<route.steps()&&
+                if(vehicle_journey_route(*sm,g,req,req.goals,assisted,aerial)&&phase_steps(assisted)<route.steps()&&
                    std::none_of(assisted.begin(),assisted.end(),[](const auto& phase){return phase.manual_displacement_steps>0;}))
                     phases=std::move(assisted);
             }
         } else if (sm->world && (!aerial || current_transport.valid || g_route_snapshot->vehicle_shortcuts)) {
-            if (!boarding_route(*sm, g, req, req.goals, phases,aerial) && !live.triggers.empty()) {
+            if (!vehicle_journey_route(*sm, g, req, req.goals, phases,aerial) && !live.triggers.empty()) {
                 // The existing explicit-route policy may cross a live event with
                 // a warning. Apply it to both vehicle/walking legs, without
                 // repeating a ship-only search for an unreachable land goal.
                 auto through_events = req;
                 through_events.ignore_hazards = true;
-                boarding_route(*sm, g, through_events, req.goals, phases,aerial);
+                vehicle_journey_route(*sm, g, through_events, req.goals, phases,aerial);
             }
         }
         std::wstring reason;
@@ -2781,6 +2820,8 @@ std::vector<RemoteObject> connected_objects_snapshot(int map_id, map_state::Reso
     });
 }
 
+#include "world_map_inventory.inl"
+
 namespace {
 // The native Player row and a remembered craft on another map both describe
 // walking here. An actual or unknown-map local vehicle remains out of scope.
@@ -2868,6 +2909,11 @@ bool keep_remote_foot_leg(const baked::Submap& here,const MapGoal& goal,TargetKi
 }
 }
 
+namespace {
+#include "world_map_journey.inl"
+#include "world_air_journey.inl"
+}
+
 bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, TargetKind kind, const std::wstring& name,
                    PathInfo& out)
 {
@@ -2951,6 +2997,21 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
                 }
             }
         }
+        const auto world_route=[&]() {
+            if(!here->world||!there->world||kind!=TargetKind::Transition)return false;
+            const auto journey=world_map_journey(goal);if(!journey.found)return false;
+            out=PathInfo{};
+            set_active(map_id,goal.cell,goal.map_id,journey.phases,journey.next_map);
+            fill_result(*here,journey.phases,out);out.next_map_id=journey.next_map;
+            remember_destination(goal,kind,name);
+            if(g_pending) {
+                g_pending->incoming_trap.reset();
+                g_pending->incoming_transition=TrapVisit{map_id,journey.entity,journey.next_map,journey.crossing.x,journey.crossing.y,
+                    journey.crossing,journey.arrival};
+            }
+            return true;
+        };
+        if(goal.map_id!=map_id&&world_route())return true;
         if (goal.cells.empty()) goal.cells = goals_for(*there, goal.cell, kind).cells;
         if (goal.cells.empty()) {
             out.error = L"No path found";
@@ -2972,6 +3033,7 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
             if (!tr && !g_route_snapshot) return false;
             if (!find(g_route_snapshot ? snapshot_position() : unity::local_position(tr), world_of_cell(*here, goal.cell), map_handle, player, true, kind, false, out))
                 return false;
+            if(!out.success&&world_route())return true;
             if (out.success && out.next_map_id > 0) {
                 remember_destination(goal, kind, name);
                 if (g_pending) {
@@ -3612,6 +3674,8 @@ void cancel_browse_route() {
 namespace {
 struct BrowsePlanned {
     BrowseRoute route;
+    double requested_at=0,capture_ms=0,native_ms=0,queue_ms=0,compute_ms=0;
+    unsigned capture_slices=0;
     int map_id = 0;
     Cell start;
     VehicleState vehicle;
@@ -3619,11 +3683,14 @@ struct BrowsePlanned {
     TargetKind kind = TargetKind::Infer;
 };
 BrowsePlanned plan_browse_snapshot(RouteSnapshot& snapshot) {
+    const double compute_started=frame::now();
     // Browsing always evaluates the current snapshot from scratch. Kept walking
     // plans and trap receipts belong to explicit navigation, not list labels.
     snapshot.previous_active.reset(); snapshot.active = {}; snapshot.pending = {};
     auto planned = plan_snapshot(snapshot);
     BrowsePlanned result;
+    result.requested_at=planned.requested_at;result.capture_ms=planned.capture_ms;
+    result.native_ms=planned.native_ms;result.capture_slices=planned.capture_slices;result.queue_ms=planned.queue_ms;
     result.map_id = planned.map_id; result.start = planned.start; result.vehicle = planned.vehicle;
     result.goal = std::move(planned.goal); result.kind = planned.kind;
     const auto& path = planned.path;
@@ -3662,13 +3729,17 @@ BrowsePlanned plan_browse_snapshot(RouteSnapshot& snapshot) {
     if (!result.route.direct && result.route.reason.empty() && path.success)
         for(size_t i=0;i<path.walk_phases.size();++i) {
             const auto& phase=path.walk_phases[i];
-            if(phase.transportation_id>0 && !phase.action_before.empty()) {
+            const bool before=phase.transportation_id>0&&!phase.action_before.empty();
+            const bool after=phase.manual_after&&!phase.action_after.empty();
+            if(before||after) {
                 // A usable owned-vehicle route is not a missing vehicle. Match
                 // the same specific action/name spoken by explicit directions,
                 // but don't present a distant boarding heading as the next step.
                 int approach=0;
                 for(size_t j=0;j<i;++j) if(!path.walk_phases[j].cells.empty())
                     approach+=static_cast<int>(path.walk_phases[j].cells.size())-1;
+                if(!before)approach+=route_progress::steps(phase);
+                const auto& action=before?phase.action_before:phase.action_after;
                 // Before the first vehicle action the captured current mode
                 // still owns movement. Parked-vehicle approaches are on foot;
                 // the destination vehicle does not decide this verb.
@@ -3682,13 +3753,14 @@ BrowsePlanned plan_browse_snapshot(RouteSnapshot& snapshot) {
                         approach_key=L"Sail {0}, then {1}";
                 }
                 result.route.reason=approach>0
-                    ? TF(approach_key, {field::format_steps(approach*kTile),phase.action_before})
-                    : phase.action_before;
+                    ? TF(approach_key, {field::format_steps(approach*kTile),action})
+                    : action;
                 break;
             }
         }
     if (!result.route.direct && result.route.reason.empty() && path.success)
         result.route.reason = route_warning(path,snapshot.goal);
+    result.compute_ms=(frame::now()-compute_started)*1000;
     // Route geometry, phase text and temporary plans are destroyed here on the
     // worker. Only small owned evidence goes back to the native owner.
     return result;
@@ -3701,6 +3773,7 @@ bool capture_vehicle_shortcuts_policy() {
     return mode!=ui::prefs::kFilterCurrentFloor;
 }
 void request_browse_route(MapGoal goal, TargetKind kind, std::function<void(BrowseRoute)> publish) {
+    const double requested_at=frame::now();
     cancel_browse_route();
     if (!ffpr::system::is_field_navigation_ready()) return;
     void* pl = field::player();
@@ -3708,7 +3781,7 @@ void request_browse_route(MapGoal goal, TargetKind kind, std::function<void(Brow
     if (!submap || !pl || !unity::transform(pl)) { publish({}); return; }
     auto snapshot = std::make_shared<RouteSnapshot>(map_state::Resolver());
     snapshot->vehicle_shortcuts=capture_vehicle_shortcuts_policy();
-    snapshot->requested_at = frame::now();
+    snapshot->requested_at = requested_at;
     snapshot->map_id = field::current_map_id(); snapshot->submap = submap;
     snapshot->position = unity::local_position(unity::transform(pl));
     snapshot->layer = submap->world ? 1 : player_layer(pl);
@@ -3716,7 +3789,10 @@ void request_browse_route(MapGoal goal, TargetKind kind, std::function<void(Brow
     snapshot->goal = std::move(goal); snapshot->kind = kind;
     snapshot->epoch = g_browse_owner.epoch(); snapshot->generation = snapshot->epoch->load();
     auto entities = std::make_shared<EntityCursor>(); // native-owner closure only
+    entities->cache_frame_roots=game::is(game::Id::FF3)&&snapshot->map_id==1;
+    snapshot->native_ms=(frame::now()-requested_at)*1000;
     frame::every_frame([snapshot, entities, publish = std::move(publish)]() mutable {
+        const double native_started=frame::now();
         if (snapshot->epoch->load() != snapshot->generation) return false;
         if (!ffpr::system::is_field_navigation_ready() || field::current_map_id() != snapshot->map_id) {
             cancel_browse_route(); return false;
@@ -3729,9 +3805,11 @@ void request_browse_route(MapGoal goal, TargetKind kind, std::function<void(Brow
             if (live_entity(entity) && entity_is_present(entity) && unity::transform(entity))
                 snapshot->obstacles.push_back(capture_obstacle(entity, *snapshot));
         }
-        if (more) return true;
+        ++snapshot->capture_slices;
+        if (more) {snapshot->native_ms+=(frame::now()-native_started)*1000;return true;}
         capture_vehicle_names(*snapshot);
         snapshot->captured_at = frame::now();
+        snapshot->native_ms+=(snapshot->captured_at-native_started)*1000;
         worker_job::start(g_browse_owner, std::move(*snapshot), &plan_browse_snapshot,
             [publish = std::move(publish)](BrowsePlanned result) mutable {
                 if (!still_current(result)) {
@@ -3741,6 +3819,9 @@ void request_browse_route(MapGoal goal, TargetKind kind, std::function<void(Brow
                 }
                 // In particular, do not commit_plan: browsing must not redirect a
                 // beacon/autowalk, remember a destination or consume a trap receipt.
+                if(result.map_id==1&&game::is(game::Id::FF3))
+                    LOGF("[BakedNav] browse ready map %d: capture %.3f ms (%u slices, native %.3f ms), queue %.3f ms, compute %.3f ms, total %.3f ms",
+                         result.map_id,result.capture_ms,result.capture_slices,result.native_ms,result.queue_ms,result.compute_ms,(frame::now()-result.requested_at)*1000);
                 publish(std::move(result.route));
             }, background::Lane::Navigation);
         return false;
@@ -3752,7 +3833,7 @@ struct ExitSnapshot {
     bool with_vehicles;
     bool story_filter = false;
     explicit ExitSnapshot(bool vehicles, map_state::Resolver state = map_state::Resolver())
-        : route(std::move(state)), with_vehicles(vehicles) {}
+        : route(std::move(state)), with_vehicles(vehicles) {route.vehicle_shortcuts=vehicles&&game::is(game::Id::FF3);}
 };
 DefenseAdvice defense_advice(ExitSnapshot& capture,const DefenseContext& context,std::function<bool()> cancelled) {
     capture.route.cancelled=std::move(cancelled);
@@ -3784,9 +3865,15 @@ void finish_exit_capture(ExitSnapshot& capture) {
     if (capture.with_vehicles || capture.story_filter) {
         capture.route.vehicles = field::vehicles_on_map();
         for (auto& vehicle : capture.route.vehicles) vehicle.game = nullptr;
+        if(game::is(game::Id::FF3)&&settings::get_int(ui::prefs::kPathfindingFilterMode,-1)==ui::prefs::kFilterWorldMap)
+            capture.route.saved_vehicles=field::saved_world_vehicles();
     }
 }
 bool exit_snapshot_world(const ExitSnapshot& capture) { return capture.route.submap->world; }
+bool exit_snapshot_stationary_inventory(const ExitSnapshot& capture) {
+    return game::is(game::Id::FF3)&&capture.route.map_id==1&&capture.route.submap&&capture.route.submap->world&&!capture.route.obstacles.empty()&&
+        std::none_of(capture.route.obstacles.begin(),capture.route.obstacles.end(),[](const auto& actor){return actor.npc||actor.party;});
+}
 bool teleport_landing_safe(ExitSnapshot& capture, Vec3 target) {
     auto& snapshot = capture.route;
     if (!snapshot.submap || !std::isfinite(target.x) || !std::isfinite(target.y) || !std::isfinite(target.z)) return false;
@@ -3989,7 +4076,13 @@ std::vector<bool> story_gate_mask(ExitSnapshot& capture, const std::vector<Story
             baked_route::Reach landed,parked;
             auto foot=movement;foot.vehicle_group=foot.vehicle_type=foot.landing_group=0;
             if(sm->world) {
-                if(movement.vehicle_group>0)landed=land_after_ride(movement,reach);
+                if(movement.vehicle_group>0) {
+                    landed=land_after_ride(movement,reach);
+                    if(game::is(game::Id::FF3)&&snapshot.vehicle_shortcuts) {
+                        auto walking=foot;walking.transportation_id=0;
+                        parked=parked_vehicle_reach(walking,landed);
+                    }
+                }
                 else parked=parked_vehicle_reach(movement,reach);
             }
             const auto found=rows.find(baked::submap_index(sm));
@@ -4063,6 +4156,7 @@ std::vector<bool> story_gate_mask(ExitSnapshot& capture, const std::vector<Story
 }
 std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTarget>& targets,
                               std::function<bool()> cancelled) {
+    if(targets.empty())return {};
     auto& snapshot = capture.route;
     snapshot.cancelled = cancelled;
     SnapshotScope scope(snapshot);
@@ -4086,6 +4180,16 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
     baked_route::Request story_flight;
     bool story_air_ready=false;
     auto foot = req; foot.vehicle_group = foot.vehicle_type = foot.landing_group = 0;
+    const auto prepare_parked=[&] {
+        if(parked_ready)return;
+        parked_ready=true;
+        if(!capture.with_vehicles)return;
+        if(req.vehicle_group>0) {
+            if(!game::is(game::Id::FF3))return;
+            auto walking=foot;walking.transportation_id=0;
+            parked=parked_vehicle_reach(walking,landed);
+        } else parked=parked_vehicle_reach(req,reach);
+    };
     std::vector<int> result(targets.size(),-1);
     // A sea destination cannot use a flood of positions reached after landing.
     // Share the actual owned boarding/sailing planner for entries and events.
@@ -4104,6 +4208,11 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
         const auto& target = targets[i];
         if (target.map_id > 0 && target.map_id != snapshot.map_id) {
             MapGoal goal; goal.map_id = target.map_id; goal.cell = target.cell;
+            if(sm->world&&baked::submap_by_map_id(target.map_id)&&baked::submap_by_map_id(target.map_id)->world&&game::is(game::Id::FF3)) {
+                const auto journey=world_map_journey(goal);
+                if(journey.found)result[i]=journey.total;
+                continue;
+            }
             auto leg = find_across(nullptr,nullptr,goal);
             if (!leg.found && !leg.incomplete) leg = find_across(nullptr,nullptr,goal,true,true);
             if (leg.found) result[i] = leg.steps_total;
@@ -4191,9 +4300,9 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
                 auto transfer=foot;transfer.goals=movement.goals;
                 result[i]=baked_route::transition_distance(transfer,landed);
             }
-            if(result[i]<0&&sm->world&&capture.with_vehicles&&req.vehicle_group==0) {
-                if(!parked_ready){parked=parked_vehicle_reach(req,reach);parked_ready=true;}
-                result[i]=baked_route::transition_distance(movement,parked);
+            if(result[i]<0&&sm->world&&capture.with_vehicles&&(req.vehicle_group==0||game::is(game::Id::FF3))) {
+                prepare_parked();auto transfer=foot;transfer.goals=movement.goals;
+                result[i]=baked_route::transition_distance(transfer,parked);
             }
             if(result[i]<0&&sm->world&&capture.with_vehicles&&req.vehicle_group==0) {
                 if(ship_goal)result[i]=ship_distance(at,*ship_goal,TargetKind::Infer);
@@ -4215,8 +4324,8 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
                 const int land = baked_route::transition_distance(foot,landed);
                 if (land >= 0 && (distance < 0 || land < distance)) distance = land;
             }
-            if (distance < 0 && sm->world && capture.with_vehicles && req.vehicle_group == 0 && !movement.goals.empty()) {
-                if (!parked_ready) { parked=parked_vehicle_reach(req,reach);parked_ready=true; }
+            if (distance < 0 && sm->world && capture.with_vehicles && (req.vehicle_group == 0||game::is(game::Id::FF3)) && !movement.goals.empty()) {
+                prepare_parked();
                 auto transfer=foot;transfer.goals=movement.goals;
                 distance=baked_route::transition_distance(transfer,parked);
             }
@@ -4224,6 +4333,22 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
         }
         if(result[i]<0&&sm->world&&capture.with_vehicles&&req.vehicle_group==0&&ship_goal)
             result[i]=ship_distance(at,*ship_goal,TargetKind::Transition);
+    }
+    if(game::is(game::Id::FF3)&&capture.with_vehicles&&sm->world&&
+       (snapshot.map_id==3||snapshot.map_id==4)&&!planning_cancelled()) {
+        for(size_t i=0;i<targets.size();++i) {
+            if(planning_cancelled())return result;
+            if(result[i]>=0||targets[i].kind!=TargetKind::Transition||
+               (targets[i].map_id>0&&targets[i].map_id!=snapshot.map_id))continue;
+            const auto at=cell_of(*sm,targets[i].position,snapshot.layer);
+            // The sole surface tunnel basin is the already qualified Village
+            // entrance. Underwater has only four actual script entrances;
+            // each may require surfacing/flying/diving from another basin.
+            if(snapshot.map_id==4&&!(at==nautilus_surface::village_cell))continue;
+            MapGoal goal;goal.map_id=snapshot.map_id;goal.cell=at;
+            const auto journey=nautilus_world_journey(goal);
+            if(journey.found)result[i]=journey.total;
+        }
     }
     if(sm->world&&!planning_cancelled()) {
         std::vector<const baked::Object*> doors;std::vector<size_t> indices;
@@ -4287,6 +4412,7 @@ static void request_route_impl(MapGoal goal, TargetKind kind, std::wstring name,
     if (pending) snapshot->pending = *pending;
     // Native pointers stay in this owner-thread capture closure, never in Snapshot/Work.
     auto entities = std::make_shared<EntityCursor>();
+    entities->cache_frame_roots=game::is(game::Id::FF3)&&snapshot->map_id==1;
     g_request_pending = true;
     snapshot->native_ms = (frame::now() - requested_at) * 1000;
     auto capture = [snapshot, entities, serial, publish = std::move(publish)]() mutable {

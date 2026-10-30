@@ -85,7 +85,10 @@ int pathfinding_mode()
     if (mode < 0) mode = settings::get_bool("PathfindingFilter", false) ? ui::prefs::kFilterCurrentFloor : ui::prefs::kFilterCurrentMap;
     return std::clamp(mode, 0, ui::prefs::kPathfindingFilterModeMax);
 }
-bool pathfinding_enabled() { return pathfinding_mode() != ui::prefs::kFilterCurrentMap; }
+bool literal_inventory() {
+    return pathfinding_mode()==ui::prefs::kFilterCurrentMap||pathfinding_mode()==ui::prefs::kFilterWorldMap;
+}
+bool pathfinding_enabled() { return !literal_inventory(); }
 
 bool pathfinding_passes(const EntityPtr& e, const FilterContext& ctx)
 {
@@ -94,7 +97,7 @@ bool pathfinding_passes(const EntityPtr& e, const FilterContext& ctx)
     // owned vehicle snapshot; publication invalidates it on map/vehicle movement.
     if((e->aerial_transition||surface_target(*e)) && e->local_baked_map_id==current_map_id_or_user_data())return true;
     // Another floor's entry exists only under "Current map", which lists everything.
-    if (e->remote()) return pathfinding_mode() == ui::prefs::kFilterCurrentMap;
+    if (e->remote()) return literal_inventory();
     if (!pathfinding_enabled()) return true;
     // A vehicle-only trigger hidden for the current vehicle is not a walking target: it is
     // reached by boarding its vehicle, so the walking path test does not apply.
@@ -487,6 +490,7 @@ int g_index = 0;
 Category g_category = Category::All;
 std::vector<EntityPtr>& filtered_view() { return g_category_views[static_cast<size_t>(g_category)]; }
 bool g_views_ready = false;
+bool g_view_stationary_inventory=false;
 bool g_navigation_filtered = false;
 int g_view_vehicle = 0;
 std::optional<Vec3> g_view_origin;
@@ -502,6 +506,7 @@ uint64_t g_filter_generation = 0;
 // map" (user, 2026-10-11); appended after the live entities.
 std::vector<EntityPtr> g_remote;
 int g_remote_map_id = -1;
+int g_remote_filter_mode = -1;
 
 // Selected entity identity, to keep focus across re-sorts
 EntityPtr g_sel;
@@ -675,7 +680,7 @@ void apply_filter() {
     input->category = g_category; input->sort = player_local_position(input->player);
     input->pads = game::flags().has_vehicle_pads; input->exits = settings::get_bool("MapExitFilter", false);
     input->events = settings::get_bool(ui::prefs::kEventGroupFilter,ui::prefs::kEventGroupFilterDefault);
-    input->reachable_only=pathfinding_mode()!=ui::prefs::kFilterCurrentMap;
+    input->reachable_only=!literal_inventory();
     input->story_gates = input->reachable_only&&settings::get_bool(ui::prefs::kStoryGateFilter,ui::prefs::kStoryGateFilterDefault);
     input->entrance_suffixes = settings::get_bool(ui::prefs::kEntranceSuffixes,ui::prefs::kEntranceSuffixesDefault);
     input->navigation = baked_nav::begin_exit_capture(!input->reachable_only||pathfinding_mode() == ui::prefs::kFilterCurrentMapWithVehicles,
@@ -707,6 +712,7 @@ void apply_filter() {
     const int continued_map = input->continued_map, continued_x = input->continued_x, continued_y = input->continued_y,
         continued_id = input->continued_entity_id;
     auto obstacles = std::make_shared<EntityCursor>(); // native pointers remain in this closure
+    obstacles->cache_frame_roots=game::is(game::Id::FF3)&&map_id==1;
     frame::every_frame([entities, input, obstacles, captured = false, next = size_t(0), generation, selection_revision, map_id, continued_map, continued_x, continued_y, continued_id, continued_raw, captured_at, navigation_filtered, vehicle]() mutable {
         if (generation != g_filter_generation) return false;
         if (!ffpr::system::is_field_navigation_ready() || map_id != current_map_id_or_user_data()) { cancel_filter(); return false; }
@@ -827,6 +833,7 @@ void apply_filter() {
                     if (continued_current) g_index = current.continued;
                     if (g_index >= static_cast<int>(filtered_view().size())) g_index = g_sel_has ? -1 : 0;
                     g_views_ready = true;
+                    g_view_stationary_inventory=result->stationary_inventory;
                     g_view_origin = origin;
                     g_navigation_filtered = navigation_filtered; g_view_vehicle = vehicle;
                     g_view_captured_at = captured_at;
@@ -946,8 +953,10 @@ worker_job::Owner g_scan_work;
 void finish_scan(int map_id, bool remote_ready = false)
 {
     g_entities.clear();
-    for (auto& kv : g_entity_map) g_entities.push_back(kv.second);
-    if (pathfinding_mode() == ui::prefs::kFilterCurrentMap) {
+    const auto* map=baked::submap_by_map_id(map_id);
+    if(pathfinding_mode()!=ui::prefs::kFilterWorldMap||(map&&map->world))
+        for (auto& kv : g_entity_map) g_entities.push_back(kv.second);
+    if (literal_inventory()) {
         g_entities.insert(g_entities.end(), g_remote.begin(), g_remote.end());
     } else if (g_remote_map_id != -1) {
         g_remote.clear();
@@ -995,6 +1004,7 @@ void invalidate_map()
     for (auto& view : g_category_views) view.clear();
     ++g_audio_revision;
     g_views_ready = false;
+    g_view_stationary_inventory=false;
     g_view_origin.reset();
     g_navigation_filtered=false; g_view_vehicle=0;
     g_view_captured_at = 0;
@@ -1029,6 +1039,7 @@ void schedule_scan()
         if (!scan->map_id) {
             scan->map_id = current_map_id_or_user_data();
             if (scan->map_id <= 0) { g_scan_running = false; return false; }
+            scan->cursor.cache_frame_roots=game::is(game::Id::FF3)&&scan->map_id==1;
             scan->started = frame::now();
             scan->asset = current_map_asset_name();
         }
@@ -1062,22 +1073,23 @@ void schedule_scan()
             return !entry.second;
         }), g_entity_map.end());
         g_converted_revision = scan->revision;
-        if (pathfinding_mode() == ui::prefs::kFilterCurrentMap && g_remote_map_id != scan->map_id) {
+        const int filter_mode=pathfinding_mode();
+        if (literal_inventory() && (g_remote_map_id != scan->map_id||g_remote_filter_mode!=filter_mode)) {
             map_state::Resolver state; // Copy live flags here; worker receives no game pointers.
             const int map_id = scan->map_id;
             const double started = scan->started;
             auto epoch = g_scan_work.epoch(); const auto work_generation = epoch->load();
             const auto cancelled = [epoch,work_generation] { return epoch->load() != work_generation; };
-            struct Projection { int map_id; map_state::Resolver state; std::function<bool()> cancelled; };
-            worker_job::start(g_scan_work, Projection{map_id, std::move(state), cancelled},
-                [](Projection& input) { return baked_nav::connected_objects_snapshot(input.map_id, input.state, input.cancelled); },
-                [map_id, started, generation](std::vector<baked_nav::RemoteObject> objects) mutable {
+            struct Projection { int map_id; map_state::Resolver state; std::function<bool()> cancelled; bool worlds; };
+            worker_job::start(g_scan_work, Projection{map_id, std::move(state), cancelled,filter_mode==ui::prefs::kFilterWorldMap},
+                [](Projection& input) { return input.worlds?baked_nav::world_objects_snapshot(input.map_id,input.state,input.cancelled):baked_nav::connected_objects_snapshot(input.map_id, input.state, input.cancelled); },
+                [map_id, started, generation,filter_mode](std::vector<baked_nav::RemoteObject> objects) mutable {
                     if (generation != g_scan_generation) return;
                     if (map_id != current_map_id_or_user_data()) { g_scan_running = false; return; }
                     if (!ffpr::system::is_field_navigation_ready()) { g_scan_running = false; return; }
                     auto builder = std::make_shared<RemoteBuilder>(std::move(objects));
                     builder->input.cancelled = [generation] { return generation != g_scan_generation; };
-                    frame::every_frame([map_id, started, generation, builder]() mutable {
+                    frame::every_frame([map_id, started, generation, builder,filter_mode]() mutable {
                         if (generation != g_scan_generation) return false;
                         if (map_id != current_map_id_or_user_data()) { g_scan_running = false; return false; }
                         if (!ffpr::system::is_field_navigation_ready()) { g_scan_running = false; return false; }
@@ -1089,9 +1101,9 @@ void schedule_scan()
                         if (failed) { g_scan_running = false; return false; }
                         if (more) return true;
                         worker_job::start(g_scan_work, std::move(builder->input), &build_remote,
-                            [map_id, started, generation](std::vector<EntityPtr> remote) {
+                            [map_id, started, generation,filter_mode](std::vector<EntityPtr> remote) {
                                 if (generation != g_scan_generation || map_id != current_map_id_or_user_data()) return;
-                                g_remote = std::move(remote); g_remote_map_id = map_id;
+                                g_remote = std::move(remote); g_remote_map_id = map_id;g_remote_filter_mode=filter_mode;
                                 finish_scan(map_id, true); g_scan_running = false;
                                 LOGF("[EntityScanner] ready map %d: %zu live, %zu remote; %.1f ms elapsed across frames",
                                     map_id, g_entity_map.size(), g_remote.size(), (frame::now() - started) * 1000);
@@ -1112,7 +1124,24 @@ void schedule_scan()
 
 void scan_entities()
 {
-    if (!g_scan_running) schedule_scan();
+    if(g_scan_running)return;
+    // A qualified Floating Continent snapshot has no currently live NPCs.
+    // Re-capturing and filtering its 1,500 border actors on every stationary
+    // arrow competes with that arrow's fresh route on the Navigation worker.
+    // Reuse only the already published views at the exact same pose/vehicle/
+    // script revision. Explicit browse/directions still capture live blockers.
+    if(game::is(game::Id::FF3)&&g_last_scanned_map_id==1&&current_map_id_or_user_data()==1&&
+       g_views_ready&&g_view_stationary_inventory&&g_navigation_filtered&&!g_filter_pending&&g_view_origin&&
+       g_converted_revision==g_state_revision&&!g_entities.empty()&&baked_nav::prepared()&&
+       std::none_of(g_entities.begin(),g_entities.end(),[](const auto& e){return e&&e->kind==Kind::NPC;})) {
+        const auto* map=baked::submap_by_map_id(1);
+        if(map&&map->world) {
+            Vec3 at;const auto vehicle=field::current_vehicle();
+            if(player_local_position(at)&&at.x==g_view_origin->x&&at.y==g_view_origin->y&&at.z==g_view_origin->z&&
+               (vehicle.valid?vehicle.id:0)==g_view_vehicle)return;
+        }
+    }
+    schedule_scan();
 }
 
 void refresh_state()

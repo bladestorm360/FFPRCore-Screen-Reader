@@ -100,6 +100,10 @@ struct Grids {
     std::vector<uint8_t> attribute;      // world maps: terrain attribute id per cell
     std::vector<std::vector<uint8_t>> transport;   // [group - 1]: 1 = blocked for the group
     std::vector<Object> objects;
+    // Prepared once with the immutable bake on Data; preserve original order
+    // for duplicate/zero IDs, nearest-cell ties and conditional companions.
+    std::unordered_map<int,std::vector<size_t>> objects_by_entity;
+    bool entity_index_prepared=false;
     std::unordered_map<int,std::vector<size_t>> world_exits; // prepared on Data, read-only on native/Navigation owners
     std::unordered_map<int,std::vector<size_t>> transition_helpers;
     std::unordered_map<int,std::vector<size_t>> vehicle_pads; // world cell -> prepared object indices

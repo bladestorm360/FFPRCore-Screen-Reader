@@ -198,11 +198,11 @@ void initialize()
     v.push_back(toggle(L"Speak autowalk path", p::kSpeakAutowalkPath, p::kSpeakAutowalkPathDefault,
                        L"On. Reads the full current route when autowalk starts, and the next leg after a map transition.",
                        L"Off. Autowalk starts without reading the route. Arrival and required actions are still announced."));
-    v.push_back(enumeration(L"Pathfinding Filter", {p::kPathfindingFilterModeNames[0], p::kPathfindingFilterModeNames[1], p::kPathfindingFilterModeNames[2]},
+    v.push_back(enumeration(L"Pathfinding Filter", {p::kPathfindingFilterModeNames[0], p::kPathfindingFilterModeNames[1], p::kPathfindingFilterModeNames[2], p::kPathfindingFilterModeNames[3]},
                             p::kPathfindingFilterMode, p::kPathfindingFilterModeDefault, p::kPathfindingFilterModeMax,
                             L"Current floor: entity cycling shows only what walking reaches on this floor. Current map with vehicles: also what a vehicle you have here reaches. Current map: everything, and a target cut off on this floor is routed through another floor."));
     v.push_back(toggle(L"Map Exit Filter", p::kMapExitFilter, p::kMapExitFilterDefault,
-                       L"On. Multiple exits leading to the same destination collapse to the closest one.",
+                       L"On. Exits to the same destination are grouped separately on each floor. The closest usable exit on each floor remains listed.",
                        L"Off. All map exits appear in navigation."));
     v.push_back(toggle(L"Event group filter", p::kEventGroupFilter, p::kEventGroupFilterDefault,
                        L"On. Repeated triggers for the same event are grouped. Navigation keeps the closest reachable trigger.",
@@ -516,7 +516,9 @@ void activate(const Item& i)
 std::wstring description(const Item& i)
 {
     const wchar_t* key = i.kind == Kind::Toggle ? (toggle_value(i) ? i.desc : i.desc_off) : i.desc;
-    return key ? T(key) : std::wstring();
+    auto text=key?T(key):std::wstring();
+    if(i.key&&std::string(i.key)==ui::prefs::kPathfindingFilterMode)text+=L" "+T(L"World map filter help");
+    return text;
 }
 
 /// Position of the current item among the navigable (non-header) items. Section headers are

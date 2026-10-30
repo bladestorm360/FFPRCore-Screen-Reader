@@ -1,14 +1,33 @@
 # Current feature and source index
 
-Current October29 audit scope/status is maintained in the
+Current October30 navigation follow-up is in
+[vehicle/world journeys](re/WORLD_MAP_JOURNEYS_20261030.md): Maze landing ties,
+required parked-craft changes, continent/surface/underwater continuation and
+the fourth World map filter. Source/offline/all-six delivery is Closed at
+a6d9b4ce19dfb6ad/11460096 bytes. History rewrite is complete with releases preserved;
+[content review](re/SOURCE_CONTENT_REVIEW_20261029.md). The installed payload
+below is the prior frozen audit candidate.
+
+Latest human follow-up: [Magic Exchange character picker](re/MAGIC_EXCHANGE_20261030.md)
+corrects FFIII's native state ownership; entry/source header and recipient arrows
+pass targeted production-consumer checks with existing I/Autodetail MP details.
+Combined serial build/smoke/security/guarded all-six delivery is complete.
+
+[Floating Continent navigation delay](re/FLOATING_NAVIGATION_LAG_20261030.md):
+human-scoped world1 correction covers foot/Nautilus/Invincible, prepared actor
+identity lookup, frame-local native roots and qualified stationary views.
+Route/label parity and fresh dynamic-state controls pass offline; native frame
+and audible confirmation remains separate.
+
+Prior October29 audit scope/status is maintained in the
 [single checkpoint record](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
 The finite map/event/reachability findings and combined checks are source/
-offline/all-six delivery Closed. All six games now use cf805c2e/11374080 bytes;
+offline/all-six delivery Closed. At that checkpoint all six used cf805c2e/11374080 bytes;
 132 installed payload hashes match the scanned candidate and144 protected files
 are unchanged. [Final evidence and limits](re/MAP_AUDIT_DELIVERY_20261029.md).
 Live gameplay/audio/frame confirmation and the separate startup hang remain
-distinct. Historical source cleanup is deferred until the user is at the PC;
-ordinary commits of the cleaned current changes are explicitly authorized.
+distinct. The later human-authorized history rewrite is now complete with
+release history preserved; ordinary source-safe commits are authorized.
 
 | Current affected responsibility | Source/behavior contract and evidence |
 | --- | --- |

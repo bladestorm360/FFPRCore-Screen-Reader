@@ -423,6 +423,13 @@ void d_SceneLoaded(int32_t scene, int32_t mode, const void* mi)
 
 int install()
 {
+    actions::define("EntityScanner.MainMenuOpening", [] {
+        // Stationary world1 views are reusable only until an actual native
+        // menu entry. Spell use may change entry conditions at the same pose.
+        if (!game::is(game::Id::FF3) || current_map_id() != 1) return;
+        baked_nav::invalidate();
+        scanner::invalidate_map();
+    });
     actions::define("Mod.CycleNext", [] { cycle(true); });
     actions::define("Mod.CyclePrevious", [] { cycle(false); });
     actions::define("Mod.AnnounceCurrentEntity", [] { announce_current_entity(); });
