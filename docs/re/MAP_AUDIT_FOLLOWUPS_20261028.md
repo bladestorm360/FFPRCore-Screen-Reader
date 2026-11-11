@@ -22,10 +22,12 @@ chest selected. The first combined offline run exposed a regression in
 FFVI's uncollected Dream pickup. Ordinary solid treasure chests now use the
 stricter approach proof. Animated and loose pickups use their existing
 native action rules. The corrected Zot replay and all 34 Dream assertions
-pass. The complete build and local delivery are pending.
+pass. The full canonical build, smoke, exact-payload scan and FFIV
+installation passed. Gameplay confirmation remains pending.
 Reproduce with `build.bat --check remote_exit_check` under the enforced
 runner. The baseline and corrected receipts are in
 `build_check/ff4_zot_chest_20261111`.
+[Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-11-ffiv-tower-of-zot-chest).
 
 ## November 11 all-six Storyline category
 

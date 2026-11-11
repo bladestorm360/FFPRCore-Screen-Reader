@@ -1,5 +1,14 @@
 # Native FFPR durable memory
 
+**November 11 Tower of Zot chest.** Cross-floor planning for ordinary
+treasure chests now requires a reachable interaction tile. The logged
+5F–4F–5F recovery passes, as does the FFVI Dream pickup. FFIV has the
+verified `8e6cf822bdc5eaf2` DLL, including the Kain airship label. The
+full build, smoke, scan and installed hashes passed. Gameplay confirmation
+is pending.
+[Scope](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-11-tower-of-zot-5f-chest).
+[Delivery evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-11-ffiv-tower-of-zot-chest).
+
 **November 11 private Git backup.** The verified GitHub backup is
 `bladestorm360/FFPRCore-Screen-Reader-backup`, configured locally as
 `private-backup`. Commit eligible work at substantive checkpoints and task

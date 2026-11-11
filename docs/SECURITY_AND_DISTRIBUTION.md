@@ -1,5 +1,34 @@
 # Build and distribution security
 
+## November 11 FFIV Tower of Zot chest
+
+FFIV now uses the 13,390,336-byte DLL with SHA-256
+`8e6cf822bdc5eaf2f73d8610fc2de4270f193eba552785ba7f7d902e84ed7c77`.
+The route source is in private checkpoint `1016b7d08d9c20e8a958215237926dd96b58d19e`.
+The exact source fingerprints and receipts are in
+`build_check/ff4_zot_chest_20261111`.
+
+Reproduce with the enforced runner and `build.bat`, then
+`smoketest.bat`. The corrected canonical build completed 281 serial
+targets and 8,366 native-name checks, with zero missing or undefined wiring
+names. The full Zot, Dream and shared route checks passed. It took
+7,059.075 seconds, peaked at 794,390,528 bytes and exited 0 with the
+process tree drained. The built DLL retained 67 byte-matched resources,
+47 forwarded exports and the verified FFIV labels in all 12 locales.
+
+The isolated smoke host loaded the same DLL. The signed Defender scanner
+used definitions 1.463.246.0 and reported zero matching detections on all
+22 exact payload files, with stable hashes. Its exclusion query was
+unavailable and no signing certificate was present. The guarded
+`deploy.bat ff4` installed the verified payload. All 22 files matched
+afterward, and all 144 protected fingerprints and the other five
+installations matched their preinstall checks.
+
+Cleanup removed 35,548,493 bytes of temporary build groups, smoke and
+scan staging, and the one-off verification helper. The installed hash
+was checked again afterward. Keep the canonical incremental build and
+the source, deployment and private backup receipts.
+
 ## November 11 FFIV Kain's Airship
 
 The locally installed FFIV DLL is 13,389,312 bytes with SHA-256
