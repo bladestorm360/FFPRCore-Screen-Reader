@@ -54,10 +54,10 @@ and close only when a running game prevents installation.
 
 Owner update, November 11: commit repository-eligible work at substantive
 checkpoints and task completion, including work awaiting verification.
-Push the checkpoint to the verified private `private-backup` remote owned
-by bladestorm360 and verify its branch tip. Use the public remote for
-explicitly authorized publication. Apply the source-content gate before
-staging, check the staged content, and audit history when setting up a backup.
+Push checkpoints to the verified public `FFPRCore-Screen-Reader` remote owned
+by bladestorm360 and verify the destination branch tip. Apply the source-content
+gate before staging, check the staged content, and review every commit newly
+exposed by a push. Follow the separate release workflow for packaged releases.
 
 Owner build sequencing update, November 6. Use at most one shared slot for an
 FFPR build across all chats, including separate folders and game targets. Batch

@@ -9,12 +9,11 @@ is pending.
 [Scope](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-11-tower-of-zot-5f-chest).
 [Delivery evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-11-ffiv-tower-of-zot-chest).
 
-**November 11 private Git backup.** The verified GitHub backup is
-`bladestorm360/FFPRCore-Screen-Reader-backup`, configured locally as
-`private-backup`. Commit eligible work at substantive checkpoints and task
-completion. Use the private branch for backups while gameplay or offline
-verification is pending. Verify the remote ref and record the check status.
-The existing public remote retains its publication role.
+**November 11 Git checkpoints.** Push repository-eligible work to the verified
+public `bladestorm360/FFPRCore-Screen-Reader` repository at substantive
+checkpoints and task completion, including work awaiting gameplay or offline
+verification. Review content before pushing, verify the remote ref and record
+the current check status.
 [Project rule](AGENTS.md).
 
 **November 11 FFIV Kain's Airship.** Both world-map Objects contacts beside

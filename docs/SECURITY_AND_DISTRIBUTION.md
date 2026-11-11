@@ -4,7 +4,7 @@
 
 FFIV now uses the 13,390,336-byte DLL with SHA-256
 `8e6cf822bdc5eaf2f73d8610fc2de4270f193eba552785ba7f7d902e84ed7c77`.
-The route source is in private checkpoint `1016b7d08d9c20e8a958215237926dd96b58d19e`.
+The route source is in checkpoint `1016b7d08d9c20e8a958215237926dd96b58d19e`.
 The exact source fingerprints and receipts are in
 `build_check/ff4_zot_chest_20261111`.
 
@@ -27,7 +27,7 @@ installations matched their preinstall checks.
 Cleanup removed 35,548,493 bytes of temporary build groups, smoke and
 scan staging, and the one-off verification helper. The installed hash
 was checked again afterward. Keep the canonical incremental build and
-the source, deployment and private backup receipts.
+the source, deployment and Git checkpoint receipts.
 
 ## November 11 FFIV Kain's Airship
 
