@@ -240,6 +240,43 @@ void ff4_world_entrances(map_state::Flags flags){
     expect(list.rows.size()>2&&field::filter_worker::build_categories(list).views[0].order.size()==list.rows.size(),
            "literal world discovery still lists every physical Troia and Troia Castle entrance");
 }
+void ff4_zot_chest(map_state::Flags flags) {
+    MapGoal target;target.map_id=206;target.cell={0,16,9};target.entity_id=25;
+    const auto* fifth=baked::submap_by_map_id(206);
+    const auto& floor=baked::grids(*fifth).objects;
+    const auto chest=std::find_if(floor.begin(),floor.end(),[&](const auto& object){
+        return object.type==baked::ObjType::TreasureBox&&object.entity_id()==target.entity_id&&
+            object.contains(target.cell.x,target.cell.y);
+    });
+    expect(chest!=floor.end(),"the reported Zot chest has the exact baked identity");
+    if(chest==floor.end())return;
+    target.raw_name=baked::object_identifier(*chest);
+    struct Leg {int map;Cell start,end;int next;};
+    const Leg legs[]={{206,{0,21,10},{0,21,9},205},{205,{0,21,8},{0,13,10},206},{206,{0,13,9},{0,15,9},0}};
+    Pending pending;
+    for(const auto& leg:legs) {
+        flags.current_map_id=leg.map;
+        RouteSnapshot snapshot(map_state::Resolver(flags,fixture::records));
+        snapshot.map_id=leg.map;snapshot.submap=baked::submap_by_map_id(leg.map);snapshot.layer=0;
+        snapshot.position=world_of_cell(*snapshot.submap,leg.start);snapshot.locale=L"en";
+        snapshot.goal=target;snapshot.kind=TargetKind::Interact;snapshot.pending=pending;
+        if(leg.map==206)for(const auto& object:floor)if(object.type==baked::ObjType::TreasureBox) {
+            NativeObstacle observed;observed.cell={object.layer,object.tx,object.ty};
+            observed.type=int(object.type);observed.id=object.entity_id();observed.chest=true;
+            snapshot.obstacles.push_back(observed);
+        }
+        Planned plan;std::thread worker([&]{plan=plan_snapshot(snapshot);});worker.join();
+        const auto end=plan.path.walk_phases.empty()||plan.path.walk_phases.back().cells.empty()?
+            Cell{}:plan.path.walk_phases.back().cells.back();
+        expect(plan.path.success&&plan.path.next_map_id==leg.next&&end==leg.end,
+            "Zot route selects the western 5F landing and reaches the chest's usable side");
+        if(leg.next)expect(plan.pending.valid&&plan.pending.goal.cell==target.cell&&
+                           plan.pending.goal.entity_id==target.entity_id,"Zot stairs retain the original chest across floors");
+        pending=plan.pending;
+        std::printf("Zot map%d from (%d,%d): success%d next%d end (%d,%d) %d steps\n",
+            leg.map,leg.start.x,leg.start.y,plan.path.success,plan.path.next_map_id,end.x,end.y,plan.path.step_count);
+    }
+}
 }
 int main(){
     std::setvbuf(stdout,nullptr,_IONBF,0);policy_cases();
@@ -254,7 +291,7 @@ int main(){
         for(int i=0;i<baked::submap_count();++i)baked::grids(*baked::submap_at(i));g_loaded=g_prepared=true;
         auto flags=std::make_unique<map_state::Flags>();flags->scenario.fill(0);flags->treasure.fill(0);flags->global.fill(0);
         if(number==3){dwarven(*flags);town_returns(*flags);animated_object_floors();}
-        if(number==4){kaipo_returns(*flags);ff4_return_floors(*flags);ff4_world_entrances(*flags);}
+        if(number==4){kaipo_returns(*flags);ff4_return_floors(*flags);ff4_world_entrances(*flags);ff4_zot_chest(*flags);}
         int largest=0,root=0;
         for(int i=0;i<baked::submap_count();++i){
             const auto* sm=baked::submap_at(i);if(sm->world||sm->first_map_id<=0)continue;

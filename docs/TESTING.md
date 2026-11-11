@@ -1,5 +1,12 @@
 # Playability and natural-play confirmation records
 
+## November 11 FFIV Tower of Zot 5F chest
+
+Select the unopened chest beside the Gaia Hammer chest from 4F. Follow the
+directions to 5F. Expect the west-side landing, then two steps east to the
+interaction position. If you start beside the Gaia Hammer chest on the
+other side, expect a route down to 4F and back to the west-side landing.
+
 ## November 11 FFIV Kain's Airship
 
 When Kain's airship appears beside Troya, browse Objects. Expect “Kain's

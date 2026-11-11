@@ -11,10 +11,17 @@ reachable in two steps from PointIn 2 at (13,9), through the western
 
 Static geometry replay verifies that only this 5F landing can reach the
 usable approach. The old graph can count a reachable tile beside the
-occupied approach as proof of arrival. Verify that both remote selection
-and local route recovery require an actual interaction approach, retaining
-the original chest across the 5F–4F–5F route. The report arrived during the
-frozen Kain airship-label build.
+occupied approach as proof of arrival. The production baseline reproduced
+No path from (21,10) and chose the wrong stair at (21,7) from 4F. From
+the western landing it reached (15,9) in two steps. The fix carries
+the exact interaction-approach requirement into both the remote route
+and same-floor recovery searches. The focused production replay passes.
+It returns to 4F in one step, takes the western stair in 18 steps and
+finishes two steps from that 5F landing. Each transition keeps the same
+chest selected. The complete build and local delivery are pending.
+Reproduce with `build.bat --check remote_exit_check` under the enforced
+runner. The baseline and corrected receipts are in
+`build_check/ff4_zot_chest_20261111`.
 
 ## November 11 all-six Storyline category
 

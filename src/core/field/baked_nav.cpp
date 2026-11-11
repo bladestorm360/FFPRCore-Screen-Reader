@@ -3030,6 +3030,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             around.map_id = map_id;
             around.cell = stair_chest ? kBaronChest : target;
             around.cells = req.goals;
+            around.examine = around.examine || goals.face;
         }
         // Try the known land connection before offering a vehicle. While
         // airborne, keep the existing landing and vehicle approach priority.
@@ -3686,6 +3687,9 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
         if(try_blackjack_journey(goal_in,kind,name,out))return true;
         const int map_id = planning_map_id();
         MapGoal goal = goal_in;
+        // Interact goals identify the cells from which to face the target.
+        // Reaching a tile beside a blocked approach does not reach the target.
+        if (kind == TargetKind::Interact) goal.examine = true;
         std::vector<Cell> remote_npc_cells;
         if (goal.entity_id >= 0 && goal.transportation_id<=0) {
             auto state = planning_state();
