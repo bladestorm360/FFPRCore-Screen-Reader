@@ -47,7 +47,7 @@ def decide(n,name):
         if name=='sc_godown_1':
             return 'existing_exit',None,'already an indexed world exit; arrival includes story staging'
         if name=='sc_e_0031':
-            return 'transfer','Passage','ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6'
+            return 'transfer',"Devil's Road portal",'ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6'
     if n==5:
         if name.startswith(('sc_map_20070_move_','sc_map_20071_move_')):
             return 'transfer','Passage','ordinary room-to-room door; arrival color/fade and map initializer restore room state'

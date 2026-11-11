@@ -37,6 +37,7 @@ void configure() {
     scape::Options o;
     o.navigation=enabled(); o.soundscape=settings::get_bool("Soundscape",false);
     o.hrtf=settings::get_bool("HRTF",false);
+    o.custom=custom::capture();
     o.range=std::clamp(settings::get_int("SoundscapeDistance",10)/5*5,5,25);
     o.master=levels::get("SoundscapeVolume")/50.f;
     for(size_t i=0;i<cues::count;++i) {
@@ -78,7 +79,7 @@ void tick() {
         capture_next=0; capture_revision=0;
         if(const auto* sm=field::baked::submap_by_map_id(map)) {
             capture->map_width=float(sm->width);capture->map_height=float(sm->height);
-            if(sm->world){capture->wrap_width=float(sm->width); capture->wrap_height=float(sm->height);}
+            capture->wrap_width=float(field::baked::wrap_width(*sm)); capture->wrap_height=float(field::baked::wrap_height(*sm));
         }
     }
     if(at-capture->captured_at>1.0) { cancel(); next_capture=at+.20; return; }

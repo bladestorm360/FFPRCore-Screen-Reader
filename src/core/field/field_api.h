@@ -41,6 +41,7 @@ struct PathInfo {
     bool transition_repeat_blocked = false;
     int map_width = 0, map_height = 0;
     bool wraps = false;
+    int loop_axes = 0;           // native per-axis indoor loops; wraps retains world movement policy
     int next_map_id = 0;          // the route continues on this map after its last leg ("take
                                   // the exit to ..."): the target is cut off on this floor or
                                   // lies on another one (baked_nav); 0 = the route ends at the target

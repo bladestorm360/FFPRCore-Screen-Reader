@@ -119,7 +119,14 @@ ref::Field fTalkCloseMessageKey{kFieldMapObjectDefault,"<CloseMessageKey>k__Back
 namespace field {bool call_virtual_bool(ref::Method&,void* p){fixture::native();return p&&static_cast<fixture::Node*>(p)->enabled;}}
 namespace il2cpp {Class*object_class(void*){return nullptr;} }
 namespace ffpr::menus::detail {bool auto_detail(){return ui::prefs::auto_detail_enabled();}bool blank(std::wstring_view s){return s.empty();}std::wstring strip_icon(std::wstring_view s){return std::wstring(s);}void clear_other_menu_states(const char*){}bool shop_menu_active(){return false;}void shop_clear_for_equipment_submenu(){}void shop_set_menu_active(){} }
-namespace ffpr::battle {bool in_battle(){return fixture::battle;}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:-1;}void*player_owned_character(void*p){return displayed::field(p,"owned");}void*current_actor(){return nullptr;}std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";} }
+namespace ffpr::battle {bool in_battle(){return fixture::battle;}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:-1;}void*player_owned_character(void*p){return displayed::field(p,"owned");}void*current_actor(){return nullptr;}std::wstring character_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";} }
+namespace ffpr::battle {
+// This fixture supplies rendered rows only. The submenu replay owns live parameters.
+void* unit_parameter(void*) { return nullptr; }
+int param_current_hp(void*) { return 0; }
+int param_current_mp(void*) { return 0; }
+int param_confirmed_or_base(void*, Stat) { return 0; }
+}
 namespace menu_state {void reset_all(){}void set_active(const char*n,bool b){fixture::states[n]=b;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;auto i=fixture::resets.find(n);if(i!=fixture::resets.end())i->second();}void register_reset(const char*n,std::function<void()>f){fixture::resets[n]=std::move(f);} }
 namespace dedup {bool index(const char*,long long,Scope){return true;}void reset(const char*){} }
 namespace ffpr::shop {bool live(void*p,ref::Class&){return unity::alive(p);}void*master_get_data(ref::Class& k,int id){fixture::native();auto it=fixture::shop_content.find(id);return std::string(k.name)=="Content"&&it!=fixture::shop_content.end()?it->second:nullptr;}std::wstring strip_icon_markup(std::wstring_view s){return std::wstring(s);}void magic_reset_state(){} }

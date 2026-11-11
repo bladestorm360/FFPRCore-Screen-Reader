@@ -1,0 +1,19 @@
+"""Coral guide instructions in all twelve game-supported languages."""
+from pathlib import Path
+import json,sys
+from author_ebots_rock_guide import PARTY,KEEP,FEED,WARP
+ROOT=Path(__file__).resolve().parents[1]
+ROWS={
+ PARTY:dict(en=PARTY,ja='宝箱にサンゴを渡す前にストラゴスを現在のパーティに入れてください。',fr='Placez Strago dans l’équipe active avant de nourrir le coffre.',it='Metti Strago nel gruppo attivo prima di nutrire il forziere.',de='Nimm Strago in die aktive Gruppe auf, bevor du die Truhe fütterst.',es='Incluye a Strago en el grupo activo antes de alimentar al cofre.',ko='상자에 산호를 주기 전에 스트라고스를 현재 파티에 넣으세요.',zht='餵食寶箱前，請將斯特拉格斯加入目前隊伍。',zhc='喂食宝箱前，请将斯特拉格斯加入当前队伍。',ru='Добавьте Страго в активный отряд, прежде чем кормить сундук.',pt='Coloque Strago no grupo ativo antes de alimentar o baú.',th='ให้สตราโกอยู่ในปาร์ตี้ที่ใช้งานก่อนป้อนปะการังให้หีบ'),
+ KEEP:dict(en=KEEP,ja='2番目の選択肢でサンゴを手元に残し、再度案内を求めてください。',fr='Choisissez la deuxième option pour garder le corail, puis redemandez conseil.',it='Scegli la seconda opzione per tenere il corallo, poi richiedi indicazioni.',de='Wähle die zweite Option, um die Korallen zu behalten. Fordere dann erneut Hinweise an.',es='Elige la segunda opción para conservar el coral y vuelve a pedir indicaciones.',ko='두 번째 선택지로 산호를 보관한 뒤 다시 안내를 요청하세요.',zht='選擇第二個選項保留珊瑚，然後再次要求指引。',zhc='选择第二个选项保留珊瑚，然后再次请求指引。',ru='Выберите второй вариант, чтобы сохранить кораллы, затем снова запросите подсказку.',pt='Escolha a segunda opção para guardar o coral e peça orientação novamente.',th='เลือกตัวเลือกที่สองเพื่อเก็บปะการังไว้ แล้วขอคำแนะนำอีกครั้ง'),
+ FEED:dict(en=FEED,ja='1番目の選択肢で、22個以上のサンゴを一度に渡してください。',fr='Choisissez la première option pour donner au moins 22 coraux à la fois.',it='Scegli la prima opzione per dare almeno 22 coralli in una volta.',de='Wähle die erste Option, um mindestens 22 Korallen auf einmal zu verfüttern.',es='Elige la primera opción para dar al menos 22 corales de una vez.',ko='첫 번째 선택지로 산호를 한 번에 22개 이상 주세요.',zht='選擇第一個選項，一次餵食至少22個珊瑚。',zhc='选择第一个选项，一次喂食至少22个珊瑚。',ru='Выберите первый вариант, чтобы отдать не менее 22 кораллов за раз.',pt='Escolha a primeira opção para dar pelo menos 22 corais de uma vez.',th='เลือกตัวเลือกแรกเพื่อป้อนปะการังอย่างน้อย 22 ชิ้นในครั้งเดียว'),
+ WARP:dict(en=WARP,ja='転送床で別の部屋を試し、再度案内を求めてください。',fr='Utilisez le téléporteur pour essayer une autre salle, puis redemandez conseil.',it='Usa il teletrasporto per provare un’altra stanza, poi richiedi indicazioni.',de='Benutze den Teleporter, um einen anderen Raum zu versuchen. Fordere dann erneut Hinweise an.',es='Usa el teletransportador para probar otra sala y vuelve a pedir indicaciones.',ko='워프로 다른 방으로 이동한 뒤 다시 안내를 요청하세요.',zht='使用傳送點嘗試前往其他房間，然後再次要求指引。',zhc='使用传送点尝试前往其他房间，然后再次请求指引。',ru='Используйте телепорт, чтобы попробовать другую комнату, затем снова запросите подсказку.',pt='Use o teletransporte para tentar outra sala e peça orientação novamente.',th='ใช้จุดวาร์ปเพื่อลองไปห้องอื่น แล้วขอคำแนะนำอีกครั้ง')}
+ROWS['Random warp required']=dict(en='Random warp required',ja='ランダム転送が必要',fr='Téléportation aléatoire requise',it='Teletrasporto casuale richiesto',de='Zufallsteleport erforderlich',es='Requiere teletransporte aleatorio',ko='무작위 워프 필요',zht='需要隨機傳送',zhc='需要随机传送',ru='Нужен случайный телепорт',pt='Teletransporte aleatório necessário',th='ต้องใช้จุดวาร์ปสุ่ม')
+if __name__=='__main__':
+ p=ROOT/'data/common/mod_text.json';d=json.loads(p.read_text(encoding='utf-8'));langs=set(d['Exit to {0}']);assert len(langs)==12
+ for key,row in ROWS.items():
+  assert set(row)==langs and all(row.values())
+  if'--check'in sys.argv:assert d.get(key)==row,key
+  else:assert key not in d or d[key]==row,key;d[key]=row
+ if'--check'not in sys.argv:p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ print('Ebot: four instructions and random-route label/all12 languages.')

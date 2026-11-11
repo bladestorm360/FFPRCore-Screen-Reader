@@ -15,6 +15,7 @@ bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
 game::Id game=game::Id::FF1;
 field::VehicleState vehicle{true,1,1,L""};
 field::baked_route::Cell cell{1,1,1};
+int map_id=1,precision_queries=0;unity::Vec3 position{};
 unity::Vec2 native{};
 unity::Vec2 moved{};int calls=0, airship_calls=0, key_calls=0, cleaned=0; bool shoulders=false;
 std::map<events::Kind,std::vector<events::Handler>> handlers;
@@ -59,7 +60,7 @@ il2cpp::Method* Method::get(){return reinterpret_cast<il2cpp::Method*>(ptr());}
 std::wstring rd_str(void*,Field&){return L"Action";}
 void call_failed_note(const char*){std::abort();}
 }
-namespace unity {bool alive(void*p){return p!=nullptr;}bool active_in_hierarchy(void*p){return p!=nullptr;}void*transform(void*p){return p;}Vec3 local_position(void*){return {};}}
+namespace unity {bool alive(void*p){return p!=nullptr;}bool active_in_hierarchy(void*p){return p!=nullptr;}void*transform(void*p){return p;}Vec3 local_position(void*){return fixture::position;}}
 namespace log_ {void write(const char*,...){} }
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return true;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
@@ -72,9 +73,11 @@ namespace menu_state {bool any_active(){return fixture::menu;} }
 namespace field::cache {void*get(ref::Class&t){return std::string(t.name)=="FieldMap"?&fixture::map:&fixture::controller;}void*get_or_refresh(ref::Class&t){return get(t);} }
 namespace field {
 void*player_controller(){return &fixture::controller;}
-void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return 1;}bool face_player(void*,int){return true;}Target selected(){return {};}
+void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}bool face_player(void*,int){return true;}Target selected(){return {};}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
 namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3,baked_route::Cell&c){c=fixture::cell;return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
+unity::Vec3 world_of(void*,const baked_route::Cell& cell){return {cell.x*16.f,-cell.y*16.f,0};}
+bool walk_precision_edge(void*,void*,const route_progress::PrecisionPoint&,const route_progress::PrecisionPoint&){++fixture::precision_queries;return fixture::edge_open;}
 void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
 }
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);} }
@@ -88,6 +91,8 @@ namespace gamepad {bool lstick_up_pressed(){return false;}bool lstick_down_press
 }
 namespace input::bindings {
 bool remapped_keyboard_in_use(){return false;}
+bool event_guide_keyboard_in_use(){return false;}
+bool battle_party_keyboard_in_use(){return false;}
 bool consumed(int){return false;}
 bool navigation_request_pressed(){return false;}
 bool navigation_controller_input(int){return false;}
@@ -198,6 +203,26 @@ int main(){
   fixture::focus=false;a::input_updated();fixture::focus=true;focus_stale(detour);
   expect(!a::active(),"focus loss retires a pending obstacle route and its completion");
  }
+ // Actual input producer must retain fractional values, wait for native
+ // displacement and honor the same collision/focus ownership on this room.
+ fixture::game=game::Id::FF1;fixture::map_id=91;fixture::controller.mode=0;fixture::controller.airship=false;
+ fixture::vehicle={true,1,1,L""};fixture::ready=fixture::focus=fixture::edge_open=true;fixture::player.moving=false;
+ field::PathInfo precision;precision.success=true;precision.map_width=precision.map_height=64;
+ a::Phase gap;gap.cells={{0,18,18},{0,20,17}};gap.precision={{0,36,36},{0,37,36},{0,37,35},{0,38,35},{0,39,35},{0,40,35},{0,40,34}};
+ a::Phase finish;finish.cells={{0,20,17},{0,20,16},{0,19,16}};precision.walk_phases={gap,finish};
+ fixture::cell={0,18,18};fixture::position={288,-288,0};a::start(precision);
+ auto fine_axis=a::d_InputAxis(nullptr,nullptr);
+ expect(fine_axis.x==.5f&&fine_axis.y==0&&a::active(),"native producer takes the first cardinal half step east");
+ const int query_count=fixture::precision_queries;fixture::player.moving=true;
+ expect(a::d_InputAxis(nullptr,nullptr).x==0&&fixture::precision_queries==query_count,"moving precision input neither advances nor repeats collision queries");
+ fixture::player.moving=false;
+ for(size_t i=1;i+1<gap.precision.size();++i){const auto from=gap.precision[i],to=gap.precision[i+1];fixture::cell={from.layer,(from.x2+1)/2,(from.y2+1)/2};fixture::position={from.x2*8.f,-from.y2*8.f,0};fixture::step();fine_axis=a::d_InputAxis(nullptr,nullptr);
+  expect(fine_axis.x==(to.x2-from.x2)*.5f&&fine_axis.y==(from.y2-to.y2)*.5f&&!(fine_axis.x&&fine_axis.y),"each actual native half-step input follows the ordered cardinal corner");}
+ fixture::cell={0,20,17};fixture::position={320,-272,0};fixture::step();fine_axis=a::d_InputAxis(nullptr,nullptr);
+ expect(fine_axis.x==0&&fine_axis.y==1,"precision completion resumes the ordinary pickup approach");a::cancel();
+ fixture::cell={0,18,18};fixture::position={288,-288,0};a::start(precision);fixture::edge_open=false;
+ fine_axis=a::d_InputAxis(nullptr,nullptr);expect(!fine_axis.x&&!fine_axis.y,"a native precision collision veto releases movement");a::cancel();
+ fixture::edge_open=true;fixture::map_id=1;fixture::position={};
  std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
  std::printf("Autowalk native input/vehicle waits/FF6 flight: %d failures\n",failures);return failures?1:0;
 }

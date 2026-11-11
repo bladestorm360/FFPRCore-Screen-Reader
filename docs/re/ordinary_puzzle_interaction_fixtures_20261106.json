@@ -1,0 +1,2216 @@
+{
+  "ff1": {
+    "puzzles": [
+      {
+        "id": "lute_slab",
+        "maps": [
+          115
+        ],
+        "_about": "Actual interactive slab9, not decoration16; native Lute sequence37 is completion, not proximity.",
+        "steps": [
+          {
+            "map": 115,
+            "entity": 9,
+            "raw": "石板（有）",
+            "layer": 0,
+            "x": 38,
+            "y": 25,
+            "examine": true,
+            "text": "Examine the stone slab to play the Lute.",
+            "done_scenario": 37
+          }
+        ]
+      }
+    ]
+  },
+  "ff2": {
+    "puzzles": [
+      {
+        "id": "fynn_treasure_passage",
+        "maps": [
+          21
+        ],
+        "steps": [
+          {
+            "map": 21,
+            "entity": 31,
+            "raw": "①ポール",
+            "layer": 0,
+            "x": 7,
+            "y": 6,
+            "examine": true,
+            "text": "Ask about {0}.",
+            "arg": "modtext:FF2 keyword Cyclone",
+            "before_scenario": 75,
+            "done_scenario": 88
+          },
+          {
+            "map": 21,
+            "entity": 36,
+            "raw": "隠し通路",
+            "layer": 0,
+            "x": 18,
+            "y": 12,
+            "examine": true,
+            "text": "Examine the hidden passage.",
+            "done_scenario": 114
+          }
+        ],
+        "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+        "done_scenario": 114,
+        "requires_scenario": 72
+      },
+      {
+        "id": "semitt_snowcraft",
+        "maps": [
+          118
+        ],
+        "steps": [
+          {
+            "map": 118,
+            "entity": 14,
+            "raw": "sc_e_0025:隠し通路の蓋",
+            "layer": 0,
+            "x": 24,
+            "y": 7,
+            "examine": true,
+            "text": "Examine the hidden passage.",
+            "done_scenario": 22
+          }
+        ],
+        "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+        "done_scenario": 22,
+        "requires_scenario": 21
+      },
+      {
+        "id": "fynn_mirror",
+        "maps": [
+          41
+        ],
+        "steps": [
+          {
+            "map": 41,
+            "entity": 5,
+            "raw": "鏡",
+            "layer": 0,
+            "x": 11,
+            "y": 7,
+            "examine": true,
+            "text": "Use {0} at the mirror, then wait for the scene to finish.",
+            "arg": "modtext:FF2 item Pendant",
+            "done_scenario": 73
+          }
+        ],
+        "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+        "done_scenario": 73,
+        "requires_scenario": 72
+      }
+    ]
+  },
+  "ff3": {
+    "puzzles": [
+      {
+        "id": "ur_hidden_door",
+        "_about": "Ur: the examined object at (13,7) opens the hidden door at (15,9).",
+        "maps": [
+          336
+        ],
+        "steps": [
+          {
+            "map": 336,
+            "x": 13,
+            "y": 6,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the hidden switch",
+            "entity": 9,
+            "raw": "隠し扉を開ける①",
+            "done_scenario": 221
+          },
+          {
+            "map": 336,
+            "x": 15,
+            "y": 8,
+            "layer": 1,
+            "examine": false,
+            "text": "Go through the hidden door"
+          }
+        ]
+      },
+      {
+        "id": "altar_cave_wall_switch",
+        "_about": "Altar Cave B3: the wall switch on the left (sc_e_0003) at (15,11).",
+        "maps": [
+          153
+        ],
+        "steps": [
+          {
+            "map": 153,
+            "x": 15,
+            "y": 10,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 10,
+            "raw": "sc_e_0003:壁開けスイッチ：左",
+            "done_scenario": 2
+          }
+        ]
+      },
+      {
+        "id": "mythril_mines_hidden_door",
+        "_about": "Mythril Mines: switch 1 at (13,7) opens the hidden door at (10,8).",
+        "maps": [
+          159
+        ],
+        "steps": [
+          {
+            "map": 159,
+            "x": 13,
+            "y": 6,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the hidden switch",
+            "entity": 8,
+            "raw": "ミスリルの洞窟：隠し扉を開ける スイッチ①",
+            "done_scenario": 180
+          },
+          {
+            "map": 159,
+            "x": 10,
+            "y": 7,
+            "layer": 1,
+            "examine": false,
+            "text": "Go through the hidden door"
+          }
+        ]
+      },
+      {
+        "id": "tower_of_owen_hidden_door",
+        "_about": "Tower of Owen 5F: the object at (12,7) opens the hidden door at (13,13).",
+        "maps": [
+          179
+        ],
+        "steps": [
+          {
+            "map": 179,
+            "x": 12,
+            "y": 6,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the hidden switch",
+            "entity": 7,
+            "raw": "オーエンの塔：隠し扉を開ける",
+            "done_scenario": 225
+          },
+          {
+            "map": 179,
+            "x": 13,
+            "y": 12,
+            "layer": 1,
+            "examine": false,
+            "text": "Go through the hidden door"
+          }
+        ]
+      },
+      {
+        "id": "molten_cave_hidden_door",
+        "_about": "Molten Cave: the object at (22,6) opens the hidden door at (20,7).",
+        "maps": [
+          191
+        ],
+        "steps": [
+          {
+            "map": 191,
+            "x": 22,
+            "y": 5,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the hidden switch",
+            "entity": 9,
+            "raw": "ほのおの洞窟：隠し扉を開ける",
+            "done_scenario": 199
+          },
+          {
+            "map": 191,
+            "x": 20,
+            "y": 6,
+            "layer": 1,
+            "examine": false,
+            "text": "Go through the hidden door"
+          }
+        ]
+      },
+      {
+        "id": "caanan_hidden_door",
+        "maps": [
+          43
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 43,
+            "entity": 10,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "壁を消す",
+            "layer": 1,
+            "x": 19,
+            "y": 6,
+            "done_scenario": 222
+          }
+        ]
+      },
+      {
+        "id": "argus_hidden_door_lower",
+        "maps": [
+          69
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 69,
+            "entity": 700,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "隠し扉を消す",
+            "layer": 1,
+            "x": 12,
+            "y": 7,
+            "done_scenario": 202
+          }
+        ]
+      },
+      {
+        "id": "argus_hidden_door_upper",
+        "maps": [
+          73
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 73,
+            "entity": 700,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "②の壁を消す",
+            "layer": 1,
+            "x": 11,
+            "y": 6,
+            "done_scenario": 223
+          }
+        ]
+      },
+      {
+        "id": "saronia_hidden_door",
+        "maps": [
+          110
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 110,
+            "entity": 9,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "壁を消す",
+            "layer": 0,
+            "x": 12,
+            "y": 7,
+            "done_scenario": 201
+          }
+        ]
+      },
+      {
+        "id": "doga_manor_hidden_door",
+        "maps": [
+          133
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 133,
+            "entity": 11,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "壁を消す",
+            "layer": 2,
+            "x": 9,
+            "y": 7,
+            "done_scenario": 198
+          }
+        ]
+      },
+      {
+        "id": "replito_hidden_door",
+        "maps": [
+          141
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 141,
+            "entity": 3,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "壁を消す",
+            "layer": 1,
+            "x": 9,
+            "y": 7,
+            "done_scenario": 204
+          }
+        ]
+      },
+      {
+        "id": "sealed_cave_hidden_door",
+        "maps": [
+          162
+        ],
+        "done_scenario": 224,
+        "steps": [
+          {
+            "map": 162,
+            "entity": 7,
+            "raw": "2の道が開く",
+            "layer": 1,
+            "x": 20,
+            "y": 7,
+            "examine": true,
+            "text": "Examine the hidden passage.",
+            "done_scenario": 224
+          }
+        ],
+        "_about": "One exact native control/item-selection operation; native receipt, not proximity, completes it."
+      },
+      {
+        "id": "eureka_hidden_passage",
+        "maps": [
+          324
+        ],
+        "done_scenario": 226,
+        "steps": [
+          {
+            "map": 324,
+            "entity": 15,
+            "raw": "調べると壁が開く",
+            "layer": 1,
+            "x": 17,
+            "y": 6,
+            "examine": true,
+            "text": "Examine the hidden passage.",
+            "done_scenario": 226
+          }
+        ],
+        "_about": "One exact native control/item-selection operation; native receipt, not proximity, completes it."
+      },
+      {
+        "id": "syrcus_key_door",
+        "maps": [
+          305
+        ],
+        "done_scenario": 94,
+        "steps": [
+          {
+            "map": 305,
+            "entity": 29,
+            "raw": "シルクスの鍵を使うと扉が開く",
+            "layer": 1,
+            "x": 19,
+            "y": 7,
+            "examine": true,
+            "text": "Use {0} on the locked door.",
+            "arg": "modtext:FF3 item Syrcus Key",
+            "done_scenario": 94
+          }
+        ],
+        "_about": "One exact native control/item-selection operation; native receipt, not proximity, completes it."
+      },
+      {
+        "id": "eureka_key_mirror",
+        "maps": [
+          306
+        ],
+        "done_scenario": 178,
+        "steps": [
+          {
+            "map": 306,
+            "entity": 7,
+            "raw": "鏡の警告、鍵を使うと通行可能に",
+            "layer": 1,
+            "x": 10,
+            "y": 9,
+            "examine": true,
+            "text": "Use {0} at the mirror, then wait for the scene to finish.",
+            "arg": "modtext:FF3 item Eureka Key",
+            "done_scenario": 178
+          }
+        ],
+        "_about": "One exact native control/item-selection operation; native receipt, not proximity, completes it.",
+        "requires_scenario": 93
+      }
+    ]
+  },
+  "ff4": {
+    "puzzles": [
+      {
+        "id": "baron_castle_switches",
+        "_about": "Castle Baron: the two wall switches in the castle at (18,31) and (18,20).",
+        "maps": [
+          4
+        ],
+        "steps": [
+          {
+            "map": 4,
+            "x": 18,
+            "y": 30,
+            "layer": 0,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 42,
+            "raw": "スイッチ",
+            "done_scenario": 280
+          },
+          {
+            "map": 4,
+            "x": 18,
+            "y": 19,
+            "layer": 0,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 45,
+            "raw": "スイッチ",
+            "done_scenario": 281
+          }
+        ]
+      },
+      {
+        "id": "baron_castle_1f_switch",
+        "_about": "Castle Baron 1F: the switch at (18,9) opens the door at (19,7).",
+        "maps": [
+          5
+        ],
+        "steps": [
+          {
+            "map": 5,
+            "x": 18,
+            "y": 8,
+            "layer": 0,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 16,
+            "raw": "スイッチ",
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "baron_castle_1f_west_switch",
+        "_about": "Castle Baron 1F (west): the switch at (18,9) opens the door at (16,7).",
+        "maps": [
+          16
+        ],
+        "steps": [
+          {
+            "map": 16,
+            "x": 18,
+            "y": 8,
+            "layer": 0,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 7,
+            "raw": "スイッチ",
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "devils_road_hidden_door",
+        "_about": "Town of Baron, Devil's Road: the switch at (5,11) opens the hidden door at (6,9).",
+        "maps": [
+          29
+        ],
+        "steps": [
+          {
+            "map": 29,
+            "x": 5,
+            "y": 10,
+            "layer": 0,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 7,
+            "raw": "スイッチ",
+            "done_scenario": 283
+          },
+          {
+            "map": 29,
+            "x": 6,
+            "y": 8,
+            "layer": 0,
+            "examine": false,
+            "text": "Go through the hidden door"
+          }
+        ]
+      },
+      {
+        "id": "baron_inn_switch",
+        "maps": [
+          25
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 25,
+            "entity": 15,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "スイッチ",
+            "layer": 0,
+            "x": 23,
+            "y": 8,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "damcyan_switch",
+        "maps": [
+          42
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 42,
+            "entity": 11,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "スイッチ",
+            "layer": 0,
+            "x": 13,
+            "y": 8,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "fabul_switch",
+        "maps": [
+          47
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 47,
+            "entity": 11,
+            "text": "Go through the hidden door",
+            "examine": false,
+            "raw": "スイッチ",
+            "layer": 0,
+            "x": 23,
+            "y": 8,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "eblan_switch",
+        "maps": [
+          84
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 84,
+            "entity": 10,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "スイッチ",
+            "layer": 0,
+            "x": 7,
+            "y": 8,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "troia_town_passage",
+        "maps": [
+          91
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 91,
+            "entity": 26,
+            "text": "Go through the hidden door",
+            "examine": false,
+            "raw": "隠し扉",
+            "layer": 0,
+            "x": 18,
+            "y": 4,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "troia_town_switch",
+        "maps": [
+          94
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 94,
+            "entity": 10,
+            "text": "Examine the switch",
+            "examine": true,
+            "raw": "スイッチ",
+            "layer": 0,
+            "x": 8,
+            "y": 6,
+            "done_scenario": 283
+          }
+        ]
+      },
+      {
+        "id": "troia_town_rear_passage",
+        "maps": [
+          95
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 95,
+            "entity": 20,
+            "text": "Go through the hidden door",
+            "examine": false,
+            "raw": "隠し扉",
+            "layer": 0,
+            "x": 7,
+            "y": 2,
+            "done_scenario": 280
+          }
+        ]
+      },
+      {
+        "id": "troia_castle_passage",
+        "maps": [
+          104
+        ],
+        "_about": "One native operation opens this passage. The exact scenario receipt supports initial, resumed and completed states; proximity is not completion.",
+        "steps": [
+          {
+            "map": 104,
+            "entity": 9,
+            "text": "Go through the hidden door",
+            "examine": false,
+            "raw": "隠し扉",
+            "layer": 0,
+            "x": 8,
+            "y": 2,
+            "done_scenario": 279
+          }
+        ]
+      },
+      {
+        "id": "baron_key_doors",
+        "maps": [
+          24
+        ],
+        "steps": [
+          {
+            "map": 24,
+            "entity": 66,
+            "raw": "武器屋鍵選択",
+            "layer": 1,
+            "x": 15,
+            "y": 17,
+            "examine": true,
+            "text": "Use {0} on the locked door.",
+            "done_scenario": 271,
+            "arg": "modtext:FF4 item Baron Key"
+          },
+          {
+            "map": 24,
+            "entity": 67,
+            "raw": "昔の水路鍵選択",
+            "layer": 1,
+            "x": 4,
+            "y": 20,
+            "examine": true,
+            "text": "Use {0} on the locked door.",
+            "done_scenario": 272,
+            "arg": "modtext:FF4 item Baron Key"
+          }
+        ],
+        "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+        "done_scenario": 33,
+        "requires_scenario": 31
+      },
+      {
+        "id": "agart_magma_well",
+        "maps": [
+          109
+        ],
+        "steps": [
+          {
+            "map": 109,
+            "entity": 3,
+            "raw": "アガルトの村の井戸でマグマの石をつかう",
+            "layer": 1,
+            "x": 15,
+            "y": 10,
+            "examine": true,
+            "text": "Use {0} at the well, then wait for the scene to finish.",
+            "done_scenario": 44,
+            "arg": "modtext:FF4 item Magma Rock"
+          }
+        ],
+        "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+        "done_scenario": 44,
+        "requires_scenario": 43
+      },
+      {
+        "id": "babel_key_door",
+        "maps": [
+          220
+        ],
+        "steps": [
+          {
+            "map": 220,
+            "entity": 28,
+            "raw": "ルゲイエのカギ使用イベント",
+            "layer": 0,
+            "x": 21,
+            "y": 9,
+            "examine": true,
+            "text": "Use {0} on the locked door.",
+            "done_scenario": 273,
+            "arg": "modtext:FF4 item Dr Lugae Key"
+          }
+        ],
+        "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+        "done_scenario": 48,
+        "requires_scenario": 47
+      },
+      {
+        "id": "sealed_cavern_door",
+        "maps": [
+          268
+        ],
+        "steps": [
+          {
+            "map": 268,
+            "entity": 6,
+            "raw": "アイテム使用まで閉鎖",
+            "layer": 0,
+            "x": 13,
+            "y": 4,
+            "examine": true,
+            "text": "Use {0} on the locked door.",
+            "done_scenario": 58,
+            "arg": "modtext:FF4 item Luca Necklace"
+          }
+        ],
+        "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+        "done_scenario": 58,
+        "requires_scenario": 57
+      },
+      {
+        "id": "dwarven_castle_passage",
+        "maps": [
+          125
+        ],
+        "steps": [
+          {
+            "map": 125,
+            "entity": 17,
+            "raw": "ドワーフ兵（青）③",
+            "layer": 0,
+            "x": 16,
+            "y": 5,
+            "examine": true,
+            "text": "Speak to the soldier.",
+            "done_scenario": 278
+          }
+        ],
+        "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+        "done_scenario": 278
+      }
+    ]
+  },
+  "ff5": {
+    "puzzles": [
+      {
+        "id": "fire_powered_ship_engine_room",
+        "_about": "Engine control13 hides itself and door15 after operation. Entity1 in ev_e_0216 has no action script and is not a second switch. Repeat Shift+G after operating the control; missing actor state never certifies completion.",
+        "maps": [
+          256
+        ],
+        "steps": [
+          {
+            "map": 256,
+            "x": 7,
+            "y": 10,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the switch",
+            "entity": 13,
+            "raw": "スイッチ",
+            "done_hidden": true
+          }
+        ]
+      }
+    ]
+  },
+  "ff6": {
+    "puzzles": [
+      {
+        "id": "darills_tomb_doors",
+        "_about": "Darill's Tomb B2: examining the stone at (28,43) on map 458 makes a door appear (the passage at (28,40)); the stone at (76,13) on map 463 does the same there.",
+        "maps": [
+          458,
+          463
+        ],
+        "steps": [
+          {
+            "map": 458,
+            "x": 7,
+            "y": 10,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the gravestone",
+            "entity": 1,
+            "raw": "調べると扉が出現",
+            "done_scenario": 341
+          },
+          {
+            "map": 463,
+            "x": 13,
+            "y": 12,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the gravestone",
+            "entity": 24,
+            "raw": "調べると扉が出現",
+            "done_scenario": 343
+          }
+        ]
+      },
+      {
+        "id": "cultists_tower_hidden_switch",
+        "_about": "Cultists' Tower: the hidden switch at (9,9) on map 478 makes the door appear.",
+        "maps": [
+          478
+        ],
+        "steps": [
+          {
+            "map": 478,
+            "x": 9,
+            "y": 8,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the hidden switch",
+            "entity": 5,
+            "raw": "隠しスイッチ（扉が出現）",
+            "done_scenario": 421
+          }
+        ]
+      },
+      {
+        "id": "owzers_mansion_painting",
+        "_about": "Owzer's Mansion: the flower painting at (111,18) on map 442 is examined (a battle follows).",
+        "maps": [
+          442
+        ],
+        "steps": [
+          {
+            "map": 442,
+            "x": 18,
+            "y": 16,
+            "layer": 1,
+            "examine": true,
+            "text": "Examine the painting",
+            "entity": 15,
+            "raw": "花の絵を調べるとバトル",
+            "done_scenario": 381
+          }
+        ]
+      }
+    ],
+    "story_guides": [
+      {
+        "id": "zozo_dragon",
+        "maps": [
+          472
+        ],
+        "introduction": "",
+        "when": [],
+        "rules": [
+          {
+            "when": [
+              [
+                "scenario",
+                363,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 472,
+                "entity": 1,
+                "raw": "スイッチ踏むとストームドラゴン出現",
+                "group": "ev_e_0733",
+                "kind": "spot",
+                "text": "Optional: operate this switch to release the dragon, then win the battle.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ]
+          },
+          {
+            "when": [],
+            "targets": [
+              {
+                "map": 472,
+                "entity": 2,
+                "raw": "ストームドラゴン",
+                "group": "ev_e_0734",
+                "kind": "interact",
+                "text": "Defeat {0}. Contact starts this encounter; request guidance again after battle.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ],
+            "finish_on_scenario": 364
+          }
+        ],
+        "complete": "No pending objective is available here. Continue through the opened passage and request guidance again.",
+        "first_match": true,
+        "select_when": [
+          [
+            "scenario",
+            353,
+            "eq",
+            1
+          ],
+          [
+            "scenario",
+            367,
+            "eq",
+            1
+          ]
+        ],
+        "complete_scenario": 364,
+        "finish_on_completion": true,
+        "source_script_hashes": {
+          "Map_10020/sc_e_0729_1": "122391093bdd916dfcb1bbe2852cc7558187b0c83f8db37bb865aba8afadfe38",
+          "Map_20030/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_20410/sc_e_0725": "04346b76f66890c2be4678976e29fe1f808c4f46a232fbe6fae031474e45f267",
+          "Map_20410/sc_e_0729": "9976aef2e49006d2878d4dbe08abf70360745a0d9528e9d7d7fd23ca9b72624e",
+          "Map_20410/sc_e_0729_2": "3b8f071740ca868468f7db634a7dd0a5eb2b1e4c90bf288bedc716bd5d2d9925",
+          "Map_20411_4/sc_e_0726": "ab4eb2e244c887144e5e5f33bfbd1c4534a5cc789a926df9490172437194a290",
+          "Map_20411_4/sc_e_0727": "ddb4b5ea0d98c7ceedd3e928dba3b9e28619aa0b4754db7f9bae3ed201e5ecc9",
+          "Map_20411_4/sc_e_0875": "e4efb021c4b913830ee44cff8c56a9d266e0bd8714902ba760a077b7fa6c2603",
+          "Map_20411_4/sc_e_0876": "18cb826009b35fb44b9ce0868fc42aeb07b3e91c121fa69572603d7acd735c74",
+          "Map_20411_4/sc_e_1057": "964f91a30e9594c3856bc1c4e8f63eadfc18a280cd06d3b8fc53f8711adb7ef6",
+          "Map_20411_4/sc_e_1060": "2297ff4cba345f2e7842bdf00bc6462663736bc8234d67a8126327312f8d47bb",
+          "Map_20411_4/sc_map_20411_4": "ac2e98716db8eb2b6982a0767e67433908078e4fb783a994d797380aee8c9898",
+          "Map_20411_4/sc_npc_20411_4_1": "d69e013a442fa0c69d930a98820a17df1e053d2f45b94ac7c4c7ec6e1c44ea92",
+          "Map_20440/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_20441_3/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30510/sc_e_0290": "8d1598702122aa2c5ae92b9da3050435e19aaed563e0267e922cd04d71f5ebd9",
+          "Map_30510/sc_e_0291": "79d0ec4d2f6bdd01292fc8cd21aa9649b8f641aab804a820e3598d9d7c1631a3",
+          "Map_30510/sc_e_0292": "5a28e0d8c8cf80424e0cbf3a1b7f07dab55c8a2d73dd597002f91aa2fa9d6838",
+          "Map_30510/sc_e_0293": "80f323940e17e4b163d0a0ff98ce294ccdf441d6e6e944530d13061b4faf141e",
+          "Map_30510/sc_e_0294": "c739bda29b95222612511613239f348af53f26feff4c77474ab099914b8ef1e6",
+          "Map_30510/sc_e_0295": "bef70b809df5b46257f848fbf5847b901d43be76ea97b002919a7fadf9caaa81",
+          "Map_30510/sc_e_0296": "1e04c29328d03a47e3446c26909f93951c5626e89f5449af4c899286798a3242",
+          "Map_30510/sc_e_0297": "6b08da98eae8a769b6f53110dda37edb155f243186127b7f84aaf3491d731c5d",
+          "Map_30510/sc_e_0298": "11ed8e21f2511e4e05648963345120d0b7e4b82aefcfd46ed0b899da67e1c26f",
+          "Map_30510/sc_e_0301": "b9292892692e66bd784e7a341ac2ed5e9a9a15f73d0b7c61a483404fa2d6d3dd",
+          "Map_30510/sc_e_0301_1": "bdf0a44296c67ca5146ed2a14003748107079038080cebe6c535c82e477f1aea",
+          "Map_30510/sc_e_0307_1": "623fd4b8d0f90b5240abf5c88b6f180b82c6febc08efe0c97aace6310fdeba8a",
+          "Map_30510/sc_e_0309": "ca0b96d414d6ec22ecfeeb4fd84edc9c288aee61773c5403d7e19592b1936e6c",
+          "Map_30510/sc_e_0730": "7a81a21feef18bfaed55b8e4a7c36115925ec8f84ea9093132041c91fa28ad03",
+          "Map_30510/sc_e_0730_0": "21d9cd32bdf70186079c851e76f784ef19ebf03e936f9c3fcb7ba495f3527b6d",
+          "Map_30510/sc_e_0731": "3a30d4674598070baf3f47ae3750c57d82979962dc989e724a883e460f8867bb",
+          "Map_30510/sc_e_0732": "48b9aea21325b50b9f3e66f598d5693cddf9bfccb5bc250fd21d8302392373ae",
+          "Map_30510/sc_map_30510": "1493fc881f4bdf24f26790468f8cff63a73c4436d1fd484a5dd3c5bb0a452ea9",
+          "Map_30510/sc_npc_30510_1": "18af6776b47643c4681448804206f52823b79bf04b5c49049b6d3e8e977077f6",
+          "Map_30511_12/sc_e_0302": "4d9ff76e2928c004628c126b0dfe7f89724cfc82882b51b7dde1a7bd69e0da5b",
+          "Map_30511_12/sc_e_0302_4": "42c40da01131de0dbab3e509b3a8ae05bdf23320cc34aefdae6b37da33011878",
+          "Map_30511_12/sc_e_0303": "9738e9e0a4a4e6db5a671496f8334f6b0e5afa1ec6a6e6fede59bd16ef019d22",
+          "Map_30511_12/sc_e_0304": "c79e76c6f5f35ce273238907484ae2dc4df70fec26b34ee165f5b435954a447c",
+          "Map_30511_12/sc_e_0305": "564719a431aa7d31fa669962a966965fe86e618528b032c5996e660ffe12c394",
+          "Map_30511_12/sc_e_0306": "58fdc442026eaef8cc4210365a4b9676ab0e76ae35798dbe1c3ce1d47462d083",
+          "Map_30511_12/sc_e_0307": "f6140a62e4a3f6bbaed08421930b46684cfa25630f4a7e8d633326e27bb27974",
+          "Map_30511_12/sc_e_0308": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_30511_12/sc_e_0405_9": "8684ddfb771c946b739b20b069ec4ce120b2369ae9b1567259f2bdeca15bcfe7",
+          "Map_30511_12/sc_e_0413_2": "06572a99c7504a30ae193f9dfa425420ea43b1027cf1b42bec5fd880d0faaa9e",
+          "Map_30511_12/sc_map_30511_12": "00b9688aafee3a32b79437df50d7f9a376c93c3889b5b9c45ad60db71f4fdf00",
+          "Map_30511_3/sc_e_0299": "051a27f8a98c8acbeed9ada53484601b5406148ba23e1d0b38177be54cd85d64",
+          "Map_30511_3/sc_e_0300": "9b0a39b9cef085e23232ade31cd5223660e599732abd529e710d5883ab110453",
+          "Map_30511_3/sc_map_30511_3": "d1e07cca3906b80e038d478cc01c0eba9af2b7351ff6dea6c8f3289d21fd5a01",
+          "Map_30511_6/sc_map_30511_6": "8cea152d89451b3a4b2fecdf7a335350f32bafc552bfd3a011bbf4785420f1bd",
+          "Map_30511_7/sc_map_30511_7": "cac4ae184a9bd486f6e2b9a20993a121bda9e5e256c7a019a4c96a6d2eac0ae5",
+          "Map_30660/sc_map_30660": "1e3203f1119e639717f0177e7d1beaa0d7b5da9ede9993dbb5c360e6ab620ab9",
+          "Map_30661_1/sc_map_30661_1": "fc308dec31a2591b800f194dbedc614a713dbf38cd80e14c396ac3473887987e",
+          "Map_30671_1/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_30671_1/sc_e_0733": "63193ed6076b5354a86aa641ea98cf8307fa44db16511bfd338b380d74f75c0e",
+          "Map_30671_1/sc_e_0734": "095cf5b999747196969c695519254b6170017671068e6761b42b90315e13b857",
+          "Map_30671_1/sc_e_0734_1": "7fa2c637c54bb72a202379115b990e37c6ad5340d3d79e09031f3e57783c63d0",
+          "Map_30671_1/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30671_1/sc_map_30671_1": "01368d2b4a84ec23359a251fe12dc1a93c03e1727ecffdecec0e306d3270fae3",
+          "Map_30680/sc_e_0735_1": "4e764865f67d4ab31430aa6f0319f2287a3132c4a9086fb16624d01ef558c105",
+          "Map_30681_1/sc_e_0735": "2e9b1cbc2fbcbf48270239cf247bb6d13258e0a936810b086fb5b2e376617751",
+          "Map_30681_1/sc_e_0735_2": "9e9dc58f2697a90ab7cbfb3afd68e32f2c1719b906dfa4bfcbb047a5a162ec1a",
+          "Map_30681_1/sc_e_0737": "289b59d3f3549e4fce7268c9c6b406e4cebae70f2ad26ab6d3ea6006f2f1f5ab",
+          "Map_30681_1/sc_map_30681_1": "502eb05c17afd10c3dbd0cc79bbe6d165d09a0327c20e54625335119ff58542a",
+          "Map_30681_1/sc_npc_30681_1": "9723bdf47e660198e73a5ae026c5919c2a42ad34311b57ea68bb161c8131500b",
+          "Map_30690/sc_e_0735": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_30690/sc_e_0735_1": "8e410514bb11f0766ccc79b48c82a9767839095fb8c2728db93633264da2446b",
+          "Map_30690/sc_e_0736": "30b7e63ede32599ab493a2be2828b0615c118b935a78321fa64d51bc0b8fd5ca",
+          "Map_30690/sc_e_1032_10": "ed3b4b9b8644e2f12dbefa86857ba6bae684682f4beed2e60561612e0efa06fd",
+          "Map_30690/sc_map_30690": "984e7d48be3a6277c803df124201f921fbbfdbb06c460328130a96f63d0d78ca",
+          "Map_30731_1/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30781_1/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30811_7/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30871_10/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30871_9/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_10020/sc_chocobo_20351_2_2": "b2b325da72e8e836c7de730ce8eba314498b2780433e12b2733be4120d005719",
+          "Map_10020/sc_chocobo_20361_1_2": "8c06a92d711f21cf1122b80460d0b12694dec4084e0d191728ef8bc6833173d2",
+          "Map_10020/sc_chocobo_20431_1_2": "a5b8a53308600fa11a6df1fc08332b94e8243d14203222d4ffb3755cf89daffc",
+          "Map_10020/sc_chocobo_20481_1_2": "02b3d5d82acc2ff3b468cdae7f945a7375bff4edb28bfb55a0d35f7fa4794f5e",
+          "Map_10020/sc_chocobo_20481_2_2": "b16bfccb040247341e19b8be815ec85f1e37f7a1c54f29c3b1412fed3de65761",
+          "Map_10020/sc_chocobo_20481_3_2": "fa93b1696470cc011ae0f31b16bcd50fa7a1238873dbdfe9bba8ee2fbbbab7e8",
+          "Map_10020/sc_e_0607_10": "f00bbb0b876a453ce62665e4a853c03f7abfb3e6d607079cb8bbdd366cee3708",
+          "Map_10020/sc_e_0626_2": "e6a2e2fc92b86ea18e5b3d95b930f33061d2384ebe4c4ab9d68926fb03a4a204",
+          "Map_10020/sc_e_0626_3": "23be63c2775bcb6dc0a2d05090cfbdf8bd51886d70a2c6479417effe62f014ac",
+          "Map_10020/sc_e_0627_1": "a1f3c22e495c85221c644139ca6d96b0d2ea5f73a86f77a1c3e4012f7f7a5fe9",
+          "Map_10020/sc_e_0662_1": "51b857962bfda69c5f3f67003290087c26ba9384b3d4dcfef9f8a9f7e389d8d0",
+          "Map_10020/sc_e_0663_1": "29ec0783032c062c414384b2787faf6db2d5515830fb23a3aaa4d8bc393b193f",
+          "Map_10020/sc_e_0664_1": "e39f5b7b3dbd833fdaeb5c2462f7b972c9584c812dc849324a981a9690121fc8",
+          "Map_10020/sc_e_0673_1": "8adde07f8a3d56c33abd6822c23a879d5443c1edd8b08b646450f15e60cf847f",
+          "Map_10020/sc_e_0674_1": "67264619ec4bb451b419df3c7e997eadf8bb3bc9daae55d3d4d8758a77e8968e",
+          "Map_10020/sc_e_0675_1": "7f3cada2c6ab39510ec1d472f295d745119a1cb66bc5fd4ed7049e5ae39a8467",
+          "Map_10020/sc_e_0681_1": "7a18eb8c90236dc426459c2e21344b4162e88dd1f1cc193089f92ddfbe771572",
+          "Map_10020/sc_e_0703_10": "b64922ba8fc6dbcbd0fc338eac997144a2a154b349edde7ace1b3892d2fa5295",
+          "Map_10020/sc_e_0703_12": "e9a6b5e9123315b99037ac05d5ebb83c8177a408e2a92062ce9d7242bb95ec50",
+          "Map_10020/sc_e_0703_8": "eaef2990b27e748544e4df8edca5b6231c6839b622050a5de6bf0ed104b377cc",
+          "Map_10020/sc_e_0724_1": "fe58a9a512fb1e6e149dd00d908b98a09b80b2babe26785463304fd1f176c1ca",
+          "Map_10020/sc_e_0724_2": "cede6b47260ad7d8dc4ee5fe1ebdc4231e5685cb46b84bc7d49d4b182e4532d7",
+          "Map_10020/sc_e_0724_3": "7a5a3ef825dd488978746fafe8a1f7d2e97261840edb3efc185eb14616d7fc0f",
+          "Map_10020/sc_e_0738": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0739": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0740": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0744_3": "c98ff2fc9546181779336178059fa4644a14f6f75a2bb22806825bde1a1fb9e7",
+          "Map_10020/sc_e_0745_3": "69f5343adb85b6733d65b5a32e79be5dee56fb02100ee32fa57495fe768af01e",
+          "Map_10020/sc_e_0792": "64a040b78e6c506bece5804347f1a8cd9b582c398eda4e9a651fe99698f9882c",
+          "Map_10020/sc_e_0832": "b5d38dcf70ce95bc5928e29da3ad45923a32459a0cf971f02a7c40a68210bdc4",
+          "Map_10020/sc_e_0882_1": "e63a6af2467873717ec81164577c4ffb91de5a41dcbd41fb6dab15a954c7b4a7",
+          "Map_10020/sc_e_0882_3": "68aeaed41ad0a37282b5620efc8425f2028929726ef0a882b991a99d62b2f2c3",
+          "Map_10020/sc_e_0941_1": "e84b28e1a2dac2dad54c107de0401cd79aef70f826b57cb8cdf135cb2fecea30",
+          "Map_10020/sc_e_0964": "b89b07c82de40910a3da67658464c9746bb4322d33b782ffd1de0e124ae86b8c",
+          "Map_10020/sc_e_0964_1": "2764fe3b2d9fd8f0c1b8483e5d6c09186ec446a8bf79cd740b1eab568da4462b",
+          "Map_10020/sc_e_0966": "7d543a577954b4bfbca0161645fce0f750b0017792edfa33f7165c206f4e3738",
+          "Map_10020/sc_e_0966_2": "518d83900f385e432c94e935d54fccc791b3e24ed4d6940da7f3ac2c422e8da7",
+          "Map_10020/sc_e_1002_2": "40f42ab3f0d7f698fd225bd99915b1fde3e459e2626d48659f91dd41f6a3ad87",
+          "Map_10020/sc_e_1002_4": "966f6fea2ca1f225c0b72e8ae9d062ee67697afbf42e5c5d0558a3dea1d26f88",
+          "Map_10020/sc_e_1032_16": "57034608d5cf49d18bf26d8aed58a3e1d40befa01e57da0fce9c6c5ddf256c9a",
+          "Map_10020/sc_e_1067_1": "7e56387c2c472c1d3fc115b080782fdc5c1f00bab78a8e4bd7f6dc548e7ae3c8",
+          "Map_10020/sc_e_1067_3": "583452ad03ff275359b5f8ad1cfd43bf421035c65f4ef87aebffe787b9bef8a4",
+          "Map_10020/sc_e_CBlanding": "34a326c6d727413e9cb09ba694b21bcbd151c0666501f043ff9bede67b9a38d5",
+          "Map_10020/sc_e_CNlanding": "3344605636d3d1c3062369ca6fe4900bde2b885251c044a7879359949b3fcbbf",
+          "Map_10020/sc_e_FAinboard": "409d60da1e05498893877ed59a0aadef378abbbc2905c8e0c03223488cf6ffc0",
+          "Map_10020/sc_e_FAlanding": "1c6ff3f1e4f2fea898cdd3a8fe3d65eae5580aa3b58ce02a83612754ed70a68e",
+          "Map_10020/sc_e_FAlanding_1": "75cf87989374449ad883f38502c79e3a45326f4ac652b32fa690a340fe575cf5",
+          "Map_10020/sc_e_FAoutboard_1": "8167a7613be54c86825f3de2036ec9a4ea20baa1e8386060b6d1bbab1d1cff19",
+          "Map_10020/sc_e_FAtakeoff": "4f5a4450036416f704543a889a133e5c6dae95a4498e6fd6e472063653673634",
+          "Map_10020/sc_map_10020": "aa8ca6167003ff96800dfe950d609a263e67f232bb4cb554406ad7c698c10d0d",
+          "Map_10020/sc_tnt": "af191fdfa1a342d100aaae35d433a3aa3a8a0b09cd1d951336a804d9b0ab3fe4",
+          "Map_20030/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_20030/sc_e_0249_6": "7d6595f1b744bca65a8563fb76da92ccf38d26b5f033986fbee066cc1c7b90ea",
+          "Map_20030/sc_e_0250": "e4abadbeed07e4332984fe8f6808f8d1f5c643c45d5b99c0d49e6981c38021ce",
+          "Map_20030/sc_e_0251": "f08264108e1836f52e7498e4d33f9e92b9bbade6aa982fb7cec5d0668a3f063c",
+          "Map_20030/sc_e_0252": "2d11b7791b96a2a6b29ad8a885cbfdca1c4ec3e8b25238650eb994ef8a0279c7",
+          "Map_20030/sc_e_0253": "3871e2000bee40c7895f1d0d91ad3890e90a2f2bdc4b14d93ad84d6011e28b42",
+          "Map_20030/sc_e_0254": "2f72dc4fcc5af2569c2d8d429735a29393edde577d644f3cb5235d3e719a5ee0",
+          "Map_20030/sc_e_0255": "f7aba0f5aa4891b7e0dbd2c651098da0d79e5b9c1a7ac8b81d4e6236a0479658",
+          "Map_20030/sc_e_0256": "f276553e3ff05c30461fe816e0418c5e00dd4cfed45270745d89d008fa66dd53",
+          "Map_20030/sc_e_0256_2": "d8e05a36c0f5d94c4f313b3bf4970996557a97d573b4eb6ee6d7f3e72e71ff69",
+          "Map_20030/sc_e_0257": "955eb7c58fc3037d365f449f359972c150a283d7d9ddf273481e7553bb4a5531",
+          "Map_20030/sc_e_0257_1": "4c5a8e3140a047533e1706df9894cd6718de3057bbee70b0f4de8eec7cecdc0c",
+          "Map_20030/sc_e_0258": "af6d6db12ae39e49ca8e94153762d8734afff0d354f56f2e031adb8451768d3d",
+          "Map_20030/sc_e_0259": "5ca738240ae2b306697b4d11f5f5a0bec4e123cf075654757d0eb154eaf79986",
+          "Map_20030/sc_e_0259_1": "eff35a5d1998f3f2837a6fefb69e4c3e2096b2ebdb93531f677230c5defb66e9",
+          "Map_20030/sc_e_0261": "9cd389dd9d18117dbf7ae2c985320aac8f18b3147c402164c422b0fc9a4bc038",
+          "Map_20030/sc_e_0779": "32243e9e1caf39f7f2b69fe9dd0f64483fc90bf04b81ad6a27a991482824790e",
+          "Map_20030/sc_e_0779_1": "ad8251057c7845aa87eec02782625f4cd7f8b03caba2ef4b5bef22be05dc3219",
+          "Map_20030/sc_e_1087": "52e7609c0358364ba65e00de8c565e273ce5c52f92ff9f1cf313785ff6bd3fc2",
+          "Map_20030/sc_e_1087_1": "b682acb383bd48696437cdbac9bc60c1f7494ab20273acdab84de54aa1df26ee",
+          "Map_20030/sc_e_1087_t": "712688997b71b696512d39b91d213a5236f8cb049cedd4b2ab0c38adba1fe003",
+          "Map_20030/sc_e_1088": "a2e12d5a62fd059392e85586e60bfde744a846f20ef6adaf5b50640bd8587a2f",
+          "Map_20030/sc_e_1088_1": "e853409291af5149c37a17f7d230e0c8639453577434f8f8660cd48d6a26ab21",
+          "Map_20030/sc_e_1089": "23a0d40d6e04cbc38837337d56dff00f2e0372ca107b6e5177a68ad7bb65c9d3",
+          "Map_20030/sc_e_1089_1": "082aad901e5f3da2f621fd9dc55676e0b4ab4c70cc6e4a54c3001a968beb4ef1",
+          "Map_20030/sc_e_1090": "bbe78abf6bac60e434f302067245bb952ad74642699297c26fc692dda2d6c375",
+          "Map_20030/sc_e_1090_1": "e531bf9b50c428814c19df638fd6cc9db53e5a42a6461d11224a0ab51f530fdb",
+          "Map_20030/sc_e_1091": "c11a3fbecb2de9ba26f01a7dcc0f936939aa8d33c89afc4f9c8bc58d1752cd4e",
+          "Map_20030/sc_e_1091_1": "a47eed82a57daba899fb50a1ed323f815ecd333ca1d97c5f29299bb4d1fe5dde",
+          "Map_20030/sc_e_1092": "a63951a76732e3b020df5a7b40b06feb6aec659d5b046574c9ae10a517fe2624",
+          "Map_20030/sc_e_1092_1": "a95eeaa2a157afd3a1f4383823c7db4a99a156871187f104eb1fc36911a9ddf7",
+          "Map_20030/sc_e_1093": "93c5d4e162cd311ceffbf797a7c7a27d3a98f40bca2b0b96de3f2b0ff2ae2270",
+          "Map_20030/sc_e_1093_1": "9ae1ca1fc684609be393fb0a0caae664cf417d7d8ac8de3ae86a27f33e536a33",
+          "Map_20030/sc_e_1094": "9740cd42e80a51f86ada6ff408a036ce2724bb6d6cfe68bf51eaa740d8260046",
+          "Map_20030/sc_e_1094_1": "dcefd307d327afe2beb28627e89c47f3fbdf325de6ac7da686aac0e92aa9b432",
+          "Map_20030/sc_e_1095": "2493b64b0c21d2856e056205d7f980af132b61dd9c5c7fabfe6f618b71ca60af",
+          "Map_20030/sc_e_1095_1": "c532ff57d5cc253460785f0a3b75204cc0a08322fc574f6b82eb90e1e646660b",
+          "Map_20030/sc_e_1096": "7532e139e262202396e826df904b79c94037c2c0abcd177b1508737044120008",
+          "Map_20030/sc_e_1096_1": "970052e5c0d4f998fd6ec318a042c8ba475d2d08e976151a26cc88c889f35607",
+          "Map_20030/sc_e_1097": "6cbba3e55bd7ee333df63fb9a87a1334dcfc98d287fd35a97c328aaf57bb408a",
+          "Map_20030/sc_e_1097_1": "b940fc0351f2bfa138f4cfbc26f1fad4c8acefd8f34aaf0b536e407766f59563",
+          "Map_20030/sc_map_20030": "3a654b3ad11bf44ad50614c8cc54f061e8bdb16ae0015221745e013ba75bf5f8",
+          "Map_20410/sc_e_0724": "36bf16423789eb0e9c203059ce649fe2dd786544ed1b3c81917e7ae1e5e052a9",
+          "Map_20410/sc_e_0724_4": "865c9edd42e0f91936ec499bab8511c1b796414d94317240ca8c975d89b3325d",
+          "Map_20410/sc_map_20410": "ae7b6e3e5bca5b4643162fc6b43a08b056da508eee66e8217350077a8057cb11",
+          "Map_20410/sc_npc_20410_1": "8fb41f87cc8631c9ba02c653154de48025673fab02654ffbfac25c4c3cbefe90",
+          "Map_20440/sc_e_0333_2": "740abd65c1215ee460c058d28a8e301485071e9b8291a228619458065f847205",
+          "Map_20440/sc_e_0893_3": "ea04aa09e4fbdb385f04ae2e716be7a8da55f9a1f96dd6fd88a78543329278f9",
+          "Map_20440/sc_map_20440": "48ba1b4fd772603d3ae6db822ef23de26b00f81661aef5e02f843134269fef0e",
+          "Map_20440/sc_npc_20440_1": "d69e013a442fa0c69d930a98820a17df1e053d2f45b94ac7c4c7ec6e1c44ea92",
+          "Map_20441_3/sc_e_0332": "750fc88a4bc87850322fe3cbdbd9fcab79a00b468665df56dfd2c1d5d3355feb",
+          "Map_20441_3/sc_e_0333": "ec2b360f61c3b4caa4fe575c710231bbfd07fdd76918676d1394f81bb12656bc",
+          "Map_20441_3/sc_e_0334": "528baade202e1be327af041af6404cac4084b21d534a653c431d498130d0d39f",
+          "Map_20441_3/sc_e_0334_2": "7396e63a660a777ba3b8e85b79c997fdd653110253449d21d0899f05bcfe509f",
+          "Map_20441_3/sc_e_0335": "fd10f6e102111f6bf51597c99dc9b824d55a63d6b93d8a0a5c34527aaf157fe8",
+          "Map_20441_3/sc_e_0892": "1195788870711331483a982a43679f2168956a7a1fb3e40de731fe35f15210ac",
+          "Map_20441_3/sc_e_0893": "a3f373010f1a9e6c40fc79cca374a01e48908fb315413808f1b393b364368f54",
+          "Map_20441_3/sc_map_20441_3": "3a7d4153d3506bc88990acd558da5a64cedb87d91bdb02c80788d8dc862aad4a",
+          "Map_30731_1/sc_e_0879": "3d9722dbd008a960919bb24d07f6f8789c26aebf68c6664f10d82898998b3595",
+          "Map_30731_1/sc_e_0879_1": "637399b0d071d945c5989dbaebb1db01409f9e372bca055516cbc8accab2c8a4",
+          "Map_30731_1/sc_map_30731_1": "e96c6afd2ace11218ff7f280f3c520b0d3c3cab2ddebd120db13ce657ff99fd3",
+          "Map_30781_1/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_30781_1/sc_e_0794": "970ad84be2900efe298851fedbf58287254805e6f5f1a91064b4d56db5f077ec",
+          "Map_30781_1/sc_e_0794_1": "35fbe8e6c6ec6cad63ea19ea3d57064f608fa6c7db78318b5e086f32e31a5330",
+          "Map_30781_1/sc_e_0795": "ff9680ba587cf3d9f096ed1da10070e06c9d337caeec6abe7ef19cc51e58a014",
+          "Map_30781_1/sc_e_0795_1": "2ec07323fee8f8e6cc4fa5a5a4ee8c4a5da0c86eeb220eb032cd13121a678f3e",
+          "Map_30781_1/sc_e_0796": "6f59a4fadf383a5b44325e1daed49a65f9a6c666daae4578dfec0231448c9883",
+          "Map_30781_1/sc_e_0796_1": "40df927ac47729ef2224d165275f4a6f691519e3988587df8ce53184baec3817",
+          "Map_30781_1/sc_e_0797": "0496c7559402303acd9ba0166ac57ab2586ac7bba2377c34fce47d0c91fa1b7f",
+          "Map_30781_1/sc_e_0797_1": "8bf7cff9159f338bc8b09c4d91b868ec037d22304eac098b5d94cba7bb9edb3e",
+          "Map_30781_1/sc_e_0798": "c8f0325a6e3039959f255ee938f058b9a6eb19b781166f8f7f9ad692f8802df9",
+          "Map_30781_1/sc_e_0798_1": "fe3dabf32ab910bf6f032c2f54b4913ae9c523b2d5ee804ec160d9b9fd7ffe25",
+          "Map_30781_1/sc_e_0799": "2fbb60ed4d2ed339fd1f88e616d995854889b2e35da2156329869fe908567d9c",
+          "Map_30781_1/sc_e_0799_2": "4a02a79e8c00f456a0d65ab53af489ae837ba006b95e9e98869f2617b6055441",
+          "Map_30781_1/sc_e_0800": "62c0b4700752d4b9fed16a1a0a66731f4d4b2702e0d796b1869548dec8cba336",
+          "Map_30781_1/sc_e_0800_1": "6edc72c3075639eb0480e3567c98cf2e6927abdcfa671a10c1101aae81fa8246",
+          "Map_30781_1/sc_e_0801": "bc49c97fc03e9db06c64c451795ad81e076b06fa47cfe9a00e2f1b4ef9a0bb93",
+          "Map_30781_1/sc_e_0801_1": "c91f3fe8d03c263aef5eb8ade55d4c508fbd372b2b729a86a9713384f96bc692",
+          "Map_30781_1/sc_e_0802": "32cf65a9c2b67294008262d2f1dea7c203ea1b34ce5868962f0a529995e4115a",
+          "Map_30781_1/sc_e_0803": "7a1f8d2c2c017f9e1046dc85e529ff28df738cf13298c03d3f80def881b7fe5b",
+          "Map_30781_1/sc_e_0804": "fcd07ce3d91347c93bc3717c3b7be1fc4292ad460550139254d994ee59b13847",
+          "Map_30781_1/sc_e_0804_1": "1c10d39153124b6ac029de7e7f2db29d8fb6b6f1ceca0c0e93a59bafacfe1500",
+          "Map_30781_1/sc_e_0805": "af083f29b6cac28440e5053e39f6d42a770000ad2e8c22500664d812fefc7d39",
+          "Map_30781_1/sc_e_0805_1": "04e9079c2a50a8aded04a506c4ee1302bbfdc7831b57e6ec8bdb3405f36c1d78",
+          "Map_30781_1/sc_e_0806": "64e00f7fd99cb95f6e8ef33048b066a5af3fb4a9ee7781d921ae08483322cdac",
+          "Map_30781_1/sc_e_0807": "bf67485609d43f1037783911e6eff74a651dbd8c678a3b5c1377167bd94186ea",
+          "Map_30781_1/sc_e_0808": "5bc5317c5ca9fc40287cda18dae647d5ff7643470e503549b181f01970501bac",
+          "Map_30781_1/sc_e_0809": "7e3e5d90b5d21c0067d685cf00a02f8ad0f5a0dde3f3e5c252fdccddca0bae36",
+          "Map_30781_1/sc_e_0809_1": "104dda2828f6203d56a6c67d264aa0ed9e31cb1728d9009f0a8b6b6b5de5a1f2",
+          "Map_30781_1/sc_e_0810": "eb858e468988378728679a4958ab4d887097b5ed23f596b52144c889013096e6",
+          "Map_30781_1/sc_e_1104": "bc002f5d562eed023af659db52a9382229c36f63db69dc85f3cc07acc61b4565",
+          "Map_30781_1/sc_e_no_treasure_203": "7ba8dd3a840f83eb6d9d8117483cd2a6480184796ad6aef5e57026de82f463db",
+          "Map_30781_1/sc_map_30781_1": "960447177634cdd21fa17b203f32d28403570ee54c8bf854c69ebe034b7af9e2",
+          "Map_30811_7/sc_e_0885_2": "9b5579db38baa0fb18a57d94e1e720b1fb2608aebcb44b2aaf1f0c6f650fab1c",
+          "Map_30811_7/sc_e_0889": "d593000fd10eb174d780cb7ab39499e1799e3bda8c6f202cf7d9030c2b05a2c2",
+          "Map_30811_7/sc_e_0889_1": "385459b0b5731d8ed5ad8c54928a6c7e531c0de86fe5332a0551d04bd2efdd03",
+          "Map_30811_7/sc_e_0890": "11628b9da80733c3e9548d341265ba10a5b8ea7c755a9ef1e05f7e535585b4cc",
+          "Map_30811_7/sc_map_30811_7": "59c55af02641a81c4d5fa60605eff90e57949bb8df62bb692180c2053b5b1432",
+          "Map_30871_10/sc_e_0974": "8b72d723078fb5db7ff6d7c4921ffc4735190b81209d07b7622dd43789a76965",
+          "Map_30871_10/sc_e_0974_1": "c2ae03c67ac7ccc80532c7ef5ccd5343ca3857ba082208cf3eff45c3888f2465",
+          "Map_30871_10/sc_map_30871_10": "bb0493b181995b2948731e05492294e57a91b8ef8789fe2615592bcb269ef3d6",
+          "Map_30871_9/sc_e_0981": "7f78c5caf4a11c671676d841166042b98d7855f1069166469135055c20e9f855",
+          "Map_30871_9/sc_e_0981_1": "a4221fe0e2c1569f5e99c4dde120d24dce0d24e2f83f3790fb67a2f55ce8f570",
+          "Map_30871_9/sc_map_30871_9": "11a3df1c4c6d44a258a0410a2ae555b04ed30b7a57ba9cd5c61aa9822283ab0f"
+        },
+        "evidence": "docs/re/CYAN_ZOZO_GUIDANCE_20261104.md"
+      },
+      {
+        "id": "cultists_tower",
+        "maps": [
+          476,
+          477,
+          478,
+          479,
+          480,
+          481,
+          482,
+          483,
+          484,
+          485,
+          486,
+          487
+        ],
+        "introduction": "",
+        "when": [],
+        "rules": [
+          {
+            "when": [
+              [
+                "scenario",
+                421,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 478,
+                "entity": 5,
+                "raw": "隠しスイッチ（扉が出現）",
+                "group": "ev_e_0878",
+                "kind": "interact",
+                "text": "Examine the hidden switch",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                421,
+                "eq",
+                1
+              ],
+              [
+                "treasure",
+                179,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 479,
+                "entity": 3,
+                "raw": "エアアンカー×1",
+                "group": "entity_default",
+                "kind": "interact",
+                "text": "Open the chest.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                421,
+                "eq",
+                1
+              ],
+              [
+                "treasure",
+                179,
+                "eq",
+                1
+              ],
+              [
+                "scenario",
+                423,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 487,
+                "entity": 3,
+                "raw": "ソウルオブサマサ×1",
+                "group": "entity_default",
+                "kind": "interact",
+                "text": "Open the chest.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                421,
+                "eq",
+                1
+              ],
+              [
+                "treasure",
+                179,
+                "eq",
+                1
+              ],
+              [
+                "scenario",
+                423,
+                "eq",
+                1
+              ],
+              [
+                "scenario",
+                424,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 486,
+                "entity": 1,
+                "raw": "マジックマスターとバトル",
+                "group": "ev_e_0881",
+                "kind": "spot",
+                "text": "Fight {0}.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                421,
+                "eq",
+                1
+              ],
+              [
+                "treasure",
+                179,
+                "eq",
+                1
+              ],
+              [
+                "scenario",
+                424,
+                "eq",
+                1
+              ]
+            ],
+            "targets": [
+              {
+                "map": 476,
+                "x": 13,
+                "y": 2,
+                "layer": 2,
+                "kind": "spot",
+                "label": "Passage",
+                "text": "Continue through the passage.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true
+              }
+            ],
+            "finish_on_exit": 476,
+            "finish_through": [
+              486,
+              484,
+              482,
+              480,
+              477
+            ]
+          }
+        ],
+        "complete": "No pending objective is available here. Continue through the opened passage and request guidance again.",
+        "complete_when": [
+          [
+            "treasure",
+            179,
+            "eq",
+            1
+          ],
+          [
+            "scenario",
+            424,
+            "eq",
+            1
+          ],
+          [
+            "map",
+            0,
+            "eq",
+            476
+          ]
+        ],
+        "source_script_hashes": {
+          "Map_30700/sc_e_0776": "3ad5b2f9c446b46cdf93cc2bff9a28a7bdc5930b4bfa168deaa873a2cb71b0b3",
+          "Map_30700/sc_e_0777": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_30700/sc_e_0877": "b2f8d6689e5789e051eab1f9fc9cb8bbd8c4d82b94e779a4e154197dd0971180",
+          "Map_30700/sc_map_30700": "414ca3635e27ea439392931a59cdc12d8a3b628c22984c0d45d1eb70d4814edd",
+          "Map_30700/sc_npc_30700_1": "5abebd5ec7f6f2ff360e968b77c3836ff36b9c7aad1aa731fc823119f1c172dc",
+          "Map_30710/sc_map_30710": "b4931fe24aca363d8d9aaa5a31bdddcc973d37283cdd3e1feb3566edfa5a4736",
+          "Map_30711_1/sc_e_0878": "739263cb4f88213ff8f2c42db81bfc0f9abbc4e3b3a3e037a27817aaddf5338d",
+          "Map_30711_1/sc_map_30711_1": "5ac0e49b759a8dcc939d927691c15a0956f8daef9ba8238026644bc58c9f8254",
+          "Map_30731_1/sc_e_0879": "3d9722dbd008a960919bb24d07f6f8789c26aebf68c6664f10d82898998b3595",
+          "Map_30731_1/sc_e_0879_1": "637399b0d071d945c5989dbaebb1db01409f9e372bca055516cbc8accab2c8a4",
+          "Map_30731_1/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+          "Map_30731_1/sc_map_30731_1": "e96c6afd2ace11218ff7f280f3c520b0d3c3cab2ddebd120db13ce657ff99fd3",
+          "Map_30750/sc_e_0881": "a6615cf318900eec0e7d2bbc7cb4e02d637ceaf742ac736a4007f1ebdbf1e9ba",
+          "Map_30750/sc_e_0881_1": "c092d72cf85e658550d9ffa5e8147c3485f1cef97ddea4c67af02850c4782976",
+          "Map_30750/sc_map_30750": "48776443f12b8a88b35654d24d88bf343678a1c080305a38c1e665000e048339",
+          "Map_30751_1/sc_e_0880": "539d05315f8dd0eac54e5c048fad4ce0a71cdd8a285743ade3fd4cd78509e688",
+          "Map_30751_1/sc_map_30751_1": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f"
+        },
+        "evidence": "docs/re/CULTISTS_TOWER_20261103.md"
+      },
+      {
+        "id": "imperial_post_party",
+        "maps": [
+          162
+        ],
+        "introduction": "",
+        "when": [],
+        "rules": [
+          {
+            "when": [
+              [
+                "terra",
+                0,
+                "eq",
+                0
+              ]
+            ],
+            "note": "Bring Terra and at least one other character in the active party."
+          },
+          {
+            "when": [
+              [
+                "members",
+                0,
+                "lt",
+                2
+              ]
+            ],
+            "note": "Bring Terra and at least one other character in the active party."
+          },
+          {
+            "when": [],
+            "targets": [
+              {
+                "map": 162,
+                "entity": 18,
+                "raw": "誰もいないためそのまま進む",
+                "group": "ev_e_0442",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              },
+              {
+                "map": 162,
+                "entity": 19,
+                "raw": "誰もいないためそのまま進む",
+                "group": "ev_e_0442",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              },
+              {
+                "map": 162,
+                "entity": 20,
+                "raw": "誰もいないためそのまま進む",
+                "group": "ev_e_0442",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              },
+              {
+                "map": 162,
+                "entity": 51,
+                "raw": "誰もいないためそのまま進む",
+                "group": "ev_e_0442",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              },
+              {
+                "map": 162,
+                "entity": 52,
+                "raw": "誰もいないためそのまま進む",
+                "group": "ev_e_0442",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ],
+            "finish_on_scenario": 217
+          }
+        ],
+        "complete": "No pending objective is available here. Continue through the opened passage and request guidance again.",
+        "first_match": true,
+        "select_when": [
+          [
+            "scenario",
+            207,
+            "eq",
+            1
+          ],
+          [
+            "scenario",
+            225,
+            "eq",
+            0
+          ]
+        ],
+        "complete_when": [
+          [
+            "scenario",
+            217,
+            "eq",
+            1
+          ],
+          [
+            "terra",
+            0,
+            "eq",
+            1
+          ],
+          [
+            "members",
+            0,
+            "ge",
+            2
+          ]
+        ],
+        "source_script_hashes": {
+          "Map_10010/sc_e_0347_0": "3f26094b35dd01980e58c3cf0dd3421cf96188ce99920db25f6c7b33f8c44abc",
+          "Map_10010/sc_e_0347_3": "219a03bf37973c6ef34dff4f9206554f842d3aa18dab287de2dbd8c44d2cf874",
+          "Map_10010/sc_e_0405_6": "3f5713f05f90c5d60d7214d3e65221f9aee9ffc701b55b1b91645f47f2c34e2d",
+          "Map_10010/sc_e_0405_8": "8efd4a4c7eca6704ae0f0ea77fb2e698f418ffab5e276e2f2014db09325b6257",
+          "Map_10010/sc_e_0515": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_10010/sc_e_0515_1": "d5b70aa035d10b1d60b545cc9c1ae208bef8d9b3cc1cbba70970abb632c29dd1",
+          "Map_10010/sc_e_0516_1": "99baaf35abce5e05534e2f57f8d88b4f9a62a9ee6ff0388d349696ad5249b5d7",
+          "Map_10010/sc_e_0518_1": "b0c2ff7d223c66c6e0bdcf0807af6cc788bf125174884c5b35ca96158b9402e0",
+          "Map_10010/sc_e_BJoutboard_1": "49fc869a01d2d0df2370736ac222d36d116487a4e53e387a6967f27b81b6911b",
+          "Map_10010_1/sc_e_0347_2": "bfdc0687d4dd30afb77529e07cfd636d360cdf5034cf19b8dc99e4d22f23e716",
+          "Map_20170/sc_e_0314_1": "de60a53f9d562286b4eb3ea9116e61997dd278c105b7a04d7f08f77ef73229d7",
+          "Map_20170/sc_e_0347_1": "78a49fe6cd1738b17ba0ca74fe6ee183e042adb720bb8e30360c36916d76a22d",
+          "Map_20170/sc_e_0405_4": "5be3062dbc0beafb3d2e57fc1110fe6ca12522be1078d6e5bc04e369dc0df771",
+          "Map_20170/sc_e_0405_5": "6c55105f712dfe9ac74bb067acbe673611e3235a80ada5ddb51cee5b0a1a3d11",
+          "Map_20170/sc_e_0405_7": "9ff288de9c1aa23b295ff8f3d2deaffa45953f9596d1069a0e027bea6b5270a3",
+          "Map_20170/sc_e_0413_4": "5c3d5ea0772805e811efdea7b798c1ec89f389a453ba80f931d0548aefcaee4c",
+          "Map_20170/sc_e_0461_1": "b01b2f7ce5d6dd7f136541c3e05b5bccea7f178083729ce2a2990ef1ea4e7889",
+          "Map_20170/sc_e_0461_2": "a29740ceb7cac0cb93294ceaf37a3b04349332c02bc07cc9beb116c728cfbb6f",
+          "Map_20170/sc_e_0461_5": "ccfe815c6d744bf0681a41c3c90d30cb7b88f8b33613da7a3497b5752142eaaa",
+          "Map_20170/sc_e_0558": "2f04a7baae1e1e4e0d39907c8b8ef4ac6301862ad8dbcd8abd8fda5c5382f04d",
+          "Map_20170/sc_e_0558_10": "6c0bb637b733d0e456fad8db5ca87f54f95c71c148332dec34e29263391b5791",
+          "Map_20170/sc_e_0558_2": "7730225d7d0ce8a52d88692be36efdc9713bb87bd8c715f84c00d62bf7bd23e0",
+          "Map_20170/sc_e_0558_8": "ac88dcf4eb0b60a265eb2336e3da9c60402baead624298bf0aabf13498337487",
+          "Map_20170/sc_e_0560_2": "01594ce76c981481a74beac6ba53578411194b932326c333ba8a6b508e5bd435",
+          "Map_20170/sc_e_0565": "d4e217f8d9dbc419b912fbf8911da04a6a942b5d241a27c3c58fce7a50a6f9ca",
+          "Map_20170/sc_e_0565_1": "a145d6d13f01ae714edefd4fec547750de5580fcfd47763af34974689a070038",
+          "Map_20170/sc_e_0565_2": "11f75fdbfc4de548e7f34f97caf806caf4709010e5631863f7bbf0dcc8d9f47e",
+          "Map_20170/sc_e_0565_trigger_set": "1e5d055484d816483f794449d8688934b229834254640cd0955035b68447724a",
+          "Map_20170/sc_e_0567_1": "5979332ae38f349e89a56b8e99046bee8fc090fc0c571ae76bb0c41e8605613a",
+          "Map_20170/sc_e_0569": "6b389bea5dc625ec87de22a9267af6334f1a3ff8d1dd47ad0e11f88043994987",
+          "Map_20170/sc_e_0569_2": "834824d4f08364d03343d75e321d442ade2dde486f1b6815a73ff601d2b48fe3",
+          "Map_20170/sc_e_0607_1": "c240adf851b6ead6dfbe7537529e93fc0b13246dc6d98b1e95ab86b451e6c565",
+          "Map_20170/sc_e_0703_2": "43774cf8e283fdcec9010e180cb5acb921d3e7415b2760a7b077eeca152b1fd5",
+          "Map_20170/sc_e_0703_4": "5e2da6638a67172989ba09a5cc954dee40b05c2f4a8d89d3acb782ae3e9040c8",
+          "Map_20170/sc_e_0703_6": "127f7c3064b86fde813d997d240796abd21efe04361d141453b8f50cbab38330",
+          "Map_20170/sc_e_1056": "d60d19408b64c874fa29e97d5ced463a521add3199c0df060ae4eceb4758f6ce",
+          "Map_20170/sc_e_1056_1": "f9fbee0b26f3e0dde52d75d1a2663da4111dc434ab80ae2c5e215a022517a146",
+          "Map_20170/sc_e_1058": "fbfe624242d9b06b2829dd89887399d4982f151eefd2701f82dd26cab6f319f1",
+          "Map_20170/sc_e_1058_1": "35cf1b6e999530f37caf1e269ed0c6f65af8ec314ce96f6c47cf5f998414d7c3",
+          "Map_20170/sc_e_BJinboard_1": "4a9bd0eaa1d93099eb8e548aac470c74084c64b5a59c4bda77157b19302fbcc7",
+          "Map_20170/sc_e_BJoutboard": "a88002b1a6bf63cf319785bfbd24cb2a680a3ea5134dc73e2355f55f4f06f8b6",
+          "Map_20170/sc_map_20170": "9ebdfdaeaa572ceacb326446c2625f188c4319575185545320395d894ca0823b",
+          "Map_20171_1/sc_e_0344_5": "499eec3207c4cbe5fd3d09b70665bf381a6d8c0dfee8e1902242cd5864cc3746",
+          "Map_20171_1/sc_e_0345": "b7fb019194f8ed73ca547c998434eed86bc34c7218686d42b62bd2a449a17d12",
+          "Map_20171_1/sc_e_0347": "6931583cd7aed6bbf70a22dbb74db58ed58f728c884fdb02ab9a3fdbbf934e71",
+          "Map_20171_1/sc_e_0414_1": "b6fbb6efff344ddf76d25c685f8d18c46801f3145f93a8b279c995326eb1095f",
+          "Map_20171_1/sc_map_20171_1": "e9228f29e31ce82bd95ec0a6c286a41983379ab61f10f2ee2632d1a09df910d7",
+          "Map_20180/sc_e_0426": "e89af32f30c77c9279ee23a4357e2ff67f4f120136fe0d58f3b98c7ca4aaf151",
+          "Map_20180/sc_e_0426_0": "91be8a10be5967c1123b53b8310d90854df323fc46b83b106c3360662f442d5d",
+          "Map_20180/sc_e_0514_1": "e8d93b74d41f018e8e24663ba702c53cddaa1c96b40886fd3d5cb9cce5c99aab",
+          "Map_20180/sc_map_20180": "3525d72c76615b70dbceac79b846f7c318d452ac7503c2ee0ceb09c8ee80156c",
+          "Map_20180/sc_npc_20180_1": "5323871abbd5e6c3d4ca20aafa30115bd1dab5caee188e73089cee6a0a5de45e",
+          "Map_20180/sc_npc_20180_2": "b83277bbe5b45360c3b88f53db1850a7e5186096580185ea2d0573333388dee7",
+          "Map_20180/sc_npc_20180_3": "c79749e45eb0cb1e98e9b576bafc1884e1513b0dcf5dc729d741af0d0d798213",
+          "Map_20180/sc_npc_20180_4": "c7b84523fee854225e6a5f4caaf98d91127378f7d83ed32dacf84d1a11181fb2",
+          "Map_20180/sc_npc_20180_5": "aeff8387d36496eda578330d42b0809d9d240abd2a57053488bd8a80d766d9ad",
+          "Map_20180/sc_npc_20180_6": "36072b9f55b611344e1fa3c6ba3868191d4405c3b932d2f9418daec3e368f214",
+          "Map_20180/sc_npc_20180_7": "e6ecfd9550dac4db73e5389451ccb054b96c23132b4180c4ccced32b9367333f",
+          "Map_20180/sc_npc_20180_8": "a01ac61f1957747b0e93d7d314239933bfde4c71d6738952f53fbb8d9de27116",
+          "Map_20180/sc_npc_20180_9": "f9c4ed4e0408c4972183217fb6e423a7a8e414e6937b61da99110f3e64b768a2",
+          "Map_20181_3/sc_e_0347": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20181_5/sc_e_0514": "b6d54c1d4eb8e5ad9a82838993573e06bb688a3ff663aedeca9c473bb948f8ae",
+          "Map_20181_5/sc_e_0514_2": "8e7d58b7f5819aa75b5ce3191d6a9878d45ac89787f69d142cef762fe74e840a",
+          "Map_20181_5/sc_e_0515": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20181_5/sc_e_0516": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20181_5/sc_e_0517": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20181_5/sc_e_0518": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20181_6/sc_e_0512": "be319dfd4c0f00576941c758c7dac28961153852e36c9190d0fe1d16c07b86e4",
+          "Map_20181_6/sc_e_0513": "d33700987aac97b75c7c35bb7ef3dd5c27a0d815775899195450fc2084ee7cb2",
+          "Map_20181_6/sc_e_0515": "beaebef985f39d5e6710b88db3631ca4f9a2187d59e9832f0f50e86511ff65cb",
+          "Map_20181_6/sc_map_20181_6": "774c584ed33e75408df368d6eacd0c420268bda040c11bd2792cc340441f1330",
+          "Map_20181_6/sc_npc_20181_6_1": "ff4a30a5797ccd5f0731e26feb08eabb222299c10044aa69bb858772c737822b",
+          "Map_20181_7/sc_e_0515_2": "9d3b335e7c62dbbd00d3439ddd3a41d0bb40d08133135be3b4eef384f63c743f",
+          "Map_20181_7/sc_e_0516": "4603892ff4cefae6316a8ded4dab7ea06e40b2b9bd3898bbf474f29319dcf5f7",
+          "Map_20181_7/sc_e_0516_2": "b07a01e241e3b3cc97149cfdab41991fe66f514be6bfc6184e6d223eedbb9d02",
+          "Map_20181_7/sc_e_0517": "ec22336046992ebc847a4fd91aeaaf0b8c477218232ca89b49ced394cdab8d20",
+          "Map_20181_7/sc_e_0518": "3899b90fcea7e7de03f85924d013b1d4d2edc25145f5e0c937ee9d118c58bef7",
+          "Map_20181_7/sc_map_20181_7": "29511106b5fd6ba36fef604c90edce42d241af3704c70cdb0589fb57cfb9b9bf",
+          "Map_20210/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_20210/sc_e_0363": "6aee9e7a7e687e0bde08b29ed277674c774ab864f941c4774487cfbac5dfff6c",
+          "Map_20210/sc_e_0363_1": "6ce6075a27e374fe00921074155fb72be4ae2350926633e423699c9ccd29022b",
+          "Map_20210/sc_e_0364": "72f8b602daa54a8722bca0a36214906ea44a1124fa052488d457096a3181867c",
+          "Map_20210/sc_e_0365": "7480b29d39d686420b1cb2c6302caba84050f8ca8f6ef95c5c5eba5fe27b60a5",
+          "Map_20210/sc_e_0365_1": "cb84d035c2905f570c6cab8ad67ad1070d763fb505847ff4a77365bdf33fa377",
+          "Map_20210/sc_e_0366": "762dc96d49e5590f173b8f120e22551819801a6be855af0c078219dc0cd10d2b",
+          "Map_20210/sc_e_0366_1": "6ce6075a27e374fe00921074155fb72be4ae2350926633e423699c9ccd29022b",
+          "Map_20210/sc_e_0367": "302ea1330724e28bbcf16009904d1ac7b3817f2e0185994275dc7e5547cac413",
+          "Map_20210/sc_e_0368": "a2192f781d937c8b4fcd705cad7d217a6c0add1ba261da6982c30665ed31eb47",
+          "Map_20210/sc_e_0369": "cbe97e6391ebb065913192ed4b774c6f85d505a525c294e5d67088144ea9f37a",
+          "Map_20210/sc_e_0371_2": "73687486a31c055fba90b4f144d3f938937f5527b2e020812fb4cfc1a6fd5860",
+          "Map_20210/sc_e_0372": "5229f1e1e52ece331a5917af8209f7a7f3312f6349fb9f050991cec09a77d6b2",
+          "Map_20210/sc_e_0373": "360a34f122c8117dde7371bed25c746156bb2ec2b8265a133a8979e72c12d55c",
+          "Map_20210/sc_e_0374": "b91ce354c0db6d8a7c44fe1068015a7d07ad7b910edfc59dd74f95ddbf667047",
+          "Map_20210/sc_e_0375": "3b0e57ca3701de43ff3413f4d3d3931d35b4362a0d091f7e77cbe3fa93c27082",
+          "Map_20210/sc_e_0375_1": "386dcc977bf511bedd810c0f359cc56361f43e4d33ba99320514f91c3234e1da",
+          "Map_20210/sc_e_0404_8": "61535b95b53d01855dc8707e13c22fcc02cf2d81f374fbfa6757dd5bf9027dd7",
+          "Map_20210/sc_e_0405": "0fde2928ddd620f88a1d7f11b34585f33b291ff33e8964addda907650689de14",
+          "Map_20210/sc_e_0428": "c2e9fd25e35708938fa066569ee8560b5e4c3d792bc9cef5d9ff24d2e1b0081a",
+          "Map_20210/sc_e_0428_1": "ad53f63f966eaed176499adcff3c0dde1abc8ef1063bc628f88c9da3ebc8c2f8",
+          "Map_20210/sc_e_1051_1": "5463de203d8d9463de855734c217071bc8f39b7e96b38f7a9e01ce6a814016f2",
+          "Map_20210/sc_e_1051_2": "c8a04cfe03ff6096b83450e782c5a2a7fdd9caad997a3c73008bf224ab131373",
+          "Map_20210/sc_e_1109": "6aced80b9ede100396bbbbf090a9594f52e85dfc6298bc4574a978f423571ae8",
+          "Map_20210/sc_map_20210": "c104d9385da01aedf52f3c7abc2fd3049c3e3d1f075334fbf774a38ebcb170c4",
+          "Map_20230/sc_e_0405_10": "76dff9094e76b0f4882c40ad32776951ed3c0919e480ec7de537195bf7e57daf",
+          "Map_20231_1/sc_e_0405_11": "d49bfb971a792b471b0443f31d7de8f6a1596caba5ba85adecf1e49ae416cbcc",
+          "Map_20240/sc_e_0350": "c7ab7cb4338b0d82a13aad8dd02973b9599961cdb57881e9222f76b5d9dd1fc4",
+          "Map_20240/sc_e_0350_1": "2c28d9850aa1a6378b36f3441b2233f7af0a23971c1c7424f8df317cad40b7c8",
+          "Map_20240/sc_e_0352": "c6f18b159018cf74889be756963888b91f28708c0355ddfb764b7fd401bcb00d",
+          "Map_20240/sc_e_0352_1": "2c28d9850aa1a6378b36f3441b2233f7af0a23971c1c7424f8df317cad40b7c8",
+          "Map_20240/sc_e_0440": "3d6a2536c54c237b44c5cd75c785c9b5a447cd352c5c8e52178c35720a0273e9",
+          "Map_20240/sc_e_0441": "5dffbc9c71c486c33800e0f7ee874dbaa84d3e8b1aea1331fcb43149497e5135",
+          "Map_20240/sc_e_0442": "d4f0d989547d1a2802d7537ed16191721c59f9b98bd4e86456403464b8034f78",
+          "Map_20240/sc_e_0461": "595c1033d88dab6103ae6990c0ee11b4f5c068ba41393a716cd8737d366c2071",
+          "Map_20240/sc_map_20240": "6c720f180bfc9b6293775d329e0c6568f048ca7b7645aaf1a89edf4e0ff13e6b",
+          "Map_20260/sc_e_0405_1": "175ae47f98b8fae81ca1884713fadb879b2b8425226c4515d4228a3bd18b1755",
+          "Map_20260/sc_e_0405_3": "e93f8b7e2fbdd98d371ad77014ca6a4d4d71f0fb25ed54ed2f47c71abf05604f",
+          "Map_20261_1/sc_e_0405_2": "22e647dcf39451f7f468bb79d68fa5d3b1077de655e447b65095eb66dfe15012",
+          "Map_20321_6/sc_e_0513": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_30511_12/sc_e_0405_9": "8684ddfb771c946b739b20b069ec4ce120b2369ae9b1567259f2bdeca15bcfe7"
+        },
+        "evidence": "docs/re/IMPERIAL_TRAVEL_20261104.md"
+      },
+      {
+        "id": "veldt_cave_shadow",
+        "maps": [
+          488,
+          489,
+          490,
+          491,
+          492,
+          311
+        ],
+        "introduction": "",
+        "when": [],
+        "rules": [
+          {
+            "when": [
+              [
+                "scenario",
+                371,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 488,
+                "entity": 1,
+                "raw": "インターセプターに奥に案内される",
+                "group": "ev_e_0741",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                533,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 491,
+                "entity": 21,
+                "raw": "スイッチ押すと岩が動く",
+                "group": "ev_e_0743",
+                "kind": "interact",
+                "text": "Operate {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ]
+          },
+          {
+            "when": [],
+            "targets": [
+              {
+                "map": 492,
+                "entity": 4,
+                "raw": "Goto＆シャドウを発見、ベヒーモスとバトル、サマサの村で回想",
+                "group": "entity_default",
+                "kind": "spot",
+                "text": "Reach {0}. Win the battle and wait for the rescue to finish.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ],
+            "finish_on_scenario": 372
+          }
+        ],
+        "complete": "No pending objective is available here. Continue through the opened passage and request guidance again.",
+        "first_match": true,
+        "select_when": [
+          [
+            "scenario",
+            297,
+            "eq",
+            1
+          ],
+          [
+            "scenario",
+            298,
+            "eq",
+            1
+          ]
+        ],
+        "complete_scenario": 372,
+        "finish_on_completion": true,
+        "source_script_hashes": {
+          "Map_10020/sc_e_0740": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0744_3": "c98ff2fc9546181779336178059fa4644a14f6f75a2bb22806825bde1a1fb9e7",
+          "Map_10020/sc_e_0745_3": "69f5343adb85b6733d65b5a32e79be5dee56fb02100ee32fa57495fe768af01e",
+          "Map_20270/sc_e_0744_5": "dc2681e734d84e017e28666b4a8798b27911ed895239e99efc33826b5590645c",
+          "Map_20460/sc_e_0749": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20461_5/sc_e_0745_5": "d0533e7cecb089b322ebb8fc6c69159d2bd825420e87a7b7e5ceb8477214869b",
+          "Map_20461_6/sc_e_0744_4": "d7a3e1f1262563b8e47dc94c0a42dd6b42394d9237decd84b9257ecdddf32d9d",
+          "Map_20461_6/sc_e_0744_6": "e1fff26dba3fcdeb8c927c8fdf3388d2163de9b77844ee2d08cb4a953c244c8b",
+          "Map_20461_6/sc_e_0745_4": "444a9f71105bde7af5b3dcb6c957ddac25a016d9062bb6cf52eae3a0a1b9c8a0",
+          "Map_20461_6/sc_e_0745_6": "52fa848e9b085b1c05fa8ad323150129bd012f7fd70aca31f11757d474867f7d",
+          "Map_20461_6/sc_e_0746": "d86690e1c4aef0ae5fa6dd860d1669bd1b259124eaa096527e2380571a791e35",
+          "Map_20461_6/sc_e_0747": "6a6b10871ae79939a13a5678328359a8eb8dfdc8ce50883b7c81585b9c951742",
+          "Map_20461_6/sc_e_0748": "dbd94e69b808eae71d0000d9d29e8b47da5762440653b4d2d8d732dc26d41d79",
+          "Map_30761_1/sc_e_0741": "2125d64d248802aac44f9768471e26eee3c726bffbaa147b26cd74973629eb2d",
+          "Map_30761_1/sc_map_30761_1": "2c4dd79a7b27350b4c731e3382fafa4810fe53d6478f1371ed5a7b1d5bec15fd",
+          "Map_30761_2/sc_e_0632": "b561617d80dd3bd9a1bc1071f2fe7ac7ae36570e3c418044f88a2c4ad7b3e1a4",
+          "Map_30761_2/sc_e_0742": "f3f6250c48daad23354eb97f461f6606753caec46d32431a2e3f75ec6345fc6a",
+          "Map_30761_2/sc_e_0742_1": "070bd460107cebceaf900a5feea589dfd7305d603d3e0de76671093485cc9273",
+          "Map_30761_2/sc_map_30761_2": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_30761_4/sc_e_0743": "142e9506e5763519c4262fd0d97850ce8a838baa577f036de932ba143caf344e",
+          "Map_30761_4/sc_e_0744_1": "335b95cb144fa2fefa55cb7b746088bfd6b9a9f636345f1ccdd6d299aeac2fd3",
+          "Map_30761_4/sc_e_0744_2": "2672b0d7b121f8c36e1c4f9859b5ffff1bed67d313fb1be76f2ec4d038e183f9",
+          "Map_30761_4/sc_e_0745_1": "3afa40f5be1ea6b5210c99567f08e3bab2dd8d14a8288eaeda7ee7aec21d4894",
+          "Map_30761_4/sc_e_0745_2": "c8564f5e34dc4b0f37ce756a3bbafcfac84fe908fbcf0448c31298749375bd97",
+          "Map_30761_4/sc_map_30761_4": "d5938088d673496fbd0005dc52de802531f53647c8b0dfb43604796db9909d48",
+          "Map_30761_5/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_30761_5/sc_e_0744": "be0b12774170b8fa84b6621b224b8d3c533cdd8eb80ae4da641de34bb7d3fd57",
+          "Map_30761_5/sc_map_30761_5": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+          "Map_10020/sc_chocobo_20351_2_2": "b2b325da72e8e836c7de730ce8eba314498b2780433e12b2733be4120d005719",
+          "Map_10020/sc_chocobo_20361_1_2": "8c06a92d711f21cf1122b80460d0b12694dec4084e0d191728ef8bc6833173d2",
+          "Map_10020/sc_chocobo_20431_1_2": "a5b8a53308600fa11a6df1fc08332b94e8243d14203222d4ffb3755cf89daffc",
+          "Map_10020/sc_chocobo_20481_1_2": "02b3d5d82acc2ff3b468cdae7f945a7375bff4edb28bfb55a0d35f7fa4794f5e",
+          "Map_10020/sc_chocobo_20481_2_2": "b16bfccb040247341e19b8be815ec85f1e37f7a1c54f29c3b1412fed3de65761",
+          "Map_10020/sc_chocobo_20481_3_2": "fa93b1696470cc011ae0f31b16bcd50fa7a1238873dbdfe9bba8ee2fbbbab7e8",
+          "Map_10020/sc_e_0607_10": "f00bbb0b876a453ce62665e4a853c03f7abfb3e6d607079cb8bbdd366cee3708",
+          "Map_10020/sc_e_0626_2": "e6a2e2fc92b86ea18e5b3d95b930f33061d2384ebe4c4ab9d68926fb03a4a204",
+          "Map_10020/sc_e_0626_3": "23be63c2775bcb6dc0a2d05090cfbdf8bd51886d70a2c6479417effe62f014ac",
+          "Map_10020/sc_e_0627_1": "a1f3c22e495c85221c644139ca6d96b0d2ea5f73a86f77a1c3e4012f7f7a5fe9",
+          "Map_10020/sc_e_0662_1": "51b857962bfda69c5f3f67003290087c26ba9384b3d4dcfef9f8a9f7e389d8d0",
+          "Map_10020/sc_e_0663_1": "29ec0783032c062c414384b2787faf6db2d5515830fb23a3aaa4d8bc393b193f",
+          "Map_10020/sc_e_0664_1": "e39f5b7b3dbd833fdaeb5c2462f7b972c9584c812dc849324a981a9690121fc8",
+          "Map_10020/sc_e_0673_1": "8adde07f8a3d56c33abd6822c23a879d5443c1edd8b08b646450f15e60cf847f",
+          "Map_10020/sc_e_0674_1": "67264619ec4bb451b419df3c7e997eadf8bb3bc9daae55d3d4d8758a77e8968e",
+          "Map_10020/sc_e_0675_1": "7f3cada2c6ab39510ec1d472f295d745119a1cb66bc5fd4ed7049e5ae39a8467",
+          "Map_10020/sc_e_0681_1": "7a18eb8c90236dc426459c2e21344b4162e88dd1f1cc193089f92ddfbe771572",
+          "Map_10020/sc_e_0703_10": "b64922ba8fc6dbcbd0fc338eac997144a2a154b349edde7ace1b3892d2fa5295",
+          "Map_10020/sc_e_0703_12": "e9a6b5e9123315b99037ac05d5ebb83c8177a408e2a92062ce9d7242bb95ec50",
+          "Map_10020/sc_e_0703_8": "eaef2990b27e748544e4df8edca5b6231c6839b622050a5de6bf0ed104b377cc",
+          "Map_10020/sc_e_0724_1": "fe58a9a512fb1e6e149dd00d908b98a09b80b2babe26785463304fd1f176c1ca",
+          "Map_10020/sc_e_0724_2": "cede6b47260ad7d8dc4ee5fe1ebdc4231e5685cb46b84bc7d49d4b182e4532d7",
+          "Map_10020/sc_e_0724_3": "7a5a3ef825dd488978746fafe8a1f7d2e97261840edb3efc185eb14616d7fc0f",
+          "Map_10020/sc_e_0729_1": "122391093bdd916dfcb1bbe2852cc7558187b0c83f8db37bb865aba8afadfe38",
+          "Map_10020/sc_e_0738": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0739": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0792": "64a040b78e6c506bece5804347f1a8cd9b582c398eda4e9a651fe99698f9882c",
+          "Map_10020/sc_e_0832": "b5d38dcf70ce95bc5928e29da3ad45923a32459a0cf971f02a7c40a68210bdc4",
+          "Map_10020/sc_e_0882_1": "e63a6af2467873717ec81164577c4ffb91de5a41dcbd41fb6dab15a954c7b4a7",
+          "Map_10020/sc_e_0882_3": "68aeaed41ad0a37282b5620efc8425f2028929726ef0a882b991a99d62b2f2c3",
+          "Map_10020/sc_e_0941_1": "e84b28e1a2dac2dad54c107de0401cd79aef70f826b57cb8cdf135cb2fecea30",
+          "Map_10020/sc_e_0964": "b89b07c82de40910a3da67658464c9746bb4322d33b782ffd1de0e124ae86b8c",
+          "Map_10020/sc_e_0964_1": "2764fe3b2d9fd8f0c1b8483e5d6c09186ec446a8bf79cd740b1eab568da4462b",
+          "Map_10020/sc_e_0966": "7d543a577954b4bfbca0161645fce0f750b0017792edfa33f7165c206f4e3738",
+          "Map_10020/sc_e_0966_2": "518d83900f385e432c94e935d54fccc791b3e24ed4d6940da7f3ac2c422e8da7",
+          "Map_10020/sc_e_1002_2": "40f42ab3f0d7f698fd225bd99915b1fde3e459e2626d48659f91dd41f6a3ad87",
+          "Map_10020/sc_e_1002_4": "966f6fea2ca1f225c0b72e8ae9d062ee67697afbf42e5c5d0558a3dea1d26f88",
+          "Map_10020/sc_e_1032_16": "57034608d5cf49d18bf26d8aed58a3e1d40befa01e57da0fce9c6c5ddf256c9a",
+          "Map_10020/sc_e_1067_1": "7e56387c2c472c1d3fc115b080782fdc5c1f00bab78a8e4bd7f6dc548e7ae3c8",
+          "Map_10020/sc_e_1067_3": "583452ad03ff275359b5f8ad1cfd43bf421035c65f4ef87aebffe787b9bef8a4",
+          "Map_10020/sc_e_CBlanding": "34a326c6d727413e9cb09ba694b21bcbd151c0666501f043ff9bede67b9a38d5",
+          "Map_10020/sc_e_CNlanding": "3344605636d3d1c3062369ca6fe4900bde2b885251c044a7879359949b3fcbbf",
+          "Map_10020/sc_e_FAinboard": "409d60da1e05498893877ed59a0aadef378abbbc2905c8e0c03223488cf6ffc0",
+          "Map_10020/sc_e_FAlanding": "1c6ff3f1e4f2fea898cdd3a8fe3d65eae5580aa3b58ce02a83612754ed70a68e",
+          "Map_10020/sc_e_FAlanding_1": "75cf87989374449ad883f38502c79e3a45326f4ac652b32fa690a340fe575cf5",
+          "Map_10020/sc_e_FAoutboard_1": "8167a7613be54c86825f3de2036ec9a4ea20baa1e8386060b6d1bbab1d1cff19",
+          "Map_10020/sc_e_FAtakeoff": "4f5a4450036416f704543a889a133e5c6dae95a4498e6fd6e472063653673634",
+          "Map_10020/sc_map_10020": "aa8ca6167003ff96800dfe950d609a263e67f232bb4cb554406ad7c698c10d0d",
+          "Map_10020/sc_tnt": "af191fdfa1a342d100aaae35d433a3aa3a8a0b09cd1d951336a804d9b0ab3fe4",
+          "Map_20270/sc_e_0519": "4a76db73021ed5736d117a4e83fb369d7e130d7f2b696016ef959be97e15374b",
+          "Map_20270/sc_e_0520": "6e4733f997af862e07f1961bd8047e11248d4404fece60c13f5b5223ab62f5ea",
+          "Map_20270/sc_e_0522_1": "7f63898ab96bf973be80d323344f810747e05af780a568e558be30ec3991c41c",
+          "Map_20270/sc_e_0523": "94a7685b3c1e760dba10f2f7069144b4db280f8b91f9d178acf02ea4d9159279",
+          "Map_20270/sc_e_0540_1": "cd697acac81542b30311c1721249b55a3687da5eda5cb9cd715c43c268413b33",
+          "Map_20270/sc_e_0551_1": "da9b7452107a86253c5fd356c66eed8c721f4180912378798a71ff2dbd840dc0",
+          "Map_20270/sc_e_0552": "f74bad772d5704cd456de9f3c6eacd49061b4b3707609519c4fb30489e22954a",
+          "Map_20270/sc_e_0552_1": "2cb6f0f8a74d5c7cc265eb4de561fc3c165a3af44ca90ada69349ebafd07abd1",
+          "Map_20270/sc_e_0553": "8abcf408efebc9430a4a2d20d6c47ff530f84e4f6108d02aff560f10082738b5",
+          "Map_20270/sc_e_0553_1": "dcee9c13d4256c2d9e8339d341938ca6bf1462a4bc99ffa4b5a650e0df932f34",
+          "Map_20270/sc_e_0554": "6962eb84a30b0865c2e3fe30c3df3eae87e936be4498cace42dfbbfef7197a77",
+          "Map_20270/sc_e_0554_1": "3c0e0fb4c0b42334fc16176ec0501d06ebe8a8461422314b5bb8d018a1853004",
+          "Map_20270/sc_e_0555": "a6038eeaf99219d71731270cbe8a003545c405a8d389c341afee0b0e9305c4f2",
+          "Map_20270/sc_e_0555_1": "71bece14901c565b0623f192f3d6f659c17174b7786a3126d9016c2dca99101b",
+          "Map_20270/sc_e_0555_10": "dac2f59ae6ead68b26eb25b6767edfddf4c7db6ff01d1b1f1e8d5e98cb15dbe7",
+          "Map_20270/sc_e_0555_5": "f1e84c7c2ef1865e29c97543fa305f0f188356103edc637b8be3e182f72cf5ea",
+          "Map_20270/sc_e_0555_6": "f546413cc6c7c70fc8c7f70d1c0d0b1f400f345656f9613e7125515d9bc66949",
+          "Map_20270/sc_e_0555_8": "16855e531c634c62fafa406bdea1415d6e85d240521f40fbd51bad574085dc67",
+          "Map_20270/sc_e_0556": "a0959f1f85430e6b3b7899e711eb413f41d18b20b8a587d7f460e2c7fd472a53",
+          "Map_20270/sc_e_0557": "9cb0909db9b096af46324f24cbbcf3cea365ba67ee728218bf672593859a5fd2",
+          "Map_20270/sc_e_0958": "10cb7b740446b2c358de8fbdb4eb14a65c58a3bdf2ff4db22408929069012629",
+          "Map_20270/sc_e_0958_branch": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+          "Map_20270/sc_e_1025": "6bc53e016455ee85e43eba8db547d7e72f471faef3181ba4ed04bf297cbda52b",
+          "Map_20270/sc_e_1027": "3d90c847cb9931ac6c4de84140f2bfef417f7b252da72286ac1c0e474540e5f6",
+          "Map_20270/sc_e_1029": "5993278cb5991a7a6a56cf2fbf4bb4c6069185f0b7bacfac6b9d5fcfc0963679",
+          "Map_20270/sc_e_1032_4": "02708fccddcf53651b8855411a8f3086f5e304c255909570285ad1d78cee53d8",
+          "Map_20270/sc_map_20270": "e0a34591ea1c4c94b76f92f4e75400da3e5a2c037df52d92c25e8c36e4d7ffb3",
+          "Map_20270/sc_npc_20270_1": "64a051a28282ff3395c85536f8b0a9dc2e19b7a1c1e048ba4246ba99861bd1f6",
+          "Map_20270/sc_npc_20270_2": "66fed86fd83c473f320bb252926fa8b3ac7a17b57b1cfc7a27c3c08523acbb13",
+          "Map_20270/sc_npc_20270_3": "73e22e4f6254169e21bcbafc1ef365c416e4738abd95dbed19416a6f2d3864d5",
+          "Map_20270/sc_npc_20270_4": "844cefe2bdef6f2d6dd30fc0fca7fede116d9f236d281bc92a79342101472aa2",
+          "Map_20460/sc_e_0755": "9ea2d45656bcab5ae83155830d8a9ac28834d527d60f632855e192f1879bc51b",
+          "Map_20460/sc_e_0941": "cabd18b6f74e8fe96bff06755ed00a5e3eab7bab89bff36089fd74eede65043e",
+          "Map_20460/sc_e_0941_2": "5586ca2841d461c7954e42284db105a8712c44abb7a3f600eca72f79b318764b",
+          "Map_20460/sc_e_0942": "6916ad8f0491209635770cd986e1ea5afb578a0ba4440de24fc0da655b91ab9c",
+          "Map_20460/sc_e_0950_3": "d4679b97d66a9dc7719c46d220e815cc79aca8c0e258ac1c0c8ce584c05c3a68",
+          "Map_20460/sc_e_0950_5": "7adc082766530b23c1258493865f22dd8d29f4020350d47ee554462147ebb185",
+          "Map_20460/sc_e_0951": "764758386a0477a1d262466bd0de3db751ef097e5f7be4fc5d455fe6ce02a4e1",
+          "Map_20460/sc_map_20460": "218483bf3350cf99d42aa9d05b17e830e3ed7428a02e0b62052fc98647ed79d4",
+          "Map_20460/sc_npc_20460_2": "5d85ba63c00c5db561534677746f2220889feadfdd55612d092e21573c1f2d27",
+          "Map_20461_5/sc_e_0942_2": "88d810c195dcdd28264249250840095c559c06eb9dfaea2e04d1a1717c1bea37",
+          "Map_20461_5/sc_e_0950_4": "a04c3ee96ce78ba910e31c32a98320b51bd8b55aa7334be5a45abe893d8c14fb",
+          "Map_20461_5/sc_e_0950_6": "bdfc24f7e7f384aec31c59f8779732e50987f8f261c6a1e0896a9529bdd8ab46",
+          "Map_20461_5/sc_map_20461_5": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+          "Map_20461_6/sc_e_0942_1": "cb854a4e2e081e3eaa338a20e74907a2fd7c98543aff124d3793595b8691fcca",
+          "Map_20461_6/sc_e_0950_2": "a059e406f314a2c2937e89c2d98264b86b94ef3132b4ab3de3cfec32ed9197ff",
+          "Map_20461_6/sc_map_20461_6": "f278570509f9f19cb8c246ea8b427b1c5ef80448a79d8453f131d028574e232e"
+        },
+        "evidence": "docs/re/VELDT_CAVE_GUIDANCE_20261104.md"
+      },
+      {
+        "id": "veldt_cave_relm",
+        "maps": [
+          488,
+          489,
+          490,
+          491,
+          492,
+          311
+        ],
+        "introduction": "",
+        "when": [],
+        "rules": [
+          {
+            "when": [
+              [
+                "scenario",
+                371,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 488,
+                "entity": 1,
+                "raw": "インターセプターに奥に案内される",
+                "group": "ev_e_0741",
+                "kind": "spot",
+                "text": "Continue to {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ]
+          },
+          {
+            "when": [
+              [
+                "scenario",
+                533,
+                "eq",
+                0
+              ]
+            ],
+            "targets": [
+              {
+                "map": 491,
+                "entity": 21,
+                "raw": "スイッチ押すと岩が動く",
+                "group": "ev_e_0743",
+                "kind": "interact",
+                "text": "Operate {0}, then request guidance again.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ]
+          },
+          {
+            "when": [],
+            "targets": [
+              {
+                "map": 492,
+                "entity": 4,
+                "raw": "Goto＆シャドウを発見、ベヒーモスとバトル、サマサの村で回想",
+                "group": "entity_default",
+                "kind": "spot",
+                "text": "Reach {0}. Win the battle and wait for the rescue to finish.",
+                "avoid_other_events": true,
+                "allow_scripted_crossings": true,
+                "allow_world_transit": false
+              }
+            ],
+            "finish_on_scenario": 373
+          }
+        ],
+        "complete": "No pending objective is available here. Continue through the opened passage and request guidance again.",
+        "first_match": true,
+        "select_when": [
+          [
+            "scenario",
+            297,
+            "eq",
+            1
+          ],
+          [
+            "scenario",
+            298,
+            "eq",
+            0
+          ]
+        ],
+        "complete_scenario": 373,
+        "finish_on_completion": true,
+        "source_script_hashes": {
+          "Map_10020/sc_e_0740": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0744_3": "c98ff2fc9546181779336178059fa4644a14f6f75a2bb22806825bde1a1fb9e7",
+          "Map_10020/sc_e_0745_3": "69f5343adb85b6733d65b5a32e79be5dee56fb02100ee32fa57495fe768af01e",
+          "Map_20270/sc_e_0744_5": "dc2681e734d84e017e28666b4a8798b27911ed895239e99efc33826b5590645c",
+          "Map_20460/sc_e_0749": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+          "Map_20461_5/sc_e_0745_5": "d0533e7cecb089b322ebb8fc6c69159d2bd825420e87a7b7e5ceb8477214869b",
+          "Map_20461_6/sc_e_0744_4": "d7a3e1f1262563b8e47dc94c0a42dd6b42394d9237decd84b9257ecdddf32d9d",
+          "Map_20461_6/sc_e_0744_6": "e1fff26dba3fcdeb8c927c8fdf3388d2163de9b77844ee2d08cb4a953c244c8b",
+          "Map_20461_6/sc_e_0745_4": "444a9f71105bde7af5b3dcb6c957ddac25a016d9062bb6cf52eae3a0a1b9c8a0",
+          "Map_20461_6/sc_e_0745_6": "52fa848e9b085b1c05fa8ad323150129bd012f7fd70aca31f11757d474867f7d",
+          "Map_20461_6/sc_e_0746": "d86690e1c4aef0ae5fa6dd860d1669bd1b259124eaa096527e2380571a791e35",
+          "Map_20461_6/sc_e_0747": "6a6b10871ae79939a13a5678328359a8eb8dfdc8ce50883b7c81585b9c951742",
+          "Map_20461_6/sc_e_0748": "dbd94e69b808eae71d0000d9d29e8b47da5762440653b4d2d8d732dc26d41d79",
+          "Map_30761_1/sc_e_0741": "2125d64d248802aac44f9768471e26eee3c726bffbaa147b26cd74973629eb2d",
+          "Map_30761_1/sc_map_30761_1": "2c4dd79a7b27350b4c731e3382fafa4810fe53d6478f1371ed5a7b1d5bec15fd",
+          "Map_30761_2/sc_e_0632": "b561617d80dd3bd9a1bc1071f2fe7ac7ae36570e3c418044f88a2c4ad7b3e1a4",
+          "Map_30761_2/sc_e_0742": "f3f6250c48daad23354eb97f461f6606753caec46d32431a2e3f75ec6345fc6a",
+          "Map_30761_2/sc_e_0742_1": "070bd460107cebceaf900a5feea589dfd7305d603d3e0de76671093485cc9273",
+          "Map_30761_2/sc_map_30761_2": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_30761_4/sc_e_0743": "142e9506e5763519c4262fd0d97850ce8a838baa577f036de932ba143caf344e",
+          "Map_30761_4/sc_e_0744_1": "335b95cb144fa2fefa55cb7b746088bfd6b9a9f636345f1ccdd6d299aeac2fd3",
+          "Map_30761_4/sc_e_0744_2": "2672b0d7b121f8c36e1c4f9859b5ffff1bed67d313fb1be76f2ec4d038e183f9",
+          "Map_30761_4/sc_e_0745_1": "3afa40f5be1ea6b5210c99567f08e3bab2dd8d14a8288eaeda7ee7aec21d4894",
+          "Map_30761_4/sc_e_0745_2": "c8564f5e34dc4b0f37ce756a3bbafcfac84fe908fbcf0448c31298749375bd97",
+          "Map_30761_4/sc_map_30761_4": "d5938088d673496fbd0005dc52de802531f53647c8b0dfb43604796db9909d48",
+          "Map_30761_5/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "Map_30761_5/sc_e_0744": "be0b12774170b8fa84b6621b224b8d3c533cdd8eb80ae4da641de34bb7d3fd57",
+          "Map_30761_5/sc_map_30761_5": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+          "Map_10020/sc_chocobo_20351_2_2": "b2b325da72e8e836c7de730ce8eba314498b2780433e12b2733be4120d005719",
+          "Map_10020/sc_chocobo_20361_1_2": "8c06a92d711f21cf1122b80460d0b12694dec4084e0d191728ef8bc6833173d2",
+          "Map_10020/sc_chocobo_20431_1_2": "a5b8a53308600fa11a6df1fc08332b94e8243d14203222d4ffb3755cf89daffc",
+          "Map_10020/sc_chocobo_20481_1_2": "02b3d5d82acc2ff3b468cdae7f945a7375bff4edb28bfb55a0d35f7fa4794f5e",
+          "Map_10020/sc_chocobo_20481_2_2": "b16bfccb040247341e19b8be815ec85f1e37f7a1c54f29c3b1412fed3de65761",
+          "Map_10020/sc_chocobo_20481_3_2": "fa93b1696470cc011ae0f31b16bcd50fa7a1238873dbdfe9bba8ee2fbbbab7e8",
+          "Map_10020/sc_e_0607_10": "f00bbb0b876a453ce62665e4a853c03f7abfb3e6d607079cb8bbdd366cee3708",
+          "Map_10020/sc_e_0626_2": "e6a2e2fc92b86ea18e5b3d95b930f33061d2384ebe4c4ab9d68926fb03a4a204",
+          "Map_10020/sc_e_0626_3": "23be63c2775bcb6dc0a2d05090cfbdf8bd51886d70a2c6479417effe62f014ac",
+          "Map_10020/sc_e_0627_1": "a1f3c22e495c85221c644139ca6d96b0d2ea5f73a86f77a1c3e4012f7f7a5fe9",
+          "Map_10020/sc_e_0662_1": "51b857962bfda69c5f3f67003290087c26ba9384b3d4dcfef9f8a9f7e389d8d0",
+          "Map_10020/sc_e_0663_1": "29ec0783032c062c414384b2787faf6db2d5515830fb23a3aaa4d8bc393b193f",
+          "Map_10020/sc_e_0664_1": "e39f5b7b3dbd833fdaeb5c2462f7b972c9584c812dc849324a981a9690121fc8",
+          "Map_10020/sc_e_0673_1": "8adde07f8a3d56c33abd6822c23a879d5443c1edd8b08b646450f15e60cf847f",
+          "Map_10020/sc_e_0674_1": "67264619ec4bb451b419df3c7e997eadf8bb3bc9daae55d3d4d8758a77e8968e",
+          "Map_10020/sc_e_0675_1": "7f3cada2c6ab39510ec1d472f295d745119a1cb66bc5fd4ed7049e5ae39a8467",
+          "Map_10020/sc_e_0681_1": "7a18eb8c90236dc426459c2e21344b4162e88dd1f1cc193089f92ddfbe771572",
+          "Map_10020/sc_e_0703_10": "b64922ba8fc6dbcbd0fc338eac997144a2a154b349edde7ace1b3892d2fa5295",
+          "Map_10020/sc_e_0703_12": "e9a6b5e9123315b99037ac05d5ebb83c8177a408e2a92062ce9d7242bb95ec50",
+          "Map_10020/sc_e_0703_8": "eaef2990b27e748544e4df8edca5b6231c6839b622050a5de6bf0ed104b377cc",
+          "Map_10020/sc_e_0724_1": "fe58a9a512fb1e6e149dd00d908b98a09b80b2babe26785463304fd1f176c1ca",
+          "Map_10020/sc_e_0724_2": "cede6b47260ad7d8dc4ee5fe1ebdc4231e5685cb46b84bc7d49d4b182e4532d7",
+          "Map_10020/sc_e_0724_3": "7a5a3ef825dd488978746fafe8a1f7d2e97261840edb3efc185eb14616d7fc0f",
+          "Map_10020/sc_e_0729_1": "122391093bdd916dfcb1bbe2852cc7558187b0c83f8db37bb865aba8afadfe38",
+          "Map_10020/sc_e_0738": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0739": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+          "Map_10020/sc_e_0792": "64a040b78e6c506bece5804347f1a8cd9b582c398eda4e9a651fe99698f9882c",
+          "Map_10020/sc_e_0832": "b5d38dcf70ce95bc5928e29da3ad45923a32459a0cf971f02a7c40a68210bdc4",
+          "Map_10020/sc_e_0882_1": "e63a6af2467873717ec81164577c4ffb91de5a41dcbd41fb6dab15a954c7b4a7",
+          "Map_10020/sc_e_0882_3": "68aeaed41ad0a37282b5620efc8425f2028929726ef0a882b991a99d62b2f2c3",
+          "Map_10020/sc_e_0941_1": "e84b28e1a2dac2dad54c107de0401cd79aef70f826b57cb8cdf135cb2fecea30",
+          "Map_10020/sc_e_0964": "b89b07c82de40910a3da67658464c9746bb4322d33b782ffd1de0e124ae86b8c",
+          "Map_10020/sc_e_0964_1": "2764fe3b2d9fd8f0c1b8483e5d6c09186ec446a8bf79cd740b1eab568da4462b",
+          "Map_10020/sc_e_0966": "7d543a577954b4bfbca0161645fce0f750b0017792edfa33f7165c206f4e3738",
+          "Map_10020/sc_e_0966_2": "518d83900f385e432c94e935d54fccc791b3e24ed4d6940da7f3ac2c422e8da7",
+          "Map_10020/sc_e_1002_2": "40f42ab3f0d7f698fd225bd99915b1fde3e459e2626d48659f91dd41f6a3ad87",
+          "Map_10020/sc_e_1002_4": "966f6fea2ca1f225c0b72e8ae9d062ee67697afbf42e5c5d0558a3dea1d26f88",
+          "Map_10020/sc_e_1032_16": "57034608d5cf49d18bf26d8aed58a3e1d40befa01e57da0fce9c6c5ddf256c9a",
+          "Map_10020/sc_e_1067_1": "7e56387c2c472c1d3fc115b080782fdc5c1f00bab78a8e4bd7f6dc548e7ae3c8",
+          "Map_10020/sc_e_1067_3": "583452ad03ff275359b5f8ad1cfd43bf421035c65f4ef87aebffe787b9bef8a4",
+          "Map_10020/sc_e_CBlanding": "34a326c6d727413e9cb09ba694b21bcbd151c0666501f043ff9bede67b9a38d5",
+          "Map_10020/sc_e_CNlanding": "3344605636d3d1c3062369ca6fe4900bde2b885251c044a7879359949b3fcbbf",
+          "Map_10020/sc_e_FAinboard": "409d60da1e05498893877ed59a0aadef378abbbc2905c8e0c03223488cf6ffc0",
+          "Map_10020/sc_e_FAlanding": "1c6ff3f1e4f2fea898cdd3a8fe3d65eae5580aa3b58ce02a83612754ed70a68e",
+          "Map_10020/sc_e_FAlanding_1": "75cf87989374449ad883f38502c79e3a45326f4ac652b32fa690a340fe575cf5",
+          "Map_10020/sc_e_FAoutboard_1": "8167a7613be54c86825f3de2036ec9a4ea20baa1e8386060b6d1bbab1d1cff19",
+          "Map_10020/sc_e_FAtakeoff": "4f5a4450036416f704543a889a133e5c6dae95a4498e6fd6e472063653673634",
+          "Map_10020/sc_map_10020": "aa8ca6167003ff96800dfe950d609a263e67f232bb4cb554406ad7c698c10d0d",
+          "Map_10020/sc_tnt": "af191fdfa1a342d100aaae35d433a3aa3a8a0b09cd1d951336a804d9b0ab3fe4",
+          "Map_20270/sc_e_0519": "4a76db73021ed5736d117a4e83fb369d7e130d7f2b696016ef959be97e15374b",
+          "Map_20270/sc_e_0520": "6e4733f997af862e07f1961bd8047e11248d4404fece60c13f5b5223ab62f5ea",
+          "Map_20270/sc_e_0522_1": "7f63898ab96bf973be80d323344f810747e05af780a568e558be30ec3991c41c",
+          "Map_20270/sc_e_0523": "94a7685b3c1e760dba10f2f7069144b4db280f8b91f9d178acf02ea4d9159279",
+          "Map_20270/sc_e_0540_1": "cd697acac81542b30311c1721249b55a3687da5eda5cb9cd715c43c268413b33",
+          "Map_20270/sc_e_0551_1": "da9b7452107a86253c5fd356c66eed8c721f4180912378798a71ff2dbd840dc0",
+          "Map_20270/sc_e_0552": "f74bad772d5704cd456de9f3c6eacd49061b4b3707609519c4fb30489e22954a",
+          "Map_20270/sc_e_0552_1": "2cb6f0f8a74d5c7cc265eb4de561fc3c165a3af44ca90ada69349ebafd07abd1",
+          "Map_20270/sc_e_0553": "8abcf408efebc9430a4a2d20d6c47ff530f84e4f6108d02aff560f10082738b5",
+          "Map_20270/sc_e_0553_1": "dcee9c13d4256c2d9e8339d341938ca6bf1462a4bc99ffa4b5a650e0df932f34",
+          "Map_20270/sc_e_0554": "6962eb84a30b0865c2e3fe30c3df3eae87e936be4498cace42dfbbfef7197a77",
+          "Map_20270/sc_e_0554_1": "3c0e0fb4c0b42334fc16176ec0501d06ebe8a8461422314b5bb8d018a1853004",
+          "Map_20270/sc_e_0555": "a6038eeaf99219d71731270cbe8a003545c405a8d389c341afee0b0e9305c4f2",
+          "Map_20270/sc_e_0555_1": "71bece14901c565b0623f192f3d6f659c17174b7786a3126d9016c2dca99101b",
+          "Map_20270/sc_e_0555_10": "dac2f59ae6ead68b26eb25b6767edfddf4c7db6ff01d1b1f1e8d5e98cb15dbe7",
+          "Map_20270/sc_e_0555_5": "f1e84c7c2ef1865e29c97543fa305f0f188356103edc637b8be3e182f72cf5ea",
+          "Map_20270/sc_e_0555_6": "f546413cc6c7c70fc8c7f70d1c0d0b1f400f345656f9613e7125515d9bc66949",
+          "Map_20270/sc_e_0555_8": "16855e531c634c62fafa406bdea1415d6e85d240521f40fbd51bad574085dc67",
+          "Map_20270/sc_e_0556": "a0959f1f85430e6b3b7899e711eb413f41d18b20b8a587d7f460e2c7fd472a53",
+          "Map_20270/sc_e_0557": "9cb0909db9b096af46324f24cbbcf3cea365ba67ee728218bf672593859a5fd2",
+          "Map_20270/sc_e_0958": "10cb7b740446b2c358de8fbdb4eb14a65c58a3bdf2ff4db22408929069012629",
+          "Map_20270/sc_e_0958_branch": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+          "Map_20270/sc_e_1025": "6bc53e016455ee85e43eba8db547d7e72f471faef3181ba4ed04bf297cbda52b",
+          "Map_20270/sc_e_1027": "3d90c847cb9931ac6c4de84140f2bfef417f7b252da72286ac1c0e474540e5f6",
+          "Map_20270/sc_e_1029": "5993278cb5991a7a6a56cf2fbf4bb4c6069185f0b7bacfac6b9d5fcfc0963679",
+          "Map_20270/sc_e_1032_4": "02708fccddcf53651b8855411a8f3086f5e304c255909570285ad1d78cee53d8",
+          "Map_20270/sc_map_20270": "e0a34591ea1c4c94b76f92f4e75400da3e5a2c037df52d92c25e8c36e4d7ffb3",
+          "Map_20270/sc_npc_20270_1": "64a051a28282ff3395c85536f8b0a9dc2e19b7a1c1e048ba4246ba99861bd1f6",
+          "Map_20270/sc_npc_20270_2": "66fed86fd83c473f320bb252926fa8b3ac7a17b57b1cfc7a27c3c08523acbb13",
+          "Map_20270/sc_npc_20270_3": "73e22e4f6254169e21bcbafc1ef365c416e4738abd95dbed19416a6f2d3864d5",
+          "Map_20270/sc_npc_20270_4": "844cefe2bdef6f2d6dd30fc0fca7fede116d9f236d281bc92a79342101472aa2",
+          "Map_20460/sc_e_0755": "9ea2d45656bcab5ae83155830d8a9ac28834d527d60f632855e192f1879bc51b",
+          "Map_20460/sc_e_0941": "cabd18b6f74e8fe96bff06755ed00a5e3eab7bab89bff36089fd74eede65043e",
+          "Map_20460/sc_e_0941_2": "5586ca2841d461c7954e42284db105a8712c44abb7a3f600eca72f79b318764b",
+          "Map_20460/sc_e_0942": "6916ad8f0491209635770cd986e1ea5afb578a0ba4440de24fc0da655b91ab9c",
+          "Map_20460/sc_e_0950_3": "d4679b97d66a9dc7719c46d220e815cc79aca8c0e258ac1c0c8ce584c05c3a68",
+          "Map_20460/sc_e_0950_5": "7adc082766530b23c1258493865f22dd8d29f4020350d47ee554462147ebb185",
+          "Map_20460/sc_e_0951": "764758386a0477a1d262466bd0de3db751ef097e5f7be4fc5d455fe6ce02a4e1",
+          "Map_20460/sc_map_20460": "218483bf3350cf99d42aa9d05b17e830e3ed7428a02e0b62052fc98647ed79d4",
+          "Map_20460/sc_npc_20460_2": "5d85ba63c00c5db561534677746f2220889feadfdd55612d092e21573c1f2d27",
+          "Map_20461_5/sc_e_0942_2": "88d810c195dcdd28264249250840095c559c06eb9dfaea2e04d1a1717c1bea37",
+          "Map_20461_5/sc_e_0950_4": "a04c3ee96ce78ba910e31c32a98320b51bd8b55aa7334be5a45abe893d8c14fb",
+          "Map_20461_5/sc_e_0950_6": "bdfc24f7e7f384aec31c59f8779732e50987f8f261c6a1e0896a9529bdd8ab46",
+          "Map_20461_5/sc_map_20461_5": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+          "Map_20461_6/sc_e_0942_1": "cb854a4e2e081e3eaa338a20e74907a2fd7c98543aff124d3793595b8691fcca",
+          "Map_20461_6/sc_e_0950_2": "a059e406f314a2c2937e89c2d98264b86b94ef3132b4ab3de3cfec32ed9197ff",
+          "Map_20461_6/sc_map_20461_6": "f278570509f9f19cb8c246ea8b427b1c5ef80448a79d8453f131d028574e232e"
+        },
+        "evidence": "docs/re/VELDT_CAVE_GUIDANCE_20261104.md"
+      }
+    ],
+    "guidance_types": {
+      "cultists_tower": {
+        "kind": "navigation",
+        "maps": [
+          476,
+          477,
+          478,
+          479,
+          480,
+          481,
+          482,
+          483,
+          484,
+          485,
+          486,
+          487
+        ]
+      },
+      "imperial_post_party": {
+        "kind": "other",
+        "maps": [
+          162
+        ]
+      },
+      "veldt_cave_relm": {
+        "kind": "navigation",
+        "maps": [
+          488,
+          489,
+          490,
+          491,
+          492,
+          311
+        ]
+      },
+      "veldt_cave_shadow": {
+        "kind": "navigation",
+        "maps": [
+          488,
+          489,
+          490,
+          491,
+          492,
+          311
+        ]
+      }
+    }
+  }
+}

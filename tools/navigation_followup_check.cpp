@@ -38,13 +38,28 @@ bool check_ship(const baked::Submap& world) {
     auto snapshot=std::make_unique<RouteSnapshot>(map_state::Resolver(map_state::Flags{},fixture::records));
     snapshot->submap=&world;snapshot->map_id=world.first_map_id;snapshot->layer=1;snapshot->locale=L"en";
     auto foot=walk_request(world,{1,0,0});
-    Cell boat,shore;bool found=false;
+    Cell boat,shore;bool found=false,first_shore_seen=false;
     for(int y=0;y<grid.height&&!found;++y)for(int x=0;x<grid.width&&!found;++x) {
         const Cell at{1,x,y};
         if(!baked::vehicle_open(grid,ship->group,x,y)||!baked::group_crosses(ship->group,baked::attribute(grid,x,y))||baked_route::open(foot,grid,at))continue;
         for(const auto side:std::vector<Cell>{{1,0,-1},{1,1,0},{1,0,1},{1,-1,0}}) {
             Cell adjacent{1,(x+side.x+grid.width)%grid.width,(y+side.y+grid.height)%grid.height};
-            if(baked_route::open(foot,grid,adjacent)){boat=at;shore=adjacent;found=true;break;}
+            if(!baked_route::open(foot,grid,adjacent))continue;
+            // This identity fixture must choose a physically boardable shore,
+            // not merely a walkable one. Independently apply the pinned native
+            // SeamlessHitCheck source-terrain/landing and direction conditions;
+            // do not use the production boarding helper to generate its inputs.
+            const int attribute=baked::attribute(grid,adjacent.x,adjacent.y);
+            const bool native_shore=ship->landing_group>0&&baked::group_lands(ship->landing_group,attribute)&&
+                baked_route::direction_allowed(foot,adjacent,at);
+            if(!first_shore_seen) {
+                first_shore_seen=true;
+                std::printf("FF%d first walkable-only Ship witness boat%d,%d shore%d,%d attribute%d native%d\n",
+                    baked::game_number(),at.x,at.y,adjacent.x,adjacent.y,attribute,native_shore);
+                if(baked::game_number()==1)expect(!native_shore,"the former FF1 generated shore violates native boarding, independently of planner output");
+            }
+            if(!native_shore||baked_route::terminal_transition(foot,grid,adjacent)||baked_route::trap_cell(foot,grid,adjacent))continue;
+            boat=at;shore=adjacent;found=true;break;
         }
     }
     if(!found)return false; // intro/alternate worlds can deliberately disable this transport
@@ -370,8 +385,11 @@ int main() {
         for(int i=0;i<baked::submap_count();++i) {
             const auto& map=*baked::submap_at(i);const auto& grid=baked::grids(map);
             for(const auto& object:grid.objects)if(baked::world_exit(object)) {
-                ++world_exits;const auto* dest=baked::submap_by_map_id(object.a);
+                ++world_exits;const auto* dest=object.a==-1?&map:baked::submap_by_map_id(object.a);
                 expect(dest!=nullptr,"every reviewed scripted transfer points at a real destination for that game");
+                if(object.a==-1)expect(std::any_of(grid.objects.begin(),grid.objects.end(),[&](const auto& point){
+                    return point.type==baked::ObjType::PointIn&&point.a==object.b;
+                }),"same-floor scripted movement retains its exact arrival point");
                 expect(!baked_route::step_event(object),"ordinary scripted exits are not story scene warnings");
                 const auto* found=baked::world_exit_at(grid,object.entity_id(),baked::object_identifier(object),object.tx,object.ty);
                 // The immutable native detector must not invent one destination

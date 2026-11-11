@@ -24,10 +24,13 @@ inline bool at_door(const baked_route::Cell& point,const baked::Object& door,int
     const int dx=point.x<door.tx?door.tx-point.x:point.x>=door.tx+door.tw?point.x-(door.tx+door.tw-1):0;
     const int dy=point.y<door.ty?door.ty-point.y:point.y>=door.ty+door.th?point.y-(door.ty+door.th-1):0;
     if(dx+dy<=1)return true;
-    // Native shops can place PointIn two cells inside, facing into the room.
+    // Native shops place PointIn two cells inside; FFIV Kaipo's four
+    // interiors use three. Require a straight inward native facing, never a
+    // general radius. Both explicit arrival IDs and unique reverse matching
+    // below still certify the same physical doorway.
     // Certify only that straight inward placement, not a larger radius around
     // arbitrary doors. Exact unique reciprocal IDs/arrivals still own the pair.
-    if(dx+dy!=2||(!dx&&!dy)||(dx&&dy))return false;
+    if((dx+dy!=2&&dx+dy!=3)||(!dx&&!dy)||(dx&&dy))return false;
     if(!dx)return point.y<door.ty?facing==1:facing==4;
     return point.x<door.tx?facing==8:facing==2;
 }
@@ -35,15 +38,36 @@ inline bool at_door(const baked_route::Cell& point,const baked::Object& door,int
 inline std::vector<bool> return_mask(const std::vector<Door>& doors,const std::function<bool()>& cancelled={}) {
     std::vector<bool> hidden(doors.size(),false);
     std::map<std::pair<int,int>,std::vector<size_t>> directions;
+    struct CurrentReturns {
+        std::optional<baked_route::Cell> arrival;
+        bool keep=false;
+    };
+    std::map<int,CurrentReturns> current_returns;
+    const auto returns_here=[](const Door& door) {
+        return door.source_depth>0 && door.destination_depth==0 && door.source!=door.destination;
+    };
     for(size_t i=0;i<doors.size();++i){
         if(cancelled&&cancelled())return {};
         const auto& door=doors[i];
-        if(door.known&&door.arrival)directions[{door.source,door.destination}].push_back(i);
+        if(returns_here(door)){
+            auto& group=current_returns[door.source];
+            if(!door.known||!door.arrival||(group.arrival&&*group.arrival!=*door.arrival))group.keep=true;
+            else group.arrival=door.arrival;
+        }
+        if(door.footprint.type==baked::ObjType::GotoMap&&door.known&&door.arrival)
+            directions[{door.source,door.destination}].push_back(i);
     }
     for(size_t i=0;i<doors.size();++i){
         if(cancelled&&cancelled())return {};
         const auto& door=doors[i];
-        if(!door.known||!door.arrival||door.source_depth<=0||door.destination_depth<0||
+        // A remote return is useful from here if it can bring the player
+        // back somewhere different on this floor. Compare native cells per
+        // source floor, so unrelated interiors never make each other visible.
+        if(returns_here(door)){
+            hidden[i]=!current_returns.at(door.source).keep;
+            continue;
+        }
+        if(door.footprint.type!=baked::ObjType::GotoMap||!door.known||!door.arrival||door.source_depth<=0||door.destination_depth<0||
             door.destination_depth>=door.source_depth||door.source==door.destination)continue;
         const auto back=directions.find({door.destination,door.source});
         if(back==directions.end())continue;

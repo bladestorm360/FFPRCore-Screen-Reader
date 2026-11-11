@@ -1,5 +1,43 @@
 # Floor and world exits, October 13, 2026
 
+**Ebot’s Rock source/focused/documentation Closed, November4:** twentieth guide
+uses actual current-room coral/chests/layout, the native22 threshold, active
+Strago first-feed check, correct keep/feed choices and full first/repeat Hidon
+completion. Fresh random warps have12 real outcomes; first entry stays
+deterministic. Normal routes label random attempts and retire on actual arrival
+without consuming the pad. No terrain/native object/other-room change, new hook
+or native getter call. Actual152 route/state assertions,27 pocket/layout cases,
+442 guide identities/current controller, role readers17/18/37 and all-six route/
+Magitek regressions pass. Five keys/all12 locales. Exact source/report/resource
+identities: broader_audit_20261104/ebot_completion.json.1117logical/1149physical;
+350V+186VI=536 pending. No Main DLL/install/game/probe/agent; combined release/
+delivery and natural gameplay remain required.
+[Topic](EBOTS_ROCK_GUIDANCE_20261104.md).
+
+**Magitek Factory source/focused/documentation Closed, November4:**27 exact
+Factory/Research identities reviewed. Eleven native ladder/conveyor links
+(ten manual/one automatic) restore missing lower/upper routes on396; no absent
+46/31 operation is granted on643. Exact22-object addition preserves all terrain,
+old objects/other rooms/initializers/19 story/five static guides. Normal same-floor
+manual directions now retain the planner's exact receipt beside the control;
+actual start and exact landing own completion. No new hook/native read/write/
+queue/search or VM design. Hidden passage397/PointIn11 already matches17,28.
+Actual11 arcs/11 approaches/50 assertions, all-six routing105 manual/84 directional
+and trap regressions pass. Stale long-warning fixture expectations corrected;
+actual concise warning policy retained. Source/semantic/canonical/docs/evidence:
+broader_audit_20261104/magitek_completion.json;
+[topic](MAGITEK_PASSAGES_20261104.md).1114logical/1146physical reviewed;
+350V+189VI=539 pending. No Main DLL/install/game/probe/agent. Combined release/
+delivery and natural gameplay remain required.
+
+November3 [Owzer audit correction](OWZERS_MANSION_20261103.md): enabled
+instantiated object-collider0 is a full wall, unlike terrain-grid None0. Exact
+GetCollisionRect/SetBoxCollision/Init/CanEnter evidence in all six binaries
+supports the current/remote/transport-specific correction. Partial2–5 and
+axis6–7 behavior, selectors and native grids are retained. Actual closed/open
+door cases, Chocobo/Owen and all-six transport fixtures pass. The combined
+native output and broader final audit checks remain pending.
+
 October26 [locked-door approach](LOCKED_DOORS_20261026.md): an Objects/Door row
 uses Interact even when a GotoMap shares its tile. The room's Transition remains
 blocked by the native lock, while an accessible Door can be examined without a
@@ -52,8 +90,8 @@ No tester logs/saves were accessed and no game was launched or probed.
 ## World exits and grouping
 
 World passability requires both the transportation grid and the native terrain
-permission. Native CheckOkList rejects out-of-range attributes. FF5's high raw
-values remain rejected; no guessed terrain normalization is applied. Transition
+permission. Native CheckOkList rejects out-of-range attributes. FFV's reviewed
+Walse terrain resolves through the native story-state conversions below. Transition
 goals need an actual GotoMap or step-on warp footprint. Empty/unenterable footprints
 stay empty, removing the former fallback to a decorative or blocked tile.
 Ordinary entrances are entered after legal landing/walking rather than flying over
@@ -102,6 +140,47 @@ vehicle pointers and immutable bake references. Navigation owns masks, floods,
 route distances, remote planning, grouping and category construction. The native
 owner never waits for work; request epochs cancel obsolete computation. Ordinary
 floods keep FIFO BFS; only nonzero shore seed costs need a priority queue.
+
+## FFV Walse terrain November 10
+
+The actual November 7 FFV log part 1 reports no goal cells for the Tower of Walse
+at (196,88) and Walse Meteorite at (204,84). The party at (195,87) later entered
+the tower manually. The game assets place GotoMap entity 64 to map 234 and the
+active meteorite script or door entity 48 to map 244 at those exact cells.
+
+The installed FFV misc bundle's MapFootAttribute record for map 1 resolves raw
+terrain 42 through 47. MapAssetLoader.CreateMapFootInfo at RVA 0x2A3EA0 applies
+the ranges via MapUtility.EnableRangeFlag at RVA 0x2F55E0. The meteor scene
+sc_e_0038_3 sets ScenarioFlag4 bit 222 and the tower scene sc_e_0476 sets bit
+223. Those bits are 990 and 991 in the copied scenario bank. The tower entrance
+changes from terrain 20 to water 16. The meteorite changes from 6 to 20.
+
+The owned route request resolves only the six Walse terrain IDs before the
+shared eligibility, walking, boarding and landing checks. FFV's
+TransportationAsyncTask at RVA 0x2AF800 replaces the collision cells for those
+IDs from the converted terrain's permission in each transportation group.
+The planner mirrors that rule for Walse and keeps all other transportation
+cells, native transition footprints and group prerequisites.
+The live edge guard retains the existing native collision check. The change
+uses the existing request paths and adds no hook. Other high FFV terrain IDs
+require separate source qualification. Gameplay and cumulative application
+timing still need confirmation.
+
+Asset SHA-256 values are `b8dfed01eb0d4c56b7af506671f1314cb33bf57d02e59dae0b37c0a0d56f197b`
+for the FFV misc bundle and `28671174335cdc3cfd3ef35eb10f8be1deaf73394d5beee297fc052dc2c43151`
+for Map_10010. The maintained FFV story-contact replay covers the logged
+walking pose and Wind Drake landings, both active meteorite phases, the sunk
+tower and unknown flag state.
+
+## Straight-line bearing for story-gated targets
+
+The current entity announcement adds the approximate geometric distance and
+bearing to the existing Story gated note, including across a looping map's
+seam. Entity browsing and K or P use the same formatter. A blocked explicit
+directions request can report the same bearing. Other floors keep their floor
+label because their local coordinate systems have separate origins. The
+independent Hide story-gated destinations option hides those rows when enabled.
+The bearing is informational and never becomes a route.
 
 ## Offline coverage and explicit limits
 
@@ -281,8 +360,47 @@ bundle-overwrite fault was found in the fresh extraction.
 The shared goal builder previously merged sibling entrances to the same floor/arrival.
 Explicitly selected transitions now retain their own x/y, including multi-cell trigger
 footprints. Eligibility distance, browse and explicit planning use that same point;
-optional exit grouping selects its representative before planning. No unselected sibling
-can rescue an invalid or unreachable selected tile. Native terrain/layer, story state,
+optional exit grouping selects its representative before planning. The FFIV exception
+below uses a reachable entrance only when native arrivals are identical. Native terrain/layer, story state,
 vehicles, interaction facing and cross-floor transition rules remain in effect.
 [All-six evidence and Cornelia replay](BASELINE_FIXES_2026_10_16.md#exact-transition-goals).
 This supersedes older nearby-arc goal-union descriptions; bakes are unchanged.
+
+## November 10 FFIV directions while flying
+
+An explicit spoken directions request to a selected target on the current
+world map uses the live airship identity. The first route may finish after
+the ship has moved. For an ordinary flight and landing route, the same
+navigation worker can then update the flight leg from the new tile using
+the owned terrain and gate rules. The selected landing and final foot
+approach are retained. The adjustment is attempted once and limited to
+8,192 expansions. It shares the original request's cancellation epoch.
+
+If movement continues through that publication or there is no qualified
+flight leg to update, the response is an explicitly straight-line bearing.
+It names the planned landing when available and carries no movement route.
+A map or vehicle change retires that response. The native owner reads only
+the current pose and vehicle and formats the bearing. Both path searches
+and full route formatting stay on the worker. This slice covers FFIV manual
+directions on the current world map. See the [scope and replay evidence](MAP_AUDIT_FOLLOWUPS_20261028.md#november-10-ffiv-directions-during-airship-movement).
+
+## November 10 FFIV world entrances and remote returns
+
+For an inaccessible ordinary FFIV world entrance, the owned route worker
+can finish at a reachable entrance to the same map and unique native
+PointIn. The physical rows and existing world exit grouping still use
+their original identities. Directions, browse and autowalk use the same
+proved route endpoint. Routes into different arrival positions keep their
+own terrain and cross-floor handoffs.
+
+On foot, a proved ground route takes priority over boarding a parked FFIV
+airship. A new boarding route needs actual flight before landing. A player
+already aboard may land on the current tile where the native rules allow it.
+
+An indoor remote exit that returns to the occupied floor is suppressed
+when its source floor has just one known native landing on the occupied
+floor. Compare layer and tile. Distinct or uncertain landings remain
+selectable even with exit grouping on. The owned projection marks a redundant
+scripted return and the scanner skips it before resolving names. Raw scripted
+travel records and all native routing edges remain available.
+[Scope and evidence](MAP_AUDIT_FOLLOWUPS_20261028.md#november-10-ffiv-world-entrance-directions-and-remote-returns).

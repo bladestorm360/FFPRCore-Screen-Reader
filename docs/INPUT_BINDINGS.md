@@ -1,5 +1,109 @@
 # Input bindings
 
+**Keyboard remapping source/focused/documentation Closed, November4:** existing
+per-game catalog/editor now checks new gameplay assignments against current
+native keys/modifiers, preserves rejected values, and uses the effective
+recovery/capture-cancel keys. Separate custom navigation profiles and inactive-
+profile conflicts pass; existing default sharing/context precedence is retained.
+Five battle-only party slots/native2/3, text/focus/capture/controller independence
+and all ten native input paths pass. Held remapped keys stay owned through
+modifier/context handoff until release. No new hook, worker or per-frame native
+configuration read. Exact all-six native evidence,109 key mappings,8403 names/
+zero missing,43 reader/chord assertions and all five actual input/settings targets
+pass. Eight keys/all12 locales. Combined release/install/gameplay pending; exact
+broader_audit_20261104/keyboard_completion.json. Audit remains1117logical/
+1149physical,350V+186VI=536 pending. Return to the finite remaining map audit.
+[Topic](re/KEYBOARD_REMAPPING_20261104.md).
+
+November3 [Narshe chase](re/NARSHE_CHASE_GUIDANCE_20261103.md): full native room/chest/pursuit/
+motionless ledge wait/Mog rescue guide, including actual northern mine floors.
+19th guide within32; actual16 assertions/11 continuations/current+old models/
+controller pass.43 discoveries resolved,1009logical/1041physical,644 pending.
+Four keys/all12 languages; earlier defense/light/gates and old guides preserved.
+Source/focused/documentation Closed; combined delivery/gameplay pending.
+
+November3 [Narshe party locks](re/NARSHE_PARTY_LOCKS_20261103.md): source/focused/documentation Closed.
+Six doors require active Locke, with reachable fronts and manual unlocking;
+opened receipts remain passable without him. Reader18/six-door93 and current
+FFI/FFIII key regressions pass. No native writes/clone/hook or new puzzle recipe.
+Combined delivery/gameplay pending; other43 Narshe interactions remain required.
+
+November3 [Floating Continent](re/FLOATING_CONTINENT_GUIDANCE_20261103.md):
+use existing Shift+G/controller guide after each operation/battle; Ctrl+G stops.
+The guide includes both airship choices and native Shadow waiting, with no
+invented timer or automatic input. Minimal/Verbose follows the shared setting.
+Source/focused Closed; not installed yet.
+
+November3 [puzzle verbosity](re/PUZZLE_VERBOSITY_20261103.md): F8 > Navigation >
+Puzzle guide verbosity defaults to Minimal. Shift+G gives the current directions
+and necessary action without activation/step announcements. Verbose restores
+that metadata. Trap/event route notices are Trap required / Event required.
+Controls and essential timing/choice instructions remain unchanged. Source/focused/documentation Closed; all six actual-consumer targets pass.
+Combined delivery remains pending.
+
+November3UTC [Cultists' Tower](re/CULTISTS_TOWER_20261103.md): use the existing
+Shift+G/controller guide after each switch, chest and battle. It follows the
+complete descent to the entrance; Ctrl+G stops and clears completion. No new
+binding, automatic input or special party requirement. Not installed yet.
+
+November3UTC [Darill's Tomb](re/DARILLS_TOMB_20261103.md): existing Shift+G/
+controller guide follows the complete journey. Repeat after each native action.
+During the epitaph dialogue/choices it repeats Yes, then options4/1/2/1;
+native menu focus remains unchanged. Ctrl+G stops and clears pending output.
+Source/focused Closed; final combined delivery pending.
+
+November3UTC [Ancient Castle](re/ANCIENT_CASTLE_20261103.md): existing Shift+G/
+controller guidance continues through both statue interactions and the hidden
+switch. Request again after each native scene. Native completion receipts own
+advancement; no new binding or automatic input. Source/focused Closed; queued
+for the final combined delivery.
+
+November3UTC [ordinary Phantom Train](re/PHANTOM_TRAIN_JOURNEY_20261103.md):
+the existing Shift+G/controller command follows boarding through the final
+conversation. Request again after native scenes, jumps, battle and each lever
+operation; detachment requires two native lever phases with a return between.
+Stop binding is unchanged. Source/focused Closed; not installed yet.
+
+November3UTC [FFVI Zone Eater crossings](re/ZONE_EATER_CROSSINGS_20261103.md):
+use the existing Shift+G/controller guide command after each manual jump or
+switch. If a bridge guard knocks the party down, request again for the recovery
+switch and return. The later guide continues through the stepping stones and
+joining dialogue. Ctrl+G/controller stop remains unchanged. No new controls
+or automatic movement. Source/focused Closed; not installed yet.
+
+November3UTC [FFVI roof guide](re/ZONE_EATER_ROOF_20261103.md): the first Shift+G
+(existing controller guide command) previews the next cardinal leg. Request
+again when ready, then wait for the short Go cue. Repeat from each safe area;
+Ctrl+G/controller stop cancels. Confirming readiness during the ceiling animation
+changes only pending mod intent; it does not read the actor or start movement.
+Only that pending VI request owns the extra blocked-scene repeat context.
+There is no held-key repeat or new binding. Source/focused qualification is
+Closed; the combined new guide is not installed yet.
+
+November1 FFV Library: Shift+G starts/repeats the state-based guide on272–283;
+Ctrl+G stops it, including during a blocked native scene. An owned instruction
+can be repeated in a native menu/dialogue without rescanning the shelves. The
+ordinary engine-room guide remains available on256. Source/focused
+qualification is complete; no Library DLL installed. See
+[Library ownership and controls](re/FF5_PUZZLE_GUIDES_20261101.md#production-ownership-controls-and-extension-contract).
+
+October31 [guide ownership](re/SHIFTG_PUZZLE_AUDIT_20261030.md): start a static
+guide on the ready field, then Shift+G can repeat its current instruction during
+a native choice/dialogue without route or puzzle-state capture. Ctrl+G retires
+an active guide during dialogue, movies or loading. Controller mod mode RB/LB
+provides repeat/stop in the qualified choice context; a loading/movie context
+offers stop only. Existing battle/menu controller commands remain available.
+Opera's native performance qualification remains separate. Remaps, typing/focus
+guards and physical-key release ownership still apply. Source/offline verified;
+combined delivery and gameplay remain pending.
+
+October30 [Opera guide](re/SHIFTG_PUZZLE_AUDIT_20261030.md): Shift+G repeats the
+current lyric answer or action cue during the native performance; Ctrl+G stops
+the guide. Saved remaps still apply. Controller mod mode uses RB/LB for guide
+next/stop even during lyrics; native choice arrows and confirm remain game-owned.
+Only these information commands cross the scripted-event guard. This source/
+focused-offline slice awaits combined delivery and gameplay confirmation.
+
 October28: [FFIII turn-order investigation](re/TURN_ORDER_DISPLAY_20261028.md)
 found no rendered upcoming-actor list. The requested conditional Shift+T binding
 is inapplicable and has not been added.
@@ -15,8 +119,9 @@ native single/all switching (left/right or displayed A/D) announces All allies,
 then the focused character when returning to single. I on the positive FFIII
 event-key-item owner reads only its current description; Autodetail controls
 automatic description. Loading/fades still block review. No new key was assigned.
-Speech contains Enemy critical status, default off, an independent opt-in for
-hidden enemy low-HP condition announcements; party Critical and critical hits stay.
+The November 6 [enemy status correction](re/ENEMY_STATUS.md) retires the
+hidden enemy Critical option. The optional enemy status setting controls
+confirmed visible transformations. KO remains independent.
 
 October25: [displayed controls](re/BATTLE_GEAR_CONTROLS_20261025.md) includes
 standalone hints such as battle Tab:Change Equipment, alongside the current
@@ -86,8 +191,14 @@ asynchronous I/O service. `bindings_check`, `transition_input_check`, and `modal
 exercise production dispatch/editor code; native-reader fixtures retain their narrower
 fake binding boundary. All-six name checks and gameplay checks remain distinct.
 
-Battle: T reads the active turn, H the active member's rendered statistics, and 1–9 the
-visible party rows. Enemy HP's optional Numbers/Percentage/Hidden modes remain on F5.
+Battle: T reads the ready party character (or an executing party character when
+no command menu owns input), H the active member's rendered statistics, and
+`/`, `.`, `,`, `M`, `N` read party slots 1–5 respectively. In Items, Magic, and
+targeting, a hidden slot is read from the ordinary party row's live battle data.
+FFIV's fifth slot is supported. Outside battle,
+punctuation retains waypoint controls and M reports the map. Native keyboard
+L/R2/3 and shop1–9 comparisons retain their game/context ownership. Enemy HP's
+optional Numbers/Percentage/Hidden modes remain on F5.
 H and party review include visible conditions outside targeting: rendered red HP
 as Critical, gray zero as KO, completed body forms, applied tints and active visual
 effects. Native text/icons own the target condition column. Repeated requests are
@@ -109,6 +220,12 @@ keys and the interval before the buffer is ready. Ordinary confirm advances norm
 Controller mod mode: West (X/Square) reads details; shoulders or D-pad Up/Down review lines, and D-pad
 Left/Right goes first/last. Status retains
 its grouped arrow/Shift/Ctrl review and native page controls. No keyboard mod mode exists.
+
+Custom controls, November2 source: F8 → Navigation audio → Custom sounds.
+When on, Custom sound settings contains each sound's enable/default fallback,
+volume and preview. Periodic sounds allow200–5000ms with left/right; Confirm
+restores Original timing. Wall Loop Off reveals its ping interval. This feature
+is not installed yet; [status and behavior](re/CUSTOM_SOUND_CONTROLS_20261102.md).
 
 F8 settings opens on the field: select a category and then a setting. Escape/B returns to
 categories and closes from the root; F8 closes directly. F1/F3 read actual native changes
@@ -401,7 +518,8 @@ F8/controller settings now begin Speech with Game speech (default on), and Navig
 with Navigation audio master (default on), HRTF (default off), Soundscape (default off),
 then its nested settings page. The latter has master volume, distance and all eight entity
 cue toggle/volume/preview groups. Sound previews covers the other ten effects, conditional
-on each game's existing EXP/landing support. Back restores immediate parent focus.
+on each game's existing EXP/landing support. Deliberate previews play at the saved
+volume with either sound switch off. Back restores immediate parent focus.
 The speech-only mod menu has explicit central `say_menu` ingress and remains audible when
 gameplay speech is muted. No backend bypass, keyboard mode or diagnostic binding was added.
 [Implementation/evidence](re/SOUNDSCAPE.md), [pending user checks](TESTING.md).
@@ -434,7 +552,8 @@ neutral. Defaults, saved remaps, layout choice and native physical input are unc
 This is a concrete input bug, separate from the unresolved intermittent battle stall.
 
 
-October25 [party shortcut repair](re/BATTLE_TITLE_PARTY_20261025.md): BattleParty.Slot1..9
+Historical October25 [party shortcut repair](re/BATTLE_TITLE_PARTY_20261025.md),
+superseded by the November2 five-key battle-only mapping above: BattleParty.Slot1..9
 retain default1..9 and use independent catalog entries even when their descriptions
 match. The first legacy ID/remap is preserved; later different default chords get
 a deterministic suffix. No settings reset; native controls and shop bindings retain

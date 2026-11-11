@@ -1,5 +1,10 @@
 # Soundscape implementation — October 15, 2026
 
+November2 source addition: [custom controls](CUSTOM_SOUND_CONTROLS_20261102.md)
+retain generated defaults and add per-cue enable/volume,200–5000ms periodic
+timing, plus wall loop or discrete pings. Existing renderer/device/thread
+ownership and limits remain. Source/offline/delivery status is in that topic.
+
 October22 implementation: cue_runtime.cpp::Player::start applies an additional2x
 wall-bump gain only after HRTF actually activates. Both original and custom PCM take
 the same cue-specific adjustment; other cues, stereo/fallback, existing HRTF master,
@@ -234,12 +239,30 @@ text. `modal_input_check` checks the master is the first Speech row across all s
 Fixture linkage was updated in `title_prompt_check`. These checks were added but not run by
 the bounded implementation handoff; Sol owns review and canonical validation.
 
+## Manual previews and the navigation audio master
+
+The November 10 FFV settings had Navigation audio off. Current and rotated
+game logs show that SDL opened its playback device and HRTF loopback
+initialized. The owner confirmed normal audio returned after enabling the
+master. The other titles use the same mixer and cue producer, with their own
+saved switches.
+
+A manual Settings preview plays at the saved volume with the master and
+individual cue switch in either state. The audio worker gives it a dedicated
+voice. A master change clears queued gameplay PCM and stops automatic voices.
+While muted, the worker only submits a selected preview and lets its remaining
+PCM drain. Field snapshot retirement and epoch checks keep their existing
+ownership and bounds. The all-six menu fixture checks both preview actions.
+The mixer fixture checks nonzero preview PCM, automatic cue suppression and
+draining under the master-off state. Physical playback of the updated preview
+remains a gameplay check.
+
 ## Audio menu translations and modal fixture — October 15, 2026
 
 The common text catalog now covers the Navigation audio master, HRTF, Soundscape switch and
 settings page, shared cue labels, per-cue volume/preview labels, and range/help text in all
-12 locales. Preview help says previews use the current cue volume even when that cue is off,
-while the Navigation audio master still applies. `modal_input_check` now links the real
+12 locales. At this checkpoint the master also applied to previews. The November 10
+preview exception above supersedes that behavior. `modal_input_check` links the real
 cue definitions and records preview dispatches through a fixture; it checks the four root
 categories and Close Menu, audio row order, nested cue controls, distance bounds/steps and
 parent focus after Back. JSON/locale checks and `git diff --check` passed. No build or test
@@ -337,7 +360,7 @@ footstep, wall and landing lifetimes. Route producers never consulted Soundscape
 actual-producer checks now exercise soundscape with directions, beacon-only and combined
 beacon/directions. Ctrl+Apostrophe toggles the same persistent Soundscape master as F8
 in both keyboard layouts, without changing navigation preferences. The existing
-Navigation audio master continues to gate every mod cue.
+At this checkpoint, Navigation audio master gated every mod cue.
 
 Watercraft eligibility now reads current native TransportationInfo rather than the
 boarding-event cache, including a loaded boarded save. Extracted transportation masters

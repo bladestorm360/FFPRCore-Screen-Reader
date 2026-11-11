@@ -1,0 +1,94 @@
+{
+  "scope_tag": "ff4_ContinuationSupplement",
+  "candidates": [
+    {
+      "submap": "Map_20051_9",
+      "maps": [
+        53
+      ],
+      "area_ids": [
+        9
+      ],
+      "area_names_en": [
+        "Fabul Castle"
+      ],
+      "entity": 7,
+      "raw": "ヤンの奥さん",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "delegated physical/state mechanism;explicit triage"
+      ],
+      "cell": [
+        0,
+        12,
+        5
+      ],
+      "action": 2,
+      "script": "sc_npc_20051_9_1",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    }
+  ],
+  "source_sha256": {
+    "objects": "9581c3295f405afc639843b64a74cd73855f8df85bec239ee3e3f0df4caa2c26",
+    "scripts": "298676492a7b109e5b1b42dea5f87dec06a3bb800378e0ef50ab0e2c74e925cb",
+    "maps": "8e7a4f944f10197fd5ee2c6097d8750b9477446be7abd813251f1d499dc862bb",
+    "script_master": "b2a2ba529b0e2c6658ec3ee4b070454d38bf91c8c275423fa8de75c541f613a5",
+    "areas": "907142f0c07d4dcea764767b7afceddc126882967e4a3e3acff0e32837d61e0c",
+    "english_names": "7869f0ebd8fe7726dc76391e84e5b5755f086f24143ccb8536507f63057c0fde"
+  },
+  "source_script_hashes": {
+    "Map_20051_9/sc_npc_20051_9_1": "1261969b019e1c32b06d51c1977fbe7ce3878d7028870646257c8b5d97fbdfbc",
+    "Map_20051_9/sc_e_0111": "61d0f63b58c06c9017371d248a2a1fd397f4d25be67b0c3f2f9d37f0a184db41",
+    "Map_20051_9/sc_e_0113": "0dcd6bb5bda9cf572823ca456f376aa9888ea05bd57c544c2f522cf7503e7b2d"
+  },
+  "actors": [
+    {
+      "room": "Map_20051_9",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "BottomObject",
+        15,
+        8
+      ]
+    },
+    {
+      "room": "Map_20051_9",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        15,
+        8
+      ]
+    },
+    {
+      "room": "Map_20051_9",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 14,
+      "type": "NPC",
+      "raw": "ヤンの奥さん",
+      "action": 2,
+      "script_id": 1577,
+      "cell": [
+        "BottomObject",
+        12,
+        6
+      ]
+    }
+  ],
+  "unresolved_script_names": []
+}

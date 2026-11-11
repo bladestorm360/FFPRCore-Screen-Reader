@@ -13,6 +13,9 @@ const DWORD owner = GetCurrentThreadId();
 std::atomic<int> wrong_owner{0};
 int failures = 0;
 bool unresolved_flag_field=false;
+bool missing_word_field=false,missing_word_user=false;
+bool missing_control=false,bad_control=false,hidden_control=false,hidden_parent=false,dead_control=false;
+int native_control_reads=0,current_map=256;
 void native() { if (GetCurrentThreadId() != owner) ++wrong_owner; }
 void expect(bool ok, const char* label) { if (!ok) { ++failures; std::printf("FAIL %s\n", label); } }
 template<class T, size_t N> struct Array {
@@ -28,17 +31,42 @@ Array<int32_t, 8> area,local;
 Packed scenario_flags{{}, &scenario}, treasure_flags{{}, &treasure};
 Storage storage{{}, &scenario_flags, &treasure_flags, &global, &area, &local};
 using List=std::vector<void*>;
-struct User { uint8_t padding[0x7c]{}; int area_id=101;void* corps=nullptr;void* owned=nullptr; } user;
-struct MiniMember { int id=0;void* parameter=nullptr; };
+struct User { uint8_t padding[0x7c]{}; int area_id=101;void* corps=nullptr;void* owned=nullptr;void* words=nullptr;void* normal_items=nullptr; } user;
+struct WordList {uintptr_t header[2]{};void* items=nullptr;int size=0;} word_list;
+Array<int32_t,32> word_array;
+static_assert(offsetof(User,words)==0x90);
+struct MiniMember { int id=0;void* parameter=nullptr;void* save=reinterpret_cast<void*>(uintptr_t(1));int job=1;bool enabled=true;int status=1; };
+int locke_status_reads=0;bool missing_locke_method=false;
+int locke_status(void*p,const void*){native();++locke_status_reads;return static_cast<MiniMember*>(p)->status;}
+struct KeyItem {int item=14,content=15,quantity=1;void* save=reinterpret_cast<void*>(uintptr_t(1));};
+struct KeyDictionary {std::map<int,void*> values;int size_override=-1;};
+bool bad_key_type=false,missing_key_field=false,missing_key_method=false;
+int key_lookups=0,key_lookup_id=-1,key_getters=0,job_getters=0;
+int key_count(void*p,const void*){native();++key_getters;return static_cast<KeyItem*>(p)->quantity;}
+int key_item_id(void*p,const void*){native();++key_getters;return static_cast<KeyItem*>(p)->item;}
+int key_content_id(void*p,const void*){native();++key_getters;return static_cast<KeyItem*>(p)->content;}
+int key_job(void*p,const void*){native();++job_getters;return static_cast<MiniMember*>(p)->job;}
+bool key_enabled(void*p,const void*){native();return static_cast<MiniMember*>(p)->enabled;}
 struct MiniParameter { void* conditions=nullptr; };
 struct MiniCondition { int type=0; };
+struct ControlProperty {int id=13;void* name=nullptr;} control_property;
+struct Control {ControlProperty* property=&control_property;bool own_hidden=false;} control;
+List controls{&control};
+struct Controller {void* entities=&controls;} controller;
+struct Handle {void* controller=&fixture::controller;} handle;
+std::wstring control_name=L"スイッチ";
+void* control_entity(void*,int id,const void*){native();++native_control_reads;if(missing_control)return nullptr;
+ for(void* row:controls){auto* actor=static_cast<Control*>(row);if(actor&&actor->property&&actor->property->id==id)return actor;}return nullptr;}
+#ifdef FFPR_LIBRARY_OWNER_CHECK
+std::map<events::Kind,std::vector<events::Handler>> event_handlers;
+#endif
 game::Id running_game=game::Id::FF3;
 int mini_id(void*p,const void*){native();return p?static_cast<MiniMember*>(p)->id:0;}
 int mini_type(void*p,const void*){native();return p?static_cast<MiniCondition*>(p)->type:0;}
 void* current = &storage;
 json::Value records;
 void* instance(const void*) { native(); return current; }
-void* user_instance(const void*) { native(); return &user; }
+void* user_instance(const void*) { native(); return missing_word_user&&running_game==game::Id::FF2?nullptr:&user; }
 std::string read(const std::string& path) { std::ifstream f(path, std::ios::binary); return {std::istreambuf_iterator<char>(f), {}}; }
 }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
@@ -49,11 +77,20 @@ Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 int32_t Field::get() {
     fixture::native();
     if(fixture::unresolved_flag_field && (std::strcmp(name,"scenario")==0 || std::strcmp(name,"bits")==0 || std::strcmp(name,"length")==0)) return -1;
+    if(std::strcmp(name,"fieldController")==0)return offsetof(fixture::Handle,controller);
+    if(std::strcmp(name,"entityList")==0)return offsetof(fixture::Controller,entities);
+    if(std::strcmp(name,"entity_id")==0)return offsetof(fixture::ControlProperty,id);
+    if(std::strcmp(name,"name")==0)return offsetof(fixture::ControlProperty,name);
     if(std::strcmp(cls.name,"UserDataManager")==0){
+        if(std::strcmp(name,"normalOwnedItems")==0)return fixture::missing_key_field?-1:offsetof(fixture::User,normal_items);
+        if(std::strcmp(name,"<OwnedKeyWaordList>k__BackingField")==0)return fixture::missing_word_field?-1:offsetof(fixture::User,words);
         if(std::strcmp(name,"<corpsList>k__BackingField")==0)return offsetof(fixture::User,corps);
         if(std::strcmp(name,"<OwnedCharacterList>k__BackingField")==0)return offsetof(fixture::User,owned);
     }
     if(std::strcmp(cls.name,"OwnedCharacterData")==0&&std::strcmp(name,"parameter")==0)return offsetof(fixture::MiniMember,parameter);
+    if(std::strcmp(cls.name,"OwnedCharacterData")==0&&std::strcmp(name,"saveData")==0)return offsetof(fixture::MiniMember,save);
+    if(std::strcmp(cls.name,"Corps")==0&&std::strcmp(name,"saveData")==0)return offsetof(fixture::MiniMember,save);
+    if(std::strcmp(cls.name,"OwnedItemData")==0&&std::strcmp(name,"saveData")==0)return offsetof(fixture::KeyItem,save);
     if(std::strcmp(cls.name,"CharacterParameterBase")==0&&std::strcmp(name,"<CurrentConditionList>k__BackingField")==0)return offsetof(fixture::MiniParameter,conditions);
     if (std::strcmp(cls.name,"DataStorage.Flags") == 0) return std::strcmp(name,"bits") == 0 ? 0x10 : 0x18;
     if (std::strcmp(cls.name,"DataStorage") == 0) {
@@ -67,14 +104,30 @@ int32_t Field::get() {
     if (std::strcmp(cls.name,"UserDataManager")==0&&std::strcmp(name,"<CurrentAreaId>k__BackingField")==0)return 0x7c;
     return -1;
 }
-void* Method::ptr() { fixture::native();if(std::strcmp(name,"get_Id")==0||std::strcmp(name,"get_CharacterId")==0)return reinterpret_cast<void*>(&fixture::mini_id);if(std::strcmp(name,"get_ConditionType")==0)return reinterpret_cast<void*>(&fixture::mini_type); return std::strcmp(name,"get_Instance") == 0 ? reinterpret_cast<void*>(&fixture::instance) : std::strcmp(name,"Instance")==0 ? reinterpret_cast<void*>(&fixture::user_instance) : nullptr; }
+void* Method::ptr() { fixture::native();
+    if(std::strcmp(name,"get_characterStatusId")==0)return fixture::missing_locke_method?nullptr:reinterpret_cast<void*>(&fixture::locke_status);
+    if(std::strcmp(name,"get_Count")==0)return fixture::missing_key_method?nullptr:reinterpret_cast<void*>(&fixture::key_count);
+    if(std::strcmp(name,"get_ItemId")==0)return reinterpret_cast<void*>(&fixture::key_item_id);
+    if(std::strcmp(name,"get_ContentId")==0)return reinterpret_cast<void*>(&fixture::key_content_id);
+    if(std::strcmp(name,"get_JobId")==0)return reinterpret_cast<void*>(&fixture::key_job);
+    if(std::strcmp(name,"get_IsEnableCorps")==0)return reinterpret_cast<void*>(&fixture::key_enabled);
+    if(std::strcmp(name,"GetFieldEntity")==0)return reinterpret_cast<void*>(&fixture::control_entity);if(std::strcmp(name,"get_Id")==0||std::strcmp(name,"get_CharacterId")==0)return reinterpret_cast<void*>(&fixture::mini_id);if(std::strcmp(name,"get_ConditionType")==0)return reinterpret_cast<void*>(&fixture::mini_type); return std::strcmp(name,"get_Instance") == 0 ? reinterpret_cast<void*>(&fixture::instance) : std::strcmp(name,"Instance")==0 ? reinterpret_cast<void*>(&fixture::user_instance) : nullptr; }
 il2cpp::Method* Method::get() { fixture::native(); return reinterpret_cast<il2cpp::Method*>(ptr()); }
-std::wstring str(void*) { fixture::native(); return {}; }
+bool Class::is(void*p){fixture::native();return p&&!fixture::bad_control&&!(std::strcmp(name,"OwnedItemData")==0&&fixture::bad_key_type);}
+std::wstring str(void*p) { fixture::native(); return p?*static_cast<std::wstring*>(p):L""; }
+std::wstring rd_str_bounded(void*p,Field& f,size_t cap) {fixture::native();const auto value=str(il2cpp::read_field<void*>(p,f.get()));return value.size()<=cap?value:L"";}
 void call_failed_note(const char*) { fixture::expect(false,"native getter must not fault"); }
 }
 namespace game {Id current(){return fixture::running_game;}}
 namespace unity {
-int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}
+int dict_count(void*p){fixture::native();if(!p)return 0;const auto& d=*static_cast<fixture::KeyDictionary*>(p);return d.size_override>=0?d.size_override:static_cast<int>(d.values.size());}
+void* dict_reference(void*p,int key){fixture::native();++fixture::key_lookups;fixture::key_lookup_id=key;if(!p)return nullptr;const auto& d=*static_cast<fixture::KeyDictionary*>(p);const auto it=d.values.find(key);return it==d.values.end()?nullptr:it->second;}
+void* game_object(void*p){fixture::native();return p;}
+void* transform(void*p){fixture::native();return p;}
+void* parent(void*p){fixture::native();return p;}
+bool active_self(void*p){fixture::native();return p&&!fixture::hidden_control&&!static_cast<fixture::Control*>(p)->own_hidden;}
+bool active_in_hierarchy(void*){fixture::native();return !fixture::hidden_parent;}
+int list_count(void*p){fixture::native();if(p==&fixture::word_list)return fixture::word_list.size;return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}
 void* list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 int array_length(void* array) { fixture::native(); return il2cpp::read_field<int32_t>(array, kArrayLengthOff); }
 }
@@ -87,15 +140,43 @@ namespace field::scanner { void invalidate_map() {} }
 namespace field::r {
 ref::Class kFieldController{"Last.Map", "FieldController"};
 ref::Field fMapManager{kFieldController, "mapManager"};
+ref::Field fFieldController{kFieldController,"fieldController"},fEntityList{kFieldController,"entityList"};
+ref::Field fPropEntityId{kFieldController,"entity_id"},fPropName{kFieldController,"name"};
 ref::Class kUserDataManager{"Last.Management", "UserDataManager"};
 ref::Method mUserDataInstance{kUserDataManager, "Instance", 0};
 }
-namespace events { void on(Kind, Handler) {} }
+namespace field {
+int current_map_id(){fixture::native();return fixture::current_map;}
+void* map_handle(){fixture::native();return &fixture::handle;}
+bool live_entity(void*p){fixture::native();return p&&!fixture::dead_control;}
+void* entity_property(void*p){fixture::native();return p?static_cast<fixture::Control*>(p)->property:nullptr;}
+}
+namespace events { void on(Kind kind, Handler handler) {
+#ifdef FFPR_LIBRARY_OWNER_CHECK
+ fixture::event_handlers[kind].push_back(std::move(handler));
+#endif
+} }
 namespace data { const json::Value& game_json(const char*) { return fixture::records; } }
 int main()
 {
     using namespace fixture;
     using namespace field;
+    running_game=game::Id::FF2;word_list.items=&word_array;user.words=&word_list;
+    expect(map_state::keyword_learned(927)==false,"initialized empty native word list proves the keyword is not learned");
+    word_array.values[0]=926;word_array.values[1]=927;word_array.values[2]=931;word_list.size=3;
+    expect(map_state::keyword_learned(927)==true&&map_state::keyword_learned(931)==true&&map_state::keyword_learned(928)==false,
+        "native-shaped learned-word storage resolves exact content IDs, not menu indices");
+    missing_word_user=true;expect(!map_state::keyword_learned(927).has_value(),"missing native user is unknown");missing_word_user=false;
+    missing_word_field=true;expect(!map_state::keyword_learned(927).has_value(),"unresolved typed word field is unknown");missing_word_field=false;
+    user.words=nullptr;expect(!map_state::keyword_learned(927).has_value(),"missing word list is unknown");user.words=&word_list;
+    word_list.items=nullptr;expect(!map_state::keyword_learned(927).has_value(),"missing word backing storage is unknown");word_list.items=&word_array;
+    word_list.size=-1;expect(!map_state::keyword_learned(927).has_value(),"negative word size is rejected");
+    word_list.size=33;expect(!map_state::keyword_learned(927).has_value(),"over-budget word size is rejected before walking it");word_list.size=3;
+    word_array.length=2;expect(!map_state::keyword_learned(927).has_value(),"short backing array cannot certify a learned word");
+    word_array.length=129;expect(!map_state::keyword_learned(927).has_value(),"over-budget capacity is unknown");word_array.length=32;
+    expect(!map_state::keyword_learned(0).has_value(),"invalid keyword ID is rejected");
+    for(auto id:{game::Id::FF1,game::Id::FF3,game::Id::FF4,game::Id::FF5,game::Id::FF6}){running_game=id;expect(!map_state::keyword_learned(927).has_value(),"other games do not query FFII word storage");}
+    running_game=game::Id::FF3;
     // Recovered CheckChild checks all occupied active corps slots, not only the
     // leader or every character ever owned. No interpreter state is written.
     MiniCondition mini{401};List mini_conditions{&mini},normal_conditions;
@@ -106,7 +187,17 @@ int main()
     small.conditions=nullptr;expect(!map_state::snapshot().party_mini,"uninitialized condition storage stays unknown");small.conditions=&mini_conditions;
     mini_conditions={nullptr};expect(!map_state::snapshot().party_mini,"null condition entries stay unknown");mini_conditions={&mini};
     active={nullptr};expect(!map_state::snapshot().party_mini,"null corps entries stay unknown");active={&a,&b};
-    b.parameter=&normal;expect(map_state::snapshot().party_mini==0,"one non-Mini active member blocks the Tozus native predicate");b.parameter=&small;
+    expect(map_state::party_condition_state(401)==1&&map_state::party_condition_state(402)==0,"explicit condition reader distinguishes all Mini from no Frog");
+    b.parameter=&normal;expect(map_state::snapshot().party_mini==0,"one non-Mini active member blocks the Tozus native predicate");
+    expect(map_state::party_condition_state(401)==2,"mixed Mini is distinct from all and none");b.parameter=&small;
+    MiniCondition frog{402};List frog_conditions{&frog};MiniParameter transformed{&frog_conditions};
+    a.parameter=b.parameter=&transformed;
+    expect(map_state::party_condition_state(402)==1&&map_state::party_condition_state(401)==0,"all Frog does not borrow the Mini condition");
+    b.parameter=&normal;expect(map_state::party_condition_state(402)==2,"one normal member cannot certify all-party Frog removal");
+    a.parameter=&normal;expect(map_state::party_condition_state(402)==0,"all normal members certify no Frog");
+    a.parameter=b.parameter=&small;
+    expect(!map_state::party_condition_state(403),"unreviewed condition IDs cannot use the FFIII guide reader");
+    small.conditions=nullptr;expect(!map_state::party_condition_state(401),"unknown native condition storage cannot complete a transformation step");small.conditions=&mini_conditions;
     auto sig1=map_state::Resolver().signature();b.parameter=&normal;auto sig2=map_state::Resolver().signature();expect(sig1!=sig2,"party-form changes invalidate route state signatures without a story-flag write");b.parameter=&small;
     owned.erase(owned.begin());expect(!map_state::snapshot().party_mini,"missing active character data remains unknown");owned.insert(owned.begin(),&a);
     active.assign(10,&a);expect(!map_state::snapshot().party_mini,"over-bound corps rejected before reading members");active={&a,&b};
@@ -129,6 +220,21 @@ int main()
     scenario.length=31;expect(!map_state::scenario_flag(192),"short backing array is unknown");scenario.length=128;
     scenario_flags.length=1000;expect(!map_state::scenario_flag(192),"invalid bank length is unknown");scenario_flags.length=1024;
     unresolved_flag_field=true;expect(!map_state::scenario_flag(192),"unresolved native fields are unknown");unresolved_flag_field=false;
+    expect(map_state::local_value(318,1)==21,"single local value retains exact current storage map");
+    expect(!map_state::local_value(386,1)&&!map_state::local_value(318,-1)&&!map_state::local_value(318,8),"foreign map and invalid local index remain unknown");
+    local.length=7;expect(!map_state::local_value(318,1),"malformed local array cannot certify a clock result");local.length=8;
+    current=nullptr;expect(!map_state::local_value(318,1),"missing local storage remains unknown");current=&storage;
+    running_game=game::Id::FF5;control_property.name=&control_name;
+    expect(map_state::entity_hidden(256,13,control_name)==false,"live visible ship control is pending");
+    hidden_control=true;expect(map_state::entity_hidden(256,13,control_name)==true,"native Hide on retained exact actor certifies the flagless control");
+    hidden_parent=true;expect(!map_state::entity_hidden(256,13,control_name),"a hidden parent cannot imitate a completed control");hidden_parent=false;
+    expect(!map_state::entity_hidden(255,13,control_name)&&!map_state::entity_hidden(256,0,control_name)&&!map_state::entity_hidden(256,13,L"other"),"foreign floor, special zero identity and raw-name mismatch stay unknown");
+    missing_control=true;expect(!map_state::entity_hidden(256,13,control_name),"absent actor does not establish Hide");missing_control=false;
+    dead_control=true;expect(!map_state::entity_hidden(256,13,control_name),"destroyed actor remains unknown");dead_control=false;
+    bad_control=true;expect(!map_state::entity_hidden(256,13,control_name),"invalid native controller is rejected");bad_control=false;
+    const auto before_control_reads=native_control_reads;controls.assign(65,&control);
+    expect(!map_state::entity_hidden(256,13,control_name)&&native_control_reads==before_control_reads,"over-budget list is refused before native lookup");controls={&control};
+    running_game=game::Id::FF6;expect(!map_state::entity_hidden(256,13,control_name),"other games cannot borrow the reviewed FFV native lookup");running_game=game::Id::FF3;
     for (size_t i = 0; i < 32; ++i) scenario.values[i] = 0x80000001u;
     auto captured = map_state::snapshot();
     bool exact = true;

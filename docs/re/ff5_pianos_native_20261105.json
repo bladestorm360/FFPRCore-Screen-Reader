@@ -1,0 +1,173 @@
+{
+  "identities": 18,
+  "locations": 8,
+  "complete_scripts": 26,
+  "source_script_hashes": {
+    "Map_20011_3/sc_e_0174": "157e8d99ae63b22bde58beba695df07fd2e582ad09b8f254f45a7e913b9141c0",
+    "Map_20011_3/sc_e_0174_1": "9b5a1e6baf6ae63f98f1fe3cc485025e00876cad0ea6fd0d9d0b77942191e171",
+    "Map_20011_3/sc_map_20011_3": "e7ec8f2fd8780d509b4e31536ed71133878437520e93bfb87ea967bb721df0ee",
+    "Map_20021_6/sc_e_0177": "a75815ec639b2ad3aa5b262edff32672e6a43d4947d216dd2b4d17bf44bfb68a",
+    "Map_20021_6/sc_e_0177_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20021_6/sc_map_20021_6": "859c3708769e557059c84c893e079aa936af4f8a21a9de5e6f08fd87af1bf104",
+    "Map_20061_5/sc_e_0189": "97f81e7f71367f7699a7b4948ce5602823ad75b623c0c3f32022e20c793ee03f",
+    "Map_20061_5/sc_e_0189_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20061_5/sc_map_20061_5": "bcc188ee2a645804beae3c77402a1723f4819ed75c9452aa18f5a20836dfb5bd",
+    "Map_20081_3/sc_e_0191": "1d1bf9a91180ac8fedc7968715988f582b25d30ad856ae41f74cdee7c4786280",
+    "Map_20081_3/sc_e_0191_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20081_3/sc_map_20081_3": "dc59dab24d45ea474a7553d7e841b3ec922b0754c4fa8c4beb96a58574f9377f",
+    "Map_20101_2/sc_20101_2_to_20100_1": "b64d0f7a38a616a4cbe0ac9505fcc996cb1873f7839b795c8bf7ff2060795813",
+    "Map_20101_2/sc_e_0197": "11dd7fbea6a9d4ee1b33492c95f6f6308bbae1ac5e1825832dd22768be656fb8",
+    "Map_20101_2/sc_e_0197_1": "ebcb74f508bedb06b32ff29de37d1b3f15415736c99277442d1b6e2090c3669c",
+    "Map_20101_2/sc_e_0198": "91b9628436182738f0bd575be00c030daee457be861116ab622849f2b9d18236",
+    "Map_20101_2/sc_map_20101_2": "87f5c8c5f8232c52f81a462f33c68bf2b69583fb60353bdc6b20636577464590",
+    "Map_20151_3/sc_e_0229": "c954bcb5a600cff5b497aba81deb61b39376d776f23ad291616a483edf71f792",
+    "Map_20151_3/sc_e_0229_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20151_3/sc_map_20151_3": "34ada6065f1a4b8de68f2db97798108eafbc1c2df4ed5ee719f5eb3be9e4fa38",
+    "Map_20161_1/sc_e_0244": "86f75c4259b117413359e76b738c521a22a55b6ff92e6d03505b6a110966dedb",
+    "Map_20161_1/sc_e_0244_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20161_1/sc_map_20161_1": "28ed279f6a6fb1e1dfb4f0f39bbcf65df8b5b7b2b0362003eb71d60a05cfa568",
+    "Map_20201_9/sc_e_0279": "e803d5df9ed1a83a1a6f1d0ac6da71780e7d52dede023aa92745372daadd9886",
+    "Map_20201_9/sc_e_0279_1": "c39b195e6dd3ebc5d08be4201aecb37cb55a4180dc9dac375fe34e41f8ad937c",
+    "Map_20201_9/sc_map_20201_9": "3e3026ab6e8e24eb33c4ab55329c0d54a0df3dc7738e7ad5d4161419a0490fbd"
+  },
+  "episodes": 8192,
+  "peak_main_operations": 59,
+  "performance_facts": [
+    {
+      "room": "Map_20011_3",
+      "script": "sc_e_0174",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 220
+    },
+    {
+      "room": "Map_20011_3",
+      "script": "sc_e_0174_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 220
+    },
+    {
+      "room": "Map_20021_6",
+      "script": "sc_e_0177",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 221
+    },
+    {
+      "room": "Map_20021_6",
+      "script": "sc_e_0177_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 221
+    },
+    {
+      "room": "Map_20061_5",
+      "script": "sc_e_0189",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 222
+    },
+    {
+      "room": "Map_20061_5",
+      "script": "sc_e_0189_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 222
+    },
+    {
+      "room": "Map_20081_3",
+      "script": "sc_e_0191",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 223
+    },
+    {
+      "room": "Map_20081_3",
+      "script": "sc_e_0191_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 223
+    },
+    {
+      "room": "Map_20101_2",
+      "script": "sc_e_0197",
+      "operations": 632,
+      "replay": false,
+      "town_receipt": 224
+    },
+    {
+      "room": "Map_20101_2",
+      "script": "sc_e_0197_1",
+      "operations": 424,
+      "replay": true,
+      "town_receipt": 224
+    },
+    {
+      "room": "Map_20151_3",
+      "script": "sc_e_0229",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 225
+    },
+    {
+      "room": "Map_20151_3",
+      "script": "sc_e_0229_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 225
+    },
+    {
+      "room": "Map_20161_1",
+      "script": "sc_e_0244",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 226
+    },
+    {
+      "room": "Map_20161_1",
+      "script": "sc_e_0244_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 226
+    },
+    {
+      "room": "Map_20201_9",
+      "script": "sc_e_0279",
+      "operations": 624,
+      "replay": false,
+      "town_receipt": 227
+    },
+    {
+      "room": "Map_20201_9",
+      "script": "sc_e_0279_1",
+      "operations": 416,
+      "replay": true,
+      "town_receipt": 227
+    }
+  ],
+  "crescent": {
+    "performance_receipts": [
+      328,
+      329
+    ],
+    "exit_resets": [
+      328,
+      329
+    ],
+    "late_rewards_require": 125,
+    "song_items": [
+      461,
+      463,
+      465
+    ]
+  },
+  "source_sha256": {
+    "objects": "d0bedfd68c7aafbe6cf60d8c44ec5d0f3e5ff1f76e7ec73fc076569fd713930c",
+    "scripts": "56efc5afcbcb652253551ac04de01d20a32fd19b6b9b9218a5aaf105abb48fef",
+    "maps": "4d9f99c7a2d2ca39939173e73fbc24ebba92c837fe681084430c9b49400e7d94",
+    "script_master": "ea0f0a9f58480baf861dd812409a79009bdb91418547993b878e1b4e29ead5c0",
+    "areas": "c91cb0f5e0dc64d9acdadf3e9ee7a7a62dd8bd93eaf4fe2e3cf220915f365894",
+    "english_names": "75fc08ecbad4e7f9431a3ee6a19a01965ca11380c9667232109d1b9666a4f76f"
+  }
+}

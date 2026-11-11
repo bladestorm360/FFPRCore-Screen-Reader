@@ -1,0 +1,220 @@
+{
+  "Map_20060/sc_e_0046_0": {
+    "sha256": "085c1aa74cbf4416e5ff67382283485e4f0c167c5871c857eddbddab8eee4956",
+    "flags": [],
+    "transfers": [
+      [
+        37,
+        1,
+        "sc_e_0046"
+      ],
+      [
+        37,
+        1,
+        ""
+      ]
+    ],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20060/sc_e_0051": {
+    "sha256": "d0996a56b82162d51c65fd28c2e84869764a4687fe72cb33e8cd4922e15226cb",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        37,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20060/sc_map_20060": {
+    "sha256": "a255a820143894b83ce33871f654dda515d1b038381e43a2eb2e5498b39bbfaf",
+    "flags": [
+      [
+        "ScenarioFlag4",
+        137,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0046": {
+    "sha256": "63796cf9f0aa173e8bd70016cbe4f195fabff9cbae26f8d3120f0e69289b1ad4",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0047": {
+    "sha256": "e6fad1079ecc758960d100be825bce363e02dc4d4fbb7f0da460bdf335f63d1f",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        33,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0048": {
+    "sha256": "059d6e6627e2437f4d4847e676c21e1e6c4121e05f9169abdc2927b3ad540bf5",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        34,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0049": {
+    "sha256": "050b4a2017a904aabc51b0e4e7af09927cef280a933797121d0afd750be127af",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        35,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0050": {
+    "sha256": "efc00f3f4bf5ff6b934d2d89509077c55d4c16207bca6734983f0b2c81cd6405",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        36,
+        1
+      ]
+    ],
+    "transfers": [
+      [
+        36,
+        2,
+        ""
+      ],
+      [
+        36,
+        2,
+        ""
+      ]
+    ],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0136": {
+    "sha256": "f495ce63bb1ae784a302b949c2a15f2b11dc792ef261708c698ebcbe8f504719",
+    "flags": [],
+    "transfers": [],
+    "choices": [
+      []
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0137": {
+    "sha256": "f495ce63bb1ae784a302b949c2a15f2b11dc792ef261708c698ebcbe8f504719",
+    "flags": [],
+    "transfers": [],
+    "choices": [
+      []
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_e_0138": {
+    "sha256": "f495ce63bb1ae784a302b949c2a15f2b11dc792ef261708c698ebcbe8f504719",
+    "flags": [],
+    "transfers": [],
+    "choices": [
+      []
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20061_1/sc_map_20061_1": {
+    "sha256": "d870dad40c60e327a56be95b2184638f5f15cb23f2e32aa97ac45e8b2b37e100",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20400/sc_e_0954": {
+    "sha256": "a8012ff26a3698b1318a4674c6c674fc5ade6d5a5d4f913332a70336c4b17900",
+    "flags": [
+      [
+        "ScenarioFlag2",
+        208,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [
+      "アビリティ習得：夢幻闘舞"
+    ],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20400/sc_map_20400": {
+    "sha256": "2cc1f33ee991e80f58073d75930944005f3c11eefb8ef0855efaa990728ed961",
+    "flags": [
+      [
+        "ScenarioFlag4",
+        137,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  }
+}

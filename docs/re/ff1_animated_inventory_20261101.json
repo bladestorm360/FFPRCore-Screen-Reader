@@ -1,0 +1,2751 @@
+{
+  "source_sha256": "05496a2fb235d1e3f3287179bb31431c3ab3592f9bb421759814afeefd3f9414",
+  "objects": [
+    {
+      "submap": "Map_00000_1",
+      "maps": [
+        800
+      ],
+      "entity": -1,
+      "group": "entity_default",
+      "raw": "",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        21
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_00000_2",
+      "maps": [
+        801
+      ],
+      "entity": -1,
+      "group": "entity_default",
+      "raw": "",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        21
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_00000_3",
+      "maps": [
+        802
+      ],
+      "entity": -1,
+      "group": "entity_default",
+      "raw": "",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        21
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_10010",
+      "maps": [
+        1
+      ],
+      "entity": 102,
+      "group": "ev_e_0015",
+      "raw": "運河開通イベントの水しぶき",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 38,
+      "group": "ev_e_0002",
+      "raw": "クリスタルのかけら青",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 39,
+      "group": "ev_e_0002",
+      "raw": "クリスタルのかけら緑",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 40,
+      "group": "ev_e_0002",
+      "raw": "クリスタルのかけら赤",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        5
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 41,
+      "group": "ev_e_0002",
+      "raw": "クリスタルのかけら黄",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 28,
+      "group": "ev_e_0004",
+      "raw": "ビックリマーク2",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 29,
+      "group": "ev_e_0004",
+      "raw": "ビックリマーク3",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        5
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 30,
+      "group": "ev_e_0004",
+      "raw": "ビックリマーク4",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        3
+      ],
+      "entity": 37,
+      "group": "ev_e_0004",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20021_7",
+      "maps": [
+        9
+      ],
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "UpperObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20021_7",
+      "maps": [
+        9
+      ],
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "UpperObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20021_7",
+      "maps": [
+        9
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "UpperObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20021_7",
+      "maps": [
+        9
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "UpperObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20041_2",
+      "maps": [
+        18
+      ],
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20041_2",
+      "maps": [
+        18
+      ],
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20041_2",
+      "maps": [
+        18
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20041_2",
+      "maps": [
+        18
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 46,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク1",
+      "layer": "UpperObject",
+      "cell": [
+        -2,
+        52
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 47,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク2",
+      "layer": "UpperObject",
+      "cell": [
+        -4,
+        52
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 48,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク3",
+      "layer": "UpperObject",
+      "cell": [
+        -4,
+        53
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 49,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク4",
+      "layer": "UpperObject",
+      "cell": [
+        -4,
+        54
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 50,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク5",
+      "layer": "UpperObject",
+      "cell": [
+        -4,
+        55
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 51,
+      "group": "ev_e_0015",
+      "raw": "ビックリマーク6",
+      "layer": "UpperObject",
+      "cell": [
+        -6,
+        52
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20051_1",
+      "maps": [
+        21
+      ],
+      "entity": 41,
+      "group": "ev_e_0052",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        4
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20061_2",
+      "maps": [
+        27
+      ],
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20061_2",
+      "maps": [
+        27
+      ],
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20061_2",
+      "maps": [
+        27
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20061_2",
+      "maps": [
+        27
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20071_1",
+      "maps": [
+        32
+      ],
+      "entity": 260,
+      "group": "ev_e_0013",
+      "raw": "ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20081_1",
+      "maps": [
+        33
+      ],
+      "entity": 107,
+      "group": "ev_e_0011",
+      "raw": "ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        4
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20090",
+      "maps": [
+        34
+      ],
+      "entity": 105,
+      "group": "ev_e_0034",
+      "raw": "吹き出し「！」",
+      "layer": "GroundObject",
+      "cell": [
+        49,
+        4
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20090",
+      "maps": [
+        34
+      ],
+      "entity": 119,
+      "group": "ev_e_0034",
+      "raw": "吹き出し「…」",
+      "layer": "GroundObject",
+      "cell": [
+        49,
+        6
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20111_4",
+      "maps": [
+        46
+      ],
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20111_4",
+      "maps": [
+        46
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20111_4",
+      "maps": [
+        46
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20111_4",
+      "maps": [
+        46
+      ],
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20121_3",
+      "maps": [
+        51
+      ],
+      "entity": 8,
+      "group": "ev_e_0048",
+      "raw": "クラスチェンジ用",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        2
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20121_3",
+      "maps": [
+        51
+      ],
+      "entity": 9,
+      "group": "ev_e_0048",
+      "raw": "クラスチェンジ用",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20121_3",
+      "maps": [
+        51
+      ],
+      "entity": 10,
+      "group": "ev_e_0048",
+      "raw": "クラスチェンジ用",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        4
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20130",
+      "maps": [
+        52
+      ],
+      "entity": 64,
+      "group": "entity_default",
+      "raw": "樽の潜水艦",
+      "layer": "GroundObject",
+      "cell": [
+        56,
+        38
+      ],
+      "script": "sc_e_0031",
+      "action": 2,
+      "collision": false
+    },
+    {
+      "submap": "Map_20130",
+      "maps": [
+        52
+      ],
+      "entity": 71,
+      "group": "ev_e_0030",
+      "raw": "！マーク",
+      "layer": "GroundObject",
+      "cell": [
+        66,
+        39
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20131_2",
+      "maps": [
+        55
+      ],
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20131_2",
+      "maps": [
+        55
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20131_2",
+      "maps": [
+        55
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20131_2",
+      "maps": [
+        55
+      ],
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20150",
+      "maps": [
+        60
+      ],
+      "entity": 93,
+      "group": "ev_e_0028",
+      "raw": "妖精解放エフェクト",
+      "layer": "GroundObject",
+      "cell": [
+        76,
+        59
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20150",
+      "maps": [
+        60
+      ],
+      "entity": 91,
+      "group": "ev_e_0029",
+      "raw": "妖精が変身する光の玉",
+      "layer": "UpperObject",
+      "cell": [
+        76,
+        18
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20150",
+      "maps": [
+        60
+      ],
+      "entity": 92,
+      "group": "ev_e_0029",
+      "raw": "水しぶき",
+      "layer": "UpperObject",
+      "cell": [
+        76,
+        20
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20151_7",
+      "maps": [
+        65
+      ],
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20151_7",
+      "maps": [
+        65
+      ],
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20151_7",
+      "maps": [
+        65
+      ],
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20151_7",
+      "maps": [
+        65
+      ],
+      "entity": 12,
+      "group": "entity_default",
+      "raw": "Sunstream",
+      "layer": "GroundObject",
+      "cell": [
+        9,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_20180",
+      "maps": [
+        122
+      ],
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "AnimationObject",
+      "layer": "GroundObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 44,
+      "group": "ev_e_0003",
+      "raw": "黒色の玉",
+      "layer": "BottomObject",
+      "cell": [
+        38,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 47,
+      "group": "ev_e_0003",
+      "raw": "イベント用「！」マーク",
+      "layer": "BottomObject",
+      "cell": [
+        -8,
+        26
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 48,
+      "group": "ev_e_0003",
+      "raw": "イベント用「！」マーク",
+      "layer": "BottomObject",
+      "cell": [
+        -8,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 87,
+      "group": "ev_e_0004",
+      "raw": "黒色の玉",
+      "layer": "BottomObject",
+      "cell": [
+        38,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 86,
+      "group": "ev_e_0014",
+      "raw": "黒色の玉",
+      "layer": "BottomObject",
+      "cell": [
+        38,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 39,
+      "group": "ev_e_0038",
+      "raw": "黒色の玉",
+      "layer": "BottomObject",
+      "cell": [
+        38,
+        28
+      ],
+      "script": "sc_e_0038",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 40,
+      "group": "ev_e_0038",
+      "raw": "クリスタルのかけら青",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        26
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 41,
+      "group": "ev_e_0038",
+      "raw": "クリスタルのかけら緑",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 42,
+      "group": "ev_e_0038",
+      "raw": "クリスタルのかけら黄",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        30
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30011_1",
+      "maps": [
+        72
+      ],
+      "entity": 43,
+      "group": "ev_e_0038",
+      "raw": "クリスタルのかけら赤",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        32
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_3",
+      "maps": [
+        78
+      ],
+      "entity": 56,
+      "group": "ev_e_0016",
+      "raw": "ヴァンパイア変身エフェクト",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 33,
+      "group": "ev_e_0021",
+      "raw": "土色の玉（リッチ会話前）",
+      "layer": "BottomObject",
+      "cell": [
+        13,
+        30
+      ],
+      "script": "sc_e_0021",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 34,
+      "group": "ev_e_0021",
+      "raw": "土のクリスタル暗",
+      "layer": "BottomObject",
+      "cell": [
+        13,
+        28
+      ],
+      "script": "",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 35,
+      "group": "ev_e_0021",
+      "raw": "クリスタルの洞窟のワープ（黄）暗",
+      "layer": "BottomObject",
+      "cell": [
+        13,
+        26
+      ],
+      "script": "",
+      "action": 2,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 38,
+      "group": "ev_e_0021",
+      "raw": "PC1.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 24,
+      "group": "ev_e_0021",
+      "raw": "PC1.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        6
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 25,
+      "group": "ev_e_0021",
+      "raw": "PC3.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 26,
+      "group": "ev_e_0021",
+      "raw": "PC4.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -3,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 27,
+      "group": "ev_e_0021",
+      "raw": "PC2.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -3,
+        6
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 28,
+      "group": "ev_e_0021",
+      "raw": "クリスタルのかけら黄",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 29,
+      "group": "ev_e_0021",
+      "raw": "土のクリスタル明",
+      "layer": "BottomObject",
+      "cell": [
+        -3,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 30,
+      "group": "ev_e_0021",
+      "raw": "クリスタルの洞窟のワープ（黄）明",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 51,
+      "group": "ev_e_0022",
+      "raw": "土のクリスタル明",
+      "layer": "BottomObject",
+      "cell": [
+        13,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30031_5",
+      "maps": [
+        80
+      ],
+      "entity": 30,
+      "group": "ev_e_0022",
+      "raw": "クリスタルの洞窟のワープ（黄）明",
+      "layer": "BottomObject",
+      "cell": [
+        13,
+        26
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30041_1",
+      "maps": [
+        81
+      ],
+      "entity": 12,
+      "group": "ev_e_0018",
+      "raw": "スタールビー",
+      "layer": "UpperObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 32,
+      "group": "ev_e_0024",
+      "raw": "クリスタルの洞窟のワープ（赤）暗",
+      "layer": "BottomObject",
+      "cell": [
+        12,
+        54
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 33,
+      "group": "ev_e_0024",
+      "raw": "赤色の玉(マリリス会話前)",
+      "layer": "BottomObject",
+      "cell": [
+        12,
+        58
+      ],
+      "script": "sc_e_0023",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 34,
+      "group": "ev_e_0024",
+      "raw": "火のクリスタル暗",
+      "layer": "BottomObject",
+      "cell": [
+        12,
+        56
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 35,
+      "group": "ev_e_0024",
+      "raw": "PC1.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        57
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 36,
+      "group": "ev_e_0024",
+      "raw": "PC3.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        59
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 37,
+      "group": "ev_e_0024",
+      "raw": "PC4.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        59
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 38,
+      "group": "ev_e_0024",
+      "raw": "PC2.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        57
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 39,
+      "group": "ev_e_0024",
+      "raw": "クリスタルのかけら赤",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        61
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 40,
+      "group": "ev_e_0024",
+      "raw": "火のクリスタル明",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        61
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 41,
+      "group": "ev_e_0024",
+      "raw": "クリスタルの洞窟のワープ（赤）明",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        63
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 44,
+      "group": "ev_e_0024",
+      "raw": "PC1.ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        52
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 30,
+      "group": "ev_e_0025",
+      "raw": "クリスタルの洞窟のワープ（赤）明",
+      "layer": "BottomObject",
+      "cell": [
+        12,
+        54
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30051_6",
+      "maps": [
+        87
+      ],
+      "entity": 31,
+      "group": "ev_e_0025",
+      "raw": "火のクリスタル明",
+      "layer": "BottomObject",
+      "cell": [
+        12,
+        56
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30061_4",
+      "maps": [
+        91
+      ],
+      "entity": 8,
+      "group": "ev_e_0025",
+      "raw": "浮遊石",
+      "layer": "BottomObject",
+      "cell": [
+        19,
+        16
+      ],
+      "script": "sc_e_0024",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30071_1",
+      "maps": [
+        93
+      ],
+      "entity": 18,
+      "group": "entity_default",
+      "raw": "おじいさんのテレポート",
+      "layer": "UpperObject",
+      "cell": [
+        -3,
+        30
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 34,
+      "group": "ev_e_0034",
+      "raw": "クリスタルの洞窟のワープ（青）暗",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 37,
+      "group": "ev_e_0034",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -4,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 38,
+      "group": "ev_e_0034",
+      "raw": "水色の玉(クラーケン会話前)",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        12
+      ],
+      "script": "sc_e_0036",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 25,
+      "group": "ev_e_0034",
+      "raw": "クリスタルの洞窟のワープ（青）明",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 26,
+      "group": "ev_e_0034",
+      "raw": "クリスタルのかけら青",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 27,
+      "group": "ev_e_0034",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 28,
+      "group": "ev_e_0034",
+      "raw": "ビックリマーク2",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 29,
+      "group": "ev_e_0034",
+      "raw": "ビックリマーク3",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        12
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 30,
+      "group": "ev_e_0034",
+      "raw": "ビックリマーク4",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        14
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 58,
+      "group": "ev_e_0034",
+      "raw": "水のクリスタル明",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 39,
+      "group": "ev_e_0034",
+      "raw": "水のクリスタル暗",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 31,
+      "group": "ev_e_0035",
+      "raw": "クリスタルの洞窟のワープ（青）暗",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 32,
+      "group": "ev_e_0035",
+      "raw": "水のクリスタル暗",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 25,
+      "group": "ev_e_0036",
+      "raw": "クリスタルの洞窟のワープ（青）明",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 24,
+      "group": "ev_e_0036",
+      "raw": "水のクリスタル明",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 34,
+      "group": "ev_e_34",
+      "raw": "クリスタルの洞窟のワープ（青）暗",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 37,
+      "group": "ev_e_34",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 38,
+      "group": "ev_e_34",
+      "raw": "水色の玉(クラーケン会話前)",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        12
+      ],
+      "script": "sc_e_0036",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 39,
+      "group": "ev_e_34",
+      "raw": "水のクリスタル暗",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 25,
+      "group": "ev_e_35",
+      "raw": "クリスタルの洞窟のワープ（青）明",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        9
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 26,
+      "group": "ev_e_35",
+      "raw": "クリスタルのかけら青",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 27,
+      "group": "ev_e_35",
+      "raw": "ビックリマーク1",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        3
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 28,
+      "group": "ev_e_35",
+      "raw": "ビックリマーク2",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        5
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 29,
+      "group": "ev_e_35",
+      "raw": "ビックリマーク3",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 30,
+      "group": "ev_e_35",
+      "raw": "ビックリマーク4",
+      "layer": "BottomObject",
+      "cell": [
+        -6,
+        9
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 31,
+      "group": "ev_e_35",
+      "raw": "クリスタルの洞窟のワープ（青）暗",
+      "layer": "BottomObject",
+      "cell": [
+        20,
+        8
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 32,
+      "group": "ev_e_35",
+      "raw": "水のクリスタル暗",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 33,
+      "group": "ev_e_35",
+      "raw": "水のクリスタル明",
+      "layer": "GroundObject",
+      "cell": [
+        -2,
+        5
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 33,
+      "group": "ev_e_35",
+      "raw": "クラーケン出現時エフェクト",
+      "layer": "GroundObject",
+      "cell": [
+        -2,
+        1
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_1",
+      "maps": [
+        96
+      ],
+      "entity": 24,
+      "group": "ev_e_36",
+      "raw": "水のクリスタル明",
+      "layer": "GroundObject",
+      "cell": [
+        20,
+        10
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30081_3",
+      "maps": [
+        98
+      ],
+      "entity": 19,
+      "group": "entity_default",
+      "raw": "タル潜水艦",
+      "layer": "UpperObject",
+      "cell": [
+        30,
+        61
+      ],
+      "script": "sc_e_0032",
+      "action": 2,
+      "collision": false
+    },
+    {
+      "submap": "Map_30091_1",
+      "maps": [
+        104
+      ],
+      "entity": 25,
+      "group": "ev_e_0026",
+      "raw": "ロボット電気",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        56
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_1",
+      "maps": [
+        108
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        9
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_2",
+      "maps": [
+        109
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        9
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_2",
+      "maps": [
+        109
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        46
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_2",
+      "maps": [
+        109
+      ],
+      "entity": 31,
+      "group": "ev_e_0051",
+      "raw": "アダマンタイト（有）",
+      "layer": "BottomObject",
+      "cell": [
+        17,
+        42
+      ],
+      "script": "sc_e_0051",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30111_3",
+      "maps": [
+        110
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "UpperObject",
+      "cell": [
+        33,
+        31
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_3",
+      "maps": [
+        110
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        37
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_4",
+      "maps": [
+        111
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "GroundObject",
+      "cell": [
+        43,
+        49
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_4",
+      "maps": [
+        111
+      ],
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "GroundObject",
+      "cell": [
+        11,
+        17
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 31,
+      "group": "entity_default",
+      "raw": "テレポートマス",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        60
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 3,
+      "group": "ev_e_0037",
+      "raw": "ティアマットのオーブ（会話前）",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        15
+      ],
+      "script": "sc_e_0037",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 8,
+      "group": "ev_e_0037",
+      "raw": "ビックリマーク",
+      "layer": "GroundObject",
+      "cell": [
+        -1,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 9,
+      "group": "ev_e_0037",
+      "raw": "緑色のクリスタルのかけら",
+      "layer": "GroundObject",
+      "cell": [
+        -1,
+        13
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 10,
+      "group": "ev_e_0037",
+      "raw": "PC3ビックリマーク",
+      "layer": "GroundObject",
+      "cell": [
+        -3,
+        17
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 11,
+      "group": "ev_e_0037",
+      "raw": "PC2ビックリマーク",
+      "layer": "GroundObject",
+      "cell": [
+        -5,
+        17
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 12,
+      "group": "ev_e_0037",
+      "raw": "PC1ビックリマーク",
+      "layer": "GroundObject",
+      "cell": [
+        -7,
+        17
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 13,
+      "group": "ev_e_0037",
+      "raw": "PC4ビックリマーク",
+      "layer": "GroundObject",
+      "cell": [
+        -1,
+        17
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 14,
+      "group": "ev_e_0037",
+      "raw": "風のクリスタル（明）",
+      "layer": "GroundObject",
+      "cell": [
+        -1,
+        21
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 15,
+      "group": "ev_e_0037",
+      "raw": "クリスタルの洞窟のワープ（緑）明\n",
+      "layer": "GroundObject",
+      "cell": [
+        -5,
+        21
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 16,
+      "group": "ev_e_0037",
+      "raw": "クリスタルの洞窟のワープ（緑）暗\n",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 17,
+      "group": "ev_e_0037",
+      "raw": "風のクリスタル（暗）",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        11
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 14,
+      "group": "ev_e_0038",
+      "raw": "風のクリスタル（明）",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        11
+      ],
+      "script": "",
+      "action": 0,
+      "collision": true
+    },
+    {
+      "submap": "Map_30111_5",
+      "maps": [
+        112
+      ],
+      "entity": 15,
+      "group": "ev_e_0038",
+      "raw": "クリスタルの洞窟のワープ（緑）明\n",
+      "layer": "GroundObject",
+      "cell": [
+        16,
+        7
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_1",
+      "maps": [
+        113
+      ],
+      "entity": 13,
+      "group": "entity_default",
+      "raw": "クリスタルの洞窟のワープ（赤）明\n(仮置き）",
+      "layer": "BottomObject",
+      "cell": [
+        38,
+        28
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_4",
+      "maps": [
+        116
+      ],
+      "entity": 20,
+      "group": "ev_e_0040",
+      "raw": "強制エンカウント：リッチ",
+      "layer": "UpperObject",
+      "cell": [
+        65,
+        49
+      ],
+      "script": "sc_e_0040",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30121_5",
+      "maps": [
+        117
+      ],
+      "entity": 52,
+      "group": "ev_e_0041",
+      "raw": "強制エンカウント：マリリス",
+      "layer": "UpperObject",
+      "cell": [
+        31,
+        35
+      ],
+      "script": "sc_e_0041",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30121_6",
+      "maps": [
+        118
+      ],
+      "entity": 69,
+      "group": "ev_e_0042",
+      "raw": "強制エンカウント：クラーケン",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        43
+      ],
+      "script": "sc_e_0042",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30121_7",
+      "maps": [
+        119
+      ],
+      "entity": 14,
+      "group": "ev_e_0043",
+      "raw": "強制エンカウント：ティアマット",
+      "layer": "UpperObject",
+      "cell": [
+        36,
+        10
+      ],
+      "script": "sc_e_0043",
+      "action": 2,
+      "collision": true
+    },
+    {
+      "submap": "Map_30121_8",
+      "maps": [
+        120
+      ],
+      "entity": 7,
+      "group": "ev_e_0044",
+      "raw": "ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -3,
+        20
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_8",
+      "maps": [
+        120
+      ],
+      "entity": 8,
+      "group": "ev_e_0044",
+      "raw": "PC3ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -3,
+        22
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_8",
+      "maps": [
+        120
+      ],
+      "entity": 9,
+      "group": "ev_e_0044",
+      "raw": "PC2ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -4,
+        22
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_8",
+      "maps": [
+        120
+      ],
+      "entity": 10,
+      "group": "ev_e_0044",
+      "raw": "PC1ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -5,
+        22
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    },
+    {
+      "submap": "Map_30121_8",
+      "maps": [
+        120
+      ],
+      "entity": 11,
+      "group": "ev_e_0044",
+      "raw": "PC4ビックリマーク",
+      "layer": "BottomObject",
+      "cell": [
+        -2,
+        22
+      ],
+      "script": "",
+      "action": 0,
+      "collision": false
+    }
+  ],
+  "submarine_transfers": [
+    {
+      "submap": "Map_20130",
+      "script": "sc_e_0031",
+      "destinations": [
+        [
+          98,
+          101
+        ]
+      ],
+      "native_calls": [],
+      "sha256": "9b76e87eec3cce8bbd9d4e052e63b9e0ff74a3b236b23da9a85ebd5e148c27d8"
+    },
+    {
+      "submap": "Map_30081_3",
+      "script": "sc_e_0032",
+      "destinations": [
+        [
+          52,
+          101
+        ]
+      ],
+      "native_calls": [],
+      "sha256": "5194d67b0b542b301052c32722502e274876cdd566e5d961ba202ee9e40c5bea"
+    }
+  ]
+}

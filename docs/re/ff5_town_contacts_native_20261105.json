@@ -1,0 +1,52 @@
+{
+  "identities": 19,
+  "root_classes": 14,
+  "complete_scripts": 18,
+  "source_script_hashes": {
+    "Map_20010/sc_e_0018": "92840e5fc932f240d5e4b45b73624eae5de77c8e5899c28dfc86c95ee8826829",
+    "Map_20010/sc_e_0021": "0338aa1dd35aedf2ab9681b7dfea72bcae976f62a415e716b39fc39411bf3ccc",
+    "Map_20010/sc_map_20010": "63d717d13c86723053bab9db1ff32577ca1025a4b04bdc3a1bbaed9ec4dca988",
+    "Map_20010/sc_npc_20010_5": "6464425531f743f8dd056eeb2bda77bd777710d52d011949dfe0d1970e746fff",
+    "Map_20011_1/sc_npc_20011_1_1": "fa2abf24f2ebfd229941d831b380dd92e25a767df2c3e97d7cccc3d7f0dfaf1b",
+    "Map_20011_3/sc_e_0173": "59c425427faa43e5a3bf9530bc09e5544a4cb13fd956fcb421f7084ef8c1cf85",
+    "Map_20011_3/sc_e_0173_1": "fdb445d4338ba3b2fbdccee751c052220c6713c2ca46c13a57332e23549a8608",
+    "Map_20011_4/sc_e_0020": "7397daaa8168c903529fbb64b2b39b0e8493ef8d349c394abca0a412879f6b54",
+    "Map_20011_9/sc_e_0176": "46c2af7cc952f68f6c12cd06d8680e94aa51ecf8424949c259eca233fd02ab1e",
+    "Map_20020/sc_e_0031": "757ef77b12040e553d49ae10b552b0f2d5cf40eceb95a5111fedfceb9846ece3",
+    "Map_20020/sc_e_0362_1": "aa41c049d72a3bedb2c3ca3310607041dc0e706c4086067cdd1f783a49ac62f6",
+    "Map_20021_7/sc_e_0032": "1ac1fac62af28852adcfd93392978c92727925a57984604589abe703577e72b3",
+    "Map_20100/sc_e_0055": "77af1615a64651ab201a10df04001399c6ee37e31db95d2bf75e88f11817e675",
+    "Map_20100/sc_e_0055_1": "fd75504955484f4a930f706eaee30edaeb328c96ed8c9faab61ead53ce54b014",
+    "Map_20100/sc_map_20100": "400152e434009c933f6cd19b40051d614a0e29405309b6179f1deea7b1014595",
+    "Map_20121_3/sc_e_0140": "1ab8265dc1c05b6b58b711e97a9cbd71d6a0065655fb991447fc2f893866618f",
+    "Map_20121_3/sc_e_0201": "503a2e5bdada4d803dceab71b78d7b4853282bb87977f11afb2dd8e5898f2119",
+    "Map_20151_2/sc_npc_20151_2_1": "f20618827a414c015e4771662d0aaddf333634e2b56b789ca7439a85467f500a"
+  },
+  "source_sha256": {
+    "objects": "d0bedfd68c7aafbe6cf60d8c44ec5d0f3e5ff1f76e7ec73fc076569fd713930c",
+    "scripts": "56efc5afcbcb652253551ac04de01d20a32fd19b6b9b9218a5aaf105abb48fef",
+    "maps": "4d9f99c7a2d2ca39939173e73fbc24ebba92c837fe681084430c9b49400e7d94",
+    "script_master": "ea0f0a9f58480baf861dd812409a79009bdb91418547993b878e1b4e29ead5c0",
+    "areas": "c91cb0f5e0dc64d9acdadf3e9ee7a7a62dd8bd93eaf4fe2e3cf220915f365894",
+    "english_names": "75fc08ecbad4e7f9431a3ee6a19a01965ca11380c9667232109d1b9666a4f76f"
+  },
+  "dialogue_source_sha256": "a5e1bbceb3a88714e16f4ea4cadb4251992ee0e1c0e31fdc31a46df5bb365ef9",
+  "dialogue_locators": [
+    "N107_C01_143_01_01",
+    "N107_C01_143_01_02",
+    "N107_C01_143_01_03",
+    "N107_C01_143_01_04",
+    "E0282_00_143_a_14",
+    "E0282_00_143_a_15",
+    "E0169_00_031_a_01"
+  ],
+  "timer_callback": {
+    "seconds": 6,
+    "operations": 83,
+    "story_or_inventory_effects": false
+  },
+  "ordinary_direction_contacts": [
+    "Map_20011_9/sc_e_0176",
+    "Map_20151_2/sc_npc_20151_2_1"
+  ]
+}

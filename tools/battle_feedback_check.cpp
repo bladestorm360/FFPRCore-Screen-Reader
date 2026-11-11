@@ -27,6 +27,7 @@ using HitMessage=bool(*)(void*,void*,const void*);
 HitMessage hit_message_dispatch=nullptr,native_hit_original=nullptr;
 bool defer_digits=false;std::vector<std::function<void()>> digit_callbacks;
 bool enemy_critical=false;
+int ko_master_id=-1;
 Dict* next_modifiers=nullptr;bool direct_applies=true,ff5_callback=false;
 json::Value status_catalog;
 game::Id game_id=game::Id::FF2;Node *effect=nullptr,*victim=nullptr,*caster=nullptr,*provider=nullptr,*key=nullptr;int drawn=1,native_calls=0,expected_type=-1;bool apply=false;
@@ -150,7 +151,7 @@ int condition_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}int cond
 std::vector<void*> confirmed_conditions(void*p){return p?static_cast<fixture::Node*>(p)->conditions:std::vector<void*>{};}
 void* current_condition_list(void*p){return p?&static_cast<fixture::Node*>(p)->conditions:nullptr;}
 std::vector<void*> current_conditions(void*p){return confirmed_conditions(p);}std::vector<void*> list_items(void*p){return p?*static_cast<fixture::List*>(p):fixture::List{};}
-std::wstring resolve_condition_name(void*p,int id,int*type){const int value=p?condition_type(p):(id==900?4:0);if(type)*type=value;return condition_labels::fallback(value);}
+std::wstring resolve_condition_name(void*p,int id,int*type){const int value=p?condition_type(p):id==fixture::ko_master_id?kConditionTypeKO:id==900?4:0;if(type)*type=value;return condition_labels::fallback(value);}
 std::wstring strip_icon(std::wstring_view s){return std::wstring(s);}bool blank(const std::wstring&s){return s.empty();}
 il2cpp::Method* find_method_param_type(il2cpp::Class*,const char*,int,int,const char*){return nullptr;}
 }
@@ -167,6 +168,35 @@ namespace settings {bool get_bool(const char* key,bool fallback){return std::str
 int main(){using namespace fixture;namespace b=ffpr::battle;namespace s=b::special_feedback;int failures=0;
  auto expect=[&](bool ok,const char*name){if(!ok){++failures;std::printf("FAIL %s\n",name);}};
  {std::ifstream input("data/ff2/mod_text.json");std::string bytes{std::istreambuf_iterator<char>(input),{}};expect(json::parse(bytes,status_catalog),"real FFII condition translation overrides load");}
+ b::o_Add=[](void*,void*,int32_t,const void*){};
+ b::o_AddFF5=[](void*,void*,int32_t,bool,const void*){};
+ for(int n=1;n<=6;++n) {
+  game_id=static_cast<game::Id>(n);
+  std::ifstream input("docs/re/ff"+std::to_string(n)+"_condition_visual_audit.json");
+  const std::string bytes{std::istreambuf_iterator<char>(input),{}};
+  json::Value catalog;
+  const auto* rows=json::parse(bytes,catalog)?catalog.get(L"conditions"):nullptr;
+  expect(rows!=nullptr,"matching condition identity audit loads");
+  if(!rows)continue;
+  for(const auto& row:rows->arr) {
+   if(row.get(L"type")->n!=b::kConditionTypeKO)continue;
+   ko_master_id=static_cast<int>(row.get(L"id")->n);
+   for(bool critical_enabled:{false,true}) {
+    enemy_critical=critical_enabled;
+    Node first,second,ko;
+    first.kind=second.kind=L"BattleEnemyData";first.name=second.name=L"Gatlinger";
+    ko.id=ko_master_id;ko.type=b::kConditionTypeKO;first.conditions={&ko};
+    auto add=[&](Node& enemy) {
+     if(n==5)b::d_AddFF5(nullptr,&enemy,ko_master_id,true,nullptr);
+     else b::d_Add(nullptr,&enemy,ko_master_id,nullptr);
+    };
+    spoken.clear();add(first);add(second);
+    expect(spoken==std::vector<std::wstring>{L"Gatlinger: KO",L"Gatlinger: KO"},
+           "both enemy KOs speak even with the same name and only a master receipt for the second");
+   }
+  }
+ }
+ ko_master_id=-1;enemy_critical=false;spoken.clear();
  // Replay native direct + bulk reconciliation with status inherited from an
  // earlier battle: no condition_added call or remembered Add history is seeded.
  b::o_RemoveFunction=&remove_native;b::o_RemoveConditionFunction=&remove_bulk;
@@ -193,15 +223,39 @@ int main(){using namespace fixture;namespace b=ffpr::battle;namespace s=b::speci
   Node enemy,critical;enemy.name=L"Giant Rat";enemy.kind=L"BattleEnemyData";critical.id=900;critical.type=4;
   List live{&critical};enemy.conditions={&critical};enemy.functions=&live;
   spoken.clear();b::condition_added(&enemy,900);
-  expect(spoken.size()==(enabled?1:0),"all-six hidden enemy Critical follows its independent opt-in setting");
+  expect(spoken.empty(),"hidden enemy Critical remains silent even with the old preference enabled");
   spoken.clear();enemy.conditions.clear();b::condition_added(&enemy,900);
-  expect(spoken.size()==(enabled?1:0),"unconfirmed Add still uses resolved master type rather than leaking Critical through a fallback name");
+  expect(spoken.empty(),"unconfirmed enemy Add cannot disclose hidden Critical");
   enemy.conditions={&critical};b::removal_reset_state();spoken.clear();b::d_RemoveFunction(nullptr,&enemy,900,nullptr);
-  expect(spoken.size()==(enabled?1:0),"enemy Critical removal follows the same setting");
+  expect(spoken.empty(),"hidden enemy Critical removal remains silent");
   enemy.kind=L"BattlePlayerData";enemy.name=L"Corrad";enemy.conditions={&critical};spoken.clear();b::condition_added(&enemy,900);
   expect(spoken==std::vector<std::wstring>{L"Corrad: Critical"},"party critical health remains audible regardless of enemy disclosure");
  }
  enemy_critical=false;b::removal_reset_state();spoken.clear();
+ // Enemy Add/removal reconciliation is identity/state, never presentation.
+ // Even a named condition with visible art must be announced by its actual
+ // renderer owner. Defeat is the explicit exception.
+ for(int n=1;n<=6;++n)for(bool critical_enabled:{false,true})for(int type:{25,10,205})for(bool bulk:{false,true}) {
+  game_id=static_cast<game::Id>(n);enemy_critical=critical_enabled;
+  Node enemy,status;enemy.name=type==25?L"Vampire Lord":L"Enemy";enemy.kind=L"BattleEnemyData";
+  status.id=29;status.type=type;List live{&status};enemy.conditions={&status};enemy.functions=&live;
+  b::removal_reset_state();spoken.clear();b::condition_added(&enemy,29);
+  expect(spoken.empty(),"all-six raw enemy additions cannot disclose hidden Regen or bypass the visual-effect owner");
+  enemy.conditions.clear();b::condition_added(&enemy,29);
+  expect(spoken.empty(),"unconfirmed enemy Add cannot leak a fallback condition label");
+  enemy.conditions={&status};removal_id=29;
+  if(bulk)b::d_RemoveConditionFunction(nullptr,&enemy,nullptr,nullptr,nullptr);
+  else b::d_RemoveFunction(nullptr,&enemy,29,nullptr);
+  expect(spoken.empty(),"raw enemy removal cannot disclose a hidden condition regardless of Critical opt-in");
+  enemy.kind=L"BattlePlayerData";enemy.name=L"Ally";enemy.conditions={&status};live={&status};
+  b::removal_reset_state();spoken.clear();b::condition_added(&enemy,29);
+  expect(spoken.size()==1,"party condition additions remain owned by their existing feedback path");
+  spoken.clear();
+  if(bulk)b::d_RemoveConditionFunction(nullptr,&enemy,nullptr,nullptr,nullptr);
+  else b::d_RemoveFunction(nullptr,&enemy,29,nullptr);
+  expect(spoken.size()==1,"party condition removals remain audible");
+ }
+ enemy_critical=false;removal_id=-1;b::removal_reset_state();spoken.clear();
  b::o_CreateDamageView=&basic;b::o_CreateDamageViewFF2=&basic2;b::o_CreateDamageViewFF5=&basic5;
  b::o_utility_damage=&utility;b::o_utility_damage2=&utility2;b::o_render_damage=&render;b::o_render_damage6=&render6;
  // Joint production postfix -> actual target-effect module -> speech, without
@@ -370,6 +424,27 @@ int main(){using namespace fixture;namespace b=ffpr::battle;namespace s=b::speci
   spoken.clear();unrefreshed.base_values[2]=100;stats::finish_action(&guy,&action_targets);flush();
   expect(spoken==std::vector<std::wstring>{L"Target: Maximum HP up"},"maximum-resource statistics remain distinct from current HP damage");
   stats::reset();spoken.clear();work.clear();
+ }
+ for(int n=1;n<=6;++n) {
+  game_id=static_cast<game::Id>(n);
+  stats::reset();stats::active=true;spoken.clear();
+  Node enemy,temp;
+  enemy.name=L"Gatlinger";enemy.kind=L"BattleEnemyData";enemy.temporary=&temp;
+  Dict empty,attack_up{{reinterpret_cast<void*>(10),reinterpret_cast<void*>(7)}};
+  temp.modifiers=&empty;next_modifiers=&attack_up;
+  expect(!stats::capture(&enemy).valid,"hidden enemy modifier dictionaries are not captured");
+  if(n==2)b::d_UpdateTempParamter(nullptr,&enemy,nullptr);
+  else stats::status(nullptr,&enemy,nullptr);
+  flush();expect(temp.modifiers==&attack_up&&spoken.empty(),"enemy status refresh still applies Attack silently");
+  spoken.clear();List targets{&enemy};
+  stats::observe_action(&enemy,L"Gatlinger",&targets);
+  stats::direct(&enemy,10,7,nullptr);stats::direct(&enemy,10,-7,nullptr);
+  flush();expect(enemy.temporary_values[10]==0&&spoken.empty(),"native enemy Attack up and down apply without a spoken raw stat");
+  spoken.clear();enemy.base_values[10]=6;
+  stats::finish_action(&enemy,&targets);
+  flush();expect(spoken.empty(),"action completion cannot disclose a hidden enemy statistic");
+  spoken.clear();
+  stats::reset();next_modifiers=nullptr;
  }
  // Whole capture -> native continuation -> formatting job -> first fake speech,
  // plus a paused formatter scenario. These timings exclude Unity/native costs,

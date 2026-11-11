@@ -116,34 +116,40 @@ int main() {
         snapshot->route.obstacles.clear();
         std::thread opened([&]{hidden=story_gate_mask(*snapshot,targets,{});});opened.join();
         expect(!hidden[0],"opened story gates restore their destinations");
-        if(n==6)for(int i=0;i<baked::submap_count();++i) {
+        if(n>=4)for(int i=0;i<baked::submap_count();++i) {
             const auto* sm=baked::submap_at(i);if(sm->first_map_id<=0)continue;
             for(const auto& point:baked::grids(*sm).objects)if(point.type==baked::ObjType::SavePoint) {
                 ++save_points;
-                FilterInput input;input.current_map=sm->first_map_id;
+                for(bool live:{false,true}) {
+                FilterInput input;input.current_map=live?sm->first_map_id:1;
                 const auto add=[&](const baked::Object& object,Kind kind) {
                     FilterRow row;row.index=input.rows.size();row.kind=kind;
                     row.category=kind==Kind::SavePoint?Category::SavePoints:Category::Events;
-                    row.remote_map=sm->first_map_id;row.cell_layer=object.layer;row.cell_x=object.tx;row.cell_y=object.ty;
+                    row.remote_map=live?0:sm->first_map_id;row.cell_layer=object.layer;row.cell_x=object.tx;row.cell_y=object.ty;
+                    row.position={(object.tx-sm->width*.5f)*16,(sm->height*.5f-object.ty)*16,0};
                     row.entity_id=object.entity_id();row.raw_name=baked::object_identifier(object);row.name=L"Save Point";
                     input.rows.push_back(std::move(row));
                 };
                 add(point,Kind::SavePoint);add(point,Kind::SavePoint);
                 for(const auto& companion:baked::grids(*sm).objects)if(companion.group==point.group) {
-                    if(save_points::tutorial(baked::object_identifier(companion))) {
-                        expect(companion.a==20&&companion.b==2&&point.contains(companion.tx,companion.ty),"all save tutorials have the verified script/action and anchor");
-                        ++tutorials;add(companion,Kind::Event);
+                    const auto raw=baked::object_identifier(companion);
+                    const bool related=n==4?raw==L"セーブポイント":n==5?(raw==L"セーブポイント（初）"||raw==L"セーブポイント(初)"):save_points::tutorial(raw);
+                    if(companion.type==baked::ObjType::Event&&related&&companion.layer==point.layer&&point.contains(companion.tx,companion.ty)) {
+                        expect((n==4?(companion.a==853||companion.a==855):n==5?companion.a==2006:companion.a==20)&&companion.b==2,"all save companions have the verified game-specific script/action and anchor");
+                        if(!live)++tutorials;add(companion,Kind::Event);
                     }
-                    if(companion.type==baked::ObjType::AnimEntity&&save_points::animation(baked::object_identifier(companion)))++decorations;
+                    if(!live&&companion.type==baked::ObjType::AnimEntity&&save_points::animation(baked::object_identifier(companion)))++decorations;
                 }
+                auto unrelated=input.rows[0];unrelated.index=input.rows.size();unrelated.kind=Kind::Event;unrelated.category=Category::Events;unrelated.raw_name=L"unrelated same-cell event";input.rows.push_back(unrelated);
                 Categories views;std::thread worker([&]{views=build_categories(input);});worker.join();
-                expect(views.views[0].order.size()==1&&views.views[static_cast<size_t>(Category::SavePoints)].order.size()==1&&
-                    views.views[static_cast<size_t>(Category::Events)].order.empty(),"each native FF6 save point has one canonical save-category target");
+                expect(views.views[0].order.size()==2&&views.views[static_cast<size_t>(Category::SavePoints)].order.size()==1&&
+                    views.views[static_cast<size_t>(Category::Events)].order==std::vector<size_t>{unrelated.index},"each native IV/V/VI point has one save-category target and preserves unrelated same-cell events locally and remotely");
+                }
             }
         }
         std::printf("FF%d story-filter and live-trigger fixtures completed\n",n);
     }
-    expect(save_points==42&&tutorials==42&&decorations==42,"all 42 FF6 save-point records and companions are covered");
+    expect(save_points==93&&tutorials==91&&decorations==42,"all93 IV/V/VI points and91 scripted companions are covered; two inert V markers stay excluded");
     expect(fixture::wrong_owner==0,"filter worker never calls a native or game-localization API");
     std::printf("Save points %d, tutorials %d, animations %d; worst gate batch %.3f ms; failures %d\n",save_points,tutorials,decorations,worst,failures);
     return failures?1:0;

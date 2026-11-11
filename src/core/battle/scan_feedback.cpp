@@ -7,7 +7,10 @@
 
 namespace ffpr::battle::scan_feedback {
 namespace {
-ref::Class kScan{"Last.Battle.Function", "ScanBattleFunction", game::kFF3};
+// FFIII Libra/Study and FFIV Scan/Study refresh the same native message
+// index until the timer advances. Both use the fields below before dispatch.
+constexpr uint8_t kScanGames = game::kFF3 | game::kFF4;
+ref::Class kScan{"Last.Battle.Function", "ScanBattleFunction", kScanGames};
 ref::Method mIsFunctionEnd{kScan, "IsFunctionEnd", 0};
 ref::Field fFirst{kScan, "isFirstProcess"};
 ref::Field fIndex{kScan, "messageDisplayCount"};
@@ -48,7 +51,7 @@ void reset(){event={};}
 bool detour(void* self,const void* mi) {
     Observation observed;
     hooks::guarded("Battle.ScanObserve",[&] {
-        if(game::is(game::Id::FF3))copy_fields(self,fFirst.get(),fIndex.get(),&observed);
+        if(game::in(kScanGames))copy_fields(self,fFirst.get(),fIndex.get(),&observed);
     });
     SourceScope scope(self,observed);
     // Native function and its exact bool result remain authoritative. Scope is
@@ -58,13 +61,13 @@ bool detour(void* self,const void* mi) {
     return done;
 }
 int install() {
-    if(!game::is(game::Id::FF3))return 0;
+    if(!game::in(kScanGames))return 0;
     events::on(events::Kind::BattleEntering,[]{reset();});
     events::on(events::Kind::BattleEnd,[]{reset();});
     events::on(events::Kind::SceneLoaded,[]{reset();});
     return hooks::attach(mIsFunctionEnd,&detour,&original)?1:0;
 }
-core::Install registration{"Battle.ScanFeedback",&install,109,game::kFF3};
+core::Install registration{"Battle.ScanFeedback",&install,109,kScanGames};
 }
 bool accept_message() {
     if(!source.valid)return true;

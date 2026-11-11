@@ -1,5 +1,10 @@
 # Attack targeting and displayed ally rows
 
+November3 correction: [current item target entry](ITEM_TARGET_ENTRY_20261103.md)
+uses the native command's eligible TargetPlayerList rather than the prior
+SelectContent cache. All-six distinct native fields and VI side entries are
+verified; displayed-row ownership and correct cursor-movement producers remain.
+
 October24: implemented; canonical build and offline checks passed, gameplay pending. The FFII
 screenshot shows Firion1363/1605 HP, current MP10 and Defend. Maximum MP is not
 displayed and must not be invented.

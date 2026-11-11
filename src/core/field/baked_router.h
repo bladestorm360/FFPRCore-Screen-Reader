@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -13,8 +14,8 @@
 //
 // Movement model (what the game does, confirmed in the FF2 decompile of 2026-10-10):
 //  * cardinal steps plus only the native parser's diagonal stair connections; a
-//    cell's direction mask controls its edges, and a
-//    hidden-passage cell is open to the player (never to the game's searcher) when asked;
+//    cell's physical direction mask controls its edges; hidden-passage IDs
+//    animate tile covers and do not grant movement through walls;
 //  * layer changes happen by stepping on a ToLayer cell (the object's own layer -> its target
 //    layer); the reverse direction has its own native trigger. The step is taken
 //    when the cell is open on either layer;
@@ -24,6 +25,14 @@
 //    the player owns them;
 //  * live blockers (NPCs, closed objects) are passed in by the caller.
 namespace field::baked_route {
+#ifdef FFPR_OFFLINE_CHECK
+// Per-worker test diagnostics; no counters, timers or API in the shipped DLL.
+struct SearchProfile {int x=0,y=0,gx=0,gy=0,vehicle=0,expansions=0;bool found=false;double ms=0;};
+struct WorkProfile {int find_calls=0,flood_calls=0;double find_ms=0,flood_ms=0;std::vector<SearchProfile> searches;};
+void reset_work_profile();
+WorkProfile work_profile();
+void adaptive_world_potential(bool enabled);
+#endif
 
 struct Cell {
     int layer = 1, x = 0, y = 0;
@@ -66,6 +75,9 @@ struct Request {
     int vehicle_group = 0;            // riding: that group's world layer; 0 = on foot
     int vehicle_type = 0, landing_group = 0; // owned riding/landing rules for filter handoff
     int transportation_id = 0;         // observed identity, never an inferred unlock
+    // Resolved native foot IDs for story-dependent raw IDs 33 through 64.
+    // Zero preserves the raw ID, so unknown or unreviewed terrain stays closed.
+    std::array<uint8_t, 32> world_terrain{};
     std::shared_ptr<const TransportRules> transport_rules;
     bool transport_gates = true;       // gates-free explanation proof only
     std::vector<int> auto_groups;     // on foot: groups ridden automatically when owned
@@ -78,6 +90,9 @@ struct Request {
     // Shared across all legs/floods of one owned snapshot, never native pointers.
     std::shared_ptr<const baked::TransitionGrid> transitions;
     bool ignore_hazards = false;     // filter reachability includes destinations behind events
+    // A guide may request only the first current entry. Ordinary routes keep
+    // the complete native forced path;this boundary is never a physical wall.
+    bool avoid_automatic = false;
     bool live_hazards = false;       // current map: replace baked variants with active triggers
     std::vector<Cell> hazards;
     bool live_traps = false;
@@ -86,6 +101,10 @@ struct Request {
     // Reviewed airborne scene entries terminate the leg but keep the aircraft's
     // terrain rules. They must not inherit goals_open's ground-door override.
     bool terminal_goal = false;       // only the exact selected terminal cell
+    // Reviewed direction-dispatched step events use native approach-side bits
+    // N/E/S/W=1/2/4/8. Zero keeps ordinary movement. A final cardinal edge owns
+    // that event's landing; an unrelated flood arrival cannot choose it.
+    int goal_entry_mask = 0;
     bool goals_open = true;           // a closed transition goal may be entered, retaining
                                       // native terrain/transport and directional restrictions: the
                                       // game opens a GotoMap entity's cells for the route
@@ -93,6 +112,23 @@ struct Request {
                                       // a world-map town tile is closed to walking otherwise
     int max_expansions = 0;           // 0 = whole map
 };
+
+inline int converted_terrain(const Request& request, int raw) {
+    return raw >= 33 && raw <= 64 ? request.world_terrain[raw - 33] : 0;
+}
+
+inline int terrain_at(const Request& request, const baked::Grids& grid, int x, int y) {
+    const int raw = baked::attribute(grid, x, y);
+    const int converted = converted_terrain(request, raw);
+    return converted ? converted : raw;
+}
+
+inline bool transport_layer_open(const Request& request, const baked::Grids& grid, int group, int x, int y) {
+    const int converted = converted_terrain(request, baked::attribute(grid, x, y));
+    // FFV's transportation asset loader rewrites the collision tile from the
+    // group's permission for the converted foot ID before parsing the layer.
+    return converted ? baked::group_crosses(group, converted) : baked::vehicle_open(grid, group, x, y);
+}
 
 // Preparation runs on owned workers, never inside a native capture hook.
 uint64_t transportation_bit(int id);
@@ -196,6 +232,10 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
 // Owned multi-world planning shares every ordinary neighbour guard. Fixed
 // storage covers eight indoor directions or four world steps/four mountain actions.
 size_t successors(const Request& r,const Cell& from,std::array<Cell,8>& cells);
+// Incoming cardinal world edges, using the same forward edge/goal/hazard
+// predicates. Room stairs and manual mountain jumps are outside this adapter;
+// cardinal_only explicitly requests an Invincible's zero-action subgraph.
+size_t world_predecessors(const Request& r,const Cell& to,std::array<Cell,8>& cells,bool cardinal_only=false);
 /// Entering this cell changes maps; it cannot be an intermediate walking tile.
 bool terminal_transition(const Request& r, const baked::Grids& g, const Cell& cell);
 /// A teleport landing must be open, clear of blockers/traps/events and have a legal way out.

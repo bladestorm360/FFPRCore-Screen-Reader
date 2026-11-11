@@ -1,0 +1,12 @@
+{
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "methods": [
+    {
+      "method": "Current.ChangeStateToEvent",
+      "rva": 2840320,
+      "bytes": 240,
+      "sha256": "f06c5887afeefc2980c5db196a5d572d6f7c185a221ee2dd9ed98ef124ba8182"
+    }
+  ]
+}

@@ -3,11 +3,136 @@
   "puzzles": [
     {
       "id": "citadel_of_trials",
-      "_about": "The teleporter maze: 1F pad -> 2F point 1; the 2F pads (sc_war_30071_N: ChangeMap [94, N]) jump between the floor's numbered points; the 2F stairs at (33,32) lead to 3F, where the return pad at (29,29) sits by the throne. The router takes the pads as warp edges, so one destination suffices.",
-      "maps": [93, 94, 95],
+      "_about": "Speak to the first-floor elder (native44), follow the unchanged teleport maze to3F native PointIn1, Upper35,32, then open the trial reward chest9 at Ground27,29. Native reward45 completes the entire guide and persists after the item is handed over;3F arrival alone only completes the maze step. The automatic return warp at Bottom29,28 is never a guide target.",
+      "maps": [
+        93,
+        94,
+        95
+      ],
       "steps": [
-        {"map": 95, "x": 29, "y": 28, "layer": 0, "examine": false, "text": "Go to {0}", "arg": "map:95"}
+        {
+          "map": 93,
+          "entity": 8,
+          "raw": "1:村人(おじいさん)",
+          "layer": 2,
+          "x": 23,
+          "y": 21,
+          "examine": true,
+          "text": "Speak to the elder to begin the trial.",
+          "done_scenario": 44
+        },
+        {
+          "map": 95,
+          "x": 35,
+          "y": 32,
+          "layer": 2,
+          "examine": false,
+          "text": "Go to {0}",
+          "arg": "map:95",
+          "reach_map": true
+        },
+        {
+          "map": 95,
+          "entity": 9,
+          "raw": "イベント:ネズミのしっぽ",
+          "layer": 0,
+          "x": 27,
+          "y": 29,
+          "examine": true,
+          "text": "Open the chest after the battle.",
+          "done_scenario": 45
+        }
+      ],
+      "done_scenario": 45
+    },
+    {
+      "id": "earth_rod_slab",
+      "maps": [
+        78,
+        81,
+        40
+      ],
+      "_about": "Vampire victory16, actual Ruby acquisition17, Giant passage18, Sarda Rod19 and slab20. Native receipts skip completed prerequisites; authored world transit only. No treasure-content label disclosure.",
+      "steps": [
+        {
+          "map": 78,
+          "entity": 54,
+          "raw": "ヴァンパイア（コウモリ）",
+          "layer": 0,
+          "x": 31,
+          "y": 39,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 16,
+          "allow_world_transit": true
+        },
+        {
+          "map": 78,
+          "entity": 22,
+          "raw": "ev_スタールビー",
+          "layer": 0,
+          "x": 28,
+          "y": 37,
+          "examine": true,
+          "text": "Open the chest after the battle.",
+          "done_scenario": 17,
+          "allow_world_transit": true
+        },
+        {
+          "map": 81,
+          "entity": 11,
+          "raw": "巨人",
+          "layer": 2,
+          "x": 15,
+          "y": 12,
+          "examine": true,
+          "text": "Speak to the giant.",
+          "done_scenario": 18,
+          "allow_world_transit": true
+        },
+        {
+          "map": 40,
+          "entity": 9,
+          "raw": "賢者サーダ",
+          "layer": 0,
+          "x": 11,
+          "y": 6,
+          "examine": true,
+          "text": "Speak to the sage to obtain the rod.",
+          "done_scenario": 19,
+          "allow_world_transit": true
+        },
+        {
+          "map": 78,
+          "entity": 52,
+          "raw": "土の杖で消える石板",
+          "layer": 2,
+          "x": 31,
+          "y": 28,
+          "examine": true,
+          "text": "Examine the stone slab to use the rod.",
+          "done_scenario": 20,
+          "allow_world_transit": true
+        }
       ]
     }
-  ]
+  ],
+  "guidance_types": {
+    "citadel_of_trials": {
+      "kind": "navigation",
+      "maps": [
+        93,
+        94,
+        95
+      ]
+    },
+    "earth_rod_slab": {
+      "kind": "navigation",
+      "maps": [
+        78,
+        81,
+        40
+      ]
+    }
+  }
 }

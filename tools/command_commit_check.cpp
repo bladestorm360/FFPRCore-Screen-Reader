@@ -12,6 +12,7 @@ int main(){
  int failures=0;auto expect=[&](bool ok,const char* why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
  Node command,row,attack,owner,actor;List rows{&row};command.list=&rows;row.data=&attack;attack.name=L"Attack";
  actor.name=L"Rae";actor.index=1;b::o_SetCursor=&command_cursor;
+ b::o_CommandSelectInit=+[](void*,const void*){++fixture::ready_original_calls;};
  b::o_SetCommandData=+[](void*,void*,void*,void*,const void*){++fixture::original_calls;};
  const char* expected[]={"<CommandSelectingInit>b__71_0","<CommandSelectingInit>b__71_0","<CommandSelectingInit>b__71_0","<CommandSelectingInit>b__73_0","<CommandSelectingInit>b__72_0","<CommandSelectingInit>b__77_0"};
  for(int n=1;n<=6;++n){
@@ -19,7 +20,7 @@ int main(){
   commit_dispatch=native_commit=&command_committed;commit_hook.clear();b::command_install();
   expect(commit_hook==expected[n-1],"exact game-specific native commit callback is registered");
   for(bool inline_reset:{false,true}){
-   b::command_reset_state();spoken.clear();b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
+   b::command_reset_state();spoken.clear();fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
    expect(spoken.size()==2&&spoken[0]==L"Rae's turn"&&spoken[1].starts_with(L"Attack"),"legitimate initial Attack follows its real turn heading");
    spoken.clear();dedup::reset(b::kCommandCtx);const int calls=original_calls;
    committed_body=[&]{if(inline_reset)b::d_SetCursor(&command,0,nullptr);};
@@ -28,7 +29,7 @@ int main(){
    if(!inline_reset)b::d_SetCursor(&command,0,nullptr);
    for(int i=0;i<4;++i)frame::run_tick();
    expect(spoken.empty()&&!b::g_command_turn_ready,"non-targeting commit cannot speak an orphan Attack even before a delayed handoff");
-   actor.name=L"Robyn";actor.index=2;b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);frame::run_tick();
+   actor.name=L"Robyn";actor.index=2;fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);frame::run_tick();
    expect(spoken.size()==2&&spoken[0]==L"Robyn's turn"&&spoken[1].starts_with(L"Attack"),"next character opens a fresh command window and reads initial Attack");actor.name=L"Rae";actor.index=1;
    spoken.clear();b::notify_command_submenu_active();b::d_SetCursor(&command,0,nullptr);frame::run_tick();
    expect(spoken.size()==1&&spoken[0].starts_with(L"Attack"),"a real target/submenu cancellation still reads its current command");
@@ -38,7 +39,7 @@ int main(){
   // The original may initialize the next actor synchronously. Closing again in
   // a postfix would erase that new actor's legitimate focus ownership.
   b::command_reset_state();b::g_command_turn_ready=true;spoken.clear();dedup::reset(b::kCommandCtx);
-  committed_body=[&]{b::d_SetCursor(&command,0,nullptr);b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);};
+  committed_body=[&]{b::d_SetCursor(&command,0,nullptr);fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);};
   commit_dispatch(&owner,&rows,nullptr);
   expect(spoken.size()==2&&spoken[0]==L"Rae's turn"&&spoken[1].starts_with(L"Attack")&&b::g_command_turn_ready,
       "synchronous handoff preserves the new actor's turn and focus");

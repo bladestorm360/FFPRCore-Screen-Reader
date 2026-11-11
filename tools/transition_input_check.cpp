@@ -11,12 +11,15 @@
 namespace fixture {
 bool blocked = true, buttons = false, teleport = false,battle=false;int one_button=-1;
 bool soundscape=true;int single_key=-1;
-bool interception=true;
+bool interception=true,focused=true;
+bool guide_active=false,choice_repeat=false,information=false,key_help=false;
+bool shop=false,shop_panel=false;
+bool text_input=false;
 struct Controller { void* player=reinterpret_cast<void*>(1); } controller;
 int keymap = 0;int modifier=0;
 std::string last_action;
 float trigger = 1;
-int actions = 0, speech = 0, native_reads = 0, modal_calls = 0;
+int actions = 0, speech = 0, native_reads = 0, modal_calls = 0,key_state_reads=0;
 }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace ref {
@@ -42,9 +45,16 @@ void define(const char*, Fn) {}
 }
 namespace queries {
 bool is(const char* name) {
+    if(std::strcmp(name,"PuzzleGuide.IsActive")==0)return fixture::guide_active;
+    if(std::strcmp(name,"PuzzleGuide.CanRepeatDuringEvent")==0)return fixture::choice_repeat;
     if (std::strcmp(name, "GameStatePatches.IsInputTransitionBlocked") == 0) return fixture::blocked;
     if (std::strcmp(name, "GameStatePatches.IsFieldNavigationReady") == 0) return !fixture::blocked;
     if(std::strcmp(name,"BattleStateHelper.IsInBattle")==0)return fixture::battle;
+    if(std::strcmp(name,"ReviewBuffer.IsInformation")==0)return fixture::information;
+    if(std::strcmp(name,"ShopMenuTracker.IsShopMenuActive")==0||std::strcmp(name,"ShopMenuTracker.ValidateState")==0)return fixture::shop;
+    if(std::strcmp(name,"ShopPartyReader.IsPanelShown")==0)return fixture::shop&&fixture::shop_panel;
+    if(std::strcmp(name,"KeyHelpReader.IsScreenActive")==0)return fixture::key_help;
+    if(std::strcmp(name,"TextInputWindow.IsOpen")==0)return fixture::text_input;
     return std::strcmp(name, "NavigationTargetTracker.IsEntity") == 0;
 }
 bool defined(const char*) { return false; }
@@ -63,7 +73,7 @@ namespace ui {
 namespace confirmation {bool is_open(){return false;}}
 namespace text_input {bool is_open(){return false;}}
 bool any_modal_open() { return false; }
-bool handle_modal_input() { ++fixture::modal_calls; return false; }
+bool handle_modal_input() { ++fixture::modal_calls; return fixture::text_input||input::bindings::update_capture(); }
 namespace mod_menu {
 bool is_open() { return false; }
 void open() { ++fixture::actions; } void close() { ++fixture::actions; }
@@ -82,12 +92,12 @@ void set_int(const char*, int) { ++fixture::actions; }
 }
 namespace input {
 bool interception_enabled(){return fixture::interception;}
-bool key_held(Key){return false;} bool key_in_use(Key k){return fixture::single_key==int(k);}
+bool key_held(Key){return false;} bool key_in_use(Key k){++fixture::key_state_reads;return fixture::single_key==int(k);}
 const char* key_name(Key){return "Key";}
 float right_stick_x(){return 0;}float right_stick_y(){return 0;}
 bool key_pressed(Key k) { if(k==Key::F9)return fixture::single_key==int(k);return fixture::single_key<0 || fixture::single_key==int(k); } bool any_key_pressed() { return true; }
 bool shift_held() { return (fixture::modifier&1)!=0; } bool ctrl_held() { return (fixture::modifier&2)!=0; } bool alt_held() { return (fixture::modifier&4)!=0; }
-bool game_window_focused() { return true; } bool gamepad_available() { return true; }
+bool game_window_focused() { return fixture::focused; } bool gamepad_available() { return true; }
 bool sdl_ready() { return true; }
 bool button_pressed(int i) { return fixture::buttons || fixture::one_button==i; } bool button_held(int i) { return fixture::buttons || fixture::one_button==i; }
 float left_trigger() { return fixture::trigger; } float right_trigger() { return 0; }
@@ -224,6 +234,74 @@ int main() {
     fixture::last_action.clear();fixture::execute(K::Alpha2,M::None,input::Context::Battle);
     expect(fixture::last_action=="BattleParty.Slot2","remapping slot1 cannot steal slot2");
     b::reset(first);
-    std::printf("Transition input: binding guards, controller retirement/held LT, both layouts and full-tick soundscape/layout regression: %d failures\n", failures);
+    // Native Opera owns only guide information; loading/field actions remain
+    // blocked. Exercise actual dispatch, saved remaps and release ownership.
+    fixture::blocked=true;fixture::trigger=0;fixture::single_key=int(K::G);fixture::modifier=1;
+    b::event_guide_context(true);fixture::last_action.clear();input::update();
+    expect(fixture::last_action=="PuzzleGuide.Next","blocked performance accepts Shift+G through real full tick");
+    fixture::modifier=2;input::update();expect(fixture::last_action=="PuzzleGuide.Stop","blocked performance accepts Ctrl+G");
+    fixture::single_key=int(K::P);fixture::modifier=0;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"performance cannot dispatch ordinary pathfinding");
+    int guide_index=-1;
+    for(size_t i=0;i<b::entries().size();++i)if(b::entries()[i].label==L"Puzzle guide: start, or the current step again")guide_index=int(i);
+    expect(b::set(guide_index,int(K::F12),0,conflict),"guide retains its original persistent remapping entry");
+    fixture::single_key=int(K::F12);input::update();
+    expect(fixture::last_action=="PuzzleGuide.Next"&&b::event_guide_keyboard_in_use(),"remapped guide dispatches and owns native input during performance");
+    b::event_guide_context(false);fixture::modifier=0;
+    expect(b::event_guide_keyboard_in_use(),"consumed primary stays owned after native event ends");
+    fixture::single_key=-2;expect(!b::event_guide_keyboard_in_use(),"released guide primary retires ownership");
+    b::event_guide_context(true);fixture::single_key=int(K::F12);b::event_guide_keyboard_in_use();
+    fixture::focused=false;expect(!b::event_guide_keyboard_in_use(),"focus loss clears physical key ownership");
+    fixture::last_action.clear();input::update();expect(fixture::last_action.empty(),"unfocused performance cannot dispatch");
+    fixture::focused=true;fixture::single_key=-2;b::reset(guide_index);b::reset_all();input::router::reset();pad_frame(-1,input::Context::Global);
+    pad_frame(input::kBack,input::Context::Global);pad_frame(-1,input::Context::Global);
+    fixture::last_action.clear();pad_frame(input::kWest,input::Context::Global);
+    expect(fixture::last_action.empty()&&input::router_state()==input::RouterState::ModMode,"event mod mode cannot dispatch Gil or field actions");
+    pad_frame(-1,input::Context::Global);pad_frame(input::kRightShoulder,input::Context::Global);
+    expect(fixture::last_action=="PuzzleGuide.Next"&&input::router_state()==input::RouterState::Normal,"event mod mode RB dispatches only guide next");
+    pad_frame(-1,input::Context::Global);pad_frame(input::kBack,input::Context::Global);pad_frame(-1,input::Context::Global);pad_frame(input::kLeftShoulder,input::Context::Global);
+    expect(fixture::last_action=="PuzzleGuide.Stop","event mod mode LB stops guide");
+    b::event_guide_context(false);fixture::single_key=int(K::G);fixture::modifier=1;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"ordinary loading still rejects guide after native performance retires");
+    fixture::guide_active=true;fixture::choice_repeat=true;fixture::last_action.clear();input::update();
+    expect(fixture::last_action=="PuzzleGuide.Next"&&!b::event_guide_context(),"owned choice repeat dispatches without changing Opera's native qualification");
+    fixture::choice_repeat=false;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"stop-only loading cannot start or repeat a guide");
+    fixture::single_key=-2;b::event_guide_keyboard_in_use();b::keyboard_allowed(false);
+    fixture::single_key=int(K::G);fixture::modifier=2;input::update();expect(fixture::last_action=="PuzzleGuide.Stop"&&b::event_guide_keyboard_in_use(),"Ctrl+G can retire and own its physical key during loading after a previous typing context");
+    fixture::single_key=int(K::P);fixture::modifier=0;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"owned cancellation never grants ordinary field/pathfinding access");
+    fixture::single_key=-2;input::update();pad_frame(-1,input::Context::Global);pad_frame(input::kBack,input::Context::Global);pad_frame(-1,input::Context::Global);
+    fixture::last_action.clear();pad_frame(input::kRightShoulder,input::Context::Global);
+    expect(fixture::last_action.empty(),"controller stop-only context cannot request guidance");
+    pad_frame(-1,input::Context::Global);pad_frame(input::kLeftShoulder,input::Context::Global);
+    expect(fixture::last_action=="PuzzleGuide.Stop","controller movie/loading mod mode can retire an owned guide");
+    fixture::blocked=false;fixture::battle=true;b::owned_guide_context(false,true);pad_frame(-1,input::Context::Battle);
+    expect(!input::g_event_mode,"owned cancellation preserves the normal battle controller context");
+    fixture::guide_active=false;fixture::battle=false;b::owned_guide_context(false,false);
+    fixture::blocked=false;fixture::single_key=-2;fixture::modifier=0;
+    fixture::single_key=int(K::Count);fixture::information=false;fixture::key_help=false;fixture::interception=true;fixture::text_input=false;
+    const int recovery=index("key.0.Toggle control interception.-1");
+    expect(recovery>=0&&b::set(recovery,int(K::F16),0,conflict),"recovery toggle accepts a remapped effective key");
+    fixture::single_key=int(K::F9);fixture::last_action.clear();input::update();expect(fixture::last_action.empty(),"old F9 stops toggling interception after reassignment");
+    fixture::single_key=int(K::F16);fixture::last_action.clear();fixture::interception=false;input::update();expect(fixture::last_action=="Input.ToggleControlInterception","effective recovery key still works while ordinary shortcuts are disabled");
+    fixture::text_input=true;fixture::last_action.clear();input::update();expect(fixture::last_action.empty(),"text entry owns its keys before remapped recovery");fixture::text_input=false;
+    const int captured=b::add("key.field.capture.fixture","Capture fixture",false,1,int(K::F19));b::capture(captured);fixture::single_key=int(K::Count);input::update();fixture::single_key=int(K::F9);fixture::last_action.clear();input::update();expect(!b::capturing()&&b::entries()[captured].primary==int(K::F9)&&fixture::last_action.empty(),"old F9 is capturable without toggling interception");fixture::interception=true;fixture::single_key=int(K::Count);
+    for(int slot=1;slot<=9;++slot) {
+        const std::string action="ShopPartyReader.AnnounceSlot"+std::to_string(slot);
+        const std::string label="Shop: party member "+std::to_string(slot)+", equip comparison";
+        input::add_binding(K(int(K::Alpha0)+slot),M::None,input::Context::Shop,action.c_str(),label.c_str());
+    }
+    fixture::shop=fixture::shop_panel=fixture::information=true;
+    fixture::guide_active=fixture::choice_repeat=true;
+    for(int slot=1;slot<=9;++slot) {
+        fixture::single_key=int(K::Alpha0)+slot;fixture::last_action.clear();input::update();
+        expect(fixture::last_action=="ShopPartyReader.AnnounceSlot"+std::to_string(slot),"displayed shop comparison retains each number key with another context ready");
+    }
+    fixture::single_key=int(K::Alpha2);fixture::shop_panel=false;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"equipment review with no shop comparison does not claim native character switching");
+    fixture::shop=false;fixture::information=false;fixture::last_action.clear();input::update();
+    expect(fixture::last_action.empty(),"outside a shop the number key does not request a shop comparison");
+    std::printf("Transition input: binding guards, controller retirement/held LT, both layouts and shop focus: %d failures\n", failures);
     return failures ? 1 : 0;
 }

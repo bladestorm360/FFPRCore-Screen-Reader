@@ -1,0 +1,1874 @@
+{
+  "source_script_hashes": {
+    "Map_20250/sc_e_0370": "c805abc1e031efab0d251958c37170a52ca45067ef426148450ee3bc354ced1b",
+    "Map_20250/sc_e_0371": "7ebfb42ca42e4b67e8db5b9941e7c06788b6690ac90a023fa196429f01b818c0",
+    "Map_20250/sc_e_0371_1": "9f3081e1251e8f6b2bde02dd7e233abc82ffc3d7cc0a64544de297b8936c8645",
+    "Map_20250/sc_e_0469": "fca7618616150ee0c932ba7aea550de37b18a8ad856b685f8a6f54b618c23ea0",
+    "Map_20250/sc_e_0469_0": "b4ac26ee10facd5c530b2b0362a6f11f1660dbc936b9f60d299def58cc9e14d0",
+    "Map_20250/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20250/sc_e_0474": "62b0b91555d2824d6f8de9ef38294477c29cc7569ea6ffc5b5fc7231b9483b5b",
+    "Map_20250/sc_e_0475": "17945b758e8ecb87dfe844543b8d2c372afdecce72f3d28eedc5960ea81c04fb",
+    "Map_20250/sc_e_0497": "9680ef1dfcedb7196a75d09fa914a18cb1c7bc1c55d4b028928e91f1b9fd12cb",
+    "Map_20250/sc_e_0497_1": "cfc3e0975b3b94d43585b8d47c41eba4be5c808cb45277ef782a04fee670c643",
+    "Map_20250/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20250/sc_e_1051": "58cc727ac1b05c866fb96ee450b3e88e33aade4da141145d6b71a86edc798052",
+    "Map_20250/sc_e_1051_1": "e5dec60d6be867799a3729279ed6e830ec05470a27719f5b63312b0c05bf5b30",
+    "Map_20250/sc_map_20250": "b8e2d00cac490e026dc901d68c2c71440382d5592144739aee254a88b044345f",
+    "Map_20251_1/sc_e_0470": "04e04ed7ac0a83aeb39e1725d5e96e4e55cc3da59ef4f183a0e88acf82228102",
+    "Map_20251_1/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_1/sc_e_0476": "efb892a954ded8c1dfc7925885197a27259dd2758c47a1404080977b3318200a",
+    "Map_20251_1/sc_e_0477": "779f11a63603c18e22e893be3ac31d67a391329604895a81e2b9be3db41f4beb",
+    "Map_20251_1/sc_e_0478": "06540e48bb7881e51599fd3975e0e05f03724663cfbe48c570df8f31930e23fc",
+    "Map_20251_1/sc_e_0479": "65ccd11336e52636c0d1f442542f3fe16cd5ba7a2612b49c5ecbde4a005b57d0",
+    "Map_20251_1/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_1/sc_e_0506": "c4f000a5bf957279caf8ec50db0048f09eecc5c81f0c3817af8ff86135278063",
+    "Map_20251_1/sc_map_20251_1": "76f7f0cf18f690890d36ebed16c56f7acc87e9cf0eaed8bc7545aae71940720b",
+    "Map_20251_10/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_10/sc_map_20251_10": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+    "Map_20251_11/sc_e_0470": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+    "Map_20251_11/sc_e_0471": "0babe31b7cd404a7b20c07c139ca378b7a4b7e9a297b9bd648535391d7ad29a4",
+    "Map_20251_11/sc_e_0472": "6a72be50f2e69a7892471fb7f4704b38dc314052804892c58e0916712c6b8255",
+    "Map_20251_11/sc_e_0473": "b78ccb2f1db3e38bb531ef60b66353d5332d82f20701c2ebe266ae200bc511d5",
+    "Map_20251_11/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_11/sc_map_20251_11": "48a1e958b8d5022a9968e118ae74001dd4f52145ed1111e2f4e36d981b566823",
+    "Map_20251_11/sc_npc_20251_11_1": "30941cfc48639fde79665aa73b3375788ffb0c75877a0835ddd7dd6309aaa801",
+    "Map_20251_11/sc_npc_20251_11_2": "a3a337d56a563172de8ca0149223b4d6e74a66ef4b89348a2f3aad7684a9bc38",
+    "Map_20251_12/sc_e_0502_1": "d2c46a349d04127d8b23c2f0aa37b3fe98b073d8f2461e280f9aee95e5d964fd",
+    "Map_20251_12/sc_e_0504": "d6a1141f1b832fb014e4d4382003b86186d82745caa6cb45f69d432102bc1f49",
+    "Map_20251_12/sc_e_0505": "3a46fe384afe919834c41186ae2326e7a82fbf35ee262995c0038f85887e5e01",
+    "Map_20251_12/sc_e_0505_1": "1b22395ccbea9566ac318c9eb739984a7bb0ca8fb70eeef9675ac340825a7c53",
+    "Map_20251_12/sc_e_0505_2": "6dd3178d9f3a4f53733bc6921e5e51b89a1d3cf2639a1481681f9db179094a38",
+    "Map_20251_12/sc_map_20251_12": "36101dc5c092bc7d10dcdd5d6d8dd37f179d2f7c4f78c8c1110444b316aa3954",
+    "Map_20251_2/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_2/sc_map_20251_2": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+    "Map_20251_3/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_3/sc_e_0480": "ab9c1d0fe3fc3bd32faac42c8e85e04d250a72cbfe804f53a917b2dc597fa138",
+    "Map_20251_3/sc_e_0481": "18f73fef5581c97712b3a819b098efc9128e212f6755450d01a5df8e1cd10608",
+    "Map_20251_3/sc_e_0482": "524fac40cccc542a5d33f83d59da15968e86ca3317471586dc419f76779b3256",
+    "Map_20251_3/sc_e_0483": "4ec733a13f66897db9f4c7ebb917ceb08ba01261a1b32487b1ed6850e1ea90a8",
+    "Map_20251_3/sc_e_0484": "49d6b4c35eb0a7951f2ac1e0531000e3853debc3a635b02cdc8c52c7efb88b45",
+    "Map_20251_3/sc_e_0494": "70d184ab42936778941a10dce1d6a8b7311982a951a5f457c34ec7081b44ec2a",
+    "Map_20251_3/sc_e_0494_1": "020911aa3a648a03948594200b0c823da829fb668845b1f8f574341bf7d5104e",
+    "Map_20251_3/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_3/sc_map_20251_3": "c4e11119b0c668f5bd109f85a9065ad2a3c43c0fea08929331f777ea86d9cb23",
+    "Map_20251_4/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_4/sc_e_0495": "10486aca8e879b0edaecb11756785454d052570433ca0671b4e16c6702f7f7dc",
+    "Map_20251_4/sc_e_0495_1": "8888929f07bf464308f1bfffde11ac539ffdd14da5b2f607edff3f7f6ff9a849",
+    "Map_20251_4/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_4/sc_e_0511": "7924b8f466dd9258f8a7937b783989ee9ed162b21fa6ee8755698a655d68e5e9",
+    "Map_20251_4/sc_map_20251_4": "37e8cfbc8a03febe7ca211943c496e41fef86397437b2c1d2085ce2b59049c89",
+    "Map_20251_5/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_5/sc_e_0485": "437e6febff566d9711a36f7e7cc3241332f91f48534557f9999a1e911730818b",
+    "Map_20251_5/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_5/sc_map_20251_5": "8913b187439ecaafc1ab3c2a89e111082eae0017ebb471185b04e2d399f9bb29",
+    "Map_20251_6/sc_e_0498": "5b83b91388a0580a19b1d11c6b85adc196d0fca3338a289284da0c0a19392d65",
+    "Map_20251_6/sc_e_0499": "ed9150c34d528e6fef07c1cfb823f137b0dcd62b5b95a63f42c4d6d88fcc0635",
+    "Map_20251_6/sc_e_0500": "fac4b0a1c6b2fbb783b28d90875b8eaa7a09f2fe6d2164e556c92a6680aa5cb3",
+    "Map_20251_6/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_6/sc_map_20251_6": "7d3e1843fb18110252e9fe45db04eacb6684213884885d5de151dc0c492cb48b",
+    "Map_20251_7/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_7/sc_map_20251_7": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+    "Map_20251_8/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_8/sc_e_0486": "6edf909165c234ccff56930ae65b894cbfdc87d9dad31311e2c3a222aa41481c",
+    "Map_20251_8/sc_e_0487": "e57a1f3c0322ff93b7dce19052c170e7bf7031b1cfd515b744cd9add92fd7a8f",
+    "Map_20251_8/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_8/sc_map_20251_8": "2908172ee487f4042206933bf5d06b423b3505d56a8b7b16e102ee994268696b",
+    "Map_20251_9/sc_e_0473_0": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+    "Map_20251_9/sc_e_0488": "2de97a0df28c0e06ccd2000e5115fccc755520974b0938b0aa14bdab7cbb4c0b",
+    "Map_20251_9/sc_e_0501": "42ea88b1cfee7ea7e78afc94284395bd6a3657143355f75567250e94ac6a15be",
+    "Map_20251_9/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20251_9/sc_map_20251_9": "eaf496749e0f1fa2908223fecc03d5dc930c8e723d57247336862a2e5e0c47fb",
+    "Map_20260/sc_e_0473_0": "0f48fd240bcf3c8bd0efcb28c8d849ecdd9ef6796eddd85ed8a611f03a04cf1c",
+    "Map_20260/sc_e_0489": "792630a5aa0a4930f8be3c5a5124aa493cf7d4d1f9ed36d7fc763ae7bc42a384",
+    "Map_20260/sc_e_0490": "33b250828342d08a518e71f53c95c4396a3592369faf7bf7c4a072c3c4e3cf63",
+    "Map_20260/sc_e_0491": "2c4b2e698c1b25eb7420ee49659b80cb2e1d32538976b0d69cbba37c8bb5e366",
+    "Map_20260/sc_e_0492": "6d4a4913ee6053a9e69e67f51447565435fa72528189dac091625e38b798170c",
+    "Map_20260/sc_e_0493": "416774eba1a525dcf9308381fb47a0f4f34805ca364940ff609f093a092c82c9",
+    "Map_20260/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_20261_1/sc_e_0473_0": "0f48fd240bcf3c8bd0efcb28c8d849ecdd9ef6796eddd85ed8a611f03a04cf1c",
+    "Map_20261_1/sc_e_0496": "0e8f33560903978d4cf02140a98866facd69fac95df1d6cdcd651dedd0af369f",
+    "Map_20261_1/sc_e_0496_1": "58e04d5013470f6bcb7973fa05949e40079236b15de4409f854c3b29eea233be",
+    "Map_20261_1/sc_e_0502_0": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+    "Map_40012/sc_e_0502": "3ab85b4b3c649f7fea49884b183f2b72c80d3d876eb3db3774c14c83be0a1671"
+  },
+  "facts": {
+    "Map_20250/sc_e_0370": {
+      "sha256": "c805abc1e031efab0d251958c37170a52ca45067ef426148450ee3bc354ced1b",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          181,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20250/sc_e_0371": {
+      "sha256": "7ebfb42ca42e4b67e8db5b9941e7c06788b6690ac90a023fa196429f01b818c0",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20250/sc_e_0371_1": {
+      "sha256": "9f3081e1251e8f6b2bde02dd7e233abc82ffc3d7cc0a64544de297b8936c8645",
+      "flags": [],
+      "transfers": [
+        [
+          143,
+          1,
+          "sc_e_0371_2"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20250/sc_e_0469": {
+      "sha256": "fca7618616150ee0c932ba7aea550de37b18a8ad856b685f8a6f54b618c23ea0",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          227,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20250/sc_e_0469_0": {
+      "sha256": "b4ac26ee10facd5c530b2b0362a6f11f1660dbc936b9f60d299def58cc9e14d0",
+      "flags": [],
+      "transfers": [
+        [
+          143,
+          7,
+          ""
+        ],
+        [
+          149,
+          7,
+          ""
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20250/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20250/sc_e_0474": {
+      "sha256": "62b0b91555d2824d6f8de9ef38294477c29cc7569ea6ffc5b5fc7231b9483b5b",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          230,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20250/sc_e_0475": {
+      "sha256": "17945b758e8ecb87dfe844543b8d2c372afdecce72f3d28eedc5960ea81c04fb",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          231,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20250/sc_e_0497": {
+      "sha256": "9680ef1dfcedb7196a75d09fa914a18cb1c7bc1c55d4b028928e91f1b9fd12cb",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20250/sc_e_0497_1": {
+      "sha256": "cfc3e0975b3b94d43585b8d47c41eba4be5c808cb45277ef782a04fee670c643",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          253,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "戦闘結果取得",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20250/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20250/sc_e_1051": {
+      "sha256": "58cc727ac1b05c866fb96ee450b3e88e33aade4da141145d6b71a86edc798052",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20250/sc_e_1051_1": {
+      "sha256": "e5dec60d6be867799a3729279ed6e830ec05470a27719f5b63312b0c05bf5b30",
+      "flags": [],
+      "transfers": [
+        [
+          143,
+          1,
+          "sc_e_1051_2"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20250/sc_map_20250": {
+      "sha256": "b8e2d00cac490e026dc901d68c2c71440382d5592144739aee254a88b044345f",
+      "flags": [
+        [
+          "ScenarioFlag4",
+          156,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_1/sc_e_0470": {
+      "sha256": "04e04ed7ac0a83aeb39e1725d5e96e4e55cc3da59ef4f183a0e88acf82228102",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_1/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_1/sc_e_0476": {
+      "sha256": "efb892a954ded8c1dfc7925885197a27259dd2758c47a1404080977b3318200a",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          232,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止"
+      ]
+    },
+    "Map_20251_1/sc_e_0477": {
+      "sha256": "779f11a63603c18e22e893be3ac31d67a391329604895a81e2b9be3db41f4beb",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          233,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_1/sc_e_0478": {
+      "sha256": "06540e48bb7881e51599fd3975e0e05f03724663cfbe48c570df8f31930e23fc",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          234,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_1/sc_e_0479": {
+      "sha256": "65ccd11336e52636c0d1f442542f3fe16cd5ba7a2612b49c5ecbde4a005b57d0",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          235,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_1/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_1/sc_e_0506": {
+      "sha256": "c4f000a5bf957279caf8ec50db0048f09eecc5c81f0c3817af8ff86135278063",
+      "flags": [
+        [
+          "ScenarioFlag2",
+          2,
+          1
+        ],
+        [
+          "ScenarioFlag2",
+          3,
+          1
+        ],
+        [
+          "ScenarioFlag2",
+          4,
+          1
+        ],
+        [
+          "ScenarioFlag2",
+          5,
+          1
+        ],
+        [
+          "ScenarioFlag2",
+          6,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_1/sc_map_20251_1": {
+      "sha256": "76f7f0cf18f690890d36ebed16c56f7acc87e9cf0eaed8bc7545aae71940720b",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          228,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_10/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_10/sc_map_20251_10": {
+      "sha256": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_11/sc_e_0470": {
+      "sha256": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_11/sc_e_0471": {
+      "sha256": "0babe31b7cd404a7b20c07c139ca378b7a4b7e9a297b9bd648535391d7ad29a4",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_11/sc_e_0472": {
+      "sha256": "6a72be50f2e69a7892471fb7f4704b38dc314052804892c58e0916712c6b8255",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_11/sc_e_0473": {
+      "sha256": "b78ccb2f1db3e38bb531ef60b66353d5332d82f20701c2ebe266ae200bc511d5",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          229,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_11/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_11/sc_map_20251_11": {
+      "sha256": "48a1e958b8d5022a9968e118ae74001dd4f52145ed1111e2f4e36d981b566823",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_11/sc_npc_20251_11_1": {
+      "sha256": "30941cfc48639fde79665aa73b3375788ffb0c75877a0835ddd7dd6309aaa801",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_11/sc_npc_20251_11_2": {
+      "sha256": "a3a337d56a563172de8ca0149223b4d6e74a66ef4b89348a2f3aad7684a9bc38",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_12/sc_e_0502_1": {
+      "sha256": "d2c46a349d04127d8b23c2f0aa37b3fe98b073d8f2461e280f9aee95e5d964fd",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          255,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_12/sc_e_0504": {
+      "sha256": "d6a1141f1b832fb014e4d4382003b86186d82745caa6cb45f69d432102bc1f49",
+      "flags": [
+        [
+          "ScenarioFlag2",
+          1,
+          1
+        ]
+      ],
+      "transfers": [
+        [
+          177,
+          3,
+          ""
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_12/sc_e_0505": {
+      "sha256": "3a46fe384afe919834c41186ae2326e7a82fbf35ee262995c0038f85887e5e01",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_12/sc_e_0505_1": {
+      "sha256": "1b22395ccbea9566ac318c9eb739984a7bb0ca8fb70eeef9675ac340825a7c53",
+      "flags": [
+        [
+          "ScenarioFlag2",
+          0,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "戦闘結果取得"
+      ]
+    },
+    "Map_20251_12/sc_e_0505_2": {
+      "sha256": "6dd3178d9f3a4f53733bc6921e5e51b89a1d3cf2639a1481681f9db179094a38",
+      "flags": [
+        [
+          "ScenarioFlag2",
+          0,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_12/sc_map_20251_12": {
+      "sha256": "36101dc5c092bc7d10dcdd5d6d8dd37f179d2f7c4f78c8c1110444b316aa3954",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_2/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_2/sc_map_20251_2": {
+      "sha256": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_3/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0480": {
+      "sha256": "ab9c1d0fe3fc3bd32faac42c8e85e04d250a72cbfe804f53a917b2dc597fa138",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          236,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0481": {
+      "sha256": "18f73fef5581c97712b3a819b098efc9128e212f6755450d01a5df8e1cd10608",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          237,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0482": {
+      "sha256": "524fac40cccc542a5d33f83d59da15968e86ca3317471586dc419f76779b3256",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          238,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0483": {
+      "sha256": "4ec733a13f66897db9f4c7ebb917ceb08ba01261a1b32487b1ed6850e1ea90a8",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          239,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0484": {
+      "sha256": "49d6b4c35eb0a7951f2ac1e0531000e3853debc3a635b02cdc8c52c7efb88b45",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          240,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0494": {
+      "sha256": "70d184ab42936778941a10dce1d6a8b7311982a951a5f457c34ec7081b44ec2a",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0494_1": {
+      "sha256": "020911aa3a648a03948594200b0c823da829fb668845b1f8f574341bf7d5104e",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          250,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "戦闘結果取得",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_3/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_3/sc_map_20251_3": {
+      "sha256": "c4e11119b0c668f5bd109f85a9065ad2a3c43c0fea08929331f777ea86d9cb23",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_4/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_4/sc_e_0495": {
+      "sha256": "10486aca8e879b0edaecb11756785454d052570433ca0671b4e16c6702f7f7dc",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_4/sc_e_0495_1": {
+      "sha256": "8888929f07bf464308f1bfffde11ac539ffdd14da5b2f607edff3f7f6ff9a849",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          251,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "戦闘結果取得",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_4/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_4/sc_e_0511": {
+      "sha256": "7924b8f466dd9258f8a7937b783989ee9ed162b21fa6ee8755698a655d68e5e9",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_4/sc_map_20251_4": {
+      "sha256": "37e8cfbc8a03febe7ca211943c496e41fef86397437b2c1d2085ce2b59049c89",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_5/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_5/sc_e_0485": {
+      "sha256": "437e6febff566d9711a36f7e7cc3241332f91f48534557f9999a1e911730818b",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          241,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_5/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_5/sc_map_20251_5": {
+      "sha256": "8913b187439ecaafc1ab3c2a89e111082eae0017ebb471185b04e2d399f9bb29",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_6/sc_e_0498": {
+      "sha256": "5b83b91388a0580a19b1d11c6b85adc196d0fca3338a289284da0c0a19392d65",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー表示",
+        "UI非表示",
+        "マップUI全て表示",
+        "時間切れでスクリプト変更"
+      ]
+    },
+    "Map_20251_6/sc_e_0499": {
+      "sha256": "ed9150c34d528e6fef07c1cfb823f137b0dcd62b5b95a63f42c4d6d88fcc0635",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "時間切れでスクリプト変更"
+      ]
+    },
+    "Map_20251_6/sc_e_0500": {
+      "sha256": "fac4b0a1c6b2fbb783b28d90875b8eaa7a09f2fe6d2164e556c92a6680aa5cb3",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "時間切れでスクリプト変更"
+      ]
+    },
+    "Map_20251_6/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_6/sc_map_20251_6": {
+      "sha256": "7d3e1843fb18110252e9fe45db04eacb6684213884885d5de151dc0c492cb48b",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_7/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_7/sc_map_20251_7": {
+      "sha256": "b2d1ee03738445070267a209cca92ac8d0cd593f8fa7cc4d8ac7653942472f80",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_8/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_8/sc_e_0486": {
+      "sha256": "6edf909165c234ccff56930ae65b894cbfdc87d9dad31311e2c3a222aa41481c",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          242,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_8/sc_e_0487": {
+      "sha256": "e57a1f3c0322ff93b7dce19052c170e7bf7031b1cfd515b744cd9add92fd7a8f",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          243,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_8/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_8/sc_map_20251_8": {
+      "sha256": "2908172ee487f4042206933bf5d06b423b3505d56a8b7b16e102ee994268696b",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20251_9/sc_e_0473_0": {
+      "sha256": "94cd885bf6f74318892fe206a0080d8580cce04198bb0ba71a86dfd9d5059fd8",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_9/sc_e_0488": {
+      "sha256": "2de97a0df28c0e06ccd2000e5115fccc755520974b0938b0aa14bdab7cbb4c0b",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          244,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20251_9/sc_e_0501": {
+      "sha256": "42ea88b1cfee7ea7e78afc94284395bd6a3657143355f75567250e94ac6a15be",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "時間切れでスクリプト変更"
+      ]
+    },
+    "Map_20251_9/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20251_9/sc_map_20251_9": {
+      "sha256": "eaf496749e0f1fa2908223fecc03d5dc930c8e723d57247336862a2e5e0c47fb",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20260/sc_e_0473_0": {
+      "sha256": "0f48fd240bcf3c8bd0efcb28c8d849ecdd9ef6796eddd85ed8a611f03a04cf1c",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20260/sc_e_0489": {
+      "sha256": "792630a5aa0a4930f8be3c5a5124aa493cf7d4d1f9ed36d7fc763ae7bc42a384",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          245,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20260/sc_e_0490": {
+      "sha256": "33b250828342d08a518e71f53c95c4396a3592369faf7bf7c4a072c3c4e3cf63",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          246,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20260/sc_e_0491": {
+      "sha256": "2c4b2e698c1b25eb7420ee49659b80cb2e1d32538976b0d69cbba37c8bb5e366",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          247,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20260/sc_e_0492": {
+      "sha256": "6d4a4913ee6053a9e69e67f51447565435fa72528189dac091625e38b798170c",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          248,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20260/sc_e_0493": {
+      "sha256": "416774eba1a525dcf9308381fb47a0f4f34805ca364940ff609f093a092c82c9",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          249,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20260/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20261_1/sc_e_0473_0": {
+      "sha256": "0f48fd240bcf3c8bd0efcb28c8d849ecdd9ef6796eddd85ed8a611f03a04cf1c",
+      "flags": [],
+      "transfers": [],
+      "calls": []
+    },
+    "Map_20261_1/sc_e_0496": {
+      "sha256": "0e8f33560903978d4cf02140a98866facd69fac95df1d6cdcd651dedd0af369f",
+      "flags": [],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "タイマー一時停止解除",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20261_1/sc_e_0496_1": {
+      "sha256": "58e04d5013470f6bcb7973fa05949e40079236b15de4409f854c3b29eea233be",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          252,
+          1
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        "タイマー一時停止",
+        "戦闘結果取得",
+        "タイマー一時停止解除"
+      ]
+    },
+    "Map_20261_1/sc_e_0502_0": {
+      "sha256": "f5a9ea18ee705cdbc84037a9ee60bb926bd7e058a23faa29290cc1c05c133e12",
+      "flags": [],
+      "transfers": [
+        [
+          584,
+          1,
+          "sc_e_0502"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_40012/sc_e_0502": {
+      "sha256": "3ab85b4b3c649f7fea49884b183f2b72c80d3d876eb3db3774c14c83be0a1671",
+      "flags": [],
+      "transfers": [
+        [
+          177,
+          1,
+          "sc_e_0502_1"
+        ]
+      ],
+      "calls": []
+    }
+  },
+  "choices": [
+    {
+      "room": "Map_20251_11",
+      "script": "sc_e_0471",
+      "pc": 6,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0474_00_999_a_25"
+      ]
+    },
+    {
+      "room": "Map_20251_11",
+      "script": "sc_e_0472",
+      "pc": 6,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0474_00_999_a_25"
+      ]
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 22,
+      "options": [
+        "E0502_00_177_c_01",
+        "E0502_00_177_c_02",
+        "E0502_00_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 41,
+      "options": [
+        "E0502_01_177_c_01",
+        "E0502_01_177_c_02",
+        "E0502_01_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 62,
+      "options": [
+        "E0502_02_177_c_01",
+        "E0502_02_177_c_02",
+        "E0502_02_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 81,
+      "options": [
+        "E0502_03_177_c_01",
+        "E0502_03_177_c_02",
+        "E0502_03_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 97,
+      "options": [
+        "E0502_04_177_c_01",
+        "E0502_04_177_c_02",
+        "E0502_04_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 136,
+      "options": [
+        "E0502_06_177_c_01",
+        "E0502_06_177_c_02"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 146,
+      "options": [
+        "E0502_07_177_c_01",
+        "E0502_07_177_c_02"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 158,
+      "options": [
+        "E0502_04_177_c_01",
+        "E0502_04_177_c_02",
+        "E0502_04_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0502_1",
+      "pc": 181,
+      "options": [
+        "E0502_08_177_c_01",
+        "E0502_08_177_c_02"
+      ],
+      "previous_op": "SetFlag",
+      "previous_keys": [
+        "ScenarioFlag1"
+      ]
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0504",
+      "pc": 3,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0504_03_177_a_01"
+      ]
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0504",
+      "pc": 13,
+      "options": [
+        "E0504_00_177_c_01",
+        "E0504_00_177_c_02",
+        "E0504_00_177_c_03"
+      ],
+      "previous_op": "Wait",
+      "previous_keys": []
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0504",
+      "pc": 39,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0504_02_177_a_01"
+      ]
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0504",
+      "pc": 43,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0504_01_177_a_01"
+      ]
+    },
+    {
+      "room": "Map_20251_12",
+      "script": "sc_e_0505",
+      "pc": 3,
+      "options": [],
+      "previous_op": "Msg",
+      "previous_keys": [
+        "E0505_00_177_a_01"
+      ]
+    }
+  ],
+  "actors": [
+    {
+      "submap": "Map_20250",
+      "entity": 24,
+      "group": "ev_e_0474",
+      "script": "sc_e_0474",
+      "type": "NPC",
+      "raw": "魔導アーマー帝国兵:sc_e_0475",
+      "maps": [
+        165
+      ]
+    },
+    {
+      "submap": "Map_20250",
+      "entity": 25,
+      "group": "ev_e_0474",
+      "script": "sc_e_0475",
+      "type": "NPC",
+      "raw": "帝国兵sc_e_0474",
+      "maps": [
+        165
+      ]
+    },
+    {
+      "submap": "Map_20250",
+      "entity": 26,
+      "group": "ev_e_0474",
+      "script": "sc_e_0497",
+      "type": "NPC",
+      "raw": "魔導アーマー帝国兵:sc_e_0497",
+      "maps": [
+        165
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 1,
+      "group": "ev_e_0470",
+      "script": "sc_e_0470",
+      "type": "NPC",
+      "raw": "重臣",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 44,
+      "group": "ev_e_0476",
+      "script": "sc_e_0476",
+      "type": "NPC",
+      "raw": "③魔導アーマー帝国兵:ev_e_0476",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 45,
+      "group": "ev_e_0476",
+      "script": "sc_e_0477",
+      "type": "NPC",
+      "raw": "④魔導アーマー帝国兵:ev_e_0477",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 46,
+      "group": "ev_e_0476",
+      "script": "sc_e_0478",
+      "type": "NPC",
+      "raw": "⑤帝国兵:ev_e_0478",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 47,
+      "group": "ev_e_0476",
+      "script": "sc_e_0479",
+      "type": "NPC",
+      "raw": "⑥帝国兵:ev_e_0479",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_1",
+      "entity": 41,
+      "group": "ev_e_0506",
+      "script": "sc_e_0506",
+      "type": "Event",
+      "raw": "会談の得点に応じた報酬",
+      "maps": [
+        166
+      ]
+    },
+    {
+      "submap": "Map_20251_11",
+      "entity": 17,
+      "group": "ev_e_0471",
+      "script": "sc_e_0471",
+      "type": "Event",
+      "raw": "重臣に阻まれる:ev_e_0471",
+      "maps": [
+        176
+      ]
+    },
+    {
+      "submap": "Map_20251_11",
+      "entity": 16,
+      "group": "ev_e_0471",
+      "script": "sc_e_0472",
+      "type": "Event",
+      "raw": "重臣に阻まれる:ev_e_0472",
+      "maps": [
+        176
+      ]
+    },
+    {
+      "submap": "Map_20251_11",
+      "entity": 15,
+      "group": "ev_e_0473",
+      "script": "sc_e_0473",
+      "type": "NPC",
+      "raw": "ガストラ",
+      "maps": [
+        176
+      ]
+    },
+    {
+      "submap": "Map_20251_12",
+      "entity": 3,
+      "group": "ev_e_0502",
+      "script": "sc_e_0505",
+      "type": "NPC",
+      "raw": "重臣",
+      "maps": [
+        177
+      ]
+    },
+    {
+      "submap": "Map_20251_12",
+      "entity": 4,
+      "group": "ev_e_0502",
+      "script": "sc_e_0505",
+      "type": "NPC",
+      "raw": "重臣",
+      "maps": [
+        177
+      ]
+    },
+    {
+      "submap": "Map_20251_12",
+      "entity": 6,
+      "group": "ev_e_0502",
+      "script": "sc_e_0505",
+      "type": "NPC",
+      "raw": "重臣",
+      "maps": [
+        177
+      ]
+    },
+    {
+      "submap": "Map_20251_12",
+      "entity": 7,
+      "group": "ev_e_0502",
+      "script": "sc_e_0505",
+      "type": "NPC",
+      "raw": "重臣",
+      "maps": [
+        177
+      ]
+    },
+    {
+      "submap": "Map_20251_12",
+      "entity": 13,
+      "group": "ev_e_0504",
+      "script": "sc_e_0504",
+      "type": "Event",
+      "raw": "会談再開",
+      "maps": [
+        177
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 15,
+      "group": "ev_e_0480",
+      "script": "sc_e_0480",
+      "type": "NPC",
+      "raw": "①帝国兵:ev_e_0480",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 14,
+      "group": "ev_e_0480",
+      "script": "sc_e_0481",
+      "type": "NPC",
+      "raw": "②帝国兵:ev_e_0481",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 13,
+      "group": "ev_e_0480",
+      "script": "sc_e_0482",
+      "type": "NPC",
+      "raw": "③帝国兵:ev_e_0482",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 11,
+      "group": "ev_e_0480",
+      "script": "sc_e_0483",
+      "type": "NPC",
+      "raw": "④帝国兵:ev_e_0483",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 10,
+      "group": "ev_e_0484",
+      "script": "sc_e_0484",
+      "type": "NPC",
+      "raw": "帝国兵:ev_e_0484",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_3",
+      "entity": 12,
+      "group": "ev_e_0484",
+      "script": "sc_e_0494",
+      "type": "NPC",
+      "raw": "帝国兵:ev_e_0494",
+      "maps": [
+        168
+      ]
+    },
+    {
+      "submap": "Map_20251_4",
+      "entity": 4,
+      "group": "ev_e_0495",
+      "script": "sc_e_0495",
+      "type": "NPC",
+      "raw": "帝国兵",
+      "maps": [
+        169
+      ]
+    },
+    {
+      "submap": "Map_20251_5",
+      "entity": 1,
+      "group": "ev_e_0485",
+      "script": "sc_e_0485",
+      "type": "NPC",
+      "raw": "帝国兵",
+      "maps": [
+        170
+      ]
+    },
+    {
+      "submap": "Map_20251_6",
+      "entity": 9,
+      "group": "entity_default",
+      "script": "sc_e_0499",
+      "type": "Entity",
+      "raw": "調べるとトイレの水流れる:sc_e_0499",
+      "maps": [
+        171
+      ]
+    },
+    {
+      "submap": "Map_20251_6",
+      "entity": 10,
+      "group": "entity_default",
+      "script": "sc_e_0500",
+      "type": "Entity",
+      "raw": "調べるとトイレの水流れる:sc_e_0500",
+      "maps": [
+        171
+      ]
+    },
+    {
+      "submap": "Map_20251_6",
+      "entity": 12,
+      "group": "ev_e_0498",
+      "script": "sc_e_0498",
+      "type": "Event",
+      "raw": "ケフカの独り言が始まる",
+      "maps": [
+        171
+      ]
+    },
+    {
+      "submap": "Map_20251_8",
+      "entity": 9,
+      "group": "ev_e_0486",
+      "script": "sc_e_0486",
+      "type": "NPC",
+      "raw": "兵士:ev_e_0486",
+      "maps": [
+        173
+      ]
+    },
+    {
+      "submap": "Map_20251_8",
+      "entity": 7,
+      "group": "ev_e_0486",
+      "script": "sc_e_0487",
+      "type": "NPC",
+      "raw": "兵士",
+      "maps": [
+        173
+      ]
+    },
+    {
+      "submap": "Map_20251_9",
+      "entity": 7,
+      "group": "entity_default",
+      "script": "sc_e_0501",
+      "type": "Entity",
+      "raw": "調べるとトイレの水が流れる",
+      "maps": [
+        174
+      ]
+    },
+    {
+      "submap": "Map_20251_9",
+      "entity": 8,
+      "group": "ev_e_0488",
+      "script": "sc_e_0488",
+      "type": "NPC",
+      "raw": "帝国兵",
+      "maps": [
+        174
+      ]
+    },
+    {
+      "submap": "Map_20260",
+      "entity": 20,
+      "group": "ev_e_0489",
+      "script": "sc_e_0489",
+      "type": "NPC",
+      "raw": "①魔導アーマー帝国兵:ev_e_0490",
+      "maps": [
+        178
+      ]
+    },
+    {
+      "submap": "Map_20260",
+      "entity": 19,
+      "group": "ev_e_0489",
+      "script": "sc_e_0490",
+      "type": "NPC",
+      "raw": "②魔導アーマー帝国兵:ev_e_0490",
+      "maps": [
+        178
+      ]
+    },
+    {
+      "submap": "Map_20260",
+      "entity": 18,
+      "group": "ev_e_0489",
+      "script": "sc_e_0491",
+      "type": "NPC",
+      "raw": "③魔導アーマー帝国兵:ev_e_0491",
+      "maps": [
+        178
+      ]
+    },
+    {
+      "submap": "Map_20260",
+      "entity": 17,
+      "group": "ev_e_0489",
+      "script": "sc_e_0492",
+      "type": "NPC",
+      "raw": "④魔導アーマー帝国兵:ev_e_0492",
+      "maps": [
+        178
+      ]
+    },
+    {
+      "submap": "Map_20260",
+      "entity": 15,
+      "group": "ev_e_0493",
+      "script": "sc_e_0493",
+      "type": "NPC",
+      "raw": "帝国兵:ev_e_0493",
+      "maps": [
+        178
+      ]
+    },
+    {
+      "submap": "Map_20261_1",
+      "entity": 9,
+      "group": "ev_e_0496",
+      "script": "sc_e_0496",
+      "type": "NPC",
+      "raw": "帝国兵",
+      "maps": [
+        179
+      ]
+    }
+  ]
+}

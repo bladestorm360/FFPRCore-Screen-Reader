@@ -14,6 +14,8 @@ const DWORD native_owner = GetCurrentThreadId();
 std::atomic<int> wrong_owner{0};
 int native_reads = 0;
 bool capture_ready=false;
+bool probe_walk_edge=false,walk_edge_allowed=true;
+int walk_edge_queries=0;unity::Vec3 walk_edge_position;
 bool capture_movement=false;
 struct MovementProperty {int type=2,steps=1;} movement_property;
 struct MovementActor {MovementProperty* property=&movement_property;} movement_actor;
@@ -36,20 +38,27 @@ bool capture_entity_alive=false,capture_entity_active=false,capture_entity_vehic
 // Other planner fixtures keep their old null-property/native-free behavior.
 struct TransportArray {uint8_t header[24]{};uintptr_t count=0;int32_t values[8]{};};
 struct TransportList {uint8_t header[16]{};TransportArray* items=nullptr;int32_t count=0;};
-struct TransportProperty {int32_t type=19,id=0;TransportList* targets=nullptr;} transport_property;
-struct TransportActor {TransportProperty* property=&transport_property;bool enabled=true;int32_t collision=1;bool power=true;} transport_actor;
+struct TransportProperty {int32_t type=19,id=0;TransportList* targets=nullptr;void* native_name=nullptr;int32_t script=0;} transport_property;
+struct TransportActor {TransportProperty* property=&transport_property;bool enabled=true;int32_t collision=1;bool power=true;int32_t cache_enable=0;} transport_actor;
 bool capture_transport=false;
+bool capture_border=false;int engine_reads=0;
 std::wstring capture_raw_name;
 int current_map=0;
+field::map_state::Flags captured_map_state;
+int observed_group_map=0;
+std::set<std::wstring> observed_map_groups;
 unity::Vec3 current_position;
+field::VehicleState observed_vehicle;
 std::vector<int> auto_groups;
+std::vector<field::SavedWorldVehicle> saved_models;
+int saved_reads=0;
 std::vector<std::function<void()>> queued,completed;
 std::vector<std::string> scheduled;
 std::mutex completion_lock;
 game::Id game_id = game::Id::FF2;
 int filter_mode=-1;bool legacy_filter=false;
 void native() { if (GetCurrentThreadId() != native_owner) ++wrong_owner; else ++native_reads; }
-json::Value records;
+json::Value records,guide_recipes;
 }
 namespace ref {
 Class::Class(const char* n, const char* c, uint8_t g, const char* a) : ns(n), name(c), games(g), assembly(a) {}
@@ -67,12 +76,14 @@ bool Class::is(void*p) { fixture::native();
         if(cls=="MoveLerpInstruction")return p==&fixture::routine_lerp;
     }
     if(fixture::capture_transport&&p==&fixture::transport_actor) {
+        if(fixture::capture_border&&std::strcmp(name,"FieldEntity")==0)return true;
         if(std::strcmp(name,"FieldColliderEntity")==0)return fixture::transport_property.type==19;
         // Match the actual inheritance: RandomEvent and SwitchEvent are also
         // EventTriggerEntity instances. Otherwise the host would conceal a
         // production type-filter omission instead of exercising it.
         if(std::strcmp(name,"EventTriggerEntity")==0)return fixture::transport_property.type==2||fixture::transport_property.type==28||fixture::transport_property.type==30;
     }
+    if(fixture::capture_border&&p==&fixture::transport_property&&std::strcmp(name,"PropertyEvent")==0)return true;
     return fixture::capture_entity_alive&&std::string(name)=="FieldEntity" || (fixture::capture_companion||fixture::capture_movement)&&std::string(name)=="FieldNonPlayer" || fixture::capture_movement&&p==&fixture::movement_property&&std::string(name)=="PropertyNpc";
 }
 int32_t Field::get() { fixture::native();
@@ -90,6 +101,10 @@ int32_t Field::get() { fixture::native();
         if(std::strcmp(name,"<Property>k__BackingField")==0)return offsetof(fixture::TransportActor,property);
         if(std::strcmp(name,"<TargetTransportationIdList>k__BackingField")==0)return offsetof(fixture::TransportProperty,targets);
         if(std::strcmp(name,"<EntityId>k__BackingField")==0)return offsetof(fixture::TransportProperty,id);
+        if(fixture::capture_border&&std::strcmp(name,"<ObjectType>k__BackingField")==0)return offsetof(fixture::TransportProperty,type);
+        if(fixture::capture_border&&std::strcmp(name,"<Name>k__BackingField")==0)return offsetof(fixture::TransportProperty,native_name);
+        if(fixture::capture_border&&std::strcmp(name,"<ScriptId>k__BackingField")==0)return offsetof(fixture::TransportProperty,script);
+        if(fixture::capture_border&&std::strcmp(name,"cacheActiveEnable")==0)return offsetof(fixture::TransportActor,cache_enable);
         if(std::strcmp(name,"enable")==0)return offsetof(fixture::TransportActor,enabled);
         if(std::strcmp(name,"collisionId")==0)return offsetof(fixture::TransportActor,collision);
         if(std::strcmp(name,"<TriggerPower>k__BackingField")==0)return offsetof(fixture::TransportActor,power);
@@ -112,8 +127,8 @@ Class* object_class(void*) { fixture::native(); return nullptr; }
 namespace unity {
 bool alive(void*) { fixture::native(); return fixture::capture_entity_alive; }
 void* game_object(void*) { fixture::native(); return nullptr; }
-void* transform(void* p) { fixture::native(); return fixture::capture_ready?p:nullptr; }
-Vec3 local_position(void*) { fixture::native(); return fixture::current_position; }
+void* transform(void* p) { fixture::native();++fixture::engine_reads; return fixture::capture_ready?p:nullptr; }
+Vec3 local_position(void*) { fixture::native();++fixture::engine_reads; return fixture::current_position; }
 int list_count(void* p) { fixture::native();
     if(fixture::capture_routine&&(p==&fixture::routine_controllers||p==&fixture::routine_instructions)) {
         const auto& list=*static_cast<fixture::RoutineList*>(p);
@@ -133,6 +148,7 @@ int array_length(void* p) { fixture::native(); return fixture::capture_transport
 namespace log_ { void write(const char*, ...) {} }
 namespace hooks { void note_fault(const char*) { std::abort(); } }
 namespace frame {
+bool on_main_thread() { return GetCurrentThreadId()==fixture::native_owner; }
 double now() { return GetTickCount64() / 1000.0; }
 void post(Task task) { std::lock_guard lock(fixture::completion_lock);fixture::completed.push_back(std::move(task)); }
 int every_frame(Step, const char* label, int) { fixture::native();fixture::scheduled.push_back(label); return 0; }
@@ -171,25 +187,30 @@ std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring> arg
 namespace data {
 void prepare_game_json() {}
 std::string game_file(const char*) { return {}; }
-const json::Value& game_json(const char*) { return fixture::records; }
+const json::Value& game_json(const char* name) { return std::string(name)=="puzzles"&&fixture::guide_recipes.get(L"story_guides")?fixture::guide_recipes:fixture::records; }
 }
 namespace field {
 std::wstring format_steps(float distance) { return std::to_wstring(static_cast<int>(distance/16))+L".0 steps"; }
+std::wstring direction_name(unity::Vec3 from,unity::Vec3 to) {return to.y<from.y?L"South":to.y>from.y?L"North":to.x<from.x?L"West":L"East";}
 void prepare_entity_translations() {}
 std::wstring translate_entity_name_snapshot(const std::wstring& value) { return value; }
 std::wstring translate_entity_name_snapshot(const std::wstring& value,int) { return value; }
+std::wstring translate_entity_name_snapshot(const std::wstring& value,int,int) { return value; }
 npc_names::Label npc_display_label_snapshot(const std::wstring& value) { return npc_names::parse(value); }
 int current_map_id() { fixture::native(); return fixture::current_map; }
 void* map_handle() { fixture::native(); return fixture::capture_routine?&fixture::routine_handle:nullptr; }
 void* player() { fixture::native(); return fixture::capture_ready?reinterpret_cast<void*>(1):nullptr; }
 unity::Vec3 player_position() { fixture::native(); return {}; }
-VehicleState current_vehicle() { fixture::native(); return {}; }
+VehicleState current_vehicle() { fixture::native(); return fixture::observed_vehicle; }
 std::vector<int> owned_auto_vehicle_groups() { fixture::native(); return fixture::auto_groups; }
 std::vector<VehicleOnMap> vehicles_on_map() { fixture::native(); return {}; }
-std::vector<SavedWorldVehicle> saved_world_vehicles() {fixture::native();return {};}
+std::vector<SavedWorldVehicle> saved_world_vehicles() {fixture::native();++fixture::saved_reads;return fixture::saved_models;}
 std::wstring vehicle_display_name(int, int, const std::wstring&) { fixture::native(); return {}; }
 bool EntityCursor::next(void*&) { fixture::native(); return false; }
-bool native_position_walkable(void*, unity::Vec3) { fixture::native(); return false; }
+bool native_position_walkable(void*, unity::Vec3 position) {
+ fixture::native();if(!fixture::probe_walk_edge)return false;
+ ++fixture::walk_edge_queries;fixture::walk_edge_position=position;return fixture::walk_edge_allowed;
+}
 bool entity_is_active(void*) { fixture::native(); return fixture::capture_entity_active; }
 bool entity_is_present(void*) { fixture::native(); return fixture::capture_entity_active||fixture::capture_entity_vehicle_hidden; }
 bool entity_is_scenery(void*) { fixture::native(); return false; }
@@ -197,7 +218,18 @@ int object_type_of(void*) { fixture::native(); return fixture::capture_transport
 std::wstring resolve_map_name_by_id(int) { fixture::native(); return {}; }
 }
 namespace field::map_state {
-Resolver::Resolver() : Resolver(Flags{}, fixture::records) { fixture::native(); }
+std::optional<int> scenario_flag(int index) {
+    fixture::native();
+    return fixture::captured_map_state.scenario.at(index);
+}
+Resolver::Resolver() : Resolver(fixture::captured_map_state, fixture::records) {
+ fixture::native();
+ // Same current-map observation input as the production native constructor.
+ // Explicit Flags-only planner fixtures intentionally have no such evidence.
+ if(const auto* room=baked::submap_by_map_id(fixture::observed_group_map)) {
+  observed_index_=baked::submap_index(room);observed_groups_=fixture::observed_map_groups;
+ }
+}
 }
 
 // Real-map counter coverage owns its frame separately from the large planner suite.
@@ -370,11 +402,29 @@ __declspec(noinline) int check_beacon_index(){
     return failures;
 }
 
+// Focused fixtures reuse these native facades and the actual route consumer.
+// Their own main runs their cases; do not also compile this unused full suite.
+// The standalone route_worker_check retains every case below.
+// Wrapper checks own their entry point. The standalone executable below
+// retains every base assertion; wrappers never call its renamed unused body.
+#if !defined(FFPR_ROUTE_FIXTURE_ONLY) && !defined(main)
 int main() {
     std::setvbuf(stdout,nullptr,_IONBF,0); // retain the decisive fixture if a native-style fault terminates the host
     using namespace field::baked_nav;
     int failures = check_beacon_index();
     auto expect = [&](bool ok, const char* line) { if (!ok) { ++failures; std::printf("FAIL %s\n", line); } };
+    // Exercise the actual warning formatter, independently of the planner's
+    // existing required-trap/event classification and destination identity.
+    for(int number=1;number<=6;++number) {
+        fixture::game_id=static_cast<game::Id>(number);
+        field::PathInfo warning;MapGoal destination;
+        expect(route_warning(warning,destination).empty(),"all-six safe routes have no required-action warning");
+        warning.event_on_route=true;
+        expect(route_warning(warning,destination)==L"Event required","all-six event warning is minimal");
+        warning.required_trap=true;
+        expect(route_warning(warning,destination)==L"Trap required","all-six trap warning is minimal and takes precedence");
+    }
+    fixture::game_id=game::Id::FF2;
     int retired = 0;
     std::vector<worker_job::Owner*> owners{&g_route_owner,&g_follow_owner,&g_quick_owner,&g_browse_owner};
     std::vector<uint64_t> epochs;
@@ -653,6 +703,97 @@ int main() {
         for(auto& v:chest_flags.treasure) v=0;
         for(auto& v:chest_flags.global) v=0;
         failures += check_counter_routes(number,chest_flags,chest_records);
+        if(number==4) {
+            using field::PathInfo;
+            using field::TargetKind;
+            const auto& world=*field::baked::submap_by_map_id(1);
+            fixture::capture_ready=true;fixture::current_map=1;
+            fixture::observed_vehicle={true,3,3,{},1};
+            const auto prior_flags=fixture::captured_map_state;
+            auto prior_records=std::move(fixture::records);
+            fixture::records=chest_records;
+            fixture::captured_map_state=chest_flags;
+            fixture::captured_map_state.current_map_id=1;
+            MapGoal goal;goal.map_id=1;goal.cell={1,40,69};goal.moving_flight_directions=true;
+            auto position=[&](Cell at){fixture::current_position=world_of_cell(world,at);};
+            auto work=[&] {
+                auto jobs=std::move(fixture::queued);fixture::queued.clear();
+                std::thread worker([&]{for(auto& job:jobs)job();});worker.join();
+            };
+            auto publish=[&] {
+                auto completions=std::move(fixture::completed);fixture::completed.clear();
+                for(auto& completion:completions)completion();
+            };
+            int publications=0;PathInfo answer;
+            auto start=[&](Cell at) {
+                invalidate_active();clear_pending(true);
+                position(at);answer={};publications=0;
+                request_route(goal,TargetKind::Transition,L"Troia Castle",[&](PathInfo path){answer=std::move(path);++publications;});
+            };
+            const auto full_started=std::chrono::steady_clock::now();
+            start({1,52,16});work();publish();
+            const auto full_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-full_started).count();
+            expect(publications==1&&answer.success&&answer.walk_phases.size()==2,"stationary Enterprise route has a native flight and landing/walk leg");
+            const auto original=answer.walk_phases;
+            start({1,52,16});work();position({1,51,17});publish();
+            expect(!publications&&request_pending()&&fixture::queued.size()==1,"diagonal movement queues one bounded flight-only adjustment");
+            const auto began=std::chrono::steady_clock::now();work();publish();
+            const auto elapsed=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-began).count();
+            expect(publications==1&&answer.success&&!request_pending()&&answer.walk_phases.size()==2&&original.size()==2&&
+                   answer.walk_phases.front().cells.front()==Cell{1,51,17}&&
+                   answer.walk_phases.back().cells==original.back().cells&&answer.walk_phases.back().action_cell==original.back().action_cell,
+                   "updated Enterprise path starts at the current tile and preserves the proved landing and walk");
+            start({1,77,254});work();position({1,75,0});publish();work();position({1,74,1});publish();
+            expect(publications==1&&!answer.success&&!request_pending()&&fixture::queued.empty()&&answer.walk_phases.empty()&&
+                   answer.reason.find(L"Planned landing is ")==0&&answer.reason.find(L"South in a straight line")!=std::wstring::npos,
+                   "continued movement across the seam publishes the latest approximate bearing once, without a stale walking path");
+            start({1,52,16});work();position({1,51,17});publish();work();fixture::observed_vehicle={true,1,1,{},1};publish();
+            expect(!publications&&!request_pending(),"landing or switching vehicles retires the in-flight adjustment");
+            fixture::observed_vehicle={true,3,3,{},1};goal.moving_flight_directions=false;
+            start({1,52,16});work();position({1,51,17});publish();
+            expect(!publications&&request_pending(),"ordinary route consumers still require an exact current pose");
+            cancel_requests();work();publish();
+            fixture::capture_ready=false;fixture::current_map=0;fixture::observed_vehicle={};fixture::captured_map_state=prior_flags;
+            fixture::records=std::move(prior_records);
+            invalidate_active();clear_pending(true);
+            std::printf("Enterprise moving flight: %.3f ms full request, %.3f ms flight adjustment (fake owner, immediate worker delivery)\n",full_ms,elapsed);
+
+            auto route_flags=chest_flags;
+            route_flags.current_map_id=1;route_flags.scenario[43]=1; // Zot return contact has retired
+            auto parked_route=[&](Cell from,Cell target,Cell parked,int entity) {
+                RouteSnapshot capture(field::map_state::Resolver(route_flags,chest_records));
+                capture.map_id=1;capture.submap=&world;capture.layer=1;capture.locale=L"en";
+                capture.position=world_of_cell(world,from);capture.vehicle={true,1,1,{},1};
+                field::VehicleOnMap aircraft;aircraft.transportation_id=3;aircraft.type=3;aircraft.pos=world_of_cell(world,parked);
+                capture.vehicles={aircraft};capture.vehicle_shortcuts=true;
+                capture.goal.map_id=1;capture.goal.cell=target;capture.goal.entity_id=entity;
+                if(entity>=0)capture.goal.raw_name=L"GotoMap";
+                capture.kind=TargetKind::Transition;
+                return capture;
+            };
+            for(const auto& [from,steps]:std::array<std::pair<Cell,int>,4>{{
+                    {{1,46,41},39},{{1,50,65},15},{{1,51,65},16},{{1,40,70},0}}}) {
+                auto capture=parked_route(from,{1,40,70},{1,41,70},57);
+                Planned route;BrowsePlanned browse;
+                const auto route_started=std::chrono::steady_clock::now();
+                std::thread replay([&]{route=plan_snapshot(capture);browse=plan_browse_snapshot(capture);});replay.join();
+                std::printf("Troia town approach (%d,%d): %d steps, %zu phases, browse direct %d, %.3f ms\n",
+                    from.x,from.y,route.path.step_count,route.path.walk_phases.size(),browse.route.direct,
+                    std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-route_started).count());
+                expect(route.path.success&&route.path.step_count==steps&&route.path.walk_phases.size()==1&&
+                       route.path.walk_phases.front().transportation_id==0&&browse.route.direct,
+                    "the exact logged Troia entrance uses a legal walk even with the Enterprise parked on the approach");
+            }
+            auto crossing=parked_route({1,109,202},{1,159,186},{1,108,202},-1);
+            Planned required;
+            std::thread ocean([&]{required=plan_snapshot(crossing);});ocean.join();
+            std::printf("Agart to Mysidia: %d steps, %zu phases\n",required.path.step_count,required.path.walk_phases.size());
+            expect(required.path.success&&required.path.walk_phases.size()==3&&
+                   required.path.walk_phases[1].vehicle_before==field::route_progress::VehicleAction::ConfirmBoard&&
+                   required.path.walk_phases[1].cells.size()>1&&
+                   required.path.walk_phases[2].vehicle_before==field::route_progress::VehicleAction::ConfirmLand,
+                   "the Agart-to-Mysidia route retains actual flight when walking cannot cross the ocean");
+        }
         if(number==6) {
             const auto* room=field::baked::submap_by_map_id(318);
             expect(room!=nullptr,"Terra defense uses the actual Narshe mines room 318");
@@ -734,15 +875,64 @@ int main() {
                         expect((mask&(1<<side))!=0,"direction-dispatched crossing cannot use an unreviewed side");
                     }}
                     bool landing=false;
-                    for(const auto& p:field::baked::grids(*floor).objects)
+                    const auto* destination=crossing.a==-1?floor:field::baked::submap_by_map_id(crossing.a);
+                    if(destination)for(const auto& p:field::baked::grids(*destination).objects)
                         landing|=p.type==field::baked::ObjType::PointIn&&p.a==crossing.b;
-                    expect(landing,"every reviewed same-floor crossing resolves its own factual landing");
+                    expect(landing,"every reviewed crossing resolves its own factual destination-floor landing");
                 }
             }
-            expect(crossings==87&&directional==69,"Phoenix, Zozo, cave bridges and tower ladder travel are present");
+            // Closed Darill qualification adds three directional turtle arcs
+            // (463/20,22,23); Sealed Gate adds manual fall408/69 with no side
+            // restriction. Keep the older census exact rather than relaxing it.
+            // Gerad adds exactly two directional, recurring turtle-bank arcs.
+            // Esper Cave adds exactly three native manual bridge jumps.
+            // One exact animated Solitary Island raft now owns the full actual
+            // manual voyage landing; its four native sides need no restriction.
+            // Yeti's two examined switches retain their exact native points
+            // and layers. They add two manual companions, with no side mask.
+            // The later Opera lever adds one exact completed manual exit,
+            // preserving its actual final landing and unrestricted native sides.
+            expect(crossings==91+3+1+10+2+3+1+2+1&&directional==71+3+10+2+3,"earlier reviewed travel plus Darill, Sealed Gate, factory, Gerad, Esper, Solitary, Yeti and the later Opera exit are present");
             std::printf("FF6 reviewed travel: %d solid interactions, %d approach restrictions checked\n",crossings,directional);
             const auto* phoenix=field::baked::submap_by_map_id(498);
             const auto& cave_record=*chest_records.get(field::baked::name_of(*phoenix));
+            auto arrival_flags=chest_flags;arrival_flags.area.fill(0);arrival_flags.local.fill(0);
+            arrival_flags.current_map_id=498;arrival_flags.current_area_id=static_cast<int>(cave_record.get(L"area_id")->n);
+            field::map_state::Resolver arrival_state(arrival_flags,chest_records);
+            int automatic_rocks=0;
+            for(const auto& crossing:field::baked::grids(*phoenix).objects) {
+                if(crossing.type!=field::baked::ObjType::Warp||(crossing.d&255)!=1||
+                    (crossing.entity_id()!=205&&crossing.entity_id()!=206))continue;
+                ++automatic_rocks;const int mask=(crossing.d>>8)&15;
+                expect(mask==3||mask==12,"moving-rock branch preserves its actual pair of native entry headings");
+                const Cell end{crossing.layer,crossing.tx,crossing.ty};
+                const auto* arrival=point_in(*phoenix,crossing.b,arrival_state);
+                expect(arrival&&arrival->tx==end.x&&arrival->ty==end.y+(mask==3?3:-3)&&arrival->layer==end.layer,
+                    "each automatic rock crossing lands at its exact three-tile native displacement");
+                for(int held:{0,1})for(int side=0;side<4;++side) {
+                    auto state=chest_flags;state.current_map_id=498;state.current_area_id=static_cast<int>(cave_record.get(L"area_id")->n);
+                    state.area.fill(0);state.local.fill(0);state.area[6]=held;
+                    const int dx[]={0,1,0,-1},dy[]={-1,0,1,0};
+                    field::baked_route::Request request;request.submap=phoenix;request.start={end.layer,end.x+dx[side],end.y+dy[side]};
+                    request.goals={end};request.goal_entry_mask=mask;request.transportation_id=1;
+                    field::map_state::Resolver projected(state,chest_records);field::map_state::add_obstacles(projected,*phoenix,request,true,true);
+                    const auto route=field::baked_route::find(request);
+                    const auto reach=field::baked_route::flood(request);
+                    const int distance=distance_to_object(request,reach,crossing,end.layer,false);
+                    if(!held)expect(!route.found&&distance<0,"restored rocks block every entry when switch6 is released");
+                    if(route.found) {
+                        expect(route.cells.size()>1,"a directional step event cannot invent a zero-movement entry");
+                        const int direction=field::baked_route::step_direction(route.cells[route.cells.size()-2],route.cells.back());
+                        expect(direction>=0&&direction<4&&(mask&(1<<((direction+2)%4))),
+                            "the reconstructed final edge selects the same branch as the graph distance");
+                    }
+                    if(!(mask&(1<<side)))expect(distance!=1,"a flood arrival from another side cannot borrow this landing");
+                    request.start=end;
+                    expect(!field::baked_route::find(request).found&&distance_to_object(request,field::baked_route::flood(request),crossing,end.layer,false)<0,
+                        "an already occupied trigger has no invented native entry heading");
+                }
+            }
+            expect(automatic_rocks==4,"both native rock triggers retain both direction-dependent arrivals");
             for(int index=1;index<=7;++index) {
                 auto held=chest_flags;held.current_map_id=498;held.current_area_id=static_cast<int>(cave_record.get(L"area_id")->n);
                 held.area.fill(0);held.local.fill(0);held.area[static_cast<size_t>(index)]=1;
@@ -1026,3 +1216,4 @@ int main() {
     expect(fixture::wrong_owner == 0, "world search/cancellation also avoid all native APIs");
     std::printf("Route worker check: %d failures\n", failures); return failures ? 1 : 0;
 }
+#endif

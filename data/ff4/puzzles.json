@@ -1,50 +1,153 @@
 {
-  "_comment": "Guided puzzle solutions for FINAL FANTASY IV (src/core/field/puzzle_guide.cpp). Map ids are the map master's (tools/mapdump/ff4_master/map.txt); cells are baked tile coordinates, one row above the dumps' ty for tile objects since the 2026-10-11 bottom-edge fix in bake_maps.py (tools/mapdump/ff4_objects.jsonl). Authored 2026-10-10 from the dumps' developer labels; not yet tested in game.",
+  "_comment": "Original factual puzzle recipes. Examined controls require native operation receipts and exact target identities; waypoint arrival alone completes only navigation steps. Source/evidence/limits: docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md.",
   "puzzles": [
     {
       "id": "troia_castle_treasury",
-      "_about": "Troia Castle B1: the four floor switches are stepped on in order, 1 to 4 (the developers' label: スイッチ（1→2→3→4→終了）). Switches at (2,7) (5,7) (8,7) (11,7), the doors on the row below.",
-      "maps": [102],
+      "_about": "Troia Castle B1 starts at the entrance switch. Each native receipt opens the gate to the next contact. The fourth operation finishes the guide before the far-side contact.",
+      "maps": [
+        102
+      ],
       "steps": [
-        {"map": 102, "x": 2, "y": 6, "layer": 0, "examine": false, "text": "Step on switch {0}", "arg": "1"},
-        {"map": 102, "x": 5, "y": 6, "layer": 0, "examine": false, "text": "Step on switch {0}", "arg": "2"},
-        {"map": 102, "x": 8, "y": 6, "layer": 0, "examine": false, "text": "Step on switch {0}", "arg": "3"},
-        {"map": 102, "x": 11, "y": 6, "layer": 0, "examine": false, "text": "Step on switch {0}", "arg": "4"}
+        {
+          "map": 102,
+          "x": 7,
+          "y": 10,
+          "layer": 0,
+          "examine": false,
+          "text": "Step on switch {0}",
+          "arg": "1",
+          "entity": 41,
+          "raw": "スイッチ（1→2→3→4→終了）",
+          "done_scenario": 274
+        },
+        {
+          "map": 102,
+          "x": 2,
+          "y": 6,
+          "layer": 0,
+          "examine": false,
+          "text": "Step on switch {0}",
+          "arg": "2",
+          "entity": 43,
+          "raw": "扉1のスイッチ",
+          "done_scenario": 275
+        },
+        {
+          "map": 102,
+          "x": 5,
+          "y": 6,
+          "layer": 0,
+          "examine": false,
+          "text": "Step on switch {0}",
+          "arg": "3",
+          "entity": 45,
+          "raw": "扉2のスイッチ",
+          "done_scenario": 276
+        },
+        {
+          "map": 102,
+          "x": 8,
+          "y": 6,
+          "layer": 0,
+          "examine": false,
+          "text": "Step on switch {0}",
+          "arg": "4",
+          "entity": 44,
+          "raw": "扉3のスイッチ",
+          "done_scenario": 279
+        }
       ]
     },
     {
-      "id": "baron_castle_switches",
-      "_about": "Castle Baron: the two wall switches in the castle at (18,31) and (18,20).",
-      "maps": [4],
+      "id": "magnetic_cave",
+      "maps": [
+        100,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
       "steps": [
-        {"map": 4, "x": 18, "y": 30, "layer": 0, "examine": true, "text": "Examine the switch"},
-        {"map": 4, "x": 18, "y": 19, "layer": 0, "examine": true, "text": "Examine the switch"}
+        {
+          "map": 100,
+          "entity": 22,
+          "raw": "ギルバートと再会",
+          "layer": 0,
+          "x": 9,
+          "y": 5,
+          "examine": false,
+          "text": "Obtain {0} from your ally.",
+          "done_scenario": 34,
+          "arg": "modtext:FF4 item Twin Harp",
+          "allow_world_transit": true
+        },
+        {
+          "map": 201,
+          "entity": 5,
+          "raw": "ダークエルフ",
+          "layer": 0,
+          "x": 12,
+          "y": 13,
+          "examine": true,
+          "text": "Remove metal equipment before exploring. Fight the first encounter, then wait for the harp scene.",
+          "done_scenario": 97,
+          "allow_world_transit": true
+        },
+        {
+          "map": 201,
+          "entity": 4,
+          "raw": "ダークエルフ",
+          "layer": 0,
+          "x": 12,
+          "y": 13,
+          "examine": true,
+          "text": "Equip metal equipment again, then defeat the guardian.",
+          "done_scenario": 36
+        },
+        {
+          "map": 201,
+          "entity": 3,
+          "raw": "クリスタル青",
+          "layer": 0,
+          "x": 12,
+          "y": 10,
+          "examine": true,
+          "text": "Collect the item.",
+          "done_scenario": 98
+        }
+      ],
+      "_about": "Exact native item/control stages; completion requires the native receipt, not adjacency. Cinematics, manual menus and battles remain native.",
+      "done_scenario": 98
+    }
+  ],
+  "guidance_types": {
+    "troia_castle_treasury": {
+      "kind": "navigation",
+      "maps": [
+        102
       ]
     },
-    {
-      "id": "baron_castle_1f_switch",
-      "_about": "Castle Baron 1F: the switch at (18,9) opens the door at (19,7).",
-      "maps": [5],
-      "steps": [
-        {"map": 5, "x": 18, "y": 8, "layer": 0, "examine": true, "text": "Examine the switch"}
-      ]
-    },
-    {
-      "id": "baron_castle_1f_west_switch",
-      "_about": "Castle Baron 1F (west): the switch at (18,9) opens the door at (16,7).",
-      "maps": [16],
-      "steps": [
-        {"map": 16, "x": 18, "y": 8, "layer": 0, "examine": true, "text": "Examine the switch"}
-      ]
-    },
-    {
-      "id": "devils_road_hidden_door",
-      "_about": "Town of Baron, Devil's Road: the switch at (5,11) opens the hidden door at (6,9).",
-      "maps": [29],
-      "steps": [
-        {"map": 29, "x": 5, "y": 10, "layer": 0, "examine": true, "text": "Examine the switch"},
-        {"map": 29, "x": 6, "y": 8, "layer": 0, "examine": false, "text": "Go through the hidden door"}
+    "magnetic_cave": {
+      "kind": "other",
+      "maps": [
+        100,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
       ]
     }
-  ]
+  }
 }

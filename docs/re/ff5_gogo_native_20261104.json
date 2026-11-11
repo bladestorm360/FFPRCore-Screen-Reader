@@ -1,0 +1,1105 @@
+{
+  "scope_tag": "ff5_Gogo",
+  "maps": {
+    "485": "Map_30531_1",
+    "486": "Map_30531_2",
+    "487": "Map_30531_3",
+    "488": "Map_30531_4",
+    "489": "Map_30531_5",
+    "490": "Map_30531_6",
+    "491": "Map_30531_7",
+    "492": "Map_30531_8",
+    "493": "Map_30531_9",
+    "494": "Map_30531_10",
+    "622": "Map_30531_11"
+  },
+  "battle_references": {
+    "489": {
+      "script": "sc_b_timer",
+      "monsters": [
+        353
+      ]
+    },
+    "632": {
+      "script": "",
+      "monsters": [
+        353
+      ]
+    }
+  },
+  "battle_scripts": {
+    "sc_b_timer": {
+      "bundle": "battle_script_assets_all_57093aabd9509d9fbf4bb15e3e875251.bundle",
+      "bundle_sha256": "a6d234367d06cf4b76f02aa14630ae513b49159400fbadad60b446ecd9f98337",
+      "asset_sha256": "76f2f6ed78d8534076f0ebbf531c38270f7d84650c0846f478719158fcfc7ab6",
+      "operations": 39
+    },
+    "sc_ai_353_FamedMimicGogo": {
+      "bundle": "monster_ai_assets_all_e4a98eaba55f62da64589c60af5ce7c6.bundle",
+      "bundle_sha256": "9c2da3c3bb66200764d9db9505ba15a0b8ea51a76d5a0488188b87e960dab022",
+      "asset_sha256": "7a72a64c2939d657c14a8b5f9b8153dfae55533e7bd9df0dec6b47d15c8c495e",
+      "operations": 148
+    }
+  },
+  "source_script_hashes": {
+    "Map_30531_1/sc_e_0332": "9768083c00172f0763bc3da98949043aab8b62136c88fa76143b5ab7ea2ba7f1",
+    "Map_30531_1/sc_e_0425": "a2d7fc00d4c72ad8c130fd2d6795552d74f490a9d92c03bc620a1241f5736d81",
+    "Map_30531_1/sc_map_30531_1": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_1/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_10/sc_e_0166": "900933b9a337d2de93262cd1f4616d505e332df46bb56435f42a335ac08595c9",
+    "Map_30531_10/sc_e_0166_1": "4c345413e00ede3c0b072bb52f0ebcc0eb5e428a35c4065c70a7c4b7cd50a4a5",
+    "Map_30531_10/sc_map_30531_10": "0e33242f1991883e0f434294009466ca950cb0e44fc6ca64dc37aedc729bd915",
+    "Map_30531_10/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_11/sc_30531_11_to_10050": "88d7f25a65794df71c110064b5564bbf4f1c2d2ead3a799296c0f75f7de90fd0",
+    "Map_30531_11/sc_30531_11_to_30531_1": "1211710d58ed53239c86608320d0c5ac1f0e4e3f1a7e49665111a21df6a55417",
+    "Map_30531_11/sc_map_30531_11": "8bc86f1797a62785b1429c2494025559941b8e5ffc2395fd93ce9a096635e31d",
+    "Map_30531_2/sc_map_30531_2": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_2/sc_map_30531_2_climb_1": "e4a244e150d1d4cb749e9d6f4371245ca726b8c2793e5a4a7b305a8f564c77bf",
+    "Map_30531_2/sc_map_30531_2_climb_2": "1effb6b2ff6a04a9474031de2e00f9456511dc503ef26611256235c527b093bf",
+    "Map_30531_2/sc_map_30531_2_climb_3": "26490c7d50025d8eed245eeee74ffdc58910e99dbb5c46f87bdb14692bdf78a8",
+    "Map_30531_2/sc_map_30531_2_fall_1": "20ca101d3b1b3320511c1b555aa951d9c61178f71fa59b7d749670a7cf7533bc",
+    "Map_30531_2/sc_map_30531_2_fall_2": "02dcd5bc8c652302e9c96eb4ccc3a3d4f35edd881e899b383afe15dfe8f29670",
+    "Map_30531_2/sc_map_30531_2_fall_3": "a43c51d75bf5bf5fa4d59fc370c2509bd1112dc5dc73ab192774b61e71ac649c",
+    "Map_30531_2/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_3/sc_map_30531_3": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_3/sc_map_30531_3_climb_1": "aa01854bd05826f6f326a3a66a6c06296f4f076a9f6a7e802c9376ffc157d0ce",
+    "Map_30531_3/sc_map_30531_3_climb_2": "9b26452b650a04f8adb51e1baf58ac9baa8adce17d3438a7cf364596df852d2a",
+    "Map_30531_3/sc_map_30531_3_climb_3": "463d0cf00faaaaf7ce65ef44b309e3b425288a9bd2aad665ffa507ea089fe2c8",
+    "Map_30531_3/sc_map_30531_3_fall_1": "ec22b123e490387d63d43bb53507fa54be02c48807286acd06880f7bce90f33f",
+    "Map_30531_3/sc_map_30531_3_fall_2": "b746da6223c5e6e6a722d939f0851a37426c97107a72a7c11a57840e941eb789",
+    "Map_30531_3/sc_map_30531_3_fall_3": "b286af20522ee882c2a2390f37ee8aa8dbfc13e0dd6b38aa79b93f9a7f5cdc83",
+    "Map_30531_3/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_4/sc_map_30531_4": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_4/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_5/sc_map_30531_5": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_5/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_6/sc_e_0333": "9fb1ae3108ea3e33e09c9c98789a7d0a26c461abdbb58caede33ada14b9def6b",
+    "Map_30531_6/sc_map_30531_6": "9119f3a4aca15535ffa13766b03d97d5550dfcfd48c5a1178225f3549c24e0c6",
+    "Map_30531_6/sc_map_30531_6_climb": "9977468ef6c3edafd604413474892a648f3aa33901b91ffc1f3a1a45dee6ac64",
+    "Map_30531_6/sc_map_30531_6_fall": "22a830b4e13b96429767b0f0135633eeb46bcdbb1ef62109919461192a36646c",
+    "Map_30531_6/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_7/sc_map_30531_7": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_7/sc_map_30531_7_climb": "2955139eda6286f0b20e2b1973f93fca7d06f500798a84259ca34d12caa7acc4",
+    "Map_30531_7/sc_map_30531_7_fall": "68aba4c86141873a52fe539bdfbcd99c156f18e97c0d3a5c01286d48823d2689",
+    "Map_30531_7/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_8/sc_map_30531_8": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_8/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_30531_9/sc_map_30531_9": "b0b839bf034a2975dc85649764fb78195a03823bd6836dc2960f81f84dd8d4d3",
+    "Map_30531_9/sc_tlp": "bb2df079457a5a4b52f23bbadfe60e017e22a832d5f7c3402f87b35411257b95",
+    "Map_10050/sc_ride_submarine": "9465ff090f83b24e32362bf33be0460a9ca396ab8eadad9bbc9561f3422cf2b3",
+    "Map_10050/sc_map_10050": "d1215479e20598a63906b83194872683c78b9a0684b35fe840d55215994ec552",
+    "Resident/sc_walse_time_over": "08b526bf6dd8927242defe9473c70747f7493d19c920ea443cdfdc1a813852b4"
+  },
+  "actors": [
+    {
+      "room": "Map_30531_1",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 2,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        11,
+        4
+      ],
+      "destination": 622,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_1",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 3,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        11,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_1",
+      "type": "GotoMap",
+      "editor": 3,
+      "entity": 4,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        11,
+        18
+      ],
+      "destination": 486,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_1",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 5,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        11,
+        17
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_10",
+      "type": "PointIn",
+      "editor": 1,
+      "entity": 1,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_10",
+      "type": "GotoMap",
+      "editor": 2,
+      "entity": 2,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        4
+      ],
+      "destination": 493,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_10",
+      "type": "NPC",
+      "editor": 12,
+      "entity": 5,
+      "raw": "クリスタル",
+      "group": "ev_e_0166",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_10",
+      "type": "Entity",
+      "editor": 13,
+      "entity": 8,
+      "raw": "sc_e_0166 ものまねしゴゴ",
+      "group": "ev_e_0166",
+      "script": "sc_e_0166",
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "GotoMap",
+      "editor": 32,
+      "entity": 1,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        13
+      ],
+      "destination": 623,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "PointIn",
+      "editor": 34,
+      "entity": 61,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        7,
+        7
+      ],
+      "destination": null,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "PointIn",
+      "editor": 35,
+      "entity": 4,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        13
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "PointIn",
+      "editor": 42,
+      "entity": 62,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        7,
+        10
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "Event",
+      "editor": 44,
+      "entity": 44,
+      "raw": "沈んだウォルスの塔",
+      "group": "entity_default",
+      "script": "sc_30531_11_to_30531_1",
+      "cell": [
+        "GroundObject",
+        7,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_11",
+      "type": "Entity",
+      "editor": 45,
+      "entity": 63,
+      "raw": "海底へ",
+      "group": "entity_default",
+      "script": "sc_30531_11_to_10050",
+      "cell": [
+        "GroundObject",
+        7,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 1,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        7
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 2,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        6
+      ],
+      "destination": 485,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "PointIn",
+      "editor": 3,
+      "entity": 3,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        7
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "PointIn",
+      "editor": 5,
+      "entity": 4,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        8,
+        7
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "PointIn",
+      "editor": 7,
+      "entity": 5,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "Event",
+      "editor": 19,
+      "entity": 19,
+      "raw": "落ちる①",
+      "group": "entity_default",
+      "script": "sc_map_30531_2_fall_1",
+      "cell": [
+        "GroundObject",
+        8,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "Event",
+      "editor": 20,
+      "entity": 20,
+      "raw": "落ちる②",
+      "group": "entity_default",
+      "script": "sc_map_30531_2_fall_2",
+      "cell": [
+        "GroundObject",
+        12,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_2",
+      "type": "Event",
+      "editor": 21,
+      "entity": 21,
+      "raw": "落ちる③",
+      "group": "entity_default",
+      "script": "sc_map_30531_2_fall_3",
+      "cell": [
+        "GroundObject",
+        10,
+        10
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "PointIn",
+      "editor": 1,
+      "entity": 15,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        12,
+        9
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "PointIn",
+      "editor": 3,
+      "entity": 16,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        8,
+        9
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 17,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        13
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "PointIn",
+      "editor": 5,
+      "entity": 18,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "GotoMap",
+      "editor": 2,
+      "entity": 19,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        17
+      ],
+      "destination": 488,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "Entity",
+      "editor": 12,
+      "entity": 12,
+      "raw": "ツタのぼり①",
+      "group": "entity_default",
+      "script": "sc_map_30531_3_climb_1",
+      "cell": [
+        "BottomObject",
+        8,
+        8
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "Entity",
+      "editor": 13,
+      "entity": 13,
+      "raw": "ツタのぼり②",
+      "group": "entity_default",
+      "script": "sc_map_30531_3_climb_2",
+      "cell": [
+        "BottomObject",
+        12,
+        8
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_3",
+      "type": "Entity",
+      "editor": 14,
+      "entity": 14,
+      "raw": "ツタのぼり③",
+      "group": "entity_default",
+      "script": "sc_map_30531_3_climb_3",
+      "cell": [
+        "BottomObject",
+        10,
+        12
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_4",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 1,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        12,
+        4
+      ],
+      "destination": 487,
+      "point": 4
+    },
+    {
+      "room": "Map_30531_4",
+      "type": "GotoMap",
+      "editor": 2,
+      "entity": 2,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        6
+      ],
+      "destination": 489,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_4",
+      "type": "PointIn",
+      "editor": 3,
+      "entity": 3,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        12,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_4",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 4,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_5",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 1,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        4
+      ],
+      "destination": 488,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_5",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 2,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_5",
+      "type": "GotoMap",
+      "editor": 3,
+      "entity": 3,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        13
+      ],
+      "destination": 490,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_5",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 4,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        12
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 4,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        5
+      ],
+      "destination": 489,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 5,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "GotoMap",
+      "editor": 3,
+      "entity": 6,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        12
+      ],
+      "destination": 491,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 7,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "PointIn",
+      "editor": 5,
+      "entity": 8,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        7,
+        10
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "Event",
+      "editor": 12,
+      "entity": 12,
+      "raw": "落ちる④",
+      "group": "entity_default",
+      "script": "sc_map_30531_6_fall",
+      "cell": [
+        "BottomObject",
+        7,
+        9
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_6",
+      "type": "Entity",
+      "editor": 17,
+      "entity": 3,
+      "raw": "空気入手：トリガー",
+      "group": "ev_e_0333",
+      "script": "sc_e_0333",
+      "cell": [
+        "BottomObject",
+        7,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "GotoMap",
+      "editor": 1,
+      "entity": 7,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        4
+      ],
+      "destination": 490,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 8,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "GotoMap",
+      "editor": 3,
+      "entity": 9,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        12
+      ],
+      "destination": 492,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "PointIn",
+      "editor": 4,
+      "entity": 10,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "PointIn",
+      "editor": 5,
+      "entity": 11,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        7,
+        9
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_7",
+      "type": "Entity",
+      "editor": 6,
+      "entity": 6,
+      "raw": "ツタのぼり④",
+      "group": "entity_default",
+      "script": "sc_map_30531_7_climb",
+      "cell": [
+        "BottomObject",
+        7,
+        8
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_8",
+      "type": "PointIn",
+      "editor": 1,
+      "entity": 1,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        8,
+        5
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_8",
+      "type": "PointIn",
+      "editor": 3,
+      "entity": 2,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_8",
+      "type": "GotoMap",
+      "editor": 4,
+      "entity": 3,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        8,
+        4
+      ],
+      "destination": 491,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_8",
+      "type": "GotoMap",
+      "editor": 5,
+      "entity": 4,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        7
+      ],
+      "destination": 493,
+      "point": 1
+    },
+    {
+      "room": "Map_30531_9",
+      "type": "PointIn",
+      "editor": 1,
+      "entity": 1,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_9",
+      "type": "PointIn",
+      "editor": 2,
+      "entity": 2,
+      "raw": "PointIn",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        6
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30531_9",
+      "type": "GotoMap",
+      "editor": 3,
+      "entity": 3,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        10
+      ],
+      "destination": 492,
+      "point": 2
+    },
+    {
+      "room": "Map_30531_9",
+      "type": "GotoMap",
+      "editor": 4,
+      "entity": 4,
+      "raw": "GotoMap",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "BottomObject",
+        10,
+        7
+      ],
+      "destination": 494,
+      "point": 1
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "native_functions": [
+    {
+      "method": "Current.SetupBgmTempoUp",
+      "rva": 2900944,
+      "bytes": 912,
+      "sha256": "0c53eeadf158fc5e51ec67bbf0eb4a7157c736ed7379839eadf2f50a092c180e"
+    },
+    {
+      "method": "Current.ResetBgmTempoUp",
+      "rva": 2883296,
+      "bytes": 112,
+      "sha256": "ed39fb7f377264f89c19fbde75e29bfbd05405394db7274f82be16b7387e1d24"
+    },
+    {
+      "method": "Current.TempoCallback0",
+      "rva": 7951520,
+      "bytes": 128,
+      "sha256": "03a62174a578b2130ca637f37923017e626679c67c0a3301ab23dbc343068b5e"
+    },
+    {
+      "method": "Current.TempoCallback1",
+      "rva": 7951648,
+      "bytes": 128,
+      "sha256": "f62e7c09dcddb548bedd0102d89c693c2b1a21e32f9966c734229b16eca480ff"
+    },
+    {
+      "method": "Current.SyncLoadBgmForPitch",
+      "rva": 2911712,
+      "bytes": 608,
+      "sha256": "144bd532cb13aefea4031c6e80ff448334aa417dc2ae4a91a5ead99c94e08106"
+    },
+    {
+      "method": "Current.SyncPitchCallback",
+      "rva": 7954336,
+      "bytes": 80,
+      "sha256": "a5a403aa27b7fd62c411de6e255d2c99e69f1aecc5a302708c5feea12f4da3c7"
+    }
+  ],
+  "mechanic_sources": {
+    "monster_party.txt": "63af9c6102ac48d59767030b85cbc1c2174de94f710b5b4e9318dc0927710cf8",
+    "monster.txt": "8764ba3b2368c005279431334ebd3e8d3d5b4464c48bff3270b1fa04f9bcd557",
+    "monster_ai_script.txt": "a04f1fde5246e0a829b0d8c34e297ed8fc1f6ece302eeebb18bac6206bd831ba",
+    "ability.txt": "4cceb0baaeb702ae8ef5493eb648e8cfa1cfc112ada35c8388cde26f87014ce2",
+    "script.txt": "ea0f0a9f58480baf861dd812409a79009bdb91418547993b878e1b4e29ead5c0",
+    "map.txt": "4d9f99c7a2d2ca39939173e73fbc24ebba92c837fe681084430c9b49400e7d94",
+    "map_script.txt": "000ba7b97bad15fff0d991c057b9160602960ce1a1aa222e1db04f9d597d206b",
+    "story_mes_en.txt": "a5e1bbceb3a88714e16f4ea4cadb4251992ee0e1c0e31fdc31a46df5bb365ef9"
+  },
+  "additional_discoveries": [
+    {
+      "game": "ff5",
+      "submap": "Map_30531_10",
+      "group": "ev_e_0166",
+      "entity": 8,
+      "raw": "sc_e_0166 ものまねしゴゴ",
+      "script": "sc_e_0166",
+      "script_sha256": "900933b9a337d2de93262cd1f4616d505e332df46bb56435f42a335ac08595c9",
+      "guides": [
+        "gogo_sunken_tower"
+      ],
+      "discovery": "Independent native special-battle/field callback review;not included in the three immutable map-mechanism inventories.",
+      "evidence": "docs/re/FF5_GOGO_20261104.md;actual489/148-operation AI,full166 and native safe622 return."
+    }
+  ]
+}

@@ -1,0 +1,5830 @@
+{
+  "scope_tag": "ff5_Desert",
+  "source_script_hashes": {
+    "Map_30170/sc_e_0060": "2bc17502a2dad8fbd708b3438221700296eebea7a0592983d06e911cc0f46ba4",
+    "Map_30170/sc_e_0060_1": "5a164d2eef8f677a8b605a4cbe1d7fc980b2bb9ca409d233ba405a7e4eeaa4df",
+    "Map_30170/sc_e_0060_2": "26233692dc126a70ff2d26a2e8e6cd83d6ebc15ee218589c951759d439f77bee",
+    "Map_30170/sc_e_0060_3": "5c361416fb834577d8bc0728ea0870478aacc0e82c2fa14681c5e6b5c6bf8c47",
+    "Map_30170/sc_e_0060_4": "5c7c8ea996caff98ff575620e53f5e592b37380f68cd91296fb3c50948ea68f6",
+    "Map_30170/sc_e_0060_5": "5caa6d51c9e5c5b9205887df150cf676de96668fdb4916179f58b7c85c047977",
+    "Map_30170/sc_e_0060_6": "7813c31f4053d9fd6dd10f915df66251a51e66cc22806ced12be2dc4785e1ee3",
+    "Map_30170/sc_e_0060_7": "515efa68d98eb96b96589c98d986e5b00612797f96e89f15f244266a4b722cd4",
+    "Map_30170/sc_e_0060_8": "643d048b288635b43a656dfdcafb173439b6799843d868609a1e21cf9eae6db7",
+    "Map_30170/sc_map_30170": "b0310ad439297f4e8a215b1d8812a258dd1dcf92bb05af9bbecc8f30a6098471"
+  },
+  "actors": [
+    {
+      "room": "Map_30170",
+      "type": "PointIn",
+      "editor": 6,
+      "entity": 66,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        53,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": null
+    },
+    {
+      "room": "Map_30170",
+      "type": "GotoMap",
+      "editor": 7,
+      "entity": 63,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        53,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 14,
+      "collision": null,
+      "action": 3
+    },
+    {
+      "room": "Map_30170",
+      "type": "PointIn",
+      "editor": 8,
+      "entity": 67,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        49,
+        58
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": null
+    },
+    {
+      "room": "Map_30170",
+      "type": "GotoMap",
+      "editor": 9,
+      "entity": 64,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        49,
+        59
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 15,
+      "collision": null,
+      "action": 3
+    },
+    {
+      "room": "Map_30170",
+      "type": "Entity",
+      "editor": 326,
+      "entity": 826,
+      "raw": "石像1",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        24,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": true,
+      "action": 0
+    },
+    {
+      "room": "Map_30170",
+      "type": "Entity",
+      "editor": 327,
+      "entity": 827,
+      "raw": "石像2",
+      "group": "entity_default",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        26,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": true,
+      "action": 0
+    },
+    {
+      "room": "Map_30170",
+      "type": "NPC",
+      "editor": 1,
+      "entity": 61,
+      "raw": "シド",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_7",
+      "cell": [
+        "UpperObject",
+        64,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "NPC",
+      "editor": 2,
+      "entity": 62,
+      "raw": "ミド",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_7",
+      "cell": [
+        "UpperObject",
+        64,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 3,
+      "entity": 65,
+      "raw": "サンドウォームと戦闘",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060",
+      "cell": [
+        "UpperObject",
+        53,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 13,
+      "entity": 13,
+      "raw": "サンドウォームと戦闘:流砂1",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_2",
+      "cell": [
+        "UpperObject",
+        51,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 14,
+      "entity": 14,
+      "raw": "サンドウォームと戦闘:流砂2",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_3",
+      "cell": [
+        "UpperObject",
+        55,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 15,
+      "entity": 15,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 16,
+      "entity": 16,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 17,
+      "entity": 17,
+      "raw": "サンドウォームと戦闘:流砂5",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_6",
+      "cell": [
+        "UpperObject",
+        51,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 18,
+      "entity": 828,
+      "raw": "サンドウォームと戦闘:流砂6",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_8",
+      "cell": [
+        "UpperObject",
+        55,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 19,
+      "entity": 829,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 20,
+      "entity": 20,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 21,
+      "entity": 21,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 22,
+      "entity": 22,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 23,
+      "entity": 23,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 24,
+      "entity": 24,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 25,
+      "entity": 25,
+      "raw": "サンドウォームと戦闘:流砂6",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_8",
+      "cell": [
+        "UpperObject",
+        54,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 26,
+      "entity": 26,
+      "raw": "サンドウォームと戦闘:流砂5",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_6",
+      "cell": [
+        "UpperObject",
+        52,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "NPC",
+      "editor": 27,
+      "entity": 27,
+      "raw": "シド：イベント後",
+      "group": "ev_e_0060",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        65,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 4
+    },
+    {
+      "room": "Map_30170",
+      "type": "NPC",
+      "editor": 28,
+      "entity": 28,
+      "raw": "ミド：イベント後",
+      "group": "ev_e_0060",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        65,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 4
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 302,
+      "entity": 502,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 303,
+      "entity": 503,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 304,
+      "entity": 504,
+      "raw": "サンドウォームと戦闘:流砂3",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_4",
+      "cell": [
+        "UpperObject",
+        50,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Event",
+      "editor": 305,
+      "entity": 505,
+      "raw": "サンドウォームと戦闘:流砂4",
+      "group": "ev_e_0060",
+      "script": "sc_e_0060_5",
+      "cell": [
+        "UpperObject",
+        56,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": null,
+      "action": 2
+    },
+    {
+      "room": "Map_30170",
+      "type": "Entity",
+      "editor": 306,
+      "entity": 800,
+      "raw": "鍵がかかっている",
+      "group": "ev_e_0060",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        25,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "collision": true,
+      "action": 4
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "native_functions": [
+    {
+      "method": "SlidingFloor.Setup",
+      "rva": 15465568,
+      "bytes": 32,
+      "sha256": "8be63416a1ba8ad454e3e053f52b9c6d9f6caeb241bda31912ae500f7fdce90f"
+    },
+    {
+      "method": "SlidingFloor.UpdateGimmick",
+      "rva": 15465600,
+      "bytes": 800,
+      "sha256": "e8da7d6dfe01e60890ee573b02cf8759271e0bf17c0b03d71a3cb7053027c307"
+    },
+    {
+      "method": "SlidingFloor.Enable",
+      "rva": 15465456,
+      "bytes": 112,
+      "sha256": "963e79791764bc30c44c0f15f42861fa03b9e1be6e18a5a47c4c84fd3c858d85"
+    },
+    {
+      "method": "SlidingFloor.Disable",
+      "rva": 15465360,
+      "bytes": 96,
+      "sha256": "10de252e98e924616e2f5951a39d8a4fb589429522079a623034e9923187955a"
+    },
+    {
+      "method": "SlidingFloor.Property",
+      "rva": 9887936,
+      "bytes": 128,
+      "sha256": "40bf1ae068b8e8c9322d9ef646f09d5b178e920d78e7040792e0d49f36f200a5"
+    },
+    {
+      "method": "Gimmick.Init",
+      "rva": 15700368,
+      "bytes": 128,
+      "sha256": "9e5f23dcc2f5b8f32f43ab42e76ec52033b992e358d771717a34a97606c8534f"
+    },
+    {
+      "method": "Gimmick.InRange",
+      "rva": 15700096,
+      "bytes": 272,
+      "sha256": "a85e1abb909553d70900235cc357e3d9fb2415b32ba1bc238d94080753a1a412"
+    },
+    {
+      "method": "Gimmick.Enabled",
+      "rva": 15701360,
+      "bytes": 32,
+      "sha256": "5aea94aa02d50457f1dcacd2b486cfb8bca7991922571e3a4fcc6b00b2a70ee2"
+    },
+    {
+      "method": "Gimmick.Property",
+      "rva": 9883824,
+      "bytes": 272,
+      "sha256": "b762c962ceb087359474337b56df4b6b3865b39d6b4012e3857b2521b80103df"
+    },
+    {
+      "method": "Direction.Vector",
+      "rva": 3120144,
+      "bytes": 512,
+      "sha256": "7f9355c827517a3c3bd95c70f0d844a5b5d2afba8cd55651a16b5edfc33e9abb"
+    },
+    {
+      "method": "Player.MoveTo",
+      "rva": 15733344,
+      "bytes": 416,
+      "sha256": "47a7c2b6255c871947679a15834a21299004a9fd3a8c6a16282d8f88aa609f31"
+    },
+    {
+      "method": "NonPlayer.MoveTo",
+      "rva": 15728000,
+      "bytes": 192,
+      "sha256": "3a19f43211eeb7e22a6f6a14c1bcf57ca7638266f501d716fdb4b4d3fe111e5a"
+    },
+    {
+      "method": "Entity.MoveTo",
+      "rva": 15691872,
+      "bytes": 2800,
+      "sha256": "3a1d17e6ee597b402720a02d4a18863b676d9c76d26c5509cf9507b9465c2b72"
+    },
+    {
+      "method": "Sprite.MoveTo",
+      "rva": 15468672,
+      "bytes": 784,
+      "sha256": "c6617e5a2013c82995bb460ba43dd50cc2bd2223961b484a07de5c5670c27c70"
+    },
+    {
+      "method": "MapController.CanMoveTo",
+      "rva": 2606976,
+      "bytes": 1296,
+      "sha256": "f8a480789b48668b2df983e986570452d56140debb49d4391c68848627246f53"
+    },
+    {
+      "method": "MapUtility.ParseObjectGroups",
+      "rva": 3111568,
+      "bytes": 1152,
+      "sha256": "f8aa4d95945973288d90d3c7f4ccb8dd0bcebeeacc370137ac4e0e41a2379d3a"
+    },
+    {
+      "method": "Entity.UpdateRaycast",
+      "rva": 15698976,
+      "bytes": 32,
+      "sha256": "e2b8fcb34fc20f649f6f4ea1b5f0ba1ec42cc1a60e9c92ac96cea3e01fbcabc8"
+    },
+    {
+      "method": "MapController.SetupGimmickArea",
+      "rva": 2674528,
+      "bytes": 1328,
+      "sha256": "ba3a4cec422c501bf75af3000179e665ec373a329f3a27f25bfb718f5dd71840"
+    },
+    {
+      "method": "Companion.UpdateRaycast",
+      "rva": 15671600,
+      "bytes": 336,
+      "sha256": "d5be3096bf15ee543affbfdf7a0af835f479ffc8f20e5fb453660652bc202ef8"
+    },
+    {
+      "method": "Character.UpdateRaycast",
+      "rva": 5713872,
+      "bytes": 3792,
+      "sha256": "2202b396dbcd7b50922a79097d2b624478b0adf7733b4cc55c20b4a9a25480c7"
+    },
+    {
+      "method": "Player.ChangeMoveState",
+      "rva": 15731040,
+      "bytes": 96,
+      "sha256": "c11481c5485815a72d9bf05c30e693e270f73b6c077cdb55ef7119a1976b56ac"
+    },
+    {
+      "method": "Loop.UpdateGimmick",
+      "rva": 3671040,
+      "bytes": 176,
+      "sha256": "fe06ff51ce2f1431185aeb517185f900ee7879821bf58c4c7ed2dcedab57bab9"
+    },
+    {
+      "method": "Keyboard.OnKeyDown",
+      "rva": 8150752,
+      "bytes": 1424,
+      "sha256": "2c8b2137020cdf360ed8da4011eacc4777c52ae8fb3175c4ccb6eee7b3bbcc6e"
+    },
+    {
+      "method": "Keyboard.Axis",
+      "rva": 8152368,
+      "bytes": 864,
+      "sha256": "c851864a89448951388c1a09a248d17b44498872f3e9e5485977430418021171"
+    },
+    {
+      "method": "Map.UpdateController",
+      "rva": 2688096,
+      "bytes": 1088,
+      "sha256": "b162393f8d2dea5f1fc4938ccea2e27335635de3c03e8964c5d27f72fd0978ab"
+    },
+    {
+      "method": "FieldMap.InitGimmick",
+      "rva": 3651184,
+      "bytes": 48,
+      "sha256": "bfa393f9b903e729076eaf41ed8912c0560977f21e9660f976677806de6d9d7e"
+    },
+    {
+      "method": "Input.SetActive",
+      "rva": 3480784,
+      "bytes": 128,
+      "sha256": "b3f1097ef1a745a9985a019d1fd778cc3f6f37995ef833acaff2edf81c61e9bc"
+    },
+    {
+      "method": "Puppet.Route",
+      "rva": 2995568,
+      "bytes": 1968,
+      "sha256": "40a012786094fccb28d288012ab49a239e542ced91b79b83a9832fec2bde6222"
+    }
+  ],
+  "sliding_constants": [
+    {
+      "instruction": 15465904,
+      "rva": 29654780,
+      "value": 16.0
+    },
+    {
+      "instruction": 15465945,
+      "rva": 29654780,
+      "value": 16.0
+    },
+    {
+      "instruction": 15466028,
+      "rva": 26786628,
+      "value": 1.0
+    }
+  ],
+  "sliding_areas": [
+    {
+      "editor": 41,
+      "entity": 811,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        53,
+        15
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 42,
+      "entity": 812,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        15
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 43,
+      "entity": 813,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        14
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 44,
+      "entity": 814,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        13
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 46,
+      "entity": 815,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        10
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 47,
+      "entity": 816,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 48,
+      "entity": 817,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        8
+      ],
+      "size": [
+        128,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 49,
+      "entity": 818,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        7
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 50,
+      "entity": 819,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        37,
+        6
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 51,
+      "entity": 109,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        36,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 52,
+      "entity": 110,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        31,
+        5
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 53,
+      "entity": 111,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        30,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 54,
+      "entity": 112,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        6
+      ],
+      "size": [
+        160,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 55,
+      "entity": 113,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        25,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 56,
+      "entity": 114,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        24,
+        7
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 57,
+      "entity": 115,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        23,
+        7
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 58,
+      "entity": 116,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        24,
+        8
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 59,
+      "entity": 117,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        9
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 60,
+      "entity": 118,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        17,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 61,
+      "entity": 119,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        8
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 62,
+      "entity": 120,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 63,
+      "entity": 121,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 64,
+      "entity": 122,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        11
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 65,
+      "entity": 123,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 66,
+      "entity": 124,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        19,
+        11
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 67,
+      "entity": 125,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        24,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 68,
+      "entity": 126,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        24,
+        12
+      ],
+      "size": [
+        336,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 69,
+      "entity": 127,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 70,
+      "entity": 128,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        30,
+        11
+      ],
+      "size": [
+        224,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 71,
+      "entity": 129,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 72,
+      "entity": 130,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        10
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 73,
+      "entity": 131,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        28,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 74,
+      "entity": 132,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        9
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 75,
+      "entity": 133,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        25,
+        8
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 76,
+      "entity": 134,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        31,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 77,
+      "entity": 135,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        32,
+        8
+      ],
+      "size": [
+        160,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 78,
+      "entity": 136,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        42,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 79,
+      "entity": 137,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        27,
+        7
+      ],
+      "size": [
+        256,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 80,
+      "entity": 138,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        7
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 81,
+      "entity": 139,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        13
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 82,
+      "entity": 140,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        8,
+        13
+      ],
+      "size": [
+        560,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 83,
+      "entity": 141,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        14,
+        7
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 84,
+      "entity": 142,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        12,
+        8
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 85,
+      "entity": 143,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        8,
+        11
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 86,
+      "entity": 820,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        10
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 87,
+      "entity": 821,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        11,
+        9
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 88,
+      "entity": 145,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        10,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 89,
+      "entity": 146,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        8
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 90,
+      "entity": 147,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        5,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 91,
+      "entity": 148,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        5,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 92,
+      "entity": 149,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        9
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 93,
+      "entity": 150,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 94,
+      "entity": 151,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        5,
+        12
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 95,
+      "entity": 152,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        11
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 96,
+      "entity": 153,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        11
+      ],
+      "size": [
+        16,
+        96
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 97,
+      "entity": 154,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        15
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 98,
+      "entity": 155,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        14
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 99,
+      "entity": 156,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        15
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 100,
+      "entity": 157,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        14
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 101,
+      "entity": 158,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 102,
+      "entity": 159,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        15
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 103,
+      "entity": 160,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 104,
+      "entity": 161,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        17
+      ],
+      "size": [
+        16,
+        128
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 105,
+      "entity": 162,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        19
+      ],
+      "size": [
+        16,
+        64
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 106,
+      "entity": 163,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        23
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 107,
+      "entity": 164,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        24
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 108,
+      "entity": 165,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        23
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 109,
+      "entity": 166,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        5,
+        25
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 110,
+      "entity": 167,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        30
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 111,
+      "entity": 168,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        30
+      ],
+      "size": [
+        16,
+        96
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 112,
+      "entity": 169,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 113,
+      "entity": 170,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        30
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 114,
+      "entity": 171,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        31
+      ],
+      "size": [
+        16,
+        64
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 115,
+      "entity": 172,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        3,
+        35
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 116,
+      "entity": 173,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        36
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 117,
+      "entity": 174,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        37
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 118,
+      "entity": 175,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        37
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 119,
+      "entity": 176,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        0,
+        37
+      ],
+      "size": [
+        32,
+        64
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 120,
+      "entity": 177,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        38
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 121,
+      "entity": 178,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        0,
+        41
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 122,
+      "entity": 179,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 123,
+      "entity": 180,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        38
+      ],
+      "size": [
+        16,
+        144
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 124,
+      "entity": 181,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        5,
+        42
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 125,
+      "entity": 182,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        49
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 126,
+      "entity": 183,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 127,
+      "entity": 184,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        49
+      ],
+      "size": [
+        32,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 128,
+      "entity": 185,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        52
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 129,
+      "entity": 186,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        6,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 130,
+      "entity": 187,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        51
+      ],
+      "size": [
+        64,
+        48
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 131,
+      "entity": 188,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        11,
+        51
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 132,
+      "entity": 189,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 133,
+      "entity": 190,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        7,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 134,
+      "entity": 191,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        8,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 135,
+      "entity": 192,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        8,
+        47
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 136,
+      "entity": 193,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        12,
+        47
+      ],
+      "size": [
+        32,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 137,
+      "entity": 194,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        12,
+        50
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 138,
+      "entity": 195,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        15,
+        50
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 139,
+      "entity": 196,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        11,
+        53
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 140,
+      "entity": 197,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        50
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 141,
+      "entity": 198,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        17,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 142,
+      "entity": 199,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        53
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 143,
+      "entity": 200,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        14,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 144,
+      "entity": 201,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        14,
+        56
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 145,
+      "entity": 202,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        15,
+        58
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 146,
+      "entity": 203,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        55
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 147,
+      "entity": 204,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        21,
+        55
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 148,
+      "entity": 205,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        20,
+        56
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 149,
+      "entity": 206,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        21,
+        57
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 150,
+      "entity": 207,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        19,
+        60
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 151,
+      "entity": 208,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        20,
+        57
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 152,
+      "entity": 209,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        19,
+        59
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 153,
+      "entity": 210,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        18,
+        60
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 154,
+      "entity": 211,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        60
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 155,
+      "entity": 212,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        25,
+        60
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 156,
+      "entity": 213,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        59
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 157,
+      "entity": 214,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        60
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 158,
+      "entity": 215,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        32,
+        59
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 159,
+      "entity": 216,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        58
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 160,
+      "entity": 217,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        58
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 161,
+      "entity": 218,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        29,
+        57
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 162,
+      "entity": 219,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        30,
+        58
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 163,
+      "entity": 220,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        27,
+        57
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 164,
+      "entity": 222,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        33,
+        58
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 165,
+      "entity": 221,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        27,
+        55
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 166,
+      "entity": 223,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        58
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 167,
+      "entity": 224,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        34,
+        57
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 168,
+      "entity": 225,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        31,
+        56
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 169,
+      "entity": 226,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        55
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 170,
+      "entity": 227,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        28,
+        55
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 171,
+      "entity": 228,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        32,
+        53
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 172,
+      "entity": 229,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        33,
+        52
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 173,
+      "entity": 230,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        34,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 174,
+      "entity": 231,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        34,
+        53
+      ],
+      "size": [
+        128,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 175,
+      "entity": 232,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        54
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 176,
+      "entity": 233,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        34,
+        52
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 177,
+      "entity": 234,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        40,
+        52
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 178,
+      "entity": 235,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 179,
+      "entity": 236,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        41,
+        48
+      ],
+      "size": [
+        16,
+        64
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 180,
+      "entity": 237,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        49
+      ],
+      "size": [
+        32,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 181,
+      "entity": 238,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        38,
+        48
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 182,
+      "entity": 239,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        40,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 183,
+      "entity": 240,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        53
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 184,
+      "entity": 241,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 185,
+      "entity": 242,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 186,
+      "entity": 243,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        55
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 187,
+      "entity": 244,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        56
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 188,
+      "entity": 245,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        55
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 189,
+      "entity": 246,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        54
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 190,
+      "entity": 247,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        49,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 191,
+      "entity": 248,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        53
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 192,
+      "entity": 249,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        55
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 193,
+      "entity": 250,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        56
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 194,
+      "entity": 252,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        53,
+        54
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 195,
+      "entity": 251,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        55
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 196,
+      "entity": 253,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        51,
+        52
+      ],
+      "size": [
+        32,
+        48
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 197,
+      "entity": 822,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 198,
+      "entity": 823,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        54
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 199,
+      "entity": 255,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        51
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 200,
+      "entity": 256,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        53,
+        50
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 201,
+      "entity": 257,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        52
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 202,
+      "entity": 258,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        50
+      ],
+      "size": [
+        16,
+        64
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 203,
+      "entity": 259,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        49
+      ],
+      "size": [
+        96,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 204,
+      "entity": 260,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        49
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 205,
+      "entity": 261,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        44
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 206,
+      "entity": 262,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        40,
+        47
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 207,
+      "entity": 263,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        42,
+        48
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 208,
+      "entity": 264,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        46
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 209,
+      "entity": 266,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        46
+      ],
+      "size": [
+        32,
+        80
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 210,
+      "entity": 265,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        48
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 211,
+      "entity": 267,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        50
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 212,
+      "entity": 268,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 213,
+      "entity": 269,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        51,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 214,
+      "entity": 270,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 215,
+      "entity": 271,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        51,
+        47
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 216,
+      "entity": 272,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        58,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 217,
+      "entity": 273,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        58,
+        39
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 218,
+      "entity": 274,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        46
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 219,
+      "entity": 275,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 220,
+      "entity": 276,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        44
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 221,
+      "entity": 278,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        43
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 222,
+      "entity": 277,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        49,
+        44
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 223,
+      "entity": 279,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 224,
+      "entity": 280,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        46
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 225,
+      "entity": 281,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        36
+      ],
+      "size": [
+        16,
+        176
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 226,
+      "entity": 282,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        44
+      ],
+      "size": [
+        48,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 227,
+      "entity": 283,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        42
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 228,
+      "entity": 284,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 229,
+      "entity": 285,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        40
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 230,
+      "entity": 286,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        39
+      ],
+      "size": [
+        192,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 231,
+      "entity": 287,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        40
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 232,
+      "entity": 288,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 233,
+      "entity": 289,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        28
+      ],
+      "size": [
+        16,
+        128
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 234,
+      "entity": 292,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        34
+      ],
+      "size": [
+        144,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 235,
+      "entity": 290,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        36
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 236,
+      "entity": 291,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 237,
+      "entity": 293,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        37
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 238,
+      "entity": 294,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        53,
+        31
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 239,
+      "entity": 295,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        60,
+        41
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 241,
+      "entity": 296,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        62,
+        25
+      ],
+      "size": [
+        16,
+        272
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 242,
+      "entity": 824,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        60,
+        38
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 243,
+      "entity": 825,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        60,
+        25
+      ],
+      "size": [
+        32,
+        160
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 244,
+      "entity": 298,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        61,
+        35
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 245,
+      "entity": 299,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        30
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 246,
+      "entity": 300,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        34
+      ],
+      "size": [
+        32,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 247,
+      "entity": 301,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        34
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 248,
+      "entity": 303,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 249,
+      "entity": 302,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 250,
+      "entity": 304,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        36
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 251,
+      "entity": 305,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        31
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 252,
+      "entity": 306,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 253,
+      "entity": 307,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        28
+      ],
+      "size": [
+        112,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 254,
+      "entity": 308,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        28
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 255,
+      "entity": 309,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        29
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 256,
+      "entity": 310,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        30
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 257,
+      "entity": 311,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        24
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 258,
+      "entity": 312,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        27
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 259,
+      "entity": 313,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        58,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 260,
+      "entity": 314,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        58,
+        25
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 261,
+      "entity": 315,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 262,
+      "entity": 316,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        23
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 263,
+      "entity": 317,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 264,
+      "entity": 318,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        26
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 265,
+      "entity": 319,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        20
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 266,
+      "entity": 320,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        54,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 267,
+      "entity": 321,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        52,
+        25
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 268,
+      "entity": 322,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        27
+      ],
+      "size": [
+        32,
+        64
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 269,
+      "entity": 323,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        27
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 270,
+      "entity": 324,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        28
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 271,
+      "entity": 325,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        27
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 272,
+      "entity": 326,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        24
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 273,
+      "entity": 327,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        24
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 274,
+      "entity": 328,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        24
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 275,
+      "entity": 329,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 276,
+      "entity": 330,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        22
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 277,
+      "entity": 331,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        21
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 278,
+      "entity": 332,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        49,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 279,
+      "entity": 333,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        50,
+        19
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 280,
+      "entity": 334,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        51,
+        19
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 281,
+      "entity": 335,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        18
+      ],
+      "size": [
+        16,
+        64
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 282,
+      "entity": 336,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 283,
+      "entity": 337,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 284,
+      "entity": 338,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        45,
+        17
+      ],
+      "size": [
+        16,
+        80
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 285,
+      "entity": 339,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        51,
+        18
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 286,
+      "entity": 340,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        18
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 287,
+      "entity": 341,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        18
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 288,
+      "entity": 342,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        59,
+        16
+      ],
+      "size": [
+        16,
+        112
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 289,
+      "entity": 343,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        17
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 290,
+      "entity": 344,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        56,
+        16
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 291,
+      "entity": 345,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        46,
+        14
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 292,
+      "entity": 346,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        16
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 293,
+      "entity": 347,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        17
+      ],
+      "size": [
+        128,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 294,
+      "entity": 348,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        41,
+        10
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 295,
+      "entity": 349,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        21,
+        54
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 296,
+      "entity": 350,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        23,
+        56
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 297,
+      "entity": 351,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        54
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 298,
+      "entity": 352,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        24,
+        50
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 299,
+      "entity": 353,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        26,
+        50
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 307,
+      "entity": 354,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        42,
+        55
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 1,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 308,
+      "entity": 355,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        2,
+        29
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 309,
+      "entity": 356,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        1,
+        29
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 310,
+      "entity": 357,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        1,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 311,
+      "entity": 358,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        4,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 312,
+      "entity": 359,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        16,
+        7
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 313,
+      "entity": 360,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        0,
+        42
+      ],
+      "size": [
+        80,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 314,
+      "entity": 361,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        8,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 316,
+      "entity": 363,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        40
+      ],
+      "size": [
+        144,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 317,
+      "entity": 364,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        55,
+        44
+      ],
+      "size": [
+        48,
+        32
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 318,
+      "entity": 365,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        57,
+        43
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "direction": 2,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 321,
+      "entity": 366,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        44,
+        6
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 322,
+      "entity": 367,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        47,
+        7
+      ],
+      "size": [
+        48,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 323,
+      "entity": 368,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        43,
+        16
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 4,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 324,
+      "entity": 369,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        48,
+        14
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 325,
+      "entity": 370,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        25,
+        11
+      ],
+      "size": [
+        64,
+        16
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    },
+    {
+      "editor": 411,
+      "entity": 371,
+      "group": "entity_default",
+      "layer": "UpperObject",
+      "cell": [
+        12,
+        51
+      ],
+      "size": [
+        48,
+        32
+      ],
+      "direction": 8,
+      "enabled": true,
+      "seconds": 0,
+      "all_layers": false
+    }
+  ],
+  "position_native": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": [
+      {
+        "method": "Puppet.SetPos",
+        "rva": 2997536,
+        "bytes": 3776,
+        "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+      },
+      {
+        "method": "Puppet.GetDirectTargetPosition",
+        "rva": 2971584,
+        "bytes": 1008,
+        "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+      },
+      {
+        "method": "Puppet.GetChangeLayerValue",
+        "rva": 2970896,
+        "bytes": 688,
+        "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+      },
+      {
+        "method": "Puppet.MoveEntityLayerWithWorldPosition",
+        "rva": 2980992,
+        "bytes": 704,
+        "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+      }
+    ]
+  }
+}

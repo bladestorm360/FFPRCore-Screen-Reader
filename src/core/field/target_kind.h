@@ -8,6 +8,9 @@ namespace field {
 inline TargetKind navigation_target_kind(Kind kind,Category category,bool aerial=false){
     if(aerial)return TargetKind::AirshipTransition;
     if(category==Category::Objects)return TargetKind::Interact;
+    // Reviewed boss contacts browse as NPCs while the original map object
+    // still requires a manual interaction from an adjacent tile.
+    if(kind==Kind::Event&&category==Category::NPCs)return TargetKind::Interact;
     switch(kind){
     case Kind::NPC:case Kind::TreasureChest:return TargetKind::Interact;
     case Kind::MapExit:return TargetKind::Transition;

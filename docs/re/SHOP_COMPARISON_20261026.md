@@ -1,5 +1,8 @@
 # Shop equipment compatibility and hand comparisons, October26
 
+The [November 6 keyboard follow-up](PUZZLE_SCOPE_AND_FF4_KEYS_20261106.md#shop-number-row)
+restores slot-key dispatch while the stock comparison panel owns focus.
+
 Status: implementation complete and offline verified. The exact scanned payload
 is installed/hash-verified in I, II, IV, V and VI. FFIII's running-process guard
 deferred its installation; it retains the prior build until closed. Gameplay

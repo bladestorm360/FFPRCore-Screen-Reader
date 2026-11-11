@@ -200,6 +200,15 @@ if '--chocobo-rules' in sys.argv:
                'MapUtility': {'GetCollisionRect'},
                'GotoMapEventEntity': {'OnTriggerStayCustom'},
                'MapConstants': {'.cctor'}}
+if '--boarding-directions' in sys.argv:
+    # Narrow missing predicate/accept-direction owners. Reuse the existing
+    # source-matched CanLand/BoardingTransportationAction archives rather than
+    # capture them again. No game execution or runtime hook is involved.
+    out = ROOT.parent / 'tools/boarding_directions_20261101' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git', '-C', str(out), 'rev-parse', '--show-toplevel'], capture_output=True).returncode != 0
+    targets = {'TransportationController': {'SeamlessHitCheck', 'ChangeAcceptActionDirection', 'CheckLandingAutoMove'},
+               'TransportationInfo': {'CheckLandingList'}}
 if '--boot-scenes' in sys.argv:
     out = ROOT.parent / 'tools/startup_hang_20261025' / f'ff{number}'
     out.mkdir(parents=True, exist_ok=True)
@@ -318,6 +327,40 @@ if '--enterprise' in sys.argv:
                'FieldPlayerKeyTwoStepController': {'OnKeyDown','SetAction','SwitchSelectAction'}}
 # Exact native landing predicates for the user-reported early Enterprise landing.
 # Separate source-bearing archive preserves the prior flight research.
+if '--keyword-puzzle-contract' in sys.argv:
+    # Resolve native keyword/item success dispatch for authored FF2 puzzle
+    # instructions; no gameplay or broad capture, raw methods outside Git.
+    assert number == 2
+    out = ROOT.parent / 'tools/ff2_keyword_puzzles_20261101/ff2'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'Current': {'CreateNbrSystem','NbrAsk','NbrItem','NbrSelect'},
+               'UserDataClient': {'AddKeyWord'}, 'Puppet': {'MoveTo'}}
+if '--slab-pose' in sys.argv:
+    # Exact FF1 post-guardian SetPos operand/layer contract. Raw bodies remain
+    # outside every Git tree; this branch never runs a game.
+    assert number == 1
+    out = ROOT.parent / 'tools/ff1_slab_pose_20261101/ff1'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'Puppet': {'SetPos','MoveEntityLayerWithWorldPosition'}}
+if '--blackjack-route' in sys.argv:
+    assert number == 6
+    out = ROOT.parent / 'tools/puzzle_audit_20261030/broader_audit_20261104/ff6_Imperial_Travel_Context/native_vehicle'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'External.Vehicle': {'OnTheVehicle'},
+               'OwnedTransportationData': {'get_Enable','get_Position','get_MapId'},
+               'SaveMapManager': {'ConvertEntityPosition'},
+               'FieldController': {'Last.Map.IMapAccessor.SetPositionToTransportation'}}
+if '--saved-world-positions' in sys.argv:
+    # Resolve one remaining ABI fact: departure saves use grid cells or local
+    # world units. Exact producer/conversion targets; no game execution.
+    out = ROOT.parent / 'tools/saved_world_positions_20261031' / f'ff{number}'
+    out.mkdir(parents=True, exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode != 0
+    targets = {'SaveMapManager': {'ConvertEntityPosition'},
+               'OwnedTransportationData': {'get_Position','set_Position'}}
 if '--enterprise-landing' in sys.argv:
     out = ROOT.parent / 'tools/enterprise_landing_20261027' / (f'ff{number}' + ('-detail' if '--landing-detail' in sys.argv else ''))
     out.mkdir(parents=True, exist_ok=True)
@@ -444,6 +487,43 @@ if '--auto-transport-order' in sys.argv:
                'Transportation.<EventTransportationMove>d__36': {'MoveNext'},
                'Transportation.<EventTransportationChange>d__37': {'MoveNext'},
                'FieldEntity': {'CheckHit'}, 'FieldPlayer': {'SquareMoveFinished'}}
+if '--ice-movement' in sys.argv:
+    assert number==1
+    out=ROOT.parent/'tools/ice_movement_20261101/ff1'
+    out.mkdir(parents=True,exist_ok=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    targets={'FieldPlayerKeyController':{'OnTouchPadCallback','OnKey'},
+             'FieldController':{'IsCanMoveToDestPosition','OnImmediatelyBeforeMoveing'},
+             'FieldCharaEntity':{'MoveToAxis','Move','UpdateRaycast'},
+             'FieldPlayer':{'MoveToAxis','Move','UpdateRaycast'}}
+if '--damcyan-movement' in sys.argv:
+    assert number==4
+    out=ROOT.parent/'tools/damcyan_native_20261102/ff4'
+    assert not out.exists(), 'Preserve existing native evidence'
+    out.mkdir(parents=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    targets={'FieldController':{'IsCanMoveToDestPosition'},
+             'FieldCharaEntity':{'UpdateRaycast'},
+             'MapUtility':{'ParseHiddenPassageMappingData','ParseMapCollisionMappingData','ParseCollisionMappingData','ParseCollisionMapData'},
+             'HiddenPassageController':{'ObserveMoveStartFootPoint','ObserveMoveFinishedFootPoint','IsPlaceHiddenPassage'}}
+if '--passage-movement' in sys.argv:
+    out=ROOT.parent/'tools/passage_native_20261102'/f'ff{number}'
+    assert not out.exists(), 'Preserve existing native evidence'
+    out.mkdir(parents=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    targets={'FieldController':{'IsCanMoveToDestPosition'},
+             'FieldCharaEntity':{'UpdateRaycast'},
+             'MapUtility':{'ParseHiddenPassageMappingData','ParseMapCollisionMappingData','ParseCollisionMappingData'},
+             'HiddenPassageController':{'ObserveMoveStartFootPoint','ObserveMoveFinishedFootPoint','IsPlaceHiddenPassage'},
+             'HiddenPassageGroup':{'Show','Hide'}}
+if '--ff4-event-initial' in sys.argv:
+    assert number==4
+    out=ROOT.parent/'tools/ff4_event_initial_20261102'
+    assert not out.exists(), 'Preserve existing native evidence'
+    out.mkdir(parents=True)
+    assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+    targets={'SelectFieldContentController':{'Open','SelectInit','SelectContent'},
+             'SelectFieldContentManager.<Open>d__16':{'MoveNext'}}
 if '--trigger-lifetime' in sys.argv:
     out = ROOT.parent / 'tools/map_transport_audit_20261028' / f'ff{number}_trigger_lifetime'
     out.mkdir(parents=True, exist_ok=True)

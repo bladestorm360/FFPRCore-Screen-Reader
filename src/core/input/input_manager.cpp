@@ -49,6 +49,7 @@ struct Binding {
     std::function<void()> fn;
     std::string description;
     int navigation_keymap = -1; // -1 shared; 0 letters; 1 brackets/backslash
+    bool event_guide = false;
 };
 
 struct KeyEntry {
@@ -69,7 +70,7 @@ KeyEntry* entry(Key key)
 /// Shift > None, then KeyHelp > BestiaryDetail > Status > Battle > Field > Global. Keeps the
 /// list sorted on every insert so game modules can add keys after the core's.
 void register_binding(Key key, Mod mod, Context ctx, std::function<void()> fn, const char* description,
-                      int navigation_keymap = -1)
+                      int navigation_keymap = -1, bool event_guide = false)
 {
     KeyEntry* e = entry(key);
     if (!e) {
@@ -87,7 +88,8 @@ void register_binding(Key key, Mod mod, Context ctx, std::function<void()> fn, c
         }
     }
     const int index=bindings::add(id.c_str(),description?description:"",false,int(ctx),int(key),int(mod),navigation_keymap);
-    Binding b{key, mod, index, ctx, std::move(fn), description ? description : "", navigation_keymap};
+    Binding b{key, mod, index, ctx, std::move(fn), description ? description : "", navigation_keymap,event_guide};
+    if(event_guide)bindings::mark_event_guide(index);
     auto before = [](const Binding& x, const Binding& y) {
         if (x.mod != y.mod) return static_cast<int>(x.mod) > static_cast<int>(y.mod);
         return static_cast<int>(x.ctx) > static_cast<int>(y.ctx);
@@ -103,17 +105,17 @@ void register_binding(Key key, Mod mod, Context ctx, std::function<void()> fn, c
     }
 }
 
-void reg(Key key, Mod mod, Context ctx, const char* action, const char* description, int navigation_keymap = -1)
+void reg(Key key, Mod mod, Context ctx, const char* action, const char* description, int navigation_keymap = -1, bool event_guide = false)
 {
     std::string name = action;
-    register_binding(key, mod, ctx, [name] { actions::run(name.c_str()); }, description, navigation_keymap);
+    register_binding(key, mod, ctx, [name] { actions::run(name.c_str()); }, description, navigation_keymap,event_guide);
 }
 
 /// RegisterFieldOnly: off the field (menu, battle, title) the active context is never Field, so
 /// the binding has no match and the key does nothing.
-void reg_field(Key key, Mod mod, const char* action, const char* description, int navigation_keymap = -1)
+void reg_field(Key key, Mod mod, const char* action, const char* description, int navigation_keymap = -1, bool event_guide = false)
 {
-    reg(key, mod, Context::Field, action, description, navigation_keymap);
+    reg(key, mod, Context::Field, action, description, navigation_keymap,event_guide);
 }
 
 // --- binding bodies that were lambdas or private methods in FF1 -----------------------------------
@@ -139,6 +141,7 @@ void handle_tab_key()
 
 void initialize_bindings()
 {
+    bindings::initialize_keyboard_controls();
     reg(Key::F1,Mod::None,Context::Global,"GameToggles.ReportSpeed","Report game speed");
     reg(Key::F3,Mod::None,Context::Global,"GameToggles.ReportEncounters","Report encounters");
     reg(Key::F7,Mod::None,Context::Global,"Mod.ToggleAutoDetail","Toggle automatic details");
@@ -246,8 +249,8 @@ void initialize_bindings()
     reg_field(Key::F6, Mod::Shift, "Mod.ToggleBeaconMode", "Switch route or object beacon");
 
     // --- Field: puzzle guide (src/core/field/puzzle_guide.cpp) ---
-    reg_field(Key::G, Mod::Shift, "PuzzleGuide.Next", "Puzzle guide: start, or the current step again");
-    reg_field(Key::G, Mod::Ctrl, "PuzzleGuide.Stop", "Puzzle guide: stop");
+    reg_field(Key::G, Mod::Shift, "PuzzleGuide.Next", "Puzzle guide: start, or the current step again",-1,true);
+    reg_field(Key::G, Mod::Ctrl, "PuzzleGuide.Stop", "Puzzle guide: stop",-1,true);
 
 }
 
@@ -281,7 +284,12 @@ Context determine_context(bool on_demand)
     if (queries::is("KeyHelpReader.IsScreenActive")) return Context::KeyHelp;
     if (both("StatusNavigationTracker.IsNavigationActive", "StatusNavigationTracker.ValidateState")) return Context::Status;
     if (both("BestiaryNavigationTracker.IsNavigationActive", "BestiaryNavigationTracker.ValidateState")) return Context::BestiaryDetail;
-    if (queries::is("ReviewBuffer.IsInformation")) return Context::Information;
+    if (queries::is("ReviewBuffer.IsInformation")) {
+        // The displayed product comparison owns shop slot keys even if a
+        // comparison buffer from a previous equipment panel is still ready.
+        if (queries::is("ShopPartyReader.IsPanelShown") && queries::is("ShopMenuTracker.ValidateState")) return Context::Shop;
+        return Context::Information;
+    }
     if (queries::is("BattleStateHelper.IsInBattle")) return Context::Battle;
     // The shop (its tracker validates the controller's state each time): the number row reads
     // the party panel's equipment comparison. Global keys still match in this context.
@@ -292,11 +300,12 @@ Context determine_context(bool on_demand)
     return Context::Global;
 }
 
-void dispatch_registered_bindings(Context active)
+void dispatch_registered_bindings(Context active,bool guide_only=false)
 {
     for(int pass=0;pass<2;++pass) for(const auto& entry:g_bindings) for(const auto& b:entry.list) {
         if(!interception_enabled() && b.key!=Key::F9 && b.key!=Key::F8)continue;
-        if((pass==0 ? b.ctx!=active : b.ctx!=Context::Global || active==Context::Global))continue;
+        if(guide_only) {if(pass||!b.event_guide||!bindings::guide_binding_allowed(b.binding))continue;}
+        else if((pass==0 ? b.ctx!=active && !(b.ctx==Context::BattleParty&&bindings::battle_party_context()) : b.ctx!=Context::Global || active==Context::Global))continue;
         if(b.navigation_keymap>=0 && b.navigation_keymap!=ui::prefs::navigation_keymap())continue;
         if(!bindings::pressed(b.binding))continue;
         if(b.description.find("Teleport ")==0 && !ui::prefs::teleport_shortcuts_enabled())continue;
@@ -349,14 +358,36 @@ void update()
     // Controller routing and IsFieldActive first, every frame.
     { timing::Scope part("Input controller dispatch");
       const Context context = determine_context(false);
+      // Native item/magic comparisons may own an Information review buffer.
+      // Party checks overlay those battle contexts only; field/global bindings
+      // keep these physical keys everywhere else. No context is promoted to Battle.
+      bindings::battle_party_context(context==Context::Battle||
+          ((context==Context::Information||context==Context::Status)&&queries::is("BattleStateHelper.IsInBattle")));
+      const bool repeat=queries::is("PuzzleGuide.CanRepeatDuringEvent");
+      const bool unavailable=context!=Context::Field||queries::is("GameStatePatches.IsInputTransitionBlocked");
+      bindings::owned_guide_context(repeat,(repeat||unavailable)&&queries::is("PuzzleGuide.IsActive"));
       bindings::context(context);router::update(context);update_native_input_ownership(); }
 
     if (queries::is("GameStatePatches.IsInputTransitionBlocked")) {
+        // A qualified native choice can repeat owned text; an active guide can
+        // always retire its owned state. Neither operation borrows field access.
+        if(bindings::guide_command_context()&&game_window_focused()&&!ui::any_modal_open()&&
+           any_key_pressed()) {
+            const bool typing=is_input_field_focused();
+            bindings::keyboard_allowed(!typing);
+            if(!typing) {
+                router::notify_keyboard_input();
+                dispatch_registered_bindings(Context::Global,true);
+            }
+        }
         return; // discard input edges; never replay hotkeys when loading finishes
     }
-    // Recovery toggle remains available in every game menu and mod dialog,
-    // before modal dispatch. It never depends on an intercepted native key.
-    if(game_window_focused() && key_pressed(Key::F9) && !shift_held() && !ctrl_held() && !alt_held()) {
+    // The effective recovery chord remains available before menu dispatch.
+    // Capture and text entry own their inputs; a remapped letter must not
+    // become a recovery command while the player is typing a name.
+    if(game_window_focused() && !bindings::capturing() &&
+       bindings::keyboard_action_pressed("Toggle control interception")&&
+       !queries::is("TextInputWindow.IsOpen")&&!is_input_field_focused()) {
         actions::run("Input.ToggleControlInterception");return;
     }
 
@@ -379,7 +410,14 @@ void update()
     bindings::keyboard_allowed(!typing);
     if(typing)return;
 
-    const Context active = determine_context(true);
+    Context active = determine_context(true);
+    if(active==Context::Field&&bindings::guide_next_allowed())active=Context::Global;
+    if(active!=Context::Field&&bindings::guide_command_context()) {
+        dispatch_registered_bindings(active,true);
+        // Guide keys belong exclusively to this event, including remaps onto
+        // otherwise global commands. All other keys retain normal dispatch.
+        if(bindings::event_guide_keyboard_in_use())return;
+    }
     { timing::Scope part("Input keyboard dispatch"); dispatch_registered_bindings(active); }
 }
 

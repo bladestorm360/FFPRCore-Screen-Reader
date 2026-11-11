@@ -21,6 +21,8 @@ field::EntityPtr entity = std::make_shared<field::Entity>();
 field::Category category = field::Category::All;
 int next = 0, previous = 0, cancelled = 0;
 bool selectable = true, transition = false, field_ready = true, battle = false;
+unity::Vec3 player_position;
+field::baked::Submap world{};
 bool soundscape=true,beacons=false,combined=false;int beacon_requests=0;
 int scans = 0, cache_reads = 0;
 int refreshes=0,scan_cancels=0,invalidations=0,view_invalidations=0,map_id=1;
@@ -114,7 +116,15 @@ std::wstring Entity::format_description(unity::Vec3, bool direct, const std::wst
     if (remote()) return L"Chest (Deist Cavern B5)"+(note.empty()?std::wstring():L" ("+note+L")");
     return direct ? L"Chest, north" : L"Chest (" + note + L")";
 }
-FilterContext::FilterContext() { field_player = map_handle = reinterpret_cast<void*>(1); }
+FilterContext::FilterContext() {
+    field_player = map_handle = reinterpret_cast<void*>(1);
+    player_position = fixture::player_position;
+}
+std::wstring format_steps(float distance) { return text::num(int(distance / 16)) + L" steps"; }
+std::wstring direction_name(unity::Vec3, unity::Vec3 delta) { return delta.x > 0 ? L"East" : L"West"; }
+}
+namespace field::baked {
+const Submap* submap_by_map_id(int id) { return id == fixture::map_id ? &fixture::world : nullptr; }
 }
 namespace field::scanner {
 void remember_selection() {} void clear_selection() {}
@@ -191,6 +201,7 @@ int main() {
     fixture::finish();
     expect(static_cast<bool>(fixture::route), "actual route producer waits for asynchronous plan");
     expect(fixture::requested_goal.entity_id==0&&fixture::requested_name==L"Chest (Map)","directions retain native event identity and destination floor in the continuation name");
+    expect(fixture::requested_goal.moving_flight_directions,"spoken directions opt into the scoped moving airship response");
     field::category_next(); fixture::finish();
     auto before = fixture::output.size(); field::PathInfo path; path.success = true; path.description = L"1 north";
     fixture::route(path);
@@ -204,7 +215,7 @@ int main() {
     field::announce_current_entity(); fixture::finish();
     fixture::transition = true; fixture::route(path); fixture::transition = false;
     expect(fixture::output.empty(), "a completed route cannot speak during a transition");
-    path.warning=L"Warning: a trap is required to reach this chest.";
+    path.warning=L"Trap required";
     field::announce_current_entity(); fixture::finish(); fixture::route(path);
     expect(fixture::output.size()==1 && fixture::output.back().parts==std::vector<std::wstring>{path.warning,path.description},
         "enabled warnings precede directions in one correctly ordered speech event");
@@ -251,6 +262,21 @@ int main() {
     expect(fixture::output.back().parts.front()==L"Chest (Deist Cavern B5) (Story gated) (1 of 1)",
         "other-floor browsing preserves floor and story-gate evidence without false reachability");
     fixture::entity->remote_map_id=0;
+    fixture::world.world=true;fixture::world.width=256;fixture::world.height=256;
+    fixture::player_position={255*16.f,0,0};fixture::entity->pos={16,0,0};
+    fixture::output.clear();fixture::browse_path=gated;fixture::delay_browse=false;
+    field::cycle(true);fixture::finish();
+    expect(fixture::output.size()==1 &&
+           fixture::output.back().parts.front()==L"Chest (Story gated. 2 steps East in a straight line) (1 of 1)",
+           "highlighting a gated destination speaks its approximate bearing across the world seam");
+    fixture::output.clear();field::announce_entity_only();
+    expect(fixture::output.size()==1 && fixture::output.back().parts.front().find(L"2 steps East in a straight line")!=std::wstring::npos,
+           "both keyboard layouts' current-entity action repeat the gate and bearing");
+    fixture::output.clear();field::announce_current_entity();fixture::finish();
+    field::PathInfo blocked;blocked.reason=L"Story gated";fixture::route(blocked);
+    expect(fixture::output.size()==1 && fixture::output.back().parts.front()==L"Story gated. 2 steps East in a straight line",
+           "an explicit gated route reports its bearing without issuing movement");
+    fixture::world={};fixture::player_position={};fixture::entity->pos={};
     for(const auto transition:{events::Kind::BattleEntering,events::Kind::BattleStart,events::Kind::MapChanging}) {
         fixture::route={};field::announce_current_entity();
         const auto before=fixture::output.size(),generation=field::g_category_generation;

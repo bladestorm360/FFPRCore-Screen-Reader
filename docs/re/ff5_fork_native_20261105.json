@@ -1,0 +1,216 @@
+{
+  "scope_tag": "ff5_ForkTower",
+  "source_script_hashes": {
+    "Map_10040/sc_e_0444_3": "1e3014683c8ff609004f97b470260b569ed196ccae08338742720498e5ec3f2c",
+    "Map_30481_1/sc_30481_1_barrier1": "4d9ce169d9aa7f740f7d251ae54f8fc82f52599c277adcb1f796666d05fb0bf3",
+    "Map_30481_1/sc_30481_1_barrier2": "cd259b080f490395c03be0c2a1cba0a65c77c0262e882f2febb277f896a7b941",
+    "Map_30481_1/sc_30481_1_barrier3": "c9078cf1e852fd02996e95484f88b67b4a599eb4252a7ee77467863cbb217da3",
+    "Map_30481_1/sc_30481_1_barrier4": "47e9eecddd64318e39d6c0755a05a316cc64922f1e4f409d5ae39e69d4f0b4d4",
+    "Map_30481_1/sc_30481_1_barrier5": "0f8c2ca47688c1866f9614ddbb3a4b7f06ef1c018d4824d1828c5fecf97ef9e8",
+    "Map_30481_1/sc_e_0142_3": "d7f81282c67d00060add742802901e9679faa33056c378742a35771c107e62ca",
+    "Map_30481_1/sc_e_0143": "99db3caff1e42f1f4d0eb86cfe1906ae6b2578bbc76de6aa93f4eca231614ce5",
+    "Map_30481_1/sc_e_0143_1": "52de23646c1d95ff08a25045489dc92f48c9592c5ce3959d45bdd7626e5437be",
+    "Map_30481_1/sc_e_0143_2": "e9d5a05b519116a1b592e5156409d84aca893eaa55b1a0c3b93594b64e08ad81",
+    "Map_30481_1/sc_e_0143_3": "b70c78ce30c97f3634c2969a19b624d42af597ce1a3ca26c328527087cc5ef76",
+    "Map_30481_1/sc_e_0143_4": "bafeb55102dc1556ba359698631d0f8c4482afc148cf90831d6f6ec480f59be4",
+    "Map_30481_1/sc_e_0143_5": "81d762d38184f10b4858002210b94969e05df4920df61f614d474521b5ced9a7",
+    "Map_30481_1/sc_e_0143_6": "4ecdc5c9d63e947099af01d2b4a07ffe2c6493d5710243faf1f1b84b005cb91f",
+    "Map_30481_1/sc_map_30481_1": "f810a456a4083bb11ba6d8d3e39dc556dcd6cce11407c52bd523397f2a3165e6",
+    "Map_30490/sc_e_0143_7": "03ec4500fd0ed167c929ca00d2cdb9caa1a72d8ddb804cd74ae7bc122a5b7bde",
+    "Map_30490/sc_e_0144": "4f601e3a11b242e8119acf1a011651832e0e3f08d5fea658a24bace5875d8c07",
+    "Map_30490/sc_map_30490": "0aabdcd3a51b9c85213181515968c89d5e9025428034db86a45f893641556627",
+    "Map_30490_1/sc_e_0143_7": "03ec4500fd0ed167c929ca00d2cdb9caa1a72d8ddb804cd74ae7bc122a5b7bde",
+    "Map_30490_1/sc_e_0144": "4f601e3a11b242e8119acf1a011651832e0e3f08d5fea658a24bace5875d8c07",
+    "Map_30490_1/sc_map_30490_1": "0aabdcd3a51b9c85213181515968c89d5e9025428034db86a45f893641556627",
+    "Map_30490_2/sc_e_0143_7": "03ec4500fd0ed167c929ca00d2cdb9caa1a72d8ddb804cd74ae7bc122a5b7bde",
+    "Map_30490_2/sc_e_0144": "4f601e3a11b242e8119acf1a011651832e0e3f08d5fea658a24bace5875d8c07",
+    "Map_30490_2/sc_map_30490_2": "0aabdcd3a51b9c85213181515968c89d5e9025428034db86a45f893641556627",
+    "Map_30491_4/sc_map_30491_4": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30491_5/sc_map_30491_5": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30491_6/sc_map_30491_6": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30491_7/sc_map_30491_7": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30491_8/sc_e_0145_4": "a63208dcc915d0e522a1ac865e40d0dc62c66add5f93ddcdad1ec404011ef558",
+    "Map_30491_8/sc_e_0444": "6af44fb37711c66ce988a5782a2b86d033ee6dfd1484e57da63559dd17f3d0eb",
+    "Map_30491_8/sc_e_0444_1": "b3b086983bda87df4a08d0609476753f65db4777e448be688431ef1a910fce84",
+    "Map_30491_8/sc_e_0444_2": "54b14157a7b15ef19074c23edbcfea403e0f9a485a1343be7dfd9718cca73709",
+    "Map_30491_8/sc_map_30491_8": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30500/sc_e_0144_1": "52e219832f37b2ec1515ff48e3a712a12bdbc6c9d726beaa1d933be600121368",
+    "Map_30500/sc_e_0145_1": "ff312583c25852c7ef82417ba450c43955d2c981ed30d82db6bab4e00e8a651d",
+    "Map_30500/sc_map_30500": "bbb53255bc44abccce3f1be6ebc879bcf02e22573df60c216c5ee93c158306d2",
+    "Map_30500_1/sc_e_0144_1": "52e219832f37b2ec1515ff48e3a712a12bdbc6c9d726beaa1d933be600121368",
+    "Map_30500_1/sc_e_0145_1": "ff312583c25852c7ef82417ba450c43955d2c981ed30d82db6bab4e00e8a651d",
+    "Map_30500_1/sc_map_30500_1": "bbb53255bc44abccce3f1be6ebc879bcf02e22573df60c216c5ee93c158306d2",
+    "Map_30500_2/sc_e_0144_1": "52e219832f37b2ec1515ff48e3a712a12bdbc6c9d726beaa1d933be600121368",
+    "Map_30500_2/sc_e_0145_1": "ff312583c25852c7ef82417ba450c43955d2c981ed30d82db6bab4e00e8a651d",
+    "Map_30500_2/sc_map_30500_2": "bbb53255bc44abccce3f1be6ebc879bcf02e22573df60c216c5ee93c158306d2",
+    "Map_30501_8/sc_e_0145": "8876051757294be2a3b0ebf8fe11e06908bf8783010cfd6386dc8dc93f817844",
+    "Map_30501_8/sc_e_0145_2": "ad9c568e890985585e012ec153c4d72e786e1f66be99133297f8d17a359e75f9",
+    "Map_30501_8/sc_e_0145_3": "bf39e0b549370ff610b41dfa2d6ccfcda6f3b1691dc1e953ceb37dcc4515dcee",
+    "Map_30501_8/sc_map_30501_8": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Resident/sc_e_0445": "aa5fa33e8ba14dcb55348b4785f10ca8b4c7ab9546323d8b09c1fdd4261f0b96"
+  },
+  "maps": [
+    {
+      "id": 443,
+      "room": "Map_30481_1",
+      "area": 66
+    },
+    {
+      "id": 444,
+      "room": "Map_30490",
+      "area": 67
+    },
+    {
+      "id": 445,
+      "room": "Map_30491_1",
+      "area": 67
+    },
+    {
+      "id": 446,
+      "room": "Map_30491_2",
+      "area": 67
+    },
+    {
+      "id": 447,
+      "room": "Map_30491_3",
+      "area": 67
+    },
+    {
+      "id": 448,
+      "room": "Map_30491_4",
+      "area": 67
+    },
+    {
+      "id": 449,
+      "room": "Map_30491_5",
+      "area": 67
+    },
+    {
+      "id": 450,
+      "room": "Map_30491_6",
+      "area": 67
+    },
+    {
+      "id": 451,
+      "room": "Map_30491_7",
+      "area": 67
+    },
+    {
+      "id": 452,
+      "room": "Map_30491_8",
+      "area": 67
+    },
+    {
+      "id": 453,
+      "room": "Map_30500",
+      "area": 68
+    },
+    {
+      "id": 454,
+      "room": "Map_30501_1",
+      "area": 68
+    },
+    {
+      "id": 455,
+      "room": "Map_30501_2",
+      "area": 68
+    },
+    {
+      "id": 456,
+      "room": "Map_30501_3",
+      "area": 68
+    },
+    {
+      "id": 457,
+      "room": "Map_30501_4",
+      "area": 68
+    },
+    {
+      "id": 458,
+      "room": "Map_30501_5",
+      "area": 68
+    },
+    {
+      "id": 459,
+      "room": "Map_30501_6",
+      "area": 68
+    },
+    {
+      "id": 460,
+      "room": "Map_30501_7",
+      "area": 68
+    },
+    {
+      "id": 461,
+      "room": "Map_30501_8",
+      "area": 68
+    },
+    {
+      "id": 648,
+      "room": "Map_30490_1",
+      "area": 67
+    },
+    {
+      "id": 649,
+      "room": "Map_30490_2",
+      "area": 67
+    },
+    {
+      "id": 650,
+      "room": "Map_30500_1",
+      "area": 68
+    },
+    {
+      "id": 651,
+      "room": "Map_30500_2",
+      "area": 68
+    }
+  ],
+  "battle_assets": {
+    "sc_b_addcondition": {
+      "bundle": "battle_script_assets_all_57093aabd9509d9fbf4bb15e3e875251.bundle",
+      "bundle_sha256": "a6d234367d06cf4b76f02aa14630ae513b49159400fbadad60b446ecd9f98337",
+      "sha256": "ea0e592bc7d3cc8e5d57d7d0d68973831b7ba159a43e9fd56b5d3b08dc9efc46"
+    },
+    "sc_ai_350_Minotaur": {
+      "bundle": "monster_ai_assets_all_e4a98eaba55f62da64589c60af5ce7c6.bundle",
+      "bundle_sha256": "9c2da3c3bb66200764d9db9505ba15a0b8ea51a76d5a0488188b87e960dab022",
+      "sha256": "014d46f99a98e53b7892457de19b696fa4f5c1e0193cc18196e8b841f461086e"
+    },
+    "sc_ai_349_Omniscient": {
+      "bundle": "monster_ai_assets_all_e4a98eaba55f62da64589c60af5ce7c6.bundle",
+      "bundle_sha256": "9c2da3c3bb66200764d9db9505ba15a0b8ea51a76d5a0488188b87e960dab022",
+      "sha256": "38617a1c70c449d3a05baed2217612086b37eef7525ada15fa1db9d47a8410b8"
+    }
+  },
+  "position_native": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": [
+      {
+        "method": "Puppet.SetPos",
+        "rva": 2997536,
+        "bytes": 3776,
+        "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+      },
+      {
+        "method": "Puppet.GetDirectTargetPosition",
+        "rva": 2971584,
+        "bytes": 1008,
+        "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+      },
+      {
+        "method": "Puppet.GetChangeLayerValue",
+        "rva": 2970896,
+        "bytes": 688,
+        "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+      },
+      {
+        "method": "Puppet.MoveEntityLayerWithWorldPosition",
+        "rva": 2980992,
+        "bytes": 704,
+        "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+      }
+    ]
+  }
+}

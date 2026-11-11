@@ -7,7 +7,7 @@
 #include <cstring>
 #include <cstdlib>
 namespace fixture {
-struct Node {void* list=nullptr;std::wstring name,description;bool visible=true;};
+struct Node {void* list=nullptr;std::wstring name,description;bool visible=true,description_enabled=true;};
 using List=std::vector<void*>;Node manager;bool manager_exists=true,autodetail=false;int originals=0;
 std::vector<std::wstring> spoken;
 std::map<std::string,bool> states;
@@ -22,7 +22,7 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Field::Field(Class& c,const char*n,const char*a):cls(c),name(n),alt(a){}
 Method::Method(Class& c,const char*n,int a):cls(c),name(n),argc(a){}
-int32_t Field::get(){return offsetof(fixture::Node,list);}
+int32_t Field::get(){return std::strcmp(name,"isEnableDescription")==0?offsetof(fixture::Node,description_enabled):offsetof(fixture::Node,list);}
 bool Class::is(void*p){return p!=nullptr;}
 std::wstring rd_str(void*p,Field&f){if(!p)return {};const auto&n=*static_cast<fixture::Node*>(p);return std::strcmp(f.name,"<NameMessageId>k__BackingField")==0?n.name:n.description;}
 void* instance(Class&){return fixture::manager_exists?&fixture::manager:nullptr;}

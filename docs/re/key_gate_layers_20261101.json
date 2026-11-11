@@ -1,0 +1,1338 @@
+{
+  "about": "Original navigation coverage of locked-door actor and exact native OpenTrigger counterpart layers; no game implementation.",
+  "doors": [
+    {
+      "submap": "Map_20011_1",
+      "id": 79,
+      "group": "ev_e_0002",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        26,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 69,
+          "tmx_object": 99,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 3
+        },
+        {
+          "id": 72,
+          "tmx_object": 92,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 3
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20011_1",
+      "id": 80,
+      "group": "ev_e_0002",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        33,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 70,
+          "tmx_object": 100,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 75,
+          "tmx_object": 95,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 4
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20011_1",
+      "id": 77,
+      "group": "ev_e_0005",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        26,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 69,
+          "tmx_object": 99,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 3
+        },
+        {
+          "id": 72,
+          "tmx_object": 92,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 3
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20011_1",
+      "id": 78,
+      "group": "ev_e_0005",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        33,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 70,
+          "tmx_object": 100,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 75,
+          "tmx_object": 95,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 4
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20011_1",
+      "id": 88,
+      "group": "ev_e_0006",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        26,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 69,
+          "tmx_object": 99,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 3
+        },
+        {
+          "id": 72,
+          "tmx_object": 92,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 3
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20011_1",
+      "id": 89,
+      "group": "ev_e_0006",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        33,
+        18
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 70,
+          "tmx_object": 100,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 75,
+          "tmx_object": 95,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 4
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        5,
+        6,
+        13
+      ],
+      "initializer_sha256": "f01f555f0d5b5b7799c47e4e2145323702d98bbd0d6d952d273dddeed090f005"
+    },
+    {
+      "submap": "Map_20051_1",
+      "id": 90,
+      "group": "ev_e_0010",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        14,
+        53
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 81,
+          "tmx_object": 117,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 82,
+          "tmx_object": 114,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 86,
+          "tmx_object": 99,
+          "group": "ev_e_0015",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 87,
+          "tmx_object": 81,
+          "group": "ev_e_0015",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 81,
+          "tmx_object": 106,
+          "group": "ev_e_0016",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 82,
+          "tmx_object": 86,
+          "group": "ev_e_0016",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 73,
+          "tmx_object": 98,
+          "group": "ev_e_0052",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 77,
+          "tmx_object": 96,
+          "group": "ev_e_0052",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 68,
+          "tmx_object": 110,
+          "group": "ev_e_0053",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 69,
+          "tmx_object": 101,
+          "group": "ev_e_0053",
+          "layer": 2,
+          "link": 4
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13,
+        14,
+        15,
+        47,
+        48
+      ],
+      "initializer_sha256": "a226ca45decd86293a602484a02c629d92d10ba722d5c44399e29db51b04d7b6"
+    },
+    {
+      "submap": "Map_20071_1",
+      "id": 141,
+      "group": "ev_e_0010",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        33,
+        11
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 256,
+          "tmx_object": 162,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 258,
+          "tmx_object": 168,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 2
+        },
+        {
+          "id": 252,
+          "tmx_object": 186,
+          "group": "ev_e_0015",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 254,
+          "tmx_object": 184,
+          "group": "ev_e_0015",
+          "layer": 2,
+          "link": 2
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        12,
+        13,
+        49
+      ],
+      "initializer_sha256": "ecac35c1f5e992babfd55d614699d2fa9028c8163a62d3f35a484c70ea68ca30"
+    },
+    {
+      "submap": "Map_20071_1",
+      "id": 140,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        33,
+        11
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 256,
+          "tmx_object": 162,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 258,
+          "tmx_object": 168,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 2
+        },
+        {
+          "id": 252,
+          "tmx_object": 186,
+          "group": "ev_e_0015",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 254,
+          "tmx_object": 184,
+          "group": "ev_e_0015",
+          "layer": 2,
+          "link": 2
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        12,
+        13,
+        49
+      ],
+      "initializer_sha256": "ecac35c1f5e992babfd55d614699d2fa9028c8163a62d3f35a484c70ea68ca30"
+    },
+    {
+      "submap": "Map_20081_1",
+      "id": 135,
+      "group": "ev_e_0010",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        18,
+        28
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 128,
+          "tmx_object": 159,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 132,
+          "tmx_object": 181,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 2
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        10,
+        11,
+        13
+      ],
+      "initializer_sha256": "feb394f83dc5397b1046e227acadd7c4ea778b1180b33c9849d5a00fe9435ba6"
+    },
+    {
+      "submap": "Map_20081_1",
+      "id": 134,
+      "group": "ev_e_0011",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        18,
+        28
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 128,
+          "tmx_object": 159,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 132,
+          "tmx_object": 181,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 2
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        10,
+        11,
+        13
+      ],
+      "initializer_sha256": "feb394f83dc5397b1046e227acadd7c4ea778b1180b33c9849d5a00fe9435ba6"
+    },
+    {
+      "submap": "Map_20081_1",
+      "id": 133,
+      "group": "ev_e_0012",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        18,
+        28
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 128,
+          "tmx_object": 159,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 2
+        },
+        {
+          "id": 132,
+          "tmx_object": 181,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 2
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        10,
+        11,
+        13
+      ],
+      "initializer_sha256": "feb394f83dc5397b1046e227acadd7c4ea778b1180b33c9849d5a00fe9435ba6"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 36,
+      "group": "ev_e_0002",
+      "raw": "カギのかかった扉(確認用)",
+      "cell": [
+        2,
+        64,
+        12
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 0,
+          "tmx_object": 150,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 0,
+          "tmx_object": 152,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 76,
+          "tmx_object": 275,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 80,
+          "tmx_object": 269,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 66,
+          "tmx_object": 288,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 70,
+          "tmx_object": 282,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 104,
+          "tmx_object": 340,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 12
+        },
+        {
+          "id": 112,
+          "tmx_object": 348,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 12
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 37,
+      "group": "ev_e_0002",
+      "raw": "カギのかかった扉(確認用)",
+      "cell": [
+        2,
+        38,
+        35
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 0,
+          "tmx_object": 86,
+          "group": "ev_e_0001",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 0,
+          "tmx_object": 88,
+          "group": "ev_e_0001",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 18,
+          "tmx_object": 300,
+          "group": "ev_e_0003",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 30,
+          "tmx_object": 293,
+          "group": "ev_e_0003",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 92,
+          "tmx_object": 322,
+          "group": "ev_e_0004",
+          "layer": 0,
+          "link": 10
+        },
+        {
+          "id": 95,
+          "tmx_object": 321,
+          "group": "ev_e_0004",
+          "layer": 2,
+          "link": 10
+        },
+        {
+          "id": 18,
+          "tmx_object": 298,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 30,
+          "tmx_object": 305,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 18,
+          "tmx_object": 296,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 4
+        },
+        {
+          "id": 30,
+          "tmx_object": 309,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 101,
+          "tmx_object": 337,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 10
+        },
+        {
+          "id": 107,
+          "tmx_object": 343,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 10
+        }
+      ],
+      "unlock_receipt": 1,
+      "unlock_kind": "story",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 38,
+      "group": "ev_e_0002",
+      "raw": "カギのかかった扉(確認用)",
+      "cell": [
+        2,
+        65,
+        49
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 78,
+          "tmx_object": 280,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 83,
+          "tmx_object": 277,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 68,
+          "tmx_object": 290,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 73,
+          "tmx_object": 285,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 102,
+          "tmx_object": 338,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 111,
+          "tmx_object": 347,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 11
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 34,
+      "group": "ev_e_0003",
+      "raw": "カギのかかった扉(確認用)",
+      "cell": [
+        2,
+        64,
+        12
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 0,
+          "tmx_object": 150,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 0,
+          "tmx_object": 152,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 76,
+          "tmx_object": 275,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 80,
+          "tmx_object": 269,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 66,
+          "tmx_object": 288,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 70,
+          "tmx_object": 282,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 104,
+          "tmx_object": 340,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 12
+        },
+        {
+          "id": 112,
+          "tmx_object": 348,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 12
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 35,
+      "group": "ev_e_0003",
+      "raw": "カギのかかった扉(確認用)",
+      "cell": [
+        2,
+        65,
+        49
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 78,
+          "tmx_object": 280,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 83,
+          "tmx_object": 277,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 68,
+          "tmx_object": 290,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 73,
+          "tmx_object": 285,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 102,
+          "tmx_object": 338,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 111,
+          "tmx_object": 347,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 11
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 88,
+      "group": "ev_e_0004",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        64,
+        12
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 0,
+          "tmx_object": 150,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 0,
+          "tmx_object": 152,
+          "group": "ev_e_0013",
+          "layer": 2,
+          "link": 4
+        },
+        {
+          "id": 76,
+          "tmx_object": 275,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 80,
+          "tmx_object": 269,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 66,
+          "tmx_object": 288,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 6
+        },
+        {
+          "id": 70,
+          "tmx_object": 282,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 6
+        },
+        {
+          "id": 104,
+          "tmx_object": 340,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 12
+        },
+        {
+          "id": 112,
+          "tmx_object": 348,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 12
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30011_1",
+      "id": 89,
+      "group": "ev_e_0004",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        65,
+        49
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 78,
+          "tmx_object": 280,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 83,
+          "tmx_object": 277,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 68,
+          "tmx_object": 290,
+          "group": "ev_e_0038",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 73,
+          "tmx_object": 285,
+          "group": "ev_e_0038",
+          "layer": 2,
+          "link": 11
+        },
+        {
+          "id": 102,
+          "tmx_object": 338,
+          "group": "ev_e_0039",
+          "layer": 0,
+          "link": 11
+        },
+        {
+          "id": 111,
+          "tmx_object": 347,
+          "group": "ev_e_0039",
+          "layer": 2,
+          "link": 11
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        1,
+        2,
+        13,
+        21,
+        23,
+        34,
+        35,
+        36
+      ],
+      "initializer_sha256": "dd443fa52825a2360c2f7f4f8b9c7b8855c6b6195e5dc0fa1dd689829612f5c3"
+    },
+    {
+      "submap": "Map_30021_3",
+      "id": 140,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        16,
+        66
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 116,
+          "tmx_object": 172,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 23
+        },
+        {
+          "id": 126,
+          "tmx_object": 155,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 23
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13
+      ],
+      "initializer_sha256": "70a7a3e9f2d4a4131b54ee50ebbc585867be2ae1989a34d63b15a2f50ad20522"
+    },
+    {
+      "submap": "Map_30021_3",
+      "id": 141,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        32,
+        66
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 118,
+          "tmx_object": 174,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 20
+        },
+        {
+          "id": 129,
+          "tmx_object": 158,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 20
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13
+      ],
+      "initializer_sha256": "70a7a3e9f2d4a4131b54ee50ebbc585867be2ae1989a34d63b15a2f50ad20522"
+    },
+    {
+      "submap": "Map_30021_3",
+      "id": 142,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        48,
+        66
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 120,
+          "tmx_object": 176,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 21
+        },
+        {
+          "id": 132,
+          "tmx_object": 161,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 21
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13
+      ],
+      "initializer_sha256": "70a7a3e9f2d4a4131b54ee50ebbc585867be2ae1989a34d63b15a2f50ad20522"
+    },
+    {
+      "submap": "Map_30021_3",
+      "id": 143,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        63,
+        66
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 122,
+          "tmx_object": 178,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 22
+        },
+        {
+          "id": 135,
+          "tmx_object": 164,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 22
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13
+      ],
+      "initializer_sha256": "70a7a3e9f2d4a4131b54ee50ebbc585867be2ae1989a34d63b15a2f50ad20522"
+    },
+    {
+      "submap": "Map_30021_3",
+      "id": 144,
+      "group": "ev_e_0013",
+      "raw": "カギのかかった扉",
+      "cell": [
+        2,
+        69,
+        66
+      ],
+      "layers": [
+        0,
+        2
+      ],
+      "open_controls": [
+        {
+          "id": 124,
+          "tmx_object": 180,
+          "group": "ev_e_0014",
+          "layer": 0,
+          "link": 99
+        },
+        {
+          "id": 138,
+          "tmx_object": 167,
+          "group": "ev_e_0014",
+          "layer": 2,
+          "link": 99
+        }
+      ],
+      "unlock_receipt": 13,
+      "unlock_kind": "mystic_key",
+      "initializer_scenario_flags": [
+        13
+      ],
+      "initializer_sha256": "70a7a3e9f2d4a4131b54ee50ebbc585867be2ae1989a34d63b15a2f50ad20522"
+    }
+  ]
+}

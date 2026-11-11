@@ -1,3 +1,4 @@
+// check-sources: audio/custom_cues.cpp
 // Production audio-loop target selection, mode action, gates and ping parameters.
 // Native owners and the route service boundary are fake; no game/device is opened.
 #include <cstdio>
@@ -5,6 +6,7 @@
 #include <limits>
 #include "../src/core/fieldnav/audio_loops.cpp"
 namespace fixture {
+uint32_t custom_mask=0;bool hrtf=false;
 std::map<std::string,int> values;
 std::map<std::string,actions::Fn> actions;
 std::map<events::Kind,std::vector<events::Handler>> handlers;
@@ -16,7 +18,7 @@ ffpr::fieldnav::nav_target::Kind kind=ffpr::fieldnav::nav_target::Kind::Entity;
 ffpr::fieldnav::waypoints::EntityPtr waypoint;
 bool ready=true,focus=true,field=true,suppress=false,dialogue=false,fading=false;
 bool map_available=true,route_found=true,arrived=false,route_pending=false;
-int pings=0,follow=0,across=0,quick=0,map_reads=0;float pan=0,volume=0;bool south=false,low=false;
+int pings=0,landing_pings=0,follow=0,across=0,quick=0,map_reads=0;float pan=0,volume=0;bool south=false,low=false;
 int planned_entity=-1;
 double at=10;
 unity::Vec3 corner{0,80,0};
@@ -73,8 +75,12 @@ namespace landing_spots {bool riding_watercraft(){return false;}void nearby(void
 }
 namespace sound {
 bool wall_tone_playing(){return false;}void stop_wall_tone(){}
-void play_wall_tones_looped(const std::vector<Direction>&){}void play_landing_ping(float,float,int){}
+void play_wall_tones_looped(const std::vector<Direction>&){}void play_landing_ping(float,float,int){++fixture::landing_pings;}
 void play_beacon(float east,float north,float volume,bool low){++fixture::pings;fixture::south=north<0;fixture::pan=std::clamp(east/100.f,-1.f,1.f);fixture::volume=volume;fixture::low=low;}
+}
+namespace sound::runtime {
+bool hrtf_active(){return fixture::hrtf;}
+uint32_t custom_available_mask(){return fixture::custom_mask;}
 }
 int main(){
     using namespace ffpr::fieldnav::audio_loops;
@@ -152,6 +158,33 @@ int main(){
         "battle prefix suspends every audio navigation loop without queries or destroying its retained target");
     events::fire(events::Kind::BattleStart);
     expect(!g_last_beacon_target.keep,"native opening ready releases the retained audio target");
+    fixture::values["AudioBeacons"]=1;fixture::values["BeaconMode"]=1;
+    fixture::kind=ffpr::fieldnav::nav_target::Kind::Entity;fixture::target.valid=true;fixture::target.remote_map_id=0;
+    fixture::target.position={48,0,0};fixture::player={};fixture::map_available=true;g_beacon_silenced=false;
+    fixture::custom_mask=0;fixture::reset();beacon_iteration(900);
+    const double original_interval=g_next_beacon_time-900;
+    const auto& custom_beacon=sound::custom::keys(sound::cues::Id::Beacon);
+    fixture::values[custom_beacon.repeat]=5000;fixture::custom_mask=uint32_t(1)<<size_t(sound::cues::Id::Beacon);
+    fixture::reset();beacon_iteration(910);
+    expect(fixture::pings==1&&std::abs(g_next_beacon_time-915)<.001,"actual beacon producer uses custom5s interval");
+    fixture::values[custom_beacon.enabled]=0;fixture::reset();beacon_iteration(920);
+    expect(fixture::pings==1&&std::abs(g_next_beacon_time-920-original_interval)<.001,"disabled custom beacon restores original producer timing");
+    fixture::hrtf=true;fixture::values["BeaconMode"]=0;fixture::values[custom_beacon.enabled]=1;
+    fixture::values[sound::custom::keys(sound::cues::Id::BeaconBlocked).repeat]=200;
+    fixture::route_found=true;fixture::route_pending=false;beacon_iteration(929);
+    fixture::route_pending=true;fixture::reset();beacon_iteration(930);
+    expect(fixture::pings==1&&std::abs(g_next_beacon_time-935)<.001,"active HRTF pending beacon takes normal Beacon file timing");
+    fixture::route_pending=false;fixture::route_found=false;fixture::reset();beacon_iteration(936);
+    expect(fixture::pings==1&&fixture::low&&std::abs(g_next_beacon_time-941)<.001,"active HRTF blocked beacon uses normal Beacon file interval");
+    fixture::hrtf=false;fixture::route_found=true;
+    fixture::values["LandingPings"]=1;fixture::at=940;g_landing_next_check=1000;g_landing_mask=1;g_landing_next_ping=0;
+    const auto& custom_landing=sound::custom::keys(sound::cues::Id::Landing);
+    fixture::values[custom_landing.repeat]=200;fixture::custom_mask=uint32_t(1)<<size_t(sound::cues::Id::Landing);
+    landing_ping_step();expect(fixture::landing_pings==1&&std::abs(g_landing_next_ping-940.2)<.001,"actual landing producer uses custom200ms interval");
+    fixture::at=940.1;landing_ping_step();expect(fixture::landing_pings==1,"landing producer does not fire early");
+    fixture::values[custom_landing.enabled]=0;fixture::at=941;landing_ping_step();
+    expect(fixture::landing_pings==2&&std::abs(g_landing_next_ping-941.25)<.001,"default landing producer restores250ms cadence");
+    fixture::dialogue=true;fixture::at=942;landing_ping_step();expect(!g_landing_mask&&fixture::landing_pings==2,"dialogue cancels custom landing production");
     std::printf("%s beacon modes: real loop/action, route/object/remote/waypoint/wrap/arrival/gates; %d failures\n",failures?"FAIL":"PASS",failures);
     return failures?1:0;
 }

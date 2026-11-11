@@ -1,4 +1,4 @@
-// check-sources: input/bindings.cpp audio/cue_bank.cpp
+// check-sources: input/bindings.cpp audio/cue_bank.cpp audio/custom_cues.cpp
 // Offline regression of the real modal sampler and settings menu; no game/window/control.
 #include <windows.h>
 #include "bindings_keys_fixture.h"
@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <chrono>
 
 namespace fixture {
 bool focused = true;
@@ -53,6 +54,7 @@ void after_seconds(double, Task task, const char*) { fixture::pending.push_back(
 namespace game { Id current() { return static_cast<Id>(fixture::game_id); } }
 namespace fixture { std::vector<int> previews; }
 namespace sound { void preview(cues::Id cue) { fixture::previews.push_back(static_cast<int>(cue)); } }
+namespace sound::runtime { uint32_t custom_available_mask(){return 0;} }
 namespace input {
 bool game_window_focused(){return fixture::focused;}
 bool key_pressed(Key k){ui::modal_keys::sample();return ui::modal_keys::pressed(fixture::key_vk(k));}
@@ -137,6 +139,9 @@ int main()
         {ui::prefs::kNavigationKeymap, L"Navigation"},
         {ui::prefs::kTeleportShortcuts, L"Navigation"},
         {ui::prefs::kPathfindingFilterMode, L"Navigation"},
+        {ui::prefs::kPuzzleGuideVerbosity, L"Navigation"},
+        {ui::prefs::kNavigationPuzzleGuidance, L"Navigation"},
+        {ui::prefs::kOtherPuzzleGuidance, L"Navigation"},
         {ui::prefs::kMapExitFilter, L"Navigation"},
         {ui::prefs::kToLayerFilter, L"Navigation"},
         {ui::prefs::kStickClickNormalization, L"Navigation"},
@@ -230,18 +235,17 @@ int main()
                "all-six root keeps four categories and Close Menu");
         if (audio_header != items.end()) {
             const int audio_index = static_cast<int>(audio_header - items.begin());
-            expect(audio_index + 4 < static_cast<int>(items.size()) &&
+            const auto scape_page=std::find_if(items.begin(),items.end(),[&](const auto& item){return item.name==L"Soundscape settings"&&item.kind==ui::mod_menu::Kind::Submenu&&item.parent==audio_index;});
+            const auto scape_toggle=std::find_if(items.begin(),items.end(),[&](const auto& item){return item.name==L"Soundscape"&&item.kind==ui::mod_menu::Kind::Toggle&&item.parent==audio_index;});
+            expect(audio_index + 2 < static_cast<int>(items.size()) &&
                    items[audio_index + 1].name == L"Navigation audio master" &&
                    items[audio_index + 1].kind == ui::mod_menu::Kind::Toggle && items[audio_index + 1].bool_def &&
                    items[audio_index + 2].name == L"HRTF" && items[audio_index + 2].kind == ui::mod_menu::Kind::Toggle &&
                    !items[audio_index + 2].bool_def &&
-                   items[audio_index + 3].name == L"Soundscape" && items[audio_index + 3].kind == ui::mod_menu::Kind::Toggle &&
-                   !items[audio_index + 3].bool_def &&
-                   items[audio_index + 4].name == L"Soundscape settings" &&
-                   items[audio_index + 4].kind == ui::mod_menu::Kind::Submenu &&
-                   items[audio_index + 1].parent == audio_index && items[audio_index + 3].parent == audio_index,
-                   "Navigation audio starts with its independent master, HRTF, Soundscape switch and settings submenu");
-            const int soundscape_index = audio_index + 4;
+                   scape_toggle!=items.end()&&!scape_toggle->bool_def&&scape_page!=items.end()&&
+                   items[audio_index + 1].parent == audio_index,
+                   "Navigation audio retains its independent master, HRTF, Soundscape switch and settings submenu");
+            const int soundscape_index = int(scape_page-items.begin());
             const auto distance = std::find_if(items.begin(), items.end(), [&](const auto& item) {
                 return item.parent == soundscape_index && item.key && std::string(item.key) == "SoundscapeDistance";
             });
@@ -290,6 +294,23 @@ int main()
                    "every entity preview dispatches through the shared cue bank");
 
             auto& menu_state = ui::mod_menu::st();
+            const auto preview = std::find_if(items.begin(), items.end(), [](const auto& item) {
+                return item.cue == sound::cues::Id::NPC;
+            });
+            if (preview != items.end()) {
+                fixture::values["NavigationAudio"] = 0;
+                fixture::values["SoundscapeNPC"] = 0;
+                const auto before = fixture::previews.size();
+                ui::mod_menu::activate(*preview);
+                ui::mod_menu::adjust(*preview, 1);
+                expect(fixture::previews.size() == before + 2 && fixture::values["NavigationAudio"] == 0 &&
+                       fixture::values["SoundscapeNPC"] == 0,
+                       "both deliberate preview actions dispatch with the master and individual cue off");
+                fixture::values.erase("NavigationAudio");
+                fixture::values.erase("SoundscapeNPC");
+            } else {
+                expect(false, "the NPC preview is available in every game");
+            }
             menu_state.open = true; menu_state.page = -1; menu_state.index = audio_index;
             ui::mod_menu::enter_page(soundscape_index);
             expect(menu_state.page == soundscape_index && menu_state.index >= 0 &&
@@ -381,7 +402,7 @@ int main()
             ui::mod_menu::set_int(item,-1);expect(ui::mod_menu::int_value(item)==0,"HRTF volume preserves zero mute");
             ui::mod_menu::set_int(item,101);expect(ui::mod_menu::int_value(item)==100,"HRTF slider stays within original bounds");
         }
-        const auto shared_range=std::find_if(items.begin(),items.end(),[](const auto& item){return item.kind==ui::mod_menu::Kind::Range;});
+        const auto shared_range=std::find_if(items.begin(),items.end(),[](const auto& item){return item.kind==ui::mod_menu::Kind::Range&&item.key&&std::string(item.key)=="SoundscapeDistance";});
         if(shared_range!=items.end()) {
             fixture::values["HRTF"]=1;ui::mod_menu::set_int(*shared_range,15);fixture::values["HRTF"]=0;
             expect(ui::mod_menu::int_value(*shared_range)==15&&!fixture::values.contains("HRTF.SoundscapeDistance"),"soundscape range stays shared across HRTF modes");
@@ -462,6 +483,68 @@ int main()
     fixture::keys[VK_ESCAPE] = false; tick();
     press(VK_ESCAPE);
     expect(!ui::mod_menu::is_open(), "fresh focused Escape closes normally");
-    std::printf("Modal focus regression: %s\n", failures ? "FAILED" : "PASS");
+    // Actual nested custom menu, conditional rebuild and persisted typed keys.
+    double menu_total_ms=0,menu_peak_ms=0;
+    for(int game=1;game<=6;++game) {
+        fixture::game_id=game;fixture::values.clear();
+        const auto menu_began=std::chrono::steady_clock::now();ui::mod_menu::initialize();
+        const auto menu_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-menu_began).count();
+        menu_total_ms+=menu_ms;menu_peak_ms=std::max(menu_peak_ms,menu_ms);
+        auto find_key=[&](const char* key) {const auto& items=ui::mod_menu::st().items;for(size_t n=0;n<items.size();++n)if(items[n].key&&std::string(items[n].key)==key)return int(n);return -1;};
+        auto find_name=[&](const wchar_t* name) {const auto& items=ui::mod_menu::st().items;for(size_t n=0;n<items.size();++n)if(items[n].name==name)return int(n);return -1;};
+        auto focus=[&](int n){auto& s=ui::mod_menu::st();s.index=n;s.page=s.items[n].parent;};
+        expect(!ui::prefs::puzzle_guide_verbose(),"all-six unset guide verbosity defaults to Minimal");
+        expect(ui::prefs::navigation_puzzle_guidance()&&ui::prefs::other_puzzle_guidance(),"all-six missing type preferences preserve both guide kinds");
+        const auto nav_key=ui::prefs::kNavigationPuzzleGuidance,other_key=ui::prefs::kOtherPuzzleGuidance;
+        expect(find_key(nav_key)>=0&&find_key(other_key)>=0,"all-six Navigation menu contains both independent type toggles");
+        focus(find_key(nav_key));ui::mod_menu::adjust_current_item(-1);
+        expect(!ui::prefs::navigation_puzzle_guidance()&&ui::prefs::other_puzzle_guidance(),"navigation toggle preserves non-navigation guidance");
+        ui::mod_menu::initialize();
+        expect(!ui::prefs::navigation_puzzle_guidance()&&ui::prefs::other_puzzle_guidance(),"type settings survive a menu rebuild");
+        focus(find_key(other_key));ui::mod_menu::adjust_current_item(-1);
+        expect(!ui::prefs::navigation_puzzle_guidance()&&!ui::prefs::other_puzzle_guidance(),"both guide types can be disabled together");
+        focus(find_key(nav_key));ui::mod_menu::adjust_current_item(1);
+        expect(ui::prefs::navigation_puzzle_guidance()&&!ui::prefs::other_puzzle_guidance(),"navigation guidance can remain enabled alone");
+        focus(find_key(other_key));ui::mod_menu::adjust_current_item(1);
+        const int guide_verbosity=find_key(ui::prefs::kPuzzleGuideVerbosity);
+        expect(guide_verbosity>=0,"all-six Navigation menu exposes guide verbosity");
+        focus(guide_verbosity);ui::mod_menu::adjust_current_item(1);
+        expect(ui::prefs::puzzle_guide_verbose()&&fixture::values[ui::prefs::kPuzzleGuideVerbosity]==1,"guide Verbose selection persists through the shared settings owner");
+        ui::mod_menu::initialize();
+        expect(ui::prefs::puzzle_guide_verbose(),"menu rebuild retains the explicit Verbose selection");
+        focus(find_key(ui::prefs::kPuzzleGuideVerbosity));ui::mod_menu::adjust_current_item(-1);
+        expect(!ui::prefs::puzzle_guide_verbose()&&fixture::values[ui::prefs::kPuzzleGuideVerbosity]==0,"guide Minimal selection restores the requested behavior");
+        const int custom_page=find_name(L"Custom sound settings");size_t cues=0;
+        for(const auto& item:ui::mod_menu::st().items)if(item.parent==custom_page)++cues;
+        expect(custom_page>=0&&cues==sound::cues::count-((game==2||game==4||game==6)?1:0),"all-six custom submenu has only applicable cue IDs");
+        const auto& npc=sound::custom::keys(sound::cues::Id::NPC);
+        focus(find_key(npc.repeat));ui::mod_menu::adjust_current_item(1);
+        expect(fixture::values[npc.repeat]==200,"first custom timing adjustment starts at200ms");
+        for(int n=0;n<60;++n)ui::mod_menu::adjust_current_item(1);
+        expect(fixture::values[npc.repeat]==5000,"custom timing cannot exceed5s");
+        for(int n=0;n<60;++n)ui::mod_menu::adjust_current_item(-1);
+        expect(fixture::values[npc.repeat]==200,"custom timing cannot fall below200ms");
+        ui::mod_menu::toggle_current_item();expect(fixture::values[npc.repeat]==0,"Confirm restores original timing");
+        focus(find_key(npc.enabled));ui::mod_menu::toggle_current_item();expect(fixture::values[npc.enabled]==0,"per-sound default fallback is saved independently");
+        const auto& wall=sound::custom::keys(sound::cues::Id::WallNorth);
+        expect(find_key(wall.repeat)<0,"looped wall does not expose unused interval");
+        focus(find_key(wall.loop));ui::mod_menu::toggle_current_item();
+        expect(find_key(wall.repeat)>=0&&ui::mod_menu::st().items[ui::mod_menu::st().index].key==wall.loop,"wall loop toggle rebuilds timing row and retains focus");
+        focus(find_key(sound::custom::enabled_key));ui::mod_menu::toggle_current_item();
+        expect(find_name(L"Custom sound settings")<0&&ui::mod_menu::st().items[ui::mod_menu::st().index].key==sound::custom::enabled_key,"global off hides custom submenu without stale selection");
+        ui::mod_menu::toggle_current_item();expect(find_name(L"Custom sound settings")>=0,"global on restores custom submenu");
+    }
+    {
+        namespace b=input::bindings;
+        const int route=b::add("key.field.modal.fixture","Route fixture",false,1,int(input::Key::F12));
+        b::native_keyboard_check(+[](const b::Entry&e,int,int,std::wstring&){return e.scope>=0?b::NativeKeyboardResult::Unavailable:b::NativeKeyboardResult::Clear;});
+        ui::mod_menu::initialize();auto& s=ui::mod_menu::st();s.open=true;
+        const auto row=std::find_if(s.items.begin(),s.items.end(),[&](const auto&i){return i.binding==route&&i.kind==ui::mod_menu::Kind::BindingInput;});
+        expect(row!=s.items.end(),"actual keyboard editor lists the registered gameplay action");
+        if(row!=s.items.end()){s.index=int(row-s.items.begin());s.page=row->parent;const auto before=b::entries()[route].primary;const auto said=fixture::spoken.size();ui::mod_menu::adjust_current_item(1);const bool explained=std::any_of(fixture::spoken.begin()+said,fixture::spoken.end(),[](const auto&line){return line.find(L"unavailable")!=std::wstring::npos;});expect(b::entries()[route].primary==before&&explained,"unavailable game configuration preserves binding instead of cycling to Unbound");}
+        b::native_keyboard_check(nullptr);s.open=false;
+    }
+    std::printf("All-six full menu construction: mean %.3f ms, peak %.3f ms; fixture settings/resource cap, no game or speech latency claim\n",menu_total_ms/6,menu_peak_ms);
+    std::printf("Modal focus/custom menu regression: %s\n", failures ? "FAILED" : "PASS");
     return failures ? 1 : 0;
 }

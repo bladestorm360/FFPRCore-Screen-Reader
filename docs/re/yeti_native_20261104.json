@@ -1,0 +1,5083 @@
+{
+  "maps": {
+    "18": "Map_20020",
+    "19": "Map_20030",
+    "20": "Map_20040",
+    "493": "Map_30771_1",
+    "494": "Map_30771_2",
+    "495": "Map_30771_3",
+    "496": "Map_30771_4"
+  },
+  "source_script_hashes": {
+    "Map_20020/sc_e_0791_1": "6abf0ee442d8a84b5ff4ad7220b78038bb6387b9b7df34ef92baba4b63d3a7a3",
+    "Map_20030/sc_e_0779": "32243e9e1caf39f7f2b69fe9dd0f64483fc90bf04b81ad6a27a991482824790e",
+    "Map_20030/sc_e_0779_1": "ad8251057c7845aa87eec02782625f4cd7f8b03caba2ef4b5bef22be05dc3219",
+    "Map_20040/sc_e_0780": "668ecd57e21e7dac7294921e05d43f1170c00497d7b57c2d86a46b06e3382b3e",
+    "Map_20040/sc_e_0780_1": "3c5e859ef2451b53d6796461987d352178112a35276dcdd2f841f0ec467c0bdf",
+    "Map_20040/sc_e_0781": "ee273e77974333227772167e82b9806f2690c2b2937b3f12b64b609f10b458cc",
+    "Map_30771_1/sc_e_0781_1": "bf7a2648a20d3975f8ba6c8586c3bcd0e07e776b5860b5940b43e1b139be1797",
+    "Map_30771_1/sc_e_0782": "ee9a33acf2b24fc4ac2bdc95be3fad0a754e39dbd8841916909df3cd0ff253ec",
+    "Map_30771_1/sc_e_0783": "16bd24e77663337f9561461f25297a57e681a0fd958889312f81ac0cca0d24fb",
+    "Map_30771_1/sc_map_30771_1": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_30771_2/sc_e_0782_1": "9feb3c59ec451a982e806245be55aeda8057da99f66f713e772a162bb1703c45",
+    "Map_30771_2/sc_e_0783_1": "0b8c08dc679977d238b117c44323dfe43f136e54d03f0f34e0ab7ecace0e418e",
+    "Map_30771_2/sc_e_0784_1": "7d9902f61cdee28621cb541ffde3af4a7addc7e80af4a7ad35a48ad000a1b44e",
+    "Map_30771_2/sc_e_0785_1": "0d42c61d0927909912d87c29f36fd6bf1510484eb558f043186a4cb6574b0f2d",
+    "Map_30771_2/sc_e_0787_1": "72ad043f094f6da889b5a96a1b6089df053f7fec65146ba03275e0c1482fa94e",
+    "Map_30771_2/sc_map_30771_2": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_30771_3/sc_e_0784": "da366037ae9ca9e9420efc858fb0e9a7542895f0c23ce98a2e91ea88fb4da072",
+    "Map_30771_3/sc_e_0785": "61b50bcb2ea1d6db7ade312809d38c953705aea9697c6bff97ef3d283cc618d6",
+    "Map_30771_3/sc_e_0786": "0497e6579b4bf63ae3cd3ecbbde0f9a95b44cf00336ba1df605049be65f948a7",
+    "Map_30771_3/sc_e_0786_1": "104f981f1c8d8c847b1c0d2ca72984f3f724e7306b10452b460341de39de4147",
+    "Map_30771_3/sc_e_0787": "1f716784971a14746c71ec6fda554ca847af5e2f8c01704d0d5c2e312bd4d74e",
+    "Map_30771_3/sc_e_0788": "fd3263427a67e754dc36cbc7f52d7c73d486975245c4b496181627ce4cf701fc",
+    "Map_30771_3/sc_map_30771_3": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30771_4/sc_e_0788_1": "a42c34fe450031ea27ce6b4cb83f328112c5ca7aea9273c7d940e8dcca152233",
+    "Map_30771_4/sc_e_0789": "f7979d51bc9e37cdd296678301e53ced7984e7b14c818d11f7e4d928346bce62",
+    "Map_30771_4/sc_e_0789_1": "d935aa108b2649aacd2c31af418b42fec720dbf6336cae7ce2cba6293eef2b0f",
+    "Map_30771_4/sc_e_0790": "ae3163d872f8c2596fd0ea2898537532fbc395ec76eaa7d15e38ca15d9b76b71",
+    "Map_30771_4/sc_e_0791": "9f81eb7618a287385f05976dd1f16f68b540cae78d5e202c9d16a7de4bb4ad81",
+    "Map_30771_4/sc_map_30771_4": "646d7fcf97671aee64008164e732f61614c3bb3117a59201feb9f64738266c9a",
+    "Map_20020/sc_e_0007": "692aa34f82d39409be54942a6942da501b896143848a0e311e571ec6e81ee01e",
+    "Map_20020/sc_e_0007_1": "22324cfe92a0a8823c44e6274a887ba901e17e1e75540cffc1f8305abd8c0b4d",
+    "Map_20020/sc_e_0008": "f29f7aaf93633b12d50d18d165abab03158015f8b7b949dfed0590bea9139bad",
+    "Map_20020/sc_e_0249_5": "195570ade26f19a0881c281dda2ec2c495e73bf7a28af4b377605a21b6d500ec",
+    "Map_20020/sc_e_0435": "5e8fc1e10fb843434280decbb129d0641d7ea860048f2aa75719d472397b0b16",
+    "Map_20020/sc_map_20020": "02aba13f5cb45667bcf81c51dda12e1fa513924ed8e98203b93dbbb1ab09f6d5",
+    "Map_20030/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "Map_20030/sc_e_0249_6": "7d6595f1b744bca65a8563fb76da92ccf38d26b5f033986fbee066cc1c7b90ea",
+    "Map_20030/sc_e_0250": "e4abadbeed07e4332984fe8f6808f8d1f5c643c45d5b99c0d49e6981c38021ce",
+    "Map_20030/sc_e_0251": "f08264108e1836f52e7498e4d33f9e92b9bbade6aa982fb7cec5d0668a3f063c",
+    "Map_20030/sc_e_0252": "2d11b7791b96a2a6b29ad8a885cbfdca1c4ec3e8b25238650eb994ef8a0279c7",
+    "Map_20030/sc_e_0253": "3871e2000bee40c7895f1d0d91ad3890e90a2f2bdc4b14d93ad84d6011e28b42",
+    "Map_20030/sc_e_0254": "2f72dc4fcc5af2569c2d8d429735a29393edde577d644f3cb5235d3e719a5ee0",
+    "Map_20030/sc_e_0255": "f7aba0f5aa4891b7e0dbd2c651098da0d79e5b9c1a7ac8b81d4e6236a0479658",
+    "Map_20030/sc_e_0256": "f276553e3ff05c30461fe816e0418c5e00dd4cfed45270745d89d008fa66dd53",
+    "Map_20030/sc_e_0256_2": "d8e05a36c0f5d94c4f313b3bf4970996557a97d573b4eb6ee6d7f3e72e71ff69",
+    "Map_20030/sc_e_0257": "955eb7c58fc3037d365f449f359972c150a283d7d9ddf273481e7553bb4a5531",
+    "Map_20030/sc_e_0257_1": "4c5a8e3140a047533e1706df9894cd6718de3057bbee70b0f4de8eec7cecdc0c",
+    "Map_20030/sc_e_0258": "af6d6db12ae39e49ca8e94153762d8734afff0d354f56f2e031adb8451768d3d",
+    "Map_20030/sc_e_0259": "5ca738240ae2b306697b4d11f5f5a0bec4e123cf075654757d0eb154eaf79986",
+    "Map_20030/sc_e_0259_1": "eff35a5d1998f3f2837a6fefb69e4c3e2096b2ebdb93531f677230c5defb66e9",
+    "Map_20030/sc_e_0261": "9cd389dd9d18117dbf7ae2c985320aac8f18b3147c402164c422b0fc9a4bc038",
+    "Map_20030/sc_e_0975": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+    "Map_20030/sc_e_1087": "52e7609c0358364ba65e00de8c565e273ce5c52f92ff9f1cf313785ff6bd3fc2",
+    "Map_20030/sc_e_1087_1": "b682acb383bd48696437cdbac9bc60c1f7494ab20273acdab84de54aa1df26ee",
+    "Map_20030/sc_e_1087_t": "712688997b71b696512d39b91d213a5236f8cb049cedd4b2ab0c38adba1fe003",
+    "Map_20030/sc_e_1088": "a2e12d5a62fd059392e85586e60bfde744a846f20ef6adaf5b50640bd8587a2f",
+    "Map_20030/sc_e_1088_1": "e853409291af5149c37a17f7d230e0c8639453577434f8f8660cd48d6a26ab21",
+    "Map_20030/sc_e_1089": "23a0d40d6e04cbc38837337d56dff00f2e0372ca107b6e5177a68ad7bb65c9d3",
+    "Map_20030/sc_e_1089_1": "082aad901e5f3da2f621fd9dc55676e0b4ab4c70cc6e4a54c3001a968beb4ef1",
+    "Map_20030/sc_e_1090": "bbe78abf6bac60e434f302067245bb952ad74642699297c26fc692dda2d6c375",
+    "Map_20030/sc_e_1090_1": "e531bf9b50c428814c19df638fd6cc9db53e5a42a6461d11224a0ab51f530fdb",
+    "Map_20030/sc_e_1091": "c11a3fbecb2de9ba26f01a7dcc0f936939aa8d33c89afc4f9c8bc58d1752cd4e",
+    "Map_20030/sc_e_1091_1": "a47eed82a57daba899fb50a1ed323f815ecd333ca1d97c5f29299bb4d1fe5dde",
+    "Map_20030/sc_e_1092": "a63951a76732e3b020df5a7b40b06feb6aec659d5b046574c9ae10a517fe2624",
+    "Map_20030/sc_e_1092_1": "a95eeaa2a157afd3a1f4383823c7db4a99a156871187f104eb1fc36911a9ddf7",
+    "Map_20030/sc_e_1093": "93c5d4e162cd311ceffbf797a7c7a27d3a98f40bca2b0b96de3f2b0ff2ae2270",
+    "Map_20030/sc_e_1093_1": "9ae1ca1fc684609be393fb0a0caae664cf417d7d8ac8de3ae86a27f33e536a33",
+    "Map_20030/sc_e_1094": "9740cd42e80a51f86ada6ff408a036ce2724bb6d6cfe68bf51eaa740d8260046",
+    "Map_20030/sc_e_1094_1": "dcefd307d327afe2beb28627e89c47f3fbdf325de6ac7da686aac0e92aa9b432",
+    "Map_20030/sc_e_1095": "2493b64b0c21d2856e056205d7f980af132b61dd9c5c7fabfe6f618b71ca60af",
+    "Map_20030/sc_e_1095_1": "c532ff57d5cc253460785f0a3b75204cc0a08322fc574f6b82eb90e1e646660b",
+    "Map_20030/sc_e_1096": "7532e139e262202396e826df904b79c94037c2c0abcd177b1508737044120008",
+    "Map_20030/sc_e_1096_1": "970052e5c0d4f998fd6ec318a042c8ba475d2d08e976151a26cc88c889f35607",
+    "Map_20030/sc_e_1097": "6cbba3e55bd7ee333df63fb9a87a1334dcfc98d287fd35a97c328aaf57bb408a",
+    "Map_20030/sc_e_1097_1": "b940fc0351f2bfa138f4cfbc26f1fad4c8acefd8f34aaf0b536e407766f59563",
+    "Map_20030/sc_map_20030": "3a654b3ad11bf44ad50614c8cc54f061e8bdb16ae0015221745e013ba75bf5f8",
+    "Map_20040/sc_e_0259_2": "8680cf783acb9c8322795200e25a442b451e9f8a3da4c014b9623915371f20a8",
+    "Map_20040/sc_e_0259_3": "739fce84c5f4a88b5bc24afd74d4e61b1ee14bacdd54c417390ce953da9d654e",
+    "Map_20040/sc_e_0436": "88ddbc23438df9ad23e356b59085a8b5c47ce0c0b7289aefdc0833b36d8cb0e4",
+    "Map_20040/sc_e_0437": "c17c5089815f8fe1780704bfd36632a5a192ee84c8302ea8dcc8e340aa45422c",
+    "Map_20040/sc_e_0437_0": "67880645be3ddcbd3538e164f7bcc26154c5bb0792db058d0fad491ab5323302",
+    "Map_20040/sc_e_0438": "e03cac1ed18abdd230eee7a09cee183d210121a39772007523af762e2ffcf34b",
+    "Map_20040/sc_e_0439": "d337fc5662ebb7670f057718ac82e5f2b74590195ff86a0b9717916e15ed8d90",
+    "Map_20040/sc_e_1013": "b51255b59ce087c5d37a62bc3ce4c80ead501e5f3df92d6e46cb118025569661",
+    "Map_20040/sc_e_1015": "2b9b4b085fc2312ad5ac4ac82d8f44bd2db8da73bb6cc11d870f5f73aff54d1e",
+    "Map_20040/sc_e_1055": "f080e1c74a110665a0f555103a6df7c6a7de198cc70aa129d3c4fbde3b252012",
+    "Map_20040/sc_map_20040": "88c6a323428bed8acce8e9693a45e4f5f67f6c9cecf51752f6d47b1eed6a4d60"
+  },
+  "facts": {
+    "Map_20020/sc_e_0791_1": {
+      "sha256": "6abf0ee442d8a84b5ff4ad7220b78038bb6387b9b7df34ef92baba4b63d3a7a3",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0779": {
+      "sha256": "32243e9e1caf39f7f2b69fe9dd0f64483fc90bf04b81ad6a27a991482824790e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          1,
+          367,
+          0,
+          0,
+          "sc_e_0779_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_0779_1": {
+      "sha256": "ad8251057c7845aa87eec02782625f4cd7f8b03caba2ef4b5bef22be05dc3219",
+      "flags": [
+        [
+          3,
+          "ScenarioFlag2",
+          138,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0780": {
+      "sha256": "668ecd57e21e7dac7294921e05d43f1170c00497d7b57c2d86a46b06e3382b3e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          12,
+          488,
+          0,
+          0,
+          "sc_e_0780_1"
+        ]
+      ]
+    },
+    "Map_20040/sc_e_0780_1": {
+      "sha256": "3c5e859ef2451b53d6796461987d352178112a35276dcdd2f841f0ec467c0bdf",
+      "flags": [
+        [
+          26,
+          "ScenarioFlag2",
+          139,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0781": {
+      "sha256": "ee273e77974333227772167e82b9806f2690c2b2937b3f12b64b609f10b458cc",
+      "flags": [],
+      "choices": [
+        [
+          3
+        ]
+      ],
+      "transfers": [
+        [
+          8,
+          493,
+          1,
+          "sc_e_0781_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_1/sc_e_0781_1": {
+      "sha256": "bf7a2648a20d3975f8ba6c8586c3bcd0e07e776b5860b5940b43e1b139be1797",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag4",
+          192,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_1/sc_e_0782": {
+      "sha256": "ee9a33acf2b24fc4ac2bdc95be3fad0a754e39dbd8841916909df3cd0ff253ec",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          494,
+          1,
+          "sc_e_0782_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_1/sc_e_0783": {
+      "sha256": "16bd24e77663337f9561461f25297a57e681a0fd958889312f81ac0cca0d24fb",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          494,
+          2,
+          "sc_e_0783_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_1/sc_map_30771_1": {
+      "sha256": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_e_0782_1": {
+      "sha256": "9feb3c59ec451a982e806245be55aeda8057da99f66f713e772a162bb1703c45",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_e_0783_1": {
+      "sha256": "0b8c08dc679977d238b117c44323dfe43f136e54d03f0f34e0ab7ecace0e418e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_e_0784_1": {
+      "sha256": "7d9902f61cdee28621cb541ffde3af4a7addc7e80af4a7ad35a48ad000a1b44e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_e_0785_1": {
+      "sha256": "0d42c61d0927909912d87c29f36fd6bf1510484eb558f043186a4cb6574b0f2d",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_e_0787_1": {
+      "sha256": "72ad043f094f6da889b5a96a1b6089df053f7fec65146ba03275e0c1482fa94e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_2/sc_map_30771_2": {
+      "sha256": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_e_0784": {
+      "sha256": "da366037ae9ca9e9420efc858fb0e9a7542895f0c23ce98a2e91ea88fb4da072",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          494,
+          5,
+          "sc_e_0784_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_e_0785": {
+      "sha256": "61b50bcb2ea1d6db7ade312809d38c953705aea9697c6bff97ef3d283cc618d6",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          494,
+          6,
+          "sc_e_0785_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_e_0786": {
+      "sha256": "0497e6579b4bf63ae3cd3ecbbde0f9a95b44cf00336ba1df605049be65f948a7",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          4,
+          236,
+          0,
+          0,
+          "sc_e_0786_1"
+        ]
+      ]
+    },
+    "Map_30771_3/sc_e_0786_1": {
+      "sha256": "104f981f1c8d8c847b1c0d2ca72984f3f724e7306b10452b460341de39de4147",
+      "flags": [
+        [
+          2,
+          "ScenarioFlag2",
+          140,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_e_0787": {
+      "sha256": "1f716784971a14746c71ec6fda554ca847af5e2f8c01704d0d5c2e312bd4d74e",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          494,
+          7,
+          "sc_e_0787_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_e_0788": {
+      "sha256": "fd3263427a67e754dc36cbc7f52d7c73d486975245c4b496181627ce4cf701fc",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          496,
+          1,
+          "sc_e_0788_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_3/sc_map_30771_3": {
+      "sha256": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_4/sc_e_0788_1": {
+      "sha256": "a42c34fe450031ea27ce6b4cb83f328112c5ca7aea9273c7d940e8dcca152233",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_4/sc_e_0789": {
+      "sha256": "f7979d51bc9e37cdd296678301e53ced7984e7b14c818d11f7e4d928346bce62",
+      "flags": [],
+      "choices": [
+        [
+          9
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          53,
+          444,
+          57,
+          12,
+          "sc_e_0789_1"
+        ]
+      ]
+    },
+    "Map_30771_4/sc_e_0789_1": {
+      "sha256": "d935aa108b2649aacd2c31af418b42fec720dbf6336cae7ce2cba6293eef2b0f",
+      "flags": [
+        [
+          4,
+          "ScenarioFlag2",
+          141,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_4/sc_e_0790": {
+      "sha256": "ae3163d872f8c2596fd0ea2898537532fbc395ec76eaa7d15e38ca15d9b76b71",
+      "flags": [
+        [
+          58,
+          "ScenarioFlag2",
+          142,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          29,
+          "名前入力：ウーマロ"
+        ],
+        [
+          49,
+          "メンバー加入：ウーマロ"
+        ],
+        [
+          52,
+          "メンバー加入：ウーマロ"
+        ],
+        [
+          53,
+          "控えに移動：ウーマロ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30771_4/sc_e_0791": {
+      "sha256": "9f81eb7618a287385f05976dd1f16f68b540cae78d5e202c9d16a7de4bb4ad81",
+      "flags": [],
+      "choices": [
+        [
+          3
+        ]
+      ],
+      "transfers": [
+        [
+          9,
+          18,
+          1,
+          "sc_e_0791_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30771_4/sc_map_30771_4": {
+      "sha256": "646d7fcf97671aee64008164e732f61614c3bb3117a59201feb9f64738266c9a",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20020/sc_e_0007": {
+      "sha256": "692aa34f82d39409be54942a6942da501b896143848a0e311e571ec6e81ee01e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          6,
+          85,
+          0,
+          0,
+          "sc_e_0007_1"
+        ]
+      ]
+    },
+    "Map_20020/sc_e_0007_1": {
+      "sha256": "22324cfe92a0a8823c44e6274a887ba901e17e1e75540cffc1f8305abd8c0b4d",
+      "flags": [
+        [
+          3,
+          "ScenarioFlag1",
+          5,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20020/sc_e_0008": {
+      "sha256": "f29f7aaf93633b12d50d18d165abab03158015f8b7b949dfed0590bea9139bad",
+      "flags": [
+        [
+          8,
+          "ScenarioFlag1",
+          6,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20020/sc_e_0249_5": {
+      "sha256": "195570ade26f19a0881c281dda2ec2c495e73bf7a28af4b377605a21b6d500ec",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          21,
+          19,
+          1,
+          "sc_e_0249_6"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20020/sc_e_0435": {
+      "sha256": "5e8fc1e10fb843434280decbb129d0641d7ea860048f2aa75719d472397b0b16",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag1",
+          212,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20020/sc_map_20020": {
+      "sha256": "02aba13f5cb45667bcf81c51dda12e1fa513924ed8e98203b93dbbb1ab09f6d5",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          37,
+          "近景１：表示"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0009": {
+      "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+      "flags": [
+        [
+          4,
+          "ScenarioFlag1",
+          7,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          6
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0249_6": {
+      "sha256": "7d6595f1b744bca65a8563fb76da92ccf38d26b5f033986fbee066cc1c7b90ea",
+      "flags": [
+        [
+          7,
+          "ScenarioFlag1",
+          136,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0250": {
+      "sha256": "e4abadbeed07e4332984fe8f6808f8d1f5c643c45d5b99c0d49e6981c38021ce",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0251": {
+      "sha256": "f08264108e1836f52e7498e4d33f9e92b9bbade6aa982fb7cec5d0668a3f063c",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0252": {
+      "sha256": "2d11b7791b96a2a6b29ad8a885cbfdca1c4ec3e8b25238650eb994ef8a0279c7",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0253": {
+      "sha256": "3871e2000bee40c7895f1d0d91ad3890e90a2f2bdc4b14d93ad84d6011e28b42",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0254": {
+      "sha256": "2f72dc4fcc5af2569c2d8d429735a29393edde577d644f3cb5235d3e719a5ee0",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0255": {
+      "sha256": "f7aba0f5aa4891b7e0dbd2c651098da0d79e5b9c1a7ac8b81d4e6236a0479658",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0256": {
+      "sha256": "f276553e3ff05c30461fe816e0418c5e00dd4cfed45270745d89d008fa66dd53",
+      "flags": [],
+      "choices": [
+        [
+          2
+        ]
+      ],
+      "transfers": [
+        [
+          6,
+          584,
+          1,
+          "sc_e_0256_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0256_2": {
+      "sha256": "d8e05a36c0f5d94c4f313b3bf4970996557a97d573b4eb6ee6d7f3e72e71ff69",
+      "flags": [
+        [
+          24,
+          "ScenarioFlag1",
+          137,
+          1
+        ],
+        [
+          32,
+          "ScenarioFlag3",
+          41,
+          1
+        ],
+        [
+          33,
+          "ScenarioFlag3",
+          45,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "パペット入れ替え：スロット２・３先頭"
+        ],
+        [
+          4,
+          "パペット入れ替え：解除"
+        ],
+        [
+          10,
+          "パペット入れ替え：スロット２・３先頭"
+        ],
+        [
+          12,
+          "パペット入れ替え：解除"
+        ],
+        [
+          27,
+          "パペット入れ替え：スロット２・３先頭"
+        ],
+        [
+          29,
+          "パペット入れ替え：解除"
+        ],
+        [
+          30,
+          "パーティ配置：幻獣防衛戦"
+        ],
+        [
+          31,
+          "ゲームオーバー設定：幻獣防衛戦"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0257": {
+      "sha256": "955eb7c58fc3037d365f449f359972c150a283d7d9ddf273481e7553bb4a5531",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          2,
+          88,
+          0,
+          0,
+          "sc_e_0257_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_0257_1": {
+      "sha256": "4c5a8e3140a047533e1706df9894cd6718de3057bbee70b0f4de8eec7cecdc0c",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0258": {
+      "sha256": "af6d6db12ae39e49ca8e94153762d8734afff0d354f56f2e031adb8451768d3d",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          9,
+          584,
+          1,
+          "sc_e_0258_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0259": {
+      "sha256": "5ca738240ae2b306697b4d11f5f5a0bec4e123cf075654757d0eb154eaf79986",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          3,
+          506,
+          19,
+          36,
+          "sc_e_0259_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_0259_1": {
+      "sha256": "eff35a5d1998f3f2837a6fefb69e4c3e2096b2ebdb93531f677230c5defb66e9",
+      "flags": [
+        [
+          17,
+          "ScenarioFlag3",
+          41,
+          0
+        ],
+        [
+          18,
+          "ScenarioFlag3",
+          45,
+          0
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          29,
+          20,
+          1,
+          "sc_e_0259_2"
+        ],
+        [
+          31,
+          584,
+          1,
+          "sc_e_0258_1"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "戦闘結果取得"
+        ],
+        [
+          22,
+          "メンバー離脱：ティナ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0261": {
+      "sha256": "9cd389dd9d18117dbf7ae2c985320aac8f18b3147c402164c422b0fc9a4bc038",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_0975": {
+      "sha256": "5d558cb6aa066a2aa9d1f5f7132a5b830cbd24cee5d8576ff5bc46503b3cffad",
+      "flags": [
+        [
+          83,
+          "ScenarioFlag2",
+          221,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1087": {
+      "sha256": "52e7609c0358364ba65e00de8c565e273ce5c52f92ff9f1cf313785ff6bd3fc2",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1087_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1087_1": {
+      "sha256": "b682acb383bd48696437cdbac9bc60c1f7494ab20273acdab84de54aa1df26ee",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1087_t": {
+      "sha256": "712688997b71b696512d39b91d213a5236f8cb049cedd4b2ab0c38adba1fe003",
+      "flags": [
+        [
+          3,
+          "ScenarioFlag3",
+          73,
+          1
+        ],
+        [
+          4,
+          "ScenarioFlag3",
+          74,
+          1
+        ],
+        [
+          5,
+          "ScenarioFlag3",
+          75,
+          1
+        ],
+        [
+          6,
+          "ScenarioFlag3",
+          76,
+          1
+        ],
+        [
+          7,
+          "ScenarioFlag3",
+          77,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1088": {
+      "sha256": "a2e12d5a62fd059392e85586e60bfde744a846f20ef6adaf5b50640bd8587a2f",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1088_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1088_1": {
+      "sha256": "e853409291af5149c37a17f7d230e0c8639453577434f8f8660cd48d6a26ab21",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1089": {
+      "sha256": "23a0d40d6e04cbc38837337d56dff00f2e0372ca107b6e5177a68ad7bb65c9d3",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1089_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1089_1": {
+      "sha256": "082aad901e5f3da2f621fd9dc55676e0b4ab4c70cc6e4a54c3001a968beb4ef1",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1090": {
+      "sha256": "bbe78abf6bac60e434f302067245bb952ad74642699297c26fc692dda2d6c375",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1090_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1090_1": {
+      "sha256": "e531bf9b50c428814c19df638fd6cc9db53e5a42a6461d11224a0ab51f530fdb",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1091": {
+      "sha256": "c11a3fbecb2de9ba26f01a7dcc0f936939aa8d33c89afc4f9c8bc58d1752cd4e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1091_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1091_1": {
+      "sha256": "a47eed82a57daba899fb50a1ed323f815ecd333ca1d97c5f29299bb4d1fe5dde",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1092": {
+      "sha256": "a63951a76732e3b020df5a7b40b06feb6aec659d5b046574c9ae10a517fe2624",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          92,
+          93,
+          0,
+          "sc_e_1092_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1092_1": {
+      "sha256": "a95eeaa2a157afd3a1f4383823c7db4a99a156871187f104eb1fc36911a9ddf7",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          8,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          10,
+          "パペット入れ替え：解除"
+        ],
+        [
+          12,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1093": {
+      "sha256": "93c5d4e162cd311ceffbf797a7c7a27d3a98f40bca2b0b96de3f2b0ff2ae2270",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          89,
+          90,
+          0,
+          "sc_e_1093_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1093_1": {
+      "sha256": "9ae1ca1fc684609be393fb0a0caae664cf417d7d8ac8de3ae86a27f33e536a33",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag3",
+          73,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          9,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          11,
+          "パペット入れ替え：解除"
+        ],
+        [
+          13,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1094": {
+      "sha256": "9740cd42e80a51f86ada6ff408a036ce2724bb6d6cfe68bf51eaa740d8260046",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          89,
+          90,
+          0,
+          "sc_e_1094_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1094_1": {
+      "sha256": "dcefd307d327afe2beb28627e89c47f3fbdf325de6ac7da686aac0e92aa9b432",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag3",
+          74,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          9,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          11,
+          "パペット入れ替え：解除"
+        ],
+        [
+          13,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1095": {
+      "sha256": "2493b64b0c21d2856e056205d7f980af132b61dd9c5c7fabfe6f618b71ca60af",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          89,
+          90,
+          0,
+          "sc_e_1095_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1095_1": {
+      "sha256": "c532ff57d5cc253460785f0a3b75204cc0a08322fc574f6b82eb90e1e646660b",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag3",
+          75,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          10,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          12,
+          "パペット入れ替え：解除"
+        ],
+        [
+          13,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1096": {
+      "sha256": "7532e139e262202396e826df904b79c94037c2c0abcd177b1508737044120008",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          89,
+          90,
+          0,
+          "sc_e_1096_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1096_1": {
+      "sha256": "970052e5c0d4f998fd6ec318a042c8ba475d2d08e976151a26cc88c889f35607",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag3",
+          76,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          10,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          12,
+          "パペット入れ替え：解除"
+        ],
+        [
+          13,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_e_1097": {
+      "sha256": "6cbba3e55bd7ee333df63fb9a87a1334dcfc98d287fd35a97c328aaf57bb408a",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          2,
+          "RTS：エンカウントパーティ切替"
+        ]
+      ],
+      "encounters": [
+        [
+          3,
+          89,
+          90,
+          0,
+          "sc_e_1097_1"
+        ]
+      ]
+    },
+    "Map_20030/sc_e_1097_1": {
+      "sha256": "b940fc0351f2bfa138f4cfbc26f1fad4c8acefd8f34aaf0b536e407766f59563",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag3",
+          77,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "戦闘結果取得"
+        ],
+        [
+          3,
+          "RTS：エンカウント前パーティ復元"
+        ],
+        [
+          10,
+          "パペット入れ替え：バトルパーティ"
+        ],
+        [
+          12,
+          "パペット入れ替え：解除"
+        ],
+        [
+          13,
+          "RTS：エンカウント前パーティ復元"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20030/sc_map_20030": {
+      "sha256": "3a654b3ad11bf44ad50614c8cc54f061e8bdb16ae0015221745e013ba75bf5f8",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0259_2": {
+      "sha256": "8680cf783acb9c8322795200e25a442b451e9f8a3da4c014b9623915371f20a8",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          73,
+          581,
+          1,
+          "sc_e_0259_b"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0259_3": {
+      "sha256": "739fce84c5f4a88b5bc24afd74d4e61b1ee14bacdd54c417390ce953da9d654e",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          12,
+          1,
+          1,
+          "sc_e_0259_4"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0436": {
+      "sha256": "88ddbc23438df9ad23e356b59085a8b5c47ce0c0b7289aefdc0833b36d8cb0e4",
+      "flags": [
+        [
+          4,
+          "ScenarioFlag1",
+          213,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0437": {
+      "sha256": "c17c5089815f8fe1780704bfd36632a5a192ee84c8302ea8dcc8e340aa45422c",
+      "flags": [
+        [
+          12,
+          "ScenarioFlag1",
+          214,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0437_0": {
+      "sha256": "67880645be3ddcbd3538e164f7bcc26154c5bb0792db058d0fad491ab5323302",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0438": {
+      "sha256": "e03cac1ed18abdd230eee7a09cee183d210121a39772007523af762e2ffcf34b",
+      "flags": [
+        [
+          48,
+          "ScenarioFlag1",
+          215,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "メンバー加入：モグ"
+        ],
+        [
+          2,
+          "控えに移動：モグ"
+        ],
+        [
+          26,
+          "名前入力：モグ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20040/sc_e_0439": {
+      "sha256": "d337fc5662ebb7670f057718ac82e5f2b74590195ff86a0b9717916e15ed8d90",
+      "flags": [
+        [
+          11,
+          "ScenarioFlag1",
+          216,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_e_1013": {
+      "sha256": "b51255b59ce087c5d37a62bc3ce4c80ead501e5f3df92d6e46cb118025569661",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1014_0"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：モグ"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "モノクロフィルターはずす"
+        ],
+        [
+          11,
+          "顔グラ表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20040/sc_e_1015": {
+      "sha256": "2b9b4b085fc2312ad5ac4ac82d8f44bd2db8da73bb6cc11d870f5f73aff54d1e",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1016_0"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：ウーマロ"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "モノクロフィルターはずす"
+        ],
+        [
+          11,
+          "顔グラ表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20040/sc_e_1055": {
+      "sha256": "f080e1c74a110665a0f555103a6df7c6a7de198cc70aa129d3c4fbde3b252012",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20040/sc_map_20040": {
+      "sha256": "88c6a323428bed8acce8e9693a45e4f5f67f6c9cecf51752f6d47b1eed6a4d60",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    }
+  },
+  "actors": [
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        53
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 3,
+      "point": 18
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 8,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        53
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 3,
+      "point": 18
+    },
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 10,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 11,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        23,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 12,
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        32,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "PointIn",
+      "object_id": 13,
+      "entity": 12,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 16,
+      "entity": 15,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 19,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 17,
+      "entity": 16,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        35,
+        2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 19,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 18,
+      "entity": 17,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 19,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "Event",
+      "object_id": 19,
+      "entity": 25,
+      "group": "ev_e_0007",
+      "raw": "戦闘5（町の奥）",
+      "script": "sc_e_0007",
+      "cell": [
+        "GroundObject",
+        30,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 20,
+      "entity": 26,
+      "group": "ev_e_0007",
+      "raw": "ガード（左）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 21,
+      "entity": 27,
+      "group": "ev_e_0007",
+      "raw": "ガード（右）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        67,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 22,
+      "entity": 28,
+      "group": "ev_e_0007",
+      "raw": "獣人（左）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 23,
+      "entity": 29,
+      "group": "ev_e_0007",
+      "raw": "獣人（右）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        67,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "Event",
+      "object_id": 25,
+      "entity": 22,
+      "group": "ev_e_0008",
+      "raw": "炭鉱入口会話",
+      "script": "sc_e_0008",
+      "cell": [
+        "GroundObject",
+        31,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 104,
+      "entity": 36,
+      "group": "ev_e_0259",
+      "raw": "NPCウーマロ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        35,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "Event",
+      "object_id": 31,
+      "entity": 20,
+      "group": "ev_e_0435",
+      "raw": "山上にコソドロ見付けるが逃げる",
+      "script": "sc_e_0435",
+      "cell": [
+        "GroundObject",
+        32,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "Event",
+      "object_id": 32,
+      "entity": 19,
+      "group": "ev_e_0435",
+      "raw": "山上にコソドロ見付けるが逃げる",
+      "script": "sc_e_0435",
+      "cell": [
+        "GroundObject",
+        31,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "Event",
+      "object_id": 33,
+      "entity": 18,
+      "group": "ev_e_0435",
+      "raw": "山上にコソドロ見付けるが逃げる",
+      "script": "sc_e_0435",
+      "cell": [
+        "GroundObject",
+        30,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "NPC",
+      "object_id": 30,
+      "entity": 21,
+      "group": "ev_e_0435",
+      "raw": "コソドロ",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        40,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 88,
+      "entity": 5,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 323,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 89,
+      "entity": 6,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        32,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 323,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 90,
+      "entity": 7,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 323,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 94,
+      "entity": 8,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 326,
+      "point": 2
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 96,
+      "entity": 14,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        31,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 327,
+      "point": 2
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 98,
+      "entity": 13,
+      "group": "ev_e_0609",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        24,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 327,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 91,
+      "entity": 30,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 632,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 92,
+      "entity": 31,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        32,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 632,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 93,
+      "entity": 32,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 632,
+      "point": 1
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 95,
+      "entity": 33,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 635,
+      "point": 2
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 97,
+      "entity": 34,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        31,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 636,
+      "point": 2
+    },
+    {
+      "room": "Map_20020",
+      "type": "GotoMap",
+      "object_id": 99,
+      "entity": 35,
+      "group": "ev_e_0609_1",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        24,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 636,
+      "point": 1
+    },
+    {
+      "room": "Map_20030",
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 18,
+      "point": 6
+    },
+    {
+      "room": "Map_20030",
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 18,
+      "point": 6
+    },
+    {
+      "room": "Map_20030",
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 18,
+      "point": 6
+    },
+    {
+      "room": "Map_20030",
+      "type": "PointIn",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "PointIn",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "GotoMap",
+      "object_id": 7,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 20,
+      "point": 1
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 129,
+      "entity": 95,
+      "group": "entity_default",
+      "raw": "バケツに触れるとHP/MPが回復",
+      "script": "sc_e_0261",
+      "cell": [
+        "GroundObject",
+        24,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 29,
+      "entity": 50,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる1（最初はロックが表示）",
+      "script": "sc_e_0250",
+      "cell": [
+        "GroundObject",
+        18,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 30,
+      "entity": 51,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる2（最初はセリスが表示）",
+      "script": "sc_e_0251",
+      "cell": [
+        "GroundObject",
+        19,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 31,
+      "entity": 52,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる3（最初はカイエンが表示）",
+      "script": "sc_e_0252",
+      "cell": [
+        "GroundObject",
+        20,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 32,
+      "entity": 53,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる4（最初はエドガーが表示）",
+      "script": "sc_e_0253",
+      "cell": [
+        "GroundObject",
+        21,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 33,
+      "entity": 54,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる5（最初はマッシュが表示）",
+      "script": "sc_e_0254",
+      "cell": [
+        "GroundObject",
+        22,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 34,
+      "entity": 55,
+      "group": "ev_e_0250",
+      "raw": "操作キャラを入れ替えられる6（最初はガウが表示）",
+      "script": "sc_e_0255",
+      "cell": [
+        "GroundObject",
+        23,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 36,
+      "entity": 23,
+      "group": "ev_e_0250",
+      "raw": "バナン:sc_e_0256",
+      "script": "sc_e_0256",
+      "cell": [
+        "GroundObject",
+        20,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 70,
+      "entity": 57,
+      "group": "ev_e_0250",
+      "raw": "NPCロック",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 71,
+      "entity": 58,
+      "group": "ev_e_0250",
+      "raw": "NPCティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 72,
+      "entity": 59,
+      "group": "ev_e_0250",
+      "raw": "NPCセリス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 73,
+      "entity": 60,
+      "group": "ev_e_0250",
+      "raw": "NPCカイエン",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 74,
+      "entity": 61,
+      "group": "ev_e_0250",
+      "raw": "NPCエドガー",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 75,
+      "entity": 62,
+      "group": "ev_e_0250",
+      "raw": "NPCマッシュ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        22,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 76,
+      "entity": 63,
+      "group": "ev_e_0250",
+      "raw": "NPCガウ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Event",
+      "object_id": 80,
+      "entity": 72,
+      "group": "ev_e_0250",
+      "raw": "セーブポイントについての説明を受けるかを問われる",
+      "script": "sc_e_0009",
+      "cell": [
+        "GroundObject",
+        25,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "AnimEntity",
+      "object_id": 83,
+      "entity": 73,
+      "group": "ev_e_0250",
+      "raw": "savepoint",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 11,
+      "entity": 10,
+      "group": "ev_e_0256",
+      "raw": "NPCケフカ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        65
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 12,
+      "entity": 11,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 13,
+      "entity": 12,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 14,
+      "entity": 13,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 15,
+      "entity": 14,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵4",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 16,
+      "entity": 15,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵5",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 17,
+      "entity": 16,
+      "group": "ev_e_0256",
+      "raw": "NPC緑帝国兵6",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 19,
+      "entity": 17,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 20,
+      "entity": 18,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 21,
+      "entity": 19,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 22,
+      "entity": 20,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵4",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 23,
+      "entity": 21,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵5",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 24,
+      "entity": 22,
+      "group": "ev_e_0256",
+      "raw": "NPC帝国兵6",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 77,
+      "entity": 9,
+      "group": "ev_e_0256",
+      "raw": "NPC1バナン",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 39,
+      "entity": 25,
+      "group": "ev_e_0257",
+      "raw": "ケフカ:sc_e_0259",
+      "script": "sc_e_0259",
+      "cell": [
+        "GroundObject",
+        19,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 40,
+      "entity": 24,
+      "group": "ev_e_0257",
+      "raw": "帝国兵:sc_e_0257",
+      "script": "sc_e_0257",
+      "cell": [
+        "GroundObject",
+        18,
+        36
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 41,
+      "entity": 64,
+      "group": "ev_e_0257",
+      "raw": "NPC1バナン",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 44,
+      "entity": 38,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘1",
+      "script": "sc_e_1087",
+      "cell": [
+        "GroundObject",
+        22,
+        28
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 45,
+      "entity": 39,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘2",
+      "script": "sc_e_1088",
+      "cell": [
+        "GroundObject",
+        22,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 46,
+      "entity": 40,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘3",
+      "script": "sc_e_1089",
+      "cell": [
+        "GroundObject",
+        22,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 47,
+      "entity": 41,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘4",
+      "script": "sc_e_1090",
+      "cell": [
+        "GroundObject",
+        23,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 48,
+      "entity": 42,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘5",
+      "script": "sc_e_1091",
+      "cell": [
+        "GroundObject",
+        18,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 49,
+      "entity": 43,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で緑兵士と当たると戦闘6",
+      "script": "sc_e_1092",
+      "cell": [
+        "GroundObject",
+        18,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 50,
+      "entity": 44,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で茶兵士と当たると戦闘1",
+      "script": "sc_e_1093",
+      "cell": [
+        "GroundObject",
+        19,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 51,
+      "entity": 45,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で茶兵士と当たると戦闘2",
+      "script": "sc_e_1094",
+      "cell": [
+        "GroundObject",
+        20,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 52,
+      "entity": 46,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で茶兵士と当たると戦闘3",
+      "script": "sc_e_1095",
+      "cell": [
+        "GroundObject",
+        21,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 53,
+      "entity": 47,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で茶兵士と当たると戦闘4",
+      "script": "sc_e_1096",
+      "cell": [
+        "GroundObject",
+        22,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 54,
+      "entity": 48,
+      "group": "ev_e_0257",
+      "raw": "ナルシェ襲撃で茶兵士と当たると戦闘5",
+      "script": "sc_e_1097",
+      "cell": [
+        "GroundObject",
+        23,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 123,
+      "entity": 89,
+      "group": "ev_e_0257",
+      "raw": "タイマーで消す重り",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 124,
+      "entity": 90,
+      "group": "ev_e_0257",
+      "raw": "タイマーで消す重り",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 125,
+      "entity": 91,
+      "group": "ev_e_0257",
+      "raw": "タイマーで消す重り",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 126,
+      "entity": 92,
+      "group": "ev_e_0257",
+      "raw": "タイマーで消す重り",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        22,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Entity",
+      "object_id": 127,
+      "entity": 93,
+      "group": "ev_e_0257",
+      "raw": "タイマーで消す重り",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "Event",
+      "object_id": 87,
+      "entity": 68,
+      "group": "ev_e_0703",
+      "raw": "セーブポイントについての説明を受けるかを問われる",
+      "script": "sc_e_0009",
+      "cell": [
+        "GroundObject",
+        25,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "AnimEntity",
+      "object_id": 88,
+      "entity": 69,
+      "group": "ev_e_0703",
+      "raw": "savepoint",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20030",
+      "type": "NPC",
+      "object_id": 9,
+      "entity": 1,
+      "group": "ev_e_0779",
+      "raw": "フリーズドラゴン",
+      "script": "sc_e_0779",
+      "cell": [
+        "GroundObject",
+        17,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 23,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        35,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 19,
+      "point": 2
+    },
+    {
+      "room": "Map_20040",
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 24,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 19,
+      "point": 2
+    },
+    {
+      "room": "Map_20040",
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 25,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        35,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 41,
+      "entity": 15,
+      "group": "ev_e_0001",
+      "raw": "進行不可:ev_e_0780まで",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 42,
+      "entity": 16,
+      "group": "ev_e_0001",
+      "raw": "進行不可:ev_e_0780まで",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 43,
+      "entity": 18,
+      "group": "ev_e_0001",
+      "raw": "進行不可:ev_e_0780まで",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 44,
+      "entity": 19,
+      "group": "ev_e_0001",
+      "raw": "進行不可:ev_e_0780まで",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 45,
+      "entity": 22,
+      "group": "ev_e_0001",
+      "raw": "進行不可:ev_e_0780まで",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 69,
+      "entity": 47,
+      "group": "ev_e_0001",
+      "raw": "氷漬けの幻獣",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 82,
+      "entity": 50,
+      "group": "ev_e_0001",
+      "raw": "氷αなし",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 73,
+      "entity": 46,
+      "group": "ev_e_0001",
+      "raw": "氷半透明",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 57,
+      "entity": 38,
+      "group": "ev_e_0259",
+      "raw": "NPCトランスティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -2,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 75,
+      "entity": 48,
+      "group": "ev_e_0259",
+      "raw": "ティナ_キラキラ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -4,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 30,
+      "entity": 35,
+      "group": "ev_e_0436",
+      "raw": "コソドロを見付けるが逃げていく",
+      "script": "sc_e_0436",
+      "cell": [
+        "GroundObject",
+        32,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 31,
+      "entity": 36,
+      "group": "ev_e_0436",
+      "raw": "コソドロ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 32,
+      "entity": 29,
+      "group": "ev_e_0437",
+      "raw": "モーグリとコソドロのイベント",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        20,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 33,
+      "entity": 30,
+      "group": "ev_e_0437",
+      "raw": "モーグリとコソドロのイベント",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        19,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 34,
+      "entity": 31,
+      "group": "ev_e_0437",
+      "raw": "モーグリとコソドロのイベント",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        18,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 35,
+      "entity": 32,
+      "group": "ev_e_0437",
+      "raw": "モーグリ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 36,
+      "entity": 33,
+      "group": "ev_e_0437",
+      "raw": "コソドロ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        -1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 38,
+      "entity": 28,
+      "group": "ev_e_0438",
+      "raw": "話しかけてモーグリを助ける",
+      "script": "sc_e_0438",
+      "cell": [
+        "GroundObject",
+        15,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Entity",
+      "object_id": 48,
+      "entity": 27,
+      "group": "ev_e_0438",
+      "raw": "話しかけてコソドロを助ける",
+      "script": "sc_e_0439",
+      "cell": [
+        "GroundObject",
+        22,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 77,
+      "entity": 34,
+      "group": "ev_e_0438",
+      "raw": "モーグリとコソドロが崖から落ちそうなので出られない",
+      "script": "sc_e_0437_0",
+      "cell": [
+        "GroundObject",
+        24,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 8,
+      "entity": 1,
+      "group": "ev_e_0780",
+      "raw": "ヴァリガルマンダとバトル",
+      "script": "sc_e_0780",
+      "cell": [
+        "GroundObject",
+        19,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "NPC",
+      "object_id": 72,
+      "entity": 6,
+      "group": "ev_e_0780",
+      "raw": "ヴァリガルマンダ",
+      "script": "sc_e_0780",
+      "cell": [
+        "GroundObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 83,
+      "entity": 51,
+      "group": "ev_e_0780",
+      "raw": "氷αなし",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 65,
+      "entity": 7,
+      "group": "ev_e_0780",
+      "raw": "魔石",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        -2,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "AnimEntity",
+      "object_id": 74,
+      "entity": 37,
+      "group": "ev_e_0780",
+      "raw": "氷_半透明",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 14,
+      "entity": 26,
+      "group": "ev_e_0781",
+      "raw": "崖上から飛び降りるか選択",
+      "script": "sc_e_0781",
+      "cell": [
+        "GroundObject",
+        19,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 60,
+      "entity": 39,
+      "group": "ev_e_1055",
+      "raw": "動いた判定",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        20,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 61,
+      "entity": 40,
+      "group": "ev_e_1055",
+      "raw": "動いた判定",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        20,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 62,
+      "entity": 41,
+      "group": "ev_e_1055",
+      "raw": "動いた判定",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        19,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 63,
+      "entity": 42,
+      "group": "ev_e_1055",
+      "raw": "動いた判定",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        18,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_20040",
+      "type": "Event",
+      "object_id": 64,
+      "entity": 43,
+      "group": "ev_e_1055",
+      "raw": "動いた判定",
+      "script": "sc_e_1055",
+      "cell": [
+        "GroundObject",
+        18,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        56
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        53
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "GotoMap",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        53
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 495,
+      "point": 1
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "GotoMap",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 495,
+      "point": 2
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "GotoMap",
+      "object_id": 7,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 495,
+      "point": 3
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "Event",
+      "object_id": 14,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "落とし穴に落ちる2",
+      "script": "sc_e_0783",
+      "cell": [
+        "GroundObject",
+        10,
+        55
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_1",
+      "type": "Event",
+      "object_id": 15,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "落とし穴に落ちる1",
+      "script": "sc_e_0782",
+      "cell": [
+        "GroundObject",
+        11,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 7,
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        42,
+        53
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 8,
+      "entity": 12,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        52,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "GotoMap",
+      "object_id": 9,
+      "entity": 13,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        52,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 495,
+      "point": 4
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        49,
+        50
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        48,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        53,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        60,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "PointIn",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        59,
+        39
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "GotoMap",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        53,
+        37
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 495,
+      "point": 5
+    },
+    {
+      "room": "Map_30771_2",
+      "type": "TreasureBox",
+      "object_id": 15,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "ガントレット×1",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        41,
+        59
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        22,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "PointIn",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "GotoMap",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 493,
+      "point": 2
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "GotoMap",
+      "object_id": 7,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 493,
+      "point": 3
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "GotoMap",
+      "object_id": 8,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 493,
+      "point": 4
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "GotoMap",
+      "object_id": 9,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 494,
+      "point": 3
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "GotoMap",
+      "object_id": 10,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 494,
+      "point": 4
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "TreasureBox",
+      "object_id": 15,
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "エーテルスーパー×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "Event",
+      "object_id": 30,
+      "entity": 19,
+      "group": "entity_default",
+      "raw": "落とし穴に落ちる4",
+      "script": "sc_e_0785",
+      "cell": [
+        "GroundObject",
+        33,
+        28
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "Event",
+      "object_id": 31,
+      "entity": 21,
+      "group": "entity_default",
+      "raw": "落とし穴に落ちる3",
+      "script": "sc_e_0784",
+      "cell": [
+        "GroundObject",
+        14,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "Entity",
+      "object_id": 32,
+      "entity": 13,
+      "group": "entity_default",
+      "raw": "スイッチ押すと落とし穴に落ちる2",
+      "script": "sc_e_0788",
+      "cell": [
+        "GroundObject",
+        40,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "Entity",
+      "object_id": 33,
+      "entity": 15,
+      "group": "entity_default",
+      "raw": "スイッチ押すと落とし穴に落ちる1",
+      "script": "sc_e_0787",
+      "cell": [
+        "GroundObject",
+        31,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_3",
+      "type": "TreasureBox",
+      "object_id": 37,
+      "entity": 18,
+      "group": "entity_default",
+      "raw": "宝箱からモンスター",
+      "script": "sc_e_0786",
+      "cell": [
+        "GroundObject",
+        13,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "PointIn",
+      "object_id": 15,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        58,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "Event",
+      "object_id": 25,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "ナルシェ屋外北の穴にワープ",
+      "script": "sc_e_0791",
+      "cell": [
+        "GroundObject",
+        57,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "AnimEntity",
+      "object_id": 32,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "どくろの彫刻",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        57,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "Entity",
+      "object_id": 23,
+      "entity": 6,
+      "group": "ev_e_0789",
+      "raw": "ウーマロの部屋で魔石ミドガルズオルム入手、ゆきおとことバトル",
+      "script": "sc_e_0789",
+      "cell": [
+        "GroundObject",
+        57,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "AnimEntity",
+      "object_id": 26,
+      "entity": 5,
+      "group": "ev_e_0789",
+      "raw": "魔石",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        69,
+        2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    },
+    {
+      "room": "Map_30771_4",
+      "type": "NPC",
+      "object_id": 22,
+      "entity": 1,
+      "group": "ev_e_0790",
+      "raw": "ウーマロ",
+      "script": "sc_e_0790",
+      "cell": [
+        "GroundObject",
+        69,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null
+    }
+  ]
+}

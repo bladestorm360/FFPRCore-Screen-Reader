@@ -101,6 +101,27 @@ Source authoring: `tools/review_devil_road.py`; exact native Puppet producers/
 provenance: `../tools/conditional_arrivals_20261029/ff4_devil_road_native/`.
 Native intermediate loading/animation timing still needs gameplay confirmation.
 
+Both Events entries now say “Devil's Road portal” using the same label in
+all 12 languages. The shared developer name identifies exactly two native
+contacts. Mysidia map66, entity5 uses the chain above. Baron map29, entity20
+uses a separate script that branches on ScenarioFlag1/30. Its locked branch
+speaks a message and exits. Its open branch transfers through the transient
+world scene to Mysidia map66. The functional event check pins both contacts and
+their continuation hashes in `tools/world_event_reviews.json`. Naming uses the
+existing event label lookup and leaves the native access conditions and route
+data intact.
+
+The canonical build passed using one resource slot and peaked at 798,777,344
+bytes across the full process tree. Both Devil's Road route replays passed.
+The payload check compared all 67 embedded resources with the previous
+release and found changes only to the shared translation catalog and FFIV
+event labels. The smoke test passed and Defender returned no detections on
+22 staged files. The account could not query Defender exclusion status.
+Receipts are in `build_check/ff4_devils_road_labels_20261106/`.
+The label was subsequently installed with the verified [Baron East Tower
+chest fix](MAP_AUDIT_FOLLOWUPS_20261028.md#november-6-ffiv-castle-baron-east-tower-1f-west-chest).
+Gameplay has not been checked.
+
 ## Underwater entry preservation
 
 Six exact FFV underwater scripts dismount inside the entry. When promoted to

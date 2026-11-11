@@ -1,0 +1,19 @@
+{
+  "map": 81,
+  "gate": {
+    "type": 6,
+    "id": 11,
+    "group": "ev_e_0018",
+    "raw": "巨人",
+    "cell": [
+      2,
+      15,
+      12
+    ],
+    "initializer_sha256": "1594da2de60c93b587b8bc66297f84d291e004add72f1eeae3a9fc2a917ddfc9",
+    "prerequisite_receipt": 17,
+    "opening_receipt": 18
+  },
+  "ready_variant": 11,
+  "receipt_source": "FF1_SLAB_GUIDES_20261101.md"
+}

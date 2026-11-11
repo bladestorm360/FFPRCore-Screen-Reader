@@ -21,6 +21,7 @@ int main(int argc,char** argv){
   fixture::selected_game=static_cast<game::Id>(n);
   for(const auto& row:reviews.arr){
    const auto* grammar=row.get(L"review_grammar");if(int(row.get(L"game")->n)!=n||!grammar||!grammar->s.starts_with(L"contextual_"))continue;
+   const int prior_failures=failures;
    const auto* map=baked::submap_by_name(row.get(L"submap")->s);if(!map)return 2;
    const auto& grid=baked::grids(*map);const baked::Object* source=nullptr;
    for(const auto& object:grid.objects)if(object.type==baked::ObjType::Event&&object.entity_id()==int(row.get(L"entity_id")->n)&&
@@ -30,13 +31,20 @@ int main(int argc,char** argv){
    fixture::talk.script=int(row.get(L"script_id")->n);fixture::talk.action=int(row.get(L"action_id")->n);
    fixture::pose={float(source->tx),float(source->ty),0};
    const auto* expected_exit=baked::world_exit_at(grid,source->entity_id(),fixture::talk.name,source->tx,source->ty);
-   auto native=convert(&fixture::object);const bool transfer=grammar->s==L"contextual_transfer"||(grammar->s==L"contextual_conditional"&&expected_exit);
+   // Pyramid quicksand is a trap, even though its earlier functional review
+   // pinned an ordinary transfer. The physical bake guard proves its landing.
+   const bool quicksand=n==5&&map->first_map_id==411&&source->entity_id()==19&&
+       row.get(L"script_name")->s==L"sc_e_0290";
+   const bool same_floor=expected_exit&&(expected_exit->a<0||expected_exit->a==map->first_map_id);
+   const bool transfer=!same_floor&&((grammar->s==L"contextual_transfer"&&!quicksand)||
+       (grammar->s==L"contextual_conditional"&&expected_exit));
+   auto native=convert(&fixture::object);
    expect(native!=nullptr,"real reviewed event survives the actual native detector chain");
    if(native){
     expect(native->kind==(transfer?Kind::MapExit:Kind::Event),"native detector publishes the correct event/exit type");
     expect(native->category()==(transfer?Category::MapExits:Category::Events),"native event is in exactly its proper destination category");
-    if(transfer){const auto* final=row.get(L"final_transfer");const auto* primary=row.get(L"primary_transfer");
-     expect(native->dest_map_id==(final?int(final->arr[0].n):primary?int(primary->arr[0].n):expected_exit->a),"native exit retains its exact destination");}
+    if(transfer)expect(expected_exit&&native->dest_map_id==expected_exit->a,
+                       "native exit retains its independently verified playable destination");
     else expect(native->name==row.get(L"label")->s,"native event speaks the source-reviewed functional label");
    }
    baked_nav::RemoteObject remote;remote.map_id=map->first_map_id;remote.type=source->type;
@@ -47,8 +55,11 @@ int main(int argc,char** argv){
    expect(published.size()==1,"actual remote publication retains the reviewed destination");
    if(published.size()==1){
     expect(published[0]->category()==(transfer?Category::MapExits:Category::Events),"remote category agrees with the native detector");
-    if(!transfer)expect(published[0]->name==row.get(L"label")->s,"remote functional label agrees with native output");
+    if(transfer)expect(expected_exit&&published[0]->dest_map_id==expected_exit->a,"remote exit retains the same playable destination");
+    else expect(published[0]->name==row.get(L"label")->s,"remote functional label agrees with native output");
    }
+   if(failures!=prior_failures)std::printf("FF%d map %d entity %d: native kind %d destination %d, baked exit %d\n",
+       n,map->first_map_id,source->entity_id(),native?int(native->kind):-1,native?native->dest_map_id:0,expected_exit?expected_exit->a:0);
    ++checked;if(transfer)++transfers;else ++mechanisms;
   }
  }

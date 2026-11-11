@@ -1226,6 +1226,48 @@
     "evidence": "Reviewed player-puppet stepping-stone crossing; final Lerp, native MapRange conversion. docs/re/FF6_STORY_NAVIGATION.md"
   },
   {
+    "submap": "Map_30871_4",
+    "entity_id": 12,
+    "object_id": 56,
+    "interaction_travel": true,
+    "destination_map": 544,
+    "original_point": 3,
+    "continuation": "sc_e_0970_2",
+    "continuation_sha256": "0acc00388ed50e56a4fa2e343e9f2b216e400d94bb828b93ce483c7c838fd514",
+    "arrival_cell": [
+      48,
+      24,
+      1
+    ],
+    "arrival_baked_cell": [
+      30,
+      20,
+      1
+    ],
+    "evidence": "Exact three-script roller/duct transfer through movie545; final player Lerp/layer. docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md"
+  },
+  {
+    "submap": "Map_30871_2",
+    "entity_id": 13,
+    "object_id": 23,
+    "interaction_travel": true,
+    "destination_map": 546,
+    "original_point": 2,
+    "continuation": "sc_e_0971_2",
+    "continuation_sha256": "5463b6220a3d1657dd98151173057d1708038ed5c0144d7d3631e446519af826",
+    "arrival_cell": [
+      9,
+      13,
+      2
+    ],
+    "arrival_baked_cell": [
+      9,
+      13,
+      2
+    ],
+    "evidence": "Exact three-script roller/duct transfer through movie545; final player Lerp/layer. docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md"
+  },
+  {
     "submap": "Map_30510",
     "entity_id": 133,
     "object_id": 188,
@@ -1405,6 +1447,98 @@
     "arrival_baked_cell": [
       19,
       33,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 205,
+    "object_id": 335,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 12,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_1104",
+    "continuation_sha256": "700319c246b1de8f5f254c08d286212259ed3128b3d724c5b30a388bd97ec95a",
+    "arrival_cell": [
+      19,
+      19,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      19,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 205,
+    "object_id": 335,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 3,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_1104",
+    "continuation_sha256": "700319c246b1de8f5f254c08d286212259ed3128b3d724c5b30a388bd97ec95a",
+    "arrival_cell": [
+      19,
+      25,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      25,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 206,
+    "object_id": 336,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 12,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_1104",
+    "continuation_sha256": "700319c246b1de8f5f254c08d286212259ed3128b3d724c5b30a388bd97ec95a",
+    "arrival_cell": [
+      19,
+      21,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      21,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30781_1",
+    "entity_id": 206,
+    "object_id": 336,
+    "same_map": true,
+    "interaction_travel": false,
+    "approach_mask": 3,
+    "destination_map": 498,
+    "original_point": 0,
+    "continuation": "sc_e_1104",
+    "continuation_sha256": "700319c246b1de8f5f254c08d286212259ed3128b3d724c5b30a388bd97ec95a",
+    "arrival_cell": [
+      19,
+      27,
+      1
+    ],
+    "arrival_baked_cell": [
+      19,
+      27,
       1
     ],
     "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
@@ -3248,5 +3382,1035 @@
       1
     ],
     "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_25",
+    "entity_id": 0,
+    "object_id": 44,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 567,
+    "original_point": 0,
+    "continuation": "sc_e_1105",
+    "continuation_sha256": "61a844b30fd505429275fffd3df2b5019eefd6908b8ae10b641c23135604e859",
+    "arrival_cell": [
+      64,
+      11,
+      1
+    ],
+    "arrival_baked_cell": [
+      12,
+      11,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30871_25",
+    "entity_id": 0,
+    "object_id": 44,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 567,
+    "original_point": 0,
+    "continuation": "sc_e_1105",
+    "continuation_sha256": "61a844b30fd505429275fffd3df2b5019eefd6908b8ae10b641c23135604e859",
+    "arrival_cell": [
+      64,
+      13,
+      1
+    ],
+    "arrival_baked_cell": [
+      12,
+      13,
+      1
+    ],
+    "evidence": "Reviewed direction-dispatched player movement; source-side mask and native movement operands. docs/re/FF6_STORY_NAVIGATION.md"
+  },
+  {
+    "submap": "Map_30651_8",
+    "entity_id": 22,
+    "object_id": 37,
+    "destination_map": 463,
+    "original_point": 0,
+    "continuation": "sc_e_0690",
+    "continuation_sha256": "3e739da77ad5e8aabb3e13e449f9b809ab85303e8d0c761ac033c68687f268ce",
+    "arrival_cell": [
+      79,
+      8,
+      1
+    ],
+    "arrival_baked_cell": [
+      16,
+      8,
+      1
+    ],
+    "evidence": "Exact native turtle player-puppet final landing; area1 records the second crossing side. docs/re/DARILLS_TOMB_20261103.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15
+  },
+  {
+    "submap": "Map_30651_8",
+    "entity_id": 23,
+    "object_id": 38,
+    "destination_map": 463,
+    "original_point": 0,
+    "continuation": "sc_e_0690",
+    "continuation_sha256": "3e739da77ad5e8aabb3e13e449f9b809ab85303e8d0c761ac033c68687f268ce",
+    "arrival_cell": [
+      79,
+      8,
+      1
+    ],
+    "arrival_baked_cell": [
+      16,
+      8,
+      1
+    ],
+    "evidence": "Exact native turtle player-puppet final landing; area1 records the second crossing side. docs/re/DARILLS_TOMB_20261103.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15
+  },
+  {
+    "submap": "Map_30651_8",
+    "entity_id": 20,
+    "object_id": 36,
+    "destination_map": 463,
+    "original_point": 0,
+    "continuation": "sc_e_0691",
+    "continuation_sha256": "9612df79a9e50f79b60b4106d807ad5da6bf0a69a3af29185e7d48b40560aa0e",
+    "arrival_cell": [
+      71,
+      13,
+      1
+    ],
+    "arrival_baked_cell": [
+      8,
+      13,
+      1
+    ],
+    "evidence": "Exact native turtle player-puppet final landing; area1 records the second crossing side. docs/re/DARILLS_TOMB_20261103.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15
+  },
+  {
+    "submap": "Map_30651_8",
+    "entity_id": 26,
+    "object_id": 32,
+    "destination_map": 462,
+    "original_point": 2,
+    "continuation": "sc_e_0687_1",
+    "continuation_sha256": "12104f0dc861c5ef4c3aa5abdd0795eb71fea53b486492a3163d08150607b3f7",
+    "arrival_cell": [
+      56,
+      14,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      10,
+      1
+    ],
+    "evidence": "Exact native turtle player-puppet final landing; area1 records the second crossing side. docs/re/DARILLS_TOMB_20261103.md"
+  },
+  {
+    "submap": "Map_30631_4",
+    "entity_id": 56,
+    "object_id": 60,
+    "destination_map": 445,
+    "original_point": 0,
+    "continuation": "sc_e_0765",
+    "continuation_sha256": "f29a7b6dc1a8b2105aeba4f84752993ee763d5f40af88945ae90e5c9570e0356",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      71,
+      52,
+      1
+    ],
+    "arrival_baked_cell": [
+      6,
+      24,
+      1
+    ],
+    "evidence": "Exact automatic native painting/door transfer and final player pose. docs/re/OWZERS_MANSION_20261103.md"
+  },
+  {
+    "submap": "Map_30631_4",
+    "entity_id": 57,
+    "object_id": 62,
+    "destination_map": 445,
+    "original_point": 0,
+    "continuation": "sc_e_0766",
+    "continuation_sha256": "56d9aeb05025e64e012322a8415cbfe5b26e02bc11d32506c9a5a6ab55bf03bd",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      85,
+      46,
+      1
+    ],
+    "arrival_baked_cell": [
+      20,
+      18,
+      1
+    ],
+    "evidence": "Exact automatic native painting/door transfer and final player pose. docs/re/OWZERS_MANSION_20261103.md"
+  },
+  {
+    "submap": "Map_30631_4",
+    "entity_id": 55,
+    "object_id": 58,
+    "destination_map": 445,
+    "original_point": 0,
+    "continuation": "sc_e_1064",
+    "continuation_sha256": "ec0d40e743ddcb4fc46bc65413eae61e50976ff2760876e2dd1f1c8b3d72eb49",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      90,
+      60,
+      1
+    ],
+    "arrival_baked_cell": [
+      25,
+      32,
+      1
+    ],
+    "evidence": "Exact automatic native painting/door transfer and final player pose. docs/re/OWZERS_MANSION_20261103.md"
+  },
+  {
+    "submap": "Map_30631_4",
+    "entity_id": 59,
+    "object_id": 72,
+    "destination_map": 445,
+    "original_point": 3,
+    "continuation": "sc_e_0766_2",
+    "continuation_sha256": "ad90b0fb1d6a1b7fe3f85039c292f8a8a0f85350369a1824b7ef1fce0cb33ee8",
+    "arrival_point": 3,
+    "ordinary_travel": true,
+    "evidence": "Native return transfer resets local1 and restarts the door cycle. docs/re/OWZERS_MANSION_20261103.md"
+  },
+  {
+    "submap": "Map_30531_4",
+    "entity_id": 69,
+    "object_id": 84,
+    "destination_map": 408,
+    "original_point": 0,
+    "continuation": "sc_e_0446",
+    "continuation_sha256": "de1ac80d3ba366f3f15df919c6babed0844bd705d7b7b3caa6e6db5e90a96b8e",
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      58,
+      24,
+      1
+    ],
+    "arrival_baked_cell": [
+      45,
+      24,
+      1
+    ],
+    "evidence": "Native encoded puppet layer2 converts to Ground/baked1; exact forced-fall player landing, distinct from camera puppets and control tile. docs/re/SEALED_GATE_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 143,
+    "object_id": 190,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0576",
+    "continuation_sha256": "ecedd12f99e94d022f1867aa11f9d8694420817f9f8db00752e623dc346b7fca",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      32,
+      26,
+      2
+    ],
+    "arrival_baked_cell": [
+      32,
+      26,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 141,
+    "object_id": 192,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0577",
+    "continuation_sha256": "6a6fafc3c70f3363f9ea1d6ba6b4d2f1595cd32fd8512d12b9b1079af4d671af",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      40,
+      16,
+      2
+    ],
+    "arrival_baked_cell": [
+      40,
+      16,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 133,
+    "object_id": 205,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0579",
+    "continuation_sha256": "1751dc8b43d04cebe06d3ad71722b3b257fe13fff95a823b2086df323ac0e598",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      42,
+      27,
+      2
+    ],
+    "arrival_baked_cell": [
+      42,
+      27,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 131,
+    "object_id": 207,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0580",
+    "continuation_sha256": "ba51bdf5466b34bfd3d8c206dbaebdf64837357163ba8788627055de042b2d04",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      67,
+      49,
+      2
+    ],
+    "arrival_baked_cell": [
+      67,
+      49,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 129,
+    "object_id": 215,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0581",
+    "continuation_sha256": "0de5825aa0a01e490f4af587d3b99868c1610219c0e8d36202cf139a82b0a62a",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      63,
+      41,
+      2
+    ],
+    "arrival_baked_cell": [
+      63,
+      41,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 127,
+    "object_id": 217,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0582",
+    "continuation_sha256": "bdd284023548ce46540e0d8ba36a8f8b6f3e1128bf5b39b7b34777eef912baf3",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      40,
+      34,
+      2
+    ],
+    "arrival_baked_cell": [
+      40,
+      34,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 125,
+    "object_id": 209,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0583",
+    "continuation_sha256": "d322276a30e6b28cddbdfb4c4c139685b20996479f27639ea3d7e8d44682b17e",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      77,
+      41,
+      2
+    ],
+    "arrival_baked_cell": [
+      77,
+      41,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 123,
+    "object_id": 211,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0584",
+    "continuation_sha256": "115257724560098d8abe533674878489bdfaba142ff9be318fc8cce74cb2394a",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      48,
+      32,
+      2
+    ],
+    "arrival_baked_cell": [
+      48,
+      32,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 78,
+    "object_id": 275,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0588",
+    "continuation_sha256": "8186d97ddef86a05a4029e9a3fd26946cfc45b05be2f0070f122e99236aa3640",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      70,
+      33,
+      2
+    ],
+    "arrival_baked_cell": [
+      70,
+      33,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 76,
+    "object_id": 277,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0589",
+    "continuation_sha256": "ed2602bde90f8040d01e874fb8a83d9e6a8f684f7821574195124907c6f427da",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      89,
+      35,
+      2
+    ],
+    "arrival_baked_cell": [
+      89,
+      35,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 52,
+    "object_id": 247,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0595",
+    "continuation_sha256": "6455b772af7e2189c7c9c3237d4e06bd417880e494ce40abfc01a4858c11e685",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      75,
+      29,
+      2
+    ],
+    "arrival_baked_cell": [
+      75,
+      29,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30600",
+    "entity_id": 53,
+    "object_id": 248,
+    "destination_map": 431,
+    "original_point": 0,
+    "continuation": "sc_e_0595",
+    "continuation_sha256": "6455b772af7e2189c7c9c3237d4e06bd417880e494ce40abfc01a4858c11e685",
+    "same_map": true,
+    "ordinary_travel": true,
+    "arrival_cell": [
+      75,
+      29,
+      2
+    ],
+    "arrival_baked_cell": [
+      75,
+      29,
+      2
+    ],
+    "evidence": "Exact player-only final landing; retained Upper layer and original normal/escape event activation. docs/re/FLOATING_CONTINENT_GUIDANCE_20261103.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 46,
+    "object_id": 132,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 1,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0380",
+    "continuation_sha256": "df6de85d61ac3040a3cb2078ae6c2206d436c26ff523477b77d10555240aca57",
+    "arrival_cell": [
+      10,
+      45,
+      1
+    ],
+    "arrival_baked_cell": [
+      10,
+      45,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 57,
+    "object_id": 130,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "ff36cb3bf23547fde37442d66b4d3a31928a07d3ec17395a80c33d169c6ec5fd",
+    "arrival_cell": [
+      11,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      17,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 33,
+    "object_id": 131,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "ff36cb3bf23547fde37442d66b4d3a31928a07d3ec17395a80c33d169c6ec5fd",
+    "arrival_cell": [
+      11,
+      16,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      16,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 33,
+    "object_id": 131,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 1,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "ff36cb3bf23547fde37442d66b4d3a31928a07d3ec17395a80c33d169c6ec5fd",
+    "arrival_cell": [
+      11,
+      21,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      21,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 31,
+    "object_id": 142,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 1,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0387",
+    "continuation_sha256": "cc8aea17a8d8f476f2bc741507daa588db731904148f6e2157cfc6a5a3bd7bc4",
+    "arrival_cell": [
+      21,
+      27,
+      2
+    ],
+    "arrival_baked_cell": [
+      21,
+      27,
+      2
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_1",
+    "entity_id": 29,
+    "object_id": 134,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 396,
+    "original_point": 0,
+    "continuation": "sc_e_0388",
+    "continuation_sha256": "87764ff77adb3ca14a05853ba75f9895ad6f5ed8a1878673b5fff3d8e04fd825",
+    "arrival_cell": [
+      21,
+      24,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      24,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_11",
+    "entity_id": 57,
+    "object_id": 130,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 643,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "b209d7eafd023eac4f4c84b3f2e1d12abceb55679013cbcfea9134216c47256e",
+    "arrival_cell": [
+      11,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      17,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_11",
+    "entity_id": 33,
+    "object_id": 131,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 643,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "b209d7eafd023eac4f4c84b3f2e1d12abceb55679013cbcfea9134216c47256e",
+    "arrival_cell": [
+      11,
+      16,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      16,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_11",
+    "entity_id": 33,
+    "object_id": 131,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 1,
+    "destination_map": 643,
+    "original_point": 0,
+    "continuation": "sc_e_0386",
+    "continuation_sha256": "b209d7eafd023eac4f4c84b3f2e1d12abceb55679013cbcfea9134216c47256e",
+    "arrival_cell": [
+      11,
+      21,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      21,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_11",
+    "entity_id": 29,
+    "object_id": 134,
+    "same_map": true,
+    "interaction_travel": true,
+    "ordinary_travel": false,
+    "approach_mask": 4,
+    "destination_map": 643,
+    "original_point": 0,
+    "continuation": "sc_e_0388",
+    "continuation_sha256": "a88ef074feb9f9ac90dd01e52f659e37810192cfcbd5a16b51021d43e62c086e",
+    "arrival_cell": [
+      21,
+      24,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      24,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30521_2",
+    "entity_id": 62,
+    "object_id": 122,
+    "same_map": true,
+    "interaction_travel": false,
+    "ordinary_travel": true,
+    "approach_mask": 0,
+    "destination_map": 397,
+    "original_point": 0,
+    "continuation": "sc_e_0389_1",
+    "continuation_sha256": "54b05a890cbee211b3f16ed2a4fc9c54e3b45fcad8275dc309fec34412afef83",
+    "arrival_cell": [
+      40,
+      30,
+      1
+    ],
+    "arrival_baked_cell": [
+      40,
+      30,
+      1
+    ],
+    "evidence": "Exact factory player movement/relative layer and physical approach side; native local writes are visual flap receipts and remain native-owned. docs/re/MAGITEK_PASSAGES_20261104.md"
+  },
+  {
+    "submap": "Map_30641_1",
+    "entity_id": 16,
+    "object_id": 19,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "destination_map": 448,
+    "original_point": 0,
+    "continuation": "sc_e_0668",
+    "continuation_sha256": "ab62e8f9c770cae8aade61a8b2ab0c2487d6ac55b882ba3f2bb501ffa5329e4e",
+    "recurring_source_cell": [
+      47,
+      27,
+      1
+    ],
+    "arrival_cell": [
+      47,
+      25,
+      1
+    ],
+    "arrival_baked_cell": [
+      9,
+      8,
+      1
+    ],
+    "evidence": "Exact native facing branch, child0669, existing332-gated recurring route306411 and actual counter banks. Manual interaction only; docs/re/GERAD_PASSAGE_20261104.md"
+  },
+  {
+    "submap": "Map_30641_1",
+    "entity_id": 16,
+    "object_id": 19,
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "destination_map": 448,
+    "original_point": 0,
+    "continuation": "sc_e_0668",
+    "continuation_sha256": "ab62e8f9c770cae8aade61a8b2ab0c2487d6ac55b882ba3f2bb501ffa5329e4e",
+    "recurring_source_cell": [
+      47,
+      27,
+      1
+    ],
+    "arrival_cell": [
+      47,
+      29,
+      1
+    ],
+    "arrival_baked_cell": [
+      9,
+      12,
+      1
+    ],
+    "evidence": "Exact native facing branch, child0669, existing332-gated recurring route306411 and actual counter banks. Manual interaction only; docs/re/GERAD_PASSAGE_20261104.md"
+  },
+  {
+    "submap": "Map_30501_4",
+    "entity_id": 0,
+    "object_id": 7,
+    "destination_map": 96,
+    "original_point": 2,
+    "continuation": "sc_e_1502_3",
+    "continuation_sha256": "9907fbe79d52374c547733d64c11faec4f301e894de11d2c82d93a3cdc81d2e4",
+    "arrival_cell": [
+      24,
+      11,
+      2
+    ],
+    "arrival_baked_cell": [
+      24,
+      11,
+      2
+    ],
+    "evidence": "Exact last3D/world/city continuation, final player SetPos24,11/native PointIn2 Upper and full521; docs/re/CRESCENT_SERPENT_GUIDE_20261104.md"
+  },
+  {
+    "submap": "Map_30561_1",
+    "entity_id": 16,
+    "object_id": 29,
+    "destination_map": 424,
+    "original_point": 0,
+    "continuation": "sc_e_0543",
+    "continuation_sha256": "4610ee7b70a3b28ca1f942dc140f8fc7a38d5b7faac16d01f86ad6614209c70f",
+    "arrival_cell": [
+      37,
+      55,
+      1
+    ],
+    "arrival_baked_cell": [
+      10,
+      22,
+      1
+    ],
+    "evidence": "Exact native player Lerp/Move or PointIn plus8 South continuation; docs/re/ESPER_CAVE_GUIDE_20261104.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 15
+  },
+  {
+    "submap": "Map_30561_1",
+    "entity_id": 17,
+    "object_id": 30,
+    "destination_map": 424,
+    "original_point": 0,
+    "continuation": "sc_e_0544",
+    "continuation_sha256": "db7688dc9167f2b93adb3bbb6240806b6b7dfb841084002786a933c498f90ffc",
+    "arrival_cell": [
+      38,
+      56,
+      1
+    ],
+    "arrival_baked_cell": [
+      11,
+      23,
+      1
+    ],
+    "evidence": "Exact native player Lerp/Move or PointIn plus8 South continuation; docs/re/ESPER_CAVE_GUIDE_20261104.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 2
+  },
+  {
+    "submap": "Map_30561_1",
+    "entity_id": 18,
+    "object_id": 31,
+    "destination_map": 424,
+    "original_point": 0,
+    "continuation": "sc_e_0545",
+    "continuation_sha256": "a827d3619fbc4c3a7ec98a7aa7de309c638412e75790f24ac0a882ea8224001c",
+    "arrival_cell": [
+      48,
+      55,
+      1
+    ],
+    "arrival_baked_cell": [
+      21,
+      22,
+      1
+    ],
+    "evidence": "Exact native player Lerp/Move or PointIn plus8 South continuation; docs/re/ESPER_CAVE_GUIDE_20261104.md",
+    "same_map": true,
+    "interaction_travel": true,
+    "approach_mask": 8
+  },
+  {
+    "submap": "Map_20210",
+    "entity_id": 60,
+    "object_id": 62,
+    "same_map": true,
+    "ordinary_travel": true,
+    "destination_map": 143,
+    "original_point": 0,
+    "continuation": "sc_e_0374",
+    "continuation_sha256": "c2e2df82ff388e0893933c90603373c8c4f2dfd5d8d5d59dbbb61ed3684fd0ef",
+    "arrival_cell": [
+      57,
+      34,
+      1
+    ],
+    "arrival_baked_cell": [
+      57,
+      34,
+      1
+    ],
+    "evidence": "Exact final player Lerp57,34/native layer2 after distraction/crate; native local1/523 group guards preserved. docs/re/IMPERIAL_TRAVEL_20261104.md"
+  },
+  {
+    "submap": "Map_20291_2",
+    "entity_id": 3,
+    "object_id": 16,
+    "destination_map": 2,
+    "original_point": 1,
+    "continuation": "sc_e_0626_3",
+    "continuation_sha256": "d11aaf97f9fc540bd13805be7e134619682a6d6d13ac3b62d9957e0ee92652de",
+    "arrival_cell": [
+      146,
+      212,
+      1
+    ],
+    "arrival_baked_cell": [
+      146,
+      212,
+      1
+    ],
+    "interaction_travel": true,
+    "ordinary_travel": true,
+    "evidence": "Both native0626/0630 branches share full world626_3/player SetPos146,212 and actual306;not intermediate beach192 or default World PointIn1. docs/re/SOLITARY_ISLAND_GUIDE_20261104.md"
+  },
+  {
+    "submap": "Map_20451_4",
+    "entity_id": 8,
+    "object_id": 11,
+    "destination_map": 520,
+    "original_point": 1,
+    "continuation": "sc_e_0895_1",
+    "continuation_sha256": "3f25ea84653a81a89f1bc83838ecc1f5d5af35a27cd0085635eb31abb3da6461",
+    "arrival_cell": [
+      22,
+      54,
+      1
+    ],
+    "arrival_baked_cell": [
+      22,
+      21,
+      1
+    ],
+    "approach_mask": 4,
+    "evidence": "Native northward bed entry/first rest option and full0895_1 player SetPos22,54;not ordinary door PointIn1. docs/re/DREAM_EPISODE_20261104.md"
+  },
+  {
+    "submap": "Map_30771_3",
+    "entity_id": 15,
+    "object_id": 33,
+    "destination_map": 494,
+    "original_point": 7,
+    "continuation": "sc_e_0787_1",
+    "continuation_sha256": "3cd5807f7a29745d20dd452f0afcefcb1bcf6bbd90d20ee84f594537b2bf6265",
+    "arrival_point": 7,
+    "arrival_baked_cell": [
+      27,
+      9,
+      2
+    ],
+    "interaction_travel": true,
+    "evidence": "Full native player SetPos plus seven South steps exactly matches the original PointIn;preserve its real layer and make only the switch interaction manual. docs/re/YETI_CAVE_20261104.md"
+  },
+  {
+    "submap": "Map_30771_3",
+    "entity_id": 13,
+    "object_id": 32,
+    "destination_map": 496,
+    "original_point": 1,
+    "continuation": "sc_e_0788_1",
+    "continuation_sha256": "361045bfc7cf23b33680733b2e543c543bc5336ee37ae032acc8d14234b4c373",
+    "arrival_point": 1,
+    "arrival_baked_cell": [
+      13,
+      21,
+      1
+    ],
+    "interaction_travel": true,
+    "evidence": "Full native player SetPos plus seven South steps exactly matches the original PointIn;preserve its real layer and make only the switch interaction manual. docs/re/YETI_CAVE_20261104.md"
+  },
+  {
+    "submap": "Map_20441_3",
+    "entity_id": 3,
+    "object_id": 18,
+    "destination_map": 290,
+    "original_point": 1,
+    "continuation": "sc_e_0333_2",
+    "continuation_sha256": "ed77043fec14c345243f61356732733a0469b2c69a91031ba79c82dbae3a8404",
+    "arrival_cell": [
+      66,
+      42,
+      1
+    ],
+    "arrival_baked_cell": [
+      26,
+      20,
+      1
+    ],
+    "interaction_travel": true,
+    "ordinary_travel": true,
+    "evidence": "Only after native434:full repeat landing SetPos66,39 Ground plus three South steps;Move operand2 is speed. No access through the first boss arena. docs/re/LATE_OPERA_DRAGON_20261104.md"
   }
 ]

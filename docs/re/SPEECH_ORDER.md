@@ -1,5 +1,21 @@
 # Speech ordering and Prism priority audit, October 13
 
+November3 [puzzle verbosity](PUZZLE_VERBOSITY_20261103.md): omitting a Minimal
+activation header preserves the first direction's intentional interruption.
+Verbose interrupts once for activation and queues subsequent step information.
+Required-route notices remain in the same warning-before-directions event,
+shortened to Trap required / Event required. No text deduplication or arbitrary
+speech delay is introduced; producer readiness/cancellation ownership remains.
+
+October31 source/focused correction: [ATB command turns](ATB_COMMAND_TURNS_20261031.md)
+uses IV/V/VI's actual native command-input entry, with character then ready
+command focus. Accepted commands end the existing character guard, allowing
+consecutive turns from the same character; cancel/re-entry retains its local
+guard. T follows the party commander through child menus and excludes enemies.
+Opening roster, saved interruption preference and native action/damage speech
+remain. Three current native contracts and actual-consumer regressions pass;
+combined delivery/natural audible timing remain pending.
+
 October22 implementation: Speech now contains **Interrupt speech on character turn**,
 persisted as InterruptCharacterTurn. Default On preserves existing automatic behavior;
 Off queues the same turn announcement. The opening turn always queues behind the

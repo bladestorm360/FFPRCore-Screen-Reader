@@ -14,7 +14,7 @@ int transportation_at(const Request& request,const baked::Grids& grid,const Cell
     // The supported native automatic groups have disjoint terrain masks in all
     // six masters. Once their native transition finishes, terrain fixes the
     // stable foot/canoe/snowcraft identity; manual parked craft are not auto-use.
-    const int attribute=baked::attribute(grid,cell.x,cell.y);
+    const int attribute=terrain_at(request,grid,cell.x,cell.y);
     if(baked::group_crosses(1,attribute))return 1;
     for(const int group:request.auto_groups)
         if(baked::group_crosses(group,attribute))
@@ -39,7 +39,7 @@ void add_transport_cell(TransportRules& rules,TransportRules::Kind kind,
 
 void add_transport_collision(TransportRules& rules,const baked::Submap& map,
                              const Cell& cell,int collision,uint64_t ids) {
-    if(!ids||collision==0||(rules.submap&&rules.submap!=&map))return;
+    if(!ids||(rules.submap&&rules.submap!=&map))return;
     rules.submap=&map;
     // Reuse the native collision decoder, including partial and unknown IDs.
     std::vector<Cell> hard;std::vector<Request::Directional> edges;

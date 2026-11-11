@@ -1,0 +1,2084 @@
+{
+  "source_script_hashes": {
+    "Map_20110/sc_e_0219": "6fad58acc1d9c509675dd0c9c8e73c149d31f7d7d78d143023d7afad92606fdf",
+    "Map_20110/sc_e_0219_2": "cae4f7a9fd8d0d576425ab5237fbe3fe1cbe9aa1561ac4222f6af75e306ca11d",
+    "Map_20110/sc_e_0220": "7f33e397489b8094f389e9d30d76007cfc7ecf8937d53decd9b90f7ca3a3a9b0",
+    "Map_20110/sc_e_0221": "3625227e27fb4f47c001071c1487b561d0c08ec554c86c7da993a39698732805",
+    "Map_20110/sc_e_0226": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+    "Map_20110/sc_map_20110": "9505422a0f8aab6d10f962dc20802ee89102da09cc588e3fd47f6c2972457359",
+    "Map_20110_1/sc_e_0649_1": "bd6f67d7cb680d572fbad8ce4cee678f0c615f8ce9574609f864990268018b87",
+    "Map_20110_1/sc_map_20110_1": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_20111_1/sc_e_0226": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+    "Map_20111_1/sc_map_20111_1": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_20111_1/sc_sty_20111_1": "395f43222b6a16b4ce37554318767444f4247c0d45118121745ecd67fa292b80",
+    "Map_20111_1/sc_sty_20111_1_branch": "79e797375c41ad9d3289cc33519b9808f3a3ccc4be049ff47e34a866591f0422",
+    "Map_20111_1/sc_sty_20111_1_end": "7824e64ff58d8acd61931aa4245919426bfa493cba7c12be140bec272c9249b9",
+    "Map_20111_2/sc_e_0226": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+    "Map_20111_2/sc_e_0226_1": "933a16446c09c0ca6d45594934e6205936515ba58f3ea1290e1e17696fbd432e",
+    "Map_20111_2/sc_e_0226_2": "fe29e8448157c9dc09623db39e506b8b148df4b56124d97d050f69186cc325b8",
+    "Map_20111_2/sc_map_20111_2": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_20111_3/sc_e_0226": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+    "Map_20111_3/sc_e_0226_3": "e008144d1a86a0bb2818e5c79c38e283fe4020bb3e5aacbb44e34bcaa711df86",
+    "Map_20111_3/sc_map_20111_3": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_20111_4/sc_e_0225": "cced5a0a414d47489966aa5b8f669b78c73194254e5bbd78929c206e84b69b7a",
+    "Map_20111_4/sc_map_20111_4": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_20111_6/sc_e_0223": "a38a2d1a311d42d30dd25d3889d2182a2a8838d2270b6b19aa20adda21c86797",
+    "Map_20111_6/sc_e_0224": "146410aaf73e2cd0edfa7c52e0e4edfc6e75c4b94196bd3de290c5e0d4750c18",
+    "Map_20111_6/sc_e_0227": "9ad580a01d86bba0e003d43aef32610f87e79464c82ccd8f6f617f73f0afda01",
+    "Map_20111_6/sc_e_0230": "5411f05004b7be8fe94bc6b671b41c7dc74cca364bc4e04a0a0ee3186faa4feb",
+    "Map_20111_6/sc_e_0233": "ee2474b3e623db30648d5e5d38e1059878d66d45a29a2cf0a04ec2c5654f0be5",
+    "Map_20111_6/sc_e_0236": "079aa21f96878f330994afe58dad8acc9288017a2e0ab4e5dd5302988edd0fed",
+    "Map_20111_6/sc_e_0238": "60316356ebac4d8a874e2572451bd41d04dd2266118856a4ccd6047d838291f4",
+    "Map_20111_6/sc_map_20111_6": "2ba6e421965936a09a75077e36208f33d560a94a1ed114b399a422cb15b21fa5",
+    "Map_20111_6/sc_npc_20111_6_1": "b289f92079291a50cb74d1db381f58cfb86c6373ca4e3077840c321d84e4d26d",
+    "Map_20111_7/sc_e_0222": "aad87aa1484d1202e926cf93ea15e72a83afe0762e0fb7b1aa4229c7935f19f9",
+    "Map_20111_7/sc_e_0226": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+    "Map_20111_7/sc_e_0226_4": "9dcdf61cfda85131ccd9c3323a06351268616b959930a3428a2eb4cd653d8960",
+    "Map_20111_7/sc_map_20111_7": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_20340/sc_e_0644": "c2f0982b4090cd724cecbf0b931f7b440cdd4e64e799fd251dbf5c0cc65cdd41",
+    "Map_20340/sc_e_0645": "699b492fd4613f8f10c2b3fa96964af424b6755e45dc0e73a632cf692eeac123",
+    "Map_20340/sc_e_0646": "662ecae24bc8735c8b849559cd986b8c547340518656ceabc18be2ce72fc57e4",
+    "Map_20340/sc_e_0650_1": "16bef4470e4f219acaa9569ad42322ed0e0f4966180ae30462b9ea1682a8a4a8",
+    "Map_20340/sc_e_0650_2": "b217e69f9581cc2b9fdcf7f098a315926d21a18c24e70659ece2226371cbbc0a",
+    "Map_20340/sc_e_0650_2_1": "8700ffd74e317aa5548454cdf43a478b3d3fddbe0cee482ec7bdf7da4ed25582",
+    "Map_20340/sc_e_0709_1": "be3bed5b8587dbe7274b915098e3f81c55a9e4a179fe8df2b6ca52919ca52bda",
+    "Map_20340/sc_e_0709_2": "c4b4e638d083f9b5c7176c8102e19463d16ed9a82cc65074a79293810c938f9c",
+    "Map_20340/sc_e_0709_3": "dda6d29a00d5e8a357542508eb5e4688d2ea9e3026a9e35cffa3f83f8a0ea21a",
+    "Map_20340/sc_e_1003_2": "c82653a8d9de21f93ff39ea61123329de6116badc81896014ed0f9b16463a07a",
+    "Map_20340/sc_e_1030_6": "7f4172407fbae5cb4bd798a4e7a949e0b86c4c2ffde7ebf5432f95c93ad88d75",
+    "Map_20340/sc_e_1032_2": "91a342f28753ce07b519d73050764f2258f3357e8249af5cc8ed7b3463463f7e",
+    "Map_20340/sc_map_20340": "d10263a932999956006a33e617d4024b1e3978e4cdeee3ed1b06e9cc9ca9d5b0",
+    "Map_20341_4/sc_map_20341_4": "85384ce0352aa34d2cc13b764892eb8dc6691ae925afcb49a9e04ca778ac5788",
+    "Map_20341_5/sc_map_20341_5": "8de237baba5057ce835ea83c22e45bc1c6b90e551667d0552bbc6cf69a3f9510",
+    "Map_20341_6/sc_e_0706": "86ab3d33777d899d5143042e81e8337056d65d546a967a213bbf3ecba76a634e",
+    "Map_20341_6/sc_map_20341_6": "9c7a7f3ea0d37c40eb5372a860ed04ade9871ecae619d41471c9d4144cd823cb",
+    "Map_20341_7/sc_e_0647": "c890dc63c39d9df8bfc528906ff80bc52368e4b028941f79ca6b391836939c04",
+    "Map_20341_7/sc_map_20341_7": "85384ce0352aa34d2cc13b764892eb8dc6691ae925afcb49a9e04ca778ac5788",
+    "Map_20341_8/sc_e_0648": "8a4e69e60d465f0034a967b1adb77fa4da1a7f189ee041bb7063ff8a01e3c81d",
+    "Map_20341_8/sc_e_0649": "5392d1e870089e8d6a13b0cf9c5537d4ce73e62ede494fcbcea62e87f5465275",
+    "Map_20341_8/sc_e_0649_2": "278388a8b8937a44ff78e96ba31fd6d4ac6410ad8231905750cb4f53c9f00f6b",
+    "Map_20341_8/sc_e_0650": "1104d89423b56f7cb095949e1a79ec934d6cc0b5f84ee43c1f4d23904b657dc3",
+    "Map_20341_8/sc_e_0650_3": "38ba25a28fd53693e64858723c95f4b89b3cf0abf229414fd0be4c378dcafa6e",
+    "Map_20341_8/sc_e_0651": "dddc08851cf5f5d653e592bf5207d761acf97483b11c9a46626b386452ac13a7",
+    "Map_20341_8/sc_e_1003_1": "0f4f2f531cdaa922354bdea6246585527da0ab55ae4dcb147346cdede872b225",
+    "Map_20341_8/sc_e_1030_7": "237dde0e46a3c163ae57724b69cd3a2df291f7dacbfe23048265a1a24a7ce7d1",
+    "Map_20341_8/sc_e_1032_1": "157315ab930072f85fe8a128504c8352fcb2891d27e8d53a90d990c314ee0513",
+    "Map_20341_8/sc_map_20341_8": "1570364b9481ac0762597ac6153d51dd206af39dca1d4952ce89812251bc18ce",
+    "Map_20341_8/sc_npc_20341_8_1": "1f2f430ba644191565b4c91bed516e9e2973eb49e1472f47a07a8aadbcf6f320",
+    "Map_20341_8/sc_npc_20341_8_10": "7b04d28c54d61f12db01becedd9ce242f85d454cea61c9aa0a9cd8c7156faab0",
+    "Map_20341_8/sc_npc_20341_8_11": "3ecf5b52b816ad1a87a6addec789edc4a3608fac98deb65a98fd8ed8486d21e9",
+    "Map_20341_8/sc_npc_20341_8_2": "8492d39c052ad150b55999c7bffdefee09282978b0750111e63b98c95c09b832",
+    "Map_20341_8/sc_npc_20341_8_3": "cc21786a3fc7a977262f092624d06adf0c10e2a14729f6cefdc9edabd140b574",
+    "Map_20341_8/sc_npc_20341_8_4": "9d49014cdcc8786ef15f68a813746e0bf9cf0e2fc10cfc312d381205ea272f8e",
+    "Map_20341_8/sc_npc_20341_8_5": "b099306f9593c76acd8b4b38d5edbb1ada2658b7fc5e5f406f14eebfb278e5f1",
+    "Map_20341_8/sc_npc_20341_8_6": "fd84ee1f0c5ebef7636642e7bc32902193239fe4baa4d64b68f566ebbb91a703",
+    "Map_20341_8/sc_npc_20341_8_7": "1a8b5ce35e6a252961159dfac88d96340d16e55a0a90db70eee22a32e88105c8",
+    "Map_20341_8/sc_npc_20341_8_8": "b6e42321f2fc413be88a22a42440ad5c35b2d3af4d6f4fe15ae1ef8fdff59303",
+    "Map_20341_8/sc_npc_20341_8_9": "1c671dcc1071e7325392cfd6f17bfb194d130af856e8bd20155e889100bcabdb",
+    "Map_20341_9/sc_e_0707": "aa689aea06329cfa3777a657447f5c22b8e58ccd1366fb0776aaffa1f367e577",
+    "Map_20341_9/sc_e_0708": "cb0f96d42a82f6f421c9b03e012470a333f09165f2156ea67311bcdb310bbc24",
+    "Map_20341_9/sc_e_0709": "9856e865ec5ff565abcc257ea09db52ed6a7e93d127e7776e3b3e1de95b701e9",
+    "Map_20341_9/sc_map_20341_9": "7194a85dc929563cf06f087193e2bd77075d1244234713f7326636a485dc576e"
+  },
+  "reply_writers": [
+    {
+      "locator": "Map_20110/sc_e_0226",
+      "writes": [
+        [
+          4,
+          "ScenarioFlag2",
+          249
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          252
+        ],
+        [
+          14,
+          "ScenarioFlag2",
+          255
+        ],
+        [
+          19,
+          "ScenarioFlag3",
+          2
+        ]
+      ]
+    },
+    {
+      "locator": "Map_20111_1/sc_e_0226",
+      "writes": [
+        [
+          4,
+          "ScenarioFlag2",
+          249
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          252
+        ],
+        [
+          14,
+          "ScenarioFlag2",
+          255
+        ],
+        [
+          19,
+          "ScenarioFlag3",
+          2
+        ]
+      ]
+    },
+    {
+      "locator": "Map_20111_2/sc_e_0226",
+      "writes": [
+        [
+          4,
+          "ScenarioFlag2",
+          249
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          252
+        ],
+        [
+          14,
+          "ScenarioFlag2",
+          255
+        ],
+        [
+          19,
+          "ScenarioFlag3",
+          2
+        ]
+      ]
+    },
+    {
+      "locator": "Map_20111_3/sc_e_0226",
+      "writes": [
+        [
+          4,
+          "ScenarioFlag2",
+          249
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          252
+        ],
+        [
+          14,
+          "ScenarioFlag2",
+          255
+        ],
+        [
+          19,
+          "ScenarioFlag3",
+          2
+        ]
+      ]
+    },
+    {
+      "locator": "Map_20111_7/sc_e_0226",
+      "writes": [
+        [
+          4,
+          "ScenarioFlag2",
+          249
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          252
+        ],
+        [
+          14,
+          "ScenarioFlag2",
+          255
+        ],
+        [
+          19,
+          "ScenarioFlag3",
+          2
+        ]
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 10,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 11,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 12,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 13,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 14,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 15,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 16,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 17,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 18,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 19,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 20,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 21,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 22,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 23,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 24,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 25,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 26,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 27,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 28,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 29,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 44,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 45,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 46,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 48,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC1爺さん",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 49,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC2男性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 50,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC3女性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 51,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC4ならず者",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 52,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC5ならず者",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 53,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC6男性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 54,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC8男の子",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 55,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC9女の子",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 56,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC10女性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 58,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC11女性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 59,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC12カタリーナ",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 60,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC13ディーン",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 61,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC14鳥",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 67,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0219:NPC男性",
+      "script": "sc_e_0219"
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 66,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0220:NPC犬",
+      "script": "sc_e_0220"
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 68,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC7",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 75,
+      "type": "Entity",
+      "group": "entity_default",
+      "name": "",
+      "script": "sc_e_0221"
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 79,
+      "type": "AnimEntity",
+      "group": "entity_default",
+      "name": "井戸(崩壊前)",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 65,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0221:NPC鳥",
+      "script": "sc_e_0221"
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 69,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC男性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 70,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女性",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 71,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女の子",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 72,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女の子2",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 73,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC男の子",
+      "script": null
+    },
+    {
+      "map": 84,
+      "room": "Map_20110",
+      "entity": 74,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC犬",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 69,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC男性",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 70,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女性",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 71,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女の子",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 72,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC女の子2",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 73,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC男の子",
+      "script": null
+    },
+    {
+      "map": 583,
+      "room": "Map_20110_1",
+      "entity": 74,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "NPC犬",
+      "script": null
+    },
+    {
+      "map": 85,
+      "room": "Map_20111_1",
+      "entity": 3,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 85,
+      "room": "Map_20111_1",
+      "entity": 9,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0226:NPC1商人",
+      "script": "sc_sty_20111_1"
+    },
+    {
+      "map": 86,
+      "room": "Map_20111_2",
+      "entity": 7,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 86,
+      "room": "Map_20111_2",
+      "entity": 8,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 86,
+      "room": "Map_20111_2",
+      "entity": 25,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "通常時：武器屋",
+      "script": "sc_e_0226_1"
+    },
+    {
+      "map": 86,
+      "room": "Map_20111_2",
+      "entity": 26,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "通常時：防具屋",
+      "script": "sc_e_0226_2"
+    },
+    {
+      "map": 87,
+      "room": "Map_20111_3",
+      "entity": 3,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 87,
+      "room": "Map_20111_3",
+      "entity": 14,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0232:NPC1商人",
+      "script": "sc_e_0226_3"
+    },
+    {
+      "map": 88,
+      "room": "Map_20111_4",
+      "entity": 4,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 88,
+      "room": "Map_20111_4",
+      "entity": 5,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 88,
+      "room": "Map_20111_4",
+      "entity": 10,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0225:NPC1初心者の館の男",
+      "script": "sc_e_0225"
+    },
+    {
+      "map": 89,
+      "room": "Map_20111_5",
+      "entity": 0,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 89,
+      "room": "Map_20111_5",
+      "entity": 0,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "NPC1初心者の館の男",
+      "script": null
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 3,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 9,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "sc_e_0223:NPC1男性",
+      "script": "sc_e_0223"
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 10,
+      "type": "AnimEntity",
+      "group": "ev_e_0223",
+      "name": "手紙:イベント前（アクションなし）",
+      "script": null
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 8,
+      "type": "AnimEntity",
+      "group": "ev_e_0224",
+      "name": "sc_e_0224:手紙",
+      "script": "sc_e_0224"
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 7,
+      "type": "AnimEntity",
+      "group": "ev_e_0227",
+      "name": "sc_e_0227:手紙",
+      "script": "sc_e_0227"
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 6,
+      "type": "AnimEntity",
+      "group": "ev_e_0230",
+      "name": "sc_e_0230:手紙",
+      "script": "sc_e_0230"
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 5,
+      "type": "AnimEntity",
+      "group": "ev_e_0233",
+      "name": "sc_e_0233:手紙",
+      "script": "sc_e_0233"
+    },
+    {
+      "map": 90,
+      "room": "Map_20111_6",
+      "entity": 4,
+      "type": "AnimEntity",
+      "group": "ev_e_0236",
+      "name": "sc_e_0236:手紙",
+      "script": "sc_e_0236"
+    },
+    {
+      "map": 91,
+      "room": "Map_20111_7",
+      "entity": 4,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 91,
+      "room": "Map_20111_7",
+      "entity": 16,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "通常時：アクセサリー屋",
+      "script": "sc_e_0226_4"
+    },
+    {
+      "map": 91,
+      "room": "Map_20111_7",
+      "entity": 14,
+      "type": "Entity",
+      "group": "entity_default",
+      "name": "sc_e_0222:ベッドで休む",
+      "script": "sc_e_0222"
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 6,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 7,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 8,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 9,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 10,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 11,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 12,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 13,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 14,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 15,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 16,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 17,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 18,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 19,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 20,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 21,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 22,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 23,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 24,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 25,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 26,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 27,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 29,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 31,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 33,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 40,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "犬",
+      "script": "sc_e_0645"
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 41,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "犬",
+      "script": "sc_e_0646"
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 57,
+      "type": "Event",
+      "group": "ev_e_0644",
+      "name": "犬がやってきて子供に気付かれる",
+      "script": "sc_e_0644"
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 58,
+      "type": "Event",
+      "group": "ev_e_0644",
+      "name": "犬がやってきて子供に気付かれる",
+      "script": "sc_e_0644"
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 59,
+      "type": "NPC",
+      "group": "ev_e_0644",
+      "name": "男の子:ev_e_0644",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 56,
+      "type": "NPC",
+      "group": "ev_e_0650",
+      "name": "ティナ:ev_e_0650",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 47,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "男の子:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 48,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "女の子:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 49,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "女の子:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 50,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "男の子:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 51,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "男の子:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 52,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "カタリーナ:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 53,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "ディーン:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 55,
+      "type": "Entity",
+      "group": "ev_e_0709",
+      "name": "ティナから発するキラキラ　※エフェクトのアセットないため仮置き",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 54,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "トランスティナ:ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 63,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "トランスティナ(影用):ev_e_0709",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 60,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "トランスティナ:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 43,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "男の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 44,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 45,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 46,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "男の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 1,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "男の子1:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 2,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "男の子2:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 3,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子1:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 207,
+      "room": "Map_20340",
+      "entity": 4,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子2:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 208,
+      "room": "Map_20341_4",
+      "entity": 0,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 208,
+      "room": "Map_20341_4",
+      "entity": 0,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 209,
+      "room": "Map_20341_5",
+      "entity": 0,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 209,
+      "room": "Map_20341_5",
+      "entity": 0,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 3,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 5,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 0,
+      "type": "Entity",
+      "group": "ev_e_0001",
+      "name": "侵入不可",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 6,
+      "type": "NPC",
+      "group": "ev_e_0703",
+      "name": "①ディーン",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 1,
+      "type": "NPC",
+      "group": "ev_e_0706",
+      "name": "犬",
+      "script": null
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 7,
+      "type": "Event",
+      "group": "ev_e_0706",
+      "name": "一番左の家に入ると犬が隠し通路に走っていく",
+      "script": "sc_e_0706"
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 8,
+      "type": "Event",
+      "group": "ev_e_0706",
+      "name": "一番左の家に入ると犬が隠し通路に走っていく",
+      "script": "sc_e_0706"
+    },
+    {
+      "map": 210,
+      "room": "Map_20341_6",
+      "entity": 9,
+      "type": "Event",
+      "group": "ev_e_0706",
+      "name": "一番左の家に入ると犬が隠し通路に走っていく",
+      "script": "sc_e_0706"
+    },
+    {
+      "map": 211,
+      "room": "Map_20341_7",
+      "entity": 2,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 211,
+      "room": "Map_20341_7",
+      "entity": 6,
+      "type": "Entity",
+      "group": "entity_default",
+      "name": "ベッドで休める",
+      "script": "sc_e_0647"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 2,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 5,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "①男の子",
+      "script": "sc_npc_20341_8_1"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 7,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "③男の子",
+      "script": "sc_npc_20341_8_3"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 9,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "⑤女の子",
+      "script": "sc_npc_20341_8_5"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 11,
+      "type": "NPC",
+      "group": "entity_default",
+      "name": "⑦女の子",
+      "script": "sc_npc_20341_8_7"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 46,
+      "type": "Event",
+      "group": "ev_e_0648",
+      "name": "小屋の地下でティナと再会",
+      "script": "sc_e_0648"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 6,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "②女の子:ev_e_0648_1",
+      "script": "sc_npc_20341_8_2"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 8,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "④女の子:ev_e_0648_1",
+      "script": "sc_npc_20341_8_4"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 67,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "⑥男の子:ev_e_0648_1",
+      "script": "sc_npc_20341_8_6"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 12,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "⑧男の子:ev_e_0648_1",
+      "script": "sc_npc_20341_8_8"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 14,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "⑨カタリーナ:ev_e_0648_1",
+      "script": "sc_npc_20341_8_9"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 15,
+      "type": "NPC",
+      "group": "ev_e_0648_1",
+      "name": "⑩ディーン:ev_e_0648_1",
+      "script": "sc_npc_20341_8_10"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 66,
+      "type": "NPC",
+      "group": "ev_e_0649",
+      "name": "ティナ:ev_e_0649",
+      "script": "sc_e_0649"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 44,
+      "type": "Event",
+      "group": "ev_e_0650",
+      "name": "部屋を出るとフンババが襲ってくる",
+      "script": "sc_e_0650"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 57,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "②女の子:ev_e_0650_1",
+      "script": "sc_npc_20341_8_2"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 58,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "④女の子:ev_e_0650_1",
+      "script": "sc_npc_20341_8_4"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 59,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "⑥男の子:ev_e_0650_1",
+      "script": "sc_npc_20341_8_6"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 65,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "ティナ:ev_e_0650_1",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 60,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "⑧男の子:ev_e_0650_1",
+      "script": "sc_npc_20341_8_8"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 61,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "⑨カタリーナ:ev_e_0650_1",
+      "script": "sc_npc_20341_8_9"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 62,
+      "type": "NPC",
+      "group": "ev_e_0650_1",
+      "name": "⑩ディーン:ev_e_0650_1",
+      "script": "sc_npc_20341_8_10"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 43,
+      "type": "Event",
+      "group": "ev_e_0651",
+      "name": "子供から魔石をもらえる",
+      "script": "sc_e_0651"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 54,
+      "type": "NPC",
+      "group": "ev_e_0703",
+      "name": "②女の子:ev_e_0703",
+      "script": "sc_npc_20341_8_2"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 55,
+      "type": "NPC",
+      "group": "ev_e_0703",
+      "name": "④女の子:ev_e_0703",
+      "script": "sc_npc_20341_8_4"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 64,
+      "type": "NPC",
+      "group": "ev_e_0703",
+      "name": "⑥男の子:ev_e_0703",
+      "script": "sc_npc_20341_8_6"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 56,
+      "type": "NPC",
+      "group": "ev_e_0703",
+      "name": "⑧男の子:ev_e_0703",
+      "script": "sc_npc_20341_8_8"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 47,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "②女の子:ev_e_0709",
+      "script": "sc_npc_20341_8_2"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 48,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "④女の子:ev_e_0709",
+      "script": "sc_npc_20341_8_4"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 63,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "⑥男の子:ev_e_0709",
+      "script": "sc_npc_20341_8_6"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 49,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "⑧男の子:ev_e_0709",
+      "script": "sc_npc_20341_8_8"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 50,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "⑨カタリーナ:ev_e_0709",
+      "script": "sc_npc_20341_8_9"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 51,
+      "type": "NPC",
+      "group": "ev_e_0709",
+      "name": "⑩ディーン:ev_e_0650_1",
+      "script": "sc_npc_20341_8_10"
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 35,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "男の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 37,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "ディーン:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 38,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "女の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 39,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "女の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 40,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "女の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 41,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "女の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 42,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "男の子:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 36,
+      "type": "NPC",
+      "group": "ev_e_1003",
+      "name": "カタリーナ:ev_e_1003",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 26,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 27,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 28,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "男の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 29,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 30,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "カタリーナ:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 31,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "ディーン:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 32,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "女の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 33,
+      "type": "NPC",
+      "group": "ev_e_1030",
+      "name": "男の子:ev_e_1030",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 18,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子1:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 20,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子3:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 16,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "ディーン:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 19,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子2:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 21,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "女の子4:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 23,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "カタリーナ:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 24,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "赤ん坊:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 25,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "男の子3:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 17,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "男の子1:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 212,
+      "room": "Map_20341_8",
+      "entity": 22,
+      "type": "NPC",
+      "group": "ev_e_1032",
+      "name": "男の子2:ev_e_1032",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 8,
+      "type": "GotoMap",
+      "group": "entity_default",
+      "name": "GotoMap",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 1,
+      "type": "Event",
+      "group": "ev_e_0707",
+      "name": "ティナたちを発見、フンババの報",
+      "script": "sc_e_0707"
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 2,
+      "type": "NPC",
+      "group": "ev_e_0707",
+      "name": "①ティナ",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 3,
+      "type": "NPC",
+      "group": "ev_e_0707",
+      "name": "②カタリーナ",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 4,
+      "type": "NPC",
+      "group": "ev_e_0707",
+      "name": "犬",
+      "script": "sc_e_0708"
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 5,
+      "type": "NPC",
+      "group": "ev_e_0707",
+      "name": "③ディーン",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 6,
+      "type": "NPC",
+      "group": "ev_e_0707",
+      "name": "④男の子",
+      "script": null
+    },
+    {
+      "map": 213,
+      "room": "Map_20341_9",
+      "entity": 9,
+      "type": "Event",
+      "group": "ev_e_0709",
+      "name": "フンババとバトル、ティナ仲間に",
+      "script": "sc_e_0709"
+    }
+  ]
+}

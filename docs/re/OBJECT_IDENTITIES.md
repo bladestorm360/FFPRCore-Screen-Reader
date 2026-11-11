@@ -136,3 +136,14 @@ appearance/Hide ownership, not repeated wording or an independently guessed rang
 wall near his bed, Castle Fynn's wall and Narshe's rock at exact native map/entity
 identities. Shared raw names stay context-qualified. Existing Clock/Fireplace and
 treasure/category rules remain unchanged; final combined verification is pending.
+## Kain's airship on the FFIV world map
+
+The November 11 game log calls the Objects entry at world tile (41,70)
+“Tower entrance.” The two native action entities in Map_10010 are 135 and
+1126. Both represent Kain's airship at that tile. Their native identifiers
+describe travel to the Tower of Zot. The reviewed label names the airship
+in all 12 locales. Both identities remain interactive Objects. The Vehicles
+category is for player-controlled vehicles and mounts.
+
+The existing event identity check verifies both native contacts, the live
+and copied label lookup keys, and the complete FFIV locale catalog.

@@ -142,7 +142,7 @@ bool player_cell(void* map, void* pl, Cell& cell)
 void begin(const field::PathInfo& path, bool speak_path=true)
 {
     if (!g_route) g_route = new Route();
-    g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps);
+    g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps, path.loop_axes);
     g_map = field::current_map_id(); g_next_map = path.next_map_id;
     g_transition.set_next(g_next_map);
     g_exit_approach = path.walk_phases.size() == 1 && path.walk_phases.front().cells.size() <= 1;
@@ -235,7 +235,16 @@ unity::Vec2 axis(unity::Vec2 native)
         }
         g_last_cell = at; g_have_cell = true; g_progress_at = frame::now();
     }
-    const Step step = g_route->next(at);
+    std::optional<PrecisionPosition> precise_position;
+    // One position read scoped to FF1's reviewed pit room; ordinary movement
+    // keeps its existing observation/callback path.
+    if(game::is(game::Id::FF1)&&g_map==91) {
+        const auto origin=field::baked_nav::world_of(map,{at.layer,0,0});
+        void* transform=unity::transform(pl);if(!transform){cancel();return native;}
+        const auto current=unity::local_position(transform);
+        precise_position=PrecisionPosition{(current.x-origin.x)/8.,(origin.y-current.y)/8.};
+    }
+    const Step step = g_route->next(at,precise_position);
     if (step.result == Result::Move) {
         if (frame::now() - g_progress_at > 2.0) {
             // An actor can enter after walk_edge's check but before native
@@ -245,8 +254,9 @@ unity::Vec2 axis(unity::Vec2 native)
             else {cancel();ffpr::say(T(L"Autowalk blocked"));}
             return {};
         }
-        if(!field::baked_nav::walk_edge(map, pl, at, step.next, step.goal_edge,
-            step.vehicle_action, step.transportation_id)) {
+        const bool legal=step.precision?field::baked_nav::walk_precision_edge(map,pl,step.precision_from,step.precision_to):
+            field::baked_nav::walk_edge(map,pl,at,step.next,step.goal_edge,step.vehicle_action,step.transportation_id);
+        if(!legal) {
             if(g_has_goal)retry_obstacle();
             else {cancel();ffpr::say(T(L"Autowalk blocked"));}
             return {};
@@ -256,7 +266,8 @@ unity::Vec2 axis(unity::Vec2 native)
             g_boundary_deadline = frame::now() + 10.0;
             g_boundary_target = step.next; g_boundary_action = step.vehicle_action; g_boundary_vehicle = step.transportation_id;
         }
-        unity::Vec2 wanted{static_cast<float>(step.x), static_cast<float>(step.y)};
+        unity::Vec2 wanted=step.precision?unity::Vec2{step.axis_x,step.axis_y}:
+            unity::Vec2{static_cast<float>(step.x),static_cast<float>(step.y)};
         void* controller=field::player_controller();
         auto* special=profile(controller);
         if (special || kAirshipController.is(controller)) {

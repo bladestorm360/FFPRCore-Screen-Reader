@@ -1,5 +1,5 @@
-// Included after boarding_route by baked_nav.cpp. This is the FFIII owned
-// vehicle-change adapter, not another native pathfinder or capture pipeline.
+// Included after boarding_route by baked_nav.cpp. The owned FFIII craft-change
+// adapter also handles FF1's explicitly selected Ship pickup via its Airship.
 // Every edge reuses the existing qualified single-craft/foot leg, preserving
 // its landing, shore, deck, hazard and manual-action contracts.
 int journey_vehicle_family(int id) {
@@ -56,9 +56,16 @@ struct JourneyModeScope {
 
 bool vehicle_journey_route(const baked::Submap& sm,const baked::Grids& grid,
                            const baked_route::Request& movement,const std::vector<Cell>& goals,
-                           std::vector<Phase>& phases,const air_transitions::Rule* aerial=nullptr) {
-    if(boarding_route(sm,grid,movement,goals,phases,aerial))return true;
-    if(!game::is(game::Id::FF3)||!g_route_snapshot||!g_route_snapshot->vehicle_shortcuts||!sm.world)return false;
+                           std::vector<Phase>& phases,const air_transitions::Rule* aerial=nullptr,
+                           bool direct_tried=false,bool shortcut=false) {
+    if(!direct_tried&&boarding_route(sm,grid,movement,goals,phases,aerial,shortcut))return true;
+    if(!g_route_snapshot||!sm.world)return false;
+    const bool ff1_ship=game::is(game::Id::FF1)&&g_route_snapshot->goal.transportation_id==4;
+    // Ship4's water is not a final walking/airship landing area. The existing
+    // legs can instead land at a real boarding shore, then board that exact
+    // captured Ship. Ordinary FF1 destinations keep their existing planner.
+    if((!game::is(game::Id::FF3)&&!ff1_ship)||
+       (!g_route_snapshot->vehicle_shortcuts&&!(ff1_ship&&movement.vehicle_type==3)))return false;
     const auto candidates=journey_vehicles();if(candidates.empty())return false;
     struct Node {
         VehicleOnMap craft;
@@ -132,8 +139,7 @@ bool vehicle_journey_route(const baked::Submap& sm,const baked::Grids& grid,
             constexpr int sides[4][2]={{0,-1},{1,0},{0,1},{-1,0}};
             for(const auto& side:sides) {
                 const Cell beside{at.layer,(at.x+side[0]+grid.width)%grid.width,(at.y+side[1]+grid.height)%grid.height};
-                if(!baked_route::open(foot,grid,beside)||baked_route::terminal_transition(foot,grid,beside))continue;
-                if((row->type==kTransportShip||row->type==kTransportSubmarine)&&!baked_route::direction_allowed(foot,beside,at))continue;
+                if(!boarding_approach::allowed(foot,*row,beside,at)||baked_route::terminal_transition(foot,grid,beside))continue;
                 contact.push_back(beside);
             }
             if(contact.empty())continue;

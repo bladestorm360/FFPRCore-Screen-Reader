@@ -4,6 +4,15 @@ Current native feature coverage is maintained in [FEATURE_INDEX](FEATURE_INDEX.m
 October22 fixes/evidence are tracked in [the current register](FIXES_2026_10_22.md).
 The historical FINISHED labels below are implementation/port labels, not blanket gameplay certification.
 
+Owner gameplay confirmation, October 31, 2026: FFII and FFIII are confirmed 100%
+playable with the mod features and map bakes. FFI is tentatively 100% playable
+to completion; its completed playthrough used the old mod. The
+[gameplay record](TESTING.md#owner-gameplay-confirmations-october-31) preserves
+these confirmations alongside the specific outstanding cases. The broader
+audit and documented fixes were resumed by the owner on October31. Current
+source/focused checkpoints, native-context limits and remaining combined
+delivery are tracked in the single map-audit scope ledger.
+
 October 12 results follow-up supersedes all historical L-log references below:
 all six games use native current-phase buffers, concise displayed totals and
 Autodetail-controlled details, with prefix input ownership. [Evidence](re/RESULTS.md).
@@ -15,8 +24,9 @@ parity findings below. Implemented/offline-verified behavior still requires user
 Areas marked FINISHED are complete in the repo. Every core area is finished.
 FF2–FF5 game modules: see the end of this file.
 
-What each area of the native mod ports, and what the port found. Nothing here is tested in a
-game yet. "Parity finding" = the C# mod behaved this way; the port keeps it, nothing fixed.
+The following historical inventory records what each area of the native mod
+ported and the original port findings. Current gameplay confirmations are
+recorded above. "Parity finding" describes behavior retained from the C# mod.
 
 ## Phase 0 (data)
 

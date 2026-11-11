@@ -19,6 +19,8 @@ void walls(unsigned mask,float gain);
 void counter(bool enabled,float gain=1);
 void preview(cues::Id cue);
 bool hrtf_active();
+// Copied immutable availability only; no worker-owned PCM/pointer access.
+uint32_t custom_available_mask();
 // Existing audio worker only.
 void pump(SDL_AudioStream* stream);
 void close();

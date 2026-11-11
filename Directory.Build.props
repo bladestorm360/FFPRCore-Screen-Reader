@@ -1,0 +1,10 @@
+<Project>
+  <!-- A single constrained process tree owns a build. Keep compiler servers
+       and project/compiler parallelism off, including nested release builds. -->
+  <PropertyGroup>
+    <BuildInParallel>false</BuildInParallel>
+    <UseSharedCompilation>false</UseSharedCompilation>
+    <ConcurrentBuild>false</ConcurrentBuild>
+    <UseRazorBuildServer>false</UseRazorBuildServer>
+  </PropertyGroup>
+</Project>

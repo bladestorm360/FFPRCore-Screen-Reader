@@ -293,7 +293,17 @@ int main(int argc,char** argv) {
     observation->rows={{1,scape::Kind::NPC,2,0}};runtime::publish(observation);fixture::queued=0;runtime::pump(stream);
     expect(runtime::player->emitters.empty(),"expired native snapshot cannot create emitters");
     auto off=fixture::options();off.navigation=false;runtime::configure(off);runtime::play(cues::Id::Footstep);runtime::pump(stream);
-    expect(fixture::queued==0,"navigation master stops every mod cue and queued output");
+    expect(fixture::queued==0,"navigation master stops automatic cues and queued gameplay output");
+    off.soundscape=false;off.enabled.fill(false);runtime::configure(off);
+    runtime::walls(1,1);runtime::counter(true);
+    fixture::nonzero=false;runtime::preview(cues::Id::NPC);runtime::pump(stream);
+    expect(fixture::nonzero && !runtime::player->voices[2].on && !runtime::player->voices[8].on,
+           "deliberate NPC preview submits PCM with the master and category off, without automatic walls or counter");
+    const auto clears_after_preview=fixture::clears;
+    for (int i=0;i<16;++i) { fixture::queued=0;runtime::pump(stream); }
+    expect(fixture::clears==clears_after_preview && fixture::queued==0,
+           "muted playback lets the preview tail drain and remains idle afterward");
+    runtime::walls(0,0);runtime::counter(false);
     runtime::configure(fixture::options());runtime::pump(stream);
     const auto start=runtime::now();
     for(int i=0;i<10000;++i) runtime::play(cues::Id::Footstep);

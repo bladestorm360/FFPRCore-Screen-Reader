@@ -1,5 +1,54 @@
 # FFIII vehicle and connected-world journeys
 
+## Resumed source/offline work, October31
+
+The owner resumed the documented fixes and subsequent all-six audit. Historical
+pause/delivery entries below remain evidence, superseded for this scope by the
+single ledger. Actual-provider12 route/browse cases now cover both Doga doors
+and all four underwater entrances from Surface/Nautilus and Continent/Invincible.
+Legal snapshots pass; the reported native underwater No path is not yet
+reproduced, so this is not a claim that the installed failure is resolved.
+
+Confirmed fixes: repeated dive/surface direction requests retain the pending
+manual transition receipt; multi-frame capture samples latest owner-thread pose
+before dispatch while keeping strict publication/vehicle validation; native
+layer1 sparse world blockers survive the router's single-plane normalization.
+Reverse water search preserves actual movement/crossing rules; an early
+qualified Village fallback avoids exhaustive unrelated return searches.
+Measured ordinary A* detours reach80000–163000 heading expansions; bounded
+adaptive exact tile potentials and qualified stationary reuse on worlds1/3/4
+are under all-six/reference qualification. No native calls move to workers, no
+pathfinding returns to the game thread, and no new DLL is installed yet.
+Evidence: build_check/navigation_resume_20261031/; fixture timings under quotas
+do not measure native frames or audible response.
+
+## Owner gameplay report, October31 — document only
+
+World-map mode works between Floating Continent and Surface World. Underwater
+maps are listed in that mode, but their requested routes return "No path".
+This is a reported gameplay failure; earlier offline checks do not establish
+that the installed underwater journey works.
+
+Required when work resumes: full diving and surfacing support using actual
+legal vehicle/story access, underwater destinations and underwater intermediate
+legs. A route must be able to dive, travel through the underwater map and
+surface/use its native exits to reach places such as Doga's Village. Preserve
+the confirmed continent/surface connection while checking other routes too.
+
+Selection of both Doga's Village and Doga's Manor also causes significant
+pathfinder lag. Other destinations also lag; these two are the biggest offenders.
+Timing and cause are unmeasured. A potential additional pathing issue occurs
+when directions are requested repeatedly while moving in a flying vehicle,
+especially diagonally; exact failure behavior remains uncharacterized. Avoiding
+hotpathing is the owner's suspected explanation, not a confirmed diagnosis.
+When resumed, investigate safe improvements while keeping pathfinding off the
+main game thread. If moving searches back onto that thread is the only remedy,
+the owner accepts the limitation. The owner requested documentation
+only to save usage; audit/fix work remains paused. No investigation, code,
+build, test, game probe or deployment was performed for this report. Scope and
+future acceptance remain in the
+[single ledger](MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+
 User-triggered continuation of the single [scope ledger](MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
 Source/offline/all-six delivery is Closed: a6d9b4ce19dfb6ad/11460096 bytes.
 Completion/recovery: build_check/navigation_delivery_20261030/completion.json.

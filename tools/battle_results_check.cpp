@@ -245,6 +245,8 @@ namespace ffpr::fieldnav::autowalk { bool virtual_key(int, bool) { return false;
 
 namespace input::bindings {
 bool remapped_keyboard_in_use(){return false;}
+bool event_guide_keyboard_in_use(){return false;}
+bool battle_party_keyboard_in_use(){return false;}
 bool consumed(int){return false;}
 bool navigation_request_pressed(){return false;}
 bool navigation_controller_input(int){return false;}
@@ -391,8 +393,8 @@ int main()
     result_reset_state(); spoken.clear(); d_points(&menu, nullptr); tick();
     oForced1 = &phase; dForced1(&members, nullptr); tick();
     expect(contains(L"Firion: EXP"), "forced native animation completion refreshes final details");
-    // FFIII's native confirm ends the tally on the same page. Preserve all-six
-    // behavior and optional details while acknowledging only that forced event.
+    // A native forced completion ends the tally on the same page. Acknowledge
+    // every EXP game while preserving FFII's skill/stat phase and optional details.
     Phase forced[] = {&dForced1, &dForced2, &dForced3, &dForced4, &dForced5, &dForced6};
     auto counted_forced = +[](void*, const void*) { ++fixture::native_calls; };
     oForced1 = oForced2 = oForced3 = oForced4 = oForced5 = oForced6 = counted_forced;
@@ -403,24 +405,28 @@ int main()
         forced[n - 1](&members, nullptr); tick();
         expect(native_calls == 1 && g_phase == ResultPhase::Points,
             "forced tally calls native once and does not advance results phase");
-        expect(contains(L"EXP tally complete") == (n == 3 && !automatic),
-            "only FFIII forced completion acknowledges with Autodetail off");
+        expect(contains(L"EXP tally complete") == (n != 2 && !automatic),
+            "every EXP game acknowledges a native skip with Autodetail off");
         expect(contains(L"Firion: EXP") == (automatic && n != 2),
             "forced completion preserves final optional member details");
         spoken.clear(); forced[n - 1](&members, nullptr); tick();
         expect(native_calls == 2 && spoken.empty(), "same completed native tally cannot announce twice");
     }
-    game_id = game::Id::FF3; detail = false;
-    result_reset_state(); spoken.clear(); members.end_count = 0;
-    d_points(&menu, nullptr); dForced3(&members, nullptr); tick(); tick();
-    expect(contains(L"EXP obtained") && !contains(L"EXP tally complete"),
-        "completion before the first page read uses the initial announcement");
-    for (bool close : {false, true}) {
+    detail = false;
+    for (int n : {1, 3, 4, 5, 6}) {
+        game_id = static_cast<game::Id>(n);
         result_reset_state(); spoken.clear(); members.end_count = 0;
-        d_points(&menu, nullptr); tick(); spoken.clear(); dForced3(&members, nullptr);
-        if (close) d_close(&menu, nullptr); else d_items(&menu, nullptr);
-        tick(); expect(!contains(L"EXP tally complete"), "close or next phase cancels deferred tally acknowledgement");
+        d_points(&menu, nullptr); forced[n - 1](&members, nullptr); tick(); tick();
+        expect(contains(L"EXP obtained") && !contains(L"EXP tally complete"),
+            "completion before the first page read uses the initial announcement");
+        for (bool close : {false, true}) {
+            result_reset_state(); spoken.clear(); members.end_count = 0;
+            d_points(&menu, nullptr); tick(); spoken.clear(); forced[n - 1](&members, nullptr);
+            if (close) d_close(&menu, nullptr); else d_items(&menu, nullptr);
+            tick(); expect(!contains(L"EXP tally complete"), "close or next phase cancels deferred tally acknowledgement");
+        }
     }
+    game_id = game::Id::FF3;
     // A later native phase invalidates old pending reads.
     result_reset_state(); spoken.clear(); d_points(&menu, nullptr); d_items(&menu, nullptr); tick();
     expect(!contains(L"EXP obtained"), "phase changes cancel obsolete reads");

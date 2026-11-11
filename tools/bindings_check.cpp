@@ -56,7 +56,7 @@ int main(){
     expect(b::set(route,-1,0,conflict),"command can be unbound");fixture::edges[int(K::F12)]=true;expect(!b::pressed(route),"unbound command never dispatches");
     b::reset(route);fixture::neutral();fixture::edges[int(K::P)]=true;expect(b::pressed(route),"individual reset restores its saved default");
     fixture::keymap=1;fixture::edges[int(K::Backslash)]=true;expect(!b::pressed(route)&&b::pressed(brackets),"Brackets layout remains available after remapping Letters");fixture::keymap=0;fixture::neutral();
-    b::context(input::Context::Field);b::set(route,int(K::F14),0,conflict);fixture::keys[int(K::F14)]=true;expect(b::remapped_keyboard_in_use(),"changed keyboard shortcut reserves its native input");fixture::neutral();
+    b::context(input::Context::Field);b::set(route,int(K::F14),0,conflict);fixture::keys[int(K::F14)]=true;b::context(input::Context::Field);expect(b::remapped_keyboard_in_use(),"changed keyboard shortcut reserves its native input");fixture::neutral();
     const int pad=b::add("pad.field.route","Navigate to selected destination",true,-11,b::kLeftTrigger,-1);
     fixture::lt=1;b::begin_frame();expect(b::pad("pad.field.route")&&b::consumed(b::kLeftTrigger),"default LT request owns its physical trigger");fixture::neutral();
     const int mode=b::add("pad.mode.toggle","Toggle mod mode",true,-10,4,-1);
@@ -95,10 +95,26 @@ int main(){
     expect(b::capturing(),"controller capture waits to distinguish a single button from a chord");
     fixture::buttons[1]=true;b::begin_frame();b::update_capture();expect(!b::capturing()&&b::entries()[pad].primary==1&&b::entries()[pad].modifier==9,"controller capture stores held modifier plus second input");fixture::neutral();
     b::set(pad,-1,-1,conflict);
+    const int shared=b::add("key.shared.layout.fixture","Shared layout command",false,1,int(K::F20));
+    expect(b::set(brackets,int(K::F22),0,conflict),"inactive Brackets profile can store its own custom route key");
+    fixture::keymap=0;expect(!b::set(shared,int(K::F22),0,conflict)&&b::entries()[shared].primary==int(K::F20),"shared binding rejects conflict with inactive profile and preserves old key");
+    expect(b::set(route,int(K::F22),0,conflict),"mutually exclusive navigation profiles may reuse a custom key");
+    fixture::neutral();fixture::edges[int(K::F22)]=true;expect(b::pressed(route)&&!b::pressed(brackets),"custom Letters route is selected in Letters profile");fixture::keymap=1;expect(!b::pressed(route)&&b::pressed(brackets),"switching profiles activates only its matching custom route");
+    fixture::neutral();fixture::keymap=0;expect(b::set(route,int(K::F16),2,conflict),"profile test restores prior persisted control chord");
     const auto persisted=fixture::saved;b::catalog().clear();fixture::saved=persisted;
     const int restored=b::add("key.route","Directions",false,1,int(K::P));expect(b::entries()[restored].primary==int(K::F16)&&b::entries()[restored].modifier==2,"per-game settings restore the effective binding after fresh registration");
     const int restored_pad=b::add("pad.field.route","Route",true,-11,b::kLeftTrigger,-1);expect(b::entries()[restored_pad].primary==-1,"unbound controller command persists with no modifier across registration");
     b::reset_all();expect(b::entries()[restored].primary==int(K::P),"reset all restores defaults without changing other settings");
+    fixture::neutral();
+    fixture::saved["Binding.key.2.Battle: displayed party member statistics.-1.Input"]=int(K::Alpha2);
+    const int party=b::add("key.9.Battle: party slot 2 statistics.-1","Battle: party slot 2 statistics",false,int(input::Context::BattleParty),int(K::Period));
+    expect(b::entries()[party].primary==int(K::Period),"retired numeric party overrides cannot restore native2/3 conflicts in the new battle-only scope");
+    fixture::keys[int(K::Period)]=fixture::edges[int(K::Period)]=true;b::battle_party_context(false);
+    expect(!b::pressed(party)&&!b::battle_party_keyboard_in_use(),"party binding and ownership are disabled outside native battle");
+    b::battle_party_context(true);
+    expect(b::pressed(party)&&b::keyboard_in_use(input::Context::Information)&&b::battle_party_keyboard_in_use(),"battle party binding overlays native submenu information without changing that context");
+    b::keyboard_allowed(false);expect(!b::battle_party_keyboard_in_use(),"native text entry retires party physical ownership immediately");b::keyboard_allowed(true);
+    b::battle_party_context(false);fixture::neutral();
     std::vector<std::string> ids;
     for(int i=0;i<240;++i) {ids.push_back("pad.benchmark."+std::to_string(i));b::add(ids.back().c_str(),"Owned fixture command",true,-11,i%b::kPadInputs,-1);}
     const auto started=std::chrono::steady_clock::now();

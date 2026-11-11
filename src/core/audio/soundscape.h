@@ -1,5 +1,6 @@
 #pragma once
 #include "cue_bank.h"
+#include "custom_cues.h"
 #include <memory>
 #include <optional>
 
@@ -28,6 +29,7 @@ struct Options {
     int range=10; float master=1;
     std::array<bool,cues::entity_count> enabled{};
     std::array<float,cues::count> gains{};
+    custom::Options custom;
 };
 struct Emitter {
     uint64_t id=0; cues::Id cue=cues::Id::Event;

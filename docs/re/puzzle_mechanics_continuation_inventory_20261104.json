@@ -1,0 +1,5875 @@
+{
+  "discovery": "Conservative delegated physical/state and direct choice/state supplement;explicit semantic review required.",
+  "baseline_sha256": {
+    "puzzle_mechanics_inventory_20261031.json": "41e2b825720510e15cfbbd80b2fd562f18a50a2237acc5847bf3ae488d23c5bf",
+    "puzzle_mechanics_animation_inventory_20261031.json": "13bf2820c3da9ec730db40ed87d4c108591df33f1a487da7c1a416be5ea31f9c"
+  },
+  "games": {
+    "ff1": {
+      "source_sha256": {
+        "objects": "05496a2fb235d1e3f3287179bb31431c3ab3592f9bb421759814afeefd3f9414",
+        "scripts": "6b815904eb89348a672dd2b5938d279f47a3d30a46d13e18a1cf8864b919e09d",
+        "maps": "dc5cff22226e76f8e86f7631905d62b1ab1979e17b720424be409bc8eeefb6e7",
+        "script_master": "24068845402c5a4ba8dc3e524d4437ea286ad6eae16ca38dea80e6b154950c92",
+        "areas": "a95ee64d716b96b85f7ae4a061f72ab8fc01b83ed1f7d596ee8e15431a1e4dab",
+        "english_names": "da818ed75282c83027aaf56ab2ef3f0735c2685efff52a6add1c7f5c3b62b4d7"
+      },
+      "counts": {
+        "candidates": 0,
+        "identities": 0,
+        "rooms": 0
+      },
+      "candidates": [],
+      "script_facts": {}
+    },
+    "ff2": {
+      "source_sha256": {
+        "objects": "aaf6a22ae23d585dce41d4718e75786fb117b551954eb46daad566ae90086cc3",
+        "scripts": "989a0c1ac921bea8f02fdf564142b2275ee2cce919d728045146c363bc859770",
+        "maps": "654be95c8eededb1cec4707fdb6196e36cc5f78a6b91f2acc27320d270bee8e5",
+        "script_master": "10e9e45da1abd04b70db67d88759de1e82a9d1896d0cd77646139f85637cc966",
+        "areas": "d0f7d8549389632e64353a9abfe5e3e1cc3029249f5036f3d085ed0690bb46be",
+        "english_names": "07042eddd1337531b0838de00b7364f8ebfff88f0d4e914e9a19150afbc63c49"
+      },
+      "counts": {
+        "candidates": 9,
+        "identities": 9,
+        "rooms": 8
+      },
+      "candidates": [
+        {
+          "submap": "Map_20011_2",
+          "maps": [
+            6
+          ],
+          "area_ids": [
+            2
+          ],
+          "area_names_en": [
+            "Altair"
+          ],
+          "entity": 29,
+          "raw": "②ミンウ",
+          "group": "ev_e_0010_m",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            0,
+            9,
+            7
+          ],
+          "action": 2,
+          "script": "sc_e_0152",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20050",
+          "maps": [
+            46
+          ],
+          "area_ids": [
+            4
+          ],
+          "area_names_en": [
+            "Paloom"
+          ],
+          "entity": 39,
+          "raw": "①船乗り",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            25
+          ],
+          "action": 2,
+          "script": "sc_sea_ship_taxi_0001",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20060",
+          "maps": [
+            52
+          ],
+          "area_ids": [
+            5
+          ],
+          "area_names_en": [
+            "Poft"
+          ],
+          "entity": 45,
+          "raw": "②船乗り",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            27,
+            30
+          ],
+          "action": 2,
+          "script": "sc_sea_ship_taxi_0002",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20061_1",
+          "maps": [
+            53
+          ],
+          "area_ids": [
+            5
+          ],
+          "area_names_en": [
+            "Poft"
+          ],
+          "entity": 6,
+          "raw": "⑨飛空艇乗り",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            0,
+            23,
+            10
+          ],
+          "action": 2,
+          "script": "sc_air_ship_taxi_0001",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20150",
+          "maps": [
+            112
+          ],
+          "area_ids": [
+            4
+          ],
+          "area_names_en": [
+            "Paloom"
+          ],
+          "entity": 40,
+          "raw": "①船乗り",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            25
+          ],
+          "action": 2,
+          "script": "sc_sea_ship_taxi_0001",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20160",
+          "maps": [
+            115
+          ],
+          "area_ids": [
+            5
+          ],
+          "area_names_en": [
+            "Poft"
+          ],
+          "entity": 46,
+          "raw": "②船乗り",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            27,
+            30
+          ],
+          "action": 2,
+          "script": "sc_sea_ship_taxi_0002",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20161_1",
+          "maps": [
+            116
+          ],
+          "area_ids": [
+            5
+          ],
+          "area_names_en": [
+            "Poft"
+          ],
+          "entity": 8,
+          "raw": "①飛空艇乗り",
+          "group": "ev_e_0020",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            0,
+            23,
+            10
+          ],
+          "action": 2,
+          "script": "sc_air_ship_taxi_0001",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20161_1",
+          "maps": [
+            116
+          ],
+          "area_ids": [
+            5
+          ],
+          "area_names_en": [
+            "Poft"
+          ],
+          "entity": 8,
+          "raw": "①飛空艇乗り",
+          "group": "ev_e_0040",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            0,
+            23,
+            10
+          ],
+          "action": 2,
+          "script": "sc_air_ship_taxi_0001",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30111_3",
+          "maps": [
+            230
+          ],
+          "area_ids": [
+            26
+          ],
+          "area_names_en": [
+            "Leviathan"
+          ],
+          "entity": 3,
+          "raw": "sc_e_0073",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            0,
+            13,
+            19
+          ],
+          "action": 2,
+          "script": "sc_e_0073",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        }
+      ],
+      "script_facts": {
+        "Map_20011_2/sc_e_0010": {
+          "sha256": "34f00e10708a7b876b4521c52701c383ceae23c8dd1a74f9ace05d7bf9eee9b5",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20011_2/sc_e_0152": {
+          "sha256": "69610d17bb66b0821c5db48c19b3beb9a5042d6c7dbfb6af53ff3bd6fd2f6229",
+          "calls": [
+            "sc_e_0010"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20050/sc_sea_ship_taxi_0001": {
+          "sha256": "c914d3bc4e38f264f337b52676b2d56f27c6c6aa7646cdc412696030eb38349b",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20060/sc_sea_ship_taxi_0002": {
+          "sha256": "330c82daff00563ba3659f2c64edb1bfb721ec6b0dd6e4e7c05470afc3999c0c",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20061_1/sc_air_ship_taxi_0001": {
+          "sha256": "2fa470b1f66d4fff9fe767419cd129bb34f0d46a6677d5e683ec5303cbd81081",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 2
+        },
+        "Map_20150/sc_sea_ship_taxi_0001": {
+          "sha256": "c914d3bc4e38f264f337b52676b2d56f27c6c6aa7646cdc412696030eb38349b",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20160/sc_sea_ship_taxi_0002": {
+          "sha256": "330c82daff00563ba3659f2c64edb1bfb721ec6b0dd6e4e7c05470afc3999c0c",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20161_1/sc_air_ship_taxi_0001": {
+          "sha256": "2fa470b1f66d4fff9fe767419cd129bb34f0d46a6677d5e683ec5303cbd81081",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 2
+        },
+        "Map_30111_3/sc_e_0073": {
+          "sha256": "3260ecc26d5cf4f56f6242fceb6a25341347a66b630054ad2bc2f68ebf33932a",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 1
+        }
+      }
+    },
+    "ff3": {
+      "source_sha256": {
+        "objects": "c4e55d91a7519e18eecb970cd2a7da7266e9c0ffe88a3e362e4b506bf49ecd45",
+        "scripts": "933c9ae51b97d68410f2a4bdbf74786f850b80f58971daf04418ed7009336c02",
+        "maps": "c02a2bfaca1ec025c6e6b2dc88059f68c73397e821c3e5b6b35c2e4d1c6a3d01",
+        "script_master": "544f96e352e0cff39f55a86c34d7fc4c1d3ce771931c9b765789da46517347a6",
+        "areas": "780f15910a9c52ff837c919f6f9929ced3f99ee1f7f15dc9d9924f5fee9fcfcb",
+        "english_names": "7b3979738abc3130c26854f1793972d98c5180f5a6f67ff8be3c98fb5c2d8d80"
+      },
+      "counts": {
+        "candidates": 1,
+        "identities": 1,
+        "rooms": 1
+      },
+      "candidates": [
+        {
+          "submap": "Map_30241_8",
+          "maps": [
+            298
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Doga's Grotto"
+          ],
+          "entity": 5,
+          "raw": "エウレカの鍵、シルクスの鍵を入手",
+          "group": "ev_e_0097",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            7
+          ],
+          "action": 2,
+          "script": "sc_e_0087",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        }
+      ],
+      "script_facts": {
+        "Map_30241_8/sc_e_0327": {
+          "sha256": "57cc0abe77fde392757c27d4e70429a6854de3c88c721234cf0680180dcd8890",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30241_8/sc_e_0087": {
+          "sha256": "236d7c3cae55f93c9ffc0694ab1ca9b62d939aea32b9044b0faddbf690c17d49",
+          "calls": [
+            "sc_e_0327"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        }
+      }
+    },
+    "ff4": {
+      "source_sha256": {
+        "objects": "9581c3295f405afc639843b64a74cd73855f8df85bec239ee3e3f0df4caa2c26",
+        "scripts": "298676492a7b109e5b1b42dea5f87dec06a3bb800378e0ef50ab0e2c74e925cb",
+        "maps": "8e7a4f944f10197fd5ee2c6097d8750b9477446be7abd813251f1d499dc862bb",
+        "script_master": "b2a2ba529b0e2c6658ec3ee4b070454d38bf91c8c275423fa8de75c541f613a5",
+        "areas": "907142f0c07d4dcea764767b7afceddc126882967e4a3e3acff0e32837d61e0c",
+        "english_names": "7869f0ebd8fe7726dc76391e84e5b5755f086f24143ccb8536507f63057c0fde"
+      },
+      "counts": {
+        "candidates": 1,
+        "identities": 1,
+        "rooms": 1
+      },
+      "candidates": [
+        {
+          "submap": "Map_20051_9",
+          "maps": [
+            53
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Fabul Castle"
+          ],
+          "entity": 7,
+          "raw": "ヤンの奥さん",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            0,
+            12,
+            5
+          ],
+          "action": 2,
+          "script": "sc_npc_20051_9_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        }
+      ],
+      "script_facts": {
+        "Map_20051_9/sc_npc_20051_9_1": {
+          "sha256": "1261969b019e1c32b06d51c1977fbe7ce3878d7028870646257c8b5d97fbdfbc",
+          "calls": [
+            "sc_e_0111",
+            "sc_e_0113"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20051_9/sc_e_0111": {
+          "sha256": "61d0f63b58c06c9017371d248a2a1fd397f4d25be67b0c3f2f9d37f0a184db41",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20051_9/sc_e_0113": {
+          "sha256": "0dcd6bb5bda9cf572823ca456f376aa9888ea05bd57c544c2f522cf7503e7b2d",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        }
+      }
+    },
+    "ff5": {
+      "source_sha256": {
+        "objects": "d0bedfd68c7aafbe6cf60d8c44ec5d0f3e5ff1f76e7ec73fc076569fd713930c",
+        "scripts": "56efc5afcbcb652253551ac04de01d20a32fd19b6b9b9218a5aaf105abb48fef",
+        "maps": "4d9f99c7a2d2ca39939173e73fbc24ebba92c837fe681084430c9b49400e7d94",
+        "script_master": "ea0f0a9f58480baf861dd812409a79009bdb91418547993b878e1b4e29ead5c0",
+        "areas": "c91cb0f5e0dc64d9acdadf3e9ee7a7a62dd8bd93eaf4fe2e3cf220915f365894",
+        "english_names": "75fc08ecbad4e7f9431a3ee6a19a01965ca11380c9667232109d1b9666a4f76f"
+      },
+      "counts": {
+        "candidates": 60,
+        "identities": 60,
+        "rooms": 7
+      },
+      "candidates": [
+        {
+          "submap": "Map_20051_2",
+          "maps": [
+            73
+          ],
+          "area_ids": [
+            17
+          ],
+          "area_names_en": [
+            "Castle Tycoon"
+          ],
+          "entity": 34,
+          "raw": "屋外へ",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            26
+          ],
+          "action": 2,
+          "script": "sc_20051_2_to_20051_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20090",
+          "maps": [
+            118
+          ],
+          "area_ids": [
+            29
+          ],
+          "area_names_en": [
+            "Istory"
+          ],
+          "entity": 22,
+          "raw": "吟遊詩人",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            34,
+            17
+          ],
+          "action": 2,
+          "script": "sc_npc_20090_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 21,
+          "raw": "sc_e_0382_1:「禁断の書」格納",
+          "group": "ev_e_0382",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0382",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 35,
+          "raw": "sc_e_0382_1:「禁断の書」格納",
+          "group": "ev_e_0382",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            15,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0382",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 36,
+          "raw": "sc_e_0382_1:「禁断の書」格納",
+          "group": "ev_e_0382",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            16,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0382",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 22,
+          "raw": "sc_e_0384:「魔物大辞典」格納",
+          "group": "ev_e_0384",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            22,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0384",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 50,
+          "raw": "sc_e_0384:「魔物大辞典」格納",
+          "group": "ev_e_0384",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            23,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0384",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 23,
+          "raw": "sc_e_0386:「ロンカの秘密」格納",
+          "group": "ev_e_0386",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            15,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0386",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 51,
+          "raw": "sc_e_0386:「ロンカの秘密」格納",
+          "group": "ev_e_0386",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0386",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 52,
+          "raw": "sc_e_0386:「ロンカの秘密」格納",
+          "group": "ev_e_0386",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            16,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0386",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 68,
+          "raw": "ア行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0387_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 69,
+          "raw": "サ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            18,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0387_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 70,
+          "raw": "サ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            19,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0387_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 71,
+          "raw": "サ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            20,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0387_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 72,
+          "raw": "タ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 73,
+          "raw": "タ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 74,
+          "raw": "ナ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 75,
+          "raw": "ナ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            15,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 76,
+          "raw": "ナ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            16,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 77,
+          "raw": "ハ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            18,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_6",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 78,
+          "raw": "ハ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            19,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_6",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 79,
+          "raw": "ハ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            20,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0387_6",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 80,
+          "raw": "ヤ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0387_7",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 81,
+          "raw": "ヤ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0387_7",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 82,
+          "raw": "ワ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            18,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0387_8",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 83,
+          "raw": "ワ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            19,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0387_8",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_7",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            52
+          ],
+          "area_names_en": [
+            "Surgate Castle"
+          ],
+          "entity": 84,
+          "raw": "ワ行",
+          "group": "ev_e_0387",
+          "type": "Entity",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            20,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0387_8",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20180",
+          "maps": [
+            161
+          ],
+          "area_ids": [
+            49
+          ],
+          "area_names_en": [
+            "Quelb"
+          ],
+          "entity": 55,
+          "raw": "老人（紫）",
+          "group": "ev_e_0498",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            -1,
+            0
+          ],
+          "action": 2,
+          "script": "sc_e_0379",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 13,
+          "raw": "サンドウォームと戦闘:流砂1",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            51,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0060_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 14,
+          "raw": "サンドウォームと戦闘:流砂2",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            55,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0060_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 15,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 16,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 17,
+          "raw": "サンドウォームと戦闘:流砂5",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            51,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_6",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 828,
+          "raw": "サンドウォームと戦闘:流砂6",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            55,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_8",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 829,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 20,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 21,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 22,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 23,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 24,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 25,
+          "raw": "サンドウォームと戦闘:流砂6",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            54,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_8",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 26,
+          "raw": "サンドウォームと戦闘:流砂5",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            52,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_6",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 502,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 503,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 504,
+          "raw": "サンドウォームと戦闘:流砂3",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            50,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0060_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30170",
+          "maps": [
+            286
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Desert of Shifting Sands"
+          ],
+          "entity": 505,
+          "raw": "サンドウォームと戦闘:流砂4",
+          "group": "ev_e_0060",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            56,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0060_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 26,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 27,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            6,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 28,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            7,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 29,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            7,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 30,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            7,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 31,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            6,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 32,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_13",
+          "maps": [
+            397
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Castle Exdeath"
+          ],
+          "entity": 33,
+          "raw": "床を止める",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0266_10",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 15,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            9,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 16,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            10,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 17,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            11,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 33,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            9,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 34,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            10,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288_4",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30461_1",
+          "maps": [
+            411
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Pyramid of Moore"
+          ],
+          "entity": 35,
+          "raw": "sc_e_0288:ダメージ床の配置替え(1F)",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            11,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0288_5",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        }
+      ],
+      "script_facts": {
+        "Map_20051_2/sc_20051_2_to_20051_1": {
+          "sha256": "9a677738aa488e1c708481adfc5931ee5b78b944cd45aa789433d0a138ba065d",
+          "calls": [
+            "sc_e_0128"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20051_2/sc_e_0128": {
+          "sha256": "5b4980c6bfc1ef75b643c67ebed1af5e3266489f369428626d425b485cf4054f",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20090/sc_npc_20090_2": {
+          "sha256": "cd02ab7b5443d3dd0e4fa7c495e464cc4aa9202cf04a01727f8d6325a48f1ce7",
+          "calls": [
+            "sc_e_0196"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20090/sc_e_0196": {
+          "sha256": "f0c142586a386ca31325ed0503b71a992f8d8d4b55422dd2c658f870d537f9d2",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20171_7/sc_e_0382": {
+          "sha256": "2f8655bdcc317fe5375126f2938ff3352a7e0f6cabe941816c4b9becbcf42d60",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 2
+        },
+        "Map_20171_7/sc_e_0384": {
+          "sha256": "19b5f4908489a82c67b2c9cddb9dccc9d62a9237fa72230fa876a3489563c238",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 2
+        },
+        "Map_20171_7/sc_e_0386": {
+          "sha256": "78ba087e28fb0e829c719c4a62497315e840a3c09fe55e51535803aeb7359627",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 2
+        },
+        "Map_20171_7/sc_e_0387_2": {
+          "sha256": "58e6a1829120e0377b80c77ab8e58fab0133c656be9e366072a2cb181efd8c23",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_3": {
+          "sha256": "aa7de277fff2c719961445e4c5cb68a388dbdfe9380a7a67a7d0cad8f26e10dc",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_4": {
+          "sha256": "af0600d46557026257e92291179a1cf86d1d7fc5bfda5be925b993b8a439992a",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_5": {
+          "sha256": "8697c38e62ead880932b46c43f51dc6025fcf15c47530d416b15e9b14e9bd213",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_6": {
+          "sha256": "7b92c37051555d308005dfe6121de0cd08885a67502c6ed6f0f1db379714fc31",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_7": {
+          "sha256": "52c802e87ec0fdd93fae87f3de810be0f54c1fed9536195b1e79595f058166cf",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_7/sc_e_0387_8": {
+          "sha256": "bc1172a832c46071ffcaafdfc0d6fabcc88f90d6496160fdedb6bbc422ec0266",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20180/sc_e_0379": {
+          "sha256": "905cde12504abec26d25f2274c6752d6dce6298701016cb962ad742d3fd1a2b9",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30170/sc_e_0060_4": {
+          "sha256": "5c7c8ea996caff98ff575620e53f5e592b37380f68cd91296fb3c50948ea68f6",
+          "calls": [
+            "sc_e_0060_6"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060_2": {
+          "sha256": "26233692dc126a70ff2d26a2e8e6cd83d6ebc15ee218589c951759d439f77bee",
+          "calls": [
+            "sc_e_0060_4"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060_6": {
+          "sha256": "7813c31f4053d9fd6dd10f915df66251a51e66cc22806ced12be2dc4785e1ee3",
+          "calls": [
+            "sc_e_0060"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060": {
+          "sha256": "2bc17502a2dad8fbd708b3438221700296eebea7a0592983d06e911cc0f46ba4",
+          "calls": [
+            "sc_e_0060_7"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060_7": {
+          "sha256": "515efa68d98eb96b96589c98d986e5b00612797f96e89f15f244266a4b722cd4",
+          "calls": [],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_30170/sc_e_0060_3": {
+          "sha256": "5c361416fb834577d8bc0728ea0870478aacc0e82c2fa14681c5e6b5c6bf8c47",
+          "calls": [
+            "sc_e_0060_5"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060_8": {
+          "sha256": "643d048b288635b43a656dfdcafb173439b6799843d868609a1e21cf9eae6db7",
+          "calls": [
+            "sc_e_0060"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30170/sc_e_0060_5": {
+          "sha256": "5caa6d51c9e5c5b9205887df150cf676de96668fdb4916179f58b7c85c047977",
+          "calls": [
+            "sc_e_0060_8"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_9": {
+          "sha256": "09728f8fd24f8dec1f5e7a79dcbe53a3dbb937c7f8e41638f7ba9fe4589cdc35",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_5": {
+          "sha256": "44b76b7cc367acf19ae85b91e6819cd745df1d83d3381b5a450a62ebf2f042d9",
+          "calls": [
+            "sc_e_0266_12"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_8": {
+          "sha256": "75f54bf4ea8eea1128f91b6c723dcf5d10c777021fcc963219acd2d231547ce4",
+          "calls": [
+            "sc_e_0266_12"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_12": {
+          "sha256": "0d2d5ca1b55036a755cbd4cbc3debd99142fc90b477ffaab8ab5bdfaab773155",
+          "calls": [],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_1": {
+          "sha256": "b9949b7d7ca99f41b18a2822eab1678ca612225ae971a1fda1271ec858d4403e",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_10": {
+          "sha256": "16733085a78ec7c365248ec76a77f7f5973020dbd94a051866460006b7c2bfe9",
+          "calls": [
+            "sc_e_0266_1",
+            "sc_e_0266_2",
+            "sc_e_0266_3",
+            "sc_e_0266_4",
+            "sc_e_0266_5",
+            "sc_e_0266_6",
+            "sc_e_0266_7",
+            "sc_e_0266_8",
+            "sc_e_0266_9"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_6": {
+          "sha256": "ca63b93583b9287802668699da7e54d31441d2cb252d6f97ac06925cc147e986",
+          "calls": [
+            "sc_e_0266_12"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_4": {
+          "sha256": "b7fd76406b07db20a149e7eadac3b2622bdfbc9a34bca7b08e770d812ebf14be",
+          "calls": [
+            "sc_e_0266_12"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_3": {
+          "sha256": "151be5963d8877c6638b504c13429c3d3aa2126ad48e650658e2d8634b68e9e9",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_7": {
+          "sha256": "82f8df627397751c23a0216074893c89f5ac8fd8c2b8592f77296cbf0ef15d8e",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_13/sc_e_0266_2": {
+          "sha256": "a51268752b4a2ec3217c6f87ca1802945133d49d07d5287216916ccd99ec0eb7",
+          "calls": [
+            "sc_e_0266_12"
+          ],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_needle": {
+          "sha256": "4279392592bff662bae02e9fb41aa541b272747e5495484c13807c558337fd93",
+          "calls": [],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288": {
+          "sha256": "87a3d682995de5eddcb1106b7ad7c983b8ea53bac2fabc3e079f7389e9cb4470",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_1": {
+          "sha256": "fe5c26375b634b7798ea1b473f0c3f003a4bf5db6bcbf55a6614c041137d277d",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_2": {
+          "sha256": "cfd40912424e8711ba95f31dbddf8e044e9a8a6cca3f07c9ef094a92f82375e1",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_3": {
+          "sha256": "8f49c2ce97512fcca32030fffac149423ab8e01044aa2bdeac01c96ce8c178e0",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_4": {
+          "sha256": "91f4458cff8a0fba8deebb5244a7280ed3b85b004e02072e41c912beb9a5fcaa",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30461_1/sc_e_0288_5": {
+          "sha256": "0ddf537b43e2ec242afcebfad84eaa8ec6945f64cbb067659919b383be99e8e1",
+          "calls": [
+            "sc_e_0288_needle"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        }
+      }
+    },
+    "ff6": {
+      "source_sha256": {
+        "objects": "17f6a180291875ebad43dd0e375a37493bee68f9d8077a8e3538353006abed23",
+        "scripts": "7b989e8be83adfecbd038a62e9c1b1ce9055d1f983b4803d2a358e6e6794aecb",
+        "maps": "1dedbff32eef5025db9a20e3180464e78d9be854c7acb9f91ebd4f3b9373fe36",
+        "script_master": "f28e965a31655aa284f7802c90f0af70b3ca10ca4c36746eea76e46dd0919e71",
+        "areas": "25cf96f80f0a1e4e2f1984d5482399bb6c562c3973577ca3ca226f00b4696973",
+        "english_names": "9fea81a0b457d762762e0d7e29e4ccf4a081e6d97d34d8563408522d1ab5a01b"
+      },
+      "counts": {
+        "candidates": 88,
+        "identities": 88,
+        "rooms": 67
+      },
+      "candidates": [
+        {
+          "submap": "Map_20011_2",
+          "maps": [
+            5
+          ],
+          "area_ids": [
+            7
+          ],
+          "area_names_en": [
+            "Narshe"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20030",
+          "maps": [
+            19
+          ],
+          "area_ids": [
+            7
+          ],
+          "area_names_en": [
+            "Narshe"
+          ],
+          "entity": 72,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0250",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            25,
+            5
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20030",
+          "maps": [
+            19
+          ],
+          "area_ids": [
+            7
+          ],
+          "area_names_en": [
+            "Narshe"
+          ],
+          "entity": 68,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0703",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            25,
+            5
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20071_1",
+          "maps": [
+            39
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 6,
+          "raw": "NPC1商人",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            4,
+            16
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20071_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20071_10",
+          "maps": [
+            48
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 19,
+          "raw": "sc_e_0077:服を脱ぐかどうか選択",
+          "group": "ev_e_0077",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            16,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0077",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20071_13",
+          "maps": [
+            51
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20071_26",
+          "maps": [
+            64
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20081_5",
+          "maps": [
+            71
+          ],
+          "area_ids": [
+            14
+          ],
+          "area_names_en": [
+            "The Returners' Hideout"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            8
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20111_1",
+          "maps": [
+            85
+          ],
+          "area_ids": [
+            24
+          ],
+          "area_names_en": [
+            "Mobliz"
+          ],
+          "entity": 9,
+          "raw": "sc_e_0226:NPC1商人",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            21,
+            13
+          ],
+          "action": 2,
+          "script": "sc_sty_20111_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20121_2",
+          "maps": [
+            94
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 0,
+          "raw": "NPC1商人",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            4,
+            16
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20121_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20151_1",
+          "maps": [
+            106
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Jidoor"
+          ],
+          "entity": 6,
+          "raw": "NPC1商人",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            5,
+            17
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20151_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 20,
+          "raw": "ガウ",
+          "group": "ev_e_0414",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            18,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0414",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 19,
+          "raw": "カイエン",
+          "group": "ev_e_0415",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            18,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0415",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 18,
+          "raw": "エドガー",
+          "group": "ev_e_0416",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            13,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0416",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 17,
+          "raw": "マッシュ",
+          "group": "ev_e_0417",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            12,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0417",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 16,
+          "raw": "セッツァー",
+          "group": "ev_e_0418",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            14,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0418",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 15,
+          "raw": "ロック",
+          "group": "ev_e_0419",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            21,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0419",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20171_2",
+          "maps": [
+            121
+          ],
+          "area_ids": [
+            3
+          ],
+          "area_names_en": [
+            "Blackjack"
+          ],
+          "entity": 14,
+          "raw": "ティナ",
+          "group": "ev_e_0420",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            23,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0420",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20180",
+          "maps": [
+            125
+          ],
+          "area_ids": [
+            53
+          ],
+          "area_names_en": [
+            "Albrook"
+          ],
+          "entity": 75,
+          "raw": "阻まれる右",
+          "group": "ev_e_0426",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            45,
+            25
+          ],
+          "action": 2,
+          "script": "sc_e_0426_0",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20190",
+          "maps": [
+            132
+          ],
+          "area_ids": [
+            48
+          ],
+          "area_names_en": [
+            "Tzen"
+          ],
+          "entity": 58,
+          "raw": "NPC⑫:ならず者",
+          "group": "ev_e_0427",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            32,
+            3
+          ],
+          "action": 2,
+          "script": "sc_e_0427",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20210",
+          "maps": [
+            143
+          ],
+          "area_ids": [
+            40
+          ],
+          "area_names_en": [
+            "Vector"
+          ],
+          "entity": 81,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0405",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            58,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20230",
+          "maps": [
+            155
+          ],
+          "area_ids": [
+            37
+          ],
+          "area_names_en": [
+            "Esper World"
+          ],
+          "entity": 33,
+          "raw": "①獣人:ev_e_406",
+          "group": "ev_e_0406",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            32,
+            17
+          ],
+          "action": 2,
+          "script": "sc_npc_20230_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20230",
+          "maps": [
+            155
+          ],
+          "area_ids": [
+            37
+          ],
+          "area_names_en": [
+            "Esper World"
+          ],
+          "entity": 3,
+          "raw": "①獣人:ev_e_406_1",
+          "group": "ev_e_0406_1",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            32,
+            11
+          ],
+          "action": 2,
+          "script": "sc_npc_20230_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20231_5",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            37
+          ],
+          "area_names_en": [
+            "Esper World"
+          ],
+          "entity": 7,
+          "raw": "②幻獣（長老）",
+          "group": "ev_e_0405",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            21
+          ],
+          "action": 2,
+          "script": "sc_npc_20231_5_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20231_5",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            37
+          ],
+          "area_names_en": [
+            "Esper World"
+          ],
+          "entity": 21,
+          "raw": "長老（正面向き）",
+          "group": "ev_e_0405",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            13,
+            22
+          ],
+          "action": 2,
+          "script": "sc_npc_20231_5_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20231_5",
+          "maps": [
+            160
+          ],
+          "area_ids": [
+            37
+          ],
+          "area_names_en": [
+            "Esper World"
+          ],
+          "entity": 6,
+          "raw": "③幻獣（妖精）",
+          "group": "ev_e_0406",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            19,
+            16
+          ],
+          "action": 2,
+          "script": "sc_npc_20231_5_3",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20271_5",
+          "maps": [
+            185
+          ],
+          "area_ids": [
+            55
+          ],
+          "area_names_en": [
+            "Thamasa"
+          ],
+          "entity": 3,
+          "raw": "ストラゴス",
+          "group": "ev_e_0521",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            8,
+            17
+          ],
+          "action": 2,
+          "script": "sc_npc_20271_5_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20291_1",
+          "maps": [
+            191
+          ],
+          "area_ids": [
+            65
+          ],
+          "area_names_en": [
+            "Solitary Island"
+          ],
+          "entity": 7,
+          "raw": "シド:ev_e_0615(ベットへ)",
+          "group": "ev_e_0615",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0616",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20330",
+          "maps": [
+            201
+          ],
+          "area_ids": [
+            48
+          ],
+          "area_names_en": [
+            "Tzen"
+          ],
+          "entity": 1,
+          "raw": "⑩ならず者（魔石購入）",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            34,
+            3
+          ],
+          "action": 2,
+          "script": "sc_e_0640",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20351_2",
+          "maps": [
+            216
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 0,
+          "raw": "①商人（チョコボ屋）",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            4,
+            16
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20351_2",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20351_3",
+          "maps": [
+            217
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 1,
+          "raw": "ならず者④",
+          "group": "ev_e_0653",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            4,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0655",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20351_3",
+          "maps": [
+            217
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 2,
+          "raw": "ならず者③",
+          "group": "ev_e_0653",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            8,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0654",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20351_3",
+          "maps": [
+            217
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 3,
+          "raw": "ならず者②",
+          "group": "ev_e_0653",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            5,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0653",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20351_3",
+          "maps": [
+            217
+          ],
+          "area_ids": [
+            30
+          ],
+          "area_names_en": [
+            "Nikeah"
+          ],
+          "entity": 4,
+          "raw": "ならず者①",
+          "group": "ev_e_0653",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0656",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20361_1",
+          "maps": [
+            220
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 9,
+          "raw": "チョコボ屋NPC",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            4,
+            16
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20361_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20361_13",
+          "maps": [
+            232
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20361_26",
+          "maps": [
+            245
+          ],
+          "area_ids": [
+            8
+          ],
+          "area_names_en": [
+            "South Figaro"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20371_2",
+          "maps": [
+            249
+          ],
+          "area_ids": [
+            11
+          ],
+          "area_names_en": [
+            "Figaro Castle"
+          ],
+          "entity": 5,
+          "raw": "爺さん",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            9,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0674",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20431_1",
+          "maps": [
+            283
+          ],
+          "area_ids": [
+            35
+          ],
+          "area_names_en": [
+            "Jidoor"
+          ],
+          "entity": 5,
+          "raw": "チョコボ屋",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            4,
+            17
+          ],
+          "action": 2,
+          "script": "sc_chocobo_20431_1",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_20471_1",
+          "maps": [
+            314
+          ],
+          "area_ids": [
+            16
+          ],
+          "area_names_en": [
+            "Cabin"
+          ],
+          "entity": 3,
+          "raw": "爺さん（ガウの父親）",
+          "group": "entity_default",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            2,
+            8,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0959",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_1",
+          "maps": [
+            317,
+            637
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 22,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            36,
+            43
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 18,
+          "raw": "モンスター1:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            17,
+            31
+          ],
+          "action": 9,
+          "script": "sc_e_1081",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 19,
+          "raw": "モンスター2:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            31
+          ],
+          "action": 9,
+          "script": "sc_e_1082",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 20,
+          "raw": "モンスター3:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            34
+          ],
+          "action": 9,
+          "script": "sc_e_1083",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 21,
+          "raw": "モンスター4:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            37
+          ],
+          "action": 9,
+          "script": "sc_e_1084",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 22,
+          "raw": "モンスター5:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            38
+          ],
+          "action": 9,
+          "script": "sc_e_1085",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30011_2",
+          "maps": [
+            318
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 23,
+          "raw": "モンスター6:防衛戦用",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            41
+          ],
+          "action": 9,
+          "script": "sc_e_1086",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30021_1",
+          "maps": [
+            323,
+            632
+          ],
+          "area_ids": [
+            9
+          ],
+          "area_names_en": [
+            "Narshe Mines"
+          ],
+          "entity": 15,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            25
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30041_6",
+          "maps": [
+            340
+          ],
+          "area_ids": [
+            13
+          ],
+          "area_names_en": [
+            "Mt. Kolts"
+          ],
+          "entity": 6,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            10,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30380",
+          "maps": [
+            345
+          ],
+          "area_ids": [
+            15
+          ],
+          "area_names_en": [
+            "Lethe River"
+          ],
+          "entity": 12,
+          "raw": "sc_e_0063(sc_e_0268を統合)",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            31,
+            51
+          ],
+          "action": 2,
+          "script": "sc_e_0063",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30381_1",
+          "maps": [
+            346
+          ],
+          "area_ids": [
+            15
+          ],
+          "area_names_en": [
+            "Lethe River"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30391_1",
+          "maps": [
+            348
+          ],
+          "area_ids": [
+            15
+          ],
+          "area_names_en": [
+            "Lethe River"
+          ],
+          "entity": 9,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30410",
+          "maps": [
+            350
+          ],
+          "area_ids": [
+            17
+          ],
+          "area_names_en": [
+            "Imperial Camp"
+          ],
+          "entity": 39,
+          "raw": "sc_e_0118_0:ケフカは部下に盾にして逃げる",
+          "group": "ev_e_0118",
+          "type": "Event",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            17,
+            31
+          ],
+          "action": 2,
+          "script": "sc_e_0118_0",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_14",
+          "maps": [
+            370
+          ],
+          "area_ids": [
+            22
+          ],
+          "area_names_en": [
+            "Phantom Train"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            8
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_3",
+          "maps": [
+            359
+          ],
+          "area_ids": [
+            22
+          ],
+          "area_names_en": [
+            "Phantom Train"
+          ],
+          "entity": 9,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            5,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30441_6",
+          "maps": [
+            362
+          ],
+          "area_ids": [
+            22
+          ],
+          "area_names_en": [
+            "Phantom Train"
+          ],
+          "entity": 24,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            27,
+            9
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30521_3",
+          "maps": [
+            398
+          ],
+          "area_ids": [
+            43
+          ],
+          "area_names_en": [
+            "Magitek Factory"
+          ],
+          "entity": 13,
+          "raw": "イフリート",
+          "group": "ev_e_0394",
+          "type": "NPC",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0394",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30521_4",
+          "maps": [
+            399
+          ],
+          "area_ids": [
+            43
+          ],
+          "area_names_en": [
+            "Magitek Factory"
+          ],
+          "entity": 4,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            8,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30521_9",
+          "maps": [
+            404
+          ],
+          "area_ids": [
+            44
+          ],
+          "area_names_en": [
+            "Magitek Research Facility"
+          ],
+          "entity": 6,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30531_5",
+          "maps": [
+            409
+          ],
+          "area_ids": [
+            63
+          ],
+          "area_names_en": [
+            "Cave to the Sealed Gate"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            9,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30561_3",
+          "maps": [
+            426
+          ],
+          "area_ids": [
+            60
+          ],
+          "area_names_en": [
+            "Esper Cave"
+          ],
+          "entity": 4,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30600",
+          "maps": [
+            431,
+            631
+          ],
+          "area_ids": [
+            58
+          ],
+          "area_names_en": [
+            "Floating Continent"
+          ],
+          "entity": 166,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            7,
+            20
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30601_1",
+          "maps": [
+            432
+          ],
+          "area_ids": [
+            58
+          ],
+          "area_names_en": [
+            "Floating Continent"
+          ],
+          "entity": 2,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            0,
+            9,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30631_1",
+          "maps": [
+            442
+          ],
+          "area_ids": [
+            36
+          ],
+          "area_names_en": [
+            "Owzer's Mansion"
+          ],
+          "entity": 20,
+          "raw": "日記",
+          "group": "ev_e_0757",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            23,
+            15
+          ],
+          "action": 2,
+          "script": "sc_e_0757",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30631_4",
+          "maps": [
+            445
+          ],
+          "area_ids": [
+            36
+          ],
+          "area_names_en": [
+            "Owzer's Mansion"
+          ],
+          "entity": 64,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            22,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30651_10",
+          "maps": [
+            465
+          ],
+          "area_ids": [
+            47
+          ],
+          "area_names_en": [
+            "Darill's Tomb"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30671_1",
+          "maps": [
+            472
+          ],
+          "area_ids": [
+            31
+          ],
+          "area_names_en": [
+            "Mt. Zozo"
+          ],
+          "entity": 9,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            9,
+            18
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30761_5",
+          "maps": [
+            492
+          ],
+          "area_ids": [
+            57
+          ],
+          "area_names_en": [
+            "Cave on the Veldt"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            13,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30781_1",
+          "maps": [
+            498
+          ],
+          "area_ids": [
+            50
+          ],
+          "area_names_en": [
+            "Phoenix Cave"
+          ],
+          "entity": 143,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            37,
+            28
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30781_2",
+          "maps": [
+            499
+          ],
+          "area_ids": [
+            50
+          ],
+          "area_names_en": [
+            "Phoenix Cave"
+          ],
+          "entity": 40,
+          "raw": "ファルコン号へ移動",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            47
+          ],
+          "action": 2,
+          "script": "sc_e_0831",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30781_2",
+          "maps": [
+            499
+          ],
+          "area_ids": [
+            50
+          ],
+          "area_names_en": [
+            "Phoenix Cave"
+          ],
+          "entity": 93,
+          "raw": "ファルコン号へ移動",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            44,
+            25
+          ],
+          "action": 2,
+          "script": "sc_e_0831",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30791_4",
+          "maps": [
+            503
+          ],
+          "area_ids": [
+            45
+          ],
+          "area_names_en": [
+            "Zone Eater's Belly"
+          ],
+          "entity": 6,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            9,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30801_4",
+          "maps": [
+            511
+          ],
+          "area_ids": [
+            66
+          ],
+          "area_names_en": [
+            "Cave to the Ancient Castle"
+          ],
+          "entity": 6,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            15,
+            17
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30821_1",
+          "maps": [
+            520
+          ],
+          "area_ids": [
+            51
+          ],
+          "area_names_en": [
+            "Dreamscape"
+          ],
+          "entity": 59,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            25,
+            20
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30831_1",
+          "maps": [
+            523
+          ],
+          "area_ids": [
+            23
+          ],
+          "area_names_en": [
+            "Dreamscape - Phantom Train"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            31,
+            8
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30831_4",
+          "maps": [
+            526
+          ],
+          "area_ids": [
+            23
+          ],
+          "area_names_en": [
+            "Dreamscape - Phantom Train"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            7,
+            8
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30851_4",
+          "maps": [
+            530
+          ],
+          "area_ids": [
+            19
+          ],
+          "area_names_en": [
+            "Dreamscape - Doma Castle"
+          ],
+          "entity": 10,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0935_1",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            2,
+            11,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30861_1",
+          "maps": [
+            539
+          ],
+          "area_ids": [
+            67
+          ],
+          "area_names_en": [
+            "Ebot's Rock"
+          ],
+          "entity": 8,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            9,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30870",
+          "maps": [
+            542
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 112,
+          "raw": "（右PT）瓦礫の塔スタート地点で脱出",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            14,
+            16
+          ],
+          "action": 2,
+          "script": "sc_e_1098",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30870",
+          "maps": [
+            542
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 113,
+          "raw": "（中央PT）瓦礫の塔スタート地点で脱出",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            41,
+            17
+          ],
+          "action": 2,
+          "script": "sc_e_1099",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30870",
+          "maps": [
+            542
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 125,
+          "raw": "（右PT）瓦礫の塔スタート地点で脱出",
+          "group": "entity_default",
+          "type": "Entity",
+          "roles": [
+            "delegated physical/state mechanism;explicit triage",
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            56,
+            21
+          ],
+          "action": 2,
+          "script": "sc_e_1100",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_12",
+          "maps": [
+            554
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0977",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_2",
+          "maps": [
+            544
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 16,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            19,
+            13
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_24",
+          "maps": [
+            566
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 51,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0992_1",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            13,
+            12
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_25",
+          "maps": [
+            567
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 25,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0996_1",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            12,
+            14
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_26",
+          "maps": [
+            568
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 22,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0997_1",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            11,
+            10
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_30871_27",
+          "maps": [
+            569
+          ],
+          "area_ids": [
+            42
+          ],
+          "area_names_en": [
+            "Kefka's Tower"
+          ],
+          "entity": 0,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "entity_default",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            6,
+            11
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        },
+        {
+          "submap": "Map_40012",
+          "maps": [
+            584
+          ],
+          "area_ids": [
+            4
+          ],
+          "area_names_en": [
+            "Scenario Selection"
+          ],
+          "entity": 166,
+          "raw": "セーブポイントについての説明を受けるかを問われる",
+          "group": "ev_e_0065",
+          "type": "Event",
+          "roles": [
+            "choice and state;explicit triage"
+          ],
+          "cell": [
+            1,
+            16,
+            6
+          ],
+          "action": 2,
+          "script": "sc_e_0009",
+          "guide_references": [],
+          "status": "needs exact semantic triage"
+        }
+      ],
+      "script_facts": {
+        "Map_20011_2/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20030/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20071_1/sc_chocobo_20071_1": {
+          "sha256": "84902c0f365e2afd2f61d430ed74602beee883f0daf5bc34626dc8bad7b13a73",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20071_10/sc_e_0077": {
+          "sha256": "c0fec5bf92aeda93348671372f19833eccb8e965e649f8b12a3bf4468a5b0f58",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20071_13/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20071_26/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20081_5/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20111_1/sc_e_0226": {
+          "sha256": "417df61d3f4bb8369277b1454ad40b521826ed7bd03870930f789a6ae11bb79f",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20111_1/sc_sty_20111_1": {
+          "sha256": "395f43222b6a16b4ce37554318767444f4247c0d45118121745ecd67fa292b80",
+          "calls": [
+            "sc_sty_20111_1_branch"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20111_1/sc_sty_20111_1_end": {
+          "sha256": "7824e64ff58d8acd61931aa4245919426bfa493cba7c12be140bec272c9249b9",
+          "calls": [
+            "sc_e_0226"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20111_1/sc_sty_20111_1_branch": {
+          "sha256": "79e797375c41ad9d3289cc33519b9808f3a3ccc4be049ff47e34a866591f0422",
+          "calls": [
+            "sc_sty_20111_1_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20121_2/sc_chocobo_20121_2": {
+          "sha256": "2c0d774219c7923dbc09f7040ff03f88131424fdd5c3cc9f7864732fcd4ff461",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20151_1/sc_chocobo_20151_1": {
+          "sha256": "06a1168592b02522bdbf636632695ca79c129c8d0088c2d10d349799da9fd853",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0462": {
+          "sha256": "39cc27ab943c650fc65d6c51e6ba3a820b20cf0004a59498e5a8b0a58c92ab5b",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0414": {
+          "sha256": "0e35d24b848d1fd1300522f4d46e720c12c4e1b86c5f405ae55da2b5d59ccff1",
+          "calls": [
+            "sc_e_0462"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0463": {
+          "sha256": "129a795abb4a79bffa6de708127d731e99cc028d94f83ea6515a4f5570bd6409",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0415": {
+          "sha256": "e9ac19df1b0c27cffbe086d737735cee32985fb5b9a1d81af67448fbb94ea2b0",
+          "calls": [
+            "sc_e_0463"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0416": {
+          "sha256": "feff56399206c1848d1fe1a2c630e32d779d4d48cf3606accb179d3afbac91f0",
+          "calls": [
+            "sc_e_0464"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0464": {
+          "sha256": "088093acf53558ae89f9f0b7656a6db9a06729e05b36ab5ab74f1cd530d7cd42",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0417": {
+          "sha256": "fb7058ff9d0924c3f4e325c141b1cdd284164e44e1a4d1ce6353c39cd85a7f6a",
+          "calls": [
+            "sc_e_0465"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0465": {
+          "sha256": "ddb24662838f2cf8e01cb7a1f05469b593a6614e9b732215d2ad293f370d379f",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0466": {
+          "sha256": "cc707da8fd2ed01c3f4c24b47312a18d7789e6639a182d3579148c25a17c65d1",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0418": {
+          "sha256": "d146d99b3597ccf6ed86c7f107c89c9d30648687d39d906bb416dff441236067",
+          "calls": [
+            "sc_e_0466"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0419": {
+          "sha256": "89765c6f69b8bdd52a19b5df2a7865e01996d6272d0d47b8a3f1ba7dc7766762",
+          "calls": [
+            "sc_e_0467"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0467": {
+          "sha256": "cbbd7698e97041b6d2d7bfff50de9a8c2f1f2b3c5f01e11cc22db41deb4e7754",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0420": {
+          "sha256": "d1d612c3b38140bd23d11b2cbe92821c8cd491938ba29eafd96c829ca113a3e9",
+          "calls": [
+            "sc_e_0468"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20171_2/sc_e_0468": {
+          "sha256": "bb4dcab3c03b20cb3641277db932720c8153932b8ea31194ff8bc44c80ab8286",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20180/sc_e_0426_0": {
+          "sha256": "91be8a10be5967c1123b53b8310d90854df323fc46b83b106c3360662f442d5d",
+          "calls": [
+            "sc_e_0426"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20180/sc_e_0426": {
+          "sha256": "e89af32f30c77c9279ee23a4357e2ff67f4f120136fe0d58f3b98c7ca4aaf151",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20190/sc_e_0427": {
+          "sha256": "a1b8ff9812db9db324bc632aa8c610361a0139ab942c356b4a9639760382b5ad",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20210/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20230/sc_npc_20230_1": {
+          "sha256": "9b08e0a96a9ebd7499936ee01c5fba0c62c7b92d3faff3c3150d2eb0c2144456",
+          "calls": [
+            "sc_e_0408"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20230/sc_e_0408": {
+          "sha256": "23f8796960316f04c99b780d62c70aae98b120ac301d28e59953f846eaf649ae",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20231_5/sc_npc_20231_5_2": {
+          "sha256": "30fdb2f7102478f222877c31e50c79f6ff3bed0cccb1597f355189579ae696e4",
+          "calls": [
+            "sc_e_0410"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20231_5/sc_e_0410": {
+          "sha256": "112dbf4b8c1083b4bc407d397a53f2c949f053d8d6a0c2385274785028956929",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20231_5/sc_e_0411": {
+          "sha256": "2f2e711e1c4c212e0a8ce41548e375e02f655bab7d1251a2ff020070f251e616",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20231_5/sc_npc_20231_5_3": {
+          "sha256": "d1549354fe83d5a6e4a779d525abdebd95f8ffad845159bfd11ed7ecbe183800",
+          "calls": [
+            "sc_e_0411"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20271_5/sc_e_0521": {
+          "sha256": "f7d2144ebaf7bfd4493f9a8dcce916963a4ad108cb6afe12139369fb92ce6063",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20271_5/sc_npc_20271_5_1": {
+          "sha256": "96d7fa183ec9aa8aa4d92ea48fbab0ba0ef8ae6676e061f719d090c1bbd49871",
+          "calls": [
+            "sc_e_0521"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20291_1/sc_e_0625": {
+          "sha256": "c0d15cfcc1312c33b14bb0532179b63bbe343c588eb8ccffecea9a470dca36c9",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20291_1/sc_e_0616": {
+          "sha256": "023cade3a54abb917a067291804869e3d86f1441e7d12dc3e322156addbe3396",
+          "calls": [
+            "sc_e_0625"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20330/sc_e_0640": {
+          "sha256": "1215cce333e5e993a0b771b5b366ebcbcbd1df75ef70fcbcee01b75811f737b1",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20351_2/sc_chocobo_20351_2": {
+          "sha256": "5595e1287c3d2d9d76497986573ed489fb3b0b7f993146c88894534ef2bc07ec",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20351_3/sc_e_0657": {
+          "sha256": "7ac9bae1f11eb9988cad3b338a76f9681ea23a9f9c2abec13f49dd9cb6e4c01c",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20351_3/sc_e_0655": {
+          "sha256": "f959c92b1510239190561745bdbda090a55b229bdd4ff4d54a0051b8c2bfda4b",
+          "calls": [
+            "sc_e_0657"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20351_3/sc_e_0654": {
+          "sha256": "05170715f488442f8998a291e074bfe19b805fc8a19c5945304bcf50a6ae3f98",
+          "calls": [
+            "sc_e_0657"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20351_3/sc_e_0653": {
+          "sha256": "e2251a71c332ef2b48ef482171a0e704733f1daffab61e520bc90645bf1def7d",
+          "calls": [
+            "sc_e_0657"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20351_3/sc_e_0656": {
+          "sha256": "a7901f9d393fff48d81e626d5f5433a26f7b769bcb51ccb96fa05b2e8d190e68",
+          "calls": [
+            "sc_e_0657"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_20361_1/sc_chocobo_20361_1": {
+          "sha256": "f8f66015cfc2ba8efe004224ff03cae778df607d41335ad9922fbf5e6246fc90",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20361_13/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20361_26/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20371_2/sc_e_0674": {
+          "sha256": "1484e0f70cbc8699958883aae47bd5c01252c42af1daa1e25647cc8250134cb9",
+          "calls": [
+            "sc_e_0675",
+            "sc_e_1067_2"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20371_2/sc_e_0675": {
+          "sha256": "9fec9339419fbcb81c11415713cffaf2e67fb3acad5e91be312e3f6cb3f541a6",
+          "calls": [
+            "sc_e_0882_2"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_20371_2/sc_e_0882_2": {
+          "sha256": "acde75de25f252277d1d4231284da6cfb4c069608ddabae6efc0a3b1a5f41450",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20371_2/sc_e_1067_2": {
+          "sha256": "07f0b462385efa4d3e076ac282d3822d2c2decfe47a48112284024e9a61aba4a",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20431_1/sc_chocobo_20431_1": {
+          "sha256": "47193a95493b92a73fbebfb9dc0591647b192e87b52e24a6d9af63f57c931aec",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_20471_1/sc_e_0959": {
+          "sha256": "b2170702c32976bf26de0d5909b8e630fb09a0a5d81e61a39b0f953034a9b1d0",
+          "calls": [
+            "sc_e_1070"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_20471_1/sc_e_1070": {
+          "sha256": "69a3e337111a040ae5ce69bf4183edd85b2a566bda3a866e1f19292190d99093",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30011_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30011_2/sc_e_0017_end": {
+          "sha256": "d1016c5ba709f0fd371915dedd0f42ab3e22df70d49235a9e06715d6e44c1056",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1081": {
+          "sha256": "6fbec0645fe0ebdb6bfd647a51113ad54675380d445ee9efb37f4ffac152cd72",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1082": {
+          "sha256": "d21e81017255fc4f827bac567a4650d8f1bec1cfffebe88a5d23d85c87288a4e",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1083": {
+          "sha256": "1926013934c47747a1c5515c71c57788741c06976605d0b93a7ef94d7981fea0",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1084": {
+          "sha256": "602807d78fa3cff9d3f17a966d25b10ea23461238e9c02cf295f40dca9898b4f",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1085": {
+          "sha256": "1af5dac8f075234a9040a64316aa925dbb31c813f25bf6f59da01cfafb46cff1",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30011_2/sc_e_1086": {
+          "sha256": "fe1daafe4b747fdc0f50f4b7271001edabe65b741c120711a218e557bde0d745",
+          "calls": [
+            "sc_e_0017_end"
+          ],
+          "physical": false,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30021_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30041_6/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30380/sc_e_0063_3": {
+          "sha256": "40dc74a21c357eafd8e1e1f27dcdb544764705b9d1aceaf23184b4d5ed3aee13",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30380/sc_e_0063": {
+          "sha256": "150f6c6079d39b23b57ff5f2264984b13a245bfc147d10f23f18dc3c877032cf",
+          "calls": [
+            "sc_e_0063_3"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_30381_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30391_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30410/sc_e_0118": {
+          "sha256": "fa414b79867b609b1ff2b39910e5620395b2e9f5a2c4a834246ee0491f7e719d",
+          "calls": [],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30410/sc_e_0118_0": {
+          "sha256": "8ed0d9854aa86fd737a1f6852e433b970394608886cbb14ac142baacf98b68d5",
+          "calls": [
+            "sc_e_0118"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30441_14/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30441_3/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30441_6/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30521_3/sc_e_0394": {
+          "sha256": "e6a071a93dc2a8a188440e1e4c896c691dec16f091585655fd71448c8189f405",
+          "calls": [
+            "sc_e_0395"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 0
+        },
+        "Map_30521_3/sc_e_0395": {
+          "sha256": "ab87e8d363734c23ea72c5a7211e07816bdaebb25f002ca55daa34a96dd8fe77",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30521_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30521_9/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30531_5/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30561_3/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30600/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30601_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30631_1/sc_e_0757": {
+          "sha256": "f27ddcfdacc5bd71481124d4bf10750d1babb0661ca39322dd73a156ce816ff9",
+          "calls": [
+            "sc_map_30631_1"
+          ],
+          "physical": false,
+          "state": true,
+          "choice_count": 5
+        },
+        "Map_30631_1/sc_map_30631_1": {
+          "sha256": "84dc65c016065247c34267d47a5e3e9d568df85912196739009491a7af8e2681",
+          "calls": [],
+          "physical": true,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30631_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30651_10/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30671_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30761_5/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30781_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30781_2/sc_e_0831": {
+          "sha256": "5787c7097bd9ec60045bcf9ca4f43e749d95038104d43131eeaf35ef11d86127",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30791_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30801_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30821_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30831_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30831_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30851_4/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30861_1/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Resident/sc_reset_rubble_tower": {
+          "sha256": "999786d3b062f271afca0206f7c595ad0b2476bc797b928ba269ab6c7958dca4",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 0
+        },
+        "Map_30870/sc_e_1098": {
+          "sha256": "99da924ebb64c34b494b5a46f99fb74e60b854bc4d7b0353ca484cf879b72e70",
+          "calls": [
+            "sc_reset_rubble_tower"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_30870/sc_e_1099": {
+          "sha256": "b21bd0301562d08e46a6f816ecb6e9f32b5517fa303b12a17de461dfc3063e60",
+          "calls": [
+            "sc_reset_rubble_tower"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_30870/sc_e_1100": {
+          "sha256": "357908d14ce608d0485d55e163bb502393cb6aeb36ca589f5e82eb32c5cdb2ac",
+          "calls": [
+            "sc_reset_rubble_tower"
+          ],
+          "physical": true,
+          "state": false,
+          "choice_count": 1
+        },
+        "Map_30871_12/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30871_2/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30871_24/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30871_25/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30871_26/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_30871_27/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        },
+        "Map_40012/sc_e_0009": {
+          "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+          "calls": [],
+          "physical": false,
+          "state": true,
+          "choice_count": 1
+        }
+      }
+    }
+  }
+}

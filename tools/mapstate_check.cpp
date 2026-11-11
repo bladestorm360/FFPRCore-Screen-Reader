@@ -46,10 +46,20 @@ int main()
             for(const auto& guard:guards->arr) {
                 ++event_guards;expect(guard.get(L"code")->arr.size()<=256,"event predicate retains only bounded native entry control flow");
                 const baked::Object* object=nullptr;
+                const auto matching_mask=[&](const baked::Object& row) {
+                    const auto* mask=guard.get(L"warp_mask");
+                    return !mask||(row.type==baked::ObjType::Warp&&mask->arr.size()==2&&
+                        (row.d&static_cast<int>(mask->arr[0].n))==static_cast<int>(mask->arr[1].n));
+                };
+                const auto matching_type=[&](const baked::Object& row) {
+                    const int type=static_cast<int>(guard.get(L"type")->n);
+                    return static_cast<int>(row.type)==type||(guard.get(L"warp_mask")&&
+                        row.type==baked::ObjType::Warp&&((row.d&255)==1?(type==2||type==28):type==5));
+                };
                 for(const auto& row:baked::grids(sm).objects)
-                    if(static_cast<int>(row.type)==guard.get(L"type")->n&&row.entity_id()==guard.get(L"id")->n&&
+                    if(matching_type(row)&&row.entity_id()==guard.get(L"id")->n&&
                         baked::object_identifier(row)==guard.get(L"raw")->s&&baked::str(row.group)==guard.get(L"group")->s&&
-                        row.layer==guard.get(L"cell")->arr[0].n&&row.tx==guard.get(L"cell")->arr[1].n&&row.ty==guard.get(L"cell")->arr[2].n)object=&row;
+                        row.layer==guard.get(L"cell")->arr[0].n&&row.tx==guard.get(L"cell")->arr[1].n&&row.ty==guard.get(L"cell")->arr[2].n&&matching_mask(row))object=&row;
                 expect(object!=nullptr,"every native entry guard has its exact original bake identity");if(!object)continue;
                 // A destination-scoped predicate controls its exact companion
                 // arc, not consumption of the native physical door. Preserve
@@ -60,14 +70,16 @@ int main()
                         if(row.type==baked::ObjType::Warp&&row.entity_id()==guard.get(L"id")->n&&
                            baked::object_identifier(row)==guard.get(L"raw")->s&&baked::str(row.group)==guard.get(L"group")->s&&
                            row.layer==guard.get(L"cell")->arr[0].n&&row.tx==guard.get(L"cell")->arr[1].n&&row.ty==guard.get(L"cell")->arr[2].n&&
-                           row.a==destination->arr[0].n&&row.b==destination->arr[1].n)object=&row;
+                           row.a==destination->arr[0].n&&row.b==destination->arr[1].n&&matching_mask(row))object=&row;
                     expect(object!=nullptr,"each destination guard has its exact real companion arc");if(!object)continue;
                 }
                 for(int profile=0;profile<3;++profile) {
                     map_state::Flags copied;if(profile<2){for(auto& v:copied.scenario)v=profile;for(auto& v:copied.treasure)v=profile;for(auto& v:copied.global)v=profile;}
                     map_state::Resolver state(copied,records);const auto availability=map_state::project(guard,copied);
-                    expect(state.consumed(sm,*object)==(availability.known&&availability.group.empty()),"entry guards retire an event only when all native prefix paths skip every action");
-                    if(profile==2)expect(!state.consumed(sm,*object),"unknown persistent flags cannot consume a potentially actionable event");
+                    const auto* strict=guard.get(L"require_known");
+                    const bool closed_unknown=!availability.known&&strict&&strict->b;
+                    expect(state.consumed(sm,*object)==(closed_unknown||(availability.known&&availability.group.empty())),"exact entry/arc guards preserve their native action and explicit unknown-state policy");
+                    if(profile==2)expect(state.consumed(sm,*object)==closed_unknown,"unknown ordinary events remain actionable; exact strict arcs require proven availability");
                 }
             }
         }
@@ -123,6 +135,17 @@ int main()
             }
         }
         if(n==6) {
+            const auto& training=*records.get(L"Map_20400");std::set<uint64_t> signatures;
+            for(int present:{-1,0,1}) {
+                auto party=flags;party.current_map_id=2;party.current_area_id=0;
+                if(present>=0)party.party_sabin=present!=0;
+                const auto result=map_state::project(training,party);
+                expect(result.known==(present>=0)&&result.groups.count(L"ev_e_0954")==static_cast<size_t>(present==1),"Duncan requires actual active Sabin6; unknown or reserve ownership grants no event");
+                signatures.insert(map_state::Resolver(party,records).signature());party.scenario[464]=1;
+                const auto finished=map_state::project(training,party);
+                expect(finished.known&&finished.groups.empty(),"completed training464 retires the event even when party membership is unknown");
+            }
+            expect(signatures.size()==3,"party change and unknown transitions invalidate remembered training routes");
             auto state=flags;state.scenario[13]=1;
             const auto defense=map_state::project(*records.get(L"Map_30011_2"),state);
             expect(defense.known&&defense.groups.count(L"ev_e_0018")&&defense.groups.count(L"ev_e_0609"),

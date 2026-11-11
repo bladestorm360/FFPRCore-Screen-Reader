@@ -1,0 +1,2012 @@
+{
+  "about": "63 exact native NbrSelect callers, independently recovered declarations. Factual discovery only; semantic dispositions/complete guides are separate. Raw assets remain external.",
+  "bundles": [
+    {
+      "name": "map_20010_assets_all_dbde2e1cc9fc059ac66436ab26e90c91.bundle",
+      "sha256": "bade169fdafa8b2f4d97de70b127519abda4c1867fbcdf8f80726f146d37ceae"
+    },
+    {
+      "name": "map_20011_assets_all_39d09592180354e770764b70d5204300.bundle",
+      "sha256": "148127ffe18c6f71626f81dcbce58ad9bebb9052334772c93a6266f160f097b4"
+    },
+    {
+      "name": "map_20031_assets_all_1b21bdb4f8998950ac983a904db87565.bundle",
+      "sha256": "487a06f7b38e50dd59034fdc40529225108f5fec165231b645db5a484ea8a88b"
+    },
+    {
+      "name": "map_20041_assets_all_2862c124cdabd3a63b734b393adcda82.bundle",
+      "sha256": "ef09961f23ba226908de2493733fc149c6c2e4d394fdd9c47cedcab3e6208895"
+    },
+    {
+      "name": "map_20061_assets_all_92a0b62c66b06ef591c717423086368f.bundle",
+      "sha256": "51e8decaeda267894abf160f1aef849ee879c88609e4cdc08026adfdc684d95a"
+    },
+    {
+      "name": "map_20071_assets_all_9f881c61794f18dc37b6ec6e23614ca8.bundle",
+      "sha256": "e86afcdabd85f33de96518e3ce91ad1069e4f869b812f003d06e10e2e69ecf3a"
+    },
+    {
+      "name": "map_20080_assets_all_1aa4aa3d9317b3f41f3b0ce8ded66c80.bundle",
+      "sha256": "a898d9ec2126ccf1ee4bff7c6a03e539fd8a4e39001b49b56a1a6f64defd272f"
+    },
+    {
+      "name": "map_20090_assets_all_36bab387b78f0af4cc2d8896da62874c.bundle",
+      "sha256": "b857a20b9f4c732133c73a019469da699c62a6fb6ff1e079f965ddd96327ccde"
+    },
+    {
+      "name": "map_20101_assets_all_76e4df553b663b909f698dd75e870af0.bundle",
+      "sha256": "0e6b65398adfaa81bc58c6924724b7cbe33b6f3ec92ad00d438214f8cbae4f91"
+    },
+    {
+      "name": "map_20131_assets_all_c74c21bfb38fcf0f525163531a85f54d.bundle",
+      "sha256": "a7b39117350d8952f552092298ab066bcd62910a38c6585b1cfc5d4db23e63b1"
+    },
+    {
+      "name": "map_20161_assets_all_aa1b9f6d8295b815181e3d1010a91d79.bundle",
+      "sha256": "7108d58f2f0801ab80518a8a595317a4a7ab84d0b180f085046491c0023629ff"
+    },
+    {
+      "name": "map_30031_assets_all_da9990118f6ee5fbd1dffea93a707538.bundle",
+      "sha256": "84752937531a0f5e22b342aafd095176bed4a1c257e2bb1e391a3909d7d04b3c"
+    },
+    {
+      "name": "map_30041_assets_all_f8de295aaebc6f6d0757a81c8bf28dcb.bundle",
+      "sha256": "ea19146e33ad95dc1eea2ee83357cc5a69313fa5460f581f198f9acf6663091f"
+    },
+    {
+      "name": "map_30051_assets_all_67847bcf8d6b4b6833452779c364649a.bundle",
+      "sha256": "59124f211864db50468ddb5ba87286fdce1efaf0891f0e0fad0282b8995507d9"
+    },
+    {
+      "name": "map_30061_assets_all_e62a9f0de393d73c7e4d4509c2b2f210.bundle",
+      "sha256": "6c61547578f75f7aca25ed888b397fab39254530641b42cab7c5fda350f426cf"
+    },
+    {
+      "name": "map_30071_assets_all_a26497db62bf0c9343f3e4b390606154.bundle",
+      "sha256": "8e651a2f584e39a78bcaf9976b28eaf97ff2635d50871572f037eb6381953f7a"
+    },
+    {
+      "name": "map_30101_assets_all_60e70325c716e364aea41849bd06f022.bundle",
+      "sha256": "8ede626bcfbd520b06851bc69ac7d60722405e4b323ed4af48b5531386da900f"
+    },
+    {
+      "name": "map_30111_assets_all_9a21893cd50bb321aa174a6c6c4c4484.bundle",
+      "sha256": "ca4502fb01625dcdd139d3488dfdd2ca3b837242037ba647eb03d376e4fd90d9"
+    }
+  ],
+  "scripts": [
+    {
+      "submap": "Map_20010",
+      "script": "sc_e_0149",
+      "script_sha256": "7d091767529d6d8f1733eadf75b23cd639d54e7933072a8f53288d69265302a1",
+      "asset_sha256": "0104515854a6ef2a5f575f23799cc93357b5a96da5788f5c85a2fc32f36e6419",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 57,
+          "raw": "ポール",
+          "group": "ev_e_0002",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20010",
+      "script": "sc_e_0150",
+      "script_sha256": "15285e196863fda5b61851098262ded6036fdf493c4fb6b8d97330331cfe297d",
+      "asset_sha256": "e6646f2e7a44f24d982e39835c8df9a71f2bca8baa7da8dc1162cb31e088fbdb",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 13
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 2,
+          "success_pc": 17
+        }
+      ],
+      "owners": [
+        {
+          "entity": 66,
+          "raw": "ゴードン",
+          "group": "ev_e_0002",
+          "type": "NPC",
+          "action": 2
+        },
+        {
+          "entity": 64,
+          "raw": "ゴードン",
+          "group": "ev_e_0007",
+          "type": "NPC",
+          "action": 2
+        },
+        {
+          "entity": 62,
+          "raw": "ゴードン",
+          "group": "ev_e_0010",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20010",
+      "script": "sc_e_0151",
+      "script_sha256": "8691e91b78517d3fd3ed20d54b635768a396d416eb42ad1cac349699ebbdb373",
+      "asset_sha256": "736a63afd9289133067b7dca57be4b21bb7dbb0d529b32c66c387174e2b85a04",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 919,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 60,
+          "raw": "ゴードン",
+          "group": "ev_e_0017",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0001_5",
+      "script_sha256": "02803c68aa79dc5e9c00fe05ce5a5c360607853c700da3ef49bdb4dffa6fa13a",
+      "asset_sha256": "d8c0383e98be5fc12571b11a8cb470e2ef2d2f56705e8d7979bd42252b210306",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 27
+        }
+      ],
+      "owners": [],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag4",
+          133
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          0
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0007",
+      "script_sha256": "780b6283ea6095e35bb8fb9e55979ff9c3e398962e33beb45daae0f119f39b2d",
+      "asset_sha256": "181c711aec14eba3d54db8e7111a7135e3396b0a440a751398b8582e7525d18f",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 22
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 49
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 2,
+          "success_pc": 26
+        }
+      ],
+      "owners": [
+        {
+          "entity": 49,
+          "raw": "真ヒルダ",
+          "group": "entity_default",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          6
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          8
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0009",
+      "script_sha256": "40b11bf96ede38c2f1dae6940657cc9dcd7484f4abf534be91d2a359120ef606",
+      "asset_sha256": "0c22e4b78cf51bc7c4a1c42cbdd9b5582b5543dbd5381916fd10c422ae15f9a1",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 918,
+          "success_pc": 7
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 917,
+          "success_pc": 12
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 2,
+          "success_pc": 16
+        }
+      ],
+      "owners": [],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          8
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0104",
+      "script_sha256": "0dd9d93fa2d6d5e5a9814c538ef8a35171ca7821299ffaff7df73151b21609c9",
+      "asset_sha256": "040e39db6cda0606401d8bf23774c33df5160d62a3ef9bb7bba6683f469195b2",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 918,
+          "success_pc": 8
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 919,
+          "success_pc": 12
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 921,
+          "success_pc": 16
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 5,
+          "success_pc": 20
+        }
+      ],
+      "owners": [],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0148",
+      "script_sha256": "f006d6c3e717fc9fd4939a8724233182f3ae512a2469f35381cd6bf94eb2fa31",
+      "asset_sha256": "5075c868adf8e7d394ff3dd3e62af47d7c3324a47ffa29c3a9de5dec63fe92d5",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 919,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0017",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20011_2",
+      "script": "sc_e_0152",
+      "script_sha256": "69610d17bb66b0821c5db48c19b3beb9a5042d6c7dbfb6af53ff3bd6fd2f6229",
+      "asset_sha256": "f4570edaed525df7573259103542406b7d39dc3e7d1460d946a9fb9bbcf86087",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 6
+        }
+      ],
+      "owners": [
+        {
+          "entity": 29,
+          "raw": "②ミンウ",
+          "group": "ev_e_0010_m",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20011_4",
+      "script": "sc_e_0153",
+      "script_sha256": "6e3e912f767523075dcd4637d53fc0d7a66abd7a13347b37ca7fdcd91c8d422b",
+      "asset_sha256": "a0643b8da722b8d81a6d0be138c5440efd2e920b5cd1d9cc0cf78e7056fbb03d",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "①フィン王",
+          "group": "ev_e_0010",
+          "type": "NPC",
+          "action": 2
+        },
+        {
+          "entity": 5,
+          "raw": "①フィン王",
+          "group": "ev_e_0017",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20011_9",
+      "script": "sc_e_0016",
+      "script_sha256": "2c112fcdf61503a133e1203fe7ef349ba97bd9c37c168967852bd77e64df8986",
+      "asset_sha256": "3f27b6120f98551c03a39fef83a7c636c2ecbc15fda3b6f953450c4a83c3f440",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 17
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 21
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 5,
+          "success_pc": 25
+        }
+      ],
+      "owners": [
+        {
+          "entity": 9,
+          "raw": "トブール",
+          "group": "ev_e_0001",
+          "type": "NPC",
+          "action": 2
+        },
+        {
+          "entity": 6,
+          "raw": "トブール",
+          "group": "ev_e_0017",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          14
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20031_1",
+      "script": "sc_e_0128",
+      "script_sha256": "65dfb9403826bcc9735769bd3b4bce9bdd220a70ef53d80405eea604ffd2a278",
+      "asset_sha256": "68754c22dd947861e9b742add77d85d456943459c3a26db8c3010e22d9fe4f63",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 928,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 31,
+          "raw": "①ポール",
+          "group": "ev_e_0080",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          88
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20031_1",
+      "script": "sc_e_0158",
+      "script_sha256": "9120874e8faa4e77f9d9b23ebaa0146bc602df47c4e2033ef8af28b47c3e071a",
+      "asset_sha256": "da7f3b907c3bc8f21b8a8d8406ff2ef0d14bbaffd25c3c2948b6008b724b76a4",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 931,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 33,
+          "raw": "①ポール",
+          "group": "ev_e_0060",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20031_1",
+      "script": "sc_e_0200",
+      "script_sha256": "59358b9963df56f34ea6b7e8d956c7e8e8ffc087166f113fd55485da596d10a6",
+      "asset_sha256": "74536d701259d9dc409b12ebf1da1eb24d7bc0653c3451087c7107289bad52fe",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 920,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 28,
+          "raw": "①ポール",
+          "group": "ev_e_0083",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20031_1",
+      "script": "sc_e_0200_1",
+      "script_sha256": "6247d7dc38d3c1ee6eeaa29fef8f8bb46517e2a451462a082504578f47150a13",
+      "asset_sha256": "f7d218b897258dfe82454825c3135797e1c4c91888b9bb505a54e51cbd452d0d",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 920,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 26,
+          "raw": "①ポール",
+          "group": "ev_e_0084",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20031_5",
+      "script": "sc_e_0005",
+      "script_sha256": "629922352efa5544dba66721ed2b9aa18e57b6651d99d30207e8a28662b09b1e",
+      "asset_sha256": "4330976597f29ca91b9e31cf06f19a3316ff13d42707d3b4e50da6be055dee66",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 7
+        }
+      ],
+      "owners": [
+        {
+          "entity": 41,
+          "raw": "⑨男性（青服）",
+          "group": "ev_e_0001",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          4
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20031_6",
+      "script": "sc_e_0006",
+      "script_sha256": "d1b93d936366e5d49031c9ef95f8d0768ffcba11c5573a3a629218191b78e9f5",
+      "asset_sha256": "78df51da45fa00576f3396d5ec21216f89c1dab00c6e9f1a95df812ec29039f9",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 12,
+          "raw": "スコット",
+          "group": "ev_e_0001",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "TreasureFlag2",
+          245
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          5
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20041_5",
+      "script": "sc_e_0080",
+      "script_sha256": "59191ca18be881337422882372f2e3631db8a2f383b83a2555146ac38255d20c",
+      "asset_sha256": "8d04157ed1ddbc69be350d663f1d87bb4c93e06f71e49c82f8bf44fe7ca3f537",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 10,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "鏡",
+          "group": "ev_e_0080",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_5",
+      "script": "sc_e_0118",
+      "script_sha256": "f8f3cdc3ca21e0e8e4372bf4dfad67f68a156719ba3f0797c128c5e5416365ec",
+      "asset_sha256": "d8033ad9ded6ca388fc770cda0fda5da34cb06c32c6cb6eec0695d74e91e118a",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 10,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 9,
+          "raw": "鏡",
+          "group": "ev_e_0118",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0063",
+      "script_sha256": "60b55b2f223cdf27961ec690ca91ca005ef5c53407be48e7136fb5cb61bc9462",
+      "asset_sha256": "a4bbbc781603649196f82dbe0cc3b95d55193075c47b3552aad6670330cd2ed2",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 931,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 22,
+          "raw": "隠し通路",
+          "group": "entity_default",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          56
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0116",
+      "script_sha256": "8e485af434da92c4a57a3c3d5a5b391d0603f1b454ff289a9542380c68fce2aa",
+      "asset_sha256": "1571df039120b821561aa74b89546730303193b8285149db76757b1f21eaf6f7",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 924,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 930,
+          "success_pc": 13
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 931,
+          "success_pc": 17
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 926,
+          "success_pc": 21
+        },
+        {
+          "label": "Key_0_0_4",
+          "content": 927,
+          "success_pc": 25
+        },
+        {
+          "label": "Key_0_0_5",
+          "content": 925,
+          "success_pc": 29
+        }
+      ],
+      "owners": [
+        {
+          "entity": 23,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0060",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0117",
+      "script_sha256": "a6fd21ae26c751d948a6d06d475c24eef215f3b0440e176509af7d4e993cc473",
+      "asset_sha256": "6ab6a36aa58d3ec296c549c6a5728fdc6c1d3254a1e5c57f5f95e6f67abce30f",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 924,
+          "success_pc": 7
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 925,
+          "success_pc": 11
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 931,
+          "success_pc": 15
+        }
+      ],
+      "owners": [
+        {
+          "entity": 41,
+          "raw": "②ゴードン",
+          "group": "ev_e_0060",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0119",
+      "script_sha256": "c4b46e6f5bddfcdb4e7796d7600641037e044651b512bf9bbbee2f892fd383d8",
+      "asset_sha256": "181113cbd8ecfb42ad54a9be9c910851a3d538487846f7ee9b663153d75ebe24",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 15
+        }
+      ],
+      "owners": [
+        {
+          "entity": 93,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0072",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0126",
+      "script_sha256": "16b4b4fe84bc1043a8f84f190f9649129fdf6752d65dd70a6351dc6b06b35f44",
+      "asset_sha256": "98c9c4ef6321b51331bb66521e6f799f6eea243521997dbec8a75ecb8ce52c19",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 928,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 33,
+          "raw": "②ゴードン",
+          "group": "ev_e_0080",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0127",
+      "script_sha256": "58948993980a931dfe773f2d77a61aab46b79ad2276ff045dfd1a48365427660",
+      "asset_sha256": "c09c76a8329eeeda2b6225b0a0eb452961dd6bbfe79bac5c152eed404957d3cf",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 928,
+          "success_pc": 10
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 14
+        }
+      ],
+      "owners": [
+        {
+          "entity": 92,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0080",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0129",
+      "script_sha256": "4ad5151f3f169d92d051249406573047d8a7ec2d0ac317ad36478b5bd0803a7d",
+      "asset_sha256": "dc0e97741d28eaf4d71c97dc5c12540159ee13c6035a0a35178685cf4e93cca4",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 920,
+          "success_pc": 12
+        }
+      ],
+      "owners": [
+        {
+          "entity": 90,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0083",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0130",
+      "script_sha256": "b47ecdfac81db433482ce9862402d986bc49a68d181ac6598cb8b06e50d215b4",
+      "asset_sha256": "f7c7e84f447893b8afce8cb55a27d49bafff7d58c9ea7b9fee79886e894378c4",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 920,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 29,
+          "raw": "②ゴードン",
+          "group": "ev_e_0083",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0140",
+      "script_sha256": "d6f054cc414c1435c91bd5e499f03c7132bcfb2cdc24df17b14d6a995ba3dca0",
+      "asset_sha256": "43c96a2e303f755e01c4b51922bc38052054fcb099cfbb3bb3c590eced964393",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 929,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 89,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0087",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0159",
+      "script_sha256": "fed7d37c2f46030ed1e192d7065e97733ea1cee645e1ba3c06d30cea6fd26084",
+      "asset_sha256": "24663bc2a99a620bea8c01786dea46f8eaedc43bddad0dedad2da2a6ba53af49",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 928,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 91,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0081",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0160",
+      "script_sha256": "491ea8cf6c387d17528b66514fc01af0e27b95cbf60522ffe1ce1f0c59f8ebf0",
+      "asset_sha256": "fe56233686a6a1440134f52c063af6a28920b337c5a6d3fe4a792b171083e9d2",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 929,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 27,
+          "raw": "②ゴードン",
+          "group": "ev_e_0087",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0161",
+      "script_sha256": "315001bd6ad76a22aa017a13d94a19f0cda1e2cf0e2d7c32d8c119b0a6b51c86",
+      "asset_sha256": "afedbfae19087c4f83e890248ea1caec72b42d18b6b2b5c2139d1385a9ce03b1",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 920,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 30,
+          "raw": "③レイラ",
+          "group": "ev_e_0083",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20041_7",
+      "script": "sc_e_0162",
+      "script_sha256": "f325f05b8a2e2a2d7c503605f47361eea2c93a03f5174ebceaa191644e5ee7fe",
+      "asset_sha256": "5dbe78a9d21d0e4a859f9ec9da0ed2b8858d98a532ac3afdc7fe4995bdaeccc0",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 929,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 28,
+          "raw": "③レイラ",
+          "group": "ev_e_0087",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20061_1",
+      "script": "sc_e_0002",
+      "script_sha256": "15b7bf7b3fa8e7659ac64c54a5041689e864d8dd99c0855c1024a95bd431d02c",
+      "asset_sha256": "3e5747c4528d8eca18916d4a283f4b1ac2a6f2796104bc950a6ecc30361dd700",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 921,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 919,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "⑩シド",
+          "group": "entity_default",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20061_1",
+      "script": "sc_e_0163",
+      "script_sha256": "765ca7c46b5d02fd65335172664ee97dc5a10e204b55c6b7fb5af4ba210dc688",
+      "asset_sha256": "eb975f676c9fadf399fe828dd60b6d8f053e9b8fb34f112a949431c9a5c987b9",
+      "bindings": [],
+      "owners": [],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20071_1",
+      "script": "sc_e_0024",
+      "script_sha256": "c1b5f96e526224364a5e8bc2edc345692566026427f6c5719a104130bb354804",
+      "asset_sha256": "af302269097949947eb4284d58854012cb772d252a805ed782ee9fc1a5fdadf1",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 922,
+          "success_pc": 8
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 19
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 23
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 921,
+          "success_pc": 27
+        }
+      ],
+      "owners": [
+        {
+          "entity": 21,
+          "raw": "ヨーゼフ",
+          "group": "ev_e_0024",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          21
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20071_1",
+      "script": "sc_e_0102",
+      "script_sha256": "6e76613ba16dc3103539f87bbf89ba5aa7732c96d4e8882f7fa5062fd7218fc8",
+      "asset_sha256": "a9ae0aaa23023c728385bab5f87fcf08994883a5cc52d167ab5a2a30742e2d52",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 14
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 921,
+          "success_pc": 18
+        }
+      ],
+      "owners": [
+        {
+          "entity": 26,
+          "raw": "ヨーゼフ",
+          "group": "ev_e_0001",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20071_1",
+      "script": "sc_e_0103",
+      "script_sha256": "f08bd06e3795e545b5c1f50dfb777a5cc40180efd9ff586d74ed1a2396bfd079",
+      "asset_sha256": "4a301c1f49e61bd7c8e2ed7ec5e280f8f1431b2951c70f54ebdcc32b072a39c3",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 918,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 919,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 921,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 21,
+          "raw": "ヨーゼフ",
+          "group": "ev_e_0014",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20080",
+      "script": "sc_e_0018",
+      "script_sha256": "266a74fb4429460cadcf074c37274a34476f4c020ee30a48308c275a165828aa",
+      "asset_sha256": "727b1de2cc1f10ac6dd4e73d4bc746c4fc235b9e13e87d5a1820c3ca2f903893",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 919,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 68,
+          "raw": "⑩パラメキア兵",
+          "group": "ev_e_0018",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          15
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20080",
+      "script": "sc_e_0164",
+      "script_sha256": "187a0032cb00b6fcb9983a33a4eb220d4a0d5ac70f6046e470b5d04558dc3d45",
+      "asset_sha256": "cdff247dd9d2fb924f132ecb8cf248d22b39e98b4f045a70cb88792c3bbe123d",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 919,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 78,
+          "raw": "⑩パラメキア兵",
+          "group": "ev_e_0001",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20090",
+      "script": "sc_e_0115",
+      "script_sha256": "868ac188e8d53abd81233e208dca441e8f895b78fd67705901d74c2d7b47bf2c",
+      "asset_sha256": "8f8eabd9b2c6bb1c77216f159e2f4bc14677a3f43e9cd8b20734081f5847f53f",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 20
+        }
+      ],
+      "owners": [
+        {
+          "entity": 22,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0057",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20101_7",
+      "script": "sc_e_0177",
+      "script_sha256": "3b37eafde059db906f23b3f4df5e5fe3f8037da9dc381ba29b2deddbfd7e5ef7",
+      "asset_sha256": "96f7db6173a0d2337463ad67e38fa052af091bb340b7dc6160a1f7092eba32b7",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 929,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 920,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 925,
+          "success_pc": 13
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 930,
+          "success_pc": 17
+        },
+        {
+          "label": "Key_0_0_4",
+          "content": 924,
+          "success_pc": 21
+        },
+        {
+          "label": "Key_0_0_5",
+          "content": 926,
+          "success_pc": 25
+        },
+        {
+          "label": "Key_0_0_6",
+          "content": 927,
+          "success_pc": 29
+        },
+        {
+          "label": "Key_0_0_7",
+          "content": 922,
+          "success_pc": 33
+        },
+        {
+          "label": "Key_0_0_8",
+          "content": 923,
+          "success_pc": 37
+        },
+        {
+          "label": "Key_0_0_9",
+          "content": 921,
+          "success_pc": 41
+        },
+        {
+          "label": "Key_0_0_10",
+          "content": 918,
+          "success_pc": 45
+        }
+      ],
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "本棚",
+          "group": "entity_default",
+          "type": "Entity",
+          "action": 2
+        },
+        {
+          "entity": 6,
+          "raw": "本棚",
+          "group": "entity_default",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20101_8",
+      "script": "sc_e_0065",
+      "script_sha256": "79d00e95c13d8596e0a00d901713c044c61c90a1eedb39644fc396d4887d626a",
+      "asset_sha256": "0cc0e3b34a928ccb80501513281beaf01a3c150099774c22276a2886065fdb94",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 12,
+          "success_pc": 8
+        }
+      ],
+      "owners": [
+        {
+          "entity": 4,
+          "raw": "女神像",
+          "group": "ev_e_0065",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          58
+        ]
+      ]
+    },
+    {
+      "submap": "Map_20131_7",
+      "script": "sc_e_0041",
+      "script_sha256": "94ec8cb61d03f9c57dd910c8c8c7e61cbdc74355084dc713762c75c12bcc7199",
+      "asset_sha256": "a5799f94669c14b185f459d4435b5a52c08e4348e50516a676db71465f63b270",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 6
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 10
+        }
+      ],
+      "owners": [
+        {
+          "entity": 54,
+          "raw": "⑥ゴードン",
+          "group": "ev_e_0041",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20131_7",
+      "script": "sc_e_0154",
+      "script_sha256": "cf588736f64c1399a0eb03525b59457ac014eb437c91e1acdcf795f9c906d2b9",
+      "asset_sha256": "5004afbf0c4f3dc8283a2ef23e520027bcbb552901fed98f0c215a8f04261f11",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 919,
+          "success_pc": 10
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 923,
+          "success_pc": 14
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 922,
+          "success_pc": 24
+        }
+      ],
+      "owners": [
+        {
+          "entity": 58,
+          "raw": "①ヒルダ",
+          "group": "ev_e_0024",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20131_9",
+      "script": "sc_e_0023",
+      "script_sha256": "684063a51f43f14ce96e993baebc634bdfaf45061cc510da7a1e1cd02ae8732f",
+      "asset_sha256": "eb7b5dc7c12fe832986c4590750436010061695a01da99bbb18820940bf1518d",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 921,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 923,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 922,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "①フィン王",
+          "group": "ev_e_0024",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20131_9",
+      "script": "sc_e_0153",
+      "script_sha256": "6e3e912f767523075dcd4637d53fc0d7a66abd7a13347b37ca7fdcd91c8d422b",
+      "asset_sha256": "a0643b8da722b8d81a6d0be138c5440efd2e920b5cd1d9cc0cf78e7056fbb03d",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 918,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "①フィン王",
+          "group": "ev_e_0020",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20131_9",
+      "script": "sc_e_0156",
+      "script_sha256": "53032b0b2c2818c12384b5d522759eb0fda89b1dc643970e59cc524930161e56",
+      "asset_sha256": "23c0defdfdfff9f9c8c19eb5d22e4b6065700d7ab843cbfbdee3f4e28b364990",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 919,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 921,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 923,
+          "success_pc": 13
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 922,
+          "success_pc": 17
+        }
+      ],
+      "owners": [
+        {
+          "entity": 16,
+          "raw": "④ミンウ",
+          "group": "ev_e_0024",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20131_9",
+      "script": "sc_e_0157",
+      "script_sha256": "0cdc2735ff01aa6228949fba28df69d990324daf048ea25c31d0a9aedb46d23e",
+      "asset_sha256": "bbdc4c86303045e733e3bc85aa92193e4b98b326ec73da8de9c3687e9082f2f7",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 919,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 15,
+          "raw": "④ミンウ",
+          "group": "ev_e_0035",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20161_1",
+      "script": "sc_e_0021",
+      "script_sha256": "b3e56e831f23d46c8b7e060e94e3df7b72ff7a8e9135e43c6cbb44454bb9c4cc",
+      "asset_sha256": "779656c744d94ca162993c6eaf0fa283ac9ace1bd8ed55a364270cdb3ba48014",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 921,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 923,
+          "success_pc": 9
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 919,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 7,
+          "raw": "②シド",
+          "group": "ev_e_0020",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_20161_1",
+      "script": "sc_e_0163",
+      "script_sha256": "765ca7c46b5d02fd65335172664ee97dc5a10e204b55c6b7fb5af4ba210dc688",
+      "asset_sha256": "eb975f676c9fadf399fe828dd60b6d8f053e9b8fb34f112a949431c9a5c987b9",
+      "bindings": [],
+      "owners": [
+        {
+          "entity": 7,
+          "raw": "②シド",
+          "group": "ev_e_0040",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30031_7",
+      "script": "sc_e_0106",
+      "script_sha256": "d36d924e2a1cbfb65b6f0dd064be0cdae9aaefe57dd988c81749365c9122a3eb",
+      "asset_sha256": "f80aa3bf1abb4a510e8de4166b698d31baae0e20a3b4708e9ae0053173ef1ec5",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 922,
+          "success_pc": 58
+        }
+      ],
+      "owners": [
+        {
+          "entity": 14,
+          "raw": "⑦ジャイアントビーバー",
+          "group": "entity_default",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30041_1",
+      "script": "sc_e_0030",
+      "script_sha256": "8d4466577416c7fd9713034b8e4d2d1ae9c96b522b6114131536f5393810e595",
+      "asset_sha256": "7ebb904a46a0bdf0bb6307f94ad75c7d1fa4ee2bbc2f834fba6b3f66869c83e7",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 7,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 30,
+          "raw": "扉の封印",
+          "group": "ev_e_0029",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          27
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30041_1",
+      "script": "sc_e_0034",
+      "script_sha256": "90f4fb981d1654d1d6445a8b1e9c8d254f8c09883a58a09a53fcc4cfabb8c469",
+      "asset_sha256": "b9638c9bb1cbfca21534176e1426306907d9958560d92edf6448742c5fd95bce",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 8,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 55,
+          "raw": "太陽の炎トリガー用",
+          "group": "ev_e_0029",
+          "type": "Entity",
+          "action": 2
+        },
+        {
+          "entity": 56,
+          "raw": "太陽の炎トリガー用",
+          "group": "ev_e_0030",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          31
+        ],
+        [
+          "SetFlag",
+          "TreasureFlag2",
+          246
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30051_1",
+      "script": "sc_e_0036",
+      "script_sha256": "e658177b396ee3b13855ff3d0cbb5a9dd560f3d5b27d47fc59afb7e85197b221",
+      "asset_sha256": "ba6c4e716a46a81e82bd8359e687bb4bee9b6502304420ede2faa866e290d0ab",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 917,
+          "success_pc": 15
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 4,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 42,
+          "raw": "①帝国兵",
+          "group": "ev_e_0036",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          33
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30051_9",
+      "script": "sc_e_0039",
+      "script_sha256": "c9512f06565d200efcd38517d28bb82621a62fb694bb668059cff94c9d14153a",
+      "asset_sha256": "17cf5fd99f55535f734683fe5c9a5f5fdac32cd9ecbff444e9f0247e8ed7e0ab",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 9,
+          "success_pc": 5
+        }
+      ],
+      "owners": [
+        {
+          "entity": 12,
+          "raw": "大戦艦爆破トリガー",
+          "group": "ev_e_0039",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30061_4",
+      "script": "sc_e_0047",
+      "script_sha256": "575e7f38c7467db19d7fcacb8415c668a1b0d58eba4faa153b73b765e3d08293",
+      "asset_sha256": "4cc16cf28c844501830b5ba6faba1a6f8ae8cd6fe6b3f18319a9363deb8f9e86",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 927,
+          "success_pc": 10
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 926,
+          "success_pc": 14
+        }
+      ],
+      "owners": [
+        {
+          "entity": 28,
+          "raw": "母親",
+          "group": "ev_e_0047",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30061_4",
+      "script": "sc_e_0132",
+      "script_sha256": "e52c2136a3c4af3efcd770327d3f8288b2d3844b884df51fe7c16b6e89cd3efa",
+      "asset_sha256": "7c4a7f48a03e35552e1923101a14ac491dd94dd96da6960c4dfd61d0f8d144b6",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 13
+        }
+      ],
+      "owners": [
+        {
+          "entity": 32,
+          "raw": "母親",
+          "group": "ev_e_0087",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "TreasureFlag1",
+          237
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          89
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30061_4",
+      "script": "sc_e_0165",
+      "script_sha256": "868ebe83d7a7b13ace8d93443ec0238efdeb19612fc2117a178d40c3fa99068a",
+      "asset_sha256": "eb74d862b2efd948a29ae21fd5c1c21db8f8b53ae23120c4a4c55c42556e9a29",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 7
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 11
+        }
+      ],
+      "owners": [
+        {
+          "entity": 27,
+          "raw": "子供（金髪）",
+          "group": "ev_e_0047",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30061_5",
+      "script": "sc_e_0050",
+      "script_sha256": "f9daf27a62e82401982e40ebe95030f5ce77edcb371c0c64ace860b4fc38f005",
+      "asset_sha256": "7244101cabad0322e2473e089d101a6dcd4cd02e1d8decca4618df943f20a647",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 12
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 16
+        }
+      ],
+      "owners": [
+        {
+          "entity": 6,
+          "raw": "飛竜",
+          "group": "ev_e_0050",
+          "type": "NPC",
+          "action": 2
+        },
+        {
+          "entity": 6,
+          "raw": "飛竜",
+          "group": "ev_e_0051",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "TreasureFlag2",
+          247
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          44
+        ],
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          116
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30061_5",
+      "script": "sc_e_0166",
+      "script_sha256": "1becd71589849b92777d23cae8c6f4192f144919e217a8b1cfac5e7e0dec0be9",
+      "asset_sha256": "a90811a515676678193e5fe3023075df729576ccbcfe73a589d0f79c34725873",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 926,
+          "success_pc": 5
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 927,
+          "success_pc": 9
+        }
+      ],
+      "owners": [
+        {
+          "entity": 6,
+          "raw": "飛竜",
+          "group": "ev_e_0049",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": []
+    },
+    {
+      "submap": "Map_30071_5",
+      "script": "sc_e_0052",
+      "script_sha256": "be2d33ecf60dcff5bcca9a6ef457e4373a8953a3d99e515f086ab0e76ed0b37f",
+      "asset_sha256": "45fcb52938b4e24c9348a386cc25f752869220d890a22429f947142a914147c7",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 11,
+          "success_pc": 6
+        }
+      ],
+      "owners": [
+        {
+          "entity": 41,
+          "raw": "命の泉",
+          "group": "entity_default",
+          "type": "Entity",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          46
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30101_1",
+      "script": "sc_e_0068",
+      "script_sha256": "b518d532e90ec2f3e362664cbdd2557877fd19276ba54b7836de64d5648ae067",
+      "asset_sha256": "935b47866b0a59364edc31ba886758510a89c86b656c0f089b5f106efef449c7",
+      "bindings": [
+        {
+          "label": "Key_0_1_0",
+          "content": 13,
+          "success_pc": 6
+        }
+      ],
+      "owners": [
+        {
+          "entity": 28,
+          "raw": "ドッペルゲンガー",
+          "group": "ev_e_0068",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          61
+        ]
+      ]
+    },
+    {
+      "submap": "Map_30111_2",
+      "script": "sc_e_0071",
+      "script_sha256": "0632b679af501d15db198144ca69cb091ef7138cef68b7ee9d36c7f69956a97b",
+      "asset_sha256": "76a3347c4b3a8ace62363249bd36cff83349edff5c63d2347be82dc4b30daae3",
+      "bindings": [
+        {
+          "label": "Key_0_0_0",
+          "content": 927,
+          "success_pc": 16
+        },
+        {
+          "label": "Key_0_0_1",
+          "content": 926,
+          "success_pc": 20
+        },
+        {
+          "label": "Key_0_0_2",
+          "content": 924,
+          "success_pc": 24
+        },
+        {
+          "label": "Key_0_0_3",
+          "content": 925,
+          "success_pc": 28
+        },
+        {
+          "label": "Key_0_1_0",
+          "content": 14,
+          "success_pc": 8
+        }
+      ],
+      "owners": [
+        {
+          "entity": 27,
+          "raw": "リチャード",
+          "group": "ev_e_0070",
+          "type": "NPC",
+          "action": 2
+        }
+      ],
+      "state_effects": [
+        [
+          "SetFlag",
+          "ScenarioFlag1",
+          64
+        ]
+      ]
+    }
+  ]
+}

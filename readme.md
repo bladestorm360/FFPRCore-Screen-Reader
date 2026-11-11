@@ -83,20 +83,20 @@ Common commands in both layouts:
 - Backtick, above Tab: rescan the map.
 - Shift+M: toggle the map exit filter, grouping exits by destination on each floor and retaining the nearest usable exit per floor.
 - Alt+Backslash: toggle the event group filter, grouping repeated triggers for the same event and preferring the closest reachable trigger. Also available under Navigation in the mod menu.
-- Ctrl+Shift+Backslash: toggle Hide story-gated destinations (default Off). Also under F8 > Navigation. This hides proven story barriers while keeping uncertain destinations and ordinary NPC obstructions.
+- Ctrl+Shift+Backslash: toggle Hide story-gated destinations (default Off). Also under F8 > Navigation. This hides proven story barriers while keeping uncertain destinations and ordinary NPC obstructions. Visible story-gated destinations on your floor also give their straight-line bearing when highlighted or repeated with K or P.
 - Ctrl+arrow: teleport north, south, west or east of the selected destination, if Navigation / Teleport shortcuts is enabled (default off).
-- Shift+G: start or repeat the current puzzle-guide step.
+- Shift+G: start or repeat the current puzzle-guide step. Minimal is the default: directions and needed actions without activation or step announcements. Select Verbose under F8 > Navigation > Puzzle guide verbosity to include them.
 - FF6 story guidance gives brief directions and necessary party-switch instructions. Parked parties block both guidance and normal paths; when approaches are occupied, directions stop one step before the party and append “Blocked by Party n”. Terra/Banon defenses warn once when an enemy enters three tiles; Shift+G repeats the danger and identifies the closest party when all positions are known. Otherwise guidance aims for the commander who ends the defense.
 - Save points have their own Save Points category. FF6 animation/tutorial companions do not add duplicate destinations.
 - Objects contains things examined or used, such as statues, fountains and gravestones. Events contains automatic walk-on triggers; classification follows each object's actual activation.
 - Native name entry speaks letters crossed with arrows and letters erased with Backspace. Boss targets distinguish verified heads/shells, Chadarnook forms and FF5 Neo Exdeath body areas.
 - Ctrl+G: stop the puzzle guide.
 - G: announce gil.
-- M: announce the current map.
+- M outside battle: announce the current map.
 - V: announce walking or the current vehicle.
 - H: announce the active character's vitals and visible conditions in battle; party information elsewhere. FFVI also reports airship heading and altitude when applicable.
 - T in battle: announce the active turn.
-- 1-9 in battle: read the corresponding party member's vitals and visible conditions, including Critical. In shops: read that party member's equipment comparison, including Can not equip. Each party shortcut has its own remappable binding.
+- In battle, `/`, `.`, `,`, `M`, `N` read party slots 1–5, including visible conditions and Critical. They also work in native item and magic submenus. Outside battle, waypoint keys and M retain their existing functions. In shops, 1–9 read equipment comparisons. Each party check is independently remappable.
 - R: repeat the current dialogue or message.
 - I: read the highlighted item's, spell's or setting's details. In equipment and shops, read the current stats/description panel, following Q or X/Square. In the mod menu, I describes the highlighted setting.
 - Shift+I: read the controls for the current screen.
@@ -136,9 +136,9 @@ In the waypoint name window, type normally. Left/Right reviews letters, Up/Down 
 - F7: toggle Autodetail.
 - F8 on the field: open the mod menu. F8 closes it directly.
 
-Speech includes two independent settings: Interrupt speech on character turn (default on) and Enemy status announcements (default off). Turning turn interruption off queues automatic turn speech; manual T still interrupts. Enemy status speech follows actual visible effects, sprite transformations or material changes. The separate Enemy critical status option defaults off; it can disclose low enemy HP without a standard visible danger pose. Indistinguishable effects use a generic label; hidden Critical is not inferred from enemy HP. Battle results notifications once defaults on when unset and keeps every displayed message in the review buffer. Existing saved settings are preserved.
+Speech includes two independent settings: Interrupt speech on character turn (default on) and Enemy status announcements (default off). Turning turn interruption off queues automatic turn speech; manual T still interrupts. Enemy status speech announces confirmed visible enemy transformations. Enemy KO is spoken independently of this setting. Battle results notifications once defaults on when unset and keeps every displayed message in the review buffer. Existing saved settings are preserved.
 
-The mod menu has Speech, Navigation, Navigation audio and Battle categories. Speech starts with Game speech (default on). Turning it off mutes game and gameplay announcements; the speech-only mod menu continues speaking, including its help and close announcement. Speech also includes Autodetail, Verbose/Brief stat deltas, Status damage (default on) and Spoil treasure chest contents (default off). Navigation includes Autowalk, Navigation keymap, Teleport shortcuts, Speak autowalk path, filters and Stick Click Normalization. Navigation audio starts with its master switch (default on), followed by HRTF, Soundscape and Soundscape settings. The audio master silences every mod sound while preserving individual preferences. It also contains the existing sound toggles and volumes, Beacon with directions, the EXP counter where supported, and Sound previews. Autowalk, Speak autowalk path, Beacon with directions, Soundscape and HRTF remain independently default off.
+The mod menu has Speech, Navigation, Navigation audio and Battle categories. Speech starts with Game speech (default on). Turning it off mutes game and gameplay announcements; the speech-only mod menu continues speaking, including its help and close announcement. Speech also includes Autodetail, Verbose/Brief stat deltas, Status damage (default on) and Spoil treasure chest contents (default off). Navigation includes Autowalk, Navigation keymap, Teleport shortcuts, Speak autowalk path, filters and Stick Click Normalization. Navigation audio starts with its master switch (default on), followed by HRTF, Soundscape and Soundscape settings. The audio master controls automatic sounds. Manual previews remain available. It also contains the existing sound toggles and volumes, Beacon with directions, the EXP counter where supported, and Sound previews. Autowalk, Speak autowalk path, Beacon with directions, Soundscape and HRTF remain independently default off.
 
 Landing Pings is available through Navigation audio in FFI, FFII, FFIII and FFV, default off. It identifies adjacent legal shores while sailing a ship or submarine, and also while using the canoe in FFI–FFIII. It works after loading a save aboard a watercraft. FFII's snowcraft and aircraft are excluded, as are FFIV and FFVI. The old field 9 beacon alias, Minus/Equals category aliases, FFIII status R and FFV Shift+Semicolon shortcuts are removed. F6 toggles beacons in every game. There are no diagnostic or data-dumping hotkeys. Backtick refreshes the navigation list without writing a data dump.
 
@@ -150,7 +150,7 @@ Beacon mode is also available in F8 > Navigation audio. Follow route (the defaul
 
 ### Soundscape and spatial audio
 
-In F8, Navigation audio, turn on Soundscape, or press Ctrl+Apostrophe on the field. Soundscape settings contains its master volume, distance (10 steps by default), and a switch, volume and preview for each cue. Volumes run from 0 to 100. Previews use your volume settings even if that individual cue is switched off; the Navigation audio master still applies. Soundscape, beacon navigation and spoken directions work independently and can be used together. Existing wall bumps, footsteps, wall tones, beacon, EXP counter and landing pings retain their original synthesis, envelopes and default levels; optional HRTF spatializes those original signals.
+In F8, Navigation audio, turn on Soundscape, or press Ctrl+Apostrophe on the field. Soundscape settings contains its master volume, distance (10 steps by default), and a switch, volume and preview for each cue. Volumes run from 0 to 100. Previews use your saved volume and play even when the master or the individual cue is off. Soundscape, beacon navigation and spoken directions work independently and can be used together. Existing wall bumps, footsteps, wall tones, beacon, EXP counter and landing pings retain their original synthesis, envelopes and default levels; optional HRTF spatializes those original signals.
 
 Each nearby entity has its own repeating cue, independent of the selected destination and beacon. Only entities already eligible for the pathfinder participate; entries on another floor, opened chests and ToLayer transitions are silent. Distance is straight-line tile distance, with wrapping at world-map edges.
 
@@ -174,6 +174,17 @@ HRTF is an independent, default-off setting for headphones. It places the wall t
 Create a folder named sounds beside the game's EXE. Put replacement WAV files directly inside it using the exact filenames below. Restart the game after changing files. The folder is optional: a missing folder, empty folder, missing file or invalid individual file uses that cue's embedded default. Do not put these files in the game's own audio data folders.
 
 Use uncompressed 16-bit PCM WAV, mono or stereo, 8,000–96,000 Hz, at most four seconds per file. Stereo is mixed to mono so the mod can position the sound. WAV files with other encodings, including floating-point or compressed audio, fall back to the embedded cue. Keep replacements comfortably quiet; the menu's volume controls still apply. Continuous wall and EXP clips loop, so seamless starts and ends work best.
+
+Custom controls, November2 source update, not installed yet: F8 → Navigation audio
+→ Custom sounds. When enabled, Custom sound settings contains each applicable
+sound. Use custom sound Off restores that sound's generated default. Adjust its
+volume independently;50% preserves the WAV's original gain. Stereo and HRTF keep
+separate saved volumes. Periodic custom sounds offer200–5000ms in100ms steps;
+Confirm restores Original timing. Footstep and Wall Bump remain event sounds.
+Wall Loop Off plays timed pings, with1s if no interval is selected. Wall Loop On
+plays continuously; the sound designer must make its seam clean. Long wall,
+counter and entity clips finish before repeating. Existing sound switches and
+master volume still apply. [Implementation/delivery status](docs/re/CUSTOM_SOUND_CONTROLS_20261102.md).
 
 - footstep.wav: each tile of movement.
 - wall_bump.wav: collision thud.

@@ -1,0 +1,138 @@
+{
+  "scope_tag": "ff3_ContinuationSupplement",
+  "candidates": [
+    {
+      "submap": "Map_30241_8",
+      "maps": [
+        298
+      ],
+      "area_ids": [
+        52
+      ],
+      "area_names_en": [
+        "Doga's Grotto"
+      ],
+      "entity": 5,
+      "raw": "エウレカの鍵、シルクスの鍵を入手",
+      "group": "ev_e_0097",
+      "type": "Event",
+      "roles": [
+        "delegated physical/state mechanism;explicit triage"
+      ],
+      "cell": [
+        1,
+        11,
+        7
+      ],
+      "action": 2,
+      "script": "sc_e_0087",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    }
+  ],
+  "source_sha256": {
+    "objects": "c4e55d91a7519e18eecb970cd2a7da7266e9c0ffe88a3e362e4b506bf49ecd45",
+    "scripts": "933c9ae51b97d68410f2a4bdbf74786f850b80f58971daf04418ed7009336c02",
+    "maps": "c02a2bfaca1ec025c6e6b2dc88059f68c73397e821c3e5b6b35c2e4d1c6a3d01",
+    "script_master": "544f96e352e0cff39f55a86c34d7fc4c1d3ce771931c9b765789da46517347a6",
+    "areas": "780f15910a9c52ff837c919f6f9929ced3f99ee1f7f15dc9d9924f5fee9fcfcb",
+    "english_names": "7b3979738abc3130c26854f1793972d98c5180f5a6f67ff8be3c98fb5c2d8d80"
+  },
+  "source_script_hashes": {
+    "Map_30241_8/sc_e_0087": "236d7c3cae55f93c9ffc0694ab1ca9b62d939aea32b9044b0faddbf690c17d49",
+    "Map_30241_8/sc_e_0327": "57cc0abe77fde392757c27d4e70429a6854de3c88c721234cf0680180dcd8890"
+  },
+  "actors": [
+    {
+      "room": "Map_30241_8",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        11,
+        18
+      ]
+    },
+    {
+      "room": "Map_30241_8",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        11,
+        19
+      ]
+    },
+    {
+      "room": "Map_30241_8",
+      "group": "ev_e_0096",
+      "entity": 6,
+      "object_id": 3,
+      "type": "Event",
+      "raw": "ドーガ戦、ウネ戦",
+      "action": 2,
+      "script_id": 152,
+      "cell": [
+        "GroundObject",
+        11,
+        10
+      ]
+    },
+    {
+      "room": "Map_30241_8",
+      "group": "ev_e_0096",
+      "entity": 7,
+      "object_id": 4,
+      "type": "NPC",
+      "raw": "1:ドーガ",
+      "action": 2,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        10,
+        8
+      ]
+    },
+    {
+      "room": "Map_30241_8",
+      "group": "ev_e_0096",
+      "entity": 8,
+      "object_id": 5,
+      "type": "NPC",
+      "raw": "2:ウネ",
+      "action": 2,
+      "script_id": 156,
+      "cell": [
+        "GroundObject",
+        12,
+        8
+      ]
+    },
+    {
+      "room": "Map_30241_8",
+      "group": "ev_e_0097",
+      "entity": 5,
+      "object_id": 6,
+      "type": "Event",
+      "raw": "エウレカの鍵、シルクスの鍵を入手",
+      "action": 2,
+      "script_id": 155,
+      "cell": [
+        "GroundObject",
+        11,
+        8
+      ]
+    }
+  ],
+  "unresolved_script_names": []
+}

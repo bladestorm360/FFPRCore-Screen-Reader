@@ -60,6 +60,10 @@ bool player_cell(void* map_handle, void* player, baked_route::Cell& out);
 bool cell_at(void* map_handle, unity::Vec3 world, baked_route::Cell& out);
 /// The centre of a baked cell in the map's local space (the inverse of cell_at).
 unity::Vec3 world_of(void* map_handle, const baked_route::Cell& cell);
+// One exact reviewed half-tile segment, rechecked against native collision on
+// the movement owner. Never a path solver or worker-side native operation.
+bool walk_precision_edge(void* map_handle,void* player,const route_progress::PrecisionPoint& from,
+                         const route_progress::PrecisionPoint& to);
 
 /// The cells a route may end on for a target at `target` (baked_router.h goals_for, kind
 /// inferred from what is baked there), under the player's current movement rules.
@@ -86,6 +90,19 @@ struct MapGoal {
     int transportation_id = 0;     // a selected vehicle uses its captured native model position
     int entity_id = -1;            // -1 for coordinate-only goals; zero is a valid native identity
     std::wstring raw_name;         // developer identity only, never spoken; separates story variants
+    // Authored current-floor memory puzzles must not use the ordinary
+    // event-warning fallback: another active marker changes their puzzle state.
+    bool avoid_other_events = false;
+    // Authored dungeon guides can follow reviewed doors/belts/jumps while
+    // preserving the event-safe policy. Memory-marker guides leave this off.
+    bool allow_scripted_crossings = false;
+    // Authored fetch/return puzzle steps may require a real world-map journey
+    // between interiors. Ordinary indoor destinations never enable this:
+    // their gate checks must not search unrelated world detours.
+    bool allow_world_transit = false;
+    // Manual spoken directions may publish a bearing if flight moved again.
+    // Automation and persistent guide previews always need an exact route.
+    bool moving_flight_directions = false;
 };
 
 /// Capture bounded native state on its owner, then plan/format on an owned worker.
@@ -174,6 +191,7 @@ struct CrossLeg {
     bool trap_repeat_blocked = false;
     bool transition_repeat_blocked = false;
     bool event_on_route = false, incomplete = false;
+    bool random_transfer = false;
     int visited_maps = 0;          // owned search-work evidence for bounded regression checks
     bool on_this_map = false;        // the goal itself is the end of this leg
     int next_map_id = 0;             // the map the exit / warp leads to (when !on_this_map)
@@ -190,8 +208,11 @@ struct CrossLeg {
 // current leg always retains with_npcs; native recapture owns each floor handoff.
 // Optional worker-only world target batch shares this exact bounded search for
 // list eligibility; pointers refer only to the immutable bake, never game objects.
+// The last argument is only for the synchronous world1 later-floor-NPC retry:
+// it borrows the identical current-capture walking/landing flood from its parent.
 CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false, bool with_npcs = true, bool with_remote_npcs = true,
-    const std::vector<const baked::Object*>* world_targets = nullptr, std::vector<int>* distances = nullptr);
+    const std::vector<const baked::Object*>* world_targets = nullptr, std::vector<int>* distances = nullptr,
+    const baked_route::Reach* current_world_reach = nullptr);
 /// Retain a bounded completed-trap history for the current destination, preventing repeated legs.
 bool note_trap_start(int map_id, const baked_route::Cell& at);
 void record_map_arrival(int map_id, const baked_route::Cell& at);
@@ -216,6 +237,7 @@ struct RemoteObject {
     int content_id = 0;             // TreasureBox: its contents
     std::optional<bool> opened;     // TreasureBox: copied native save flag; absent when unknown
     bool world_exit = false;       // verified script-backed travel; native identity/type retained
+    bool redundant_return = false; // keep the raw travel edge; omit only its pathfinder row
     int dest_map_id = 0;            // GotoMap: its real destination, including connected floors
     bool shop = false;              // ShopNPC
     bool scripted = false;          // NPC/ShopNPC: an interaction script, not a name-only placeholder

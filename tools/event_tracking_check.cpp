@@ -9,7 +9,7 @@
 
 int main() {
     using namespace field;using namespace field::baked_nav;
-    int failures=0,total_events=0,total_roots=0;
+    int failures=0,total_events=0,total_roots=0,scripted_returns=0;
     auto expect=[&](bool ok,const char* reason){if(!ok){++failures;std::printf("FAIL %s\n",reason);}};
     std::vector<std::string> storage;storage.reserve(6);
     for(int number=1;number<=6;++number) {
@@ -46,9 +46,16 @@ int main() {
                 ++projections;largest=std::max(largest,static_cast<int>(objects.size()));
                 std::set<Identity> actual,world_exits;
                 for(const auto& object:objects)if(object.world_exit) {
-                    const auto* destination=baked::submap_by_map_id(object.dest_map_id);
+                    // These are raw travel candidates. The scanner separately
+                    // publishes same-floor actions as events or objects.
+                    const auto* destination=baked::submap_by_map_id(
+                        object.dest_map_id==-1 ? object.map_id : object.dest_map_id);
                     expect(object.event_type.empty()&&destination,
-                        "reviewed physical travel projects as an exit with its actual destination, without a scene label");
+                        "reviewed physical travel retains its baked destination or same-floor sentinel");
+                    if(object.redundant_return) {
+                        ++scripted_returns;
+                        expect(destination==source,"only returns to the occupied floor carry the list suppression flag");
+                    }
                     world_exits.insert(identity(object));
                 }
                 for(const auto& object:objects)if(!object.event_type.empty()) {
@@ -85,9 +92,12 @@ int main() {
                     if(!event||!resolver.active(*floor.submap,original)||resolver.consumed(*floor.submap,original))continue;
                     const auto& grid=baked::grids(*floor.submap);
                     if(object.tx>=grid.width||object.ty>=grid.height||object.tx+object.tw<=0||object.ty+object.th<=0)continue;
-                    if(baked::world_exit_at(grid,object.entity_id(),baked::str(object.name),object.tx,object.ty)) {
-                        expect(world_exits.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),
-                            "all active scripted world exits remain present in their exit category");
+                    if(const auto* arc=baked::world_exit_at(grid,object.entity_id(),baked::object_identifier(object),object.tx,object.ty);
+                       arc&&!(arc->d&baked::kAutomaticCurrent)) {
+                        const bool present=world_exits.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)});
+                        if(!present&&failures<10)std::printf("Missing scripted exit root%d state%d source%d type%d id%d L%d (%d,%d) dest%d action%d script%d\n",map,state,floor.map_id,int(object.type),object.entity_id(),object.layer,object.tx,object.ty,arc->a,object.b,object.a);
+                        expect(present,
+                            "all active manual travel edges remain in the raw travel projection");
                         continue;
                     }
                     expect(actual.contains(Identity{floor.map_id,static_cast<int>(object.type),object.layer,object.tx,object.ty,object.entity_id(),baked::str(object.group)}),
@@ -101,6 +111,15 @@ int main() {
         expect(!checked_events.empty(),"each game's actual bakes exercise other-floor event tracking");
         total_events+=static_cast<int>(checked_events.size());total_roots+=roots;
         std::printf("FF%d event audit: %d bake objects, %d unmapped submaps; %d master roots, %d state projections, %zu unique projected event identities, %d event rows; largest list %d; worst projection %.3f ms\n",number,baked_rows,unmapped,roots,projections,checked_events.size(),rows,largest,worst);
+        if(number==6)std::thread([&]{
+            for(const int root:{544,546}) {
+                map_state::Resolver state(map_state::Flags{},records);const auto all=connected_objects_snapshot(root,state);
+                const int source=root==544?546:544,id=root==544?12:13;
+                const auto found=std::find_if(all.begin(),all.end(),[&](const auto& row){return row.map_id==source&&row.entity_id==id&&row.type==baked::ObjType::Entity;});
+                expect(found!=all.end()&&found->world_exit&&found->dest_map_id==root&&found->event_type.empty(),"each reviewed Kefka roller/duct projects as the actual exit from its other floor");
+                expect(std::none_of(all.begin(),all.end(),[&](const auto& row){return row.map_id==source&&row.entity_id==id&&!row.event_type.empty();}),"Kefka manual transfers do not duplicate ordinary event rows");
+            }
+        }).join();
         if(number!=2)continue;
         map_state::Flags flags;for(auto& v:flags.scenario)v=0;for(auto& v:flags.treasure)v=0;for(auto& v:flags.global)v=0;
         std::thread replay([&] {
@@ -135,6 +154,8 @@ int main() {
         });replay.join();
     }
     expect(fixture::wrong_owner==0,"projection, matching and route replay make zero native API reads on workers");
+    expect(scripted_returns>0,"real redundant scripted returns remain in the raw travel inventory");
+    std::printf("Raw travel retained %d scripted returns tagged for pathfinder suppression\n",scripted_returns);
     std::printf("Event tracking: %d master roots, %d projected event identities; %d failures\n",total_roots,total_events,failures);
     return failures?1:0;
 }

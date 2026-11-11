@@ -1,15 +1,201 @@
 # Read-only snapshots and worker ownership
 
+**Duncan source/focused/documentation Closed, November4:**seven exact
+discoveries. Optional kettle/shelf/flower clues are alternatives, not three
+required operations. Later training now projects actual active Sabin6 and
+unfinished464 through one exact missing initializer branch. Existing party
+pass adds no native calls; reserve/unknown/complete states and route signatures
+checked.15 actual owner-reader assertions,13 production-route assertions,
+seven state assertions, old17-case Locke/Strago reader and current all-six
+route suite pass. Other state/guides/geometry preserved.1175logical/1207physical;
+350V+128VI=478 pending. Exact broader_audit_20261104/duncan_completion.json;
+combined build/install/gameplay pending.
+[Topic](DUNCAN_PARTY_GATE_20261104.md).
+
+**Gerad source/focused/documentation Closed, November4:**18 exact remaining
+Figaro/Nikeah/cave identities. Twenty-second FFVI guide covers four pub talks,
+native575/576 stopped-actor receipts, first/repeat ferries, inn, both recurring
+turtle banks, fleeing Siegfried, jail, Tentacles and final249→2→249 ready336.
+Two exact manual arcs reuse the actual turtle/counters/layer and known332;
+physical controls stay valid targets. No new hook/poll/native getter/input or
+worker protocol.50 actual assertions/28 continuations,556 story identities,
+controller/ferry/final-scene checks, all-six107 manual/86 directional routes
+and all12 translations pass.638 rooms' terrain/native objects/masters, all old
+initializers and21 older guides preserved. Exact failed attempts and source/
+report/executable/resource hashes:broader_audit_20261104/gerad_completion.json.
+1161logical/1193physical;350V+142VI=492 pending. Combined build/install/gameplay
+remain pending.
+[Topic](GERAD_PASSAGE_20261104.md).
+
+**South Figaro source/focused/documentation Closed, November4:**26 original
+town/cave identities; twenty-first guide covers merchant/soldier/cider Steal,
+boy/password retries, draft, costume removal, Celes/key/clock, native world/cave
+aliases,582→583→63 warnings and full Tunnel Armor64 completion. Two camera-only
+passage destinations corrected;638 rooms' terrain/native objects/masters/state
+and20 earlier guides preserved. Only this ordered recipe opts into first-match
+ownership. No new hook/native read/worker API.34 actual assertions/43 native
+continuations (31 normal),535 guide identities, six choices/both scene branches,
+all-six route suite and five keys/all12 locales pass. Failed fixtures and the
+active-script runner mistake are retained; fixed-script rerun passes. Exact
+broader_audit_20261104/south_figaro_completion.json.1143logical/1175physical;
+350V+160VI=510 pending. Combined release/install/gameplay remain pending.
+[Topic](SOUTH_FIGARO_INFILTRATION_20261104.md).
+
+
+**Keyboard remapping source/focused/documentation Closed, November4:** existing
+per-game catalog/editor now checks new gameplay assignments against current
+native keys/modifiers, preserves rejected values, and uses the effective
+recovery/capture-cancel keys. Separate custom navigation profiles and inactive-
+profile conflicts pass; existing default sharing/context precedence is retained.
+Five battle-only party slots/native2/3, text/focus/capture/controller independence
+and all ten native input paths pass. Held remapped keys stay owned through
+modifier/context handoff until release. No new hook, worker or per-frame native
+configuration read. Exact all-six native evidence,109 key mappings,8403 names/
+zero missing,43 reader/chord assertions and all five actual input/settings targets
+pass. Eight keys/all12 locales. Combined release/install/gameplay pending; exact
+broader_audit_20261104/keyboard_completion.json. Audit remains1117logical/
+1149physical,350V+186VI=536 pending. Return to the finite remaining map audit.
+[Topic](KEYBOARD_REMAPPING_20261104.md).
+
+**Ebot’s Rock source/focused/documentation Closed, November4:** twentieth guide
+uses actual current-room coral/chests/layout, the native22 threshold, active
+Strago first-feed check, correct keep/feed choices and full first/repeat Hidon
+completion. Fresh random warps have12 real outcomes; first entry stays
+deterministic. Normal routes label random attempts and retire on actual arrival
+without consuming the pad. No terrain/native object/other-room change, new hook
+or native getter call. Actual152 route/state assertions,27 pocket/layout cases,
+442 guide identities/current controller, role readers17/18/37 and all-six route/
+Magitek regressions pass. Five keys/all12 locales. Exact source/report/resource
+identities: broader_audit_20261104/ebot_completion.json.1117logical/1149physical;
+350V+186VI=536 pending. No Main DLL/install/game/probe/agent; combined release/
+delivery and natural gameplay remain required.
+[Topic](EBOTS_ROCK_GUIDANCE_20261104.md).
+
+**Magitek Factory source/focused/documentation Closed, November4:**27 exact
+Factory/Research identities reviewed. Eleven native ladder/conveyor links
+(ten manual/one automatic) restore missing lower/upper routes on396; no absent
+46/31 operation is granted on643. Exact22-object addition preserves all terrain,
+old objects/other rooms/initializers/19 story/five static guides. Normal same-floor
+manual directions now retain the planner's exact receipt beside the control;
+actual start and exact landing own completion. No new hook/native read/write/
+queue/search or VM design. Hidden passage397/PointIn11 already matches17,28.
+Actual11 arcs/11 approaches/50 assertions, all-six routing105 manual/84 directional
+and trap regressions pass. Stale long-warning fixture expectations corrected;
+actual concise warning policy retained. Source/semantic/canonical/docs/evidence:
+broader_audit_20261104/magitek_completion.json;
+[topic](MAGITEK_PASSAGES_20261104.md).1114logical/1146physical reviewed;
+350V+189VI=539 pending. No Main DLL/install/game/probe/agent. Combined release/
+delivery and natural gameplay remain required.
+
+November3 [Owzer door cue](OWZERS_MANSION_20261103.md): exact native53F760
+callback after original. Unarmed calls check owned intent only; off-owner calls
+perform no observation. An armed native-owner callback reads existing storage,
+actual map and two ints of a length-verified eight-element array; it retains no
+pointer and posts at most one owned notification. Deferred output rechecks
+generation/focus/modals/field readiness/staging cell and a quarter-second age
+limit within the native one-second opening. Stop/movement/map/battle or focus
+loss cancels readiness; delayed dispatch waits for another native opening.
+No worker/native waits, polling, timer writes or automatic movement. Actual
+controller and earlier roof cases pass. Added-observer fixture10000 mean0.377us/
+peak18.6us is bounded host evidence, not audible or game-frame responsiveness.
+
+November3UTC [ordinary Phantom Train](PHANTOM_TRAIN_JOURNEY_20261103.md): new
+stage rules and exact offline transfer/projection corrections reuse the existing
+native flags/actor capture, ready continuation, rule VM and Navigation worker.
+No new runtime hook, native membership query, snapshot field, frame polling or
+game-thread work. Two exact unknown membership branches use the existing bounded
+intersection; only their proven common boss group becomes a destination.16
+stage/engine witnesses and seven continuations pass; native/audible/frame
+confirmation remains separate from these throttled fixtures. Source/focused
+Closed; final combined payload is not installed.
+
+November3UTC [FFVI roof guide](ZONE_EATER_ROOF_20261103.md): one exact native
+TimerInstanceManager.SetGrobalTimer detour after the original, not Timer.Update
+or the per-frame layer-scroll calls. Only an armed, explicitly requested map504
+leg reaches bounded script-name observation; off-main calls perform no mod
+observation. Existing singleton/static fields supply one known5-second timer,
+one nine-character script name and finite scalar values, on the native owner.
+No pointer leaves that call. Native objects are never constructed or changed.
+The model/recovery and actual route use the existing Navigation worker.
+
+One owned pending goal/128-cell maximum preserves the preview. A second actual
+guide press arms it, including during native animation without reading actors.
+One existing ready continuation handles the reset; no new frame timer or polling
+loop. Before Go, owner context, actual position, native remaining time and exact
+cardinal cells are rechecked. Late or changed results cannot release movement.
+Input-context expansion is one existing-core FFVI-owned readiness predicate;
+other games/static guides retain their qualified behavior. All211 connected
+recoveries/34 safe resumes and actual controller/worker ownership pass. Source
+focus/mod-modal publication guards pass;10000 timer captures mean1.103us/peak17us
+in the capped fixture.1498 FFVI names0missing. Source/focused Closed, exact hashes
+in zone_eater_20261103/completion.json. No in-game aggregate frame/audible responsiveness is inferred from capped
+fixtures, and the combined native payload is not yet rebuilt/installed.
+
+November2 [custom audio controls](CUSTOM_SOUND_CONTROLS_20261102.md): fixed18
+settings captured on the existing native owner; value-only configuration queue,
+Audio-owned retained PCM and clocks. Native Beacon/Landing use a loaded-mask
+atomic and bounded settings lookups, without files/waits/new hooks. Bounds,
+cancellation and verification limits are documented in the linked topic.
+
+November1 FFIII consumable locks add two optional scalar snapshot inputs:
+Magic Key quantity from one content15 bucket lookup and Thief membership from
+the established9-corps/16-owned-character bounds. Every getter/type/save check
+stays on the native owner; no clone, script wrapper, inventory enumeration or
+game-data write is used. Native wrappers mutate map-local scratch and are
+explicitly forbidden here. Existing request capture owns these observations;
+no new hook, polling, wait or worker pointer is added. Exact identity/receipt
+rows, nested key costs and the physical manual approach are worker computation.
+Zero worker-native reads and complete directions/browse/filter journeys pass;
+native cumulative/frame/audio timing remains unmeasured. This does not certify
+the owner's25ms responsiveness threshold from throttled fixtures.
+[Source and acceptance evidence](FF3_KEY_GATES_20261101.md).
+
+October31 resumed audit: authored manual targets can consume a uniquely matched
+current single-cell Entity/AnimEntity/TreasureBox pose from the existing owned
+route snapshot, as NPCs already do. Dream-train interaction107 reproduces three
+staged-home failures; captured positions correct them. Type/raw identity,
+ambiguity, valid map/layer and consumed guards remain; rectangle anchors are
+not guessed. No new native observation, hook, wait or worker pointer. The change
+is request-driven Navigation work.26 pose/guard cases and six stationary game
+witnesses, maze episodes and shared routing checks qualify this slice. Retired
+script actions stay unavailable; opened ordinary chests remain navigable under
+the established policy. [Evidence/status](DREAM_TRAIN_20261031.md).
+
+October30 [Shift+G puzzle follow-up](SHIFTG_PUZZLE_AUDIT_20261030.md) adds Narshe's
+owned native-progress rules. Authored event-safe goals run on Navigation with
+fresh trigger power/gates and refuse ordinary event-crossing fallback. Ready
+map arrival owns final completion after party cleanup; hooks only mark epochs/
+flags. No new hook, native pointer handoff, game-thread search or wait is added.
+Focused model/route/retry episodes are separate from natural frame/audio timing.
+
+The Opera slice adds exact native Play/Select/Destroy and multiple-choice UI
+writers. Only owned choice ordinals, outcome flags and a read-only input-context
+bit survive callbacks; native pointer identities stay on the native owner and
+retire on map/battle/scene/end. The existing one-frame initial-read generation
+is cancelled by native focus/close. Two cached keyboard catalog indices provide
+remap-aware information-only dispatch and physical release ownership. Ordinary
+transition guards remain intact. No new worker, polling hook or native wait.
+7200 coroutine-detour fixture callbacks total6.314ms, with native/UI boundaries
+fake; actual cumulative native frame/audio performance remains unmeasured.
+
 October30 [Floating Continent lag](FLOATING_NAVIGATION_LAG_20261030.md) reduces
 repeated native root/header reads within the same owner frame. Resumed frames
 replace pointers before use; actor payloads stay live and no pointer is handed
 to a worker. The0.5ms capture/scheduler budgets are unchanged. Data prepares an
 immutable ID index; lookup/guard work stays owned. Qualified stationary views
-use complete current no-live-NPC facts, exact pose/vehicle/script revision and
+use complete current actor facts, exact pose/vehicle/script revision and
 existing invalidation, while browse/directions retain fresh capture. Native
 MainMenu5 also retires world1 routes/views through the field-owned action,
 without starting a scan in the menu; spell changes can affect entry guards at
-the same position. Any listed or unlisted NPC disables reuse. Old list-row age and fresh route-capture timing
+the same position. Any listed or unlisted actionable NPC disables reuse;
+FFIII world1's native non-actionable puppets use the same admission decision as
+discovery. Exact fixed default border actors skip Unity conversion and copy
+fresh power/selectors; other cache owners/identities retain full observation.
+Directions no longer force another full world1 scan after that fresh capture.
+At most four identical current-world floods share one owned request; immutable
+interior-return proofs only discard detours already dominated by its initial
+legal reach. Unknown/new pockets and other worlds preserve the full graph.
+Old list-row age and fresh route-capture timing
 are reported separately; no fake-native/worker timing certifies native lag.
 
 October30 [vehicle/world journeys](WORLD_MAP_JOURNEYS_20261030.md) add no hook,
@@ -1114,3 +1300,115 @@ frame-lag, first-usable-direction or audible-response cost has been measured for
 feature. Worker timing, when recorded, will not establish application responsiveness;
 the cumulative mod-caused 25 ms application-lag blocker applies. Gameplay remains a
 separate user-side confirmation after combined checks and installation.
+
+## FFVI puzzle snapshots and completion — October31
+
+The unused498 party observation and center-position hypothesis are retired.
+Native party copies remain limited to the established defenses19/318: at most
+three ready saved records, copied Vec3 or at most16,384 UTF-16 units per record;
+no native pointer reaches a worker. Phoenix's actual scenario/area receipts
+certify its handoffs. Four automatic-passage arcs and final-edge entry masks use
+only owned worker geometry, preserving native collision and exact arrival.
+
+Opera's explicit completion177 survives its native battle/movie sequence. The
+existing coalesced ready refresh compares that bit in its already-copied flags;
+no additional native read, hook, callback or polling system is introduced.
+Stop/title clear the receipt; transient exit arms retain their battle retirement.
+Unknown completion cannot finish a guide. Actual ready-state177 completes once.
+Inactive defense phases use14/138 to distinguish completion from No guide;
+neither defense gains a new automatic completion watcher.
+
+Two exact Opera backdrop SysCalls are visual scenery changes. Skipping them in
+offline initializer generation changes only four PCs in Map_20161_2. Native
+local ownership remains intact: an unknown future control room is entered via
+its real PointIn, then current native observation owns the lever. No foreign
+map-local value is guessed. Eight complete Opera trajectories and the current
+Phoenix/Tower/all-six worker regressions pass; the
+[puzzle topic](SHIFTG_PUZZLE_AUDIT_20261030.md) links frozen source/report inputs.
+No new native/game-frame or audible-responsiveness measurement is claimed.
+
+## Static guide operation receipts — October31
+
+The18 existing recipes distinguish a coordinate/floor waypoint from operating
+a control.21 exact controls use single scenario-bit reads, one current-map
+local read, or FFV's reviewed retained-actor Hide state. The local reader checks
+the storage's actual map ID and exactly eight native values; foreign/missing/
+malformed state is unknown. No full Flags/Mini snapshot runs on movement.
+
+Only an explicit guide repeat can request FFV's actor observation. GetFieldEntity
+positive IDs scan the native entityList; refuse a count above64 before the call.
+Returned actor lifetime, exact ID/raw name, current floor and visible parent are
+validated. A missing actor is unknown, never proof of Hide. No pointer survives
+the call or goes to a worker. Movement callbacks perform zero actor lookups.
+Exact native bodies/provenance remain outside Git in ff5_control_receipt/.
+
+Operation completion advances the guide epoch before its old route can publish.
+Current native stage receipts skip completed controls on explicit resume. The
+finite caps are64 recipes/32 steps; malformed examined recipes cannot become
+proximity guides. Existing native movement/dialogue/battle events own refresh;
+no new hook/poll/wait is added.21 controller operations, all-six native-shaped
+state and12 complete Citadel routes pass; static_checkpoint/ preserves inputs.
+CPU-throttled offline wall times do not certify game-frame/audible responsiveness.
+
+## Owned guide commands during native UI — October31
+
+The existing MessageSelectController Show/Close producer publishes one owned
+open flag. Map change, battle entry and title clear that flag/generation only;
+stale initial-choice text fails its existing guard. Additive scene loads do not
+invalidate a live native choice. No new hook or native observation is added.
+
+Once per existing input tick, the core caches owned repeat/stop availability.
+Native manager/listener input hooks inspect only those copied booleans and the
+existing binding/physical-key ownership; they do not query guide/game state.
+Opera retains its distinct native performance qualifier. Static choice/dialogue
+repeat uses only the owned instruction, even if a field readiness flag lingers;
+no native flags, actor lookup, route capture or worker job runs. Starting a
+static guide still requires the ready field. Cancel retires owned state during
+loading/movie/dialogue. It clears both owners if integration left overlapping
+state, and starting a static guide retires an older module continuation.
+
+Typing, foreground, modal and interception guards persist. The native busy
+branch refreshes the existing typing allowance before reserving a guide key;
+its earlier typing context cannot cause key replay. Physical ownership survives
+context/modifier retirement until release. Controller read-only mode exposes
+only available guide information; stop-only scenes cannot start a guide. Normal
+battle/menu controller routing is preserved. FFIII circuit cancellation now
+retires without a readiness read. Actual producer, controller/keyboard,10 native
+input paths, circuit, Opera and story-runtime checks pass. This does not certify
+native game-frame/audible latency; no game was launched or controlled.
+
+## Resumed FFIII world requests — October31
+
+Latest-pose sampling stays on the native capture owner at the end of each
+browse/direction capture. It rereads a ready same-map finite player position;
+the original vehicle observation and strict publication identity remain. A
+changed vehicle, map, request generation or tile during computation still
+retires the result. This reduces capture-age drift without moving a game
+pointer/search/wait onto another owner; sustained moving-flight publication
+remains a natural-gameplay limit.
+
+Water planning now transposes the actual cardinal movement graph and caches
+paired dive/surface legality within one owned request. The256x256 world extent,
+at most three stage planes and32 craft bound its arrays/graph. Every expansion
+and reconstruction checks cancellation. No native API, cross-request mutable
+cache or worker-to-owner wait is added. Repeated directions preserve the exact
+manual water-transition receipt instead of looking for a fabricated door.
+
+Measured ordinary A* detours expanded80000–163000 heading states. After2048
+expansions, an owned reverse tile potential guides that same turn-cost A*.
+Invincible uses this only if an ordinary zero-mountain-action route is proven;
+otherwise its original action-first graph remains. Arrays are bounded by the
+current world grid/headings, and cancellation covers graph construction and
+frontier rebuilding. Offline-only per-function counters/timers are absent from
+the shipped DLL.84 original/adaptive reference pairs and2257408 world-distance
+cells pass; native-layer blocker regressions are corrected across all six games.
+
+Qualified stationary inventory reuse covers FFIII worlds1/3/4 only. Exact
+position/vehicle, published revision and observed absence of actionable NPCs/
+parties remain mandatory; empty/unqualified captures abstain. Native script
+return, map and battle invalidation remain the producers. Both category inputs
+and the post-directions refresh use this predicate. Actual-consumer900 category
+inputs enqueue no repeated scan/filter work; movement, vehicle/story changes and
+native actor cases retain refresh. Source/focused evidence is in
+build_check/navigation_resume_20261031/; quotas distinguish these fixture timings
+from native input-to-audible response, sustained backlog and game-frame costs.

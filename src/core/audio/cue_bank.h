@@ -13,7 +13,13 @@ constexpr size_t entity_count = count - first_entity;
 constexpr int rate = 22050;
 struct Definition { const char* file; const wchar_t* label; const char* toggle; const char* volume; };
 extern const std::array<Definition, count> definitions;
-struct Clip { std::vector<int16_t> mono; bool custom = false; };
+struct Clip {
+    std::vector<int16_t> mono;
+    bool custom = false;
+    // Retained only when mono is replaced by a custom file. Worker-owned and
+    // immutable after loading; disabling an override needs no filesystem work.
+    std::vector<int16_t> original;
+};
 // Worker-only, bounded WAV decoder. PCM16 mono/stereo, 8–96 kHz, <= 4 seconds.
 bool decode(const std::string& bytes, Clip& clip);
 using Bank = std::array<Clip, count>;

@@ -79,7 +79,7 @@ Bank load(const std::wstring& root) {
         std::ifstream in(path,std::ios::binary); std::string bytes(size_t(size),'\0');
         if(!in.read(bytes.data(),std::streamsize(size))) continue;
         Clip custom;
-        if(decode(bytes,custom)) { custom.custom=true; result[i]=std::move(custom); LOGF("[Audio] custom cue %s",definitions[i].file); }
+        if(decode(bytes,custom)) { custom.custom=true; custom.original=std::move(result[i].mono); result[i]=std::move(custom); LOGF("[Audio] custom cue %s",definitions[i].file); }
         else LOGF("[Audio] invalid custom cue %s; using embedded default",definitions[i].file);
     }
     return result;

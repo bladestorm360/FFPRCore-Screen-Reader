@@ -15,6 +15,7 @@
 namespace sound::runtime {
 namespace {
 struct Request { cues::Id cue{}; float x=0,north=1,gain=1,pitch=1; uint64_t generation=0,field_generation=0; bool preview=false; float amplitude=1; bool beacon_bearing=false; };
+constexpr size_t preview_voice = 15;
 NonblockingQueue<Request,64> requests;
 NonblockingQueue<scape::Options,8> configurations;
 // Exactly four buffers, single producer/consumer per direction. No CAS/retry:
@@ -37,6 +38,7 @@ public:
 Buffers observations,spares,retired;
 std::atomic<uint64_t> field_epoch{1}, audio_epoch{1};
 std::atomic<bool> nav_enabled{true}, active_hrtf{false};
+std::atomic<uint32_t> available_custom{0};
 std::atomic<unsigned> wall_mask{0};
 std::atomic<float> wall_gain{1},counter_gain{1};
 std::atomic<bool> counter_enabled{false};
@@ -71,13 +73,23 @@ public:
     uint64_t field_generation=0,audio_generation=0;
     size_t turn=0;
     bool wanted_hrtf=false, prepared=false;
+    bool automatic_audio=false;
     unsigned last_wall=0;
     uint64_t deferred=0;
+    std::array<double,4> wall_next{};
+    double counter_next=0;
+    bool custom_clip(cues::Id cue) const { return custom::selected(options.custom,bank,cue); }
+    float custom_gain(cues::Id cue) const { return custom_clip(cue)?options.custom.cues[size_t(cue)].gain:1.f; }
+    int custom_period(cues::Id cue) const { return custom_clip(cue)?custom::clamp_interval(options.custom.cues[size_t(cue)].repeat_ms):0; }
+    const std::vector<int16_t>& samples(cues::Id cue) const {
+        const auto& clip=bank[size_t(cue)];
+        return !custom_clip(cue)&&clip.custom?clip.original:clip.mono;
+    }
     void stop(size_t i) { hrtf.stop(i); voices[i]={}; }
-    void stop_all() { for(size_t i=0;i<voices.size();++i) stop(i); }
+    void stop_all() { for(size_t i=0;i<voices.size();++i) stop(i);wall_next.fill(0);counter_next=0; }
     void stop_field() {
-        for(size_t i=0;i<voices.size();++i) if(i!=8 && i!=15) stop(i);
-        recycle(std::move(snapshot)); emitters.clear(); clocks.clear(); last_wall=0;
+        for(size_t i=0;i<voices.size();++i) if(i!=8 && i!=preview_voice) stop(i);
+        recycle(std::move(snapshot)); emitters.clear(); clocks.clear(); last_wall=0;wall_next.fill(0);
     }
     void start(size_t i,cues::Id cue,float x,float north,float gain,float pitch,bool loop=false,uint64_t id=0,float amplitude=1,bool beacon_bearing=false) {
         stop(i);
@@ -95,18 +107,24 @@ public:
                 north=(north<0?-1.f:1.f)*std::sqrt(std::max(0.f,1-x*x));
             }
         }
-        if(bank[size_t(cue)].mono.empty()) return;
+        if(samples(cue).empty()) return;
+        gain*=custom_gain(cue);
         // Wall bumps need extra headroom through the HRTF renderer. Apply this
         // only after actual activation, so stereo/unavailable-HRTF fallback and
         // every other cue keep their existing levels and volume-bank semantics.
         const float cue_gain = hrtf.active() && cue == cues::Id::WallBump ? 2.f : 1.f;
         auto& v=voices[i];
         v={true,loop,id!=0,id,cue,x,north,std::clamp(gain*amplitude,0.f,4.f),hrtf.active()?1.f:std::clamp(pitch,.4f,2.f),0,{}};
-        if(size_t(cue)<cues::first_entity && !bank[size_t(cue)].custom) {
+        if(size_t(cue)<cues::first_entity && !custom_clip(cue)) {
             v.reference=legacy::make(cue,x,gain,pitch,amplitude,hrtf.active());
             v.pitch=1; // Original synthesis changes frequency without stretching envelopes.
             v.gain=(cue==cues::Id::Beacon || cue==cues::Id::BeaconBlocked)?1:gain;
             v.gain *= cue_gain;
+            hrtf.play_pcm(i,v.reference.mono,x,north,v.gain,loop);
+        } else if(!custom_clip(cue)&&bank[size_t(cue)].custom) {
+            // Entity defaults use their retained embedded PCM. HRTF's existing
+            // per-voice buffer owns it; no backend/device reload is necessary.
+            v.reference.mono=samples(cue);v.gain*=cue_gain;
             hrtf.play_pcm(i,v.reference.mono,x,north,v.gain,loop);
         } else {
             v.gain *= cue_gain;
@@ -115,8 +133,24 @@ public:
     }
     void configure(scape::Options next) {
         const bool change=next.hrtf!=wanted_hrtf;
+        // Only changed timbre/loop ownership stops an active voice. Gain edits
+        // keep existing loops; all cleanup and sample storage stay on Audio.
+        for(size_t i=0;i<voices.size();++i)if(voices[i].on) {
+            const auto cue=voices[i].cue;const auto n=size_t(cue);
+            if(custom_clip(cue)!=custom::selected(next.custom,bank,cue)||
+               (custom_clip(cue)&&custom::wall(cue)&&options.custom.cues[n].loop!=next.custom.cues[n].loop)||
+               (cue==cues::Id::Counter&&options.custom.cues[n].repeat_ms!=next.custom.cues[n].repeat_ms))stop(i);
+        }
+        if(next.custom!=options.custom) {
+            wall_next.fill(0);counter_next=0;
+            for(auto& [id,clock]:clocks)clock.next=0;
+        }
         options=std::move(next);
-        if(!prepared) { bank=cues::load(cues::module_root()); prepared=true; }
+        if(!prepared) {
+            bank=cues::load(cues::module_root()); prepared=true;
+            uint32_t mask=0;for(size_t i=0;i<cues::count;++i)if(bank[i].custom)mask|=uint32_t(1)<<i;
+            available_custom.store(mask,std::memory_order_release);
+        }
         if(change) {
             stop_all(); wanted_hrtf=options.hrtf;
             // A fresh instance destroys its thread-local context on this same worker.
@@ -125,7 +159,6 @@ public:
             active_hrtf=enabled;
             if(options.hrtf) LOGF("[Audio] HRTF requested: %s",enabled?"active loopback":"unavailable; stereo/pitch fallback");
         }
-        if(!options.navigation) stop_all();
         refresh();
     }
     void refresh() {
@@ -139,7 +172,7 @@ public:
             if(inserted) clock->second.next=now()+double(e.rank%16)*.07;
             for(size_t i=16;i<voices.size();++i) if(voices[i].on && voices[i].id==e.id) {
                 voices[i].x=e.x; voices[i].north=e.north;
-                voices[i].gain=gain(e); hrtf.position(i,e.x,e.north,voices[i].gain);
+                voices[i].gain=gain(e)*custom_gain(e.cue); hrtf.position(i,e.x,e.north,voices[i].gain);
             }
         }
     }
@@ -155,7 +188,7 @@ public:
         snapshot=std::move(next); refresh(); return true;
     }
     void maintain(double at) {
-        if(!nav_enabled.load() || !options.navigation) { stop_all(); return; }
+        if(!nav_enabled.load() || !options.navigation) return;
         if(snapshot && at-snapshot->captured_at>1.5) {
             // Only obsolete entity observations expire here. Beacon, footsteps,
             // walls and landing pings have independent producers/lifetimes.
@@ -166,17 +199,28 @@ public:
         const int count=std::popcount(mask&15u);
         for(unsigned d=0;d<4;++d) {
             const size_t slot=2+d;
+            const auto cue=cues::Id(size_t(cues::Id::WallNorth)+d);
             if(mask&(1u<<d)) {
                 const float x=d==2?1.f:(d==3?-1.f:0.f),n=d==0?1.f:(d==1?-1.f:0.f);
                 const float gain=wall_gain.load()*(count>1?float(1.0/std::sqrt(count)):1.f);
-                if(!voices[slot].on) start(slot,cues::Id(size_t(cues::Id::WallNorth)+d),x,n,gain,1,true);
-                else { voices[slot].gain=gain; hrtf.position(slot,x,n,gain); }
-            } else if(voices[slot].on) stop(slot);
+                const bool loop=!custom_clip(cue)||options.custom.cues[size_t(cue)].loop;
+                if(!voices[slot].on&&(loop||at>=wall_next[d])) {
+                    start(slot,cue,x,n,gain,1,loop);
+                    wall_next[d]=at+(custom_period(cue)?custom_period(cue):1000)/1000.;
+                } else if(voices[slot].on) {
+                    voices[slot].gain=gain*custom_gain(cue);hrtf.position(slot,x,n,voices[slot].gain);
+                }
+            } else {if(voices[slot].on)stop(slot);wall_next[d]=0;}
         }
         if(counter_enabled.load()) {
-            if(!voices[8].on) start(8,cues::Id::Counter,0,1,counter_gain.load(),1,true);
-            else { voices[8].gain=counter_gain.load(); hrtf.position(8,0,1,voices[8].gain); }
-        } else if(voices[8].on) stop(8);
+            const int period=custom_period(cues::Id::Counter);
+            if(!voices[8].on&&(!period||at>=counter_next)) {
+                start(8,cues::Id::Counter,0,1,counter_gain.load(),1,!period);
+                counter_next=at+period/1000.;
+            } else if(voices[8].on) {
+                voices[8].gain=counter_gain.load()*custom_gain(cues::Id::Counter);hrtf.position(8,0,1,voices[8].gain);
+            }
+        } else {if(voices[8].on)stop(8);counter_next=0;}
         // Every emitter retains an independent clock. Resource pressure defers
         // starts in rotating order; it never chooses a nearest-N subset.
         size_t starts=0;
@@ -184,11 +228,19 @@ public:
             const size_t index=(turn+checked)%emitters.size(); const auto& e=emitters[index];
             auto& clock=clocks[e.id]; if(at<clock.next) continue;
             if(starts==8) { ++deferred; continue; }
-            size_t slot=16; for(;slot<voices.size() && voices[slot].on;++slot) {}
+            size_t slot=voices.size();bool playing=false;
+            for(size_t i=16;i<voices.size();++i) {
+                if(voices[i].on&&voices[i].id==e.id){playing=true;break;}
+                if(!voices[i].on&&slot==voices.size())slot=i;
+            }
+            // A long clip finishes first. An explicit short interval cannot
+            // create overlapping copies of one emitter or consume every voice.
+            if(playing){++deferred;continue;}
             if(slot==voices.size()) { ++deferred; continue; }
             const float p=pitch(e);
             start(slot,e.cue,e.x,e.north,gain(e),p,false,e.id); ++starts;
-            clock.next=at+scape::cadence(e,double(bank[size_t(e.cue)].mono.size())/cues::rate,p);
+            const int period=custom_period(e.cue);
+            clock.next=at+(period?period/1000.:scape::cadence(e,double(samples(e.cue).size())/cues::rate,p));
         }
         if(!emitters.empty()) turn=(turn+8)%emitters.size();
     }
@@ -198,6 +250,7 @@ public:
         for(size_t i=0;i<voices.size();++i) {
             auto& v=voices[i]; if(!v.on) continue;
             const bool reference=!v.reference.mono.empty();
+            const bool original_stereo=!v.reference.stereo.empty();
             const auto& pcm=reference?v.reference.mono:bank[size_t(v.cue)].mono;
             if(pcm.empty()) { stop(i); continue; }
             if(hrtf.active()) {
@@ -223,8 +276,8 @@ public:
                 const size_t n=size_t(v.cursor), next=n+1<pcm.size()?n+1:(v.loop?0:n);
                 const float fraction=float(v.cursor-n), sample=pcm[n]*(1-fraction)+pcm[next]*fraction;
                 // Saturating sum, with low-amplitude defaults and user-controlled mix levels.
-                const float l=reference?v.reference.stereo[n*2]*v.gain:sample*left;
-                const float r=reference?v.reference.stereo[n*2+1]*v.gain:sample*right;
+                const float l=original_stereo?v.reference.stereo[n*2]*v.gain:sample*left;
+                const float r=original_stereo?v.reference.stereo[n*2+1]*v.gain:sample*right;
                 out[f*2]=int16_t(std::clamp(float(out[f*2])+l,-32767.f,32767.f));
                 out[f*2+1]=int16_t(std::clamp(float(out[f*2+1])+r,-32767.f,32767.f));
                 v.cursor+=v.pitch;
@@ -264,12 +317,15 @@ void beacon(float east,float north,float gain,bool blocked) {
     requests.push(std::move(request));
 }
 void preview(cues::Id cue) {
-    if(!nav_enabled.load() || size_t(cue)>=cues::count) return;
-    Request request{cue,0,1,1,1,audio_epoch.load(),field_epoch.load(),true}; requests.push(std::move(request));
+    if(size_t(cue)>=cues::count) return;
+    Request request{cue};
+    request.preview=true;
+    requests.push(std::move(request));
 }
 void walls(unsigned mask,float gain) { wall_gain=gain; wall_mask=mask&15; }
 void counter(bool enabled,float gain) { counter_gain=gain; counter_enabled=enabled; }
 bool hrtf_active() { return active_hrtf.load(); }
+uint32_t custom_available_mask() { return available_custom.load(std::memory_order_acquire); }
 void pump(SDL_AudioStream* stream) {
     if(!stream) return;
     if(!player) {
@@ -285,35 +341,48 @@ void pump(SDL_AudioStream* stream) {
     if(updated) p.configure(std::move(next));
     if(!p.prepared) return;
     const auto generation=field_epoch.load(),audio=audio_epoch.load();
-    if(generation!=p.field_generation || audio!=p.audio_generation) {
-        p.stop_field(); if(audio!=p.audio_generation) p.stop_all();
+    const bool automatic=nav_enabled.load() && p.options.navigation;
+    const bool master_changed=audio!=p.audio_generation || automatic!=p.automatic_audio;
+    if(generation!=p.field_generation || master_changed) {
+        // Retire queued gameplay PCM on a context/master change. A deliberate
+        // menu preview owns a separate voice and can finish while muted.
+        p.stop_field();
+        if(master_changed) { p.stop(8); p.counter_next=0; }
         sdl::SDL_ClearAudioStream(stream);
         p.field_generation=generation; p.audio_generation=audio;
+        p.automatic_audio=automatic;
     }
     std::unique_ptr<scape::Snapshot> snapshot;
     while(retired.pop(snapshot)) recycle(std::move(snapshot));
-    while(observations.pop(snapshot)) p.accept(std::move(snapshot),now());
+    while(observations.pop(snapshot)) {
+        if(automatic) p.accept(std::move(snapshot),now());
+        else recycle(std::move(snapshot));
+    }
     Request request;
     for(int n=0;n<64 && requests.pop(request);++n) {
-        if(!nav_enabled.load() || request.generation!=audio_epoch.load()) continue;
-        if(!request.preview && request.field_generation!=field_epoch.load()) continue;
+        if(!request.preview && (!automatic || request.generation!=audio || request.field_generation!=generation)) continue;
         const size_t index=size_t(request.cue);
         const float gain=request.gain*(request.preview?p.options.gains[index]*(index>=cues::first_entity?p.options.master:1):1);
-        const size_t slot=request.preview?15:(index==0?0:index==1?1:index==8?8:index==9?9:6);
+        const size_t slot=request.preview?preview_voice:(index==0?0:index==1?1:index==8?8:index==9?9:6);
         p.start(slot,request.cue,request.x,request.north,gain,request.pitch,false,0,request.amplitude,request.beacon_bearing);
     }
-    if(!nav_enabled.load() || !p.options.navigation) { p.stop_all(); sdl::SDL_ClearAudioStream(stream); return; }
+    // While muted, stop submitting once the preview ends. Let SDL drain any
+    // remaining preview samples instead of clearing its tail each pump.
+    if(!automatic && !p.voices[preview_voice].on) return;
     int queued=std::max(0,sdl::SDL_GetAudioStreamQueued(stream));
     constexpr int frames=441,bytes=frames*4,target=bytes*3;
-    for(int chunk=0;chunk<3 && queued<target;++chunk,queued+=bytes) {
-        if(audio_epoch.load()!=p.audio_generation || field_epoch.load()!=p.field_generation) break;
-        p.maintain(now());
+    const auto obsolete=[&] {
+        return audio_epoch.load()!=audio || field_epoch.load()!=generation || (automatic && !nav_enabled.load());
+    };
+    for(int chunk=0;chunk<3 && queued<target && (automatic || p.voices[preview_voice].on);++chunk,queued+=bytes) {
+        if(obsolete()) break;
+        if(automatic) p.maintain(now());
         std::array<int16_t,frames*2> pcm{}; p.render(pcm.data(),frames);
         sdl::SDL_PutAudioStreamData(stream,pcm.data(),bytes);
-        if(audio_epoch.load()!=p.audio_generation || field_epoch.load()!=p.field_generation) {
+        if(obsolete()) {
             sdl::SDL_ClearAudioStream(stream); break;
         }
     }
 }
-void close() { delete player; player=nullptr; active_hrtf=false; }
+void close() { delete player; player=nullptr; active_hrtf=false;available_custom=0; }
 }

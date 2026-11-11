@@ -1,0 +1,116 @@
+{
+  "source_script_hashes": {
+    "Map_30470/sc_e_0218": "b6a199bb2c976b5c4b1dbea93751aa2a6fa1606864ef215519948c2d2aa16ec6",
+    "Map_30410/sc_e_0111_on": "9f9087d7978a384f26589bc5b903fd1a754e85a3a4cf134e8061e9345732cf7f",
+    "Map_30410/sc_e_0114": "8c631a3466275f127cdca7c751df918abb153e1420892ea14381dac657b90d83",
+    "Map_30410/sc_e_0133": "759d7cf11919e301cadba5910524922912504a00128d637a978cb32e6d64ab29",
+    "Map_30410/sc_e_0111_off": "27800401ae74ed16e4d7caea8eb0ed15046068c83e19c0d22af584537d032463",
+    "Map_30410/sc_e_0111": "f1b738f765f4c290fa7572b9e9c5503ff3d2b7d2c23362d3cf503cf21bf8fb7c",
+    "Map_30470/sc_e_0216": "b32c1d2afc40905641cde87f75f27dbee36d8e9398261b045e5739a6068b9e2f",
+    "Map_30470/sc_e_0269": "8788027a6543a379892626dd1bbe01f7e3b51f486cb1e9b909c5d223b5aefe9a",
+    "Map_30410/sc_e_0116": "a5c3e51d71c9c8724b45f7d686e86efb7400f6992b4e7b92de6a44e55f1a6b5c",
+    "Map_30410/sc_map_30410": "41ac38cebb20111bcfeb22863c993239afe226947f0a343f44fbd89c6f82880f",
+    "Map_30470/sc_map_30470": "dcadcd7033599de01cb7a256d2bc317374f0931aa23e6820b40c72f0f6644bdb"
+  },
+  "waterfall_continuations": {
+    "Map_30470/sc_e_0218": {
+      "sha256": "b6a199bb2c976b5c4b1dbea93751aa2a6fa1606864ef215519948c2d2aa16ec6",
+      "flags": [],
+      "maps": [],
+      "encounters": [
+        [
+          [
+            80,
+            0,
+            0,
+            0
+          ],
+          "sc_e_0218_1"
+        ]
+      ]
+    },
+    "Map_30470/sc_e_0218_1": {
+      "sha256": "7dc6e72f18e397b3ce92de41a829e40a5e8851b6f83ae990fab0affdace1b902",
+      "flags": [],
+      "maps": [
+        [
+          376,
+          1,
+          "sc_e_0218_2"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30470/sc_map_30470": {
+      "sha256": "dcadcd7033599de01cb7a256d2bc317374f0931aa23e6820b40c72f0f6644bdb",
+      "flags": [
+        [
+          "ScenarioFlag4",
+          170,
+          1
+        ]
+      ],
+      "maps": [],
+      "encounters": []
+    },
+    "Map_30480/sc_e_0218_2": {
+      "sha256": "9ef5205d0d4ee0ec42a096068ef3e7e1b9f42b8119193d17c233b7e17a2a435a",
+      "flags": [
+        [
+          "ScenarioFlag1",
+          125,
+          1
+        ],
+        [
+          "ScenarioFlag4",
+          171,
+          1
+        ]
+      ],
+      "maps": [],
+      "encounters": []
+    }
+  },
+  "source_input_sha256": {
+    "objects": "17f6a180291875ebad43dd0e375a37493bee68f9d8077a8e3538353006abed23",
+    "scripts": "7b989e8be83adfecbd038a62e9c1b1ce9055d1f983b4803d2a358e6e6794aecb",
+    "maps": "1dedbff32eef5025db9a20e3180464e78d9be854c7acb9f91ebd4f3b9373fe36",
+    "script_master": "f28e965a31655aa284f7802c90f0af70b3ca10ca4c36746eea76e46dd0919e71",
+    "areas": "25cf96f80f0a1e4e2f1984d5482399bb6c562c3973577ca3ca226f00b4696973",
+    "english_names": "9fea81a0b457d762762e0d7e29e4ccf4a081e6d97d34d8563408522d1ab5a01b"
+  },
+  "waterfall": {
+    "first_visit_guard": 125,
+    "conversation_receipt": 124,
+    "first_jump_battle": 80,
+    "victory_map": 376,
+    "victory_point": 1,
+    "victory_continuation": "sc_e_0218_2",
+    "return_map": 1,
+    "return_point": 37,
+    "decline_reset_bank": "AreaLocalVariable",
+    "decline_reset_index": 1
+  },
+  "preserved_closed_mask_topic": "docs/re/NPC_MASK_PROJECTION_20261029.md",
+  "no_new_puzzle_recipe": true,
+  "no_runtime_or_navigation_data_change": true,
+  "closed_mask_native_provenance": {
+    "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+    "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+    "functions": {
+      "Last.Map.FieldController.ScalingAlphaMask(int id, float scale, float scalingSec, Easing.Fuction easing)": 3225424,
+      "Last.Map.FieldController.ScalingAlphaMask(int id, float startScale, float endScale, float scalingSec, Easing.Fuction easing)": 3225248,
+      "Last.Map.ForegroundAlphaMask.ChangeMaskScale(float scale)": 8963280,
+      "Last.Map.ForegroundAlphaMask.ScalingAlphaMask(float scale, float scalingSec, Easing.Fuction easing)": 8965616,
+      "Last.Map.ForegroundAlphaMask.ScalingAlphaMask(float startScale, float endScale, float scalingSec, Easing.Fuction easing)": 8965376,
+      "Last.Map.ForegroundAlphaMask.UpdateScroll(Vector2 pointOfMap)": 8965856,
+      "Last.Map.Renderer.MainViewMapRenderer.ScalingAlphaMask(int id, float scale, float scalingSec = 0, Easing.Fuction easing)": 11720448,
+      "Last.Map.Renderer.MainViewMapRenderer.ScalingAlphaMask(int id, float startScale, float endScale, float scalingSec = 0, Easing.Fuction easing)": 11720816,
+      "Last.Interpreter.Instructions.SystemCall.Current.ShowNearMaskImperialCamp(MainCore mc)": 2883216,
+      "Last.Interpreter.Instructions.SystemCall.Current.HideNearMaskImperialCamp(MainCore mc)": 2739920,
+      "Last.Interpreter.Instructions.SystemCall.Current.ExpandNearMaskImperialCamp(MainCore mc)": 2721616,
+      "Last.Interpreter.Instructions.SystemCall.Current.ReduceNearMaskImperialCamp(MainCore mc)": 2820368,
+      "Last.Interpreter.Instructions.SystemCall.Current..cctor()": 2917792
+    }
+  }
+}

@@ -1,0 +1,3715 @@
+{
+  "scope_tag": "ff2_ContinuationSupplement",
+  "candidates": [
+    {
+      "submap": "Map_20011_2",
+      "maps": [
+        6
+      ],
+      "area_ids": [
+        2
+      ],
+      "area_names_en": [
+        "Altair"
+      ],
+      "entity": 29,
+      "raw": "②ミンウ",
+      "group": "ev_e_0010_m",
+      "type": "NPC",
+      "roles": [
+        "delegated physical/state mechanism;explicit triage"
+      ],
+      "cell": [
+        0,
+        9,
+        7
+      ],
+      "action": 2,
+      "script": "sc_e_0152",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20050",
+      "maps": [
+        46
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Paloom"
+      ],
+      "entity": 39,
+      "raw": "①船乗り",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        1,
+        14,
+        25
+      ],
+      "action": 2,
+      "script": "sc_sea_ship_taxi_0001",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20060",
+      "maps": [
+        52
+      ],
+      "area_ids": [
+        5
+      ],
+      "area_names_en": [
+        "Poft"
+      ],
+      "entity": 45,
+      "raw": "②船乗り",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        1,
+        27,
+        30
+      ],
+      "action": 2,
+      "script": "sc_sea_ship_taxi_0002",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20061_1",
+      "maps": [
+        53
+      ],
+      "area_ids": [
+        5
+      ],
+      "area_names_en": [
+        "Poft"
+      ],
+      "entity": 6,
+      "raw": "⑨飛空艇乗り",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        0,
+        23,
+        10
+      ],
+      "action": 2,
+      "script": "sc_air_ship_taxi_0001",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20150",
+      "maps": [
+        112
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Paloom"
+      ],
+      "entity": 40,
+      "raw": "①船乗り",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        1,
+        14,
+        25
+      ],
+      "action": 2,
+      "script": "sc_sea_ship_taxi_0001",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20160",
+      "maps": [
+        115
+      ],
+      "area_ids": [
+        5
+      ],
+      "area_names_en": [
+        "Poft"
+      ],
+      "entity": 46,
+      "raw": "②船乗り",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        1,
+        27,
+        30
+      ],
+      "action": 2,
+      "script": "sc_sea_ship_taxi_0002",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20161_1",
+      "maps": [
+        116
+      ],
+      "area_ids": [
+        5
+      ],
+      "area_names_en": [
+        "Poft"
+      ],
+      "entity": 8,
+      "raw": "①飛空艇乗り",
+      "group": "ev_e_0020",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        0,
+        23,
+        10
+      ],
+      "action": 2,
+      "script": "sc_air_ship_taxi_0001",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_20161_1",
+      "maps": [
+        116
+      ],
+      "area_ids": [
+        5
+      ],
+      "area_names_en": [
+        "Poft"
+      ],
+      "entity": 8,
+      "raw": "①飛空艇乗り",
+      "group": "ev_e_0040",
+      "type": "NPC",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        0,
+        23,
+        10
+      ],
+      "action": 2,
+      "script": "sc_air_ship_taxi_0001",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    },
+    {
+      "submap": "Map_30111_3",
+      "maps": [
+        230
+      ],
+      "area_ids": [
+        26
+      ],
+      "area_names_en": [
+        "Leviathan"
+      ],
+      "entity": 3,
+      "raw": "sc_e_0073",
+      "group": "entity_default",
+      "type": "Entity",
+      "roles": [
+        "choice and state;explicit triage"
+      ],
+      "cell": [
+        0,
+        13,
+        19
+      ],
+      "action": 2,
+      "script": "sc_e_0073",
+      "guide_references": [],
+      "status": "needs exact semantic triage"
+    }
+  ],
+  "source_sha256": {
+    "objects": "aaf6a22ae23d585dce41d4718e75786fb117b551954eb46daad566ae90086cc3",
+    "scripts": "989a0c1ac921bea8f02fdf564142b2275ee2cce919d728045146c363bc859770",
+    "maps": "654be95c8eededb1cec4707fdb6196e36cc5f78a6b91f2acc27320d270bee8e5",
+    "script_master": "10e9e45da1abd04b70db67d88759de1e82a9d1896d0cd77646139f85637cc966",
+    "areas": "d0f7d8549389632e64353a9abfe5e3e1cc3029249f5036f3d085ed0690bb46be",
+    "english_names": "07042eddd1337531b0838de00b7364f8ebfff88f0d4e914e9a19150afbc63c49"
+  },
+  "source_script_hashes": {
+    "Map_20011_2/sc_e_0152": "69610d17bb66b0821c5db48c19b3beb9a5042d6c7dbfb6af53ff3bd6fd2f6229",
+    "Map_20050/sc_sea_ship_taxi_0001": "c914d3bc4e38f264f337b52676b2d56f27c6c6aa7646cdc412696030eb38349b",
+    "Map_20060/sc_sea_ship_taxi_0002": "330c82daff00563ba3659f2c64edb1bfb721ec6b0dd6e4e7c05470afc3999c0c",
+    "Map_20061_1/sc_air_ship_taxi_0001": "2fa470b1f66d4fff9fe767419cd129bb34f0d46a6677d5e683ec5303cbd81081",
+    "Map_20150/sc_sea_ship_taxi_0001": "c914d3bc4e38f264f337b52676b2d56f27c6c6aa7646cdc412696030eb38349b",
+    "Map_20160/sc_sea_ship_taxi_0002": "330c82daff00563ba3659f2c64edb1bfb721ec6b0dd6e4e7c05470afc3999c0c",
+    "Map_20161_1/sc_air_ship_taxi_0001": "2fa470b1f66d4fff9fe767419cd129bb34f0d46a6677d5e683ec5303cbd81081",
+    "Map_30111_3/sc_e_0073": "3260ecc26d5cf4f56f6242fceb6a25341347a66b630054ad2bc2f68ebf33932a",
+    "Map_10010/sc_e_0073_1": "35840c0e00083308341daa93ad997e12b327bbac52ebd4586e5fd8982755cd2f",
+    "Map_20011_2/sc_e_0010": "34f00e10708a7b876b4521c52701c383ceae23c8dd1a74f9ace05d7bf9eee9b5"
+  },
+  "actors": [
+    {
+      "room": "Map_20011_2",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        13,
+        20
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "BottomObject",
+        13,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "entity_default",
+      "entity": 49,
+      "object_id": 201,
+      "type": "NPC",
+      "raw": "真ヒルダ",
+      "action": 2,
+      "script_id": 9,
+      "cell": [
+        "BottomObject",
+        11,
+        8
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0002",
+      "entity": 30,
+      "object_id": 7,
+      "type": "NPC",
+      "raw": "③兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1500,
+      "cell": [
+        "BottomObject",
+        7,
+        13
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0002",
+      "entity": 31,
+      "object_id": 8,
+      "type": "NPC",
+      "raw": "④老人",
+      "action": 2,
+      "script_id": 1501,
+      "cell": [
+        "BottomObject",
+        18,
+        15
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0002",
+      "entity": 32,
+      "object_id": 9,
+      "type": "NPC",
+      "raw": "⑤兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        12,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0002",
+      "entity": 33,
+      "object_id": 10,
+      "type": "NPC",
+      "raw": "⑥兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        14,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0002",
+      "entity": 48,
+      "object_id": 206,
+      "type": "AnimEntity",
+      "raw": "リングの光",
+      "action": 0,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        11,
+        9
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0010",
+      "entity": 14,
+      "object_id": 23,
+      "type": "NPC",
+      "raw": "③兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1500,
+      "cell": [
+        "BottomObject",
+        7,
+        13
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0010",
+      "entity": 15,
+      "object_id": 24,
+      "type": "NPC",
+      "raw": "④老人",
+      "action": 2,
+      "script_id": 1501,
+      "cell": [
+        "BottomObject",
+        18,
+        15
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0010",
+      "entity": 16,
+      "object_id": 25,
+      "type": "NPC",
+      "raw": "⑤兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        12,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0010",
+      "entity": 17,
+      "object_id": 26,
+      "type": "NPC",
+      "raw": "⑥兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        14,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0010_m",
+      "entity": 29,
+      "object_id": 202,
+      "type": "NPC",
+      "raw": "②ミンウ",
+      "action": 2,
+      "script_id": 166,
+      "cell": [
+        "BottomObject",
+        9,
+        8
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0013",
+      "entity": 6,
+      "object_id": 31,
+      "type": "NPC",
+      "raw": "③兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1500,
+      "cell": [
+        "BottomObject",
+        7,
+        13
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0013",
+      "entity": 7,
+      "object_id": 32,
+      "type": "NPC",
+      "raw": "④老人",
+      "action": 2,
+      "script_id": 1501,
+      "cell": [
+        "BottomObject",
+        18,
+        15
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0013",
+      "entity": 8,
+      "object_id": 33,
+      "type": "NPC",
+      "raw": "⑤兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        12,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0013",
+      "entity": 9,
+      "object_id": 34,
+      "type": "NPC",
+      "raw": "⑥兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        14,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0017",
+      "entity": 5,
+      "object_id": 95,
+      "type": "NPC",
+      "raw": "①ヒルダ",
+      "action": 2,
+      "script_id": 162,
+      "cell": [
+        "BottomObject",
+        11,
+        8
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0017",
+      "entity": 6,
+      "object_id": 96,
+      "type": "NPC",
+      "raw": "③兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1500,
+      "cell": [
+        "BottomObject",
+        7,
+        13
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0017",
+      "entity": 7,
+      "object_id": 97,
+      "type": "NPC",
+      "raw": "④老人",
+      "action": 2,
+      "script_id": 1501,
+      "cell": [
+        "BottomObject",
+        18,
+        15
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0017",
+      "entity": 8,
+      "object_id": 98,
+      "type": "NPC",
+      "raw": "⑤兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        12,
+        17
+      ]
+    },
+    {
+      "room": "Map_20011_2",
+      "group": "ev_e_0017",
+      "entity": 9,
+      "object_id": 99,
+      "type": "NPC",
+      "raw": "⑥兵士(白い帽子、青マント)",
+      "action": 2,
+      "script_id": 1502,
+      "cell": [
+        "BottomObject",
+        14,
+        17
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        9,
+        28
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        28
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 3,
+      "object_id": 3,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        29
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 4,
+      "object_id": 4,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        30
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 5,
+      "object_id": 5,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        21
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 6,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        22
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 7,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        15
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 8,
+      "object_id": 8,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        16
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 9,
+      "object_id": 9,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        22,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 10,
+      "object_id": 10,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        21,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 11,
+      "object_id": 11,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        18,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 12,
+      "object_id": 12,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        17,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 13,
+      "object_id": 13,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 14,
+      "object_id": 14,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        15,
+        6
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 15,
+      "object_id": 15,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        13
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 16,
+      "object_id": 16,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        14
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 17,
+      "object_id": 17,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        19
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 18,
+      "object_id": 18,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        20
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 19,
+      "object_id": 19,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        28,
+        33
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 20,
+      "object_id": 20,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        32
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 23,
+      "object_id": 23,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        30,
+        27
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 24,
+      "object_id": 24,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        26
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 27,
+      "object_id": 27,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        28,
+        15
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 28,
+      "object_id": 28,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        14
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 31,
+      "object_id": 31,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        16,
+        15
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 32,
+      "object_id": 32,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        14
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 35,
+      "object_id": 35,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        12,
+        19
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 36,
+      "object_id": 36,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        12,
+        18
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 41,
+      "object_id": 47,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 43,
+      "object_id": 49,
+      "type": "NPC",
+      "raw": "⑤海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 44,
+      "object_id": 50,
+      "type": "NPC",
+      "raw": "⑥海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "entity_default",
+      "entity": 39,
+      "object_id": 82,
+      "type": "NPC",
+      "raw": "①船乗り",
+      "action": 2,
+      "script_id": 1003,
+      "cell": [
+        "GroundObject",
+        14,
+        26
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "ev_e_0002",
+      "entity": 40,
+      "object_id": 60,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        24,
+        26
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "ev_e_0002",
+      "entity": 42,
+      "object_id": 61,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 2,
+      "script_id": 203,
+      "cell": [
+        "GroundObject",
+        33,
+        21
+      ]
+    },
+    {
+      "room": "Map_20050",
+      "group": "ev_e_0002",
+      "entity": 45,
+      "object_id": 62,
+      "type": "NPC",
+      "raw": "⑦冒険者(ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        15,
+        17
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        36,
+        33
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        31
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 3,
+      "object_id": 3,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        32
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 4,
+      "object_id": 4,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        33
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 7,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        10
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 8,
+      "object_id": 8,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        11
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 9,
+      "object_id": 9,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        25,
+        6
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 10,
+      "object_id": 10,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        26,
+        6
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 11,
+      "object_id": 11,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        27,
+        6
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 12,
+      "object_id": 12,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        6
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 13,
+      "object_id": 13,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        12
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 17,
+      "object_id": 16,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        29
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 18,
+      "object_id": 17,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        30
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 19,
+      "object_id": 18,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        31
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 20,
+      "object_id": 20,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        23,
+        33
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 21,
+      "object_id": 19,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        32
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 24,
+      "object_id": 22,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        24,
+        23
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 25,
+      "object_id": 21,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        24,
+        22
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 36,
+      "object_id": 27,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        34,
+        11
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 37,
+      "object_id": 28,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        34,
+        10
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 40,
+      "object_id": 29,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        14,
+        11
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 41,
+      "object_id": 30,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        14,
+        10
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 44,
+      "object_id": 44,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 45,
+      "object_id": 80,
+      "type": "NPC",
+      "raw": "②船乗り",
+      "action": 2,
+      "script_id": 1004,
+      "cell": [
+        "GroundObject",
+        27,
+        31
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 14,
+      "object_id": 81,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        8,
+        21
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 15,
+      "object_id": 82,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        8,
+        22
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 16,
+      "object_id": 83,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        8,
+        23
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 32,
+      "object_id": 84,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "UpperObject",
+        16,
+        19
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 33,
+      "object_id": 85,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        16,
+        18
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 5,
+      "object_id": 88,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        37,
+        21
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 89,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        37,
+        22
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 28,
+      "object_id": 90,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "UpperObject",
+        33,
+        21
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "entity_default",
+      "entity": 29,
+      "object_id": 91,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        33,
+        20
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0002",
+      "entity": 46,
+      "object_id": 60,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        21,
+        21
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0002",
+      "entity": 48,
+      "object_id": 62,
+      "type": "NPC",
+      "raw": "⑤海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        22,
+        9
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0002",
+      "entity": 47,
+      "object_id": 94,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        25,
+        13
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0010",
+      "entity": 46,
+      "object_id": 66,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        21,
+        21
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0010",
+      "entity": 48,
+      "object_id": 68,
+      "type": "NPC",
+      "raw": "⑤海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        22,
+        9
+      ]
+    },
+    {
+      "room": "Map_20060",
+      "group": "ev_e_0010",
+      "entity": 47,
+      "object_id": 96,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "UpperObject",
+        25,
+        13
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 1,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "BottomObject",
+        16,
+        15
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 2,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        16,
+        18
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "entity_default",
+      "entity": 5,
+      "object_id": 5,
+      "type": "NPC",
+      "raw": "⑩シド",
+      "action": 2,
+      "script_id": 182,
+      "cell": [
+        "BottomObject",
+        22,
+        12
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 6,
+      "type": "NPC",
+      "raw": "⑨飛空艇乗り",
+      "action": 2,
+      "script_id": 1002,
+      "cell": [
+        "BottomObject",
+        23,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 7,
+      "object_id": 18,
+      "type": "NPC",
+      "raw": "①飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        12,
+        8
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 8,
+      "object_id": 19,
+      "type": "NPC",
+      "raw": "②飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 9,
+      "object_id": 20,
+      "type": "NPC",
+      "raw": "③飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        23,
+        15
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 10,
+      "object_id": 24,
+      "type": "NPC",
+      "raw": "④飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        23,
+        8
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 11,
+      "object_id": 25,
+      "type": "NPC",
+      "raw": "⑤飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        13,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 12,
+      "object_id": 26,
+      "type": "NPC",
+      "raw": "⑥飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        16,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 13,
+      "object_id": 27,
+      "type": "NPC",
+      "raw": "⑦飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        10,
+        13
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0002",
+      "entity": 14,
+      "object_id": 28,
+      "type": "NPC",
+      "raw": "⑧飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        11,
+        14
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 7,
+      "object_id": 29,
+      "type": "NPC",
+      "raw": "①飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        12,
+        8
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 8,
+      "object_id": 30,
+      "type": "NPC",
+      "raw": "②飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        10,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 9,
+      "object_id": 31,
+      "type": "NPC",
+      "raw": "③飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        23,
+        15
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 10,
+      "object_id": 35,
+      "type": "NPC",
+      "raw": "④飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        23,
+        8
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 11,
+      "object_id": 36,
+      "type": "NPC",
+      "raw": "⑤飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        13,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 12,
+      "object_id": 37,
+      "type": "NPC",
+      "raw": "⑥飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        16,
+        11
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 13,
+      "object_id": 38,
+      "type": "NPC",
+      "raw": "⑦飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        10,
+        13
+      ]
+    },
+    {
+      "room": "Map_20061_1",
+      "group": "ev_e_0010",
+      "entity": 14,
+      "object_id": 39,
+      "type": "NPC",
+      "raw": "⑧飛空艇乗り",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        11,
+        14
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 64,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        9,
+        28
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 3,
+      "object_id": 65,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        28
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 4,
+      "object_id": 66,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        29
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 5,
+      "object_id": 67,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        30
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 68,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        21
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 69,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        22
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 8,
+      "object_id": 70,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        15
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 9,
+      "object_id": 71,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        36,
+        16
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 10,
+      "object_id": 72,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        22,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 11,
+      "object_id": 73,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        21,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 12,
+      "object_id": 74,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        18,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 13,
+      "object_id": 75,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        17,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 14,
+      "object_id": 76,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 15,
+      "object_id": 77,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        15,
+        6
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 16,
+      "object_id": 78,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        13
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 17,
+      "object_id": 79,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        14
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 18,
+      "object_id": 80,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        19
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 19,
+      "object_id": 81,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        20
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 20,
+      "object_id": 82,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        28,
+        33
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 21,
+      "object_id": 83,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        32
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 24,
+      "object_id": 86,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        30,
+        27
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 25,
+      "object_id": 87,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        26
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 28,
+      "object_id": 90,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        28,
+        15
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 29,
+      "object_id": 91,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        14
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 32,
+      "object_id": 94,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        16,
+        15
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 33,
+      "object_id": 95,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        14
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 36,
+      "object_id": 98,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        12,
+        19
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 37,
+      "object_id": 99,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        12,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "entity_default",
+      "entity": 40,
+      "object_id": 194,
+      "type": "NPC",
+      "raw": "①船乗り",
+      "action": 2,
+      "script_id": 1003,
+      "cell": [
+        "GroundObject",
+        14,
+        26
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0001",
+      "entity": 40,
+      "object_id": 115,
+      "type": "NPC",
+      "raw": "①船乗り",
+      "action": 2,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        14,
+        25
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0001_no_ship",
+      "entity": 40,
+      "object_id": 122,
+      "type": "NPC",
+      "raw": "①船乗り",
+      "action": 2,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        14,
+        25
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0020",
+      "entity": 41,
+      "object_id": 130,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0020",
+      "entity": 42,
+      "object_id": 131,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0020",
+      "entity": 43,
+      "object_id": 132,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0035",
+      "entity": 41,
+      "object_id": 137,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0035",
+      "entity": 42,
+      "object_id": 138,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0035",
+      "entity": 43,
+      "object_id": 139,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0040",
+      "entity": 41,
+      "object_id": 144,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0040",
+      "entity": 42,
+      "object_id": 145,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0040",
+      "entity": 43,
+      "object_id": 146,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0041",
+      "entity": 41,
+      "object_id": 151,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0041",
+      "entity": 42,
+      "object_id": 152,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0041",
+      "entity": 43,
+      "object_id": 153,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0041",
+      "entity": 54,
+      "object_id": 157,
+      "type": "NPC",
+      "raw": "⑤レイラ",
+      "action": 2,
+      "script_id": 56,
+      "cell": [
+        "GroundObject",
+        12,
+        27
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0044",
+      "entity": 41,
+      "object_id": 159,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0044",
+      "entity": 42,
+      "object_id": 160,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0044",
+      "entity": 43,
+      "object_id": 161,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0053",
+      "entity": 41,
+      "object_id": 167,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0053",
+      "entity": 42,
+      "object_id": 168,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0053",
+      "entity": 43,
+      "object_id": 169,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0054",
+      "entity": 41,
+      "object_id": 174,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0054",
+      "entity": 42,
+      "object_id": 175,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0054",
+      "entity": 43,
+      "object_id": 176,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0057",
+      "entity": 41,
+      "object_id": 181,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0057",
+      "entity": 42,
+      "object_id": 182,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0057",
+      "entity": 43,
+      "object_id": 183,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0060",
+      "entity": 41,
+      "object_id": 188,
+      "type": "NPC",
+      "raw": "②海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        30,
+        31
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0060",
+      "entity": 42,
+      "object_id": 189,
+      "type": "NPC",
+      "raw": "③海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        18
+      ]
+    },
+    {
+      "room": "Map_20150",
+      "group": "ev_e_0060",
+      "entity": 43,
+      "object_id": 190,
+      "type": "NPC",
+      "raw": "④海賊",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        28,
+        10
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 65,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        36,
+        33
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 3,
+      "object_id": 66,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        31
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 4,
+      "object_id": 67,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        32
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 5,
+      "object_id": 68,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        33
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 69,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        21
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 70,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        22
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 8,
+      "object_id": 71,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        10
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 9,
+      "object_id": 72,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        37,
+        11
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 10,
+      "object_id": 73,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        25,
+        6
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 11,
+      "object_id": 74,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        26,
+        6
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 12,
+      "object_id": 75,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        27,
+        6
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 13,
+      "object_id": 76,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        6
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 14,
+      "object_id": 77,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        12
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 15,
+      "object_id": 78,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        21
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 16,
+      "object_id": 79,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        22
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 17,
+      "object_id": 80,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        23
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 18,
+      "object_id": 81,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        29
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 19,
+      "object_id": 82,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 20,
+      "object_id": 83,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        8,
+        31
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 21,
+      "object_id": 84,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        23,
+        33
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 22,
+      "object_id": 85,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        23,
+        32
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 25,
+      "object_id": 88,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        24,
+        23
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 26,
+      "object_id": 89,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        24,
+        22
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 29,
+      "object_id": 92,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        33,
+        21
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 30,
+      "object_id": 93,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        33,
+        20
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 33,
+      "object_id": 96,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        16,
+        19
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 34,
+      "object_id": 97,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        16,
+        18
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 37,
+      "object_id": 100,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        34,
+        11
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 38,
+      "object_id": 101,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        34,
+        10
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 41,
+      "object_id": 104,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "GroundObject",
+        14,
+        11
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 42,
+      "object_id": 105,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        14,
+        10
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "entity_default",
+      "entity": 46,
+      "object_id": 143,
+      "type": "NPC",
+      "raw": "②船乗り",
+      "action": 2,
+      "script_id": 1004,
+      "cell": [
+        "GroundObject",
+        27,
+        31
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0002",
+      "entity": 46,
+      "object_id": 117,
+      "type": "NPC",
+      "raw": "②船乗り",
+      "action": 2,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        27,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0002_no_ship",
+      "entity": 46,
+      "object_id": 118,
+      "type": "NPC",
+      "raw": "②船乗り",
+      "action": 2,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        27,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0020",
+      "entity": 45,
+      "object_id": 119,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0035",
+      "entity": 45,
+      "object_id": 122,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0040",
+      "entity": 45,
+      "object_id": 125,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0041",
+      "entity": 45,
+      "object_id": 128,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0053",
+      "entity": 45,
+      "object_id": 131,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0054",
+      "entity": 45,
+      "object_id": 134,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0057",
+      "entity": 45,
+      "object_id": 137,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20160",
+      "group": "ev_e_0060",
+      "entity": 45,
+      "object_id": 140,
+      "type": "NPC",
+      "raw": "①冒険者（ポニーテール女）",
+      "action": 4,
+      "script_id": 0,
+      "cell": [
+        "GroundObject",
+        31,
+        30
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 11,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "BottomObject",
+        16,
+        15
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 12,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        16,
+        18
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "ev_e_0020",
+      "entity": 7,
+      "object_id": 3,
+      "type": "NPC",
+      "raw": "②シド",
+      "action": 2,
+      "script_id": 183,
+      "cell": [
+        "BottomObject",
+        22,
+        12
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "ev_e_0020",
+      "entity": 8,
+      "object_id": 4,
+      "type": "NPC",
+      "raw": "①飛空艇乗り",
+      "action": 2,
+      "script_id": 1002,
+      "cell": [
+        "BottomObject",
+        23,
+        11
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "ev_e_0040",
+      "entity": 7,
+      "object_id": 15,
+      "type": "NPC",
+      "raw": "②シド",
+      "action": 2,
+      "script_id": 184,
+      "cell": [
+        "BottomObject",
+        22,
+        12
+      ]
+    },
+    {
+      "room": "Map_20161_1",
+      "group": "ev_e_0040",
+      "entity": 8,
+      "object_id": 16,
+      "type": "NPC",
+      "raw": "①飛空艇乗り",
+      "action": 2,
+      "script_id": 1002,
+      "cell": [
+        "BottomObject",
+        23,
+        11
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "entity_default",
+      "entity": 1,
+      "object_id": 2,
+      "type": "PointIn",
+      "raw": "PointIn",
+      "action": null,
+      "script_id": null,
+      "cell": [
+        "BottomObject",
+        39,
+        21
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "entity_default",
+      "entity": 2,
+      "object_id": 3,
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "action": 3,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        39,
+        22
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "entity_default",
+      "entity": 6,
+      "object_id": 9,
+      "type": "TreasureBox",
+      "raw": "だいちのつるぎ",
+      "action": 6,
+      "script_id": 0,
+      "cell": [
+        "BottomObject",
+        33,
+        10
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "entity_default",
+      "entity": 7,
+      "object_id": 10,
+      "type": "TreasureBox",
+      "raw": "ダイヤシールド(エンカウントあり)",
+      "action": 6,
+      "script_id": 511,
+      "cell": [
+        "BottomObject",
+        33,
+        29
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "entity_default",
+      "entity": 3,
+      "object_id": 18,
+      "type": "Entity",
+      "raw": "sc_e_0073",
+      "action": 2,
+      "script_id": 101,
+      "cell": [
+        "BottomObject",
+        13,
+        20
+      ]
+    },
+    {
+      "room": "Map_30111_3",
+      "group": "ev_e_0071",
+      "entity": 10,
+      "object_id": 7,
+      "type": "NPC",
+      "raw": "ビックホーン",
+      "action": 2,
+      "script_id": 99,
+      "cell": [
+        "BottomObject",
+        16,
+        20
+      ]
+    }
+  ],
+  "unresolved_script_names": []
+}

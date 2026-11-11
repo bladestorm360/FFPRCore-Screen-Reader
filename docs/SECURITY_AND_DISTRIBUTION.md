@@ -1,5 +1,134 @@
 # Build and distribution security
 
+## November 11 FFIV Kain's Airship
+
+The locally installed FFIV DLL is 13,389,312 bytes with SHA-256
+`1bb6cf58617ea34f2cea242bdd5c5cae94ff13d5b5aba18a11d35f1cc523bbcc`.
+All 281 canonical build targets compiled. The tool session ended after
+the final NPC label check. The same frozen candidate passed the remaining
+canonical name, wiring and soundscape asset checks in the enforced runner.
+The PE check matched all 67 embedded resources and 47 forwarded exports.
+Only the two FFIV label and language resources differ from the previous
+verified installation. Both contacts and all 12 locales pass.
+
+The canonical smoke test loaded that DLL. The signed Defender scanner
+reported zero detections for the exact 22 staged files, with stable hashes.
+The exclusion query was unavailable and no signing certificate was present.
+The guarded `deploy.bat ff4` installed the exact scanned payload. All 22
+installed files matched, and the protected files and five other installations
+matched their preinstall fingerprints. Rebuild inputs, scan and installation
+receipts are in `build_check/ff4_kain_airship_20261111`.
+
+## November 10 FFIV navigation and battle
+
+The local FFIV Steam installation has the 13,388,800-byte DLL with SHA-256
+`863953f692f48fe4a2f2a03d45f612dd8e02ce3aa99016b1277f549712a01d7e`.
+The canonical build completed 281 serial projects, 8,366 native-name
+checks, and all offline checks. It had zero missing names and zero undefined
+wiring names. The built PE matched 67 embedded resources and 47 forwarded
+exports. The new guide and bearing strings cover all 12 locales.
+
+The source base is `5f1cc7c3dbd2251e572c3dc0f42f557f45191d9d` plus the
+preserved working-tree sources. The 1,301 build-input hashes are in the
+delivery receipt. Visual Studio 18 Community, MSVC 19.50.35721.0 and CMake
+4.1.1-msvc1 built x64 Release. Run `build.bat` and `smoketest.bat` under
+`scripts/run-build.py`. The final build took 5,482.012 seconds and peaked at
+792,875,008 bytes with exit 0 and the tree drained. Smoke loaded the same
+DLL in 5.286 seconds and checked the exports, forwarding and startup log.
+The first combined candidate was withheld when the raw travel audit failed.
+The final suite retains 190 tagged scripted returns in the raw inventory
+and passes across 2,454 master roots.
+
+Fingerprint the established game roots, payload, preferences and waypoints.
+Use `tools/security_payload_check.ps1 -BuiltPayload` with that preinstall
+receipt. The signed Defender scanner checked all 22 staged files with
+definitions 1.463.227.0, exit 0, zero matching detections and stable hashes.
+The exclusion query was unavailable and no signing certificate was present.
+After rechecking the exact source hashes, run the guarded `deploy.bat ff4`
+under the same runner while FFIV is closed. The installed 22 files match
+the scanned payload. All 144 protected files and the other five game
+installations match their preinstall fingerprints. The canonical,
+smoke, scan, deployment and recovery receipts are in
+`build_check/ff4_navigation_20261110`.
+
+Cleanup removed 57,129,667 bytes of scratch project groups, staging,
+isolated smoke output and one-off verification helpers. The canonical
+incremental build and active output are retained with the source and
+verification receipts. The installed DLL hash was checked again afterward.
+
+## November 10 FFV and shared controls
+
+All six installations matched the 13,354,496-byte DLL at that deployment,
+with SHA-256
+`4b4d23779b2444a0819891e97b50f5f72ab1367d789ba3acd462131e5501530c`.
+The canonical build completed 281 projects and 8,362 native-name checks with
+zero missing and zero undefined wiring names. The built PE has all 47
+forwarded exports and 67 byte-matched embedded resources. The three changed
+audio and bearing entries cover 12 locales.
+
+The source base is `5f1cc7c3dbd2251e572c3dc0f42f557f45191d9d` plus the active
+working-tree inputs, fingerprinted in 1,307 entries. Visual Studio 18
+Community, MSVC 19.50.35721.0 and CMake 4.1.1-msvc1 built x64 Release.
+Run `build.bat` from the repository through the enforced runner, then
+`smoketest.bat` in its own bounded job. The canonical job took 7,807.648 seconds,
+peaked at 963,600,384 bytes and drained with exit 0 at the 2 GB and 25% CPU
+limits. The isolated smoke job passed in 8.490 seconds.
+
+Capture the established game roots and protected-file fingerprints, then
+run `tools/security_payload_check.ps1` with BuiltPayload and the preinstall
+receipt. The exact 22-file stage passed the signed Defender scanner using
+definitions 1.463.227.0. It reported zero matching detections and stable
+hashes. The system denied the exclusion query and exposed no signing
+certificate. The guarded `deploy.bat` installed the scanned payload after
+the closed-game and dependency checks. All 132 installed file hashes match
+and 144 protected files retained their fingerprints.
+
+The build inputs, limits, concise test results, resource and scan manifests,
+and preinstall and installed receipts live in `build_check/bug_reports_20261110/`.
+Use the verified v1.0 commit `2fcf0f6f9b6d890abaa5e4886836df6670ab19a5` and the
+same build, smoke, scan and deployment procedure for release recovery.
+The current local build also includes later working-tree changes. The shared
+canonical build cache remains the reusable build tree. Temporary rollback
+copies, scanned payload copies, isolated smoke copies, generated serial
+project files and one-off verification tooling are disposable after the
+installed hashes and protected-file checks pass.
+
+November3UTC custom/shared candidate canonical/offline/smoke/scan Closed,
+not installed:12146688B SHA300ff3dfbebb647ae814baa13a171545533a2ae915236b33b1daeada9cc9d484,
+834 frozen inputs/205targets/242freshreports/67resources/12languages/8340names
+0missing/0undefined/47exports. Canonical passed1272.039s. The first scan setup
+lacked the required dependency snapshot, so no scan ran; failed evidence kept.
+Read-only installed-dependency inventory plus exact22-file Defender scan/output
+verification then passed38.070s/101339136B/exit0/drained under2GB/25%CPU. No threats,
+0 matching detection events, stable bytes, valid/current enabled scanner;
+exclusions unverified/signing0. No game/install/upload/security change.
+Exact build_check/custom_sounds_20261102/canonical_completion.json and security_final.
+
+November2 isolated FF1 Shrine/Ship/service/EXP delivery Closed21:57UTC:
+DLL11625984B SHA b62ed342de0f689673ce7a5a629e588e994477fa1aacde48f13ca3529f180a96.
+724 frozen inputs/169 compiler targets/178 fresh reports/47exports/67resources/
+12languages/8326names0missing/0undefined. Canonical/smoke qualification passes;
+Defender22 exact files no threats/0 matching events/stable hashes, valid scanner
+signature, exclusions unverified/signing0.22 installed hashes match,144 protected
+files and other five games unchanged. No game/probe/upload/security change.
+Full resumed qualification710.831s/801751040B; install12.235s/115920896B,
+both2GB/25%CPU/one worker/exit0/drained. Original2400s compiler timeout preserved.
+Exact Stage ff1_sunken_shrine_20261102/completion.json; Main delivery receipt in
+sunken_shrine_20261102/delivery_completion.json. Natural performance unclaimed.
+
+November1 isolated FF1 class/gates/animated-object delivery:11502080-byte DLL,
+SHA2562b7c5f50f0a1c30ba0367d36d67c0fcdeedc3eb33a553b4c8f6eb6d17e929284.
+699 frozen inputs/165 canonical reports,47-export smoke,67 resources/12 locales
+pass. Enabled/current Defender1.463.72.0 reports no threats/0 matching detections
+and stable hashes for22 exact staged files. Scanner signature Valid; exclusions
+OS-denied/unverified, signing identity0. Guarded FF1 installation matches all22
+hashes;144 protected files and the other5 installations unchanged. No game
+launch/probe, external upload, dependency/security change or public release.
+Build4075.394s/930578432B peak and verification/deploy38.671s/124035072B, both
+serial enforced1 GB/exit0/drained. Isolated source/evidence/recovery retained in
+../FFPRCore-Class-Delivery/build_check/ff1_class_description_20261101/.
+[Scope and qualified cases](re/FF1_GATE_FOLLOWUPS_20261101.md).
+
 October29 final six-game map audit delivery:11374080 bytes, SHA256
 cf805c2e8e05ff0235f51f5228a916bb23c80e1e6251e31c95bc86cf34a5e86b.
 Canonical/offline/isolated smoke,67 resources and12 locales pass. Defender

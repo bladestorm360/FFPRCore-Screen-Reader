@@ -1,5 +1,10 @@
 # Battle damage resources, Swap and condition feedback
 
+November3 [enemy Regen visibility correction](ENEMY_REGEN_VISIBILITY_20261103.md):
+raw condition Add/removal feedback is now party-only, except the independently
+approved enemy Critical opt-in. Actual visible enemy effects retain their own
+observer; native recovery-number popups retain their displayed-digit reader.
+
 October25 [undead Cure/HP polarity correction](FF3_FEEDBACK_20261025.md):
 nominal Recovery HitType must not override the actual renderer recovery flag.
 All-six actual-source ABI tests retain displayed digits, MP/Miss and KO order.

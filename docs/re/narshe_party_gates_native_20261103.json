@@ -1,0 +1,84 @@
+{
+  "script_sha256": {
+    "Map_20010/sc_e_0867": "45a3a06aeadba94943421599235d535edea9de7d8f8e83050c1c6b60db826407",
+    "Map_20010/sc_e_0868": "2aa544eb8af1d1dc2ada0a5ec9691a6647eec33c9cdb8802cf108bb0e68ad445",
+    "Map_20010/sc_e_0869": "dea98baa5134b980fb90b7221176b11486fa12e88fc8f1c5dec89891b81faba3",
+    "Map_20010/sc_e_0870": "dc4a7981b15467167759ccb9605c88590c9bf30fcbe3db8fce74af591891f2aa",
+    "Map_20010/sc_e_0871": "fd15b67a0404a48e66545d1c1820de8e446b501430263c19885d249ed6977357",
+    "Map_20010/sc_e_0872": "d61af8fa8daa645bcca0409d5973a47492a84e422ba129cec8ee9b946ed17d00"
+  },
+  "native_provenance": {
+    "ff6_narshe_membership_20261103": {
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "functions": {
+        "Last.Data.User.Corps.get_CharacterId()": 4646704,
+        "Last.Data.User.OwnedCharacterData.get_characterStatusId()": 4770576,
+        "Last.Management.UserDataManager.get_corpsList()": 3525680,
+        "Last.Management.UserDataManager.GetCorpsListClone()": 5749600,
+        "Last.Management.UserDataManager.GetCorpsListClone(int slotId)": 5749936,
+        "Last.Management.UserDataManager.GetMemberData(int index)": 5756432
+      }
+    },
+    "ff6_narshe_member_lookup_20261103": {
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "functions": {
+        "Last.Data.User.OwnedCharacterData.get_Id()": 4770160,
+        ".UserDataManager.<>c__DisplayClass136_0.<GetMemberData>b__0(OwnedCharacterData v)": 4720512
+      }
+    },
+    "ff6_narshe_close_view_20261103": {
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "functions": {
+        "Last.Interpreter.Instructions.SystemCall.Current.ShowCloseView1(MainCore mc)": 2880480
+      }
+    },
+    "ff6_narshe_scenery_view_20261103": {
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "functions": {
+        "Last.Map.FieldController.ShowScenery(int id, MapConstants.SceneryId sceneryId, float fadeInSec)": 3247328,
+        "Last.Map.Renderer.MainViewMapRenderer.ShowScenery(int id, MapConstants.SceneryId sceneryId, float fadeInSec = 0)": 11724416
+      }
+    },
+    "ff6_narshe_scroll_show_20261103": {
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "functions": {
+        "Last.Map.MapMultipleScroll.Show(float fadeInSec = 0)": 3783824
+      }
+    }
+  },
+  "ability": {
+    "character_status": 2,
+    "membership": "current corps",
+    "owned_reserve_sufficient": false,
+    "hp_or_enabled_check": false
+  },
+  "direct_read_contract": {
+    "user_current_corps_field": "<corpsList>k__BackingField",
+    "user_current_corps_offset": 80,
+    "user_owned_field": "<OwnedCharacterList>k__BackingField",
+    "user_owned_offset": 48,
+    "corps_save_field": "saveData",
+    "corps_save_offset": 16,
+    "character_save_field": "saveData",
+    "character_save_offset": 144,
+    "maximum_corps": 16,
+    "maximum_owned": 64,
+    "match": "Corps CharacterId matches OwnedCharacterData Id; compare the matched canonical characterStatusId to2.",
+    "forbidden_helper": "Native GetMemberData allocates a closure, predicate and OwnedCharacterData clone; no native clone/lookup wrapper is called."
+  },
+  "scope": "Six native Narshe locks115..119,114; persistent opening receipts411..416. No native writes or consumable cost.",
+  "initializer": {
+    "locator": "Map_20010/sc_map_20010",
+    "sha256": "f52d6466569c28a5c73cd86a6c761112f3f19ff3dd205202dc342797f8cfcc1d",
+    "visual_only_row": 21,
+    "native_operation_preserved": true,
+    "projection": "opaque9 to no-op0",
+    "unresolved_character_branch_preserved": 86,
+    "lifecycle": "Flag353 enables ev_e_0703; early world has297=0 and353=0.411..416 are persistent opened receipts."
+  }
+}

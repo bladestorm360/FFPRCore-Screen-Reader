@@ -1,0 +1,13 @@
+{
+  "source_script_hashes": {
+    "Map_30521_1/sc_e_0380": "52f50b84b68f3bf4f6b9e1288cfc288fe052afa7fc5191f2e79dd74e884c0c82",
+    "Map_30521_1/sc_e_0386": "cd1bc81a8d967a87a92978a5ba0821d71dc9d3ebe8223dfe669d0b74523ab2ff",
+    "Map_30521_1/sc_e_0387": "a2c11095b43150f38fd47ed711acd3da19fe3c493a46c48ad505de9c203ea127",
+    "Map_30521_1/sc_e_0388": "891c35d2a353bf7a9f968bb419ca945cab04f06d9387cb1dcec07507673a3358",
+    "Map_30521_11/sc_e_0386": "9b3b6f08524556f6070c7a84cac10885376238a1aec692278dc673eb33f1073d",
+    "Map_30521_11/sc_e_0388": "891c35d2a353bf7a9f968bb419ca945cab04f06d9387cb1dcec07507673a3358",
+    "Map_30521_2/sc_e_0389_1": "713921ce4fb3717a21548b73cc01d5257fc487a68331889d996eb8db1d79220f"
+  },
+  "source_native_contract": "Existing FFVI puppet coordinate/direction/layer contracts; absolute final Lerp or exact relative layer; no invented diagonal/half-tile order.",
+  "source_discoveries": 27
+}

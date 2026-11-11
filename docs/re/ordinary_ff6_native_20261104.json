@@ -1,0 +1,2594 @@
+{
+  "discoveries": [
+    {
+      "game": "ff6",
+      "submap": "Map_20090",
+      "maps": [
+        73
+      ],
+      "area_ids": [
+        16
+      ],
+      "area_names_en": [
+        "Cabin"
+      ],
+      "entity": 24,
+      "raw": "NPC1チョコボ乗りの道具屋",
+      "group": "ev_e_0095",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        21,
+        11
+      ],
+      "action": 2,
+      "script": "sc_e_0095",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20090",
+      "maps": [
+        73
+      ],
+      "area_ids": [
+        16
+      ],
+      "area_names_en": [
+        "Cabin"
+      ],
+      "entity": 25,
+      "raw": "NPC1チョコボ乗りの道具屋②",
+      "group": "ev_e_0095",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        14,
+        10
+      ],
+      "action": 2,
+      "script": "sc_e_0095",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20090",
+      "maps": [
+        73
+      ],
+      "area_ids": [
+        16
+      ],
+      "area_names_en": [
+        "Cabin"
+      ],
+      "entity": 20,
+      "raw": "sc_e_0097:シャドウ",
+      "group": "ev_e_0097",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        10,
+        12
+      ],
+      "action": 2,
+      "script": "sc_e_0097",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20091_1",
+      "maps": [
+        74
+      ],
+      "area_ids": [
+        16
+      ],
+      "area_names_en": [
+        "Cabin"
+      ],
+      "entity": 1,
+      "raw": "sc_e_0150:NPC1お爺さん",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        2,
+        8,
+        10
+      ],
+      "action": 2,
+      "script": "sc_e_0150",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20131_1",
+      "maps": [
+        98
+      ],
+      "area_ids": [
+        33
+      ],
+      "area_names_en": [
+        "Kohlingen"
+      ],
+      "entity": 2,
+      "raw": "シャドウ",
+      "group": "ev_e_0285",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        22,
+        14
+      ],
+      "action": 2,
+      "script": "sc_e_0285",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20131_5",
+      "maps": [
+        102
+      ],
+      "area_ids": [
+        33
+      ],
+      "area_names_en": [
+        "Kohlingen"
+      ],
+      "entity": 3,
+      "raw": "怪しいおじさんが話しかけてくる（ロックいる場合",
+      "group": "entity_default",
+      "type": "Event",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        11,
+        11
+      ],
+      "action": 2,
+      "script": "sc_e_0281",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20151_8",
+      "maps": [
+        611
+      ],
+      "area_ids": [
+        35
+      ],
+      "area_names_en": [
+        "Jidoor"
+      ],
+      "entity": 7,
+      "raw": "sc_e_0313:NPCダンチョー",
+      "group": "ev_e_0313",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        24,
+        18
+      ],
+      "action": 2,
+      "script": "sc_e_0313",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20151_8",
+      "maps": [
+        611
+      ],
+      "area_ids": [
+        35
+      ],
+      "area_names_en": [
+        "Jidoor"
+      ],
+      "entity": 1,
+      "raw": "sc_e_0314:手紙",
+      "group": "ev_e_0314",
+      "type": "AnimEntity",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        25,
+        24
+      ],
+      "action": 2,
+      "script": "sc_e_0314",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20230",
+      "maps": [
+        155
+      ],
+      "area_ids": [
+        37
+      ],
+      "area_names_en": [
+        "Esper World"
+      ],
+      "entity": 25,
+      "raw": "洞窟前で長老と話す",
+      "group": "ev_e_1062",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        32,
+        18
+      ],
+      "action": 2,
+      "script": "sc_e_1052",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20381_5",
+      "maps": [
+        267
+      ],
+      "area_ids": [
+        33
+      ],
+      "area_names_en": [
+        "Kohlingen"
+      ],
+      "entity": 9,
+      "raw": "ロックの居場所のヒント",
+      "group": "ev_e_0680",
+      "type": "Event",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        15,
+        13
+      ],
+      "action": 2,
+      "script": "sc_e_0680",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_30421_2",
+      "maps": [
+        352
+      ],
+      "area_ids": [
+        20
+      ],
+      "area_names_en": [
+        "Phantom Forest"
+      ],
+      "entity": 9,
+      "raw": "sc_e_0158:回復の泉へ誘導される",
+      "group": "ev_e_0158",
+      "type": "Event",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        5,
+        12
+      ],
+      "action": 2,
+      "script": "sc_e_0158",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_30611_2",
+      "maps": [
+        434
+      ],
+      "area_ids": [
+        49
+      ],
+      "area_names_en": [
+        "Crumbling House"
+      ],
+      "entity": 9,
+      "raw": "男の子",
+      "group": "entity_default",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        12,
+        8
+      ],
+      "action": 2,
+      "script": "sc_e_0637",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_30650",
+      "maps": [
+        455
+      ],
+      "area_ids": [
+        47
+      ],
+      "area_names_en": [
+        "Darill's Tomb"
+      ],
+      "entity": 17,
+      "raw": "墓の入り口を開ける",
+      "group": "ev_e_0682",
+      "type": "Event",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        14,
+        11
+      ],
+      "action": 2,
+      "script": "sc_e_0682",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_40012",
+      "maps": [
+        584
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Scenario Selection"
+      ],
+      "entity": 62,
+      "raw": "ロック",
+      "group": "ev_e_0066",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        13,
+        8
+      ],
+      "action": 2,
+      "script": "sc_e_0066",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_40012",
+      "maps": [
+        584
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Scenario Selection"
+      ],
+      "entity": 58,
+      "raw": "バナン",
+      "group": "ev_e_0087",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        16,
+        9
+      ],
+      "action": 2,
+      "script": "sc_e_0087",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_40012",
+      "maps": [
+        584
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Scenario Selection"
+      ],
+      "entity": 59,
+      "raw": "ティナ",
+      "group": "ev_e_0087",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        15,
+        10
+      ],
+      "action": 2,
+      "script": "sc_e_0087",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_40012",
+      "maps": [
+        584
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Scenario Selection"
+      ],
+      "entity": 60,
+      "raw": "エドガー",
+      "group": "ev_e_0087",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        17,
+        10
+      ],
+      "action": 2,
+      "script": "sc_e_0087",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_40012",
+      "maps": [
+        584
+      ],
+      "area_ids": [
+        4
+      ],
+      "area_names_en": [
+        "Scenario Selection"
+      ],
+      "entity": 61,
+      "raw": "マッシュ",
+      "group": "ev_e_0094",
+      "type": "NPC",
+      "roles": [
+        "stateful physical script"
+      ],
+      "cell": [
+        1,
+        19,
+        8
+      ],
+      "action": 2,
+      "script": "sc_e_0094",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    },
+    {
+      "game": "ff6",
+      "submap": "Map_20091_1",
+      "maps": [
+        74
+      ],
+      "area_ids": [
+        16
+      ],
+      "area_names_en": [
+        "Cabin"
+      ],
+      "entity": 6,
+      "raw": "sc_e_0151:ストーブ",
+      "group": "entity_default",
+      "type": "Entity",
+      "roles": [
+        "animation and local state; explicit triage"
+      ],
+      "cell": [
+        2,
+        11,
+        9
+      ],
+      "action": 2,
+      "script": "sc_e_0151",
+      "guide_references": [],
+      "status": "needs semantic triage"
+    }
+  ],
+  "source_script_hashes": {
+    "Map_20070/sc_e_0066_1": "57cab04fb672a23fd0d7d48f4446f705c6641a36d95161dd020603dd815e829b",
+    "Map_20090/sc_e_0095": "fb95412340ac672fa7ae378c294667dbdb986d5c86f37d0d00f84724446c3877",
+    "Map_20090/sc_e_0097": "dae08ab0adde66345ede6125eaef652a1ef65086810dd52a70643807f80b885c",
+    "Map_20090/sc_e_0144": "a184612f7ae67a3c1f3d2b998869d5d526ee060fcae8de98ec85b69de2f9c37b",
+    "Map_20090/sc_map_20090": "82c539418e9f12da0a3aca9863d6839ed448adfa21399befcc8bf52c158d1e11",
+    "Map_20091_1/sc_e_0150": "6a819fe09619a0ae6fb4529c34ea8c64d32f4e20f149824b1adeec1b937f986a",
+    "Map_20091_1/sc_e_0151": "3312e368e18e15cbafc630ac5106d55c9a1aabfb99fbc73eb27888bf12744b01",
+    "Map_20091_1/sc_e_0152": "33ce923ac56ee9862eb2ae0166962924112fa3c09be7d41d057be39787494f17",
+    "Map_20091_1/sc_map_20091_1": "72233915764fd5e16c562287ab81110baba873536c4a2bb2a644815030d6bab3",
+    "Map_20091_1/sc_npc_20091_1_1": "79d4bd1ba4c7bf3e907eb91d33f450ca706e1dc4d872e0b8a32d7381ba3510b9",
+    "Map_20131_1/sc_e_0285": "190f0ab0d46c3a1afb143bd57be3dada11709f671a4a1ca228353281355bbd0a",
+    "Map_20131_1/sc_e_0287": "d2abb0e93f5bd215b1426f7d7379d043f887c3eac88fad05f007d4e87101e3c6",
+    "Map_20131_1/sc_map_20131_1": "9e010809aef80e791083660554834cea151a4ddc8db33f4aaa5f2e4bfb98625e",
+    "Map_20131_1/sc_npc_20131_1_1": "7be1cb2e8786e15a77c6199cc9de737824f63cca5fbb45d10ac55df98d9e3038",
+    "Map_20131_1/sc_npc_20131_1_2": "4902eeb9cb2ea2b4aabefebb3f79a7578021240995eabc6c0587876e9bcbb4fd",
+    "Map_20131_1/sc_sty_20131_1": "6b47362cb237252c1a2b02d6df8d698ff43004f6899a0abb55dae2670f8accac",
+    "Map_20131_1/sc_sty_20131_1_branch": "8f91e58c4c96fa28db974b3e753c3803a9e6dfed912342896ffd42defd8dea8c",
+    "Map_20131_1/sc_sty_20131_1_end": "3712866ad5ff2d29ef1f3b9d8b3886d7fc23b4dc025ccd55f654e448416b55db",
+    "Map_20131_5/sc_e_0281": "87b0b1c0c65b4873535116814c3219731a58afca7c5b6e83f6b483d304892583",
+    "Map_20131_5/sc_e_0282": "fdd22cd67ee86b6c1348341053458ef6315e85e291935161e860024852a26b71",
+    "Map_20131_5/sc_e_0283": "e87b5c1624526034f4f0d06ef88eb8ac9674d95e526ff6cbe93b5a2bb9893f15",
+    "Map_20131_5/sc_e_0283_1": "30fa0edbfc0650f599d1e6d11d4834fd51552fc2bb99e7254d08beb57a2a98bd",
+    "Map_20131_5/sc_e_0288": "ae419442b2caf24b56db44a9fdb21300e111e705f816df87e07813484ee5e6f0",
+    "Map_20131_5/sc_map_20131_5": "1ca648e20e346f030631d654363439534ba840eb7cffb83de34b4d4fadd96919",
+    "Map_20151_8/sc_e_0289": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+    "Map_20151_8/sc_e_0313": "0e0e85423a820a4c24b02031b2c25f6cb3dc7a5ee6bef59fdb32775b60a3a012",
+    "Map_20151_8/sc_e_0314": "fa963209657c9882df3fe0e83e93e98d718c04c72543792ba51608fcba694f2d",
+    "Map_20151_8/sc_map_20151_8": "2474c20526bef123776be066bf36552603406d95c12da22fce19a86bc18f896b",
+    "Map_20151_8/sc_npc_20151_8_1": "b81fe02024c8da1e0117680fb3645fa488b3e8965ad44892e2d8f4c0374ab733",
+    "Map_20170/sc_e_0314_1": "de60a53f9d562286b4eb3ea9116e61997dd278c105b7a04d7f08f77ef73229d7",
+    "Map_20230/sc_e_0302_2": "d98a7d06135049cafcfeb2d461389fe029ac201a3d2026d325410a7a8eb2a999",
+    "Map_20230/sc_e_0405_10": "76dff9094e76b0f4882c40ad32776951ed3c0919e480ec7de537195bf7e57daf",
+    "Map_20230/sc_e_0406": "e934dc2fa59641f22e94032ba59a3ce49b04f8e72280768ecfc65825a398ed57",
+    "Map_20230/sc_e_0408": "23f8796960316f04c99b780d62c70aae98b120ac301d28e59953f846eaf649ae",
+    "Map_20230/sc_e_0409_1": "4203bbbacc81798ca55829cf57d1c75a5063f3e599bb2a670b9a8150f4b1b61a",
+    "Map_20230/sc_e_0412_0": "8a618ad1d86b81674c64193a199b1d0faf1276e76267819ec1cc6d1a56efa765",
+    "Map_20230/sc_e_1052": "35562e8615334deee66444e655522d7bfb17e5cf1e79cf87cdf42edd924d6a69",
+    "Map_20230/sc_map_20230": "29769f577350ae9eaccf082768e4cde91a89cf2be4b9988bd58252c27c2ca43e",
+    "Map_20230/sc_npc_20230_1": "9b08e0a96a9ebd7499936ee01c5fba0c62c7b92d3faff3c3150d2eb0c2144456",
+    "Map_20230/sc_npc_20230_2": "37b0f594d22b0e100c396f8c50570603f8e2e6d07c54cef87ebb9c6799e58d52",
+    "Map_20230/sc_npc_20230_3": "78055481b89943fb57fb02c05c4460fe55f693905ca68b6d522d2b7a53233865",
+    "Map_20230/sc_npc_20230_4": "6cb04933e46f46b7431de86ad30723f5c3e50bbf26711e1317d94ab2a8e69b9e",
+    "Map_20381_5/sc_e_0680": "13f0616b904d1498a262aaa6594bb6bdc2808bae122a54bed56d4c5df05385e7",
+    "Map_20381_5/sc_e_0828_2": "e2d5c456f5cc017a40f9d7ca96c1e4511d3b475479a717734a905cdbc8ae3e23",
+    "Map_20381_5/sc_map_20381_5": "53a0467c1679e3808abe2785b50c088316b5779b67cda96c4e9018f312b562fc",
+    "Map_20381_5/sc_npc_20381_5_1": "aac0ac9baa64b8dc076d994c48e69e497954a83b42c94284dd309ff7719bbce8",
+    "Map_30400/sc_e_0087_1": "79176aebc2affbd247183151ff1be2521581ebb8da152b1074f4bd82ecc45f38",
+    "Map_30421_2/sc_e_0158": "4f8b9e6385a89a8e59c00dade43290503f60c6d229f8a7fe4d6e587b674e7d0f",
+    "Map_30421_2/sc_e_0159": "a176a70111894d014bf7918f862881e7cfcb8b4e83be7c394adc255d5beec7ae",
+    "Map_30421_2/sc_e_1032_13": "3239e18521fc27d9585d0d423e07d0b10a60306d83546e17475a5340e19fc2cf",
+    "Map_30421_2/sc_map_30421_2": "07e507e4d7a61f974d94e16b3cd0826a2efad44d4ac1488f50fbbdc0ac6e5180",
+    "Map_30611_2/sc_e_0637": "e544e77b67b14f30e528d33e356695d7982371f323586c9f9802a0bd3de30b18",
+    "Map_30611_2/sc_e_0642": "1c17a9f8ebd304f38ad7eafa74f5ad0341963f2195061f09488425702a805be6",
+    "Map_30611_2/sc_e_0642_1": "68a49c4c55740e47d87dc1d40ab0b9d85966a7b0267457f9938e9ceee88a9696",
+    "Map_30611_2/sc_map_30611_2": "fde09b58a5fae2bbd613d06195c38d3bdd7f3c7bded872418ecc3a30fac97ce3",
+    "Map_30650/sc_e_0682": "4dab61c79134cf1abd6a2c8032bfac06dc1339d79645e893497c86449ed24daa",
+    "Map_30650/sc_map_30650": "8314e4cacf8543fbe0f365ad1f8be8b5b48f7ca49ead33724c00fb78c997eb0e",
+    "Map_40012/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "Map_40012/sc_e_0017_7": "af0356d79f7e3f8abd8d41f8ec7a8c61bc1f4d19abe322465d6911ef2689e84e",
+    "Map_40012/sc_e_0065_2": "a854162244b72c08ce8e904d7070145e493fee89f738638db2468bcf1ad3b82e",
+    "Map_40012/sc_e_0066": "111fb318ccc2e9d72cc7b86446daf6432be0e2efe40bd6ffcc2992c5e7f3aafb",
+    "Map_40012/sc_e_0087": "f1d0259006666815180840acc5ce63b487e489523463ed52c37404de5443c2fd",
+    "Map_40012/sc_e_0094": "a0fdb779a469b7977713bb874aa3bd30882321825783dfe34aa7eb3d8d13980e",
+    "Map_40012/sc_e_0135_1": "44069301e2795724f17205bc7bb3e1284c0f69f813426cbb551c7f1d7e56ab0b",
+    "Map_40012/sc_e_0249": "9ba4ecd896ace146f952d836896228a997f7d37e4b9880fcd0613e20ac4ebf5a",
+    "Map_40012/sc_e_0256_1": "e02694cfcd2e8a01fc14dcbf997a80abd7d303de2a50b9011932247df3098ef2",
+    "Map_40012/sc_e_0258_1": "1dfbde56b55c4c09c45f7122cfb543fd1e1243f13b3b6ecad385c4e3d105bc24",
+    "Map_40012/sc_e_0302_1": "776512c0a3a16b784d95e91e496f33e78a9f70f3a87a5d1c7344c705c2f76d9a",
+    "Map_40012/sc_e_0328_1": "f4ec9b5241cb3c1bd701110769ed5cac2d6706a1da0c43b1a938fb65bc68c95c",
+    "Map_40012/sc_e_0502": "3ab85b4b3c649f7fea49884b183f2b72c80d3d876eb3db3774c14c83be0a1671",
+    "Map_40012/sc_e_0569_1": "57e0cffb8dfc8403a2e1a775412519ace3fa62d8a21912bc3c043299c609fe61",
+    "Map_40012/sc_e_0607_9": "5bf01ffd10a49c6bcba6120679cb3ee560ff1f8671da8cf1701c44ac0b801f76",
+    "Map_40012/sc_e_0828_1": "29399a6983b080c0e584746f4a84421fb9eca038d39d4e3cb8f03bed52e10278",
+    "Map_40012/sc_e_0955": "eb9787f58eb9014315fd479741290bd0854df123305e42b7491f67c17022aca7",
+    "Map_40012/sc_e_0955_branch": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+    "Map_40012/sc_e_0966_3_1": "6a0ecfe7fb0dd1fdb5aaf598acc8aac019273f630b6bb95fa8993c499013fc9d",
+    "Map_40012/sc_e_1006_1": "41759a6332ce74adaa823b25d87720645723ac195c3912dce9b22e96a8e47233",
+    "Map_40012/sc_e_1007_0": "d925fb88b7980272d737a4f925f5379f20071f371a5182bcf0e52d67132f697c",
+    "Map_40012/sc_e_1009_0": "07fda323c40c160f773ceeb6cba3fe663623eb7961a8c9545a82bed88fd7e8e5",
+    "Map_40012/sc_e_1010_0": "f76047f62914f33bc292546eaf265ad4b988e0d1cf314621bb65b53334de01fe",
+    "Map_40012/sc_e_1012_0": "be25b5eac1f5b3793c37b24e3163d7d6e4f8ad9e0c74877c2a1e5d4aad53ab6b",
+    "Map_40012/sc_e_1014_0": "9ba78b603453c69529b85bdd9312a2ed9bdb786e645aaf979f267be5d3e148cb",
+    "Map_40012/sc_e_1016_0": "99491fbc82a88cd070714c3a207728c195a1fc4835aa2591c98299462ed4bc28",
+    "Map_40012/sc_e_1016_1": "e108558a9788472711324a0785aa3d6679e10b18b0d7e10c3951efec3c71bbe3",
+    "Map_40012/sc_e_1018_0": "1b4ced36fac14452e6f6f6e1e2a254b37832dacd70de0a5a2a570eafa9db8f9e",
+    "Map_40012/sc_e_1020_0": "fd369365808694bc4badf91db0a9f665b6505cea8c974374ef663cb7f3e98306",
+    "Map_40012/sc_e_1022_0": "9b2e0b17fcd1c22df7c822d069e43ca785fc0386315841c0df8d79c1ad5f29af",
+    "Map_40012/sc_e_1023_0": "b3681e7a14969dff08c6e49d2d2492b5350d407cb700907526c63505a986beb8",
+    "Map_40012/sc_e_1026_0": "121c1eaa4c7c0811b4b6846a56dd662812ce67779a68a58d0de0ba701280b310",
+    "Map_40012/sc_e_1028_0": "a1666654675ba4bf4d455e6287b2e180642b32db8fb1a5c8b93facab55f30c84",
+    "Map_40012/sc_e_1030_0": "c3256a3093a7b1d57669678741b70542356bc1406ad335968289fb3dcce1ab11",
+    "Map_40012/sc_e_1032_18": "0c12684a94f4a1e994db83f6a6106a9378433c44e694e1d9c8b934a24433abc5",
+    "Map_40012/sc_e_1032_18_2": "da63bdb9a759818388ccc2df7bea1ed07c27ca3ebc4f6e61d5df7cd328c3a31e",
+    "Map_40012/sc_e_1053": "6c1fbab93e225c7903197ad4b4e54ee08610f00e10d461220cc38f63f91a4272",
+    "Map_40012/sc_map_40012": "b482dc7fe3d31b9740e1c4cd76c780d6711d1e7efe3d5e22e2f5f23d44415bb5"
+  },
+  "facts": {
+    "Map_20070/sc_e_0066_1": {
+      "sha256": "57cab04fb672a23fd0d7d48f4446f705c6641a36d95161dd020603dd815e829b",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20090/sc_e_0095": {
+      "sha256": "fb95412340ac672fa7ae378c294667dbdb986d5c86f37d0d00f84724446c3877",
+      "flags": [
+        [
+          8,
+          "ScenarioFlag1",
+          70,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          7,
+          "E0095_00_073_c_01",
+          "E0095_00_073_c_02"
+        ],
+        [
+          13,
+          "E0095_02_073_c_01",
+          "E0095_02_073_c_02"
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        [
+          16,
+          "ショップを開く:一軒家_行商"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20090/sc_e_0097": {
+      "sha256": "dae08ab0adde66345ede6125eaef652a1ef65086810dd52a70643807f80b885c",
+      "flags": [
+        [
+          22,
+          "ScenarioFlag1",
+          28,
+          1
+        ],
+        [
+          50,
+          "ScenarioFlag1",
+          71,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          41
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        [
+          21,
+          "名前入力：シャドウ"
+        ],
+        [
+          47,
+          "メンバー加入：シャドウ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20090/sc_e_0144": {
+      "sha256": "a184612f7ae67a3c1f3d2b998869d5d526ee060fcae8de98ec85b69de2f9c37b",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20090/sc_map_20090": {
+      "sha256": "82c539418e9f12da0a3aca9863d6839ed448adfa21399befcc8bf52c158d1e11",
+      "flags": [
+        [
+          1,
+          "ScenarioFlag3",
+          69,
+          0
+        ],
+        [
+          2,
+          "ScenarioFlag4",
+          139,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20091_1/sc_e_0150": {
+      "sha256": "6a819fe09619a0ae6fb4529c34ea8c64d32f4e20f149824b1adeec1b937f986a",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20091_1/sc_e_0151": {
+      "sha256": "3312e368e18e15cbafc630ac5106d55c9a1aabfb99fbc73eb27888bf12744b01",
+      "flags": [
+        [
+          12,
+          "ScenarioFlag1",
+          104,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          13,
+          73,
+          2,
+          ""
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20091_1/sc_e_0152": {
+      "sha256": "33ce923ac56ee9862eb2ae0166962924112fa3c09be7d41d057be39787494f17",
+      "flags": [],
+      "choices": [
+        [
+          3,
+          "S9998_999_c_02",
+          "S9998_999_c_01"
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20091_1/sc_map_20091_1": {
+      "sha256": "72233915764fd5e16c562287ab81110baba873536c4a2bb2a644815030d6bab3",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20091_1/sc_npc_20091_1_1": {
+      "sha256": "79d4bd1ba4c7bf3e907eb91d33f450ca706e1dc4d872e0b8a32d7381ba3510b9",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_e_0285": {
+      "sha256": "190f0ab0d46c3a1afb143bd57be3dada11709f671a4a1ca228353281355bbd0a",
+      "flags": [
+        [
+          30,
+          "ScenarioFlag1",
+          28,
+          1
+        ],
+        [
+          57,
+          "ScenarioFlag1",
+          147,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          39
+        ]
+      ],
+      "transfers": [],
+      "calls": [
+        [
+          13,
+          "名前入力：シャドウ"
+        ],
+        [
+          52,
+          "メンバー加入：シャドウ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20131_1/sc_e_0287": {
+      "sha256": "d2abb0e93f5bd215b1426f7d7379d043f887c3eac88fad05f007d4e87101e3c6",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_map_20131_1": {
+      "sha256": "9e010809aef80e791083660554834cea151a4ddc8db33f4aaa5f2e4bfb98625e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_npc_20131_1_1": {
+      "sha256": "7be1cb2e8786e15a77c6199cc9de737824f63cca5fbb45d10ac55df98d9e3038",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_npc_20131_1_2": {
+      "sha256": "4902eeb9cb2ea2b4aabefebb3f79a7578021240995eabc6c0587876e9bcbb4fd",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_sty_20131_1": {
+      "sha256": "6b47362cb237252c1a2b02d6df8d698ff43004f6899a0abb55dae2670f8accac",
+      "flags": [],
+      "choices": [
+        [
+          3
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_sty_20131_1_branch": {
+      "sha256": "8f91e58c4c96fa28db974b3e753c3803a9e6dfed912342896ffd42defd8dea8c",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          10,
+          584,
+          1,
+          "sc_e_0955"
+        ],
+        [
+          14,
+          354,
+          1,
+          "sc_e_0956"
+        ],
+        [
+          17,
+          376,
+          1,
+          "sc_e_0957"
+        ],
+        [
+          19,
+          180,
+          1,
+          "sc_e_0958"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_1/sc_sty_20131_1_end": {
+      "sha256": "3712866ad5ff2d29ef1f3b9d8b3886d7fc23b4dc025ccd55f654e448416b55db",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_e_0281": {
+      "sha256": "87b0b1c0c65b4873535116814c3219731a58afca7c5b6e83f6b483d304892583",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_e_0282": {
+      "sha256": "fdd22cd67ee86b6c1348341053458ef6315e85e291935161e860024852a26b71",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_e_0283": {
+      "sha256": "e87b5c1624526034f4f0d06ef88eb8ac9674d95e526ff6cbe93b5a2bb9893f15",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_e_0283_1": {
+      "sha256": "30fa0edbfc0650f599d1e6d11d4834fd51552fc2bb99e7254d08beb57a2a98bd",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          19,
+          101,
+          1,
+          "sc_e_0283_2"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_e_0288": {
+      "sha256": "ae419442b2caf24b56db44a9fdb21300e111e705f816df87e07813484ee5e6f0",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20131_5/sc_map_20131_5": {
+      "sha256": "1ca648e20e346f030631d654363439534ba840eb7cffb83de34b4d4fadd96919",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20151_8/sc_e_0289": {
+      "sha256": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20151_8/sc_e_0313": {
+      "sha256": "0e0e85423a820a4c24b02031b2c25f6cb3dc7a5ee6bef59fdb32775b60a3a012",
+      "flags": [
+        [
+          30,
+          "ScenarioFlag1",
+          156,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20151_8/sc_e_0314": {
+      "sha256": "fa963209657c9882df3fe0e83e93e98d718c04c72543792ba51608fcba694f2d",
+      "flags": [
+        [
+          22,
+          "ScenarioFlag1",
+          157,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          23,
+          119,
+          1,
+          "sc_e_0314_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20151_8/sc_map_20151_8": {
+      "sha256": "2474c20526bef123776be066bf36552603406d95c12da22fce19a86bc18f896b",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20151_8/sc_npc_20151_8_1": {
+      "sha256": "b81fe02024c8da1e0117680fb3645fa488b3e8965ad44892e2d8f4c0374ab733",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20170/sc_e_0314_1": {
+      "sha256": "de60a53f9d562286b4eb3ea9116e61997dd278c105b7a04d7f08f77ef73229d7",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          18,
+          611,
+          1,
+          "sc_e_0314"
+        ]
+      ],
+      "calls": [
+        [
+          10,
+          "名前入力：セッツァー"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0302_2": {
+      "sha256": "d98a7d06135049cafcfeb2d461389fe029ac201a3d2026d325410a7a8eb2a999",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          14,
+          606,
+          1,
+          "sc_e_0302_3"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0405_10": {
+      "sha256": "76dff9094e76b0f4882c40ad32776951ed3c0919e480ec7de537195bf7e57daf",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          13,
+          156,
+          1,
+          "sc_e_0405_11"
+        ]
+      ],
+      "calls": [
+        [
+          1,
+          "幻獣界フィルターをかける"
+        ],
+        [
+          12,
+          "モノクロフィルターはずす"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0406": {
+      "sha256": "e934dc2fa59641f22e94032ba59a3ce49b04f8e72280768ecfc65825a398ed57",
+      "flags": [],
+      "choices": [
+        [
+          2,
+          "E0406_00_155_c_02",
+          "E0406_00_155_c_01"
+        ]
+      ],
+      "transfers": [
+        [
+          10,
+          160,
+          1,
+          "sc_e_0406_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0408": {
+      "sha256": "23f8796960316f04c99b780d62c70aae98b120ac301d28e59953f846eaf649ae",
+      "flags": [
+        [
+          6,
+          "ScenarioFlag1",
+          198,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0409_1": {
+      "sha256": "4203bbbacc81798ca55829cf57d1c75a5063f3e599bb2a670b9a8150f4b1b61a",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          37,
+          160,
+          1,
+          "sc_e_0409_2"
+        ]
+      ],
+      "calls": [
+        [
+          1,
+          "幻獣界フィルターをかける"
+        ],
+        [
+          36,
+          "モノクロフィルターはずす"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20230/sc_e_0412_0": {
+      "sha256": "8a618ad1d86b81674c64193a199b1d0faf1276e76267819ec1cc6d1a56efa765",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          3,
+          161,
+          1,
+          "sc_e_0412"
+        ],
+        [
+          6,
+          161,
+          1,
+          ""
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_e_1052": {
+      "sha256": "35562e8615334deee66444e655522d7bfb17e5cf1e79cf87cdf42edd924d6a69",
+      "flags": [
+        [
+          5,
+          "ScenarioFlag3",
+          12,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_map_20230": {
+      "sha256": "29769f577350ae9eaccf082768e4cde91a89cf2be4b9988bd58252c27c2ca43e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          13,
+          "幻獣界フィルターをかける"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20230/sc_npc_20230_1": {
+      "sha256": "9b08e0a96a9ebd7499936ee01c5fba0c62c7b92d3faff3c3150d2eb0c2144456",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_npc_20230_2": {
+      "sha256": "37b0f594d22b0e100c396f8c50570603f8e2e6d07c54cef87ebb9c6799e58d52",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_npc_20230_3": {
+      "sha256": "78055481b89943fb57fb02c05c4460fe55f693905ca68b6d522d2b7a53233865",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20230/sc_npc_20230_4": {
+      "sha256": "6cb04933e46f46b7431de86ad30723f5c3e50bbf26711e1317d94ab2a8e69b9e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20381_5/sc_e_0680": {
+      "sha256": "13f0616b904d1498a262aaa6594bb6bdc2808bae122a54bed56d4c5df05385e7",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          5,
+          "UI非表示"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_20381_5/sc_e_0828_2": {
+      "sha256": "e2d5c456f5cc017a40f9d7ca96c1e4511d3b475479a717734a905cdbc8ae3e23",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          61,
+          266,
+          1,
+          "sc_e_0828_3"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20381_5/sc_map_20381_5": {
+      "sha256": "53a0467c1679e3808abe2785b50c088316b5779b67cda96c4e9018f312b562fc",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_20381_5/sc_npc_20381_5_1": {
+      "sha256": "aac0ac9baa64b8dc076d994c48e69e497954a83b42c94284dd309ff7719bbce8",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30400/sc_e_0087_1": {
+      "sha256": "79176aebc2affbd247183151ff1be2521581ebb8da152b1074f4bd82ecc45f38",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          24,
+          1,
+          34,
+          ""
+        ]
+      ],
+      "calls": [],
+      "encounters": [
+        [
+          9,
+          36,
+          0,
+          0,
+          "sc_e_0087_1"
+        ],
+        [
+          14,
+          36,
+          0,
+          0,
+          "sc_e_0087_1"
+        ],
+        [
+          19,
+          39,
+          0,
+          0,
+          "sc_e_0087_1"
+        ]
+      ]
+    },
+    "Map_30421_2/sc_e_0158": {
+      "sha256": "4f8b9e6385a89a8e59c00dade43290503f60c6d229f8a7fe4d6e587b674e7d0f",
+      "flags": [
+        [
+          11,
+          "ScenarioFlag1",
+          106,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30421_2/sc_e_0159": {
+      "sha256": "a176a70111894d014bf7918f862881e7cfcb8b4e83be7c394adc255d5beec7ae",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30421_2/sc_e_1032_13": {
+      "sha256": "3239e18521fc27d9585d0d423e07d0b10a60306d83546e17475a5340e19fc2cf",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          13,
+          592,
+          1,
+          "sc_e_1032_14"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30421_2/sc_map_30421_2": {
+      "sha256": "07e507e4d7a61f974d94e16b3cd0826a2efad44d4ac1488f50fbbdc0ac6e5180",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30611_2/sc_e_0637": {
+      "sha256": "e544e77b67b14f30e528d33e356695d7982371f323586c9f9802a0bd3de30b18",
+      "flags": [
+        [
+          4,
+          "ScenarioFlag2",
+          55,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30611_2/sc_e_0642": {
+      "sha256": "1c17a9f8ebd304f38ad7eafa74f5ad0341963f2195061f09488425702a805be6",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": [
+        [
+          3,
+          212,
+          0,
+          0,
+          "sc_e_0642_1"
+        ]
+      ]
+    },
+    "Map_30611_2/sc_e_0642_1": {
+      "sha256": "68a49c4c55740e47d87dc1d40ab0b9d85966a7b0267457f9938e9ceee88a9696",
+      "flags": [
+        [
+          3,
+          "ScenarioFlag2",
+          59,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30611_2/sc_map_30611_2": {
+      "sha256": "fde09b58a5fae2bbd613d06195c38d3bdd7f3c7bded872418ecc3a30fac97ce3",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30650/sc_e_0682": {
+      "sha256": "4dab61c79134cf1abd6a2c8032bfac06dc1339d79645e893497c86449ed24daa",
+      "flags": [
+        [
+          25,
+          "ScenarioFlag2",
+          84,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30650/sc_map_30650": {
+      "sha256": "8314e4cacf8543fbe0f365ad1f8be8b5b48f7ca49ead33724c00fb78c997eb0e",
+      "flags": [
+        [
+          2,
+          "ScenarioFlag4",
+          188,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0009": {
+      "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+      "flags": [
+        [
+          4,
+          "ScenarioFlag1",
+          7,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          6
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0017_7": {
+      "sha256": "af0356d79f7e3f8abd8d41f8ec7a8c61bc1f4d19abe322465d6911ef2689e84e",
+      "flags": [],
+      "choices": [
+        [
+          6
+        ]
+      ],
+      "transfers": [
+        [
+          23,
+          318,
+          2,
+          "sc_e_0017_8"
+        ]
+      ],
+      "calls": [
+        [
+          12,
+          "メンバー加入：ロック"
+        ],
+        [
+          13,
+          "メンバー加入：モーグリたち"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0065_2": {
+      "sha256": "a854162244b72c08ce8e904d7070145e493fee89f738638db2468bcf1ad3b82e",
+      "flags": [
+        [
+          17,
+          "ScenarioFlag1",
+          50,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0066": {
+      "sha256": "111fb318ccc2e9d72cc7b86446daf6432be0e2efe40bd6ffcc2992c5e7f3aafb",
+      "flags": [
+        [
+          1,
+          "ScenarioFlag1",
+          51,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          17,
+          38,
+          13,
+          "sc_e_0066_1"
+        ]
+      ],
+      "calls": [
+        [
+          12,
+          "メンバー離脱：モグ（ナルシェSIM）"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0087": {
+      "sha256": "f1d0259006666815180840acc5ce63b487e489523463ed52c37404de5443c2fd",
+      "flags": [
+        [
+          1,
+          "ScenarioFlag1",
+          65,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          17,
+          349,
+          13,
+          "sc_e_0087_1"
+        ]
+      ],
+      "calls": [
+        [
+          12,
+          "メンバー離脱：モグ（ナルシェSIM）"
+        ],
+        [
+          16,
+          "後列配置：バナン"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0094": {
+      "sha256": "a0fdb779a469b7977713bb874aa3bd30882321825783dfe34aa7eb3d8d13980e",
+      "flags": [
+        [
+          1,
+          "ScenarioFlag1",
+          103,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [
+        [
+          17,
+          1,
+          35,
+          ""
+        ]
+      ],
+      "calls": [
+        [
+          12,
+          "メンバー離脱：モグ（ナルシェSIM）"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0135_1": {
+      "sha256": "44069301e2795724f17205bc7bb3e1284c0f69f813426cbb551c7f1d7e56ab0b",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          8,
+          40,
+          1,
+          "sc_e_0135_2"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0249": {
+      "sha256": "9ba4ecd896ace146f952d836896228a997f7d37e4b9880fcd0613e20ac4ebf5a",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          7,
+          14,
+          1,
+          "sc_e_0249_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0256_1": {
+      "sha256": "e02694cfcd2e8a01fc14dcbf997a80abd7d303de2a50b9011932247df3098ef2",
+      "flags": [],
+      "choices": [
+        [
+          6
+        ]
+      ],
+      "transfers": [
+        [
+          26,
+          19,
+          1,
+          "sc_e_0256_2"
+        ]
+      ],
+      "calls": [
+        [
+          22,
+          "パーティ編成：３パーティ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0258_1": {
+      "sha256": "1dfbde56b55c4c09c45f7122cfb543fd1e1243f13b3b6ecad385c4e3d105bc24",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          8,
+          "キー入力、BGM再生終了待ち"
+        ],
+        [
+          13,
+          "コンティニュー表示"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0302_1": {
+      "sha256": "776512c0a3a16b784d95e91e496f33e78a9f70f3a87a5d1c7344c705c2f76d9a",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          5,
+          155,
+          1,
+          "sc_e_0302_2"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0328_1": {
+      "sha256": "f4ec9b5241cb3c1bd701110769ed5cac2d6706a1da0c43b1a938fb65bc68c95c",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0502": {
+      "sha256": "3ab85b4b3c649f7fea49884b183f2b72c80d3d876eb3db3774c14c83be0a1671",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          6,
+          177,
+          1,
+          "sc_e_0502_1"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0569_1": {
+      "sha256": "57e0cffb8dfc8403a2e1a775412519ace3fa62d8a21912bc3c043299c609fe61",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          4,
+          119,
+          1,
+          "sc_e_0569_2"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "パーティ編成：１パーティ"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0607_9": {
+      "sha256": "5bf01ffd10a49c6bcba6120679cb3ee560ff1f8671da8cf1701c44ac0b801f76",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          17,
+          2,
+          1,
+          "sc_e_0607_10"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0828_1": {
+      "sha256": "29399a6983b080c0e584746f4a84421fb9eca038d39d4e3cb8f03bed52e10278",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          8,
+          267,
+          1,
+          "sc_e_0828_2"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0955": {
+      "sha256": "eb9787f58eb9014315fd479741290bd0854df123305e42b7491f67c17022aca7",
+      "flags": [
+        [
+          25,
+          "ScenarioFlag2",
+          209,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0955_branch": {
+      "sha256": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          17,
+          70,
+          1,
+          "sc_sty_20081_4_end"
+        ],
+        [
+          19,
+          85,
+          1,
+          "sc_sty_20111_1_end"
+        ],
+        [
+          21,
+          93,
+          1,
+          "sc_sty_20121_1_end"
+        ],
+        [
+          23,
+          98,
+          1,
+          "sc_sty_20131_1_end"
+        ],
+        [
+          25,
+          110,
+          1,
+          "sc_sty_20151_5_end"
+        ],
+        [
+          27,
+          184,
+          1,
+          "sc_e_0429_end"
+        ],
+        [
+          29,
+          199,
+          1,
+          "sc_sty_20321_5_end"
+        ],
+        [
+          31,
+          203,
+          1,
+          "sc_sty_20331_2_end"
+        ],
+        [
+          33,
+          215,
+          1,
+          "sc_sty_20351_1_end"
+        ],
+        [
+          35,
+          222,
+          1,
+          "sc_sty_20361_3_end"
+        ],
+        [
+          37,
+          263,
+          1,
+          "sc_sty_20381_1_end"
+        ],
+        [
+          39,
+          275,
+          1,
+          "sc_sty_20411_1_end"
+        ],
+        [
+          41,
+          281,
+          1,
+          "sc_sty_20421_3_end"
+        ],
+        [
+          43,
+          287,
+          1,
+          "sc_sty_20431_5_end"
+        ],
+        [
+          45,
+          300,
+          1,
+          "sc_e_0894_end"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_0966_3_1": {
+      "sha256": "6a0ecfe7fb0dd1fdb5aaf598acc8aac019273f630b6bb95fa8993c499013fc9d",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          11,
+          268,
+          1,
+          "sc_e_0966_3"
+        ]
+      ],
+      "calls": [
+        [
+          7,
+          "パーティ編成：３パーティ"
+        ],
+        [
+          8,
+          "パペット入れ替え：解除"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1006_1": {
+      "sha256": "41759a6332ce74adaa823b25d87720645723ac195c3912dce9b22e96a8e47233",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "近景１：表示"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1007_0": {
+      "sha256": "d925fb88b7980272d737a4f925f5379f20071f371a5182bcf0e52d67132f697c",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          25,
+          296,
+          1,
+          "sc_e_1008"
+        ],
+        [
+          28,
+          565,
+          1,
+          "sc_e_1007"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          13,
+          "ED名前FI：カイエン"
+        ],
+        [
+          15,
+          "ED名前SO：カイエン"
+        ],
+        [
+          17,
+          "ED名前SI：カイエン"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1009_0": {
+      "sha256": "07fda323c40c160f773ceeb6cba3fe663623eb7961a8c9545a82bed88fd7e8e5",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          25,
+          566,
+          1,
+          "sc_e_1009"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：セッツァー"
+        ],
+        [
+          16,
+          "ED名前SO：セッツァー"
+        ],
+        [
+          18,
+          "ED名前SI：セッツァー"
+        ],
+        [
+          20,
+          "ED上下マスクのみ終了"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1010_0": {
+      "sha256": "f76047f62914f33bc292546eaf265ad4b988e0d1cf314621bb65b53334de01fe",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          34,
+          595,
+          1,
+          "sc_e_1011"
+        ],
+        [
+          36,
+          595,
+          1,
+          "sc_e_1010"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：エドガー"
+        ],
+        [
+          16,
+          "ED名前SO：エドガー"
+        ],
+        [
+          18,
+          "ED名前SI：エドガー"
+        ],
+        [
+          20,
+          "ED名前FO：エドガー"
+        ],
+        [
+          21,
+          "ED名前FI：マッシュ"
+        ],
+        [
+          23,
+          "ED名前SO：マッシュ"
+        ],
+        [
+          25,
+          "ED名前SI：マッシュ"
+        ],
+        [
+          31,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1012_0": {
+      "sha256": "be25b5eac1f5b3793c37b24e3163d7d6e4f8ad9e0c74877c2a1e5d4aad53ab6b",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          26,
+          20,
+          1,
+          "sc_e_1013"
+        ],
+        [
+          28,
+          567,
+          1,
+          "sc_e_1012"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：モグ"
+        ],
+        [
+          16,
+          "ED名前SO：モグ"
+        ],
+        [
+          18,
+          "ED名前SI：モグ"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1014_0": {
+      "sha256": "9ba78b603453c69529b85bdd9312a2ed9bdb786e645aaf979f267be5d3e148cb",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          26,
+          20,
+          1,
+          "sc_e_1015"
+        ],
+        [
+          28,
+          591,
+          1,
+          "sc_e_1014"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：ウーマロ"
+        ],
+        [
+          16,
+          "ED名前SO：ウーマロ"
+        ],
+        [
+          18,
+          "ED名前SI：ウーマロ"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1016_0": {
+      "sha256": "99491fbc82a88cd070714c3a207728c195a1fc4835aa2591c98299462ed4bc28",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          26,
+          501,
+          1,
+          "sc_e_1017"
+        ],
+        [
+          28,
+          560,
+          1,
+          "sc_e_1016"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：ゴゴ"
+        ],
+        [
+          16,
+          "ED名前SO：ゴゴ"
+        ],
+        [
+          18,
+          "ED名前SI：ゴゴ"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1016_1": {
+      "sha256": "e108558a9788472711324a0785aa3d6679e10b18b0d7e10c3951efec3c71bbe3",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          8,
+          584,
+          1,
+          "sc_e_1018_0"
+        ]
+      ],
+      "calls": [
+        [
+          7,
+          "モノクロフィルターはずす"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1018_0": {
+      "sha256": "1b4ced36fac14452e6f6f6e1e2a254b37832dacd70de0a5a2a570eafa9db8f9e",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          26,
+          378,
+          1,
+          "sc_e_1019"
+        ],
+        [
+          28,
+          447,
+          1,
+          "sc_e_1018"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：ガウ"
+        ],
+        [
+          16,
+          "ED名前SO：ガウ"
+        ],
+        [
+          18,
+          "ED名前SI：ガウ"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1020_0": {
+      "sha256": "fd369365808694bc4badf91db0a9f665b6505cea8c974374ef663cb7f3e98306",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          33,
+          596,
+          1,
+          "sc_e_1021"
+        ],
+        [
+          35,
+          596,
+          1,
+          "sc_e_1020"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：ロック"
+        ],
+        [
+          16,
+          "ED名前SO：ロック"
+        ],
+        [
+          18,
+          "ED名前SI：ロック"
+        ],
+        [
+          20,
+          "ED名前FO：ロック"
+        ],
+        [
+          21,
+          "ED名前FI：セリス"
+        ],
+        [
+          23,
+          "ED名前SO：セリス"
+        ],
+        [
+          25,
+          "ED名前SI：セリス"
+        ],
+        [
+          30,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1022_0": {
+      "sha256": "9b2e0b17fcd1c22df7c822d069e43ca785fc0386315841c0df8d79c1ad5f29af",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          25,
+          562,
+          1,
+          "sc_e_1022"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：ティナ"
+        ],
+        [
+          16,
+          "ED名前SO：ティナ"
+        ],
+        [
+          18,
+          "ED名前SI：ティナ"
+        ],
+        [
+          23,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1023_0": {
+      "sha256": "b3681e7a14969dff08c6e49d2d2492b5350d407cb700907526c63505a986beb8",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          28,
+          180,
+          1,
+          "sc_e_1025"
+        ],
+        [
+          31,
+          545,
+          1,
+          "sc_e_1024"
+        ],
+        [
+          33,
+          545,
+          1,
+          "sc_e_1023"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：リルム"
+        ],
+        [
+          16,
+          "ED名前SO：リルム"
+        ],
+        [
+          18,
+          "ED名前SI：リルム"
+        ],
+        [
+          25,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1026_0": {
+      "sha256": "121c1eaa4c7c0811b4b6846a56dd662812ce67779a68a58d0de0ba701280b310",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          28,
+          180,
+          1,
+          "sc_e_1027"
+        ],
+        [
+          30,
+          447,
+          1,
+          "sc_e_1026"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          14,
+          "ED名前FI：シャドウ"
+        ],
+        [
+          16,
+          "ED名前SO：シャドウ"
+        ],
+        [
+          18,
+          "ED名前SI：シャドウ"
+        ],
+        [
+          25,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1028_0": {
+      "sha256": "a1666654675ba4bf4d455e6287b2e180642b32db8fb1a5c8b93facab55f30c84",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          24,
+          180,
+          1,
+          "sc_e_1029"
+        ],
+        [
+          26,
+          447,
+          1,
+          "sc_e_1028"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          13,
+          "ED名前FI：ストラゴス"
+        ],
+        [
+          15,
+          "ED名前SO：ストラゴス"
+        ],
+        [
+          17,
+          "ED名前SI：ストラゴス"
+        ],
+        [
+          21,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1030_0": {
+      "sha256": "c3256a3093a7b1d57669678741b70542356bc1406ad335968289fb3dcce1ab11",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          32,
+          268,
+          1,
+          "sc_e_1030"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "近景１：表示"
+        ],
+        [
+          3,
+          "ED名前表示機能初期化"
+        ],
+        [
+          16,
+          "AndYou表示"
+        ],
+        [
+          22,
+          "ED名前表示終了"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1032_18": {
+      "sha256": "0c12684a94f4a1e994db83f6a6106a9378433c44e694e1d9c8b934a24433abc5",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          10,
+          "エンディング：謝辞"
+        ],
+        [
+          16,
+          "キー入力待ち"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1032_18_2": {
+      "sha256": "da63bdb9a759818388ccc2df7bea1ed07c27ca3ebc4f6e61d5df7cd328c3a31e",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_e_1053": {
+      "sha256": "6c1fbab93e225c7903197ad4b4e54ee08610f00e10d461220cc38f63f91a4272",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_40012/sc_map_40012": {
+      "sha256": "b482dc7fe3d31b9740e1c4cd76c780d6711d1e7efe3d5e22e2f5f23d44415bb5",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    }
+  }
+}

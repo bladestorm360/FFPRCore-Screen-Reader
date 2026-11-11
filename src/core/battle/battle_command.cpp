@@ -37,6 +37,13 @@ namespace {
 ref::Class kCmdSelect{"Last.UI.KeyInput", "BattleCommandSelectController"};
 ref::Method mSetCommandData{kCmdSelect, "SetCommandData", 3};
 ref::Method mSetCursor{kCmdSelect, "SetCursor", 1};
+// ATB data preparation precedes the actual command-input state. This unique
+// native entry enables the command controls; its rooted child owns the actor.
+// Current IV/V/VI bodies/field layout are hash-qualified in the ATB topic.
+ref::Class kReadyInfo{"Last.UI.KeyInput","BattleInfomationController",game::kFF4|game::kFF5|game::kFF6};
+ref::Method mCommandSelectInit{kReadyInfo,"CommandSelectInit",0};
+ref::Field fReadyCommand{kReadyInfo,"commandSelectController"}, fCommandActor{kCmdSelect,"targetData"},
+           fCommandCursor{kCmdSelect,"selectCursor"};
 // Exact accepted-command callback, before the original forwards the action list
 // and tears down its menu. Non-targeting abilities reach this callback directly;
 // OnCommandSelect inlines CommandDone, so hooking that helper would miss them.
@@ -61,7 +68,6 @@ ref::Method mPlayerInit{kTargetSelect, "PlayerInit", 0};
 ref::Method mPlayerAll{kTargetSelect, "PlayerAllInit", 0}, mEnemyAll{kTargetSelect, "EnemyAllInit", 0};
 ref::Method mAll{kTargetSelect, "AllInit", 0};
 ref::Field fSelectCursor{kTargetSelect, "selectCursor"};
-ref::Field fPlayerDataList{kTargetSelect, "playerDataList"};
 ref::Field fEnemyDataList{kTargetSelect, "enemyDataList"};
 ref::Field fTargetPlayerList{kTargetSelect, "<TargetPlayerList>k__BackingField"};
 ref::Field fTargetEnamyList{kTargetSelect, "<TargetEnamyList>k__BackingField"};
@@ -82,7 +88,8 @@ ref::Class kTransform{"UnityEngine", "Transform"};
 constexpr const char* kTurnCtx = "BattleCommand.Turn";
 constexpr const char* kCommandCtx = "BattleCommand.Command";
 
-// Command-announce window: opened by the SetCommandData postfix ("X's turn"); closed by the
+// Command-announce window: opened by native input entry in ATB, SetCommandData
+// elsewhere ("X's turn"); closed by the
 // SetCommandData prefix and by ShowWindow(false) (the actor's commit/teardown, where the spurious
 // "Attack" bursts fire). SetCursor only announces while it is open.
 // The accepted-action callback also closes it before a command without targeting
@@ -99,7 +106,7 @@ void* g_cached_target_controller = nullptr;
 bool g_command_reannounce_pending = false;
 // Bumped on every SetCursor: a later cursor event supersedes a pending deferred re-announce.
 int g_reannounce_gen = 0;
-// Bumped in the SetCommandData prefix: a change means a new turn started (a commit).
+// Bumped in the SetCommandData prefix: new data retires an older cancel callback.
 int g_set_command_data_seq = 0;
 
 // Initial-target read generation: bumped by every EnemysInit/PlayerInit and by ShowWindow(false).
@@ -141,10 +148,12 @@ void announce_command_at(void* list, int index)
     // title. Teardown cursor resets are not selectable command events.
     if (!in_battle()) return;
     int count = unity::list_count(list);
-    if (count == 0) return;
+    if (count <= 0 || count > 64) return;
     if (index < 0 || index >= count) return;
     void* cc = unity::list_at(list, index);
-    if (!cc) return;
+    // Ready entry may precede a later cursor reset. An inactive old-page slot
+    // is not the current rendered command even if its data object remains.
+    if (!cc || !unity::active_in_hierarchy(cc)) return;
     void* command = ref::rd<void*>(cc, fTargetCommand);
     if (!command) return;
     std::wstring mes_id = command_mes_id(command);
@@ -284,11 +293,12 @@ bool try_read_initial_target(void* instance, bool is_enemy)
         if (!unity::enumerate_bounded(list, targets, 64) || index >= static_cast<int>(targets.size())) return false;
         return announce_enemy_target(list, index);
     } else {
-        void* list = ref::rd<void*>(controller, fPlayerDataList);
-        std::vector<void*> targets;
-        if (!unity::enumerate_bounded(list, targets, 64) || targets.empty()) list = ref::rd<void*>(controller, fTargetPlayerList);
-        if (!unity::enumerate_bounded(list, targets, 64) || index >= static_cast<int>(targets.size())) return false;
-        return announce_player_target(list, index);
+        // Native PlayerInit filters this command's TargetPlayerList and places
+        // its cursor from that list. playerDataList is a prior SelectContent/
+        // click cache and can still contain the last self-targeting item. An
+        // unready current list must use the existing bounded retry, never that
+        // stale cache. Cursor movement retains its actual native supplied list.
+        return announce_player_target(ref::rd<void*>(controller, fTargetPlayerList), index);
     }
     return true;
 }
@@ -322,11 +332,34 @@ void d_CommandCommit(void* self,void* actions,const void* mi) {
         g_command_turn_ready=false;
         g_command_reannounce_pending=false;
         ++g_reannounce_gen; // retire an already-queued cancel-return read
+        // Native acceptance ends this character's command episode. The same
+        // character can become ready next (common with ATB or one survivor).
+        dedup::reset(kTurnCtx);
         state_set(menu_state::BATTLE_COMMAND,false);
     });
     // Original may synchronously begin the next actor. A postfix must not close
     // that new actor's legitimate window or suppress its initial command.
     o_CommandCommit(self,actions,mi);
+}
+
+bool admit_command_turn(void* data)
+{
+    if(!in_battle()||!data)return false;
+    g_command_turn_ready=true;
+    set_current_actor(data);
+    // Ownership is a native phase fact, independent from the local repeat
+    // guard. A cancel/re-entry still owns input even without another turn read.
+    state_set(menu_state::BATTLE_COMMAND,true);
+    set_last_selected_command_index(-1);
+    state_set(menu_state::BATTLE_MAGIC,false);
+    state_set(menu_state::BATTLE_ITEM,false);
+    const int character=character_id(data);
+    const auto name=character_name(data);
+    if(name.empty()||!dedup::index(kTurnCtx,character,dedup::Scope::Session))return true;
+    dedup::reset(kCommandCtx); // initial command belongs to this newly admitted turn
+    const bool opening_turn=formation_first_turn();
+    ffpr::say(TF(L"{0}'s turn",{name}),ui::prefs::interrupt_character_turn_enabled()&&!opening_turn);
+    return true;
 }
 
 void d_SetCommandData(void* self, void* data, void* targets, void* items, const void* mi)
@@ -337,35 +370,31 @@ void d_SetCommandData(void* self, void* data, void* targets, void* items, const 
         g_command_turn_ready = false;
         dedup::reset(kCommandCtx);
         g_command_reannounce_pending = false;   // never carry a back-out arm across the handoff
-        ++g_set_command_data_seq;               // the definitive commit signal
+        ++g_set_command_data_seq;               // a new native data admission
     });
     o_SetCommandData(self, data, targets, items, mi);
     hooks::guarded("BattleCommandSelectController.SetCommandData", [&] {
         if (!in_battle()) return;
         if (kCmdSelect.is(self)) field::cache::register_object(kCmdSelect, self);
-        if (!data) return;
-        // Open the window before any early return: a same-character re-entry (cancel from target
-        // back to the command menu) is still that actor's input turn.
-        g_command_turn_ready = true;
-        int character_id_v = character_id(data);
-        // Always track the current actor (H key), even for a repeat of the same character.
-        set_current_actor(data);
+        if(!game::in(game::kFF4|game::kFF5|game::kFF6))admit_command_turn(data);
+    });
+}
 
-        if (!dedup::index(kTurnCtx, character_id_v, dedup::Scope::Session)) return;
-
-        std::wstring character_name_v = character_name(data);
-        if (character_name_v.empty()) return;
-
-        state_set(menu_state::BATTLE_COMMAND, true);
-        set_last_selected_command_index(-1);
-        state_set(menu_state::BATTLE_MAGIC, false);
-        state_set(menu_state::BATTLE_ITEM, false);
-
-        // The opening roster always finishes first. Later automatic turns use
-        // the Speech preference; manual T remains an intentional interruption.
-        const bool opening_turn = formation_first_turn();
-        ffpr::say(TF(L"{0}'s turn", {character_name_v}),
-                  ui::prefs::interrupt_character_turn_enabled() && !opening_turn);
+using CommandSelectInit_t=void(*)(void*,const void*);
+CommandSelectInit_t o_CommandSelectInit=nullptr;
+void d_CommandSelectInit(void* self,const void* mi)
+{
+    o_CommandSelectInit(self,mi);
+    hooks::guarded("Battle.CommandInputReady",[&] {
+        if(!in_battle()||!self)return;
+        void* command=ref::rd<void*>(self,fReadyCommand);
+        if(!unity::alive(command)||!kCmdSelect.is(command))return;
+        field::cache::register_object(kCmdSelect,command);
+        // Native initialization can set its cursor before this postfix opens
+        // speech. Read the ready focus now, after the character; the existing
+        // command-event guard absorbs a later unchanged SetCursor callback.
+        if(admit_command_turn(ref::rd<void*>(command,fCommandActor)))
+            announce_command_at(content_list(command),ui::cursor_index(ref::rd<void*>(command,fCommandCursor)));
     });
 }
 
@@ -567,6 +596,7 @@ int install()
 
     int n = 0;
     n += hooks::attach(mSetCommandData, &d_SetCommandData, &o_SetCommandData) ? 1 : 0;
+    n += hooks::attach(mCommandSelectInit,&d_CommandSelectInit,&o_CommandSelectInit)?1:0;
     n += hooks::attach(mSetCursor, &d_SetCursor, &o_SetCursor) ? 1 : 0;
     auto& committed=game::in(game::kFF1|game::kFF2|game::kFF3)?mCommit123:
         game::is(game::Id::FF4)?mCommit4:game::is(game::Id::FF5)?mCommit5:mCommit6;

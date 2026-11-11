@@ -1,3 +1,4 @@
+// check-sources: audio/custom_cues.cpp
 // Actual native cue front end and range actions. Only native/context/worker
 // boundaries are fake; the mixer/bank/HRTF have their own production checks.
 #include <cstdio>
@@ -49,6 +50,7 @@ int capture_soundscape(sound::scape::Snapshot& s,size_t& next,uint64_t& revision
 }
 namespace field::baked { const Submap* submap_by_map_id(int){return nullptr;} }
 namespace sound::runtime {
+uint32_t custom_available_mask(){return 0;}
 void configure(scape::Options o){fixture::options=o;}
 uint64_t epoch(){return fixture::epoch;}void cancel_field(){++fixture::epoch;}
 std::unique_ptr<scape::Snapshot> acquire_snapshot(){return std::make_unique<scape::Snapshot>();}

@@ -1,0 +1,28 @@
+{
+  "scope": "Surgate continuation identities;reuse accepted November2 proof,not a new qualification run",
+  "episodes": 148,
+  "manual_operations": 974,
+  "shelf_contacts": 419,
+  "wrong_choices": 27,
+  "native_hops": 55,
+  "resets": 28,
+  "locales": 12,
+  "archived_report_sha256": {
+    "author_report.txt": "c9be99f473f786b1ec6aec343faffda6f13971b94c7e74d5ee86134a443cd0d1",
+    "comparison_report.txt": "6d51653310df4f3068f9f685af950b22e3baa1a5164a86edb2323956ca1b952a",
+    "ff5_books_route_check_report.txt": "2469d552659ae105731133cbf57bc532d12823fe614d24c39d01643e6d9de6d7",
+    "ff5_library_owner_check_report.txt": "aab45628e952ff5b0e4e9de1e924b88e9b47d66e0df440acbe941dcdd5044eca",
+    "ff5_library_resource_check_report.txt": "29ee975eaaabc03b2b13c50ce6cdb96d8ba283885e9456ca9eabcda94e3ec55b",
+    "invalid_return_waypoint_report.txt": "9cddaabb4160afe7b5b756f4e45e7930da50bd5701ca3449f5f139aa61a862c9",
+    "primary_report.txt": "9b43569ee2b794b97eb91ae39207f699c32f6ad7023c7fdb6ff5614beade870c"
+  },
+  "inputs": {
+    "src/games/ff5/book_model.cpp": "71dec68d900efda6afacaf9207827fda8850e4a032ef7af3c0c5927965fb0089",
+    "src/games/ff5/book_model.h": "88b33f06b34b490206be3473aa38dba66114844b671f8fdca8a0f458eebec28d",
+    "tools/author_ff5_books.py": "7e5173260bf90c338dc030a23f1b6d7a33f0de92e491d29fde07893a8be4a48b",
+    "tools/ff5_books_route_check.cpp": "a2c6cada82c30c67f54949a7807ec394f8f58fb5c0ebf16f82dd9f1aa30711cd",
+    "../tools/ff5_surgate_20261102/programs.json": "9e1999b7457dddea500e379592f53d950c5c2154e5a6be97ab404b91659407c9",
+    "../tools/ff5_surgate_20261102/objects.json": "405af570b132f8e127eeaec1103fe05e6e55ff40c7e0ba90cc08ac77e00ec009",
+    "../tools/ff5_surgate_20261102/comparison_programs.json": "bf21df62dfb2e63ea201db21c7b496de947bc0d5aeae03f4c0a95bed6f04c18c"
+  }
+}

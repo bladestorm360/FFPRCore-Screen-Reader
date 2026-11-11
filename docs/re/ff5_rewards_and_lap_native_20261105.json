@@ -1,0 +1,57 @@
+{
+  "scope_tag": "ff5_RewardsAndLap",
+  "source_script_hashes": {
+    "Map_10040/sc_e_0278_1": "7542979fcd47fada5031d6d1b99f7bd6247deef0cbff7df3503f1f510079ebbe",
+    "Map_10040/sc_e_0278_2": "6a12e93cbc3deb25e117515ab886e01207583341b5199c4f3f7f70d04ec27ba2",
+    "Map_10040/sc_e_0278_3": "cf834302068c7d302c0765ad26ad7d59109bacd7c9e9a66641058606d8cef2e5",
+    "Map_10040/sc_e_0278_4": "a88718add0bf1d616f3cc6ebbca75c6e8db1439212b82bf4a997297b24d34711",
+    "Map_10040/sc_map_10040": "5992d5ff6369b3f9769c66493bcffb33f2bda9fdab2c7090f82c6649654c5b4a",
+    "Map_20201_4/sc_e_0278": "226321efc19af7d030b2e47031f0b045cda1e53b47dec61fc2f422f1c3f4b203",
+    "Map_30311_1/sc_e_0324": "8d93a5ae8cf02f67692d21c8dec6c8e32ab8a21ddcb617f5aaaf1bc8725c7ea7",
+    "Map_30311_1/sc_map_30311_1": "24ba510003e046750384c2882defb476fbc82c469db92a2b61bdc567cbef034d",
+    "Map_30311_4/sc_e_0152": "b367d150c007b57cd666cb8d5076023fa9fa23ec0965009f753208a554caf49e",
+    "Map_30311_4/sc_e_0248": "ca58be123e00dfd846566a7f54dbdb449ab204562066c9fa97bcf2c958196243",
+    "Map_30311_4/sc_e_0326": "2a3dc86e5ad921f77ce5674b6bad0c7a85d22b3f2cc7a627f839c45cba266bbb",
+    "Map_30311_4/sc_e_0402": "5a195be4a2c47d904adc84759da2d8a6fa34a12db13fc19cb895dbfb2a3bcd5b",
+    "Map_30311_4/sc_e_0403": "09c51173b04145f0a4a778b15ebcb58d8bfc0641aae308ea3fc66c6a34dd47a0",
+    "Map_30311_4/sc_e_0404": "db4fd041284e97abd2900238de0a479b574ccc400af6df6d430248b0b58d25c6",
+    "Map_30311_4/sc_e_0405": "b8e1a479d8d5364973bab39ed09babd77de2f2583efbe0e3dd0517a8e317f9de",
+    "Map_30311_4/sc_e_0406": "6d81e72646c50509f74f4cf78ef0b4e9d11cbe2cda4d02da494381d75da75dbe",
+    "Map_30311_4/sc_e_0407": "385e421dd107c3195df118dcd0111e7e8ed3cf38d3fde5d4efd2a2dfc450db68",
+    "Map_30311_4/sc_e_0408": "b2a6f9cbb0feaa434be9126323a556d354325aca922b1d0f11a9e3081d9e1f32",
+    "Map_30311_4/sc_e_0409": "7802389662a0ee66d4f27682da5de9a6d9420a2863a117ac5a6fbb0b83847381",
+    "Map_30311_4/sc_e_0410": "769ac87b275953d6f3a4d0557cb11e4ad36c90415ff5d7f70639421c151421d1",
+    "Map_30311_4/sc_e_0411": "6201623110a9bfd16229edd90dba14e2fafb1adf216985442a4b875c2e711bcc",
+    "Map_30311_4/sc_e_0412": "af8928b0920d598189923ec0291749127032e72390d690a6c289cd5df88ba2f3",
+    "Map_30311_4/sc_e_0413": "33b2a82da357015c513cd88ec5646f5e38a87205375d8ff9c8a9ae6e94f38c82",
+    "Map_30311_4/sc_map_30311_4": "f93d779a7c63b18eaac24831a8963a4f399f71c309ab194fa93e86264cfe0ab4"
+  },
+  "identities": 22,
+  "tablet_items": [
+    52,
+    53,
+    54,
+    55
+  ],
+  "pickup_receipts": [
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191
+  ],
+  "checkpoint_entities": [
+    1003,
+    1004,
+    1005,
+    1006
+  ],
+  "checkpoint_transport": 9
+}

@@ -1,0 +1,334 @@
+{
+  "doors": [
+    {
+      "submap": "Map_20130",
+      "maps": [
+        67
+      ],
+      "id": 30,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        0,
+        7,
+        7
+      ],
+      "layers": [
+        0
+      ],
+      "open_controls": [],
+      "script": "sc_key_20130_1",
+      "receipt": 205,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "8074af09fae4409f35bd5a71610fa8cf3b4071ca911b0100e3c5152fb547201e",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_20130",
+      "maps": [
+        67
+      ],
+      "id": 29,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        0,
+        31,
+        7
+      ],
+      "layers": [
+        0
+      ],
+      "open_controls": [],
+      "script": "sc_key_20130_2",
+      "receipt": 206,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "46c5f973920767aa1d2b2c033974c0cab3d0f31270a255cf2d650af2e06cc1c8",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30131_1",
+      "maps": [
+        219
+      ],
+      "id": 2349,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        8,
+        18
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30131_1_1",
+      "receipt": 207,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "377784c334a7ceb3190e3bfbc026526ea14e94908b158a6c686f6fd823d360ac",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30131_1",
+      "maps": [
+        219
+      ],
+      "id": 2350,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        24,
+        18
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30131_1_2",
+      "receipt": 208,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "e2c72fd1a63d1d8f8a67c76deb5ceeab1547dc43d2b35af752e13890f0bf2379",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30131_1",
+      "maps": [
+        219
+      ],
+      "id": 2351,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        8,
+        27
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30131_1_3",
+      "receipt": 209,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "6ba63cfae2173bbe4305273a605a32080d7eaf9376e171b1d7cd59fa967c9c8f",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30131_1",
+      "maps": [
+        219
+      ],
+      "id": 2352,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        24,
+        27
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30131_1_4",
+      "receipt": 210,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "e754c7e7911be371680a12740fd0b23311ea7e422c8e5995fab8c397dcca25f0",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_1",
+      "maps": [
+        242
+      ],
+      "id": 2361,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        11,
+        17
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_1_1",
+      "receipt": 211,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "a54f293679a42ad67d9a8da74047f9b397463edf98de87250642e9d39b6b6774",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_1",
+      "maps": [
+        242
+      ],
+      "id": 2362,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        19,
+        17
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_1_2",
+      "receipt": 212,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "428a91603e64535f8f75d82c3089e86342cd93ffd0ed4a0cfb4b436f6f384b9a",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_5",
+      "maps": [
+        246
+      ],
+      "id": 2358,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        8,
+        12
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_5_1",
+      "receipt": 213,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "d34b615c3607059bfaaf999a7e9145bea96bac421924dd5cd1467781b53e1a07",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_5",
+      "maps": [
+        246
+      ],
+      "id": 2359,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        22,
+        12
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_5_2",
+      "receipt": 214,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "cd4a483cb7ac95155e50f70c6f29242144ffdc84bf00858027b155d0d2e2e445",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_5",
+      "maps": [
+        246
+      ],
+      "id": 2360,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        22,
+        22
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_5_3",
+      "receipt": 215,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "789f66c8c228a7fe247da56c906679c2db170f92f35367f99513466b63040800",
+      "prerequisites": []
+    },
+    {
+      "submap": "Map_30171_9",
+      "maps": [
+        250
+      ],
+      "id": 2390,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        19,
+        26
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_9_2",
+      "receipt": 217,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "10836f87dae230269255fd1d2559a749f8f806a9f5a102a89f285002d4e12503",
+      "prerequisites": [
+        214
+      ]
+    },
+    {
+      "submap": "Map_30171_9",
+      "maps": [
+        250
+      ],
+      "id": 2389,
+      "group": "entity_default",
+      "raw": "魔法の鍵で入れる",
+      "cell": [
+        1,
+        7,
+        26
+      ],
+      "layers": [
+        1
+      ],
+      "open_controls": [],
+      "script": "sc_key_30171_9_1",
+      "receipt": 216,
+      "item": 14,
+      "content": 15,
+      "thief_job": 3,
+      "sha256": "c1f128bf253b7c1fd6440d0c02e3125a2bfb68fe18a54bb999990e2355a2fe0a",
+      "prerequisites": [
+        214
+      ]
+    }
+  ],
+  "scope": "Factual lock identities and source predicates; no native implementation or runtime solver."
+}

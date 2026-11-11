@@ -1479,7 +1479,7 @@
     "script_id": 126,
     "message_key": "",
     "asset_id": 0,
-    "label": "Tower entrance",
+    "label": "Kain's Airship",
     "evidence": {
       "script": "sc_e_0040",
       "map_art": "Map_10010/Map_10010/tilemap",
@@ -1500,7 +1500,7 @@
     "script_id": 1032,
     "message_key": "",
     "asset_id": 0,
-    "label": "Tower entrance",
+    "label": "Kain's Airship",
     "evidence": {
       "script": "sc_goup_1",
       "map_art": "Map_10010/Map_10010/tilemap",

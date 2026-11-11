@@ -1,0 +1,47 @@
+{
+  "scope_tag": "ff5_WalseJail",
+  "source_script_hashes": {
+    "Map_20041_9/sc_map_20041_9": "38ed2b54166efbeef27f037adddc0cc84410ee57aec9e2b4027a2fe91a390d7b",
+    "Map_20041_9/sc_e_0182": "20cb0dc15dda9e989ff1ced06679a606d6c00f9a63f3b4b1e534783efb2ef236",
+    "Map_20041_9/sc_e_0495": "d79c4949d919071c8365087dbefb7ad51524a0ac4d0f84fef085ebd81e435b08",
+    "Map_20041_9/sc_e_0428": "abff0d29453e60318ad406a113438103ed9fbfce043777428624a03630c97396"
+  },
+  "native_position": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": [
+      {
+        "method": "Puppet.SetPos",
+        "rva": 2997536,
+        "bytes": 3776,
+        "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+      },
+      {
+        "method": "Puppet.GetDirectTargetPosition",
+        "rva": 2971584,
+        "bytes": 1008,
+        "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+      },
+      {
+        "method": "Puppet.GetChangeLayerValue",
+        "rva": 2970896,
+        "bytes": 688,
+        "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+      },
+      {
+        "method": "Puppet.MoveEntityLayerWithWorldPosition",
+        "rva": 2980992,
+        "bytes": 704,
+        "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+      }
+    ]
+  },
+  "collider": 24,
+  "pose": [
+    1,
+    8,
+    11
+  ],
+  "locked_scenario": 355,
+  "opening_contact": 27
+}

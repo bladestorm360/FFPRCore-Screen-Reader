@@ -121,7 +121,7 @@ std::vector<char> read(const std::wstring& path)
 bool replay(const r::Route& path, const b::Submap& map, int facing = -1)
 {
     a::Phase phase; phase.cells = path.cells; phase.arrival_direction = facing;
-    a::Route follower; follower.set({phase}, map.width, map.height, map.world);
+    a::Route follower; follower.set({phase}, map.width, map.height, map.world, map.loop_axes);
     for (size_t i = 0; i < path.cells.size(); ++i) {
         const auto step = follower.next(path.cells[i]);
         if (i + 1 == path.cells.size()) {
@@ -222,7 +222,7 @@ int wmain()
             const auto path = r::find(req);
             if (!path.found) { expect(false, "reachable sampled map route"); continue; }
             a::Phase phase; phase.cells = path.cells;
-            a::Route follower; follower.set({phase}, grids.width, grids.height, sm->world);
+            a::Route follower; follower.set({phase}, grids.width, grids.height, sm->world, sm->loop_axes);
             bool valid = true;
             for (size_t i = 0; i < path.cells.size(); ++i) {
                 const auto step = follower.next(path.cells[i]);
@@ -230,10 +230,8 @@ int wmain()
                 else {
                     valid &= step.result == a::Result::Move && step.next == path.cells[i+1];
                     int dx=path.cells[i+1].x-path.cells[i].x, dy=path.cells[i].y-path.cells[i+1].y;
-                    if(sm->world) {
-                        if(std::abs(dx)>grids.width/2) dx+=dx>0?-grids.width:grids.width;
-                        if(std::abs(dy)>grids.height/2) dy+=dy>0?-grids.height:grids.height;
-                    }
+                    if(b::wrap_width(*sm)>0&&std::abs(dx)>grids.width/2) dx+=dx>0?-grids.width:grids.width;
+                    if(b::wrap_height(*sm)>0&&std::abs(dy)>grids.height/2) dy+=dy>0?-grids.height:grids.height;
                     valid &= step.x == dx && step.y == dy;
                     const auto repeated = follower.next(path.cells[i]);
                     valid &= repeated.x == step.x && repeated.y == step.y;

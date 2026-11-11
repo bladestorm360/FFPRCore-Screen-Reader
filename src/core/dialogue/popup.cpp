@@ -60,6 +60,7 @@ ref::Field fGameOverLoadCommands{kGameOverLoadPopup, "commandList"};
 ref::Field fGameOverCtrlView{kGameOverController, "view"};
 ref::Field fGameOverViewLoadPopup{kGameOverView, "loadPopup"};
 ref::Field fJobCommands{kJobPopup, "commandList"};
+ref::Field fJobCursor{kJobPopup, "selectCursor"};
 ref::Field fTouchCommonTitle{kTouchCommonPopup, "titleText"};    // Text
 ref::Field fTouchCommonMessage{kTouchCommonPopup, "messageText"};
 
@@ -202,6 +203,17 @@ std::wstring read_rendered_popup(void* root)
         if (!line.empty()) { if (!body.empty()) body += L". "; body += line; }
     }
     return body;
+}
+
+std::wstring read_job_popup(void* popup)
+{
+    auto body = read_rendered_popup(popup);
+    if (body.empty()) return {};
+    // The native job popup assigns its default cursor during Open. Read that
+    // rendered command as part of the ready body, before later cursor moves.
+    const auto button = read_focused_button(popup, fJobCursor, fJobCommands);
+    if (button.empty()) return {};
+    return body + L" " + button;
 }
 
 // --- focus readers ----------------------------------------------------------------------------
@@ -355,7 +367,7 @@ void popup_open(void* p)
         return;
     }
     if (kJobPopup.is(p)) {
-        handle_popup_detected("JobChangePopup", p, &fJobCommands, &read_rendered_popup);
+        handle_popup_detected("JobChangePopup", p, &fJobCommands, &read_job_popup);
         return;
     }
     // Remaining Popup subclasses (job/name/other information layouts): rendered Texts,

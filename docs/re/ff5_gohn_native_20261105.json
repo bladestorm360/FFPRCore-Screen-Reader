@@ -1,0 +1,335 @@
+{
+  "scope_tag": "ff5_Gohn",
+  "source_script_hashes": {
+    "Map_30180/sc_e_0061": "765ede500cdd8ceca7f9c40a9b53b74e103c9d15d390482acee8c49ce561d78b",
+    "Map_30180/sc_e_0062": "02ab9918177e2c4082dbd8d95aa01bde15e169e82595acffe8016d148d940464",
+    "Map_30180/sc_e_0365": "c09772fb7b4a5150ca1e3b91d89310ccd40286e45a84a461ae4c04fa35cc6be4",
+    "Map_30180/sc_e_0366": "d2a69918f06b4e558ec80496bc988192906bfd9586a6953f0223fee676d1de47",
+    "Map_30180/sc_e_0367": "834b6d63ad94f91b4fcdac3f9f6391db3de6bf5e7da2354c3da212735232819c",
+    "Map_30180/sc_e_0368": "78fb9006bd430d9b286f78957a0d417d7f5b641b9846bc0ba3436b6036d50dbd",
+    "Map_30180/sc_map_30180": "58e7055e0c44a99f3f5d57ca8f845ccf8282073df44365235152a905cb31c6a0",
+    "Map_30181_1/sc_e_0062_1": "64f885d16618b9653af4e44385175688a9635a4e29d7cbc938262ae355765e18",
+    "Map_30181_1/sc_map_30181_1": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357"
+  },
+  "actors": [
+    {
+      "room": "Map_30180",
+      "type": "PointIn",
+      "editor": 1,
+      "entity": 11,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "cell": [
+        1,
+        36,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "GotoMap",
+      "editor": 2,
+      "entity": 12,
+      "raw": "ワールドマップ",
+      "group": "entity_default",
+      "cell": [
+        1,
+        36,
+        50
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "NPC",
+      "editor": 14,
+      "entity": 4,
+      "raw": "[共有]タイクーン王",
+      "group": "entity_default",
+      "cell": [
+        1,
+        -2,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 5,
+      "entity": 5,
+      "raw": "sc_e_0061:タイクーン王探し①\n",
+      "group": "ev_e_0061",
+      "cell": [
+        1,
+        36,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 25,
+      "entity": 10,
+      "raw": "sc_e_0062:タイクーン王発見\n",
+      "group": "ev_e_0062",
+      "cell": [
+        1,
+        34,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "NPC",
+      "editor": 26,
+      "entity": 16,
+      "raw": "ev_e_0062:タイクーン王",
+      "group": "ev_e_0062",
+      "cell": [
+        1,
+        34,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 15,
+      "entity": 6,
+      "raw": "sc_e_0365:タイクーン王探し②\n",
+      "group": "ev_e_0365",
+      "cell": [
+        1,
+        35,
+        37
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "AnimEntity",
+      "editor": 30,
+      "entity": 22,
+      "raw": "ev_e_0365:？吹き出し",
+      "group": "ev_e_0365",
+      "cell": [
+        1,
+        -2,
+        3
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 16,
+      "entity": 7,
+      "raw": "sc_e_0366:タイクーン王探し③\n",
+      "group": "ev_e_0366",
+      "cell": [
+        1,
+        48,
+        45
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 17,
+      "entity": 8,
+      "raw": "sc_e_0366:タイクーン王探し③\n",
+      "group": "ev_e_0366",
+      "cell": [
+        1,
+        48,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 18,
+      "entity": 9,
+      "raw": "sc_e_0367:タイクーン王探し④\n",
+      "group": "ev_e_0367",
+      "cell": [
+        1,
+        22,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 19,
+      "entity": 18,
+      "raw": "sc_e_0367:タイクーン王探し④\n",
+      "group": "ev_e_0367",
+      "cell": [
+        1,
+        22,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 20,
+      "entity": 19,
+      "raw": "sc_e_0367:タイクーン王探し④\n",
+      "group": "ev_e_0367",
+      "cell": [
+        1,
+        22,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30180",
+      "type": "Event",
+      "editor": 23,
+      "entity": 17,
+      "raw": "sc_e_0368:タイクーン王探し⑤\n",
+      "group": "ev_e_0368",
+      "cell": [
+        1,
+        35,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30181_1",
+      "type": "GotoMap",
+      "editor": 2,
+      "entity": 1,
+      "raw": "ワープ装置",
+      "group": "entity_default",
+      "cell": [
+        1,
+        9,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30181_1",
+      "type": "PointIn",
+      "editor": 5,
+      "entity": 4,
+      "raw": "ワープ装置",
+      "group": "entity_default",
+      "cell": [
+        1,
+        9,
+        6
+      ],
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "room": "Map_30181_1",
+      "type": "PointIn",
+      "editor": 6,
+      "entity": 5,
+      "raw": "滅びの町(仮)",
+      "group": "entity_default",
+      "cell": [
+        1,
+        23,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ]
+    }
+  ],
+  "position_native": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": [
+      {
+        "method": "Puppet.SetPos",
+        "rva": 2997536,
+        "bytes": 3776,
+        "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+      },
+      {
+        "method": "Puppet.GetDirectTargetPosition",
+        "rva": 2971584,
+        "bytes": 1008,
+        "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+      },
+      {
+        "method": "Puppet.GetChangeLayerValue",
+        "rva": 2970896,
+        "bytes": 688,
+        "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+      },
+      {
+        "method": "Puppet.MoveEntityLayerWithWorldPosition",
+        "rva": 2980992,
+        "bytes": 704,
+        "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+      }
+    ]
+  }
+}

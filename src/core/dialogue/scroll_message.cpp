@@ -25,6 +25,22 @@ ref::Class kScrollManager{"Last.Message", "ScrollMessageManager"};
 ref::Method mFadePlay{kFadeManager, "Play", 9};
 ref::Method mLineFadeSetData{kLineFadeController, "SetData", 5};
 ref::Method mScrollPlay{kScrollManager, "Play", 7};
+ref::Class kFF4LineFade{"Last.UI.Message", "LineFadeMessageWindowController", game::kFF4};
+ref::Class kFF4LineFadeData{"Last.UI.Message", "LineFadeMessageWindowController.ExecutionData", game::kFF4};
+ref::Field fLineFadeIndex{kFF4LineFade, "targetIndex"};
+ref::Field fLineFadeData{kFF4LineFade, "executionData"};
+ref::Field fLineFadeMessages{kFF4LineFadeData, "<Messages>k__BackingField"};
+ref::Method mLineFadePlayInit{kFF4LineFade, "PlayInit", 0};
+
+bool line_fade_phases_ready = false;
+void* line_fade_owner = nullptr; // identity only, never dereferenced outside a native callback
+int line_fade_last_index = -1;
+
+void retire_line_fade()
+{
+    line_fade_owner = nullptr;
+    line_fade_last_index = -1;
+}
 
 // FF1 lastScrollMessage: one slot shared by the three hooks, never reset (Session scope). It holds
 // the raw message, compared before cleaning.
@@ -62,11 +78,19 @@ void fade_play_postfix(void* message_str)
 
 // LineFadeMessageWindowController.SetData(List<string> messages, ...): some paths (game over)
 // bypass the managers and call the controller directly.
-void line_fade_set_data_postfix(void* messages)
+void line_fade_set_data_postfix(void* self, void* messages)
 {
-    if (!messages) return;
+    const bool phase_reader = line_fade_phases_ready && frame::on_main_thread();
+    if (phase_reader && line_fade_owner == self) retire_line_fade();
     const int count = unity::list_count(messages);
-    if (count == 0) return;
+    if (count <= 0) return;
+    if (phase_reader && count > 1 && count <= 64) {
+        // FFIV's native Play binds each message to a separate fade group. The
+        // legend and other multiline runs start each group in PlayInit.
+        retire_line_fade();
+        line_fade_owner = self;
+        return;
+    }
 
     std::wstring combined;
     for (int i = 0; i < count; ++i) {
@@ -82,6 +106,19 @@ void line_fade_set_data_postfix(void* messages)
     // Interrupt for the defeat message so it is heard over a preceding KO message.
     const bool is_defeat = text::contains(text::lower(clean), L"defeated");
     ffpr::say(clean, is_defeat);
+}
+
+void line_fade_play_init_postfix(void* self)
+{
+    if (!line_fade_owner || self != line_fade_owner || !frame::on_main_thread()) return;
+    const int index = ref::rd<int>(self, fLineFadeIndex);
+    if (index < 0 || index >= 64 || index <= line_fade_last_index) return;
+    void* data = ref::rd<void*>(self, fLineFadeData);
+    void* messages = ref::rd<void*>(data, fLineFadeMessages);
+    if (index >= unity::array_length(messages)) return;
+    line_fade_last_index = index;
+    auto line = text::trim(ref::str(unity::array_at(messages, index)));
+    if (!line.empty()) ffpr::say(line, false);
 }
 
 // SpeakScrollLinesWithTiming: the first line at once, then one line per (scrollTime / (lines+1))
@@ -141,10 +178,12 @@ using FadePlay_t = void (*)(void* self, void* message, int32_t font_size, uint32
                             float fade_out, float wait, bool center, float pos_x, float pos_y, const void* mi);
 using LineFadeSetData_t = void (*)(void* self, void* messages, uint32_t color, float fade_in, float fade_out,
                                    float wait, const void* mi);
+using LineFadePlayInit_t = void (*)(void* self, const void* mi);
 using ScrollPlay_t = void (*)(void* self, int32_t type, void* message, float scroll_time, int32_t font_size,
                               uint32_t color, int32_t anchor, Rect16 margin, const void* mi);
 FadePlay_t o_FadePlay;
 LineFadeSetData_t o_LineFadeSetData;
+LineFadePlayInit_t o_LineFadePlayInit;
 ScrollPlay_t o_ScrollPlay;
 
 void d_FadePlay(void* self, void* message, int32_t font_size, uint32_t color, float fade_in, float fade_out,
@@ -158,7 +197,13 @@ void d_LineFadeSetData(void* self, void* messages, uint32_t color, float fade_in
                        const void* mi)
 {
     o_LineFadeSetData(self, messages, color, fade_in, fade_out, wait, mi);
-    hooks::guarded("LineFadeMessageWindowController.SetData", [&] { line_fade_set_data_postfix(messages); });
+    hooks::guarded("LineFadeMessageWindowController.SetData", [&] { line_fade_set_data_postfix(self, messages); });
+}
+
+void d_LineFadePlayInit(void* self, const void* mi)
+{
+    o_LineFadePlayInit(self, mi);
+    hooks::guarded("FF4.LineFade.PlayInit", [self] { line_fade_play_init_postfix(self); });
 }
 
 void d_ScrollPlay(void* self, int32_t type, void* message, float scroll_time, int32_t font_size, uint32_t color,
@@ -172,7 +217,17 @@ int install()
 {
     int n = 0;
     if (hooks::attach(mFadePlay, &d_FadePlay, &o_FadePlay)) ++n;
-    if (hooks::attach(mLineFadeSetData, &d_LineFadeSetData, &o_LineFadeSetData)) ++n;
+    if (hooks::attach(mLineFadeSetData, &d_LineFadeSetData, &o_LineFadeSetData)) {
+        ++n;
+        if (kFF4LineFade.applies() && fLineFadeIndex && fLineFadeData && fLineFadeMessages &&
+            hooks::attach(mLineFadePlayInit, &d_LineFadePlayInit, &o_LineFadePlayInit)) {
+            ++n;
+            line_fade_phases_ready = true;
+            events::on(events::Kind::MapChanging, &retire_line_fade);
+            events::on(events::Kind::SceneLoaded, &retire_line_fade);
+            events::on(events::Kind::TitleScreen, &retire_line_fade);
+        }
+    }
     if (hooks::attach(mScrollPlay, &d_ScrollPlay, &o_ScrollPlay)) ++n;
     return n;
 }

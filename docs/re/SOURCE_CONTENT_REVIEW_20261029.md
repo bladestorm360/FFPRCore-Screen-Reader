@@ -1,5 +1,31 @@
 # Preserved native analysis and historical source exposure
 
+## November3 current-slice inspection correction
+
+Detailed Floating Continent movement/choice traces were briefly redirected into
+ignored build_check storage. They were moved intact to the verified non-Git
+FFPR/tools/puzzle_audit_20261030/ff6_floating_continent_20261103 directory. A
+Sealed Gate verification helper containing literal native-instruction comparisons
+was likewise moved to the external ff6_puppet_layers_20261103 archive. These
+paths were never tracked, staged, committed or published; no Git action created
+a source-bearing history object. The current collector now checks the external
+destination before writing, preserves the trace, emits only its locator and
+keeps only normalized endpoint coordinates/source hashes in the repository.
+The factual layer/route receipts remain valid. This is a corrected placement
+error, not an exception to the ban on source in ignored repository paths.
+
+## November2 working inspection correction
+
+A Ghido inspection report containing native instructions was mistakenly
+redirected into ignored build_check storage. It was moved to the verified
+non-Git FFPR/tools/ff5_stone_20261102 folder before any Git action; git ls-files
+confirmed the file was never tracked. No commit/push or new history object was
+created. The collector now writes native inspection output directly outside Git
+and sends only a locator to stdout. Follow-up repository_content_check passes
+1311 objects/files,0rejected, under enforced slot2/2/2GB. Evidence and remaining
+Ghido qualification: FF5_STONE_GUIDE_20261102.md and its build_check folder.
+This corrects the working-file violation without making a broader history claim.
+
 ## October30 completed rewrite
 
 The authorized rewrite and atomic leased GitHub update succeeded. All88 prepared

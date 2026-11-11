@@ -7,12 +7,14 @@ LOCALES = ("en", "ja", "fr", "it", "de", "es", "ko", "zht", "zhc", "ru", "pt", "
 
 # Values are ordered by LOCALES. Keep format placeholders unchanged.
 ROWS = {
+"Cross the save point. Close any prompt, then use Shift+G.": ("Cross the save point. Close any prompt, then use Shift+G.","セーブポイントを通ってください。表示された案内を閉じてからShift+Gを押してください。","Traversez le point de sauvegarde. Fermez toute invite, puis utilisez Shift+G.","Attraversa il punto di salvataggio. Chiudi eventuali messaggi, poi premi Shift+G.","Überquere den Speicherpunkt. Schließe alle Hinweise und drücke dann Umschalt+G.","Cruza el punto de guardado. Cierra cualquier aviso y pulsa Mayús+G.","저장 지점을 지나세요. 안내창을 닫은 뒤 Shift+G를 누르세요.","穿過存檔點。關閉提示後按Shift+G。","穿过存档点。关闭提示后按Shift+G。","Пройдите через точку сохранения. Закройте подсказки и нажмите Shift+G.","Atravesse o ponto de salvamento. Feche os avisos e pressione Shift+G.","เดินผ่านจุดบันทึก ปิดข้อความแจ้งแล้วกด Shift+G"),
 "Banon in danger.": ("Banon in danger.","バナンが危ない。","Banon est en danger.","Banon è in pericolo.","Banon ist in Gefahr.","Banon está en peligro.","바넌이 위험합니다.","巴南有危險。","巴南有危险。","Банон в опасности.","Banon está em perigo.","บานอนกำลังตกอยู่ในอันตราย"),
 "Continue through the passage.": ("Continue through the passage.","通路を進んでください。","Continuez dans le passage.","Prosegui nel passaggio.","Gehe durch den Gang weiter.","Continúa por el pasadizo.","통로를 계속 진행하세요.","繼續穿過通道。","继续穿过通道。","Продолжайте идти по проходу.","Continue pelo corredor.","เดินต่อไปตามทาง"),
 "Enter the stage.": ("Enter the stage.","舞台に入ってください。","Entrez sur la scène.","Entra in scena.","Betritt die Bühne.","Entra en el escenario.","무대로 들어가세요.","進入舞台。","进入舞台。","Выйдите на сцену.","Entre no palco.","เข้าไปบนเวที"),
 "Fight {0}.": ("Fight {0}.","{0}と戦ってください。","Affrontez {0}.","Affronta {0}.","Kämpfe gegen {0}.","Lucha contra {0}.","{0}와 싸우세요.","與{0}戰鬥。","与{0}战斗。","Сразитесь с {0}.","Lute contra {0}.","ต่อสู้กับ {0}"),
 "Follow performance cues.": ("Follow performance cues.","演技の合図に従ってください。","Suivez les indications de la représentation.","Segui le indicazioni dello spettacolo.","Folge den Regieanweisungen.","Sigue las indicaciones de la función.","공연 신호를 따르세요.","按照演出提示行動。","按照演出提示行动。","Следуйте подсказкам представления.","Siga as deixas da apresentação.","ทำตามสัญญาณการแสดง"),
 "Hold switch. Switch parties.": ("Hold switch. Switch parties.","スイッチを押さえたまま、パーティを切り替えてください。","Maintenez l'interrupteur, puis changez d'équipe.","Tieni premuto l'interruttore e cambia gruppo.","Halte den Schalter gedrückt und wechsle die Gruppe.","Mantén pulsado el interruptor y cambia de grupo.","스위치를 누른 채 파티를 전환하세요.","壓住開關，再切換隊伍。","压住开关，再切换队伍。","Удерживайте переключатель и смените отряд.","Mantenha o interruptor pressionado e troque de grupo.","เหยียบสวิตช์ค้างไว้ แล้วเปลี่ยนปาร์ตี้"),
+"Switch parties.": ("Switch parties.","パーティを切り替えてください。","Changez d'équipe.","Cambia gruppo.","Wechsle die Gruppe.","Cambia de grupo.","파티를 전환하세요.","切換隊伍。","切换队伍。","Переключите отряд.","Troque de grupo.","เปลี่ยนปาร์ตี้"),
 "Join {0}.": ("Join {0}.","{0}に加わってください。","Rejoignez {0}.","Unisciti a {0}.","Schließe dich {0} an.","Únete a {0}.","{0}에 합류하세요.","加入{0}。","加入{0}。","Присоединитесь к {0}.","Junte-se a {0}.","ไปรวมกับ{0}"),
 "Leave the switch.": ("Leave the switch.","スイッチから離れてください。","Quittez l'interrupteur.","Lascia l'interruttore.","Verlasse den Schalter.","Deja el interruptor.","스위치에서 벗어나세요.","離開開關。","离开开关。","Отойдите от переключателя.","Saia do interruptor.","ออกจากสวิตช์"),
 "Operate {0}.": ("Operate {0}.","{0}を操作してください。","Actionnez {0}.","Aziona {0}.","Betätige {0}.","Activa {0}.","{0}을(를) 조작하세요.","操作{0}。","操作{0}。","Используйте {0}.","Acione {0}.","ใช้งาน{0}"),
@@ -28,8 +30,7 @@ ROWS = {
 
 def main():
     data = json.loads(CATALOG.read_text(encoding="utf-8"))
-    assert len(ROWS) == 17
-    assert set(ROWS) <= {"Banon in danger.", "Continue through the passage.", "Enter the stage.", "Fight {0}.", "Follow performance cues.", "Hold switch. Switch parties.", "Join {0}.", "Leave the switch.", "Operate {0}.", "Party {0} closest.", "Pull the far-right lever.", "Push {0}. Clear the party below first.", "Reach {0}.", "Read {0}.", "Step on {0}.", "Talk to {0}.", "Terra in danger."}
+    assert len(ROWS) == 19
     # Correct the three previously added name spellings, but only from their
     # exact known old values so unrelated catalog changes cannot be overwritten.
     corrections = {

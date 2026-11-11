@@ -12,6 +12,15 @@ using ExitGroup=std::pair<int,int>; // source floor, actual destination map
 ExitGroup exit_group(const FilterRow& row,const FilterInput& input) {
     return {row.remote_map?row.remote_map:input.current_map,row.destination};
 }
+bool groupable_exit(const FilterRow& row,const FilterInput& input) {
+    if(row.kind!=Kind::MapExit||row.aerial_transition||row.destination<=0)return false;
+    if(!row.remote_map)return true;
+    // Projection suppressed returns with only one proved arrival. Preserve
+    // its distinct or unresolved return choices even with exit grouping on.
+    if(row.destination==input.current_map)return false;
+    const auto* destination=baked::submap_by_map_id(row.destination);
+    return !destination||destination!=baked::submap_by_map_id(input.current_map);
+}
 void check_cancelled(const FilterInput& input) {
     if (input.cancelled && input.cancelled()) throw Cancelled{};
 }
@@ -112,7 +121,7 @@ static Filtered build_impl(FilterInput& input) {
     if (input.exits) for (size_t index : result.order) {
         check_cancelled(input);
         const auto& row = input.rows[index];
-        if (row.kind != Kind::MapExit || row.aerial_transition || row.destination <= 0) continue;
+        if (!groupable_exit(row,input)) continue;
         // World-unreachable rows are pruned below and cannot represent a group.
         if (input.reachable_only && input.world && row.route_distance < 0) continue;
         const auto key=exit_group(row,input);
@@ -151,7 +160,7 @@ static Filtered build_impl(FilterInput& input) {
         if (input.reachable_only && input.world && row.kind == Kind::MapExit && row.route_distance < 0) return true;
         // Group only explicitly enabled native identities, never spoken text.
         if (input.pads && !row.pad.empty() && !pads.insert(row.pad).second) return true;
-        if (input.exits && row.kind == Kind::MapExit && !row.aerial_transition && row.destination > 0 && exits[exit_group(row,input)] != index) return true;
+        if (input.exits && groupable_exit(row,input) && exits[exit_group(row,input)] != index) return true;
         if (input.events && !row.event_group.empty() && events[row.event_group] != index) {
             // A remembered explicit objective is never rebound to the group's
             // newly nearest sibling during movement or a floor continuation.

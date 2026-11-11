@@ -1,4 +1,18 @@
 {
+  "Kain's Airship": {
+    "en": "Kain's Airship",
+    "ja": "カインの飛空艇",
+    "fr": "Vaisseau de Kaïn",
+    "it": "Aeronave di Cain",
+    "de": "Kains Luftschiff",
+    "es": "Barco volador de Kain",
+    "ko": "카인의 비공정",
+    "zht": "凱因的飛空艇",
+    "zhc": "凯因的飞空艇",
+    "ru": "Воздушный корабль Каина",
+    "th": "เรือเหาะของไคน์",
+    "pt": "Helibarco de Kain"
+  },
   "Front Row": {
     "en": "Front Row",
     "ja": "前列",

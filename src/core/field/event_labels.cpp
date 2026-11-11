@@ -32,6 +32,14 @@ std::wstring label_text(const std::wstring& label)
     return T(label);
 }
 }
+std::wstring reviewed_boss_name(const std::wstring& raw, int map_id, int entity_id, int object_type)
+{
+    if (map_id <= 0 || entity_id < 0 || (object_type != 5 && object_type != 10)) return {};
+    const auto key = L"@boss:" + std::to_wstring(map_id) + L":" + std::to_wstring(entity_id) +
+        L":" + std::to_wstring(object_type) + L":" + raw;
+    const auto* label = data::game_json("eventlabels").get(key);
+    return label && label->is_string() && label->s.starts_with(L"@name:") ? label_text(label->s) : std::wstring();
+}
 std::wstring safe_event_label(void* entity, const std::wstring& type)
 {
     if (type == L"ToLayer") return T(L"Layer transition");

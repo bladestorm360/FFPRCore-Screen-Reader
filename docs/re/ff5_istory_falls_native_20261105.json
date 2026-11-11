@@ -1,0 +1,215 @@
+{
+  "scope_tag": "ff5_IstoryFalls",
+  "source_script_hashes": {
+    "Map_30521_1/sc_e_0149": "8fcc70b8cffecf8abd9769891877f8f7cb63d445d22524a0edb02b4e0250cbbc",
+    "Map_30521_1/sc_e_0149_1": "ffe3890e19282e22a9012f83e9ddde7a0f56b614421ffb8fab332b3fa6d30ada",
+    "Map_30521_1/sc_e_0316_1": "6736d0833ab7373fd0bc267cb7200cf43c68f740a1cc7cd7081001e802efdd0f",
+    "Map_30521_1/sc_e_0316_2": "023acc8b29be8cf49feabe5bc82f695169461bf318e172287e5edda5668dba34",
+    "Map_30521_1/sc_e_0316_3": "c699101c3296698a075f1f677635f10656d00bed2ac2aaa6e6495af05ac5f140",
+    "Map_30521_1/sc_e_0446": "d0ea30652635c371142a6ba79e9f54c3868186f20f65555baa188ebcc9c99806",
+    "Map_30521_1/sc_map_30521_1": "30fbfffdc02f1cd625eb6881151fce9697289fb4a53dbd19b7941e9994dc369f",
+    "Map_30521_3/sc_30521_3_to_30521_2_1": "108f4b4cfef8c1b4496b1ca68a9fff26c384d8e31e9b026b237099ef3bc055b5",
+    "Map_30521_3/sc_30521_3_to_30521_2_2": "4d49fbbe8351c77570787ca42904e2d0e8908600a2b932a162457a79afa0ac1d",
+    "Map_30521_3/sc_30521_3_to_30521_4": "9a0d21cb75660769eba91f8faaea0f7a5b3c8fd6ce929eb646767b530bb9c6d1",
+    "Map_30521_3/sc_e_0316_4": "c4d61a6094732fbc4aff0bd66629e79c3bbdaa5504cb3debe64f3ff8d2159d01",
+    "Map_30521_3/sc_e_0316_5": "023acc8b29be8cf49feabe5bc82f695169461bf318e172287e5edda5668dba34",
+    "Map_30521_3/sc_e_0317": "322b3434c0e9f4808af014df380b1a15aeaa19a042a11cc6d2f23c95a3ae15a2",
+    "Map_30521_3/sc_e_0317_1": "960d2009b7dee8915a0044a098d1dc805e63e8d9430c5cdca02981d000ad06b7",
+    "Map_30521_3/sc_map_30521_3": "82ce17e7a9d5dc17a13523c1d6235b8005fa66184b32dfd55e118bcbcee2a416",
+    "Map_30521_6/sc_30521_6_to_30521_8": "df60dedbdba9243873ed2b52184cb02a46b30435eb632e4f0f7ba97c6c10dea7",
+    "Map_30521_6/sc_30521_6_to_30521_8_1": "2a2de14d507d9d4fc684534f23d157d308f8e2bc6a3871d8a81604aad68618f6",
+    "Map_30521_6/sc_30521_6_to_30521_8_3": "8a1d7328a192964f53e3e13ab2f34441fb9d4a28453da236290c92b28e940844",
+    "Map_30521_6/sc_map_30521_6": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_30521_8/sc_30521_6_to_30521_8_2": "9f8702f309c72a221e9f0914507ec4d605b446f8f949e590f680665eb00503cb",
+    "Map_30521_8/sc_30521_6_to_30521_8_4": "2e143f7cd7a7a8c1b562120b2e07f5d2a37344ab2dd52d247cbf1a1289dd3126",
+    "Map_30521_8/sc_e_0318": "3bc7083b658ab715fb8cc47f4db9f8850fd6bbaf518ed820cbbb11fb0e78dc9e",
+    "Map_30521_8/sc_e_0319": "4cb360ad2b80e8230212226442f161e0b479baa016232b410cb1b397329a7b15",
+    "Map_30521_8/sc_e_0320": "c64130e9706bb5c3e20e66f91f8e26090adb054c826976a66f8a91073fcfecae",
+    "Map_30521_8/sc_e_0321_1": "99eaae10169427b2c41c025dbbecfff090b3bdf96739d16cb533342bad1e316b",
+    "Map_30521_8/sc_e_0453": "504731ddabbdaf0a69b8c1b6100b37a7869c2b1ee45c03f00a573680d3e996c9",
+    "Map_30521_8/sc_e_0457": "e453247bc03682c3e3beb79109b397dc83af36a9e70041a02834af3c965a583a",
+    "Map_30521_8/sc_map_30521_8": "05e962f47f6a26bd2094a86cb79f8cc1808fadc58c5dd9f0c1e11ed64c7303e3",
+    "Map_30521_9/sc_10040_to_30521_9_1": "f2deb29c5dd4cd6f7a33c6a2017d28101d1dd6158c6d6eba656e39068c33e8a6",
+    "Map_30521_9/sc_30521_9_to_10040": "db6dbeafbba2d0e15984fe357c2d41407e4fc79d4bd20a1eb33d362f50089a8f",
+    "Map_30521_9/sc_e_0150": "30128aea48cce4884ed23d303812a7a854ebefb358b74975eca1adce45b26fda",
+    "Map_30521_9/sc_e_0151": "dbfefe8d59ee7a915655aea3a66855cd70e3623783a103bd392fe1e02a44f16d",
+    "Map_30521_9/sc_e_0162_7": "c9790ce656a2833b5718a503920cfb91dd782bdb81e2cf5b68865681a1413dfc",
+    "Map_30521_9/sc_e_0321_2": "a1650f6a595ad4c7a73cb70b9e9a6a5e7ba5a983022cb7e8c59f26d01fc48eb9",
+    "Map_30521_9/sc_e_0323_1": "def9a1f49efc5e54ab625f00ec49b0f24e47f00de91f6754a8138b48d7ff85b3",
+    "Map_30521_9/sc_e_0401": "59cb8dfce2776304b4d4c5e6d5969609903442ce2876692ba54513b5af3f1c40",
+    "Map_30521_9/sc_e_0401_1": "805e894f48818b3071bb2e08a3cbd7f660b72392ecd0586f19a0a027b110bfc8",
+    "Map_30521_9/sc_e_0524": "5a0c6b6a472cfea760cf72ad2d203c9faa2291b49d3c80f0b741e373bec2cf43",
+    "Map_30521_9/sc_map_30521_9": "6eb310c6e4c8c67e75b9fd417d896d5d695ab741abe14b4de9fba2cada63f344"
+  },
+  "native_methods": [
+    {
+      "method": "Puppet.Move",
+      "rva": 2985232,
+      "bytes": 2880,
+      "sha256": "6fb0c4b4071d3d855f49d61db5fa34b6a5dd0f3faf8e59c907231f2ce6c80e88"
+    },
+    {
+      "method": "MapRouteSearcher.SearchSimple",
+      "rva": 3072304,
+      "bytes": 3184,
+      "sha256": "53812db1c3d92ad6d4f7860ffb7ead7fe62967b142dd7e28b888624e76640cf4"
+    },
+    {
+      "method": "FieldEntity.MoveTo",
+      "rva": 15691264,
+      "bytes": 608,
+      "sha256": "80478ecaf7435188809165d90840050e8f3854f6da61afa352fa795d9a941901"
+    },
+    {
+      "method": "FieldEntity.UpdateEntity",
+      "rva": 15698112,
+      "bytes": 704,
+      "sha256": "044a6da17ceeb62bb3edf096ef74d579248909e07b90bddcb67e2435840501ed"
+    },
+    {
+      "method": "FieldEntity.SquareMoveFinished",
+      "rva": 15697856,
+      "bytes": 32,
+      "sha256": "8025dc7d980697aea3533cb595527b8cc91a11ccaeae25a9dafe7704b28b3212"
+    },
+    {
+      "method": "SwitchLayerEventEntity.Init",
+      "rva": 15484864,
+      "bytes": 304,
+      "sha256": "f93ddfc5529511588e8bc7fcc3e0ca93cc071a23b5dc36539fde8182f357b1e0"
+    },
+    {
+      "method": "SwitchLayerEventEntity.OnTriggerEnterCustom",
+      "rva": 15485408,
+      "bytes": 736,
+      "sha256": "2c9979e5867b620ce570551fed4f54cf1a30d9c246e3b48207fa4f1fe51753af"
+    },
+    {
+      "method": "SwitchLayerEventEntity.OnTriggerStayCustom",
+      "rva": 15486672,
+      "bytes": 448,
+      "sha256": "ee05aa3df0b161ebb118d9d631bcf2097111ccf055a80d56e6d197b10c1f04c8"
+    },
+    {
+      "method": "SwitchLayerEventEntity.PerfectCollisionHit",
+      "rva": 15487120,
+      "bytes": 384,
+      "sha256": "b679ba6a3ea60402f587b0fb350194a16196afd3ac292b573d34dc646b82c955"
+    },
+    {
+      "method": "SwitchLayerEventEntity.ChangeLayer",
+      "rva": 15484512,
+      "bytes": 224,
+      "sha256": "d71aa9e0c23a592c95f7a3541ffff2274100a96d27e24ea0c198e93162a507e5"
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "current_contacts": [
+    {
+      "entity": 37,
+      "editor": 37,
+      "source": [
+        1,
+        16,
+        11
+      ],
+      "landing": [
+        16,
+        13,
+        0
+      ],
+      "south_steps": 2,
+      "layer_contact": 17,
+      "timer_controls_actor": false
+    },
+    {
+      "entity": 38,
+      "editor": 38,
+      "source": [
+        1,
+        9,
+        8
+      ],
+      "landing": [
+        9,
+        10,
+        0
+      ],
+      "south_steps": 2,
+      "layer_contact": 45,
+      "timer_controls_actor": true
+    },
+    {
+      "entity": 41,
+      "editor": 41,
+      "source": [
+        0,
+        20,
+        10
+      ],
+      "landing": [
+        20,
+        11,
+        0
+      ],
+      "south_steps": 1,
+      "layer_contact": null,
+      "timer_controls_actor": false
+    },
+    {
+      "entity": 42,
+      "editor": 42,
+      "source": [
+        0,
+        16,
+        12
+      ],
+      "landing": [
+        16,
+        13,
+        0
+      ],
+      "south_steps": 1,
+      "layer_contact": null,
+      "timer_controls_actor": false
+    },
+    {
+      "entity": 43,
+      "editor": 43,
+      "source": [
+        0,
+        12,
+        10
+      ],
+      "landing": [
+        12,
+        11,
+        0
+      ],
+      "south_steps": 1,
+      "layer_contact": null,
+      "timer_controls_actor": false
+    },
+    {
+      "entity": 44,
+      "editor": 44,
+      "source": [
+        0,
+        9,
+        9
+      ],
+      "landing": [
+        9,
+        10,
+        0
+      ],
+      "south_steps": 1,
+      "layer_contact": null,
+      "timer_controls_actor": false
+    }
+  ],
+  "spike_control": 20,
+  "exit_enable_scenario": 404,
+  "ordinary_interactions": true
+}

@@ -1,4 +1,4 @@
-// Observe native modifier application, not localized spell names or damage/HP
+// Observe native party modifier application, not localized spell names or damage/HP
 // arithmetic. All-six BattleStatusControl owns the ready aggregate dictionary;
 // BattleUtility's typed mutation owns direct stat writes. Native pointers stay
 // on their owner. The formatter receives copied names, directions and locale.
@@ -91,6 +91,7 @@ unsigned pending=0;
 std::atomic<bool> overflow{false};
 bool active=false;
 thread_local AddScope* adding=nullptr;
+bool party_unit(void* unit) { return unit && !kBattleEnemyData.is(unit); }
 void remember(void* unit,void* parameter) {
     if(!unit||!parameter)return;
     const auto generation=epoch.load(std::memory_order_relaxed);
@@ -98,10 +99,11 @@ void remember(void* unit,void* parameter) {
     for(auto& row:bindings)if(!row.parameter||row.generation!=generation){row={parameter,unit_name(unit).substr(0,256),generation,field_values(parameter)};return;}
     rejected.fetch_add(1,std::memory_order_relaxed);
 }
-std::wstring name_for(void* parameter) {
+Binding* binding_for(void* parameter) {
+    if(!parameter)return nullptr;
     const auto generation=epoch.load(std::memory_order_relaxed);
-    for(const auto& row:bindings)if(row.generation==generation&&row.parameter==parameter)return row.name;
-    return {};
+    for(auto& row:bindings)if(row.generation==generation&&row.parameter==parameter)return &row;
+    return nullptr;
 }
 int slot(int type) {
     if(type>=1&&type<=24)return type;
@@ -178,12 +180,11 @@ void changed(void* unit,const Changes& changes) {
     submit(unit_name(unit).substr(0,256),changes);
 }
 Changes changed_fields(void* parameter) {
-    const auto current=field_values(parameter);
-    const auto generation=epoch.load(std::memory_order_relaxed);
-    for(auto& row:bindings)if(row.generation==generation&&row.parameter==parameter) {
+    if(auto* row=binding_for(parameter)) {
+        const auto current=field_values(parameter);
         Changes difference{};
-        for(size_t i=1;i<slots;++i)if(supported(i))difference[i]=current[i]-row.fields[i];
-        row.fields=current;return difference;
+        for(size_t i=1;i<slots;++i)if(supported(i))difference[i]=current[i]-row->fields[i];
+        row->fields=current;return difference;
     }
     return {};
 }
@@ -199,22 +200,26 @@ Direct original_direct=nullptr;
 void direct(void* parameter,int32_t type,int32_t value,const void* mi) {
     const int id=slot(type);int32_t previous=0;bool ready=false;
     hooks::guarded("Battle.StatDirectBefore",[&] {
-        ready=active&&parameter&&supported(id)&&id!=2&&id!=3&&fields[id]&&fields[id]->get()>=0;
-        if(ready)previous=ref::rd<int32_t>(parameter,*fields[id]);
+        if(!active||!parameter||!supported(id)||id==2||id==3||!fields[id]||fields[id]->get()<0)return;
+        // Direct writes carry only the parameter. Establish party ownership
+        // through a current party binding or the synchronous party Add scope.
+        if(!binding_for(parameter)&&
+           !(adding&&party_unit(adding->unit)&&unit_parameter(adding->unit)==parameter))return;
+        ready=true;previous=ref::rd<int32_t>(parameter,*fields[id]);
     });
     original_direct(parameter,type,value,mi);
     hooks::guarded("Battle.StatDirectAfter",[&] {
         if(!ready||!active)return;
         const int64_t difference=int64_t(ref::rd<int32_t>(parameter,*fields[id]))-previous;
         if(!difference)return;
-        const auto generation=epoch.load(std::memory_order_relaxed);
-        for(auto& row:bindings)if(row.generation==generation&&row.parameter==parameter){row.fields[id]+=difference;break;}
+        auto* binding=binding_for(parameter);
+        if(binding)binding->fields[id]+=difference;
         if(param_current_hp(parameter)<=0)return; // KO teardown is not an applied effect
         Changes changes{};changes[id]=difference;
         if(adding&&unit_parameter(adding->unit)==parameter) {
             adding->changes[id]+=difference;return;
         }
-        submit(name_for(parameter),changes);
+        if(binding)submit(binding->name,changes);
     });
 }
 void reset() {
@@ -242,6 +247,9 @@ core::Install registration{"Battle.StatFeedback",&install,109};
 
 Snapshot capture(void* unit) {
     Snapshot result;
+    // Enemy statistics have no renderer here. Visible enemy effects use
+    // enemy_status.cpp. Do not read their temporary values on this path.
+    if(!party_unit(unit))return result;
     void* info=unit_info(unit);result.parameter=info_parameter(info);
     if(!result.parameter)return result;
     remember(unit,result.parameter);
@@ -259,7 +267,7 @@ Snapshot capture(void* unit) {
     result.valid=true;return result;
 }
 void observe_action(void* actor,const std::wstring& actor_name,void* target_array) {
-    if(void* parameter=unit_parameter(actor)) {
+    if(void* parameter=party_unit(actor)?unit_parameter(actor):nullptr) {
         const auto generation=epoch.load(std::memory_order_relaxed);
         Binding* binding=nullptr;
         for(auto& row:bindings)if(row.generation==generation&&row.parameter==parameter){binding=&row;break;}
@@ -274,7 +282,7 @@ void observe_action(void* actor,const std::wstring& actor_name,void* target_arra
     if(count<0||count>64){rejected.fetch_add(1,std::memory_order_relaxed);return;}
     for(int i=0;i<count;++i) {
         void* unit=unity::array_at(target_array,i);
-        if(unit)remember(unit,unit_parameter(unit));
+        if(party_unit(unit))remember(unit,unit_parameter(unit));
     }
 }
 void updated(void* unit,const Snapshot& before) {
@@ -287,7 +295,7 @@ void updated(void* unit,const Snapshot& before) {
 }
 void finish_action(void* actor,void* target_array) {
     if(!active)return;
-    const auto finish=[](void* unit){if(void* parameter=unit_parameter(unit))changed(unit,changed_fields(parameter));};
+    const auto finish=[](void* unit){if(party_unit(unit))changed(unit,changed_fields(unit_parameter(unit)));};
     finish(actor);
     const int count=unity::array_length(target_array);
     if(count<0||count>64){rejected.fetch_add(1,std::memory_order_relaxed);return;}

@@ -1172,5 +1172,6 @@
   "@sprite:106": "Machine",
   "@sprite:151": "Raft",
   "@sprite:157": "Weight",
-  "@sprite:265": "Diary"
+  "@sprite:265": "Diary",
+  "@boss:143:1:5:ガーディアン": "@name:ガーディアン"
 }

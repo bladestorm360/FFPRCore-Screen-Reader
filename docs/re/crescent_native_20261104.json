@@ -1,0 +1,1157 @@
+{
+  "source_script_hashes": {
+    "Map_10010/sc_e_1502_2": "92de3bffce584725287d51df54e9eea9bdfa9ede7711edfb17a34b2bc076feba",
+    "Map_20121_4/sc_e_1502_3": "83ea888b07c67697677e82fa1bb36edfc999a4e18ab20742ac7f81e5a979f5e6",
+    "Map_30490/sc_e_0246_1": "ceb292694f3a4f3990c790584e388fe76ea4faed85c1c73578de855e054526eb",
+    "Map_30490/sc_e_0270": "e5efbe228ee28aac246b0ae823cf434c711a71c9a9f974f1b73ecb6f8f8a6827",
+    "Map_30490/sc_map_30490": "a9613dda47ad1c74855e992f7c9634ac05287efae51dbf01b71cec10bdaf9b37",
+    "Map_30491_1/sc_e_0242": "5697b0466e8f54fa9208377644b4742f324afa314a0e7c3672740ba8e4d5cee8",
+    "Map_30491_1/sc_e_0243": "c81fd10d590b2a1ab45f2087a843b54ec3b84de5812ca7436a251e35458e3318",
+    "Map_30491_1/sc_e_0244": "edb9611235234a0d9276911663ea339a887a789b6e2164ef76ac635f21b28d32",
+    "Map_30491_1/sc_e_0245": "a5adb56e687e09228825c18169a30a835ac1e22d944cf7b6b7a221ad02ae6fe3",
+    "Map_30491_1/sc_e_0246": "93326bfe14d03c98fc0959ecc2644f87f346d315827e781ba595c04712dcfee0",
+    "Map_30491_1/sc_e_1019": "df756e73a484fbca016dee41b58f17f35901fcbd8729d6fe32151911552dd470",
+    "Map_30491_1/sc_e_1501": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+    "Map_30491_1/sc_map_30491_1": "2be0d7bfb883c48fbd746bc47278506908fbb5d6619cece5149045cddc6e4572",
+    "Map_30501_1/sc_e_1501": "6a9afe5543eebca159bce4910569c55777169283a25f75354c46eb1a7fffdd6f",
+    "Map_30501_1/sc_map_30501_1": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_30501_3/sc_e_1069": "6461c82c9850625149e92b05f0a779df4e803aa2fb10490170293486ae12f1ed",
+    "Map_30501_3/sc_map_30501_3": "518fd0dbec048edf68b70e901278dd835ab40813854a4bd603c9d3876e670bf4",
+    "Map_30501_4/sc_e_1502": "f3be9dbbbd04e9313eadbeae76ee489e67fd21a0ce93bb6c14aa43511b3e0acc",
+    "Map_30501_4/sc_map_30501_4": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_40001/sc_e_0246_2": "fbc522e1dafc02460d5a102b51fa0e7b0f9474d058b4cfd79d8d4632699f7302",
+    "Map_40001/sc_e_0246_3": "66d66c7a8582cc670b7b5677d6578a60c0917f2654c20af6d2be8c03307e3eb8",
+    "Map_40001/sc_e_0246_4": "efb25166cfdc65494a47351debbf9ca5ed3395d9f7d342b37c72a5765f6712cb",
+    "Map_40001/sc_e_0246_5": "e7200b779ce37f0b054aa5889229fcbd27f3f7427d7c27ddbbb4b22cfefa0d89",
+    "Map_40001/sc_e_0246_6": "344ae073223ac4c69e8fc7b8cdf7bcc2782913987d31c22eef9845b598b3a228",
+    "Map_40001/sc_e_1501_1": "7f47e2869d1f56f5c28705d75ce6bab2d348f918be1cc2d19e9621993479bd4f",
+    "Map_40001/sc_e_1501_2": "78d2b2047889a6c741099e1a3dbc550ce7a420e3d2b5dedef42a76e95388e6e5",
+    "Map_40001/sc_e_1501_3": "66de473d5c85e76232b43467df1e69d09e4c205356e8bff086660a99d12c8a32",
+    "Map_40001/sc_e_1501_4": "1cd56af8d6bde480059ef83f43db2d3c25f2fbab10ca506a1b114446f60a1ac7",
+    "Map_40001/sc_e_1502_1": "d1f63bcbe418084db021de9107b0286b579d24a8c448b879690655247babef58"
+  },
+  "facts": {
+    "Map_10010/sc_e_1502_2": {
+      "sha256": "92de3bffce584725287d51df54e9eea9bdfa9ede7711edfb17a34b2bc076feba",
+      "transfers": [
+        [
+          6,
+          96,
+          2,
+          "sc_e_1502_3"
+        ]
+      ],
+      "calls": [
+        [
+          1,
+          "ミニマップ表示"
+        ]
+      ]
+    },
+    "Map_20121_4/sc_e_1502_3": {
+      "sha256": "83ea888b07c67697677e82fa1bb36edfc999a4e18ab20742ac7f81e5a979f5e6",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30490/sc_e_0246_1": {
+      "sha256": "ceb292694f3a4f3990c790584e388fe76ea4faed85c1c73578de855e054526eb",
+      "transfers": [
+        [
+          20,
+          573,
+          1,
+          "sc_e_0246_2"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30490/sc_e_0270": {
+      "sha256": "e5efbe228ee28aac246b0ae823cf434c711a71c9a9f974f1b73ecb6f8f8a6827",
+      "transfers": [
+        [
+          14,
+          573,
+          1,
+          "sc_e_0246_2"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30490/sc_map_30490": {
+      "sha256": "a9613dda47ad1c74855e992f7c9634ac05287efae51dbf01b71cec10bdaf9b37",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_0242": {
+      "sha256": "5697b0466e8f54fa9208377644b4742f324afa314a0e7c3672740ba8e4d5cee8",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_0243": {
+      "sha256": "c81fd10d590b2a1ab45f2087a843b54ec3b84de5812ca7436a251e35458e3318",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_0244": {
+      "sha256": "edb9611235234a0d9276911663ea339a887a789b6e2164ef76ac635f21b28d32",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_0245": {
+      "sha256": "a5adb56e687e09228825c18169a30a835ac1e22d944cf7b6b7a221ad02ae6fe3",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_0246": {
+      "sha256": "93326bfe14d03c98fc0959ecc2644f87f346d315827e781ba595c04712dcfee0",
+      "transfers": [
+        [
+          37,
+          377,
+          1,
+          "sc_e_0246_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30491_1/sc_e_1019": {
+      "sha256": "df756e73a484fbca016dee41b58f17f35901fcbd8729d6fe32151911552dd470",
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1020_0"
+        ]
+      ],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：ガウ"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "顔グラ表示終了"
+        ],
+        [
+          11,
+          "モノクロフィルターはずす"
+        ]
+      ]
+    },
+    "Map_30491_1/sc_e_1501": {
+      "sha256": "f91bfd9cfddb980b6b024a5721e5746ce1517a78e7df52c394c87bba61a56295",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30491_1/sc_map_30491_1": {
+      "sha256": "2be0d7bfb883c48fbd746bc47278506908fbb5d6619cece5149045cddc6e4572",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30501_1/sc_e_1501": {
+      "sha256": "6a9afe5543eebca159bce4910569c55777169283a25f75354c46eb1a7fffdd6f",
+      "transfers": [
+        [
+          1,
+          573,
+          3,
+          "sc_e_1501_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30501_1/sc_map_30501_1": {
+      "sha256": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30501_3/sc_e_1069": {
+      "sha256": "6461c82c9850625149e92b05f0a779df4e803aa2fb10490170293486ae12f1ed",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30501_3/sc_map_30501_3": {
+      "sha256": "518fd0dbec048edf68b70e901278dd835ab40813854a4bd603c9d3876e670bf4",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_30501_4/sc_e_1502": {
+      "sha256": "f3be9dbbbd04e9313eadbeae76ee489e67fd21a0ce93bb6c14aa43511b3e0acc",
+      "transfers": [
+        [
+          1,
+          573,
+          5,
+          "sc_e_1502_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30501_4/sc_map_30501_4": {
+      "sha256": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+      "transfers": [],
+      "calls": []
+    },
+    "Map_40001/sc_e_0246_2": {
+      "sha256": "fbc522e1dafc02460d5a102b51fa0e7b0f9474d058b4cfd79d8d4632699f7302",
+      "transfers": [],
+      "calls": [
+        [
+          12,
+          "蛇の道移動：sc_e_0246_2"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_0246_3": {
+      "sha256": "66d66c7a8582cc670b7b5677d6578a60c0917f2654c20af6d2be8c03307e3eb8",
+      "transfers": [
+        [
+          3,
+          573,
+          7,
+          "sc_e_0246_3"
+        ]
+      ],
+      "calls": [
+        [
+          58,
+          "蛇の道移動：sc_e_0246_3"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_0246_4": {
+      "sha256": "efb25166cfdc65494a47351debbf9ca5ed3395d9f7d342b37c72a5765f6712cb",
+      "transfers": [
+        [
+          3,
+          573,
+          8,
+          "sc_e_0246_4"
+        ],
+        [
+          32,
+          379,
+          1,
+          ""
+        ]
+      ],
+      "calls": [
+        [
+          28,
+          "蛇の道移動：sc_e_0246_4"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_0246_5": {
+      "sha256": "e7200b779ce37f0b054aa5889229fcbd27f3f7427d7c27ddbbb4b22cfefa0d89",
+      "transfers": [
+        [
+          3,
+          573,
+          10,
+          "sc_e_0246_5"
+        ]
+      ],
+      "calls": [
+        [
+          36,
+          "蛇の道移動：sc_e_0246_5"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_0246_6": {
+      "sha256": "344ae073223ac4c69e8fc7b8cdf7bcc2782913987d31c22eef9845b598b3a228",
+      "transfers": [
+        [
+          3,
+          573,
+          11,
+          "sc_e_0246_6"
+        ]
+      ],
+      "calls": [
+        [
+          58,
+          "蛇の道移動：sc_e_0246_6"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_1501_1": {
+      "sha256": "7f47e2869d1f56f5c28705d75ce6bab2d348f918be1cc2d19e9621993479bd4f",
+      "transfers": [],
+      "calls": [
+        [
+          42,
+          "蛇の道移動：sc_e_1501_1"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_1501_2": {
+      "sha256": "78d2b2047889a6c741099e1a3dbc550ce7a420e3d2b5dedef42a76e95388e6e5",
+      "transfers": [
+        [
+          3,
+          573,
+          9,
+          "sc_e_1501_2"
+        ],
+        [
+          56,
+          380,
+          1,
+          ""
+        ]
+      ],
+      "calls": [
+        [
+          54,
+          "蛇の道移動：sc_e_1501_2"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_1501_3": {
+      "sha256": "66de473d5c85e76232b43467df1e69d09e4c205356e8bff086660a99d12c8a32",
+      "transfers": [
+        [
+          3,
+          573,
+          12,
+          "sc_e_1501_3"
+        ]
+      ],
+      "calls": [
+        [
+          41,
+          "蛇の道移動：sc_e_1501_3"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_1501_4": {
+      "sha256": "1cd56af8d6bde480059ef83f43db2d3c25f2fbab10ca506a1b114446f60a1ac7",
+      "transfers": [
+        [
+          3,
+          573,
+          13,
+          "sc_e_1501_4"
+        ],
+        [
+          36,
+          1,
+          1,
+          "sc_e_1502_2"
+        ]
+      ],
+      "calls": [
+        [
+          33,
+          "蛇の道移動：sc_e_1501_4"
+        ]
+      ]
+    },
+    "Map_40001/sc_e_1502_1": {
+      "sha256": "d1f63bcbe418084db021de9107b0286b579d24a8c448b879690655247babef58",
+      "transfers": [
+        [
+          29,
+          1,
+          1,
+          "sc_e_1502_2"
+        ]
+      ],
+      "calls": [
+        [
+          25,
+          "蛇の道移動：sc_e_1502_1"
+        ]
+      ]
+    }
+  },
+  "actors": [
+    {
+      "map": 377,
+      "room": "Map_30490",
+      "entity": 3,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        8,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 377,
+      "room": "Map_30490",
+      "entity": 4,
+      "object_id": 2,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        8,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 378,
+      "point": 2,
+      "treasure": null
+    },
+    {
+      "map": 377,
+      "room": "Map_30490",
+      "entity": 5,
+      "object_id": 3,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 378,
+      "point": 2,
+      "treasure": null
+    },
+    {
+      "map": 377,
+      "room": "Map_30490",
+      "entity": 1,
+      "object_id": 4,
+      "group": "ev_e_0270",
+      "type": "Event",
+      "raw": "sc_e_0270:蛇の道を通りニケアへ（再訪）",
+      "script": "sc_e_0270",
+      "cell": [
+        "GroundObject",
+        8,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 377,
+      "room": "Map_30490",
+      "entity": 2,
+      "object_id": 5,
+      "group": "ev_e_0270",
+      "type": "Event",
+      "raw": "sc_e_0270:蛇の道を通りニケアへ（再訪）",
+      "script": "sc_e_0270",
+      "cell": [
+        "GroundObject",
+        9,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 1,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 377,
+      "point": 1,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 2,
+      "object_id": 2,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 3,
+      "object_id": 3,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 16,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 4,
+      "object_id": 4,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 5,
+      "object_id": 5,
+      "group": "ev_e_0242",
+      "type": "Event",
+      "raw": "sc_e_0242:ガウの宝（ヘルメット）の存在を知らされる",
+      "script": "sc_e_0242",
+      "cell": [
+        "GroundObject",
+        12,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 11,
+      "object_id": 12,
+      "group": "ev_e_0242",
+      "type": "Entity",
+      "raw": "ビックリ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 12,
+      "object_id": 13,
+      "group": "ev_e_0242",
+      "type": "Entity",
+      "raw": "ハテナ",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        -2,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 13,
+      "object_id": 14,
+      "group": "ev_e_0242",
+      "type": "Entity",
+      "raw": "ハテナ２",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        -1,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 6,
+      "object_id": 6,
+      "group": "ev_e_0243",
+      "type": "Event",
+      "raw": "sc_e_0243:ガウが宝を探すがここではない",
+      "script": "sc_e_0243",
+      "cell": [
+        "GroundObject",
+        13,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 7,
+      "object_id": 7,
+      "group": "ev_e_0244",
+      "type": "Event",
+      "raw": "sc_e_0244:ガウがポーションを見つける",
+      "script": "sc_e_0244",
+      "cell": [
+        "GroundObject",
+        5,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 8,
+      "object_id": 8,
+      "group": "ev_e_0245",
+      "type": "Event",
+      "raw": "sc_e_0245:ガウにいたずらされる",
+      "script": "sc_e_0245",
+      "cell": [
+        "GroundObject",
+        10,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 9,
+      "object_id": 9,
+      "group": "ev_e_0246",
+      "type": "Entity",
+      "raw": "ヘルメット",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 10,
+      "object_id": 10,
+      "group": "ev_e_0246",
+      "type": "Event",
+      "raw": "sc_e_0246:ガウの宝（ヘルメット）を発見",
+      "script": "sc_e_0246",
+      "cell": [
+        "GroundObject",
+        25,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 14,
+      "object_id": 15,
+      "group": "ev_e_0246",
+      "type": "Entity",
+      "raw": "ビックリ:ev_e_0246",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 15,
+      "object_id": 21,
+      "group": "ev_e_0246",
+      "type": "NPC",
+      "raw": "NPCガウ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 378,
+      "room": "Map_30491_1",
+      "entity": 16,
+      "object_id": 22,
+      "group": "ev_e_0246",
+      "type": "NPC",
+      "raw": "NPCマッシュ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        38,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 379,
+      "room": "Map_30501_1",
+      "entity": 1,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        44,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 379,
+      "room": "Map_30501_1",
+      "entity": 4,
+      "object_id": 4,
+      "group": "entity_default",
+      "type": "TreasureBox",
+      "raw": "エクスポーション",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        52,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 379,
+      "room": "Map_30501_1",
+      "entity": 0,
+      "object_id": 5,
+      "group": "entity_default",
+      "type": "Event",
+      "raw": "sc_e_1501:蛇の道を通って、蛇の道内観2へ",
+      "script": "sc_e_1501",
+      "cell": [
+        "GroundObject",
+        43,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 380,
+      "room": "Map_30501_2",
+      "entity": 0,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 380,
+      "room": "Map_30501_2",
+      "entity": 0,
+      "object_id": 2,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 380,
+      "room": "Map_30501_2",
+      "entity": 0,
+      "object_id": 3,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        7
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 381,
+      "point": 1,
+      "treasure": null
+    },
+    {
+      "map": 381,
+      "room": "Map_30501_3",
+      "entity": 2,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        58,
+        36
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 380,
+      "point": 2,
+      "treasure": null
+    },
+    {
+      "map": 381,
+      "room": "Map_30501_3",
+      "entity": 3,
+      "object_id": 2,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        58,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 381,
+      "room": "Map_30501_3",
+      "entity": 4,
+      "object_id": 3,
+      "group": "entity_default",
+      "type": "GotoMap",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        49,
+        43
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 382,
+      "point": 1,
+      "treasure": null
+    },
+    {
+      "map": 381,
+      "room": "Map_30501_3",
+      "entity": 1,
+      "object_id": 4,
+      "group": "ev_e_1069",
+      "type": "Event",
+      "raw": "sc_e_1034:蛇の道の洞窟でスイッチを押すと水が引く",
+      "script": "sc_e_1069",
+      "cell": [
+        "GroundObject",
+        55,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 381,
+      "room": "Map_30501_3",
+      "entity": 5,
+      "object_id": 6,
+      "group": "ev_e_1069",
+      "type": "Entity",
+      "raw": "進行不可:sc_e_1069",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        50,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 382,
+      "room": "Map_30501_4",
+      "entity": 1,
+      "object_id": 1,
+      "group": "entity_default",
+      "type": "PointIn",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 382,
+      "room": "Map_30501_4",
+      "entity": 6,
+      "object_id": 6,
+      "group": "entity_default",
+      "type": "TreasureBox",
+      "raw": "グリーンベレー",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        11,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    },
+    {
+      "map": 382,
+      "room": "Map_30501_4",
+      "entity": 0,
+      "object_id": 7,
+      "group": "entity_default",
+      "type": "Event",
+      "raw": "sc_e_1502:蛇の道内観4から蛇の道を通ってニケアへ",
+      "script": "sc_e_1502",
+      "cell": [
+        "GroundObject",
+        9,
+        37
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "treasure": null
+    }
+  ],
+  "fork_enum": {
+    "Right": 0,
+    "Left": 1
+  },
+  "final_ready_map": 96,
+  "final_receipt": 521
+}

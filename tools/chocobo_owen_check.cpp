@@ -52,7 +52,7 @@ void collision_sides(const baked::Submap& map) {
         expect(test.blocked.empty()&&count==(id<=5?3:2),"half/through colliders retain their native open cardinal faces");
     }
     std::vector<Cell> blocked;std::vector<baked_route::Request::Directional> directional;
-    baked_route::add_collision(blocked,directional,at,0);expect(blocked.empty()&&directional.empty(),"native None collision contributes no wall");
+    baked_route::add_collision(blocked,directional,at,0);expect(blocked==std::vector<Cell>{at}&&directional.empty(),"enabled FieldColliderEntity0 retains its full native rectangle; terrain None0 is separate");blocked.clear();
     baked_route::add_collision(blocked,directional,at,1);baked_route::add_collision(blocked,directional,at,-1);
     expect(blocked.size()==2,"full and unknown collision remain solid");
 }

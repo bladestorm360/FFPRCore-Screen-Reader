@@ -11,6 +11,7 @@ import sys
 import collections
 import hashlib
 import bake_maps
+import phantom_train_exits
 
 ROOT = pathlib.Path(__file__).absolute().parents[1]
 DUMP = ROOT.parent / 'tools' / 'mapdump'
@@ -32,13 +33,16 @@ def puppet_navigation_effect(script, entry, region, positions=True):
     accepted. Branching/moving puppets remain outside this bounded projection.
     """
     rows=script.get('mnemonics') or []
-    visible=-1; x=y=UNSET_POSITION; moving=False
+    # All six exact PuppetCore.Ready producers first call actor.Show(0).
+    # A new puppet body therefore supersedes an earlier Hide even if it only
+    # positions/animates the actor. Native fingerprints: puppet_ready contract.
+    visible=1; x=y=UNSET_POSITION; moving=False
     for pc in range(entry,min(len(rows),entry+128)):
         m=rows[pc];op=m['mnemonic'];v=m.get('operands')or{}
         ints=list(v.get('iValues')or[])+[0]*8
         if op in ('Exit','Return'):
-            if moving and visible!=0:return None
-            return [visible,x,y] if visible!=-1 or x!=UNSET_POSITION or y!=UNSET_POSITION else None
+            if moving:return [visible,UNSET_POSITION,UNSET_POSITION]
+            return [visible,x,y]
         if op=='Hide':visible=0
         elif op=='Show':visible=1
         elif op=='SetPos':
@@ -67,20 +71,155 @@ def initializer_code(script,game,region):
         digest=hashlib.sha256(json.dumps(script,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
         assert digest=='cb8e2a844de521a5ad58bd0422e5faa62691019d7191d98e32d16371cc674392'
         assert list(region[:2])==[0,0]
+    # Exact train initializer: two optional ghost-membership branches converge
+    # before its unconditional boss group. Native B5B680 reads jump address
+    # iValues[3] and calls Main.JumpCommon. Keep membership unknown and use the
+    # existing branch intersection; no party query or guessed group is added.
+    train=game=='ff6'and script.get('submap')=='Map_30440'and script.get('name')=='sc_map_30440'
+    if train:
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='2d84a8398ab471ad976672f8c41511562c43748a920c6e0979549ae5ad60a83e'
+    zozo_magicite=game=='ff6'and(script.get('submap'),script.get('name'))==('Map_30511_12','sc_map_30511_12')
+    if zozo_magicite:
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='00b9688aafee3a32b79437df50d7f9a376c93c3889b5b9c45ad60db71f4fdf00'
+    kolts=game=='ff6'and(script.get('submap'),script.get('name'))==('Map_30360','sc_map_30360')
+    if kolts:
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='87ea43f9eb0b5dfa72d29ac812c8f75505007d22b68c020eca8922fe3e0b84f3'
+    tower=game=='ff6'and script.get('submap')=='Map_30700'and script.get('name')=='sc_map_30700'
+    if tower:
+        # Same verified B5B680 jump operand3. Once392 is set, both unknown
+        # membership branches skip the recruitment barrier. Keep membership
+        # unknown; do not create a new party reader or enable an absent group.
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='414ca3635e27ea439392931a59cdc12d8a3b628c22984c0d45d1eb70d4814edd'
+    owzer_timer = game=='ff6' and (script.get('submap'),script.get('name')) in {
+        ('Map_30631_3','sc_map_30631_3'),('Map_30631_4','sc_map_30631_4')}
+    if owzer_timer:
+        # These exact start/stop registrations only add/remove GimmickOwzer.
+        # Its later callback owns the cycling collider changes. Do not let a
+        # registration hide the initializer's subsequent groups/puppet facts.
+        # Matching native methods 2BD110/2B2A60, callback53F760; Owzer evidence.
+        expected={'Map_30631_3':'d5b70dc53b03ac894f30b621f8d423bb845ec7a59293f0b7b6bbd35e0dafe7c0',
+                  'Map_30631_4':'8ed56662b207815ce39f1ab5c4a1102315322ba1c620e112978269406111b15c'}
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()==expected[script['submap']]
+    sealed_timers = game=='ff6' and (script.get('submap'),script.get('name')) in {
+        ('Map_30531_2','sc_map_30531_2'),('Map_30531_3','sc_map_30531_3'),
+        ('Map_30531_4','sc_map_30531_4')}
+    if sealed_timers:
+        # Exact registrations only add/remove the native three-second loop.
+        # ExecGimmick443/444 owns later phase/actor writes. Keep initializer
+        # groups and puppet facts after these calls; never guess a timer phase.
+        expected={'Map_30531_2':'f45b5b8dd0b00d4c9072bdff0f98734ef7e0c723331b67047855dded798be338',
+                  'Map_30531_3':'1be931bbe6004867e64639bddac40624562199dd9523929a54bab0a648989eff',
+                  'Map_30531_4':'567a6da0029a32706186d2937a52b24a7dfdc88b8a8941cb87d18a97d795d5a0'}
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()==expected[script['submap']]
+    narshe_close = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_20010','sc_map_20010')
+    if narshe_close:
+        # Exact CloseView1 display: message82 -> FieldController/MainViewMapRenderer
+        # -> MapMultipleScroll.Show (scenery activation/particle/color only).
+        # It does not make the following six lock visibility branches unknown.
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='f52d6466569c28a5c73cd86a6c761112f3f19ff3dd205202dc342797f8cfcc1d'
+    floating = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_30600','sc_map_30600')
+    if floating:
+        # Three exact backdrop calls only show/hide scenery1/2. SetupShadowTimer
+        # registers a later callback; it does not execute its position-dependent
+        # rescue script here. Preserve later initializer groups/puppet facts,
+        # without inventing an elapsed-time or Shadow-arrival receipt.
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='1b7b0dc3a0a30b2161ae854b501a5fd2378dbb9e9416894f4be6d760e7013239'
+    duncan = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_20400','sc_map_20400')
+    if duncan:
+        # Same source-qualified BranchByCharacter ownership/jump-operand3 as
+        # the accepted party-role observer. Read Sabin6 from the active corps;
+        # do not replace this with roster ownership or an unconditional group.
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='2cc1f33ee991e80f58073d75930944005f3c11eefb8ef0855efaa990728ed961'
+    crescent = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_30491_1','sc_map_30491_1')
+    if crescent:
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='2be0d7bfb883c48fbd746bc47278506908fbb5d6619cece5149045cddc6e4572'
+    post = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_20240','sc_map_20240')
+    if post:
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()=='6c720f180bfc9b6293775d329e0c6568f048ca7b7645aaf1a89edf4e0ff13e6b'
+    dream = game=='ff6' and (script.get('submap'),script.get('name'))==('Map_20451_4','sc_map_20451_4')
+    if dream:
+        proof=json.loads((ROOT/'docs/re/dream_native_20261104.json').read_text(encoding='utf-8'))
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()==proof['source_script_hashes']['Map_20451_4/sc_map_20451_4']
+    dream_alias = game=='ff6' and (script.get('submap'),script.get('name'))in(
+        ('Map_30821_1','sc_map_30821_1'),('Map_30821_2','sc_map_30821_2'))
+    if dream_alias:
+        proof=json.loads((ROOT/'docs/re/dream_native_20261104.json').read_text(encoding='utf-8'))
+        assert hashlib.sha256(json.dumps(script['mnemonics'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()==proof['source_script_hashes'][script['submap']+'/'+script['name']]
     for m in script.get('mnemonics')or[]:
         op=m['mnemonic'];v=m.get('operands')or{};ints=list(v.get('iValues')or[])+[0]*8
-        if op=='SetPuppet':
+        if narshe_close and op=='SysCall' and (v.get('sValues')or[''])[0]=='近景１：表示':
+            code.append([0])
+        elif dream_alias and op=='SysCall'and(v.get('sValues')or[''])[0]in(
+                'パペット入れ替え：スロット２先頭','パペット入れ替え：スロット３先頭',
+                'パペット入れ替え：スロット２・３先頭','パペット入れ替え：解除'):
+            # Exact four native exports only install/reset temporary resident
+            # puppet aliases. These bodies act on -17/-18, never a baked actor
+            # or story/local bank. Preserve the following real group branches;
+            # do not infer the off-floor resident character's name or position.
+            code.append([0])
+        elif owzer_timer and op=='SysCall' and (v.get('sValues')or[''])[0] in ('ギミック開始：アウザーの館','ギミック解除：アウザーの館'):
+            code.append([0])
+        elif sealed_timers and op=='SysCall' and (v.get('sValues')or[''])[0] in (
+                'ギミック開始：sc_e_0443','ギミック解除：sc_e_0443',
+                'ギミック開始：sc_e_0444','ギミック解除：sc_e_0444'):
+            code.append([0])
+        elif floating and op=='SysCall' and (v.get('sValues')or[''])[0] in (
+                '魔大陸遠景１のみ表示','魔大陸遠景１フェードアウト','シャドウタイマー設定'):
+            code.append([0])
+        elif duncan and op=='BranchByCharacter':
+            assert ints[:4]==[6,1,0,6]
+            code.append([2,15,6,0,-1,0,6])
+        elif crescent and op=='BranchByCharacter':
+            assert ints[:4]==[12,1,0,23]
+            code.append([2,15,12,0,-1,0,23])
+        elif post and op=='BranchByCharacter':
+            assert ints[:4]==[1,1,0,12]
+            code.append([2,15,1,0,-1,0,12])
+        elif post and op=='BranchByNumOfMember':
+            assert ints[:3]==[0,1,15]and(v.get('sValues')or[''])[0]=='＝'
+            code.append([2,15,0,0,-1,1,15])
+        elif dream and op=='BranchByCharacter':
+            assert ints[:4]==[3,1,0,8]
+            code.append([2,15,3,0,-1,0,8])
+        elif dream and op=='BranchByNumOfMember':
+            assert ints[:3]==[0,4,8]and(v.get('sValues')or[''])[0]=='≠'
+            code.append([2,15,0,1,-1,4,8])
+        elif train and op=='BranchByCharacter':
+            assert ints[:4]in([17,0,0,6],[18,0,0,6])
+            code.append([2,-2,0,0,-1,0,6])
+        elif tower and op=='BranchByCharacter':
+            assert ints[:4]==[9,1,0,8]
+            code.append([2,-2,0,0,-1,0,8])
+        elif op=='SetPuppet':
             # Zero and negative IDs include resident/player aliases rather
             # than one unambiguous baked object. Keep them native-only.
             # Hide/Show and slot/actor/entry ownership are verified on all six
             # native interpreters. Absolute position units remain FFVI-only.
             effect=puppet_navigation_effect(script,ints[2],region,game=='ff6') if ints[1]>0 else None
+            if owzer_timer and script['submap']=='Map_30631_4' and ints[1]==51:
+                # These four exact bodies only LookAt0/1/2/3 after Ready.
+                # Ready shows the decorative NPC; facing cannot hide or move it.
+                assert ints[2] in (260,267,274,281)
+                body=script['mnemonics'][ints[2]:ints[2]+3]
+                assert [r['mnemonic']for r in body]==['Nop','LookAt','Exit']
+                effect=[1,UNSET_POSITION,UNSET_POSITION]
             if statues and ints[1] in (202,203,204,205):
                 assert ints[2]=={202:127,203:154,204:181,205:208}[ints[1]]
-                effect=[-1,145,59] # absolute XY; the world router normalizes its layer
+                effect=[1,145,59] # Ready shows it; the reviewed pose clears the old corridor
+            if kolts and ints[1]==2:
+                # Only the actual40-and-not41 initializer branch reaches this
+                # exact SetPos23,32,2. Native2E8850 maps request2 to Unity10
+                # (Ground),not the actor's off-map Upper home. No general
+                # moving-puppet/layer inference is enabled for other actors.
+                assert ints[:3]==[0,2,25]and script['mnemonics'][26]['mnemonic']=='SetPos'
+                assert script['mnemonics'][26]['operands']['iValues'][:4]==[23,32,2,0]
+                code.append([10,0,2,1,23-region[0],32-region[1],1]);continue
             # Always replace this puppet slot, even when its new body has no
             # navigation effect; ExecPuppet applies the ready final facts.
-            code.append([10,ints[0],ints[1],*(effect or [-1,UNSET_POSITION,UNSET_POSITION])])
+            # An opaque positive-actor body can hide again after Ready. Its
+            # final visibility is unknown, rather than an old hidden receipt.
+            fallback=-2 if ints[1]>0 else -1
+            code.append([10,ints[0],ints[1],*(effect or [fallback,UNSET_POSITION,UNSET_POSITION])])
         elif op=='ExecPuppet':code.append([11,ints[0]])
         elif op=='AssignMoveRoute' and any(p['id']==ints[0] for p in patrols):
             # One opcode per native PC retains every existing branch/call target.
@@ -90,6 +229,36 @@ def initializer_code(script,game,region):
             if match:assert match['loop']==bool(ints[2])
             code.append([12,ints[0],ints[1] if match else -1])
         else:code.append(instruction(m,game))
+    if zozo_magicite:
+        # The complete native tail only conditionally hides six party NPCs.
+        # Its seven owned/active-member tests cannot change the earlier four
+        # pickup groups. Preserve those guaranteed receipts without inventing
+        # membership or enumerating96 equivalent party branches. The existing
+        # unknown-visibility opcode keeps only these six NPCs conservative.
+        assert code[28]==[9]and len(code)==126
+        code[28]=[3,len(code)]
+        code.extend([[10,slot,actor,-2,UNSET_POSITION,UNSET_POSITION]for slot,actor in enumerate((44,30,29,28,27,26))])
+        code.extend([[11,0],[6]])
+    if game=='ff5':
+        import pyramid_state
+        code=pyramid_state.extend(script,game,region,code)
+        import jachol_state
+        code=jachol_state.extend(script,game,region,code)
+        import gogo_state
+        code=gogo_state.extend(script,game,region,code)
+        import karnak_state
+        code=karnak_state.extend(script,game,region,code)
+        import walse_jail_state
+        code=walse_jail_state.extend(script,game,region,code)
+        import death_valley_journey
+        code=death_valley_journey.extend(script,game,region,code)
+        import fire_ship_state
+        code=fire_ship_state.extend(script,game,region,code)
+        import desert_state
+        code=desert_state.extend(script,game,region,code)
+        if script['submap']=='Map_40001' and script['name']=='sc_map_40001':
+            import western_valley_state
+            code=western_valley_state.extend(script,code)
     return code
 
 
@@ -123,6 +292,13 @@ def instruction(m, game):
     if game == 'ff6' and op == 'SysCall' and strings[0] in {
             '帝国軍陣地マスクあり', '帝国軍陣地マスクなし',
             '帝国軍陣地マスク拡大', '帝国軍陣地マスク縮小'}: return [0]
+    # Exact registrations25E8E10/25E8DE0 dispatch to28A5E0/28A710:
+    # IMapAccessor82/83 show/hide distant scenery1/2/3, through the two map
+    # renderers and MapMultipleScroll. No flags, field actors or collision
+    # state changes. Preserve unknown semantics for every other backdrop call.
+    # Native provenance: docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md, Opera section.
+    if game == 'ff6' and op == 'SysCall' and strings[0] in {
+            '背景変更：飛空艇（通常）','背景変更：飛空艇（特殊）'}: return [0]
     # FFIII Current.HideMist -> FieldController.HideScenery -> both map
     # renderers' MapMultipleScroll.Hide. No flags, actors or collision writes.
     # CheckWithCompanion conditionally writes map-local0; model that output as
@@ -188,7 +364,7 @@ def entry_guard(script, game, destination=None):
     return {'entry':offsets[entry],'code':code}
 
 
-def build(game):
+def build(game, initializers_only=False):
     scripts = {}
     source={}
     for line in (DUMP / f'{game}_scripts.jsonl').read_text(encoding='utf-8').splitlines():
@@ -203,7 +379,11 @@ def build(game):
     submaps=json.loads((DUMP/f'{game}_submaps.json').read_text(encoding='utf-8'))
     bounds={sm:bake_maps.map_bounds(info,by_sub[sm]) for sm,info in submaps.items()}
     for name,record in scripts.items():
-        record['code']=initializer_code(source[name,'sc_'+name.lower()],game,bounds[name])
+        initializer=source[name,'sc_'+name.lower()]
+        record['code']=initializer_code(initializer,game,bounds[name])
+        if game=='ff5' and name=='Map_30611_12':
+            import trench_state
+            record['current_code']=trench_state.live_code(initializer,record['code'])
         patrols=[p for p in PATROLS if p['game']==game and p['submap']==name]
         if patrols:
             # Bind the native assignment to its original actor, never a coincident
@@ -250,6 +430,15 @@ def build(game):
         if o['type'] not in (2,5,6,17,21,28,30) or not p.get('script_id') or p.get('action_id')!=2 or p.get('message_key'):continue
         name=masters.get(p['script_id'],'');s=source.get((o['submap'],name))
         pending=[]
+        train_guard=phantom_train_exits.guard(o,s)if game=='ff6'and s else None
+        if train_guard is not None:pending.append(train_guard)
+        if game=='ff6':
+            import cyan_passage
+            if cyan_guard:=cyan_passage.guard(o,s):pending.append(cyan_guard)
+            import veldt_cave_passage
+            if veldt_guard:=veldt_cave_passage.guard(o,s):pending.append(veldt_guard)
+            import late_opera_passage
+            if opera_guard:=late_opera_passage.guard(o,s):pending.append(opera_guard)
         guard=entry_guard(s,game) if s else None
         if guard is not None:pending.append(guard)
         for destination in bake_maps.reviewed_conditional_destinations(game,o,s):
@@ -268,10 +457,25 @@ def build(game):
         scripts[key]['transport']=selectors['transport']
     for key,record in scripts.items(): record.update(metadata.get(key,{}))
     output = ROOT / 'data' / game / 'mapstate.json'
+    if initializers_only:
+        # A focused compiler correction must preserve authored locks, actor
+        # gates, event predicates and every unrelated source-qualified field.
+        prior=json.loads(output.read_text(encoding='utf-8'));changed=0
+        for key,row in prior.items():
+            generated=scripts.get(key)
+            if not generated or 'code'not in row:continue
+            old=row['code'];new=generated['code']
+            assert row.get('entry',0)==generated.get('entry',0)and len(old)==len(new),(game,key,'initializer layout changed')
+            for a,b in zip(old,new):
+                assert a==b or a[0]==b[0]==10 and a[:3]==b[:3],(game,key,'unrelated initializer change')
+            changed+=old!=new;row['code']=new
+        scripts=prior
+        print(f'{game}: focused puppet correction in {changed} initializer records; all authored metadata preserved')
     output.write_text(json.dumps(scripts, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print(f'{game}: {len(scripts)} map-state records; {guards} bounded native entry guards')
 
 
 if __name__ == '__main__':
-    for game in ([f'ff{i}' for i in range(1, 7)] if sys.argv[1:] == ['all'] else sys.argv[1:]):
-        build(game)
+    args=[s for s in sys.argv[1:]if s!='--initializers-only']
+    for game in ([f'ff{i}' for i in range(1, 7)] if args == ['all'] else args):
+        build(game,'--initializers-only'in sys.argv)

@@ -82,11 +82,6 @@ NautilusJourney nautilus_world_journey(const MapGoal& goal,bool airborne_goal=fa
         return a.water<b.water||(a.water==b.water&&(a.actions<b.actions||
             (a.actions==b.actions&&a.steps<b.steps)));
     };
-    struct Node {Cost cost;int parent=-1;};
-    struct Item {Cost cost;int index;};
-    const auto later=[&](const Item& a,const Item& b){return less(b.cost,a.cost);};
-    std::priority_queue<Item,std::vector<Item>,decltype(later)> queue(later);
-    std::vector<Node> nodes(area*stages);
     const auto mode_of=[&](int stage){return (initial_mode+stage)%2;};
     std::array<std::unordered_set<int>,2> completed;
     if(g_pending&&g_pending->valid&&g_pending->goal.map_id==g_route_snapshot->goal.map_id&&
@@ -98,10 +93,6 @@ NautilusJourney nautilus_world_journey(const MapGoal& goal,bool airborne_goal=fa
             if(used.map_id==3&&used.destination==4)completed[1].insert(used.y*256+used.x);
         }
     const auto cell_of_index=[](int index){return Cell{1,index%256,(index%area)/256};};
-    const int start=origin.y*256+origin.x;
-    nodes[start].cost={0,0,0};queue.push({{0,0,0},start});
-    int finish=-1;
-    Cost best;
     const auto blocked=[](const baked_route::Request& request,const Cell& at) {
         const auto& grid=baked::grids(*request.submap);
         return baked_route::transport_rule_at(request,grid,at,baked_route::TransportRules::Gate)||
@@ -110,57 +101,127 @@ NautilusJourney nautilus_world_journey(const MapGoal& goal,bool airborne_goal=fa
             return c.x==at.x&&c.y==at.y&&(c.layer<0||c.layer==at.layer);
         });
     };
+    // Collapse the first mode into one ordinary flood. Reverse search then
+    // starts at the real destination, rather than exhaust every zero-water
+    // flight state before considering a short underwater tunnel.
+    // Keep the same world layer and goal predicates as the staged graph.
+    // This is its unweighted first-mode component, not a separately normalized
+    // generic flood or another native pathfinder.
+    std::vector<int> initial(area,-1),frontier;
+    frontier.reserve(area);const int source=origin.y*256+origin.x;
+    initial[source]=0;frontier.push_back(source);
+    for(size_t cursor=0;cursor<frontier.size();++cursor) {
+        if(planning_cancelled())return {};
+        const int index=frontier[cursor];std::array<Cell,8> next;
+        const auto count=baked_route::successors(modes[initial_mode],cell_of_index(index),next);
+        for(size_t i=0;i<count;++i) {
+            const int target=next[i].y*256+next[i].x;
+            if(initial[target]>=0)continue;
+            initial[target]=initial[index]+1;frontier.push_back(target);
+        }
+    }
+    const auto initial_distance=[&](const Cell& at){return initial[at.y*256+at.x];};
+    if(planning_cancelled())return {};
+    std::array<std::vector<uint8_t>,2> pairs;
+    for(auto& values:pairs)values.assign(area,255);
+    const auto crossing=[&](int from,const Cell& at) {
+        auto& cached=pairs[from][at.y*256+at.x];
+        if(cached!=255)return cached!=0;
+        cached=!completed[from].contains(at.y*256+at.x)&&
+            baked::attribute(baked::grids(*surface),at.x,at.y)==16&&
+            baked::group_lands(modes[1].landing_group,baked::attribute(baked::grids(*water),at.x,at.y))&&
+            baked_route::open(modes[1-from],baked::grids(*maps[1-from]),at)&&
+            !blocked(modes[0],at)&&!blocked(modes[1],at)&&
+            !baked_route::terminal_transition(modes[0],baked::grids(*surface),at)&&
+            !baked_route::terminal_transition(modes[1],baked::grids(*water),at);
+        return cached!=0;
+    };
+    int first_water=INT_MAX;
+    for(int y=0;y<256;++y) {
+        if(planning_cancelled())return {};
+        for(int x=0;x<256;++x) {
+            const Cell at{1,x,y};const int distance=initial_distance(at);
+            if(distance<0||!crossing(initial_mode,at))continue;
+            first_water=std::min(first_water,initial_mode==1?distance:0);
+            if(first_water==0)break;
+        }
+        if(first_water==0)break;
+    }
+    if(first_water==INT_MAX)return result;
+    struct Item {Cost estimate,cost;int index;};
+    const auto later=[&](const Item& a,const Item& b){return less(b.estimate,a.estimate);};
+    std::priority_queue<Item,std::vector<Item>,decltype(later)> queue(later);
+    std::vector<Cost> nodes(area*stages);
+    const auto add=[&](int index,Cost cost) {
+        if(!less(cost,nodes[index]))return;
+        nodes[index]=cost;
+        const int stage=index/area;const auto at=cell_of_index(index);
+        auto estimate=cost;estimate.actions+=stage;
+        if(initial_mode==1)estimate.water+=first_water;
+        else if(initial_distance(at)<0||(stage==1&&!crossing(0,at)))++estimate.water;
+        const int dx=std::abs(at.x-origin.x),dy=std::abs(at.y-origin.y);
+        estimate.steps+=std::min(dx,256-dx)+std::min(dy,256-dy);
+        queue.push({estimate,cost,index});
+    };
+    const int last=stages-1;
+    if(target_mode==1||airborne_goal) {
+        for(const auto& at:target_cells)if(baked::in_bounds(baked::grids(*maps[target_mode]),at.x,at.y))
+            add(last*area+at.y*256+at.x,{0,0,0});
+    } else for(int y=0;y<256;++y) {
+        if(planning_cancelled())return {};
+        for(int x=0;x<256;++x) {
+            const Cell at{1,x,y};const int walk=final_walk.distance(at);
+            if(walk<0)continue;
+            const auto& grid=baked::grids(*surface);
+            if(baked::attribute(grid,x,y)!=16&&
+               baked::group_lands(modes[0].landing_group,baked::attribute(grid,x,y))&&
+               baked_route::open(foot,grid,at)&&!blocked(foot,at)&&!baked_route::terminal_transition(foot,grid,at))
+                add(last*area+y*256+x,{0,0,walk});
+        }
+    }
+    bool found=false;Cell entry;Cost best;
     while(!queue.empty()) {
         if(planning_cancelled())return {};
         const auto item=queue.top();queue.pop();
-        if(less(nodes[item.index].cost,item.cost))continue;
-        if(finish>=0&&!less(item.cost,best))break;
+        if(less(nodes[item.index],item.cost))continue;
+        if(found&&!less(item.estimate,best))break;
         const int stage=item.index/area,mode=mode_of(stage);
         const Cell at=cell_of_index(item.index);
-        const auto& request=modes[mode];const auto& grid=baked::grids(*maps[mode]);
-        int walk=-1;
-        if(mode==target_mode) {
-            if(mode==1&&std::find(target_cells.begin(),target_cells.end(),at)!=target_cells.end())walk=0;
-            if(mode==0&&airborne_goal&&std::find(target_cells.begin(),target_cells.end(),at)!=target_cells.end())walk=0;
-            if(mode==0&&!airborne_goal&&baked::attribute(grid,at.x,at.y)!=16&&
-               baked::group_lands(request.landing_group,baked::attribute(grid,at.x,at.y))&&
-               baked_route::open(foot,grid,at)&&!blocked(foot,at)&&!baked_route::terminal_transition(foot,grid,at))
-                walk=final_walk.distance(at);
+        if(stage==1&&crossing(initial_mode,at)) {
+            const int distance=initial_distance(at);
+            if(distance>=0) {
+                auto cost=item.cost;++cost.actions;cost.steps+=distance;
+                if(initial_mode==1)cost.water+=distance;
+                if(less(cost,best)){best=cost;entry=at;found=true;}
+            }
         }
-        if(walk>=0&&stage>0) {
-            auto cost=item.cost;cost.steps+=walk;
-            if(less(cost,best)){best=cost;finish=item.index;}
-        }
-        const auto add=[&](int index,Cost cost) {
-            if(!less(cost,nodes[index].cost))return;
-            nodes[index]={cost,item.index};queue.push({cost,index});
-        };
         std::array<Cell,8> next;
-        const auto count=baked_route::successors(request,at,next);
+        const auto count=baked_route::world_predecessors(modes[mode],at,next);
         for(size_t i=0;i<count;++i) {
             auto cost=item.cost;++cost.steps;if(mode==1)++cost.water;
             add(stage*area+next[i].y*256+next[i].x,cost);
         }
-        if(stage+1<stages&&!completed[mode].contains(at.y*256+at.x)&&
-           baked::attribute(baked::grids(*surface),at.x,at.y)==16&&
-           baked::group_lands(modes[1].landing_group,baked::attribute(baked::grids(*water),at.x,at.y))&&
-           baked_route::open(modes[1-mode],baked::grids(*maps[1-mode]),at)&&
-           !blocked(modes[0],at)&&!blocked(modes[1],at)&&
-           !baked_route::terminal_transition(modes[0],baked::grids(*surface),at)&&
-           !baked_route::terminal_transition(modes[1],baked::grids(*water),at)) {
+        if(stage>1&&crossing(mode_of(stage-1),at)) {
             auto cost=item.cost;++cost.actions;
-            add((stage+1)*area+at.y*256+at.x,cost);
+            add((stage-1)*area+at.y*256+at.x,cost);
         }
     }
-    if(finish<0||planning_cancelled())return result;
-    std::vector<int> path;
-    for(int index=finish;index>=0;index=nodes[index].parent)path.push_back(index);
+    if(!found||planning_cancelled())return result;
+    std::vector<Cell> path{entry};
+    while(!(path.back()==origin)) {
+        if(planning_cancelled())return {};
+        const auto at=path.back();const int distance=initial_distance(at);
+        std::array<Cell,8> before;
+        const auto count=baked_route::world_predecessors(modes[initial_mode],at,before);
+        bool advanced=false;
+        for(size_t i=0;i<count;++i)if(initial_distance(before[i])==distance-1) {
+            path.push_back(before[i]);advanced=true;break;
+        }
+        if(!advanced||path.size()>area)return {};
+    }
     std::reverse(path.begin(),path.end());
     Phase phase;phase.transportation_id=phase.movement_transportation_id=initial_mode==0?9:14;
-    for(const int index:path) {
-        if(index/area!=0)break;
-        phase.cells.push_back(cell_of_index(index));
-    }
+    phase.cells=std::move(path);
     if(phase.cells.empty())return result;
     phase.action_after=T(initial_mode==0?L"dive here":L"surface here");phase.manual_after=true;
     result.found=true;result.next_map=initial_mode==0?3:4;result.crossing=phase.cells.back();

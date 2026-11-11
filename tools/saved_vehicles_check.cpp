@@ -18,7 +18,7 @@ bool enabled(void* self,const void*){++enabled_calls;native();return static_cast
 namespace game {Id current(){return fixture::game;}}
 namespace frame {bool on_main_thread(){return fixture::owner;}}
 namespace ffpr::system {bool is_field_navigation_ready(){return fixture::ready;}}
-namespace field::baked {const TransportRow* transport(int id){static TransportRow row{9,6,10,3,0};row.type=fixture::transport_type;return id==9?&row:nullptr;}}
+namespace field::baked {const TransportRow* transport(int id){static TransportRow row{9,6,10,3,0};row.type=fixture::transport_type;return id==9||id==4?&row:nullptr;}}
 namespace ref {
 Class::Class(const char* n,const char* v,uint8_t mask,const char* a):ns(n),name(v),games(mask),assembly(a){}
 il2cpp::Class* Class::get(){fixture::native();return reinterpret_cast<il2cpp::Class*>(this);}
@@ -58,6 +58,12 @@ int main(){using field::saved_world_vehicles;int failures=0;
  fixture::saved.cell.x=std::numeric_limits<float>::infinity();expect(saved_world_vehicles().empty(),"nonfinite position is rejected");fixture::saved.cell.x=46;
  fixture::saved.map=99;expect(saved_world_vehicles().empty(),"interior/unrelated saved map cannot become a world craft");fixture::saved.map=4;
  fixture::owner=false;const int before=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==before,"workers read no native pointers");fixture::owner=true;
- for(int number:{1,2,4,5,6}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
+ fixture::game=game::Id::FF6;fixture::saved.id=4;fixture::saved.map=1;fixture::transport_type=8;
+ actual=saved_world_vehicles();expect(actual.size()==1&&actual[0].id==4&&actual[0].map==1&&actual[0].cell.x==46,"FFVI copies only the enabled Blackjack's actual world departure pose");
+ fixture::saved.id=9;expect(saved_world_vehicles().empty(),"FFVI extension cannot invent support for another vehicle");fixture::saved.id=4;
+ fixture::saved.map=2;expect(saved_world_vehicles().empty(),"FFVI extension cannot reuse the ruined world's pose");fixture::saved.map=1;
+ fixture::owned.enabled=false;expect(saved_world_vehicles().empty(),"FFVI unreleased craft supplies no saved aircraft");fixture::owned.enabled=true;
+ fixture::ready=false;const int before_unready=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==before_unready,"FFVI transition performs no save access");fixture::ready=true;
+ for(int number:{1,2,4,5}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
  std::printf("Saved vehicle reader: %d failures; no native allocation, clone, scene scan or retained game pointer\n",failures);return failures?1:0;
 }

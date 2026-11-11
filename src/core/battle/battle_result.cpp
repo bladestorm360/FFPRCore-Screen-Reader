@@ -494,7 +494,7 @@ void points_finished(void* list, bool forced_acknowledgement = false)
         // Keep current totals as review lines; replace only the now-final detailed rows.
         ui::review::replace_lines(std::move(lines), options.restore_index);
         if (had_deferred_page && ui::prefs::auto_detail_enabled() && !announcement.empty()) ffpr::say(announcement, false);
-        // FFIII confirm can finish the visible tally without advancing the page.
+        // In each EXP game, confirm can finish the visible tally on this page.
         // The native forced-completion event owns this acknowledgement; the
         // pending flag above consumes it once, without comparing speech text.
         else if (had_deferred_page && forced_acknowledgement && !ui::prefs::auto_detail_enabled())
@@ -590,7 +590,7 @@ ref::Class kCharacterList##N{NS, "ResultCharacterListController", MASK}; \
 ref::Method mStep##N{kCharacterList##N, "<PlayPerformance>b__6_0", 0}, mForced##N{kCharacterList##N, "ForcedEndPerformance", 0}; \
 Phase oStep##N, oForced##N; \
 void dStep##N(void* s, const void* m) { oStep##N(s, m); hooks::guarded("Results.AnimationStep", [s] { if (kCharacterList##N.is(s)) animation_step(s); }); } \
-void dForced##N(void* s, const void* m) { oForced##N(s, m); hooks::guarded("Results.AnimationForced", [s] { if (kCharacterList##N.is(s)) points_finished(s, N == 3); }); } \
+void dForced##N(void* s, const void* m) { oForced##N(s, m); hooks::guarded("Results.AnimationForced", [s] { if (kCharacterList##N.is(s)) points_finished(s, N != 2); }); } \
 ref::Method mPoint##N{kPoint##N, "PointsInit", 0}, mStatus##N{kStatus##N, "SetData", 1}; \
 Phase oPoint##N; using Status##N = void (*)(void*, void*, const void*); Status##N oStatus##N; \
 void dPoint##N(void* s, const void* m) { oPoint##N(s, m); hooks::guarded("Results.PointRows", [s] { point_rows(s); }); } \

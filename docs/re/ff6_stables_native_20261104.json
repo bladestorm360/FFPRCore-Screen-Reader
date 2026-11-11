@@ -1,0 +1,296 @@
+{
+  "Map_10010/sc_chocobo_20281_1_2": {
+    "sha256": "cf19a31c10a7877110e63d797daa883bfd37bf66797fc80cfcc5f8dbe4263a42",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10010/sc_chocobo_20281_2_2": {
+    "sha256": "350d8c3bb2c826ccbff2603ed76211ab291ca4281c5ac59d7d69ef4a977a1956",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10010/sc_chocobo_20281_3_2": {
+    "sha256": "19d9a6e8789792df82c9d7df6d5512b74aab2062e5c95594836f5d6d634356b9",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10010/sc_chocobo_20281_4_2": {
+    "sha256": "ebfd7831f4985f5d59c3f45c0ecfcd6a3d173b41110e38262eaa937e980e9ac0",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10020/sc_chocobo_20481_1_2": {
+    "sha256": "02b3d5d82acc2ff3b468cdae7f945a7375bff4edb28bfb55a0d35f7fa4794f5e",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10020/sc_chocobo_20481_2_2": {
+    "sha256": "b16bfccb040247341e19b8be815ec85f1e37f7a1c54f29c3b1412fed3de65761",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_10020/sc_chocobo_20481_3_2": {
+    "sha256": "fa93b1696470cc011ae0f31b16bcd50fa7a1238873dbdfe9bba8ee2fbbbab7e8",
+    "instructions": 9,
+    "changes": [],
+    "syscalls": [
+      "乗り物に乗る：チョコボ",
+      "リーダーがチョコボに乗る"
+    ],
+    "flag_writes": []
+  },
+  "Map_20280/sc_chocobo_20281_1_1": {
+    "sha256": "5da320c2319334eda732a3c728383e98cdf088df1dc679e41b7a1a4e1a6c3a18",
+    "instructions": 37,
+    "changes": [
+      [
+        1,
+        104,
+        "sc_chocobo_20281_1_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20280_1/sc_chocobo_20281_2_1": {
+    "sha256": "9baebb0ad556bef1f04cd1af7524a122b79dda86810fd957380c3282119b46e6",
+    "instructions": 37,
+    "changes": [
+      [
+        1,
+        107,
+        "sc_chocobo_20281_2_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20280_2/sc_chocobo_20281_3_1": {
+    "sha256": "e41710ad53c97018c8e10ee64f72c33e5139087b0d23fcf369b32114517846e4",
+    "instructions": 37,
+    "changes": [
+      [
+        1,
+        108,
+        "sc_chocobo_20281_3_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20280_3/sc_chocobo_20281_4_1": {
+    "sha256": "f2b8192f15b489da2733966cfea1db0d04ecfcefa7906506f0dfc8178ef8a4d1",
+    "instructions": 37,
+    "changes": [
+      [
+        1,
+        109,
+        "sc_chocobo_20281_4_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20281_1/sc_chocobo_20281_1": {
+    "sha256": "894bc446bfa2c8b75dbb33b69f4016691bab6498322686aa3c42ba9da15de45a",
+    "instructions": 27,
+    "changes": [
+      [
+        188,
+        2,
+        "sc_chocobo_20281_1_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20281_2/sc_chocobo_20281_2": {
+    "sha256": "1a6e2af173451a2c2d0231f87cd6351830974120a56576acf205439bb8993683",
+    "instructions": 27,
+    "changes": [
+      [
+        612,
+        2,
+        "sc_chocobo_20281_2_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20281_3/sc_chocobo_20281_3": {
+    "sha256": "55e0fa0cbbb9539e2ccd0f5aba3952554a2092af1636d4cc0f74c1e5a480e44d",
+    "instructions": 27,
+    "changes": [
+      [
+        614,
+        2,
+        "sc_chocobo_20281_3_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20281_4/sc_chocobo_20281_4": {
+    "sha256": "81d1db8b2f15d1b7746547241495875508316222bbc4e3ee15ee13737654e369",
+    "instructions": 27,
+    "changes": [
+      [
+        616,
+        2,
+        "sc_chocobo_20281_4_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20480/sc_chocobo_20481_1_1": {
+    "sha256": "f63c70796e7d4459f9633475d602277ffd76bc00d2496e5c5fe95e8f0e16d2eb",
+    "instructions": 37,
+    "changes": [
+      [
+        2,
+        36,
+        "sc_chocobo_20481_1_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20480_1/sc_chocobo_20481_2_1": {
+    "sha256": "25f2a16018dc968813a1f5724fd6f57fb18befe4f21e29fc3b6c99eb3fece700",
+    "instructions": 37,
+    "changes": [
+      [
+        2,
+        37,
+        "sc_chocobo_20481_2_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20480_2/sc_chocobo_20481_3_1": {
+    "sha256": "b00db1231029e45c738f2f8a8fb68e10d79a2670d82a08378fb8a0df54afc200",
+    "instructions": 37,
+    "changes": [
+      [
+        2,
+        38,
+        "sc_chocobo_20481_3_2"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": []
+  },
+  "Map_20481_1/sc_chocobo_20481_1": {
+    "sha256": "debd40c36fa67f7538115611319b289973f35f08f0a0120abea147c19d007f20",
+    "instructions": 40,
+    "changes": [
+      [
+        315,
+        2,
+        "sc_chocobo_20481_1_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20481_2/sc_chocobo_20481_2": {
+    "sha256": "4214697b3d8d4f7e0dc33389e0fded1a1f87ce8a72f777e547c6277f31517f09",
+    "instructions": 40,
+    "changes": [
+      [
+        618,
+        2,
+        "sc_chocobo_20481_2_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  },
+  "Map_20481_3/sc_chocobo_20481_3": {
+    "sha256": "5ab1cd0a581a16a84418fcecf637c63966d8efc0557e3e26ffe064193f3824c5",
+    "instructions": 40,
+    "changes": [
+      [
+        620,
+        2,
+        "sc_chocobo_20481_3_1"
+      ]
+    ],
+    "syscalls": [],
+    "flag_writes": [
+      [
+        "ScenarioFlag3",
+        36,
+        true
+      ]
+    ]
+  }
+}

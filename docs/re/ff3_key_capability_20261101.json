@@ -1,0 +1,73 @@
+{
+  "dll_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+  "dump_sha256": "cf74887b07f39807182c95701b3888ebfe171f0c9f7afbe8f33811b47c3d4b15",
+  "methods": [
+    {
+      "method": "Current.CheckThiefIsInCorps",
+      "rva": 9549248,
+      "bytes": 320,
+      "sha256": "be77b1da25aba69bf1bacbea517621689ae27c592dec41b132c9753d6a81a902"
+    },
+    {
+      "method": "Current.ThiefCorpsVisitor",
+      "rva": 9606384,
+      "bytes": 864,
+      "sha256": "a8d67e75942d6fe4d65fbe3e7c2843b9cf2559fb41325986e52f07dcefedfef2"
+    },
+    {
+      "method": "Current.ThiefMemberIdentity",
+      "rva": 3707488,
+      "bytes": 48,
+      "sha256": "aa2df54a80f5cb5fd87ca61be343ef9ccf08a69f560de4d339b3ecb861a661b6"
+    },
+    {
+      "method": "OwnedCharacterData.get_JobId",
+      "rva": 6721216,
+      "bytes": 32,
+      "sha256": "ea409bee917052b45d9baf9567856e4333d9e269fe530d435871a1674598057f"
+    },
+    {
+      "method": "OwnedCharacterData.get_IsEnableCorps",
+      "rva": 6721184,
+      "bytes": 32,
+      "sha256": "0fe4a4daf7dc150e311daf887ff8b57d314490be93d75a308864e92c4f87c455"
+    },
+    {
+      "method": "OwnedItemData.get_Count",
+      "rva": 6728080,
+      "bytes": 32,
+      "sha256": "df8b474bbefe00b3139b9cf2ada514e31859f592422450f766fcf67c68cec32e"
+    },
+    {
+      "method": "OwnedItemData.get_ItemId",
+      "rva": 3437232,
+      "bytes": 16,
+      "sha256": "522cd1018def8d6b6888df117f105d3126213073df43ffc948522697fc226dff"
+    },
+    {
+      "method": "OwnedItemData.get_ContentId",
+      "rva": 6728048,
+      "bytes": 32,
+      "sha256": "9d0b06312699192bae1b82030f05d365013347c9405385180f575a45fe4dd2fb"
+    },
+    {
+      "method": "UserDataManager.GetOwnedCharactersClone",
+      "rva": 6571328,
+      "bytes": 368,
+      "sha256": "271b1ac9f237a51229413be1987ab1005f6f4a109d9b55da80c5001ca059bb80"
+    },
+    {
+      "method": "UserDataManager.GetMemberData",
+      "rva": 6565664,
+      "bytes": 288,
+      "sha256": "131ca50aac548ff0b9adb395c0e58dcaef715a7114c30fb967824e9cf7cf1ac4"
+    },
+    {
+      "method": "UserDataManager.SearchOwnedItem",
+      "rva": 6575280,
+      "bytes": 112,
+      "sha256": "885a12b670eda1df8c6e7dfe1300395310cb25b5976cbbd46b8db9438cd6d52c"
+    }
+  ],
+  "scope": "Reviewed native body fingerprints and factual API locators only; no implementations."
+}

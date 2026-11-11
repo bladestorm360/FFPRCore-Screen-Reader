@@ -105,8 +105,8 @@ void basic_capture(bool announce) {
             auto* cls=il2cpp::object_class(static_cast<il2cpp::Object*>(map));const int offset=cls?il2cpp::field_offset(cls,"playerPos"):-1;
             if(offset<0)return false;
             const auto pos=il2cpp::read_field<unity::Vec2>(map,offset);input->x=pos.x;input->y=pos.y;
-            if(const auto* sm=field::baked::submap_by_map_id(field::current_map_id());sm&&sm->world) {
-                input->wrap_width=sm->width*16.f;input->wrap_height=sm->height*16.f;
+            if(const auto* sm=field::baked::submap_by_map_id(field::current_map_id())) {
+                input->wrap_width=field::baked::wrap_width(*sm)*16.f;input->wrap_height=field::baked::wrap_height(*sm)*16.f;
             }
         }
         int copied=0;

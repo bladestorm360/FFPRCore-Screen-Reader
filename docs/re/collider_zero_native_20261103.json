@@ -1,0 +1,110 @@
+{
+  "ff1": {
+    "dll_sha256": "33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108",
+    "dump_sha256": "8313bacc58a606108db7dc0786b4fc5bcd57dc07e171cb8b051c2a68cd817740",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 13350384,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 13364912,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 15216304,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 15215824
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  },
+  "ff2": {
+    "dll_sha256": "dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b",
+    "dump_sha256": "2cd79f198f2792c2a5c274833b94a7daeaa522cf67aff35f2e867d66be6422c4",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 11146864,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 11161392,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 8264416,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 8263936
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  },
+  "ff3": {
+    "dll_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+    "dump_sha256": "cf74887b07f39807182c95701b3888ebfe171f0c9f7afbe8f33811b47c3d4b15",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 12941728,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 12957392,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 8724544,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 8724064
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  },
+  "ff4": {
+    "dll_sha256": "bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed",
+    "dump_sha256": "011bc480d50bba3784b001844f854eae9abbe7a0050cb91c6e82146dffacc916",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 11124656,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 11139168,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 8789360,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 8788880
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  },
+  "ff5": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 3103504,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 3119072,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 15669472,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 15668992
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  },
+  "ff6": {
+    "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+    "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+    "functions": {
+      ".MapUtility.GetCollisionRect(int collisionId)": 13482528,
+      ".MapUtility.SetBoxCollision(int collisionId, ref BoxCollider2D collider)": 13498672,
+      "Last.Entity.Field.FieldColliderEntity.Init(int _collisionId)": 16657776,
+      "Last.Entity.Field.FieldColliderEntity.CanEnter(FieldEntity enterEntity, Vector2 moveVector)": 16657296
+    },
+    "default_rectangle": [
+      0,
+      0,
+      1.0,
+      1.0
+    ],
+    "zero_uses_default": true,
+    "interpretation": "Instantiated enabled zero collider is full-size, unlike terrain None0. Half2-5 and axis6-7 retained."
+  }
+}

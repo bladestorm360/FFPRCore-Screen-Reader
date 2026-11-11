@@ -1,0 +1,51 @@
+{
+  "scope_tag": "ff5_GreatSeaTrench",
+  "source_script_hashes": {
+    "Map_30611_11/sc_e_0313": "2d3f1fa489f2efab16d998158401245d69216a49d2ee99561f549c7647d0aeaf",
+    "Map_30611_11/sc_map_30611_11": "d34f5500dbf5fe026fe8feb1a468a3c9d21573745b9c7fed94a6a3f4ec905448",
+    "Map_30611_12/sc_e_0314_1": "92ef1c7bc11e7e463d975ad92dfc46df4cd71d948fb1653535f4f294d33d283d",
+    "Map_30611_12/sc_e_0314_2": "78b459d40e7fc16f551c15093be04d6516976d1b745be935b736a8226291e49c",
+    "Map_30611_12/sc_e_0314_3": "b97448706aff2203b204f192c15b2435b84cb83d2b515fb6d217154f346ccbed",
+    "Map_30611_12/sc_e_0314_4": "ea15b43d1015a00335f6746dc92e52a81eb782e3b84f6608abda82b0d54cd319",
+    "Map_30611_12/sc_e_0315": "71ab833cc92973b8b36b27101e5b80a54e207289025912da9643684f2833ac43",
+    "Map_30611_12/sc_map_30611_12": "8d051ea597685c899f1c0d0170f0cebbec4b20b7955cf9c6e4051c2db7bc7cad",
+    "Map_30611_13/sc_e_0148": "c5c78127f3f75560a64d2e7f23d5734cd52c5db4c9099d548c9f6954729327c2",
+    "Map_30611_13/sc_e_0148_1": "5d7a2f347e54b865c14e54fb39d37b9691e51df19fddba8d9bf0eeee414acc8b",
+    "Map_30611_13/sc_map_30611_13": "c783fd1e71bdb8928ec5fe19d99a521f179673f2c7172a6dc0d81739271a9ede",
+    "Map_30611_4/sc_e_0309": "4273fe2c837bab644c46176a624dd1bb4ed84a7b85796c606097138c9ebaa185",
+    "Map_30611_4/sc_e_0310": "00a8e3220d3cf37184f885d3c45e53a7fdee0d94af759868f2bf97029a0ae5b2",
+    "Map_30611_4/sc_map_30611_4": "fb253d1de67beeda598c95caa6bcdfeb08cf3757a42bc27908844419574a2987",
+    "Map_30611_5/sc_e_0311": "d7fb1efb675c58e258992110c3e1080734b9fcc48bce4ea67ab9b5071f1d7515",
+    "Map_30611_5/sc_map_30611_5": "c45fd68f1823de4ff4c4a5b8dc39979edf04713ffab401a891da575bf886f10c"
+  },
+  "identities": 12,
+  "switches": [
+    [
+      192,
+      8
+    ],
+    [
+      193,
+      10
+    ],
+    [
+      194,
+      9
+    ]
+  ],
+  "chest": 11,
+  "success": 195,
+  "completion": 148,
+  "early_chest_push_south": 6,
+  "reset_pose": [
+    0,
+    17,
+    17
+  ],
+  "reset_receipts": [
+    192,
+    193,
+    194
+  ],
+  "live_projection_rows": 148
+}

@@ -417,9 +417,23 @@ std::wstring translate_entity_name_for_map(const std::wstring& raw, int map_id) 
     if(map_id>0&&try_lookup(L"@map/"+std::to_wstring(map_id)+L"/"+raw,corrected))return corrected;
     return translate_entity_name(raw);
 }
+std::wstring translate_entity_name_for_actor(const std::wstring& raw, int map_id, int entity_id) {
+    initialize();
+    std::wstring corrected;
+    // Per-game immutable keys are authored offline from native shop groups and
+    // exact service scripts. This lookup never infers a role from a live name,
+    // scans the world, changes raw route identity or touches native state.
+    if(map_id>0&&entity_id>=0&&try_lookup(L"@actor/"+std::to_wstring(map_id)+L"/"+
+        std::to_wstring(entity_id)+L"/"+raw,corrected))return corrected;
+    return translate_entity_name_for_map(raw,map_id);
+}
 std::wstring translate_entity_name_snapshot(const std::wstring& raw, int map_id) {
     SnapshotNames scope;
     return translate_entity_name_for_map(raw,map_id);
+}
+std::wstring translate_entity_name_snapshot(const std::wstring& raw, int map_id, int entity_id) {
+    SnapshotNames scope;
+    return translate_entity_name_for_actor(raw,map_id,entity_id);
 }
 npc_names::Label npc_display_label_snapshot(const std::wstring& converted) {
     SnapshotNames scope;

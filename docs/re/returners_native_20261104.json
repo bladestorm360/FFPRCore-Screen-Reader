@@ -1,0 +1,415 @@
+{
+  "Map_20080/sc_e_0062": {
+    "sha256": "18a536ea4abaf25c213735a07616d497a9e6ddbbf11a03dacfd70d27090efa0c",
+    "flags": [
+      [
+        "ScenarioFlag3",
+        32,
+        1
+      ],
+      [
+        "ScenarioFlag3",
+        33,
+        1
+      ]
+    ],
+    "transfers": [
+      [
+        67,
+        1,
+        "sc_e_0062_1"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_1"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_1"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_1"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_1"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_2"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_2"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_2"
+      ],
+      [
+        67,
+        1,
+        "sc_e_0062_2"
+      ]
+    ],
+    "choices": [
+      [
+        "E0256_00_019_c_01",
+        "E0256_00_019_c_02"
+      ]
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": [
+      [
+        "AreaLocalVariable",
+        1,
+        "←",
+        "imm",
+        1
+      ]
+    ]
+  },
+  "Map_20080/sc_map_20080": {
+    "sha256": "2cc4fc1983712c443c791fc8603256222d34f6ae58f98be905aa941e80c990d0",
+    "flags": [
+      [
+        "ScenarioFlag4",
+        138,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_e_0056": {
+    "sha256": "4687219f2af2150365eef3edf9b6c14302dc6e4c0fc82259d61d7f10b02b641b",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        101,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": [
+      [
+        "MapLocalVariable",
+        1,
+        "←",
+        "imm",
+        1
+      ]
+    ]
+  },
+  "Map_20081_1/sc_e_0059": {
+    "sha256": "d58a126c6ada45ffbcd3d3c048a1fd15b17a044f534ffbb52e9f5f5887e8de51",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        44,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_e_0061": {
+    "sha256": "6972ccf21bb509acc68783e809827ec4456aa370c5aa49e80200d78dff4aa558",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        46,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": [
+      [
+        "MapLocalVariable",
+        1,
+        "←",
+        "imm",
+        1
+      ]
+    ]
+  },
+  "Map_20081_1/sc_e_0062_1": {
+    "sha256": "9dc2863d3387f2578913a73ee883dd770ba17b43b4646e1f08d990aef5fcc1ad",
+    "flags": [],
+    "transfers": [
+      [
+        72,
+        1,
+        "sc_e_0062_3"
+      ]
+    ],
+    "choices": [],
+    "encounters": [],
+    "calls": [
+      "メンバー加入：バナン",
+      "後列配置：バナン"
+    ],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_e_0062_2": {
+    "sha256": "6b443ddc72d7ff56f53b4a1f5b390297bc4d0543287b936f2a52f8694f674d30",
+    "flags": [],
+    "transfers": [
+      [
+        72,
+        1,
+        "sc_e_0062_3"
+      ]
+    ],
+    "choices": [],
+    "encounters": [],
+    "calls": [
+      "メンバー加入：エドガー",
+      "メンバー加入：マッシュ",
+      "メンバー加入：バナン",
+      "後列配置：バナン"
+    ],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_e_1036": {
+    "sha256": "eb8bc6862fbccbe7a1e253d5826f299b8ea4e6ad3980d8ccafb3d9599a34c2a7",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        76,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [
+      [
+        "E1036_00_067_c_01",
+        "E1036_00_067_c_02"
+      ]
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_e_1037": {
+    "sha256": "53347dcea6af65ac8cb205eac406050a5b955ae8e889063afcfe56b7bfd7e414",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        77,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_map_20081_1": {
+    "sha256": "967e4e3bf4d451dbbcb0d30a413f40c140e2c07dcc2a0ea677be59f4c11870a4",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_1/sc_npc_20081_1_2": {
+    "sha256": "17194efe3162c6fb12fe94041b38e985d76747b24d851bd88ecb6601f9908550",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_2/sc_e_0057_1": {
+    "sha256": "34b75020f3a58e0317b33f4e60bc8d4b404a45c79afc0da08606286158a9f43d",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        42,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_2/sc_e_0058": {
+    "sha256": "509795271b9a5b8fea342b1cf6170744e6774ebb78351aa8b40bf764f438f9b9",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        43,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_2/sc_e_1108": {
+    "sha256": "4f9024052cb8d113d1f048c31af89380097e95a60850cedf58c1dd8312894ea1",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": [
+      [
+        "MapLocalVariable",
+        1,
+        "←",
+        "imm",
+        1
+      ]
+    ]
+  },
+  "Map_20081_2/sc_map_20081_2": {
+    "sha256": "586114b0eaafe7e37c17d34677dd6a70321d4fbdad1db2e923cf964e7a79172a",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_2/sc_npc_20081_2_1": {
+    "sha256": "062d4ae9c705a488188e04c2c221a94ce7da319cf938cf0aae0b75dbf58d110c",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_5/sc_e_0009": {
+    "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        7,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [
+      []
+    ],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_5/sc_e_0057": {
+    "sha256": "796390ff6bbb75af4603ad4012fa6b37626372a808c19b501cd1c647b191c99a",
+    "flags": [],
+    "transfers": [
+      [
+        68,
+        1,
+        "sc_e_0057_1"
+      ]
+    ],
+    "choices": [],
+    "encounters": [],
+    "calls": [
+      "控えに移動：ロック",
+      "控えに移動：エドガー",
+      "控えに移動：マッシュ"
+    ],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_5/sc_e_0060": {
+    "sha256": "3e1c30eea7bd8973eba56a8a49bf00634680082dcb2e37653c50db3366654d2e",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        45,
+        1
+      ]
+    ],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_5/sc_map_20081_5": {
+    "sha256": "656c565817674251e854817c237e8d8adf7857d2eb2b18fce26e039154b7ee75",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_5/sc_npc_20081_5_1": {
+    "sha256": "af3acee2efeefc08ec23833d8aec39d4a8e6d50f5503d6bfaa5620357b71f3a4",
+    "flags": [],
+    "transfers": [],
+    "choices": [],
+    "encounters": [],
+    "calls": [],
+    "timers": [],
+    "locals": []
+  },
+  "Map_20081_6/sc_e_0062_3": {
+    "sha256": "3d41b156c9a15bd98781aa1cdaab070e801e905724f29a8937399867c326d888",
+    "flags": [
+      [
+        "ScenarioFlag1",
+        47,
+        1
+      ]
+    ],
+    "transfers": [],
+    "calls": []
+  }
+}

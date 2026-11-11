@@ -1,20 +1,503 @@
 {
-  "_comment": "Guided navigation includes dungeon routing puzzles. Deist's safe stairs weave between floors; B3's pitfall is avoidable. Target is B5 PointIn1, from the extracted map; no hidden treasure or story disclosure. Actual planner regression: tools/trap_route_check.cpp.",
+  "_comment": "Original factual FF2 map/story puzzle guides. Every manual operation uses its exact native receipt; adjacency or a dungeon-floor arrival never substitutes for completion.",
   "puzzles": [
     {
       "id": "deist_safe_stairs",
-      "maps": [183, 184, 185, 186, 187, 188, 189, 190],
+      "maps": [
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190
+      ],
       "steps": [
         {
-          "map": 187,
+          "map": 176,
+          "entity": 32,
+          "raw": "子供（金髪）",
+          "layer": 0,
+          "x": 16,
+          "y": 23,
+          "examine": true,
+          "text": "Speak to the boy.",
+          "allow_world_transit": true,
+          "done_scenario": 41
+        },
+        {
+          "map": 176,
+          "entity": 32,
+          "raw": "子供（金髪）",
+          "layer": 0,
+          "x": 16,
+          "y": 23,
+          "examine": true,
+          "text": "Follow the boy and speak to him again.",
+          "allow_world_transit": true,
+          "done_scenario": 42
+        },
+        {
+          "map": 179,
+          "entity": 28,
+          "raw": "母親",
+          "layer": 0,
+          "x": 21,
+          "y": 18,
+          "examine": true,
+          "text": "Speak to the mother and learn {0}. Repeat the guide after learning it.",
+          "allow_world_transit": true,
+          "done_keyword": 927,
+          "arg": "modtext:FF2 keyword Wyverns"
+        },
+        {
+          "map": 184,
+          "entity": 32,
+          "raw": "ペンダント",
+          "layer": 0,
+          "x": 35,
+          "y": 18,
+          "examine": true,
+          "text": "Examine the pendant.",
+          "allow_world_transit": true,
+          "done_scenario": 43
+        },
+        {
+          "map": 180,
+          "entity": 6,
+          "raw": "飛竜",
+          "layer": 0,
           "x": 9,
-          "y": 8,
+          "y": 10,
+          "examine": true,
+          "text": "Ask the wyvern about {0} to receive its egg.",
+          "allow_world_transit": true,
+          "done_scenario": 44,
+          "arg": "modtext:FF2 keyword Wyverns"
+        },
+        {
+          "map": 187,
+          "entity": 34,
+          "raw": "キマイラ",
           "layer": 1,
-          "examine": false,
-          "text": "Reach {0} by the safe stairs. Avoid the trap on B3.",
-          "arg": "map:187"
+          "x": 28,
+          "y": 8,
+          "examine": true,
+          "text": "Follow the safe stairs past the B3 pitfall, then defeat the guardian.",
+          "allow_world_transit": true,
+          "done_scenario": 45
+        },
+        {
+          "map": 187,
+          "entity": 41,
+          "raw": "命の泉",
+          "layer": 1,
+          "x": 25,
+          "y": 8,
+          "examine": true,
+          "text": "Use {0} at the Life Spring.",
+          "allow_world_transit": true,
+          "done_scenario": 46,
+          "arg": "modtext:FF2 item Wyvern Egg"
         }
+      ],
+      "_about": "Complete Deist dependency chain: boy41/42, actual learned Wyverns927, pendant43, egg44, guardian45, egg placement46. Actual Life Spring41 at B5Ground25,8 is the end; B5 PointIn1 is only an arrival. Explicit authored world transit connects castle/cave. Repeat after learning; native choices and manual operations remain game-owned."
+    },
+    {
+      "id": "fynn_incantation",
+      "maps": [
+        43
+      ],
+      "steps": [
+        {
+          "map": 43,
+          "entity": 25,
+          "raw": "①ゴートス",
+          "layer": 0,
+          "x": 28,
+          "y": 10,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 52
+        },
+        {
+          "map": 43,
+          "entity": 23,
+          "raw": "①ヒルダ",
+          "layer": 0,
+          "x": 24,
+          "y": 10,
+          "examine": true,
+          "text": "Speak to the queen and learn {0}. Repeat the guide after learning it.",
+          "arg": "modtext:FF2 keyword Mysidia",
+          "done_keyword": 924
+        },
+        {
+          "map": 43,
+          "entity": 23,
+          "raw": "①ヒルダ",
+          "layer": 0,
+          "x": 24,
+          "y": 10,
+          "examine": true,
+          "text": "Ask about {0} and learn {1}. Repeat the guide after learning it.",
+          "arg": "modtext:FF2 keyword Mysidia",
+          "arg2": "modtext:FF2 keyword Mask",
+          "done_keyword": 930
+        },
+        {
+          "map": 43,
+          "entity": 23,
+          "raw": "①ヒルダ",
+          "layer": 0,
+          "x": 24,
+          "y": 10,
+          "examine": true,
+          "text": "Ask about {0} and learn {1}. Repeat the guide after learning it.",
+          "arg": "modtext:FF2 keyword Mask",
+          "arg2": "modtext:FF2 keyword Ekmet Teloess",
+          "done_keyword": 931
+        },
+        {
+          "map": 43,
+          "entity": 22,
+          "raw": "隠し通路",
+          "layer": 0,
+          "x": 41,
+          "y": 7,
+          "examine": true,
+          "text": "Ask about {0} at the secret wall.",
+          "arg": "modtext:FF2 keyword Ekmet Teloess",
+          "done_scenario": 56
+        }
+      ],
+      "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+      "done_scenario": 56,
+      "requires_scenario": 51
+    },
+    {
+      "id": "kashuan_sunfire",
+      "maps": [
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163
+      ],
+      "steps": [
+        {
+          "map": 149,
+          "entity": 30,
+          "raw": "扉の封印",
+          "layer": 0,
+          "x": 22,
+          "y": 12,
+          "examine": true,
+          "text": "Use {0} on the locked door.",
+          "arg": "modtext:FF2 item Goddess Bell",
+          "done_scenario": 27
+        },
+        {
+          "map": 156,
+          "entity": 12,
+          "raw": "ゴードン",
+          "layer": 0,
+          "x": 10,
+          "y": 8,
+          "examine": true,
+          "text": "Speak to your ally.",
+          "done_scenario": 28
+        },
+        {
+          "map": 150,
+          "entity": 9,
+          "raw": "①レッドソウル",
+          "layer": 0,
+          "x": 5,
+          "y": 13,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 29
+        },
+        {
+          "map": 150,
+          "entity": 6,
+          "raw": "エギルの松明",
+          "layer": 0,
+          "x": 5,
+          "y": 10,
+          "examine": true,
+          "text": "Open the chest.",
+          "done_scenario": 30
+        },
+        {
+          "map": 149,
+          "entity": 56,
+          "raw": "太陽の炎トリガー用",
+          "layer": 0,
+          "x": 22,
+          "y": 16,
+          "examine": true,
+          "text": "Use {0} on the flame.",
+          "arg": "modtext:FF2 item Egil Torch",
+          "done_scenario": 31
+        }
+      ],
+      "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+      "done_scenario": 31
+    },
+    {
+      "id": "mysidia_masks",
+      "maps": [
+        98,
+        207
+      ],
+      "steps": [
+        {
+          "map": 98,
+          "entity": 4,
+          "raw": "女神像",
+          "layer": 0,
+          "x": 14,
+          "y": 8,
+          "examine": true,
+          "text": "Use {0} on the statue.",
+          "arg": "modtext:FF2 item White Mask",
+          "allow_world_transit": true,
+          "done_scenario": 58
+        },
+        {
+          "map": 207,
+          "entity": 28,
+          "raw": "ドッペルゲンガー",
+          "layer": 0,
+          "x": 21,
+          "y": 31,
+          "examine": true,
+          "text": "Use {0} on the doppelganger.",
+          "arg": "modtext:FF2 item Black Mask",
+          "allow_world_transit": true,
+          "done_scenario": 61
+        }
+      ],
+      "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+      "done_scenario": 61
+    },
+    {
+      "id": "dreadnought_escape",
+      "maps": [
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175
+      ],
+      "steps": [
+        {
+          "map": 164,
+          "entity": 42,
+          "raw": "①帝国兵",
+          "layer": 0,
+          "x": 13,
+          "y": 18,
+          "examine": true,
+          "text": "Use {0} at the guard, or ask about {1} and defeat him.",
+          "arg": "modtext:FF2 item Pass",
+          "arg2": "modtext:FF2 keyword Wild Rose",
+          "done_scenario": 33
+        },
+        {
+          "map": 169,
+          "entity": 28,
+          "raw": "鉄格子②",
+          "layer": 0,
+          "x": 28,
+          "y": 33,
+          "examine": true,
+          "text": "Open the cell bars.",
+          "done_scenario": 100
+        },
+        {
+          "map": 169,
+          "entity": 17,
+          "raw": "②シド",
+          "layer": 0,
+          "x": 27,
+          "y": 27,
+          "examine": true,
+          "text": "Speak to the prisoners to free them.",
+          "done_scenario": 34
+        },
+        {
+          "map": 175,
+          "entity": 12,
+          "raw": "大戦艦爆破トリガー",
+          "layer": 0,
+          "x": 18,
+          "y": 14,
+          "examine": true,
+          "text": "Use {0} at the engine, then wait for the escape to finish.",
+          "arg": "modtext:FF2 item Sunfire",
+          "done_scenario": 35
+        }
+      ],
+      "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+      "done_scenario": 35
+    },
+    {
+      "id": "coliseum_escape",
+      "maps": [
+        191,
+        192,
+        193,
+        194,
+        195
+      ],
+      "steps": [
+        {
+          "map": 191,
+          "entity": 19,
+          "raw": "sc_e_0054:ベヒーモス",
+          "layer": 0,
+          "x": 25,
+          "y": 11,
+          "examine": false,
+          "text": "Defeat the guardian.",
+          "done_scenario": 48
+        },
+        {
+          "map": 192,
+          "entity": 29,
+          "raw": "鉄格子",
+          "layer": 0,
+          "x": 12,
+          "y": 30,
+          "examine": true,
+          "text": "Examine the cell bars and wait for your ally.",
+          "done_scenario": 49
+        },
+        {
+          "map": 195,
+          "entity": 8,
+          "raw": "鉄格子",
+          "layer": 0,
+          "x": 30,
+          "y": 17,
+          "examine": true,
+          "text": "Examine the cell bars to free the prisoner.",
+          "done_scenario": 50
+        }
+      ],
+      "_about": "Original native operation sequence. Learned keywords and exact scenario receipts support resumes; proximity is never completion. Named quest items are prerequisites to their native item-use controls. Existing manual menus and game-owned cinematics remain native.",
+      "done_scenario": 50,
+      "requires_scenario": 47
+    }
+  ],
+  "guidance_types": {
+    "deist_safe_stairs": {
+      "kind": "navigation",
+      "maps": [
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190
+      ]
+    },
+    "fynn_incantation": {
+      "kind": "other",
+      "maps": [
+        43
+      ]
+    },
+    "kashuan_sunfire": {
+      "kind": "navigation",
+      "maps": [
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163
+      ]
+    },
+    "mysidia_masks": {
+      "kind": "navigation",
+      "maps": [
+        98,
+        207
+      ]
+    },
+    "dreadnought_escape": {
+      "kind": "navigation",
+      "maps": [
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175
+      ]
+    },
+    "coliseum_escape": {
+      "kind": "navigation",
+      "maps": [
+        191,
+        192,
+        193,
+        194,
+        195
       ]
     }
-  ]
+  }
 }

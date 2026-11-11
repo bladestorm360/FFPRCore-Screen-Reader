@@ -1,5 +1,10 @@
 # Applied battle statistic changes, all six games
 
+November 6 [enemy visibility follow-up](ENEMY_STATUS.md). Gatlinger's
+Attack up/down came from native temporary parameter writes without a
+renderer. The combined correction limits this producer to party units.
+Confirmed enemy transformations and KO have their own producers.
+
 October25 [visibility correction](SAVE_CONTEXT_VISIBILITY_20261025.md): raw Luck
 changes from critical-health/KO bookkeeping are excluded in all six games; dead
 target and Dying/KO/Stone cleanup no longer produces invented stat feedback.

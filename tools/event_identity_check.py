@@ -16,6 +16,22 @@ NEUTRAL={'Interactive object','Event trigger','Scene trigger'}
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def check_ff4_airship(objects, labels, maps):
+    name = "Kain's Airship"
+    expected = {135, 1126}
+    contacts = [obj for obj in objects if obj['submap'] == 'Map_10010'
+                and obj['props'].get('entity_id') in expected]
+    assert len(contacts) == 2 and {obj['props']['entity_id'] for obj in contacts} == expected
+    assert 1 in maps['Map_10010']
+    for obj in contacts:
+        assert obj['type'] == 5 and obj['props']['action_id'] == 2
+        assert labels[obj['name']] == name
+        assert REVIEWS[(4, obj['submap'], obj['group'], obj['id'])]['label'] == name
+    text = json.loads((ROOT / 'data/ff4/mod_text.json').read_text(encoding='utf-8'))[name]
+    assert text['en'] == name and set(text) == set('en ja fr it de es ko zht zhc ru th pt'.split())
+    assert all(value.strip() for value in text.values())
+    print('FFIV: both Kain airship Objects contacts and all 12 locales verified')
+
 def check():
     report=[]
     for n in range(1,7):
@@ -29,6 +45,8 @@ def check():
         with (DUMP/f'ff{n}_master/map.txt').open(encoding='utf-8-sig') as f:
             for r in csv.DictReader(l for l in f if l.strip()):
                 if r['id']:maps[r['map_name']].append(int(r['id']))
+        if n == 4:
+            check_ff4_airship(objects, labels, maps)
         checked=0;lookups=0;contexts=0
         for o in objects:
             p=o['props']

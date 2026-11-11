@@ -15,7 +15,7 @@
 #include "../src/core/ui/review_buffer.cpp"
 #include "../src/games/ff6/ability_espers.cpp"
 namespace fixture {
-struct Node {std::array<void*,128> fields{};int command=0,kind=0,id=0;bool alive=true,active=true,enabled=true,owned=true,focused=true;float alpha=1,r=1,g=1,b=1;Node* parent=nullptr;void* sprite=nullptr;std::wstring value;};
+struct Node {std::array<void*,128> fields{};int command=0,kind=0,id=0,hp=0,max_hp=0,mp=0;bool alive=true,active=true,enabled=true,owned=true,focused=true;float alpha=1,r=1,g=1,b=1;Node* parent=nullptr;void* sprite=nullptr;std::wstring value;};
 using List=std::vector<void*>;
 std::map<std::string,int> offsets;std::vector<std::wstring> spoken;std::map<std::string,void*> owners;
 std::map<std::string,void*> extra_methods;
@@ -26,7 +26,8 @@ std::map<events::Kind,std::vector<events::Handler>> status_events;
 std::map<input::Key,std::string> party_keys;
 std::set<std::string> active_menus;
 DWORD owner=GetCurrentThreadId();int wrong=0;uint64_t native_calls=0;bool autodetail=false;game::Id game=game::Id::FF6;
-bool main_menu=true,palette_ready=true;
+bool main_menu=true,palette_ready=true,battle_active=true;
+void* input_actor=nullptr;
 int red_palette=static_cast<int>(0xff4040ffu);
 void native(){++native_calls;if(GetCurrentThreadId()!=owner)++wrong;}
 int offset(const char*n){auto [i,inserted]=offsets.emplace(n,static_cast<int>(offsets.size()));return static_cast<int>(offsetof(Node,fields))+i->second*static_cast<int>(sizeof(void*));}
@@ -51,7 +52,7 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}
 il2cpp::Class* Class::get(){fixture::native();return reinterpret_cast<il2cpp::Class*>(this);}
-bool Class::is(void*p){fixture::native();if(!p)return false;auto&n=*static_cast<fixture::Node*>(p);std::string k=name;if(k=="BattlePlayerEntity")return n.kind==4;if(k=="ChangeSkinColorConditionFunctionBase")return n.kind==5;if(k=="ConditionEffectEntity")return n.kind==6;if(k=="Renderer"||k=="SpriteRenderer")return n.kind==8;if(k=="StatusWindowContentViewBase")return n.kind==3;if(k=="Image")return n.kind==2;if(k=="Graphic")return n.kind==1||n.kind==2;if(k=="Behaviour")return true;return true;}
+bool Class::is(void*p){fixture::native();if(!p)return false;auto&n=*static_cast<fixture::Node*>(p);std::string k=name;if(k=="BattlePlayerData")return n.kind!=9;if(k=="BattlePlayerEntity")return n.kind==4;if(k=="ChangeSkinColorConditionFunctionBase")return n.kind==5;if(k=="ConditionEffectEntity")return n.kind==6;if(k=="Renderer"||k=="SpriteRenderer")return n.kind==8;if(k=="StatusWindowContentViewBase")return n.kind==3;if(k=="Image")return n.kind==2;if(k=="Graphic")return n.kind==1||n.kind==2;if(k=="Behaviour")return true;return true;}
 void*Method::ptr(){fixture::native();std::string n=name;if(auto it=fixture::extra_methods.find(n);it!=fixture::extra_methods.end())return it->second;if(n=="get_isVisible"||n=="get_isPlaying")return reinterpret_cast<void*>(&fixture::enabled);if(n=="get_enabled")return reinterpret_cast<void*>(&fixture::enabled);if(n=="get_color")return reinterpret_cast<void*>(&fixture::color);if(n=="get_canvasRenderer")return reinterpret_cast<void*>(&fixture::renderer);if(n=="get_overrideSprite")return reinterpret_cast<void*>(&fixture::sprite);if(n=="GetContentObject")return reinterpret_cast<void*>(&fixture::content);return nullptr;}
 il2cpp::Method*Method::get(){return reinterpret_cast<il2cpp::Method*>(ptr());}
 int32_t Field::get(){fixture::native();if(std::string(cls.name)=="StatusWindowContentViewBase"&&std::string(cls.ns)=="Serial.Template.UI.KeyInput")return fixture::offset(std::string(name)=="defaultCursorParent"?"nativeDefaultParent":"nativeFocusParent");if(std::string(name)=="<IsFocus>k__BackingField")return offsetof(fixture::Node,focused);if(std::string(name)=="callerCommandId")return offsetof(fixture::Node,command);if(std::string(name)=="<ContentId>k__BackingField")return offsetof(fixture::Node,id);if(std::string(name)=="<IsOwned>k__BackingField")return offsetof(fixture::Node,owned);return fixture::offset(name);}
@@ -72,9 +73,13 @@ namespace displayed {std::wstring conditions(void*p){return p&&visible(p)?static
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
 namespace field::cache {void*get(ref::Class&c){return fixture::owners[c.name];}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}}
-namespace ffpr::battle {ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};bool in_battle(){return true;}void*player_owned_character(void*p){return displayed::field(p,"owned");}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}void*current_actor(){return nullptr;}std::wstring unit_name(void*){return {};}
+namespace ffpr::battle {ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};bool in_battle(){return fixture::battle_active;}void*player_owned_character(void*p){return displayed::field(p,"owned");}int character_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}void*current_actor(){return fixture::input_actor;}std::wstring character_name(void*p){return p?static_cast<fixture::Node*>(p)->value:std::wstring();}std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->value:std::wstring();}
 void* unit_info(void*p){return displayed::field(p,"info");}
 void* info_parameter(void*p){return displayed::field(p,"parameter");}
+void* unit_parameter(void*p){return info_parameter(unit_info(p));}
+int param_current_hp(void*p){return static_cast<fixture::Node*>(p)->hp;}
+int param_current_mp(void*p){return static_cast<fixture::Node*>(p)->mp;}
+int param_confirmed_or_base(void*p,Stat){return static_cast<fixture::Node*>(p)->max_hp;}
 void* current_condition_list(void*p){return displayed::field(p,"conditions");}
 void* info_functions(void*p){return displayed::field(p,"functions");}
 void* function_condition(void*p){return displayed::field(p,"condition");}
@@ -94,7 +99,7 @@ namespace queries {void define_text(const char* name,std::function<std::wstring(
 namespace ffpr::system {bool is_main_menu_state(){return fixture::main_menu;}}
 namespace events {void on(Kind kind,Handler fn){fixture::status_events[kind].push_back(std::move(fn));} }
 namespace menu_state {bool is_active(const char* name){return fixture::active_menus.contains(name);}}
-namespace input {void add_binding(Key key,Mod,Context context,const char*action,const char*){if(context==Context::Battle)fixture::party_keys[key]=action;}}
+namespace input {void add_binding(Key key,Mod,Context context,const char*action,const char*){if(context==Context::BattleParty)fixture::party_keys[key]=action;}}
 namespace settings {bool get_bool(const char*,bool){return fixture::autodetail;}int get_int(const char*,int d){return d;}}
 namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guards[k]==v)return false;fixture::guards[k]=v;return true;}void reset(const char*k){fixture::guards.erase(k);}}
 namespace log_ {void write(const char*,...){} }
@@ -253,16 +258,75 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
  }
  set(four_owner,"contentList",&four);set(four_owner,"targetSelectContentList",&empty);
  ffpr::battle::g_party_owners.clear();ffpr::battle::observe_target_party(&four_owner);autodetail=false;
- for(int n=1;n<=6;++n)for(int i=0;i<9;++i) {
+ const input::Key check_keys[]{input::Key::Slash,input::Key::Period,input::Key::Comma,input::Key::M,input::Key::N};
+ expect(party_keys.size()==5&&!party_keys.count(input::Key::Alpha2)&&!party_keys.count(input::Key::Alpha3),"exactly five party bindings leave native keyboard L/R2/3 unbound");
+ for(int n=1;n<=6;++n)for(int i=0;i<5;++i) {
   fixture::game=static_cast<game::Id>(n);spoken.clear();
-  const auto action=party_keys.at(static_cast<input::Key>(int(input::Key::Alpha1)+i));
-  expect(action=="BattleParty.Slot"+std::to_string(i+1),"production party registration maps each number to its own slot action");
+  const auto action=party_keys.at(check_keys[i]);
+  expect(action=="BattleParty.Slot"+std::to_string(i+1),"production punctuation/M/N registration maps each key to its own slot action");
   party_actions.at(action)();
   expect(i<4 ? spoken==std::vector<std::wstring>{std::wstring(names[i])+L", HP "+current[i]+L"/"+maxima[i]} : spoken.empty(),
-         "all-six registered number actions read the requested rendered party row and reject absent slots");
+         "all-six party actions read the requested rendered row and reject absent fifth slots");
  }
+ Node fifth_row,fifth_view,fifth_name=make_text(L"Yang"),fifth_hp=make_text(L"321"),fifth_max=make_text(L"432");
+ set(fifth_row,"view",&fifth_view);set(fifth_view,"nameText",&fifth_name);set(fifth_view,"currentHpText",&fifth_hp);set(fifth_view,"maxHpText",&fifth_max);
+ four.push_back(&fifth_row);fixture::game=game::Id::FF4;spoken.clear();party_actions.at("BattleParty.Slot5")();
+ expect(spoken==std::vector<std::wstring>{L"Yang, HP 321/432"},"FFIV's fifth displayed party slot is independently readable without becoming the active actor");
+ four.pop_back();
  four_views[1].active=false;spoken.clear();party_actions.at("BattleParty.Slot2")();party_actions.at("BattleParty.Slot4")();
  expect(spoken==std::vector<std::wstring>{L"Ryco, HP 255/255"},"hidden slot2 stays silent without renumbering visible slot4");
+ // The ordinary HUD is hidden while these lists have focus. Replay the
+ // registered keys against the normal native update, with stale HUD text and
+ // a newer target-only owner to ensure neither drives the submenu read.
+ {
+  std::array<Node,5> players,characters,infos,parameters,mp_fields;
+  std::array<Node*,5> party_rows{&four_rows[0],&four_rows[1],&four_rows[2],&four_rows[3],&fifth_row};
+  List roster;
+  for(int i=0;i<5;++i){
+   characters[i].value=i<4?names[i]:L"Yang";
+   parameters[i].hp=20+i;parameters[i].max_hp=30+i;parameters[i].mp=10+i;
+   set(players[i],"owned",&characters[i]);set(players[i],"info",&infos[i]);set(infos[i],"parameter",&parameters[i]);
+   set(*party_rows[i],"<TargetData>k__BackingField",&players[i]);
+   auto* slot_view=static_cast<Node*>(get(*party_rows[i],"view"));
+   slot_view->active=false;mp_fields[i]=make_text(L"999");set(*slot_view,"currentMpText",&mp_fields[i]);
+   roster.push_back(&players[i]);
+  }
+  set(four_owner,"<PlayerList>k__BackingField",&roster);
+  ffpr::battle::o_update=&fixture::update;
+  ffpr::battle::d_update(&four_owner,&roster,false,nullptr);
+  for(auto& handler:status_events.at(events::Kind::BattleStart))handler();
+  ffpr::battle::d_update(&hidden_party,&roster,true,nullptr);
+  for(int game_number=1;game_number<=6;++game_number){
+   fixture::game=static_cast<game::Id>(game_number);
+   if(game_number==4)four.push_back(&fifth_row);
+   for(auto menu:{menu_state::BATTLE_MAGIC,menu_state::BATTLE_ITEM,menu_state::BATTLE_TARGET}){
+    active_menus={menu};
+    for(int i=0;i<5;++i){
+     spoken.clear();party_actions.at(party_keys.at(check_keys[i]))();
+     const auto expected=characters[i].value+L", HP "+std::to_wstring(parameters[i].hp)+L"/"+
+       std::to_wstring(parameters[i].max_hp)+L", MP "+std::to_wstring(parameters[i].mp);
+     expect(i<4||game_number==4?spoken==std::vector<std::wstring>{expected}:spoken.empty(),
+            "battle Magic, Items, and targeting keys read live status in original order and skip absent slots");
+    }
+   }
+   if(game_number==4)four.pop_back();
+  }
+  Node ko;ko.id=5;ko.command=5;ko.value=L"KO";List applied{&ko};
+  parameters[1].hp=0;parameters[1].mp=7;set(parameters[1],"conditions",&applied);
+  spoken.clear();party_actions.at(party_keys.at(check_keys[1]))();
+  expect(spoken==std::vector<std::wstring>{characters[1].value+L", HP 0/31, MP 7, KO"},"submenu reads current vitals and applied condition after the native row was hidden");
+  battle_active=false;spoken.clear();party_actions.at(party_keys.at(check_keys[1]))();
+  expect(spoken.empty(),"a stale submenu flag outside battle cannot expose a retained row");battle_active=true;
+  active_menus.clear();spoken.clear();party_actions.at(party_keys.at(check_keys[1]))();
+  expect(spoken.empty(),"closing a battle submenu restores the visible-row boundary");
+  for(auto* party_row:party_rows){
+   set(*party_row,"<TargetData>k__BackingField",nullptr);
+   set(*static_cast<Node*>(get(*party_row,"view")),"currentMpText",nullptr);
+  }
+  set(four_owner,"<PlayerList>k__BackingField",nullptr);
+  for(auto& handler:status_events.at(events::Kind::BattleEnd))handler();
+  ffpr::battle::o_update=nullptr;
+ }
  // Current ally conditions must own all three readers even when the native
  // rotating status column still displays a previous condition. This boundary
  // fixture reproduces the reported revived Robyn/Reflect cases on actual code.
@@ -327,6 +391,40 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
   expect(spoken==std::vector<std::wstring>({L"Ryko, HP 100/500, Reflect",L"Corrad, HP 643/1430, Reflect"}),"numbering follows displayed rows while H remains on the current actor");
   second_conditions.clear();expect(ffpr::battle::displayed_player(&second_unit)==L"Ryko, HP 100/500","removing one ally's Reflect does not use the other ally's state");
   second_conditions={&reflect};live_rows={&live_row,&second_row};
+ }
+ {
+  namespace b=ffpr::battle;
+  Node turn_command,enemy;enemy.kind=9;enemy.value=L"Enemy";
+  live_unit.value=L"Corrad";second_unit.value=L"Ryko";
+  const auto previous_menus=active_menus;const auto previous_command=owners["BattleCommandSelectController"];
+  const auto previous_player=b::g_execution_player;const auto previous_name=b::g_execution_name;
+  const auto previous_ongoing=b::g_action_ongoing;const auto previous_focus=b::g_focused_player;
+  const auto previous_input=input_actor;input_actor=&second_owned;second_owned.value=L"Ryko";
+  owners["BattleCommandSelectController"]=&turn_command;set(turn_command,"targetData",&second_owned);
+  for(int n:{4,5,6}) {
+   fixture::game=static_cast<game::Id>(n);
+   for(const auto* context:{menu_state::BATTLE_COMMAND,menu_state::BATTLE_MAGIC,menu_state::BATTLE_ITEM,menu_state::BATTLE_TARGET}) {
+    active_menus={context};b::action_actor_started(&enemy);spoken.clear();b::announce_active_turn();
+    expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB enemy execution cannot replace the ready command/submenu character in T");
+   }
+   active_menus={menu_state::BATTLE_COMMAND};b::action_actor_started(&live_unit);spoken.clear();b::announce_active_turn();
+   expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB ready command owner outranks a different executing party member");
+   spoken.clear();b::announce_active_status();expect(!spoken.empty()&&spoken.front().starts_with(L"Ryko,"),"ATB H follows the character whose command menu owns input");
+   second_view.active=false;b::action_actor_started(&enemy);spoken.clear();b::announce_active_turn();
+   expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB T retains its admitted rooted commander when a target/animation panel hides that party row");second_view.active=true;
+   active_menus.clear();b::action_actor_started(&enemy);spoken.clear();b::announce_active_turn();
+   expect(spoken==std::vector<std::wstring>{L"No active character"},"T never labels an enemy action as a character turn");
+   b::g_focused_player=&live_unit;spoken.clear();b::announce_active_status();
+   expect(spoken==std::vector<std::wstring>{L"No active character"},"H retains its previous non-party-action behavior despite an old party focus marker");
+   b::action_actor_started(&live_unit);spoken.clear();b::announce_active_turn();
+   expect(spoken==std::vector<std::wstring>{L"Corrad's turn"},"executing party turns remain available without a command menu");
+   b::action_actor_finished();spoken.clear();b::announce_active_turn();
+   expect(spoken==std::vector<std::wstring>{L"No active character"},"finished action cannot turn an old focus marker into a new ready turn");
+  }
+  active_menus=previous_menus;owners["BattleCommandSelectController"]=previous_command;
+  b::g_execution_player=previous_player;b::g_execution_name=previous_name;
+  b::g_action_ongoing=previous_ongoing;b::g_focused_player=previous_focus;
+  input_actor=previous_input;
  }
  live_rows={&live_row};fixture::game=game::Id::FF3;
  auto measure_episode=[&](const char* label){

@@ -1,0 +1,95 @@
+{
+  "source_script_hashes": {
+    "Map_30861_1/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "Map_30861_1/sc_e_0946": "d10daab941576481c40b9cdfcb534cc434c3e17e3e98b036a76a1af4bd465092",
+    "Map_30861_1/sc_e_0946_0": "386d418d1fbc6182f23018308d6833bb371435dd436ab4191f624a71587b440d",
+    "Map_30861_1/sc_e_0947": "df2cf1e7d60508bedc9f3ea22fc1f7d22ca1d5bb90049fe656044892e6762dd2",
+    "Map_30861_1/sc_map_30861_1": "09d1272bfff40fe07fcdc674e22682afac26a91ea536c247af01169a2cab3731",
+    "Map_30861_2/sc_e_0943": "350b12e64163d4178fd80ec2a3f4b5d52bdb912454c8add53ac81bb26769f3c5",
+    "Map_30861_2/sc_e_0946_0": "57224e1295a42237dc189a29bffb4f678c9a19e5158d2648cbb3cffee06dd910",
+    "Map_30861_2/sc_e_0947": "df2cf1e7d60508bedc9f3ea22fc1f7d22ca1d5bb90049fe656044892e6762dd2",
+    "Map_30861_2/sc_e_0949": "78795b43373c61f0b78826fbad00a932ac5f06110ecd688d4edd367845fd51d3",
+    "Map_30861_2/sc_e_0950": "6bce04a86ed8e2627f712eada0ae86d83bcc27e6b85bd48aec4d0e60d4046d9d",
+    "Map_30861_2/sc_e_0950_1": "15b4eff9ebe7a8555d5928833aaba8cc9afd662ffaa9f7c410ffeee999f686d7",
+    "Map_30861_2/sc_e_0952": "4655c783efa49027859a719678e5b322d83f7e05d0b0425a2b5eb6b6ac2fdd23",
+    "Map_30861_2/sc_e_0952_1": "1fc4ec422ce7c1215b5ccd1c358c76a94e99283b62eb8e1364e44d23a5575158",
+    "Map_30861_2/sc_map_30861_2": "d19fda6497e07f5579db5b89e79397c944eb0a2c7b12310af63a634a7b109195",
+    "Map_30861_3/sc_e_0946_0": "35a42b9e463a93f22926e313c759ec1aee0b745f6cdfdb9f5e9c60750b919366",
+    "Map_30861_3/sc_e_0947": "df2cf1e7d60508bedc9f3ea22fc1f7d22ca1d5bb90049fe656044892e6762dd2",
+    "Map_30861_3/sc_e_0948": "9a32ed4a5909036f8e7d6cf6b8b5aa290ead7e942915b74a33bd2c2b32b1b4d8",
+    "Map_30861_3/sc_e_0948_1": "f8b3e50f27036ab27c4cf77100c3844bb2ddc7adb31672ccd68a87267ce2022f",
+    "Map_30861_3/sc_e_0948_2": "563cf2f24afd54beb5e11c936064143659a68721a701adf1e44504a900668f16",
+    "Map_30861_3/sc_e_0948_3": "2da695bab454226ba4ca738ab7b4fb96407074a9890dd24149f032a95837f970",
+    "Map_30861_3/sc_e_0948_4": "27f914ef6cb614813dd10aeb5f832496746d9081c4cbb5d87e2390d00fc26de7",
+    "Map_30861_3/sc_map_30861_3": "9740f7930ea0b052dba168de9487427d07fbedd245096f01f4167809067aeec6",
+    "Map_30861_3/sc_map_30861_3_1": "3cd031ad6e5b3cbb4824f3f33d3d8c9b2680b74cdf5a6604f81eee68ddb0e4cb",
+    "Map_30861_3/sc_map_30861_3_2": "befb1152b138fc58c6564b9f24f6e9545f55c6865c3bedd9dfc4e947b028f4b0",
+    "Map_30861_3/sc_map_30861_3_3": "d4ddc450737bbadbb6cbfa0d856252ebbdfe3363ab228bd69ff2bc4505ac9567",
+    "Map_30861_3/sc_map_30861_3_4": "380f6bebcc88a419117b1ab98eb6cbb2fc7d379eaee9d3d8323cfe05eb736f18",
+    "Map_30861_3/sc_map_30861_3_5": "2df46c8733e6dd8743f11a18fb29a930546761c6cc0d9c89d4dd197be0b310f2",
+    "Map_30861_3/sc_map_30861_3_6": "a38f3bd6a14121657ba4cc86bfcd3951b6def8ac0805a8d524d313b47f725c25",
+    "Map_30861_3/sc_map_30861_3_7": "c4239dc88fc2288330e70ecfc8a1e5e9220f9eebf8a8d8c7d0b24870efeae619",
+    "Map_30861_3/sc_map_30861_3_8": "bbd99eb25b8ddcb02d5ea3dc114474259c520cf82127bbf7f6ebdce7a7dce85a",
+    "Map_20460/sc_e_0950_3": "d4679b97d66a9dc7719c46d220e815cc79aca8c0e258ac1c0c8ce584c05c3a68",
+    "Map_20460/sc_e_0950_5": "7adc082766530b23c1258493865f22dd8d29f4020350d47ee554462147ebb185",
+    "Map_20461_5/sc_e_0950_4": "a04c3ee96ce78ba910e31c32a98320b51bd8b55aa7334be5a45abe893d8c14fb",
+    "Map_20461_5/sc_e_0950_6": "bdfc24f7e7f384aec31c59f8779732e50987f8f261c6a1e0896a9529bdd8ab46",
+    "Map_20461_6/sc_e_0950_2": "a059e406f314a2c2937e89c2d98264b86b94ef3132b4ab3de3cfec32ed9197ff"
+  },
+  "coral_global": 7,
+  "minimum_batch": 22,
+  "active_canonical_character": 8,
+  "first_final_map": 310,
+  "first_completion": 461,
+  "repeat_completion": 463,
+  "random_arrivals": [
+    [
+      540,
+      1
+    ],
+    [
+      539,
+      2
+    ],
+    [
+      539,
+      3
+    ],
+    [
+      541,
+      1
+    ],
+    [
+      541,
+      2
+    ],
+    [
+      541,
+      3
+    ],
+    [
+      541,
+      4
+    ],
+    [
+      541,
+      5
+    ],
+    [
+      541,
+      6
+    ],
+    [
+      541,
+      7
+    ],
+    [
+      541,
+      8
+    ],
+    [
+      541,
+      9
+    ]
+  ]
+}

@@ -1,0 +1,3363 @@
+{
+  "ff1": {
+    "objects": [
+      {
+        "submap": "Map_20011_1",
+        "group": "entity_default",
+        "entity": 3,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "BottomObject",
+        "cell": [
+          18,
+          35
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 3,
+          "link_object_id": 1,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "entity_default",
+        "entity": 4,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "BottomObject",
+        "cell": [
+          34,
+          35
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 4,
+          "link_object_id": 2,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "entity_default",
+        "entity": 29,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "UpperObject",
+        "cell": [
+          18,
+          35
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 29,
+          "link_object_id": 1,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "entity_default",
+        "entity": 31,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "UpperObject",
+        "cell": [
+          34,
+          35
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 31,
+          "link_object_id": 2,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0002",
+        "entity": 79,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          26,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 79,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0002",
+        "entity": 80,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 80,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0005",
+        "entity": 77,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          26,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 77,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0005",
+        "entity": 78,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 78,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0006",
+        "entity": 88,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          26,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 88,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0006",
+        "entity": 89,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 89,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0014",
+        "entity": 69,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "BottomObject",
+        "cell": [
+          26,
+          19
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 69,
+          "link_object_id": 3,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0014",
+        "entity": 70,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "BottomObject",
+        "cell": [
+          33,
+          19
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 70,
+          "link_object_id": 4,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0014",
+        "entity": 72,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "UpperObject",
+        "cell": [
+          26,
+          19
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 72,
+          "link_object_id": 3,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20011_1",
+        "group": "ev_e_0014",
+        "entity": 75,
+        "raw": "OpenTrigger",
+        "type": "OpenTrigger",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          19
+        ],
+        "props": {
+          "action_id": 5,
+          "direction": 15,
+          "entity_id": 75,
+          "link_object_id": 4,
+          "object_id": 0,
+          "object_type": 8,
+          "se_id": 9
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20051_1",
+        "group": "ev_e_0010",
+        "entity": 90,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          14,
+          54
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 90,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20071_1",
+        "group": "ev_e_0010",
+        "entity": 141,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          12
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 141,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20071_1",
+        "group": "ev_e_0013",
+        "entity": 140,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          33,
+          12
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 140,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20081_1",
+        "group": "ev_e_0010",
+        "entity": 135,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          18,
+          29
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 135,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20081_1",
+        "group": "ev_e_0011",
+        "entity": 134,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          18,
+          29
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 134,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20081_1",
+        "group": "ev_e_0012",
+        "entity": 133,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          18,
+          29
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 133,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0002",
+        "entity": 36,
+        "raw": "カギのかかった扉(確認用)",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          64,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 36,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0002",
+        "entity": 37,
+        "raw": "カギのかかった扉(確認用)",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          38,
+          36
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 37,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_CHS_04",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0002",
+        "entity": 38,
+        "raw": "カギのかかった扉(確認用)",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          65,
+          50
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 38,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0003",
+        "entity": 34,
+        "raw": "カギのかかった扉(確認用)",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          64,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 34,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0003",
+        "entity": 35,
+        "raw": "カギのかかった扉(確認用)",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          65,
+          50
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 35,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0004",
+        "entity": 88,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          64,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 88,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30011_1",
+        "group": "ev_e_0004",
+        "entity": 89,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          65,
+          50
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 89,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_3",
+        "group": "ev_e_0013",
+        "entity": 140,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          16,
+          67
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 140,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_3",
+        "group": "ev_e_0013",
+        "entity": 141,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          32,
+          67
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 141,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_3",
+        "group": "ev_e_0013",
+        "entity": 142,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          48,
+          67
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 142,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_3",
+        "group": "ev_e_0013",
+        "entity": 143,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          63,
+          67
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 143,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_3",
+        "group": "ev_e_0013",
+        "entity": 144,
+        "raw": "カギのかかった扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          69,
+          67
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "direction": 0,
+          "entity_id": 144,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "MSG_WST_CAS_03",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      }
+    ],
+    "callers": []
+  },
+  "ff3": {
+    "objects": [
+      {
+        "submap": "Map_20011_8",
+        "group": "entity_default",
+        "entity": 9,
+        "raw": "隠し扉を開ける①",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          13,
+          7
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 9,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 234,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_e_0290"
+      },
+      {
+        "submap": "Map_20011_8",
+        "group": "entity_default",
+        "entity": 15,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          15,
+          9
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 15,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20071_7",
+        "group": "entity_default",
+        "entity": 12,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          18,
+          11
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 12,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 0,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20081_1",
+        "group": "entity_default",
+        "entity": 20,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          18,
+          11
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 20,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 0,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20130",
+        "group": "entity_default",
+        "entity": 30,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "BottomObject",
+        "cell": [
+          7,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 30,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 550,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_20130_1"
+      },
+      {
+        "submap": "Map_20130",
+        "group": "entity_default",
+        "entity": 29,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "BottomObject",
+        "cell": [
+          31,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 29,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 551,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_20130_2"
+      },
+      {
+        "submap": "Map_20131_2",
+        "group": "entity_default",
+        "entity": 700,
+        "raw": "隠し扉を消す",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          12,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 700,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 762,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_sw_20131_2"
+      },
+      {
+        "submap": "Map_20131_2",
+        "group": "entity_default",
+        "entity": 702,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          14,
+          10
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 702,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20131_6",
+        "group": "entity_default",
+        "entity": 702,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          12,
+          9
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 702,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20200",
+        "group": "entity_default",
+        "entity": 56,
+        "raw": "鍵がかかっている",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          34,
+          14
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 56,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "N999_C01_097_01_01",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20211_6",
+        "group": "entity_default",
+        "entity": 10,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "BottomObject",
+        "cell": [
+          14,
+          12
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 10,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20261_3",
+        "group": "entity_default",
+        "entity": 12,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "UpperObject",
+        "cell": [
+          13,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 12,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_20281_3",
+        "group": "entity_default",
+        "entity": 4,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          10,
+          9
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 4,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30021_2",
+        "group": "entity_default",
+        "entity": 8,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          22,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 8,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30071_6",
+        "group": "entity_default",
+        "entity": 7,
+        "raw": "オーエンの塔：隠し扉を開ける",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          12,
+          7
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 7,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 760,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_sw_30071_6"
+      },
+      {
+        "submap": "Map_30071_6",
+        "group": "entity_default",
+        "entity": 12,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          13,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 12,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30091_3",
+        "group": "entity_default",
+        "entity": 9,
+        "raw": "ほのおの洞窟：隠し扉を開ける",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          22,
+          6
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 9,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 761,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_sw_30091_3"
+      },
+      {
+        "submap": "Map_30091_3",
+        "group": "entity_default",
+        "entity": 11,
+        "raw": "隠し扉",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          20,
+          7
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 11,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30111_1",
+        "group": "ev_e_0064",
+        "entity": 39,
+        "raw": "扉が封印されている",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          24,
+          23
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 4,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 39,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "E0066_00_260_a_01",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30131_1",
+        "group": "entity_default",
+        "entity": 2349,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          8,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2349,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 552,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30131_1_1"
+      },
+      {
+        "submap": "Map_30131_1",
+        "group": "entity_default",
+        "entity": 2350,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          24,
+          19
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2350,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 553,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30131_1_2"
+      },
+      {
+        "submap": "Map_30131_1",
+        "group": "entity_default",
+        "entity": 2351,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          8,
+          28
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2351,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 554,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30131_1_3"
+      },
+      {
+        "submap": "Map_30131_1",
+        "group": "entity_default",
+        "entity": 2352,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          24,
+          28
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "background": false,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2352,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "gimmick": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 5,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 555,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30131_1_4"
+      },
+      {
+        "submap": "Map_30131_8",
+        "group": "ev_e_0073",
+        "entity": 6,
+        "raw": "鎖の鍵",
+        "type": "AnimEntity",
+        "layer": "GroundObject",
+        "cell": [
+          0,
+          0
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 129,
+          "background": false,
+          "birdview_puppet": false,
+          "blend_type": 0,
+          "building": false,
+          "collision": false,
+          "direction": 15,
+          "entity_id": 6,
+          "flight_altitude_ratio": 1,
+          "front": false,
+          "interactive_icon_h_offset": 0,
+          "interactive_icon_type": 0,
+          "interactive_icon_v_offset": 0,
+          "link_object_id": 0,
+          "object_id": 0,
+          "object_type": 10,
+          "play_on_awake": true,
+          "script_id": 0,
+          "split": false,
+          "talk_target_transportation_ids": "",
+          "visible_minimap": false,
+          "zoffset": -1
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30171_1",
+        "group": "entity_default",
+        "entity": 2361,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          11,
+          18
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2361,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 556,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_1_1"
+      },
+      {
+        "submap": "Map_30171_1",
+        "group": "entity_default",
+        "entity": 2362,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          19,
+          18
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2362,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 557,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_1_2"
+      },
+      {
+        "submap": "Map_30171_5",
+        "group": "entity_default",
+        "entity": 2358,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          8,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2358,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 558,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_5_1"
+      },
+      {
+        "submap": "Map_30171_5",
+        "group": "entity_default",
+        "entity": 2359,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          22,
+          13
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2359,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 559,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_5_2"
+      },
+      {
+        "submap": "Map_30171_5",
+        "group": "entity_default",
+        "entity": 2360,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          22,
+          23
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2360,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 560,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_5_3"
+      },
+      {
+        "submap": "Map_30171_9",
+        "group": "entity_default",
+        "entity": 2390,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          19,
+          27
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2390,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 562,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_9_2"
+      },
+      {
+        "submap": "Map_30171_9",
+        "group": "entity_default",
+        "entity": 2389,
+        "raw": "魔法の鍵で入れる",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          7,
+          27
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 2389,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 561,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_key_30171_9_1"
+      },
+      {
+        "submap": "Map_30261_1",
+        "group": "ev_e_0105",
+        "entity": 29,
+        "raw": "シルクスの鍵を使うと扉が開く",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          19,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 29,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 173,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_e_0090"
+      },
+      {
+        "submap": "Map_30261_2",
+        "group": "ev_e_0179",
+        "entity": 7,
+        "raw": "鏡の警告、鍵を使うと通行可能に",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          10,
+          10
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 7,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 160,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_e_0258"
+      },
+      {
+        "submap": "Map_30291_1",
+        "group": "ev_e_0016",
+        "entity": 10,
+        "raw": "ミスリルの洞窟：隠し扉を開ける",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          10,
+          8
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 0,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 10,
+          "flight_altitude_ratio": 1,
+          "gimmick": false,
+          "interactive_icon_type": 0,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 0,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": ""
+      },
+      {
+        "submap": "Map_30291_1",
+        "group": "ev_e_0016_1",
+        "entity": 8,
+        "raw": "ミスリルの洞窟：隠し扉を開ける スイッチ①",
+        "type": "Entity",
+        "layer": "GroundObject",
+        "cell": [
+          13,
+          7
+        ],
+        "props": {
+          "accept_action_direction": 15,
+          "action_id": 2,
+          "affected": true,
+          "asset_id": 0,
+          "birdview_puppet": false,
+          "collision": true,
+          "confirm_landing": false,
+          "direction": 0,
+          "entity_id": 8,
+          "flight_altitude_ratio": 1,
+          "gimmick": true,
+          "interactive_icon_type": 5,
+          "link_object_id": 0,
+          "message_key": "",
+          "object_id": 0,
+          "object_type": 5,
+          "script_id": 244,
+          "se_id": 0,
+          "talk_target_transportation_ids": "",
+          "target_transportation_ids": "",
+          "visible_minimap": false
+        },
+        "script": "sc_e_0274"
+      }
+    ],
+    "callers": [
+      {
+        "submap": "Map_20011_8",
+        "script": "sc_e_0290",
+        "sha256": "6cba3ee76a154c1f0ee8cb1f56c92de3b0bd9ebfde34bad03cedb1255b05fcef",
+        "operation_counts": {
+          "Nop": 5,
+          "Branch": 1,
+          "PlaySE": 2,
+          "Shake": 2,
+          "Wait": 1,
+          "StopSE": 1,
+          "Call": 1,
+          "SetFlag": 1,
+          "Exit": 4,
+          "Msg": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "CueAnim": 1,
+          "SyncSE": 1
+        },
+        "native_calls": [],
+        "state_predicates": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 221,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 221,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_20130",
+        "script": "sc_key_20130_1",
+        "sha256": "8074af09fae4409f35bd5a71610fa8cf3b4071ca911b0100e3c5152fb547201e",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 205,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_20130",
+        "script": "sc_key_20130_2",
+        "sha256": "46c5f973920767aa1d2b2c033974c0cab3d0f31270a255cf2d650af2e06cc1c8",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 206,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_20131_2",
+        "script": "sc_sw_20131_2",
+        "sha256": "42d553d4e016c6490cbbf044a7db1e34a32e83a51880eae1ff615960546870a3",
+        "operation_counts": {
+          "Nop": 6,
+          "PlaySE": 2,
+          "Shake": 2,
+          "Wait": 1,
+          "StopSE": 1,
+          "Call": 2,
+          "SetFlag": 1,
+          "Exit": 4,
+          "SetPuppet": 3,
+          "ExecPuppet": 2,
+          "Return": 2,
+          "Hide": 2,
+          "CueAnim": 1,
+          "SyncSE": 1
+        },
+        "native_calls": [],
+        "state_predicates": [],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 202,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30071_6",
+        "script": "sc_sw_30071_6",
+        "sha256": "6f9fc479c35b3368d02fa1ac87e678b585c4895c57735842b0885370fa164130",
+        "operation_counts": {
+          "Nop": 7,
+          "PlaySE": 2,
+          "Shake": 2,
+          "Wait": 1,
+          "StopSE": 1,
+          "Call": 2,
+          "SetFlag": 1,
+          "Exit": 5,
+          "SetPuppet": 4,
+          "ExecPuppet": 2,
+          "Return": 2,
+          "Hide": 2,
+          "CueAnim": 2,
+          "SyncSE": 1
+        },
+        "native_calls": [],
+        "state_predicates": [],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 225,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30091_3",
+        "script": "sc_sw_30091_3",
+        "sha256": "42247c08cad01fea9262e6e36c8b39bfbfa3765cc43211753c8489f59478d437",
+        "operation_counts": {
+          "Nop": 6,
+          "PlaySE": 2,
+          "Shake": 2,
+          "Wait": 1,
+          "StopSE": 1,
+          "Call": 2,
+          "SetEntities": 1,
+          "SetFlag": 1,
+          "Exit": 4,
+          "SetPuppet": 3,
+          "ExecPuppet": 2,
+          "Return": 2,
+          "Hide": 2,
+          "CueAnim": 1,
+          "SyncSE": 1
+        },
+        "native_calls": [],
+        "state_predicates": [],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 199,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30131_1",
+        "script": "sc_key_30131_1_1",
+        "sha256": "377784c334a7ceb3190e3bfbc026526ea14e94908b158a6c686f6fd823d360ac",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 207,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30131_1",
+        "script": "sc_key_30131_1_2",
+        "sha256": "e2c72fd1a63d1d8f8a67c76deb5ceeab1547dc43d2b35af752e13890f0bf2379",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 208,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30131_1",
+        "script": "sc_key_30131_1_3",
+        "sha256": "6ba63cfae2173bbe4305273a605a32080d7eaf9376e171b1d7cd59fa967c9c8f",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 209,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30131_1",
+        "script": "sc_key_30131_1_4",
+        "sha256": "e754c7e7911be371680a12740fd0b23311ea7e422c8e5995fab8c397dcca25f0",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 210,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_1",
+        "script": "sc_key_30171_1_1",
+        "sha256": "a54f293679a42ad67d9a8da74047f9b397463edf98de87250642e9d39b6b6774",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 211,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_1",
+        "script": "sc_key_30171_1_2",
+        "sha256": "428a91603e64535f8f75d82c3089e86342cd93ffd0ed4a0cfb4b436f6f384b9a",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 212,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_5",
+        "script": "sc_key_30171_5_1",
+        "sha256": "d34b615c3607059bfaaf999a7e9145bea96bac421924dd5cd1467781b53e1a07",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 213,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_5",
+        "script": "sc_key_30171_5_2",
+        "sha256": "cd4a483cb7ac95155e50f70c6f29242144ffdc84bf00858027b155d0d2e2e445",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 214,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_5",
+        "script": "sc_key_30171_5_3",
+        "sha256": "789f66c8c228a7fe247da56c906679c2db170f92f35367f99513466b63040800",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 215,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_9",
+        "script": "sc_key_30171_9_1",
+        "sha256": "c1f128bf253b7c1fd6440d0c02e3125a2bfb68fe18a54bb999990e2355a2fe0a",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 216,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30171_9",
+        "script": "sc_key_30171_9_2",
+        "sha256": "10836f87dae230269255fd1d2559a749f8f806a9f5a102a89f285002d4e12503",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 4,
+          "SysCall": 2,
+          "Branch": 3,
+          "Exit": 4,
+          "PlaySE": 2,
+          "Jump": 1,
+          "UseItem": 1,
+          "SetFlag": 1,
+          "Call": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 1,
+          "SetPos": 1
+        },
+        "native_calls": [
+          "シーフがいるか",
+          "消費アイテム選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "MapLocalVariable",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 14,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 14
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 217,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30261_1",
+        "script": "sc_e_0090",
+        "sha256": "0a03d5198e2b96222d2526a1d09a2b9169c8c49acce617432ba7b2a1601d6ad8",
+        "operation_counts": {
+          "Nop": 8,
+          "Msg": 3,
+          "Wait": 15,
+          "SysCall": 1,
+          "Branch": 2,
+          "Exit": 4,
+          "UseItem": 1,
+          "PlaySE": 2,
+          "Flash": 13,
+          "SyncSE": 1,
+          "Call": 2,
+          "SetFlag": 1,
+          "SetPuppet": 2,
+          "ExecPuppet": 2,
+          "Return": 2,
+          "CueAnim": 1,
+          "Hide": 1
+        },
+        "native_calls": [
+          "だいじなもの選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "ItemSelection",
+            "index": 44,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 44
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 0,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 94,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30261_2",
+        "script": "sc_e_0258",
+        "sha256": "6f2b385fbd584e1e8aee960e88ca9dedfdea8345564a1179d5b274c04eef2113",
+        "operation_counts": {
+          "Nop": 17,
+          "ColorFade": 5,
+          "Call": 6,
+          "Msg": 4,
+          "Wait": 2,
+          "Branch": 3,
+          "Jump": 1,
+          "Exit": 11,
+          "SysCall": 1,
+          "PlaySE": 1,
+          "Flash": 2,
+          "SetFlag": 1,
+          "SetEntities": 1,
+          "SetPuppet": 7,
+          "ExecPuppet": 6,
+          "Return": 6,
+          "MoveTo": 5,
+          "Hide": 2
+        },
+        "native_calls": [
+          "だいじなもの選択肢表示"
+        ],
+        "state_predicates": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 93,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 1
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 43,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 43
+          },
+          {
+            "bank": "ItemSelection",
+            "index": 43,
+            "comparison": "＝",
+            "right_bank": "imm",
+            "right_value": 0
+          }
+        ],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 178,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "submap": "Map_30291_1",
+        "script": "sc_e_0274",
+        "sha256": "4a7ea064b34ecc1a15590d498e8551b21df90e6730909f69e1b2ce10d43e99c9",
+        "operation_counts": {
+          "Nop": 7,
+          "PlaySE": 2,
+          "Shake": 2,
+          "Wait": 1,
+          "StopSE": 1,
+          "Call": 1,
+          "SetFlag": 1,
+          "Exit": 5,
+          "SetEntities": 2,
+          "SetPuppet": 3,
+          "ExecPuppet": 1,
+          "Return": 1,
+          "Hide": 2,
+          "SyncSE": 1,
+          "CueAnim": 1
+        },
+        "native_calls": [],
+        "state_predicates": [],
+        "receipts": [
+          {
+            "bank": "ScenarioFlag1",
+            "index": 180,
+            "value": 1
+          }
+        ]
+      }
+    ]
+  }
+}

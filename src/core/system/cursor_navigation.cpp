@@ -283,8 +283,11 @@ void clear_other_menu_states(const std::string& except_menu)
         menu_state::reset_all();
     }
 
-    // Shop is not in the registry: clear separately.
-    if (except_menu != "Shop") actions::run("ShopMenuTracker.ClearState");
+    // Equipment slots belong to the same shop visit as the command bar.
+    // Preserve the shop's handoff until its own command cursor returns.
+    if (except_menu != "Shop" &&
+        !(except_menu == "Equip" && queries::is("ShopMenuTracker.EnteredEquipmentSubmenu")))
+        actions::run("ShopMenuTracker.ClearState");
 }
 
 // ManualPatches.ClearAllMenuStates

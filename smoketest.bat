@@ -7,6 +7,12 @@ REM Staged inside the build tree, NOT in %TEMP% (an unsigned DLL loaded from %TE
 REM Defender flagged in BDFFHD on 2026-08-12).
 setlocal
 cd /d "%~dp0"
+if defined CODEX_BUILD_JOB_NAME goto verify_resource_job
+python scripts\run-build.py --receipt build_check\smoke_resource_receipt.json -- cmd /d /c "%~f0" %*
+exit /b %errorlevel%
+:verify_resource_job
+python scripts\run-build.py --verify
+if not "%errorlevel%"=="0" exit /b 1
 if not exist "out\hid.dll" ( echo ERROR: out\hid.dll missing - run build.bat first. & exit /b 1 )
 if not exist "out\smoke_host.exe" ( echo ERROR: out\smoke_host.exe missing - run build.bat first. & exit /b 1 )
 

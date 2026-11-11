@@ -29,6 +29,8 @@
 #include "nav_target.h"
 #include "waypoints.h"
 #include "../audio/sound.h"
+#include "../audio/cue_runtime.h"
+#include "../audio/custom_cues.h"
 #include "../audio/sound_constants.h"
 #include "../core.h"
 #include "../ui/preferences.h"
@@ -325,10 +327,10 @@ void beacon_iteration(double now)
     unity::Vec3 aim = target_pos;   // what the ping points at
     if(direct) {
         const int map_id=::field::current_map_id();
-        if(const auto* sm=::field::baked::submap_by_map_id(map_id);sm && sm->world) {
+        if(const auto* sm=::field::baked::submap_by_map_id(map_id)) {
             auto nearest=[](float delta,float size){return size>0?delta-std::round(delta/size)*size:delta;};
-            aim.x=player_pos.x+nearest(target_pos.x-player_pos.x,sm->width*kTileSize);
-            aim.y=player_pos.y+nearest(target_pos.y-player_pos.y,sm->height*kTileSize);
+            aim.x=player_pos.x+nearest(target_pos.x-player_pos.x,::field::baked::wrap_width(*sm)*kTileSize);
+            aim.y=player_pos.y+nearest(target_pos.y-player_pos.y,::field::baked::wrap_height(*sm)*kTileSize);
         }
         dist_tiles=distance(player_pos,aim)/kTileSize;
     }
@@ -417,6 +419,9 @@ void beacon_iteration(double now)
         return;
     }
 
+    const auto cue=sound::runtime::hrtf_active()?sound::cues::Id::Beacon:
+        low_pitch?sound::cues::Id::BeaconBlocked:sound::cues::Id::Beacon;
+    if(const int ms=sound::custom::override_ms(cue))interval=ms/1000.f;
     g_next_beacon_time = now + interval;
 
     const float max_dist = 500.0f;
@@ -589,7 +594,8 @@ void landing_ping_step()
         if (g_landing_mask & (1u << d)) {
             play_landing_ping_for(d);
             g_landing_turn = (d + 1) % 4;
-            g_landing_next_ping = now + kLandingPingPeriod;
+            const int ms=sound::custom::override_ms(sound::cues::Id::Landing);
+            g_landing_next_ping = now + (ms?ms/1000.:kLandingPingPeriod);
             break;
         }
     }

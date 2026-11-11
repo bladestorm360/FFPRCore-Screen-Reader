@@ -457,9 +457,25 @@ void d_SetCommadnMessageFF6(void* self, void* message_str, bool is_left, const v
 }
 
 // --- BattleConditionController.Add (postfix): "X: Poison" -----------------------------------------
+bool ko_condition_id(int id)
+{
+    // All six condition masters, including the alternate UnableFight IDs.
+    // Reject other enemy additions before reading the unit's condition list.
+    const auto title = game::current();
+    if (title == game::Id::FF1) return id == 4;
+    return id == 5 ||
+        (title == game::Id::FF4 && (id == 69 || id == 86)) ||
+        (title == game::Id::FF5 && id == 75) ||
+        (title == game::Id::FF6 && id == 100);
+}
+
 void condition_added(void* unit, int id)
 {
     if (!unit) return;
+    const bool enemy = kBattleEnemyData.is(unit);
+    // Defeat is ordinary battle feedback. Other enemy conditions require
+    // their native visual producer.
+    if (enemy && !ko_condition_id(id)) return;
     // The condition from the unit's confirmed list.
     void* confirmed = nullptr;
     if (void* param = unit_parameter(unit)) {
@@ -472,9 +488,7 @@ void condition_added(void* unit, int id)
     }
     int type=0;
     std::wstring name = resolve_condition_name(confirmed, id, &type);
-    // Generic enemy art has no critical-health pose/icon. This separate,
-    // default-off disclosure never mutes party critical health or critical hits.
-    if(type==4&&kBattleEnemyData.is(unit)&&!ui::prefs::enemy_critical_status_enabled())return;
+    if (enemy && type != kConditionTypeKO) return;
     if (stat_feedback::announce_condition(unit,name,type)) return;
     if (!name.empty()) ffpr::say(unit_name(unit) + L": " + name, false);
 }
@@ -525,7 +539,9 @@ struct RemovalSnapshot {
 RemovalSnapshot removal_before(void* unit)
 {
     RemovalSnapshot result;
-    if (!unit || g_battle_end_cleanup || !is_in_battle()) return result;
+    // Enemy reconciliation exposes raw state. Only its visible producer can
+    // identify an enemy status change.
+    if (!unit || g_battle_end_cleanup || !is_in_battle() || kBattleEnemyData.is(unit)) return result;
     result.parameter = unit_parameter(unit);
     void* list = info_functions(unit_info(unit));
     const int count = unity::list_count(list);
@@ -556,7 +572,6 @@ void removal_after(void* unit, const RemovalSnapshot& before)
     }
     for (int i=0;i<before.count;++i) {
         const auto& entry=before.entries[i];
-        if(entry.type==4&&kBattleEnemyData.is(unit)&&!ui::prefs::enemy_critical_status_enabled())continue;
         if (std::find(remaining.begin(),remaining.begin()+count,entry.id)!=remaining.begin()+count) continue;
         // Keep native stacked/permanent conditions and prior KO/Stone cleanup
         // policy. A successful revive can still announce KO removed.

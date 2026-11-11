@@ -49,6 +49,13 @@ inline constexpr const char* kTeleportShortcuts = "TeleportShortcuts";
 inline constexpr const char* kSpeechEnabled = "SpeechEnabled";
 inline constexpr const char* kSpeakAutowalkPath = "SpeakAutowalkPath";
 inline constexpr const char* kBeaconWithDirections = "BeaconWithDirections";
+inline constexpr const char* kPuzzleGuideVerbosity = "PuzzleGuideVerbosity";
+inline constexpr const char* kNavigationPuzzleGuidance = "NavigationPuzzleGuidance";
+inline constexpr const char* kOtherPuzzleGuidance = "OtherPuzzleGuidance";
+inline constexpr bool kNavigationPuzzleGuidanceDefault = true, kOtherPuzzleGuidanceDefault = true;
+inline constexpr int kPuzzleGuideMinimal = 0, kPuzzleGuideVerbose = 1;
+inline constexpr int kPuzzleGuideVerbosityDefault = kPuzzleGuideMinimal;
+inline constexpr int kPuzzleGuideVerbosityMax = kPuzzleGuideVerbose;
 inline constexpr const char* kAutoDetail = "AutoDetail";                    // Auto Announcement Detail
 inline constexpr const char* kResultNotificationsOnce = "ResultNotificationsOnce";
 inline constexpr const char* kInterruptCharacterTurn = "InterruptCharacterTurn";
@@ -153,6 +160,13 @@ inline bool teleport_shortcuts_enabled() { return settings::get_bool(kTeleportSh
 inline bool speech_enabled() { return settings::get_bool(kSpeechEnabled, kSpeechEnabledDefault); }
 inline bool speak_autowalk_path_enabled() { return settings::get_bool(kSpeakAutowalkPath, kSpeakAutowalkPathDefault); }
 inline bool beacon_with_directions_enabled() { return settings::get_bool(kBeaconWithDirections, kBeaconWithDirectionsDefault); }
+// Guide metadata is optional; instructions, choices and safe timing are always
+// retained. Missing settings select the owner's default Minimal mode; values
+// use the same bounded enumeration as the menu.
+inline int puzzle_guide_verbosity() { return std::clamp(settings::get_int(kPuzzleGuideVerbosity, kPuzzleGuideVerbosityDefault), kPuzzleGuideMinimal, kPuzzleGuideVerbosityMax); }
+inline bool puzzle_guide_verbose() { return puzzle_guide_verbosity() == kPuzzleGuideVerbose; }
+inline bool navigation_puzzle_guidance() { return settings::get_bool(kNavigationPuzzleGuidance,kNavigationPuzzleGuidanceDefault); }
+inline bool other_puzzle_guidance() { return settings::get_bool(kOtherPuzzleGuidance,kOtherPuzzleGuidanceDefault); }
 inline bool auto_detail_enabled() { return settings::get_bool(kAutoDetail, kAutoDetailDefault); }
 inline bool result_notifications_once_enabled() { return settings::get_bool(kResultNotificationsOnce, kResultNotificationsOnceDefault); }
 inline bool interrupt_character_turn_enabled() { return settings::get_bool(kInterruptCharacterTurn, kInterruptCharacterTurnDefault); }

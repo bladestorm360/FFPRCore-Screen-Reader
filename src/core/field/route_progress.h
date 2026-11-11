@@ -3,8 +3,14 @@
 #include <string>
 #include <optional>
 #include <vector>
+#include <algorithm>
+#include <cstdlib>
 
 namespace field::route_progress {
+struct PrecisionPoint {
+    int layer=0,x2=0,y2=0;
+    bool operator==(const PrecisionPoint& other) const {return layer==other.layer&&x2==other.x2&&y2==other.y2;}
+};
 enum class VehicleAction { None, WalkOn, WalkOff, ConfirmBoard, ConfirmLand, BackLand };
 struct Phase {
     std::vector<baked_route::Cell> cells;
@@ -14,6 +20,7 @@ struct Phase {
     std::wstring arrival_facing;
     int arrival_direction = -1; // structured cardinal heading; never parse localized speech
     bool manual_after = false;   // e.g. an examine warp; walking alone cannot activate it
+    bool random_transfer = false; // next room is an attempt, never a promised arrival
     bool wait_for_npc = false;   // temporary patrol occupancy; replan, never interact/arrive
     VehicleAction vehicle_before = VehicleAction::None;
     int transportation_id = 0;
@@ -25,8 +32,17 @@ struct Phase {
     // Native manual movement between this phase's last cell and the next phase
     // (Invincible mountain crossing). These tiles are not ordinary walk inputs.
     int manual_displacement_steps=0;
+    // A reviewed narrow passage retains its two coarse endpoints for route
+    // ownership and exact half-tile movement points for every output consumer.
+    // At most seven cardinal points, no game pointers, timers or worker native calls.
+    std::vector<PrecisionPoint> precision;
 };
 inline int steps(const Phase& phase) {
+    if(!phase.precision.empty()) {
+        int halves=0;for(size_t i=1;i<phase.precision.size();++i)
+            halves+=std::max(std::abs(phase.precision[i].x2-phase.precision[i-1].x2),std::abs(phase.precision[i].y2-phase.precision[i-1].y2));
+        return (halves+1)/2;
+    }
     return (phase.cells.empty()?0:static_cast<int>(phase.cells.size())-1)+phase.manual_displacement_steps;
 }
 

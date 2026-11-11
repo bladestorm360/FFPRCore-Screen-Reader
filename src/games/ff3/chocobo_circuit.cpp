@@ -1,6 +1,7 @@
 // FFIII's circuit is a guide to native movement, not a quest-state writer.
 // State and native reads stay on the field owner; route work uses copied snapshots.
 #include "chocobo_circuit.h"
+#include "puzzle_guide.h"
 #include "../../core/field/baked_nav.h"
 #include "../../core/field/field_api.h"
 #include "../../core/field/map_state.h"
@@ -36,15 +37,17 @@ void retire(bool clear) {
 }
 void invalid_vehicle() { retire(true); ffpr::say(T(L"Ride a chocobo on this world map to use this guide"), true); }
 void announce(bool interrupt) {
-    if (!active || !ready() || field::current_map_id()!=1) return;
+    if (!active || !ready() || field::current_map_id()!=1 || !ui::prefs::navigation_puzzle_guidance()) return;
     if (!mounted()) { invalid_vehicle(); return; }
     const int requested_step=step; const auto requested_epoch=++epoch;
     const wchar_t* key = step==0 ? L"Go to the circuit starting point" :
         step==5 ? L"Cross the circuit checkpoint" : step==13 ? L"Return to the circuit starting point" : L"Follow the circuit";
-    auto line=TF(L"Step {0} of {1}: {2}", {text::num(step+1),text::num(14),T(key)});
+    auto line=T(key);
+    if(ui::prefs::puzzle_guide_verbose())
+        line=TF(L"Step {0} of {1}: {2}", {text::num(step+1),text::num(14),line});
     field::baked_nav::request_route(goal(), field::TargetKind::Spot, L"",
         [requested_epoch,requested_step,line=std::move(line),interrupt](field::PathInfo info) mutable {
-            if (!active || epoch!=requested_epoch || step!=requested_step || !ready() || field::current_map_id()!=1) return;
+            if (!active || epoch!=requested_epoch || step!=requested_step || !ready() || field::current_map_id()!=1 || !ui::prefs::navigation_puzzle_guidance()) return;
             if (!mounted()) { invalid_vehicle(); return; }
             if (info.success) {
                 const auto& directions=info.full_description.empty()?info.description:info.full_description;
@@ -67,10 +70,12 @@ void advance_at(const Cell& cell, bool interrupt) {
     if (step==13) { finish(); return; }
     field::baked_nav::clear_preview_destination(goal());
     ++step; ++epoch;
-    ffpr::say(T(L"Step done"),interrupt);
-    announce(false);
+    const bool verbose=ui::prefs::puzzle_guide_verbose();
+    if(verbose)ffpr::say(T(L"Step done"),interrupt);
+    announce(interrupt&&!verbose);
 }
 void next() {
+    if(!ui::prefs::navigation_puzzle_guidance()){retire(true);ffpr::say(T(L"Navigation puzzle guidance is off"),true);return;}
     if (!ready()) return;
     if (field::current_map_id()!=1 || !mounted()) { if(active) invalid_vehicle(); return; }
     if (active) {
@@ -85,13 +90,14 @@ void next() {
     const auto recorded=field::map_state::scenario_flag(192);
     if (recorded && *recorded) { ffpr::say(T(L"Chocobo circuit recorded"),true); return; }
     active=true; step=0; have_cell=false; ++epoch;
-    ffpr::say(T(L"Chocobo circuit guide"),true);
+    const bool verbose=ui::prefs::puzzle_guide_verbose();
+    if(verbose)ffpr::say(T(L"Chocobo circuit guide"),true);
     Cell cell;
     if (field::baked_nav::player_cell(field::map_handle(),field::player(),cell)) {
         last_cell=cell; have_cell=true;
-        if (cell==points[0]) { advance_at(cell,false); return; }
+        if (cell==points[0]) { advance_at(cell,!verbose); return; }
     }
-    announce(false);
+    announce(!verbose);
 }
 void move() {
     if (!active || !ready() || field::current_map_id()!=1) return;
@@ -102,13 +108,20 @@ void move() {
     if (!mounted()) { invalid_vehicle(); return; }
     advance_at(cell,true);
 }
-void stop() { if (!active || !ready()) return; retire(true); ffpr::say(T(L"Puzzle guide stopped"),true); }
+void stop() { if (!active) return; retire(true); ffpr::say(T(L"Puzzle guide stopped"),true); }
 int install() {
-    actions::define("GameModule.PuzzleGuide",[]{hooks::guarded("FF3.Circuit.Next",[]{next();});});
-    actions::define("GameModule.StopPuzzleGuide",[]{stop();});
-    actions::define("GameModule.PuzzleGuideMove",[]{move();});
-    queries::define("GameModule.HasPuzzleGuide",[]{return field::current_map_id()==1 && (active || mounted());});
-    queries::define("GameModule.PuzzleGuideActive",[]{return active;});
+    actions::define("GameModule.PuzzleGuidePolicyChanged",[]{::ff3::puzzles::stop(false);retire(true);});
+    // One registration owns FFIII's guide dispatch. Form puzzles and the
+    // native chocobo circuit never overwrite one another's actions/queries.
+    actions::define("GameModule.PuzzleGuide",[]{hooks::guarded("FF3.PuzzleGuide.Next",[]{
+        if(::ff3::puzzles::active()||::ff3::puzzles::supported(field::current_map_id())){retire(true);::ff3::puzzles::next();}
+        else {::ff3::puzzles::stop(false);next();}
+    });});
+    actions::define("GameModule.StopPuzzleGuide",[]{if(::ff3::puzzles::active())::ff3::puzzles::stop(true);else stop();});
+    actions::define("GameModule.PuzzleGuideMove",[]{if(::ff3::puzzles::active())::ff3::puzzles::move();else move();});
+    queries::define("GameModule.HasPuzzleGuide",[]{return ::ff3::puzzles::active()||::ff3::puzzles::supported(field::current_map_id())||(field::current_map_id()==1 && (active || mounted()));});
+    queries::define("GameModule.PuzzleGuideActive",[]{return active||::ff3::puzzles::active();});
+    queries::define("GameModule.PuzzleGuideDuringEvent",[]{return ::ff3::puzzles::repeatable();});
     events::on(events::Kind::MapChanging,[]{retire(false);});
     events::on(events::Kind::BattleEntering,[]{retire(false);});
     events::on(events::Kind::TitleScreen,[]{retire(false);});

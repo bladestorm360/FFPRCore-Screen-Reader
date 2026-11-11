@@ -6,7 +6,7 @@
 #include "../src/core/system/menu_text_discovery.cpp"
 namespace fixture {
 struct Node {std::wstring text=L"Corrad";bool alive=true;};
-bool owned=false,map_owned=false;std::vector<frame::Task> pending;std::vector<std::wstring> spoken;
+bool owned=false,map_owned=false,event_owned=false;std::vector<frame::Task> pending;std::vector<std::wstring> spoken;
 }
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
@@ -23,7 +23,7 @@ int child_count(void*){return 0;}void* child(void*,int){return nullptr;}
 std::vector<void*> components_in_children(void*,ref::Class&,bool){return {};}
 }
 namespace queries {
-bool is(const char*n){return (std::string(n)=="ItemMenuState.ShouldSuppress"&&fixture::owned)||(std::string(n)=="MapPanels.IsActive"&&fixture::map_owned);}
+bool is(const char*n){return (std::string(n)=="ItemMenuState.ShouldSuppress"&&fixture::owned)||(std::string(n)=="MapPanels.IsActive"&&fixture::map_owned)||(std::string(n)=="EventItemSelectState.ShouldSuppress"&&fixture::event_owned);}
 std::wstring text(const char*){return {};}
 }
 namespace hooks {void note_fault(const char*){std::abort();}}
@@ -49,6 +49,7 @@ Node row;
  ffpr::system::wait_and_read_cursor(&row);drain();
  expect(spoken==std::vector<std::wstring>{L"Corrad",L"Corrad"},"legitimate equal-text focus events are retained");
  ffpr::system::wait_and_read_cursor(&row);map_owned=true;drain();expect(spoken.size()==2,"native map claims pending generic location read without text deduplication");map_owned=false;
+ ffpr::system::wait_and_read_cursor(&row);event_owned=true;drain();expect(spoken.size()==2,"native event-item row claims generic work queued before its ready postfix");event_owned=false;
  row.alive=false;ffpr::system::wait_and_read_cursor(&row);drain();expect(spoken.size()==2,"destroyed cursor never reads stale UI");row.alive=true;
 std::printf("Deferred generic/specific cursor handoff: %d failures\n",failures);return failures?1:0;
 }

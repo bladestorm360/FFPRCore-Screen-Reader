@@ -1,0 +1,135 @@
+{
+  "scope_tag": "ff5_Exdeath",
+  "source_script_hashes": {
+    "Map_30441_13/sc_e_0266": "50884806babacc0df57348a71e3f780826af00e29b5e26741fd5d98561c5af98",
+    "Map_30441_13/sc_e_0266_1": "b9949b7d7ca99f41b18a2822eab1678ca612225ae971a1fda1271ec858d4403e",
+    "Map_30441_13/sc_e_0266_10": "16733085a78ec7c365248ec76a77f7f5973020dbd94a051866460006b7c2bfe9",
+    "Map_30441_13/sc_e_0266_11": "69bdd0e767cef0572299a696cd57811116e0362b5859815714b14c87fd4ba15a",
+    "Map_30441_13/sc_e_0266_12": "0d2d5ca1b55036a755cbd4cbc3debd99142fc90b477ffaab8ab5bdfaab773155",
+    "Map_30441_13/sc_e_0266_2": "a51268752b4a2ec3217c6f87ca1802945133d49d07d5287216916ccd99ec0eb7",
+    "Map_30441_13/sc_e_0266_3": "151be5963d8877c6638b504c13429c3d3aa2126ad48e650658e2d8634b68e9e9",
+    "Map_30441_13/sc_e_0266_4": "b7fd76406b07db20a149e7eadac3b2622bdfbc9a34bca7b08e770d812ebf14be",
+    "Map_30441_13/sc_e_0266_5": "44b76b7cc367acf19ae85b91e6819cd745df1d83d3381b5a450a62ebf2f042d9",
+    "Map_30441_13/sc_e_0266_6": "ca63b93583b9287802668699da7e54d31441d2cb252d6f97ac06925cc147e986",
+    "Map_30441_13/sc_e_0266_7": "82f8df627397751c23a0216074893c89f5ac8fd8c2b8592f77296cbf0ef15d8e",
+    "Map_30441_13/sc_e_0266_8": "75f54bf4ea8eea1128f91b6c723dcf5d10c777021fcc963219acd2d231547ce4",
+    "Map_30441_13/sc_e_0266_9": "09728f8fd24f8dec1f5e7a79dcbe53a3dbb937c7f8e41638f7ba9fe4589cdc35",
+    "Map_30441_13/sc_map_30441_13": "046ed1a997a77433b87e1804c70940e3b77cc4928fdcb5019fe72c8c8d86906c",
+    "Map_30441_16/sc_e_0438_1": "f0d3d1681ca6bbe2b80c06955ecff7c9674d9c14cd6e24ca6c191bedf215ad6c",
+    "Map_30441_16/sc_e_0438_2": "a74ded909755206e7ba3cde39735b19e2b309f7a916c4e3ab7f4ea0b63b6c743",
+    "Map_30441_16/sc_map_30441_16": "9157aea709d2c74605fc21108a7c288396e3c9a76005df65e6ad5ae53b1ac357",
+    "Map_30441_16/sc_map_30441_16_fall_1": "d57800d8d7b5c08685fcdd1aab09b9aa9e0abf4cc1e727f05c2f8d1061602dd0",
+    "Map_30441_16/sc_map_30441_16_fall_2": "4481d5b3ed9daf4b984eb666cfc0cbb43a457f8c1f49bcb30c895df9375764f6",
+    "Map_30441_16/sc_map_30441_16_fall_3": "a8e43eea0990e180c94c25a080e497894f7bb1a7e0d95f12602824dac9614a49",
+    "Map_30441_16/sc_map_30441_16_fall_4": "c75bc9c5053ec59bfe881278d0556e670ad4ee9d68ea75ea785f4f3ca8c03d21",
+    "Map_30441_16/sc_map_30441_16_fall_5": "b1ad12a3c9a025c52e5dddc14ca34a797168f2fe8eff378c1bad75fea75624c1",
+    "Map_30441_16/sc_map_30441_16_fall_6": "ee3ce7972546224f19ac2d10d64f80962fa79560332fe48a38c9e8d0c5b7ef2f",
+    "Map_30441_17/sc_e_0267": "b0be1ec8492b1e60fa42af3258a1bd61ac999fd28074a6aacea2c57526499e85",
+    "Map_30441_17/sc_e_0268_1": "f7cda798f891e35071e3e5ae76c0b8ff7c23ec977201ab8ba43587c3185ecf81",
+    "Map_30441_17/sc_e_0268_2": "d3e06843269575b4814e1628fc317bd09daec26c4dc6231f7b27d075ead93390",
+    "Map_30441_17/sc_e_0269": "6ac9c265a977cc4e66f932420339c9149b93a47c8e41c8967adebab2e9807e65",
+    "Map_30441_17/sc_e_0269_1": "0292d5d87895c7878ac7ef8e1378e236b4cb2ace8e6e1e597a887276b1329a97",
+    "Map_30441_17/sc_e_0437": "667e91599e470dc8507ddf7d0a4efadb5235d0ff29fe2a26f525853087273a18",
+    "Map_30441_17/sc_map_30441_17": "f97341ff8db7859e0330b4945160d367c943e7e283be175e485a02c521a5f596",
+    "Map_30441_17/sc_map_30441_17_fall_1": "b532d769fd98d4fa6dd8826a5fec565461ad444be039ad37306b7f3202a74d64",
+    "Map_30441_17/sc_map_30441_17_fall_2": "e30c442a6210dd0352b33c7e3705b2331a81727a2de1ad905c7daebfbd872b9c",
+    "Map_30441_17/sc_map_30441_17_fall_3": "b797fb891cd499a20575ce7758b62bf7c74e1fbeae1115d8abee037122b508f2",
+    "Map_30441_17/sc_map_30441_17_fall_4": "eed5d17039a9eb2b0a5510a94f987b8fe6ff3ea1c379e9f0f9b21aa20936595b",
+    "Map_30441_17/sc_map_30441_17_fall_5": "bdfdfd5e42f9e28ec5a59a9432e02d016898e88ed6e3ed5fd654e5e037a6a090",
+    "Map_30441_17/sc_map_30441_17_fall_6": "6d9cbca3f168b1658e2ed4e79c61a1a00df6b9a8117b0912dc42fec6d94fb193",
+    "Map_30221_4/sc_e_0247": "21199d839ec2deccb2b9404068b68b6d7caae3d184af36bfb9dc19b4ccc2534e",
+    "Map_30221_4/sc_e_0247_1": "a28d25309a70db82b3afa89b93be7dd5e8326fa21db88f31a3be5c21962494a9",
+    "Map_30221_4/sc_map_30221_4": "2e059b738c8a064a2d7868c606821f2ccb19f337648733ce51c6246dea8c280e",
+    "Map_30441_10/sc_e_0265": "a2c61fd6ebf27a89126b79ef1cb87e6df6dec4c5587c8549e528776d74f22e2c",
+    "Map_30441_10/sc_map_30441_10": "28e1f8b6dc50eafc152c2940400812c822cc5521a898940c268efbcf732985f5",
+    "Map_30441_19/sc_e_0124_2": "deefc6ead8b9689e35fbf9528c34e0f06dd1b709117e556f96eb3d35c4e46bb7",
+    "Map_30441_19/sc_map_30441_19": "3dbc1bb788aa02ce030465d09234be0bcc4b8f94e918df7d263bd3aa29c2f0aa"
+  },
+  "native_methods": [
+    {
+      "method": "Current.RouletteCastleOfExdeath",
+      "rva": 2889168,
+      "bytes": 656,
+      "sha256": "1cb40a66f06f4233fd2805fa7a2bd02364998ecc5c54bc3fe7855d4070443aef"
+    },
+    {
+      "method": "FieldTileAnimRegionEntity.GetElapsedFrame",
+      "rva": 15475072,
+      "bytes": 96,
+      "sha256": "0104af14978af9b8d9a185975ba14d0af8a461255bebe8a4f91ced7f91547ad0"
+    },
+    {
+      "method": "FieldTileAnimRegionEntity.UpdateEntity",
+      "rva": 15475744,
+      "bytes": 240,
+      "sha256": "5d880b777d0ed8cc5d3e4d3c4144bd9cf2fb775b1f6f8803913daf7d9d1e3a10"
+    },
+    {
+      "method": "MapTileUVData.GetElapsedFrame",
+      "rva": 3084944,
+      "bytes": 176,
+      "sha256": "01538a904407ef18d6ae8b63562b7812038d568b89e53473551e82194a0027c2"
+    },
+    {
+      "method": "MapTileUVData.AddElapsedMilliSecond",
+      "rva": 3084528,
+      "bytes": 64,
+      "sha256": "5cfd7a182d52a574a22375c687d13d7eb45cfdca55a41c0cd659683bba82437c"
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "floor_asset": {
+    "bundle": "map_30441_assets_all_487795df2fe2b0b013b3b8156f7c2d4c.bundle",
+    "bundle_sha256": "a89b020ad039a978e3c9223c34ca4cf4bd3306bcf928ceb211ac9fb75901172b",
+    "tilemap_sha256": "62d72dae256dfae4bf9edb9ff1850f83844340e65fabff56f095d6dc18c14e60",
+    "frame_count": 16,
+    "asset_frame_milliseconds": 50,
+    "animated_tiles": 9
+  },
+  "stopped_layouts": 9,
+  "onward_layouts": [
+    4,
+    5,
+    6
+  ],
+  "gate_state_preserved": true,
+  "passage": {
+    "submap": "Map_30441_16",
+    "entity_id": 20,
+    "destination_map": 400,
+    "original_point": 0,
+    "continuation": "sc_e_0438_1",
+    "continuation_sha256": "0c702be0262cf47861979f15def2e2cec39b6bdaac9ddbe064d702a60a00385e",
+    "same_map": true,
+    "arrival_point": 7,
+    "ordinary_travel": true,
+    "evidence": "Full 55-operation passage restores the controlled player at native PointIn 7, Ground 15,4. docs/re/FF5_EXDEATH_20261105.md"
+  },
+  "retained_position_methods": [
+    {
+      "method": "Puppet.SetPos",
+      "rva": 2997536,
+      "bytes": 3776,
+      "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+    },
+    {
+      "method": "Puppet.GetDirectTargetPosition",
+      "rva": 2971584,
+      "bytes": 1008,
+      "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+    },
+    {
+      "method": "Puppet.GetChangeLayerValue",
+      "rva": 2970896,
+      "bytes": 688,
+      "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+    },
+    {
+      "method": "Puppet.MoveEntityLayerWithWorldPosition",
+      "rva": 2980992,
+      "bytes": 704,
+      "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+    }
+  ]
+}

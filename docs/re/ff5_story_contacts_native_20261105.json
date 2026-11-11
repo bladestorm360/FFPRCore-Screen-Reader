@@ -1,0 +1,57 @@
+{
+  "source_script_hashes": {
+    "Map_10010/sc_e_0364_1": "cf774f70b17103af457fc23b60bd447b0c8b578b9c87bc958a0698c23f8aa835",
+    "Map_10010/sc_e_0364_3": "c7645b4a5055bab909fbfccad2b0cf22d1a9d11815dd1c0ae5790525b2638cb6",
+    "Map_20110/sc_e_0056": "d34a1bfe16524f30762af9e789c170c63d6daa84f409278c01f78a21e97d4f57",
+    "Map_20110/sc_e_0364": "e06476ed5854b528a397c30e686e308ec3f5b0b0b1dccccb4a01b46c5613a566",
+    "Map_20110/sc_e_0364_2": "1de0dcd49977cf844fd1aeace6ba65ba2113c3bd4206dccdee5d62cb16cebd40",
+    "Map_20110/sc_map_20110": "5ef8b2f2b4bb73ff77579691afd52df2c6e3c438844d05bfd52229c890cde621",
+    "Map_20130/sc_e_0094": "d2a3099b493308f59efeba647fda6d8d5e88f582681bd8ac2133a48b4f68847c",
+    "Map_20130/sc_e_0094_1": "c8f3a0aa560e4129c0028ed6c25d5835e2025f297860a1a576e72bf1cf5f291b",
+    "Map_20130/sc_e_0094_2": "e743c3961356f6a3caf99ab92f3041cf3f2cb36869af4eb563810b48a09fd043",
+    "Map_20130/sc_e_0095": "5d3e1981c053150c957f71f1ea823e6f5dc8ba87fa6bbe033535e988ad5dcac0",
+    "Map_20130/sc_e_0096": "8fc09f4802f8d33bc36139e0ad6494c205645f632eaf8935363d7c2aa8cbdb0c",
+    "Map_20130/sc_map_20130": "f8e3f5aa48db05c24853d2d499f500a888ca4f4b1a14ea3166e04e9af5cf7d03",
+    "Map_20131_3/sc_map_20131_3": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_40001/sc_e_0007": "4a4416d8b46cc1ac8ceb8be97bdd32b87fc457ff9b203746c3649b2d54ad66b9",
+    "Map_40001/sc_e_0477": "67bff7db0fd1254d96e98aca58509690e7dfc90e0abfa4d1afa81296b3b734cf",
+    "Map_40001/sc_e_0477_1": "c920c66e0b36507222ee33b6c1fc414eac8af59456fbd3518395f35d8f4da9bf",
+    "Map_40001/sc_e_0478": "69a8cb4aaf0ab8b58f00fa4d5a2f9a857710570337bab70887fa83112c0bb53a",
+    "Map_40001/sc_e_0479_1": "f815ceb433b0e8acc691991ba7ac9c01f562f6f24078f7e6f32806e4ac58f89d",
+    "Map_40001/sc_map_40001": "c589006a4f5011f006e0037d1355e54f88559c10b6bf43d25890dacf2a5b557c"
+  },
+  "western_valley_transport": 3,
+  "western_valley_waypoints": [
+    52,
+    48,
+    45,
+    42
+  ],
+  "story_receipts": [
+    418,
+    415,
+    364,
+    94
+  ],
+  "moogle_house": [
+    139,
+    1,
+    136,
+    4
+  ],
+  "flag_methods": [
+    {
+      "method": "DataStorage.GetFlag",
+      "rva": 14213744,
+      "bytes": 208,
+      "sha256": "8d178c2386d85c8dc549387694b9045ccb6c2d1f00e3d32953886985f26b1501"
+    },
+    {
+      "method": "DataStorage.SetFlag",
+      "rva": 14216048,
+      "bytes": 304,
+      "sha256": "edf8430a4ec234afe85b1752a45d89732f3a80599b7dcdbd09a34c9fd07b7bde"
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17"
+}

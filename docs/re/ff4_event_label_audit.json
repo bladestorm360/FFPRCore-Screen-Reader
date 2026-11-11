@@ -785,7 +785,7 @@
     "id": 385,
     "raw": "ゾットの塔へ",
     "type": 5,
-    "label": "Tower entrance",
+    "label": "Kain's Airship",
     "reason": "reviewed physical map/script occurrence",
     "trap_hint": false,
     "identity_evidence": {
@@ -800,7 +800,7 @@
     "id": 498,
     "raw": "（戻る用）ゾットの塔へ",
     "type": 5,
-    "label": "Tower entrance",
+    "label": "Kain's Airship",
     "reason": "reviewed physical map/script occurrence",
     "trap_hint": false,
     "identity_evidence": {
@@ -2727,9 +2727,16 @@
     "id": 32,
     "raw": "デビルロード",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
-    "trap_hint": false
+    "label": "Devil's Road portal",
+    "reason": "Baron portal with a locked message branch and a native return chain to Mysidia",
+    "trap_hint": false,
+    "identity_evidence": {
+      "editor_gid": 2022,
+      "script": "sc_e_0160",
+      "message_keys": [
+        "N999_C05_029_02_01"
+      ]
+    }
   },
   {
     "submap": "Map_20021_8",
@@ -3564,7 +3571,7 @@
     "id": 5,
     "raw": "デビルロード",
     "type": 2,
-    "label": "Passage",
+    "label": "Devil's Road portal",
     "reason": "ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6",
     "trap_hint": false,
     "identity_evidence": {
@@ -3889,8 +3896,8 @@
     "id": 38,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2022,
@@ -3936,8 +3943,8 @@
     "id": 36,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2022,
@@ -4037,8 +4044,8 @@
     "id": 18,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2022,
@@ -4077,8 +4084,8 @@
     "id": 36,
     "raw": "隠し扉",
     "type": 2,
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2022,
@@ -4092,8 +4099,8 @@
     "id": 38,
     "raw": "扉が開く",
     "type": 2,
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "trap_hint": false,
     "identity_evidence": {
       "editor_gid": 2022,

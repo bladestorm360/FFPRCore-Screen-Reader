@@ -122,8 +122,13 @@ void refresh(void* owner, bool switching)
     set_current_character_data(data);
     ui::review::Options options;
     options.domain = ui::review::Domain::Status;
+    // The rendered character/level title is also the first browsable row in
+    // every game, including name-only pages. Keep the existing section jumps
+    // aligned after the review owner prepends this headline.
+    options.include_headline = true;
     if (!switching && owner == g_saved_owner && name == g_saved_name) options.restore_index = g_saved_index;
     auto content = lines(owner, options.groups);
+    for(auto& group:options.groups)if(group>0)++group;
     ui::review::show(owner, title(owner), std::move(content), std::move(options));
     tracker().current_stat_index = ui::review::index();
 }

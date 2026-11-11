@@ -6,9 +6,27 @@
 #include <tuple>
 #include <unordered_map>
 #include <unordered_set>
+#ifdef FFPR_OFFLINE_CHECK
+#include <chrono>
+#endif
 #include "baked_router.h"
 
 namespace field::baked_route {
+#ifdef FFPR_OFFLINE_CHECK
+namespace {
+thread_local WorkProfile work_profile_;
+thread_local bool adaptive_potential_=true;
+struct ProfileCall {
+    bool search;SearchProfile detail;std::chrono::steady_clock::time_point start=std::chrono::steady_clock::now();
+    explicit ProfileCall(bool value):search(value){if(search)++work_profile_.find_calls;else ++work_profile_.flood_calls;}
+    ~ProfileCall(){const auto ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+        if(search){work_profile_.find_ms+=ms;detail.ms=ms;if(work_profile_.searches.size()<32)work_profile_.searches.push_back(detail);}else work_profile_.flood_ms+=ms;}
+};
+}
+void reset_work_profile(){work_profile_={};}
+WorkProfile work_profile(){return work_profile_;}
+void adaptive_world_potential(bool enabled){adaptive_potential_=enabled;}
+#endif
 namespace {
 
 constexpr int kDirs[8][2] = {{0,-1},{1,0},{0,1},{-1,0},{1,-1},{1,1},{-1,1},{-1,-1}};
@@ -31,8 +49,9 @@ inline Cell cell_of(const baked::Grids& g, int node)
 
 bool blocked_by_caller(const Request& r, const Cell& c)
 {
+    const bool world=r.submap&&r.submap->world;
     for (const Cell& b : r.blocked)
-        if (b.x == c.x && b.y == c.y && (b.layer < 0 || b.layer == c.layer)) return true;
+        if (b.x == c.x && b.y == c.y && (world || b.layer < 0 || b.layer == c.layer)) return true;
     if(!r.transport_rules||!r.submap)return false;
     const auto& grid=baked::grids(*r.submap);
     return transport_rule_at(r,grid,c,TransportRules::Gate)||transport_rule_at(r,grid,c,TransportRules::Solid);
@@ -47,12 +66,15 @@ bool is_goal_cell(const Request& r, const Cell& c)
     return false;
 }
 
-/// A ToLayer trigger owned by the player's incoming layer.
-const baked::Object* to_layer_at(const baked::Grids& g, int layer, int x, int y)
+/// Native SwitchLayerEventEntity.Init accepts every other logical layer:
+/// ascending on enter, descending at exact-position stay. The editor's object
+/// layer is not an incoming-layer condition. All-six native tails are pinned
+/// by tools/layer_contract_check.py; current assets have no conflicting targets.
+const baked::Object* to_layer_at(const baked::Grids& g, int x, int y)
 {
     for (const baked::Object& o : g.objects) {
         if (o.type != baked::ObjType::ToLayer || !o.contains(x, y)) continue;
-        if (o.layer == layer) return &o;
+        if(o.a>=0&&o.a<=2)return &o;
     }
     return nullptr;
 }
@@ -61,9 +83,9 @@ const baked::Object* to_layer_at(const baked::Grids& g, int layer, int x, int y)
 
 int layer_after(const baked::Grids& g, int from_layer, int x, int y)
 {
-    const baked::Object* o = to_layer_at(g, from_layer, x, y);
+    const baked::Object* o = to_layer_at(g, x, y);
     if (!o) return from_layer;
-    if (o->layer == from_layer && o->a >= 0 && o->a <= 2) return o->a;
+    if (o->a >= 0 && o->a <= 2) return o->a;
     return from_layer;
 }
 
@@ -71,8 +93,12 @@ bool open(const Request& r, const baked::Grids& g, const Cell& c)
 {
     if (!baked::in_bounds(g, c.x, c.y)) return false;
     if (r.submap && r.submap->world) {
-        const int attribute = baked::attribute(g,c.x,c.y);
-        auto allowed = [&](int group) { return baked::vehicle_open(g,group,c.x,c.y) && baked::group_crosses(group,attribute); };
+        const int raw = baked::attribute(g,c.x,c.y);
+        const int converted = converted_terrain(r,raw);
+        auto allowed = [&](int group) {
+            return converted ? baked::group_crosses(group,converted)
+                             : baked::vehicle_open(g,group,c.x,c.y) && baked::group_crosses(group,raw);
+        };
         if (r.vehicle_group > 0) return allowed(r.vehicle_group);
         if (allowed(1)) return true;
         for (int grp : r.auto_groups)
@@ -85,14 +111,14 @@ bool open(const Request& r, const baked::Grids& g, const Cell& c)
 bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
 {
     const bool world=r.submap&&r.submap->world;
-    const int direction=step_direction(from,to,world?r.submap->width:0,world?r.submap->height:0);
+    const int direction=step_direction(from,to,r.submap?baked::wrap_width(*r.submap):0,r.submap?baked::wrap_height(*r.submap):0);
     const auto permits=[&](const auto& gate) {
         if (gate.cell.x == to.x && gate.cell.y == to.y &&
-            (gate.cell.layer < 0 || gate.cell.layer == to.layer) &&
+            (world || gate.cell.layer < 0 || gate.cell.layer == to.layer) &&
             ((gate.axis == 1 && from.y != to.y) || (gate.axis == 2 && from.x != to.x))) return false;
         if(gate.axis||direction<0)return true;
-        const bool entered=gate.cell.x==to.x&&gate.cell.y==to.y&&(gate.cell.layer<0||gate.cell.layer==to.layer);
-        const bool left=gate.cell.x==from.x&&gate.cell.y==from.y&&(gate.cell.layer<0||gate.cell.layer==from.layer);
+        const bool entered=gate.cell.x==to.x&&gate.cell.y==to.y&&(world||gate.cell.layer<0||gate.cell.layer==to.layer);
+        const bool left=gate.cell.x==from.x&&gate.cell.y==from.y&&(world||gate.cell.layer<0||gate.cell.layer==from.layer);
         if((entered&&!(gate.mask&kBits[kReverse[direction]]))||(left&&!(gate.mask&kBits[direction])))return false;
         return true;
     };
@@ -113,21 +139,25 @@ void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>&
     // turning the whole cell into a fictional story gate. Triangle connectors
     // require surrounding native geometry and retain the prior conservative wall.
     constexpr int masks[]={15,0,14,11,7,13,6,9};
-    if(id==0)return;
+    // These are instantiated FieldColliderEntity objects, not collision-grid
+    // cells. Native GetCollisionRect(0) keeps the full unit rectangle and an
+    // enabled CanEnter(0) rejects entry. None0 in a terrain grid is different.
     if(id>=2&&id<=7)directional.push_back({cell,0,masks[id]});
     else blocked.push_back(cell);
 }
 
 bool trap_cell(const Request& r, const baked::Grids& g, const Cell& c)
 {
+    const bool world=r.submap&&r.submap->world;
     if(transport_rule_at(r,g,c,TransportRules::Trap))return true;
     if (r.live_traps) {
         for (const auto& trap : r.traps)
-            if (c.x == trap.x && c.y == trap.y && (trap.layer < 0 || c.layer == trap.layer)) return true;
+            if (c.x == trap.x && c.y == trap.y && (world || trap.layer < 0 || c.layer == trap.layer)) return true;
         return false;
     }
-    return c.layer >= 0 && c.layer < 3 && baked::in_bounds(g, c.x, c.y) &&
-        !g.traps[c.layer].empty() && g.traps[c.layer][static_cast<size_t>(c.y) * g.width + c.x];
+    const int layer=world?0:c.layer;
+    return layer >= 0 && layer < 3 && baked::in_bounds(g, c.x, c.y) &&
+        !g.traps[layer].empty() && g.traps[layer][static_cast<size_t>(c.y) * g.width + c.x];
 }
 
 int step_direction(const Cell& from, const Cell& to, int w, int h) {
@@ -139,6 +169,7 @@ int step_direction(const Cell& from, const Cell& to, int w, int h) {
 }
 bool terminal_transition(const Request& r,const baked::Grids& g,const Cell& cell) {
     if(!baked::in_bounds(g,cell.x,cell.y))return false;
+    if(r.avoid_automatic&&baked::current_bits(g,cell.layer,cell.x,cell.y))return true;
     if(transport_rule_at(r,g,cell,TransportRules::Terminal))return true;
     const bool world=r.submap&&r.submap->world;
     if((!world||r.vehicle_group<=0||native_ground_entry(r.vehicle_type))&&
@@ -154,8 +185,15 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
     // A door/warp terminates this map leg. It stays usable as the actual goal,
     // including a graph-selected exit; ignoring scene hazards cannot bypass it.
     if(terminal_transition(r,g,to)&&!((r.goals_open||r.terminal_goal)&&is_goal_cell(r,to)))return false;
-    const int dir = step_direction(from,to,world ? g.width : 0,world ? g.height : 0);
+    const int dir = step_direction(from,to,r.submap?baked::wrap_width(*r.submap):0,r.submap?baked::wrap_height(*r.submap):0);
     if (dir < 0 || (world && dir >= 4) || !direction_allowed(r,from,to)) return false;
+    // Entering a current does not constrain the approach. Once inside,the
+    // game's Gimmick state owns exactly this cardinal displacement;manual
+    // turns and diagonals cannot substitute for the forced direction.
+    const int forced=baked::current_bits(g,from.layer,from.x,from.y)&15;
+    if(forced&&(dir>=4||forced!=(1<<dir)))return false;
+    if(r.goal_entry_mask&&is_goal_cell(r,to)&&
+        (dir>=4||!(r.goal_entry_mask&(1<<((dir+2)%4)))))return false;
     if (world) {
         if (!is_goal_cell(r,to) || !r.goals_open) return true;
         for (const auto& object : g.objects)
@@ -165,7 +203,6 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
     }
     auto mask = [&](const Cell& cell) {
         if (!baked::in_bounds(g,cell.x,cell.y) || cell.layer<0 || cell.layer>2 || g.collision[cell.layer].empty()) return 0;
-        if (r.passages && baked::is_passage(g,cell.layer,cell.x,cell.y)) return 15;
         return static_cast<int>(g.collision[cell.layer][static_cast<size_t>(cell.y)*g.width+cell.x]);
     };
     const int source = mask(from);
@@ -175,7 +212,7 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
     // but closed tiles never invent a diagonal connection.
     if (!(source & kBits[dir]) && (source || dir>=4)) return false;
     if (target & kBits[kReverse[dir]]) return true;
-    return dir<4 && !target && r.goals_open && is_goal_cell(r,to);
+    return dir<4 && !target && r.goals_open && is_goal_cell(r,to)&&(!forced||terminal_transition(r,g,to));
 }
 
 namespace {
@@ -185,7 +222,7 @@ bool hazardous(const Request& r,const baked::Grids& g,const Cell& cell,bool resp
     if(transport_rule_at(r,g,cell,TransportRules::Hazard))return true;
     if(!r.live_hazards)return !g.hazard.empty()&&g.hazard[static_cast<size_t>(cell.y)*g.width+cell.x];
     for(const auto& hazard:r.hazards)
-        if(hazard.x==cell.x&&hazard.y==cell.y&&(hazard.layer<0||hazard.layer==cell.layer))return true;
+        if(hazard.x==cell.x&&hazard.y==cell.y&&((r.submap&&r.submap->world)||hazard.layer<0||hazard.layer==cell.layer))return true;
     return false;
 }
 int edge_distance(const Request& request,const baked::Grids& grid,const Cell& from,const Cell& to) {
@@ -201,9 +238,9 @@ void neighbours(const Request& r, const baked::Grids& g, const Cell& from, F&& v
     for (int dir=0; dir<(r.submap && r.submap->world ? 4 : 8); ++dir) {
         const auto& d = kDirs[dir];
         Cell n{from.layer, from.x + d[0], from.y + d[1]};
-        if (r.submap && r.submap->world) {
-            n.x = (n.x + g.width) % g.width;
-            n.y = (n.y + g.height) % g.height;
+        if (r.submap) {
+            if(baked::wrap_width(*r.submap)>0)n.x = (n.x + g.width) % g.width;
+            if(baked::wrap_height(*r.submap)>0)n.y = (n.y + g.height) % g.height;
             if (n.x == from.x && n.y == from.y) continue;
         }
         if (!baked::in_bounds(g, n.x, n.y)) continue;
@@ -253,6 +290,26 @@ size_t successors(const Request& request,const Cell& from,std::array<Cell,8>& ce
         if(count<cells.size())cells[count++]=at;
         return count<cells.size();
     });
+    return count;
+}
+
+size_t world_predecessors(const Request& r,const Cell& to,std::array<Cell,8>& cells,bool cardinal_only) {
+    if(!r.submap||!r.submap->world||(mountain_vehicle(r)&&!cardinal_only))return 0;
+    const auto& grid=baked::grids(*r.submap);
+    if(!baked::in_bounds(grid,to.x,to.y))return 0;
+    // These are neighbours' destination predicates. Reverse traversal never
+    // assumes that a one-way collider, terminal or hazard is symmetric.
+    if((!open(r,grid,to)&&!(r.goals_open&&is_goal_cell(r,to)))||blocked_by_caller(r,to)||
+       (trap_cell(r,grid,to)&&!(r.allow_trap_goal&&is_goal_cell(r,to)))||
+       (hazardous(r,grid,to)&&!is_goal_cell(r,to)))return 0;
+    size_t count=0;
+    for(int direction=0;direction<4;++direction) {
+        const auto& delta=kDirs[direction];
+        const Cell from{to.layer,(to.x+delta[0]+grid.width)%grid.width,
+                                (to.y+delta[1]+grid.height)%grid.height};
+        if(from==to||!edge_allowed(r,grid,from,to))continue;
+        cells[count++]=from;
+    }
     return count;
 }
 
@@ -389,8 +446,16 @@ bool safe_landing(const Request& movement, const baked::Grids& g, const Cell& la
 
 Route find(const Request& r)
 {
+#ifdef FFPR_OFFLINE_CHECK
+    ProfileCall profile(true);
+    profile.detail.x=r.start.x;profile.detail.y=r.start.y;profile.detail.vehicle=r.transportation_id;
+    if(!r.goals.empty()){profile.detail.gx=r.goals.front().x;profile.detail.gy=r.goals.front().y;}
+#endif
     Route out;
     if (!r.submap || r.goals.empty()) return out;
+    // The entry heading of an already occupied scripted event is unknown.
+    // Never select a native landing from a zero-movement arrival.
+    if(r.goal_entry_mask&&is_goal_cell(r,r.start))return out;
     const baked::Grids& g = baked::grids(*r.submap);
     if (g.width <= 0 || g.height <= 0) return out;
     if (!baked::in_bounds(g, r.start.x, r.start.y)) return out;
@@ -413,7 +478,8 @@ Route find(const Request& r)
         int best = 1 << 30;
         for (const Cell& goal : goals) {
             int dx = std::abs(goal.x - c.x), dy = std::abs(goal.y - c.y);
-            if (r.submap->world) { dx = std::min(dx,g.width-dx); dy = std::min(dy,g.height-dy); }
+            if(baked::wrap_width(*r.submap)>0)dx = std::min(dx,g.width-dx);
+            if(baked::wrap_height(*r.submap)>0)dy = std::min(dy,g.height-dy);
             best = std::min(best,r.submap->world ? dx+dy : std::max(dx,dy));
         }
         return best;
@@ -443,8 +509,12 @@ Route find(const Request& r)
     // not a guessed animation-time penalty: any legal zero-crossing route wins.
     using Item = std::tuple<int,int,int>; // crossings, f, state
     std::priority_queue<Item, std::vector<Item>, std::greater<Item>> frontier;
-    auto h = [&](const Cell& c) { return heuristic(c) * kStep; };
+    std::vector<int32_t> world_remaining;
+    auto h = [&](const Cell& c) {
+        return (world_remaining.empty()?heuristic(c):world_remaining[static_cast<size_t>(c.y)*g.width+c.x])*kStep;
+    };
     auto relax = [&](const Cell& next, int dir, int ng, int nc, int from_state) {
+        if(!world_remaining.empty()&&(nc>0||world_remaining[static_cast<size_t>(next.y)*g.width+next.x]<0))return;
         const int st = node_of(g, next) * headings + dir;
         const int old_crossings=mountain?crossings[st]:0;
         if (cost[st] < 0 || nc<old_crossings || (nc==old_crossings&&ng<cost[st])) {
@@ -456,7 +526,7 @@ Route find(const Request& r)
     };
     // The start has no direction: its exits cost a step each, never a turn.
     neighbours(r, g, start, [&](const Cell& next) {
-        const int direction=mountain?direction_towards(start,next,g.width,g.height):step_direction(start,next,r.submap->world?g.width:0,r.submap->world?g.height:0);
+        const int direction=mountain?direction_towards(start,next,g.width,g.height):step_direction(start,next,baked::wrap_width(*r.submap),baked::wrap_height(*r.submap));
         const int distance=mountain?edge_distance(r,g,start,next):1;
         relax(next,direction,kStep*distance,distance>1?1:0,-1);
         return true;
@@ -466,6 +536,53 @@ Route find(const Request& r)
 
     while (!frontier.empty()) {
         if (r.cancelled && r.cancelled()) return out;
+        // Long world detours made Manhattan A* revisit tens of thousands of
+        // heading states (Doga/Nautilus and continent vehicle transfers). Keep
+        // cheap local searches unchanged. Once real work crosses this bound,
+        // transpose the exact same cardinal graph once for an admissible tile
+        // potential. Heading/turn costs and all native gates still belong to
+        // the original A*. For Invincible use this only after proving that an
+        // all-cardinal route exists: zero mountain actions outrank every jump.
+        // Otherwise retain the unchanged mountain graph and objective.
+        if(r.submap->world&&world_remaining.empty()&&expansions==2048
+#ifdef FFPR_OFFLINE_CHECK
+           &&adaptive_potential_
+#endif
+        ) {
+            world_remaining.assign(static_cast<size_t>(g.width)*g.height,-1);
+            std::vector<Cell> pending;pending.reserve(world_remaining.size());
+            for(auto goal:r.goals)if(baked::in_bounds(g,goal.x,goal.y)) {
+                goal.layer=0;auto& value=world_remaining[static_cast<size_t>(goal.y)*g.width+goal.x];
+                if(value<0){value=0;pending.push_back(goal);}
+            }
+            for(size_t index=0;index<pending.size();++index) {
+                if(r.cancelled&&r.cancelled())return out;
+                const auto to=pending[index];std::array<Cell,8> previous;
+                const auto count=world_predecessors(r,to,previous,true);
+                for(size_t i=0;i<count;++i) {
+                    const auto from=previous[i];auto& value=world_remaining[static_cast<size_t>(from.y)*g.width+from.x];
+                    if(value>=0)continue;
+                    value=world_remaining[static_cast<size_t>(to.y)*g.width+to.x]+1;pending.push_back(from);
+                }
+            }
+            if(world_remaining[static_cast<size_t>(start.y)*g.width+start.x]<0) {
+                world_remaining.clear();
+                if(!mountain)return out;
+            } else {
+            decltype(frontier) revised;std::vector<bool> queued(static_cast<size_t>(states));
+            while(!frontier.empty()) {
+                if(r.cancelled&&r.cancelled())return out;
+                const int state=std::get<2>(frontier.top());frontier.pop();
+                if(queued[state])continue;queued[state]=true;
+                if(mountain&&crossings[state]>0)continue;
+                const auto cell=cell_of(g,state/headings);
+                if(world_remaining[static_cast<size_t>(cell.y)*g.width+cell.x]>=0)
+                    revised.push({0,cost[state]+h(cell),state});
+            }
+            frontier=std::move(revised);
+            if(frontier.empty())break;
+            }
+        }
         Item top = frontier.top();
         frontier.pop();
         const int st = std::get<2>(top);
@@ -478,9 +595,13 @@ Route find(const Request& r)
             goal_state = st;
             break;
         }
-        if (r.max_expansions > 0 && ++expansions > r.max_expansions) break;
+        ++expansions;
+#ifdef FFPR_OFFLINE_CHECK
+        profile.detail.expansions=expansions;
+#endif
+        if (r.max_expansions > 0 && expansions > r.max_expansions) break;
         neighbours(r, g, cur, [&](const Cell& next) {
-            const int nd = mountain?direction_towards(cur,next,g.width,g.height):step_direction(cur,next,r.submap->world?g.width:0,r.submap->world?g.height:0);
+            const int nd = mountain?direction_towards(cur,next,g.width,g.height):step_direction(cur,next,baked::wrap_width(*r.submap),baked::wrap_height(*r.submap));
             const int distance=mountain?edge_distance(r,g,cur,next):1;
             relax(next,nd,gcost+kStep*distance+(nd!=dir?kTurn:0),count+(distance>1?1:0),st);
             return true;
@@ -495,6 +616,9 @@ Route find(const Request& r)
     if (r.submap->world)
         for (Cell& c : path) c.layer = r.start.layer;
     out.found = !path.empty() && path.front().x == start.x && path.front().y == start.y;
+#ifdef FFPR_OFFLINE_CHECK
+    profile.detail.found=out.found;
+#endif
     if(mountain) {
         out.mountain_actions=crossings[goal_state];
         out.displacement_steps=0;
@@ -527,6 +651,9 @@ Reach flood(const Request& r, const std::vector<Cell>& starts)
 { return flood(r,starts,{}); }
 Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector<int>& costs)
 {
+#ifdef FFPR_OFFLINE_CHECK
+    ProfileCall profile(false);
+#endif
     Reach out;
     out.submap = r.submap;
     if (!r.submap) return out;
@@ -690,7 +817,7 @@ std::vector<int> movement_groups(const Request& r)
 bool world_enterable(const Request& r, const baked::Grids& g, int x, int y)
 {
     if (!baked::in_bounds(g, x, y)) return false;
-    const int attr = baked::attribute(g, x, y);
+    const int attr = terrain_at(r, g, x, y);
     for (int grp : movement_groups(r))
         if (baked::group_crosses(grp, attr)) return true;
     return false;
@@ -743,6 +870,7 @@ bool transition_enterable(const Request& r, const baked::Grids& g, int x, int y)
     return false;
 }
 int transition_distance(const Request& request, const Reach& reach,GoalKind kind) {
+    if(request.goal_entry_mask&&is_goal_cell(request,request.start))return -1;
     if (!request.submap || !reach.submap) return -1;
     const auto& g = baked::grids(*request.submap);
     const bool world = request.submap->world;
@@ -750,7 +878,7 @@ int transition_distance(const Request& request, const Reach& reach,GoalKind kind
     for (const Cell& goal : request.goals) {
         if (!baked::in_bounds(g,goal.x,goal.y) || blocked_by_caller(request,goal) ||
             !(kind==GoalKind::Infer?open(request,g,goal):transition_enterable(request,g,goal.x,goal.y))) continue;
-        int distance = reach.distance(goal);
+        int distance = request.goal_entry_mask ? -1 : reach.distance(goal);
         for (int dir=0;dir<(world ? 4 : 8);++dir) {
             Cell source{goal.layer,goal.x-kDirs[dir][0],goal.y-kDirs[dir][1]};
             if (world) { source.x=(source.x+g.width)%g.width; source.y=(source.y+g.height)%g.height; }
@@ -781,6 +909,22 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
                original.tx!=interaction->tx||original.ty!=interaction->ty||original.name!=interaction->name||
                original.group!=interaction->group)continue;
             crossing=original;break;
+        }
+        if(interaction->d&baked::kRecurringNpcSource) {
+            // Only an explicitly reviewed recurring NPC crossing may use a
+            // patrol pose rather than the scenery home. Retain its exact
+            // native type, footprint, layer and counter rules; terrain stays
+            // closed. Existing stationary/manual crossings keep their match.
+            if((interaction->d&255)!=2)return out;
+            const baked::Object* native=nullptr;
+            for(const auto& original:g.objects) {
+                if(original.type!=baked::ObjType::NPC||original.entity_id()!=interaction->entity_id()||
+                   original.name!=interaction->name||original.group!=interaction->group)continue;
+                if(native)return out;
+                native=&original;
+            }
+            if(!native||native->layer!=interaction->layer||native->tw!=interaction->tw||native->th!=interaction->th)return out;
+            crossing=*native;crossing.tx=interaction->tx;crossing.ty=interaction->ty;
         }
         const int mask=(interaction->d>>8)&15;
         if(mask)crossing.b=mask;

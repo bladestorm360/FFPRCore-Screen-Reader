@@ -155,7 +155,7 @@ bool should_suppress()
 
     if (void* equipment = field::cache::get(kEquipmentWindowController)) {
         int state = ui::state_tag(equipment, fEquipWindowStateMachine);
-        // Command bar: let the generic reader handle it. None: the menu is closing.
+        // Command bar speech belongs to CommandBar. None: the menu is closing.
         if (state == STATE_COMMAND || state == STATE_NONE) {
             clear_state();
             return false;
@@ -298,7 +298,7 @@ void d_EquipCommandSetFocus(void* self, int32_t id, bool is_focus, const void* m
 {
     o_EquipCommandSetFocus(self, id, is_focus, mi);
     hooks::guarded("EquipmentCommandController.SetFocus", [&] {
-        // Clears the shop state so the generic cursor reads the command bar.
+        // Transfer speech ownership from shop commands to the equipment bar.
         if (is_focus && detail::shop_menu_active()) detail::shop_clear_for_equipment_submenu();
     });
 }

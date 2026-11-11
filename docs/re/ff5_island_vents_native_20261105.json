@@ -1,0 +1,155 @@
+{
+  "source_script_hashes": {
+    "Map_30471_1/sc_30471_1_door": "b6b191daf27cdd966c51e429753c664aad14f9922a9da545c3f1044335a092bb",
+    "Map_30471_1/sc_e_0493": "2c540df2778d43cb8e753a2e35f670d96454d18de1419f126bb3dbba1cdf25f0",
+    "Map_30471_16/sc_30471_16_door": "df880e4f247aaea5f0706c65ffa183adc771d4fd802b93a01b59e22dcc5b4c14",
+    "Map_30471_16/sc_e_0142": "27193c73ac9ad5ba13c21e456c807b86d1f0fd0e3436913d033e7bad88797efa",
+    "Map_30471_16/sc_e_0142_1": "7de34a7da194a27e3497ce25dee2beb64731d2cabe0aed8aa7c4c3176afc6f32",
+    "Map_30471_2/sc_e_0304_1": "ffcffedcf85cc6e5814461b5afa61949c1f63f1de10a9c7fd34e18c32cbb5003",
+    "Map_30471_2/sc_e_0306_1": "2ce1aa40fed1ed5dd8759507cf07cd3152bafd40eee523f1bfa2b683f9fd33a2",
+    "Map_30471_2/sc_e_0307_1": "5618d414d79b8f54becbc88af3b771c0397ae097551fdb6ad4a204cd891901df",
+    "Map_30471_2/sc_e_0308_1": "4396bcdbc9333406931caced4782a94971cdcee9af1a6484553925dee20884c6",
+    "Map_30471_2/sc_e_0447_1": "5306e0addbca7c2179cb9d5452267a11f3e4f78f9ef5f5deb1c54dd145ba11e3",
+    "Map_30471_2/sc_e_0448_1": "0fd859a0ccd6454d1824ecbdd75de8d075716cc8f02d09eda6bf58d08c97eb07",
+    "Map_30471_2/sc_e_0449_1": "45087960b225052cb3c893e6a4f3a5ba96004672728bcc22fd76a10cbc7bae98",
+    "Map_30471_2/sc_e_0497_1": "402fede47b0141f267251ff21111c3dc2aced7abe0e42da08fa5465dd09e1ec6",
+    "Map_30471_3/sc_e_0304": "17eaa82e303835f6960d2f9070f667efef6908d2d1e9d30b2435f79c368d9cc9",
+    "Map_30471_3/sc_e_0497_2": "3be3c4656a2042169676c4f71cdaf21c0dd76de91c733d5d0e0e700154a22c2a",
+    "Map_30471_4/sc_e_0304_2": "fc04100e9f61a3cde62a9c6b1cc24f1983a95f7b0e9ec450d09e79f118108e66",
+    "Map_30471_4/sc_e_0305": "cf26ce03f661eebc461f849d526df8fa833ec179420797edf4b2a41f58e1cdda",
+    "Map_30471_4/sc_e_0305_1": "420929a8fa02c63a26cb02eeb982c37f12ce44f0868efee1f926877fba6aa5b3",
+    "Map_30471_4/sc_e_0306": "a72abcdfed1f7deab739b5c9da105d7facf9c86d19a5986228766bdf2d3a1b69",
+    "Map_30471_4/sc_e_0307": "4343c81e7c7afdeb2eee58cfc04debdf3aac95f13732cc01ef236d2dc84006f5",
+    "Map_30471_4/sc_e_0308": "2935cd93c13815a65f5be9819ee6e388e131ebf1f5bd89392f5dceb7f96a11bc",
+    "Map_30471_4/sc_e_0497": "dfb30c45f78b8b02559d67ab9d559a8fb7e2d5fc65714e9666b97d4e9bb99989",
+    "Map_30471_4/sc_map_30471_4": "d0c9c2d03f6e080863fd25208c160409dcca2f84345574662bbe18b207d87ea5",
+    "Map_30471_5/sc_e_0306_2": "ce16ac1588a718dd58982fccce18e5966e668df2fba175923e666bbbe7ed2232",
+    "Map_30471_5/sc_e_0447": "8d78dce13d5dcf4831c34aa35a44d87a456adda5a7180f40a94f9e8fc3d6b539",
+    "Map_30471_6/sc_e_0307_2": "1719a04be4df452e1f853847c800fb509fc2e175f12f1e32894430c80245a4c7",
+    "Map_30471_6/sc_e_0448": "91239b42e00a652b2c39b873c554843a906e9e8fd1904740d0d05474a7fdefcd",
+    "Map_30471_7/sc_e_0308_2": "7a4b16bbb30813823916801ef05239d9a45544ac96698740c59aff86d362dac1",
+    "Map_30471_7/sc_e_0449": "d25aa4322690982cdafe11b8360db18c34df7ca7053b85376d4487fe563dbb20"
+  },
+  "arrivals": [
+    {
+      "submap": "Map_30471_3",
+      "entity_id": 5,
+      "object_id": 6,
+      "destination_map": 430,
+      "original_point": 5,
+      "continuation": "sc_e_0304_2",
+      "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+      "arrival_cell": [
+        7,
+        7,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_4",
+      "entity_id": 17,
+      "object_id": 17,
+      "destination_map": 431,
+      "original_point": 1,
+      "continuation": "sc_e_0306_2",
+      "continuation_sha256": "7ebf75f9c9be238f76822120b15b1c784b4743f932840154f0589adf2ae00403",
+      "arrival_cell": [
+        7,
+        11,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_4",
+      "entity_id": 19,
+      "object_id": 18,
+      "destination_map": 432,
+      "original_point": 1,
+      "continuation": "sc_e_0307_2",
+      "continuation_sha256": "1f3ff061c30e6d712ce2369ad335cf399a47b93dd37222449b60695c4fa91c60",
+      "arrival_cell": [
+        6,
+        12,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_4",
+      "entity_id": 15,
+      "object_id": 19,
+      "destination_map": 433,
+      "original_point": 1,
+      "continuation": "sc_e_0308_2",
+      "continuation_sha256": "edf62a80541c0ffd66ac22efe15492b4977a59684ebd609d0f8558b8a0963739",
+      "arrival_cell": [
+        11,
+        12,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_4",
+      "entity_id": 16,
+      "object_id": 16,
+      "destination_map": 429,
+      "original_point": 2,
+      "continuation": "sc_e_0497_2",
+      "continuation_sha256": "330328e3d26a4edc62d0c1f75ab9e61fb35be660eeaaea2a57a8daf9cc03bebb",
+      "arrival_cell": [
+        10,
+        10,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_5",
+      "entity_id": 5,
+      "object_id": 5,
+      "destination_map": 430,
+      "original_point": 5,
+      "continuation": "sc_e_0304_2",
+      "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+      "arrival_cell": [
+        7,
+        7,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_6",
+      "entity_id": 5,
+      "object_id": 7,
+      "destination_map": 430,
+      "original_point": 5,
+      "continuation": "sc_e_0304_2",
+      "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+      "arrival_cell": [
+        7,
+        7,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    },
+    {
+      "submap": "Map_30471_7",
+      "entity_id": 7,
+      "object_id": 7,
+      "destination_map": 430,
+      "original_point": 5,
+      "continuation": "sc_e_0304_2",
+      "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+      "arrival_cell": [
+        7,
+        7,
+        1
+      ],
+      "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+    }
+  ]
+}

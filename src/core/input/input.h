@@ -102,7 +102,9 @@ void announce_context_controls();
 enum class Mod : uint8_t { None = 0, Shift = 1, Ctrl = 2, CtrlShift = 3, Alt = 4, ShiftAlt = 5, CtrlAlt = 6, CtrlShiftAlt = 7 };
 /// KeyContext, in FF1's order (the registry sorts the higher value first). Shop is the native
 /// mod's own (2026-10-10): the shop is open (ShopMenuTracker), for the number row.
-enum class Context : uint8_t { Global, Field, Battle, Shop, Status, BestiaryDetail, Results, KeyHelp, Information };
+enum class Context : uint8_t { Global, Field, Battle, Shop, Status, BestiaryDetail, Results, KeyHelp, Information,
+    BattleParty // read-only overlay during native battle submenus; existing values remain stable
+};
 
 /// Add a key binding that runs a named action. A game module adds its own keys here (from its
 /// install); the most specific modifier, then the most specific context, is tried first.

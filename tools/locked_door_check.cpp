@@ -67,6 +67,7 @@ void check_door(const baked::Submap& map,const baked::Object& original,const map
 int main(){
     std::setvbuf(stdout,nullptr,_IONBF,0);
     expect(navigation_target_kind(Kind::Event,Category::Objects)==TargetKind::Interact,"manual Objects explicitly select interaction goals");
+    expect(navigation_target_kind(Kind::Event,Category::NPCs)==TargetKind::Interact,"reviewed boss contacts keep manual interaction goals in NPCs");
     expect(navigation_target_kind(Kind::MapExit,Category::MapExits)==TargetKind::Transition&&navigation_target_kind(Kind::Event,Category::Events)==TargetKind::Infer&&navigation_target_kind(Kind::SavePoint,Category::SavePoints)==TargetKind::Infer,"ordinary exits/automatic events/save points retain their established semantics");
     std::vector<std::string> storage;storage.reserve(6);
     for(int number=1;number<=6;++number){

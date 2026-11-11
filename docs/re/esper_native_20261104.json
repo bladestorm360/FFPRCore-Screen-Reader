@@ -1,0 +1,9187 @@
+{
+  "source_script_hashes": {
+    "Map_10010/sc_e_0555_11": "a7110d00c9859c583bc1dc57ca30ca1d6f54c08d1f0bd2d0a9a1aa8353d206a9",
+    "Map_10010/sc_e_0555_4": "a6bdfe622673cdb47d487ca2b5217100178933467b3b8656530397e9d321293f",
+    "Map_10010/sc_e_0555_7": "9bde2004b9ac68426db9fdeea14431830a2119c0e6e2c2299583e6c89d126833",
+    "Map_10010/sc_e_0555_9": "862f6929675677eb6a6b5e99cee2534de7e72bd69f5a0e6163770e3df1b1e9fc",
+    "Map_20270/sc_e_0519": "4a76db73021ed5736d117a4e83fb369d7e130d7f2b696016ef959be97e15374b",
+    "Map_20270/sc_e_0520": "6e4733f997af862e07f1961bd8047e11248d4404fece60c13f5b5223ab62f5ea",
+    "Map_20270/sc_e_0522_1": "7f63898ab96bf973be80d323344f810747e05af780a568e558be30ec3991c41c",
+    "Map_20270/sc_e_0523": "94a7685b3c1e760dba10f2f7069144b4db280f8b91f9d178acf02ea4d9159279",
+    "Map_20270/sc_e_0540_1": "cd697acac81542b30311c1721249b55a3687da5eda5cb9cd715c43c268413b33",
+    "Map_20270/sc_e_0551_1": "da9b7452107a86253c5fd356c66eed8c721f4180912378798a71ff2dbd840dc0",
+    "Map_20270/sc_e_0552": "f74bad772d5704cd456de9f3c6eacd49061b4b3707609519c4fb30489e22954a",
+    "Map_20270/sc_e_0552_1": "2cb6f0f8a74d5c7cc265eb4de561fc3c165a3af44ca90ada69349ebafd07abd1",
+    "Map_20270/sc_e_0553": "8abcf408efebc9430a4a2d20d6c47ff530f84e4f6108d02aff560f10082738b5",
+    "Map_20270/sc_e_0553_1": "dcee9c13d4256c2d9e8339d341938ca6bf1462a4bc99ffa4b5a650e0df932f34",
+    "Map_20270/sc_e_0554": "6962eb84a30b0865c2e3fe30c3df3eae87e936be4498cace42dfbbfef7197a77",
+    "Map_20270/sc_e_0554_1": "3c0e0fb4c0b42334fc16176ec0501d06ebe8a8461422314b5bb8d018a1853004",
+    "Map_20270/sc_e_0555": "a6038eeaf99219d71731270cbe8a003545c405a8d389c341afee0b0e9305c4f2",
+    "Map_20270/sc_e_0555_1": "71bece14901c565b0623f192f3d6f659c17174b7786a3126d9016c2dca99101b",
+    "Map_20270/sc_e_0555_10": "dac2f59ae6ead68b26eb25b6767edfddf4c7db6ff01d1b1f1e8d5e98cb15dbe7",
+    "Map_20270/sc_e_0555_5": "f1e84c7c2ef1865e29c97543fa305f0f188356103edc637b8be3e182f72cf5ea",
+    "Map_20270/sc_e_0555_6": "f546413cc6c7c70fc8c7f70d1c0d0b1f400f345656f9613e7125515d9bc66949",
+    "Map_20270/sc_e_0555_8": "16855e531c634c62fafa406bdea1415d6e85d240521f40fbd51bad574085dc67",
+    "Map_20270/sc_e_0556": "a0959f1f85430e6b3b7899e711eb413f41d18b20b8a587d7f460e2c7fd472a53",
+    "Map_20270/sc_e_0557": "9cb0909db9b096af46324f24cbbcf3cea365ba67ee728218bf672593859a5fd2",
+    "Map_20270/sc_e_0744_5": "dc2681e734d84e017e28666b4a8798b27911ed895239e99efc33826b5590645c",
+    "Map_20270/sc_e_0958": "10cb7b740446b2c358de8fbdb4eb14a65c58a3bdf2ff4db22408929069012629",
+    "Map_20270/sc_e_0958_branch": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+    "Map_20270/sc_e_1025": "6bc53e016455ee85e43eba8db547d7e72f471faef3181ba4ed04bf297cbda52b",
+    "Map_20270/sc_e_1027": "3d90c847cb9931ac6c4de84140f2bfef417f7b252da72286ac1c0e474540e5f6",
+    "Map_20270/sc_e_1029": "5993278cb5991a7a6a56cf2fbf4bb4c6069185f0b7bacfac6b9d5fcfc0963679",
+    "Map_20270/sc_e_1032_4": "02708fccddcf53651b8855411a8f3086f5e304c255909570285ad1d78cee53d8",
+    "Map_20270/sc_map_20270": "e0a34591ea1c4c94b76f92f4e75400da3e5a2c037df52d92c25e8c36e4d7ffb3",
+    "Map_20270/sc_npc_20270_1": "64a051a28282ff3395c85536f8b0a9dc2e19b7a1c1e048ba4246ba99861bd1f6",
+    "Map_20270/sc_npc_20270_2": "66fed86fd83c473f320bb252926fa8b3ac7a17b57b1cfc7a27c3c08523acbb13",
+    "Map_20270/sc_npc_20270_3": "73e22e4f6254169e21bcbafc1ef365c416e4738abd95dbed19416a6f2d3864d5",
+    "Map_20270/sc_npc_20270_4": "844cefe2bdef6f2d6dd30fc0fca7fede116d9f236d281bc92a79342101472aa2",
+    "Map_20271_1/sc_map_20271_1": "2cb30f974dd014a5cd7425175e70afab3d4fbbee777ada70e7ee38dcaf47abaa",
+    "Map_20271_1/sc_npc_20271_1_1": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+    "Map_20271_1/sc_npc_20271_1_2": "2d84b9504d7f4bb829b052d8bc656b876159edd3ddf06074ef62a93aac77d5f2",
+    "Map_20271_2/sc_map_20271_2": "5b9c301eca817d41edaef08ea4254c3c2cda60d8d6ae25831d26c186a8c33f2d",
+    "Map_20271_2/sc_npc_20271_2_1": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+    "Map_20271_2/sc_npc_20271_2_2": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+    "Map_20271_3/sc_map_20271_3": "25e7658fa82d73632473d0dace005a980ab8f13cdf98d3d284be583cfe1e9616",
+    "Map_20271_3/sc_npc_20271_3_1": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+    "Map_20271_3/sc_npc_20271_3_2": "6e04d3fcfd312a705f6a5fc2e65766c08ca9051b40fc2d3855c250ca7a698134",
+    "Map_20271_4/sc_e_0429": "ace14d1d9060b8a955694d40f35a06f7589120b2653e6f7ded26ba5a2c927b7b",
+    "Map_20271_4/sc_e_0429_branch": "c50a76fc082b975e15a5f947b6ca2818e6accd21a01496dcf129935892a65b38",
+    "Map_20271_4/sc_e_0429_end": "d64cfcd0a7b12b956a307499b182b05cf17a4bbb9602728ece289dd4ff6b0eaf",
+    "Map_20271_4/sc_e_0522": "8f8ffd6c66bf609b7c9e1957c5ce6a661e73c4292a7a7948782cf1e3fddf6ab8",
+    "Map_20271_4/sc_map_20271_4": "cbb5e6beb8fc0992c3960fd2d4c0b58b4b5f715177710decba187f626ebcdbde",
+    "Map_20271_4/sc_npc_20271_4_1": "738df5e07dd3707f8325cd7fc08384e9c2ead759dea9ccf7faa918a47b428a4c",
+    "Map_20271_4/sc_sty_20271_4": "399ac84e352713c1f6399618008432187a3c1e5a362116e2036af6f3ddfcccb7",
+    "Map_20271_5/sc_e_0521": "f7d2144ebaf7bfd4493f9a8dcce916963a4ad108cb6afe12139369fb92ce6063",
+    "Map_20271_5/sc_e_0540": "676b5ab120c90a1e407decadcdfb36cf7a051f172320093f0f566924663a3038",
+    "Map_20271_5/sc_map_20271_5": "86dce91ea2729a1c1c07e78f1bd40bdd07fa4405a95994cd2bfd7338ff78c93c",
+    "Map_20271_5/sc_npc_20271_5_1": "96d7fa183ec9aa8aa4d92ea48fbab0ba0ef8ae6676e061f719d090c1bbd49871",
+    "Map_20271_6/sc_e_0539_3": "e75570dea9049e7d116d7e3f8e180fdcfedb9f358936da08acaca98a957dddba",
+    "Map_20271_6/sc_map_20271_6": "4e4a04042be96b86f1ae9e5afcacfc776ccfb9bee0ce245fa267024febc84de6",
+    "Map_20271_6/sc_npc_20271_6_1": "6ad2045180ddb04d68e9f0cf7840c674fc3884f91c137a2004edd8b929e3017f",
+    "Map_20271_7/sc_map_20271_7": "db41978facc9d4c264c61dbd2d2133efbcc768b0f7169d02066135bbb059c217",
+    "Map_20271_7/sc_npc_20271_7_1": "ae963cf640aa7d348543450b93977c677f9c68f745cfd3631bb82c62c6f3186a",
+    "Map_30541_1/sc_e_0524": "63e6c4e6a7fb8f414fc33b45018bc53c26e79a968b3876d877e16118cea19329",
+    "Map_30541_2/sc_e_0525": "d3e0d42bcd05628dfb81b277f5cc1112e0517ecd9e73598ddce94c569388c19a",
+    "Map_30541_2/sc_e_0525_1": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+    "Map_30541_2/sc_e_0526": "acd89b7acd52147fa701ce2e7d14743f9d56cc6760b4a116577f785415d61675",
+    "Map_30541_2/sc_e_0526_1": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+    "Map_30541_2/sc_e_0527": "32e9d67226889969067c9a9073c00a4e1cd8cbadff3306d3d913699dd88c2122",
+    "Map_30541_2/sc_e_0527_1": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+    "Map_30541_3/sc_e_0528": "83fb851f29a5fb157ae0a25e898efedf1c0aeb7b4087806d911e6378045020c9",
+    "Map_30541_3/sc_e_0528_1": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+    "Map_30541_3/sc_e_0529": "f16946ec7aa37639c4dc164d18549305d5f04fec0be188a5a062e1486e83fd25",
+    "Map_30541_3/sc_e_0529_1": "8f1398492da1166d3ff57372d8b622a62b664153932c25bab2ebdf5d6a1140a1",
+    "Map_30541_3/sc_e_0530": "1d20e87d273c7747130ae8fdb78d208a6e026e53ca09b84de191bf51e946b5b1",
+    "Map_30541_3/sc_e_0530_1": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+    "Map_30541_3/sc_e_0531": "0e9fd0148b6cb48d627ff1209a0b436efc97660355073a92f6e442e4e5daf97b",
+    "Map_30541_3/sc_e_0531_1": "65a940c090837d2168cc7175caf9dfceeedde92dd9df311eca8d3bcfa40954f2",
+    "Map_30541_3/sc_e_0532": "37ef5e2eda7a896d60869c1a9849c6946f2bd5ac24dd656699dc5f4cc4736657",
+    "Map_30541_3/sc_e_0532_1": "ae7dc8e98b24a9a1c50f396a99a5fd131160553e27365d03852ae8ce264df3fd",
+    "Map_30541_4/sc_e_0533": "2a71be7cd2ebe6f8896392b8763daf944a18465c825370c489ba9edb73c23cff",
+    "Map_30541_4/sc_e_0533_1": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+    "Map_30541_4/sc_e_0534": "c8bc97ef3672a7d334bc69b152b45432ac35b159ebe0a0c71ce81f81f69cda11",
+    "Map_30541_4/sc_e_0534_1": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+    "Map_30541_4/sc_e_0535": "1c7ada8392fbad772dbe7f12c55fd88310bebcdc791d72ac5e379c09806b9868",
+    "Map_30541_4/sc_e_0535_1": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+    "Map_30541_6/sc_e_0536": "1251fedc7bec3c6316d5f84fd2d719a27afe024ddc1666429d537b98b2f76956",
+    "Map_30541_6/sc_e_0536_1": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+    "Map_30541_6/sc_e_0537": "3a44aeaa7e38f4c21a21ada7f10b956c02dfd850e9c73b6eeb8abb6e24a8328e",
+    "Map_30541_6/sc_e_0537_1": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+    "Map_30541_9/sc_e_0539": "4740c824a8e5aa7ef1d8a0cd4c30c475dbf5772f9c5f69751c64233c435718c4",
+    "Map_30541_9/sc_e_0539_1": "3a3c3f1ba8aef61549bd830c107a57815019aa352004e66a3e07a8db615e16f1",
+    "Map_30550/sc_map_30550": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+    "Map_30551_1/sc_e_0541": "66f07eea32bc5b3ec5d6733d36231b60e1cbfddc8ed09fb38a93130328d99e1d",
+    "Map_30551_1/sc_map_30551_1": "0c2680646939307481361d6483c2b8b166c5955ef6c1ef1094a7c58332487c80",
+    "Map_30561_1/sc_e_0542": "513a0417fb4f3c2856a0af07e32f30cc6673e7c77e66c22e702cd6fe65a0107d",
+    "Map_30561_1/sc_e_0543": "8fc4791208ebb81f4fa6e46ab77b1ac41afdbba84c7c4cc543161923f54880ee",
+    "Map_30561_1/sc_e_0544": "94a8bc6f31a7d709ae653303fc3e07c49aa111a0a4eac08bfed7c7c4b239b07b",
+    "Map_30561_1/sc_e_0545": "d349517aa093c25c873e89902daf40ebe238e9c1cde5a260ff5b10c79c1e57b7",
+    "Map_30561_1/sc_e_0548_1": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+    "Map_30561_1/sc_e_0549_1": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+    "Map_30561_1/sc_e_0550_1": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+    "Map_30561_1/sc_map_30561_1": "6e026f965eb9144bfbe62d4517e8c5b52ee5e32ec678d7b4becc24399796dc12",
+    "Map_30561_2/sc_e_0546": "477a98a314af97a8ed473d7c144d94b176e70a610b561afad94b4f993c0d819f",
+    "Map_30561_2/sc_e_0547": "bcb772351bf2dc542649819a5b0e2d105242a8e45b6ac12326d90be5ee69486a",
+    "Map_30561_2/sc_e_0547_1": "f35780fa9b99dba231b8438b07b5ebf58e7f8c34373fc16ef498e1aece722c17",
+    "Map_30561_2/sc_map_30561_2": "d710f3c60cd0f5bad80a3c222b76717a40a57ccca6a61416a3d4a50b55c5d8a6",
+    "Map_30561_2/sc_npc_30561_2_1": "78ddbbdf5dda48f4e739fca36d717d661dde473464ed25b2863dc48ed6111b39",
+    "Map_30561_2/sc_npc_30561_2_2": "9fc71b2aa2c93a64574356b4434c94bc7484996787e74f074747619d5e256538",
+    "Map_30561_2/sc_npc_30561_2_3": "c5b3f520ae82fc23e2235ed469b4bbb4db2177da4d7dafc7dd8b2cd5843f4e64",
+    "Map_30561_3/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "Map_30561_3/sc_e_0548": "cc41f32ca2ad0da59fbb8602215370c73d8771c55e50aec9b31f3d69db1c68a4",
+    "Map_30561_3/sc_e_0549": "a5d5f90701d74bdb749d4d255dd5430655b0ab7227779c1e0fe7cb5c321291d7",
+    "Map_30561_3/sc_e_0550": "07524002733c6ddd18e6c044c971f47cb65fe7f0e71dd4f3d56b2472d6479201",
+    "Map_30561_3/sc_map_30561_3": "4570c81ccde49d2217e5bd0f004c2d282160a45937e7954d2ffcc642c956ae98",
+    "Map_30591_1/sc_e_0551": "56f556f4b6a002ca06e8d575b6bbf1a7528ebac127c1b9bb30d3771d1986c758",
+    "Map_30591_1/sc_map_30591_1": "2b4eb609d8fa54fa6dbe386da814996bd68bc470336de27cd8831af451071dc3",
+    "Map_30600/sc_e_0538_1": "df081b52ffc9ef5f6c9e340963a0686a4641218d3101588aca331c528d57bd4e",
+    "Map_30601_1/sc_e_0538": "62f94a5ced08e7432f10a64757dae72b9f6c75d52a40d69e2eb356790230c557",
+    "Map_40034/sc_e_0555_2": "9fed3a62de5f63d3c1d2c0468d1cdff37cd6649a61f0f378cb52a223fd94e61b",
+    "Map_40038/sc_e_0555_b": "6368b0ad87f8610dd9d76fd48509b34eb018b07ae1b0e7370f224db9ad5ea515"
+  },
+  "facts": {
+    "Map_10010/sc_e_0555_11": {
+      "sha256": "a7110d00c9859c583bc1dc57ca30ca1d6f54c08d1f0bd2d0a9a1aa8353d206a9",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_10010/sc_e_0555_4": {
+      "sha256": "a6bdfe622673cdb47d487ca2b5217100178933467b3b8656530397e9d321293f",
+      "transfers": [
+        [
+          32,
+          180,
+          1,
+          "sc_e_0555_5"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          5,
+          "カメラターゲット変更：カメラ"
+        ],
+        [
+          16,
+          "飛空艇目的地移動：sc_e_0555_4"
+        ]
+      ]
+    },
+    "Map_10010/sc_e_0555_7": {
+      "sha256": "9bde2004b9ac68426db9fdeea14431830a2119c0e6e2c2299583e6c89d126833",
+      "transfers": [
+        [
+          1,
+          180,
+          1,
+          "sc_e_0555_8"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_10010/sc_e_0555_9": {
+      "sha256": "862f6929675677eb6a6b5e99cee2534de7e72bd69f5a0e6163770e3df1b1e9fc",
+      "transfers": [
+        [
+          23,
+          180,
+          1,
+          "sc_e_0555_10"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          7,
+          "乗り物に乗る：ブラックジャック号(アニメ・BGMなし)"
+        ],
+        [
+          8,
+          "カメラターゲット変更：プレイヤー"
+        ],
+        [
+          11,
+          "飛空艇目的地移動：sc_e_0555_9"
+        ],
+        [
+          14,
+          "乗り物から降りる(アニメ・BGMなし)"
+        ],
+        [
+          15,
+          "カメラターゲット変更：カメラ"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0519": {
+      "sha256": "4a76db73021ed5736d117a4e83fb369d7e130d7f2b696016ef959be97e15374b",
+      "transfers": [],
+      "flags": [
+        [
+          17,
+          "ScenarioFlag2",
+          13,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0520": {
+      "sha256": "6e4733f997af862e07f1961bd8047e11248d4404fece60c13f5b5223ab62f5ea",
+      "transfers": [],
+      "flags": [
+        [
+          18,
+          "ScenarioFlag2",
+          14,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0522_1": {
+      "sha256": "7f63898ab96bf973be80d323344f810747e05af780a568e558be30ec3991c41c",
+      "transfers": [],
+      "flags": [
+        [
+          1,
+          "ScenarioFlag2",
+          16,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0523": {
+      "sha256": "94a7685b3c1e760dba10f2f7069144b4db280f8b91f9d178acf02ea4d9159279",
+      "transfers": [
+        [
+          122,
+          412,
+          1,
+          ""
+        ]
+      ],
+      "flags": [
+        [
+          118,
+          "ScenarioFlag2",
+          17,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          119,
+          "メンバー加入：ストラゴス"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0540_1": {
+      "sha256": "cd697acac81542b30311c1721249b55a3687da5eda5cb9cd715c43c268413b33",
+      "transfers": [],
+      "flags": [
+        [
+          37,
+          "ScenarioFlag2",
+          20,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          38,
+          "メンバー離脱：シャドウ"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0551_1": {
+      "sha256": "da9b7452107a86253c5fd356c66eed8c721f4180912378798a71ff2dbd840dc0",
+      "transfers": [],
+      "flags": [
+        [
+          188,
+          "ScenarioFlag2",
+          25,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0552": {
+      "sha256": "f74bad772d5704cd456de9f3c6eacd49061b4b3707609519c4fb30489e22954a",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          2,
+          519,
+          0,
+          "sc_e_0552_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20270/sc_e_0552_1": {
+      "sha256": "2cb6f0f8a74d5c7cc265eb4de561fc3c165a3af44ca90ada69349ebafd07abd1",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0553": {
+      "sha256": "8abcf408efebc9430a4a2d20d6c47ff530f84e4f6108d02aff560f10082738b5",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          2,
+          519,
+          0,
+          "sc_e_0553_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20270/sc_e_0553_1": {
+      "sha256": "dcee9c13d4256c2d9e8339d341938ca6bf1462a4bc99ffa4b5a650e0df932f34",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0554": {
+      "sha256": "6962eb84a30b0865c2e3fe30c3df3eae87e936be4498cace42dfbbfef7197a77",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          2,
+          519,
+          0,
+          "sc_e_0554_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20270/sc_e_0554_1": {
+      "sha256": "3c0e0fb4c0b42334fc16176ec0501d06ebe8a8461422314b5bb8d018a1853004",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0555": {
+      "sha256": "a6038eeaf99219d71731270cbe8a003545c405a8d389c341afee0b0e9305c4f2",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          6,
+          389,
+          0,
+          "sc_e_0555_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20270/sc_e_0555_1": {
+      "sha256": "71bece14901c565b0623f192f3d6f659c17174b7786a3126d9016c2dca99101b",
+      "transfers": [
+        [
+          51,
+          606,
+          1,
+          "sc_e_0555_2"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          47,
+          "メンバー離脱：レオ"
+        ],
+        [
+          48,
+          "メンバー加入：セリス"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0555_10": {
+      "sha256": "dac2f59ae6ead68b26eb25b6767edfddf4c7db6ff01d1b1f1e8d5e98cb15dbe7",
+      "transfers": [
+        [
+          102,
+          1,
+          32,
+          "sc_e_0555_11"
+        ]
+      ],
+      "flags": [
+        [
+          97,
+          "ScenarioFlag2",
+          26,
+          1
+        ],
+        [
+          98,
+          "ScenarioFlag4",
+          149,
+          0
+        ],
+        [
+          99,
+          "ScenarioFlag4",
+          204,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0555_5": {
+      "sha256": "f1e84c7c2ef1865e29c97543fa305f0f188356103edc637b8be3e182f72cf5ea",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          85,
+          392,
+          0,
+          "sc_e_0555_6"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_20270/sc_e_0555_6": {
+      "sha256": "f546413cc6c7c70fc8c7f70d1c0d0b1f400f345656f9613e7125515d9bc66949",
+      "transfers": [
+        [
+          52,
+          180,
+          1,
+          "sc_e_0555_8"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          4,
+          "メンバー離脱：ケフカ"
+        ],
+        [
+          5,
+          "メンバー離脱：ガストラ"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0555_8": {
+      "sha256": "16855e531c634c62fafa406bdea1415d6e85d240521f40fbd51bad574085dc67",
+      "transfers": [
+        [
+          50,
+          1,
+          102,
+          "sc_e_0555_9"
+        ]
+      ],
+      "flags": [
+        [
+          45,
+          "ScenarioFlag2",
+          26,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0556": {
+      "sha256": "a0959f1f85430e6b3b7899e711eb413f41d18b20b8a587d7f460e2c7fd472a53",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0557": {
+      "sha256": "9cb0909db9b096af46324f24cbbcf3cea365ba67ee728218bf672593859a5fd2",
+      "transfers": [],
+      "flags": [
+        [
+          29,
+          "ScenarioFlag2",
+          27,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_0744_5": {
+      "sha256": "dc2681e734d84e017e28666b4a8798b27911ed895239e99efc33826b5590645c",
+      "transfers": [
+        [
+          33,
+          311,
+          1,
+          "sc_e_0744_6"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          3,
+          "セピア中めまい開始"
+        ],
+        [
+          7,
+          "セピア中めまい終了"
+        ],
+        [
+          26,
+          "セピア中めまい終了"
+        ],
+        [
+          28,
+          "セピア中めまい開始"
+        ],
+        [
+          31,
+          "セピア中めまい終了"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0958": {
+      "sha256": "10cb7b740446b2c358de8fbdb4eb14a65c58a3bdf2ff4db22408929069012629",
+      "transfers": [],
+      "flags": [
+        [
+          26,
+          "ScenarioFlag2",
+          212,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          5,
+          "セピア中めまい開始"
+        ],
+        [
+          11,
+          "セピア中めまい終了"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_0958_branch": {
+      "sha256": "a3b38a4ddea6226b4256ebb2b8575ff0626c2bc90da8b71db68dd9a55285cc27",
+      "transfers": [
+        [
+          17,
+          70,
+          1,
+          "sc_sty_20081_4_end"
+        ],
+        [
+          19,
+          85,
+          1,
+          "sc_sty_20111_1_end"
+        ],
+        [
+          21,
+          93,
+          1,
+          "sc_sty_20121_1_end"
+        ],
+        [
+          23,
+          98,
+          1,
+          "sc_sty_20131_1_end"
+        ],
+        [
+          25,
+          110,
+          1,
+          "sc_sty_20151_5_end"
+        ],
+        [
+          27,
+          184,
+          1,
+          "sc_e_0429_end"
+        ],
+        [
+          29,
+          199,
+          1,
+          "sc_sty_20321_5_end"
+        ],
+        [
+          31,
+          203,
+          1,
+          "sc_sty_20331_2_end"
+        ],
+        [
+          33,
+          215,
+          1,
+          "sc_sty_20351_1_end"
+        ],
+        [
+          35,
+          222,
+          1,
+          "sc_sty_20361_3_end"
+        ],
+        [
+          37,
+          263,
+          1,
+          "sc_sty_20381_1_end"
+        ],
+        [
+          39,
+          275,
+          1,
+          "sc_sty_20411_1_end"
+        ],
+        [
+          41,
+          281,
+          1,
+          "sc_sty_20421_3_end"
+        ],
+        [
+          43,
+          287,
+          1,
+          "sc_sty_20431_5_end"
+        ],
+        [
+          45,
+          300,
+          1,
+          "sc_e_0894_end"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_e_1025": {
+      "sha256": "6bc53e016455ee85e43eba8db547d7e72f471faef3181ba4ed04bf297cbda52b",
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1026_0"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：リルム"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "顔グラ表示終了"
+        ],
+        [
+          11,
+          "モノクロフィルターはずす"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_1027": {
+      "sha256": "3d90c847cb9931ac6c4de84140f2bfef417f7b252da72286ac1c0e474540e5f6",
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1028_0"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：シャドウ"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "顔グラ表示終了"
+        ],
+        [
+          11,
+          "モノクロフィルターはずす"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_1029": {
+      "sha256": "5993278cb5991a7a6a56cf2fbf4bb4c6069185f0b7bacfac6b9d5fcfc0963679",
+      "transfers": [
+        [
+          12,
+          584,
+          1,
+          "sc_e_1030_0"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          2,
+          "顔グラ表示機能初期化"
+        ],
+        [
+          3,
+          "顔グラ表示：ストラゴス"
+        ],
+        [
+          4,
+          "モノクロフィルターかける"
+        ],
+        [
+          10,
+          "顔グラ表示終了"
+        ],
+        [
+          11,
+          "モノクロフィルターはずす"
+        ]
+      ]
+    },
+    "Map_20270/sc_e_1032_4": {
+      "sha256": "02708fccddcf53651b8855411a8f3086f5e304c255909570285ad1d78cee53d8",
+      "transfers": [
+        [
+          27,
+          268,
+          1,
+          "sc_e_1032_5"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_map_20270": {
+      "sha256": "e0a34591ea1c4c94b76f92f4e75400da3e5a2c037df52d92c25e8c36e4d7ffb3",
+      "transfers": [],
+      "flags": [
+        [
+          12,
+          "ScenarioFlag4",
+          158,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_npc_20270_1": {
+      "sha256": "64a051a28282ff3395c85536f8b0a9dc2e19b7a1c1e048ba4246ba99861bd1f6",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_npc_20270_2": {
+      "sha256": "66fed86fd83c473f320bb252926fa8b3ac7a17b57b1cfc7a27c3c08523acbb13",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_npc_20270_3": {
+      "sha256": "73e22e4f6254169e21bcbafc1ef365c416e4738abd95dbed19416a6f2d3864d5",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20270/sc_npc_20270_4": {
+      "sha256": "844cefe2bdef6f2d6dd30fc0fca7fede116d9f236d281bc92a79342101472aa2",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_1/sc_map_20271_1": {
+      "sha256": "2cb30f974dd014a5cd7425175e70afab3d4fbbee777ada70e7ee38dcaf47abaa",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_1/sc_npc_20271_1_1": {
+      "sha256": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_1/sc_npc_20271_1_2": {
+      "sha256": "2d84b9504d7f4bb829b052d8bc656b876159edd3ddf06074ef62a93aac77d5f2",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_2/sc_map_20271_2": {
+      "sha256": "5b9c301eca817d41edaef08ea4254c3c2cda60d8d6ae25831d26c186a8c33f2d",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_2/sc_npc_20271_2_1": {
+      "sha256": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_2/sc_npc_20271_2_2": {
+      "sha256": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_3/sc_map_20271_3": {
+      "sha256": "25e7658fa82d73632473d0dace005a980ab8f13cdf98d3d284be583cfe1e9616",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_3/sc_npc_20271_3_1": {
+      "sha256": "3813a31af84a95e08f7a524610327efcadeb25ba562930723e288358273550af",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_3/sc_npc_20271_3_2": {
+      "sha256": "6e04d3fcfd312a705f6a5fc2e65766c08ca9051b40fc2d3855c250ca7a698134",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_e_0429": {
+      "sha256": "ace14d1d9060b8a955694d40f35a06f7589120b2653e6f7ded26ba5a2c927b7b",
+      "transfers": [],
+      "flags": [],
+      "choices": [
+        [
+          3,
+          "E0429_00_184_c_01",
+          "E0429_00_184_c_02"
+        ]
+      ],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_e_0429_branch": {
+      "sha256": "c50a76fc082b975e15a5f947b6ca2818e6accd21a01496dcf129935892a65b38",
+      "transfers": [
+        [
+          8,
+          584,
+          1,
+          "sc_e_0955"
+        ],
+        [
+          11,
+          354,
+          1,
+          "sc_e_0956"
+        ],
+        [
+          14,
+          376,
+          1,
+          "sc_e_0957"
+        ],
+        [
+          16,
+          180,
+          1,
+          "sc_e_0958"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_e_0429_end": {
+      "sha256": "d64cfcd0a7b12b956a307499b182b05cf17a4bbb9602728ece289dd4ff6b0eaf",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_e_0522": {
+      "sha256": "8f8ffd6c66bf609b7c9e1957c5ce6a661e73c4292a7a7948782cf1e3fddf6ab8",
+      "transfers": [
+        [
+          48,
+          180,
+          7,
+          "sc_e_0522_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [
+        [
+          2
+        ]
+      ],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_map_20271_4": {
+      "sha256": "cbb5e6beb8fc0992c3960fd2d4c0b58b4b5f715177710decba187f626ebcdbde",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_npc_20271_4_1": {
+      "sha256": "738df5e07dd3707f8325cd7fc08384e9c2ead759dea9ccf7faa918a47b428a4c",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_4/sc_sty_20271_4": {
+      "sha256": "399ac84e352713c1f6399618008432187a3c1e5a362116e2036af6f3ddfcccb7",
+      "transfers": [],
+      "flags": [],
+      "choices": [
+        [
+          3
+        ]
+      ],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_5/sc_e_0521": {
+      "sha256": "f7d2144ebaf7bfd4493f9a8dcce916963a4ad108cb6afe12139369fb92ce6063",
+      "transfers": [
+        [
+          107,
+          180,
+          8,
+          ""
+        ]
+      ],
+      "flags": [
+        [
+          106,
+          "ScenarioFlag2",
+          15,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          14,
+          "名前入力：ストラゴス"
+        ],
+        [
+          45,
+          "名前入力：リルム"
+        ]
+      ]
+    },
+    "Map_20271_5/sc_e_0540": {
+      "sha256": "676b5ab120c90a1e407decadcdfb36cf7a051f172320093f0f566924663a3038",
+      "transfers": [
+        [
+          3,
+          180,
+          8,
+          "sc_e_0540_1"
+        ],
+        [
+          6,
+          180,
+          8,
+          ""
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_5/sc_map_20271_5": {
+      "sha256": "86dce91ea2729a1c1c07e78f1bd40bdd07fa4405a95994cd2bfd7338ff78c93c",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_5/sc_npc_20271_5_1": {
+      "sha256": "96d7fa183ec9aa8aa4d92ea48fbab0ba0ef8ae6676e061f719d090c1bbd49871",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_6/sc_e_0539_3": {
+      "sha256": "e75570dea9049e7d116d7e3f8e180fdcfedb9f358936da08acaca98a957dddba",
+      "transfers": [],
+      "flags": [
+        [
+          65,
+          "ScenarioFlag2",
+          19,
+          1
+        ],
+        [
+          66,
+          "ScenarioFlag4",
+          179,
+          0
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_6/sc_map_20271_6": {
+      "sha256": "4e4a04042be96b86f1ae9e5afcacfc776ccfb9bee0ce245fa267024febc84de6",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_6/sc_npc_20271_6_1": {
+      "sha256": "6ad2045180ddb04d68e9f0cf7840c674fc3884f91c137a2004edd8b929e3017f",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_7/sc_map_20271_7": {
+      "sha256": "db41978facc9d4c264c61dbd2d2133efbcc768b0f7169d02066135bbb059c217",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_20271_7/sc_npc_20271_7_1": {
+      "sha256": "ae963cf640aa7d348543450b93977c677f9c68f745cfd3631bb82c62c6f3186a",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_1/sc_e_0524": {
+      "sha256": "63e6c4e6a7fb8f414fc33b45018bc53c26e79a968b3876d877e16118cea19329",
+      "transfers": [],
+      "flags": [
+        [
+          6,
+          "ScenarioFlag2",
+          18,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0525": {
+      "sha256": "d3e0d42bcd05628dfb81b277f5cc1112e0517ecd9e73598ddce94c569388c19a",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0525_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0525_1": {
+      "sha256": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0526": {
+      "sha256": "acd89b7acd52147fa701ce2e7d14743f9d56cc6760b4a116577f785415d61675",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0526_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0526_1": {
+      "sha256": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0527": {
+      "sha256": "32e9d67226889969067c9a9073c00a4e1cd8cbadff3306d3d913699dd88c2122",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0527_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_2/sc_e_0527_1": {
+      "sha256": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0528": {
+      "sha256": "83fb851f29a5fb157ae0a25e898efedf1c0aeb7b4087806d911e6378045020c9",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0528_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0528_1": {
+      "sha256": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0529": {
+      "sha256": "f16946ec7aa37639c4dc164d18549305d5f04fec0be188a5a062e1486e83fd25",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0529_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0529_1": {
+      "sha256": "8f1398492da1166d3ff57372d8b622a62b664153932c25bab2ebdf5d6a1140a1",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0530": {
+      "sha256": "1d20e87d273c7747130ae8fdb78d208a6e026e53ca09b84de191bf51e946b5b1",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0530_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0530_1": {
+      "sha256": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0531": {
+      "sha256": "0e9fd0148b6cb48d627ff1209a0b436efc97660355073a92f6e442e4e5daf97b",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0531_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0531_1": {
+      "sha256": "65a940c090837d2168cc7175caf9dfceeedde92dd9df311eca8d3bcfa40954f2",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0532": {
+      "sha256": "37ef5e2eda7a896d60869c1a9849c6946f2bd5ac24dd656699dc5f4cc4736657",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          9,
+          412,
+          0,
+          "sc_e_0532_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_3/sc_e_0532_1": {
+      "sha256": "ae7dc8e98b24a9a1c50f396a99a5fd131160553e27365d03852ae8ce264df3fd",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0533": {
+      "sha256": "2a71be7cd2ebe6f8896392b8763daf944a18465c825370c489ba9edb73c23cff",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0533_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0533_1": {
+      "sha256": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0534": {
+      "sha256": "c8bc97ef3672a7d334bc69b152b45432ac35b159ebe0a0c71ce81f81f69cda11",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0534_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0534_1": {
+      "sha256": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0535": {
+      "sha256": "1c7ada8392fbad772dbe7f12c55fd88310bebcdc791d72ac5e379c09806b9868",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0535_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_4/sc_e_0535_1": {
+      "sha256": "759c3ed3080bef814a100c6bad6c185dc09006640dcc8f8765145f9a41585b64",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_6/sc_e_0536": {
+      "sha256": "1251fedc7bec3c6316d5f84fd2d719a27afe024ddc1666429d537b98b2f76956",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0536_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_6/sc_e_0536_1": {
+      "sha256": "14618c101c8f05ea02b44d4766421f097ffac0ba1dda29bcbce93a00a40be512",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_6/sc_e_0537": {
+      "sha256": "3a44aeaa7e38f4c21a21ada7f10b956c02dfd850e9c73b6eeb8abb6e24a8328e",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          1,
+          159,
+          160,
+          "sc_e_0537_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_6/sc_e_0537_1": {
+      "sha256": "40110df005d9288ca88af7cdf79c20f25b9076a0718ab68b0abd93d7cb104fe0",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30541_9/sc_e_0539": {
+      "sha256": "4740c824a8e5aa7ef1d8a0cd4c30c475dbf5772f9c5f69751c64233c435718c4",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          6,
+          450,
+          0,
+          "sc_e_0539_1"
+        ]
+      ],
+      "calls": []
+    },
+    "Map_30541_9/sc_e_0539_1": {
+      "sha256": "3a3c3f1ba8aef61549bd830c107a57815019aa352004e66a3e07a8db615e16f1",
+      "transfers": [
+        [
+          50,
+          186,
+          1,
+          "sc_e_0539_3"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30550/sc_map_30550": {
+      "sha256": "861b32a9fe0e740ba817fd9df0d9ac6e2865bc11c01bb23fd30c9f24f874619f",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30551_1/sc_e_0541": {
+      "sha256": "66f07eea32bc5b3ec5d6733d36231b60e1cbfddc8ed09fb38a93130328d99e1d",
+      "transfers": [],
+      "flags": [
+        [
+          3,
+          "ScenarioFlag2",
+          21,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30551_1/sc_map_30551_1": {
+      "sha256": "0c2680646939307481361d6483c2b8b166c5955ef6c1ef1094a7c58332487c80",
+      "transfers": [],
+      "flags": [
+        [
+          1,
+          "ScenarioFlag4",
+          180,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0542": {
+      "sha256": "513a0417fb4f3c2856a0af07e32f30cc6673e7c77e66c22e702cd6fe65a0107d",
+      "transfers": [],
+      "flags": [
+        [
+          3,
+          "ScenarioFlag2",
+          22,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0543": {
+      "sha256": "8fc4791208ebb81f4fa6e46ab77b1ac41afdbba84c7c4cc543161923f54880ee",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0544": {
+      "sha256": "94a8bc6f31a7d709ae653303fc3e07c49aa111a0a4eac08bfed7c7c4b239b07b",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0545": {
+      "sha256": "d349517aa093c25c873e89902daf40ebe238e9c1cde5a260ff5b10c79c1e57b7",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0548_1": {
+      "sha256": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0549_1": {
+      "sha256": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_e_0550_1": {
+      "sha256": "58ccfbeb7da98c54b523926a7b4a7065d4cb4c0c08b85f1d22884ef86527cb10",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_1/sc_map_30561_1": {
+      "sha256": "6e026f965eb9144bfbe62d4517e8c5b52ee5e32ec678d7b4becc24399796dc12",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_2/sc_e_0546": {
+      "sha256": "477a98a314af97a8ed473d7c144d94b176e70a610b561afad94b4f993c0d819f",
+      "transfers": [],
+      "flags": [
+        [
+          39,
+          "ScenarioFlag2",
+          23,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_2/sc_e_0547": {
+      "sha256": "bcb772351bf2dc542649819a5b0e2d105242a8e45b6ac12326d90be5ee69486a",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [
+        [
+          23,
+          476,
+          0,
+          "sc_e_0547_1"
+        ]
+      ],
+      "calls": [
+        [
+          19,
+          "メンバー加入：リルム"
+        ],
+        [
+          22,
+          "控えに移動：リルム"
+        ]
+      ]
+    },
+    "Map_30561_2/sc_e_0547_1": {
+      "sha256": "f35780fa9b99dba231b8438b07b5ebf58e7f8c34373fc16ef498e1aece722c17",
+      "transfers": [],
+      "flags": [
+        [
+          17,
+          "ScenarioFlag2",
+          24,
+          1
+        ]
+      ],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          18,
+          "メンバー加入：リルム"
+        ]
+      ]
+    },
+    "Map_30561_2/sc_map_30561_2": {
+      "sha256": "d710f3c60cd0f5bad80a3c222b76717a40a57ccca6a61416a3d4a50b55c5d8a6",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_2/sc_npc_30561_2_1": {
+      "sha256": "78ddbbdf5dda48f4e739fca36d717d661dde473464ed25b2863dc48ed6111b39",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_2/sc_npc_30561_2_2": {
+      "sha256": "9fc71b2aa2c93a64574356b4434c94bc7484996787e74f074747619d5e256538",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_2/sc_npc_30561_2_3": {
+      "sha256": "c5b3f520ae82fc23e2235ed469b4bbb4db2177da4d7dafc7dd8b2cd5843f4e64",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_3/sc_e_0009": {
+      "sha256": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+      "transfers": [],
+      "flags": [
+        [
+          4,
+          "ScenarioFlag1",
+          7,
+          1
+        ]
+      ],
+      "choices": [
+        [
+          6
+        ]
+      ],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_3/sc_e_0548": {
+      "sha256": "cc41f32ca2ad0da59fbb8602215370c73d8771c55e50aec9b31f3d69db1c68a4",
+      "transfers": [
+        [
+          2,
+          424,
+          7,
+          "sc_e_0548_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_3/sc_e_0549": {
+      "sha256": "a5d5f90701d74bdb749d4d255dd5430655b0ab7227779c1e0fe7cb5c321291d7",
+      "transfers": [
+        [
+          2,
+          424,
+          8,
+          "sc_e_0549_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_3/sc_e_0550": {
+      "sha256": "07524002733c6ddd18e6c044c971f47cb65fe7f0e71dd4f3d56b2472d6479201",
+      "transfers": [
+        [
+          2,
+          424,
+          9,
+          "sc_e_0550_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30561_3/sc_map_30561_3": {
+      "sha256": "4570c81ccde49d2217e5bd0f004c2d282160a45937e7954d2ffcc642c956ae98",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30591_1/sc_e_0551": {
+      "sha256": "56f556f4b6a002ca06e8d575b6bbf1a7528ebac127c1b9bb30d3771d1986c758",
+      "transfers": [
+        [
+          128,
+          180,
+          1,
+          "sc_e_0551_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": [
+        [
+          123,
+          "メンバー加入：レオ"
+        ]
+      ]
+    },
+    "Map_30591_1/sc_map_30591_1": {
+      "sha256": "2b4eb609d8fa54fa6dbe386da814996bd68bc470336de27cd8831af451071dc3",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30600/sc_e_0538_1": {
+      "sha256": "df081b52ffc9ef5f6c9e340963a0686a4641218d3101588aca331c528d57bd4e",
+      "transfers": [],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_30601_1/sc_e_0538": {
+      "sha256": "62f94a5ced08e7432f10a64757dae72b9f6c75d52a40d69e2eb356790230c557",
+      "transfers": [
+        [
+          2,
+          431,
+          3,
+          "sc_e_0538_1"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_40034/sc_e_0555_2": {
+      "sha256": "9fed3a62de5f63d3c1d2c0468d1cdff37cd6649a61f0f378cb52a223fd94e61b",
+      "transfers": [
+        [
+          31,
+          640,
+          1,
+          "sc_e_0555_b"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    },
+    "Map_40038/sc_e_0555_b": {
+      "sha256": "6368b0ad87f8610dd9d76fd48509b34eb018b07ae1b0e7370f224db9ad5ea515",
+      "transfers": [
+        [
+          34,
+          1,
+          1,
+          "sc_e_0555_4"
+        ]
+      ],
+      "flags": [],
+      "choices": [],
+      "encounters": [],
+      "calls": []
+    }
+  },
+  "actors": [
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 18,
+      "entity": 17,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 19,
+      "entity": 18,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 20,
+      "entity": 19,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 3,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 21,
+      "entity": 20,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 4,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 22,
+      "entity": 21,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 5,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 23,
+      "entity": 22,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 8,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 24,
+      "entity": 23,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 7,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "PointIn",
+      "object_id": 25,
+      "entity": 24,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 9,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 26,
+      "entity": 25,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 181,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 27,
+      "entity": 26,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 182,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 28,
+      "entity": 27,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 182,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 29,
+      "entity": 28,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 183,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 30,
+      "entity": 29,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 185,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 31,
+      "entity": 30,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 184,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 32,
+      "entity": 31,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 187,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 33,
+      "entity": 32,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 34,
+      "entity": 33,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 35,
+      "entity": 34,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        22,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 36,
+      "entity": 35,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 37,
+      "entity": 36,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 38,
+      "entity": 37,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 39,
+      "entity": 38,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        0,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 40,
+      "entity": 39,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        0,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 41,
+      "entity": 40,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        0,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "GotoMap",
+      "object_id": 43,
+      "entity": 41,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        0,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 32,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "TreasureBox",
+      "object_id": 105,
+      "entity": 42,
+      "group": "entity_default",
+      "raw": "めぐすり×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "TreasureBox",
+      "object_id": 106,
+      "entity": 43,
+      "group": "entity_default",
+      "raw": "きんのはり×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        43,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "TreasureBox",
+      "object_id": 107,
+      "entity": 44,
+      "group": "entity_default",
+      "raw": "フェニックスの尾×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "TreasureBox",
+      "object_id": 108,
+      "entity": 45,
+      "group": "entity_default",
+      "raw": "やまびこえんまく×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        13,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "TreasureBox",
+      "object_id": 109,
+      "entity": 46,
+      "group": "entity_default",
+      "raw": "イエローチェリー×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        35,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 180,
+      "entity": 171,
+      "group": "entity_default",
+      "raw": "鍵がかかっている",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        41,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 364,
+      "entity": 331,
+      "group": "entity_default",
+      "raw": "井戸(崩壊前)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 98,
+      "entity": 107,
+      "group": "ev_e_0413",
+      "raw": "①女性",
+      "script": "sc_npc_20270_1",
+      "cell": [
+        "GroundObject",
+        17,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 99,
+      "entity": 108,
+      "group": "ev_e_0413",
+      "raw": "②男性",
+      "script": "sc_npc_20270_2",
+      "cell": [
+        "GroundObject",
+        26,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 100,
+      "entity": 152,
+      "group": "ev_e_0413",
+      "raw": "③男性",
+      "script": "sc_npc_20270_3",
+      "cell": [
+        "GroundObject",
+        10,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 101,
+      "entity": 110,
+      "group": "ev_e_0413",
+      "raw": "④男の子",
+      "script": "sc_npc_20270_4",
+      "cell": [
+        "GroundObject",
+        41,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 92,
+      "entity": 104,
+      "group": "ev_e_0519",
+      "raw": "魔法を使う少年を発見",
+      "script": "sc_e_0519",
+      "cell": [
+        "GroundObject",
+        35,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 93,
+      "entity": 105,
+      "group": "ev_e_0519",
+      "raw": "男の子",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        45,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 361,
+      "entity": 106,
+      "group": "ev_e_0519",
+      "raw": "炎のエフェクト",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        41,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 95,
+      "entity": 101,
+      "group": "ev_e_0520",
+      "raw": "魔法を使う女性を発見",
+      "script": "sc_e_0520",
+      "cell": [
+        "GroundObject",
+        25,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 96,
+      "entity": 102,
+      "group": "ev_e_0520",
+      "raw": "女の子",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 97,
+      "entity": 103,
+      "group": "ev_e_0520",
+      "raw": "女性",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 143,
+      "entity": 147,
+      "group": "ev_e_0520",
+      "raw": "「！」マーク",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 110,
+      "entity": 95,
+      "group": "ev_e_0523",
+      "raw": "ストラゴス:ev_e_0523",
+      "script": "sc_e_0523",
+      "cell": [
+        "GroundObject",
+        39,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 112,
+      "entity": 97,
+      "group": "ev_e_0523",
+      "raw": "爺さん（長老）:ev_e_0523",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        38,
+        -3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 113,
+      "entity": 98,
+      "group": "ev_e_0523",
+      "raw": "男性:ev_e_0523",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        35,
+        -4
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 114,
+      "entity": 177,
+      "group": "ev_e_0523",
+      "raw": "女性:ev_e_0523",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        34,
+        -3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 115,
+      "entity": 100,
+      "group": "ev_e_0523",
+      "raw": "婆さん:ev_e_0523",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        32,
+        -3
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 144,
+      "entity": 148,
+      "group": "ev_e_0523",
+      "raw": "②男性:ev_e_0523",
+      "script": "sc_npc_20270_2",
+      "cell": [
+        "GroundObject",
+        43,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 147,
+      "entity": 149,
+      "group": "ev_e_0523",
+      "raw": "④男の子:ev_e_0523",
+      "script": "sc_npc_20270_4",
+      "cell": [
+        "GroundObject",
+        41,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 148,
+      "entity": 151,
+      "group": "ev_e_0523",
+      "raw": "③男性:ev_e_0523",
+      "script": "sc_npc_20270_3",
+      "cell": [
+        "GroundObject",
+        26,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 358,
+      "entity": 330,
+      "group": "ev_e_0523",
+      "raw": "③男性_イベント中:ev_e_0523",
+      "script": "sc_npc_20270_3",
+      "cell": [
+        "GroundObject",
+        64,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 152,
+      "entity": 94,
+      "group": "ev_e_0540",
+      "raw": "インターセプター:ev_e_0540",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        -2
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 44,
+      "entity": 77,
+      "group": "ev_e_0551",
+      "raw": "幻獣（獣人）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        72
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 45,
+      "entity": 78,
+      "group": "ev_e_0551",
+      "raw": "幻獣（ドラゴン）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        73
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 46,
+      "entity": 79,
+      "group": "ev_e_0551",
+      "raw": "幻獣（妖精）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        71
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 47,
+      "entity": 80,
+      "group": "ev_e_0551",
+      "raw": "レオ将軍",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        72
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 48,
+      "entity": 81,
+      "group": "ev_e_0551",
+      "raw": "セリス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        72
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 49,
+      "entity": 82,
+      "group": "ev_e_0551",
+      "raw": "帝国兵",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        71
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 50,
+      "entity": 83,
+      "group": "ev_e_0551",
+      "raw": "帝国兵",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        73
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 51,
+      "entity": 84,
+      "group": "ev_e_0551",
+      "raw": "ケフカ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 52,
+      "entity": 85,
+      "group": "ev_e_0551",
+      "raw": "魔導アーマー帝国兵(sc_e_0551)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 53,
+      "entity": 86,
+      "group": "ev_e_0551",
+      "raw": "魔導アーマー帝国兵(sc_e_0551)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 54,
+      "entity": 87,
+      "group": "ev_e_0551",
+      "raw": "魔導アーマー帝国兵(sc_e_0551)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        22,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 55,
+      "entity": 88,
+      "group": "ev_e_0551",
+      "raw": "ケフカの放つ魔法（キラキラ）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 76,
+      "entity": 90,
+      "group": "ev_e_0551",
+      "raw": "ロック",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        72
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 77,
+      "entity": 91,
+      "group": "ev_e_0551",
+      "raw": "ティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        73
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 78,
+      "entity": 92,
+      "group": "ev_e_0551",
+      "raw": "ストラゴス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        20,
+        75
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 79,
+      "entity": 93,
+      "group": "ev_e_0551",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        21,
+        75
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 181,
+      "entity": 178,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像7",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 182,
+      "entity": 179,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像6",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 183,
+      "entity": 180,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像5",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 184,
+      "entity": 181,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像4",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 185,
+      "entity": 182,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 186,
+      "entity": 183,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 187,
+      "entity": 184,
+      "group": "ev_e_0551",
+      "raw": "魔石化された時の魔石画像",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        66
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 230,
+      "entity": 219,
+      "group": "ev_e_0551",
+      "raw": "ケフカの魔法①",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        70
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 231,
+      "entity": 220,
+      "group": "ev_e_0551",
+      "raw": "ケフカの魔法③",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        70
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 232,
+      "entity": 221,
+      "group": "ev_e_0551",
+      "raw": "ケフカの魔法②",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        70
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 353,
+      "entity": 329,
+      "group": "ev_e_0551",
+      "raw": "レオ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 58,
+      "entity": 70,
+      "group": "ev_e_0552",
+      "raw": "魔導アーマー帝国兵(sc_e_0552)",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        23,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 59,
+      "entity": 71,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        19,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 60,
+      "entity": 72,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        20,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 61,
+      "entity": 73,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        21,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 62,
+      "entity": 74,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        22,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 63,
+      "entity": 75,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        24,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 64,
+      "entity": 76,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        25,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 128,
+      "entity": 64,
+      "group": "ev_e_0552",
+      "raw": "魔導アーマー帝国兵(sc_e_0552)",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 130,
+      "entity": 66,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 131,
+      "entity": 67,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 132,
+      "entity": 68,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 133,
+      "entity": 69,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 134,
+      "entity": 61,
+      "group": "ev_e_0552",
+      "raw": "魔導アーマー帝国兵(sc_e_0552)",
+      "script": "sc_e_0554",
+      "cell": [
+        "GroundObject",
+        26,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 135,
+      "entity": 62,
+      "group": "ev_e_0552",
+      "raw": "阻まれる",
+      "script": "sc_e_0554",
+      "cell": [
+        "GroundObject",
+        25,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 136,
+      "entity": 63,
+      "group": "ev_e_0552",
+      "raw": "阻まれる",
+      "script": "sc_e_0554",
+      "cell": [
+        "GroundObject",
+        27,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 137,
+      "entity": 50,
+      "group": "ev_e_0552",
+      "raw": "ケフカ",
+      "script": "sc_e_0555",
+      "cell": [
+        "GroundObject",
+        24,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 153,
+      "entity": 153,
+      "group": "ev_e_0552",
+      "raw": "阻まれる",
+      "script": "sc_e_0554",
+      "cell": [
+        "GroundObject",
+        24,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 155,
+      "entity": 154,
+      "group": "ev_e_0552",
+      "raw": "阻まれる",
+      "script": "sc_e_0554",
+      "cell": [
+        "GroundObject",
+        28,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 156,
+      "entity": 155,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 159,
+      "entity": 156,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        8,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 160,
+      "entity": 157,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        8,
+        36
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 161,
+      "entity": 158,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 162,
+      "entity": 159,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 163,
+      "entity": 160,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 165,
+      "entity": 162,
+      "group": "ev_e_0552",
+      "raw": "斜め禁止",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 166,
+      "entity": 163,
+      "group": "ev_e_0552",
+      "raw": "倒れているセリス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        28,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 167,
+      "entity": 164,
+      "group": "ev_e_0552",
+      "raw": "倒れている帝国兵①",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        30,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 168,
+      "entity": 165,
+      "group": "ev_e_0552",
+      "raw": "倒れている帝国兵②",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        33,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 169,
+      "entity": 166,
+      "group": "ev_e_0552",
+      "raw": "倒れているロック",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 170,
+      "entity": 167,
+      "group": "ev_e_0552",
+      "raw": "倒れているティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 171,
+      "entity": 168,
+      "group": "ev_e_0552",
+      "raw": "倒れているストラゴス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 172,
+      "entity": 169,
+      "group": "ev_e_0552",
+      "raw": "倒れているリリム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 352,
+      "entity": 65,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0553",
+      "cell": [
+        "GroundObject",
+        9,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 354,
+      "entity": 161,
+      "group": "ev_e_0552",
+      "raw": "帝国兵に阻まれる",
+      "script": "sc_e_0552",
+      "cell": [
+        "GroundObject",
+        18,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 141,
+      "entity": 58,
+      "group": "ev_e_0552_1",
+      "raw": "イベント後、墓のほうに通行可能になる",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        51,
+        25
+      ],
+      "size": [
+        16,
+        48
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 175,
+      "entity": 172,
+      "group": "ev_e_0552_2",
+      "raw": "墓の説明",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        54,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 177,
+      "entity": 174,
+      "group": "ev_e_0552_2",
+      "raw": "③男性:ev_e_0552_2",
+      "script": "sc_npc_20270_3",
+      "cell": [
+        "GroundObject",
+        10,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 178,
+      "entity": 175,
+      "group": "ev_e_0552_2",
+      "raw": "④男の子:ev_e_0552_2",
+      "script": "sc_npc_20270_4",
+      "cell": [
+        "GroundObject",
+        41,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 179,
+      "entity": 176,
+      "group": "ev_e_0552_2",
+      "raw": "女性:ev_e_0552_2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 191,
+      "entity": 173,
+      "group": "ev_e_0552_2",
+      "raw": "レオの剣",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        54,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 65,
+      "entity": 64,
+      "group": "ev_e_0553",
+      "raw": "魔導アーマー帝国兵",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        9,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 66,
+      "entity": 65,
+      "group": "ev_e_0553",
+      "raw": "帝国兵に阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        8,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 67,
+      "entity": 66,
+      "group": "ev_e_0553",
+      "raw": "帝国兵に阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        8,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 68,
+      "entity": 67,
+      "group": "ev_e_0553",
+      "raw": "帝国兵に阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        8,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 69,
+      "entity": 68,
+      "group": "ev_e_0553",
+      "raw": "帝国兵に阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        8,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 70,
+      "entity": 69,
+      "group": "ev_e_0553",
+      "raw": "帝国兵に阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        8,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 71,
+      "entity": 61,
+      "group": "ev_e_0554",
+      "raw": "魔導アーマー帝国兵",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        26,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 72,
+      "entity": 62,
+      "group": "ev_e_0554",
+      "raw": "阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        25,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Event",
+      "object_id": 73,
+      "entity": 63,
+      "group": "ev_e_0554",
+      "raw": "阻まれる",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        27,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 80,
+      "entity": 51,
+      "group": "ev_e_0555",
+      "raw": "花束",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 82,
+      "entity": 53,
+      "group": "ev_e_0555",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 83,
+      "entity": 54,
+      "group": "ev_e_0555",
+      "raw": "セッツァー",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 84,
+      "entity": 55,
+      "group": "ev_e_0555",
+      "raw": "カイエン",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 85,
+      "entity": 56,
+      "group": "ev_e_0555",
+      "raw": "エドガー",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 86,
+      "entity": 57,
+      "group": "ev_e_0555",
+      "raw": "マッシュ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 102,
+      "entity": 59,
+      "group": "ev_e_0555",
+      "raw": "⑭女性",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        31,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 333,
+      "entity": 321,
+      "group": "ev_e_0555",
+      "raw": "セリス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 334,
+      "entity": 322,
+      "group": "ev_e_0555",
+      "raw": "ロック",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 335,
+      "entity": 323,
+      "group": "ev_e_0555",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 336,
+      "entity": 324,
+      "group": "ev_e_0555",
+      "raw": "ストラゴス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 337,
+      "entity": 325,
+      "group": "ev_e_0555",
+      "raw": "ティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        65,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 190,
+      "entity": 52,
+      "group": "ev_e_0555",
+      "raw": "レオの剣",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        64,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "Entity",
+      "object_id": 332,
+      "entity": 320,
+      "group": "ev_e_0555",
+      "raw": "?マーク",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        33,
+        71
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 344,
+      "entity": 326,
+      "group": "ev_e_0555_5",
+      "raw": "魔導アーマー帝国兵(上)(sc_e_0555)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 345,
+      "entity": 327,
+      "group": "ev_e_0555_5",
+      "raw": "魔導アーマー帝国兵(左)(sc_e_0555)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 346,
+      "entity": 328,
+      "group": "ev_e_0555_5",
+      "raw": "魔導アーマー帝国兵(右)(sc_e_0555)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 325,
+      "entity": 360,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ⑦(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        34,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 326,
+      "entity": 314,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ⑤(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        34,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 327,
+      "entity": 315,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ⑥(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        35,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 328,
+      "entity": 316,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ④(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        33,
+        67
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 329,
+      "entity": 317,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ②(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        33,
+        69
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 330,
+      "entity": 318,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ③(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        33,
+        68
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "AnimEntity",
+      "object_id": 331,
+      "entity": 319,
+      "group": "ev_e_0555_6",
+      "raw": "ケフカ魔法キラキラ①(sc_e_0555_6)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        34,
+        69
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 87,
+      "entity": 48,
+      "group": "ev_e_0556",
+      "raw": "インターセプター:ev_e_0556",
+      "script": "sc_e_0556",
+      "cell": [
+        "GroundObject",
+        48,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 91,
+      "entity": 47,
+      "group": "ev_e_0557",
+      "raw": "ガンホー",
+      "script": "sc_e_0557",
+      "cell": [
+        "GroundObject",
+        18,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 395,
+      "entity": 361,
+      "group": "ev_e_0744",
+      "raw": "クライド",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        6,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 396,
+      "entity": 362,
+      "group": "ev_e_0744",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 117,
+      "entity": 112,
+      "group": "ev_e_0958",
+      "raw": "NPCインターセプター?",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 118,
+      "entity": 113,
+      "group": "ev_e_0958",
+      "raw": "NPC女性",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 119,
+      "entity": 114,
+      "group": "ev_e_0958",
+      "raw": "クライド",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 233,
+      "entity": 222,
+      "group": "ev_e_1032",
+      "raw": "爺さん1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        38,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 234,
+      "entity": 230,
+      "group": "ev_e_1032",
+      "raw": "男の子1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        9
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 235,
+      "entity": 231,
+      "group": "ev_e_1032",
+      "raw": "男の子2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 236,
+      "entity": 232,
+      "group": "ev_e_1032",
+      "raw": "男の子3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 237,
+      "entity": 233,
+      "group": "ev_e_1032",
+      "raw": "犬",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 238,
+      "entity": 229,
+      "group": "ev_e_1032",
+      "raw": "爺さん2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 239,
+      "entity": 223,
+      "group": "ev_e_1032",
+      "raw": "男性1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 241,
+      "entity": 226,
+      "group": "ev_e_1032",
+      "raw": "バンダナ商人1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        4
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 242,
+      "entity": 227,
+      "group": "ev_e_1032",
+      "raw": "バンダナ商人2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        5
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 243,
+      "entity": 228,
+      "group": "ev_e_1032",
+      "raw": "バンダナ商人3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        43,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 244,
+      "entity": 225,
+      "group": "ev_e_1032",
+      "raw": "男性3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        41,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20270",
+      "map": 180,
+      "type": "NPC",
+      "object_id": 240,
+      "entity": 224,
+      "group": "ev_e_1032",
+      "raw": "男性2",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        44,
+        14
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_1",
+      "map": 181,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        45
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_1",
+      "map": 181,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_1",
+      "map": 181,
+      "type": "NPC",
+      "object_id": 10,
+      "entity": 0,
+      "group": "ev_e_0001",
+      "raw": "①商人（道具屋）フラグ分岐前",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        36,
+        40
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_1",
+      "map": 181,
+      "type": "NPC",
+      "object_id": 6,
+      "entity": 0,
+      "group": "ev_e_0413",
+      "raw": "②お婆さん",
+      "script": "sc_npc_20271_1_2",
+      "cell": [
+        "UpperObject",
+        41,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        10,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 4,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        23,
+        49
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 3,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        10,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        23,
+        48
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "NPC",
+      "object_id": 11,
+      "entity": 0,
+      "group": "ev_e_0001",
+      "raw": "②商人（武器屋）フラグ分岐前",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        11,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_2",
+      "map": 182,
+      "type": "NPC",
+      "object_id": 12,
+      "entity": 0,
+      "group": "ev_e_0001",
+      "raw": "①商人（防具屋）フラグ分岐前",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        22,
+        38
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_3",
+      "map": 183,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        44,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_3",
+      "map": 183,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        44,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 5,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_3",
+      "map": 183,
+      "type": "NPC",
+      "object_id": 6,
+      "entity": 0,
+      "group": "ev_e_0001",
+      "raw": "①商人（アクセサリー屋）フラグ分岐前",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        43,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 7,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 3,
+      "entity": 1,
+      "group": "ev_e_0413",
+      "raw": "宿屋：高い値段",
+      "script": "sc_e_0429",
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 3,
+      "entity": 0,
+      "group": "ev_e_0429",
+      "raw": "①商人（宿屋）",
+      "script": "sc_npc_20271_4_1",
+      "cell": [
+        "UpperObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 5,
+      "entity": 9,
+      "group": "ev_e_0521",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 6,
+      "entity": 10,
+      "group": "ev_e_0521",
+      "raw": "ストラゴス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        26,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 8,
+      "entity": 11,
+      "group": "ev_e_0521",
+      "raw": "宿屋：火事発生前",
+      "script": "sc_e_0522",
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 11,
+      "entity": 8,
+      "group": "ev_e_0522",
+      "raw": "宿屋：火事発生中",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_4",
+      "map": 184,
+      "type": "NPC",
+      "object_id": 12,
+      "entity": 5,
+      "group": "ev_e_0540",
+      "raw": "宿屋：火事後",
+      "script": "sc_sty_20271_4",
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        25
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        39,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        40,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 186,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "Event",
+      "object_id": 16,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "GotoMapとインイベントsc_e_0540用トリガー",
+      "script": "sc_e_0540",
+      "cell": [
+        "UpperObject",
+        37,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 21,
+      "entity": 0,
+      "group": "ev_e_0001",
+      "raw": "ストラゴス(イベント前)",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 7,
+      "entity": 11,
+      "group": "ev_e_0413",
+      "raw": "ストラゴス",
+      "script": "sc_e_0521",
+      "cell": [
+        "UpperObject",
+        37,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 17,
+      "entity": 12,
+      "group": "ev_e_0413",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        39,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 18,
+      "entity": 13,
+      "group": "ev_e_0413",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        40,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 22,
+      "entity": 16,
+      "group": "ev_e_0413",
+      "raw": "シャドウ",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        41,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 8,
+      "entity": 14,
+      "group": "ev_e_0521",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        37,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 9,
+      "entity": 15,
+      "group": "ev_e_0521",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        47,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_5",
+      "map": 185,
+      "type": "NPC",
+      "object_id": 14,
+      "entity": 3,
+      "group": "ev_e_0521",
+      "raw": "ストラゴス",
+      "script": "sc_npc_20271_5_1",
+      "cell": [
+        "UpperObject",
+        39,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        61,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        60,
+        22
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 185,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "TreasureBox",
+      "object_id": 5,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "かたみのゆびわ×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        56,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "NPC",
+      "object_id": 6,
+      "entity": 4,
+      "group": "ev_e_0539",
+      "raw": "リルム",
+      "script": "sc_npc_20271_6_1",
+      "cell": [
+        "GroundObject",
+        65,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "NPC",
+      "object_id": 8,
+      "entity": 5,
+      "group": "ev_e_0539",
+      "raw": "インターセプター",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        67,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "NPC",
+      "object_id": 13,
+      "entity": 6,
+      "group": "ev_e_0539",
+      "raw": "NPC：ストラゴス",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        68,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_6",
+      "map": 186,
+      "type": "NPC",
+      "object_id": 11,
+      "entity": 4,
+      "group": "ev_e_0539_1",
+      "raw": "リルム",
+      "script": "sc_npc_20271_6_1",
+      "cell": [
+        "GroundObject",
+        63,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_7",
+      "map": 187,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        60,
+        44
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 180,
+      "point": 9,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_7",
+      "map": 187,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "UpperObject",
+        60,
+        43
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_20271_7",
+      "map": 187,
+      "type": "NPC",
+      "object_id": 3,
+      "entity": 8,
+      "group": "ev_e_0413",
+      "raw": "爺さん",
+      "script": "sc_npc_20271_7_1",
+      "cell": [
+        "UpperObject",
+        60,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        33,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        33,
+        45
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 422,
+      "point": 3,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 422,
+      "point": 4,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "GotoMap",
+      "object_id": 5,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        41
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 422,
+      "point": 4,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "AnimEntity",
+      "object_id": 16,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "岩",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30550",
+      "map": 421,
+      "type": "AnimEntity",
+      "object_id": 17,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "岩",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        45
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        55,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        55,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 1,
+      "point": 33,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        60,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 423,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        59,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "PointIn",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        43,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 3,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "GotoMap",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        42,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 421,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "GotoMap",
+      "object_id": 7,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        48,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 421,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "PointIn",
+      "object_id": 8,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        48,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 4,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "TreasureBox",
+      "object_id": 10,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "ヒールロッド×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        46,
+        28
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "Event",
+      "object_id": 12,
+      "entity": 12,
+      "group": "ev_e_0541",
+      "raw": "リルムがどこかへ走っていく",
+      "script": "sc_e_0541",
+      "cell": [
+        "GroundObject",
+        54,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30551_1",
+      "map": 422,
+      "type": "NPC",
+      "object_id": 14,
+      "entity": 13,
+      "group": "ev_e_0541",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        47,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "PointIn",
+      "object_id": 13,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "GotoMap",
+      "object_id": 14,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 422,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "GotoMap",
+      "object_id": 15,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "PointIn",
+      "object_id": 16,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "PointIn",
+      "object_id": 17,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 3,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "GotoMap",
+      "object_id": 18,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 3,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30560",
+      "map": 423,
+      "type": "TreasureBox",
+      "object_id": 20,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "ゴロネコスーツ×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        42,
+        64
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 423,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        42,
+        63
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        53,
+        62
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        53,
+        63
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 425,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 5,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        32,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 423,
+      "point": 3,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 6,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        33,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 3,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 7,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        43
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 4,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 8,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        36,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 427,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 9,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        52,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 428,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 10,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        51,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 5,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 11,
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        45,
+        43
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 6,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "GotoMap",
+      "object_id": 12,
+      "entity": 12,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        45,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 429,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 13,
+      "entity": 13,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        39,
+        39
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 7,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 14,
+      "entity": 14,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        44,
+        42
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 8,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "PointIn",
+      "object_id": 15,
+      "entity": 15,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        39,
+        44
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 9,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "Entity",
+      "object_id": 29,
+      "entity": 16,
+      "group": "entity_default",
+      "raw": "橋からジャンプして降りる",
+      "script": "sc_e_0543",
+      "cell": [
+        "GroundObject",
+        37,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "Entity",
+      "object_id": 30,
+      "entity": 17,
+      "group": "entity_default",
+      "raw": "橋からジャンプして降りる",
+      "script": "sc_e_0544",
+      "cell": [
+        "GroundObject",
+        38,
+        55
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "Entity",
+      "object_id": 31,
+      "entity": 18,
+      "group": "entity_default",
+      "raw": "橋からジャンプして降りる",
+      "script": "sc_e_0545",
+      "cell": [
+        "GroundObject",
+        48,
+        54
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "Event",
+      "object_id": 16,
+      "entity": 19,
+      "group": "ev_e_0542",
+      "raw": "リルムがどこかに走りさっていく",
+      "script": "sc_e_0542",
+      "cell": [
+        "GroundObject",
+        42,
+        59
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_1",
+      "map": 424,
+      "type": "NPC",
+      "object_id": 21,
+      "entity": 20,
+      "group": "ev_e_0542",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        64,
+        51
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        19,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 426,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        9,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "Entity",
+      "object_id": 5,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "三闘神の像",
+      "script": "sc_npc_30561_2_1",
+      "cell": [
+        "GroundObject",
+        14,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "Entity",
+      "object_id": 6,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "三闘神の像",
+      "script": "sc_npc_30561_2_2",
+      "cell": [
+        "GroundObject",
+        15,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "Entity",
+      "object_id": 7,
+      "entity": 9,
+      "group": "entity_default",
+      "raw": "三闘神の像",
+      "script": "sc_npc_30561_2_3",
+      "cell": [
+        "GroundObject",
+        16,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "AnimEntity",
+      "object_id": 15,
+      "entity": 200,
+      "group": "entity_default",
+      "raw": "差し込む光",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "Event",
+      "object_id": 8,
+      "entity": 10,
+      "group": "ev_e_0546",
+      "raw": "三戦神の情報をストラゴスから聞く",
+      "script": "sc_e_0546",
+      "cell": [
+        "GroundObject",
+        15,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 31,
+      "entity": 206,
+      "group": "ev_e_0546",
+      "raw": "ティナ(sc_e_0546用)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        3,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 30,
+      "entity": 205,
+      "group": "ev_e_0546",
+      "raw": "ロック(sc_e_0546用)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        2,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 29,
+      "entity": 204,
+      "group": "ev_e_0546",
+      "raw": "ストラゴス(sc_e_0546用)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        1,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 28,
+      "entity": 203,
+      "group": "ev_e_0546",
+      "raw": "リルム(sc_e_0546用)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        0,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 10,
+      "entity": 1,
+      "group": "ev_e_0547",
+      "raw": "オルトロス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "Event",
+      "object_id": 11,
+      "entity": 2,
+      "group": "ev_e_0547",
+      "raw": "オルトロスと戦闘、リルム仲間に",
+      "script": "sc_e_0547",
+      "cell": [
+        "GroundObject",
+        15,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_2",
+      "map": 425,
+      "type": "NPC",
+      "object_id": 17,
+      "entity": 202,
+      "group": "ev_e_0547",
+      "raw": "リルム(sc_e_0547用)",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        0
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        6,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        5,
+        46
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 425,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "Event",
+      "object_id": 20,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "セーブポイントについての説明を受けるかを問われる",
+      "script": "sc_e_0009",
+      "cell": [
+        "GroundObject",
+        11,
+        45
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "AnimEntity",
+      "object_id": 24,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "savepoint",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        11,
+        44
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "Event",
+      "object_id": 11,
+      "entity": 10,
+      "group": "ev_e_0548",
+      "raw": "穴に落ちるsc_e_0548",
+      "script": "sc_e_0548",
+      "cell": [
+        "GroundObject",
+        15,
+        47
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "Event",
+      "object_id": 17,
+      "entity": 11,
+      "group": "ev_e_0548",
+      "raw": "穴に落ちる_sc_e_0550",
+      "script": "sc_e_0550",
+      "cell": [
+        "GroundObject",
+        14,
+        52
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30561_3",
+      "map": 426,
+      "type": "Event",
+      "object_id": 18,
+      "entity": 12,
+      "group": "ev_e_0548",
+      "raw": "穴に落ちる_sc_e_0549",
+      "script": "sc_e_0549",
+      "cell": [
+        "GroundObject",
+        20,
+        50
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30570",
+      "map": 427,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        10,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 4,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30570",
+      "map": 427,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        11,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30570",
+      "map": 427,
+      "type": "TreasureBox",
+      "object_id": 5,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "チョコスーツ×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30580",
+      "map": 428,
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30580",
+      "map": 428,
+      "type": "GotoMap",
+      "object_id": 2,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        39,
+        34
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 5,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30580",
+      "map": 428,
+      "type": "TreasureBox",
+      "object_id": 4,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "エクスポーション×1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        41,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "GotoMap",
+      "object_id": 1,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        51,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 6,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "PointIn",
+      "object_id": 2,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        51,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 2,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 430,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "GotoMap",
+      "object_id": 5,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        50,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 424,
+      "point": 6,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30590",
+      "map": 429,
+      "type": "GotoMap",
+      "object_id": 6,
+      "entity": 0,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        39,
+        20
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 430,
+      "point": 1,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 13,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        13
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": 1,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 14,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        16,
+        12
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 429,
+      "point": 2,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "AnimEntity",
+      "object_id": 32,
+      "entity": 201,
+      "group": "entity_default",
+      "raw": "差し込む光",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        11,
+        19
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "AnimEntity",
+      "object_id": 37,
+      "entity": 202,
+      "group": "entity_default",
+      "raw": "差し込む光",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        18,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "AnimEntity",
+      "object_id": 38,
+      "entity": 200,
+      "group": "entity_default",
+      "raw": "差し込む光",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        24,
+        23
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "AnimEntity",
+      "object_id": 39,
+      "entity": 203,
+      "group": "entity_default",
+      "raw": "差し込む光",
+      "script": null,
+      "cell": [
+        "MinimapObject",
+        21,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 10,
+      "entity": 2,
+      "group": "ev_e_0551",
+      "raw": "幻獣（妖精）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        17,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 11,
+      "entity": 3,
+      "group": "ev_e_0551",
+      "raw": "幻獣（獣人）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -1,
+        24
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 12,
+      "entity": 4,
+      "group": "ev_e_0551",
+      "raw": "幻獣（緑ドラゴン）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -3,
+        26
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 13,
+      "entity": 5,
+      "group": "ev_e_0551",
+      "raw": "幻獣（赤ドラゴン）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -8,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 14,
+      "entity": 6,
+      "group": "ev_e_0551",
+      "raw": "幻獣（青ドラゴン）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -5,
+        27
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 15,
+      "entity": 7,
+      "group": "ev_e_0551",
+      "raw": "幻獣（獣人）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -4,
+        31
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 16,
+      "entity": 8,
+      "group": "ev_e_0551",
+      "raw": "幻獣（獣人）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -5,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 17,
+      "entity": 9,
+      "group": "ev_e_0551",
+      "raw": "幻獣（妖精）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -8,
+        32
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 18,
+      "entity": 10,
+      "group": "ev_e_0551",
+      "raw": "幻獣（赤ドラゴン）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -5,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 19,
+      "entity": 11,
+      "group": "ev_e_0551",
+      "raw": "幻獣（獣人）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -8,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 20,
+      "entity": 12,
+      "group": "ev_e_0551",
+      "raw": "幻獣（ユラ）",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -6,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 27,
+      "entity": 19,
+      "group": "ev_e_0551",
+      "raw": "ロック",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -6,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 28,
+      "entity": 20,
+      "group": "ev_e_0551",
+      "raw": "リルム",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -3,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 29,
+      "entity": 21,
+      "group": "ev_e_0551",
+      "raw": "ストラゴス",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -4,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "NPC",
+      "object_id": 30,
+      "entity": 22,
+      "group": "ev_e_0551",
+      "raw": "ティナ",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        -5,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    },
+    {
+      "room": "Map_30591_1",
+      "map": 430,
+      "type": "Event",
+      "object_id": 31,
+      "entity": 24,
+      "group": "ev_e_0551",
+      "raw": "幻獣を発見",
+      "script": "sc_e_0551",
+      "cell": [
+        "GroundObject",
+        15,
+        21
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "entry_point": null,
+      "treasure": null
+    }
+  ],
+  "battle_scripts": {
+    "sc_b_0547": {
+      "bundle": "battle_script_assets_all_d324779337d10824f4fb042faab0ca1f.bundle",
+      "bundle_sha256": "955e848d719db1f6b80cebe7e70fe65be25e236460ae1cd4494af38038ba2009",
+      "asset_sha256": "d2d3a1ebf4f6f8039f36c19354876b4517629a45f36fcbc1deae9e979c17855f",
+      "body_sha256": "3c1cb1705f5a125a0f383d66c7b5346ebb298e445ab82133ad09fdcab8bd9161",
+      "operations": 104
+    }
+  }
+}

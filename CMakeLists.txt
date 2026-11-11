@@ -15,7 +15,7 @@ set(FFPR_DEFS WIN32_LEAN_AND_MEAN NOMINMAX UNICODE _UNICODE)
 # Keep one compiler per project: MSBuild and compiler parallelism otherwise
 # multiply (formerly four projects times four compiler processes), exhausting
 # the user's RAM. This changes scheduling only, not optimization or codegen.
-set(FFPR_OPTS /W4 /permissive- /GR- /EHa /utf-8 /MP1 /Gy /wd4100 /wd4505)
+set(FFPR_OPTS /W4 /permissive- /GR- /EHa /utf-8 /MP1 /cgthreads1 /Gy /wd4100 /wd4505)
 
 set(FFPR_INCLUDES
     "${CMAKE_SOURCE_DIR}/third_party/sdl3/include"
@@ -32,7 +32,7 @@ add_library(ffpr_minhook OBJECT
     third_party/minhook/src/trampoline.c
     third_party/minhook/src/hde/hde64.c)
 target_include_directories(ffpr_minhook PRIVATE "${CMAKE_SOURCE_DIR}/third_party/minhook/include")
-target_compile_options(ffpr_minhook PRIVATE /W3 /utf-8 /Gy)
+target_compile_options(ffpr_minhook PRIVATE /W3 /utf-8 /MP1 /cgthreads1 /Gy)
 
 # --- core: shared by every game. NO include path to src/games (the build enforces that shared
 # code cannot call one game's classes). OBJECT library so file-scope registrations
@@ -103,7 +103,7 @@ target_include_directories(hid PRIVATE "${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE
 target_compile_definitions(hid PRIVATE ${FFPR_DEFS})
 target_compile_options(hid PRIVATE ${FFPR_OPTS})
 # Export the real hid.dll surface (47 names) so the proxy is a drop-in replacement.
-target_link_options(hid PRIVATE "/DEF:${CMAKE_SOURCE_DIR}/src/proxy/hid.def" /OPT:REF /OPT:ICF)
+target_link_options(hid PRIVATE "/DEF:${CMAKE_SOURCE_DIR}/src/proxy/hid.def" /OPT:REF /OPT:ICF /CGTHREADS:1)
 # Deliberately no Prism/SDL import libraries: each is LoadLibrary'd at runtime, so a missing one
 # silences the mod instead of stopping the game from starting. MinHook is compiled in (above).
 set_target_properties(hid PROPERTIES
@@ -115,6 +115,8 @@ set_target_properties(hid PROPERTIES
 
 # Offline validation host - see smoketest.bat. Not shipped.
 add_executable(smoke_host tools/smoke_host.cpp)
+target_compile_options(smoke_host PRIVATE /MP1 /cgthreads1)
+target_link_options(smoke_host PRIVATE /CGTHREADS:1)
 target_compile_definitions(smoke_host PRIVATE ${FFPR_DEFS})
 set_target_properties(smoke_host PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/out"
@@ -123,6 +125,31 @@ set_target_properties(smoke_host PROPERTIES
 # Offline checks of pure-logic code (no game): tools/*_check.cpp, each with the core sources
 # it names in its first line comment "// check-sources: a.cpp b.cpp".
 file(GLOB FFPR_CHECKS CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/tools/*_check.cpp")
+# These exact sources have identical compile contracts in every offline check.
+# Reusing their COFF objects avoids compiling them roughly a hundred times.
+# Every executable still owns its linked state; no DLL/server/parallel worker is
+# introduced. Production libraries retain their separate native build settings.
+set(FFPR_SHARED_CHECK_SOURCES
+    field/baked_map.cpp field/baked_router.cpp field/map_state_program.cpp
+    field/field_refs.cpp field/entity_filter.cpp field/save_points.cpp
+    field/navigation_labels.cpp field/npc_names.cpp json.cpp text.cpp
+    field/transport_rules.cpp field/mountain_crossing.cpp field/airship_transitions.cpp)
+foreach(n ${FFPR_SHARED_CHECK_SOURCES})
+    get_filename_component(shared_name "${n}" NAME_WE)
+    set(shared_target "ffpr_check_shared_${shared_name}")
+    add_library(${shared_target} OBJECT "${CMAKE_SOURCE_DIR}/src/core/${n}")
+    target_include_directories(${shared_target} PRIVATE "${CMAKE_SOURCE_DIR}/src/core" ${FFPR_INCLUDES})
+    target_compile_definitions(${shared_target} PRIVATE ${FFPR_DEFS} FFPR_OFFLINE_CHECK)
+    target_compile_options(${shared_target} PRIVATE /W4 /EHa /utf-8 /MP1 /cgthreads1)
+endforeach()
+option(FFPR_ROUTE_FIXTURE_PCH "Reuse common headers in compatible offline route checks" ON)
+if(FFPR_ROUTE_FIXTURE_PCH)
+    add_library(ffpr_route_fixture_pch OBJECT "${CMAKE_SOURCE_DIR}/tools/fixtures/route_pch.cpp")
+    target_include_directories(ffpr_route_fixture_pch PRIVATE "${CMAKE_SOURCE_DIR}/src/core" ${FFPR_INCLUDES})
+    target_compile_definitions(ffpr_route_fixture_pch PRIVATE ${FFPR_DEFS} FFPR_OFFLINE_CHECK)
+    target_compile_options(ffpr_route_fixture_pch PRIVATE /W4 /EHa /utf-8 /MP1 /cgthreads1)
+    target_precompile_headers(ffpr_route_fixture_pch PRIVATE "${CMAKE_SOURCE_DIR}/tools/fixtures/route_headers.h")
+endif()
 foreach(c ${FFPR_CHECKS})
     get_filename_component(cn "${c}" NAME_WE)
     file(STRINGS "${c}" first LIMIT_COUNT 1)
@@ -145,7 +172,29 @@ foreach(c ${FFPR_CHECKS})
     if(first MATCHES "field/entity_filter.cpp")
         list(APPEND extra "${CMAKE_SOURCE_DIR}/src/core/field/airship_transitions.cpp")
     endif()
-    add_executable(${cn} "${c}" ${extra})
+    set(check_objects)
+    foreach(source ${extra})
+        if(source MATCHES "^\\$<TARGET_OBJECTS:")
+            list(APPEND check_objects "${source}")
+            continue()
+        endif()
+        file(RELATIVE_PATH relative_source "${CMAKE_SOURCE_DIR}/src/core" "${source}")
+        if(relative_source IN_LIST FFPR_SHARED_CHECK_SOURCES)
+            get_filename_component(shared_name "${relative_source}" NAME_WE)
+            list(APPEND check_objects $<TARGET_OBJECTS:ffpr_check_shared_${shared_name}>)
+        else()
+            list(APPEND check_objects "${source}")
+        endif()
+    endforeach()
+    add_executable(${cn} "${c}" ${check_objects})
+    if(cn STREQUAL "multiparty_guide_check" OR cn STREQUAL "opera_route_check")
+        # Use the production model boundary; only the route consumer requires
+        # private access in this actual-consumer fixture.
+        target_sources(${cn} PRIVATE "${CMAKE_SOURCE_DIR}/src/games/ff6/story_model.cpp"
+            "${CMAKE_SOURCE_DIR}/src/games/ff6/dream_train_maze.cpp"
+            "${CMAKE_SOURCE_DIR}/src/games/ff6/zone_eater_roof_model.cpp"
+            "${CMAKE_SOURCE_DIR}/src/games/ff6/sealed_gate_model.cpp")
+    endif()
     if(cn STREQUAL "route_worker_check")
         # This combined fixture keeps many copied Flags/RouteSnapshots in main.
         # Its measured MSVC frame is 923736 bytes before nested owner dispatch,
@@ -154,8 +203,18 @@ foreach(c ${FFPR_CHECKS})
     endif()
     target_include_directories(${cn} PRIVATE "${CMAKE_SOURCE_DIR}/src/core" ${FFPR_INCLUDES})
     target_compile_definitions(${cn} PRIVATE ${FFPR_DEFS} FFPR_OFFLINE_CHECK)
-    target_compile_options(${cn} PRIVATE /W4 /EHa /utf-8)
+    target_compile_options(${cn} PRIVATE /W4 /EHa /utf-8 /MP1 /cgthreads1)
+    # Reuse declarations only: each fixture retains its own state/functions.
+    # Do not pre-include headers into checks that deliberately change access or
+    # SDK macros. Native production libraries retain their existing settings.
+    file(READ "${c}" check_text)
+    if(FFPR_ROUTE_FIXTURE_PCH AND
+       (check_text MATCHES "#include \"route_worker_check.cpp\"" OR cn STREQUAL "ff1_ice_route_check") AND
+       NOT check_text MATCHES "#define[ \t]+(private|protected|NOMINMAX|WIN32_LEAN_AND_MEAN|_WIN32_WINNT)")
+        target_precompile_headers(${cn} REUSE_FROM ffpr_route_fixture_pch)
+    endif()
+    target_link_options(${cn} PRIVATE /CGTHREADS:1)
     set_target_properties(${cn} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/out/checks"
-        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/out/checks")
+        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/out/checks_debug")
 endforeach()

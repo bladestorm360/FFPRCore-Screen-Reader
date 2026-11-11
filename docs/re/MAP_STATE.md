@@ -1,5 +1,37 @@
 # Persistent navigation state, October 15
 
+November4 [Pyramid of Moore](FF5_PYRAMID_20261104.md):the existing bounded
+initializer VM now includes the exact returning needle helper before the
+original tail,source-qualified physical doors/coffin enemies,and the two native
+timed-pit poses. Six record bodies change;all metadata/other records remain.
+One appended source-qualified quicksand landing retains trap semantics instead
+of ordinary travel. No native writes,new VM opcode/work budget or terrain edit.
+Current412/413/414/419/422/425 recovery is guide-owned through actual native
+controls/returns,including the flagless corridor. Source/focused verification
+and the final combined delivery are recorded separately in that topic.
+
+November3 [Narshe party locks](NARSHE_PARTY_LOCKS_20261103.md): source/focused/documentation Closed.
+Six doors require active Locke, with reachable fronts and manual unlocking;
+opened receipts remain passable without him. Reader18/six-door93 and current
+FFI/FFIII key regressions pass. No native writes/clone/hook or new puzzle recipe.
+Combined delivery/gameplay pending; other43 Narshe interactions remain required.
+
+November2 native activation correction is in source/integration qualification.
+Every source-matched PuppetCore.Ready calls its actor's virtual Show(0) before
+the new body executes. The navigation compiler now includes that activation
+before explicit Hide/Show; an opaque final body clears an old hidden receipt
+and remains uncertain. This fixes the concrete Catapult book lifecycle, which
+previously stayed projected hidden after its SetPos-only reveal. All six exact
+producer fingerprints are in puppet_ready_native_20261101.json. The private
+projection still runs only on owned data/workers, with the existing instruction,
+branch/actor budgets and no new native hook/read. Absolute spatial inference
+retains its reviewed game-specific bounds; Ready activation is a separate
+producer from SetPos itself. Focused regeneration changes only initializer
+puppet effects at existing PCs/slots and preserves authored locks/event guards.
+Basic source/Catapult/all-six state checks pass; affected route/guide consumers
+are running before current-source evidence is closed. Details and prior-source
+recovery: [Catapult dependency](FF5_CATAPULT_20261101.md).
+
 October28 [all-six audit](MAP_EVENT_AUDIT_20261028.md) corrects the observed-group
 integration: SetEntities observations are additive positive evidence, never a
 complete inventory. Capture copies the bounded observed set; existing lazy worker
@@ -124,3 +156,32 @@ and before/deploy receipts are `build_check/chest_state_recovery_2026_10_15` and
 the failed-before regression and final reports remain in the investigation directory.
 Sol implemented, reviewed and verified this repair alone. No game launch/control/
 probe, dependency installation, new commit/push or publication was performed.
+# Mt. Kolts explicit layer fact, November4
+
+The existing owned initializer projection accepts an optional seventh field on
+opcode10 for a proven layer0–2. Existing six-field records retain the native
+home layer. The single initial consumer is FFVI Map_30360's exact40/not41 boss
+placement;its compiler qualifier pins native SetPos23,32,2 and the initializer
+fingerprint. Optional layer is part of EntityState equality/intersection and
+effective-object projection. Invalid layers fail closed;no native reads,VM work
+budget or asynchronous processing changed. See
+[the source/route contract](MT_KOLTS_VARGAS_20261104.md).
+
+# Loaded Great Sea Trench switch state, November 5
+
+An optional `current_code` program applies only when the copied current map
+matches the record's native map IDs. The one authored consumer is the Great
+Sea Trench switch room. Its reload initializer can reset partial presses or
+open the chest when all three receipts are set. In the loaded room, the copied
+receipts preserve the selected switches and the actual chest and door state.
+Both programs use the same bounded interpreter on owned worker data. No new
+game-thread reads or work were added. [Trench evidence](FF5_GREAT_SEA_TRENCH_20261105.md).
+## FFV Western Valley flag operands
+
+Three branches in the Western Valley initializer use indices 417–419
+with the first scenario flag category. FFV's native flag reader and
+writer add the segment offset and bounds-check the absolute bit. The
+offline authoring step stores the equivalent bank and relative index for
+these three rows. The projection keeps the original instruction budget
+and native reload semantics.
+[Evidence](FF5_STORY_CONTACTS_20261105.md)

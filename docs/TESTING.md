@@ -1,4 +1,370 @@
-# Current natural-play confirmation priorities
+# Playability and natural-play confirmation records
+
+## November 11 FFIV Kain's Airship
+
+When Kain's airship appears beside Troya, browse Objects. Expect “Kain's
+Airship” in the list and in the nearby interaction cue. Check the same
+label when the airship is available for the return trip.
+
+## November 10 FFIV exits and boarding
+
+1. On foot near Troya, with the Enterprise parked nearby, request directions
+   to the town entrance. Expect walking directions. When walking cannot
+   reach the destination, a needed Enterprise trip should include flight.
+2. On the world map near Troya, turn Map Exit Filter off and browse the
+   different town and castle entrance tiles. The rows should still appear.
+   Directions should lead to a usable entrance without asking you to enter
+   the town or castle as an intermediate step.
+3. In Troya, the weapon shop entrance should be available. The return to
+   town should appear once you enter the shop. Apply the same check to a
+   single return from B3 to B2. If two returns from the same floor lead
+   to different places on your current floor, both should be available.
+
+## November 10 FFIV directions while flying
+
+While flying the Enterprise on the world map, select a town exit and keep
+moving. With Autowalk off, press P in the Letters layout or Backslash in
+the Brackets layout. Expect updated directions or a straight-line bearing
+while you keep moving. Ask again after stopping to hear the complete route.
+
+## November 10 FFIV Troya Castle B1
+
+On an unfinished treasury save, enter Troya Castle B1 and press Shift+G
+before touching a switch. Expect directions to the entrance switch. After
+each switch opens a gate, expect the next directions. Shift+G repeats them.
+After the fourth press, expect “Puzzle guide finished.” If you reload an
+unfinished sequence, Shift+G may direct you back to the entrance switch.
+Follow the instruction to step off and back on if you are already on it.
+
+## November 10 FFIV Study and Scan
+
+Use Cid's Study or cast Scan on an ordinary enemy such as a Skuldier. Expect
+the current and maximum HP, then the displayed weakness lines. On a target
+that rejects Scan, expect the native restricted result. Try the other
+ability on the same kind of enemy when it is available.
+
+## November 10 FFV and shared controls
+
+1. Open F8, Navigation audio, and turn the master off. Open Sound previews
+   and select Wall bump. It should play. In Soundscape settings, switch off
+   NPCs and select Preview NPCs. It should also play. Restore your settings.
+2. Highlight a visible Story gated target on your current floor. The list
+   should say Story gated followed by a straight-line distance and direction.
+   Press K or P, whichever repeats the current entity in your layout.
+3. In FFV's Ship Graveyard, browse NPCs before Siren's encounter. Siren should
+   be in NPCs and directions should lead to the normal interaction approach.
+4. When FFV progression permits, choose the Tower of Walse before it sinks
+   and the Walse Meteorite afterward. A request from the Wind Drake should
+   give a landing and the walking approach to the active entrance.
+
+The offline checks cover the route, scanner, mixer and menu. These steps
+confirm what the player hears and how the native scene starts.
+
+For the first natural FFVI visits after a release clears the loading
+hold, check the Opera House, Narshe light puzzle, Phoenix Cave and
+Kefka's Tower. Press Shift+G at entry and after each step. In the opera,
+check the current choice and stage instruction. In Narshe, check the
+next safe movement and request guidance again after a wrong step. In
+the two multi-party dungeons, follow the party switch and gate steps.
+Guidance should update for the active party and finish only after the
+whole sequence. An early finish, a stale party instruction or a route
+through a closed gate is a failure. See the
+[FFVI guide review](re/SHIFTG_PUZZLE_AUDIT_20261030.md).
+
+November4 Esper Cave: after the combined payload is installed, check this guide
+when naturally reached. Shift+G should cover the statues, Ultros and Relm's
+Sketch instruction, both treasure branches and the final Esper meeting. The
+bridge directions should stop for a manual interaction from a reachable side.
+Pit returns should resume from the final landing. Battle victory alone should
+not finish the guide; its full return to Thamasa should. Disabling non-navigation
+guidance should suppress the Sketch solution while retaining ordinary battle
+accessibility. Offline31 route assertions/29 legs and649 story identities pass;
+native movement and audible response remain separate.
+[Details](re/ESPER_CAVE_GUIDE_20261104.md).
+
+November4 Crescent/Serpent Trench: after the combined audit payload is installed,
+check this journey when naturally reached. With Gau active, Shift+G should lead
+through the helmet search. At each timed junction it should say to choose Right;
+the rendered initial/current arrow should also be spoken. Both real treasure
+caves, the drain switch and final Nikeah arrival belong to the guide. A reset
+second-cave visit should require its drain again. A skipped first-pass chest
+should not complete the guide or offer repeat diving before the Narshe battle.
+With navigation guidance off, actual arrow announcements should still work.
+Offline28 route/15 role/19 arrow assertions and642 story identities pass;
+actual movement, native frame cost and audible response remain unconfirmed.
+[Details](re/CRESCENT_SERPENT_GUIDE_20261104.md).
+
+November4 Duncan: active-party Sabin training route, reserve/unknown/completed
+states, unchanged native read count and all-six map-state/routing checks pass
+offline. At a natural later-cabin visit, check routing with Sabin active, then
+the native training completion. This remains undeployed with the combined audit
+payload. [Details](re/DUNCAN_PARTY_GATE_20261104.md).
+
+November4 Gerad: offline50 sequential/crossing assertions and28 real
+continuations,556 story identities and full controller/ferry/final336 checks
+pass. When the quest is naturally reached, check the two stopped conversations,
+turtle facing/interaction from both banks, engine return and completion after
+the castle becomes playable. Map-entry Minimal notice is also offline-verified
+in all six games (27 new assertions); it queues “Puzzle guide active” without
+starting a guide. Combined build/install and audible gameplay remain pending.
+[Gerad details](re/GERAD_PASSAGE_20261104.md),
+[verbosity/entry notice](re/PUZZLE_VERBOSITY_20261103.md).
+
+After combined delivery, South Figaro: follow Shift+G through Locke's full
+scenario. Use Steal in both merchant battles and against the green soldier.
+Request guidance after each battle/choice/arrival. Verify password and costume
+recovery, draft/secret passage, Celes/key/clock and the cave's successive sounds.
+Guidance should stop after the complete Tunnel Armor scene. Offline route,
+recovery, six-choice and all-six regression checks pass; gameplay remains open.
+No test is requested before the combined delivery.
+
+
+After combined delivery, keyboard remapping: Controls > Keyboard bindings.
+Try one custom key per navigation layout and a conflicting game key. The
+rejected key should leave the old binding intact. Remap recovery/capture-cancel
+if desired; settings help should speak the effective recovery key. Existing
+party, text and controller contexts should stay separate. Offline checks pass.
+
+After combined delivery, Ebot’s Rock: use Shift+G after each chest/warp. Follow
+the keep/feed choice; feeding should wait for22 coral and active Strago on the
+first encounter. Random rooms should adapt on arrival, and first Hidon should
+finish only after the full return scene. Offline checks pass; no gameplay test
+is requested before delivery.
+
+After final combined delivery, Magitek Factory: follow directions to lower and
+upper destinations, operate the named ladder when told to interact, then request
+directions again after the native movement finishes. The route should resume
+from the actual landing without repeating the same crossing. Offline routes/
+receipts pass; no gameplay test is requested before delivery.
+
+After combined delivery, Narshe chase: use Shift+G after each room/chest/chase
+scene. Directions should continue through the northern mine floors to the ledge.
+When told to remain still, wait without moving until the scene changes, then use
+Shift+G to reach Mog. Existing partial progress should resume; earlier defense
+and the light puzzle should retain their guides. Full offline routes pass; no
+gameplay test is requested before delivery.
+
+After combined delivery, Narshe doors: fronts should remain reachable without
+Locke. Destinations behind closed doors should require active Locke; reserve-only
+is insufficient. With him active, follow directions to the door and unlock it
+manually. An opened door should stay usable after he leaves. Actual offline
+reader/route checks pass; no gameplay test requested before delivery.
+
+After final combined delivery, Floating Continent: request Shift+G after each
+switch, chest, encounter and native scene. Follow the treasure instruction before
+the later escape collapse. At the first airship prompt, choose the second option
+to stay; at the escape edge choose the second option to wait for Shadow and
+remain there. The guide should finish only after native scenes return control.
+If the alternate collapse has already happened, guidance should clear its extra
+encounter and resume. Offline routes/choices are qualified; natural gameplay and
+audible response remain unconfirmed. No test is requested before delivery.
+
+After final combined delivery, [puzzle verbosity](re/PUZZLE_VERBOSITY_20261103.md):
+request Shift+G in an available guide. Default Minimal should give the current
+directions/action without activation or numbered steps. In F8 > Navigation,
+select Verbose, close settings and repeat; return to Minimal afterward if
+preferred. For a route that genuinely requires a trap/event, the short notice
+should precede directions. Existing answers, timing cues and stop controls remain.
+Offline fixtures cover the source behavior; natural audible timing is unconfirmed.
+
+After final combined delivery, Cave to the Sealed Gate: request Shift+G at the
+entrance and after each operation. On timed bridges it first previews cardinal
+directions; request it again when ready, wait for Go now, cross to the next safe
+area and request it again. It must continue after the deliberate fall through
+the switches, hidden floor caches, treasure and final story scene. If a fall
+occurs, the guide must recover from the actual landing. It must not finish at
+an unopened reward or announce Go after movement, a menu, battle or leaving the
+map.37 physical journeys/six continuations and actual controller/model checks
+pass offline. Gameplay is unconfirmed; no revisit or game launch is requested.
+
+Cultists' Tower after final delivery: use Shift+G at the entrance and after each
+operation. It must cover the hidden chest, summit chest, forced battle and
+descent, finishing only at the entrance. A late unopened hidden chest must still
+be guided.24 cases/63 complete continuations and actual model/controller checks
+pass offline. Gameplay remains unconfirmed; no agent game launch is requested.
+
+Darill's Tomb natural acceptance after final delivery: use Shift+G from the
+entrance and repeat after each operation. It must cover the water controls,
+turtles, four inscriptions, answer4/1/2/1, hidden chest and actual story exit.
+Shift+G during the native answer choices must repeat the instruction without
+changing selection. A late visit after the story must still guide an unfinished
+puzzle.28 physical cases/44 continuations, actual model/controller/input and
+all earlier static/roof checks pass offline; gameplay is not yet confirmed.
+
+Ancient Castle natural acceptance, after final combined delivery: use Shift+G
+in the throne room and repeat after each operation. The guide must first reach
+the enabling statue, then the hidden switch, then the final statue beyond the
+real stairs. It must not finish at the stairs or route to construction scenery.
+If entered without the first statue, it must guide that prerequisite; completion
+must wait for the final native result and normal field readiness.13 physical/
+resume/negative cases, six floor continuations and actual controller checks pass
+offline. No gameplay launch or undisplayed coordinates are requested.
+
+Ordinary Phantom Train acceptance is queued after final combined delivery:
+start Shift+G at boarding; repeat after the ghost battle, native pursuit/jump
+and each detachment lever phase. It must reach the engine, preserve left/right
+on and middle off, then reach the boss control and final conversation. Finish
+must wait until the world map is ready. Wrong first-car landing, early engine
+directions, a missing second detachment operation or an unavailable off-floor
+boss are failures.23 production route plans/21 new model cases/native-ready
+producer pass offline; no game was launched. Logs in the actual game directory
+remain the first evidence source for a gameplay report.
+
+FFVI Zone Eater crossing acceptance, queued after final all-six delivery:
+request Shift+G at the entrance and after each manual jump or switch. Directions
+must stop for the jump interaction. Avoid moving bridge guards; if knocked
+down, the next request must guide the floor switch before the return exit.
+After the separately guided roof, continue through the stepping stones to Gogo.
+The final completion must wait until naming/joining dialogue ends. A route
+through an unoperated recovery barrier, an ignored jump or early joining
+completion is a failure. Offline24 manual legs/11 objectives/13 new model cases
+and the actual native-ready controller pass; no game was launched for this work.
+
+FFVI roof natural acceptance, after the completed all-six candidate is delivered:
+enter the falling-ceiling room and request Shift+G. Hear a short cardinal preview
+and the readiness instruction. Request again, wait for Go, then follow the counts
+to the next safe area. Repeat through the actual exit; completion should speak
+only after the next floor is ready. Ctrl+G must prevent later Go cues. Opening
+mod settings or leaving game focus during release must prevent Go and require
+another readiness request. Existing timer freeze remains optional and should
+permit the same route without timer writes from the guide. Expected failure
+symptoms: changed/unpreviewed directions, a late Go cue, a cue while another
+mod modal owns input, or finishing before the actual exit. No hidden coordinates
+are needed; read actual game logs first for any reported failure. This is a
+queued natural confirmation, not a request to launch/test before audit delivery.
+
+November2 FF1 Shrine/Ship/service/EXP installed in b62ed342de0f6896; exact
+[delivery/limits](re/SUNKEN_SHRINE_LOOP_20261102.md). During natural play,
+re-request the three Shrine5F chests through the secret passage. Source proves
+the legal per-axis seam and native one-step collision ownership; physical game
+movement and audible/frame responsiveness remain unconfirmed.
+
+Custom sound controls: canonical/offline/smoke/exact-payload scan Closed;
+not installed. After the final qualified delivery, test one custom entity at200ms
+and5s, disable it to restore the generated default, then try a wall in loop and
+timed-ping modes. Dialogue/battle should cancel field playback. Stereo/HRTF
+private volume values should stay separate. No gameplay test is requested before
+delivery. [Exact feature and offline evidence](re/CUSTOM_SOUND_CONTROLS_20261102.md).
+
+FFV Library source/focused qualification is complete; no new Library DLL is installed.
+After the combined delivery, during normal progression, start Shift+G at the
+Library entrance and follow each requested shelf operation. Automatic contacts
+should say to follow the route and wait; manual bookcases require examination.
+The guide should continue through Ifrit, the cleared bookcase, the lower maze
+and book encounter, Byblos, then Mid and the return outside. Byblos victory
+alone must not announce completion. Repeat after re-entering a room and while
+standing where a shelf trigger has disappeared. In a native menu/dialogue,
+Shift+G should repeat the last instruction; Ctrl+G should stop the guide and
+retire its beacon. These are pending natural confirmations, not a request to
+launch or revisit now. [Current source and evidence](re/FF5_PUZZLE_GUIDES_20261101.md).
+
+## Owner gameplay confirmations, October 31
+
+Current owner confirmations include the November3 FF1 completion update:
+
+| Game | Playability | Basis |
+| --- | --- | --- |
+| FFII | Confirmed 100% playable | Current mod features and map bakes. |
+| FFIII | Confirmed 100% playable | Current mod features and map bakes. |
+| FFI | Confirmed beatable | Completed with the current mod, November3. |
+
+Specific outstanding route/performance reports stay in the
+[scope ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+The owner resumed those fixes and the broader all-six map/story puzzle audit on
+October31. Existing playability confirmations remain valid; new source checks
+and specific natural-play confirmations are recorded separately. No new combined
+candidate is installed yet.
+
+## Current FFIII delivery
+
+October31 Eureka correction is installed only in FFIII:
+5bb84691fc69a688b8ec5ccdf48ca22fd57644ea79ca2018dd716991d9909052,
+11,495,936bytes. It preserves the Floating Continent correction and changes
+one remote-actor validation condition. All55 weapon routes,158 canonical
+reports,67 resources/12 languages, smoke and22-file security/delivery checks
+pass;144 protected files and other five games unchanged. No game launched.
+The specific new cross-floor case awaits natural play: from another Eureka
+floor, select an unclaimed weapon and request directions; expect a valid route.
+[Evidence](re/EUREKA_REMOTE_WEAPONS_20261031.md).
+
+## Retained natural-play priorities
+
+The human's latest Floating Continent retest of a6d9b4ce failed. Its deployment
+is verified; that version's lag improvement is not accepted. The replacement
+has passed every-exit paired source/offline checks, full combined verification,
+smoke and exact-payload security. It was installed in FFIII at11c25405fff5f1eb;
+the other five remain a6d9b4ce. Current status and candidate identity belong to the
+[priority ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+The latest FFIII-only Eureka build above includes that correction. The all-six
+Shift+G puzzle follow-up was resumed October31 and remains unfinished. The
+owner's Doga lag/underwater/moving-flight fixes are now source-qualified, with
+combined delivery and natural confirmation pending; see the current ledger.
+
+Current focused source/offline slices: Narshe light path; complete Opera,
+Phoenix and Tower episodes; native completion for49 controls in34 static
+recipes;12 complete Citadel maze resumes; owned choice repeat/blocked-scene
+cancel. No new puzzle build is installed. After combined delivery, when normal
+progression permits: start Shift+G before operating a control, approach without
+using it (the guide must remain pending), then operate it and repeat. During a
+clock choice Shift+G must repeat the answer without movement directions; Ctrl+G
+must stop even during the following native scene. In Zozo it must target the
+inn's solution clock, not the clue clock. V must offer one real engine control.
+Citadel's maze must finish on3F rather than target its return pad. Detailed
+source/limits and further prioritized cases are in the
+[coverage topic](re/SHIFTG_PUZZLE_AUDIT_20261030.md).
+
+FFI's new Rod/Lute/Citadel guides pass ten complete production-route episodes with95
+legs and all prerequisite resumes. After combined delivery, when progression
+permits, Shift+G at the Earth Cave slab must guide any unfinished guardian,
+chest, Giant and sage operations before returning to the operative slab. A
+guardian victory must not skip the chest. At the Chaos Shrine slab, expect the
+Lute instruction and completion only after the native sequence. Ctrl+G must stop
+either guide. No new game trip is requested before combined verification and
+delivery. [Exact evidence/limits](re/FF1_SLAB_GUIDES_20261101.md).
+At the Citadel's first-floor entrance, Shift+G must first guide the elder; after
+that native operation it must lead through the maze to3F. A resumed2F visit
+must skip the elder using the native completion receipt.
+
+FFII Deist's seven-operation guide passes nine complete route episodes/130 legs.
+After combined delivery, during normal progression, start Shift+G at the castle
+or cavern. Expect the boy/follow-up, learning Wyverns, pendant, wyvern egg,
+guardian and actual Life Spring steps, skipping completed prerequisites. Repeat
+after learning. Inside the keyword menu, Shift+G repeats the instruction and
+Ctrl+G stops it. Reaching B5 alone must not finish the guide; actual egg placement
+must finish it. Routes must avoid the B3 pitfall. [Evidence/limits](re/FF2_PUZZLE_GUIDES_20261101.md).
+
+FFII Fynn, Kashuan, Mysidia masks and Dreadnought guides pass nineteen complete
+route episodes/135 production legs, including three actual patrol-wait capture
+updates. After combined delivery, use Shift+G during normal progression. Expect
+exact Ask/Learn terms at Fynn; the bell, guardian/chest and torch steps at
+Kashuan; the correct mask at each Mysidia control; and Dreadnought guard, actual
+cell bars, captives and engine. Guard instructions must explain Pass or Wild
+Rose followed by battle. Engine interaction alone must not finish the guide;
+the automatic escape must complete. Reaching a control or waiting for a soldier
+must not advance its native receipt. Ctrl+G must cancel, including in the keyword
+menu. No special gameplay trip is requested before combined delivery.
+
+Additional FFII guide priorities after delivery, when normal progression permits:
+Semitt's hatch requires Josef's native story progress; Fynn's treasure passage
+first needs Paul's Cyclone clue during its native story window; Coliseum must
+guide the locked-cell escape and then the captive; the Fynn mirror must name
+the Pendant and wait for the native event. A previously obtained Paul clue
+must still allow the passage later. A missed clue after Paul's story change
+must report Story gated, with no route to his retired actor. Approaching any
+control without operating it must leave the step pending.
+
+FFIII Nepto and Owen now have full form-aware guides, offline qualified across17
+episodes/133 production route legs. After combined delivery, use Shift+G during
+normal progression. Expect Mini on every member before Nepto's opening, the
+actual rat guardian and returning its Eye; a recovered Eye must skip the Mini
+prerequisite. At Owen, expect all frogs at the waterway, then all normal before
+climbing. Repeat Shift+G after casting. An opened wall must still guide the
+fifth-floor event before Medusa appears. Revisiting the basement after an earlier
+entry must check the current form again. Ctrl+G must stop in the spell or event-
+item menu; Shift+G there repeats owned instructions without directions. Existing
+chocobo circuit controls remain available. Sealed Cave/Eureka hidden controls
+and the Syrcus/Eureka key objects also have exact native-operation guides.
+[Evidence/limits](re/FF3_PUZZLE_GUIDES_20261101.md).
 
 October30 follow-up is source/offline checked and installed in all six games:
 a6d9b4ce19dfb6ad. Full canonical/smoke/exact-payload security and installed hashes
@@ -368,9 +734,9 @@ offline source/native-data tests are distinct from these listening checks.
 2. Outside battle, switch a compatible spell right to all targets: All allies.
    Switch left: only the actual focused character's displayed row. Repeat in
    other games when a spell supports both; no keyboard remapping was added.
-3. Speech's Enemy critical status starts off: enemies' hidden Critical should be
-   silent. On restores it. Party Critical and critical hits remain audible. Use
-   naturally encountered battles; no need to replay Giant Rat or alter a save.
+3. In an ordinary battle, defeat two enemies with the same name. Expect a
+   separate name and KO announcement for each. Hidden enemy Critical and raw
+   enemy stat changes stay silent. Party Critical and critical hits stay audible.
 4. In a scripted key-item selector, Autodetail off reads the item without its
    description; I reads the current description repeatedly on demand. On appends
    it once. Backing out or changing maps must not retain a prior item's detail.
@@ -679,6 +1045,16 @@ and party switching. No code review is needed.
    threat. When available, check burning-house rescue and Phantom Train engine
    guidance. The train should correct actual lever state, including
    retries. Normal navigation remains available for other puzzles and optional fights.
+6. After combined delivery, when Dreamscape reaches its separate train, start
+   Shift+G outside. Follow it through the opening scene and first car. Before
+   pulling the crate lever, hear the complete instruction: operate it again as
+   soon as control returns. The second pull stops the timer. Follow the chest,
+   item and moving-chest instructions; a moving-chest scene should refresh its
+   actual target. Already collected rewards must survive leaving/re-entering a
+   car without asking for the crate puzzle again. Continue through the maze and
+   six-chest pattern. At the locomotive, follow the real departure; this train's
+   three decorative levers must not receive the earlier train's combination.
+   Completion belongs to the next area. Ctrl+G must cancel the owned guide.
 
 For a failure, report the sequence, active party, last guidance and what happened.
 Native timing, real movement/encounter activation and audible response require
@@ -737,11 +1113,10 @@ Current engineering evidence is in FIXES_2026_10_22.md. No code review is requir
 7. In Speech, turn Interrupt speech on character turn Off. At a new turn while
    speech is active, expect the turn to queue. Turn it On and expect interruption.
    Manual T should still interrupt; the opening roster should finish in either mode.
-8. Enemy status announcements defaults Off. Enable it and apply an ordinary visible
-   status or Frog when available: expect the enemy and a supported status/effect cue
-   when rendered. Shared visuals/material colors can say Status effect. With Off,
-   expect no new automatic status observer speech. Ordinary native combat messages
-   remain. Critical is not inferred from hidden enemy HP and is expected to stay silent.
+8. Enemy status announcements defaults Off. Enable it and apply Toad to a
+   susceptible enemy in FFIV when available. Expect its name and status when
+   the new sprite is visible. Poison particles and ordinary boss sprite
+   changes produce no status cue. Enemy KO is spoken with either setting.
 9. With HRTF active, bump a wall at the usual volume: expect a stronger bump, roughly
    twice the previous output. Other sounds and stereo mode should retain their prior
    levels. Check mute/user volume. Report distortion as well as insufficient volume.
@@ -2033,3 +2408,42 @@ Failures: repeated empty prompts, lost selection, clear-route north/south loops,
 missing vehicle crossing, stale Enterprise on a foot floor, missing visible scan
 line, or silent forced tally completion. Gameplay/native-frame/audio latency
 remain unverified; retain the user's25ms cumulative mod-lag threshold.
+
+FFIII form guides now pass42 complete native-shaped episodes/222 production legs,
+52 frontier and51 owner/menu/cancel cases. After combined delivery, during normal
+progression, use Shift+G in Tozus, Nepto, Owen, Hein’s prison, the underground
+lake/Horn sequence and Doga’s Magic Circle. Cast the requested Mini/Toad effect
+only on the members the instruction names by effect state, close the native menu,
+then repeat Shift+G. The guide must use the current party form, advance only after
+native receipts, survive floor/battle transitions, and stop with Ctrl+G. Nepto’s
+defeated-before-pickup resume must target the interactive Eye, and Owen’s opened
+wall must still guide the required fifth-floor event. These are pending natural
+confirmations, not instructions to launch or revisit a completed game now.
+[Exact contracts and limits](re/FF3_PUZZLE_GUIDES_20261101.md).
+
+FFIV’s new guides pass23 native-shaped journeys/33 route legs plus item/menu/
+cancel/owner checks. After combined delivery, during normal progression:
+
+- Shift+G at the Baron key doors, Agart well, Babel key door, Dwarven passage or
+  Sealed Cavern entrance must name the correct item/control and wait for its
+  native operation. Repeat inside an item menu to hear the instruction; I reads
+  the focused item description; Ctrl+G stops. Later story visits must finish
+  rather than target retired key controls.
+- In the magnetic cave, expect the Twin Harp prerequisite, removal of metal
+  equipment, first encounter and harp scene, then re-equipping and the second
+  fight. The guide must continue to the crystal after victory and finish only
+  after the actual pickup. Repetition in the equipment menu reads owned text.
+
+These are pending natural confirmations, not a request to launch or revisit a
+completed game now. [Exact source/offline limits](re/FF4_PUZZLE_GUIDES_20261101.md).
+
+FFIII Magic Key/Thief routing passes153 complete offline chest journeys through
+all13 locks. After the combined delivery, during normal progression, check a
+locked chest destination with no keys/Thief: it should say Story gated while the
+door itself stays approachable. With a key or active Thief, directions should
+stop beside the first lock, face it and ask for interaction. Unlock it normally,
+then request directions again; the final chest must remain selected. In Temple
+of Time, the two deeper locked rooms need two keys while the earlier door is
+closed, or one key after that earlier door is opened. Thief uses no key.
+These checks remain natural gameplay confirmation, not a launch/revisit request.
+[Exact evidence and limits](re/FF3_KEY_GATES_20261101.md).

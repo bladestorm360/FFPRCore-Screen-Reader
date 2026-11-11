@@ -1,0 +1,128 @@
+{
+  "scope_tag": "ff5_DeathValley",
+  "source_script_hashes": {
+    "Map_10040/sc_e_0492_2": "15948cf12bef924e39ab0ee6ad1093b06ec652b9b844c33840b7f47e1c15c078",
+    "Map_10040/sc_map_10040": "5992d5ff6369b3f9769c66493bcffb33f2bda9fdab2c7090f82c6649654c5b4a",
+    "Map_30450/sc_e_0131": "86cfe4bf9e63be370fc3e3ef68f3240721b4968a32395195a1dc749ef3abfafa",
+    "Map_30450/sc_e_0131_3": "cf271a022eda1c8be186310bf3a64393a08072dfd922794c095e1efd722a4820",
+    "Map_30450/sc_e_0131_4": "58aee3c84e748c50817b9a31ee6ab8b1f27d56de8c9e325ea75ee7c5f07ccdf7",
+    "Map_30450/sc_e_0492_1": "f6903ff781f9fb9046846f475ca8dec747f9e95545ef5b4ef7f178e310990c4c",
+    "Map_30450/sc_map_30450": "47545fdd4d2887aa7ff502463ec448ca821978a40145130c64fe9d0d326ad653",
+    "Map_30451_1/sc_e_0131_1": "923e3ff0e9c1839641adeac159a18b2a4456bfb4feb708eb863caeb44bc335db",
+    "Map_30451_1/sc_e_0131_2": "a9e6d4d767e9af15f3a6eee52cd4a90f71fa9b8ff9f4e479a83a06e1b8ce274b",
+    "Map_30451_1/sc_e_0132": "3e27af68eccb2a827a2f17d5deb0a9baa8f195082899983bf431576610bb59b4",
+    "Map_30451_1/sc_e_0132_1": "226f855902f37d08cafeee2793e5df27bea69f7487df83cf9dea1ce1a4672fb8",
+    "Map_30451_1/sc_e_0490": "25a5b3f5e0a1badafd72ae2ca9fef2ad4f5d5eb61f7b4301637174a2172d08c7",
+    "Map_30451_1/sc_e_0491": "4fb16a306adc8dd4add0fe02a558da11732c08e02f2cc7c2860d56644a16e4b5",
+    "Map_30451_1/sc_e_0492": "c78b2e20623fc506ec2051d573e61831543f5e45e8d84ef19d84bb0d63242713",
+    "Map_30451_1/sc_map_30451_1": "4a77592f4d6613253234870ee3f594a4b55ab0c3b40a39905d2527df6bbbcb49"
+  },
+  "arrivals": [
+    {
+      "submap": "Map_30450",
+      "entity_id": 1,
+      "object_id": 12,
+      "destination_map": 408,
+      "original_point": 1,
+      "continuation": "sc_e_0131_1",
+      "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+      "arrival_cell": [
+        14,
+        18,
+        1
+      ],
+      "trap_transfer": true,
+      "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+    },
+    {
+      "submap": "Map_30450",
+      "entity_id": 2,
+      "object_id": 13,
+      "destination_map": 408,
+      "original_point": 1,
+      "continuation": "sc_e_0131_1",
+      "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+      "arrival_cell": [
+        14,
+        18,
+        1
+      ],
+      "trap_transfer": true,
+      "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+    },
+    {
+      "submap": "Map_30450",
+      "entity_id": 3,
+      "object_id": 14,
+      "destination_map": 408,
+      "original_point": 1,
+      "continuation": "sc_e_0131_1",
+      "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+      "arrival_cell": [
+        14,
+        18,
+        1
+      ],
+      "trap_transfer": true,
+      "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+    },
+    {
+      "submap": "Map_30451_1",
+      "entity_id": 20,
+      "object_id": 62,
+      "destination_map": 19,
+      "original_point": 6,
+      "continuation": "sc_e_0492_2",
+      "continuation_sha256": "6ca0910f2d198d674e7047e5554ee42b52dbe8d1fc5a8b4db16883954d81e8fc",
+      "arrival_cell": [
+        121,
+        89,
+        1
+      ],
+      "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+    }
+  ],
+  "encounter": 475,
+  "rope_receipts": [
+    341,
+    342,
+    343,
+    344,
+    132
+  ],
+  "world_transport": 9,
+  "native_boarding": [
+    {
+      "method": "Current.GetOnChocobo",
+      "rva": 2854544,
+      "bytes": 160,
+      "sha256": "d0a45e5acfe7d942947ab3b66af9fc1f62f6592e0409940aa4b7243a06876714"
+    },
+    {
+      "method": "External.Vehicle.SetVehicle",
+      "rva": 3028528,
+      "bytes": 1088,
+      "sha256": "12c42804a0676a8fc04a2336e89ba2350f9e4caf9f5704372769891045dbd5d2"
+    },
+    {
+      "method": "FieldController.ChangeTransportation",
+      "rva": 2571888,
+      "bytes": 3248,
+      "sha256": "24e0ce40aef54cbed146e13ededa33d1961a1f474bd35f0bae6a70ad21de8a0d"
+    },
+    {
+      "method": "FieldController.ChangeTransportationCollisionEntity",
+      "rva": 2570464,
+      "bytes": 288,
+      "sha256": "e282cce764fcb7f9a88d1365cb405bcef75db97299031953c52a552963f30184"
+    },
+    {
+      "method": "FieldController.ChangeTransportationSwitchEntity",
+      "rva": 2571104,
+      "bytes": 256,
+      "sha256": "b10e6eea0b829366e2db458e642401a0f61c6b768f987c17cf1d1a706981a78c"
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3"
+}

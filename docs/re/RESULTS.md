@@ -178,6 +178,46 @@ confirm also reaches the listener while reviewing input remains suppressed.
 
 ## Verification
 
+### Button-skipped EXP completion, November2
+
+Source/focused checkpoint **Closed**. FF1, FF3, FF4, FF5
+and FF6 now acknowledge a button-skipped tally with the existing localized
+“EXP tally complete” announcement when Autodetail is off. Autodetail retains
+the final displayed member details instead. FF2 has no EXP tally acknowledgement;
+its skill/stat growth pipeline is unchanged.
+
+The existing per-game `ResultCharacterListController.ForcedEndPerformance`
+detours already receive the native completion event. Their shared macro passed
+the acknowledgement flag only for FF3; it now enables all except FF2. No hook,
+polling, native read, queue or text-deduplication policy was added. The existing
+pending-animation flag consumes each completion once. The visible matching
+owner, review ownership and generation checks continue to reject stale work;
+completion before the initial page read is covered by that initial final read.
+
+The actual shared reader fixture reproduced exactly four missing acknowledgements
+before the production change. Afterward, all six adapters pass both Autodetail
+settings and repeated presses; all five EXP adapters also pass early completion
+and close/next-phase cancellation. Existing phase and ten native input-entry
+checks pass. Evidence: `build_check/exp_skip_20261102/after.json`, original failing
+report and both enforced-resource receipts. Final focused run:21.416s,
+314617856B peak, exit0/children drained under aggregate2GB/25%CPU/one worker.
+These fake displayed-view results establish behavior/lifetime wiring, not actual
+game-frame or audible latency. FF1 canonical/security/guarded installation
+Closed21:57UTC in DLLb62ed342de0f6896; exact Shrine delivery checkpoint.
+Other newly enabled adapters and natural gameplay confirmation remain separate.
+
+November 5 FFIV follow-up. At the time of the report, the installed DLL was the November 2
+payload with SHA-256 prefix `011f0dc2`. The current game-directory log
+at 17449.328–17450.625 shows the Points buffer updating from the rolling
+values to final rows with Autodetail off and no completion speech. The
+installed build precedes the shared acknowledgement change above. The
+current source and the candidate that passed isolated smoke contain the
+same localized acknowledgement as FF1 and FF3. The November 5 results
+fixture passes all six adapters and ten native input entry points. The
+verified all-six installation at 23:24 UTC includes this fix in DLL
+`cbaad8ed8f532824`. Audible gameplay confirmation remains open.
+[Installation evidence](MAP_AUDIT_FOLLOWUPS_20261028.md#november-5-final-source-scope-and-delivery).
+
 Sol retained this task: native behavior, callback lifetimes, phase grouping and
 input bypass paths required discovery, and the resulting readers/input/tests
 share concrete state dependencies. No Luna or Astra delegation was used.

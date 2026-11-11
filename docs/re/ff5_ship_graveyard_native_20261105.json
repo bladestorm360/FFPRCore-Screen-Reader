@@ -1,0 +1,299 @@
+{
+  "scope_tag": "ff5_ShipGraveyard",
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "native_methods": [
+    {
+      "method": "Puppet.SetPos",
+      "rva": 2997536,
+      "bytes": 3776,
+      "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+    },
+    {
+      "method": "Puppet.GetDirectTargetPosition",
+      "rva": 2971584,
+      "bytes": 1008,
+      "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+    },
+    {
+      "method": "Puppet.GetChangeLayerValue",
+      "rva": 2970896,
+      "bytes": 688,
+      "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+    },
+    {
+      "method": "Puppet.MoveEntityLayerWithWorldPosition",
+      "rva": 2980992,
+      "bytes": 704,
+      "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+    },
+    {
+      "method": "Puppet.Move",
+      "rva": 2985232,
+      "bytes": 2880,
+      "sha256": "6fb0c4b4071d3d855f49d61db5fa34b6a5dd0f3faf8e59c907231f2ce6c80e88"
+    }
+  ],
+  "source_script_hashes": {
+    "Map_30060/sc_30031_1_to_ship_2": "1ae00374d23700e275f64f7d83b5acfebc259b59b08cd263dd688c31c47c819d",
+    "Map_30060/sc_30060_jump_1": "9c1f41e3eec5c214b92440d5b12b8a54c9c1b5cfc9492a550dfa23f9d91ddef5",
+    "Map_30060/sc_30060_jump_10": "17d732a57214d893002bde288de219a24dde58016bb293ecda1710c8e0adda6d",
+    "Map_30060/sc_30060_jump_11": "7ea74639dbf2afcd65542e524d8910a9cefe0676013fe360792955d836ab975f",
+    "Map_30060/sc_30060_jump_12": "333ececff5deb86adf1af402a90b988f913dc327b092d2945fedd50e361e4e9d",
+    "Map_30060/sc_30060_jump_13": "c252752f0ce53239d87048b2eb979a41d3353d8eec5cd65fc769d05d39ff84ce",
+    "Map_30060/sc_30060_jump_14": "a897bb57fa4da5ca3f5622678269ec8bf918a881fb1ae47d41190a5aad07bea0",
+    "Map_30060/sc_30060_jump_15": "2ebe86c1f2958bcf11aed062c95c9ded0e6e39c4d614b97c489446e2e667ff7e",
+    "Map_30060/sc_30060_jump_16": "c96b11bcefb24a7269d21811b268ac55896fdeff48b2089550092a1b8655bd71",
+    "Map_30060/sc_30060_jump_17": "c41fd7b9e68b63a2582c51cad0953b5e121ea95cb4a8400832af4759383d0560",
+    "Map_30060/sc_30060_jump_18": "638b2f5840d392d87e31cd49e701ea973fe8fea1114a753a8a3d7d5fb3bc3ce9",
+    "Map_30060/sc_30060_jump_19": "c1dab6e1c15f6c80a761db88cec5c41803349090987908cdd7af2afa0ffb1793",
+    "Map_30060/sc_30060_jump_2": "a2db4abc14b9ed23bb09220446d20d7fd4c2c4fdc76bb49b21ad6e28fbad7a2f",
+    "Map_30060/sc_30060_jump_20": "a8c4ce10ce93b48e9115b8658359c57e73710d82a86bc0ce5708757e6504a80c",
+    "Map_30060/sc_30060_jump_3": "791da835b88944897fb2ded582ee45a4a9fedf8667b83f3ae770431ec1dc972a",
+    "Map_30060/sc_30060_jump_4": "7febde396c4526916b54872d1be33e0287b4743e013dbf0f98f33ed21d4b7538",
+    "Map_30060/sc_30060_jump_5": "20663d40340be4c73ad85fc9cb8d3252a7baddd63043ccb0e8f273063d23f91e",
+    "Map_30060/sc_30060_jump_6": "21c3f0ebd90136e736dcf288274f0ad30fd9adc6a9d7c68411d001093d828c7d",
+    "Map_30060/sc_30060_jump_7": "c96b11bcefb24a7269d21811b268ac55896fdeff48b2089550092a1b8655bd71",
+    "Map_30060/sc_30060_jump_8": "2ebe86c1f2958bcf11aed062c95c9ded0e6e39c4d614b97c489446e2e667ff7e",
+    "Map_30060/sc_30060_jump_9": "96169189074af9618e19e481f9cd854600080bc097495de89225539033a6a875",
+    "Map_30060/sc_30060_stone": "ef815c5a0417ebca40c1fd36405c5d3405c152222ceefc92408592235eda7233",
+    "Map_30060/sc_30060_timer_start": "2d6e43fda416c697eac242be1a9d5114d6509e3856220f456867d2f52c6ed5d1",
+    "Map_30060/sc_30060_timer_stop": "c9808210d1af6f7e6b9715c8ec44b1c0e4478ec2f08715509129ac4c56909dab",
+    "Map_30060/sc_30060_to_30031_1": "a7cd13e8d1ba5966fbaa51f95fc54b4e0640996b3cbb7404f9bd05def1282e3a",
+    "Map_30060/sc_e_0026_10": "4068abddbe368fe59c1f21000aadd002a0aede9c1e899d27d37a6da8fc0cd520",
+    "Map_30060/sc_e_0029": "496c4fd72d0c71180c314c35f5440dfb6fd387da0bc9c235d50a53919a022ff1",
+    "Map_30060/sc_e_0030": "804215cbf116187cc2ca8dda00272071705978b17a018609fb795c9058f1efaf",
+    "Map_30060/sc_e_0030_1": "90cef10f6723fe54d4681a36217714d844fdc8c63863ab288b6a9592a1f99e8a",
+    "Map_30060/sc_map_30060": "be87254ff69b992039eaa7b578ae11ac3937204646e281de7dfdf7f403c7fa65",
+    "Map_30061_2/sc_e_0027": "909fbbc76cc82ab040bdef6f2d5efb12318a873bc1076495bc3ac4c5560f73a9",
+    "Map_30061_2/sc_map_30061_2": "24226dba8ff777802c5c13150b5d780acb0c8bb5885079c4ac8cb7bda174eaff",
+    "Map_30061_9/sc_e_0028": "137073f447becff902138bbf5153f3468dcddc98aa1da04b99d2e1b5f77088fc",
+    "Map_30061_9/sc_e_0162_36": "e5ef1aae1251664a1b3b9fab206d404753584cda4a696331699d9e10cac973cd",
+    "Map_30061_9/sc_e_0162_c_34": "867e3c1de7c058a675e344b7e934ded214cfe14e5eaf71c94989487e0f0cba1e",
+    "Map_30061_9/sc_e_0162_g_34": "db462e5d51d0fe6a6cb1498aaa6fd82970ebb2a0bc1562d37aa4bc05a35a3169",
+    "Map_30061_9/sc_e_0162_i_33": "6b3b77bc7b1d192e72e0f44b2d284d086d3385567817350163ad340ab682cab0",
+    "Map_30061_9/sc_e_0162_j_30": "181c500379965518cc53f1f566a7a6c773f9daa36264eed5da84f2cdcecd133c",
+    "Map_30061_9/sc_e_0162_k_30": "c6cda9aa1fc0ce7d02e1cba9fb6727147859a3f2e0bcd2e3c7571e4833c0a411",
+    "Map_30061_9/sc_e_0162_m_33": "a765cd3a1743acb5c247bbd1719b0836257caf330ebe53746b76f1ca71ee7de0",
+    "Map_30061_9/sc_e_0162_o_36": "4e021e9ac2c98b12ba2c1b723948e5c963d3796de1b5733afdf12b56247d9062",
+    "Map_30061_9/sc_map_30061_9": "9e2c0166fad3b0c432807e2e35b818928c16749c8ab088c53e395046ff0545cb",
+    "Map_30061_9/sc_sty_30061_9": "c29e6d1a59c53529d6fe5645801143a5460a993e63f959e96646239ee746ffbb"
+  },
+  "jumps": [
+    {
+      "entity": 102,
+      "facing": 2,
+      "start": [
+        17,
+        33,
+        1
+      ],
+      "landing": [
+        13,
+        51,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_1",
+        "sc_30060_jump_2",
+        "sc_30060_jump_4"
+      ]
+    },
+    {
+      "entity": 76,
+      "facing": 0,
+      "start": [
+        13,
+        51,
+        1
+      ],
+      "landing": [
+        17,
+        33,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_6",
+        "sc_30060_jump_5",
+        "sc_30060_jump_3"
+      ]
+    },
+    {
+      "entity": 106,
+      "facing": 1,
+      "start": [
+        32,
+        33,
+        1
+      ],
+      "landing": [
+        36,
+        33,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_7"
+      ]
+    },
+    {
+      "entity": 107,
+      "facing": 3,
+      "start": [
+        36,
+        33,
+        1
+      ],
+      "landing": [
+        32,
+        33,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_8"
+      ]
+    },
+    {
+      "entity": 104,
+      "facing": 0,
+      "start": [
+        30,
+        46,
+        1
+      ],
+      "landing": [
+        30,
+        44,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_10"
+      ]
+    },
+    {
+      "entity": 104,
+      "facing": 2,
+      "start": [
+        30,
+        44,
+        1
+      ],
+      "landing": [
+        30,
+        46,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_10"
+      ]
+    },
+    {
+      "entity": 105,
+      "facing": 1,
+      "start": [
+        31,
+        48,
+        1
+      ],
+      "landing": [
+        33,
+        48,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_11"
+      ]
+    },
+    {
+      "entity": 105,
+      "facing": 3,
+      "start": [
+        33,
+        48,
+        1
+      ],
+      "landing": [
+        31,
+        48,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_11"
+      ]
+    },
+    {
+      "entity": 83,
+      "facing": 1,
+      "start": [
+        37,
+        49,
+        1
+      ],
+      "landing": [
+        45,
+        47,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_13",
+        "sc_30060_jump_14",
+        "sc_30060_jump_16"
+      ]
+    },
+    {
+      "entity": 108,
+      "facing": 3,
+      "start": [
+        45,
+        47,
+        1
+      ],
+      "landing": [
+        37,
+        49,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_18",
+        "sc_30060_jump_17",
+        "sc_30060_jump_15"
+      ]
+    },
+    {
+      "entity": 89,
+      "facing": 2,
+      "start": [
+        47,
+        23,
+        1
+      ],
+      "landing": [
+        47,
+        33,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_19"
+      ]
+    },
+    {
+      "entity": 90,
+      "facing": 0,
+      "start": [
+        47,
+        33,
+        1
+      ],
+      "landing": [
+        47,
+        23,
+        1
+      ],
+      "chain": [
+        "sc_30060_jump_20"
+      ]
+    }
+  ],
+  "seconds": 2,
+  "chest_receipt": 28,
+  "encounter_receipt": 29
+}

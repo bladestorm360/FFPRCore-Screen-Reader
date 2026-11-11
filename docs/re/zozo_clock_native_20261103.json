@@ -1,0 +1,32 @@
+{
+  "source_script_hashes": {
+    "Map_30511_3/sc_e_0299": "051a27f8a98c8acbeed9ada53484601b5406148ba23e1d0b38177be54cd85d64",
+    "Map_30511_3/sc_e_0300": "9b0a39b9cef085e23232ade31cd5223660e599732abd529e710d5883ab110453",
+    "Map_30511_3/sc_map_30511_3": "d1e07cca3906b80e038d478cc01c0eba9af2b7351ff6dea6c8f3289d21fd5a01"
+  },
+  "choice_positions": [
+    3,
+    1,
+    5
+  ],
+  "choice_counts": [
+    6,
+    5,
+    5
+  ],
+  "all_combinations": 150,
+  "only_correct_combination": [
+    2,
+    0,
+    4
+  ],
+  "opened_map_local": {
+    "index": 1,
+    "value": 3
+  },
+  "treasure_receipt": 115,
+  "clock_map": 386,
+  "clock_entity": 11,
+  "chest_entity": 14,
+  "forced_inside_open_event": 10
+}

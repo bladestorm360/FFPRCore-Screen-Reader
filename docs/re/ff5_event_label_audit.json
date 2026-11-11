@@ -14192,8 +14192,8 @@
     "id": 23,
     "raw": "HP/MP完全回復",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
+    "label": "@name:回復の泉",
+    "reason": "reviewed native healing spring event",
     "trap_hint": false
   },
   {
@@ -23933,8 +23933,8 @@
     "id": 19,
     "raw": "回復の泉",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
+    "label": "@name:回復の泉",
+    "reason": "reviewed native healing spring event",
     "trap_hint": false
   },
   {

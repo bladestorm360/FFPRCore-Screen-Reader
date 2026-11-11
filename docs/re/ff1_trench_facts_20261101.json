@@ -1,0 +1,989 @@
+{
+  "world_colliders": [
+    {
+      "group": "entity_default",
+      "entity": 117,
+      "raw": "コーネリア城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        144,
+        153
+      ],
+      "properties": {
+        "collision_type": 3,
+        "confirm_landing": false,
+        "entity_id": 117,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 118,
+      "raw": "コーネリア城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        146,
+        153
+      ],
+      "properties": {
+        "collision_type": 5,
+        "confirm_landing": false,
+        "entity_id": 118,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 119,
+      "raw": "コーネリア城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        145,
+        152
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 119,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 120,
+      "raw": "カオス神殿コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        121,
+        117
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 120,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 121,
+      "raw": "カオス神殿コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        123,
+        116
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 121,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 122,
+      "raw": "カオス神殿コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        123,
+        117
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 122,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 123,
+      "raw": "カオス神殿コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        122,
+        116
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 123,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 124,
+      "raw": "カオス神殿コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        121,
+        116
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 124,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 125,
+      "raw": "エルフの城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        129,
+        214
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 125,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 260,
+      "raw": "エルフの城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        128,
+        215
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 260,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 258,
+      "raw": "エルフの城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        130,
+        215
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 258,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 126,
+      "raw": "試練の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        123,
+        39
+      ],
+      "properties": {
+        "collision_type": 5,
+        "confirm_landing": false,
+        "entity_id": 126,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 127,
+      "raw": "試練の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        123,
+        38
+      ],
+      "properties": {
+        "collision_type": 5,
+        "confirm_landing": false,
+        "entity_id": 127,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 128,
+      "raw": "試練の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        122,
+        38
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 128,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 129,
+      "raw": "試練の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        121,
+        38
+      ],
+      "properties": {
+        "collision_type": 3,
+        "confirm_landing": false,
+        "entity_id": 129,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 130,
+      "raw": "試練の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        121,
+        39
+      ],
+      "properties": {
+        "collision_type": 3,
+        "confirm_landing": false,
+        "entity_id": 130,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 131,
+      "raw": "ミラージュの塔コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        184,
+        55
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 131,
+        "object_type": 19,
+        "target_transportation_ids": "1",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 132,
+      "raw": "ミラージュの塔コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        184,
+        56
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 132,
+        "object_type": 19,
+        "target_transportation_ids": "1",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 133,
+      "raw": "西の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        94,
+        178
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 133,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 134,
+      "raw": "西の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        178
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 134,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 135,
+      "raw": "西の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        96,
+        178
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 135,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 136,
+      "raw": "西の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        96,
+        179
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 136,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 137,
+      "raw": "西の城コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        94,
+        179
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 137,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 138,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        181,
+        197
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 138,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 139,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        182,
+        197
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 139,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 140,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        183,
+        197
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 140,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 141,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        183,
+        198
+      ],
+      "properties": {
+        "collision_type": 5,
+        "confirm_landing": false,
+        "entity_id": 141,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 142,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        181,
+        198
+      ],
+      "properties": {
+        "collision_type": 3,
+        "confirm_landing": false,
+        "entity_id": 142,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "entity_default",
+      "entity": 143,
+      "raw": "グルグ火山コリジョン",
+      "layer": "UpperObject",
+      "cell": [
+        182,
+        196
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 143,
+        "object_type": 19,
+        "target_transportation_ids": "1,2",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0005",
+      "entity": 105,
+      "raw": "橋が通れない",
+      "layer": "UpperObject",
+      "cell": [
+        145,
+        146
+      ],
+      "properties": {
+        "collision_type": 1,
+        "confirm_landing": false,
+        "entity_id": 105,
+        "object_type": 19,
+        "target_transportation_ids": "",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0006",
+      "entity": 206,
+      "raw": "運河陸だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 7,
+        "confirm_landing": false,
+        "entity_id": 206,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0007",
+      "entity": 205,
+      "raw": "運河陸だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 7,
+        "confirm_landing": false,
+        "entity_id": 205,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0015",
+      "entity": 103,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 103,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0016",
+      "entity": 115,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 115,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0025",
+      "entity": 101,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 101,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0026",
+      "entity": 207,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 207,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0026",
+      "entity": 254,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 254,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "group": "ev_e_0036",
+      "entity": 256,
+      "raw": "運河海だけ通れる",
+      "layer": "UpperObject",
+      "cell": [
+        95,
+        158
+      ],
+      "properties": {
+        "collision_type": 6,
+        "confirm_landing": false,
+        "entity_id": 256,
+        "object_type": 19,
+        "target_transportation_ids": "1,4",
+        "through_condition_type": 0
+      }
+    }
+  ],
+  "scripts": [
+    {
+      "locator": "Map_10010/sc_e_0015_1",
+      "sha256": "7617505e23143bf2a4a8b9ca2da75da5c78dcdead60d0de29a1d652fcce38614",
+      "state_predicates": [],
+      "flag_assignments": [],
+      "groups": [
+        "ev_e_0015"
+      ],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 16,
+        "SetEntities": 1,
+        "StopBGM": 1,
+        "Call": 4,
+        "FadeIn": 1,
+        "PlaySE": 3,
+        "Shake": 2,
+        "Wait": 9,
+        "Flash": 1,
+        "SyncSE": 1,
+        "FadeOut": 1,
+        "ChangeMap": 1,
+        "Exit": 12,
+        "SetPuppet": 11,
+        "ExecPuppet": 4,
+        "Return": 4,
+        "SetPos": 3,
+        "Hide": 5,
+        "MoveTo": 1,
+        "PlayAnim": 6,
+        "Move": 2,
+        "Show": 1
+      }
+    },
+    {
+      "locator": "Map_10010/sc_map_10010",
+      "sha256": "7fbcaeca130f9d9241c12ec0f790c441a4eae5ecd9940b797d8cf0597d1dcbba",
+      "state_predicates": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 49,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 13,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 0
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 6,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 7,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 15,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 24,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 25,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        },
+        {
+          "bank": "ScenarioFlag1",
+          "index": 33,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        }
+      ],
+      "flag_assignments": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 49,
+          "value": 1
+        }
+      ],
+      "groups": [
+        "ev_e_0005",
+        "ev_e_0006",
+        "ev_e_0007",
+        "ev_e_0016",
+        "ev_e_0025",
+        "ev_e_0026",
+        "ev_e_0036"
+      ],
+      "native_calls": [
+        "MapEntryRoofControl"
+      ],
+      "operation_counts": {
+        "Nop": 12,
+        "Branch": 8,
+        "SetFlag": 1,
+        "SysCall": 1,
+        "SetEntities": 7,
+        "Exit": 9,
+        "Call": 2,
+        "SetPuppet": 2,
+        "ExecPuppet": 2,
+        "Return": 2,
+        "CueAnim": 2
+      }
+    },
+    {
+      "locator": "Map_20011_2/sc_e_0004",
+      "sha256": "ea7154f552cbde10551c567a1a038d3f2b4f259688b72afd087ea1a6dc1c0d41",
+      "state_predicates": [],
+      "flag_assignments": [],
+      "groups": [],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 1,
+        "Exit": 1
+      }
+    },
+    {
+      "locator": "Map_20011_2/sc_e_0004_1",
+      "sha256": "b472bbc1df8783643b5458cd4c8625f64dec2452bf2a6bedb44dba722d35f518",
+      "state_predicates": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 5,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        }
+      ],
+      "flag_assignments": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 5,
+          "value": 1
+        },
+        {
+          "bank": "TreasureFlag2",
+          "index": 244,
+          "value": 1
+        }
+      ],
+      "groups": [],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 15,
+        "Branch": 1,
+        "Msg": 2,
+        "Call": 4,
+        "MsgFunfare": 1,
+        "GetItem": 1,
+        "SetFlag": 2,
+        "Exit": 11,
+        "SetPuppet": 9,
+        "ExecPuppet": 4,
+        "Return": 4,
+        "CueAnim": 3,
+        "PlayAnim": 4,
+        "LookAt": 2,
+        "Hide": 1
+      }
+    },
+    {
+      "locator": "Map_20011_2/sc_e_0004_2",
+      "sha256": "e4d6c51f2913d51b50b3855f497f6fe2c925123729fd028f91423b0c121c2fbf",
+      "state_predicates": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 5,
+          "comparison": "＝",
+          "right_bank": "imm",
+          "right_value": 1
+        }
+      ],
+      "flag_assignments": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 5,
+          "value": 1
+        },
+        {
+          "bank": "TreasureFlag2",
+          "index": 244,
+          "value": 1
+        }
+      ],
+      "groups": [],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 21,
+        "Branch": 1,
+        "Msg": 2,
+        "Call": 6,
+        "Wait": 1,
+        "MsgFunfare": 1,
+        "GetItem": 1,
+        "SetFlag": 2,
+        "Exit": 14,
+        "SetPuppet": 12,
+        "ExecPuppet": 6,
+        "Return": 6,
+        "CueAnim": 4,
+        "MoveTo": 4,
+        "PlayAnim": 4,
+        "LookAt": 2,
+        "Hide": 1
+      }
+    },
+    {
+      "locator": "Map_20051_1/sc_e_0015",
+      "sha256": "40e76ae8543a3bcb29d3358e628928bd031467480ab7df63ceb53957cd2a5bff",
+      "state_predicates": [],
+      "flag_assignments": [
+        {
+          "bank": "ScenarioFlag1",
+          "index": 15,
+          "value": 1
+        }
+      ],
+      "groups": [],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 34,
+        "Call": 11,
+        "UseItem": 1,
+        "Wait": 6,
+        "Msg": 4,
+        "PlaySE": 3,
+        "Shake": 2,
+        "FadeOut": 1,
+        "SetFlag": 1,
+        "ChangeMap": 1,
+        "Exit": 23,
+        "SetPuppet": 22,
+        "ExecPuppet": 11,
+        "Return": 11,
+        "Route": 1,
+        "MoveTo": 6,
+        "LookAt": 1,
+        "PlayAnim": 8,
+        "Move": 26,
+        "SetPos": 3,
+        "Hide": 3,
+        "CueAnim": 1
+      }
+    },
+    {
+      "locator": "Map_20051_1/sc_e_0015_2",
+      "sha256": "ada30fc3782f4e0dcc767858a3e28d338894902820bf1b3e11e72dc8ce04b358",
+      "state_predicates": [],
+      "flag_assignments": [],
+      "groups": [
+        "ev_e_0016"
+      ],
+      "native_calls": [],
+      "operation_counts": {
+        "Nop": 16,
+        "SetEntities": 1,
+        "Call": 5,
+        "FadeIn": 1,
+        "Wait": 3,
+        "PlayBGM": 2,
+        "SyncBGM": 1,
+        "Msg": 1,
+        "AutoSave": 1,
+        "Exit": 11,
+        "SetPuppet": 10,
+        "ExecPuppet": 5,
+        "Return": 5,
+        "SetPos": 3,
+        "Move": 12,
+        "PlayAnim": 3,
+        "LookAt": 1,
+        "MoveTo": 2,
+        "Hide": 1
+      }
+    }
+  ]
+}

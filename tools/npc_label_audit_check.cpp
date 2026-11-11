@@ -41,16 +41,37 @@ struct Record {
     std::wstring raw, scope;
     int layer = 0;
     float x = 0, y = 0;
+    int map_id = 0, entity_id = -1;
 };
 
 int main(int argc, char** argv)
 {
-    if (argc != 2) { std::puts("usage: npc_label_audit ffN"); return 1; }
+    if (argc != 2 && argc != 3) { std::puts("usage: npc_label_audit ffN [service-facts.json]"); return 1; }
     const std::string game = argv[1];
     if (!json::parse(read_file("data/" + game + "/translation.json"), fixture::dictionary)) {
         std::puts("FAIL dictionary load"); return 1;
     }
     field::prepare_entity_translations();
+    if (argc == 3) {
+        // Optional factual census uses the production translator and the exact
+        // service map/raw identity, including the live property's pre-fallback
+        // name. This is diagnostic output, not a new runtime role heuristic.
+        json::Value facts;
+        if (!json::parse(read_file(argv[2]), facts)) return 1;
+        const auto* game_facts = facts.get(text::from_utf8(game));
+        const auto* rows = game_facts ? game_facts->get(L"rows") : nullptr;
+        if (!rows || rows->type != json::Value::Type::Array) return 1;
+        for (size_t i = 0; i < rows->arr.size(); ++i) {
+            const auto& row = rows->arr[i];
+            const auto* raw = row.get(L"raw"); const auto* map = row.get(L"map");
+            const auto* actor = row.get(L"entity");
+            if (!raw || !map || !actor) return 1;
+            const auto label = field::npc_display_label(
+                field::translate_entity_name_for_actor(raw->s, static_cast<int>(map->n), static_cast<int>(actor->n))).base;
+            std::printf("%zu\t%s\n", i, text::to_utf8(text::replace_all(label, L"\n", L" ")).c_str());
+        }
+        return 0;
+    }
     if(game=="ff3"){
         for(const wchar_t* locale:{L"en",L"ja",L"fr",L"it",L"de",L"es",L"ko",L"zht",L"zhc",L"ru",L"th",L"pt"}){
             fixture::language=locale;
@@ -65,6 +86,21 @@ int main(int argc, char** argv)
     }
     std::ifstream objects("../tools/mapdump/" + game + "_objects.jsonl", std::ios::binary);
     if (!objects) { std::puts("FAIL object data load"); return 1; }
+    std::map<std::wstring, int> map_ids;
+    std::ifstream maps("../tools/mapdump/" + game + "_master/map.txt", std::ios::binary);
+    std::string map_line;
+    while (std::getline(maps, map_line)) {
+        if (map_line.empty() || map_line[0] < '0' || map_line[0] > '9') continue;
+        const auto first = map_line.find(','), second = map_line.find(',', first + 1);
+        if (first == std::string::npos || second == std::string::npos) return 1;
+        map_ids[text::from_utf8(map_line.substr(first + 1, second - first - 1))] = std::stoi(map_line.substr(0, first));
+    }
+    json::Value service_review;
+    if (!json::parse(read_file("docs/re/service_npc_labels_20261102.json"), service_review)) return 1;
+    const auto* games = service_review.get(L"games");
+    const auto* reviewed_game = games ? games->get(text::from_utf8(game)) : nullptr;
+    const auto* service_rows = reviewed_game ? reviewed_game->get(L"rows") : nullptr;
+    if (!service_rows || service_rows->type != json::Value::Type::Array) return 1;
     std::vector<Record> records;
     std::string line;
     while (std::getline(objects, line)) {
@@ -75,8 +111,12 @@ int main(int argc, char** argv)
         auto str = [&](const wchar_t* key) { const auto* p = row.get(key); return p ? p->s : std::wstring(); };
         auto num = [&](const wchar_t* key) { const auto* p = row.get(key); return p ? static_cast<float>(p->n) : 0.f; };
         const std::wstring layer = str(L"layer");
+        const auto* props = row.get(L"props");
+        const auto* actor = props ? props->get(L"entity_id") : nullptr;
+        const int actor_id = !actor ? -1 : actor->is_string() ? std::stoi(text::to_utf8(actor->s)) : static_cast<int>(actor->n);
         records.push_back({str(L"name"), str(L"submap") + L"\n" + str(L"group"),
-                           layer == L"BottomObject" ? 0 : layer == L"UpperObject" ? 2 : 1, num(L"tx"), num(L"ty")});
+                           layer == L"BottomObject" ? 0 : layer == L"UpperObject" ? 2 : 1, num(L"tx"), num(L"ty"),
+                           map_ids[str(L"submap")], actor_id});
     }
     int failures = 0;
     size_t checked = 0, decorated = 0, duplicate_groups = 0;
@@ -85,6 +125,28 @@ int main(int argc, char** argv)
     };
     for (const wchar_t* lang : {L"en", L"ja", L"fr", L"it", L"de", L"es", L"ko", L"zht", L"zhc", L"ru", L"th", L"pt"}) {
         fixture::language = lang;
+        for (const auto& row : service_rows->arr) {
+            const auto raw = row.get(L"raw")->s;
+            const int map = static_cast<int>(row.get(L"map")->n), actor = static_cast<int>(row.get(L"entity")->n);
+            const auto live = field::npc_display_label(field::translate_entity_name_for_actor(raw,map,actor)).base;
+            const auto copied = field::npc_display_label_snapshot(field::translate_entity_name_snapshot(raw,map,actor)).base;
+            if (live != copied) { ++failures; std::puts("FAIL service live/snapshot identity mismatch"); }
+            if (row.get(L"correct")->b) {
+                const auto key = L"@actor/" + std::to_wstring(map) + L"/" + std::to_wstring(actor) + L"/" + raw;
+                const auto* entry = fixture::dictionary.get(key);
+                const auto* localized = entry ? entry->get(lang) : nullptr;
+                if (!localized || localized->s.empty() || live != localized->s) {
+                    ++failures; std::puts("FAIL service actor/locale correction missing");
+                }
+            } else if (fixture::language == L"en" && live != row.get(L"label_before")->s) {
+                ++failures; std::puts("FAIL useful service or personal name changed");
+            }
+            if (field::translate_entity_name_for_actor(raw,map,-1) != field::translate_entity_name_for_map(raw,map) ||
+                field::translate_entity_name_for_actor(raw,0,actor) != field::translate_entity_name(raw) ||
+                field::translate_entity_name_for_actor(raw+L"__unreviewed",map,actor) != field::translate_entity_name_for_map(raw+L"__unreviewed",map)) {
+                ++failures; std::puts("FAIL service override escaped its exact actor/map/raw identity");
+            }
+        }
         if(game=="ff3"){
             const auto* alias=fixture::dictionary.get(L"7;老人2");
             const auto* localized=alias?alias->get(lang):nullptr;
@@ -119,7 +181,7 @@ int main(int argc, char** argv)
         for (size_t i = 0; i < records.size(); ++i) {
             const auto& r = records[i];
             // Live conversion uses a generic NPC fallback when the property is empty.
-            std::wstring translated = field::translate_entity_name(r.raw);
+            std::wstring translated = field::translate_entity_name_for_actor(r.raw,r.map_id,r.entity_id);
             if (translated.empty()) translated = L"NPC";
             const auto label = field::npc_display_label(translated);
             const auto again = field::npc_names::parse(label.base);

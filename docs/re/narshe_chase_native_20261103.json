@@ -1,0 +1,83 @@
+{
+  "source_script_hashes": {
+    "Map_20010/sc_map_20010": "f52d6466569c28a5c73cd86a6c761112f3f19ff3dd205202dc342797f8cfcc1d",
+    "Map_20010/sc_e_0433": "ea99ee3a020d4166f2872a3c09013b5f3a376901017c4d5f3b1a533edf823c4b",
+    "Map_20010/sc_e_0434": "c341232092d07cf5049b61b78d14a691c13d8f7a6eefb7d59f38fb482b0d04e9",
+    "Map_20011_13/sc_map_20011_13": "f726a73866a99835479cadc7d23f1d68f840764d48f2269a5f3bbe67dfacf6c4",
+    "Map_20011_13/sc_e_0431": "618104d287175228da5ea0f810796bc9528d7d8257d98b89f5148118a9d2e376",
+    "Map_20011_13/sc_e_0431_1": "849f53d0b71b8b3d2f8256559a81f7b49840b6f2f66988af5128552f47f8a38d",
+    "Map_20011_13/sc_e_0432": "1efffc6bea7a064130f8b19651be8f2c328e650b17875b2f542abbabc8282b65",
+    "Map_20020/sc_map_20020": "02aba13f5cb45667bcf81c51dda12e1fa513924ed8e98203b93dbbb1ab09f6d5",
+    "Map_20020/sc_e_0435": "5e8fc1e10fb843434280decbb129d0641d7ea860048f2aa75719d472397b0b16",
+    "Map_20040/sc_map_20040": "88c6a323428bed8acce8e9693a45e4f5f67f6c9cecf51752f6d47b1eed6a4d60",
+    "Map_20040/sc_e_0436": "88ddbc23438df9ad23e356b59085a8b5c47ce0c0b7289aefdc0833b36d8cb0e4",
+    "Map_20040/sc_e_0437": "c17c5089815f8fe1780704bfd36632a5a192ee84c8302ea8dcc8e340aa45422c",
+    "Map_20040/sc_e_0438": "e03cac1ed18abdd230eee7a09cee183d210121a39772007523af762e2ffcf34b",
+    "Map_20040/sc_e_0439": "d337fc5662ebb7670f057718ac82e5f2b74590195ff86a0b9717916e15ed8d90",
+    "Map_20040/sc_e_1055": "f080e1c74a110665a0f555103a6df7c6a7de198cc70aa129d3c4fbde3b252012"
+  },
+  "native_receipts": {
+    "prerequisites": [
+      138,
+      207
+    ],
+    "treasure_room_ready": 208,
+    "empty_chest": 209,
+    "chase": [
+      210,
+      211,
+      212,
+      213
+    ],
+    "ledge_scene": 214,
+    "mog_rescued": 215,
+    "alternate_native_outcome": 216,
+    "expired_after": 297
+  },
+  "wait": {
+    "start_script": "Map_20040/sc_e_1055",
+    "native_seconds": 5,
+    "native_callback": "sc_e_0437",
+    "running_local": 1,
+    "movement_cancels": true,
+    "no_mod_timer_or_automatic_input": true
+  },
+  "geometry_preserved": true,
+  "scope": "Original complete chase guidance on3,16,18,19,20 and northern mine323..327; preserve earlier defense19 and Closed light320. No treasure reward disclosure.",
+  "all_guide_maps": [
+    3,
+    16,
+    18,
+    19,
+    20,
+    323,
+    324,
+    325,
+    326,
+    327
+  ],
+  "actual_northern_journey": [
+    18,
+    323,
+    325,
+    326,
+    18,
+    327,
+    18,
+    19,
+    20
+  ],
+  "remote_local_waypoint": {
+    "map": 18,
+    "point": 1,
+    "reason": "Observe this floor before selecting its local-dependent chase trigger."
+  },
+  "source_input_sha256": {
+    "objects": "17f6a180291875ebad43dd0e375a37493bee68f9d8077a8e3538353006abed23",
+    "scripts": "7b989e8be83adfecbd038a62e9c1b1ce9055d1f983b4803d2a358e6e6794aecb",
+    "maps": "1dedbff32eef5025db9a20e3180464e78d9be854c7acb9f91ebd4f3b9373fe36",
+    "script_master": "f28e965a31655aa284f7802c90f0af70b3ca10ca4c36746eea76e46dd0919e71",
+    "areas": "25cf96f80f0a1e4e2f1984d5482399bb6c562c3973577ca3ca226f00b4696973",
+    "english_names": "9fea81a0b457d762762e0d7e29e4ccf4a081e6d97d34d8563408522d1ab5a01b"
+  }
+}

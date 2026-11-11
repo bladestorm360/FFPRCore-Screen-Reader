@@ -18,7 +18,7 @@
     "scripted_objects": 2297,
     "contact_encounters": 59,
     "puzzle_controls": 69,
-    "reviewed_story_travel": 106
+    "reviewed_story_travel": 114
   },
   "guides": [
     {
@@ -35,7 +35,7 @@
         498,
         499
       ],
-      "state_rules": 25
+      "state_rules": 33
     },
     {
       "id": "kefkas_tower",
@@ -74,7 +74,7 @@
         595,
         596
       ],
-      "state_rules": 28
+      "state_rules": 42
     },
     {
       "id": "opera",
@@ -88,7 +88,7 @@
         118,
         576
       ],
-      "state_rules": 16
+      "state_rules": 22
     },
     {
       "id": "narshe_battle",
@@ -136,6 +136,13 @@
         624
       ],
       "state_rules": 5
+    },
+    {
+      "id": "narshe_light_path",
+      "maps": [
+        320
+      ],
+      "state_rules": 17
     }
   ],
   "contact_encounters": [
@@ -38129,7 +38136,7 @@
       "party_calls": 0,
       "player_puppets": 2,
       "state_writes": 0,
-      "reviewed_travel": false
+      "reviewed_travel": true
     },
     {
       "maps": [
@@ -38147,7 +38154,7 @@
       "party_calls": 0,
       "player_puppets": 2,
       "state_writes": 0,
-      "reviewed_travel": false
+      "reviewed_travel": true
     },
     {
       "maps": [
@@ -43212,7 +43219,7 @@
       "party_calls": 0,
       "player_puppets": 2,
       "state_writes": 0,
-      "reviewed_travel": false
+      "reviewed_travel": true
     },
     {
       "maps": [
@@ -43434,7 +43441,7 @@
       "party_calls": 0,
       "player_puppets": 2,
       "state_writes": 0,
-      "reviewed_travel": false
+      "reviewed_travel": true
     },
     {
       "maps": [
@@ -43638,7 +43645,7 @@
       "party_calls": 0,
       "player_puppets": 1,
       "state_writes": 0,
-      "reviewed_travel": false
+      "reviewed_travel": true
     },
     {
       "maps": [

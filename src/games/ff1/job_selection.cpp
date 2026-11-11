@@ -4,10 +4,10 @@
 // name, then one frame later its description (when Auto Detail is on) and the position.
 // The on-demand detail key reads the description through "JobSelectionPatches.GetCurrentDescription".
 //
-// Parity notes: names and descriptions are found in the list's UI Text components by matching
-// the C#'s English job-name list, exactly as FF1 does. The C#'s Touch-version fallback only
-// ran when the KeyInput class was missing (it never is in FF1); its "Strategy 2" loop and
-// LogComponentTypes did nothing and are not ported.
+// Native contentList rows own their localized jobNameText; discriptionText
+// (the game's spelling) owns the separate current description. Never search
+// unrelated child texts or guess a description from its length. Exact producer,
+// field and lifetime evidence: docs/re/FF1_CLASS_DESCRIPTIONS_20261101.md.
 //
 // JobContentListController is a shared Last.UI.KeyInput class (all five dumps); masked to FF1
 // because only FF1's module hooks it here.
@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 #include "../../core/core.h"
+#include "../../core/displayed_ui.h"
 #include "../../core/frame.h"
 #include "../../core/hooks.h"
 #include "../../core/log.h"
@@ -26,78 +27,57 @@
 #include "../../core/text.h"
 #include "../../core/ui_util.h"
 #include "../../core/unity.h"
+#include "../../core/field/scene_events.h"
 
 namespace ffpr::ff1 {
 namespace {
 
 ref::Class kJobList{"Last.UI.KeyInput", "JobContentListController", game::kFF1};
 ref::Method mJobSelectContent{kJobList, "SelectContent", 1};
+ref::Field fContents{kJobList,"contentList"};
+ref::Field fDescriptionParent{kJobList,"discriptionParent"};
+ref::Class kJobContent{"Last.UI.KeyInput","JobContentController",game::kFF1};
+ref::Field fContentView{kJobContent,"view"};
 
 // IsHandlingCursor: set by SelectContent, cleared by the cursor router or ResetState.
 bool g_handling_cursor = false;
 // _lastController: the live job list, for the on-demand detail key. Re-checked on every use.
 void* g_controller = nullptr;
-
-// FF1 job names (the C#'s list, matched OrdinalIgnoreCase).
-constexpr const wchar_t* kJobNames[] = {L"Warrior",    L"Thief",      L"Monk",    L"Red Mage",
-                                        L"White Mage", L"Black Mage", L"Knight",  L"Ninja",
-                                        L"Master",     L"Red Wizard", L"White Wizard", L"Black Wizard"};
-
-bool is_job_name(const std::wstring& s)
-{
-    for (const wchar_t* name : kJobNames)
-        if (CompareStringOrdinal(s.c_str(), static_cast<int>(s.size()), name, -1, TRUE) == CSTR_EQUAL) return true;
-    return false;
-}
+uint64_t g_generation=0;
+int g_index=-1;
 
 bool controller_alive(void* ctrl)
 {
     return ctrl && kJobList.is(ctrl) && unity::alive(ctrl);
 }
 
-/// GetJobNameViaHierarchy: the index-th Text (including inactive ones) whose trimmed text is a
-/// job name. `job_count` is the number of such texts when found, -1 otherwise.
-std::wstring job_name_via_hierarchy(void* list_ctrl, int index, int& job_count)
+/// Exactly one selected native row, in any game-supported UI language.
+std::wstring selected_name(void* list_ctrl, int index, int& job_count)
 {
     job_count = -1;
-    std::vector<std::wstring> job_texts;
-    for (void* t : unity::texts(list_ctrl, true)) {
-        std::wstring value = unity::ui_text(t);
-        if (text::is_blank(value)) continue;
-        value = text::trim(value);
-        if (is_job_name(value)) job_texts.push_back(value);
-    }
-    if (index >= 0 && index < static_cast<int>(job_texts.size())) {
-        job_count = static_cast<int>(job_texts.size());
-        return job_texts[static_cast<size_t>(index)];
-    }
-    return {};
+    if(!controller_alive(list_ctrl)||!unity::active_in_hierarchy(list_ctrl))return {};
+    void* list=ref::rd<void*>(list_ctrl,fContents);const int count=unity::list_count(list);
+    if(count<1||count>12||index<0||index>=count)return {};
+    void* row=unity::list_at(list,index);
+    if(!kJobContent.is(row)||!unity::alive(row))return {};
+    void* view=ref::rd<void*>(row,fContentView);if(!view)return {};
+    const auto name=displayed::text_field(view,"jobNameText");
+    if(!name.empty())job_count=count;return name;
 }
 
-/// GetDescriptionViaHierarchy: the longest trimmed Text that is not a job name and has at
-/// least 10 characters (the first one on a tie). Empty when none.
-std::wstring description_via_hierarchy(void* list_ctrl)
+/// SetDiscriptionText writes this exact native renderer. Its parent can be
+/// outside the row hierarchy; hidden/disabled description panels stay absent.
+std::wstring current_panel_description(void* list_ctrl)
 {
-    if (!controller_alive(list_ctrl)) return {};
-    std::wstring best;
-    size_t best_len = 0;
-    for (void* t : unity::texts(list_ctrl, true)) {
-        std::wstring value = unity::ui_text(t);
-        if (text::is_blank(value)) continue;
-        value = text::trim(value);
-        if (is_job_name(value)) continue;
-        if (value.size() < 10) continue;
-        if (value.size() > best_len) {
-            best_len = value.size();
-            best = value;
-        }
-    }
-    return best;
+    if(!controller_alive(list_ctrl)||!unity::active_in_hierarchy(list_ctrl))return {};
+    void* panel=ref::rd<void*>(list_ctrl,fDescriptionParent);
+    if(!displayed::container_visible(panel))return {};
+    return displayed::text_field(list_ctrl,"discriptionText");
 }
 
 std::wstring safe_description(void* list_ctrl)
 {
-    return hooks::guarded_r("JobSelection.Description", std::wstring(), [&] { return description_via_hierarchy(list_ctrl); });
+    return hooks::guarded_r("JobSelection.Description", std::wstring(), [&] { return current_panel_description(list_ctrl); });
 }
 
 /// AnnounceJobWithDelayedDescription, one frame after SelectContent.
@@ -115,16 +95,19 @@ void announce_job(void* ctrl, const std::wstring& job_name, int index, int count
 
 void on_select_content(void* self, void* cursor)
 {
-    g_handling_cursor = true;   // the generic cursor reader stays quiet
+    const auto generation=++g_generation;
+    g_controller=nullptr;g_index=-1;g_handling_cursor=false;
     if (!cursor || !self) return;
     int index = ui::cursor_index(cursor);
-    g_controller = self;
-
     int job_count = -1;
-    std::wstring job_name = job_name_via_hierarchy(self, index, job_count);
+    std::wstring job_name = selected_name(self, index, job_count);
     if (job_name.empty()) return;
-
-    frame::next_frame([self, job_name, index, job_count] { announce_job(self, job_name, index, job_count); },
+    g_controller=self;g_index=index;g_handling_cursor=true;
+    frame::next_frame([self, job_name, index, job_count,generation] {
+        if(generation!=g_generation||g_controller!=self||g_index!=index||
+           !controller_alive(self)||!unity::active_in_hierarchy(self))return;
+        announce_job(self,job_name,index,job_count);
+    },
                       "JobSelection.Announce");
 }
 
@@ -137,13 +120,14 @@ bool is_active()
 std::wstring current_description()
 {
     void* ctrl = g_controller;
-    return ctrl ? safe_description(ctrl) : std::wstring();
+    return is_active() ? safe_description(ctrl) : std::wstring();
 }
 
 void reset_state()
 {
     g_handling_cursor = false;
     g_controller = nullptr;
+    g_index=-1;++g_generation;
 }
 
 using VoidPtr_t = void (*)(void* self, void* arg, const void* mi);
@@ -165,6 +149,10 @@ int install()
     queries::define_text("JobSelectionPatches.GetCurrentDescription", [] { return current_description(); });
     actions::define("JobSelectionPatches.ClearHandlingFlag", [] { g_handling_cursor = false; });
     actions::define("JobSelectionPatches.ResetState", [] { reset_state(); });
+    // Title-owned controllers must retire before later field/scene input can
+    // consult them; teardown touches owned state only, never the old pointer.
+    for(auto event:{events::Kind::MapChanging,events::Kind::TitleScreen,events::Kind::SceneLoaded})
+        events::on(event,[]{reset_state();});
     return n;
 }
 

@@ -40,6 +40,8 @@ bool native_input_blocked()
 {
     if (suppress_game_input()) return true;
     if (!g_interception) return false;
+    if(bindings::battle_party_keyboard_in_use())return true;
+    if(bindings::event_guide_keyboard_in_use())return true;
     if(bindings::remapped_keyboard_in_use())return true;
     if (queries::is("ReviewBuffer.IsInformation")) {
         // Arrows review the copied comparison. WASD, native confirm/cancel and

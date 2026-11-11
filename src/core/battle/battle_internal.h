@@ -6,7 +6,8 @@ namespace ffpr::battle {
 
 // battle_state.cpp (FF1 Patches/BattlePatches.cs) ----------------------------------------------
 /// FF1 MenuStateRegistry.SetActive semantics: setting a state inactive also runs its reset
-/// handler (BattleCommandState.OnReset clears LastSelectedCommandIndex and CurrentActor).
+/// handler (BattleCommandState.OnReset clears LastSelectedCommandIndex;
+/// the admitted actor identity survives child menus and is cleared by battle lifecycle).
 void state_set(const char* key, bool active);
 bool state_active(const char* key);
 /// BattleTargetState.SetTargetSelectionActive.

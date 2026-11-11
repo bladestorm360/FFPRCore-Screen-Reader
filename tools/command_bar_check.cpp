@@ -8,6 +8,7 @@ namespace fixture {
 struct Node { void* cursor=nullptr;void* rows=nullptr;void* data=nullptr;int id=1,state=1,index=0;bool alive=true,active=true; };
 using List=std::vector<void*>;
 bool menu=false;
+bool shop_equip=false;
 game::Id current_game=game::Id::FF1;
 std::map<std::string,void*> owners;
 std::map<std::string,long long> indices;
@@ -23,8 +24,9 @@ bool Class::is(void*p){return p!=nullptr;}
 int32_t Field::get(){std::string n=name;
  if(n=="selectCursor")return offsetof(fixture::Node,cursor);
  if(n=="contentList"||n=="contents")return offsetof(fixture::Node,rows);
- if(n=="<Data>k__BackingField")return offsetof(fixture::Node,data);
- if(n=="<Id>k__BackingField"||n=="<EquipmentCommandIdCash>k__BackingField")return offsetof(fixture::Node,id);
+ if(n=="<Data>k__BackingField"||n=="commandController")return offsetof(fixture::Node,data);
+ if(n=="<EquipmentCommandIdCash>k__BackingField")return offsetof(fixture::Node,id);
+ if(n=="<Id>k__BackingField")return offsetof(fixture::Node,id);
  return -1;}
 }
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
@@ -54,11 +56,24 @@ std::wstring menu_position(const std::wstring&s,int,int){return s;}
 }
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}}
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}}
-namespace queries {void define(const char*,std::function<bool()>){} }
+namespace queries {
+void define(const char*,std::function<bool()>){}
+bool is(const char* name){return std::string_view(name)=="ShopMenuTracker.EnteredEquipmentSubmenu"&&fixture::shop_equip;}
+}
 int main(){using namespace fixture;namespace s=ffpr::system;int failures=0;
 auto expect=[&](bool ok,const char*why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
+auto read_pending=[&] {
+    for(auto& step:pending)expect(!step(),"ready command read completes without further frames");
+    pending.clear();
+};
+s::o_EquipCommandInit=[](void*,const void*){};
+s::o_EquipSetCursor=[](void* owner,int32_t value,const void*){
+    auto* bar=static_cast<Node*>(owner);
+    static_cast<Node*>(bar->cursor)->index=value;
+    bar->id=value+1;
+};
 for(int n=1;n<=6;++n){current_game=static_cast<game::Id>(n);Node item,equip,magic,bar,cur,row,data;List rows{&row};bar.cursor=&cur;bar.rows=&rows;row.data=&data;
-owners["ItemWindowController"]=&item;owners["EquipmentWindowController"]=&equip;owners["AbilityWindowController"]=&magic;magic.state=4;
+owners["ItemWindowController"]=&item;owners["EquipmentWindowController"]=&equip;owners["AbilityWindowController"]=&magic;magic.state=4;equip.data=&bar;
 menu=false;spoken.clear();s::schedule_item_read(&bar);s::schedule_equip_read(&bar);if(n==1)s::schedule_magic_read(&bar);
 for(auto&step:pending)expect(!step(),"background preload ends its bounded reader immediately");pending.clear();
 expect(spoken.empty()&&!s::is_command_bar_active(),"non-menu intro/field preload speaks no command and claims no cursor");
@@ -68,5 +83,22 @@ cur.index=1;data.id=2;rows.push_back(&row);s::try_read_item(&bar);expect(spoken.
 cur.index=0;spoken.clear();s::try_read_equip(&bar);expect(spoken.size()==1&&spoken.back()==L"Equip","real equipment command remains audible");
 if(n==1){data.id=1;spoken.clear();s::try_read_magic(&bar);expect(spoken.size()==1&&spoken.back()==L"Use","FF1 magic command remains audible");}
 menu=false;s::try_read_item(&bar);menu=true;cur.index=0;data.id=1;spoken.clear();s::try_read_item(&bar);expect(spoken.size()==1,"menu re-entry re-arms existing index guard");
-indices.clear();std::printf("FF%d preload and real command focus checked\n",n);}
+menu=false;spoken.clear();shop_equip=true;
+s::d_EquipCommandInit(&equip,nullptr);read_pending();
+expect(spoken==std::vector<std::wstring>{L"Equip"}&&s::is_command_bar_active(),"shop entry speaks the initially focused Equip once and owns cursor speech");
+s::d_EquipSetCursor(&bar,1,nullptr);read_pending();
+expect(spoken==std::vector<std::wstring>{L"Equip",L"Optimal"},"shop command move speaks Optimal once");
+s::schedule_equip_read(&item);read_pending();
+expect(spoken.size()==2,"a different equipment controller cannot claim focus");
+equip.state=2;
+expect(!s::is_command_bar_active(),"equipment slot selection gives up command cursor ownership");
+equip.state=1;bar.id=1;cur.index=0;
+s::d_EquipCommandInit(&equip,nullptr);read_pending();
+expect(spoken.size()==3&&spoken.back()==L"Equip","returning from slots reads the shop command focus");
+shop_equip=false;
+s::d_EquipCommandInit(&equip,nullptr);read_pending();
+expect(spoken.size()==3&&!s::is_command_bar_active(),"closing shop leaves no command speech from a stale window");
+shop_equip=true;s::d_EquipCommandInit(&equip,nullptr);read_pending();
+expect(spoken.size()==4&&spoken.back()==L"Equip","reopening shop speaks fresh initial focus");
+shop_equip=false;indices.clear();std::printf("FF%d preload, main menu and shop command focus checked\n",n);}
 std::printf("Command contexts: %d failures\n",failures);return failures?1:0;}

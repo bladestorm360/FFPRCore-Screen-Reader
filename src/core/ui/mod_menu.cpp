@@ -34,6 +34,7 @@
 #include "../audio/sound.h"
 #include "../input/bindings.h"
 #include "../audio/volume_settings.h"
+#include "../audio/custom_cues.h"
 
 namespace ui::mod_menu {
 namespace {
@@ -49,6 +50,8 @@ struct Item {
     int int_def = 0;                        // Volume / Enum default
     int int_max = 0;                        // Enum: PreferencesManager clamp maximum
     int int_min = 0, int_step = 1;
+    bool zero_default=false,rebuild_menu=false;
+    const wchar_t* unit=L"{0} steps";
     std::vector<const wchar_t*> options;    // Enum option keys
     const wchar_t* desc = nullptr;          // description (Toggle: when on)
     const wchar_t* desc_off = nullptr;      // Toggle: description when off
@@ -158,11 +161,8 @@ void initialize()
                        L"On. A character's turn announcement interrupts current speech.",
                        L"Off. A character's turn announcement queues after current speech."));
     v.push_back(toggle(L"Enemy status announcements", p::kEnemyStatusAnnouncements, p::kEnemyStatusAnnouncementsDefault,
-                       L"On. Announce visually displayed enemy conditions.",
-                       L"Off. Do not automatically announce enemy conditions."));
-    v.push_back(toggle(L"Enemy critical status", p::kEnemyCriticalStatus, p::kEnemyCriticalStatusDefault,
-                       L"On. Announce enemies' hidden critical HP status.",
-                       L"Off. Keep enemies' hidden critical HP status silent."));
+                       L"On. Announce visible enemy transformations.",
+                       L"Off. Do not announce enemy transformations."));
     v.push_back(enumeration(L"Stat delta detail", {L"Verbose", L"Brief"},
                             p::kStatDeltaMode, p::kStatDeltaModeDefault, p::kStatDeltaModeMax,
                             L"Stat delta detail help"));
@@ -186,6 +186,12 @@ void initialize()
 
     // Navigation
     v.push_back(header(L"Navigation"));
+    v.push_back(toggle(L"Navigation puzzle guidance",p::kNavigationPuzzleGuidance,p::kNavigationPuzzleGuidanceDefault,
+                       L"Navigation puzzle guidance is on",L"Navigation puzzle guidance is off"));
+    v.push_back(toggle(L"Non-navigation puzzle guidance",p::kOtherPuzzleGuidance,p::kOtherPuzzleGuidanceDefault,
+                       L"Non-navigation puzzle guidance is on",L"Non-navigation puzzle guidance is off"));
+    v.push_back(enumeration(L"Puzzle guide verbosity",{L"Minimal",L"Verbose"},p::kPuzzleGuideVerbosity,
+                           p::kPuzzleGuideVerbosityDefault,p::kPuzzleGuideVerbosityMax,L"Puzzle guide verbosity help"));
     v.push_back(toggle(L"Autowalk", p::kAutowalk, p::kAutowalkDefault,
                        L"On. The selected layout's navigation key, Slash for a waypoint, or controller LT walks to the destination. Press again to stop. Manual input, menus and battles stop the walk.",
                        L"Off. Navigation requests give directions or restart the beacon."));
@@ -220,8 +226,8 @@ void initialize()
     const int controls_page=int(v.size());
     Item controls=header(L"Controls");controls.kind=Kind::Submenu;controls.desc=L"Keyboard bindings help";v.push_back(controls);
     auto interception=toggle(L"Control interception",p::kControlInterception,p::kControlInterceptionDefault,
-        L"On. Mod controls intercept native input. F9 toggles this setting.",
-        L"Off. Game controls pass through and game-context mod shortcuts pause. Mod dialogs remain usable. F9 restores shortcuts in any menu.");
+        L"On. Mod controls intercept native input. {0} toggles this setting.",
+        L"Off. Game controls pass through and game-context mod shortcuts pause. Mod dialogs remain usable. {0} restores shortcuts outside text entry.");
     interception.parent=controls_page;v.push_back(std::move(interception));
     for(bool controller:{false,true}) {
         const int list_page=int(v.size());
@@ -230,15 +236,15 @@ void initialize()
         for(size_t n=0;n<bindings.size();++n) {
             const auto& binding=bindings[n];if(binding.controller!=controller)continue;
             const int binding_page=int(v.size());
-            Item row=header(L"");row.name=binding.label;
+            Item row=header(L"");row.name=T(binding.label);
             row.name+=L" ("+input::bindings::scope_name(binding.scope)+L")";
-            if(binding.layout>=0)row.name+=binding.layout?L" [Brackets]":L" [Letters]";
+            if(binding.layout>=0)row.name+=L" ["+T(binding.layout?L"Brackets and backslash":L"Letters")+L"]";
             row.kind=Kind::Submenu;row.parent=list_page;row.binding=int(n);v.push_back(row);
             auto child=[&](Kind kind,const wchar_t* label) {Item item=header(label);item.kind=kind;item.parent=binding_page;item.binding=int(n);v.push_back(item);};
             child(Kind::BindingCapture,controller?L"Capture controller input":L"Capture keyboard input");
             child(Kind::BindingInput,controller?L"Primary input":L"Key");
             child(Kind::BindingModifier,controller?L"Modifier input":L"Modifiers");
-            child(Kind::BindingUnbind,L"Unbind");
+            if(binding.id!="key.capture.cancel")child(Kind::BindingUnbind,L"Unbind");
             child(Kind::BindingReset,L"Reset binding");
         }
     }
@@ -251,6 +257,31 @@ void initialize()
     v.push_back(toggle(L"Navigation audio master", "NavigationAudio", true,
                        L"Navigation audio master help", L"Navigation audio master help"));
     v.push_back(toggle(L"HRTF", "HRTF", false, L"HRTF help", L"HRTF help"));
+    Item custom_toggle=toggle(L"Custom sounds",sound::custom::enabled_key,true,L"Custom sounds help",L"Custom sounds help");
+    custom_toggle.rebuild_menu=true;v.push_back(std::move(custom_toggle));
+    if(settings::get_bool(sound::custom::enabled_key,true)) {
+        const int custom_page=int(v.size());Item page=header(L"Custom sound settings");page.kind=Kind::Submenu;v.push_back(page);
+        for(size_t n=0;n<sound::cues::count;++n) {
+            const auto id=sound::cues::Id(n);const auto& key=sound::custom::keys(id);
+            if((id==sound::cues::Id::Counter&&game::is(game::Id::FF2))||(id==sound::cues::Id::Landing&&!landing_pings))continue;
+            const int cue_page=int(v.size());Item cue=header(sound::cues::definitions[n].label);
+            cue.kind=Kind::Submenu;cue.parent=custom_page;v.push_back(std::move(cue));
+            auto child=[&](Item item){item.parent=cue_page;v.push_back(std::move(item));};
+            child(toggle(L"Use custom sound",key.enabled,true,L"Use custom sound help",L"Use custom sound help"));
+            child(volume(L"Custom sound volume",key.volume,50,L"Custom sound volume help"));
+            const bool wall=sound::custom::wall(id);
+            if(wall) {
+                auto loop=toggle(L"Loop custom wall sound",key.loop,true,L"Loop custom wall sound help",L"Loop custom wall sound help");
+                loop.rebuild_menu=true;child(std::move(loop));
+            }
+            if(sound::custom::periodic(id)&&(!wall||!settings::get_bool(key.loop,true))) {
+                Item interval=volume(L"Repeat interval",key.repeat,0,L"Custom repeat interval help");
+                interval.kind=Kind::Range;interval.int_min=200;interval.int_max=5000;interval.int_step=100;
+                interval.zero_default=true;interval.unit=L"{0} ms";child(std::move(interval));
+            }
+            auto preview=action(L"Preview",nullptr,L"Sound preview help");preview.cue=id;child(std::move(preview));
+        }
+    }
     v.push_back(toggle(L"Soundscape", "Soundscape", false, L"Soundscape help", L"Soundscape help"));
     const int soundscape_page = static_cast<int>(v.size());
     Item submenu = header(L"Soundscape settings"); submenu.kind = Kind::Submenu;
@@ -373,15 +404,25 @@ void enter_page(int header_index)
 bool toggle_value(const Item& i) { return settings::get_bool(i.key, i.bool_def); }
 int int_value(const Item& i) {
     const int value=i.kind==Kind::Volume?sound::levels::get(i.key,i.int_def):settings::get_int(i.key,i.int_def);
-    return i.kind==Kind::Range ? std::clamp(value/5*5,i.int_min,i.int_max) : value;
+    if(i.kind!=Kind::Range)return value;
+    if(i.zero_default&&value==0)return 0;
+    const int step=std::max(1,i.int_step);
+    return std::clamp(value/step*step,i.int_min,i.int_max);
 }
 
 /// FF1 FFI_ScreenReaderMod.Toggle*: flip and store, then let the owning area react.
 void flip(const Item& i)
 {
+    const bool rebuild=i.rebuild_menu;const char* key=i.key;
     settings::toggle(i.key, i.bool_def);
     ui::prefs::notify_changed(i.key);
     actions::run("Audio.RefreshSettings");
+    if(rebuild) {
+        initialize();
+        for(size_t n=0;n<st().items.size();++n)if(st().items[n].key==key) {
+            st().index=int(n);st().page=st().items[n].parent;break;
+        }
+    }
 }
 
 /// FF1 PreferencesManager.Set*: clamp and store, then let the owning area react.
@@ -390,6 +431,7 @@ void set_int(const Item& i, int value)
     const int max = i.int_max;
     const int min = i.int_min;
     if(i.kind==Kind::Volume) sound::levels::set(i.key,std::clamp(value,min,max));
+    else if(i.zero_default&&value==0)settings::set_int(i.key,0);
     else ui::prefs::set_int_clamped(i.key, value, min, max);
     ui::prefs::notify_changed(i.key);
     actions::run("Audio.RefreshSettings");
@@ -413,7 +455,7 @@ std::wstring value_string(const Item& i)
     case Kind::Volume:
         return text::num(int_value(i)) + L"%";
     case Kind::Range:
-        return TF(L"{0} steps",{text::num(int_value(i))});
+        return i.zero_default&&int_value(i)==0?T(L"Original timing"):TF(i.unit,{text::num(int_value(i))});
     case Kind::Enum: {
         const int index = int_value(i);
         if (index >= 0 && index < static_cast<int>(i.options.size()))
@@ -446,6 +488,9 @@ void adjust(const Item& i, int delta)
             if(b.controller && primary>=0 && primary==modifier)continue;
             std::wstring conflict;
             if(input::bindings::set(i.binding,primary,modifier,conflict))break;
+            if(input::bindings::native_controls_unavailable()) {
+                st().feedback=true;ffpr::say_menu(input::bindings::conflict_message(conflict),true);return;
+            }
         }
         return;
     }
@@ -484,7 +529,7 @@ void activate(const Item& i)
             st().feedback=true;
             const auto b=input::bindings::entries()[i.binding];std::wstring conflict;
             if(input::bindings::set(i.binding,b.default_primary,b.default_modifier,conflict))ffpr::say_menu(T(L"Binding restored"),true);
-            else ffpr::say_menu(TF(L"Already assigned to {0}. Unbind it first.",{T(conflict)}),true);
+            else ffpr::say_menu(input::bindings::conflict_message(conflict),true);
             return;
         }
         if(i.kind==Kind::BindingUnbind) {std::wstring ignored;input::bindings::set(i.binding,-1,input::bindings::entries()[i.binding].modifier,ignored);st().feedback=true;ffpr::say_menu(T(L"Binding removed"),true);return;}
@@ -500,7 +545,7 @@ void activate(const Item& i)
         break;
     case Kind::Enum:
     case Kind::Range:
-        adjust(i, 1);
+        if(i.zero_default)set_int(i,0);else adjust(i, 1);
         break;
     case Kind::Action:
         if (i.action) i.action();
@@ -517,6 +562,11 @@ std::wstring description(const Item& i)
 {
     const wchar_t* key = i.kind == Kind::Toggle ? (toggle_value(i) ? i.desc : i.desc_off) : i.desc;
     auto text=key?T(key):std::wstring();
+    if(key&&i.key&&std::string(i.key)==ui::prefs::kControlInterception) {
+        auto chord=T(L"Unbound");const auto& entries=input::bindings::entries();
+        for(size_t n=0;n<entries.size();++n)if(entries[n].id=="key.0.Toggle control interception.-1"){chord=input::bindings::value(int(n));break;}
+        text=TF(key,{chord});
+    }
     if(i.key&&std::string(i.key)==ui::prefs::kPathfindingFilterMode)text+=L" "+T(L"World map filter help");
     return text;
 }
@@ -657,6 +707,7 @@ void open()
     State& s = st();
     if (s.open) return;
 
+    actions::run("Input.RefreshKeyboardConflicts");
     initialize();
     s.open = true;
     s.index = 0;
@@ -750,10 +801,11 @@ void toggle_current_item()
     if (item.kind == Kind::Header || item.kind == Kind::Submenu) { enter_page(s.index); return; }
 
     s.feedback=false;
+    const auto kind=item.kind; // conditional rows can rebuild and retire item
     activate(item);
 
     // For action items (like Close Menu), don't re-announce
-    if (item.kind == Kind::Action) return;
+    if (kind == Kind::Action) return;
 
     if(!input::bindings::capturing())announce_current_item(!s.feedback);
 }

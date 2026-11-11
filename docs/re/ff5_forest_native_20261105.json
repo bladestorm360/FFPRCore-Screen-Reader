@@ -1,0 +1,78 @@
+{
+  "scope_tag": "ff5_ForestOfMoore",
+  "source_script_hashes": {
+    "Map_10020/sc_e_0119_1": "71bec381729f5d4cbe36f936c3b08d2289e5696fc88a045e23a900cdc6a21d50",
+    "Map_30400/sc_e_0118": "5fa60130e996bcc25302cd394e6ae291e09a0f28652122aba39199bd7c92f3a2",
+    "Map_30400/sc_e_0119": "be4e0ec70cbccff7fe32b757d0ce2d7cfc300a620dc5db8a203b6f98d7ddc5a2",
+    "Map_30400/sc_e_0260": "056f17a16e2c976520eed258ded6b7dbbbadb8fa385de0525b8037a7444c4acf",
+    "Map_30400/sc_e_0263": "e88a687c9474b658cb4bf78c96d13887dbe8a00b08e8615625e97851b01a5e71",
+    "Map_30400/sc_e_0263_3": "90a3b7d1cbd2f9e1699d2edc3701175406833c574cface140bcd2ad7f43f45f4",
+    "Map_30400/sc_map_30400": "797558655cb5afb07a031bbcd0b344b6efe55a9b2836d79b32072ea4f07885af",
+    "Map_30410/sc_e_0261": "4c5eaaa55e3617eb6a9e2052f6b10977b69ab1de733b90b2e05fcb12e49998e1",
+    "Map_30410/sc_map_30410": "c228fbaf1d964bc1700b25ba370f849115c5574b322928f3a899ff2864d9f2cb",
+    "Map_30420/sc_e_0119_2": "6e552f3aa9a4332daac23addec6a882a488757478ff38aedfbd1576056c38bc9",
+    "Map_30420/sc_e_0263": "fe98142bf1207ed586edd972f4fb5119dd19697f357629d905421e3aa69f5cfe",
+    "Map_30420/sc_e_0263_3": "a6bcff30a3195a43e10d465d56e0c7e8c201be9170f0d95118183d9104efa45d",
+    "Map_30420/sc_map_30420": "3dfcb2760d065f8b7f7629afdbf3a2c7454d223ca096f57d65d6301f5b4788b0",
+    "Map_30421_1/sc_30421_1_healing_spring": "fbd79ae85d5b38ed57dd94a554219ffa91eec841dffea38ee40ab2be0246d81b",
+    "Map_30421_1/sc_e_0263_2": "94368a6dc8287ed639b8c1926a3a61833a4eb399bcff4be0e3d276d910d58e90",
+    "Map_30421_1/sc_e_0264": "11fc645652ce64bac54b9fc6fe53f04f65b0e65f58b149b2acf6e9fdcd6ba16d",
+    "Map_30421_1/sc_map_30421_1": "1da72bcdd94adce991c1f538795be25837ed6a2fd567ecbc0d6bbaffd8e72f4d",
+    "Map_30430/sc_e_0120": "32c3fc7dca494c4e7cdd5432a14b6e421c6c13666c5162a0b3f9f6a827c251d0",
+    "Map_30430/sc_e_0263": "08864612296633e5b21146d71235db6b12078460b86ac580fa277b4ab6ff1fe3",
+    "Map_30430/sc_map_30430": "bbb917b4069dbfe8b26307f8b304a64a4d6320bea50940db34786ac1bb584d79",
+    "Map_40029/sc_e_0263_1": "c4cf70f61d7ab525624943d0db78dbc75691160b37a99b9d580a5b4f1a20186e"
+  },
+  "identities": 26,
+  "arrivals": [
+    {
+      "submap": "Map_30400",
+      "entity": 41,
+      "map": 381,
+      "point": 4,
+      "continuation": "sc_e_0119_2"
+    },
+    {
+      "submap": "Map_30400",
+      "entity": 43,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    },
+    {
+      "submap": "Map_30400",
+      "entity": 44,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    },
+    {
+      "submap": "Map_30420",
+      "entity": 43,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    },
+    {
+      "submap": "Map_30420",
+      "entity": 44,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    },
+    {
+      "submap": "Map_30430",
+      "entity": 27,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    },
+    {
+      "submap": "Map_30430",
+      "entity": 28,
+      "map": 382,
+      "point": 1,
+      "continuation": "sc_e_0263_2"
+    }
+  ]
+}

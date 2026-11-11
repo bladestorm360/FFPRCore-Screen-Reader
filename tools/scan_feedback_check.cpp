@@ -225,5 +225,24 @@ int main() {
  const auto ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();const int queued=frame::pending();tick();tick();
  expect(originals-before==10000&&spoken.size()==1,"10000 refreshes preserve one native call and one event");
  std::printf("Scan 10000 actual detour+message callbacks %.3fms aggregate; pending=%d; native fixture only, no game-frame claim\n",ms,queued);
+ game_id=game::Id::FF4;
+ const auto lifecycle_handlers=event_handlers[events::Kind::BattleEntering].size();
+ scan::install(); // The offline hook stub does not attach to a game process.
+ expect(game::in(scan::registration.games)&&scan::kScan.applies()&&
+        event_handlers[events::Kind::BattleEntering].size()==lifecycle_handlers+1,
+        "FFIV Study and Scan register the verified native producer and its lifecycle");
+ fire_fixture(events::Kind::BattleEntering);spoken.clear();state={};
+ const auto display=[&](int index,const wchar_t* text) {
+    state.index=index;message.name=text;
+    for(int frame=0;frame<22;++frame){scan::detour(&state,nullptr);tick();}
+ };
+ display(0,L"123/456");
+ display(1,L"Vulnerable to holy energy.");
+ display(2,L"Vulnerable to ice.");
+ expect(spoken==std::vector<std::wstring>{L"123/456",L"Vulnerable to holy energy.",L"Vulnerable to ice."},
+        "FFIV speaks current/max HP and every displayed weakness in native order before the next index replaces them");
+ spoken.clear();state={};
+ display(0,L"No effect.");
+ expect(spoken==std::vector<std::wstring>{L"No effect."},"FFIV preserves a native restricted result without inventing HP");
  std::printf("Scan producer and actual scheduler: %d failures; native calls=%d\n",failures,originals);return failures?1:0;
 }

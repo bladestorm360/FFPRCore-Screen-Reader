@@ -52,13 +52,17 @@
 #undef install
 #undef s_install
 namespace fixture {
-struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
+struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* eligible_players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
+int ready_original_calls=0;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
+std::map<std::string,std::function<bool()>> queries;
+std::map<events::Kind,std::vector<events::Handler>> events;
 std::map<std::string,std::wstring> guard;
+std::map<std::string,long long> index_guard;
 game::Id game=game::Id::FF6;
 bool battle_active=true,player_rendered=true, nested=false,menu_open=true,side_only=false,cursor_row_first=false;Node manager;int original_calls=0;
 std::function<void()> on_item_init;
@@ -87,7 +91,7 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 bool Class::is(void*p){return p!=nullptr;}il2cpp::Class*Class::get(){return nullptr;}
-int32_t Field::get(){std::string n=name;if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList"||n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
+int32_t Field::get(){std::string n=name;if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
@@ -127,10 +131,11 @@ namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="
 namespace modtext {std::wstring T(std::wstring_view v){return std::wstring(v);}std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}}
 namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;}void set_active_exclusive(const char*n){fixture::states.clear();fixture::states[n]=true;}void register_reset(const char*,std::function<void()>){}}
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
-namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guard[k]==v)return false;fixture::guard[k]=v;return true;}bool index(const char*,long long,Scope){return true;}void reset(const char*k){fixture::guard.erase(k);}}
+namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guard[k]==v)return false;fixture::guard[k]=v;return true;}bool index(const char*k,long long value,Scope){auto [it,fresh]=fixture::index_guard.emplace(k,value);if(!fresh&&it->second==value)return false;it->second=value;return true;}void reset(const char*k){fixture::guard.erase(k);fixture::index_guard.erase(k);}}
 namespace field::cache {void*get(ref::Class&c){return fixture::owners[c.name];}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}void clear(ref::Class&c){fixture::owners.erase(c.name);}}
 namespace actions {void define(const char*,Fn){}}
-namespace queries {void define(const char*,std::function<bool()>){ }void define_text(const char*,std::function<std::wstring()>){ }bool is(const char*){return false;}}
+namespace queries {void define(const char*n,std::function<bool()> f){fixture::queries[n]=std::move(f);}void define_text(const char*,std::function<std::wstring()>){ }bool is(const char*n){auto f=fixture::queries.find(n);return f!=fixture::queries.end()&&f->second();}}
+namespace events {void on(Kind k,Handler f){fixture::events[k].push_back(std::move(f));}void fire(Kind k){for(auto& f:fixture::events[k])f();}}
 namespace cursor {void add_suppressor(const char*){}}
 namespace log_ {void write(const char*,...){}}
 namespace ffpr::system {void clear_other_menu_states(const std::string&){}bool is_field_state(){return false;}bool is_main_menu_state(){return true;}std::wstring ability_command_name(int){return L"Use";}void announce_command(const std::wstring&s,int,int){ffpr::say(s);}}
@@ -148,10 +153,20 @@ bool state_active(const char*k){return menu_state::is_active(k);}void state_set(
 int character_id(void*p){return p?static_cast<fixture::Node*>(p)->index:-1;}std::wstring character_name(void*p){return static_cast<fixture::Node*>(p)->name;}std::wstring command_mes_id(void*p){return static_cast<fixture::Node*>(p)->name;}std::wstring enemy_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring displayed_player(void*p){return fixture::player_rendered&&p?static_cast<fixture::Node*>(p)->name+L", HP 30/30":L"";}std::wstring optional_enemy_hp(void*){return {};}
 bool blank(const std::wstring&s){return s.empty();}std::wstring message(const std::wstring&s,bool){return s;}std::wstring strip_icon(std::wstring_view s){return std::wstring(s);}il2cpp::Method*find_method_param_type(il2cpp::Class*,const char*,int,int,const char*){return nullptr;}
 }
+namespace fixture {
+void command_data_ready(void* command,void* actor,void* targets,void* items,const void* mi) {
+    static_cast<Node*>(command)->data=actor;
+    ffpr::battle::d_SetCommandData(command,actor,targets,items,mi);
+    if(::game::in(::game::kFF4|::game::kFF5|::game::kFF6)) {
+        Node info;info.window=command;ffpr::battle::d_CommandSelectInit(&info,mi);
+    }
+}
+}
 int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto expect=[&](bool ok,const char*why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
+ b::o_CommandSelectInit=+[](void*,const void*){++fixture::ready_original_calls;};
  b::o_SelectPlayer=b::o_SelectEnemy=&select;b::o_ShowWindow=&show;b::o_EnemysInit=b::o_PlayerInit=b::o_PlayerAll=b::o_EnemyAll=b::o_All=b::o_SidePlayerAll=b::o_SideEnemyAll=&phase;b::o_SetCursor=&command_cursor;
  Node target,cursor,enemy_a,enemy_b,ally,command,content,attack;enemy_a.name=enemy_b.name=L"Rukh";ally.name=L"Rydia";attack.name=L"Attack";content.data=&attack;
- List enemies{&enemy_a,&enemy_b},allies{&ally},commands{&content};target.cursor=&cursor;target.enemies=&enemies;target.players=&allies;target.view=&target;command.list=&commands;
+ List enemies{&enemy_a,&enemy_b},allies{&ally},commands{&content};target.cursor=&cursor;target.enemies=&enemies;target.players=target.eligible_players=&allies;target.view=&target;command.list=&commands;
  b::d_ShowWindow(&target,true,nullptr);b::d_EnemysInit(&target,nullptr);for(int i=0;i<120;++i)b::d_SelectEnemy(&target,&enemies,0,nullptr);
  expect(spoken.size()==1&&spoken[0]==L"Rukh A (1 of 2)","FF6 continuous native target refresh speaks initial focus only once");
  b::d_SelectEnemy(&target,&enemies,1,nullptr);b::d_SelectEnemy(&target,&enemies,0,nullptr);expect(spoken.size()==3,"distinct identical-name targets and returning to prior target remain audible");
@@ -220,6 +235,42 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  for(int n=1;n<=6;++n){fixture::game=static_cast<game::Id>(n);spoken.clear();b::d_EnemyAll(&target,nullptr);b::d_PlayerAll(&target,nullptr);b::d_All(&target,nullptr);expect(spoken==std::vector<std::wstring>{L"All enemies",L"All allies",L"All allies and enemies"},"all-six whole-side entry is audible with no cursor or movement callback");}
  expect(b::mEnemyAll.cls.games==game::kAll && b::mPlayerAll.cls.games==game::kAll,"group targeting hook registration covers all six games");
  fixture::game=game::Id::FF6;for(bool restricted:{false,true}){side_only=restricted;spoken.clear();b::d_SidePlayerAll(&target,nullptr);b::d_SideEnemyAll(&target,nullptr);expect(spoken==std::vector<std::wstring>{restricted?L"All allies on this side":L"All allies",restricted?L"All enemies on this side":L"All enemies"},"FF6 separate side-entry phases announce the actual selected group");}
+ // Real fields have distinct lifetimes: playerDataList is the last click/
+ // SelectContent cache; TargetPlayerList owns this command's eligible targets.
+ // Reproduce Giant's Gloves -> Strength Tonic without aliasing those fields.
+ for(int n=1;n<=6;++n){
+  fixture::game=static_cast<game::Id>(n);Node robyn,seren;robyn.name=L"Robyn";seren.name=L"Seren";
+  List self{&robyn},current{&seren,&robyn},empty;
+  const auto enter=[&]{b::d_ShowWindow(&target,false,nullptr);b::d_ShowWindow(&target,true,nullptr);spoken.clear();b::d_PlayerInit(&target,nullptr);};
+  cursor.index=0;target.players=target.eligible_players=&self;enter();
+  expect(spoken.size()==1&&spoken[0].find(L"Robyn")==0,"self-targeting item retains its actual initial ally");
+  target.players=&self;target.eligible_players=&current;enter();
+  expect(spoken.size()==1&&spoken[0].find(L"Seren")==0,"new item initial focus uses its current eligible list, never the previous self-target cache");
+  spoken.clear();b::d_SelectPlayer(&target,&current,1,nullptr);b::d_SelectPlayer(&target,&current,0,nullptr);
+  expect(spoken.size()==2&&spoken[0].find(L"Robyn")==0&&spoken[1].find(L"Seren")==0,"correct target movement and deliberate backtracking remain audible");
+  target.players=&current;target.eligible_players=&self;enter();
+  expect(spoken.size()==1&&spoken[0].find(L"Robyn")==0,"filtered self-target list also overrides an older full-party cache");
+  target.players=&self;target.eligible_players=&empty;enter();frame::run_tick();
+  expect(spoken.empty(),"unready current targets cannot fall back to a stale nonempty cache");
+  target.eligible_players=&current;frame::run_tick();
+  expect(spoken.size()==1&&spoken[0].find(L"Seren")==0,"existing bounded native-entry retry reads the new ready target once");
+  target.players=&current;target.eligible_players=&self;cursor.index=1;enter();
+  expect(spoken.empty(),"index outside the current filtered list cannot index a stale longer list");
+  cursor.index=0;frame::run_tick();expect(spoken.size()==1&&spoken[0].find(L"Robyn")==0,"ready current cursor completes the bounded initial read");
+  b::o_PlayerInit=+[](void* p,const void*){++fixture::original_calls;auto* node=static_cast<fixture::Node*>(p);ffpr::battle::d_SelectPlayer(p,node->eligible_players,static_cast<fixture::Node*>(node->cursor)->index,nullptr);};
+  target.players=&self;target.eligible_players=&current;enter();
+  expect(spoken.size()==1&&spoken[0].find(L"Seren")==0,"native SelectContent during entry remains authoritative and is not announced twice");
+  b::o_PlayerInit=&phase;b::d_ShowWindow(&target,false,nullptr);
+  if(n==6){
+   b::o_SideAttackPlayerInit=b::o_EnemySideAttackPlayerInit=&phase;
+   for(auto initial:{&b::d_SideAttackPlayerInit,&b::d_EnemySideAttackPlayerInit}){
+    target.players=&self;target.eligible_players=&current;b::d_ShowWindow(&target,true,nullptr);spoken.clear();initial(&target,nullptr);
+    expect(spoken.size()==1&&spoken[0].find(L"Seren")==0,"FF6 side-attack single-ally entries use the same current native eligible list");
+    b::d_ShowWindow(&target,false,nullptr);
+   }
+  }
+ }
+ target.players=target.eligible_players=&allies;cursor.index=0;
  List oversized(65,&enemy_a);spoken.clear();expect(!b::announce_enemy_target(&oversized,0)&&spoken.empty(),"oversized target snapshot is rejected without partial speech");
  b::o_SelectContent=&quantity;b::o_ShowUseSelect=&show_quantity;
  Node spell,spell_view,spell_icon,owned,magic_cursor,magic;spell.data=&owned;spell.view=&spell_view;owned.name=L"Cura";spell_view.fields["iconText"]=&spell_icon;spell_icon.texts["nameText"]=L"Cura";spell_view.texts={{"fixText",L"MP"},{"valueText",L"9"}};magic.view=&magic;List spells{&spell};magic.list=&spells;
@@ -304,20 +355,72 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  save_view.texts["emptyText"]=L"Save data is corrupted.";expect(ffpr::system::read_from_controller(&save,&save_data,0)==L"Quick Save: Save data is corrupted.","corrupted save row excludes stale hidden details and party");save_view.texts.erase("emptyText");save_view.texts.erase("charaNameText");save_view.texts.erase("levelText");auto slot=ffpr::system::read_from_controller(&save,&save_data,1);expect(slot.find(L"Lv.")==slot.npos&&slot.find(L"Underground Waterway")!=slot.npos,"missing rendered leader and level do not hide quicksave location or invent values");
  Node choice,choice_cursor,choice_row,choice_view;List choices{&choice_row};choice.cursor=&choice_cursor;choice.list=&choices;choice_row.view=&choice_view;choice_view.texts["text"]=L"Take the wheel";
  ffpr::dialogue::o_show=[](void*,int32_t,const void*){};ffpr::dialogue::o_close=&phase;spoken.clear();ffpr::dialogue::d_show(&choice,0,nullptr);frame::run_tick();expect(spoken.size()==1&&spoken[0].find(L"Take the wheel")==0,"native dialogue choice announces default focus after text population");spoken.clear();ffpr::dialogue::d_show(&choice,0,nullptr);ffpr::dialogue::d_close(&choice,nullptr);frame::run_tick();expect(spoken.empty(),"choice close cancels pending initial focus");
+ ffpr::dialogue::choice_install();
+ expect(!queries::is("MessageChoice.IsOpen"),"native choice starts closed");
+ for(auto boundary:{events::Kind::MapChanging,events::Kind::BattleEntering,events::Kind::TitleScreen}) {
+  spoken.clear();ffpr::dialogue::d_show(&choice,0,nullptr);
+  expect(queries::is("MessageChoice.IsOpen"),"actual native Show publishes only its owned open flag");
+  events::fire(boundary);frame::run_tick();
+  expect(!queries::is("MessageChoice.IsOpen")&&spoken.empty(),"map/battle/title boundary retires the choice and stale initial speech without a native read");
+ }
+ ffpr::dialogue::d_show(&choice,0,nullptr);events::fire(events::Kind::SceneLoaded);
+ expect(queries::is("MessageChoice.IsOpen"),"unrelated additive scene load preserves native choice ownership");
+ ffpr::dialogue::d_close(&choice,nullptr);expect(!queries::is("MessageChoice.IsOpen"),"actual native Close retires choice ownership");
  {
      b::o_SetCommandData=+[](void*,void*,void*,void*,const void*){};
      fixture::Node actor,owner;actor.name=L"Maria";actor.index=7;
      for(int n=1;n<=6;++n)for(bool enabled:{false,true}) {
          fixture::game=static_cast<game::Id>(n);fixture::interrupt_turn=enabled;fixture::opening_turn=false;
          b::command_reset_state();dedup::reset(b::kTurnCtx);fixture::spoken.clear();fixture::interruptions.clear();
-         b::d_SetCommandData(&owner,&actor,nullptr,nullptr,nullptr);
+         fixture::command_data_ready(&owner,&actor,nullptr,nullptr,nullptr);
          expect(fixture::spoken.size()==1&&fixture::interruptions.back()==enabled,
              "all-six automatic turn announcement follows saved interrupt preference without being disabled");
          dedup::reset(b::kTurnCtx);fixture::opening_turn=true;fixture::interruptions.clear();
-         b::d_SetCommandData(&owner,&actor,nullptr,nullptr,nullptr);
+         fixture::command_data_ready(&owner,&actor,nullptr,nullptr,nullptr);
          expect(!fixture::interruptions.empty()&&!fixture::interruptions.back(),"opening turn preserves roster speech in both preference states");
      }
      fixture::opening_turn=false;fixture::interrupt_turn=true;
+     const auto previous_commit=b::o_CommandCommit;b::o_CommandCommit=+[](void*,void*,const void*){};
+     for(int n=1;n<=6;++n) {
+         fixture::game=static_cast<game::Id>(n);b::command_reset_state();fixture::spoken.clear();
+         fixture::command_data_ready(&owner,&actor,nullptr,nullptr,nullptr);
+         menu_state::set_active(menu_state::BATTLE_COMMAND,false);menu_state::set_active(menu_state::BATTLE_MAGIC,true);
+         fixture::command_data_ready(&owner,&actor,nullptr,nullptr,nullptr);
+         expect(fixture::spoken.size()==1&&menu_state::is_active(menu_state::BATTLE_COMMAND)&&!menu_state::is_active(menu_state::BATTLE_MAGIC),
+             "same-episode native command reentry restores ownership without another turn announcement");
+         b::d_CommandCommit(&owner,nullptr,nullptr);
+         fixture::command_data_ready(&owner,&actor,nullptr,nullptr,nullptr);
+         expect(fixture::spoken==std::vector<std::wstring>({L"Maria's turn",L"Maria's turn"}),
+             "all-six consecutive ready turns of the same character announce after accepted command");
+     }
+     b::o_CommandCommit=previous_commit;
+     for(int n:{4,5,6}) {
+         fixture::game=static_cast<game::Id>(n);b::command_reset_state();fixture::states.clear();fixture::spoken.clear();owner.data=&actor;
+         ffpr::battle::d_SetCommandData(&owner,&actor,nullptr,nullptr,nullptr);
+         expect(fixture::spoken.empty()&&!b::g_command_turn_ready,"ATB data preparation does not announce an input turn before native command readiness");
+         Node actual_command,actual_actor,info,ready_content,ready_attack,ready_cursor;actual_actor.name=L"Rydia";actual_actor.index=8;
+         ready_attack.name=L"Attack";ready_content.data=&ready_attack;List ready_list{&ready_content};
+         actual_command.data=&actual_actor;actual_command.list=&ready_list;actual_command.cursor=&ready_cursor;info.window=&actual_command;
+         const auto previous_ready=b::o_CommandSelectInit;
+         b::o_CommandSelectInit=+[](void* owner,const void* mi){++fixture::ready_original_calls;ffpr::battle::d_SetCursor(static_cast<Node*>(owner)->window,0,mi);};
+         const auto native_before=fixture::ready_original_calls;
+         b::d_CommandSelectInit(&info,nullptr);
+         expect(fixture::spoken==std::vector<std::wstring>({L"Rydia's turn",L"Attack (1 of 1)"})&&b::g_command_turn_ready&&
+                fixture::owners["BattleCommandSelectController"]==&actual_command,
+                "ATB native input entry announces its actual rooted actor then ready focus, even when the original sets its cursor before admission");
+         expect(fixture::ready_original_calls==native_before+1,"ATB input-ready detour always invokes its native original once");
+         fixture::battle_active=false;fixture::spoken.clear();b::command_reset_state();b::d_CommandSelectInit(&info,nullptr);
+         expect(fixture::spoken.empty()&&!b::g_command_turn_ready&&fixture::ready_original_calls==native_before+2,
+                "inactive battle input entry preserves native original and cannot reopen mod turn ownership");
+         fixture::battle_active=true;
+         b::command_reset_state();fixture::spoken.clear();List malformed_commands(65,&ready_content);actual_command.list=&malformed_commands;
+         b::d_CommandSelectInit(&info,nullptr);
+         expect(fixture::spoken==std::vector<std::wstring>{L"Rydia's turn"},"oversized command collections cannot add unbounded initial-focus work");
+         b::command_reset_state();fixture::spoken.clear();actual_command.list=&ready_list;ready_content.visible=false;
+         b::d_CommandSelectInit(&info,nullptr);
+         expect(fixture::spoken==std::vector<std::wstring>{L"Rydia's turn"},"ATB ready focus cannot disclose an inactive previous-page command");ready_content.visible=true;
+         b::o_CommandSelectInit=previous_ready;
+     }
  }
  // Target announcements preserve the status supplied by the shared rendered party reader.
  for(int n=1;n<=6;++n) {
@@ -331,7 +434,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   fixture::game=static_cast<game::Id>(n);battle_active=true;states.clear();
   b::command_reset_state();b::clear_cached_target_controller();spoken.clear();
   Node actor;actor.name=L"Corrad";actor.index=1;
-  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);
+  fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);
   b::d_SetCursor(&command,0,nullptr);
   expect(spoken.size()==2&&spoken.back().starts_with(L"Attack"),"all-six live turn and command speech remain available");
   spoken.clear();b::notify_command_submenu_active();b::d_SetCursor(&command,0,nullptr);frame::run_tick();
@@ -341,7 +444,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   expect(spoken.empty()&&!menu_state::is_active(menu_state::BATTLE_COMMAND),"pending cancel read stays silent after Return14");
   b::command_reset_state();b::clear_cached_target_controller();
   const int before=original_calls;
-  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
+  fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
   b::notify_command_submenu_active();b::d_SelectPlayer(&target,&allies,0,nullptr);
   b::d_SelectEnemy(&target,&enemies,0,nullptr);b::d_PlayerAll(&target,nullptr);
   b::d_EnemyAll(&target,nullptr);b::d_All(&target,nullptr);b::d_ShowWindow(&target,true,nullptr);
@@ -351,7 +454,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
          !menu_state::is_active(menu_state::BATTLE_COMMAND)&&!menu_state::is_active(menu_state::BATTLE_TARGET),
          "late command/target callbacks cannot speak or resurrect battle ownership during title load");
   battle_active=true;states.clear();b::command_reset_state();spoken.clear();
-  b::d_SetCommandData(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
+  fixture::command_data_ready(&command,&actor,nullptr,nullptr,nullptr);b::d_SetCursor(&command,0,nullptr);
   expect(spoken.size()==2&&spoken.back().starts_with(L"Attack"),"next real battle starts normally after title-return teardown");
  }
  std::printf("Battle/field magic, save rows, formation and choice focus: %d failures\n",failures);return failures?1:0;

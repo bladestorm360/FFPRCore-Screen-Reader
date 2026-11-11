@@ -14,6 +14,7 @@ ref::Class kChoice{"Last.UI.KeyInput", "MessageSelectController"};
 ref::Field fCursor{kChoice, "selectCursor"}, fContents{kChoice, "contentList"};
 ref::Method mShow{kChoice, "Show", 1}, mClose{kChoice, "Close", 0};
 unsigned g_generation = 0;
+bool g_open=false;
 using Show = void (*)(void*, int32_t, const void*);
 using Close = void (*)(void*, const void*);
 Show o_show;
@@ -23,6 +24,7 @@ void d_show(void* self, int32_t index, const void* mi)
     o_show(self, index, mi);
     hooks::guarded("MessageChoice.Show", [self] {
         if (!kChoice.is(self)) return;
+        g_open=true;
         const auto generation = ++g_generation;
         const int initial_index = ui::cursor_index(ref::rd<void*>(self, fCursor));
         frame::cancel_label("MessageChoice.Initial");
@@ -42,11 +44,14 @@ void d_show(void* self, int32_t index, const void* mi)
 }
 void d_close(void* self, const void* mi)
 {
-    if (kChoice.is(self)) { ++g_generation; frame::cancel_label("MessageChoice.Initial"); }
+    if (kChoice.is(self)) { g_open=false;++g_generation; frame::cancel_label("MessageChoice.Initial"); }
     o_close(self, mi);
 }
 int install()
 {
+    queries::define("MessageChoice.IsOpen", [] {return g_open;});
+    for(auto event:{events::Kind::MapChanging,events::Kind::BattleEntering,events::Kind::TitleScreen})
+        events::on(event, [] {g_open=false;++g_generation;}); // flags only; pending text fails its existing generation guard
     return (hooks::attach(mShow, &d_show, &o_show) ? 1 : 0) +
         (hooks::attach(mClose, &d_close, &o_close) ? 1 : 0);
 }

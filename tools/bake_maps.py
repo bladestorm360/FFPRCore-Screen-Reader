@@ -30,7 +30,7 @@ Binary layout (little-endian; every offset is from the start of the file):
                                                      i32 type, u32 message_str})
            u32 tgroup_off  u32 tgroup_count        ({i32 id, u32 mask32}: bit n-1 = type n ok)
            u32 lgroup_off  u32 lgroup_count        ({i32 id, u32 mask32})
-  submap   u32 name_str i32 first_map_id u16 w u16 h u8 flags(bit0 world) u8 layer_mask
+  submap   u32 name_str i32 first_map_id u16 w u16 h u8 flags(bit0 world, bits1..2 native loop axes) u8 layer_mask
            u8 transport_layers u8 pad
            u32 collision_off[3] u32 passage_off[3] u32 attribute_off u32 transport_off
            u32 objects_off u32 object_count
@@ -81,6 +81,8 @@ BAKED_TYPES = {
     "Event": 2, "RandomEvent": 28, "SwitchEvent": 30,
     "Warp": 100,   # baked only: an event whose script changes map (a=map_id b=point_id d=step_on)
     "TransitionHelper": 101, # reviewed native-exit companion; original identity fields retained
+    "PrecisionPoint": 102, # owned passage point: a/b twice tile-center x/y, c passage, d order
+    "CurrentArea": 103, # owned permanent native current rectangle;never a destination
 }
 TALK_TYPES = {"NPC", "ShopNPC", "Entity", "AnimEntity", "TreasureBox"}
 
@@ -259,6 +261,24 @@ def crop_rows(rows, bounds, wide=False):
     return [row[x*stride:(x+w)*stride] for row in rows[y:y+h]]
 
 
+def native_loop_axes(rows, columns):
+    """Exact map-master loop metadata; aliases must agree on physical geometry."""
+    axes = {}
+    for row in rows:
+        name = row[columns['map_name']]
+        value = to_int(row[columns['loop_type']])
+        assert 0 <= value <= 3, (name, value)
+        assert name not in axes or axes[name] == value, ('Conflicting loop aliases', name)
+        axes[name] = value
+    return axes
+
+
+def loop_flags(world, axes):
+    # Preserve existing world bytes/semantics. Explicit axes are needed for
+    # collision-grid rooms such as Shrine5F and Flying Fortress4F.
+    return 1 if world else axes << 1
+
+
 def bake_game(game, out_dir, check=False):
     grids = json.load(open(os.path.join(MAPDUMP, f"{game}_grids.json"), encoding="utf-8"))
     submaps = json.load(open(os.path.join(MAPDUMP, f"{game}_submaps.json"), encoding="utf-8"))
@@ -276,6 +296,7 @@ def bake_game(game, out_dir, check=False):
     # --- masters -------------------------------------------------------------------------
     h, rows = read_csv(os.path.join(master, "map.txt"))
     col = {c: i for i, c in enumerate(h)}
+    loops = native_loop_axes(rows, col)
     maps = []
     first_map_id = {}
     submap_of_mapid = {}   # map master id -> sub-map name (map.txt map_name)
@@ -413,6 +434,8 @@ def bake_game(game, out_dir, check=False):
 
     # --- objects per sub-map ---------------------------------------------------------------
     by_sub = {}
+    import desert_currents
+    for current in desert_currents.areas(game,objects):by_sub.setdefault(current['submap'],[]).append(current)
     for o in objects:
         t = o["type_name"]
         if t not in BAKED_TYPES:
@@ -452,8 +475,17 @@ def bake_game(game, out_dir, check=False):
                            if row['submap'] == o['submap'] and row['entity_id'] == to_int((o['props'] or {}).get('entity_id'))
                            and ('object_id' not in row or row['object_id'] == o['id'])]
             for correction in corrections or [None]:
+                import ebot_warps
+                random_outcomes=ebot_warps.outcomes(game,o,s)
                 reviewed_dest=reviewed_transition_destination(game,o,script_names.get(sid,''),scripts_by_key,scripts_by_parent)
                 dest = reviewed_dest or (main_change_map(s) if s else None)
+                if game == 'ff5':
+                    import forest_journeys
+                    import death_valley_journey
+                    # Keep these scene contacts as scenes while using the
+                    # playable arrival for the route graph.
+                    dest = forest_journeys.destination(o,s,scripts_by_key) or dest
+                    dest = death_valley_journey.destination(o,s,scripts_by_key) or dest
                 if correction and correction[1].get('same_map'):
                     index, row = correction
                     assert dest is None
@@ -485,8 +517,30 @@ def bake_game(game, out_dir, check=False):
                     w = dict(o)
                     w["type_name"] = "Warp"
                     w["props"] = {"entity_id": (o["props"] or {}).get("entity_id"), "map_id": -1 if correction and correction[1].get('same_map') else dest[0],
-                                  "point_id": point, "step_on": (2 | (int(correction[1].get('approach_mask',0))<<8)) if correction and correction[1].get('interaction_travel') else 1 if t in ('Event','RandomEvent') else 0}
-                    if reviewed_dest or ordinary_world_exit(o,s):w['props']['step_on']|=1<<16
+                                  "point_id": point, "step_on":
+                                  (2 if correction and correction[1].get('interaction_travel') else 1 if t in ('Event','RandomEvent') else 0) |
+                                  ((int(correction[1].get('approach_mask',0))<<8) if correction else 0)}
+                    if correction and 'recurring_source_cell' in correction[1]:
+                        # One native looping turtle owns this recurring pose.
+                        # Relocate only its derived manual graph companion;
+                        # preserve the physical actor, counters and water grid.
+                        assert game=='ff6'and t=='NPC'and o['submap']=='Map_30641_1'and o['id']==19
+                        assert correction[1].get('same_map')and correction[1].get('interaction_travel')
+                        x,y,layer=correction[1]['recurring_source_cell']
+                        assert (x,y,layer)==(47,27,1)
+                        w.update(tx=x,ty=y+(1 if w.get('gid')is not None else 0),x=x*16,y=(y+1)*16,layer=LAYER_NAMES[layer])
+                        w['props']['step_on']|=1<<20
+                    # A reviewed physical fall can share the ordinary-script
+                    # resolver (FFV's quicksand). Its exact landing correction
+                    # explicitly retains trap semantics,not a silent travel arc.
+                    if not(correction and correction[1].get('trap_transfer'))and(reviewed_dest or ordinary_world_exit(o,s) or (correction and correction[1].get('ordinary_travel'))):w['props']['step_on']|=1<<16
+                    if correction and correction[1].get('automatic_current'):w['props']['step_on']|=desert_currents.CURRENT_TAG
+                    import tycoon_exit
+                    w['props']['step_on']|=tycoon_exit.flags(game,o,s)
+                    from review_field_event_contacts import scene_transfer
+                    w['props']['step_on'] |= scene_transfer(game, o, s, dest)
+                    import fork_exits
+                    w['props']['step_on']|=fork_exits.flags(game,o,s)
                     if reviewed_dest:w['props']['step_on']|=reviewed_transition_entry_flags(game,o)
                     if reviewed_submarine_entrance(game,o,s,scripts_by_key,submap_of_mapid,dest):
                         # The native entry script owns dismounting. These are
@@ -516,8 +570,15 @@ def bake_game(game, out_dir, check=False):
                         digest=hashlib.sha256(json.dumps(s,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode('utf-8')).hexdigest()
                         assert digest=='9ba57213b9254e7423bfcb2ac32fdf8a4716cb2d3e1191d2e76a02714cb7fada','Reviewed Torna Ship-entry script changed'
                         w['props']['step_on']|=1<<17
+                    if random_outcomes and random_outcomes[0][1]:w['props']['step_on']|=ebot_warps.RANDOM
                     by_sub[o["submap"]].append(w)
                     warps += 1
+                    if random_outcomes:
+                        assert tuple(dest)==random_outcomes[0][0]and not correction
+                        for alternate,random in random_outcomes[1:]:
+                            extra=dict(w);extra['props']=dict(w['props'],map_id=alternate[0],point_id=alternate[1])
+                            if random:extra['props']['step_on']|=ebot_warps.RANDOM
+                            by_sub[o['submap']].append(extra);warps+=1
                     variants=reviewed_conditional_destinations(game,o,s)
                     if variants:
                         assert not correction and tuple(dest)==variants[0]
@@ -526,6 +587,26 @@ def bake_game(game, out_dir, check=False):
                             by_sub[o['submap']].append(extra);warps+=1
 
     assert len(used_arrivals) == len(arrival_overrides), 'Reviewed arrival override did not match its object'
+
+    # Optional owned finer geometry; currently none is shipped. Actual gameplay
+    # invalidated the Ice shortcut: normal routes must use B3/B1's real drops.
+    # Never treat clearance from trigger centers alone as physical route proof.
+    precision_path = os.path.join(DEFAULT_OUT, game, 'precision_passages.json')
+    if os.path.exists(precision_path):
+        for passage in json.load(open(precision_path, encoding='utf-8'))['passages']:
+            room = passage['submap']; layer = passage['layer']; points = passage['points']
+            assert game == 'ff1' and room == 'Map_30061_4' and layer == 0
+            assert len(points) == 7 and passage['id'] == 1
+            assert all(abs(x-bx)+abs(y-by)==1 for (x,y),(bx,by) in zip(points,points[1:])), 'Passage requires ordered cardinal half steps'
+            pits = [o for o in objects if o['submap'] == room and o['type_name'] == 'Event' and trap_identifier(o.get('name') or '')]
+            assert sorted(to_int(o['props']['entity_id']) for o in pits) == passage['trap_entities']
+            for order, (x, y) in enumerate(points):
+                # tx/ty remain ordinary footprint coordinates so generic map
+                # indexes never mistake the half-grid values for actor cells.
+                by_sub[room].append(dict(submap=room, type_name='PrecisionPoint',
+                    layer=LAYER_NAMES[layer], tx=x//2, ty=y//2, x=x//2*16,
+                    y=y//2*16, w=16, h=16, name='', group='mod_navigation_precision',
+                    props=dict(half_x=x, half_y=y, passage=-100000-passage['id'], order=order)))
 
     def pack_object(o):
         t = o["type_name"]
@@ -546,6 +627,20 @@ def bake_game(game, out_dir, check=False):
         elif t in TALK_TYPES:
             a = to_int(p.get("link_object_id"))
             b = to_int(p.get("accept_action_direction"), 15) or 15
+            if game == 'ff5' and o['submap'] == 'Map_20231_4' and c == 23:
+                # The fallen book accepts input on all sides, but its actual
+                # script exits without reading it when facing East/West. Keep
+                # the native successful North/South approaches for every route
+                # consumer, including its authoritative current-floor pose.
+                assert t == 'Entity' and name == 'sc_e_0224:本棚から落ちた本'
+                assert script_names.get(to_int(p.get('script_id'))) == 'sc_e_0224_4'
+                source = scripts_by_key[(o['submap'], 'sc_e_0224_4')]['mnemonics']
+                digest = hashlib.sha256(json.dumps(source, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()).hexdigest()
+                assert digest == 'bd6c7f8d4338a71e37091cb9b291ebb1e7d92020e5df2dfb2e9c2039589f9d93', 'Reviewed Catapult book script changed'
+                branches = [m for m in source if m['mnemonic'] == 'BranchByPlayerDirection']
+                assert len(branches) == 1 and branches[0]['operands']['iValues'][:4] == [2, 12, 7, 12]
+                b &= 5
+                assert b == 5
             flags = 0
             if p.get("collision") is True or (t in ("NPC", "ShopNPC") and p.get("collision") is not False):
                 flags |= 1
@@ -589,6 +684,10 @@ def bake_game(game, out_dir, check=False):
             name = str(p.get("target_transportation_ids") or "")
         elif t == "Warp":
             a, b, d = to_int(p.get("map_id")), to_int(p.get("point_id")), to_int(p.get("step_on"))
+        elif t == 'PrecisionPoint':
+            a, b, c, d = (to_int(p.get(key)) for key in ('half_x', 'half_y', 'passage', 'order'))
+        elif t == 'CurrentArea':
+            a,b,c,d=to_int(p['direction']),0,0,to_int(p['source_entity'])
         layer = layer_index(o.get("layer"))
         if layer < 0:
             layer = 1
@@ -654,7 +753,7 @@ def bake_game(game, out_dir, check=False):
         objs = by_sub.get(n) or []
         obj_blob = b"".join(pack_object(o) for o in objs)
         obj_off = put(obj_blob) if objs else 0
-        sub_recs.append((strings.add(n), first_map_id.get(n, -1), w, h_, 1 if is_world else 0, layer_mask,
+        sub_recs.append((strings.add(n), first_map_id.get(n, -1), w, h_, loop_flags(is_world, loops.get(n,0)), layer_mask,
                          tr_count, coll_off, pass_off, attr_off, tr_off, obj_off, len(objs)))
         stats["submaps"] += 1
         stats["world"] += 1 if is_world else 0

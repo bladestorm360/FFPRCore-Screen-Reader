@@ -1,0 +1,897 @@
+{
+  "scope_tag": "ff5_Jachol",
+  "maps": {
+    "284": "Map_30161_1",
+    "285": "Map_30161_2"
+  },
+  "source_script_hashes": {
+    "Map_30161_1/sc_30161_1_to_world": "057fb0a3c81f0879d3a1d5f1794b8304026832408f9d028430d4e598fa363de8",
+    "Map_30161_1/sc_e_0226": "5e22e215a2069de629c28754a721db77be2d02e34129a721a8936459077c8910",
+    "Map_30161_1/sc_e_0226_1": "fea0572c2d309b92335be96470cc0cdec712422d4494912e8cc6032413884894",
+    "Map_30161_1/sc_e_0226_2": "fea0572c2d309b92335be96470cc0cdec712422d4494912e8cc6032413884894",
+    "Map_30161_1/sc_e_0226_3": "05793b900ccd64053e43023e27acca3171cae4bf41c9ab7041d1a99c5984a6d1",
+    "Map_30161_1/sc_e_0226_roulette_start": "356282c45950938c0eff552a49ae187e95d60af6c8627f5fc90281fa65d22ef9",
+    "Map_30161_1/sc_e_0226_roulette_stop": "5f7d864a54d35e576a96842275c9b17e820b05e2cedef3dd2b0093b22d9759a6",
+    "Map_30161_1/sc_e_0433": "b6c5fa183f4e0f4cb03e4b1d2609ce60f0ac180df4e26b38ad5fd46e9a9c1841",
+    "Map_30161_1/sc_map_30161_1": "ae8bcceac0a15f7899531f78ba2c18cee5d23918ef822a399221dc406f7c74c0",
+    "Map_30161_2/sc_e_0227": "8cda964834e322e6992e8870b2625b98d993f3c0b0ca8dcefb098ae832f59c62",
+    "Map_30161_2/sc_e_0362": "e8765d067d89f6185d624e4cf2cd42caa7eb4688af4b021b2ca490b1303153b4",
+    "Map_30161_2/sc_map_30161_2": "d69a48f505536652c4763a374544f52cc2b4834c1755d8182b8db3bc94bdcbae",
+    "Map_20191_6/sc_map_20191_6_jump": "26f48046ed9bdf612900f4121e72210822254e109934230583efcfb85fefbec2",
+    "Map_20191_6/sc_map_20191_6": "bc5e8ccfc88a4f796a47b17b8961637a74b4436e659bec896e21d58809512c65"
+  },
+  "facts": {
+    "Map_30161_1/sc_30161_1_to_world": {
+      "sha256": "057fb0a3c81f0879d3a1d5f1794b8304026832408f9d028430d4e598fa363de8",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          4,
+          1,
+          26,
+          ""
+        ],
+        [
+          6,
+          19,
+          31,
+          ""
+        ]
+      ],
+      "calls": [
+        [
+          1,
+          "ジャコールのギミック解除"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226": {
+      "sha256": "5e22e215a2069de629c28754a721db77be2d02e34129a721a8936459077c8910",
+      "flags": [
+        [
+          9,
+          "ScenarioFlag2",
+          151,
+          0
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "ジャコールのギミック解除"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226_1": {
+      "sha256": "fea0572c2d309b92335be96470cc0cdec712422d4494912e8cc6032413884894",
+      "flags": [
+        [
+          8,
+          "ScenarioFlag2",
+          151,
+          1
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          152,
+          0
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          10,
+          "ジャコールのギミック設定"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226_2": {
+      "sha256": "fea0572c2d309b92335be96470cc0cdec712422d4494912e8cc6032413884894",
+      "flags": [
+        [
+          8,
+          "ScenarioFlag2",
+          151,
+          1
+        ],
+        [
+          9,
+          "ScenarioFlag2",
+          152,
+          0
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          10,
+          "ジャコールのギミック設定"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226_3": {
+      "sha256": "05793b900ccd64053e43023e27acca3171cae4bf41c9ab7041d1a99c5984a6d1",
+      "flags": [
+        [
+          9,
+          "ScenarioFlag2",
+          151,
+          0
+        ],
+        [
+          10,
+          "ScenarioFlag2",
+          152,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "ジャコールのギミック解除"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226_roulette_start": {
+      "sha256": "356282c45950938c0eff552a49ae187e95d60af6c8627f5fc90281fa65d22ef9",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0226_roulette_stop": {
+      "sha256": "5f7d864a54d35e576a96842275c9b17e820b05e2cedef3dd2b0093b22d9759a6",
+      "flags": [],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30161_1/sc_e_0433": {
+      "sha256": "b6c5fa183f4e0f4cb03e4b1d2609ce60f0ac180df4e26b38ad5fd46e9a9c1841",
+      "flags": [],
+      "choices": [
+        [
+          2,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30161_1/sc_map_30161_1": {
+      "sha256": "ae8bcceac0a15f7899531f78ba2c18cee5d23918ef822a399221dc406f7c74c0",
+      "flags": [
+        [
+          1,
+          "ScenarioFlag4",
+          161,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          50,
+          "ジャコールのギミック設定"
+        ]
+      ],
+      "encounters": []
+    },
+    "Map_30161_2/sc_e_0227": {
+      "sha256": "8cda964834e322e6992e8870b2625b98d993f3c0b0ca8dcefb098ae832f59c62",
+      "flags": [],
+      "choices": [],
+      "transfers": [
+        [
+          4,
+          1,
+          27,
+          ""
+        ],
+        [
+          6,
+          173,
+          1,
+          "sc_map_20191_6_jump"
+        ]
+      ],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30161_2/sc_e_0362": {
+      "sha256": "e8765d067d89f6185d624e4cf2cd42caa7eb4688af4b021b2ca490b1303153b4",
+      "flags": [
+        [
+          8,
+          "ScenarioFlag2",
+          179,
+          1
+        ],
+        [
+          15,
+          "ScenarioFlag2",
+          179,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [],
+      "encounters": []
+    },
+    "Map_30161_2/sc_map_30161_2": {
+      "sha256": "d69a48f505536652c4763a374544f52cc2b4834c1755d8182b8db3bc94bdcbae",
+      "flags": [
+        [
+          2,
+          "ScenarioFlag4",
+          161,
+          1
+        ]
+      ],
+      "choices": [],
+      "transfers": [],
+      "calls": [
+        [
+          1,
+          "ジャコールのギミック解除"
+        ]
+      ],
+      "encounters": []
+    }
+  },
+  "actors": [
+    {
+      "room": "Map_30161_1",
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": null,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "PointIn",
+      "object_id": 3,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": null,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "GotoMap",
+      "object_id": 4,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 285,
+      "point": 2,
+      "action": 3,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Event",
+      "object_id": 21,
+      "entity": 4,
+      "group": "entity_default",
+      "raw": "ワールドマップ",
+      "script": "sc_30161_1_to_world",
+      "cell": [
+        "GroundObject",
+        12,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 12,
+      "entity": 8,
+      "group": "entity_default",
+      "raw": "sc_e_0226_3:壁が移動し、道ができる",
+      "script": "sc_e_0226_3",
+      "cell": [
+        "GroundObject",
+        -1,
+        1
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 19,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "sc_e_0433:扉が開く",
+      "script": "sc_e_0433",
+      "cell": [
+        "GroundObject",
+        26,
+        11
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 24,
+      "entity": 7,
+      "group": "entity_default",
+      "raw": "扉のコリジョン1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        29,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 36,
+      "entity": 21,
+      "group": "entity_default",
+      "raw": "壁のコリジョン3",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        15,
+        17
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 37,
+      "entity": 20,
+      "group": "entity_default",
+      "raw": "壁のコリジョン2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 38,
+      "entity": 19,
+      "group": "entity_default",
+      "raw": "壁のコリジョン1",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        14,
+        15
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 39,
+      "entity": 22,
+      "group": "entity_default",
+      "raw": "壁のコリジョン4",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 40,
+      "entity": 23,
+      "group": "entity_default",
+      "raw": "sc_e_0226壁が移動し、道ができる",
+      "script": "sc_e_0226",
+      "cell": [
+        "GroundObject",
+        13,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 41,
+      "entity": 24,
+      "group": "entity_default",
+      "raw": "扉のコリジョン2",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        12,
+        10
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 0,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 42,
+      "entity": 25,
+      "group": "entity_default",
+      "raw": "sc_e_0226_1壁が移動し、道ができる",
+      "script": "sc_e_0226_1",
+      "cell": [
+        "GroundObject",
+        10,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_1",
+      "type": "Entity",
+      "object_id": 43,
+      "entity": 26,
+      "group": "entity_default",
+      "raw": "sc_e_0226_2壁が移動し、道ができる",
+      "script": "sc_e_0226_2",
+      "cell": [
+        "GroundObject",
+        17,
+        18
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "PointIn",
+      "object_id": 1,
+      "entity": 1,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        55
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": null,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "GotoMap",
+      "object_id": 3,
+      "entity": 2,
+      "group": "entity_default",
+      "raw": "GotoMap",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        40,
+        56
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": 284,
+      "point": 2,
+      "action": 3,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "PointIn",
+      "object_id": 4,
+      "entity": 3,
+      "group": "entity_default",
+      "raw": "PointIn",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        27,
+        8
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": null,
+      "message": null,
+      "link": 0,
+      "collision": null
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "TreasureBox",
+      "object_id": 6,
+      "entity": 5,
+      "group": "entity_default",
+      "raw": "手裏剣",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        25,
+        33
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 6,
+      "message": "T0001_01_01",
+      "link": 101,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "TreasureBox",
+      "object_id": 7,
+      "entity": 6,
+      "group": "entity_default",
+      "raw": "テント",
+      "script": null,
+      "cell": [
+        "GroundObject",
+        23,
+        35
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 6,
+      "message": "T0001_01_01",
+      "link": 102,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "Entity",
+      "object_id": 15,
+      "entity": 10,
+      "group": "entity_default",
+      "raw": "sc_e_0227 壁を上る",
+      "script": "sc_e_0227",
+      "cell": [
+        "GroundObject",
+        27,
+        7
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "Entity",
+      "object_id": 21,
+      "entity": 11,
+      "group": "entity_default",
+      "raw": "sc_e_0362",
+      "script": "sc_e_0362",
+      "cell": [
+        "GroundObject",
+        26,
+        30
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    },
+    {
+      "room": "Map_30161_2",
+      "type": "Entity",
+      "object_id": 22,
+      "entity": 12,
+      "group": "entity_default",
+      "raw": "sc_e_0362：開封後",
+      "script": "sc_e_0362",
+      "cell": [
+        "GroundObject",
+        -1,
+        29
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "destination": null,
+      "point": null,
+      "action": 2,
+      "message": "",
+      "link": 0,
+      "collision": true
+    }
+  ],
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "native_functions": [
+    {
+      "method": "Current.SetSwitchJacholCave",
+      "rva": 2899600,
+      "bytes": 1344,
+      "sha256": "ff141a6546edf65926387d8d596f1b37f4d5c1221ff2016accf13569e3060fd2"
+    },
+    {
+      "method": "Current.ResetSwitchJacholCave",
+      "rva": 2883968,
+      "bytes": 688,
+      "sha256": "5b05619676993fea4a725a9b9f3d34a0e97a1553e093022ac5739413f1461e8e"
+    },
+    {
+      "method": "Current.SetupJacholCaveGimmick",
+      "rva": 2901856,
+      "bytes": 80,
+      "sha256": "63074ed0aa043f74030c599b2a5a1826ac36e6998b70ce74548bd2477db53371"
+    },
+    {
+      "method": "Current.ResetJacholCaveGimmick",
+      "rva": 2883408,
+      "bytes": 144,
+      "sha256": "2f6c041f64e28453e480d460cdc86a42af2c89f4e3d5e9462f645372bc937a0a"
+    },
+    {
+      "method": "Current.SetJacholCallback0",
+      "rva": 7951024,
+      "bytes": 416,
+      "sha256": "7b7c986b3fe9b5d8c5ccc75258606b77ceee1722965a28fd9d6a8d102f51aa45"
+    },
+    {
+      "method": "Current.SetJacholCallback1",
+      "rva": 7951440,
+      "bytes": 80,
+      "sha256": "1d699c93df4832b38ecd4b34fcc6936fc12d7440a98e058f0b04ea09bae3a9f2"
+    },
+    {
+      "method": "Current.ResetJacholCallback0",
+      "rva": 7949536,
+      "bytes": 416,
+      "sha256": "952a301c6009e25d64849abaaffd3566834116098e2e068584754f3abdca9161"
+    },
+    {
+      "method": "Current.ResetJacholCallback1",
+      "rva": 7949952,
+      "bytes": 80,
+      "sha256": "c8eaaf6b8869fe38494d8b96fac0d92af7e974e7dd4a34a10aa8e2ed61ed7819"
+    },
+    {
+      "method": "Current.cctor",
+      "rva": 2921280,
+      "bytes": 25568,
+      "sha256": "b02068a0974b01d8f5da0a48413b4ae792a491ffdf3ca4dde0fa0129f8249141"
+    }
+  ],
+  "native_constants": {
+    "animation_frame": 1.0,
+    "tile": 16.0,
+    "instant_delay": 0.01666666753590107,
+    "active_seconds": 3.0,
+    "hidden_seconds": 6.0
+  },
+  "switch_array": {
+    "field": "D9A9770E7CA8BF440EF9B503157D019F8EF130AE",
+    "metadata_offset": 5093304,
+    "values": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  "metadata_sha256": "65df1ceec31f0f40bc4dc881606708aa65fd9cd4e3aa4237d4d4fcf498cf91e3"
+}

@@ -7,7 +7,7 @@ struct FutureWorldScope {
     RouteSnapshot snapshot;
     RouteSnapshot* previous;
     FutureWorldScope(int map,Cell at,int id):snapshot(*g_route_snapshot),previous(g_route_snapshot) {
-        snapshot.map_id=map;snapshot.submap=baked::submap_by_map_id(map);snapshot.layer=1;
+        snapshot.map_id=map;snapshot.submap=baked::submap_by_map_id(map);snapshot.layer=at.layer;
         snapshot.position=world_of_cell(*snapshot.submap,at);
         snapshot.vehicle={true,id,baked::transport(id)->type,{}};snapshot.vehicle.map_id=map;
         snapshot.vehicles.clear();snapshot.obstacles.clear();snapshot.previous_active.reset();snapshot.active={};snapshot.pending={};
@@ -38,7 +38,13 @@ int future_world_distance(const MapGoal& goal,int depth) {
     if(!request.goals.empty()) {
         request.allow_trap_goal=true;
         std::vector<Phase> phases;
-        if(vehicle_journey_route(*map,grid,request,request.goals,phases))return phase_steps(phases);
+        const bool village=goal.map_id==4&&goal.cell==nautilus_surface::village_cell;
+        if(village) {
+            if(boarding_route(*map,grid,request,request.goals,phases))return phase_steps(phases);
+            const auto via=world_map_journey(goal,depth);if(via.found)return via.total;
+        }
+        if(vehicle_journey_route(*map,grid,request,request.goals,phases,nullptr,village))return phase_steps(phases);
+        if(village)return -1;
     }
     const auto via=world_map_journey(goal,depth);return via.found?via.total:-1;
 }

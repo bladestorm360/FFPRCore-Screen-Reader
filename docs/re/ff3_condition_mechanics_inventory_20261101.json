@@ -1,0 +1,182 @@
+{
+  "about": "Exact Mini/Frog SysCall census; factual discovery, not automatic guide completeness.",
+  "scripts": [
+    {
+      "submap": "Map_10010",
+      "script": "sc_e_0342",
+      "maps": [
+        1
+      ],
+      "predicates": [
+        {
+          "pc": 1,
+          "condition": 401
+        }
+      ],
+      "sha256": "ac4c35710caa80d94ea0bf5a19985ea096cdc5e3ae4539dfa7e8437fb0d94549",
+      "owners": [
+        {
+          "entity": 803,
+          "raw": "トーザスへ移動",
+          "group": "entity_default",
+          "type": "Event"
+        }
+      ]
+    },
+    {
+      "submap": "Map_10010",
+      "script": "sc_e_0342_1",
+      "maps": [
+        1
+      ],
+      "predicates": [
+        {
+          "pc": 1,
+          "condition": 401
+        }
+      ],
+      "sha256": "f2e9f73fc7582d8d20d151ea3c48c662ae3df57e34a7c071073d5ceb81a4679c",
+      "owners": [
+        {
+          "entity": 2367,
+          "raw": "トーザスの抜け道",
+          "group": "entity_default",
+          "type": "Event"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20161_7",
+      "script": "sc_e_0047",
+      "maps": [
+        90
+      ],
+      "predicates": [
+        {
+          "pc": 2,
+          "condition": 402
+        }
+      ],
+      "sha256": "0c04ed06e1d12d9ed1b5d7e1f803dfbbcd1ee7147b4a65839e9aa8d48ed97cf7",
+      "owners": [
+        {
+          "entity": 5,
+          "raw": "地底湖入口通常",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20261_3",
+      "script": "sc_e_0317",
+      "maps": [
+        133
+      ],
+      "predicates": [
+        {
+          "pc": 2,
+          "condition": 401
+        }
+      ],
+      "sha256": "8733e62aa899e8db0a1f3c0b39392253ce59aac52783d5a4659ef8bf3acc05d7",
+      "owners": [
+        {
+          "entity": 18,
+          "raw": "ドーガの館：魔法陣の洞窟への穴に入る",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30061_1",
+      "script": "sc_e_0032",
+      "maps": [
+        169
+      ],
+      "predicates": [
+        {
+          "pc": 2,
+          "condition": 401
+        }
+      ],
+      "sha256": "485e6a26951ac55d8984ca29bf97d70dd344d13b5ec9f2a211fd024401782117",
+      "owners": [
+        {
+          "entity": 8,
+          "raw": "小さな穴",
+          "group": "ev_e_0032",
+          "type": "Entity"
+        },
+        {
+          "entity": 5,
+          "raw": "目を返した後",
+          "group": "ev_e_0202",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30071_1",
+      "script": "sc_e_0040",
+      "maps": [
+        174
+      ],
+      "predicates": [
+        {
+          "pc": 1,
+          "condition": 402
+        }
+      ],
+      "sha256": "d0118d5a7c9df7d238d9ea25400c703890bd1f504aa21c0b762ce9fb900e8e63",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "トード使用前・後",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30101_1",
+      "script": "sc_e_0057",
+      "maps": [
+        194
+      ],
+      "predicates": [
+        {
+          "pc": 2,
+          "condition": 401
+        }
+      ],
+      "sha256": "f87e06e1f7aa84d1952b2d5f60b2a6f6af4c017551e00a03b07d14e1388c4339",
+      "owners": [
+        {
+          "entity": 18,
+          "raw": "抜け穴を通る",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Resident",
+      "script": "sc_fw_0003",
+      "maps": [],
+      "predicates": [
+        {
+          "pc": 3,
+          "condition": 401
+        },
+        {
+          "pc": 27,
+          "condition": 401
+        }
+      ],
+      "sha256": "22959646d9f7cc7b043ab66b752d7513bb2910cb8d1f5418ca167d3bb85799ad",
+      "owners": []
+    }
+  ]
+}

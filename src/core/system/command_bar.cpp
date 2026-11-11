@@ -96,6 +96,15 @@ void* item_win() { return cached_window(kItemWindow); }
 void* equip_win() { return cached_window(kEquipWindow); }
 void* magic_win() { return kMagicWindow.applies() ? cached_window(kMagicWindow) : nullptr; }
 
+bool shop_equipment_context() { return queries::is("ShopMenuTracker.EnteredEquipmentSubmenu"); }
+
+void* active_equip_command()
+{
+    void* window = equip_win();
+    if (!window || ui::state_tag(window, fEquipWindowState) != kStateEquipCommand) return nullptr;
+    return ref::rd<void*>(window, fEquipWindowCommand);
+}
+
 // ReadRoutine: one frame after the event, retry (bounded) only while "not ready"; stop early if
 // a newer event for the same bar superseded it.
 void schedule_read(int& gen_counter, void* ctrl, bool (*try_read)(void*), const char* label)
@@ -151,8 +160,8 @@ bool try_read_equip(void* ctrl)
 {
     if (!unity::alive(ctrl)) return true;
 
-    void* win = equip_win();
-    if (!is_main_menu_state() || !win || ui::state_tag(win, fEquipWindowState) != kStateEquipCommand) {
+    // Shops open the same native command bar through a separate menu owner.
+    if ((!is_main_menu_state() && !shop_equipment_context()) || active_equip_command() != ctrl) {
         dedup::reset(kCtxEquip);
         return true;
     }
@@ -316,11 +325,10 @@ core::Install s_install{"CommandBar", &install, 100};
 bool is_command_bar_active()
 {
     return hooks::guarded_r("CommandBar.IsActive", false, [] {
-        if (!is_main_menu_state()) return false; // only an actual Menu5 owns these bars
+        if (!is_main_menu_state()) return shop_equipment_context() && active_equip_command();
         void* item = item_win();
         if (item && ui::state_tag(item, fItemWindowState) == kStateItemCommand) return true;
-        void* equip = equip_win();
-        if (equip && ui::state_tag(equip, fEquipWindowState) == kStateEquipCommand) return true;
+        if (active_equip_command()) return true;
         void* magic = magic_win();
         if (magic && ui::state_tag(magic, fMagicWindowState) == kStateMagicCommand) return true;
         return false;

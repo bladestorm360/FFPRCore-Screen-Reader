@@ -84,8 +84,8 @@ void* new_str(const std::wstring&) { fixture::native(); return nullptr; }
 namespace field::party_entities {bool is_native(void*){fixture::native();return false;}std::wstring companion_name(void*){fixture::native();return {};}}
 // Exercise the real route-only identity reader; keep unrelated label stubs
 // deterministic for the older scanner tests in this fixture.
-namespace fixture {json::Value event_metadata;bool real_event_labels=false;}
-namespace data {const json::Value& game_json(const char*){return fixture::event_metadata;}}
+namespace fixture {json::Value event_metadata, event_translation;bool real_event_labels=false;}
+namespace data {const json::Value& game_json(const char* key){return std::strcmp(key,"translation")==0?fixture::event_translation:fixture::event_metadata;}}
 namespace field {std::wstring tested_safe_event_label(const std::wstring&,const std::wstring&,int,int,int=-1);}
 #define safe_event_label tested_safe_event_label
 #include "../src/core/field/event_labels.cpp"
@@ -184,17 +184,18 @@ std::wstring resolve_item_name(int) { fixture::native(); return {}; }
 std::wstring current_map_asset_name() { fixture::native(); return {}; }
 std::wstring translate_entity_name(const std::wstring& name) { fixture::native(); return name; }
 std::wstring translate_entity_name_for_map(const std::wstring& name,int) { fixture::native(); return name; }
+std::wstring translate_entity_name_for_actor(const std::wstring& name,int,int) { fixture::native(); return name; }
 npc_names::Label npc_display_label(const std::wstring& name) { fixture::native(); return npc_names::parse(name); }
 bool is_decimal_digit(wchar_t c) { return c >= L'0' && c <= L'9'; }
 bool EntityCursor::next(void*& entity) { fixture::native();entity=nullptr;if(index>=static_cast<int>(fixture::candidates.size()))return false;entity=fixture::candidates[index++];seen.insert(entity);return true; }
 bool Entity::is_alive() const { fixture::native(); return game != reinterpret_cast<void*>(2); }
 bool Entity::is_opened() const { fixture::native(); return opened; }
-Category Entity::category() const { return kind == Kind::Vehicle ? Category::Vehicles : kind == Kind::TreasureChest ? Category::Chests : kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : kind == Kind::Event && (event_type==L"Interactive Object"||event_type==L"Interactive") ? Category::Objects : Category::Events; }
+Category Entity::category() const { return kind == Kind::Vehicle ? Category::Vehicles : kind == Kind::TreasureChest ? Category::Chests : kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC || (kind==Kind::Event && event_type==L"NPC") ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : kind == Kind::Event && (event_type==L"Interactive Object"||event_type==L"Interactive") ? Category::Objects : Category::Events; }
 unity::Vec3 Entity::position() const { fixture::native(); return pos; }
 PathInfo find_path_to_quick(unity::Vec3, unity::Vec3, void*, void*, TargetKind, bool) { fixture::native(); return {}; }
 }
 namespace field::baked_nav {
-bool exit_snapshot_stationary_inventory(const ExitSnapshot&){return fixture::map==1;}
+bool exit_snapshot_stationary_inventory(const ExitSnapshot&){return fixture::map==1||fixture::map==3||fixture::map==4;}
 std::optional<AirTransitionTarget> air_transition_target(ExitSnapshot&,const std::optional<MapGoal>&,const std::optional<MapGoal>&,std::function<bool()>,bool story,bool) { return story?fixture::story_target:fixture::air_target; }
 std::optional<AirTransitionTarget> nautilus_surface_target(ExitSnapshot&,std::function<bool()>,bool) { return fixture::surface_target; }
 
@@ -279,6 +280,19 @@ int main() {
     }
     RemoteInput remote;RemoteRow row;row.object.type=baked::ObjType::NPC;row.object.map_id=180;row.object.raw_name=L"飛竜";row.object.scripted=true;row.name=L"Wyvern";row.floor=L"Castle Deist: Wyvern's Room";remote.rows.push_back(row);
     auto built=build_remote(remote);expect(built.size()==1&&built[0]->kind==Kind::NPC&&built[0]->name==L"Wyvern","scripted Wyvern remains an NPC target across floors");
+    {
+        // Real Ice Cavern B1 has two world exits in disconnected portions of
+        // the floor. Retaining only the first erases the exit reachable from B3.
+        RemoteInput exits;exits.locale=L"en";
+        for(const auto point:std::vector<std::tuple<int,int,int>>{{13,13,7},{19,35,24},{13,13,7}}) {
+            const auto [id,x,y]=point;RemoteRow item;item.floor=L"Cavern of Ice B1";item.destination=L"World Map";
+            item.object.type=baked::ObjType::GotoMap;item.object.map_id=88;item.object.dest_map_id=1;
+            item.object.entity_id=id;item.object.cell={2,x,y};exits.rows.push_back(item);
+        }
+        std::vector<EntityPtr> physical;std::thread worker([&]{physical=build_remote(exits);});worker.join();
+        expect(physical.size()==2&&physical[0]->cell_x==13&&physical[1]->cell_x==35,
+            "both physical B1 world exits survive until reachability grouping; exact repeated identity collapses");
+    }
     RemoteBuilder scripted({row.object});scripted.step();expect(scripted.input.rows.size()==1,"remote name capture accepts scripted Wyvern despite placeholder filter");row.object.scripted=false;RemoteBuilder marker({row.object});marker.step();expect(marker.input.rows.empty(),"remote cutscene Wyvern without interaction script remains excluded");
     {
         RemoteInput events;
@@ -582,9 +596,49 @@ int main() {
             RemoteBuilder builder({source});builder.step();auto rows=build_remote(builder.input);
             expect(rows.size()==1&&rows[0]->kind==Kind::MapExit&&rows[0]->name==L"Exit to World Map"&&rows[0]->remote_map_id==20,
                 "remote scripted exits use the same world destination and Map Exits category");
+            auto returning=source;returning.map_id=73;returning.dest_map_id=72;returning.redundant_return=true;
+            RemoteBuilder choices({returning,source});choices.step();
+            expect(choices.input.rows.size()==1&&choices.input.rows[0].object.dest_map_id==1,
+                "only the redundant scripted return is suppressed when formatting the pathfinder list");
         }
     }
     scanner::invalidate_map();
+    {
+        const auto read = [](const char* name) {
+            std::ifstream input(name,std::ios::binary);
+            return std::string(std::istreambuf_iterator<char>(input),{});
+        };
+        expect(json::parse(read("data/ff5/eventlabels.json"),fixture::event_metadata) &&
+               json::parse(read("data/ff5/translation.json"),fixture::event_translation),"FFV actor and spring metadata loads");
+        fixture::selected_game=game::Id::FF5;
+        fixture::real_event_labels=true;
+        fixture::map=205;fixture::talk.name=L"ウィングラプター";fixture::talk.id=17;fixture::captured_object_type=10;
+        Context context;context.fe=&fixture::object;
+        const auto boss=make_event(context,L"Interactive");
+        expect(boss->kind==Kind::Event && boss->category()==Category::NPCs && boss->name==L"Wing Raptor",
+               "live Wing Raptor browses as a named NPC while retaining its event activation");
+        baked_nav::RemoteObject source;source.map_id=205;source.entity_id=17;source.raw_name=fixture::talk.name;
+        source.type=baked::ObjType::AnimEntity;source.event_type=L"Interactive Object";
+        RemoteBuilder builder({source});builder.step();auto remote=build_remote(builder.input);
+        expect(remote.size()==1 && remote[0]->category()==Category::NPCs && remote[0]->name==L"Wing Raptor",
+               "copied other-floor Wing Raptor uses the same actor role");
+        fixture::map=211;fixture::talk.name=L"sc_e_0030:セイレーンと戦闘";fixture::talk.id=109;fixture::captured_object_type=5;
+        Context siren_context;siren_context.fe=&fixture::object;
+        const auto siren=make_event(siren_context,L"Interactive Object");
+        expect(siren->kind==Kind::Event && siren->category()==Category::NPCs && siren->name==L"Siren",
+               "Siren's selectable encounter proxy appears under NPCs with its native activation");
+        source.map_id=211;source.entity_id=109;source.raw_name=fixture::talk.name;source.type=baked::ObjType::Entity;
+        RemoteBuilder siren_builder({source});siren_builder.step();remote=build_remote(siren_builder.input);
+        expect(remote.size()==1 && remote[0]->kind==Kind::Event && remote[0]->category()==Category::NPCs && remote[0]->name==L"Siren",
+               "the copied Siren proxy retains the same name, category and route kind");
+        fixture::map=192;fixture::talk.name=L"HP/MP完全回復";fixture::talk.id=5;fixture::captured_object_type=2;
+        Context spring;spring.fe=&fixture::object;
+        const auto healing=make_event(spring,L"Event");
+        expect(healing->category()==Category::Events && healing->name==L"Healing Spring",
+               "the native cave healing spring keeps Events and uses its localized name");
+        fixture::real_event_labels=false;
+        fixture::event_translation={};
+    }
     {
         std::ifstream f("data/ff3/maps.bin",std::ios::binary);const std::string bytes((std::istreambuf_iterator<char>(f)),{});
         expect(baked::load(bytes.data(),bytes.size()),"FFIII border audit loads the actual bake");
@@ -766,21 +820,26 @@ int main() {
             scanner::invalidate_map();fixture::vehicle_id=vehicle;fixture::pose={};
             auto door=std::make_shared<Entity>();door->kind=Kind::MapExit;door->name=L"Exit";
             g_entities={door};g_category_views[0]={door};g_category_views[static_cast<size_t>(Category::MapExits)]={door};
-            g_last_scanned_map_id=1;g_views_ready=g_view_stationary_inventory=g_navigation_filtered=true;g_view_origin=fixture::pose;g_view_vehicle=vehicle;
+            g_last_scanned_map_id=fixture::map;g_views_ready=g_view_stationary_inventory=g_navigation_filtered=true;g_view_origin=fixture::pose;g_view_vehicle=vehicle;
             scanner::g_converted_revision=scanner::g_state_revision;g_filter_pending=scanner::g_scan_running=false;
         };
-        for(int vehicle:{0,8,11}){
+        for(int map:{1,3,4})for(int vehicle:{0,1,8,11}){
+            fixture::map=map;
             prime(vehicle);const auto tasks=fixture::tasks.size();const auto begin=std::chrono::steady_clock::now();
             for(int i=0;i<100;++i){scanner::scan_entities();scanner::set_category(i%2?Category::All:Category::MapExits);}
             expect(fixture::tasks.size()==tasks&&!scanner::g_scan_running&&!g_filter_pending,"stationary foot/Nautilus/Invincible category cycling schedules no redundant full scan");
-            std::printf("Floating stationary view mode%d: 100 category inputs %.3fms, no recapture backlog\n",vehicle,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-begin).count());
+            std::printf("FFIII stationary world%d mode%d: 100 category inputs %.3fms, no recapture backlog\n",map,vehicle,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-begin).count());
         }
+        prime(8);scanner::remember_selection();bool directions_ready=false;
+        scanner::when_filter_ready([&]{directions_ready=true;},true);fixture::tick();
+        expect(directions_ready&&!scanner::g_scan_running&&!g_filter_pending,
+            "stationary world1 directions do not queue another full scan behind their fresh route capture");
         prime(0);fixture::pose.x=16;scanner::scan_entities();expect(scanner::g_scan_running,"movement refreshes Floating Continent views");
         prime(0);fixture::vehicle_id=11;scanner::scan_entities();expect(scanner::g_scan_running,"boarding/changing vehicle refreshes Floating Continent views");
         prime(0);++scanner::g_state_revision;scanner::scan_entities();expect(scanner::g_scan_running,"native script revision refreshes Floating Continent views");
         prime(0);auto npc=std::make_shared<Entity>();npc->kind=Kind::NPC;g_entities.push_back(npc);scanner::scan_entities();expect(scanner::g_scan_running,"an actual live NPC opts out of stationary world reuse");
         prime(0);g_view_stationary_inventory=false;scanner::scan_entities();expect(scanner::g_scan_running,"a captured unlisted native NPC also opts out of stationary world reuse");
-        prime(0);fixture::map=4;g_last_scanned_map_id=4;scanner::scan_entities();expect(scanner::g_scan_running,"surface world retains its previous refresh behavior");
+        prime(0);fixture::map=2;g_last_scanned_map_id=2;scanner::scan_entities();expect(scanner::g_scan_running,"unqualified flooded world retains ordinary refresh behavior");
         fixture::vehicle_id=0;fixture::filter_mode=-1;
     }
     std::printf("Selected destination after movement: %.3f us native-fixture dispatch, zero list-readiness ticks (offline)\n",selected_us);

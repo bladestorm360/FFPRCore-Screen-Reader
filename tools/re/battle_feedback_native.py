@@ -110,6 +110,18 @@ if '--hp-polarity' in sys.argv:
  assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
  targets={'BattleBasicFunction':{'CreateDamageView'},'BattleUtility':{'CreateDamageView'},
           'ViewDamageEntity':{'CreateDamageValue'}}
+if '--enemy-render' in sys.argv:
+ out=ROOT.parent/'tools/enemy_render_20261103'/f'ff{number}'
+ out.mkdir(parents=True,exist_ok=True)
+ assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
+ targets={'RegenerationConditionFunction':{'Start','Update','GenerateRegeneHeal'},
+          'ConditionEffectEntityController':{'Play','CreateEffect','AddEffectComponent','EntityUpdate'},
+          'ConditionEffectEntity':{'Init','EntityUpdate'},
+          'PlayShader':{'SetMaterial','SetMaterialColorSpeed','SetMaterialColor','OnDestroy'},
+          'ViewDamageEntity':{'CreateDamageValue','CreateDamagePrefab','UpdatePosition','SetColor','EnemyPositionMove'},
+          'BattleUtility':{'CreateDamageView'}}
+if '--enemy-render' in sys.argv:
+ targets['DamageViewUIManager']={'CreateDamgeView'}
 names={};wanted={}
 for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
  ns=block.splitlines()[0]
@@ -118,7 +130,7 @@ for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
  for match in re.finditer(r'^\s*// RVA: 0x([0-9A-F]+)[^\n]*\n\s*(?:public|private|protected|internal) [^\n]*? ([\w.<>]+)\(([^\n]*)\)',block,re.M):
   rva=int(match[1],16);label=ns+'.'+cls[1]+'.'+match[2]+'('+match[3]+')'
   names.setdefault(rva,[]).append(label)
-  if ns.startswith('Last.Battle') or ns.startswith('Last.UI') or ns.startswith('Serial.') or (ns=='Last.Systems' and cls[1] in ('GroupMasterUtility','ConditionUtility')) or (ns=='Last.Data' and cls[1]=='CharacterParameterBase'):
+  if ns.startswith('Last.Battle') or ns.startswith('Last.UI') or ns.startswith('Serial.') or (ns=='Last.Systems' and cls[1] in ('GroupMasterUtility','ConditionUtility')) or (ns=='Last.Data' and cls[1]=='CharacterParameterBase') or ('--enemy-render'in sys.argv and ns==''and cls[1]=='PlayShader'):
    if match[2] in targets.get(cls[1],set()):wanted[label]=rva
 literal_file=dump.parent/'stringliteral.json'
 literals={int(row['address'],16):row['value'] for row in json.loads(literal_file.read_text(encoding='utf-8-sig'))}

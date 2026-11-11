@@ -20,6 +20,7 @@ namespace {
 RouterState g_state = RouterState::Normal;
 Context g_game_context = Context::Global;    // CurrentGameContext
 bool g_field_active = false;                 // IsFieldActive
+bool g_event_mode = false;
 bool g_consumed[kButtonCount]{};
 
 enum class LastDevice { Keyboard, Controller };
@@ -99,7 +100,13 @@ void announce_bindings(int scope,bool menu) {
     std::wstring message;
     const auto& list=bindings::entries();
     for(size_t i=0;i<list.size();++i) {
-        const auto& e=list[i];if(!e.controller || (e.scope!=scope && e.scope!=-10) || e.primary<0)continue;
+        const auto& e=list[i];if(!e.controller || (!g_event_mode&&e.scope!=scope&&e.scope!=-10) || e.primary<0)continue;
+        if(g_event_mode && e.id!="pad.mode.toggle" &&
+           e.id!="pad.mode.field.puzzle"&&e.id!="pad.mode.field.puzzle.stop"&&
+           e.id!="pad.mode.dialogue.repeat"&&e.id!="pad.mode.battle.help")continue;
+        if(g_event_mode&&e.id=="pad.mode.dialogue.repeat"&&!in_dialogue())continue;
+        if(g_event_mode&&e.id=="pad.mode.field.puzzle"&&!bindings::guide_next_allowed())continue;
+        if(g_event_mode&&e.id=="pad.mode.field.puzzle.stop"&&!bindings::guide_stop_allowed())continue;
         if(e.id.find("teleport")!=std::string::npos && !ui::prefs::teleport_shortcuts_enabled())continue;
         if(!message.empty())message+=L". ";
         message+=T(e.label)+L": "+bindings::value(int(i));
@@ -107,6 +114,7 @@ void announce_bindings(int scope,bool menu) {
     if(menu)ffpr::say_menu(message,true);else ffpr::say(message,true);
 }
 void announce_mod_mode_controls() {
+    if(g_event_mode) {announce_bindings(-17,false);return;}
     announce_bindings(in_dialogue()?-14:queries::is("ReviewBuffer.IsResults")||queries::is("ReviewBuffer.IsActive")?-15:in_battle()?-16:-17,false);
 }
 void announce_mod_menu_controls() {announce_bindings(-18,true);}
@@ -453,6 +461,34 @@ namespace router {
 void update(Context game_context)
 {
     g_game_context = game_context;
+
+    // A stop-only movie/loading context has no ordinary mod-mode controls.
+    // Preserve normal battle/menu controller routes while keyboard cancel stays
+    // available there. Native choices/performance expose only owned information.
+    const bool guide_context=bindings::guide_next_allowed()||
+        (bindings::guide_stop_allowed()&&game_context==Context::Global&&!menu_state::any_active()&&!in_battle());
+    if(guide_context) {
+        // Scripted performance accepts information only. It never borrows
+        // Field readiness, movement, teleport, scanning or menu ownership.
+        g_event_mode=true;g_field_active=false;
+        if(!game_window_focused()||!gamepad_available()||!interception_enabled()) {
+            release_controller_owned_state();return;
+        }
+        std::memset(g_consumed,0,sizeof g_consumed);
+        if(ui::any_modal_open()) {consume_all();return;}
+        if(bindings::pad("pad.mode.toggle")) {
+            g_state=g_state==RouterState::ModMode?RouterState::Normal:RouterState::ModMode;
+            ffpr::say(T(g_state==RouterState::ModMode?L"Mod":L"Cancelled"),true);return;
+        }
+        if(g_state!=RouterState::ModMode)return;
+        consume_all();
+        if(bindings::guide_next_allowed()&&bindings::pad("pad.mode.field.puzzle")) {run_action("PuzzleGuide.Next");g_state=RouterState::Normal;}
+        else if(bindings::guide_stop_allowed()&&bindings::pad("pad.mode.field.puzzle.stop")) {run_action("PuzzleGuide.Stop");g_state=RouterState::Normal;}
+        else if(in_dialogue()&&bindings::pad("pad.mode.dialogue.repeat")) {run_action("MessageWindowPatches.RepeatLastDialogue");g_state=RouterState::Normal;}
+        else if(bindings::pad("pad.mode.battle.help"))announce_mod_mode_controls();
+        return;
+    }
+    if(g_event_mode) {g_event_mode=false;release_controller_owned_state();}
 
     if (queries::is("GameStatePatches.IsInputTransitionBlocked")) {
         g_field_active = false;

@@ -57,7 +57,7 @@ validating applicable rows. No native-rule inference survived a failed assertion
 ## Implementation and ownership
 
 - baked_router Request::Directional adds an optional native cardinal mask while
-  retaining legacy axis fixtures. Shared add_collision handles None0, NoEntry1,
+  retaining legacy axis fixtures. Shared add_collision handles object0, NoEntry1,
   partial2..5 and through6..7. Masks constrain entry and exit faces; unknown and
   triangle IDs retain conservative prior handling. Native stair connector geometry
   remains the baked parser's responsibility. Live and remote obstacles use the

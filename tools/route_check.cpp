@@ -391,6 +391,34 @@ void check_ff1()
     }
 }
 
+// Hidden-passage IDs own tile-cover animation, not collision. Native all-six
+// movement raycasts still obey physical masks even when a cover ID overlaps.
+void check_hidden_geometry()
+{
+    int floor=0,walls=0,false_open=0,false_closed=0;
+    for(int i=0;i<b::submap_count();++i) {
+        const auto& map=*b::submap_at(i);const auto& g=b::grids(map);
+        for(int layer=0;layer<3;++layer)if(!g.passage[layer].empty()&&!g.collision[layer].empty())
+            for(int y=0;y<g.height;++y)for(int x=0;x<g.width;++x) {
+                const auto at=static_cast<size_t>(y)*g.width+x;if(!g.passage[layer][at])continue;
+                if(g.collision[layer][at]){++floor;false_closed+=!b::walkable(g,layer,x,y,true);}
+                else {++walls;false_open+=b::walkable(g,layer,x,y,true);}
+            }
+    }
+    expect(false_open==0,"hidden tile-cover IDs never turn actual solid walls into floor");
+    expect(false_closed==0,"real floor through hidden passages remains walkable");
+    std::printf("FF%d hidden-cover topology: %d real floor, %d solid walls, %d false openings, %d false closures\n",b::game_number(),floor,walls,false_open,false_closed);
+    if(b::game_number()==4) {
+        const auto* map=b::submap_by_map_id(42);expect(map!=nullptr,"actual Damcyan Jail map42 exists");if(!map)return;
+        r::Request req;req.submap=map;req.start={0,6,5};req.goals={{0,5,10}};req.passages=true;
+        const auto path=r::find(req);
+        expect(path.found&&path.cells.size()>1&&path.cells[1]==r::Cell{0,6,6},"reported Damcyan chest-room exit starts South around the wall");
+        bool crossed_wall=false;for(const auto& cell:path.cells)
+            crossed_wall|=b::grids(*map).collision[cell.layer][static_cast<size_t>(cell.y)*map->width+cell.x]==0;
+        expect(!crossed_wall,"complete Damcyan route crosses no physical wall despite cover markers");
+    }
+}
+
 int wmain(int argc, wchar_t** argv)
 {
     check_event_warnings();
@@ -420,7 +448,7 @@ int wmain(int argc, wchar_t** argv)
                !r::safe_landing(req, grid, {4, 1, 1}), "teleport refuses map boundaries and invalid layers");
         grid.traps[1][4] = 0; grid.collision[1][4] = 0; grid.passage[1].assign(9, 0); grid.passage[1][4] = 1;
         req.passages = true;
-        expect(r::safe_landing(req, grid, landing), "teleport uses the existing hidden-passage movement rule");
+        expect(!r::safe_landing(req, grid, landing), "teleport refuses a wall carrying a hidden-cover marker");
     }
     {
         namespace progress = field::route_progress;
@@ -452,6 +480,7 @@ int wmain(int argc, wchar_t** argv)
         paths.push_back(dir + L"\\..\\..\\data\\ff2\\maps.bin");
         paths.push_back(dir + L"\\..\\..\\data\\ff1\\maps.bin");
     }
+    for(int n=3;n<=6;++n)paths.push_back(L"data/ff"+std::to_wstring(n)+L"/maps.bin");
     static std::vector<std::vector<char>> blobs;   // static: the reader keeps the pointers
     for (const std::wstring& path : paths) {
         blobs.push_back(read_file(path));
@@ -463,6 +492,7 @@ int wmain(int argc, wchar_t** argv)
         std::wprintf(L"== %s\n", path.c_str());
         expect(b::load(blob.data(), blob.size()), "maps.bin header and tables load");
         if (!b::loaded()) return 1;
+        check_hidden_geometry();
         switch (b::game_number()) {
         case 1: check_ff1(); break;
         case 2: check_ff2(); break;

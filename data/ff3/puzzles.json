@@ -1,49 +1,555 @@
 {
-  "_comment": "Guided puzzle solutions for FINAL FANTASY III (src/core/field/puzzle_guide.cpp). Map ids are the map master's (tools/mapdump/ff3_master/map.txt); cells are baked tile coordinates, one row above the dumps' ty for tile objects since the 2026-10-11 bottom-edge fix in bake_maps.py (tools/mapdump/ff3_objects.jsonl). Authored 2026-10-10 from the dumps' developer labels (hidden-door switches); not yet tested in game.",
-  "puzzles": [
+  "_comment": "Original factual puzzle recipes. Examined controls require native operation receipts and exact target identities; waypoint arrival alone completes only navigation steps. Source/evidence/limits: docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md.",
+  "puzzles": [],
+  "form_guides": [
     {
-      "id": "ur_hidden_door",
-      "_about": "Ur: the examined object at (13,7) opens the hidden door at (15,9).",
-      "maps": [336],
-      "steps": [
-        {"map": 336, "x": 13, "y": 6, "layer": 1, "examine": true, "text": "Examine the hidden switch"},
-        {"map": 336, "x": 15, "y": 8, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+      "id": "nepto_forms",
+      "maps": [
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "actions": [
+        {
+          "id": "cast_mini",
+          "step": 1,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Mini"
+        },
+        {
+          "id": "mini_opening",
+          "step": 2,
+          "map": 169,
+          "entity": 8,
+          "raw": "小さな穴",
+          "layer": 0,
+          "x": 11,
+          "y": 8,
+          "examine": true,
+          "text": "Examine the small opening.",
+          "done_scenario": 31
+        },
+        {
+          "id": "nepto_guardian",
+          "step": 3,
+          "map": 173,
+          "entity": 6,
+          "raw": "1:オオネズミ",
+          "layer": 0,
+          "x": 13,
+          "y": 7,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 33
+        },
+        {
+          "id": "nepto_eye_pickup",
+          "step": 3,
+          "map": 173,
+          "entity": 5,
+          "raw": "ネプトのめ",
+          "layer": 0,
+          "x": 13,
+          "y": 7,
+          "examine": true,
+          "text": "Collect the item.",
+          "done_scenario": 33
+        },
+        {
+          "id": "return_eye",
+          "step": 4,
+          "map": 169,
+          "entity": 7,
+          "raw": "目を返さなければ",
+          "layer": 0,
+          "x": 11,
+          "y": 8,
+          "examine": true,
+          "text": "Use {0} on the statue.",
+          "arg": "modtext:FF3 item Nepto Eye",
+          "done_scenario": 34
+        }
       ]
     },
     {
-      "id": "altar_cave_wall_switch",
-      "_about": "Altar Cave B3: the wall switch on the left (sc_e_0003) at (15,11).",
-      "maps": [153],
-      "steps": [
-        {"map": 153, "x": 15, "y": 10, "layer": 1, "examine": true, "text": "Examine the switch"}
+      "id": "owen_forms",
+      "maps": [
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ],
+      "actions": [
+        {
+          "id": "cast_frog",
+          "step": 1,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Toad"
+        },
+        {
+          "id": "frog_waterway",
+          "step": 2,
+          "map": 174,
+          "entity": 10,
+          "raw": "トード使用前・後",
+          "layer": 1,
+          "x": 19,
+          "y": 19,
+          "examine": true,
+          "text": "Examine the waterway.",
+          "done_scenario": 39
+        },
+        {
+          "id": "remove_frog",
+          "step": 3,
+          "manual_only": true,
+          "text": "Cast {0} on every party member again to return to normal, then repeat the guide.",
+          "arg": "modtext:FF3 spell Toad"
+        },
+        {
+          "id": "voice_first",
+          "step": 4,
+          "map": 175,
+          "entity": 7,
+          "raw": "謎の声（1階）",
+          "layer": 1,
+          "x": 16,
+          "y": 16,
+          "examine": false,
+          "text": "Follow the passage and listen to the voice.",
+          "done_scenario": 40
+        },
+        {
+          "id": "voice_fourth",
+          "step": 5,
+          "map": 178,
+          "entity": 9,
+          "raw": "謎の声（4階）",
+          "layer": 1,
+          "x": 10,
+          "y": 9,
+          "examine": false,
+          "text": "Follow the passage and listen to the voice.",
+          "done_scenario": 41
+        },
+        {
+          "id": "voice_fifth",
+          "step": 6,
+          "map": 179,
+          "entity": 10,
+          "raw": "謎の声（5階）",
+          "layer": 1,
+          "x": 17,
+          "y": 8,
+          "examine": false,
+          "text": "Follow the passage and listen to the voice.",
+          "done_scenario": 42
+        },
+        {
+          "id": "owen_switch",
+          "step": 7,
+          "map": 179,
+          "entity": 7,
+          "raw": "オーエンの塔：隠し扉を開ける",
+          "layer": 1,
+          "x": 12,
+          "y": 6,
+          "examine": true,
+          "text": "Examine the hidden switch",
+          "done_scenario": 225
+        },
+        {
+          "id": "owen_guardian",
+          "step": 8,
+          "map": 184,
+          "entity": 4,
+          "raw": "1:メデューサ（人型）",
+          "layer": 1,
+          "x": 10,
+          "y": 14,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 43
+        },
+        {
+          "id": "owen_engine",
+          "step": 9,
+          "map": 184,
+          "entity": 9,
+          "raw": "ディッシュとの別れ",
+          "layer": 1,
+          "x": 10,
+          "y": 12,
+          "examine": true,
+          "text": "Examine the mechanism and wait for the escape.",
+          "done_scenario": 44
+        }
       ]
     },
     {
-      "id": "mythril_mines_hidden_door",
-      "_about": "Mythril Mines: switch 1 at (13,7) opens the hidden door at (10,8).",
-      "maps": [159],
-      "steps": [
-        {"map": 159, "x": 13, "y": 6, "layer": 1, "examine": true, "text": "Examine the hidden switch"},
-        {"map": 159, "x": 10, "y": 7, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+      "id": "tozus_forms",
+      "maps": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "actions": [
+        {
+          "id": "cast_mini",
+          "step": 1,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Mini"
+        },
+        {
+          "id": "patient",
+          "step": 2,
+          "map": 46,
+          "entity": 25,
+          "raw": "1:シェルコ",
+          "layer": 1,
+          "x": 17,
+          "y": 7,
+          "examine": true,
+          "text": "Use {0} to heal the patient.",
+          "arg": "modtext:FF3 item Antidote",
+          "done_scenario": 29
+        }
       ]
     },
     {
-      "id": "tower_of_owen_hidden_door",
-      "_about": "Tower of Owen 5F: the object at (12,7) opens the hidden door at (13,13).",
-      "maps": [179],
-      "steps": [
-        {"map": 179, "x": 12, "y": 6, "layer": 1, "examine": true, "text": "Examine the hidden switch"},
-        {"map": 179, "x": 13, "y": 12, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+      "id": "hein_forms",
+      "maps": [
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ],
+      "actions": [
+        {
+          "id": "hein_soldier",
+          "step": 1,
+          "map": 194,
+          "entity": 9,
+          "raw": "5:兵士2",
+          "layer": 1,
+          "x": 17,
+          "y": 12,
+          "examine": true,
+          "text": "Speak to the soldier.",
+          "done_scenario": 55
+        },
+        {
+          "id": "cast_mini",
+          "step": 2,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Mini"
+        },
+        {
+          "id": "hein_hole",
+          "step": 3,
+          "map": 194,
+          "entity": 18,
+          "raw": "抜け穴を通る",
+          "layer": 1,
+          "x": 17,
+          "y": 10,
+          "examine": true,
+          "text": "Examine the small opening.",
+          "done_scenario": 56
+        },
+        {
+          "id": "remove_mini",
+          "step": 4,
+          "manual_only": true,
+          "text": "Cast {0} on every party member again to return to normal, then repeat the guide.",
+          "arg": "modtext:FF3 spell Mini"
+        }
       ]
     },
     {
-      "id": "molten_cave_hidden_door",
-      "_about": "Molten Cave: the object at (22,6) opens the hidden door at (20,7).",
-      "maps": [191],
-      "steps": [
-        {"map": 191, "x": 22, "y": 5, "layer": 1, "examine": true, "text": "Examine the hidden switch"},
-        {"map": 191, "x": 20, "y": 6, "layer": 1, "examine": false, "text": "Go through the hidden door"}
+      "id": "lake_forms",
+      "maps": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        185,
+        186,
+        187,
+        188
+      ],
+      "actions": [
+        {
+          "id": "lake_approach",
+          "step": 1,
+          "map": 90,
+          "entity": 5,
+          "raw": "地底湖入口通常",
+          "layer": 1,
+          "x": 10,
+          "y": 8,
+          "examine": true,
+          "text": "Go to the waterway.",
+          "approach_only": true
+        },
+        {
+          "id": "cast_frog",
+          "step": 2,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Toad"
+        },
+        {
+          "id": "lake_waterway",
+          "step": 3,
+          "map": 90,
+          "entity": 5,
+          "raw": "地底湖入口通常",
+          "layer": 1,
+          "x": 10,
+          "y": 8,
+          "examine": true,
+          "text": "Examine the waterway.",
+          "done_scenario": 46
+        },
+        {
+          "id": "remove_frog",
+          "step": 4,
+          "manual_only": true,
+          "text": "Cast {0} on every party member again to return to normal, then repeat the guide.",
+          "arg": "modtext:FF3 spell Toad"
+        },
+        {
+          "id": "lake_guardian",
+          "step": 5,
+          "map": 188,
+          "entity": 9,
+          "raw": "1:とうぞくグツコー",
+          "layer": 1,
+          "x": 10,
+          "y": 7,
+          "examine": true,
+          "text": "Defeat the guardian.",
+          "done_scenario": 48
+        },
+        {
+          "id": "dwarf_talk",
+          "step": 6,
+          "map": 85,
+          "entity": 21,
+          "raw": "5:ドワーフ族（オレンジ帽）",
+          "layer": 1,
+          "x": 20,
+          "y": 13,
+          "examine": true,
+          "text": "Speak to the dwarf.",
+          "done_scenario": 49
+        },
+        {
+          "id": "dwarf_altar",
+          "step": 7,
+          "map": 85,
+          "entity": 27,
+          "raw": "角を置く場所確認",
+          "layer": 1,
+          "x": 20,
+          "y": 8,
+          "examine": true,
+          "text": "Use {0} at the altar.",
+          "arg": "modtext:FF3 item Horn of Ice",
+          "done_scenario": 50
+        }
+      ]
+    },
+    {
+      "id": "magic_circle_forms",
+      "maps": [
+        131,
+        132,
+        133,
+        238,
+        239,
+        240,
+        241
+      ],
+      "actions": [
+        {
+          "id": "doga_intro",
+          "step": 1,
+          "map": 131,
+          "entity": 10,
+          "raw": "ドーガの館はじめて",
+          "layer": 1,
+          "x": 7,
+          "y": 9,
+          "examine": false,
+          "text": "Follow the passage and listen to the voice.",
+          "done_scenario": 77
+        },
+        {
+          "id": "doga_switch",
+          "step": 2,
+          "map": 133,
+          "entity": 11,
+          "raw": "壁を消す",
+          "layer": 2,
+          "x": 9,
+          "y": 7,
+          "examine": true,
+          "text": "Examine the hidden switch",
+          "done_scenario": 198
+        },
+        {
+          "id": "cast_mini",
+          "step": 3,
+          "manual_only": true,
+          "text": "Cast {0} on every party member, then repeat the guide.",
+          "arg": "modtext:FF3 spell Mini"
+        },
+        {
+          "id": "magic_hole",
+          "step": 4,
+          "map": 133,
+          "entity": 18,
+          "raw": "ドーガの館：魔法陣の洞窟への穴に入る",
+          "layer": 2,
+          "x": 26,
+          "y": 6,
+          "examine": true,
+          "text": "Examine the small opening.",
+          "done_scenario": 195
+        },
+        {
+          "id": "magic_upgrade",
+          "step": 5,
+          "map": 241,
+          "entity": 3,
+          "raw": "ノーチラスが海底に行けるようになる",
+          "layer": 1,
+          "x": 8,
+          "y": 7,
+          "examine": false,
+          "text": "Approach the magic circle and wait for the scene to finish.",
+          "done_scenario": 78
+        }
       ]
     }
-  ]
+  ],
+  "guidance_types": {
+    "nepto_forms": {
+      "kind": "navigation",
+      "maps": [
+        169,
+        170,
+        171,
+        172,
+        173
+      ]
+    },
+    "owen_forms": {
+      "kind": "navigation",
+      "maps": [
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ]
+    },
+    "tozus_forms": {
+      "kind": "navigation",
+      "maps": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    "hein_forms": {
+      "kind": "navigation",
+      "maps": [
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    },
+    "lake_forms": {
+      "kind": "navigation",
+      "maps": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        185,
+        186,
+        187,
+        188
+      ]
+    },
+    "magic_circle_forms": {
+      "kind": "navigation",
+      "maps": [
+        131,
+        132,
+        133,
+        238,
+        239,
+        240,
+        241
+      ]
+    },
+    "chocobo_circuit": {
+      "kind": "navigation",
+      "maps": [
+        1
+      ]
+    }
+  }
 }

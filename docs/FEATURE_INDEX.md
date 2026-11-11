@@ -1,6 +1,609 @@
 # Current feature and source index
 
-Current October30 navigation follow-up is in
+**November5 Gogo source/focused/documentation Closed:**full sunken-tower
+air reset,second-choice/inaction battle and safe native622 return. Two exact
+music-only projections/four full vine arrivals fixed.36 assertions/575 route
+legs,current owner156,all retained owners/entry/all-six state/router and87
+canonical/four guard paths pass. Three keys/all12 locales;110 classifications.
+Earlier guides/catalogs/terrain/actors/masters preserved;zero new hooks.
+1519logical/1551physical,plus one independent Gogo solution;293FFV remain.
+No Main/install/game/probe. Full audit and combined delivery remain active.
+[Topic](re/FF5_GOGO_20261104.md).
+
+**November4 FFV ordinary early source/documentation Closed:**42 exact
+interactions have complete root/callback/source dispositions. Five distinct
+jump/bridge/moving-vehicle controls remain pending. Whole production/all-six
+data and earlier decisions unchanged;82 canonical/four guard paths pass.
+1518logical/1550physical;294FFV remain. No Main/install/game/probe. Full audit
+and combined delivery remain active.
+[Topic](re/FF5_ORDINARY_EARLY_20261104.md).
+
+**November4 Istory source/focused/documentation Closed:**four actual flower
+contacts/all saved subsets/full299,including native sheep-yard upper exit and
+world re-entry.106 assertions/136 route legs,current owner163,retained
+Pyramid189/Jachol172,all entry notices and81 canonical/four guard paths pass.
+One key/all12 locales;109 classifications. Earlier guides/catalogs/geometry/
+state/arrivals preserved;zero hooks.1476logical/1508physical;336FFV remain.
+No Main/install/game/probe. Full audit and combined delivery remain active.
+[Topic](re/FF5_ISTORY_GUIDE_20261104.md).
+
+**November4 Jachol source/focused/documentation Closed:**complete wall/random
+skull/chest-door/three-chest/full two-world climb guide. Fixed two exact timer
+initializer projections;native live pose stays authoritative.50 route/model
+assertions,current owner172,retained Pyramid/five-leaf189,entry notices,all-six
+state/router and78 canonical/four guard paths pass. Six keys/all12 locales;108
+classifications. Geometry/old guides/catalogs/arrivals preserved.1471logical/
+1503physical;341FFV remain. No Main/install/game/probe. Full audit/delivery active.
+[Topic](re/FF5_JACHOL_GUIDE_20261104.md).
+
+**November4 FFVI continuation supplement source/documentation Closed:**85
+additional exact identities/176 full scripts/1486 actor facts;all42 save tutorial
+companions verified. Accepted43 guides preserve actual choice/reset/party
+semantics;the separate Lethe leaf supplied the missing raft solution. Complete
+FFVI semantic/source census and74 canonical/four guard paths pass. Production
+unchanged.1465logical/1497physical;347FFV remain. No Main/install/game/probe.
+Full audit and combined delivery remain active.
+[Topic](re/FF6_CONTINUATION_REVIEW_20261104.md).
+
+**November4 Lethe River source/focused/documentation Closed:**complete raft/
+first-Straight/second-Left/boss/full ready50 return guide. Three new instructions
+all12 locales;43 FFVI guides/107 classifications.14 route assertions,current
+native-owner,727 guide identities,entry notices and73 canonical/four guard
+paths pass. Earlier guides/catalogs/geometry/state/arrivals preserved;zero new
+hooks.1380logical/1412physical;432 remain (347V,85VI). No Main/install/game/probe.
+Full audit and combined delivery remain active.
+[Topic](re/LETHE_RIVER_20261104.md).
+
+**November4 Surgate continuation review Closed:**25 extra shelf identities,
+source/model/accepted148-episode proof matched;production source/data unchanged.
+1377logical/1409physical;435 remain (347V,88VI). Full audit/combined delivery
+active. No new Main/game/probe/install.
+[Topic](re/FF5_SURGATE_BOOKS_20261102.md).
+
+**Pyramid of Moore source/focused/documentation Closed, November4:**complete
+42-target guide covers native needle101/reset returns,reachable snake switches
+and live enemies,coffin436/325,northern door open/close,live versus reloaded
+quicksand391,side-room recovery,timed invariant holds,wrong eastern upper-room
+recovery and the full seven-map tablet return137. Flagless corridor observes
+one/three exact controls;all other new actor observation is one conditional
+third-switch lookup. Two exact original-first scalar phase hooks cancel stale
+crossings/previews/autowalk;unknown partial advice publishes no targets.
+70 physical-route/model assertions and current native-owner cases pass,retaining
+all four earlier FFV leaves. Eight keys/all12 locales;106 global classifications.
+Six exact initializer programs,one trap classification/full8,17 Ground landing
+and one graph-only arrival change. Terrain/native actors/masters/all prior
+guides/catalogs/state metadata/old arrival indices preserved. All-six state,
+router,entry notices,1362 functional occurrences/245 source closures and68
+canonical producers/four guard paths pass. The old functional checker now
+checks source-qualified conditional exits and the one exact trap correction.
+Failed investigation/fixture receipts are retained. No Main DLL/install/game/
+probe or actual audible/frame timing claim.1341logical/1373physical reviewed
+across original inventories plus159 new continuation/choice leads.471 remain:
+9II,1III,1IV,372V,88VI. Full audit and combined delivery remain active.
+[Source,ownership and verification](re/FF5_PYRAMID_20261104.md).
+
+**Mt. Kolts source/focused/documentation Closed, November4:**the last two
+FFVI discovery controls now have a complete mountain/sighting40/actual Vargas/
+mandatory Blitz/Raging Fist Left-Right-Left-Confirm/full ready41 guide. Other
+owns the combat solution independently from Navigation. A real route failure
+was fixed:only the native40/not41 initializer projects the boss from its off-map
+Upper home to23,32 Ground. Existing opcode10 accepts one optional bounded layer;
+earlier six-field records,VM bounds and native owners are unchanged.51 exact
+field scripts/164 actors/three battle-AI assets/three placement functions.
+42 FFVI guides/105 classifications,one key/all12 locales.29 route/model
+assertions,724 guide identities,full native-owner and all-six state/router pass.
+All41 prior guides/full catalogs/geometry/native actors/masters/arrivals and
+unrelated state preserved;one exact initializer pose changes. Complete FFVI
+semantic/source census and63 canonical producers/four guard paths pass. Failed
+spawn/fixture evidence retained. No new native query/hook/timer/input or live
+responsiveness claim. No Main DLL/install/game/probe.1303logical/1335physical;
+350FFV pending;FFVI discovery review has no missing entries. Broader audit and
+final combined delivery remain active.
+[Topic](re/MT_KOLTS_VARGAS_20261104.md).
+
+**Later Opera source/focused/documentation Closed, November4:**five exact
+controls;separate complete later operator/local2/correct lever3/boss/full ready
+outside434 guide. Earlier performance and rightmost-lever solution are intact.
+Wrong-lever recovery uses actual117,27/local2. Only completed434 enables the
+manual repeat exit to full native66,42 Ground/baked26,20,not the intermediate
+boss arena. Exact Move2E98E0 proves third operand is speed;SetPos2ECBA0 proves
+layer. Physical lever and normal foot exits remain valid.41 FFVI guides/104
+classifications,one key/all12 locales.30 production-route assertions,721 guide
+identities,current native-owner and all-six state/router pass.55 exact scripts/
+130 actors/two native functions;all40 prior guides/full catalog,638 geometries/
+native actors/masters/original points/old arrivals/unrelated state preserved.
+One manual arc/one graph-only arrival;finite guide limit48 rejects49. Exact
+manual census114/89 and60 canonical producers/four guard paths pass. Failed
+fixture/census evidence retained. No new query/hook/poll/timer/input/VM bound.
+No Main DLL/install/game/probe.1301logical/1333physical;350V+2VI=352 pending.
+Broader audit and final combined delivery remain active.
+[Topic](re/LATE_OPERA_DRAGON_20261104.md).
+
+**Cave on the Veldt source/focused/documentation Closed, November4:**two
+exact controls now have complete Interceptor371/rock533/rescue/battle/voyage/
+dream/full inn-return guidance for both Shadow372 and Relm373. Unrelated926
+visit is not completion. One strictly selected-rescue-qualified repeat arc
+prevents the initial uncontrollable scene ending311 from masquerading as free
+travel to intermediate491. Its actual Upper PointIn3 and physical trigger stay
+intact. Optional trapped chest stays optional.40 FFVI guides/103 classifications,
+one key/all12 locales.50 production-route assertions,718 guide identities,both
+native-owner full-return branches,current all-six state/router and Cyan39 pass.
+124 exact scripts/444 actors;all38 earlier guides/full catalogs,638 geometries/
+native objects/masters/positions/arrivals/unrelated state preserved. Prior
+Jidoor evidence restored byte-identically after context-writer naming error;
+wrong initial switch receipt caught and fixed before delivery.57 canonical
+producers/four guard paths pass. No new native query/hook/poll/timer/input/VM
+bound. No Main DLL/install/game/probe.1296logical/1328physical;350V+7VI=357 pending.
+Broader audit and final combined delivery remain active.
+[Topic](re/VELDT_CAVE_GUIDANCE_20261104.md).
+
+**Remaining Zozo/Jidoor source/focused/documentation Closed, November4:**
+seven exact controls;real animated-pickup availability defect corrected. After
+Ramuh150,unrelated optional party checks formerly discarded guaranteed groups
+for the remaining three magicites. The exact room’s existing-VM tail preserves
+independent149/150–153 receipts and marks only six party NPCs uncertain. No new
+query,hook,VM opcode or bound.155 assertions cover all16 pickup masks,conservative
+NPCs,four complete remote journeys,early denial and the earlier lamp. That
+scriptless611 artwork is actual Talk/default0/literal description;four exact
+native functions distinguish it from the accepted later442 light switch. All
+nine auction bodies/eleven variants are ordinary visible optional bid shopping,
+with no missing map/story solution or travel gate.166 exact scripts/755 actors;
+all38 guides/101 classifications/full catalogs/638 geometries/native objects/
+masters/arrivals/unrelated state preserved. Current all-six state/router,Cyan39
+and712 guide identities pass;54 canonical producers/four guard paths pass.
+No Main DLL/install/game/probe.1294logical/1326physical;350V+9VI=359 pending.
+Broader audit and final combined delivery remain active.
+[Topic](re/ZOZO_JIDOOR_REMAINDER_20261104.md).
+
+**Cyan/Zozo source/focused/documentation Closed, November4:**seven exact
+discoveries;three complete letter/retry/delivery,purchase/manual-door/Cyan/key/
+chest and optional-dragon guides. The native merchant requires actual359;
+declined529 is not accepted358. Owned Rust Rid361 validates the onward journey,
+which stops at the physical door;unknown/absent361 cannot. Door/chest fronts
+remain approachable. One strictly365-qualified repeat summit arc fixes the
+real missing key route without turning the initial reunion into free travel.
+Actual full359/367/364 complete their sequences. Existing moving-dragon route
+poses are reused.38 FFVI guides/101 classifications,four keys/all12 locales.
+39 production-route assertions,712 guide identities,current owner and all-six
+state/router,Narshe/FFIII/FFI lock consumers pass.229 exact scripts/622 facts;
+all35 earlier guides/full catalog,638 geometries/native objects/masters/old
+arrivals/unrelated state preserved.52 canonical producers/four guard paths
+pass. No new native getter/hook/polling/timer/input. No Main DLL/install/game/
+probe.1287logical/1319physical;350V+16VI=366 pending. Broader audit and final
+combined delivery remain active.
+[Topic](re/CYAN_ZOZO_GUIDANCE_20261104.md).
+
+**Tzen rescue source/focused/documentation Closed, November4:**four exact
+discoveries now have their own complete quake/start/six-minute timer/house/
+basement/child311/return/full312 guide. Thamasa's accepted burning_house remains
+unchanged. The warning precedes native timer activation;ordinary retreat
+neither restarts the timer nor finishes the quest. Only full ready312 after
+the rescue scene and Sabin joining completes guidance.35 FFVI guides/98 purpose
+classifications,two keys/all12 locales.18 full production-route assertions,
+700 guide identities and current native-owner completion checks pass.34 exact
+scripts/71 actors;all34 previous guides/full catalog,geometry/native actors/
+masters/map-state/arrivals/native timer behavior preserved. Current unchanged
+all-six state/router evidence reused;49 canonical producers/four guard paths
+pass. No new reader/hook/polling/clock/input. No Main DLL/install/game/probe or
+live timed-run claim.1280logical/1312physical;350V+23VI=373 pending.
+Broader audit/final combined delivery remain active.
+[Topic](re/TZEN_RESCUE_20261104.md).
+
+**FFVI ordinary story controls source/focused/documentation Closed, November4:**
+19 inspected/18 completed across Cabin,Kohlingen,free-order scenario selection,
+Esper elder,forest recovery,Darill entrance and Jidoor introductions.95 exact
+connected bodies distinguish ordinary shop/party/dialogue from real puzzles.
+Jidoor119 introduction returns to611;the letter is not a travel edge. Scenario
+NPCs likewise are not automatic exits;Banon's complete three-battle chain ends
+at World1/34. No mod source/data/guide/gate/geometry/actor/arrival/catalog byte
+changes. Exact current Yeti consumer evidence reused;46 canonical producers/
+four guard paths pass. One real finding remains pending:Tzen's child434/9 is
+outside Thamasa's burning_house maps412–420 and needs a complete timed-rescue
+guide with Tzen's three markers. No false completion for that child. No Main
+DLL/install/game/probe.1276logical/1308physical;350V+27VI=377 pending.
+Broader audit/final combined delivery remain active.
+[Topic](re/ORDINARY_FF6_CONTROLS_20261104.md).
+
+**Yeti's Cave source/focused/documentation Closed, November4:**three exact
+discoveries;complete late-temple/jump/cave/correct-switch/magicite-choice/battle/
+Mog11 recruitment398 guide. Navigation and Other preferences remain separate;
+34 FFVI guides/97 classifications,four keys/all12 locales. Ordinary conversation
+stays reachable without Mog. One scalar reuses the existing role pass with no
+extra getter/hook/timer. All seven full fall animations match their original
+native PointIns;positions/layers are preserved. Only two examined-switch graph
+companions become manual;wrong-switch and four automatic-pit recoveries pass.
+24 route assertions,13 actual Mog-reader assertions,Cyan integration,695 guide
+identities,current owner controller/final398 and all-six state/router pass.
+87 scripts/168 actors,638 geometries/native objects/masters,all map state,
+previous arrivals,all33 older guides/full catalog preserved. Exact manual
+census113/89.45 canonical producers/four guard paths pass. Initial wrong-layer
+fixture retained;unfinished synthetic falls removed before delivery. No Main
+DLL/install/game/probe.1258logical/1290physical;350V+45VI=395 pending.
+Broader audit/final combined delivery remain active.
+[Topic](re/YETI_CAVE_20261104.md).
+
+**Dreamscape/Cyan source/focused/documentation Closed, November4:**twelve
+discoveries across Dreamscape/Doma and the final pickup;three new surrounding
+guides preserve the accepted train. Actual Cyan3/four-member entry,northward
+bed approach/full22,54 landing (baked22,21),both real437/439 joins,brothers,
+armor-loop450,full Doma451,family/possession battle,waking455 and final456 pickup
+are covered. Optional452/453 memories never become gates. Exact temporary
+puppet-alias projection fixes phantom obstacles/unavailable remote encounters;
+unknown party state cannot certify entry. One scalar reuses the existing role
+pass with no extra getter/hook/timer.33 FFVI guides/96 purpose classifications,
+three keys/all12 locales.34 route assertions,13 actual reader assertions,
+690 guide identities,current owner controller and all-six state/router pass.
+95 scripts/300 actors/seven resolved battle assets/12 native functions;638
+geometries/native actors/masters,all unrelated state,previous arrivals,all30
+earlier guides/full prior catalog preserved. Canonical-check failure-only
+nesting repaired:42 producers/four success-failure paths pass;full canonical
+delivery still pending. Final evidence/binaries/failed fixtures retained. No
+Main DLL/install/game/probe.1255logical/1287physical;350V+48VI=398 pending.
+Broader audit and final combined delivery remain active.
+[Topic](re/DREAM_EPISODE_20261104.md).
+
+**Solitary Island source/focused/documentation Closed, November4:**five exact
+discoveries;complete thirtieth FFVI guide uses actual beneficial fish/held-food/
+reroll receipts,correct Cid variants,both outcomes/cliff bird/hidden passage/
+manual raft/full ready306. Fishing is Other and later navigation is Navigation;
+93 classifications,four keys/all12 locales. No hidden HP read/announcement or
+new getter/hook/timer/input. Existing outcome gate is preserved. One animated
+raft companion now reaches actual World2 cell146,212 without a false trap;
+shared World2 ownership yields to the accepted next guide after306.36 actual
+route assertions include all three later animated-pickup states;669 guide
+identities,current native-owner controller and all-six state/router checks pass.
+44 scripts/93 physical facts,638 geometries/native objects/masters/all state/
+previous arrivals/29 guides/full prior catalog preserved. Final reports/binaries
+and failed fixtures retained. Exact manual census111/89. No Main DLL/install/
+game/probe.1243logical/1275physical;350V+60VI=410 pending. Combined delivery/
+gameplay pending. [Topic](re/SOLITARY_ISLAND_GUIDE_20261104.md).
+
+**Imperial travel source/focused/documentation Closed, November4:**sixteen
+discoveries across Vector, Observation Post, Albrook and Blackjack. Two complete
+guides (29 FFVI/92 purpose classifications),2 keys/all12 locales. Real Yes/crate/
+factory396 arrival,6 strict194-selected factory variants,6 actual detection/
+stationary-guard barriers; exact Terra/member initializer and20 blocked camp
+identities retain repeat-party requirements until225. Albrook's local pushback
+is avoided while its real alternate port route remains valid. Blackjack uses
+actual saved craft4/world1 position, correct Fly option and native guest22,93;
+the fallback Narshe edge is excluded. Ordinary coin/voyage/reunion stay separate.
+120 route assertions,19 role-reader assertions,saved-reader/current controller,
+659 guide identities and current all-six state/router checks pass.119 scripts/
+nine exact native functions,638-room geometry/native-object/master/prior-arrival/
+27-guide/full previous locale preservation pass. Failed fixtures and final
+reports/executables retained. No Main DLL/install/game/probe.1238logical/
+1270physical;350V+65VI=415 pending. Combined delivery/gameplay pending.
+[Topic](re/IMPERIAL_TRAVEL_20261104.md).
+
+**Esper Cave / Thamasa source/focused/documentation Closed, November4:**
+eleven exact discoveries; complete27th FFVI guide covers sightings/statues,
+native Ultros/Relm Sketch (Other), both pit-branch treasures and full Esper
+return281. Three manual bridge arcs added; all previous pit landings preserved.
+31 route assertions/29 legs including all three accessible bridge approaches,
+649 story identities/current controller and all-six state/router checks pass.
+119 native scripts/exact battle asset,one key/all12 locales/90 classifications,
+638-room geometry/native-object/master/state/prior-arrival/26-guide/full prior
+locale preservation pass. Optional Thamasa scenes and ordinary introductions/
+Gung-Ho dialogue remain separate. Retained duplicate-author, newline-proof and
+stale-census failures; exact routing census is now110 manual/89 directional.
+Reports and executables are retained under the scope directory. No Main DLL/
+install/game/probe.1222logical/1254physical;350V+81VI=431 pending.
+Combined delivery/gameplay pending. [Topic](re/ESPER_CAVE_GUIDE_20261104.md).
+
+**Crescent Mountain / Serpent Trench source/focused/documentation Closed,
+November4:**eight exact discoveries; complete26th FFVI guide covers active
+Gau12/129/helmet133, both timed Right branches, both treasures112/113, current-
+area drain and full ready96/521. Five exact graph-only crossings now reach
+playable arrivals with manual choice instructions; final native PointIn2 Upper
+layer is preserved.28 route assertions/11 legs,15 role-reader assertions,
+19 arrow/controller assertions,642 story identities and current all-six state/
+router checks pass. Four keys/all12 locales,89 purpose classifications,29 native
+scripts/current fork/UI ABI and638-room geometry/native-object/master/previous-
+arrival/25-guide preservation pass. Retained repeat-gate, factual identity,
+waypoint diagnostic and native-layer failures; no game/probe/Main DLL/install.
+1211logical/1243physical;350V+92VI=442 pending. Combined delivery/gameplay pending.
+[Topic](re/CRESCENT_SERPENT_GUIDE_20261104.md).
+
+**Mobliz source/focused/documentation Closed, November4:**15 exact discoveries;
+two complete guides for five letters/payments/actual shop-close replies/final517
+and native353-selected hidden house/missed first-visit prerequisites/true area
+exit-return/dog354/discovery355/full final356.35 real-route assertions/62 legs,
+630 story identities/current controller/choice repeat pass; two keys/all12
+locales,79 native sources, all23 old guides and terrain/objects/state/arrivals
+preserved. Fixed only the new recipes' strict indoor versus non-strict world
+return pairing; retained both failed fixtures. No new hook/native getter or
+Main DLL/install/game/probe. Exact broader_audit_20261104/mobliz_completion.json.
+1203logical/1235physical;350V+100VI=450 pending. Combined delivery/gameplay pending.
+[Topic](re/MOBLIZ_PUZZLES_20261104.md).
+
+**Imperial Palace source/focused/documentation Closed, November4:**five exact
+discoveries; twenty-third FFVI guide covers the240-second24-soldier tour, all
+current banquet questions,120-second break battle, full257 arrival and final
+ready258. Scoped native first-clock Select observer copies at most six32-char
+keys/current Msg; no pointer retention, speech/queue/timer/native write in hook.
+159 actual producer/controller assertions,36 real-route assertions/66 legs,
+589 guide identities and retained Opera pass; current native ABI/eight nested
+fields, all12 locales, source boundary and22 old guides/terrain/objects/state/
+arrivals preserved. Exact broader_audit_20261104/palace_completion.json.
+1188logical/1220physical;350V+115VI=465 pending. Combined delivery/gameplay pending.
+[Topic](re/IMPERIAL_PALACE_GUIDE_20261104.md).
+
+**Returners' Hideout source/documentation Closed, November4:**eight exact
+ordinary conversation/choice identities and22 native producers. Three real
+party talks43/44/45 precede exit46/Banon; first/second refusal544/545 do not
+finish recruitment, whose full final callback owns47. Optional paper/sleep-talk
+remain separate. No runtime/bake/guide change.1183logical/1215physical;
+350V+120VI=470 pending. Exact broader_audit_20261104/returners_completion.json.
+[Topic](re/RETURNERS_STORY_CONDITIONS_20261104.md).
+
+**Duncan source/focused/documentation Closed, November4:**seven exact
+discoveries. Optional kettle/shelf/flower clues are alternatives, not three
+required operations. Later training now projects actual active Sabin6 and
+unfinished464 through one exact missing initializer branch. Existing party
+pass adds no native calls; reserve/unknown/complete states and route signatures
+checked.15 actual owner-reader assertions,13 production-route assertions,
+seven state assertions, old17-case Locke/Strago reader and current all-six
+route suite pass. Other state/guides/geometry preserved.1175logical/1207physical;
+350V+128VI=478 pending. Exact broader_audit_20261104/duncan_completion.json;
+combined build/install/gameplay pending.
+[Topic](re/DUNCAN_PARTY_GATE_20261104.md).
+
+**FFVI rental-stable source/documentation Closed, November4:**seven exact
+merchants/21 native producers; native first-option payment and full outside/
+mounted-world arrivals qualified. No runtime/bake/guide change or free travel
+arc.1168logical/1200physical;350V+135VI=485 pending. Exact evidence:
+broader_audit_20261104/stables_completion.json.
+[Topic](re/FF6_STABLE_RENTALS_20261104.md).
+
+**Gerad source/focused/documentation Closed, November4:**18 exact remaining
+Figaro/Nikeah/cave identities. Twenty-second FFVI guide covers four pub talks,
+native575/576 stopped-actor receipts, first/repeat ferries, inn, both recurring
+turtle banks, fleeing Siegfried, jail, Tentacles and final249→2→249 ready336.
+Two exact manual arcs reuse the actual turtle/counters/layer and known332;
+physical controls stay valid targets. No new hook/poll/native getter/input or
+worker protocol.50 actual assertions/28 continuations,556 story identities,
+controller/ferry/final-scene checks, all-six107 manual/86 directional routes
+and all12 translations pass.638 rooms' terrain/native objects/masters, all old
+initializers and21 older guides preserved. Exact failed attempts and source/
+report/executable/resource hashes:broader_audit_20261104/gerad_completion.json.
+1161logical/1193physical;350V+142VI=492 pending. Combined build/install/gameplay
+remain pending.
+[Topic](re/GERAD_PASSAGE_20261104.md).
+
+**Puzzle entry notice source/focused/documentation Closed, November4:** owner
+update retains “Puzzle guide active” on eligible map entry in Minimal and
+Verbose. Shift+G stays directions-only in Minimal. Shared ready-event notice
+does not activate/reroute; stale/same-map reload, actual FFVI selection and
+all-six static checks pass (27 new assertions), plus all-six map state and
+all12 translations. Combined build/install/gameplay pending; exact
+broader_audit_20261104/puzzle_entry_completion.json. Audit counts unchanged:
+1143logical/1175physical;350V+160VI=510 pending. Return to active Figaro/Gerad.
+[Topic](re/PUZZLE_VERBOSITY_20261103.md).
+
+**South Figaro source/focused/documentation Closed, November4:**26 original
+town/cave identities; twenty-first guide covers merchant/soldier/cider Steal,
+boy/password retries, draft, costume removal, Celes/key/clock, native world/cave
+aliases,582→583→63 warnings and full Tunnel Armor64 completion. Two camera-only
+passage destinations corrected;638 rooms' terrain/native objects/masters/state
+and20 earlier guides preserved. Only this ordered recipe opts into first-match
+ownership. No new hook/native read/worker API.34 actual assertions/43 native
+continuations (31 normal),535 guide identities, six choices/both scene branches,
+all-six route suite and five keys/all12 locales pass. Failed fixtures and the
+active-script runner mistake are retained; fixed-script rerun passes. Exact
+broader_audit_20261104/south_figaro_completion.json.1143logical/1175physical;
+350V+160VI=510 pending. Combined release/install/gameplay remain pending.
+[Topic](re/SOUTH_FIGARO_INFILTRATION_20261104.md).
+
+
+**Keyboard remapping source/focused/documentation Closed, November4:** existing
+per-game catalog/editor now checks new gameplay assignments against current
+native keys/modifiers, preserves rejected values, and uses the effective
+recovery/capture-cancel keys. Separate custom navigation profiles and inactive-
+profile conflicts pass; existing default sharing/context precedence is retained.
+Five battle-only party slots/native2/3, text/focus/capture/controller independence
+and all ten native input paths pass. Held remapped keys stay owned through
+modifier/context handoff until release. No new hook, worker or per-frame native
+configuration read. Exact all-six native evidence,109 key mappings,8403 names/
+zero missing,43 reader/chord assertions and all five actual input/settings targets
+pass. Eight keys/all12 locales. Combined release/install/gameplay pending; exact
+broader_audit_20261104/keyboard_completion.json. Audit remains1117logical/
+1149physical,350V+186VI=536 pending. Return to the finite remaining map audit.
+[Topic](re/KEYBOARD_REMAPPING_20261104.md).
+
+**Ebot’s Rock source/focused/documentation Closed, November4:** twentieth guide
+uses actual current-room coral/chests/layout, the native22 threshold, active
+Strago first-feed check, correct keep/feed choices and full first/repeat Hidon
+completion. Fresh random warps have12 real outcomes; first entry stays
+deterministic. Normal routes label random attempts and retire on actual arrival
+without consuming the pad. No terrain/native object/other-room change, new hook
+or native getter call. Actual152 route/state assertions,27 pocket/layout cases,
+442 guide identities/current controller, role readers17/18/37 and all-six route/
+Magitek regressions pass. Five keys/all12 locales. Exact source/report/resource
+identities: broader_audit_20261104/ebot_completion.json.1117logical/1149physical;
+350V+186VI=536 pending. No Main DLL/install/game/probe/agent; combined release/
+delivery and natural gameplay remain required.
+[Topic](re/EBOTS_ROCK_GUIDANCE_20261104.md).
+
+**Magitek Factory source/focused/documentation Closed, November4:**27 exact
+Factory/Research identities reviewed. Eleven native ladder/conveyor links
+(ten manual/one automatic) restore missing lower/upper routes on396; no absent
+46/31 operation is granted on643. Exact22-object addition preserves all terrain,
+old objects/other rooms/initializers/19 story/five static guides. Normal same-floor
+manual directions now retain the planner's exact receipt beside the control;
+actual start and exact landing own completion. No new hook/native read/write/
+queue/search or VM design. Hidden passage397/PointIn11 already matches17,28.
+Actual11 arcs/11 approaches/50 assertions, all-six routing105 manual/84 directional
+and trap regressions pass. Stale long-warning fixture expectations corrected;
+actual concise warning policy retained. Source/semantic/canonical/docs/evidence:
+broader_audit_20261104/magitek_completion.json;
+[topic](re/MAGITEK_PASSAGES_20261104.md).1114logical/1146physical reviewed;
+350V+189VI=539 pending. No Main DLL/install/game/probe/agent. Combined release/
+delivery and natural gameplay remain required.
+
+**Imperial Camp/Baren Falls source/semantic/focused/documentation Closed:**78
+exact original identities classified without runtime/guide/navigation-data change.
+Thirty camp mask counterparts retain the Closed native mask design; current actual
+mask consumer passes both modes/Hide21/unknown locals/three real dog poses. Six
+other camp interactions are ordinary native chest/scene/story-exit operations.
+Forty-two waterfall conversation/jump/reset counterparts retain first battle80
+and victory376/0218_2/125, distinct from later world1/PointIn37 travel. Both current
+source initializers match accepted data; no early return warp or vehicle check
+introduced. Native source versions match; previous decisions/all19 story/five
+static guides/terrain/state/arrivals preserved.1087logical/1119physical reviewed;
+350V+216VI=566 pending. Exact source/report/resource identities, missing-helper
+failure and proof: sabin_scenario_20261103/completion.json;
+[topic](re/SABIN_SCENARIO_REVIEW_20261103.md). No Main DLL/install/game/probe/agent.
+Combined release/delivery and natural gameplay remain pending.
+
+November3 [Narshe chase](re/NARSHE_CHASE_GUIDANCE_20261103.md): full native room/chest/pursuit/
+motionless ledge wait/Mog rescue guide, including actual northern mine floors.
+19th guide within32; actual16 assertions/11 continuations/current+old models/
+controller pass.43 discoveries resolved,1009logical/1041physical,644 pending.
+Four keys/all12 languages; earlier defense/light/gates and old guides preserved.
+Source/focused/documentation Closed; combined delivery/gameplay pending.
+
+November3 [Narshe party locks](re/NARSHE_PARTY_LOCKS_20261103.md): source/focused/documentation Closed.
+Six doors require active Locke, with reachable fronts and manual unlocking;
+opened receipts remain passable without him. Reader18/six-door93 and current
+FFI/FFIII key regressions pass. No native writes/clone/hook or new puzzle recipe.
+Combined delivery/gameplay pending; other43 Narshe interactions remain required.
+
+**Floating Continent source/focused/documentation Closed:** complete normal
+and timed-escape guide on431/631 plus save floor432, all four treasures, native
+stay/wait choices and exact final-ready191 continuation. The alternate collapse299
+now explicitly clears encounter18/area7 before returning to the safe treasure
+route. Eight actual guide/planner cases/66 actions,382 identities/current+older
+models and actual choice/completion controller pass. Four exact initializer rows
+and12 native automatic arcs/12 graph arrivals corrected; native objects/geometry/
+masters/other rooms retained. All17 earlier story/five static guides, old catalog
+and semantic decisions preserved; actual18th guide stays inside32. Three new
+instructions/all12 languages.69 original identities/69 physical instances resolved:
+960logical/992physical reviewed,350V+343VI=693 pending. Exact source/report hashes,
+failures, preservation and finite resource receipt: floating_continent_guide_20261103/
+completion.json; topic [Floating Continent](re/FLOATING_CONTINENT_GUIDANCE_20261103.md).
+No Main DLL/install/game/probe/agent; full combined release/security/delivery and
+natural gameplay remain pending. Closed designs stay Closed.
+
+November4 [independent puzzle-type settings](re/PUZZLE_TYPES_20261104.md):
+Navigation and Non-navigation guidance save independently, both default on.
+Mixed episodes classify operations; disabled stages are never skipped, and
+changing a toggle retires queued guide output/choice caches. Native UI reading
+and ordinary pathfinding stay separate. Source/focused/documentation Closed;
+seven actual-consumer targets,85 classifications and all12 locales pass.
+Exact broader_audit_20261104/puzzle_types_completion.json. Combined delivery pending.
+
+November3 [puzzle verbosity and short route notices](re/PUZZLE_VERBOSITY_20261103.md):
+all-six Navigation setting, Minimal default/Verbose opt-in. Actual shared/FFIII/
+FFVI guide producers preserve essential actions and speech ownership. Shared
+notices say Trap required / Event required. Source/focused/documentation Closed; all six
+actual-consumer targets pass. Combined native delivery remains pending.
+
+**Sealed Gate source/focused/documentation Closed:** complete405–411 guide,
+eight short cardinal crossings using two native phase callbacks, safe waiting/
+recovery, forced fall, door/stairs/floor caches/bridges/islands/chest/story225.
+Exact native puppet layer2 means native10/Ground/baked1, fixing all16 earlier
+landing failures without shared routing changes.37 physical journeys/six
+continuations/313 identities and all five actual model/controller/guide/state/
+route targets pass; prior16 story/five static guides and catalog values remain.
+Validated32-guide bound for actual17th; four instructions/all12 languages.
+Only six exact timer initializer rows and one manual arc/one synthetic arrival
+change map data; all earlier semantic decisions preserved.69 original identities/
+69 physical instances now explicitly reviewed:891logical/923physical covered,
+350V+412VI=762 pending. Final integration58.770s/119754752B/exit0/drained/2GB/25%CPU;
+corrected bake/routes112.427s/451936256B. Exact completion.json and native/failed/
+preservation evidence in sealed_gate_20261103; topic [Sealed Gate](re/SEALED_GATE_GUIDANCE_20261103.md).
+No new Main DLL/install/game/probe/agent; combined release/gameplay still pending.
+
+
+November3UTC [Cultists' Tower](re/CULTISTS_TOWER_20261103.md) source/focused
+Closed: hidden switch/chest, summit reward, forced battle and actual entrance
+return.24 physical cases/63 continuations/227 identities and actual controller
+cases pass. One exact entrance projection row repaired; bakes/catalog and all
+older guides preserved.641logical/673physical reviewed;1012 remain. Not installed.
+
+November3UTC [Darill's Tomb](re/DARILLS_TOMB_20261103.md) source/focused Closed:
+full water/turtle/epitaph/hidden-chest/boss/memory journey, native4/1/2/1 choice
+repeat,28 physical cases/44 continuations/222 identities/89 static controls pass.
+Three instructions in12 languages; old guides/catalog/geometry preserved.
+632logical/664physical reviewed;1021 original candidates remain. Combined
+native delivery/gameplay pending.
+
+November3UTC [Ancient Castle](re/ANCIENT_CASTLE_20261103.md) source/focused
+Closed: enabling statue428, hidden switch429 and real final statue432 replace
+the old unreachable construction waypoint.13 route/resume/negative cases and
+six floor continuations pass; actual generic controller and89 controls/52 recipes
+across all six games pass. Twelve story/four other static guides preserved;
+no runtime source/bake change.615logical/647physical reviewed,1038 remain.
+Combined native delivery/gameplay pending.
+
+November3UTC [ordinary Phantom Train](re/PHANTOM_TRAIN_JOURNEY_20261103.md) is
+source/focused Closed: boarding, ghost blockade, pursuit/jump, both detachment
+lever phases, retained engine1/0/1, boss and actual world1 completion.23 real
+route plans/21 new model states/native-ready producer pass. Four first-car
+arrivals and one exact common-tail boss projection are corrected; no new hook.
+Eleven other guides/catalog/geometry preserved.589logical/621physical original
+records covered;1064 remain. Combined native output/install/gameplay pending.
+
+November3UTC [accepted FFVI mechanic reconciliation](re/ACCEPTED_FF6_MECHANICS_20261103.md)
+adds139 explicit native-behavior decisions while preserving accepted consumers.
+571 logical/603 physical original records covered;1082 remain. This semantic
+slice is Closed; Phantom Train's earlier entrance/pursuit/detachment journey
+needs a separate physical proof before its18 entries can be accepted.
+
+November3UTC [Zone Eater crossings](re/ZONE_EATER_CROSSINGS_20261103.md): complete
+bridge/manual-jump/fall-recovery/stepping-stone/Gogo Shift+G journey, using the
+existing controller and reviewed travel edges.24 manual legs/11 objectives,
+13 new model cases and naming/dialogue readiness pass; source/focused Closed.
+Ten earlier guides and catalog values preserved;12 story guides now authored.
+No new payload installed.432 logical/464 physical original decisions covered;
+1221 candidates remain. The separately qualified roof/jump supplements count
+as additional coverage, not additional original discovery records.
+
+November3UTC [Zone Eater roof](re/ZONE_EATER_ROOF_20261103.md): cardinal preview,
+deliberate readiness request and native-cycle Go cue;34 safe markers/211 connected
+positions/nine forward legs/two real incoming floors. Model/controller/shared
+input/source/12-language/native-name/focus checks pass; source/focused Closed.
+No new guide DLL installed.429 logical/461 physical audit
+decisions are covered;1224 candidates remain, plus the separately qualified roof
+callback/marker supplement. Prior nine story-guide records are preserved.
+
+November2 [Kefka manual transfer projection parity](re/KEFKA_MANUAL_EXIT_PROJECTION_20261102.md):
+reviewed roller/duct exits keep their category on other floors. Canonical/offline
+Closed in300ff3dfbebb647a; no guide/graph/data change or new installation.
+
+November2 minimal [world trap mask correction](re/FF3_WORLD_TRAP_MASK_20261102.md):
+FF3 bog masks now share the world routing plane; room layers/live overrides
+retained. Canonical/offline Closed in300ff3dfbebb647a, not installed.
+
+November2: [custom sound controls](re/CUSTOM_SOUND_CONTROLS_20261102.md) add
+conditional per-cue timing, volume, default fallback and wall loop/ping choices.
+Canonical/offline/smoke/scan are Closed in300ff3dfbebb647a:205 targets/242 reports/
+67 resources/12 languages. Final all-six installation and physical listening
+remain pending. The original map/story audit resumes with the Zone Eater roof.
+
+November1: FFI narrow Levistone passage, valid Ship boarding sides and Giant/Sage
+walking routes are installed at378838e78c5ada5d; source/offline/delivery Closed.
+[Exact FF1 scope and evidence](re/FF1_BOARDING_ICE_20261101.md).
+FFIII expanded Magic Key/Thief routing is source/focused Closed, awaiting the
+combined candidate. FFV Library now has a bounded native owner and worker-only
+state-based Shift+G guide, with six instructions and readiness text in12
+languages. Its source/focused position/localization/integration qualification is complete;
+no new Library DLL installed. [Library contracts and evidence](re/FF5_PUZZLE_GUIDES_20261101.md).
+Remaining V/VI mechanics and final all-six delivery stay in the single ledger.
+
+Owner gameplay confirmations: FFII and FFIII are confirmed100% playable with
+mod features and map bakes. November3: FFI is confirmed beatable with the current
+mod, superseding the tentative old-mod playthrough report.
+[Gameplay record](TESTING.md#owner-gameplay-confirmations-october-31).
+The owner resumed the documented fixes and all-six map/story puzzle audit on
+October31. Current checkpoints and remaining native-context limits are in the
+[single scope ledger](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+The new combined candidate is not installed yet. The [Eureka remote-weapon correction](re/EUREKA_REMOTE_WEAPONS_20261031.md)
+is now installed only in FFIII at5bb84691fc69a688/11,495,936bytes: all55 routes,
+canonical/smoke/security checks,22 installed hashes and144 protected entries
+verified. Its specific new natural cross-floor case remains pending.
+
+The October30 navigation baseline is in
 [vehicle/world journeys](re/WORLD_MAP_JOURNEYS_20261030.md): Maze landing ties,
 required parked-craft changes, continent/surface/underwater continuation and
 the fourth World map filter. Source/offline/all-six delivery is Closed at
@@ -14,13 +617,40 @@ pass targeted production-consumer checks with existing I/Autodetail MP details.
 Combined serial build/smoke/security/guarded all-six delivery is complete.
 
 [Floating Continent navigation delay](re/FLOATING_NAVIGATION_LAG_20261030.md):
-human-scoped world1 correction covers foot/Nautilus/Invincible, prepared actor
-identity lookup, frame-local native roots and qualified stationary views.
-Route/label parity and fresh dynamic-state controls pass offline; native frame
-and audible confirmation remains separate.
+October30 user retest failed in the verified installed build. Priority correction
+uses exact fixed-border/native-power observation, actual NPC admission for
+stationary reuse, no post-directions scan backlog and owned world1 planner/data
+reuse. All gates/vehicles and ordinary live actors persist. Expanded actual
+consumer/canonical checks and guarded FFIII delivery are complete at11c25405fff5f1eb;
+all22 installed files match and144 protected entries are unchanged. Natural-frame/audible
+confirmation remains separate. The owner confirms Floating Continent/Surface
+world-map routing works. The resumed underwater/lag follow-up now has qualified
+source corrections for final interiors, native dive/surface continuations and
+saved-craft capture; combined delivery and natural responsiveness remain open.
+The current FFIII-only Eureka build preserves the earlier installed baseline.
 
 Prior October29 audit scope/status is maintained in the
 [single checkpoint record](re/MAP_AUDIT_FOLLOWUPS_20261028.md#current-milestone-and-scope-ledger).
+The human-requested [all-six Shift+G follow-up](re/SHIFTG_PUZZLE_AUDIT_20261030.md)
+is active: Narshe's ordered light path, complete Opera/Phoenix/Tower episodes,
+34 static recipes' native completion/identity correction and read-only owned
+choice repeat/cancel pass focused checks.49 controls and12 actual
+Citadel maze resumes pass; Zozo's wrong clue clock and V's false second switch
+are corrected. Combined delivery and the remaining unique-mechanic inventory
+are open; the earlier finite map audit did not certify every puzzle solution.
+The separate Dreamscape train family now has complete authored car/maze/exit
+objectives and13 instructions in12 locales;173 states/187 references,94 actual-
+type route legs and762 preserved maze legs are source/focused Closed in
+[the train topic](re/DREAM_TRAIN_20261031.md). The new
+[FFI Rod/Lute/Citadel guides](re/FF1_SLAB_GUIDES_20261101.md) pass ten full route
+episodes/95 legs, including the initial Citadel elder. Their authored-only world
+transit, policy-switch and shared routing integration are source/focused Closed;
+all52 FFI candidate dispositions are recorded. Remaining five-game semantic
+triage and combined verification/delivery remain open.
+[FFII Deist](re/FF2_PUZZLE_GUIDES_20261101.md) now includes its complete seven-
+operation chain through egg placement; nine journeys/130 legs pass. Learned
+keywords are bounded owner-thread explicit-request observations, with no
+movement scans; keyword-menu repeat/cancel and official terms/12 locales pass.
 The finite map/event/reachability findings and combined checks are source/
 offline/all-six delivery Closed. At that checkpoint all six used cf805c2e/11374080 bytes;
 132 installed payload hashes match the scanned candidate and144 protected files
@@ -538,6 +1168,7 @@ This index is checked against source when adding/removing a registration.
 | FF5.BattleTarget | [src/games/ff5/battle_target.cpp](../src/games/ff5/battle_target.cpp) / install | 540 | game::kFF5 |
 | FF5.Mod | [src/games/ff5/ff5_mod.cpp](../src/games/ff5/ff5_mod.cpp) / install | 506 | game::kFF5 |
 | FF5.JobAbility | [src/games/ff5/job_ability.cpp](../src/games/ff5/job_ability.cpp) / install | 500 | game::kFF5 |
+| FF5.LibraryGuide | [src/games/ff5/library_guide.cpp](../src/games/ff5/library_guide.cpp) / install | 516 | game::kFF5 |
 | FF5.Naming | [src/games/ff5/naming.cpp](../src/games/ff5/naming.cpp) / install | 510 | game::kFF5 |
 | FF5.Timers | [src/games/ff5/timers.cpp](../src/games/ff5/timers.cpp) / install | 505 | game::kFF5 |
 | FF6.AbilityEspers | [src/games/ff6/ability_espers.cpp](../src/games/ff6/ability_espers.cpp) / install | 521 | k6 |

@@ -18,9 +18,11 @@ namespace {
 ref::Class kParty{"Last.UI.KeyInput", "BattlePlayerInfomationController"};
 ref::Field fContents{kParty, "contentList"};
 ref::Field fTargets{kParty, "targetSelectContentList"};
+ref::Field fRoster{kParty, "<PlayerList>k__BackingField"};
 ref::Class kCommands{"Last.UI.KeyInput", "BattleCommandSelectController"};
 ref::Field fActor{kCommands, "targetData"};
 void* g_party = nullptr;
+void* g_ordinary_party = nullptr;
 // Attack and spell/item targeting can own separate party controllers. A live
 // controller is not proof that its rows are the ones currently rendered.
 // Keep only owners observed by their native producers, never search the scene.
@@ -39,8 +41,11 @@ using Update = void (*)(void*, void*, bool, const void*);
 Update o_update;
 void d_update(void* self, void* players, bool target, const void* mi) {
     o_update(self, players, target, mi);
-    hooks::guarded("Battle.PartyViewOwner", [self] {
-        if (kParty.is(self)) { remember_party(self); field::cache::register_object(kParty, self); }
+    hooks::guarded("Battle.PartyViewOwner", [self, target] {
+        if (!kParty.is(self)) return;
+        remember_party(self);
+        if (!target) g_ordinary_party = self;
+        field::cache::register_object(kParty, self);
     });
 }
 Update o_focus;
@@ -64,6 +69,7 @@ void d_initialize(void* self, const void* mi) {
 int g_review_slot = 0;
 void* g_execution_player = nullptr;
 std::wstring g_execution_name;
+bool g_action_ongoing=false; // action context only; no enemy identity or turn schedule
 
 std::vector<void*> rows_for(void* party)
 {
@@ -114,16 +120,24 @@ std::wstring read_row(void* row, bool include_command = false)
     return line;
 }
 
-void* active_row(const std::vector<void*>& content)
+bool choosing_command()
 {
-    for (void* row : content)
-        if (g_execution_player && displayed::field(row, "<TargetData>k__BackingField") == g_execution_player) return row;
+    return menu_state::is_active(menu_state::BATTLE_COMMAND)||menu_state::is_active(menu_state::BATTLE_ITEM)||
+           menu_state::is_active(menu_state::BATTLE_MAGIC)||menu_state::is_active(menu_state::BATTLE_TARGET);
+}
+
+void* command_actor()
+{
+    if(!choosing_command())return nullptr;
     // Read rooted native command data afresh; opening Magic/Items must not clear its owner.
     void* command = field::cache::get(kCommands);
-    const bool choosing = menu_state::is_active(menu_state::BATTLE_COMMAND) || menu_state::is_active(menu_state::BATTLE_ITEM) ||
-                          menu_state::is_active(menu_state::BATTLE_MAGIC) || menu_state::is_active(menu_state::BATTLE_TARGET);
-    if (!choosing && !g_execution_name.empty() && !g_execution_player) return nullptr;
-    void* actor = choosing && unity::alive(command) ? ref::rd<void*>(command, fActor) : nullptr;
+    return unity::alive(command)?ref::rd<void*>(command,fActor):nullptr;
+}
+
+void* command_row(const std::vector<void*>& content)
+{
+    if(!choosing_command())return nullptr;
+    void* actor=command_actor();
     if (actor) {
         const int id = character_id(actor);
         for (void* row : content) {
@@ -136,8 +150,21 @@ void* active_row(const std::vector<void*>& content)
     // Match the preserved actor by identity only; never dereference an unrooted stale pointer.
     for (void* row : content) {
         void* owned = player_owned_character(displayed::field(row, "<TargetData>k__BackingField"));
-        if (choosing && owned && owned == current_actor()) return row;
+        if (owned && owned == current_actor()) return row;
     }
+    return nullptr;
+}
+
+void* active_row(const std::vector<void*>& content)
+{
+    // ATB permits another action while this character is choosing a command.
+    // The input owner takes precedence over the action currently executing.
+    if(void* row=command_row(content))return row;
+    for(void* row:content)
+        if(g_execution_player&&displayed::field(row,"<TargetData>k__BackingField")==g_execution_player)return row;
+    // Preserve H's existing no-active-character result during a non-party
+    // action when no command context owns input. A stale focus is not its actor.
+    if(g_action_ongoing&&!g_execution_player&&!choosing_command())return nullptr;
     for (void* row : content)
         if (g_focused_player && displayed::field(row, "<TargetData>k__BackingField") == g_focused_player) return row;
     for (void* row : content)
@@ -145,11 +172,41 @@ void* active_row(const std::vector<void*>& content)
     return nullptr;
 }
 
+std::wstring submenu_slot(int index)
+{
+    if (!in_battle() || (!menu_state::is_active(menu_state::BATTLE_ITEM) &&
+                        !menu_state::is_active(menu_state::BATTLE_MAGIC) &&
+                        !menu_state::is_active(menu_state::BATTLE_TARGET))) return {};
+    // The normal native UpdateView binds contentList in HUD order and roots its
+    // roster. Battle submenus can hide the HUD without clearing those bindings.
+    void* owner = g_ordinary_party;
+    if (!unity::alive(owner) || !ref::rd<void*>(owner, fRoster)) return {};
+    void* row = unity::list_at(ref::rd<void*>(owner, fContents), index);
+    void* view = displayed::field(row, "view");
+    void* player = displayed::field(row, "<TargetData>k__BackingField");
+    void* owned = player_owned_character(player);
+    if (!view || !owned) return {};
+    void* parameter = unit_parameter(player);
+    auto line = character_name(owned);
+    if (line.empty() || !parameter) return {};
+
+    line += L", " + T(L"HP") + L" " + text::num(param_current_hp(parameter));
+    const int maximum = param_confirmed_or_base(parameter, Stat::MaxHp);
+    if (maximum > 0) line += L"/" + text::num(maximum);
+    if (displayed::field(view, "currentMpText"))
+        line += L", " + T(L"MP") + L" " + text::num(param_current_mp(parameter));
+    const auto conditions = party_status::current_lines(player, view);
+    if (!conditions.empty()) line += L", " + text::join(conditions, L", ");
+    return line;
+}
+
 void announce_slot(int slot)
 {
+    if (slot < 1 || slot > 5) return;
     const auto content = rows();
-    if (slot < 1 || slot > static_cast<int>(content.size()) || !content[slot - 1]) return;
-    ffpr::say(read_row(content[slot - 1]), true);
+    void* visible = slot <= static_cast<int>(content.size()) ? content[slot - 1] : nullptr;
+    const auto line = visible ? read_row(visible) : submenu_slot(slot - 1);
+    if (!line.empty()) ffpr::say(line, true);
 }
 
 void cycle_party(int delta)
@@ -180,20 +237,27 @@ int install()
         // to ordinary row speech, so repeating them here duplicates that read.
         return text::join(displayed::charge_lines(displayed::field(selected, "view")), L", ");
     });
-    for (int i = 0; i < 9; ++i) {
-        const auto key = static_cast<input::Key>(static_cast<int>(input::Key::Alpha1) + i);
+    // Separate battle-read scope also works while a native spell/item submenu
+    // owns the information buffer. New scope IDs retire the old number-row
+    // bindings without changing shop number keys or native L/R on2/3.
+    constexpr input::Key keys[]{input::Key::Slash,input::Key::Period,input::Key::Comma,input::Key::M,input::Key::N};
+    constexpr const char* labels[]{"Battle: party slot 1 statistics","Battle: party slot 2 statistics",
+        "Battle: party slot 3 statistics","Battle: party slot 4 statistics","Battle: party slot 5 statistics"};
+    for (int i = 0; i < 5; ++i) {
         const std::string action = "BattleParty.Slot" + std::to_string(i + 1);
         actions::define(action.c_str(), [i] { announce_slot(i + 1); });
-        input::add_binding(key, input::Mod::None, input::Context::Battle,
-                          action.c_str(), "Battle: displayed party member statistics");
+        input::add_binding(keys[i], input::Mod::None, input::Context::BattleParty,
+                          action.c_str(), labels[i]);
     }
     actions::define("BattleParty.ActiveTurn", [] { announce_active_turn(); });
     input::add_binding(input::Key::T, input::Mod::None, input::Context::Battle,
                        "BattleParty.ActiveTurn", "Battle: announce active turn");
     actions::define("BattleParty.Next", [] { cycle_party(1); });
     actions::define("BattleParty.Previous", [] { cycle_party(-1); });
+    // The ordinary panel can already have been bound when battle readiness fires.
     events::on(events::Kind::BattleStart, [] { g_party_owners.clear();g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
-    events::on(events::Kind::BattleEnd, [] { g_party_owners.clear();g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
+    events::on(events::Kind::BattleEnd, [] { g_party_owners.clear();g_ordinary_party = g_party = g_focused_player = nullptr; g_review_slot = -1; action_actor_finished(); });
+    events::on(events::Kind::TitleScreen, [] { g_ordinary_party = nullptr; });
     return (hooks::attach(mInitialize, &d_initialize, &o_initialize) ? 1 : 0) +
         (hooks::attach(mUpdate, &d_update, &o_update) ? 1 : 0) + (hooks::attach(mFocus, &d_focus, &o_focus) ? 1 : 0);
 }
@@ -233,15 +297,28 @@ void announce_active_status()
 void announce_active_turn()
 {
     if (!in_battle()) return;
-    if (!g_execution_name.empty()) { ffpr::say(TF(L"{0}'s turn", {g_execution_name}), true); return; }
-    void* row = active_row(rows());
-    const auto name = row ? displayed::text_field(displayed::field(row, "view"), "nameText") : std::wstring();
+    const bool choosing=choosing_command();
+    // A target/animation panel may temporarily hide the commander's party row.
+    // Its rooted native actor, matched to the admitted input owner by identity,
+    // still owns the same already-announced name. Never dereference the saved
+    // pointer itself or substitute an executing unit for this input context.
+    if(choosing)if(void* actor=command_actor();actor&&actor==current_actor()) {
+        const auto name=character_name(actor);
+        if(!name.empty()){ffpr::say(TF(L"{0}'s turn",{name}),true);return;}
+    }
+    const auto content=rows();
+    void* row=choosing?command_row(content):g_execution_player?active_row(content):nullptr;
+    auto name=row?displayed::text_field(displayed::field(row,"view"),"nameText"):std::wstring();
+    if(name.empty()&&!choosing&&g_execution_player)name=g_execution_name;
     ffpr::say(name.empty() ? T(L"No active character") : TF(L"{0}'s turn", {name}), true);
 }
 void action_actor_started(void* unit)
 {
-    g_execution_name = unit_name(unit);
+    g_action_ongoing=unit!=nullptr;
     g_execution_player = kBattlePlayerData.is(unit) ? unit : nullptr;
+    // This observer belongs to party information, not enemy turn tracking.
+    // Enemy action/damage readers retain their own native producers.
+    g_execution_name=g_execution_player?unit_name(unit):std::wstring();
 }
-void action_actor_finished() { g_execution_player = nullptr; g_execution_name.clear(); }
+void action_actor_finished() { g_action_ongoing=false;g_execution_player = nullptr; g_execution_name.clear(); }
 }

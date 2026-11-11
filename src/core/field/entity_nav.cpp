@@ -32,6 +32,7 @@
 #include "../modtext.h"
 #include "../say.h"
 #include "../text.h"
+#include <cmath>
 
 namespace field {
 
@@ -119,6 +120,21 @@ TargetKind target_kind_of(const Entity& e)
     return navigation_target_kind(e.kind,e.category(),e.aerial_transition);
 }
 
+// A gate may block the route without obscuring the selected object's bearing.
+// Only a current-floor pose shares coordinates with the player.
+std::wstring gated_bearing(int map_id, unity::Vec3 player, unity::Vec3 target)
+{
+    unity::Vec3 delta{target.x - player.x, target.y - player.y, 0};
+    if (!std::isfinite(delta.x) || !std::isfinite(delta.y)) return {};
+    if (const auto* map = baked::submap_by_map_id(map_id)) {
+        if (const int width = baked::wrap_width(*map)) delta.x = std::remainder(delta.x, width * 16.f);
+        if (const int height = baked::wrap_height(*map)) delta.y = std::remainder(delta.y, height * 16.f);
+    }
+    const auto distance = std::hypot(delta.x, delta.y);
+    if (distance == 0) return TF(L"{0} in a straight line", {format_steps(0)});
+    return TF(L"{0} in a straight line", {format_steps(distance) + L" " + direction_name({}, delta)});
+}
+
 /// Only the selected object is evaluated. Native capture and owned route work are
 /// asynchronous; the independent browse request cannot replace beacon/walk plans.
 void format_current_entity(std::function<void(std::wstring)> publish)
@@ -140,7 +156,7 @@ void format_current_entity(std::function<void(std::wstring)> publish)
     }
     const auto generation = g_category_generation;
     baked_nav::request_browse_route(goal, target_kind_of(*e),
-        [e, position, generation, publish = std::move(publish)](baked_nav::BrowseRoute path) {
+        [e, position, map_id = goal.map_id, generation, publish = std::move(publish)](baked_nav::BrowseRoute path) {
             if (generation != g_category_generation || scanner::current_entity() != e ||
                 !ensure_field_context() || !e->is_alive()) return;
             const auto now = e->position();
@@ -153,6 +169,10 @@ void format_current_entity(std::function<void(std::wstring)> publish)
                     : (!path.reason.empty() ? path.reason : T(L"Not directly reachable"));
             }
             FilterContext current;
+            if (!direct && !e->remote() && note == T(L"Story gated") && current.field_player) {
+                const auto bearing = gated_bearing(map_id, current.player_position, now);
+                if (!bearing.empty()) note += L". " + bearing;
+            }
             const auto ordinal = L" " + TF(L"({0} of {1})", {text::num(scanner::current_index() + 1), text::num(scanner::count())});
             publish(e->format_description(current.player_position, direct, note) + ordinal);
         });
@@ -196,6 +216,7 @@ void announce_ready_entity(bool walking, double requested_at)
     if (walking) {
         ffpr::fieldnav::autowalk::request(walk_goal, kind, name);
     } else {
+        walk_goal.moving_flight_directions = true;
         baked_nav::request_route(walk_goal, kind, name, [e, walk_goal, category_generation = g_category_generation, requested_at](PathInfo p) {
             if(category_generation!=g_category_generation||!ensure_field_context())return;
             const auto selected=scanner::current_entity();
@@ -210,6 +231,13 @@ void announce_ready_entity(bool walking, double requested_at)
                    (!walk_goal.raw_name.empty()&&selected->audio_hint!=walk_goal.raw_name))return;
             }
             auto message = p.success && !p.description.empty() ? p.description : (!p.reason.empty() ? p.reason : T(L"No path"));
+            if (!p.success && p.reason == T(L"Story gated") && selected && !selected->remote()) {
+                FilterContext current;
+                if (current.field_player) {
+                    const auto bearing = gated_bearing(walk_goal.map_id, current.player_position, selected->position());
+                    if (!bearing.empty()) message += L". " + bearing;
+                }
+            }
             const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
             if (!p.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({p.warning, message}, true, timing);
             else ffpr::say(message, true, timing);

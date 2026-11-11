@@ -804,5 +804,976 @@
       1
     ],
     "evidence": "Complete east-facing sheep interaction; controlled-player Lerp preserves current layer at33,19; docs/re/ISTORY_SHEEP_ENTRY_20261029.md"
+  },
+  {
+    "submap": "Map_30461_1",
+    "entity_id": 19,
+    "destination_map": 412,
+    "original_point": 1,
+    "continuation": "sc_e_0290_1",
+    "continuation_sha256": "4cbeb5c271034aa5765263a37dc4e797e7dbb1969e27432474eb80f0937be818",
+    "arrival_cell": [
+      8,
+      17,
+      1
+    ],
+    "arrival_baked_cell": [
+      8,
+      17,
+      1
+    ],
+    "trap_transfer": true,
+    "evidence": "Full quicksand/fall callback ends at8,17 Ground after bound animation,not the native stair PointIn1;docs/re/FF5_PYRAMID_20261104.md"
+  },
+  {
+    "submap": "Map_30531_3",
+    "entity_id": 12,
+    "destination_map": 486,
+    "original_point": 1,
+    "continuation": "sc_map_30531_2_climb_1",
+    "continuation_sha256": "4f7c4070e0bbaa66b57e5aefdef5cf0cb97be1336b4ada670089bbce6331ca84",
+    "arrival_point": 3,
+    "arrival_baked_cell": [
+      8,
+      6,
+      1
+    ],
+    "evidence": "Full controlled-player vine continuation ends at this existing native PointIn;Lerp layer0 preserves the destination layer. docs/re/FF5_GOGO_20261104.md;accepted FFV Lerp ownership/layer proof in ISTORY_SHEEP_ENTRY_20261029.md."
+  },
+  {
+    "submap": "Map_30531_3",
+    "entity_id": 13,
+    "destination_map": 486,
+    "original_point": 1,
+    "continuation": "sc_map_30531_2_climb_2",
+    "continuation_sha256": "87b0c1272801e13cd54b52821bec6168809b5e945d3d9e393ef282de85237167",
+    "arrival_point": 2,
+    "arrival_baked_cell": [
+      12,
+      6,
+      1
+    ],
+    "evidence": "Full controlled-player vine continuation ends at this existing native PointIn;Lerp layer0 preserves the destination layer. docs/re/FF5_GOGO_20261104.md;accepted FFV Lerp ownership/layer proof in ISTORY_SHEEP_ENTRY_20261029.md."
+  },
+  {
+    "submap": "Map_30531_3",
+    "entity_id": 14,
+    "destination_map": 486,
+    "original_point": 1,
+    "continuation": "sc_map_30531_2_climb_3",
+    "continuation_sha256": "69c973962080de2b03763332836ba5a87adeee59a983add744e8ddfe67018f2a",
+    "arrival_point": 4,
+    "arrival_baked_cell": [
+      10,
+      10,
+      1
+    ],
+    "evidence": "Full controlled-player vine continuation ends at this existing native PointIn;Lerp layer0 preserves the destination layer. docs/re/FF5_GOGO_20261104.md;accepted FFV Lerp ownership/layer proof in ISTORY_SHEEP_ENTRY_20261029.md."
+  },
+  {
+    "submap": "Map_30531_7",
+    "entity_id": 6,
+    "destination_map": 490,
+    "original_point": 1,
+    "continuation": "sc_map_30531_6_climb",
+    "continuation_sha256": "693437702fb194c0808417ec98e13a00e7349a36d42457dab7e5bcd14e899104",
+    "arrival_point": 3,
+    "arrival_baked_cell": [
+      7,
+      9,
+      0
+    ],
+    "evidence": "Full controlled-player vine continuation ends at this existing native PointIn;Lerp layer0 preserves the destination layer. docs/re/FF5_GOGO_20261104.md;accepted FFV Lerp ownership/layer proof in ISTORY_SHEEP_ENTRY_20261029.md."
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 13,
+    "object_id": 13,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_2",
+    "continuation_sha256": "df8bf207aa53c8255204699faec42baf5a0b0a30a11f241873d46f60394891fb",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 14,
+    "object_id": 14,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_3",
+    "continuation_sha256": "1752df4344ca0cb15bf99576ce777d44878e37ee5de859705ab23d8c42c88802",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 15,
+    "object_id": 15,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 16,
+    "object_id": 16,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 17,
+    "object_id": 17,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_6",
+    "continuation_sha256": "efe76ca32247aa2d4ed093dfc559e3c566e2e3cd4afce3ea7fce0a0402109773",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 828,
+    "object_id": 18,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_8",
+    "continuation_sha256": "64ca1c876cbbd2c11dfd400f59e6613358d8c29df8302e5feff7ae1e53b47526",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 829,
+    "object_id": 19,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 20,
+    "object_id": 20,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 21,
+    "object_id": 21,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 22,
+    "object_id": 22,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 23,
+    "object_id": 23,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 24,
+    "object_id": 24,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 25,
+    "object_id": 25,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_8",
+    "continuation_sha256": "64ca1c876cbbd2c11dfd400f59e6613358d8c29df8302e5feff7ae1e53b47526",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 502,
+    "object_id": 302,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 503,
+    "object_id": 303,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 504,
+    "object_id": 304,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_4",
+    "continuation_sha256": "dde91255e9fbef22835ce74930954bb84da4a507c1e12e8b80188641180723b1",
+    "arrival_cell": [
+      52,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30170",
+    "entity_id": 505,
+    "object_id": 305,
+    "destination_map": 286,
+    "original_point": 0,
+    "continuation": "sc_e_0060_5",
+    "continuation_sha256": "621bab11efd0b59157a533f509b635717e5d2ae7f6b6d79d68cec855628a87b9",
+    "arrival_cell": [
+      53,
+      14,
+      2
+    ],
+    "same_map": true,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Full controlled-player current chains after complete Sandworm callback59. docs/re/FF5_DESERT_20261105.md"
+  },
+  {
+    "submap": "Map_30180",
+    "entity_id": 10,
+    "destination_map": 288,
+    "original_point": 1,
+    "continuation": "sc_e_0062_1",
+    "continuation_sha256": "366fd290a9b13fa6a34ec7f19b7e1dac4c5230fe4f3533ac340479fc8978258e",
+    "arrival_cell": [
+      17,
+      10,
+      1
+    ],
+    "trap_transfer": true,
+    "evidence": "Full471-operation native callback ends controlled player17,10,native layer2/Ground. Existing exact FFV SetPos/layer qualification. docs/re/FF5_GOHN_20261105.md"
+  },
+  {
+    "submap": "Map_30441_16",
+    "entity_id": 20,
+    "destination_map": 400,
+    "original_point": 0,
+    "continuation": "sc_e_0438_1",
+    "continuation_sha256": "0c702be0262cf47861979f15def2e2cec39b6bdaac9ddbe064d702a60a00385e",
+    "same_map": true,
+    "arrival_point": 7,
+    "ordinary_travel": true,
+    "evidence": "Full 55-operation passage restores the controlled player at native PointIn 7, Ground 15,4. docs/re/FF5_EXDEATH_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 37,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_5",
+    "continuation_sha256": "6c55851ebb12e7133e50b8e5318923f7df47c61ee5ea2db9205fde7abfcbafa8",
+    "same_map": true,
+    "arrival_cell": [
+      16,
+      13,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 38,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_5",
+    "continuation_sha256": "6c55851ebb12e7133e50b8e5318923f7df47c61ee5ea2db9205fde7abfcbafa8",
+    "same_map": true,
+    "arrival_cell": [
+      9,
+      10,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 41,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_4",
+    "continuation_sha256": "f43368ed66378939f201b909c402dae96bd81d071cebbb38810343b830e51f88",
+    "same_map": true,
+    "arrival_cell": [
+      20,
+      11,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 42,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_4",
+    "continuation_sha256": "f43368ed66378939f201b909c402dae96bd81d071cebbb38810343b830e51f88",
+    "same_map": true,
+    "arrival_cell": [
+      16,
+      13,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 43,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_4",
+    "continuation_sha256": "f43368ed66378939f201b909c402dae96bd81d071cebbb38810343b830e51f88",
+    "same_map": true,
+    "arrival_cell": [
+      12,
+      11,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_30521_3",
+    "entity_id": 44,
+    "destination_map": 478,
+    "original_point": 0,
+    "continuation": "sc_e_0316_4",
+    "continuation_sha256": "f43368ed66378939f201b909c402dae96bd81d071cebbb38810343b830e51f88",
+    "same_map": true,
+    "arrival_cell": [
+      9,
+      10,
+      0
+    ],
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "docs/re/FF5_ISTORY_FALLS_20261105.md"
+  },
+  {
+    "submap": "Map_20070",
+    "entity_id": 54,
+    "destination_map": 1,
+    "original_point": 36,
+    "continuation": "sc_e_0048_2",
+    "continuation_sha256": "29980fdd2137ace01f1a7e4412d5569f1c04ce759e9321cabbcedd7178c97cd2",
+    "arrival_cell": [
+      83,
+      78,
+      2
+    ],
+    "ordinary_travel": true,
+    "evidence": "Full world, explosion and final world callbacks restore the controlled player at 83,78. docs/re/FF5_KARNAK_20261105.md"
+  },
+  {
+    "submap": "Map_20070",
+    "entity_id": 55,
+    "destination_map": 1,
+    "original_point": 36,
+    "continuation": "sc_e_0048_2",
+    "continuation_sha256": "29980fdd2137ace01f1a7e4412d5569f1c04ce759e9321cabbcedd7178c97cd2",
+    "arrival_cell": [
+      83,
+      78,
+      2
+    ],
+    "ordinary_travel": true,
+    "evidence": "Full world, explosion and final world callbacks restore the controlled player at 83,78. docs/re/FF5_KARNAK_20261105.md"
+  },
+  {
+    "submap": "Map_20070",
+    "entity_id": 56,
+    "destination_map": 1,
+    "original_point": 36,
+    "continuation": "sc_e_0048_2",
+    "continuation_sha256": "29980fdd2137ace01f1a7e4412d5569f1c04ce759e9321cabbcedd7178c97cd2",
+    "arrival_cell": [
+      83,
+      78,
+      2
+    ],
+    "ordinary_travel": true,
+    "evidence": "Full world, explosion and final world callbacks restore the controlled player at 83,78. docs/re/FF5_KARNAK_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 102,
+    "object_id": 121,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_timer_start",
+    "continuation_sha256": "5f780c7973912cf9d36c5ffd82198840045cb60d2828389273caa847a02e6a22",
+    "same_map": true,
+    "arrival_cell": [
+      13,
+      51,
+      1
+    ],
+    "ordinary_travel": true,
+    "interaction_travel": false,
+    "approach_mask": 1,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 76,
+    "object_id": 99,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_6",
+    "continuation_sha256": "2d2b2cde0e6538fb82600530e7caf6d2ed721dde4e76485243ddc100d1f4ef12",
+    "same_map": true,
+    "arrival_cell": [
+      17,
+      33,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 106,
+    "object_id": 112,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_7",
+    "continuation_sha256": "86f9e1ad4d8ae714eb347f7d37bcf21bbe83224368414fb44612c39cca984e1c",
+    "same_map": true,
+    "arrival_cell": [
+      36,
+      33,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 107,
+    "object_id": 113,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_8",
+    "continuation_sha256": "b1651de6e990df2431f31661d892e9d7259c9f2643ec20a59d3a226ae7fce9f4",
+    "same_map": true,
+    "arrival_cell": [
+      32,
+      33,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 2,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 104,
+    "object_id": 109,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_10",
+    "continuation_sha256": "361c41d6d9c480842bbe4ccc20d55d068ef6813c3fca7a90ba7f9019d8df4364",
+    "same_map": true,
+    "arrival_cell": [
+      30,
+      44,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 104,
+    "object_id": 109,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_10",
+    "continuation_sha256": "361c41d6d9c480842bbe4ccc20d55d068ef6813c3fca7a90ba7f9019d8df4364",
+    "same_map": true,
+    "arrival_cell": [
+      30,
+      46,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 105,
+    "object_id": 110,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_11",
+    "continuation_sha256": "db38e946f5d7ea12e5294eb3997109255ef51a8670584769dd022fa0688dddfd",
+    "same_map": true,
+    "arrival_cell": [
+      33,
+      48,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 105,
+    "object_id": 110,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_11",
+    "continuation_sha256": "db38e946f5d7ea12e5294eb3997109255ef51a8670584769dd022fa0688dddfd",
+    "same_map": true,
+    "arrival_cell": [
+      31,
+      48,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 2,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 83,
+    "object_id": 114,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_13",
+    "continuation_sha256": "46bd377dfe615fdf5c25bec3594d74a87023d1aff311d6a8ada233c1c8695a79",
+    "same_map": true,
+    "arrival_cell": [
+      45,
+      47,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 8,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 108,
+    "object_id": 115,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_18",
+    "continuation_sha256": "df661e991e6c600858f4702e62f93b6e4f6f00aac9a55892778c90e3936d4499",
+    "same_map": true,
+    "arrival_cell": [
+      37,
+      49,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 2,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 89,
+    "object_id": 118,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_19",
+    "continuation_sha256": "698f7686e565f447fcd111b6b4d83c4392c8214aa64a5ccb704d5faf0c595432",
+    "same_map": true,
+    "arrival_cell": [
+      47,
+      33,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 1,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30060",
+    "entity_id": 90,
+    "object_id": 117,
+    "destination_map": 211,
+    "original_point": 0,
+    "continuation": "sc_30060_jump_20",
+    "continuation_sha256": "afdf39962d35a3ac9b8e889198b10363a8d27d4f3b6e51bd7153554400b631b4",
+    "same_map": true,
+    "arrival_cell": [
+      47,
+      23,
+      1
+    ],
+    "ordinary_travel": false,
+    "interaction_travel": true,
+    "approach_mask": 4,
+    "evidence": "docs/re/FF5_SHIP_GRAVEYARD_20261105.md"
+  },
+  {
+    "submap": "Map_30450",
+    "entity_id": 1,
+    "object_id": 12,
+    "destination_map": 408,
+    "original_point": 1,
+    "continuation": "sc_e_0131_1",
+    "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+    "arrival_cell": [
+      14,
+      18,
+      1
+    ],
+    "trap_transfer": true,
+    "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+  },
+  {
+    "submap": "Map_30450",
+    "entity_id": 2,
+    "object_id": 13,
+    "destination_map": 408,
+    "original_point": 1,
+    "continuation": "sc_e_0131_1",
+    "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+    "arrival_cell": [
+      14,
+      18,
+      1
+    ],
+    "trap_transfer": true,
+    "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+  },
+  {
+    "submap": "Map_30450",
+    "entity_id": 3,
+    "object_id": 14,
+    "destination_map": 408,
+    "original_point": 1,
+    "continuation": "sc_e_0131_1",
+    "continuation_sha256": "11dd181789d68d975c274519c2a38d392f0cbbee8780adef06dae983c7243057",
+    "arrival_cell": [
+      14,
+      18,
+      1
+    ],
+    "trap_transfer": true,
+    "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+  },
+  {
+    "submap": "Map_30451_1",
+    "entity_id": 20,
+    "object_id": 62,
+    "destination_map": 19,
+    "original_point": 6,
+    "continuation": "sc_e_0492_2",
+    "continuation_sha256": "6ca0910f2d198d674e7047e5554ee42b52dbe8d1fc5a8b4db16883954d81e8fc",
+    "arrival_cell": [
+      121,
+      89,
+      1
+    ],
+    "evidence": "docs/re/FF5_DEATH_VALLEY_20261105.md"
+  },
+  {
+    "submap": "Map_30471_3",
+    "entity_id": 5,
+    "object_id": 6,
+    "destination_map": 430,
+    "original_point": 5,
+    "continuation": "sc_e_0304_2",
+    "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+    "arrival_cell": [
+      7,
+      7,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_4",
+    "entity_id": 17,
+    "object_id": 17,
+    "destination_map": 431,
+    "original_point": 1,
+    "continuation": "sc_e_0306_2",
+    "continuation_sha256": "7ebf75f9c9be238f76822120b15b1c784b4743f932840154f0589adf2ae00403",
+    "arrival_cell": [
+      7,
+      11,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_4",
+    "entity_id": 19,
+    "object_id": 18,
+    "destination_map": 432,
+    "original_point": 1,
+    "continuation": "sc_e_0307_2",
+    "continuation_sha256": "1f3ff061c30e6d712ce2369ad335cf399a47b93dd37222449b60695c4fa91c60",
+    "arrival_cell": [
+      6,
+      12,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_4",
+    "entity_id": 15,
+    "object_id": 19,
+    "destination_map": 433,
+    "original_point": 1,
+    "continuation": "sc_e_0308_2",
+    "continuation_sha256": "edf62a80541c0ffd66ac22efe15492b4977a59684ebd609d0f8558b8a0963739",
+    "arrival_cell": [
+      11,
+      12,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_4",
+    "entity_id": 16,
+    "object_id": 16,
+    "destination_map": 429,
+    "original_point": 2,
+    "continuation": "sc_e_0497_2",
+    "continuation_sha256": "330328e3d26a4edc62d0c1f75ab9e61fb35be660eeaaea2a57a8daf9cc03bebb",
+    "arrival_cell": [
+      10,
+      10,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_5",
+    "entity_id": 5,
+    "object_id": 5,
+    "destination_map": 430,
+    "original_point": 5,
+    "continuation": "sc_e_0304_2",
+    "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+    "arrival_cell": [
+      7,
+      7,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_6",
+    "entity_id": 5,
+    "object_id": 7,
+    "destination_map": 430,
+    "original_point": 5,
+    "continuation": "sc_e_0304_2",
+    "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+    "arrival_cell": [
+      7,
+      7,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
+  },
+  {
+    "submap": "Map_30471_7",
+    "entity_id": 7,
+    "object_id": 7,
+    "destination_map": 430,
+    "original_point": 5,
+    "continuation": "sc_e_0304_2",
+    "continuation_sha256": "70193ffdb98d099979534b38534957f795546717b8fc0de783e1c4d220a0f508",
+    "arrival_cell": [
+      7,
+      7,
+      1
+    ],
+    "evidence": "docs/re/FF5_ISLAND_SHRINE_20261105.md"
   }
 ]

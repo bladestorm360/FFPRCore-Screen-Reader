@@ -1,0 +1,213 @@
+{
+  "tables": {
+    "0x98": {
+      "field": "564D3526F1455C9BCF33779B5B24746A6E71B99B",
+      "metadata_offset": 5412158,
+      "actors": [
+        85,
+        86,
+        87
+      ]
+    },
+    "0xa0": {
+      "field": "9B05EA1F1558187B8143537ECBAA20AA19297C9E",
+      "metadata_offset": 5413830,
+      "actors": [
+        21,
+        22,
+        23
+      ]
+    }
+  },
+  "required_seconds": 1.0,
+  "actors": [
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 21,
+      "raw": "左扉AnimRegion",
+      "type": "TileAnimation",
+      "group": "entity_default",
+      "script": "",
+      "cell": [
+        1,
+        23,
+        21
+      ],
+      "properties": {
+        "all_layers": true,
+        "entity_id": 21,
+        "object_id": 3,
+        "object_type": 1,
+        "reverse": false
+      }
+    },
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 22,
+      "raw": "中扉AnimRegion",
+      "type": "TileAnimation",
+      "group": "entity_default",
+      "script": "",
+      "cell": [
+        1,
+        25,
+        21
+      ],
+      "properties": {
+        "all_layers": true,
+        "entity_id": 22,
+        "object_id": 4,
+        "object_type": 1,
+        "reverse": false
+      }
+    },
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 23,
+      "raw": "右扉AnimRegion",
+      "type": "TileAnimation",
+      "group": "entity_default",
+      "script": "",
+      "cell": [
+        1,
+        27,
+        21
+      ],
+      "properties": {
+        "all_layers": true,
+        "entity_id": 23,
+        "object_id": 5,
+        "object_type": 1,
+        "reverse": false
+      }
+    },
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 86,
+      "raw": "扉ギミック用コリジョン中",
+      "type": "CollisionEntity",
+      "group": "entity_default",
+      "script": "",
+      "cell": [
+        1,
+        25,
+        22
+      ],
+      "properties": {
+        "collision_type": 0,
+        "confirm_landing": false,
+        "entity_id": 86,
+        "object_type": 19,
+        "target_transportation_ids": "",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 87,
+      "raw": "扉ギミック用コリジョン右",
+      "type": "CollisionEntity",
+      "group": "entity_default",
+      "script": "",
+      "cell": [
+        1,
+        27,
+        22
+      ],
+      "properties": {
+        "collision_type": 0,
+        "confirm_landing": false,
+        "entity_id": 87,
+        "object_type": 19,
+        "target_transportation_ids": "",
+        "through_condition_type": 0
+      }
+    },
+    {
+      "map": 445,
+      "room": "Map_30631_4",
+      "entity": 85,
+      "raw": "扉ギミック用コリジョン左",
+      "type": "CollisionEntity",
+      "group": "ev_e_1064",
+      "script": "",
+      "cell": [
+        1,
+        23,
+        22
+      ],
+      "properties": {
+        "collision_type": 0,
+        "confirm_landing": false,
+        "entity_id": 85,
+        "object_type": 19,
+        "target_transportation_ids": "",
+        "through_condition_type": 0
+      }
+    }
+  ],
+  "metadata_sha256": "f50d9d1ff84f8033b8acbdc6845ab3a0f2793dd253c36a4a7d212303980844dd",
+  "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+  "native_callback": "Current.<>c.<SetGimmickTimerOwzer>b__742_0",
+  "callback_rva": "0x53F760",
+  "local_bank": 10,
+  "local_index": 3,
+  "cycle": [
+    0,
+    1,
+    2
+  ],
+  "note": "Callback shows old collider and hides next collider, updates local3 and plays native sound9. Start/stop register/remove only GimmickOwzer timer.",
+  "source_script_hashes": {
+    "Map_30631_1/sc_e_0756": "e43065e02fae633eba3178ab4855f0cc8399ea9039a03fa7129f7f08fb91676d",
+    "Map_30631_1/sc_e_0757": "f27ddcfdacc5bd71481124d4bf10750d1babb0661ca39322dd73a156ce816ff9",
+    "Map_30631_1/sc_e_0758": "8682a37736540009bef6ac083572eb1f42645a493b261d41701f1dfa76350c67",
+    "Map_30631_1/sc_e_0759": "0bff9004d8378c8d4861fef4aaef6cb4bc729202efa6016ea8f7f001b0c37264",
+    "Map_30631_1/sc_e_0760": "1cdc4222b56f9ef72bfd1b26f8fd557cdedd5cc3dfe7334882137db8e5f3b502",
+    "Map_30631_1/sc_e_0761": "06a591bd46ac5c408dd468c2eb7c86baf172997c0c3c3eedbba37b373a1e69ee",
+    "Map_30631_1/sc_e_0761_1": "489db30eb6ad077ed7ffa797b789ca1df56c0db89ddf7ed23b39e40b2d79a76f",
+    "Map_30631_1/sc_e_0762": "439682f3ee443bce227afb1580f4001a7235bfa63bce13e463996e302713fa44",
+    "Map_30631_1/sc_e_0762_1": "2e2f9b207226950f57a79252d99ca0553333e86c3fc266c978674b8bc1ecd62f",
+    "Map_30631_1/sc_e_1062": "2e4980302cc99ee0a5437058c23ee3ff977c9eea538c95b890a1eb1adda8eb28",
+    "Map_30631_1/sc_map_30631_1": "84dc65c016065247c34267d47a5e3e9d568df85912196739009491a7af8e2681",
+    "Map_30631_2/sc_map_30631_2": "b2f4dfa93cd50ccc0f8d7efe99341f7858d8328c55acd3e8c2fbecc505a0510a",
+    "Map_30631_3/sc_e_0763": "1379791ec55f73f6c6069d1002e0aa7ab04217eebebdb67c2a1cfaa472767a22",
+    "Map_30631_3/sc_e_0763_1": "973ee4eae957e8febbfc7a5f68237047bd449d2c195740d7052d2a6788124b94",
+    "Map_30631_3/sc_e_0764_1": "1565873270e1e2adf446acd309bc68d0e60a00dcfa38b58b869d55796830f9cf",
+    "Map_30631_3/sc_map_30631_3": "d5b70dc53b03ac894f30b621f8d423bb845ec7a59293f0b7b6bbd35e0dafe7c0",
+    "Map_30631_4/sc_e_0009": "5859572c0f38138c015e6939c73ab85837f2b02767b94f130b80b5345d321263",
+    "Map_30631_4/sc_e_0764": "955eddafba48fcaab816bd71186ad6b307552b92453f8a7912b3baf65a262844",
+    "Map_30631_4/sc_e_0765": "9d6b2432cce8f12942e162a0b4b72c375ff10499665f4cbaa5e14e8012a4bd82",
+    "Map_30631_4/sc_e_0766": "4aa505a48448710cef33d1d7661c39ef9e44f4bd02dd0e9f229c479ff268bd5f",
+    "Map_30631_4/sc_e_0766_1": "15e9e73e0586377ae4be02af1b9ab40d5bd1f84d4c5eb7d30207f8107dad7bbe",
+    "Map_30631_4/sc_e_0766_2": "5689a07242a6f282a11190fb7acac10bf5be987a8bbcf5d394b11f26becb0e80",
+    "Map_30631_4/sc_e_0767": "64c00a2e2c385923aff3ee577e9e7caae264b0c8663a5aaa386d615371bc912b",
+    "Map_30631_4/sc_e_0767_1": "07e31d0b37700a5dd0c03fbd8e9b2e75da9f846f86982813df37446e77c0a87e",
+    "Map_30631_4/sc_e_0768": "0d4ce767f27f988870cf559a600a4244e41abc30b85adb3a79ac1aeb3fc11c60",
+    "Map_30631_4/sc_e_0768_1": "7d84b7867bf511676cda285c0ae5af248812504efaf0ef213bb0a0c1b250f598",
+    "Map_30631_4/sc_e_0769": "aad280a0e6f25d84d768dfa3d88fd3227a9522def34226ad7def4478d2f7c715",
+    "Map_30631_4/sc_e_0769_1": "6907e2a533138d5e86e0bdc00baa5625cc699d16041543d0399a5314ba61d73b",
+    "Map_30631_4/sc_e_0770": "952a1922163af5df1f02333e58370bdc30ded2186e2920d7b7f308e48b07791b",
+    "Map_30631_4/sc_e_0770_1": "6e52c67fa6295217b7399b982485b18f76446457137784881f5d65250508d545",
+    "Map_30631_4/sc_e_0771": "c489de0866e78c4631f2988bd025a2729a9917657c1f4b0f0fe8e319b287cd4e",
+    "Map_30631_4/sc_e_0771_1": "9cd58d1af52dda8c9eca7d12a3e860efb3026755d7bacc1140149ae75c845036",
+    "Map_30631_4/sc_e_0772": "b9ca85888cfcf93b0bb4c738dd93811228de0406efde87964f1e67219994dc0e",
+    "Map_30631_4/sc_e_0772_1": "6a6eed81b046708066d2e3d57653b85409675f19fda5719a88c6a19b142d8d50",
+    "Map_30631_4/sc_e_1063": "565a1f1cb18d99bbafd05f2a2b75389ab10e4223b578ff7163c9f1f9f0f939ff",
+    "Map_30631_4/sc_e_1063_t": "5d0181443785d7b3cf2b9afab5f8a1cf92c2039af42d6d4383834d8ec0ac48b6",
+    "Map_30631_4/sc_e_1064": "8d3df4e80644ccd85e669613ea753d7613f57adf4557bf623a3e826a7c3bd21e",
+    "Map_30631_4/sc_map_30631_4": "8ed56662b207815ce39f1ab5c4a1102315322ba1c620e112978269406111b15c",
+    "Map_30631_5/sc_e_0773": "ea13a80b492a0902b6b72b9bf0e11ce0b34d797e9538ad4af020bca4dfd53646",
+    "Map_30631_5/sc_e_0773_1": "096f7ae4335576f90b8bb3fc9f7a28d43eb62971eaa5910245af55bc444e8ac8",
+    "Map_30631_5/sc_e_0773_2": "8134289c2b2826f8fc69700a745fe1a56831388a64642568632ca425252206e0",
+    "Map_30631_5/sc_e_0774": "a6a57ee0c81cfba31ab49ffab4a1e650419956c36565eb04789c31d57a0c4f82",
+    "Map_30631_5/sc_e_0775": "7dd0ca5597bd37580260a4ff80362aa0e4512e82810703bf5651d2a62d1a9368",
+    "Map_30631_5/sc_map_30631_5": "48766d4916887ceec4ba50738a56b1c411bcd4feb7b29f1e0685b72388f5e44c",
+    "Map_30631_5/sc_npc_30631_5_1": "bfaa13451c4a46944735f7825f54011c0be77c4932dc2a24d86004e505b720ba"
+  }
+}

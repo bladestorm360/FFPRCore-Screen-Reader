@@ -1,5 +1,79 @@
 # Features: the porting checklist
 
+November3 [Narshe chase](re/NARSHE_CHASE_GUIDANCE_20261103.md): full native room/chest/pursuit/
+motionless ledge wait/Mog rescue guide, including actual northern mine floors.
+19th guide within32; actual16 assertions/11 continuations/current+old models/
+controller pass.43 discoveries resolved,1009logical/1041physical,644 pending.
+Four keys/all12 languages; earlier defense/light/gates and old guides preserved.
+Source/focused/documentation Closed; combined delivery/gameplay pending.
+
+November3 [Narshe party locks](re/NARSHE_PARTY_LOCKS_20261103.md): source/focused/documentation Closed.
+Six doors require active Locke, with reachable fronts and manual unlocking;
+opened receipts remain passable without him. Reader18/six-door93 and current
+FFI/FFIII key regressions pass. No native writes/clone/hook or new puzzle recipe.
+Combined delivery/gameplay pending; other43 Narshe interactions remain required.
+
+November3 [Floating Continent](re/FLOATING_CONTINENT_GUIDANCE_20261103.md):
+Shift+G covers the complete normal/timed escape journey and all four treasures,
+native stay/wait choices, save return, alternate-collapse recovery and final
+ready completion. Eight actual guide/planner cases66 actions and current/older
+model/controller checks pass; source/focused Closed. Combined delivery pending.
+
+November3 [puzzle verbosity](re/PUZZLE_VERBOSITY_20261103.md): all-six F8 >
+Navigation > Puzzle guide verbosity, saved0/Minimal by default or1/Verbose.
+Minimal omits activation/step metadata while retaining directions and necessary
+actions. Trap/event notices use Trap required / Event required in both modes.
+Source/focused/documentation Closed; all six actual-consumer targets pass.
+Combined delivery remains pending.
+
+November3UTC [Cultists' Tower](re/CULTISTS_TOWER_20261103.md): Shift+G follows
+the hidden switch and chest, summit reward, forced battle and full descent.
+It finishes at the actual entrance and resumes partial/late visits. Source/
+focused Closed; combined delivery/gameplay pending.
+
+November3UTC [Darill's Tomb](re/DARILLS_TOMB_20261103.md): Shift+G now guides
+both water mechanisms, turtle rides, all inscriptions and the exact answer,
+hidden chest, boss passage and moving story guide through the real exit.
+It supports late optional-puzzle visits and repeats the answer during native
+choices. Source/focused Closed; not installed yet.
+
+November3UTC [Ancient Castle](re/ANCIENT_CASTLE_20261103.md): Shift+G now covers
+the enabling statue, hidden switch and final statue beyond the actual stairs.
+Native432 and field readiness complete the objective. Missing prerequisites
+and partial saves resume correctly. Source/focused Closed; not installed yet.
+
+November3UTC [ordinary Phantom Train](re/PHANTOM_TRAIN_JOURNEY_20261103.md):
+Shift+G now begins at boarding, follows the native ghost/pursuit/jump stages,
+guides both detachment lever operations and retains the engine combination.
+Completion follows the final conversation and actual ready world-map arrival.
+Source/focused Closed; combined native delivery/gameplay still pending.
+
+November3UTC [FFVI Zone Eater crossings](re/ZONE_EATER_CROSSINGS_20261103.md):
+Shift+G covers the entrance, each manual jump, real switch recovery after a
+fall, onward corridors, raised stepping stones and Gogo's joining dialogue.
+Current native guard collision and exact jump landings remain authoritative.
+Source/focused qualification Closed; combined delivery/gameplay pending.
+
+November3UTC [FFVI falling ceiling](re/ZONE_EATER_ROOF_20261103.md): a short
+cardinal preview, explicit player readiness and a revalidated native-cycle Go
+cue. Exact safe-area recovery/normal input ownership/stop and late-result guards
+are implemented. Source/focused qualification is Closed; combined
+payload, installation and natural confirmation remain separate.
+
+November2 [custom sound controls](re/CUSTOM_SOUND_CONTROLS_20261102.md): new
+shared conditional submenu, per-cue default fallback/volume and custom-only
+periodic timing200–5000ms; wall loop or timed pings. Source/focused checks are
+Closed; canonical/offline/smoke/exact-payload scan now pass in300ff3dfbebb647a.
+Final all-six installation/physical listening pending. Existing default timing remains.
+
+Native FFIII November1 follow-up: held Magic Keys or an active enabled Thief
+validate source-qualified locked-door journeys, with actual key consumption
+accounted for through the nested Temple of Time doors. A closed door remains
+approachable; directions to protected destinations stop for manual unlocking
+and retain the final objective. Current/remote directions, browsing and story
+filtering share the same bounded copied-state rule. Source/focused checks and
+combined delivery status: [FFIII key gates](re/FF3_KEY_GATES_20261101.md).
+
 Every feature, hotkey and setting of the five old mods. The port is graded against this list.
 
 Written 2026-10-05 for Phase 0 of `../UNIFIED_MOD_PLAN.md`.
@@ -28,7 +102,7 @@ Where a readme or plan disagreed with the code, the code was taken.
 | Screen-reader output through Tolk (NVDA, JAWS, SAPI) | All | — | — | `Tolk.cs`, `Utils/TolkWrapper.cs`; FF5 also `Utils/SpeechHelper.cs` |
 | Dialogue, page by page, with speaker name | All | — | — | FF1-3 `Patches/MessageWindowPatches.cs`; FF4-5 `Patches/MessagePatches.cs` |
 | Scrolling story text (intro, ending) | All | — | — | FF1-3 `Patches/ScrollMessagePatches.cs`; FF4 `Patches/MessagePatches.cs`; FF5 `Patches/GameStatePatches.cs` |
-| Line-fade story text | All | — | — | FF3 `Patches/LineFadeMessagePatches.cs`; FF1-2 `Patches/ScrollMessagePatches.cs`; FF4-5 `Patches/MessagePatches.cs` |
+| Line-fade story text | All | — | — | FFIII line fades and [FFIV multiline fades](re/FF4_MYSIDIAN_LEGEND_20261106.md) follow the native line starts. |
 | Repeat dialogue page | All | R; pad: mod mode + X | — | FF1 `Patches/MessageWindowPatches.cs`; FF2-5 `DialogueTracker` (in the message patches) |
 | "Entering {map}" on map change | All | — | — | FF1 `Patches/MapTransitionPatches.cs`; FF2-5 `Patches/GameStatePatches.cs` |
 | Popups and confirmations, Game Over | All | — | — | `Patches/PopupPatches.cs`; FF1 `Patches/PopupState.cs`; FF3 `Patches/GameOverPatches.cs` |
@@ -115,7 +189,9 @@ Where a readme or plan disagreed with the code, the code was taken.
 | Hidden-passage route grid | 3 4 5 | — | — | `Field/HiddenPassageRouting.cs` |
 | Long-range routing: breadcrumb chaining, riding search | 5 | — | — | FF5 `Field/Routing/BreadcrumbRouteChainer.cs`, `PathSpaceNormalizer.cs`, `RoutingAdapter.cs` |
 | Baked-map router (native only, 2026-10-10): the whole sub-map, layers, hidden passages, shop counters, world-map vehicles and boarding, no 31-tile window; the game's searcher only for unknown maps | All | same keys | — | `src/core/field/baked_map.cpp`, `baked_router.cpp`, `baked_nav.cpp`; data `data/ffN/maps.bin` from `tools/bake_maps.py` |
-| Puzzle guide (native only): authored step lists with live directions, across floors (exits and script warps) | All (FF2: none authored) | Shift+G / Ctrl+G; pad: mod mode + RB / LB | — | `src/core/field/puzzle_guide.cpp`, `data/ffN/puzzles.json` |
+| Puzzle guide: authored native-operation steps with live directions across floors and explicit fetch/return legs; unique stateful puzzle adapters | All | Shift+G / Ctrl+G; pad: mod mode + RB / LB | — | `src/core/field/puzzle_guide.cpp`, `data/ffN/puzzles.json`; current scope/evidence in `docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md` |
+| Current-form Mini/Toad puzzle instructions, including mixed-party recovery and native receipt resumes | FFIII | Same puzzle controls; repeat after changing forms | — | `src/games/ff3/puzzle_guide.cpp`; [contracts/evidence](re/FF3_PUZZLE_GUIDES_20261101.md) |
+| Magnetic-cave stages and item-gate guides; native item-choice row, optional Autodetail and manual details | FFIV | Same puzzle controls; I for selected item details | — | `src/games/ff4/event_item_select.cpp`; [contracts/evidence](re/FF4_PUZZLE_GUIDES_20261101.md) |
 | Moon pathfinding | 4 | — | — | FF4 `Field/FieldNavigationHelper.cs` |
 | Navigation target memory (last entity or waypoint) | All | — | — | `Core/NavigationTargetTracker.cs`; FF4 `Core/NavigationStateManager.cs`; FF5 `Core/NavigationStateSnapshot.cs` |
 

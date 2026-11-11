@@ -1,5 +1,34 @@
 # Libra and Study displayed information
 
+## November 10 FFIV Study and Scan
+
+In the actual FFIV game-directory log, Cid selects Skuldier A, uses Study at
+143661.828 and gets “Vulnerable to holy energy” at 143668.578. The HP line
+is absent. The same FFIV battle function group 152 serves Scan (ability 25)
+and Study (ability 183). Both select function 50 with zero parameters.
+
+FFIV's native `ScanBattleFunction.AddDisplayMessages` at RVA `5D5190` adds
+the current/maximum HP display before the weakness list on a valid scan.
+The official `BATTLE_HP_STATUS` message is `MSG_SYSTEM_061`. The invalid-scan
+branch builds a separate result. The mod uses the native rendered strings
+so native restrictions continue to govern which lines exist.
+
+In the Steam FFIV GameAssembly with SHA-256
+`bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed`,
+`IsFunctionEnd` at `5D5CB0` reads the first-process byte at offset `69`
+and the line index at `70`. It submits the same index until its timer
+advances. The observed direct call chain is `5D5E31` to the battle UI
+manager at `3788D0`, then the KeyInput menu at `39B1E0` and the existing
+`SetMessage` reader at `961B60`. The deferred speech slot otherwise gets
+replaced on each frame and can lose the HP line when the index changes.
+
+Use the existing FFIII producer scope for the verified FFIV owner. It
+observes two scalars only during native Scan execution. The existing
+message path retains the first nonempty string per actual index, including
+multiple weaknesses and repeated identical lines at different indices.
+The same bounded regression fixture tests both games and a different-game
+pass-through. Gameplay listening remains separate from this replay.
+
 ## Scope ledger
 
 User-initiated FFIII audit: source checkpoint complete, Closed. Verified native display behavior and corrected one reader timing defect. Final combined delivery and gameplay confirmation remain pending. Temple of Water source is complete, Closed. The next active source scope is multiple-NPC route oscillation; EXP-counter Enter feedback, Amur Weapons remote-return preview and Boost visible-display audit remain separately queued. No game launch/control/runtime probe was authorized or performed.

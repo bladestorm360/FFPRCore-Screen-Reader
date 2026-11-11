@@ -112,6 +112,10 @@ with tempfile.TemporaryDirectory(prefix='prism-check-', dir=scratch_parent) as t
     (mod / 'prism.lock.json').write_text(json.dumps(lock), encoding='utf-8')
     shutil.copy2(ROOT / 'tools/prism_dependency.py', mod / 'tools/prism_dependency.py')
     shutil.copy2(ROOT / 'tools/openal_dependency.py', mod / 'tools/openal_dependency.py')
+    # Normal deploy now verifies its actual inherited resource job. Keep that
+    # guard in the scratch mod too; missing it tests an incomplete fixture.
+    (mod / 'scripts').mkdir()
+    shutil.copy2(ROOT / 'scripts/run-build.py', mod / 'scripts/run-build.py')
     openal = mod / 'third_party/openal-soft'
     openal.mkdir()
     openal_files = {}

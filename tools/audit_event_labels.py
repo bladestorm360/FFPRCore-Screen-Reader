@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import unicodedata
 from event_label_identities import physical_identity, SPRITES, RULES, script_identity, reviewed_identity, reviewed_warp_identity, WORLD_TRAVEL_REVIEWS, reviewed_world_event_identity, reviewed_event_script
+from review_field_event_contacts import apply_labels
 
 ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DUMP = ROOT.parent / 'tools' / 'mapdump'
@@ -186,6 +187,7 @@ def build(n):
     # Live properties can identify an otherwise unnamed/ambiguous object through
     # the verified mapobject asset ID. Remote bakes retain the raw-name fallback.
     labels.update({f'@sprite:{asset}':label for asset,label in SPRITES[n].items()})
+    apply_labels(n, labels, audit, objects, scripts, masters, map_ids)
     (ROOT / 'data' / game / 'eventlabels.json').write_text(json.dumps(labels, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (ROOT / 'docs' / 're' / f'{game}_event_label_audit.json').write_text(json.dumps(audit, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     counts = collections.Counter(labels.values())

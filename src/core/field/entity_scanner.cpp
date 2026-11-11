@@ -23,6 +23,7 @@
 #include "field_internal.h"
 #include "airship_transitions.h"
 #include "nautilus_surface.h"
+#include "floating_border.h"
 #include "map_names.h"
 #include "object_cache.h"
 #include "path_search.h"
@@ -193,6 +194,13 @@ EntityPtr make_event(Context& c, const std::wstring& type)
 {
     EntityPtr e = make(Kind::Event, c, safe_event_label(c.fe, type));
     e->event_type = type;
+    if (type == L"Interactive" || type == L"Interactive Object") {
+        auto name = reviewed_boss_name(e->audio_hint, current_map_id_or_user_data(), e->entity_id, c.object_type());
+        if (!name.empty()) {
+            e->name = e->converted_name = std::move(name);
+            e->event_type = L"NPC";
+        }
+    }
     return e;
 }
 
@@ -264,6 +272,11 @@ EntityPtr create_map_exit(Context& c)
     return exit;
 }
 
+// Scripted movement edges can land on another part of the same floor.
+bool leaves_floor(int origin, int destination) {
+    return destination > 0 && destination != origin;
+}
+
 /// GotoMapDetector (50): map exits (GotoMapEventEntity, ObjectType 3).
 /// (PropertyTelepoPoint).
 Detection goto_map_detector(Context& c)
@@ -274,7 +287,8 @@ Detection goto_map_detector(Context& c)
     if(c.is_event_trigger&&baked_nav::prepared()&&!entity_is_scenery(c.fe)&&!placeholder(c)) {
         // Prepared immutable ID index: no script parsing/grid decoding or
         // whole-map scan on this native callback. Each game supplies its own bake.
-        const auto* map=baked::submap_by_map_id(current_map_id_or_user_data());
+        const int map_id=current_map_id_or_user_data();
+        const auto* map=baked::submap_by_map_id(map_id);
         auto* property=c.property();
         if(map&&property) {
             baked_route::Cell cell;
@@ -289,7 +303,8 @@ Detection goto_map_detector(Context& c)
                 if(map->world && air_transitions::possible_raw(static_cast<int>(game::current()),current_map_id_or_user_data(),raw) && r::kPropertyEvent.is(property) &&
                    air_transitions::match(3,current_map_id_or_user_data(),ref::rd<int32_t>(property,r::fEventScriptId),raw))return skip();
                 if(baked::transition_helper_at(baked::grids(*map),id,raw,cell.x,cell.y))return skip();
-                if(const auto* exit=baked::world_exit_at(baked::grids(*map),id,raw,cell.x,cell.y)) {
+                if(const auto* exit=baked::world_exit_at(baked::grids(*map),id,raw,cell.x,cell.y);
+                   exit&&leaves_floor(map_id,exit->a)&&!(exit->d&baked::kAutomaticCurrent)) {
                     const auto* target=baked::submap_by_map_id(exit->a);
                     const auto destination=target&&target->world?T(L"World Map"):resolve_map_name(exit->a);
                     auto entity=make_exit(c,TF(L"Exit to {0}",{destination}),exit->a,destination);
@@ -576,14 +591,22 @@ struct RemoteBuilder {
         CaptureBudget budget;
         for (; next < objects.size() && budget.available(); ++next) {
             const auto& object = objects[next];
+            if (object.redundant_return) continue;
             RemoteRow row; row.object = object; row.floor = resolve_map_name(object.map_id);
             if(object.world_exit) {
-                const auto* target=baked::submap_by_map_id(object.dest_map_id);
-                row.destination=target&&target->world?T(L"World Map"):resolve_map_name(object.dest_map_id);
-                input.rows.push_back(std::move(row));continue;
+                if(leaves_floor(object.map_id,object.dest_map_id)) {
+                    const auto* target=baked::submap_by_map_id(object.dest_map_id);
+                    row.destination=target&&target->world?T(L"World Map"):resolve_map_name(object.dest_map_id);
+                    input.rows.push_back(std::move(row));continue;
+                }
+                // The baked edge still owns movement, but its landing is on
+                // this floor. Publish the native action with its event label.
+                row.object.world_exit=false;
+                row.object.event_type=object.type==baked::ObjType::Entity||object.type==baked::ObjType::AnimEntity?
+                    L"Interactive Object":L"Event";
             }
-            if (!object.event_type.empty()) {
-                if (object.event_type != L"Warp Tile" && placeholder_fn && placeholder_fn(object.raw_name.c_str())) continue;
+            if (!row.object.event_type.empty()) {
+                if (row.object.event_type != L"Warp Tile" && placeholder_fn && placeholder_fn(object.raw_name.c_str())) continue;
                 input.rows.push_back(std::move(row));
                 continue;
             }
@@ -591,7 +614,7 @@ struct RemoteBuilder {
             case baked::ObjType::NPC:
             case baked::ObjType::ShopNPC:
                 if (placeholder_fn && placeholder_fn(object.raw_name.c_str()) && !object.scripted) continue;
-                row.name = object.raw_name.empty() ? std::wstring() : translate_entity_name_for_map(object.raw_name,object.map_id);
+                row.name = translate_entity_name_for_actor(object.raw_name,object.map_id,object.entity_id);
                 break;
             case baked::ObjType::TreasureBox:
                 if (ui::prefs::spoil_treasure_chest_contents_enabled() && object.content_id > 0) row.name = resolve_item_name(object.content_id);
@@ -625,7 +648,12 @@ std::vector<EntityPtr> build_remote(RemoteInput& input) {
             entity->name=TF(L"Exit to {0}",{entity->dest_name});
         } else if (!object.event_type.empty()) {
             entity->kind = Kind::Event; entity->event_type = object.event_type;
-            entity->name = safe_event_label(object.raw_name, object.event_type, object.map_id, object.entity_id, static_cast<int>(object.type));
+            const auto native_type = static_cast<int>(object.type);
+            entity->name = reviewed_boss_name(object.raw_name, object.map_id, object.entity_id, native_type);
+            if (entity->name.empty())
+                entity->name = safe_event_label(object.raw_name, object.event_type, object.map_id, object.entity_id, native_type);
+            else
+                entity->event_type = L"NPC";
             if (object.type == baked::ObjType::TransportationEventAction) entity->vehicle_pad = object.raw_name;
         } else switch (object.type) {
         case baked::ObjType::NPC:
@@ -647,11 +675,15 @@ std::vector<EntityPtr> build_remote(RemoteInput& input) {
         entity->converted_name = entity->name;
         const std::wstring where = entity->kind == Kind::Event
             ? std::to_wstring(object.entity_id) + L":" + object.group + L":" + std::to_wstring(object.cell.layer) + L":" + std::to_wstring(object.cell.x) + L"," + std::to_wstring(object.cell.y)
-            : entity->kind == Kind::MapExit ? std::to_wstring(object.dest_map_id)
+            // Two doors to the same destination can occupy disconnected parts
+            // of one floor (FF1 Ice B1). Preserve physical identity here; the
+            // existing reachability-aware exit grouping chooses a usable door.
+            : entity->kind == Kind::MapExit ? std::to_wstring(object.map_id) + L":" + std::to_wstring(object.entity_id) + L":" + object.raw_name + L":" +
+                std::to_wstring(object.cell.layer) + L":" + std::to_wstring(object.cell.x) + L"," + std::to_wstring(object.cell.y) + L":" + std::to_wstring(object.dest_map_id)
             : std::to_wstring(object.cell.x) + L"," + std::to_wstring(object.cell.y);
         const std::wstring key = entity->floor_name + L"\n" + std::to_wstring(static_cast<int>(entity->kind)) + L"\n" +
             (entity->kind == Kind::NPC ? base : entity->name) + L"\n" + where;
-        if (!seen.insert(key).second) continue; // unchanged story-variant inclusion guard
+        if (!seen.insert(key).second) continue; // exact repeated identity/unchanged non-exit variant guard
         result.push_back(std::move(entity));
     }
     return result;
@@ -728,7 +760,7 @@ void apply_filter() {
             row.remote_map = entity->remote_map_id; row.cell_x = entity->cell_x; row.cell_y = entity->cell_y;
             row.cell_layer = entity->cell_layer;
             if (!row.remote_map && (input->events || input->entrance_suffixes || input->story_gates ||
-                row.kind==Kind::SavePoint || (game::is(game::Id::FF6) && save_points::tutorial(row.raw_name)))) {
+                row.kind==Kind::SavePoint || save_points::companion(static_cast<int>(game::current()),row.raw_name))) {
                 const int layer = entity->game ? game_object_layer(entity->game)-9 : -1;
                 row.cell_layer = layer>=0 && layer<=2 ? layer : -1;
             }
@@ -919,7 +951,12 @@ void when_filter_ready(std::function<void()> ready, bool existing_selection) {
             if (!ffpr::system::is_field_navigation_ready() ||
                 ffpr::system::input_transition_blocked() || map_id != current_map_id_or_user_data()) return false;
             if (baked_nav::request_pending()) return true;
-            schedule_scan();
+            // The completed explicit route already observed fresh world
+            // power/vehicles. Reuse its unchanged list generation when the
+            // qualified stationary predicate passes, instead of immediately
+            // queuing another whole world behind every directions request.
+            if(game::is(game::Id::FF3)&&(map_id==1||map_id==3||map_id==4))scan_entities();
+            else schedule_scan();
             return false;
         }, "EntityScanner.RefreshAfterDirections", INT_MAX);
         return;
@@ -1055,6 +1092,11 @@ void schedule_scan()
             auto known = std::find_if(g_entity_map.begin(), g_entity_map.end(), [fe](const auto& kv) { return kv.first == fe; });
             if (known != g_entity_map.end() && known->second && known->second->is_alive() &&
                 scan->revision == g_converted_revision) continue;
+            // These exact fixed border actors are owned by the consolidated
+            // continent provider, never individually listed. Reject them before
+            // Unity ancestor/name conversion, including the negative results
+            // that the former conversion cache rebuilt on every input.
+            if(floating_border::identify(fe,scan->map_id))continue;
             if (!scan->asset.empty() && !entity_on_current_map(fe, scan->asset)) continue;
             auto entity = hooks::guarded_r("EntityScanner.Convert", EntityPtr(), [fe] { return convert(fe); });
             if (entity) {
@@ -1125,16 +1167,17 @@ void schedule_scan()
 void scan_entities()
 {
     if(g_scan_running)return;
-    // A qualified Floating Continent snapshot has no currently live NPCs.
-    // Re-capturing and filtering its 1,500 border actors on every stationary
-    // arrow competes with that arrow's fresh route on the Navigation worker.
+    // A qualified FFIII world snapshot has no currently live NPCs. Re-capturing
+    // and filtering its actors on every stationary arrow competes with that
+    // arrow's fresh route on the Navigation worker. Native script/map/battle
+    // changes retire these views through refresh_state/invalidate_map.
     // Reuse only the already published views at the exact same pose/vehicle/
     // script revision. Explicit browse/directions still capture live blockers.
-    if(game::is(game::Id::FF3)&&g_last_scanned_map_id==1&&current_map_id_or_user_data()==1&&
+    if(game::is(game::Id::FF3)&&(g_last_scanned_map_id==1||g_last_scanned_map_id==3||g_last_scanned_map_id==4)&&current_map_id_or_user_data()==g_last_scanned_map_id&&
        g_views_ready&&g_view_stationary_inventory&&g_navigation_filtered&&!g_filter_pending&&g_view_origin&&
        g_converted_revision==g_state_revision&&!g_entities.empty()&&baked_nav::prepared()&&
        std::none_of(g_entities.begin(),g_entities.end(),[](const auto& e){return e&&e->kind==Kind::NPC;})) {
-        const auto* map=baked::submap_by_map_id(1);
+        const auto* map=baked::submap_by_map_id(g_last_scanned_map_id);
         if(map&&map->world) {
             Vec3 at;const auto vehicle=field::current_vehicle();
             if(player_local_position(at)&&at.x==g_view_origin->x&&at.y==g_view_origin->y&&at.z==g_view_origin->z&&

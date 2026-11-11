@@ -23,7 +23,9 @@ bool g_battle_ready = false;
 int g_main_state = -1;
 // BattleCommandState.LastSelectedCommandIndex (0 Attack, 1 Magic, 2 Items, 3 Defend/Run).
 int g_last_selected_command_index = -1;
-// BattleCommandState.CurrentActor (OwnedCharacterData). Cleared with the BATTLE_COMMAND state.
+// Admitted command actor (OwnedCharacterData), retained across child menus.
+// Only compare this saved identity against a rooted current native owner;
+// battle lifecycle clears it. Readers never dereference this pointer itself.
 void* g_current_actor = nullptr;
 
 ref::Class kBattleController{"Last.Battle", "BattleController"};

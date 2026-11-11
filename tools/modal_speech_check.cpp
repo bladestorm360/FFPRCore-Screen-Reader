@@ -13,6 +13,12 @@
 #include "../src/core/ui/confirmation_dialog.cpp"
 #include "../src/core/ui/initial_speech.h"
 #include "../src/core/battle/battle_message_line.h"
+#include "../src/core/dialogue/scroll_message.cpp"
+#define install install_popup_fixture
+#define s_install popup_installation_fixture
+#include "../src/core/dialogue/popup.cpp"
+#undef s_install
+#undef install
 namespace fixture {
 struct Output { std::string text; bool interrupt; double at; };
 std::vector<Output> output;
@@ -23,6 +29,25 @@ int pressed = 0, delayed = 0;
 bool game_speech = true;
 HANDLE entered = nullptr, release = nullptr;
 std::atomic<bool> block{false};
+using StoryLines = std::vector<std::wstring>;
+struct StoryData { StoryLines* messages = nullptr; };
+struct StoryWindow { StoryData data; StoryData* execution = &data; int index = 0; };
+struct PopupCommand { std::wstring* text = nullptr; };
+struct PopupWindow {
+    int* cursor = nullptr;
+    std::vector<PopupCommand*>* commands = nullptr;
+    std::vector<void*> texts;
+};
+std::vector<PopupCommand*>* command_list = nullptr;
+frame::Step popup_ready;
+bool popup_active = false;
+std::function<void()> clear_story;
+void story_set(void* window, void* lines, uint32_t, float, float, float, const void*) {
+    auto& owner = *static_cast<StoryWindow*>(window);
+    owner.data.messages = static_cast<StoryLines*>(lines);
+    owner.index = 0;
+}
+void story_play(void*, const void*) {}
 double now() { return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count(); }
 PrismConfig config() { return {}; }
 PrismContext* init(PrismConfig*) { return reinterpret_cast<PrismContext*>(1); }
@@ -55,8 +80,8 @@ void consume() {
 void drain() { std::thread worker(&consume); worker.join(); }
 }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
-namespace actions { void define(const char*, Fn) {} }
-namespace queries { void define(const char*, std::function<bool()>) {} }
+namespace actions { void define(const char*, Fn) {} bool defined(const char*) { return false; } bool run(const char*) { return false; } }
+namespace queries { void define(const char*, std::function<bool()>) {} std::wstring text(const char*) { return {}; } }
 namespace log_ {
 void write(const char* format, ...) {
     if (std::strncmp(format,"[SpeechTiming]",14)!=0) return;
@@ -74,7 +99,76 @@ int get_int(const char*,int d){return d;}void set_int(const char*,int){}
 bool get_bool(const char* key, bool def) { return std::strcmp(key, "SpeechEnabled") == 0 ? fixture::game_speech : def; }
 void save_pending() {}
 }
-namespace frame { uint64_t count() { return fixture::tick; } void after_seconds(double, Task, const char*) { ++fixture::delayed; } void after_frames(int, Task, const char*) { ++fixture::delayed; } }
+namespace frame {
+uint64_t count() { return fixture::tick; }
+bool on_main_thread() { return true; }
+void cancel_label(const char*) { fixture::popup_ready = {}; }
+int every_frame(Step step, const char*, int) { fixture::popup_ready = std::move(step); return 1; }
+void after_seconds(double, Task, const char*) { ++fixture::delayed; }
+void after_frames(int, Task, const char*) { ++fixture::delayed; }
+}
+namespace game { Id current() { return Id::FF4; } }
+namespace events { void on(Kind kind, Handler action) { if (kind == Kind::MapChanging) fixture::clear_story = std::move(action); } }
+namespace dedup { bool text(const char*, std::wstring_view, Scope) { return true; } bool index(const char*, long long, Scope) { return true; } void reset(const char*) {} }
+namespace menu_state {
+bool is_active(const char* name) { return std::strcmp(name, POPUP) == 0 && fixture::popup_active; }
+void set_active(const char*, bool active) { fixture::popup_active = active; }
+void reset(const char*) { fixture::popup_active = false; }
+}
+namespace cursor { const CursorEvent& current() { static CursorEvent event; return event; } void add_suppressor(const char*) {} }
+namespace ui { int cursor_index(void* cursor) { return *static_cast<int*>(cursor); } }
+namespace ffpr::fieldnav::location_message { bool should_announce_fade_message(std::wstring_view) { return true; } }
+namespace ref {
+Class::Class(const char* n, const char* c, uint8_t g, const char* a) : ns(n), name(c), games(g), assembly(a) {}
+bool Class::is(void*) { return std::strcmp(name, "JobChangePopup") == 0; }
+Field::Field(Class& c, const char* n, const char* a) : cls(c), name(n), alt(a) {}
+Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
+int32_t Field::get() {
+    if (std::strcmp(name, "targetIndex") == 0) return offsetof(fixture::StoryWindow, index);
+    if (std::strcmp(name, "executionData") == 0) return offsetof(fixture::StoryWindow, execution);
+    if (std::strcmp(name, "selectCursor") == 0) return offsetof(fixture::PopupWindow, cursor);
+    if (std::strcmp(name, "commandList") == 0) return offsetof(fixture::PopupWindow, commands);
+    if (std::strcmp(name, "text") == 0) return offsetof(fixture::PopupCommand, text);
+    return offsetof(fixture::StoryData, messages);
+}
+std::wstring str(void* value) { return value ? *static_cast<std::wstring*>(value) : std::wstring(); }
+}
+namespace hooks {
+bool attach_raw(ref::Method& method, void*, void** original) {
+    if (std::strcmp(method.name, "SetData") == 0) *original = reinterpret_cast<void*>(&fixture::story_set);
+    else if (std::strcmp(method.name, "PlayInit") == 0) *original = reinterpret_cast<void*>(&fixture::story_play);
+    else return false;
+    return true;
+}
+void note_fault(const char*) { std::abort(); }
+}
+namespace unity {
+int list_count(void* value) {
+    if (!value) return 0;
+    if (value == fixture::command_list) return static_cast<int>(fixture::command_list->size());
+    return static_cast<int>(static_cast<fixture::StoryLines*>(value)->size());
+}
+void* list_at(void* value, int index) {
+    if (index < 0 || index >= list_count(value)) return nullptr;
+    if (value == fixture::command_list) return (*fixture::command_list)[index];
+    return &(*static_cast<fixture::StoryLines*>(value))[index];
+}
+int array_length(void* value) { return list_count(value); }
+void* array_at(void* value, int index) { return list_at(value, index); }
+bool alive(void* value) { return value != nullptr; }
+std::vector<void*> texts(void* value, bool) { return static_cast<fixture::PopupWindow*>(value)->texts; }
+std::wstring ui_text(void* value) { return ref::str(value); }
+}
+namespace displayed {
+void* field(void* value, const char* name) {
+    if (std::strcmp(name, "commandList") == 0) return static_cast<fixture::PopupWindow*>(value)->commands;
+    if (std::strcmp(name, "text") == 0) return static_cast<fixture::PopupCommand*>(value)->text;
+    return nullptr;
+}
+bool visible(void* value) { return value != nullptr; }
+std::wstring text(void* value) { return ref::str(value); }
+std::wstring text_field(void*, const char*) { return {}; }
+}
 namespace ui::modal_keys {
 void seed() {} void sample() {} bool pressed(int key) { return key == fixture::pressed; } bool held(int) { return false; }
 }
@@ -232,6 +326,67 @@ int main() {
     expect(fixture::output.empty(),"opening source classification obeys the central gameplay speech master");
     fixture::game_speech=true;
     expect(fixture::delayed==0,"opening condition speech adds no timer or action-pair delay");
+    {
+        using namespace ffpr::dialogue;
+        expect(install() == 2, "FFIV registers SetData and the per-line presentation hook");
+        fixture::StoryWindow owner, unrelated;
+        fixture::StoryLines lines{L"First visible line\ncontinued on this page", L"", L"Repeated line", L"Repeated line"};
+        const auto set = [&](fixture::StoryLines& pages) { d_LineFadeSetData(&owner, &pages, 0, 3.5f, 0.7f, 5.0f, nullptr); };
+        set(lines); fixture::drain();
+        expect(fixture::output.empty(), "FFIV legend SetData never speaks the future lines together");
+        d_LineFadePlayInit(&unrelated, nullptr);
+        d_LineFadePlayInit(&owner, nullptr);
+        d_LineFadePlayInit(&owner, nullptr);
+        fixture::drain();
+        expect(fixture::output.size() == 1 && fixture::output[0].text == "First visible line continued on this page" &&
+            ffpr::last_spoken() == lines[0] && !fixture::output[0].interrupt,
+            "first native fade queues one page and preserves its line break for repeat");
+        for (int index : {1, 2, 3}) {
+            owner.index = index;
+            d_LineFadePlayInit(&owner, nullptr);
+            fixture::drain();
+        }
+        expect(fixture::output.size() == 3 && fixture::output[1].text == "Repeated line" &&
+            fixture::output[2].text == "Repeated line", "blank fade is quiet and equal text at distinct native indices speaks twice");
+        fixture::output.clear();
+        set(lines); fixture::clear_story(); d_LineFadePlayInit(&owner, nullptr); fixture::drain();
+        expect(fixture::output.empty(), "a scene departure retires lines that never entered the renderer");
+        set(lines); d_LineFadePlayInit(&owner, nullptr); fixture::drain();
+        expect(fixture::output.size() == 1, "replaying the same presentation begins a new sequence");
+        fixture::output.clear();
+        fixture::StoryLines defeat{L"You were defeated."};
+        set(defeat); d_LineFadePlayInit(&owner, nullptr); fixture::drain();
+        expect(fixture::output.size() == 1 && fixture::output[0].text == "You were defeated." &&
+            fixture::output[0].interrupt, "ordinary single-line defeat feedback retains its timing");
+        expect(fixture::delayed == 0, "legend pacing adds no timers or polling");
+    }
+    {
+        using namespace ffpr::dialogue;
+        fixture::output.clear();
+        std::wstring job = L"Monk", question = L"Are you sure you want to change jobs?", yes = L"Yes", no = L"No";
+        fixture::PopupCommand yes_command{&yes}, no_command{&no};
+        std::vector<fixture::PopupCommand*> commands{&yes_command, &no_command};
+        fixture::command_list = &commands;
+        int index = 1;
+        fixture::PopupWindow popup{&index, &commands, {&job, &question, &yes, &no}};
+        popup_open(&popup);
+        expect(fixture::popup_ready() && fixture::output.empty(), "the native popup waits for its rendered body and initial cursor");
+        expect(!fixture::popup_ready(), "ready job popup queues its initial announcement exactly once");
+        fixture::drain();
+        expect(fixture::output.size() == 1 && fixture::output[0].text == "Monk. Are you sure you want to change jobs? No",
+            "job confirmation reads its body and focused No in that order");
+        fixture::output.clear();
+        index = 0;
+        read_current_button(&index); fixture::drain();
+        expect(fixture::output.size() == 1 && fixture::output[0].text == "Yes", "later native movement still speaks only the new option");
+        fixture::output.clear();
+        popup_open(&popup);
+        fixture::popup_ready(); fixture::popup_ready(); fixture::drain();
+        expect(fixture::output.size() == 1 && fixture::output[0].text == "Monk. Are you sure you want to change jobs? Yes",
+            "reopening uses the actual cursor instead of a fixed No default");
+        popup_close();
+        fixture::command_list = nullptr;
+    }
     std::printf("Speech request to fake SDK: cold %.3f ms, worst warm %.3f ms; 2,000 blocked-SDK publications %.3f ms, latest output %.3f ms; %d failures\n",
         cold_ms,worst_warm,publish_ms,busy_ms,failures);
     CloseHandle(fixture::entered); CloseHandle(fixture::release);

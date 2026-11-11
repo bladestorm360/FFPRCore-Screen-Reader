@@ -1,5 +1,20 @@
 # F9 recovery and screen-owned controls
 
+**Keyboard remapping source/focused/documentation Closed, November4:** existing
+per-game catalog/editor now checks new gameplay assignments against current
+native keys/modifiers, preserves rejected values, and uses the effective
+recovery/capture-cancel keys. Separate custom navigation profiles and inactive-
+profile conflicts pass; existing default sharing/context precedence is retained.
+Five battle-only party slots/native2/3, text/focus/capture/controller independence
+and all ten native input paths pass. Held remapped keys stay owned through
+modifier/context handoff until release. No new hook, worker or per-frame native
+configuration read. Exact all-six native evidence,109 key mappings,8403 names/
+zero missing,43 reader/chord assertions and all five actual input/settings targets
+pass. Eight keys/all12 locales. Combined release/install/gameplay pending; exact
+broader_audit_20261104/keyboard_completion.json. Audit remains1117logical/
+1149physical,350V+186VI=536 pending. Return to the finite remaining map audit.
+[Topic](KEYBOARD_REMAPPING_20261104.md).
+
 October24: implemented; canonical build and offline checks passed, gameplay pending. Shared
 by all six games, including native menus.
 

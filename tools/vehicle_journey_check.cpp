@@ -23,7 +23,8 @@ int main(){
  };
  const auto model=[&](int id,Cell at){VehicleOnMap value;value.transportation_id=id;value.type=baked::transport(id)->type;value.pos=world_of_cell(*world,at);return value;};
  const auto make=[&](int current){auto c=std::make_shared<ExitSnapshot>(true,map_state::Resolver(flags,fixture::records));auto& s=c->route;
-  s.map_id=4;s.submap=world;s.layer=1;s.locale=L"en";s.position=world_of_cell(*world,{1,151,74});s.vehicle={current!=0,current,current?baked::transport(current)->type:0,{}};
+  // Zero selects walking: native current_vehicle still returns valid Player1.
+  s.map_id=4;s.submap=world;s.layer=1;s.locale=L"en";s.position=world_of_cell(*world,{1,151,74});s.vehicle={true,current?current:1,current?baked::transport(current)->type:1,{}};
   s.vehicle_shortcuts=true;s.auto_groups={3};s.goal.map_id=4;s.goal.cell={1,128,184};s.goal.entity_id=158;s.kind=TargetKind::Transition;
   // The actual wind restriction is enforced by three powered native events,
   // not terrain: all three aircraft share the relevant terrain profile. Keep

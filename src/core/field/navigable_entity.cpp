@@ -167,7 +167,7 @@ std::wstring format_steps(float distance)
 /// matches "ToLayer"); only the announcement is localized.
 std::wstring localize_type_name(const std::wstring& type_name)
 {
-    if (type_name == L"Event") return T(L"Event");
+    if (type_name == L"Event" || type_name == L"NPC") return T(type_name);
     if (type_name == L"Interactive Object") return T(L"Interactive Object");
     if (type_name == L"Interactive") return T(L"Interactive");
     if (type_name == L"Warp Tile") return T(L"Warp Tile");
@@ -235,9 +235,10 @@ Category Entity::category() const
     case Kind::MapExit: return Category::MapExits;
     case Kind::Vehicle: return Category::Vehicles;
     case Kind::SavePoint: return Category::SavePoints;
-    // Activation belongs to the native entity class, not to the script's
-    // contents/name. Keep Kind::Event for shared script/consumption tracking.
+    // Keep native activation and consumption on Kind::Event. A verified
+    // animated boss actor belongs in the NPC browsing category.
     case Kind::Event:
+        if (event_type == L"NPC") return Category::NPCs;
         return event_type == L"Interactive Object" || event_type == L"Interactive"
             ? Category::Objects : Category::Events;
     default: return Category::Events;   // Event, ScriptTrigger

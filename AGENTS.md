@@ -1,5 +1,12 @@
 # Native FFPR accessibility mod
 
+Owner hard rule, November1: check logs in the actual game directory for all
+relevant gameplay information before asking the user. Never read/use tester
+logs without explicit permission. Do not ask for normally undisplayed coordinates
+when the game log supplies them. Open the current log's shared read/write/delete
+file handle before trusting a directory listing that reports zero length;
+inspect relevant rotated parts afterward. See ../../../AGENTS.md.
+
 Hard rule reaffirmed by the user, October30: game source, recovered/decompiled
 implementations, disassembly and implementation snippets must never be written
 inside this or any other Git repository, even ignored paths, nor committed or
@@ -39,6 +46,51 @@ supplied research/contracts, acceptance/offline checks and return-to-Sol conditi
 Preserve the current task, uncommitted work and all native/thread/lifetime/approval rules.
 
 Build with `build.bat`, then `smoketest.bat`; deployment is separate (`deploy.bat [ffN]`). These scripts must never launch a game. Gameplay testing and runtime probes are user-side unless explicitly authorized. Complete the current audit and offline checks before requesting gameplay tests.
+
+Owner update, November 6: install authorized local fixes in the affected games
+as soon as the build and required verification pass. No separate deployment
+confirmation is needed. Keep the closed-game guard and ask the user to save
+and close only when a running game prevents installation.
+
+Owner update, November 11: commit repository-eligible work at substantive
+checkpoints and task completion, including work awaiting verification.
+Push the checkpoint to the verified private `private-backup` remote owned
+by bladestorm360 and verify its branch tip. Use the public remote for
+explicitly authorized publication. Apply the source-content gate before
+staging, check the staged content, and audit history when setting up a backup.
+
+Owner build sequencing update, November 6. Use at most one shared slot for an
+FFPR build across all chats, including separate folders and game targets. Batch
+fixes that are close to ready into one build and deployment. If the owner asks
+to deploy to a specific game first, finish its fix, verification and deployment
+before starting the queued work.
+
+Owner build update, November1: two shared machine-wide resource slots, each
+one complete build/tool tree with a default hard aggregate2GB ceiling, including
+children (up to4GB combined). This supersedes the one-slot/1GB default. Use the
+maintained scripts/run-build.py; one worker/node per tree, bounded CPU,
+below-normal priority, /m:1 /nr:false /MP1, no shared compiler/MSBuild servers,
+node reuse or project/compiler parallelism. Independent mods may use both slots;
+never bypass admission, retry uncapped, change active jobs or terminate unrelated
+processes. A necessary larger limit requires demonstrated target-specific need,
+the smallest justified budget and explicit owner approval. Bakes/extraction/
+tests/probes/benchmarks use the same slots and finite enforced budgets.
+
+Owner CPU update, November2: multiple cores are allowed, but never unlimited.
+New local runner jobs use a hard25% machine CPU cap, further limited to three
+logical cores' equivalent (25%/three on this12-thread host). Two slots therefore
+use at most half the machine CPU. This supersedes the former single-core CPU
+share only; aggregate2GB per tree, admission, below-normal priority, no servers
+and serial compiler/MSBuild settings remain. Do not change active jobs. This is
+an explicit local owner override of the maintained runner's older CPU default.
+
+Host qualification found AppContainer isolates even Global mutex names between
+tool invocations. The project preserves its pre-child AppContainer refusal over
+the maintained runner. Use the normal user context (exec_command with
+require_escalated here), retaining kernel memory/CPU limits and actual job
+verification. No administrator rights are needed. Slot one retains the legacy
+Global mutex, so old active1GB jobs stay unchanged; new jobs may use slot two.
+Current adoption/14 small guard checks: docs/re/LOCAL_GUIDANCE_20261028.md#build-memory-preference.
 
 Use name-resolved IL2CPP references and `hooks::attach`; verify signatures and folded native bodies against matching dumps/analysis. Preserve the custom MinHook coexistence changes. Hooks own UI timing; bounded deferrals start from native events. Game pointers need lifetime checks. Centralize services and use them at call sites; no new deduplication without explicit permission.
 

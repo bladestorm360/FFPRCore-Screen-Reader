@@ -1,0 +1,77 @@
+{
+  "methods": [
+    {
+      "game": "ff1",
+      "dll_sha256": "33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108",
+      "dump_sha256": "8313bacc58a606108db7dc0786b4fc5bcd57dc07e171cb8b051c2a68cd817740",
+      "method": "PuppetCore.Ready",
+      "rva": 5921136,
+      "bytes": 288,
+      "sha256": "9e3c999e47e11a40e40f4dd27c14ddf62b8d5c23a67b94c6662eb8a3108c38cc",
+      "actor_show_rva": 15244384,
+      "actor_show_slot": 22,
+      "ready_show_call_rva": 5921381
+    },
+    {
+      "game": "ff2",
+      "dll_sha256": "dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b",
+      "dump_sha256": "2cd79f198f2792c2a5c274833b94a7daeaa522cf67aff35f2e867d66be6422c4",
+      "method": "PuppetCore.Ready",
+      "rva": 9468160,
+      "bytes": 288,
+      "sha256": "fa35480e4198811d2ecab2efc8eb3fba2a26502c038a8fe303888ff30266daf8",
+      "actor_show_rva": 12877968,
+      "actor_show_slot": 22,
+      "ready_show_call_rva": 9468405
+    },
+    {
+      "game": "ff3",
+      "dll_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+      "dump_sha256": "cf74887b07f39807182c95701b3888ebfe171f0c9f7afbe8f33811b47c3d4b15",
+      "method": "PuppetCore.Ready",
+      "rva": 9602320,
+      "bytes": 288,
+      "sha256": "173748747bc36f71c350c629482c20e6fa491abf59e6ac84dead94486cc73cf5",
+      "actor_show_rva": 15790768,
+      "actor_show_slot": 22,
+      "ready_show_call_rva": 9602565
+    },
+    {
+      "game": "ff4",
+      "dll_sha256": "bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed",
+      "dump_sha256": "011bc480d50bba3784b001844f854eae9abbe7a0050cb91c6e82146dffacc916",
+      "method": "PuppetCore.Ready",
+      "rva": 9820528,
+      "bytes": 288,
+      "sha256": "3d56e1f4304d5defdc3ceda0f7cb802e178419e4793bce46ea8b0f6f2ef5052b",
+      "actor_show_rva": 12437952,
+      "actor_show_slot": 22,
+      "ready_show_call_rva": 9820773
+    },
+    {
+      "game": "ff5",
+      "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+      "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+      "method": "PuppetCore.Ready",
+      "rva": 7941648,
+      "bytes": 288,
+      "sha256": "25ade2a23caa15dd01bccb55f57becb303541332b7557e485fdf679ea2376a4c",
+      "actor_show_rva": 15697632,
+      "actor_show_slot": 21,
+      "ready_show_call_rva": 7941893
+    },
+    {
+      "game": "ff6",
+      "dll_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "dump_sha256": "38aa9c54abe1c712ffd3c6e88a893ea6428f6df7001718b754b21afba7f4a61b",
+      "method": "PuppetCore.Ready",
+      "rva": 5489328,
+      "bytes": 288,
+      "sha256": "a6e34ee99f7bf931643b87631cb6527b96018badc8d4b8914d47ce4fa0b9d49f",
+      "actor_show_rva": 16686144,
+      "actor_show_slot": 22,
+      "ready_show_call_rva": 5489573
+    }
+  ],
+  "scope": "Static source-matched Ready calls actor Show(0) before each newly entered puppet body; native code external, no game execution."
+}

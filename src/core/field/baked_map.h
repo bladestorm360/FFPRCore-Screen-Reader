@@ -16,6 +16,19 @@
 // compute workers; offline checks may load from a file without any engine access.
 namespace field::baked {
 
+// A source-pinned looping NPC visits this manual crossing pose repeatedly.
+// It is a waiting interaction, never an automatic move or an all-layer actor.
+inline constexpr int kRecurringNpcSource = 1 << 20;
+// Source-qualified Trench passages keep their native timed UI player-operated.
+inline constexpr int kSerpentRightJunction = 1 << 21;
+// FFVI's exact Blackjack flight control resumes at the saved craft position.
+inline constexpr int kBlackjackSavedFlight = 1 << 23;
+// Exact permanent currents and post-Sandworm automatic script crossings.
+inline constexpr int kAutomaticCurrent = 1 << 24;
+// A no-return story replacement temporarily prevents this exact floor exit.
+inline constexpr int kConditionalSceneExit = 1 << 25;
+inline constexpr int kSerpentDiveChoice = 1 << 22;
+
 /// MapConstants.ObjectType values that are baked (bake_maps.py BAKED_TYPES).
 enum class ObjType : uint8_t {
     PointIn = 0, Event = 2, GotoMap = 3, ToLayer = 4, Entity = 5, NPC = 6, TreasureBox = 7,
@@ -27,8 +40,11 @@ enum class ObjType : uint8_t {
     /// Baked only: an event whose script changes map (ChangeMap in its Main segment): a warp
     /// pad, a trapdoor. a = destination map id, b = destination PointIn point id, d = 1 when
     /// stepping on it fires (an Event), 0 when it is examined (an Entity). Low byte 2 is
-    /// reviewed manual travel; bits 8..11 optionally restrict native approach sides;
+    /// reviewed manual travel; bits 8..11 optionally restrict native approach sides
+    /// for manual travel or the final edge into a reviewed automatic passage;
     /// bit16 identifies ordinary scripted world travel separately from scenes.
+    /// bit19 identifies a reviewed random outcome; routing reaches the pad and
+    /// requests a fresh observation after the native RNG chooses its arrival.
     /// A cutscene whose
     /// destination script changes map straight back (FF1's bridge credits) is not one
     /// (bake_maps.py round_trip, 2026-10-11).
@@ -36,6 +52,13 @@ enum class ObjType : uint8_t {
     // Reviewed companion of a collocated native GotoMap. Identity is retained
     // for live suppression, but the real GotoMap alone owns route/exit semantics.
     TransitionHelper = 101,
+    // Original mod geometry, never a native actor or destination. Four bounded
+    // points describe a reviewed passage between pit centers. a/b are twice
+    // tile-center coordinates, c passage identity, d ordered point index.
+    PrecisionPoint = 102,
+    // Owned rectangle metadata,not a native actor or destination. a contains
+    // native Up/Right/Down/Left bits;d retains the source area ID for evidence.
+    CurrentArea = 103,
 };
 
 /// One baked routing object (34 bytes in the file). Fields a-d per type: see bake_maps.py.
@@ -90,7 +113,13 @@ struct Submap {
     uint32_t transport_off;
     uint32_t objects_off;
     uint32_t object_count;
+    uint8_t loop_axes = 0;  // native LoopType: bit0 horizontal, bit1 vertical
 };
+
+// Old world bakes omit axis metadata and retain both native wrap axes. Indoor
+// loops keep collision/layers; they never become terrain/vehicle world maps.
+inline int wrap_width(const Submap& s) { return (s.loop_axes&1)||(s.world&&!s.loop_axes)?s.width:0; }
+inline int wrap_height(const Submap& s) { return (s.loop_axes&2)||(s.world&&!s.loop_axes)?s.height:0; }
 
 /// Decoded grids of one sub-map, built on first use and kept (a few hundred KB at most).
 struct Grids {
@@ -110,8 +139,15 @@ struct Grids {
     std::vector<uint8_t> hazard;         // 1 = a step-on warp / trapdoor cell: never crossed by
                                          // an ordinary route, only entered as its goal
     std::vector<uint8_t> traps[3];       // identified pitfalls, retaining their native layer
+    // Allocated only on source-qualified current floors. Low four bits are
+    // forced outgoing direction;bit16 marks an automatic scripted crossing.
+    std::vector<uint8_t> currents[3];
     TransitionGrid transitions;        // prepared immutable terminal-entry lookup
 };
+inline int current_bits(const Grids& grid,int layer,int x,int y) {
+    if(layer<0||layer>2||x<0||y<0||x>=grid.width||y>=grid.height||grid.currents[layer].empty())return 0;
+    return grid.currents[layer][static_cast<size_t>(y)*grid.width+x];
+}
 
 /// Bind the baked data (the bytes must outlive the process; a resource does). False when the
 /// header is not FFPRMAP1 / the sizes do not fit.
@@ -142,7 +178,8 @@ const Object* world_exit_at(const Grids& grid,int id,const std::wstring& raw,int
 bool transition_helper_at(const Grids& grid,int id,const std::wstring& raw,int x,int y);
 /// Native vehicle-action pad's target model IDs (empty list permits any vehicle).
 bool vehicle_pad_accepts(const Object& object,int transportation_id);
-/// Has native movement directions on `layer`, or is a hidden passage when requested.
+/// Has native physical movement directions on this layer. Hidden tile-cover IDs
+/// never override collision; the final argument is retained for caller compatibility.
 bool walkable(const Grids& g, int layer, int x, int y, bool passages);
 bool is_passage(const Grids& g, int layer, int x, int y);
 /// World maps: open for a transportation group (its Transportation layer), group 1-based.

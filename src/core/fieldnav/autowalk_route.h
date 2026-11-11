@@ -19,29 +19,47 @@ struct Step {
     int face_direction = -1;
     VehicleAction vehicle_action = VehicleAction::None;
     int transportation_id = 0;
+    bool precision = false;
+    float axis_x=0,axis_y=0;
+    field::route_progress::PrecisionPoint precision_from,precision_to;
 };
+struct PrecisionPosition {double x2=0,y2=0;};
 class Route {
     std::vector<Phase> phases_;
     size_t phase_ = 0, cell_ = 0;
     int width_ = 0, height_ = 0;
-    bool wraps_ = false;
+    bool cardinal_only_ = false;
     bool action_done_ = false;
-    static int delta(int d, int size, bool wraps) {
-        if (wraps && size > 0) {
+    static int delta(int d, int size) {
+        if (size > 0) {
             if (d > size / 2) d -= size;
             if (d < -size / 2) d += size;
         }
         return d;
     }
 public:
-    void set(std::vector<Phase> phases, int width, int height, bool wraps) {
+    void set(std::vector<Phase> phases, int width, int height, bool world, int loop_axes = -1) {
         phases_ = std::move(phases); phase_ = cell_ = 0; action_done_ = false;
-        width_ = width; height_ = height; wraps_ = wraps;
+        if(loop_axes<0||(!loop_axes&&world))loop_axes=world?3:0;
+        width_ = (loop_axes&1)?width:0; height_ = (loop_axes&2)?height:0; cardinal_only_ = world;
     }
-    Step next(const Cell& at) {
+    Step next(const Cell& at,std::optional<PrecisionPosition> position={}) {
         while (phase_ < phases_.size()) {
             const Phase& p = phases_[phase_];
             if (p.cells.empty()) return {};
+            if(!p.precision.empty()) {
+                if(!position||p.precision.size()>7)return {};
+                size_t index=p.precision.size();
+                for(size_t i=0;i<p.precision.size();++i)if(p.precision[i].layer==at.layer&&
+                    std::abs(position->x2-p.precision[i].x2)<0.03&&std::abs(position->y2-p.precision[i].y2)<0.03)index=i;
+                if(index==p.precision.size())return {};
+                if(index+1==p.precision.size()){++phase_;cell_=0;action_done_=false;continue;}
+                const auto from=p.precision[index],to=p.precision[index+1];
+                if((from.x2!=to.x2&&from.y2!=to.y2)||from.layer!=to.layer)return {};
+                Step result;result.result=Result::Move;result.next={to.layer,(to.x2+1)/2,(to.y2+1)/2};
+                result.precision=true;result.axis_x=(to.x2-from.x2)*.5f;result.axis_y=(from.y2-to.y2)*.5f;
+                result.precision_from=from;result.precision_to=to;return result;
+            }
             // Boarding/landing can change position to the next phase's first cell. Give the
             // action before requiring that displacement; it belongs to the player.
             const bool automatic = p.vehicle_before == VehicleAction::WalkOn || p.vehicle_before == VehicleAction::WalkOff;
@@ -54,11 +72,11 @@ public:
             if (!(at == p.cells[cell_])) return {};
             if (cell_ + 1 < p.cells.size()) {
                 const Cell& to = p.cells[cell_ + 1];
-                int dx = delta(to.x - at.x, width_, wraps_);
-                int dy = delta(to.y - at.y, height_, wraps_);
-                if (std::max(std::abs(dx),std::abs(dy)) != 1 || (wraps_ && dx && dy)) return {};
-                // Diagonals are only native baked stair edges; walk_edge verifies
-                // that edge and native collision again before any input is owned.
+                int dx = delta(to.x - at.x, width_);
+                int dy = delta(to.y - at.y, height_);
+                if (std::max(std::abs(dx),std::abs(dy)) != 1 || (cardinal_only_ && dx && dy)) return {};
+                // Ordinary diagonals retain native baked stair edges. Reviewed
+                // sub-tile passages use the separate bounded branch above.
                 return {Result::Move, to, dx, -dy, {}, cell_ + 2 == p.cells.size(), -1,
                     automatic && cell_ == 0 ? p.vehicle_before : VehicleAction::None, p.transportation_id};
             }

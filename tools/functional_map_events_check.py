@@ -6,7 +6,7 @@ the presence of a developer word or absence of a Msg opcode by itself.
 from pathlib import Path
 import collections,csv,hashlib,json
 import event_label_identities as identities
-from scripted_transition_identity import destination as transfer_destination
+from scripted_transition_identity import destination as transfer_destination,conditional_destinations
 from check_scripted_bakes import decode as decode_bake
 
 ROOT=Path(__file__).resolve().parents[1];DUMP=ROOT.parent/'tools/mapdump'
@@ -39,14 +39,18 @@ for n in range(1,7):
         transfer=transfer_destination(f'ff{n}',obj,review['script_name'],scripts,parents)
         if transfer:
             matches=[o for o in baked_rooms[obj['submap']]['objects'] if o[0]==100 and o[8]==review['entity_id'] and o[10:]==(obj['name'],obj['group'])]
-            expected=transfer[:2]
+            variants=conditional_destinations(f'ff{n}',obj,script)or[transfer]
+            assert tuple(variants[0])==tuple(transfer)
+            expected={tuple(v[:2]):False for v in variants}
             correction_file=ROOT/f'data/ff{n}/warp_arrival_overrides.json'
             corrections=json.loads(correction_file.read_text(encoding='utf-8'))if correction_file.exists()else[]
             for index,correction in enumerate(corrections):
-                if (correction['submap'],correction['entity_id'],correction.get('object_id',obj['id']),correction['destination_map'],correction['original_point'],correction['continuation'])==(
-                        obj['submap'],review['entity_id'],obj['id'],*transfer):
-                    expected=(correction['destination_map'],-100000-index if 'arrival_cell'in correction else correction['arrival_point'])
-            assert matches and all(o[6:8]==expected and o[9]&65536 for o in matches),('Physical transfer missing from exit index',n,obj['submap'],review['entity_id'])
+                for variant in variants:
+                    if (correction['submap'],correction['entity_id'],correction.get('object_id',obj['id']),correction['destination_map'],correction['original_point'],correction['continuation'])==(
+                            obj['submap'],review['entity_id'],obj['id'],*variant):
+                        expected.pop(tuple(variant[:2]),None)
+                        expected[correction['destination_map'],-100000-index if 'arrival_cell'in correction else correction['arrival_point']]=correction.get('trap_transfer',False)
+            assert matches and {o[6:8]for o in matches}==expected.keys()and all(bool(o[9]&65536)!=expected[o[6:8]]for o in matches),('Reviewed transfer missing or wrong trap/travel semantics',n,obj['submap'],review['entity_id'])
             transfer_count+=1
         bodies=[script]+[scripts[(c['submap'],c['script'])] for c in review['continuations']]
         ops={m['mnemonic'] for s in bodies for m in s.get('mnemonics')or[]}
@@ -90,3 +94,5 @@ assert total>=507
 print(f'PASS {total} exact occurrences; complete source/continuation hashes, functional grammar and12 locales; no game run')
 assert silent_checked==245
 print('PASS all245 silent-family contextual dispositions/source closures;41 narrative families retain Scene trigger; provider/exit ownership separately verified')
+from review_troia_passages import check as check_troia_passages
+check_troia_passages()

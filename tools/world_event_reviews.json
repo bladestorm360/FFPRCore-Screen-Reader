@@ -7394,7 +7394,22 @@
     "script_sha256": "4054e027a89057405b1cfaee06017b3b9136d9ee698f5f801146751302056aeb",
     "label": "Passage",
     "reason": "complete travel-only body and continuation grammar; no dialogue, actor staging or encounter",
-    "continuations": []
+    "continuations": [],
+    "object_type": 2,
+    "action_id": 2,
+    "review_grammar": "contextual_conditional",
+    "conditional_transfers": [
+      [
+        549,
+        4,
+        ""
+      ],
+      [
+        549,
+        6,
+        ""
+      ]
+    ]
   },
   {
     "game": 3,
@@ -7638,6 +7653,33 @@
   },
   {
     "game": 4,
+    "submap": "Map_20021_5",
+    "group": "entity_default",
+    "id": 32,
+    "object_type": 2,
+    "action_id": 2,
+    "entity_id": 20,
+    "raw": "デビルロード",
+    "script_id": 400,
+    "script_name": "sc_e_0160",
+    "script_sha256": "79810e406a432f453a45df5bf5e2ade582ef3062f77a6e8c3a884f85c057a543",
+    "label": "Devil's Road portal",
+    "reason": "Baron portal with a locked message branch and a native return chain to Mysidia",
+    "continuations": [
+      {
+        "submap": "Map_10010",
+        "script": "sc_e_0160_1",
+        "body_sha256": "08699fa31832d3a3f66145d819367efad2c80a1734df5dd8d3bd5b2d371b464a"
+      },
+      {
+        "submap": "Map_20061_9",
+        "script": "sc_e_0160_2",
+        "body_sha256": "a14f5dce499a22204b93f38899456187c3872af09e97749ffe1a07f5a1a50d44"
+      }
+    ]
+  },
+  {
+    "game": 4,
     "submap": "Map_20041_3",
     "group": "ev_e_0103",
     "id": 17,
@@ -7776,8 +7818,8 @@
     "script_id": 1010,
     "script_name": "sc_s_20101_1",
     "script_sha256": "cde62672fd26ad8fddc9d855b6db504b79cac02ec36f14b56b8b5de42d1f9b3d",
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "continuations": []
   },
   {
@@ -7792,8 +7834,8 @@
     "script_id": 1030,
     "script_name": "sc_s_20101_4",
     "script_sha256": "936b631f3f90bc7898f8c5e144ed361e5143558cbb4d46a005ec616bd9c910bc",
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "continuations": []
   },
   {
@@ -7808,8 +7850,8 @@
     "script_id": 1011,
     "script_name": "sc_s_20101_2",
     "script_sha256": "a8831a69a9c20558d6c952524147029d59e5b9e27b4faefa7e81ab2e6f443f9a",
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "continuations": []
   },
   {
@@ -7824,8 +7866,8 @@
     "script_id": 1012,
     "script_name": "sc_s_20101_3",
     "script_sha256": "3ee4fca8774758060176911580068f13edb7f349c8710620e6ed9d69035defc9",
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "continuations": []
   },
   {
@@ -7840,8 +7882,8 @@
     "script_id": 1012,
     "script_name": "sc_s_20101_3",
     "script_sha256": "3ee4fca8774758060176911580068f13edb7f349c8710620e6ed9d69035defc9",
-    "label": "Door",
-    "reason": "reviewed complete physical animation/interaction body and continuations",
+    "label": "Passage switch",
+    "reason": "ordinary step contact opens its passage and retires its native trigger; complete script and collider effects reviewed",
     "continuations": []
   },
   {
@@ -25689,7 +25731,7 @@
     "script_id": 93,
     "script_name": "sc_e_0031",
     "script_sha256": "57f233ef82542a8d80eaf1c7be2446fa13266eeac7da4a5a6129e17be7df8030",
-    "label": "Passage",
+    "label": "Devil's Road portal",
     "reason": "ordinary teleport through a transient world scene; complete native chain ends at Baron player6,6",
     "review_grammar": "contextual_transfer",
     "continuations": [

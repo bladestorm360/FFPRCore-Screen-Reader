@@ -66,11 +66,113 @@ Recovery, failed/accepted fixtures and receipts:build_check/short_walk_20261028/
 
 ## Build memory preference
 
-Human reported severe machine-wide lag during builds. The former MSBuild /m:4
-and compiler /MP4 permitted multiplied compiler processes. `build.bat` now uses
-/m:1 and CMAKE_BUILD_PARALLEL_LEVEL=1; CMake uses /MP1. Future targeted commands
-must also use /m:1. This changes build scheduling only, preserving optimization,
-checks and output semantics. The current final candidate was already built and
-passed before this configuration change; the next necessary build will use the
-serial policy. No claim of measured RAM reduction yet. Do not run parallel
-build commands or a second compiler while this project's build is active.
+**Owner build sequencing update, November 6.** FFPR shares one build across
+all six games. Only one version of this mod may build at a time across both
+machine slots and all chats. Batch fixes that are close to ready into one
+verified build and deployment. Finish a specifically requested game-first
+deployment before starting the queued work.
+
+**Owner CPU update, November2:** multiple cores are allowed, never unlimited.
+Future local jobs use min(25% machine, three logical cores' equivalent),25% on
+this12-thread host. Both slots can use at most50% CPU.2GB aggregate per tree,
+admission, priority, cleanup and serial compilers remain. Active jobs keep their
+original settings. This explicit local owner override supersedes only the
+maintained runner's old single-core CPU-share default. Real child verification:
+build_check/cpu_allowance_20261102/; all14 real guard checks pass at the new cap,
+including two admissions/third refusal and aggregate child memory/cleanup.
+
+**Current owner memory update, November1: two shared slots,2GB per complete tree.**
+The maintained runner/checks were merged November2 UTC after the existing Ghido
+1GB job completed unchanged (99.656s/441663488B/exit0/drained). Each slot admits
+one complete tree with a2,000,000,000B hard aggregate cap, including descendants;
+both slots can use up to4GB combined. Child workers remain serial/below-normal
+and CPU bounded. No shared compiler/MSBuild servers, node reuse, /MP or project
+parallelism. Independent projects may occupy both slots; no uncapped retries or
+admission bypass. Larger target-specific budgets still need explicit owner
+approval. Existing game/deploy/installation/publication permissions are unchanged.
+
+The exact maintained runner/check hashes and the only local delta are recorded
+in build_check/resource_slots_20261102/source_merge.json. The local delta retains
+the already-qualified AppContainer namespace refusal before any child starts.
+Use the normal user context via require_escalated here, without administrator
+rights; actual job membership/limits are verified. Slot one keeps
+Global\Codex.Build.ResourceBudget.v1; slot two appends .Slot2. Active old jobs
+remain in slot one under their prior smaller limits. Future commands use
+scripts/run-build.py directly, with optional finite --wait-seconds; the old
+wait_resource.py is historical and is not the new admission route.
+
+All14 maintained real guard checks pass: small64MB process/child/aggregate
+allocation denial, page rounding/minimum verification, inside/outside-job
+verification, two admissions/third rejection and descendant cleanup. The2GB-
+default check allocates no large heap. Final guard report and source identities:
+build_check/resource_slots_20261102/. Existing .NET property/concurrency settings
+were preserved and the enforcement message updated; native CMake single-worker
+settings remain. Preserve prior1GB receipts as valid evidence under their actual
+budgets. Resource-throttled timings do not establish game responsiveness.
+
+### Historical one-slot adoption and host evidence
+
+October30 owner replacement applies globally across chats/projects: one build
+tree, default hard aggregate1 GB, one worker/node, bounded CPU and below-normal
+priority. Explicit approval is required before any necessary increase. Longer
+builds are acceptable. Expensive bakes/extraction/tests/probes/benchmarks use
+the same serial enforced runner; no unchanged multi-GB background jobs.
+
+The authoritative [contract](D:/Games/Dev/codex/templates/accessibility-mod/references/build-resources.md)
+and portable runner are adopted as `scripts/run-build.py`. The supplied
+`Directory.Build.props`/`.targets` were added because
+neither file existed, preserving CMake/project settings. They disable shared/
+Razor compilation, MSBuild servers, node reuse and parallel work, and check
+actual kernel containment. Native /m:1 /nr:false /MP1 remain in force.
+
+`build.bat`, `smoketest.bat` and `deploy.bat` wrap their entire operation and
+verify an existing job before nested execution. Direct `build_one_check.py`
+also verifies. A global named mutex excludes other chats/projects using the
+maintained runner. The child starts suspended, receives and verifies the kernel
+job, then resumes; its descendants inherit the same aggregate quota. No debugger,
+injection, administrator rights or global system-settings change is required.
+The local temporary debugger-based limiter was retired before adoption; its
+source/failed/cancelled development evidence remains under build_check/.
+
+The maintained contract defines the ceiling as total committed memory, rounded
+down from1,000,000,000bytes to pages. CPU is capped at the smaller of one logical
+processor or25% of the machine; this machine's receipt is8.33%. Lower priority
+and smaller GC limits apply alongside the hard job quota. Failure/cancellation
+drains descendants before releasing the global lock. No automatic increase,
+uncapped fallback, omitted required check or unrelated-process termination.
+Windows raw peak counters may include refused allocation attempts; preserve
+them as counters, not a claim that refused memory was available. See
+[Microsoft's job-memory definition](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information).
+
+All11 maintained real guard checks pass under64 MB: normal/page-rounded launch,
+inside/outside membership, process/child/aggregate allocation refusal, over-budget
+refusal, global busy exclusion and descendant cleanup. The project check's only
+adaptation keeps receipts in build_check/resource_guard_checks/ because the
+host's sandbox TEMP path rejected receipt writes. No test allocates1 GB.
+The first actual compile ran under1 GB/8.33% CPU, with observed compiler private
+memory227.2 MB and resident237.4 MB. It was cancelled after a stronger cross-tool
+global-exclusion check failed; no new fixture outcome is claimed.
+
+Host-specific correction: AppContainer isolated even the Global mutex between
+tool invocations. A separate invocation acquired its own lock while our compile
+was active (TokenIsAppContainer1). Same-parent busy checks therefore did not
+establish cross-chat exclusion. `api()` now rejects AppContainer before any
+child starts. Execute bounded commands in the normal user context here via
+`exec_command`/`require_escalated`; all quotas remain, and no administrator rights
+or machine-settings change is required. Normal-context probing found the real
+global lock busy and launched no child. Do not terminate that unrelated job.
+Outside-context requalification passes all11 checks, and a separate normal-user
+tool invocation observes busy258 while a45-second64-MB holder is active. That
+holder exits0 with childrenDrained true and~7.5-MB raw peak. The earlier30-second
+holder was already finished before observation; do not count that missed timing
+as either an exclusion pass or failure. The local refusal
+is the only runner logic difference from the current maintained copy; its
+concurrent GC-default update is merged without changing the aggregate ceiling.
+The maintained package itself has not been overwritten. Evidence includes
+build_check/build_memory/{appcontainer_refusal,normal_user_probe}.json and the
+preserved cancelled compilation report.
+
+All new fixture wall times must be labeled resource-throttled; prior valid
+source-matched evidence remains valid. Neither resource-limited wall time nor
+earlier unconstrained offline worker time proves native/audible responsiveness.
+This changes engineering tools only; nothing is added to the game payload.

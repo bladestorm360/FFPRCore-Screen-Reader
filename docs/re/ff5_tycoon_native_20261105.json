@@ -1,0 +1,68 @@
+{
+  "scope_tag": "ff5_Tycoon",
+  "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+  "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+  "native_functions": [
+    {
+      "method": "Mnemonic.ChangeScript",
+      "rva": 10740640,
+      "bytes": 336,
+      "sha256": "f99597cc6947e94cfeb7eb7f9e4b7f65b0450b70a876ed0ddd6b0eee85442b2f"
+    },
+    {
+      "method": "Integrator.ChangeScript",
+      "rva": 7920704,
+      "bytes": 544,
+      "sha256": "283704ba2b056b7e35d35675fa737e9680ddce0a54713c8f7e48f35f3a7aa5e8"
+    }
+  ],
+  "position_native": {
+    "dll_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+    "dump_sha256": "99239a856351c4cc7310bae2679af73085efebc765a00459b4d64cf088ee7aa3",
+    "functions": [
+      {
+        "method": "Puppet.SetPos",
+        "rva": 2997536,
+        "bytes": 3776,
+        "sha256": "0bc352fb4bc68205321f362cfe9091c341d91d0b3abd20e8995bc16197913a99"
+      },
+      {
+        "method": "Puppet.GetDirectTargetPosition",
+        "rva": 2971584,
+        "bytes": 1008,
+        "sha256": "885b25b6be858acb7ab3e581706277c4efde3033b0b4e51ad2879d60e39ae9a3"
+      },
+      {
+        "method": "Puppet.GetChangeLayerValue",
+        "rva": 2970896,
+        "bytes": 688,
+        "sha256": "b37b2ed50d67e0e9df75809be4fd5da7ffbd3ba585551142321390c6e7434a0e"
+      },
+      {
+        "method": "Puppet.MoveEntityLayerWithWorldPosition",
+        "rva": 2980992,
+        "bytes": 704,
+        "sha256": "41f3827180e0d40fa370a4e306e6e04736f88ed475d0e6d55ced5204be610231"
+      }
+    ]
+  },
+  "source_script_hashes": {
+    "Map_20050/sc_e_0127": "e659a881dab67e15d5ca8e70d066111090e427127ccdcdc515b4f5accca9d6e5",
+    "Map_20050/sc_e_0129": "538fef47d8a781f7053fd378ded56946359a6fac4e81ac974be01b3d93a8300f",
+    "Map_20050/sc_map_20050": "f6abfa0a2ec439b4573960bad79d7c7d45c483655e4bf635effd6f64b008d878",
+    "Map_20050/sc_map_20050_gate_1": "110e49331438423b5d2ea094096c02d53fdad757fdf7a387e5a44cb2f11f9151",
+    "Map_20050/sc_map_20050_gate_2": "8c5a3c66e9bf793332af279d51af8ada5c26a77f2e939ea4f58f1af4900132d4",
+    "Map_20050/sc_npc_20050_1": "41972c683033e1df372a61b18b6cb0fcfc1ffccebb8c1aa6ffb228608667b857",
+    "Map_20051_2/sc_20051_2_to_20051_1": "9a677738aa488e1c708481adfc5931ee5b78b944cd45aa789433d0a138ba065d",
+    "Map_20051_2/sc_e_0128": "5b4980c6bfc1ef75b643c67ebed1af5e3266489f369428626d425b485cf4054f",
+    "Map_20051_2/sc_map_20051_2": "e8063fb8f2df1d620333cbe58bf26dc39913fe625fddfcbaa3d988e00df7b11c",
+    "Map_20051_5/sc_map_20051_5": "f785b5d8828b6c172a740e1acfae0120c6091b4a7e2dcdbf35b6b2984aebe9b8",
+    "Map_20051_5/sc_npc_20051_5_1": "21ed52e1ce0845c225d0b3ae1f180c83b8f570aa84925f3f756bf3782b24e173",
+    "Map_20051_5/sc_s_20051_5_1": "d4826cb8a6751d3fe3110a1530b75d3dfdaead88e2634c39fdc01436b4ba0892",
+    "Map_20051_7/sc_e_0362_3": "33d61064926074a92c88f27f9d932add66556cbfea9e0af7c0086998e0c34751",
+    "Map_20051_7/sc_e_0362_4": "6c24465ea4bc4182a5e86480840b58d0acb400724b9032ab09902af8660207f1",
+    "Map_20051_7/sc_map_20051_7": "ef28d1f26ce492f0eec2e2c49d72260c52ef7503db97124b05725ee498cb5249"
+  },
+  "identities": 15,
+  "ordinary_treasury_not_puzzle": true
+}

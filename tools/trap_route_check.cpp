@@ -28,7 +28,20 @@ int main() {
                 for(int y=object.ty;y<object.ty+object.th;++y)for(int x=object.tx;x<object.tx+object.tw;++x)
                     if(field::baked::in_bounds(grid,x,y))
                         expect(field::baked_route::trap_cell(request,grid,{object.layer,x,y}), "trap mask includes its exact native layer within the actual map bounds");
-                expect(!field::baked_route::trap_cell(request,grid,{(object.layer+1)%3,object.tx,object.ty}) ||
+                if(map->world) {
+                    expect(field::baked_route::trap_cell(request,grid,{0,object.tx,object.ty}),"world trap projects its native object layer onto routing plane zero");
+                    auto live=request;live.live_traps=true;
+                    expect(!field::baked_route::trap_cell(live,grid,{0,object.tx,object.ty}),"authoritative disabled world trap overrides conservative baked mask");
+                    live.traps={{object.layer,object.tx,object.ty}};
+                    expect(field::baked_route::trap_cell(live,grid,{0,object.tx,object.ty}),"active live world trap ignores native object-layer numbering");
+                    live.traps.clear();auto rules=std::make_shared<field::baked_route::TransportRules>();
+                    field::baked_route::add_transport_cell(*rules,field::baked_route::TransportRules::Trap,*map,{object.layer,object.tx,object.ty},uint64_t(1)<<1);
+                    live.transport_rules=rules;live.vehicle_group=1;live.transportation_id=1;
+                    expect(field::baked_route::trap_cell(live,grid,{0,object.tx,object.ty}),"world foot selector remains authoritative at actual bog");
+                    live.vehicle_group=3;live.transportation_id=8;
+                    expect(!field::baked_route::trap_cell(live,grid,{0,object.tx,object.ty}),"world aircraft selector remains independent of conservative mask");
+                }
+                expect(map->world || !field::baked_route::trap_cell(request,grid,{(object.layer+1)%3,object.tx,object.ty}) ||
                     std::any_of(grid.objects.begin(),grid.objects.end(),[&](const auto& other) { return other.layer==(object.layer+1)%3 && field::baked::is_trap(other) && other.contains(at.x,at.y); }),
                     "trap mask does not bleed across layers");
             }
@@ -144,7 +157,7 @@ int main() {
                 if (!result.path.success) continue;
                 if (result.path.required_trap) {
                     ++required;
-                    expect(result.path.warning==L"Warning: a trap is required to reach this chest.","required chest trap warning is separate from directions");
+                    expect(result.path.warning==L"Trap required","required chest trap warning is concise and separate from directions");
                     snapshot.pending=result.pending;
                     snapshot.pending.completed_traps={{185,9,186,14,27}};
                     snapshot.active={};
@@ -178,7 +191,7 @@ int main() {
             expect(drop.path.success && drop.path.required_trap && drop.path.next_map_id==186,"closed stairs allow the only required trap leg");
             const auto browse=plan_browse_snapshot(snapshot);
             expect(!browse.route.direct&&browse.route.via_map_id==186,"required trap browse omits direct steps and retains its next floor");
-            expect(drop.path.warning==L"Warning: a trap is required on this route.","required trap warning is a separate optional speech part");
+            expect(drop.path.warning==L"Trap required","required trap warning is a separate optional speech part");
             expect(drop.path.walk_phases.size()==1 && drop.path.walk_phases.front().cells.back()==Cell{0,14,27},"trap leg stops at trigger rather than crossing it");
             expect(drop.pending.incoming_trap.has_value(),"planned trap arrival is retained with final destination");
             snapshot.pending=drop.pending;
@@ -193,7 +206,7 @@ int main() {
             expect(!repeat.path.success && repeat.path.trap_repeat_blocked,"another directions request does not erase repeat protection");
             field::PathInfo warning; warning.required_trap=true;
             MapGoal chest_goal; chest_goal.map_id=187; chest_goal.cell={1,35,29};
-            expect(route_warning(warning,chest_goal)==L"Warning: a trap is required to reach this chest.","actual chest identity selects concise required-trap chest warning");
+            expect(route_warning(warning,chest_goal)==L"Trap required","chests retain the same concise required-trap warning");
             snapshot.pending={}; snapshot.active={}; snapshot.kind=field::TargetKind::Infer;
             snapshot.goal.map_id=185; snapshot.goal.cell={0,14,27};
             const auto selected=plan_snapshot(snapshot);

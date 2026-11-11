@@ -4,6 +4,81 @@
 #include "route_worker_check.cpp"
 #undef main
 
+namespace {
+template<class Expect> void check_baron_stair_chest(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    const Cell stair{0,2,6}, off_stair{0,2,5};
+    const MapGoal goal{17,{0,2,5},false,{},0,9};
+    auto make_snapshot = [&](int map, Cell position) {
+        map_state::Flags flags;
+        flags.current_map_id = map;
+        RouteSnapshot snapshot(map_state::Resolver(flags,fixture::records));
+        snapshot.submap = baked::submap_by_map_id(map);
+        snapshot.map_id = map;
+        snapshot.layer = position.layer;
+        snapshot.position = world_of_cell(*snapshot.submap, position);
+        snapshot.locale = L"en";
+        snapshot.kind = TargetKind::Interact;
+        snapshot.goal = goal;
+        for (const auto& object : baked::grids(*snapshot.submap).objects) {
+            if (object.type != baked::ObjType::TreasureBox) continue;
+            NativeObstacle actor;
+            actor.cell = {object.layer,object.tx,object.ty};
+            actor.type = int(object.type);
+            actor.id = object.entity_id();
+            actor.chest = true;
+            actor.raw_name = baked::object_identifier(object);
+            snapshot.obstacles.push_back(std::move(actor));
+        }
+        return snapshot;
+    };
+    std::thread worker([&] {
+        for (Cell start : {Cell{0,6,7},Cell{0,4,5},Cell{0,8,5}}) {
+            auto tower = make_snapshot(17,start);
+            auto browse = plan_browse_snapshot(tower);
+            expect(!browse.route.direct && browse.route.via_map_id == 20,
+                   "Baron west chest browsing identifies the basement detour");
+            auto route = plan_snapshot(tower);
+            expect(route.path.success && route.path.next_map_id == 20 && !route.path.event_on_route &&
+                   !route.path.required_trap && route.pending.incoming_transition &&
+                   route.pending.incoming_transition->arrival == stair,
+                   "Baron west chest from each logged start uses the real B1 arrival");
+        }
+        auto basement = make_snapshot(20,stair);
+        const auto initial = plan_snapshot(basement);
+        expect(initial.path.success && initial.path.next_map_id == 17 && initial.path.walk_phases.size() == 1 &&
+               initial.path.walk_phases.front().cells == std::vector<Cell>{stair,off_stair,stair} &&
+               initial.pending.incoming_transition && initial.pending.incoming_transition->arrival == stair,
+               "Baron B1 return steps North then South to re-enter the stair");
+        basement.previous_active = initial.active;
+        basement.pending = initial.pending;
+        const auto repeated = plan_snapshot(basement);
+        expect(repeated.path.success && repeated.path.step_count == 2 && repeated.path.next_map_id == 17,
+               "Baron B1 repeated directions retain the first step before leaving the stair");
+        CornerSnapshot corner{initial.active,basement.submap,stair,goal.cell,20,17};
+        const auto index = build_corner(corner);
+        const auto* beacon = index.index.find(stair);
+        expect(beacon && !beacon->arrived && beacon->steps_to_corner == 1 && beacon->steps_left == 2,
+               "Baron B1 beacon points to the step off the stair");
+        auto returned = make_snapshot(17,stair);
+        const auto final = plan_snapshot(returned);
+        expect(final.path.success && final.path.next_map_id == 0 && final.path.step_count == 0 &&
+               final.path.walk_phases.size() == 1 && final.path.walk_phases.front().arrival_direction == 0,
+               "Baron 1F return arrives at the chest and directs the player to face North");
+        auto sibling = make_snapshot(17,{0,6,7});
+        sibling.goal.cell = {0,3,5};
+        sibling.goal.entity_id = 10;
+        const auto sibling_route = plan_snapshot(sibling);
+        expect(sibling_route.path.success && sibling_route.path.next_map_id == 0,
+               "Baron neighboring chest still uses the direct same-floor route");
+    });
+    worker.join();
+    std::puts("Baron East Tower chest, basement return, repeat and beacon replayed.");
+}
+}
+
 int main() {
     using namespace field::baked_nav;
     int failures=0, direct_games=0, detours=0;
@@ -17,6 +92,83 @@ int main() {
         expect(field::baked::load(storage.back().data(),storage.back().size()),"real game bake loads");
         for(int i=0;i<field::baked::submap_count();++i)field::baked::grids(*field::baked::submap_at(i));
         g_loaded=true;g_prepared=true;
+        if(number==4) {
+            check_baron_stair_chest(expect);
+            const auto* jail=field::baked::submap_by_map_id(42);
+            RouteSnapshot room(field::map_state::Resolver(field::map_state::Flags{},fixture::records));
+            room.submap=jail;room.map_id=42;room.layer=0;room.position=world_of_cell(*jail,{0,6,5});room.locale=L"en";
+            room.goal.map_id=42;room.goal.cell={0,5,10};room.kind=field::TargetKind::Transition;
+            Planned jail_route;std::thread worker([&]{jail_route=plan_snapshot(room);});worker.join();
+            expect(jail_route.path.success&&!jail_route.path.walk_phases.empty()&&jail_route.path.walk_phases.front().cells.size()>1&&
+                jail_route.path.walk_phases.front().cells[1]==field::baked_route::Cell{0,6,6},"actual Damcyan planner starts South around the reported wall");
+            const auto* tower=field::baked::submap_by_map_id(55);
+            const Cell landing{0,5,6}, upper_stair{0,5,5}, lower_stair{0,5,7};
+            auto tower_route=[&](Cell start,Cell end,int entity,field::TargetKind kind) {
+                RouteSnapshot snapshot(field::map_state::Resolver(field::map_state::Flags{},fixture::records));
+                snapshot.submap=tower;snapshot.map_id=55;snapshot.layer=0;snapshot.locale=L"en";
+                snapshot.position=world_of_cell(*tower,start);
+                snapshot.goal.map_id=55;snapshot.goal.cell=end;snapshot.goal.entity_id=entity;snapshot.kind=kind;
+                for(const auto& object:field::baked::grids(*tower).objects) {
+                    const bool npc=object.type==field::baked::ObjType::NPC;
+                    const bool chest=object.type==field::baked::ObjType::TreasureBox;
+                    if((!npc&&!chest)||object.tx<0||field::baked::str(object.group)!=L"entity_default")continue;
+                    NativeObstacle actor;
+                    actor.cell={object.layer,object.tx,object.ty};actor.type=int(object.type);
+                    actor.id=object.entity_id();actor.npc=npc;actor.chest=chest;
+                    actor.raw_name=field::baked::object_identifier(object);
+                    snapshot.obstacles.push_back(std::move(actor));
+                }
+                Planned result;std::thread worker([&]{result=plan_snapshot(snapshot);});worker.join();
+                return result.path;
+            };
+            for(const auto& [target,entity]:{std::pair{Cell{0,11,6},6},std::pair{Cell{0,10,4},7}}) {
+                for(const Cell start:{upper_stair,landing,lower_stair}) {
+                    const auto path=tower_route(start,target,entity,field::TargetKind::Interact);
+                    expect(path.success&&path.next_map_id==0&&path.walk_phases.size()==1,
+                           "Fabul 2F NPC stays on its floor from the landing and both arrivals");
+                    if(path.walk_phases.size()!=1)continue;
+                    const auto& cells=path.walk_phases.front().cells;
+                    const size_t turn=start==landing?0:1;
+                    expect(cells.size()>turn+1&&cells[turn]==landing&&cells[turn+1]==Cell{0,6,6},
+                           "the Fabul stairs are left through the central east turn");
+                    expect(std::none_of(cells.begin()+std::min<size_t>(1,cells.size()),cells.end(),
+                                       [&](Cell at){return at==upper_stair||at==lower_stair;}),
+                           "the rest of the Fabul 2F NPC route avoids both stair triggers");
+                }
+            }
+            for(const auto& [stair,entity]:{std::pair{upper_stair,4},std::pair{lower_stair,2}}) {
+                const auto path=tower_route(landing,stair,entity,field::TargetKind::Transition);
+                expect(path.success&&path.walk_phases.size()==1&&path.walk_phases.front().cells.size()==2&&
+                       path.walk_phases.front().cells.back()==stair,"the selected Fabul stair remains an intentional exit");
+            }
+            // Native Hovercraft2/type7, the actual Antlion entrance173. Start
+            // on the nearest hovercraft-only terrain so there is a real flight
+            // before landing, rather than a zero-distance label-only fixture.
+            const auto* craft=field::baked::transport(2);bool checked=false;
+            for(int i=0;i<field::baked::submap_count()&&!checked;++i) {
+                const auto* world=field::baked::submap_at(i);if(!world->world)continue;
+                for(const auto& exit:field::baked::grids(*world).objects) {
+                    if(exit.type!=field::baked::ObjType::GotoMap||exit.a!=173)continue;
+                    field::baked_route::Cell start{1,-1,-1};
+                    const auto& grid=field::baked::grids(*world);
+                    for(int radius=1;radius<=16&&start.x<0;++radius)for(int dy=-radius;dy<=radius&&start.x<0;++dy)
+                        for(int dx=-radius;dx<=radius;++dx) {
+                            if(std::abs(dx)+std::abs(dy)!=radius)continue;
+                            const int x=exit.tx+dx,y=exit.ty+dy;
+                            if(field::baked::vehicle_open(grid,craft->group,x,y)&&!field::baked::vehicle_open(grid,1,x,y)) {start={1,x,y};break;}
+                        }
+                    if(start.x<0)continue;
+                    RouteSnapshot hover(field::map_state::Resolver(field::map_state::Flags{},fixture::records));
+                    hover.submap=world;hover.map_id=world->first_map_id;hover.layer=1;hover.locale=L"en";
+                    hover.position=world_of_cell(*world,start);hover.vehicle={true,2,7,L""};
+                    hover.goal.map_id=hover.map_id;hover.goal.cell={1,exit.tx,exit.ty};hover.goal.entity_id=exit.entity_id();hover.kind=field::TargetKind::Transition;
+                    BrowsePlanned result;std::thread flight([&]{result=plan_browse_snapshot(hover);});flight.join();
+                    expect(result.route.reason.rfind(L"Fly ",0)==0&&result.route.reason.find(L"land")!=std::wstring::npos,"Antlion hovercraft browse says Fly then land");
+                    std::printf("FF4 Hovercraft Antlion from %d,%d: %ls\n",start.x,start.y,result.route.reason.c_str());checked=true;break;
+                }
+            }
+            expect(checked,"actual hovercraft-only origin and Antlion landing exercised");
+        }
         // Actual route worker: distinct selected town triggers must not collapse
         // to a sibling endpoint. Exercise a real entrance in every world bake.
         int explicit_exits=0;

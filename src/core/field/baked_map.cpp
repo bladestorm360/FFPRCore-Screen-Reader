@@ -59,6 +59,10 @@ std::vector<TransportRow>* g_transport = nullptr;
 std::unordered_map<int, uint32_t>* g_tgroups = nullptr;
 std::unordered_map<int, uint32_t>* g_lgroups = nullptr;
 std::unordered_map<int, Grids*>* g_grids = nullptr;          // submap index -> decoded
+// FFIII world1 repeatedly asks for identical border/guard identities. Decode
+// its immutable string table once on the existing Data owner, before readiness.
+// The public value-returning interface and original decoder fallback persist.
+std::vector<std::wstring>* g_strings = nullptr;
 
 bool fits(uint32_t off, size_t bytes) { return off <= g_size && bytes <= g_size - off; }
 
@@ -109,6 +113,7 @@ bool load(const void* data, size_t size)
     g_data = static_cast<const uint8_t*>(data);
     g_size = size;
     g_header = h;
+    g_strings = nullptr;
 
     const SubmapRec* subs = at<SubmapRec>(h->submaps_off, h->submap_count);
     const MapRec* maps = at<MapRec>(h->maps_off, h->map_count);
@@ -120,6 +125,12 @@ bool load(const void* data, size_t size)
         g_data = nullptr;
         g_header = nullptr;
         return false;
+    }
+
+    if(h->game==3) {
+        auto* decoded=new std::vector<std::wstring>();decoded->reserve(h->strings_count);
+        for(uint32_t i=0;i<h->strings_count;++i)decoded->push_back(str(i));
+        g_strings=decoded;
     }
 
     g_submaps = new std::vector<Submap>();
@@ -139,6 +150,7 @@ bool load(const void* data, size_t size)
         s.width = r.width;
         s.height = r.height;
         s.world = (r.flags & 1) != 0;
+        s.loop_axes = (r.flags >> 1) & 3;
         s.layer_mask = r.layer_mask;
         s.transport_layers = r.transport_layers;
         for (int l = 0; l < 3; ++l) {
@@ -167,6 +179,7 @@ int game_number() { return g_header ? g_header->game : 0; }
 std::wstring str(uint32_t index)
 {
     if (!g_header || index >= g_header->strings_count) return {};
+    if(g_strings)return (*g_strings)[index];
     const uint32_t* offs = at<uint32_t>(g_header->strings_off, g_header->strings_count);
     if (!offs) return {};
     uint32_t off = offs[index];
@@ -259,7 +272,7 @@ const Grids& grids(const Submap& s)
                 o.d = r.d;
                 o.name = r.name;
                 o.group = r.group;
-                g->objects_by_entity[o.entity_id()].push_back(g->objects.size());
+                if(o.type!=ObjType::CurrentArea)g->objects_by_entity[o.entity_id()].push_back(g->objects.size());
                 if(world_exit(o))g->world_exits[o.entity_id()].push_back(g->objects.size());
                 if(o.type==ObjType::TransitionHelper)g->transition_helpers[o.entity_id()].push_back(g->objects.size());
                 if(s.world && o.type==ObjType::TransportationEventAction && (o.a||o.b))
@@ -274,6 +287,14 @@ const Grids& grids(const Submap& s)
     // Step-on warps and trapdoors: cells an ordinary route must not cross.
     if (cells) {
         for (const Object& o : g->objects) {
+            if(o.type==ObjType::CurrentArea||(o.type==ObjType::Warp&&(o.d&kAutomaticCurrent))) {
+                auto& current=g->currents[o.layer];if(current.empty())current.assign(cells,0);
+                const int bits=o.type==ObjType::CurrentArea?o.a:16;
+                if(bits==1||bits==2||bits==4||bits==8||bits==16)
+                    for(int y=std::max(0,int(o.ty));y<std::min(g->height,int(o.ty)+o.th);++y)
+                        for(int x=std::max(0,int(o.tx));x<std::min(g->width,int(o.tx)+o.tw);++x)
+                            current[static_cast<size_t>(y)*g->width+x]|=static_cast<uint8_t>(bits);
+            }
             if(const int bits=transition_bits(o)) {
                 auto& mask=g->transitions[s.world?0:o.layer];
                 if(mask.empty())mask.assign(cells,0);
@@ -282,7 +303,10 @@ const Grids& grids(const Submap& s)
                         mask[static_cast<size_t>(y)*g->width+x]|=static_cast<uint8_t>(bits);
             }
             if (is_trap(o) && o.layer < 3) {
-                auto& traps = g->traps[o.layer];
+                // World routing projects every native object layer onto plane0,
+                // just like transitions above. Live story/vehicle traps replace
+                // this conservative mask through Request::live_traps.
+                auto& traps = g->traps[s.world ? 0 : o.layer];
                 if (traps.empty()) traps.assign(cells, 0);
                 for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x)
                     if (x >= 0 && y >= 0 && x < g->width && y < g->height)
@@ -336,14 +360,15 @@ const Object* world_exit_at(const Grids& grid,int id,const std::wstring& raw,int
 }
 bool in_bounds(const Grids& g, int x, int y) { return x >= 0 && y >= 0 && x < g.width && y < g.height; }
 
-bool walkable(const Grids& g, int layer, int x, int y, bool passages)
+bool walkable(const Grids& g, int layer, int x, int y, bool /*passages*/)
 {
     if (layer < 0 || layer > 2 || !in_bounds(g, x, y)) return false;
     const std::vector<uint8_t>& c = g.collision[layer];
     if (c.empty()) return false;
     const size_t i = static_cast<size_t>(y) * g.width + x;
-    if (c[i] != 0) return true;
-    return passages && !g.passage[layer].empty() && g.passage[layer][i] != 0;
+    // Native hidden-passage IDs animate tile covers. They may overlap actual
+    // walls (Damcyan Jail) and never override physical collision/raycast masks.
+    return c[i] != 0;
 }
 
 bool is_passage(const Grids& g, int layer, int x, int y)

@@ -1,0 +1,421 @@
+{
+  "about": "Independent native item-selector callers; factual identities/hashes, not automatic puzzle certification.",
+  "scripts": [
+    {
+      "submap": "Map_20011_3",
+      "script": "sc_e_0163",
+      "maps": [
+        7
+      ],
+      "items": [
+        10,
+        18
+      ],
+      "sha256": "90274bf05391a8c1c5ef9c79bac6c355c7dde8e828d2e983104e5f68647a232e",
+      "owners": [
+        {
+          "entity": 50,
+          "raw": "Event発火用",
+          "group": "ev_e_0035",
+          "type": "Entity"
+        },
+        {
+          "entity": 51,
+          "raw": "Event発火用",
+          "group": "ev_e_0035",
+          "type": "Entity"
+        },
+        {
+          "entity": 9,
+          "raw": "パロムポロム石化",
+          "group": "ev_e_0035",
+          "type": "NPC"
+        },
+        {
+          "entity": 10,
+          "raw": "パロムポロム石化",
+          "group": "ev_e_0035",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20020",
+      "script": "sc_e_0156",
+      "maps": [
+        24
+      ],
+      "items": [
+        68
+      ],
+      "sha256": "3ba8019904c2d98208ddc0a9eb2d4b7b739f5deb5940c0343153200329fd7c11",
+      "owners": [
+        {
+          "entity": 66,
+          "raw": "武器屋鍵選択",
+          "group": "ev_e_0156",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20020",
+      "script": "sc_e_0157",
+      "maps": [
+        24
+      ],
+      "items": [
+        68
+      ],
+      "sha256": "c71495eb29f51c1833fe00405c6780358578e1125a6be6b0d385bcba5346c240",
+      "owners": [
+        {
+          "entity": 67,
+          "raw": "昔の水路鍵選択",
+          "group": "ev_e_0157",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20031_5",
+      "script": "sc_e_0018",
+      "maps": [
+        37
+      ],
+      "items": [
+        64
+      ],
+      "sha256": "6ad31ee2fbdd2c220865598e74fedfe279c0d4e5702aed96546809490bfb14ef",
+      "owners": [
+        {
+          "entity": 9,
+          "raw": "ローザ",
+          "group": "ev_e_0018",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20101_5",
+      "script": "sc_e_0139",
+      "maps": [
+        91
+      ],
+      "items": [
+        60
+      ],
+      "sha256": "f146ea680cb7d7441d2199a62620067ec41815ffe5f4932acd2d8a9374845b27",
+      "owners": [
+        {
+          "entity": 22,
+          "raw": "男性（紫）",
+          "group": "entity_default",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20121_3",
+      "script": "sc_e_0045",
+      "maps": [
+        109
+      ],
+      "items": [
+        72
+      ],
+      "sha256": "2fb66b3fb91095863826459ca515567b8bd05e6c61325d9afd65cc2b1065b82a",
+      "owners": [
+        {
+          "entity": 3,
+          "raw": "アガルトの村の井戸でマグマの石をつかう",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20141_1",
+      "script": "sc_e_0105",
+      "maps": [
+        117
+      ],
+      "items": [
+        67,
+        70
+      ],
+      "sha256": "f3fd5297bde2f4485e4bd72fbcf9767ae1a60a89987ee7854942adf76b99533c",
+      "owners": [
+        {
+          "entity": 3,
+          "raw": "2:小人(青)",
+          "group": "entity_default",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20151_7",
+      "script": "sc_dchoco_0008",
+      "maps": [
+        125
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "f1f2e6c1b13597dd9bdf47b1b45801fac7821dfc90cec7ec7af9efa8edc97dfb",
+      "owners": [
+        {
+          "entity": 20,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 21,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20181_2",
+      "script": "sc_e_0106",
+      "maps": [
+        151
+      ],
+      "items": [
+        63
+      ],
+      "sha256": "105e1f3824135d8b0d43a56dffc665b40edefe0eaf642a779b77e224dec4d98d",
+      "owners": [
+        {
+          "entity": 6,
+          "raw": "ククロ",
+          "group": "ev_e_0106",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20210_1",
+      "script": "sc_dchoco_0001",
+      "maps": [
+        155
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "fc273bbb952ca73111ad9536f83252643260b6c90ca7a4a50ee42471026bf67d",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 11,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20210_2",
+      "script": "sc_dchoco_0002",
+      "maps": [
+        156
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "fda6ab5393d98e122f03b137be131f93e6b95794c68b8e2831a6dc9eb097005f",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 11,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20210_3",
+      "script": "sc_dchoco_0003",
+      "maps": [
+        157
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "fda6ab5393d98e122f03b137be131f93e6b95794c68b8e2831a6dc9eb097005f",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 11,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20210_4",
+      "script": "sc_dchoco_0004",
+      "maps": [
+        158
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "fda6ab5393d98e122f03b137be131f93e6b95794c68b8e2831a6dc9eb097005f",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 11,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20210_5",
+      "script": "sc_dchoco_0005",
+      "maps": [
+        159
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "fda6ab5393d98e122f03b137be131f93e6b95794c68b8e2831a6dc9eb097005f",
+      "owners": [
+        {
+          "entity": 10,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 11,
+          "raw": "ギサールの野菜用",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_20220",
+      "script": "sc_dchoco_0006",
+      "maps": [
+        160
+      ],
+      "items": [
+        25
+      ],
+      "sha256": "2be45cf63980938be8236dce940f87d98520970c630c0acd768d55e479210b0c",
+      "owners": [
+        {
+          "entity": 9,
+          "raw": "ギサールの野菜用（右）",
+          "group": "entity_default",
+          "type": "Entity"
+        },
+        {
+          "entity": 25,
+          "raw": "ギサールの野菜用（左）",
+          "group": "entity_default",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30151_11",
+      "script": "sc_e_0158",
+      "maps": [
+        220
+      ],
+      "items": [
+        75
+      ],
+      "sha256": "8c3df8e9ad0aafba80e29715c11d02840572893436c10838b1c2385d54df4ffa",
+      "owners": [
+        {
+          "entity": 26,
+          "raw": "壊れた扉",
+          "group": "ev_e_0053",
+          "type": "Entity"
+        },
+        {
+          "entity": 28,
+          "raw": "ルゲイエのカギ使用イベント",
+          "group": "ev_e_0158",
+          "type": "Entity"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30181_5",
+      "script": "sc_e_0112",
+      "maps": [
+        263
+      ],
+      "items": [
+        62
+      ],
+      "sha256": "d5b7ed66fa2e23c84a34dad86f919c817dadb4b209e072685c3d13b4dc83b5e8",
+      "owners": [
+        {
+          "entity": 14,
+          "raw": "ヤン",
+          "group": "ev_e_0112",
+          "type": "NPC"
+        }
+      ]
+    },
+    {
+      "submap": "Map_30201_1",
+      "script": "sc_e_0062",
+      "maps": [
+        268
+      ],
+      "items": [
+        74
+      ],
+      "sha256": "cc2d6ca7efdfeed0b57ec2fe3b968eff61930ddf6a49b32c79bff6a6bf65e221",
+      "owners": [
+        {
+          "entity": 6,
+          "raw": "アイテム使用まで閉鎖",
+          "group": "ev_e_0062",
+          "type": "Entity"
+        },
+        {
+          "entity": 7,
+          "raw": "封印の洞窟の扉で『ルカの首飾り』を使用",
+          "group": "ev_e_0062",
+          "type": "Event"
+        }
+      ]
+    }
+  ]
+}

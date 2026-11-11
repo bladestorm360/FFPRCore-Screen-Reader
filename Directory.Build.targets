@@ -1,0 +1,9 @@
+<Project>
+  <Target Name="RequireResourceBoundBuild" BeforeTargets="PrepareForBuild;CoreCompile;Publish;Restore">
+    <Error Condition="'$(CODEX_BUILD_JOB_NAME)' == '' Or '$(CODEX_BUILD_PYTHON)' == ''"
+           Text="Build resource guard required: run python scripts/run-build.py -- dotnet build (or wrap the release script). Default: two shared slots, one worker per tree, 2 GB total child-tree memory per slot." />
+    <!-- The marker alone is insufficient: verify actual kernel job membership
+         and hard memory/CPU limits before any compilation can begin. -->
+    <Exec Command="&quot;$(CODEX_BUILD_PYTHON)&quot; &quot;$(MSBuildThisFileDirectory)scripts/run-build.py&quot; --verify" />
+  </Target>
+</Project>
