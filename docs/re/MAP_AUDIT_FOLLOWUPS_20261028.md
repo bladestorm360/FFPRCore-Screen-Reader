@@ -18,7 +18,11 @@ the exact interaction-approach requirement into both the remote route
 and same-floor recovery searches. The focused production replay passes.
 It returns to 4F in one step, takes the western stair in 18 steps and
 finishes two steps from that 5F landing. Each transition keeps the same
-chest selected. The complete build and local delivery are pending.
+chest selected. The first combined offline run exposed a regression in
+FFVI's uncollected Dream pickup. Ordinary solid treasure chests now use the
+stricter approach proof. Animated and loose pickups use their existing
+native action rules. The corrected Zot replay and all 34 Dream assertions
+pass. The complete build and local delivery are pending.
 Reproduce with `build.bat --check remote_exit_check` under the enforced
 runner. The baseline and corrected receipts are in
 `build_check/ff4_zot_chest_20261111`.
@@ -46,6 +50,20 @@ floors. Audit world-changing transfers and one-way story transitions where
 ordinary floor-to-floor routing does not supply a valid route. The player
 still performs story actions that require native confirmation. Completion
 comes from the resulting game state.
+
+The existing evidence qualifies particular cases that can become campaign
+tests. FF1's Chaos Shrine seal and Garland use separate receipts. FFII
+already reads a learned keyword on an explicit guide request. FFIII has
+owned route replays between the Floating Continent, Surface World and
+underwater. FFIV has verified fetch-and-return legs for the Twin Harp,
+but the full three-world route matrix needs coverage. FFV and FFVI need
+world-phase checks that retire prior-world objectives. FFVI also needs
+save cases for its parallel scenarios and active party. Treat these
+existing receipts as evidence for individual stages.
+[FFI story gate](FF1_GATE_FOLLOWUPS_20261101.md).
+[FFIII world journeys](WORLD_MAP_JOURNEYS_20261030.md).
+[FFIV campaign interactions](FF4_PUZZLE_GUIDES_20261101.md).
+[FFVI story sequences](FF6_STORY_NAVIGATION.md).
 
 | Checkpoint | State and exit condition |
 | --- | --- |

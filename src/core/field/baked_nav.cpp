@@ -2727,6 +2727,14 @@ static std::vector<const baked::Object*> equivalent_world_entrances(
     return alternatives;
 }
 
+static bool ordinary_chest_goal(const baked::Grids& grid, const Cell& target, int entity_id)
+{
+    return std::any_of(grid.objects.begin(),grid.objects.end(),[&](const auto& object) {
+        return object.type==baked::ObjType::TreasureBox&&!baked::pickup_treasure(object)&&
+            (entity_id<0||entity_id==object.entity_id())&&object.contains(target.x,target.y);
+    });
+}
+
 bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetKind kind, bool with_vehicles, PathInfo& out)
 {
     const baked::Submap* sm = current_submap(map_handle);
@@ -3030,7 +3038,8 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             around.map_id = map_id;
             around.cell = stair_chest ? kBaronChest : target;
             around.cells = req.goals;
-            around.examine = around.examine || goals.face;
+            if(kind==TargetKind::Interact&&ordinary_chest_goal(g,target,g_route_snapshot->goal.entity_id))
+                around.examine=true;
         }
         // Try the known land connection before offering a vehicle. While
         // airborne, keep the existing landing and vehicle approach priority.
@@ -3687,9 +3696,10 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
         if(try_blackjack_journey(goal_in,kind,name,out))return true;
         const int map_id = planning_map_id();
         MapGoal goal = goal_in;
-        // Interact goals identify the cells from which to face the target.
-        // Reaching a tile beside a blocked approach does not reach the target.
-        if (kind == TargetKind::Interact) goal.examine = true;
+        // A chest approach must reach a cell that can face the chest. Keep
+        // the separate rules for animated pickups and other native actions.
+        if(kind==TargetKind::Interact&&ordinary_chest_goal(baked::grids(*there),goal.cell,goal.entity_id))
+            goal.examine=true;
         std::vector<Cell> remote_npc_cells;
         if (goal.entity_id >= 0 && goal.transportation_id<=0) {
             auto state = planning_state();
