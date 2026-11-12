@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 12 FFIV Castle Baron gate
+
+Production source 27572a4 plus the focused delivery entry e3b5082.
+The user approved stopping the earlier full 281-target job. The focused
+production DLL, smoke host and four named route/state/filter checks
+completed in 595.7 seconds. The enforced job peaked at 926,883,840 bytes,
+with 25% CPU and one worker. All 67 embedded resources matched their
+source files and all 47 exports resolved in the isolated smoke host.
+
+Defender found no threats in 22 exact staged files with stable hashes.
+Exclusion status was unavailable. No signing certificate was present.
+Guarded deploy.bat ff4 installed SHA-256 d33c195037659787dd9ed35641fb09869724590d4564a817f09813624f7a08ef.
+All 22 installed files, 138 protected file checks and the other five
+installations verified. Concise receipts are in the workspace's
+tools/baron_gate_20261112 directory. Gameplay confirmation is pending.
+
+
 ## November 11 FFIV Tower of Zot chest
 
 FFIV now uses the 13,390,336-byte DLL with SHA-256

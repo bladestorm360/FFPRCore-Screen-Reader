@@ -333,8 +333,11 @@ write or extra work on the game thread was added.
 The pre-change production replay reproduces an unavailable gate from map
 9 and Story gated exits from both maps. The changed browse_route_check
 passes all eight open/closed route cases and their continuation checks.
-The canonical build, local smoke, payload scan and FFIV deployment are
-pending. Gameplay confirmation remains separate.
+The focused production build, four selected offline checks, isolated smoke
+and exact 22-file Defender scan passed. All 22 installed FFIV files matched.
+The other five mod installations and 138 protected file checks passed.
+Implementation and offline delivery are Closed. Gameplay confirmation
+remains separate.
 
 ## November 6 FFIV Castle Baron East Tower 1F west chest
 

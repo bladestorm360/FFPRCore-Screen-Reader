@@ -14,7 +14,13 @@ Release hid target and smoke host, plus only those named fixtures. It runs
 the source-boundary, pinned OpenAL and native-name checks. It verifies each
 embedded resource byte-for-byte against the generated input manifest and
 records the DLL hash and selected checks in build_check/local-delivery.
-The complete build remains available for broad integration and releases.
+Focused incremental delivery is the owner-directed default. The complete
+suite is an explicit workflow for genuinely broad verification and packaged
+releases. Reuse one production compiler cache on C: between fixes. Keep the
+native build configuration and compiler dependency tracking intact. At
+checkpoint cleanup, discard unrelated fixture build products, raw test
+transcripts, staging and superseded DLL copies. Preserve the production
+objects needed to rebuild only changed sources and embedded inputs.
 
 The normal enforced Windows job, one compiler/project worker, 25% CPU
 limit, below-normal priority, no shared compiler servers and 2 GB
@@ -22,6 +28,13 @@ aggregate limit also apply to the focused path. Native builds use C:.
 Run the isolated smoke check and scan the exact installed payload before
 the guarded deploy command. Record the installed hashes. This checkpoint
 does not change game runtime behavior or reduce payload checks.
+
+The first C: focused production build for Castle Baron took 595.7 seconds
+from a cold production cache. It selected six top-level targets with their
+dependencies and peaked at 926,883,840 bytes in the verified 25% CPU job.
+The owner stopped the earlier full build around target 87 of 281 after
+30.7 minutes. This is a partial full-build observation, not a full-build
+benchmark. See the Castle Baron entry in SECURITY_AND_DISTRIBUTION.md.
 
 
 Human scope October28: include these two small corrections with the urgent
