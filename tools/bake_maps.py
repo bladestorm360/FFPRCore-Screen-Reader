@@ -13,6 +13,7 @@ What is baked, per sub-map (the Tiled sub-map "Map_20011_1"; a world map is "Map
   * the hidden-passage grids (cells the player walks that the game's searcher never enters);
   * world maps: the terrain attribute ids (one per cell, 1-32) and the per-transportation-GROUP
     passability layers "Transportation01".."NN" (0 open, 1 blocked: the riding route grid);
+    FFIV Underworld also uses the ground collision slot for its on-foot sub-collision faces;
   * the routing objects: entry points (PointIn), exits (GotoMap), layer changes (ToLayer),
     counters (RelayInteraction), talk targets (NPC, ShopNPC, Entity, AnimEntity,
     TreasureBox), teleports (TelepoPoint), vehicle pads (TransportationEventAction),
@@ -178,6 +179,20 @@ def collision_rows(coll, li):
         if layer_index(ln) == li and rows:
             return rows
     return None
+
+
+def baked_collision_layers(game, name, grid, bounds):
+    collision = grid.get("collision") or {}
+    if game != "ff4" or name != "Map_10020":
+        return collision
+    # The package supplies a separate directional ground overlay for this world.
+    rows = (grid.get("sub_collision") or {}).get("GroundSubCollision", [])
+    x, y, w, h = bounds
+    if (collision or not grid.get("attribute") or not grid.get("transportation")
+            or not w or not h or len(rows) < y + h
+            or any(len(row) < x + w or "?" in row for row in rows[y:y+h])):
+        raise ValueError("FFIV Map_10020 requires the extracted GroundSubCollision layer")
+    return {"GroundSubCollision": rows}
 
 
 def grid_cells(rows, w, h, wide):
@@ -712,11 +727,11 @@ def bake_game(game, out_dir, check=False):
         g = grids.get(n) or {}
         region = bounds[n]
         _, _, w, h_ = region
-        coll = g.get("collision") or {}
+        coll = baked_collision_layers(game, n, g, region)
         passage = g.get("hidden_passage") or {}
         attribute = g.get("attribute") or {}
         transport_layers = g.get("transportation") or {}
-        is_world = bool(attribute) and not coll
+        is_world = bool(attribute) and not g.get("collision")
         layer_mask = 0
         coll_off = [0, 0, 0]
         pass_off = [0, 0, 0]
@@ -815,10 +830,10 @@ def bake_game(game, out_dir, check=False):
           f"({warps} warps, {scenes} round-trip cutscenes kept as events), {stats['cells']} collision cells "
           f"-> {stats['bytes']} bytes: {path}")
     if check:
-        verify(path, grids, names, bounds)
+        verify(path, game, grids, names, bounds)
 
 
-def verify(path, grids, names, bounds):
+def verify(path, game, grids, names, bounds):
     """Decode every collision grid back and compare with the dump (the RLE round trip)."""
     data = open(path, "rb").read()
     hdr = struct.unpack_from("<8sIB3sIIIIIIIIIIII", data, 0)
@@ -829,7 +844,7 @@ def verify(path, grids, names, bounds):
         rec = struct.unpack_from("<IihhBBBBIIIIIIIIII", data, sub_off + i * SUBMAP)
         w, h = rec[2], rec[3]
         n = names[i]
-        coll = (grids.get(n) or {}).get("collision") or {}
+        coll = baked_collision_layers(game, n, grids.get(n) or {}, bounds[n])
         for li, ln in enumerate(LAYER_NAMES):
             off = rec[8 + li]
             rows = collision_rows(coll, li)

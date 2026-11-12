@@ -622,3 +622,20 @@ installer behavior. Do not rename/repack/rebuild merely to change a verdict,
 disable protections, add blanket exclusions or silently submit samples. Vendor
 false-positive submission and artifact uploads require existing authorization.
 An unresolved detection is distinct from the unsigned/reputation gaps above.
+
+## November 12 FFIV Underworld routing
+
+Focused build, three navigation fixtures, 8,427 native-name checks and the
+47-export smoke test passed. The installed FFIV `hid.dll` is 13,438,976 bytes
+with SHA256 `6db637319016d3dc187e8725e717664b130f1d6ad6f2cad76546f4f187fe076c`.
+Defender definitions `1.463.267.0` reported no threats on the 22 exact files,
+with zero matching detection events and stable hashes. The OS denied the
+exclusion query. The build has no signing certificate or outer package.
+All 22 FFIV installed hashes matched. The installer preserved 138 protected
+file states and the other five game payloads. It verified Prism read-only.
+
+Evidence is in `../tools/ff4_underworld_20261112/delivery` relative to the
+checkout. Recovery uses source checkpoint `cc1ce8d0cb76ab48738199a53203e95879521277`
+with the documented focused build, smoke, scan and FFIV deploy sequence.
+Its prior installed DLL hash is
+`c9f1072d36f1f1c3b43c2b0f3833632c8bef3483c28eef68babf35f4d1d17acb`.

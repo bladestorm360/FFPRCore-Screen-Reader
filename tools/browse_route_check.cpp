@@ -5,6 +5,83 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff4_underworld(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    const auto* underworld = baked::submap_by_map_id(2);
+    if (!underworld || !underworld->world) {
+        expect(false, "FFIV Underworld bake loads as a world map");
+        return;
+    }
+    const Cell wall{1,108,89}, west{1,107,89}, north{1,108,88};
+    const auto& grid = baked::grids(*underworld);
+    baked_route::Request walking;
+    walking.submap = underworld;
+    expect(baked_route::open(walking, grid, west), "the west tile passes the foot transportation test");
+    expect(!baked_route::edge_allowed(walking, grid, wall, west) &&
+           !baked_route::edge_allowed(walking, grid, west, wall),
+           "the Underworld partial wall blocks the reported west edge in both directions");
+    expect(baked_route::edge_allowed(walking, grid, wall, north), "the Underworld north step remains open");
+    walking.start = wall;
+    walking.goals = {north};
+    const auto north_route = baked_route::find(walking);
+    expect(north_route.cells == std::vector<Cell>{wall, north}, "the planner still routes one step north from the wall");
+    auto flying = walking;
+    flying.vehicle_group = 4;
+    flying.vehicle_type = 3;
+    flying.transportation_id = 4;
+    expect(baked_route::open(flying, grid, west) && baked_route::edge_allowed(flying, grid, wall, west),
+           "flight does not inherit the ground wall");
+
+    std::ifstream stream("data/ff4/mapstate.json", std::ios::binary);
+    const std::string bytes(std::istreambuf_iterator<char>(stream), {});
+    json::Value records;
+    if (!json::parse(bytes, records)) {
+        expect(false, "FFIV Underworld initializer data loads");
+        return;
+    }
+    map_state::Flags flags;
+    flags.current_map_id = 2;
+    flags.current_area_id = 2;
+    flags.scenario.fill(0);
+    flags.global.fill(0);
+    flags.local.fill(0);
+    flags.scenario[44] = 1;
+    flags.scenario[45] = 1;
+    flags.scenario[46] = 1;
+    std::thread worker([&] {
+        for (const Cell start : {Cell{1,110,89}, wall, north}) {
+            for (const auto& [goal, entity] : {std::pair{Cell{1,65,26}, 40},
+                     std::pair{Cell{1,64,23}, 33}, std::pair{Cell{1,61,22}, 124}}) {
+                RouteSnapshot snapshot(map_state::Resolver(flags, records));
+                snapshot.submap = underworld;
+                snapshot.map_id = 2;
+                snapshot.position = world_of_cell(*underworld, start);
+                snapshot.vehicle = {true,1,1,{},1};
+                snapshot.goal.map_id = 2;
+                snapshot.goal.cell = goal;
+                snapshot.goal.entity_id = entity;
+                snapshot.locale = L"en";
+                const auto began = std::chrono::steady_clock::now();
+                const auto path = plan_snapshot(snapshot).path;
+                const auto elapsed = std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-began).count();
+                bool illegal_step = false;
+                for (const auto& phase : path.walk_phases) {
+                    for (size_t i = 1; i < phase.cells.size(); ++i)
+                        if (!baked_route::direction_allowed(walking, phase.cells[i-1], phase.cells[i])) illegal_step = true;
+                }
+                std::printf("Underworld from (%d,%d) to (%d,%d): success %d steps %d blocked step %d %.3f ms %ls %ls\n",
+                            start.x, start.y, goal.x, goal.y, path.success, path.step_count, illegal_step, elapsed,
+                            path.reason.c_str(), path.error.c_str());
+                expect(path.reason != L"Destination is no longer available", "the logged scene trigger is active in the replay");
+                expect(!illegal_step, "the Underworld route never directs the player through a partial wall");
+            }
+        }
+    });
+    worker.join();
+}
+
 template<class Expect> void check_dwarven_castle(Expect expect)
 {
     using namespace field;
@@ -213,6 +290,7 @@ int main() {
         for(int i=0;i<field::baked::submap_count();++i)field::baked::grids(*field::baked::submap_at(i));
         g_loaded=true;g_prepared=true;
         if(number==4) {
+            check_ff4_underworld(expect);
             check_dwarven_castle(expect);
             check_baron_gate(expect);
             check_baron_stair_chest(expect);

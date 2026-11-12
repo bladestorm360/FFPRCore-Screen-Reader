@@ -1,5 +1,37 @@
 # Remaining map-audit findings and evidence limits
 
+## November 12 FFIV Underworld west route
+
+The FFIV log at 22901–22961 shows the route beginning four steps west from
+(110,89), then continuing to say two steps west at (108,89) after native
+movement stops. A north step to (108,88) succeeds. Three northwest scene
+triggers reproduce the problem on Underworld map 2 (`Map_10020`).
+
+The installed map bundle's `sub_collision` asset carries `GroundSubCollision`
+with a west face at (108,89). Both the terrain attribute and group-one
+transportation layer allow the tile immediately to its west. The map bake
+now packs the extracted directional layer into the Underworld's ground
+collision slot alongside its transportation grids.
+Every on-foot route checks the source and destination faces before accepting a
+step. Mounted routes keep their own transportation rules. The data and checks
+run on the existing owned navigation worker with no new hooks or game-thread
+reads.
+
+The baseline production worker chose the blocked west edge in all nine
+position-to-cell replays. The corrected worker reports Requires vehicle
+from the three positions to each of the three active scene triggers.
+A one-step north route from the wall and the airship edge both pass.
+The replay took at most 2.2 ms per route in the offline worker fixture.
+The rebake adds only 1,113 bytes for the Underworld mask, with a round-trip
+decode and byte comparison of all other data. Reproduce with
+`build_local.bat browse_route_check map_geometry_check route_worker_check`.
+Source asset locators, hashes and the extraction receipt are in the external
+workspace `tools/ff4_underworld_20261112`. Focused delivery took 98.4 seconds
+with the compiler cache and verified 67 embedded resources. All three named
+checks passed. The exact scanned payload is installed in FFIV.
+[Installation record](../SECURITY_AND_DISTRIBUTION.md#november-12-ffiv-underworld-routing).
+In-game confirmation is pending.
+
 ## November 12 FFIV Dwarven Castle chest loop
 
 The FFIV log at 20691–20707 shows the B1 chest at (26,5) routing

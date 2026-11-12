@@ -108,10 +108,21 @@ bool open(const Request& r, const baked::Grids& g, const Cell& c)
     return baked::walkable(g, c.layer, c.x, c.y, r.passages);
 }
 
-bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
+static bool direction_allowed(const Request& r, const Cell& from, const Cell& to,
+                              int direction, const baked::Grids* grid)
 {
     const bool world=r.submap&&r.submap->world;
-    const int direction=step_direction(from,to,r.submap?baked::wrap_width(*r.submap):0,r.submap?baked::wrap_height(*r.submap):0);
+    // FFIV's Underworld has a ground sub-collision overlay alongside its
+    // transportation grids. Apply its wall faces in both directions on foot.
+    if (world && r.vehicle_group <= 0 && direction >= 0 && direction < 4 && r.submap->collision_off[1]) {
+        const auto& ground = grid ? *grid : baked::grids(*r.submap);
+        const auto& faces = ground.collision[1];
+        if (!faces.empty() && baked::in_bounds(ground, from.x, from.y) && baked::in_bounds(ground, to.x, to.y)) {
+            const auto source = faces[static_cast<size_t>(from.y) * ground.width + from.x];
+            const auto target = faces[static_cast<size_t>(to.y) * ground.width + to.x];
+            if (!(source & kBits[direction]) || !(target & kBits[kReverse[direction]])) return false;
+        }
+    }
     const auto permits=[&](const auto& gate) {
         if (gate.cell.x == to.x && gate.cell.y == to.y &&
             (world || gate.cell.layer < 0 || gate.cell.layer == to.layer) &&
@@ -130,6 +141,12 @@ bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
             if((gate.ids&ids)&&!permits(gate))return false;
     }
     return true;
+}
+
+bool direction_allowed(const Request& r, const Cell& from, const Cell& to)
+{
+    const int direction=step_direction(from,to,r.submap?baked::wrap_width(*r.submap):0,r.submap?baked::wrap_height(*r.submap):0);
+    return direction_allowed(r, from, to, direction, nullptr);
 }
 
 void add_collision(std::vector<Cell>& blocked,std::vector<Request::Directional>& directional,const Cell& cell,int id)
@@ -186,7 +203,7 @@ bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, con
     // including a graph-selected exit; ignoring scene hazards cannot bypass it.
     if(terminal_transition(r,g,to)&&!((r.goals_open||r.terminal_goal)&&is_goal_cell(r,to)))return false;
     const int dir = step_direction(from,to,r.submap?baked::wrap_width(*r.submap):0,r.submap?baked::wrap_height(*r.submap):0);
-    if (dir < 0 || (world && dir >= 4) || !direction_allowed(r,from,to)) return false;
+    if (dir < 0 || (world && dir >= 4) || !direction_allowed(r,from,to,dir,&g)) return false;
     // Entering a current does not constrain the approach. Once inside,the
     // game's Gimmick state owns exactly this cardinal displacement;manual
     // turns and diagonals cannot substitute for the forced direction.

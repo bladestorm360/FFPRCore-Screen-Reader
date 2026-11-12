@@ -23,6 +23,13 @@ and preserves native form messages where available. Gameplay
 confirmation is pending. See [boss animation speech](docs/re/BOSS_VISUALS_20261112.md).
 On November 12 the owner set [focused incremental delivery](docs/re/LOCAL_GUIDANCE_20261028.md#november-12-focused-local-delivery) as the default. Reuse the production compiler cache and select checks by affected behavior.
 
+**November 12 FFIV Underworld.** On-foot routes apply the Underworld's
+authored directional collision faces along with transportation passability.
+The replay reports Requires vehicle for the three logged scene triggers
+from the approaches near Dwarven Castle. FFIV has the verified focused build.
+In-game confirmation is pending.
+[Evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-underworld-west-route).
+
 **November 12 Dwarven Castle chests.** The fixed guards before
 King Giott's throne-room scene now count as story barriers on both
 loaded and future floors. This prevents the B1 and West Tower chest
@@ -48,7 +55,7 @@ verification. Review content before pushing, verify the remote ref and record
 the current check status.
 [Project rule](AGENTS.md).
 
-The November 12 migration, route and boss checkpoints are local.
+The November 12 migration, route, boss and Underworld checkpoints are local.
 Automatic approval review rejected the push containing the
 workspace migration to the public remote. The last verified
 remote master tip is `4399119bf2eb8d2dc665310f455d1017033420b4`.
