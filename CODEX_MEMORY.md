@@ -19,6 +19,8 @@ production browse route replay. Focused build, smoke and exact payload
 scan passed. The FFIV Steam install matches the scanned files. See [the Castle Baron checkpoint](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-castle-baron-front-gate-and-overworld-exit).
 The FFIV–VI silent boss animation audit resumed after that deployment and
 was temporarily set aside for the Dwarven Castle route report.
+The first source slice and outstanding render checks are in
+[boss animation speech](docs/re/BOSS_VISUALS_20261112.md).
 On November 12 the owner set [focused incremental delivery](docs/re/LOCAL_GUIDANCE_20261028.md#november-12-focused-local-delivery) as the default. Reuse the production compiler cache and select checks by affected behavior.
 
 **November 12 Dwarven Castle chests.** The fixed guards before

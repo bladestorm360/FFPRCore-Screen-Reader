@@ -1,0 +1,334 @@
+#include "boss_visuals.h"
+#include "battle_util.h"
+#include "../core.h"
+#include "../displayed_ui.h"
+#include "../frame.h"
+#include "../hooks.h"
+#include "../modtext.h"
+#include "../say.h"
+#include "../unity.h"
+#include <array>
+#include <cmath>
+
+namespace ffpr::battle::boss_visuals {
+namespace {
+constexpr auto kSpriteGames = game::kFF4 | game::kFF5;
+constexpr auto kVisualGames = kSpriteGames | game::kFF6;
+ref::Class kDeformation{"Last.Battle.Function", "DeformationEnemyFunction", kSpriteGames};
+ref::Method mCreate{kDeformation, "Create", 0};
+ref::Field fDeformedMonster{kDeformation, "monster"};
+ref::Class kReplacement{"Last.Battle.Function", "BattleFunction37", kSpriteGames};
+ref::Method mStartEnd{kReplacement, "StartEnd", 0};
+ref::Field fOldUnits{kReplacement, "beforeUnits"}, fNewUnits{kReplacement, "afterUnits"};
+ref::Class kFunction{"Last.Battle", "BattleBaseFunction", kSpriteGames};
+ref::Field fAct{kFunction, "<battleActData>k__BackingField"};
+ref::Field fValue1{kFunction, "<Value1>k__BackingField"}, fValue3{kFunction, "<Value3>k__BackingField"};
+ref::Class kAct{"Last.Battle", "BattleActData", kSpriteGames};
+ref::Field fAttacker{kAct, "<AttackUnitData>k__BackingField"};
+ref::Field fTargets{kAct, "<TargetUnitDatas>k__BackingField"};
+ref::Class kInfo{"Last.Battle", "BattleUnitDataInfo", kVisualGames};
+ref::Field fEntity{kInfo, "<BattleSpriteEntity>k__BackingField"};
+ref::Class kEnemy{"Last.Battle", "BattleEnemyData", kSpriteGames};
+ref::Field fMaster{kEnemy, "<MonsterMaster>k__BackingField"};
+ref::Class kMonster{"Last.Data.Master", "Monster", kSpriteGames};
+ref::Method mId{kMonster, "get_Id", 0}, mAsset{kMonster, "get_MonsterAssetId", 0};
+ref::Class kSprite{"Last.Battle", "BattleSpriteEntity", kVisualGames};
+ref::Field fBody{kSprite, "characterSR"}, fAnimState{kSprite, "AnimStateController"};
+ref::Class kMesh{"Last.Battle", "EntityMeshRenderer", kVisualGames};
+ref::Field fArt{kMesh, "sprite"}, fRenderer{kMesh, "meshRenderer"};
+ref::Class kAnimator{"Last.Battle", "BattleEnemyAnimatorBase", kSpriteGames};
+ref::Field fPendingArt{kAnimator, "changeSprite"}, fAnimatorEntity{kAnimator, "battleEnemyEntity"};
+ref::Class kAnimState{"Last.Battle", "AnimStateController", kVisualGames};
+ref::Field fAnimator{kAnimState, "myBattleAnimatorBase"};
+ref::Class kHide{"Last.Battle", "NoSelectConditionFunction", game::kFF6};
+ref::Method mHide{kHide, "Start", 0}, mShow{kHide, "Remove", 0};
+ref::Class kEnemyEntity{"Last.Battle", "BattleEnemyEntity", game::kFF6};
+ref::Field fInitialAsset{kEnemyEntity, "monsterAssetId"};
+ref::Class kFF6AnimState{"Last.Battle", "AnimStateController", game::kFF6};
+ref::Field fStanding{kFF6AnimState, "currentStandingState"};
+ref::Class kPaintingScript{"Last.Interpreter.Instructions.SystemCall", "Current", game::kFF6};
+ref::Method mPainting{kPaintingScript, "ChadarnookSwich", 1};
+ref::Class kSandwormScript{"Last.Interpreter.Instructions.SystemCall", "Current", game::kFF5};
+ref::Method mSandwormMove{kSandwormScript, "SandWormMoveEnemy", 1};
+ref::Method mSandwormReveal{kSandwormScript, "SandWormEffectAfter", 1};
+ref::Class kPaintMesh{"Last.Battle", "EntityMeshRenderer", game::kFF6};
+ref::Method mSetFloat{kPaintMesh, "SetFloat", 2};
+ref::Class kPlugManager{"Last.Battle", "BattlePlugManager", game::kFF5 | game::kFF6};
+ref::Method mPlugInstance{kPlugManager, "Instance", 0}, mEnemyUnits{kPlugManager, "GetEnemyUnits", 0};
+
+// These are identity tokens for native-owned objects. The only dereferences
+// happen inside a native callback using its current owner. No worker or frame
+// task retains a Unity object.
+struct Request { uintptr_t entity = 0; SpriteChange change; };
+std::array<Request, 8> requests;
+unsigned pending = 0;
+bool ready = false;
+int painting_asset = 0;
+bool sandworm_moved = false;
+
+void close()
+{
+    ready = false;
+    pending = 0;
+}
+
+void open()
+{
+    requests = {};
+    painting_asset = 0;
+    sandworm_moved = false;
+    ready = true;
+}
+
+bool observe() { return frame::on_main_thread() && ready; }
+uintptr_t token(void* object) { return reinterpret_cast<uintptr_t>(object); }
+void* entity_of(void* unit) { return ref::rd<void*>(unit_info(unit), fEntity); }
+void* art_of(void* entity) { return ref::rd<void*>(ref::rd<void*>(entity, fBody), fArt); }
+int monster_id(void* unit)
+{
+    if (!kBattleEnemyData.is(unit)) return 0;
+    return ref::call<int32_t>(mId, ref::rd<void*>(unit, fMaster));
+}
+
+bool visible_body(void* entity)
+{
+    auto* mesh = ref::rd<void*>(entity, fBody);
+    return ref::rd<void*>(mesh, fArt) && displayed::renderer_visible(ref::rd<void*>(mesh, fRenderer));
+}
+
+void speak(const wchar_t* key)
+{
+    if (key) say(T(key), false);
+}
+
+Request* request_for(uintptr_t entity)
+{
+    for (auto& request : requests)
+        if (request.entity == entity) return &request;
+    return nullptr;
+}
+
+void forget(Request& request)
+{
+    request = {};
+    --pending;
+}
+
+void remember(void* entity, SpriteChange change)
+{
+    if (auto* old = request_for(token(entity))) forget(*old);
+    if (!change.presented(change.expected, true)) return;
+    if (auto* slot = request_for(0)) {
+        *slot = {token(entity), change};
+        ++pending;
+    }
+}
+
+using Callback = void(*)(void*, const void*);
+Callback o_create, o_start_end, o_hide, o_show;
+
+void d_create(void* self, const void* mi)
+{
+    o_create(self, mi);
+    if (!observe()) return;
+    hooks::guarded("BossVisual.Deformation", [&] {
+        auto* act = ref::rd<void*>(self, fAct);
+        auto* targets = ref::rd<void*>(act, fTargets);
+        if (unity::array_length(targets) != 1) return;
+        auto* unit = unity::array_at(targets, 0);
+        if (unit != ref::rd<void*>(act, fAttacker)) return;
+        auto* entity = entity_of(unit);
+        if (!entity) return;
+        const auto owner = monster_id(unit);
+        const auto asset = ref::call<int32_t>(mAsset, ref::rd<void*>(self, fDeformedMonster));
+        const auto* key = deformation(game::current(), owner, asset,
+                                      ref::rd<int32_t>(self, fValue1), ref::rd<int32_t>(self, fValue3));
+        auto* state = ref::rd<void*>(entity, fAnimState);
+        auto* animator = ref::rd<void*>(state, fAnimator);
+        if (ref::rd<void*>(animator, fAnimatorEntity) != entity) return;
+        remember(entity, {token(art_of(entity)), token(ref::rd<void*>(animator, fPendingArt)), key});
+    });
+}
+
+void d_start_end(void* self, const void* mi)
+{
+    const wchar_t* key = nullptr;
+    if (observe()) hooks::guarded("BossVisual.PartyIdentity", [&] {
+        const int party = ref::rd<int32_t>(self, fValue1);
+        if (party != 445 && party != 654 && party != 655 && (party < 540 || party > 542)) return;
+        auto* before = ref::rd<void*>(self, fOldUnits);
+        auto* after = ref::rd<void*>(self, fNewUnits);
+        if (unity::array_length(before) != 1 || unity::array_length(after) != 1) return;
+        auto* old_unit = unity::array_at(before, 0);
+        auto* new_unit = unity::array_at(after, 0);
+        const auto* candidate = replacement(game::current(), party, monster_id(old_unit), monster_id(new_unit));
+        // Native StartEnd is reached after the flashing swap has settled.
+        if (candidate && !displayed::container_visible(entity_of(old_unit)) &&
+            visible_body(entity_of(new_unit))) key = candidate;
+    });
+    o_start_end(self, mi);
+    if (key && observe()) hooks::guarded("BossVisual.PartyShown", [&] { speak(key); });
+}
+
+void hide_change(void* self, const void* mi, Callback original, bool withdrawing)
+{
+    void* state = nullptr;
+    void* entity = nullptr;
+    int before = -1;
+    int asset = 0;
+    if (observe()) hooks::guarded("BossVisual.ShellIdentity", [&] {
+        entity = entity_of(function_unit(self));
+        asset = ref::rd<int32_t>(entity, fInitialAsset);
+        if (!no_select_actor(asset, withdrawing) || (withdrawing && !visible_body(entity))) return;
+        state = ref::rd<void*>(entity, fAnimState);
+        if (!state) return;
+        before = ref::rd<int32_t>(state, fStanding);
+    });
+    original(self, mi);
+    if (state && observe()) hooks::guarded("BossVisual.NoSelectShown", [&] {
+        if (ref::rd<void*>(entity, fAnimState) != state) return;
+        const auto* key = no_select_pose(asset, before, ref::rd<int32_t>(state, fStanding), withdrawing);
+        if (key && (withdrawing || visible_body(entity))) speak(key);
+    });
+}
+
+void d_hide(void* self, const void* mi) { hide_change(self, mi, o_hide, true); }
+void d_show(void* self, const void* mi) { hide_change(self, mi, o_show, false); }
+
+// The FFVI script applies alpha 1 to the newly exposed body, then the shadow.
+// Only watch these writes while that exact script is on the native stack.
+thread_local void** painting_reveal = nullptr;
+struct PaintingScope {
+    void** previous = painting_reveal;
+    explicit PaintingScope(void*& body) { painting_reveal = &body; }
+    ~PaintingScope() { painting_reveal = previous; }
+};
+using SetFloat = void(*)(void*, void*, float, const void*);
+SetFloat o_set_float;
+void d_set_float(void* mesh, void* property, float value, const void* mi)
+{
+    o_set_float(mesh, property, value, mi);
+    if (!painting_reveal || *painting_reveal || value != 1.0f) return;
+    hooks::guarded("BossVisual.PaintingAlpha", [&] {
+        if (ref::str(property) == L"_Alpha") *painting_reveal = mesh;
+    });
+}
+
+using Script = int32_t(*)(void*, const void*);
+Script o_painting;
+Script o_sandworm_move, o_sandworm_reveal;
+void* enemy_units()
+{
+    auto* manager = ref::call_static<void*>(mPlugInstance);
+    return ref::call<void*>(mEnemyUnits, manager);
+}
+
+void* sandworm_body()
+{
+    auto* enemies = enemy_units();
+    const int count = unity::array_length(enemies);
+    if (count < 1 || count > 9) return nullptr;
+    for (int index = 0; index < count; ++index) {
+        auto* unit = unity::array_at(enemies, index);
+        if (monster_id(unit) == 294) return entity_of(unit);
+    }
+    return nullptr;
+}
+
+int32_t d_sandworm_move(void* interpreter, const void* mi)
+{
+    if (!observe() || sandworm_moved) return o_sandworm_move(interpreter, mi);
+    void* transform = nullptr;
+    unity::Vec3 before{};
+    hooks::guarded("BossVisual.SandwormBefore", [&] {
+        transform = unity::transform(sandworm_body());
+        if (transform) before = unity::local_position(transform);
+    });
+    const auto result = o_sandworm_move(interpreter, mi);
+    if (transform && observe()) hooks::guarded("BossVisual.SandwormMoved", [&] {
+        if (unity::transform(sandworm_body()) != transform) return;
+        const auto after = unity::local_position(transform);
+        sandworm_moved = std::abs(after.x-before.x) > 0.01f || std::abs(after.y-before.y) > 0.01f;
+    });
+    return result;
+}
+
+int32_t d_sandworm_reveal(void* interpreter, const void* mi)
+{
+    const auto result = o_sandworm_reveal(interpreter, mi);
+    if (result == 0 && observe() && sandworm_moved) hooks::guarded("BossVisual.SandwormShown", [&] {
+        sandworm_moved = false;
+        if (visible_body(sandworm_body())) speak(L"BossVisual.SandwormMoved");
+    });
+    return result;
+}
+
+int32_t d_painting(void* interpreter, const void* mi)
+{
+    if (!observe()) return o_painting(interpreter, mi);
+    void* body = nullptr;
+    const auto result = [&] {
+        PaintingScope scope(body);
+        return o_painting(interpreter, mi);
+    }();
+    if (!body || !observe()) return result;
+    hooks::guarded("BossVisual.PaintingShown", [&] {
+        auto* enemies = enemy_units();
+        const int count = unity::array_length(enemies);
+        if (count < 1 || count > 9) return;
+        for (int index = 0; index < count; ++index) {
+            auto* entity = entity_of(unity::array_at(enemies, index));
+            if (ref::rd<void*>(entity, fBody) != body) continue;
+            const int asset = ref::rd<int32_t>(entity, fInitialAsset);
+            if ((asset == 300 || asset == 317) && visible_body(entity)) {
+                const auto* key = painting(painting_asset, asset);
+                painting_asset = asset;
+                speak(key);
+            }
+            break;
+        }
+    });
+    return result;
+}
+
+int install()
+{
+    if (!game::in(kVisualGames)) return 0;
+    events::on(events::Kind::BattleEntering, &close);
+    events::on(events::Kind::BattleStart, &open);
+    events::on(events::Kind::BattleEnd, &close);
+    events::on(events::Kind::TitleScreen, &close);
+    if (game::is(game::Id::FF6)) {
+        const int hide = hooks::attach(mHide, &d_hide, &o_hide);
+        const int show = hooks::attach(mShow, &d_show, &o_show);
+        const int painting = hooks::attach(mPainting, &d_painting, &o_painting);
+        return hide + show + painting + hooks::attach(mSetFloat, &d_set_float, &o_set_float);
+    }
+    const int sprite = hooks::attach(mCreate, &d_create, &o_create);
+    const int party = hooks::attach(mStartEnd, &d_start_end, &o_start_end);
+    if (!game::is(game::Id::FF5)) return sprite + party;
+    const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);
+    return sprite + party + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal);
+}
+core::Install registration{"Battle.BossVisuals", &install, 117};
+}
+
+SpriteChange before_sprite(void* entity, void* incoming)
+{
+    if (!observe() || !pending || !entity) return {};
+    auto* request = request_for(token(entity));
+    if (!request) return {};
+    const auto change = request->change;
+    forget(*request);
+    return hooks::guarded_r("BossVisual.BeforeSprite", SpriteChange{}, [&] {
+        return change.expected == token(incoming) && change.before == token(art_of(entity)) ? change : SpriteChange{};
+    });
+}
+
+void after_sprite(void* entity, const SpriteChange& change)
+{
+    if (change.key && observe() && token(art_of(entity)) == change.expected &&
+        change.presented(change.expected, visible_body(entity))) speak(change.key);
+}
+
+} // namespace ffpr::battle::boss_visuals
