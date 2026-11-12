@@ -1,5 +1,5 @@
 @echo off
-REM Build the FFPR native screen reader (hid.dll proxy). Builds ALWAYS go through this script.
+REM Full FFPR regression build. Use build_local.bat for scoped local delivery.
 REM Treat negative Windows exception/stack-overflow exit codes as failures too.
 REM Nothing is written to any game folder: installing is deploy.bat, a separate step.
 setlocal

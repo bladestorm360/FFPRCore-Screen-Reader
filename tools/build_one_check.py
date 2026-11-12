@@ -1,8 +1,8 @@
 """Canonical build.bat --check NAME development slice; no deployment/game run.
 
 Build and run one actual production-consumer check at a time. This is not a
-complete candidate build: the ordinary build.bat and smoke/security checks
-remain mandatory before delivery. Use existing CMake inputs and one compiler.
+production DLL build. Use build_local.bat with the affected checks for a
+scoped delivery, followed by smoke and payload verification. Use existing CMake inputs and one compiler.
 """
 from pathlib import Path
 import os
@@ -48,7 +48,7 @@ def main():
     with (evidence/(name.removesuffix('_check')+suffix+'_report.txt')).open('wb') as output:
         result = subprocess.run([str(executable)], cwd=ROOT, env=env, stdout=output, stderr=subprocess.STDOUT)
     print('Targeted check:', name, config, 'exit', result.returncode, 'elapsed %.3fs' % (time.monotonic()-began))
-    print('Development evidence only; full canonical build/smoke/security required before deployment.')
+    print('Development evidence only. Build and verify a production DLL before deployment.')
     return result.returncode
 
 

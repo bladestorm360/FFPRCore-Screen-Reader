@@ -45,7 +45,7 @@ For an explicit user-directed handoff, follow the shared policy for scope/file o
 supplied research/contracts, acceptance/offline checks and return-to-Sol conditions.
 Preserve the current task, uncommitted work and all native/thread/lifetime/approval rules.
 
-Build with `build.bat`, then `smoketest.bat`; deployment is separate (`deploy.bat [ffN]`). These scripts must never launch a game. Gameplay testing and runtime probes are user-side unless explicitly authorized. Complete the current audit and offline checks before requesting gameplay tests.
+For a scoped local fix, use `build_local.bat CHECK [CHECK ...]` with the maintained checks for the changed behavior. Use `build.bat` for the complete regression build and packaged releases. Both build the same production DLL. Run `smoketest.bat` and the exact-payload security check before the separate `deploy.bat [ffN]` step. These scripts must never launch a game. See [local delivery](docs/re/LOCAL_GUIDANCE_20261028.md#november-12-focused-local-delivery). Gameplay testing and runtime probes are user-side unless explicitly authorized. Complete the current audit and offline checks before requesting gameplay tests.
 
 Owner update, November 6: install authorized local fixes in the affected games
 as soon as the build and required verification pass. No separate deployment

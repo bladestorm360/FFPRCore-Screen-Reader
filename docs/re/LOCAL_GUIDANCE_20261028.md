@@ -1,5 +1,29 @@
 # Nearby walking routes and repeated interactive objects
 
+## November 12 focused local delivery
+
+The complete FFPR build schedules 281 targets. Many are independent offline
+checks that compile the navigation planner into separate test programs. The
+production DLL itself uses the shared core, MinHook and six game adapters.
+The owner requested a shorter verified local path for scoped changes.
+
+Run build_local.bat with the maintained checks for the actual affected
+behavior. For the Baron fix the list is browse_route_check, mapstate_check,
+route_worker_check and entity_filter_check. The command builds the normal
+Release hid target and smoke host, plus only those named fixtures. It runs
+the source-boundary, pinned OpenAL and native-name checks. It verifies each
+embedded resource byte-for-byte against the generated input manifest and
+records the DLL hash and selected checks in build_check/local-delivery.
+The complete build remains available for broad integration and releases.
+
+The normal enforced Windows job, one compiler/project worker, 25% CPU
+limit, below-normal priority, no shared compiler servers and 2 GB
+aggregate limit also apply to the focused path. Native builds use C:.
+Run the isolated smoke check and scan the exact installed payload before
+the guarded deploy command. Record the installed hashes. This checkpoint
+does not change game runtime behavior or reduce payload checks.
+
+
 Human scope October28: include these two small corrections with the urgent
 [cross-floor NPC repair](CROSS_FLOOR_NPC_20261028.md), deploy FFIII, then resume
 the [full map audit](MAP_AUDIT_FOLLOWUPS_20261028.md). Sol only; no game probe.
