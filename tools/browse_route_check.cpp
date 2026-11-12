@@ -5,6 +5,61 @@
 #undef main
 
 namespace {
+template<class Expect> void check_baron_gate(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    std::ifstream stream("data/ff4/mapstate.json",std::ios::binary);
+    const std::string bytes(std::istreambuf_iterator<char>(stream),{});
+    json::Value records;
+    if(!json::parse(bytes,records)) { expect(false,"Baron initializer data loads");return; }
+    const auto* exterior=baked::submap_by_map_id(4);
+    if(!exterior) { expect(false,"Baron courtyard bake loads");return; }
+    const auto& grid=baked::grids(*exterior);
+    const auto object=[&](int id)->const baked::Object*{
+        for(const auto& o:grid.objects)if(o.entity_id()==id&&o.type!=baked::ObjType::PointIn&&o.type!=baked::ObjType::Warp)return &o;
+        return nullptr;
+    };
+    std::thread worker([&]{
+        for (int map:{4,9})for(int opened:{0,1}) {
+            map_state::Flags flags;flags.current_map_id=map;flags.current_area_id=3;
+            flags.scenario.fill(0);flags.global.fill(0);flags.local.fill(0);
+            flags.scenario[280]=opened;flags.scenario[281]=opened;
+            auto* gate=object(49);
+            auto* exit=object(1);
+            if(!gate||!exit) { expect(false,"Baron gate and exit identities load");return; }
+            for (auto* target:{gate,exit}) {
+                const bool to_gate=target==gate;
+                RouteSnapshot snapshot(map_state::Resolver(flags,records));
+                snapshot.map_id=map;snapshot.submap=baked::submap_by_map_id(map);snapshot.layer=0;
+                snapshot.locale=L"en";snapshot.vehicle={true,1,1,{}};
+                snapshot.position=world_of_cell(*snapshot.submap,map==4?Cell{0,16,33}:Cell{0,3,3});
+                snapshot.goal={4,{target->layer,target->tx,target->ty},to_gate,{},0,target->entity_id(),baked::object_identifier(*target)};
+                snapshot.kind=to_gate?TargetKind::Infer:TargetKind::Transition;
+                if(map==4)for(const auto& o:grid.objects){
+                    if(o.type!=baked::ObjType::Entity&&o.type!=baked::ObjType::Event)continue;
+                    if((o.entity_id()<42||(o.entity_id()>50&&o.entity_id()!=142&&o.entity_id()!=143))||
+                       !snapshot.state.active(*exterior,o))continue;
+                    NativeObstacle seen;seen.id=o.entity_id();seen.type=int(o.type);seen.raw_name=baked::object_identifier(o);seen.cell={o.layer,o.tx,o.ty};
+                    seen.trigger=o.type==baked::ObjType::Event;snapshot.obstacles.push_back(std::move(seen));
+                }
+                auto route=plan_snapshot(snapshot);
+                if(to_gate) {
+                    expect(snapshot.state.active(*exterior,*target)==!opened,
+                           "Baron gate uses persistent receipt across the hall transition");
+                    expect(route.path.success==!opened,"Baron gate remains available only until opened");
+                } else {
+                    expect(route.path.success,"Baron exit routes from both logged floors");
+                    if(!opened) {
+                        expect(route.pending.valid && route.pending.goal.entity_id==1 &&
+                               route.pending.goal.map_id==4 && route.pending.incoming_transition,
+                               "Baron exit retains its destination through the gate approach floor change");
+                    }
+                }
+            }
+        }
+    });worker.join();
+}
 template<class Expect> void check_baron_stair_chest(Expect expect)
 {
     using namespace field;
@@ -93,6 +148,7 @@ int main() {
         for(int i=0;i<field::baked::submap_count();++i)field::baked::grids(*field::baked::submap_at(i));
         g_loaded=true;g_prepared=true;
         if(number==4) {
+            check_baron_gate(expect);
             check_baron_stair_chest(expect);
             const auto* jail=field::baked::submap_by_map_id(42);
             RouteSnapshot room(field::map_state::Resolver(field::map_state::Flags{},fixture::records));

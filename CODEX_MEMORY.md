@@ -12,6 +12,13 @@ research. The old managed localization merge requires an explicit historical
 source root. It is a one-time porting tool outside the current build.
 
 
+**November 12 Castle Baron front gate.** Latest FFIV log reproduced a
+closed gate disappearing in the west 1F hall and a Story gated Overworld
+exit. The exact remote entry projection and gate approach pass the
+production browse route replay. Canonical build and FFIV deployment
+are pending. See [the Castle Baron checkpoint](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-castle-baron-front-gate-and-overworld-exit).
+The FFIV–VI silent boss animation audit is queued after that deployment.
+
 **November 11 Tower of Zot chest.** Cross-floor planning for ordinary
 treasure chests now requires a reachable interaction tile. The logged
 5F–4F–5F recovery passes, as does the FFVI Dream pickup. FFIV has the

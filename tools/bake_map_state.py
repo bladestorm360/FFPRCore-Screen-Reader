@@ -381,6 +381,17 @@ def build(game, initializers_only=False):
     for name,record in scripts.items():
         initializer=source[name,'sc_'+name.lower()]
         record['code']=initializer_code(initializer,game,bounds[name])
+        if game == 'ff4' and name == 'Map_20010_1':
+            # ClearMapLocal runs before loading this floor. The persistent
+            # gate receipts are still evaluated. Only the already loaded
+            # courtyard can have the two transient trigger-deletion locals.
+            code = record['code']
+            assert code[14] == [2, 10, 1, 0, -1, 0, 16]
+            assert code[17] == [2, 10, 2, 0, -1, 0, 19]
+            record['current_code'] = code
+            record['code'] = code.copy()
+            record['code'][14] = [3, 16]
+            record['code'][17] = [3, 19]
         if game=='ff5' and name=='Map_30611_12':
             import trench_state
             record['current_code']=trench_state.live_code(initializer,record['code'])

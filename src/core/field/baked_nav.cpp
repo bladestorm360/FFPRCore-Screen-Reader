@@ -4203,6 +4203,7 @@ struct Planned {
 };
 #include "manual_key_prefix.inl"
 #include "troia_passages.inl"
+#include "baron_gate.inl"
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
     snapshot.flight_to_landing.reset();
@@ -4260,6 +4261,7 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     }
     prepare_manual_key_prefix(snapshot,result.path);
     prepare_troia_passage_prefix(snapshot,result.path);
+    prepare_baron_gate_prefix(snapshot,result.path);
     if (waterfall_state == 0 && !result.path.success && result.path.reason.empty() &&
         result.path.error == L"No path found") {
         result.path.reason = T(L"Event required");

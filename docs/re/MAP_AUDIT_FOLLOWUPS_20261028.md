@@ -305,6 +305,37 @@ and listing before and after stepping on each affected contact.
 Apply the owner's complex-puzzle scope when assessing guide coverage.
 Implementation and gameplay confirmation remain pending.
 
+## November 12 FFIV Castle Baron front gate and Overworld exit
+
+Scope is the front drawbridge and its route through the west 1F hall. The
+reported log shows exterior map 4 at Bottom (16,33), a Story gated Overworld
+exit at (18,34), and a route to Gate via the hall. Upon arriving in map 9 at
+16278.453, the destination was retired. Keep the real crossing available
+until opened and retain the chosen Overworld exit through the floor change.
+
+The courtyard initializer Map_20010_1 has two map-local trigger-deletion
+guards. ClearMapLocal resets those locals before a new floor initializes.
+The remote projection now uses those exact zero-on-entry facts. The current
+floor still evaluates the captured locals. ScenarioFlag2/24 (absolute 280)
+remains the native front gate receipt. The independent rear gate receipt
+and all other maps retain their existing semantics.
+
+The gate has two contact cells on each side. Native script IDs 1001 and
+1033 remove the same front gate collision and write the same receipt.
+FFIV directions to the four exact Overworld exit rows can route to a
+reachable active contact when the closed gate blocks the selected exit.
+The existing worker planner supplies any required floor change. The
+destination and native arrival receipt survive that change. On the
+courtyard the path ends at the gate contact, and the next request
+replans from the native position and collision. No hook, game-state
+write or extra work on the game thread was added.
+
+The pre-change production replay reproduces an unavailable gate from map
+9 and Story gated exits from both maps. The changed browse_route_check
+passes all eight open/closed route cases and their continuation checks.
+The canonical build, local smoke, payload scan and FFIV deployment are
+pending. Gameplay confirmation remains separate.
+
 ## November 6 FFIV Castle Baron East Tower 1F west chest
 
 The installed build returned “No path” to map 17 treasure entity 9
