@@ -5,6 +5,71 @@
 #undef main
 
 namespace {
+template<class Expect> void check_dwarven_castle(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    std::ifstream stream("data/ff4/mapstate.json",std::ios::binary);
+    const std::string bytes(std::istreambuf_iterator<char>(stream),{});
+    json::Value records;
+    if (!json::parse(bytes,records)) {
+        expect(false,"Dwarven Castle initializer data loads");
+        return;
+    }
+    std::thread worker([&] {
+        for (int story : {0,1}) {
+            for (const auto [floor,start] : {std::pair{119,Cell{0,4,7}},std::pair{119,Cell{0,4,9}},
+                 std::pair{121,Cell{0,17,13}},std::pair{121,Cell{0,17,11}},std::pair{121,Cell{0,9,5}}}) {
+                for (int target : {125,123}) {
+                    map_state::Flags flags;
+                    flags.current_map_id=floor;
+                    flags.current_area_id=39;
+                    flags.scenario.fill(0);
+                    flags.global.fill(0);
+                    flags.local.fill(0);
+                    flags.scenario[46]=story;
+                    RouteSnapshot snapshot(map_state::Resolver(flags,records));
+                    snapshot.submap=baked::submap_by_map_id(floor);
+                    snapshot.map_id=floor;
+                    snapshot.layer=start.layer;
+                    snapshot.position=world_of_cell(*snapshot.submap,start);
+                    snapshot.vehicle={true,1,1,{}};
+                    snapshot.kind=TargetKind::Interact;
+                    snapshot.locale=L"en";
+                    snapshot.goal={target,target==125?Cell{0,26,5}:Cell{0,9,11},true,{},0,target==125?12:5};
+                    for (const auto& object : baked::grids(*snapshot.submap).objects) {
+                        if (!snapshot.state.active(*snapshot.submap,object)) continue;
+                        const bool npc=object.type==baked::ObjType::NPC||object.type==baked::ObjType::ShopNPC;
+                        const bool chest=object.type==baked::ObjType::TreasureBox;
+                        if (!npc&&!chest) continue;
+                        NativeObstacle actor;
+                        actor.type=int(object.type);
+                        actor.id=object.entity_id();
+                        actor.cell={object.layer,object.tx,object.ty};
+                        actor.npc=npc;
+                        actor.chest=chest;
+                        actor.solidity_known=true;
+                        actor.solid=chest||(object.d&1);
+                        actor.raw_name=baked::object_identifier(object);
+                        snapshot.obstacles.push_back(std::move(actor));
+                    }
+                    auto route=plan_snapshot(snapshot);
+                    std::printf("Dwarven story %d from %d (%d,%d) to %d: success %d next %d steps %d %ls %ls\n",
+                                story,floor,start.x,start.y,target,route.path.success,route.path.next_map_id,route.path.step_count,
+                                route.path.reason.c_str(),route.path.error.c_str());
+                    if (story==0)
+                        expect(!route.path.success&&route.path.reason==L"Story gated"&&!route.pending.valid,
+                               "The guarded chest clears the destination without an inn/1F round trip");
+                    else
+                        expect(route.path.success&&route.path.next_map_id==(floor==119?121:target==123?122:125),
+                               "The chest route uses the inn stairs after the native guard group is removed");
+                }
+            }
+        }
+    });
+    worker.join();
+}
+
 template<class Expect> void check_baron_gate(Expect expect)
 {
     using namespace field;
@@ -148,6 +213,7 @@ int main() {
         for(int i=0;i<field::baked::submap_count();++i)field::baked::grids(*field::baked::submap_at(i));
         g_loaded=true;g_prepared=true;
         if(number==4) {
+            check_dwarven_castle(expect);
             check_baron_gate(expect);
             check_baron_stair_chest(expect);
             const auto* jail=field::baked::submap_by_map_id(42);

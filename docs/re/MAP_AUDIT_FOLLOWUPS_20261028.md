@@ -1,5 +1,35 @@
 # Remaining map-audit findings and evidence limits
 
+## November 12 FFIV Dwarven Castle chest loop
+
+The FFIV log at 20691–20707 shows the B1 chest at (26,5) routing
+from the Inn & Item Shop to 1F and back. At 20769–20777 the West
+Tower 2F chest at (9,11) follows the same cycle. The production
+worker replay reproduces those directions with the early-story guards
+at their authored cells and the normal current-floor collision checks.
+
+Before King Giott's throne-room sequence completes, the native
+initializers on maps 119 and 121 select group `ev_e_0047`. Its
+stationary guards occupy (24,9) on 1F and (17,5) and (8,13) in the
+Inn, on layer 0. Their native dialogue says the rooms are off-limits.
+The remote-floor NPC retry previously removed them from its planning
+model. The loaded floor still had their actual collision, so it sent
+the route back. The exterior map's central landing and tower
+approaches occupy separate walkable regions.
+
+The three exact guard identities now use the existing story-barrier
+classification for current and future floors. The route reports
+Story gated before the scene and keeps the native stairs available
+after `sc_e_0047_4` sets scenario 46. Guard dialogue and NPC selection
+remain native. The correction uses the existing worker snapshot and
+adds three authored rows. It adds no native hooks or frame polling.
+
+The fixture replays both targets from five actual route positions
+on both sides of scenario 46. The production replay, map-state
+and worker fixtures are selected with
+`build_local.bat browse_route_check mapstate_check route_worker_check`.
+Gameplay confirmation is pending.
+
 ## November 11 Tower of Zot 5F chest
 
 The FFIV log at 226512.359 shows the selected chest at (16,9) after

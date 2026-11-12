@@ -1,5 +1,17 @@
 # Build and distribution security
 
+## November 12 FFIV Dwarven Castle chests
+
+The warm focused build and three route and map-state checks completed in
+103.0 seconds. Peak job memory was 494,252,032 bytes with one worker and the
+25% CPU cap. All 67 embedded resources matched their source bytes. The
+isolated host resolved 47 exports and booted successfully. Defender found
+no threats in the 22 exact payload files and their hashes remained stable.
+The exclusion query was unavailable and no signing certificate was present.
+The DLL SHA-256 is
+`5fb04b743a0fc2f8e4817b3cfbfe979aa821f2797355271359f1c5a7229fcf98`.
+Installation is waiting for FFIV to exit.
+
 ## November 12 FFIV Castle Baron gate
 
 Production source 27572a4 plus the focused delivery entry e3b5082.

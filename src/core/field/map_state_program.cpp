@@ -319,11 +319,12 @@ bool Resolver::can_unlock(const baked::Submap& sm,const baked::Object& object) c
     return false;
 }
 bool Resolver::story_barrier(const baked::Submap& sm,const baked::Object& object) const {
+    const bool dwarven=baked::game_number()==4&&(sm.first_map_id==119||sm.first_map_id==121);
     const bool desert=baked::game_number()==5&&sm.first_map_id==286;
     const bool fork=baked::game_number()==5&&sm.first_map_id==443;
     if(desert&&(flags_.scenario[58]==std::optional<int>(1)||flags_.scenario[59]==std::optional<int>(1)))return false;
     if(fork&&flags_.scenario[142]==std::optional<int>(1))return false;
-    if(((baked::game_number()==6&&(sm.first_map_id==162||sm.first_map_id==125||sm.first_map_id==143))||desert||fork)&&
+    if(((baked::game_number()==6&&(sm.first_map_id==162||sm.first_map_id==125||sm.first_map_id==143))||dwarven||desert||fork)&&
        (object.type==baked::ObjType::Event||object.type==baked::ObjType::NPC)) {
         const auto* record=records_.get(baked::name_of(sm));const auto* rows=record?record->get(L"story_actor_gates"):nullptr;
         if(!rows||rows->arr.empty()||rows->arr.size()>32)return false;
@@ -341,6 +342,8 @@ bool Resolver::story_barrier(const baked::Submap& sm,const baked::Object& object
             // applies normal native group selection first. Vector0375's
             // detection regions also boot the player out after victory;
             // crossing them cannot substitute for the actual crate bypass.
+            // The Dwarven Castle initializer selects three stationary guards
+            // before scenario 46. A later-floor NPC retry must respect them.
             // Fork Tower's five pre-tablet contacts similarly return the
             // controlled player south;only native142 opens onward travel.
             return true;

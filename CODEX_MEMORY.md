@@ -17,8 +17,16 @@ closed gate disappearing in the west 1F hall and a Story gated Overworld
 exit. The exact remote entry projection and gate approach pass the
 production browse route replay. Focused build, smoke and exact payload
 scan passed. The FFIV Steam install matches the scanned files. See [the Castle Baron checkpoint](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-castle-baron-front-gate-and-overworld-exit).
-The FFIV–VI silent boss animation audit is queued after that deployment.
+The FFIV–VI silent boss animation audit resumed after that deployment and
+was temporarily set aside for the Dwarven Castle route report.
 On November 12 the owner set [focused incremental delivery](docs/re/LOCAL_GUIDANCE_20261028.md#november-12-focused-local-delivery) as the default. Reuse the production compiler cache and select checks by affected behavior.
+
+**November 12 Dwarven Castle chests.** The fixed guards before
+King Giott's throne-room scene now count as story barriers on both
+loaded and future floors. This prevents the B1 and West Tower chest
+routes from cycling between 1F and the Inn. The original stairs
+become routable when the native scene clears the guards.
+[Route evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-dwarven-castle-chest-loop).
 
 **November 11 Tower of Zot chest.** Cross-floor planning for ordinary
 treasure chests now requires a reachable interaction tile. The logged

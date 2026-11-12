@@ -364,6 +364,31 @@ def entry_guard(script, game, destination=None):
     return {'entry':offsets[entry],'code':code}
 
 
+def dwarven_guards(objects, bounds):
+    # All three guards occupy a one-tile passage in the pre-battle group.
+    # The native scenario-46 initializers remove that group together.
+    contacts = {
+        'Map_20151_1': {18: (24, 10, 'N112_C01_121_04_01')},
+        'Map_20151_3': {18: (17, 6, 'N112_C01_121_06_01'),
+                        19: (8, 14, 'N112_C01_121_04_01')},
+    }
+    rows = {}
+    for submap, guards in contacts.items():
+        found = []
+        for entity, (x, y, message) in guards.items():
+            guard, = [o for o in objects[submap] if o['type'] == 6
+                      and o['group'] == 'ev_e_0047' and o['props']['entity_id'] == entity]
+            assert (guard['tx'], guard['ty']) == (x, y)
+            assert guard['props']['move_type'] == 1 and guard['props']['message_key'] == message
+            assert (guard['w'], guard['h']) == (16, 16)
+            left, top = bounds[submap][:2]
+            found.append(dict(id=entity, type=6, group=guard['group'], raw=guard['name'],
+                              cell=[bake_maps.layer_index(guard['layer']), x-left,
+                                    bake_maps.tile_row(guard)-top], size=[1, 1]))
+        rows[submap] = found
+    return rows
+
+
 def build(game, initializers_only=False):
     scripts = {}
     source={}
@@ -467,6 +492,9 @@ def build(game, initializers_only=False):
         if key not in scripts:scripts[key]={'entry':0,'code':[],'initializer_unknown':True}
         scripts[key]['transport']=selectors['transport']
     for key,record in scripts.items(): record.update(metadata.get(key,{}))
+    if game == 'ff4':
+        for key, guards in dwarven_guards(by_sub, bounds).items():
+            scripts[key]['story_actor_gates'] = guards
     output = ROOT / 'data' / game / 'mapstate.json'
     if initializers_only:
         # A focused compiler correction must preserve authored locks, actor
