@@ -9,7 +9,7 @@ import UnityPy
 root=Path(__file__).resolve().parents[2]
 number=int(sys.argv[1]) if len(sys.argv)>1 else 5
 titles=('FINAL FANTASY','FINAL FANTASY II','FINAL FANTASY III','FINAL FANTASY IV','FINAL FANTASY V','FINAL FANTASY VI')
-assets=Path('D:/Games/SteamLibrary/steamapps/common')/(titles[number-1]+' PR')/(titles[number-1]+'_Data/StreamingAssets/aa')
+assets=Path('C:/Program Files (x86)/Steam/steamapps/common')/(titles[number-1]+' PR')/(titles[number-1]+'_Data/StreamingAssets/aa')
 out=root.parent/'tools/map_event_audit_20261028'/f'ff{number}_effect_native'
 out.mkdir(parents=True,exist_ok=True)
 assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0

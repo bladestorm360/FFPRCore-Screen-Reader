@@ -8,7 +8,7 @@ def digest(p):
  with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
 def main():
  check='--check'in sys.argv;guide,guard,proof,gates=author();assert read(R/'docs/re/ff5_fork_native_20261105.json')==proof
- native=proof['position_native'];dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==native['dll_sha256']and digest(R.parent/'FF5/dump.cs')==native['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
+ native=proof['position_native'];dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==native['dll_sha256']and digest(R.parent/'FF5/dump.cs')==native['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
  for f in native['functions']:assert hashlib.sha256(pe.get_data(f['rva'],f['bytes'])).hexdigest()==f['sha256']
  master=read(R/'docs/re/ff5_remaining_native_20261104.json');selected=[r for r in master['candidates']if r['submap']in ('Map_30481_1','Map_30490','Map_30490_1','Map_30490_2')];assert len(selected)==11
  for role,name in{'objects':'ff5_objects.jsonl','scripts':'ff5_scripts.jsonl','maps':'ff5_master/map.txt','script_master':'ff5_master/script.txt','areas':'ff5_master/area.txt','english_names':'ff5_master/system_en.txt'}.items():assert digest(D/name)==master['source_sha256'][role]

@@ -41,7 +41,7 @@ for block in source.split('// Namespace: ')[1:]:
             targets.append((name, args, rva))
 folders = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR',
            'FINAL FANTASY IV PR', 'FINAL FANTASY V PR', 'FINAL FANTASY VI PR']
-binary = pathlib.Path('D:/Games/SteamLibrary/steamapps/common') / folders[NUMBER-1] / 'GameAssembly.dll'
+binary = pathlib.Path('C:/Program Files (x86)/Steam/steamapps/common') / folders[NUMBER-1] / 'GameAssembly.dll'
 pe = pefile.PE(str(binary), fast_load=True)
 ordered = sorted(names)
 dis = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)

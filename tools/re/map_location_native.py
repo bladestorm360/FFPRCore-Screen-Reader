@@ -21,7 +21,7 @@ folder = ('ff1', 'ff2', 'ff3', 'FF4', 'FF5', 'ff6')[number-1]
 title = ('FINAL FANTASY', 'FINAL FANTASY II', 'FINAL FANTASY III',
          'FINAL FANTASY IV', 'FINAL FANTASY V', 'FINAL FANTASY VI')[number-1]
 dump = ROOT.parent / folder / 'dump.cs'
-dll = Path('D:/Games/SteamLibrary/steamapps/common') / (title+' PR') / 'GameAssembly.dll'
+dll = Path('C:/Program Files (x86)/Steam/steamapps/common') / (title+' PR') / 'GameAssembly.dll'
 out = ROOT.parent / 'tools/map_floor_20261025' / f'ff{number}'
 out.mkdir(parents=True, exist_ok=True)
 assert subprocess.run(['git', '-C', str(out), 'rev-parse', '--show-toplevel'],

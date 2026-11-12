@@ -16,7 +16,7 @@ import pefile
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUTPUT = external_directory('build_check/re')
 OUTPUT.mkdir(parents=True, exist_ok=True)
-STEAM = pathlib.Path('D:/Games/SteamLibrary/steamapps/common')
+STEAM = pathlib.Path('C:/Program Files (x86)/Steam/steamapps/common')
 GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR',
          'FINAL FANTASY IV PR', 'FINAL FANTASY V PR', 'FINAL FANTASY VI PR']
 METHODS = ['InitNone', 'UpdateNone', 'InitShortcutCommand', 'UpdateShortcutCommand',

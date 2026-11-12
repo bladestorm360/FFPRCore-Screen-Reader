@@ -18,7 +18,7 @@ targets={'EventTriggerEntity':{'IsTriggerEnable','OnTriggerEnterCustom','OnTrigg
          'KeyboardManager':{'ShowKeyboard','Update'}}
 for number,title in enumerate(titles,1):
     dump=ROOT.parent/('FF4' if number==4 else 'FF5' if number==5 else f'ff{number}')/'dump.cs'
-    dll=Path('D:/Games/SteamLibrary/steamapps/common')/(title+' PR')/'GameAssembly.dll'
+    dll=Path('C:/Program Files (x86)/Steam/steamapps/common')/(title+' PR')/'GameAssembly.dll'
     names={};selected={}
     for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
         cls=re.search(r'^(?:public|private|internal).*?\b(?:class|struct) ([\w.<>]+)',block,re.M)

@@ -12,7 +12,7 @@ def sha(path):
 def main():
  out=BASE/'ff5_library_20261101';out.mkdir(exist_ok=True)
  assert subprocess.run(['git','-C',str(out),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
- dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');dump=ROOT.parent/'FF5/dump.cs'
+ dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');dump=ROOT.parent/'FF5/dump.cs'
  old=json.loads((BASE/'chocobo_owen_20261025/ff5/provenance.json').read_text(encoding='utf-8'))
  assert sha(dll)==old['dll_sha256'] and sha(dump)==old['dump_sha256']
  text=dump.read_text(encoding='utf-8');starts=sorted({int(x,16) for x in re.findall(r'// RVA: 0x([0-9A-F]+) Offset:',text)})

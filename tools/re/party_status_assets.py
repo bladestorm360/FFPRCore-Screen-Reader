@@ -68,7 +68,7 @@ def main():
         master = ROOT.parent / 'tools/mapdump' / f'ff{number}_master'
         conditions = rows(master / 'condition.txt')
         assets = {int(r['id']): r['asset_name'] for r in rows(master / 'battle_effect_asset.txt')}
-        install = Path('D:/Games/SteamLibrary/steamapps/common') / (title + ' PR')
+        install = Path('C:/Program Files (x86)/Steam/steamapps/common') / (title + ' PR')
         bundle_index = {p.name: p for p in install.glob('*_Data/StreamingAssets/aa/StandaloneWindows64/*.bundle')}
         facts = []
         for identity in sorted({int(c['battle_effect_asset_id']) for c in conditions} - {0}):

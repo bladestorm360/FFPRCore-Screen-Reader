@@ -22,7 +22,7 @@ assert subprocess.run(['git', '-C', str(OUT), 'rev-parse', '--show-toplevel'],
                       capture_output=True).returncode != 0, 'Evidence must be outside Git'
 DUMP = ROOT.parent / ('FF4' if NUMBER==4 else 'FF5' if NUMBER==5 else f'ff{NUMBER}') / 'dump.cs'
 TITLE=('FINAL FANTASY','FINAL FANTASY II','FINAL FANTASY III','FINAL FANTASY IV','FINAL FANTASY V','FINAL FANTASY VI')[NUMBER-1]
-DLL = Path('D:/Games/SteamLibrary/steamapps/common')/(TITLE+' PR')/'GameAssembly.dll'
+DLL = Path('C:/Program Files (x86)/Steam/steamapps/common')/(TITLE+' PR')/'GameAssembly.dll'
 TARGETS = {
     'FieldNonPlayer': {'SetProperty', 'CanEnter', 'Setup', 'get_CanAction'},
     'FieldPartyEntity': {'CanEnter'},

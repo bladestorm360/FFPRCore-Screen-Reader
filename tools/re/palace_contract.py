@@ -19,7 +19,7 @@ def main():
  base=R.parent/'tools/puzzle_audit_20261030/broader_audit_20261104/ff6_Imperial_Palace'
  provenance=json.loads((base/'native_select/provenance.json').read_text(encoding='utf-8'))
  assert provenance['dump_sha256']==digest(dump_path)
- assert provenance['dll_sha256']==digest(Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY VI PR/GameAssembly.dll'))
+ assert provenance['dll_sha256']==digest(Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY VI PR/GameAssembly.dll'))
  assert any('.External.Message.Select('in name and rva==0xB63E60 for name,rva in provenance['functions'].items())
  proof=json.loads((R/'docs/re/palace_native_20261104.json').read_text(encoding='utf-8'))
  assert len(proof['source_script_hashes'])==90 and len(proof['choices'])==16

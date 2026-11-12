@@ -12,7 +12,8 @@ exit /b %errorlevel%
 :verify_resource_job
 python scripts\run-build.py --verify
 if not "%errorlevel%"=="0" exit /b 1
-set "STEAM=D:\Games\SteamLibrary\steamapps\common"
+if not defined FFPR_GAME_ROOT set "FFPR_GAME_ROOT=%ProgramFiles(x86)%\Steam\steamapps\common"
+set "STEAM=%FFPR_GAME_ROOT%"
 if not exist "out\hid.dll" ( echo ERROR: out\hid.dll missing - run build.bat first. & exit /b 1 )
 python tools\openal_dependency.py check
 if errorlevel 1 exit /b 1

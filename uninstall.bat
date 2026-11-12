@@ -8,7 +8,8 @@ REM MinHook.x64.dll in the game folder may now belong to another mod.
 REM Deleting hid.dll alone disables the mod: the game then loads System32's hid.dll.
 REM Keep your settings: uninstall.bat --keep-settings
 setlocal
-set "STEAM=D:\Games\SteamLibrary\steamapps\common"
+if not defined FFPR_GAME_ROOT set "FFPR_GAME_ROOT=%ProgramFiles(x86)%\Steam\steamapps\common"
+set "STEAM=%FFPR_GAME_ROOT%"
 set "KEEP=%~1"
 call :one "FINAL FANTASY PR"
 call :one "FINAL FANTASY II PR"

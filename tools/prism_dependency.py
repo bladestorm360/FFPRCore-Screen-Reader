@@ -15,7 +15,9 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / 'third_party/prism'
 LOCK = ROOT / 'prism.lock.json'
-STEAM = Path(os.environ.get('FFPR_GAME_ROOT', 'D:/Games/SteamLibrary/steamapps/common'))
+STEAM = Path(os.environ.get('FFPR_GAME_ROOT') or
+             Path(os.environ.get('ProgramFiles(x86)', 'C:/Program Files (x86)'))
+             / 'Steam/steamapps/common')
 GAMES = [('FINAL FANTASY PR', 'FINAL FANTASY.exe'),
          ('FINAL FANTASY II PR', 'FINAL FANTASY II.exe'),
          ('FINAL FANTASY III PR', 'FINAL FANTASY III.exe'),

@@ -9,7 +9,7 @@ import pefile
 from capstone import Cs,CS_ARCH_X86,CS_MODE_64
 
 ROOT=Path(__file__).resolve().parents[2]
-DLL=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY III PR/GameAssembly.dll')
+DLL=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY III PR/GameAssembly.dll')
 DUMP=ROOT.parent/'ff3/dump.cs'
 TARGETS=(('Current.CheckThiefIsInCorps',0x91B5C0),
          ('Current.ThiefCorpsVisitor',0x9294F0),

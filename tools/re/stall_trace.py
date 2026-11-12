@@ -14,7 +14,7 @@ import re
 import time
 
 ROOT = Path(os.path.abspath(__file__)).parents[2]
-GAME = Path(r'D:\Games\SteamLibrary\steamapps\common\FINAL FANTASY II PR')
+GAME = Path(r'C:\Program Files (x86)\Steam\steamapps\common\FINAL FANTASY II PR')
 TARGETS = {
     ('SubSceneManagerMainGame', 'ChangeState'),
     ('TitleWindowController', 'InitSelect'),

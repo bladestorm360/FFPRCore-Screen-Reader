@@ -129,9 +129,7 @@ with tempfile.TemporaryDirectory(prefix='prism-check-', dir=scratch_parent) as t
     (target / dependency.GAMES[0][1]).write_bytes(b'fake executable; never launched')
     dependency.install(target, lock, package)
     before = snapshot(target / '.ffpr-deps/prism')
-    script = (ROOT / 'deploy.bat').read_text(encoding='utf-8').replace(
-        'set "STEAM=D:\\Games\\SteamLibrary\\steamapps\\common"', 'set "STEAM=' + str(steam) + '"')
-    (mod / 'deploy.bat').write_text(script, encoding='utf-8')
+    shutil.copy2(ROOT / 'deploy.bat', mod / 'deploy.bat')
     env = dict(os.environ, FFPR_GAME_ROOT=str(steam))
     previous_openal = None
     for version in [b'fake mod two', b'fake mod three']:

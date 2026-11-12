@@ -21,7 +21,7 @@ for n,(game,folder) in enumerate(zip(games,folders),1):
    if m[2] in ['CreateEntity','CreateTelepoPointList','FindRelatedEntitiesInTelepoPoint','OnCacheTelepoPoint'] and ns=='Last.Map':targets[label]=rva
    if n==2 and cls[1]=='AbilityUseContentListController' and ns=='Serial.FF2.UI.KeyInput' and m[2] in ['SetCursor','SetFocus','UpdateView']:targets[label]=rva
    if ns=='Last.UI.KeyInput' and ((cls[1]=='ShopListMainContentController' and m[2] in ['SetCursor','SelectContent','CreateItemList']) or (cls[1]=='ShopInfoController' and m[2]=='SetDescription') or (cls[1]=='ShopListItemContentView' and m[2] in ['UpdateView','SetPrice'])):targets[label]=rva
- binary=Path('D:/Games/SteamLibrary/steamapps/common')/game/'GameAssembly.dll';pe=pefile.PE(str(binary),fast_load=True);ordered=sorted(names);md=capstone.Cs(capstone.CS_ARCH_X86,capstone.CS_MODE_64);output=[]
+ binary=Path('C:/Program Files (x86)/Steam/steamapps/common')/game/'GameAssembly.dll';pe=pefile.PE(str(binary),fast_load=True);ordered=sorted(names);md=capstone.Cs(capstone.CS_ARCH_X86,capstone.CS_MODE_64);output=[]
  for name,rva in targets.items():
   end=next((x for x in ordered if x>rva),rva+16384);output.append('\n'+name+' RVA '+hex(rva))
   for ins in md.disasm(pe.get_data(rva,min(end-rva,32768)),pe.OPTIONAL_HEADER.ImageBase+rva):

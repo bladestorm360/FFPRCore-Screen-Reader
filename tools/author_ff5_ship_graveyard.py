@@ -239,7 +239,7 @@ def main():
     overrides,guide,facts,hashes = qualified()
     position = read(ROOT.parent/'tools/ff5_library_20261101/puppet_position_provenance.json')
     motion = read(ROOT/'docs/re/ff5_istory_falls_native_20261105.json')['native_methods']
-    dll = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+    dll = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
     assert digest(dll) == position['dll_sha256'] and digest(ROOT.parent/'FF5/dump.cs') == position['dump_sha256']
     image = pefile.PE(str(dll),fast_load=True)
     methods = position['functions'] + [method for method in motion if method['method'] == 'Puppet.Move']

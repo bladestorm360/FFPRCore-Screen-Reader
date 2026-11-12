@@ -82,7 +82,7 @@ def main():
 
     hashes = {'/'.join(key):signature(body) for key,body in sorted(scripts.items())}
     prior = read(ROOT.parent/'tools/ff5_library_20261101/puppet_position_provenance.json')
-    dll = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+    dll = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
     assert digest(dll) == prior['dll_sha256']
     image = pefile.PE(str(dll),fast_load=True)
     methods = []

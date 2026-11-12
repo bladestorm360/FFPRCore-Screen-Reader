@@ -39,7 +39,7 @@ GitHub content CI41053005400 passed for2a214aa. No permission error occurred;
 no browser, repository deletion/recreation, dependency install or game launch.
 
 Exact recovery bundles, original refs/config and commit/ref maps are preserved
-outside Git at D:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/. Factual
+outside Git at C:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/. Factual
 verification is build_check/history_rewrite_20261030/completion.json. The normal
 reachable branches/tags are clean; other people's clones and GitHub internal
 unreferenced-object caches were not inspected or claimed purged. All-six
@@ -51,7 +51,7 @@ retaining the repository and releases. No browser or authentication workaround
 is allowed after a GitHub permission error. The exact active task and queued
 navigation additions are in the single scope ledger. A verified full recovery
 bundle and original refs/config/working-change archive are outside all Git trees
-at D:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/.
+at C:/Games/Dev/Unity/FFPR/tools/history_rewrite_20261030/.
 
 The complete reachable-history scan finds36 recovered disassembly versions
 across the same30 paths (2703 blobs inspected); the cleaned working tree has0.
@@ -86,7 +86,7 @@ Original mod implementations, bakes, factual manifests, offsets, locators and
 behavioral evidence were preserved.
 
 Every affected original was copied with its relative path and verified SHA-256
-to `D:/Games/Dev/Unity/FFPR/tools/repository_sources_20261029/`, outside every
+to `C:/Games/Dev/Unity/FFPR/tools/repository_sources_20261029/`, outside every
 Git checkout. Thirty tracked disassembly files under docs/re are now plain
 source-free references to their preserved originals. The other 170 local raw
 files were removed only after verification. Companion factual fresh-extraction
@@ -97,7 +97,7 @@ lives in the external archive. No backup of recovered bodies was left in Git.
 
 Fourteen historical exporters now use the checked external directory selected
 by `tools/re/evidence_paths.py`, under
-`D:/Games/Dev/Unity/FFPR/tools/native_evidence/`. It rejects path escape and any
+`C:/Games/Dev/Unity/FFPR/tools/native_evidence/`. It rejects path escape and any
 Git ancestor before creating an output directory. Factual metadata can still
 be written to docs/re. The historical fresh-bake comparison now consumes its
 preserved external source dataset. Modern audit exporters already use external

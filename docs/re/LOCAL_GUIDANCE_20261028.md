@@ -118,7 +118,7 @@ priority. Explicit approval is required before any necessary increase. Longer
 builds are acceptable. Expensive bakes/extraction/tests/probes/benchmarks use
 the same serial enforced runner; no unchanged multi-GB background jobs.
 
-The authoritative [contract](D:/Games/Dev/codex/templates/accessibility-mod/references/build-resources.md)
+The authoritative [contract](C:/Games/Dev/codex/templates/accessibility-mod/references/build-resources.md)
 and portable runner are adopted as `scripts/run-build.py`. The supplied
 `Directory.Build.props`/`.targets` were added because
 neither file existed, preserving CMake/project settings. They disable shared/

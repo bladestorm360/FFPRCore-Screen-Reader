@@ -20,7 +20,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 for number, title in enumerate(GAMES, 1):
     dump_root = ROOT.parent / ('FF4' if number == 4 else 'FF5' if number == 5 else f'ff{number}')
     dump = dump_root / 'dump.cs'
-    binary = Path('D:/Games/SteamLibrary/steamapps/common') / (title + ' PR') / 'GameAssembly.dll'
+    binary = Path('C:/Program Files (x86)/Steam/steamapps/common') / (title + ' PR') / 'GameAssembly.dll'
     names, targets = defaultdict(list), {}
     for block in dump.read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:
         namespace = block.splitlines()[0]

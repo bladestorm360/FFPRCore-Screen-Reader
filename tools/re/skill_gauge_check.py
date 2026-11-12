@@ -9,7 +9,7 @@ import pefile
 
 ROOT = Path(__file__).resolve().parents[2]
 MASTER = ROOT.parent / 'tools/mapdump/ff2_master'
-DLL = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
+DLL = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
 pe = pefile.PE(str(DLL), fast_load=True)
 dis = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
 calls = {int(ins.op_str, 16) - pe.OPTIONAL_HEADER.ImageBase for ins in

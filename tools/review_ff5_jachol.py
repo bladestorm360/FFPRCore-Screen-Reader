@@ -9,10 +9,10 @@ def digest(p):
  with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
 def main():
  proof=read(R/'docs/re/ff5_jachol_native_20261104.json');assert len(proof['source_script_hashes'])==14 and len(proof['native_functions'])==9
- dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');pe=pefile.PE(str(dll),fast_load=True)
+ dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');pe=pefile.PE(str(dll),fast_load=True)
  assert digest(dll)==proof['dll_sha256']and digest(R.parent/'FF5/dump.cs')==proof['dump_sha256']
  for f in proof['native_functions']:assert hashlib.sha256(pe.get_data(f['rva'],f['bytes'])).hexdigest()==f['sha256']
- path=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/FINAL FANTASY V_Data/il2cpp_data/Metadata/global-metadata.dat');assert digest(path)==proof['metadata_sha256']
+ path=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/FINAL FANTASY V_Data/il2cpp_data/Metadata/global-metadata.dat');assert digest(path)==proof['metadata_sha256']
  rows={};facts={};sources=None
  for name in('puzzle_mechanics_inventory_20261031.json','puzzle_mechanics_animation_inventory_20261031.json','puzzle_mechanics_continuation_inventory_20261104.json'):
   g=read(R/'docs/re'/name)['games']['ff5'];assert sources is None or sources==g['source_sha256'];sources=g['source_sha256'];facts.update(g['script_facts'])

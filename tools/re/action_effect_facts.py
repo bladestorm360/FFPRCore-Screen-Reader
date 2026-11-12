@@ -32,7 +32,7 @@ base = next(b for b in text.split('// Namespace: ') if b.startswith('Last.Battle
 assert 'myObject; // 0x30' in base
 assert 'public int get_AbilityId()' in next(b for b in text.split('// Namespace: ') if b.startswith('Last.Data.Master\npublic class Command :'))
 
-assets = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa/StandaloneWindows64')
+assets = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa/StandaloneWindows64')
 facts=[]
 for stem,markers,expected in [('ef_ff0_focus',{'EF_FF0_Focus_H00_0'},5),('ef_ff3_attract',{'EF_FF3_Attract_A00_0','EF_FF3_Attract_W00_3'},2)]:
     bundle, = assets.glob(stem+'_assets_all_*.bundle')

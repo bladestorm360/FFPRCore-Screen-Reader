@@ -4,7 +4,9 @@ $ErrorActionPreference='Stop'
 # launches a game, injects code, writes target memory or sends input. Native
 # minidump stack/module data belongs outside every Git checkout.
 $gameProcess=Get-Process -Id $TargetProcessId
-$expected='D:\Games\SteamLibrary\steamapps\common\FINAL FANTASY III PR\FINAL FANTASY III.exe'
+$steam = $env:FFPR_GAME_ROOT
+if (-not $steam) { $steam = Join-Path ${env:ProgramFiles(x86)} 'Steam\steamapps\common' }
+$expected = Join-Path $steam 'FINAL FANTASY III PR\FINAL FANTASY III.exe'
 if ($gameProcess.Path -ne $expected) { throw 'Refusing a process other than the approved FFIII game.' }
 $targetRoot=[IO.Path]::GetFullPath($OutputDirectory)
 $allowed=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..\tools\startup_hang_20261025'))

@@ -45,7 +45,7 @@ formatting has the same small-row scope as ordinary Items. Speech dispatch
 remains on the shared nonblocking service. No game-thread wait or new polling.
 
 Offline native exports/provenance are outside Git at
-D:/Games/Dev/Unity/FFPR/tools/battle_item_equipment_20261024/ff1..ff6/.
+C:/Games/Dev/Unity/FFPR/tools/battle_item_equipment_20261024/ff1..ff6/.
 Extractor: tools/re/ff6_story_native.py --battle-item-equipment.
 FFII KeyInput SelectEquipContent6277C0, UseEquipSelectInit62B7B0,
 SetEquipList628560 and BattleEquipContentController.UpdateView43B630 establish

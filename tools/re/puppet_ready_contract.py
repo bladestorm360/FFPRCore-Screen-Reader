@@ -20,7 +20,7 @@ def main():
   assert len(prior['methods'])==6
   for i,row in enumerate(prior['methods'],1):
    assert row['game']==f'ff{i}'and row['method']=='PuppetCore.Ready'
-   dll=Path('D:/Games/SteamLibrary/steamapps/common')/NAMES[i-1]/'GameAssembly.dll';dump=ROOT.parent/f'ff{i}'/'dump.cs'
+   dll=Path('C:/Program Files (x86)/Steam/steamapps/common')/NAMES[i-1]/'GameAssembly.dll';dump=ROOT.parent/f'ff{i}'/'dump.cs'
    assert sha(dll)==row['dll_sha256']and sha(dump)==row['dump_sha256']
    pe=pefile.PE(str(dll),fast_load=True)
    assert 0<row['bytes']<=4096 and hashlib.sha256(pe.get_data(row['rva'],row['bytes'])).hexdigest()==row['sha256']
@@ -30,7 +30,7 @@ def main():
  assert subprocess.run(['git','-C',str(folder),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
  facts=[];dis=Cs(CS_ARCH_X86,CS_MODE_64)
  for i,name in enumerate(NAMES,1):
-  key=f'ff{i}';dump=ROOT.parent/key/'dump.cs';dll=Path('D:/Games/SteamLibrary/steamapps/common')/name/'GameAssembly.dll'
+  key=f'ff{i}';dump=ROOT.parent/key/'dump.cs';dll=Path('C:/Program Files (x86)/Steam/steamapps/common')/name/'GameAssembly.dll'
   old=json.loads((ROOT.parent/'tools/npc_fynn_20261023'/key/'provenance.json').read_text())
   assert sha(dll)==old['dll_sha256']and sha(dump)==old['dump_sha256'],key
   text=dump.read_text(encoding='utf-8');start=text.index('public class PuppetCore : Core');end=text.index('// Namespace:',start)

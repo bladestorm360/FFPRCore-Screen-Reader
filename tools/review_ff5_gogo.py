@@ -7,12 +7,12 @@ def digest(p):
  with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
 def main():
  check='--check'in sys.argv;P=R/'docs/re/ff5_gogo_native_20261104.json';proof=read(P);assert proof['scope_tag']=='ff5_Gogo'and len(proof['source_script_hashes'])==47 and len(proof['actors'])==59 and len(proof['native_functions'])==6
- dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==proof['dll_sha256']and digest(R.parent/'FF5/dump.cs')==proof['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
+ dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==proof['dll_sha256']and digest(R.parent/'FF5/dump.cs')==proof['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
  for f in proof['native_functions']:assert hashlib.sha256(pe.get_data(f['rva'],f['bytes'])).hexdigest()==f['sha256']
  mechanic_files=('monster_party.txt','monster.txt','monster_ai_script.txt','ability.txt','script.txt','map.txt','map_script.txt','story_mes_en.txt');wanted={name:digest(D/'ff5_master'/name)for name in mechanic_files}
  if check:assert proof['mechanic_sources']==wanted
  else:assert 'mechanic_sources'not in proof or proof['mechanic_sources']==wanted;proof['mechanic_sources']=wanted
- E=R.parent/'tools/puzzle_audit_20261030/broader_audit_20261104/ff5_Gogo_Context';aa=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/FINAL FANTASY V_Data/StreamingAssets/aa/StandaloneWindows64')
+ E=R.parent/'tools/puzzle_audit_20261030/broader_audit_20261104/ff5_Gogo_Context';aa=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/FINAL FANTASY V_Data/StreamingAssets/aa/StandaloneWindows64')
  for name,row in proof['battle_scripts'].items():assert digest(E/(name+'.json'))==row['asset_sha256']and digest(aa/row['bundle'])==row['bundle_sha256']
  ai=read(E/'sc_ai_353_FamedMimicGogo.json')['Mnemonics'];assert len(ai)==148 and ai[37]['mnemonic']=='StartTable'and all(m['mnemonic']=='Act'and m['operands']['iValues'][0]==608 for m in ai[38:63])and ai[63]['operands']['iValues'][0]==635
  assert proof['battle_references']['489']==dict(script='sc_b_timer',monsters=[353])and proof['battle_references']['632']==dict(script='',monsters=[353])

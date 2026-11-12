@@ -1,5 +1,17 @@
 # Native FFPR durable memory
 
+## C: workspace (2026-11-12)
+
+Current checkout is C:/Games/Dev/Unity/FFPR/FFPRCore-Screen-Reader. The
+[workspace memory](../CODEX_MEMORY.md) indexes local research and recovery.
+Deployment, uninstall and Prism checks use the C: Steam library by default
+and accept FFPR_GAME_ROOT for an explicit alternate steamapps/common path.
+The active Core build uses the checked-in localized data and pinned
+dependencies. Sibling game dumps and the Ghidra workspace are for offline
+research. The old managed localization merge requires an explicit historical
+source root. It is a one-time porting tool outside the current build.
+
+
 **November 11 Tower of Zot chest.** Cross-floor planning for ordinary
 treasure chests now requires a reachable interaction tile. The logged
 5F–4F–5F recovery passes, as does the FFVI Dream pickup. FFIV has the
@@ -3751,7 +3763,7 @@ build_check/map_event_audit_20261028/source_ownership_resume_20261029.json.
 
 - October 13 release finalization: GitHub/local source and named remote now use
   FFPRCore-Screen-Reader, preserving public user ownership, repository ID and master
-  history. Current root is D:/Games/Dev/Unity/FFPR/FFPRCore-Screen-Reader. Standard
+  history. Current root is C:/Games/Dev/Unity/FFPR/FFPRCore-Screen-Reader. Standard
   prepare-release requests now include commit/push and verified GitHub publication,
   excluding repository renaming. Fresh canonical build/all offline checks and isolated
   smoke pass; rebuilt 20-file complete ZIP includes the repaired README source URL.

@@ -14,7 +14,7 @@ for c in cases:
    ii=m.get('operands',{}).get('iValues')or[]
    if m['mnemonic']=='AssignMoveRoute'and ii and ii[0]==c['id']:needed.add((c['submap'],ii[1]))
 assert 0<len(needed)<=32
-assets=Path('D:/Games/SteamLibrary/steamapps/common')/(titles[n-1]+' PR')/(titles[n-1]+'_Data/StreamingAssets/aa')
+assets=Path('C:/Program Files (x86)/Steam/steamapps/common')/(titles[n-1]+' PR')/(titles[n-1]+'_Data/StreamingAssets/aa')
 catalog_path=assets/'catalog.json';catalog=json.loads(catalog_path.read_text(encoding='utf-8-sig'))
 targets={p.lower()for p in catalog['m_InternalIds']if any(p.endswith('/'+sm+'/route_instruction_'+str(route)+'.json')for sm,route in needed)}
 assert len(targets)==len(needed),(needed,targets)

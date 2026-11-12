@@ -33,7 +33,7 @@ for row in scripts:
 assert not references, 'A fixed border acquired script-owned movement/visibility; retain ordinary observation'
 native = ROOT.parent / 'tools/map_transport_audit_20261028/ff3_trigger_lifetime/provenance.json'
 provenance = json.loads(native.read_text(encoding='utf-8'))
-dll = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY III PR/GameAssembly.dll')
+dll = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY III PR/GameAssembly.dll')
 assert hashlib.sha256(dll.read_bytes()).hexdigest() == provenance['dll_sha256']
 assert hashlib.sha256((ROOT.parent/'ff3/dump.cs').read_bytes()).hexdigest() == provenance['dump_sha256']
 print(json.dumps(dict(fixed_default_border_actors=len(border), puppet_references=len(references),

@@ -28,7 +28,7 @@ const char* label();
 /// 1..6, or 0 when unknown.
 int number();
 
-/// The game folder with a trailing backslash ("D:\...\FINAL FANTASY PR\").
+/// The game folder with a trailing backslash (for example, a Steam Pixel Remaster directory).
 const wchar_t* dir();
 
 /// True when the second check (app.info product name) agrees with the exe name.

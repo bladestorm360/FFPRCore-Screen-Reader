@@ -13,7 +13,7 @@ import capstone
 import pefile
 
 ROOT = Path(__file__).resolve().parents[1]
-STEAM = Path('D:/Games/SteamLibrary/steamapps/common')
+STEAM = Path('C:/Program Files (x86)/Steam/steamapps/common')
 TITLES = ('FINAL FANTASY', 'FINAL FANTASY II', 'FINAL FANTASY III',
           'FINAL FANTASY IV', 'FINAL FANTASY V', 'FINAL FANTASY VI')
 FOLDERS = ('ff1', 'ff2', 'ff3', 'FF4', 'FF5', 'ff6')

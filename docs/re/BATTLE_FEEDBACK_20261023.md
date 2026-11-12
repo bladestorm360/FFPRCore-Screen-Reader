@@ -97,7 +97,7 @@ battle/battle_util.cpp, menus/magic_menu_state.cpp, core/condition_labels.h,
 displayed_conditions.cpp, battle/battle_party.cpp and battle/battle_command.cpp.
 Original extraction script: tools/re/battle_feedback_native.py. Matching game
 bodies, hashes and locators remain outside Git in
-D:/Games/Dev/Unity/FFPR/tools/battle_feedback_20261023/ff1..ff6/.
+C:/Games/Dev/Unity/FFPR/tools/battle_feedback_20261023/ff1..ff6/.
 FFII's known-target direct damage-call xrefs are also retained there.
 
 | FFII native producer | RVA | Established fact |

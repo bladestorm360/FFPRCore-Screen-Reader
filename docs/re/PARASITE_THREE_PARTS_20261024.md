@@ -62,7 +62,7 @@ no new user-facing string or catalog entry is needed.
 Production: src/core/battle/{battle_message.cpp,special_feedback.cpp,.h}.
 Native extraction logic: tools/re/battle_feedback_native.py --three-parts;
 matching native bodies/provenance remain outside Git at
-D:/Games/Dev/Unity/FFPR/tools/parasite_three_parts_20261024/ff1..ff6/.
+C:/Games/Dev/Unity/FFPR/tools/parasite_three_parts_20261024/ff1..ff6/.
 The prior sibling layout/provider facts remain in
 [equipment/MP investigation](BATTLE_ITEM_EQUIPMENT_20261024.md).
 

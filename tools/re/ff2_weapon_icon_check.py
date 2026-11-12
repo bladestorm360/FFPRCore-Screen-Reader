@@ -9,7 +9,7 @@ import capstone
 import pefile
 
 ROOT = Path(__file__).resolve().parents[2]
-BINARY = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
+BINARY = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
 OUTPUT = external_directory('build_check/re') / 'ff2_weapon_icon.txt'
 names, targets = defaultdict(list), {}
 for block in (ROOT.parent / 'ff2/dump.cs').read_text(encoding='utf-8-sig').split('// Namespace: ')[1:]:

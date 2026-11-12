@@ -77,7 +77,7 @@ def main():
     if facts is None:
         archive = ROOT/'build_check/broader_audit_20261104'
         facts = read(archive/'death_valley_boarding_facts.json') + read(archive/'death_valley_native_boarding_dispatch_facts.json')
-    dll = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+    dll = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
     assert len(facts) == 5 and digest(dll) == prior['dll_sha256'] and digest(ROOT.parent/'FF5/dump.cs') == prior['dump_sha256']
     image = pefile.PE(str(dll),fast_load=True)
     for method in facts:

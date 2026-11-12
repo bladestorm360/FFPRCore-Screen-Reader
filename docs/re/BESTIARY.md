@@ -70,7 +70,7 @@ intentional review interruption. See [input bindings](../INPUT_BINDINGS.md).
 
 Names/signatures are checked against every installed dump. Exact FF2 native
 analysis and all-six call metadata stay outside Git in
-`D:/Games/Dev/Unity/FFPR/tools/issuefix_20261022/`; read-only Ghidra changes were
+`C:/Games/Dev/Unity/FFPR/tools/issuefix_20261022/`; read-only Ghidra changes were
 discarded. No game source/snippets were added to documentation.
 
 `tools/bestiary_check.cpp` exercises the actual detours/reader with delayed native

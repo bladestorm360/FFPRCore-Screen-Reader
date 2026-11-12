@@ -11,7 +11,7 @@ from author_ff5_exdeath import ROOT, DUMP, TOPIC, author, read
 BUILD = ROOT / 'build_check/broader_audit_20261104/ff5_Exdeath'
 EXTERNAL = ROOT.parent / 'tools/puzzle_audit_20261030/broader_audit_20261104/ff5_Exdeath'
 PROOF = ROOT / 'docs/re/ff5_exdeath_native_20261105.json'
-DLL = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+DLL = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
 ORDINARY = {
     'sc_e_0247': 'One automatic posture scene from a left contact. It records409 and applies the native posture condition.',
     'sc_e_0247_1': 'The matching right contact runs the same automatic posture scene and receipts.',

@@ -3,7 +3,7 @@ from pathlib import Path
 import collections,csv,hashlib,json,re,subprocess,sys
 import pefile
 ROOT=Path(__file__).resolve().parents[2]
-DLL=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+DLL=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
 DUMP=ROOT.parent/'FF5/dump.cs'
 TARGETS=(('Current.ChangeScript',0xA3E3A0),('MainCore.ChangeScript',0x78DC40))
 def sha(path):

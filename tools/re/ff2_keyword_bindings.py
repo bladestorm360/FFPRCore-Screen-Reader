@@ -46,7 +46,7 @@ def main():
         bindings=[(values[i],values[i+1]) for i,key in enumerate(keys) if key.startswith('Key_')]
         source_hash=hashlib.sha256(text.encode()).hexdigest();assert (source_hash,bindings)==EXPECTED[name]
         facts.append(dict(locator=room+'/'+name,bundle=path.name,bundle_sha256=digest(path),script_sha256=source_hash,bindings=bindings))
-    dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
+    dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY II PR/GameAssembly.dll')
     assert digest(dll)=='dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b','Native dispatch/learning producer changed'
     inside=False;typed=False
     for line in (ROOT.parent/'ff2/dump.cs').open(encoding='utf-8-sig'):

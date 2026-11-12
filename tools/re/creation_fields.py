@@ -36,7 +36,7 @@ def main():
             for m in re.finditer(r'// RVA: 0x([A-F0-9]+)[^\n]*\n\s*((?:public|private|internal|protected) [^\n]*? ([\w.<>]+)\(([^\n]*)\))', block):
                 functions.append((int(m[1], 16), ns, name, m[3], m[2]))
         boundaries = sorted({f[0] for f in functions})
-        binary = Path('D:/Games/SteamLibrary/steamapps/common') / game / 'GameAssembly.dll'
+        binary = Path('C:/Program Files (x86)/Steam/steamapps/common') / game / 'GameAssembly.dll'
         image = pefile.PE(str(binary), fast_load=True).get_memory_mapped_image()
         targets = [('Last.UI.KeyInput', 'CharacterContentController', 'SetJobName'),
                    ('Last.UI.KeyInput', 'CharacterContentController', 'SetData'),

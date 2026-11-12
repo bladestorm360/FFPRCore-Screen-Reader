@@ -21,7 +21,7 @@ def sha(path):
  return digest.hexdigest()
 
 def main():
- dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY PR/GameAssembly.dll')
+ dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY PR/GameAssembly.dll')
  assert sha(dll)=='33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108'
  assert sha(ROOT.parent/'ff1/dump.cs')=='8313bacc58a606108db7dc0786b4fc5bcd57dc07e171cb8b051c2a68cd817740'
  assert json.loads((ROOT/'data/ff1/precision_passages.json').read_text(encoding='utf-8'))['passages']==[], 'Retired Ice shortcut must not return'

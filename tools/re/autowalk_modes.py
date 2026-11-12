@@ -14,7 +14,7 @@ import pefile
 from evidence_paths import external_directory
 
 ROOT = Path(os.path.abspath(__file__)).parents[2]
-STEAM = Path('D:/Games/SteamLibrary/steamapps/common')
+STEAM = Path('C:/Program Files (x86)/Steam/steamapps/common')
 GAMES = ['FINAL FANTASY PR','FINAL FANTASY II PR','FINAL FANTASY III PR',
          'FINAL FANTASY IV PR','FINAL FANTASY V PR','FINAL FANTASY VI PR']
 METHODS = {'Init','SwtichInputEnable','SwitchInputEnable','OnTouchPadCallback',

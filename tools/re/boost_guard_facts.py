@@ -6,7 +6,7 @@ import UnityPy
 ROOT=Path(__file__).resolve().parents[2]
 MASTER=ROOT.parent/'tools/mapdump/ff3_master'
 OUT=ROOT.parent/'tools/guard_feedback_20261028/ff3'
-ASSETS=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa')
+ASSETS=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa')
 def table(name):return list(csv.DictReader((MASTER/name).open(encoding='utf-8-sig')))
 def sha(path):
     with path.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()

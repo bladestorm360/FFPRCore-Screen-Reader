@@ -1,7 +1,7 @@
 # Porting guide: C# MelonLoader mods to the native core
 
 Read this before porting any file. It is the contract every port follows.
-Plan: `D:\Games\Dev\Unity\FFPR\UNIFIED_MOD_PLAN.md`. Open issues: `..\OPEN_ISSUES.md`.
+Plan: `C:\Games\Dev\Unity\FFPR\UNIFIED_MOD_PLAN.md`. Open issues: `..\OPEN_ISSUES.md`.
 
 ## Hard rules
 

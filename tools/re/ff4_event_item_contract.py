@@ -4,7 +4,7 @@ import collections,hashlib,json,re
 import pefile
 import capstone
 ROOT=Path(__file__).resolve().parents[2]
-DLL=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY IV PR/GameAssembly.dll');DUMP=ROOT.parent/'FF4/dump.cs'
+DLL=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY IV PR/GameAssembly.dll');DUMP=ROOT.parent/'FF4/dump.cs'
 def digest(path):
  h=hashlib.sha256()
  with path.open('rb') as f:

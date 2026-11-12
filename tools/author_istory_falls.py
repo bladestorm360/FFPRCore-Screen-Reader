@@ -86,7 +86,7 @@ def main():
     position = read(ROOT.parent / 'tools/ff5_library_20261101/puppet_position_provenance.json')
     captured = read(PROOF)['native_methods'] if PROOF.exists() else read(ROOT / 'build_check/broader_audit_20261104/ff5_IstoryFalls/motion_facts.json')
     assert len(captured) == 10
-    dll = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+    dll = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
     assert digest(dll) == position['dll_sha256'] and digest(ROOT.parent/'FF5/dump.cs') == position['dump_sha256']
     image = pefile.PE(str(dll), fast_load=True)
     for method in captured:

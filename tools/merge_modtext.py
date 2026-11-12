@@ -17,9 +17,8 @@ Rules (see docs/MODTEXT_MERGE.md for the reasons):
   * Then tools/modtext_fixes.py is applied: corrections to each game's own
     official text and keys no old mod had. They survive every re-merge.
 
-Usage:  python tools/merge_modtext.py [--src-root DIR] [--check]
-  --src-root  folder holding ff1/, ff2/, ff3/, FF4/, FF5/ (default: the
-              parent of this repository)
+Usage:  python tools/merge_modtext.py --src-root DIR [--check]
+  --src-root  historical workspace with the six managed mod checkouts
   --check     verify the files already written; write nothing
 Prints a short summary. Exit code 1 on any verification failure.
 """
@@ -322,7 +321,7 @@ def update_doc(path, block):
 def main():
     repo = Path(__file__).resolve().parent.parent
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--src-root", type=Path, default=repo.parent)
+    ap.add_argument("--src-root", type=Path, required=True)
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
 
@@ -347,7 +346,7 @@ def main():
             load_json(data / f"ff{g}" / "mod_text.json") == overrides[g]
             for g in SOURCES)
         if not ok:
-            print("Out of date: run tools/merge_modtext.py")
+            print("Catalog differs from the historical managed-source merge")
             return 1
     else:
         write_json(data / "common" / "mod_text.json", common)

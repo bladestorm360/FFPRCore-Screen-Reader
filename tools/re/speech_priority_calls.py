@@ -11,7 +11,7 @@ import pefile
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = external_directory('build_check/re')
 OUTPUT.mkdir(parents=True, exist_ok=True) # outside every Git tree
-STEAM = Path('D:/Games/SteamLibrary/steamapps/common')
+STEAM = Path('C:/Program Files (x86)/Steam/steamapps/common')
 GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR']
 for number, folder in enumerate(GAMES, 1):
     names, targets = defaultdict(list), {}

@@ -41,8 +41,8 @@ def main():
             assert evidence.is_file(), evidence
             rows.append(dict(game=game, monster=identifier, message=monster['mes_id_name'],
                              descriptor=descriptor, asset=int(monster['monster_asset_id']),
-                             evidence=str(evidence), evidence_sha256=digest(evidence),
-                             master=str(master), master_sha256=digest(master), method=kind))
+                             evidence=evidence.relative_to(ROOT.parent).as_posix(), evidence_sha256=digest(evidence),
+                             master=master.relative_to(ROOT.parent).as_posix(), master_sha256=digest(master), method=kind))
     report = dict(date='2026-10-23', identities=rows,
                   additional_review=dict(
                       ff5='Soul Cannon already names Launchers separately; Neo Exdeath dummy511 and Stalker copies receive no inferred identity.',

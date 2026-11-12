@@ -11,7 +11,7 @@ from author_ff5_karnak import ROOT, DUMP, TOPIC, author, read, write
 PROOF = ROOT/'docs/re/ff5_karnak_native_20261105.json'
 EXTERNAL = ROOT.parent/'tools/puzzle_audit_20261030/broader_audit_20261104/ff5_Karnak'
 BUILD = ROOT/'build_check/broader_audit_20261104/ff5_Karnak'
-DLL = Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
+DLL = Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll')
 
 def digest(path):
     with path.open('rb') as stream:

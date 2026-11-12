@@ -23,7 +23,7 @@ for n,(folder,game) in enumerate(zip(folders,games),1):
             rva=int(m[1],16);label=cls[1]+'.'+m[2]+'('+m[3]+')';names.setdefault(rva,[]).append(label)
             if cls[1]=='DataStorage' and m[2] in ['.ctor','GetFlag','get_Instance','ClearMapLocal','ClearAreaLocal']:targets[label]=rva
             if cls[1]=='DataStorage.Flags' and m[2] in ['.ctor','Import','Get','Initialize']:targets[label]=rva
-    binary=pathlib.Path('D:/Games/SteamLibrary/steamapps/common')/game/'GameAssembly.dll'
+    binary=pathlib.Path('C:/Program Files (x86)/Steam/steamapps/common')/game/'GameAssembly.dll'
     pe=pefile.PE(str(binary),fast_load=True);ordered=sorted(names);md=capstone.Cs(capstone.CS_ARCH_X86,capstone.CS_MODE_64)
     output=['GameAssembly SHA256 '+hashlib.sha256(binary.read_bytes()).hexdigest()]
     decoded={}

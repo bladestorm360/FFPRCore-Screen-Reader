@@ -11,7 +11,7 @@ def main():
  for directory,count in(('native_controls',13),('native_fork',1)):
   proof=json.loads((base/directory/'provenance.json').read_text(encoding='utf-8'))
   assert proof['dump_sha256']==digest(dump_path)
-  assert proof['dll_sha256']==digest(Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY VI PR/GameAssembly.dll'))
+  assert proof['dll_sha256']==digest(Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY VI PR/GameAssembly.dll'))
   assert len(proof['functions'])==count
  for ns in ('Serial.FF6.UI.KeyInput','Serial.FF6.UI.Touch'):
   methods=d.classes[ns,'ChoiceDirectionController']['methods']

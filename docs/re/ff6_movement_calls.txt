@@ -1,7 +1,7 @@
 Local native analysis reference
 
 Recovered game implementation is preserved outside every Git tree.
-Archive: D:\Games\Dev\Unity\FFPR\tools\repository_sources_20261029\docs\re\ff6_movement_calls.txt
+Archive: C:\Games\Dev\Unity\FFPR\tools\repository_sources_20261029\docs\re\ff6_movement_calls.txt
 SHA-256: a11288fe01b39a82d6ecea370ce883a2c467774d64d73ae902286baa53920119
 Original bytes: 23101
 

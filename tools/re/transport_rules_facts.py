@@ -18,7 +18,7 @@ for number,(folder,title) in enumerate(zip(FOLDERS,TITLES),1):
     dump=(source/'dump.cs').read_text(encoding='utf-8-sig')
     script=json.loads((source/'script.json').read_text(encoding='utf-8-sig'))
     fields={r['Address']:r['Name'] for r in script['ScriptMetadata']}
-    metadata=Path('D:/Games/SteamLibrary/steamapps/common')/(title+' PR')/(title+'_Data/il2cpp_data/Metadata/global-metadata.dat')
+    metadata=Path('C:/Program Files (x86)/Steam/steamapps/common')/(title+' PR')/(title+'_Data/il2cpp_data/Metadata/global-metadata.dat')
     raw=metadata.read_bytes();tables=[];filters=[]
     for index,line in enumerate(lines):
         if 'RuntimeHelpers.InitializeArray' not in line:continue

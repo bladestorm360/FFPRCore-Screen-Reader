@@ -8,7 +8,7 @@ import base64,hashlib,json,re,struct,subprocess
 import UnityPy
 
 ROOT=Path(__file__).resolve().parents[2]
-ASSETS=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa')
+ASSETS=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY III PR/FINAL FANTASY III_Data/StreamingAssets/aa')
 OUT=ROOT.parent/'tools/turn_order_display_20261028/ff3'
 assert subprocess.run(['git','-C',str(OUT.parent),'rev-parse','--show-toplevel'],capture_output=True).returncode!=0
 OUT.mkdir(parents=True,exist_ok=True)

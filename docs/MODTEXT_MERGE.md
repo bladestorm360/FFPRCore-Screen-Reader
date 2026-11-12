@@ -32,8 +32,8 @@ So step 1 never needs to fall back per language.
 From the repo root:
 
 ```
-python tools\merge_modtext.py
-python tools\merge_modtext.py --check
+python tools\merge_modtext.py --src-root "<historical managed workspace>"
+python tools\merge_modtext.py --src-root "<historical managed workspace>" --check
 ```
 
 - The first writes the data files and the report below.

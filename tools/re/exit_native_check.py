@@ -21,7 +21,7 @@ def sha(path):
 
 report = []
 for game,folder in zip(bake.GAMES,FOLDERS):
-    install = Path("D:/Games/SteamLibrary/steamapps/common") / folder
+    install = Path("C:/Program Files (x86)/Steam/steamapps/common") / folder
     metadata_path = next(install.glob("**/global-metadata.dat"))
     metadata = metadata_path.read_bytes()
     assert struct.unpack_from("<I",metadata)[0] == 0xFAB11BAF

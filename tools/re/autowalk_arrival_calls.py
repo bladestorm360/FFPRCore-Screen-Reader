@@ -8,7 +8,7 @@ import capstone
 import pefile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-STEAM = pathlib.Path('D:/Games/SteamLibrary/steamapps/common')
+STEAM = pathlib.Path('C:/Program Files (x86)/Steam/steamapps/common')
 GAMES = ['FINAL FANTASY PR', 'FINAL FANTASY II PR', 'FINAL FANTASY III PR',
          'FINAL FANTASY IV PR', 'FINAL FANTASY V PR', 'FINAL FANTASY VI PR']
 TARGETS = {

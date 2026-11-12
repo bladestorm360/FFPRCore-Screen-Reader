@@ -32,7 +32,7 @@ from collections import defaultdict
 
 LANGS = ["en", "ja", "fr", "it", "de", "es", "ko", "zht", "zhc", "ru", "th", "pt"]
 
-STEAM = os.environ.get("FFPR_STEAM", r"D:\Games\SteamLibrary\steamapps\common")
+STEAM = os.environ.get("FFPR_STEAM", r"C:\Program Files (x86)\Steam\steamapps\common")
 INSTALL = {
     "ff1": ("FINAL FANTASY PR", "FINAL FANTASY_Data"),
     "ff2": ("FINAL FANTASY II PR", "FINAL FANTASY II_Data"),

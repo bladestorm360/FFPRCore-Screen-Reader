@@ -8,7 +8,7 @@ def digest(p):
 def main():
  check='--check'in sys.argv;path=R/'docs/re/ff5_desert_native_20261105.json';proof=read(path);assert proof['scope_tag']=='ff5_Desert'and len(proof['source_script_hashes'])==10 and len(proof['actors'])==30 and len(proof['sliding_areas'])==274 and len(proof['native_functions'])==28
  position=read(R.parent/'tools/ff5_library_20261101/puppet_position_provenance.json');assert len(position['functions'])==4
- dll=Path('D:/Games/SteamLibrary/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==proof['dll_sha256']==position['dll_sha256']and digest(R.parent/'FF5/dump.cs')==proof['dump_sha256']==position['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
+ dll=Path('C:/Program Files (x86)/Steam/steamapps/common/FINAL FANTASY V PR/GameAssembly.dll');assert digest(dll)==proof['dll_sha256']==position['dll_sha256']and digest(R.parent/'FF5/dump.cs')==proof['dump_sha256']==position['dump_sha256'];pe=pefile.PE(str(dll),fast_load=True)
  for f in proof['native_functions']+position['functions']:assert hashlib.sha256(pe.get_data(f['rva'],f['bytes'])).hexdigest()==f['sha256']
  if check:assert proof['position_native']==position
  else:assert 'position_native'not in proof or proof['position_native']==position;proof['position_native']=position;path.write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

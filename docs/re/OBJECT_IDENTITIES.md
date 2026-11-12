@@ -24,7 +24,7 @@ Iron gate even when its developer name is missing or ambiguous.
 
 `tools/event_label_identities.py` contains52 reviewed mapobject sprite IDs across
 all six games. The inspected contact sheets and exact extracted assets remain at
-D:/Games/Dev/Unity/FFPR/tools/issuefix_20261022/ffN_object_sprites.png (plus two zooms).
+C:/Games/Dev/Unity/FFPR/tools/issuefix_20261022/ffN_object_sprites.png (plus two zooms).
 The follow-up adds extra_sprites.png and numbered context-sheet iterations in that
 same external directory. No copied sprites, game source or script bodies enter the repository. The table is
 mod-owned classification metadata, not a game asset distribution.

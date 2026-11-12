@@ -131,7 +131,7 @@ context requires a nonempty populated buffer, and manager protection covers
 only press edges after calling the native function. All are producer/lifecycle
 bugs; no new speech deduplication is authorized or needed.
 
-Bravely Default reference: `D:/Games/Dev/Unity/BDFFHD/bdffhd-screen-reader/src/`
+Bravely Default reference: `C:/Games/Dev/Unity/BDFFHD/bdffhd-screen-reader/src/`
 `battle_buffer.*`, `buffer_controls.h`, and results section of
 `hooks_battle.cpp`. Relevant pattern is current rendered content, copied lines,
 native event timing and input ownership before native edges. FFPR retains its
@@ -651,7 +651,7 @@ Implementation complete; the first canonical build/regressions pass. Combined
 object/results delivery and final checks are recorded in [the fix register](../FIXES_2026_10_22.md).
 No game was launched, controlled or probed. The user explicitly authorized reading
 Tester Logs. The read-only source is
-D:/Games/Dev/Unity/FFPR/Tester Logs/Timorensinck/ffpr_screen_reader.log,
+archived tester report from Timorensinck,
 470707 bytes, SHA-256
 6f7bcd394b48e81f1b93fa9da8aedefb8911948d337180b004ff8a6b6e24a546.
 It is FF1 V0.9.4 from the October21 build, not confirmation of the October22 DLL.
