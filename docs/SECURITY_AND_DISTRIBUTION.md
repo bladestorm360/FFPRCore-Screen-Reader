@@ -1,5 +1,23 @@
 # Build and distribution security
 
+## November 12 FFIV–VI boss animation cues
+
+The focused boss-visual, battle-entry and battle-feedback checks
+passed in 46.0 seconds with the linked production DLL. The job
+peaked at 303,001,600 bytes with one worker and the 25% CPU cap.
+All 67 embedded resources matched their inputs and all 47 exports
+resolved in the isolated smoke host. Defender found no threats
+in the 22 exact payload files. The exclusion query was unavailable
+and no signing certificate was present.
+
+The FFIV, FFV and FFVI Steam installations each matched all 22
+scanned files. All 69 protected file checks passed, and the FF1–III
+DLL and SDL hashes matched their pre-installation values. No game
+was launched. The installed SHA-256 is
+`c9f1072d36f1f1c3b43c2b0f3833632c8bef3483c28eef68babf35f4d1d17acb`.
+Concise receipts are in the workspace's
+`tools/boss_visuals_20261112/delivery` directory.
+
 ## November 12 FFIV Dwarven Castle chests
 
 The warm focused build and three route and map-state checks completed in
@@ -10,7 +28,11 @@ no threats in the 22 exact payload files and their hashes remained stable.
 The exclusion query was unavailable and no signing certificate was present.
 The DLL SHA-256 is
 `5fb04b743a0fc2f8e4817b3cfbfe979aa821f2797355271359f1c5a7229fcf98`.
-Installation is waiting for FFIV to exit.
+After the user closed FFIV, the established installer applied the
+DLL and verified all 22 scanned files and 138 protected file checks.
+The later boss-cue build includes this route fix and supersedes this
+DLL in FFIV. The separate route delivery receipt is in the workspace's
+`tools/dwarven_castle_20261112` directory.
 
 ## November 12 FFIV Castle Baron gate
 

@@ -17,17 +17,19 @@ closed gate disappearing in the west 1F hall and a Story gated Overworld
 exit. The exact remote entry projection and gate approach pass the
 production browse route replay. Focused build, smoke and exact payload
 scan passed. The FFIV Steam install matches the scanned files. See [the Castle Baron checkpoint](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-castle-baron-front-gate-and-overworld-exit).
-The FFIV–VI silent boss animation audit resumed after that deployment and
-was temporarily set aside for the Dwarven Castle route report.
-The first source slice and outstanding render checks are in
-[boss animation speech](docs/re/BOSS_VISUALS_20261112.md).
+The verified FFIV–VI boss animation update is installed. It adds
+29 cues in all 12 languages for audited silent visual transitions
+and preserves native form messages where available. Gameplay
+confirmation is pending. See [boss animation speech](docs/re/BOSS_VISUALS_20261112.md).
 On November 12 the owner set [focused incremental delivery](docs/re/LOCAL_GUIDANCE_20261028.md#november-12-focused-local-delivery) as the default. Reuse the production compiler cache and select checks by affected behavior.
 
 **November 12 Dwarven Castle chests.** The fixed guards before
 King Giott's throne-room scene now count as story barriers on both
 loaded and future floors. This prevents the B1 and West Tower chest
 routes from cycling between 1F and the Inn. The original stairs
-become routable when the native scene clears the guards.
+become routable when the native scene clears the guards. FFIV
+received the route fix first. The later boss animation build
+includes the fix and now supplies the installed DLL.
 [Route evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-12-ffiv-dwarven-castle-chest-loop).
 
 **November 11 Tower of Zot chest.** Cross-floor planning for ordinary
@@ -45,6 +47,11 @@ checkpoints and task completion, including work awaiting gameplay or offline
 verification. Review content before pushing, verify the remote ref and record
 the current check status.
 [Project rule](AGENTS.md).
+
+The November 12 migration, route and boss checkpoints are local.
+Automatic approval review rejected the push containing the
+workspace migration to the public remote. The last verified
+remote master tip is `4399119bf2eb8d2dc665310f455d1017033420b4`.
 
 **November 11 FFIV Kain's Airship.** Both world-map Objects contacts beside
 Troya use the localized airship name. The full offline suite, smoke, scan

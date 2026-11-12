@@ -50,8 +50,15 @@ game locales and follows the existing Auto/manual language setting.
 
 The focused policy fixture passes exact forms, mode-only and same-art
 rejection, native-message precedence, and all 12 localized entries for
-each of 29 cues. The affected core objects compile. The native name
-audit passes 8,427 checks. The next delivery still needs the linked
-payload, smoke, exact scan and installation checks. The Dwarven Castle
-route DLL is ready for its separate installation. Battle startup and
-audible timing still require gameplay confirmation.
+each of 29 cues. The linked build, entry and feedback fixtures,
+8,427 native name checks, isolated smoke and exact-payload scan
+passed. The installed FFIV, FFV and FFVI payloads match the scan.
+[Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-12-ffivvi-boss-animation-cues).
+
+Gameplay confirmation is pending. On the next relevant encounter,
+listen for Barbariccia's wind rise and fall, Wing Raptor's wings
+opening and closing, or Ymir's head withdrawing and emerging.
+Each visible change should speak once when it happens. For Mist
+Dragon, listen for the game's form messages without an added cue.
+The offline checks cover form selection and the native battle-entry
+sequence. Audible timing and native-frame responsiveness require gameplay.
