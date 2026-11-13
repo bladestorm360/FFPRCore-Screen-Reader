@@ -112,10 +112,6 @@ static bool direction_allowed(const Request& r, const Cell& from, const Cell& to
                               int direction, const baked::Grids* grid)
 {
     const bool world=r.submap&&r.submap->world;
-    // Once the near-side contact has opened the door, the player can leave
-    // the doorway. Before then only the proved approach may enter it.
-    if(direction>=0)for(const auto& door:r.walk_open_doors)
-        if(door.cell==to&&!(door.entry_mask&kBits[kReverse[direction]]))return false;
     // FFIV's Underworld has a ground sub-collision overlay alongside its
     // transportation grids. Apply its wall faces in both directions on foot.
     if (world && r.vehicle_group <= 0 && direction >= 0 && direction < 4 && r.submap->collision_off[1]) {
@@ -465,7 +461,8 @@ bool safe_landing(const Request& movement, const baked::Grids& g, const Cell& la
     return escape;
 }
 
-Route find(const Request& r)
+namespace {
+Route find_plain(const Request& r)
 {
 #ifdef FFPR_OFFLINE_CHECK
     ProfileCall profile(true);
@@ -648,6 +645,46 @@ Route find(const Request& r)
     out.cells = std::move(path);
     return out;
 }
+}
+
+Route find(const Request& request)
+{
+    if (!request.submap || request.walk_open_doors.empty()) return find_plain(request);
+    Request movement = request;
+    auto closed = std::move(movement.walk_open_doors);
+    Route result;
+    for (;;) {
+        Request leg = movement;
+        for (const auto& door : closed) leg.blocked.push_back(door.cell);
+        auto tail = find_plain(leg);
+        if (tail.found) {
+            if (result.cells.empty()) return tail;
+            result.cells.insert(result.cells.end(), tail.cells.begin() + 1, tail.cells.end());
+            result.found = true;
+            return result;
+        }
+        if (closed.empty() || (leg.cancelled && leg.cancelled())) return {};
+        leg.goals.clear();
+        leg.goals_open = false;
+        leg.allow_trap_goal = false;
+        leg.goal_entry_mask = 0;
+        leg.ignore_hazards = false;
+        for (const auto& door : closed)
+            if (door.contact != leg.start && !terminal_transition(leg, baked::grids(*leg.submap), door.contact))
+                leg.goals.push_back(door.contact);
+        auto approach = find_plain(leg);
+        if (!approach.found) return {};
+        const Cell reached = approach.cells.back();
+        std::vector<Cell> opened;
+        for (const auto& door : closed) if (door.contact == reached) opened.push_back(door.cell);
+        std::erase_if(closed, [&](const auto& door) {
+            return std::find(opened.begin(), opened.end(), door.cell) != opened.end();
+        });
+        const auto first = result.cells.empty() ? approach.cells.begin() : approach.cells.begin() + 1;
+        result.cells.insert(result.cells.end(), first, approach.cells.end());
+        movement.start = reached;
+    }
+}
 
 bool Reach::reachable(const Cell& c) const { return distance(c) >= 0; }
 
@@ -670,7 +707,8 @@ Reach flood(const Request& r)
 }
 Reach flood(const Request& r, const std::vector<Cell>& starts)
 { return flood(r,starts,{}); }
-Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector<int>& costs)
+namespace {
+Reach flood_plain(const Request& r, const std::vector<Cell>& starts, const std::vector<int>& costs)
 {
 #ifdef FFPR_OFFLINE_CHECK
     ProfileCall profile(false);
@@ -733,6 +771,46 @@ Reach flood(const Request& r, const std::vector<Cell>& starts, const std::vector
         });
     }
     return out;
+}
+}
+
+Reach flood(const Request& request, const std::vector<Cell>& starts, const std::vector<int>& costs)
+{
+    if (!request.submap || request.walk_open_doors.empty()) return flood_plain(request, starts, costs);
+    auto closed = request.walk_open_doors;
+    Request initial = request;
+    for (const auto& door : closed) initial.blocked.push_back(door.cell);
+    auto reach = flood_plain(initial, starts, costs);
+    const auto& grid = baked::grids(*request.submap);
+    for (;;) {
+        if (!reach.submap || closed.empty()) return reach;
+        // Each new opening starts its own propagation at the contact with
+        // the actual cost of reaching it. Never recalculate from the origin
+        // with the newly opened door available as a fictitious shortcut.
+        int nearest = INT_MAX;
+        Cell contact;
+        for (const auto& door : closed) {
+            const int d = reach.distance(door.contact);
+            if (d <= 0 || d >= nearest || terminal_transition(request, grid, door.contact)) continue;
+            nearest = d;
+            contact = door.contact;
+        }
+        if (nearest == INT_MAX) return reach;
+        std::vector<Cell> opened;
+        for (const auto& door : closed) if (door.contact == contact) opened.push_back(door.cell);
+        std::erase_if(closed, [&](const auto& door) {
+            return std::find(opened.begin(), opened.end(), door.cell) != opened.end();
+        });
+        // Preserve costs on the still-closed graph when expanding after the
+        // native contact. Doors have monotone, local hiding effects only.
+        Request after = request;
+        for (const auto& door : closed) after.blocked.push_back(door.cell);
+        auto expanded = flood_plain(after, {contact}, {nearest});
+        if (!expanded.submap) return expanded;
+        for (int layer = 0; layer < 3; ++layer)
+            for (size_t i = 0; i < expanded.dist[layer].size(); ++i)
+                reach.dist[layer][i] = std::min(reach.dist[layer][i], expanded.dist[layer][i]);
+    }
 }
 
 int direction_towards(const Cell& from, const Cell& to, int wrap_width, int wrap_height)

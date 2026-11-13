@@ -1,5 +1,54 @@
 # Remaining map-audit findings and evidence limits
 
+## November 13 shared walk-open doors and FFIV route reports
+
+The six-game door bake matches step-on events whose complete supported
+script hides exact, noninteractive collision actors. It records contacts
+on 14 FFIV floors, four FFV floors and one FFVI floor. FF I–III had no
+matching scripted collider release in this pass. Native walk-in map
+exits already have ordinary transition semantics in all six titles.
+Inventory, guarded script branches, manually operated objects and
+sequence-sensitive puzzles keep their own navigation rules.
+
+Live routes require the copied powered contact and the closed actor at
+their authored cells. Future-floor routes use initializer projection.
+The worker first tries ordinary walking. It may then route to an opening
+contact and continue through the exact cells it releases. Reachability
+expands from the actual contact with its accumulated cost. Closed cells
+still block teleport landing. Geometry and resource ownership stay with
+the game. Same-floor refresh runs after the native gimmick hands control
+back.
+
+The Dwarven Base log at 114973.546 could not route to the active throne
+scene. At 115119.031 the same scene became reachable from B1. B1's event
+24 runs script 1014 and hides collision actor 18. The production replay
+now finds a 36-step first leg from the logged Base position through B2.
+The actual throne-room event remains a scene and follows the native
+story flags. The earlier chest guards still block before Giott's scene.
+
+The four Underworld Dwarven Castle contacts share map 118 and PointIn 1.
+The selected fourth tile at (109,87) failed from the Falcon at (112,88).
+The route checks the selected tile first, then uses a legal landing and
+walking approach to an equivalent arrival. The partial wall remains
+blocked. The reported parked Falcon at (114,128) is beyond the terminal
+Kokkol's Smithy contact. The log records the player entering the Smithy
+and returning at PointIn 8 before boarding. The route uses the normal
+interior-return graph. The offline replay verifies two steps into the
+Smithy, one step back outside, and one step to the recaptured Falcon.
+The selected destination stays available inside after the observed
+arrival. The world route requires the craft's live model on return.
+
+Tomra's two town contacts lead to distinct PointIn 1 and 2 inside the
+shop. From the logged spot the offline replay reaches the doors in one
+and nine steps. Both indoor return exits remain separately selectable.
+A moving actor blocking the outdoor approach can produce a local wait
+instead of an unnecessary shop detour.
+
+The focused build runs `browse_route_check`, `mapstate_check`,
+`route_worker_check`, `fade_ready_check` and `boss_visuals_check`.
+The browse replay checks 571 world exit objectives across six games.
+Gameplay confirmation remains open. See the [combined delivery record](../SECURITY_AND_DISTRIBUTION.md#november-13-combined-door-route-and-boss-update).
+
 ## November 13 FFIV Castle Baron walk-open doors
 
 The FFIV log at 102493–102581 says Story gated for both engineers from

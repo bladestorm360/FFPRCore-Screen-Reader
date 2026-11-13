@@ -107,6 +107,11 @@ public:
     // Exact story NPC or party-sensitive pushback event. Unlike an ordinary
     // patrol/event it blocks onward traversal even when NPC avoidance is off.
     bool story_barrier(const baked::Submap& sm,const baked::Object& object) const;
+    struct WalkOpenContact {
+        const baked::Object* contact;
+        std::vector<const baked::Object*> blockers;
+    };
+    const std::vector<WalkOpenContact>& walk_open_contacts(const baked::Submap& sm);
     // Reviewed native patrol poses for a future floor. These are first-leg
     // evidence only; the loaded floor still requires its live actor snapshot.
     std::vector<baked_route::Cell> route_positions(const baked::Submap& sm,const baked::Object& object);
@@ -132,6 +137,7 @@ private:
     std::map<const baked::Object*,bool> consumed_;
     std::map<const baked::Object*,uint64_t> transportation_;
     std::map<int,std::shared_ptr<const baked::TransitionGrid>> transitions_;
+    std::map<int,std::vector<WalkOpenContact>> walk_open_contacts_;
 };
 // NPC omission is only a cross-floor continuation proof. Current-floor movement
 // still uses authoritative live blockers and stops at an actual interaction.

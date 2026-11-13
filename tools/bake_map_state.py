@@ -11,6 +11,7 @@ import sys
 import collections
 import hashlib
 import bake_maps
+import bake_walk_open_doors
 import phantom_train_exits
 
 ROOT = pathlib.Path(__file__).absolute().parents[1]
@@ -495,6 +496,9 @@ def build(game, initializers_only=False):
     if game == 'ff4':
         for key, guards in dwarven_guards(by_sub, bounds).items():
             scripts[key]['story_actor_gates'] = guards
+    if not initializers_only:
+        for key, contacts in bake_walk_open_doors.generate(game, DUMP):
+            scripts.setdefault(key, {'entry': 0, 'code': [], 'initializer_unknown': True})['walk_open'] = contacts
     output = ROOT / 'data' / game / 'mapstate.json'
     if initializers_only:
         # A focused compiler correction must preserve authored locks, actor

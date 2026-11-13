@@ -27,6 +27,85 @@ template<class Expect> void check_ff4_underworld(Expect expect)
     walking.goals = {north};
     const auto north_route = baked_route::find(walking);
     expect(north_route.cells == std::vector<Cell>{wall, north}, "the planner still routes one step north from the wall");
+    {
+        map_state::Flags flags;
+        flags.current_map_id=2;flags.scenario.fill(1);flags.global.fill(0);
+        std::ifstream source("data/ff4/mapstate.json",std::ios::binary);
+        const std::string text(std::istreambuf_iterator<char>(source),{});
+        json::Value records;
+        expect(json::parse(text,records),"Underworld map-state data loads");
+        RouteSnapshot snapshot(map_state::Resolver(flags,records));
+        snapshot.submap=underworld;snapshot.map_id=2;snapshot.layer=1;
+        snapshot.position=world_of_cell(*underworld,{1,112,88});
+        snapshot.vehicle={true,9,8,{}};snapshot.locale=L"en";
+        snapshot.kind=TargetKind::Transition;
+        int entries=0;
+        for (const auto& object:grid.objects) {
+            if (object.type!=baked::ObjType::GotoMap||object.a!=118) continue;
+            ++entries;
+            snapshot.goal={2,{object.layer,object.tx,object.ty},false,{},0,object.entity_id(),baked::object_identifier(object)};
+            const auto result=plan_snapshot(snapshot);
+            std::printf("Dwarven Castle Falcon entry %d (%d,%d): success %d, steps %d, %ls\n",
+                        object.entity_id(),object.tx,object.ty,result.path.success,result.path.step_count,result.path.reason.c_str());
+            expect(result.path.success&&result.path.reason!=L"Story gated","each Dwarven Castle entrance can use the same legal Falcon arrival");
+        }
+        expect(entries==4,"the Underworld bake contains all four equivalent Dwarven Castle entrances");
+
+        const Cell parked{1,114,128};
+        VehicleOnMap falcon;
+        falcon.transportation_id=9;falcon.type=8;falcon.pos=world_of_cell(*underworld,parked);
+        snapshot.vehicle={true,1,1,{}};
+        snapshot.vehicles={falcon};snapshot.kind=TargetKind::Spot;
+        snapshot.goal={2,parked,false,{},9};
+        for (const Cell start : {Cell{1,113,130},Cell{1,114,130},Cell{1,114,129}}) {
+            snapshot.position=world_of_cell(*underworld,start);
+            const auto result=plan_snapshot(snapshot);
+            std::printf("Parked Falcon from (%d,%d): success %d, steps %d, %ls\n",start.x,start.y,
+                        result.path.success,result.path.step_count,result.path.reason.c_str());
+            expect(result.path.success&&result.path.reason!=L"Requires vehicle"&&
+                   result.path.next_map_id==(start.y==130?149:0),
+                   "The parked Falcon route uses the Smithy return when its entrance blocks the direct approach");
+            if(start.x!=113) continue;
+            const auto* smithy=baked::submap_by_map_id(149);
+            if(!smithy||!result.pending.incoming_transition) {
+                expect(false,"The first leg records its exact Smithy arrival");
+                continue;
+            }
+            const auto hop=*result.pending.incoming_transition;
+            auto inside_flags=flags;
+            inside_flags.current_map_id=149;
+            RouteSnapshot inside(map_state::Resolver(inside_flags,records));
+            inside.submap=smithy;inside.map_id=149;inside.layer=hop.arrival.layer;
+            inside.position=world_of_cell(*smithy,hop.arrival);
+            inside.vehicle=snapshot.vehicle;inside.locale=L"en";
+            inside.goal=result.pending.goal;inside.kind=result.pending.kind;inside.pending=result.pending;
+            {
+                SnapshotScope scope(inside);
+                note_trap_start(2,hop.entry);
+                record_map_arrival(149,hop.arrival);
+            }
+            const auto return_route=plan_snapshot(inside);
+            std::printf("Falcon return from Smithy (%d,%d) L%d: success %d, next %d, steps %d, %ls %ls\n",
+                        hop.arrival.x,hop.arrival.y,hop.arrival.layer,return_route.path.success,return_route.path.next_map_id,
+                        return_route.path.step_count,return_route.path.reason.c_str(),return_route.path.error.c_str());
+            expect(return_route.path.success&&return_route.path.next_map_id==2&&return_route.pending.incoming_transition,
+                   "Inside the Smithy, the kept Falcon route leads back to the Underworld");
+            inside.pending=return_route.pending;
+            expect(plan_snapshot(inside).path.success,"The kept Falcon destination can be requested again from inside the Smithy");
+            inside.pending={};
+            expect(!plan_snapshot(inside).path.success,"An unrelated indoor request cannot assume an off-map Falcon is parked");
+            if(return_route.pending.incoming_transition) {
+                auto returned=snapshot;
+                returned.pending=return_route.pending;
+                returned.position=world_of_cell(*underworld,return_route.pending.incoming_transition->arrival);
+                const auto final_leg=plan_snapshot(returned);
+                expect(final_leg.path.success&&final_leg.path.step_count==1&&final_leg.path.next_map_id==0,
+                       "On return, the live Falcon model is one legal step away");
+                returned.vehicles.clear();
+                expect(!plan_snapshot(returned).path.success,"On return, an absent Falcon cannot use its old position");
+            }
+        }
+    }
     auto flying = walking;
     flying.vehicle_group = 4;
     flying.vehicle_type = 3;
@@ -94,6 +173,26 @@ template<class Expect> void check_dwarven_castle(Expect expect)
         return;
     }
     std::thread worker([&] {
+        {
+            const auto* base=baked::submap_by_map_id(128);
+            const auto* throne=baked::submap_by_map_id(120);
+            map_state::Flags flags;
+            flags.current_map_id=128;flags.current_area_id=40;
+            flags.scenario.fill(0);flags.local.fill(0);flags.global.fill(0);
+            for (int i:{44,45,46,55}) flags.scenario[i]=1;
+            RouteSnapshot snapshot(map_state::Resolver(flags,records));
+            snapshot.submap=base;snapshot.map_id=128;snapshot.layer=0;
+            snapshot.position=world_of_cell(*base,{0,4,15});
+            snapshot.vehicle={true,1,1,{}};snapshot.locale=L"en";
+            snapshot.kind=TargetKind::Transition;
+            for(const auto& object:baked::grids(*throne).objects)
+                if(object.type==baked::ObjType::Event&&object.entity_id()==16)
+                    snapshot.goal={120,{object.layer,object.tx,object.ty},false,{},0,16,baked::object_identifier(object)};
+            const auto result=plan_snapshot(snapshot);
+            std::printf("Dwarven Base to throne scene: success %d next %d steps %d %ls %ls\n",result.path.success,
+                        result.path.next_map_id,result.path.step_count,result.path.reason.c_str(),result.path.error.c_str());
+            expect(result.path.success&&result.path.next_map_id==127,"Dwarven Base can route toward the active throne-room scene through B2");
+        }
         for (int story : {0,1}) {
             for (const auto [floor,start] : {std::pair{119,Cell{0,4,7}},std::pair{119,Cell{0,4,9}},
                  std::pair{121,Cell{0,17,13}},std::pair{121,Cell{0,17,11}},std::pair{121,Cell{0,9,5}}}) {
@@ -145,6 +244,43 @@ template<class Expect> void check_dwarven_castle(Expect expect)
         }
     });
     worker.join();
+}
+
+template<class Expect> void check_tomra_shop(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    const auto* town=baked::submap_by_map_id(144);
+    if(!town) { expect(false,"Tomra's town geometry loads");return; }
+    json::Value records;
+    RouteSnapshot snapshot(map_state::Resolver({},records));
+    snapshot.submap=town;snapshot.map_id=144;snapshot.layer=0;
+    snapshot.position=world_of_cell(*town,{0,17,11});
+    snapshot.vehicle={true,1,1,{}};snapshot.locale=L"en";
+    snapshot.kind=TargetKind::Transition;
+    int doors=0;
+    for(const auto& object:baked::grids(*town).objects) {
+        if(object.type!=baked::ObjType::GotoMap||object.a!=147)continue;
+        ++doors;
+        snapshot.goal={144,{object.layer,object.tx,object.ty},false,{},0,object.entity_id(),baked::object_identifier(object)};
+        const auto result=plan_snapshot(snapshot);
+        std::printf("Tomra shop door %d (point %d): success %d, %d steps, via %d, %ls\n",object.entity_id(),object.b,
+                    result.path.success,result.path.step_count,result.path.next_map_id,result.path.reason.c_str());
+        expect(result.path.success&&result.path.next_map_id==0&&!result.path.walk_phases.empty()&&
+               result.path.walk_phases.back().cells.back()==snapshot.goal.cell,
+               "Both Tomra shop doors use their own town-side approach");
+        if(object.b==2) {
+            NativeObstacle dwarf;
+            dwarf.type=int(baked::ObjType::NPC);dwarf.id=27;dwarf.cell={0,17,12};
+            dwarf.npc=true;dwarf.solidity_known=true;dwarf.solid=true;dwarf.movement_known=true;dwarf.wanders=true;
+            snapshot.obstacles.push_back(dwarf);
+            const auto wait=plan_snapshot(snapshot);
+            expect(wait.path.success&&wait.path.npc_approach&&wait.path.next_map_id==0,
+                   "A dwarf in the alcove gives a wait at the local Tomra door route");
+            snapshot.obstacles.clear();
+        }
+    }
+    expect(doors==2,"Tomra has two separate shop arrivals");
 }
 
 template<class Expect> void check_baron_walk_open_doors(Expect expect)
@@ -221,9 +357,11 @@ template<class Expect> void check_baron_walk_open_doors(Expect expect)
         SnapshotScope scope(live);
         auto projected=walk_request(*map,{0,20,30});
         map_state::add_obstacles(live.state,*map,projected);
-        expect(baked_route::direction_allowed(projected,{0,20,20},{0,20,19})&&
-               !baked_route::direction_allowed(projected,{0,20,18},{0,20,19}),
-               "remote courtyard uses only the authored rear gate approach");
+        expect(std::any_of(projected.walk_open_doors.begin(),projected.walk_open_doors.end(),[](const auto& door) {
+            return door.cell==Cell{0,20,19}&&door.contact==Cell{0,20,20};
+        })&&std::none_of(projected.walk_open_doors.begin(),projected.walk_open_doors.end(),[](const auto& door) {
+            return door.cell==Cell{0,20,19}&&door.contact==Cell{0,20,18};
+        }),"remote courtyard uses only the authored rear gate opening contacts");
     });
     worker.join();
 }
@@ -373,6 +511,7 @@ int main() {
         if(number==4) {
             check_ff4_underworld(expect);
             check_dwarven_castle(expect);
+            check_tomra_shop(expect);
             check_baron_gate(expect);
             check_baron_walk_open_doors(expect);
             check_baron_stair_chest(expect);

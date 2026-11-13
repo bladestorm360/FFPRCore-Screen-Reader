@@ -1,6 +1,5 @@
 // Read-only projection of the navigation subset of a native map initializer.
 #include "map_state.h"
-#include "walk_open_doors.h"
 #include <vector>
 #include <climits>
 #include <algorithm>
@@ -569,6 +568,45 @@ std::shared_ptr<const baked::TransitionGrid> Resolver::transitions(const baked::
     }
     transitions_[key]=mask;return mask;
 }
+const std::vector<Resolver::WalkOpenContact>& Resolver::walk_open_contacts(const baked::Submap& sm)
+{
+    const int index = baked::submap_index(&sm);
+    auto [cached, fresh] = walk_open_contacts_.try_emplace(index);
+    auto& contacts = cached->second;
+    if (!fresh) return contacts;
+    const auto* record = records_.get(baked::name_of(sm));
+    const auto* rows = record ? record->get(L"walk_open") : nullptr;
+    if (!rows || rows->arr.size() > 16) return contacts;
+    const auto& grid = baked::grids(sm);
+    const auto lookup = [&](const json::Value& key) -> const baked::Object* {
+        if (key.arr.size() != 6) return nullptr;
+        const auto& a = key.arr;
+        for (const auto& object : grid.objects) {
+            if (object.entity_id() == number(a[1]) && int(object.type) == number(a[0]) &&
+                object.layer == number(a[3]) && object.tx == number(a[4]) && object.ty == number(a[5]) &&
+                baked::str(object.group) == a[2].s) return &object;
+        }
+        return nullptr;
+    };
+    for (const auto& row : rows->arr) {
+        const auto* source = row.get(L"contact");
+        const auto* script = row.get(L"script");
+        const auto* blockers = row.get(L"blockers");
+        if (!source || !script || !blockers || blockers->arr.size() > 16) continue;
+        const auto* contact = lookup(*source);
+        if (!contact || !baked_route::step_event(*contact) || contact->a != number(*script) ||
+            contact->b != 2 || contact->tw != 1 || contact->th != 1) continue;
+        WalkOpenContact entry{contact, {}};
+        for (const auto& key : blockers->arr) {
+            const auto* object = lookup(key);
+            if (object && (object->d & 1) && object->tw == 1 && object->th == 1)
+                entry.blockers.push_back(object);
+        }
+        if (!entry.blockers.empty()) contacts.push_back(std::move(entry));
+    }
+    return contacts;
+}
+
 void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Request& request, bool gates, bool geometry_only, bool with_npcs)
 {
     if(request.transport_rules&&request.transport_rules->submap!=&sm)request.transport_rules.reset();
@@ -584,6 +622,22 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
         if(!prepared)prepared=request.transport_rules?std::make_shared<Rules>(*request.transport_rules):std::make_shared<Rules>();
         baked_route::add_transport_cell(*prepared,kind,sm,cell,ids);
     };
+    std::vector<const baked::Object*> ordinary_contacts;
+    std::vector<const baked::Object*> auto_blockers;
+    for (const auto& entry : resolver.walk_open_contacts(sm)) {
+        const auto& contact = *entry.contact;
+        if (!resolver.active(sm, contact) || resolver.consumed(sm, contact)) continue;
+        const auto source = resolver.effective(sm, contact);
+        if (source.tx != contact.tx || source.ty != contact.ty || source.layer != contact.layer) continue;
+        ordinary_contacts.push_back(&contact);
+        for (const auto* blocker : entry.blockers) {
+            if (!resolver.active(sm, *blocker, true)) continue;
+            const auto door = resolver.effective(sm, *blocker);
+            if (door.tx != blocker->tx || door.ty != blocker->ty || door.layer != blocker->layer) continue;
+            auto_blockers.push_back(blocker);
+            request.walk_open_doors.push_back({{door.layer,door.tx,door.ty},{source.layer,source.tx,source.ty}});
+        }
+    }
     for (const auto& original : baked::grids(sm).objects) {
         const bool story_actor=resolver.story_barrier(sm,original);
         if(geometry_only && original.type!=baked::ObjType::Entity && original.type!=baked::ObjType::AnimEntity && original.type!=baked::ObjType::EffectEntity &&
@@ -594,19 +648,7 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
         const bool restricted=ids!=~uint64_t(0);
         const bool npc = o.type == baked::ObjType::NPC || o.type == baked::ObjType::ShopNPC;
         if(npc&&!with_npcs&&!(gates&&story_actor))continue;
-        if(const auto* door=walk_open_doors::blocker(sm,original)) {
-            int entry_mask=0;
-            for(const auto& source:baked::grids(sm).objects) {
-                const bool south=walk_open_doors::contact(*door,source,true);
-                const bool north=walk_open_doors::contact(*door,source,false);
-                if((south||north)&&source.tx==o.tx&&resolver.active(sm,source)&&!resolver.consumed(sm,source))
-                    entry_mask|=south?8:1;
-            }
-            if(entry_mask&&o.tx==original.tx&&o.ty==original.ty&&o.layer==original.layer) {
-                request.walk_open_doors.push_back({{o.layer,o.tx,o.ty},entry_mask});
-                continue;
-            }
-        }
+        if (std::find(auto_blockers.begin(),auto_blockers.end(),&original)!=auto_blockers.end()) continue;
         const bool solid = o.type == baked::ObjType::TreasureBox ||
             (gates&&story_actor&&o.type==baked::ObjType::Event)||
             (npc && (o.d & 1) && (story_actor?gates:with_npcs)) ||
@@ -616,7 +658,8 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
         const bool terminal=baked::world_exit(o)&&!used;
         const auto* source_exit=baked::world_exit_at(baked::grids(sm),o.entity_id(),baked::object_identifier(o),o.tx,o.ty);
         const bool exit_source=source_exit&&(!(source_exit->d&(baked::kAutomaticCurrent|baked::kConditionalSceneExit))||!resolver.consumed(sm,*source_exit));
-        const bool trigger = baked_route::step_event(o)&&!used&&!exit_source&&!walk_open_doors::is_contact(sm,original);
+        const bool trigger = baked_route::step_event(o)&&!used&&!exit_source&&
+            std::find(ordinary_contacts.begin(),ordinary_contacts.end(),&original)==ordinary_contacts.end();
         const int transition_bits=used?0:baked::transition_bits(o);
         if (!solid && !collider && !trigger&&!terminal&&!(restricted&&transition_bits)) continue;
         for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x) {

@@ -82,9 +82,9 @@ struct Request {
     bool transport_gates = true;       // gates-free explanation proof only
     std::vector<int> auto_groups;     // on foot: groups ridden automatically when owned
     std::vector<Cell> blocked;        // live blockers; layer -1 = every layer
-    struct WalkOpenDoor { Cell cell; int entry_mask; }; // native side bits N=1, W=2, E=4, S=8
-    // Kept in gate-free proofs so a closed door cannot be entered from a
-    // side that has no powered step-on opener.
+    struct WalkOpenDoor { Cell cell; Cell contact; };
+    // Each conditional cell can be entered only after a matching contact is
+    // reached. Kept in gate-free proofs and never applied as a native write.
     std::vector<WalkOpenDoor> walk_open_doors;
     bool live_relays = false;        // active projected counter tiles, when state is known
     std::vector<baked::Object> relays; // owned geometry only; no native references

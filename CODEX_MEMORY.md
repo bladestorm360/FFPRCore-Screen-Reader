@@ -1,9 +1,17 @@
 # Native FFPR durable memory
 
+**November 13 shared door routing and FFIV navigation.** Exact step-on
+door contacts now let ordinary routes pass through the colliders they
+release. The Dwarven Castle throne route, four Underworld entrance
+tiles, parked Falcon approach and both Tomra shop doors use native
+arrival and collision rules. See [the route evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-13-shared-walk-open-doors-and-ffiv-route-reports).
+The combined update passed focused checks and was hash-verified in all
+six Steam installations. See [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-13-combined-door-route-and-boss-update).
+
 **November 13 boss sprite correction.** FFIV and FFV type-45 actions now
 follow BattleFunction24 staging through the native presentation commit.
-FFV's Wing Raptor uses both type 45 and type 73. FFV matched the scan.
-FFIV delivery is queued with the shared walk-open door fix. See
+FFV's Wing Raptor uses both type 45 and type 73. The fix was included in
+the combined delivery. See
 [the battle evidence](docs/re/BOSS_VISUALS_20261112.md#november-13-missing-cloak-and-wing-announcements).
 
 **November 13 FFIV navigation.** Castle Baron routes use the verified walk-open

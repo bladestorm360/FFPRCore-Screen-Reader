@@ -157,7 +157,7 @@ void check_map_transition()
 
     // Same map: no announcement
     if (current_map_id == g_last_announced_map_id && !g_needs_map_scan) {
-        if (g_script_refresh || (g_gimmick_refresh && (current_map_id==1||current_map_id==2||current_map_id==4)) ||
+        if (g_script_refresh || g_gimmick_refresh ||
             ::field::scanner::needs_scan(current_map_id)) ::field::request_rescan();
         g_script_refresh = false;
         g_gimmick_refresh = false;
@@ -206,10 +206,10 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
                 ::field::baked_nav::note_trap_start(map_id,at);
         });
     }
-    // Baron walk-open doors and the Enterprise's carry animation can change
-    // same-floor geometry/model ownership during FFIV's Gimmick state.
+    // Walk-open doors and the Enterprise's carry animation can change
+    // same-floor geometry/model ownership during Gimmick state.
     if (state == kStateEvent) g_script_refresh = true;
-    if (state == kStateGimmick && game::is(game::Id::FF4)) g_gimmick_refresh = true;
+    if (state == kStateGimmick && game::in(game::kFF4|game::kFF5|game::kFF6)) g_gimmick_refresh = true;
     if (state == kStateChangeMap || same_map_drop) {
         events::fire(events::Kind::MapChanging);
         g_needs_map_scan = true;

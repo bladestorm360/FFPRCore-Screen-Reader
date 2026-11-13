@@ -1,5 +1,26 @@
 # Build and distribution security
 
+## November 13 combined door, route and boss update
+
+The focused build ran five offline checks, matched 67 embedded resources,
+and verified 8,450 native names. The isolated smoke host resolved all
+47 exports. Build time was 203.3 seconds with one worker, a 25% CPU cap
+and peak job memory of 523,952,128 bytes. The unsigned 13,474,304-byte
+DLL SHA-256 is
+`7c4580631476988bd9fcf0c3755142e55e5848686e549dea72924fdc62c79192`.
+Defender definitions `1.463.284.0` found no threats in the 22 exact
+payload files. Hashes stayed stable and no matching detection event was
+recorded. The OS denied the separate exclusion query.
+
+The established installer updated all six Steam copies after the games
+closed. All 22 installed files matched the scanned bytes in each game,
+and all 138 protected file states matched the pre-install inventory.
+Receipts and prior per-game hashes are under
+`../tools/boss_visuals_20261112/walk-open-delivery`. Source recovery starts
+from `8d7143c7642a70e237a8648b6f6626902c98d2ef` for the previous battle
+fix, `993e06e` for the previous FFIV build, and the per-game delivery
+records for other previous builds. No game was launched for verification.
+
 ## November 13 FFIV and FFV boss sprite correction
 
 The focused build passed the production boss sprite, battle entry and
@@ -11,8 +32,8 @@ query was denied. SHA256 is
 `caaccaad05f650eaeb14267aa37c5c7f57acbd16672c45c727d45c9fa28933a4`.
 
 FFV matched all 22 hashes and the installer verified 138 protected file
-states across all six games. At the owner's request FFIV delivery is
-queued with the shared door routing fix. Recovery starts from `993e06e`
+states across all six games. FFIV received the fix with the later combined
+door and navigation update. Recovery starts from `993e06e`
 for source and the previous per-game delivery records for installed hashes.
 Receipts are in `../tools/boss_visuals_20261112/sprite-fix-delivery`.
 

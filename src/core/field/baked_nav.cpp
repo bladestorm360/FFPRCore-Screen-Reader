@@ -22,7 +22,6 @@
 #include "field_internal.h"
 #include "map_names.h"
 #include "map_state.h"
-#include "walk_open_doors.h"
 #include "entity_translator.h"
 #include "../game.h"
 #include "../hooks.h"
@@ -800,6 +799,25 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
             !snapshot.projected_origin&&!snapshot.anticipated_release&&g.entity_index_prepared;
         if(reuse&&snapshot.floating_blockers&&snapshot.floating_blockers_data==snapshot.obstacles.data()&&
            snapshot.floating_blockers_size==snapshot.obstacles.size())return *snapshot.floating_blockers;
+        std::vector<const baked::Object*> ordinary_contacts;
+        std::vector<const baked::Object*> auto_blockers;
+        const auto observed_at = [&](const baked::Object& object, bool contact) {
+            const Cell cell{object.layer,object.tx,object.ty};
+            return std::any_of(snapshot.obstacles.begin(), snapshot.obstacles.end(), [&](const NativeObstacle& raw) {
+                return raw.id == object.entity_id() && raw.type == int(object.type) && raw.cell == cell &&
+                    raw.enabled && raw.applies && !raw.transportation_restricted && (!contact || raw.trigger) &&
+                    baked_by_entity_id(g,raw.id,object.type,cell,raw.raw_name) == &object;
+            });
+        };
+        if (!snapshot.anticipated_release) for (const auto& entry : snapshot.state.walk_open_contacts(sm)) {
+            const auto* source = entry.contact;
+            if (!observed_at(*source,true) || snapshot.state.consumed(sm,*source)) continue;
+            ordinary_contacts.push_back(source);
+            for (const auto* door : entry.blockers) if (observed_at(*door,false)) {
+                auto_blockers.push_back(door);
+                out.walk_open_doors.push_back({{door->layer,door->tx,door->ty},{source->layer,source->tx,source->ty}});
+            }
+        }
         std::shared_ptr<Rules> prepared;
         for (const auto& raw : g_route_snapshot->obstacles) {
             if(g_route_snapshot->anticipated_release &&
@@ -859,7 +877,7 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
                 const auto* o = raw.fixed_border?raw.fixed_border:baked_by_entity_id(g, raw.id, static_cast<baked::ObjType>(raw.type), c, raw.raw_name);
                 if (!o) o = baked_by_entity_id(g, raw.id, baked::ObjType::Warp, c, raw.raw_name);
                 if (o&&g_route_snapshot->state.consumed(sm,*o)) continue;
-                if (o&&walk_open_doors::is_contact(sm,*o)) continue;
+                if (std::find(ordinary_contacts.begin(),ordinary_contacts.end(),o)!=ordinary_contacts.end()) continue;
                 if(o&&snapshot.state.story_barrier(sm,*o)&&!is_goal(c.x,c.y))append(out.gates,c,Rules::Gate);
                 // A completed scene may move its still-powered trigger away
                 // instead of destroying it (FF6 Ymir: native SetPos after the
@@ -877,20 +895,8 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
                 // excluded from the display-only destination detector chain.
                 const auto* o = baked_by_entity_id(g, raw.id, static_cast<baked::ObjType>(raw.type), c, raw.raw_name);
                 if (o && (o->d & kFlagCollision) && !snapshot.state.can_unlock(sm,*o)) {
-                    if(const auto* door=walk_open_doors::blocker(sm,*o);door&&c==Cell{o->layer,o->tx,o->ty}) {
-                        int entry_mask=0;
-                        for(const auto& observed:snapshot.obstacles) {
-                            if(!observed.trigger||!observed.enabled||!observed.applies||
-                               observed.cell.layer!=c.layer||observed.cell.x!=c.x||
-                               (observed.cell.y!=door->south_y&&observed.cell.y!=door->north_y))continue;
-                            const auto* source=baked_by_entity_id(g,observed.id,baked::ObjType::Event,
-                                                                  observed.cell,observed.raw_name);
-                            if(!source||snapshot.state.consumed(sm,*source))continue;
-                            if(walk_open_doors::contact(*door,*source,true))entry_mask|=8;
-                            if(walk_open_doors::contact(*door,*source,false))entry_mask|=1;
-                        }
-                        if(entry_mask&&!raw.transportation_restricted){out.walk_open_doors.push_back({c,entry_mask});continue;}
-                    }
+                    if (c==Cell{o->layer,o->tx,o->ty}&&
+                        std::find(auto_blockers.begin(),auto_blockers.end(),o)!=auto_blockers.end()) continue;
                     // Scripted single-tile walls/rocks can move without a map
                     // reload. Their current native tile, including ID zero,
                     // owns collision; the baked home must not remain closed.
@@ -2076,6 +2082,8 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
     const bool batch=world_targets&&distances;
     if(batch&&(!here->world||here!=there||world_targets->size()>512))return out;
     const bool stair_chest = !batch && baron_stair_chest(goal);
+    const auto* target_vehicle=baked::transport(goal.transportation_id);
+    const bool parked_airship_goal=there->world&&target_vehicle&&ff4_airship(target_vehicle->type);
     std::vector<int> target_traps;
     if(batch){distances->assign(world_targets->size(),-1);target_traps.assign(world_targets->size(),INT_MAX);}
     return hooks::guarded_r("BakedNav.FindAcross", out, [&] {
@@ -2299,7 +2307,7 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 int d = -1;
                 for (const Cell& c : goal_cells) {
                     int dc = reach.distance(c);
-                    if (dc < 0 && !goal.examine) {
+                    if (dc < 0 && !goal.examine && !parked_airship_goal) {
                         // a closed goal cell (a chest, a switch): from beside it
                         static const int kSide[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
                         for (const auto& s : kSide) {
@@ -3003,6 +3011,26 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             (action_pad || aerial || !mounted_foot_target(req,target,kind,goals.face)) &&
             !(sm->world&&req.vehicle_group>0&&goals.face);
         if (pad_ready && (req.vehicle_group == 0 || riding_goal)) route = baked_route::find(req);
+        const auto* parked_model=baked::transport(g_route_snapshot->goal.transportation_id);
+        const bool parked_airship=parked_model&&ff4_airship(parked_model->type);
+        if (!route.found && sm->world && req.vehicle_group==0 && parked_airship) {
+            // Confirm boards from the adjacent interaction tile.
+            auto approach=req;
+            approach.goals.clear();approach.goals_open=false;approach.allow_trap_goal=false;
+            static constexpr int sides[][2]={{0,-1},{1,0},{0,1},{-1,0}};
+            for(const auto& side:sides) {
+                const Cell adjacent{target.layer,(target.x+side[0]+g.width)%g.width,
+                                    (target.y+side[1]+g.height)%g.height};
+                if(baked_route::open(approach,g,adjacent)&&!baked_route::terminal_transition(approach,g,adjacent))
+                    approach.goals.push_back(adjacent);
+            }
+            auto walk=baked_route::find(approach);
+            if(walk.found) {
+                route=std::move(walk);
+                goals.face=true;goals.faced={target};
+                req=std::move(approach);
+            }
+        }
         if (!route.found && game::flags().has_hidden_passages && !sm->world) {
             baked_route::Request with = req;
             with.passages = true;
@@ -3043,20 +3071,47 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                 if(path.found){route=std::move(path);req=std::move(alternate);}
             }
         }
-        const bool world_dungeon_return = !route.found && sm->world &&
-            (kind == TargetKind::Transition || kind == TargetKind::Infer) &&
+        std::vector<Phase> equivalent_landing;
+        if (!route.found && !equivalents.empty() && ff4_airship(req.vehicle_type)) {
+            auto alternate = req;
+            // Try the selected entrance first. Use a sibling only if it has
+            // the same native arrival and the selected tile cannot be reached.
+            if (!vehicle_journey_route(*sm, g, req, req.goals, equivalent_landing, aerial)) {
+                alternate.goals.clear();
+                for (const auto* entrance : equivalents) alternate.goals.push_back({target.layer,entrance->tx,entrance->ty});
+                vehicle_journey_route(*sm, g, alternate, alternate.goals, equivalent_landing, aerial);
+            }
+        }
+        const bool world_dungeon_return = !route.found && equivalent_landing.empty() && sm->world &&
+            ((parked_airship&&req.vehicle_group==0) ||
+            ((kind == TargetKind::Transition || kind == TargetKind::Infer) &&
             std::any_of(g.objects.begin(), g.objects.end(), [&](const auto& object) {
                 if (!object.contains(target.x, target.y) ||
                     (object.type != baked::ObjType::GotoMap && !baked::world_exit(object))) return false;
                 const auto* destination = baked::submap_by_map_id(object.a);
                 return destination && !destination->world;
-            });
+            })));
+        std::optional<Phase> same_floor_door_approach;
+        if (!route.found && !sm->world && kind==TargetKind::Transition && !live.moving_npcs.empty()) {
+            // A wandering NPC can temporarily block an alcove's only way
+            // back to town. Prefer the exact town-side door and wait on the
+            // actual obstruction instead of routing through a sibling door.
+            auto proof=req;
+            proof.blocked=live.hard(true,true,false);
+            proof.blocked.insert(proof.blocked.end(),live.fixed_npcs.begin(),live.fixed_npcs.end());
+            const auto direct=baked_route::find(proof);
+            if (direct.found) {
+                auto approach=npc_approach(req,live,direct.cells);
+                if (approach && approach->wait_for_npc) same_floor_door_approach=std::move(approach);
+            }
+        }
         MapGoal around;
         if (!route.found && (!sm->world || world_dungeon_return)) {
             if (stair_chest) around = g_route_snapshot->goal;
             around.map_id = map_id;
             around.cell = stair_chest ? kBaronChest : target;
             around.cells = req.goals;
+            if(parked_airship) around.transportation_id=g_route_snapshot->goal.transportation_id;
             if(kind==TargetKind::Interact&&ordinary_chest_goal(g,target,g_route_snapshot->goal.entity_id))
                 around.examine=true;
         }
@@ -3065,7 +3120,13 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         std::optional<CrossLeg> world_return;
         if (world_dungeon_return && !aerial) world_return = find_across(map_handle, player, around, true);
         std::vector<Phase> phases;
-        if(world_return&&world_return->found&&!world_return->phases.empty()&&
+        if(same_floor_door_approach) {
+            out.npc_approach=true;
+            out.reason=same_floor_door_approach->action_after;
+            phases.push_back(std::move(*same_floor_door_approach));
+        } else if(!equivalent_landing.empty()) {
+            phases=std::move(equivalent_landing);
+        } else if(world_return&&world_return->found&&!world_return->phases.empty()&&
            std::any_of(equivalents.begin(),equivalents.end(),[&](const auto* entrance) {
                return world_return->next_map_id==entrance->a&&world_return->trap_entity==entrance->entity_id()&&
                    world_return->trap_x==entrance->tx&&world_return->trap_y==entrance->ty;
@@ -3139,8 +3200,8 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                 // caller cannot rediscover that portal by asking which object
                 // contains the final walking cell. Retain the exact planner
                 // receipt, just as the strict guide route already does.
-                if(g_route_snapshot&&g_pending&&next_map==map_id&&!phases.empty()&&
-                   phases.back().manual_after&&!leg.cells.empty()) {
+                if(g_route_snapshot&&g_pending&&!phases.empty()&&!leg.cells.empty()&&
+                   ((next_map==map_id&&phases.back().manual_after)||parked_airship)) {
                     remember_destination(g_route_snapshot->goal,kind,g_route_snapshot->name);
                     g_pending->incoming_trap.reset();
                     g_pending->incoming_transition=TrapVisit{map_id,leg.trap_entity,next_map,
@@ -4226,16 +4287,34 @@ struct Planned {
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
     snapshot.flight_to_landing.reset();
+    bool vehicle_missing=snapshot.goal.transportation_id>0;
+    std::optional<TrapVisit> parked_craft_arrival;
+    // The live actor list no longer contains a parked craft after entering
+    // an interior. Check the observed arrival before discarding old map
+    // geometry receipts. On return, use the live craft position again.
+    if(vehicle_missing&&snapshot.goal.map_id!=snapshot.map_id&&snapshot.pending.valid&&
+       snapshot.pending.goal.map_id==snapshot.goal.map_id&&snapshot.pending.goal.cell==snapshot.goal.cell&&
+       snapshot.pending.goal.transportation_id==snapshot.goal.transportation_id) {
+        const auto* model=baked::transport(snapshot.goal.transportation_id);
+        if(model&&ff4_airship(model->type)) {
+            const auto& visits=snapshot.pending.completed_transitions;
+            const auto arrival=std::find_if(visits.begin(),visits.end(),[&](const TrapVisit& leg) {
+                return leg.observed&&leg.map_id==snapshot.goal.map_id&&leg.destination==snapshot.map_id;
+            });
+            if(arrival!=visits.end()) parked_craft_arrival=*arrival;
+            vehicle_missing=!parked_craft_arrival;
+        }
+    }
     const auto state_signature = snapshot.state.signature();
     if (snapshot.pending.state_signature != state_signature) {
         snapshot.pending.completed_transitions.clear(); snapshot.pending.incoming_transition.reset();
+        if(parked_craft_arrival) snapshot.pending.completed_transitions.push_back(*parked_craft_arrival);
         snapshot.pending.state_signature = state_signature;
     }
     if (snapshot.previous_active) snapshot.active = *snapshot.previous_active;
     modtext::LocaleScope locale(snapshot.locale);
     SnapshotScope scope(snapshot);
     snapshot.observed_goal=snapshot.goal.cell;
-    bool vehicle_missing=snapshot.goal.transportation_id>0;
     if(snapshot.goal.transportation_id>0&&snapshot.goal.map_id==snapshot.map_id) {
         const auto model=std::find_if(snapshot.vehicles.begin(),snapshot.vehicles.end(),[&](const auto& vehicle){
             return vehicle.transportation_id==snapshot.goal.transportation_id;
