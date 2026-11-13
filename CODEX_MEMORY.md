@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 13 FFIV navigation.** Castle Baron routes use the verified walk-open
+door approaches. The Enterprise now has a separate hovercraft lowering cue,
+and the hovercraft follows its carrier while attached and uses its parked
+position after release.
+[Baron](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-13-ffiv-castle-baron-walk-open-doors).
+[Hovercraft](docs/re/VEHICLE_ROUTING.md#november-13-ffiv-hovercraft-pickup-and-lowering).
+
 **November 13 map close.** All six desktop controllers inline the Q map's
 Cancel path. The mod now releases its map-owned review and field gate when
 that controller clears IsOpen. The three focused context checks passed.

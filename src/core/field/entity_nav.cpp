@@ -143,6 +143,7 @@ void format_current_entity(std::function<void(std::wstring)> publish)
     const auto e = scanner::current_entity();
     if (!e) { publish({}); return; }
     const auto ordinal = L" " + TF(L"({0} of {1})", {text::num(scanner::current_index() + 1), text::num(scanner::count())});
+    if(e->hovercraft_is_carried()) {publish(e->format_description({},false,{})+ordinal);return;}
     FilterContext ctx;
     const auto position = e->position();
     baked_nav::MapGoal goal;
@@ -192,6 +193,7 @@ void announce_ready_entity(bool walking, double requested_at)
             speak(T(L"No entity selected"));return;
         }
     } else {
+        if(e->hovercraft_is_carried()) {speak(e->format_description({},false,{}));return;}
         mark_entity();
         FilterContext ctx;
         if (!ctx.field_player || !unity::transform(ctx.field_player)) {
@@ -544,7 +546,7 @@ Target selected()
     Target t;
     hooks::guarded("Field.Selected", [&] {
         EntityPtr e = scanner::current_entity();
-        if (!e) return;
+        if (!e || e->hovercraft_is_carried()) return; // carried cargo is a list row, not a navigation target
         t.valid = true;
         t.position = e->position();
         t.name = e->display_name();

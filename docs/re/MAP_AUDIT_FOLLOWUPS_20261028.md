@@ -1,5 +1,33 @@
 # Remaining map-audit findings and evidence limits
 
+## November 13 FFIV Castle Baron walk-open doors
+
+The FFIV log at 102493–102581 says Story gated for both engineers from
+the courtyard at Bottom (20,30). At 102584–102589 the player reaches the
+rear door contact, the game enters Gimmick, and the player crosses into
+Castle Baron 1F. The rear contact at (19,20) or (20,20) runs script 1034
+when stepped on. It removes collision actors 46 and 47 before the player
+reaches the closed doorway at row 19. The front door has paired contacts
+on both sides, using scripts 1033 and 1001 to remove actors 43 and 44.
+The rear door only has the automatic approach on its south side.
+
+Current-floor routing matches the exact live powered contact to the exact
+door and approach tile. Future-floor routing uses the same rule with
+initializer-projected contact state. Known door-opening contacts count as
+ordinary travel. The router keeps the approach restriction in reachability
+and story-gate checks, keeps unrelated collisions, and refuses direct
+teleport into a closed doorway. Live autowalk still checks the native
+movement predicate and waits for field control by its existing rules.
+The player can request fresh directions after the native door animation.
+No new pathfinding hook or game-state write is involved.
+
+Verification uses the production browse worker, same-floor directions,
+and story-gate filtering against the actual courtyard and engineer actors.
+Both destinations now get a 13-step first leg through the rear door to 1F.
+The route keeps the engineer selected through the normal floor continuation.
+The replay also checks missing contact power and the rear door's unsupported
+approach. In-game confirmation is pending.
+
 ## November 12 FFIV Underworld west route
 
 The FFIV log at 22901–22961 shows the route beginning four steps west from

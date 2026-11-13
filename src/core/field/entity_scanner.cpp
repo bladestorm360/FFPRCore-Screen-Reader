@@ -94,6 +94,7 @@ bool pathfinding_enabled() { return !literal_inventory(); }
 bool pathfinding_passes(const EntityPtr& e, const FilterContext& ctx)
 {
     if (!e || !e->is_alive()) return false;
+    if (e->hovercraft_is_carried()) return true;
     // This local synthetic row was already proved reachable in the current
     // owned vehicle snapshot; publication invalidates it on map/vehicle movement.
     if((e->aerial_transition||surface_target(*e)) && e->local_baked_map_id==current_map_id_or_user_data())return true;

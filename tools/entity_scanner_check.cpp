@@ -189,6 +189,7 @@ npc_names::Label npc_display_label(const std::wstring& name) { fixture::native()
 bool is_decimal_digit(wchar_t c) { return c >= L'0' && c <= L'9'; }
 bool EntityCursor::next(void*& entity) { fixture::native();entity=nullptr;if(index>=static_cast<int>(fixture::candidates.size()))return false;entity=fixture::candidates[index++];seen.insert(entity);return true; }
 bool Entity::is_alive() const { fixture::native(); return game != reinterpret_cast<void*>(2); }
+bool Entity::hovercraft_is_carried() const { return false; }
 bool Entity::is_opened() const { fixture::native(); return opened; }
 Category Entity::category() const { return kind == Kind::Vehicle ? Category::Vehicles : kind == Kind::TreasureChest ? Category::Chests : kind == Kind::SavePoint ? Category::SavePoints : kind == Kind::NPC || (kind==Kind::Event && event_type==L"NPC") ? Category::NPCs : kind == Kind::MapExit ? Category::MapExits : kind == Kind::Event && (event_type==L"Interactive Object"||event_type==L"Interactive") ? Category::Objects : Category::Events; }
 unity::Vec3 Entity::position() const { fixture::native(); return pos; }

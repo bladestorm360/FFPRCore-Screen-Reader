@@ -40,6 +40,13 @@ ref::Method mHideLandingGuide{kMapUIManager, "HideLandingGuide", 0};
 ref::Field fLandingGuide{kMapUIManager, "landingGuide"};
 
 bool g_last_landable_state = false;
+ref::Class kFF4TransportationEvent{"Serial.FF4.Map","TransportationEvent",game::kFF4};
+ref::Method mFF4LandingEvent{kFF4TransportationEvent,"IsLandingEvent",3};
+ref::Class kSaveMapManager{"Last.Map","SaveMapManager",game::kFF4};
+ref::Class kSaveMapData{"Last.Map","SaveMapData",game::kFF4};
+ref::Field fMapSave{kSaveMapManager,"<SaveData>k__BackingField"};
+ref::Field fCarrying{kSaveMapData,"carryingHoverShip"};
+bool g_can_lower_hovercraft=false;
 // The native boolean stays true across land<->dive terrain. Remember the
 // available action, rather than treating those distinct native choices as one.
 enum class LandingAction { Unknown, Land, Dive, Surface };
@@ -106,6 +113,12 @@ void observe_landing_guide(void* self, bool landable)
     // The native current transportation is authoritative. Movement speech can
     // still say on foot during boarding; nearby parked models aren't mounted.
     const auto vehicle=::field::current_vehicle();
+    // The native generic guide can describe either the aircraft or its cargo.
+    // The FFIV landing-event producer below owns the carried case.
+    if(game::is(game::Id::FF4)&&vehicle.id==10&&hovercraft_carried()!=std::optional<bool>(false)) {
+        g_last_landable_state=false;g_landing_action=LandingAction::Unknown;
+        return;
+    }
     if(!manual_landing_vehicle(vehicle)) {reset_landing_state();return;}
     if(vehicle.id!=g_landing_vehicle_id || vehicle.type!=g_landing_vehicle_type) {
         reset_landing_state();
@@ -133,6 +146,29 @@ void observe_landing_guide(void* self, bool landable)
     }
     g_last_landable_state=landable;
     g_landing_action=action;
+}
+
+using LandingEvent=bool(*)(void*,int32_t,void*,bool*,const void*);
+LandingEvent o_ff4_landing_event=nullptr;
+bool d_ff4_landing_event(void* self,int32_t id,void* can_land,bool* landable,const void* mi)
+{
+    const bool handled=o_ff4_landing_event(self,id,can_land,landable,mi);
+    hooks::guarded("VehicleLanding.FF4Hovercraft",[&]{
+        if(id!=10||!landable||hovercraft_carried()!=std::optional<bool>(true)) {
+            g_can_lower_hovercraft=false;
+            return;
+        }
+        // On the carried branch native code fills this output with the result
+        // of the hovercraft's own landing check, including native blockers.
+        const bool available=handled&&*landable;
+        const bool entered=available&&!g_can_lower_hovercraft;
+        g_can_lower_hovercraft=available;
+        if(entered&&system::is_field_navigation_ready()&&!system::input_transition_blocked()) {
+            g_last_announcement_time=frame::now();
+            ffpr::say(T(L"Can lower hovercraft"),false);
+        }
+    });
+    return handled;
 }
 
 using SwitchLandable_t = void (*)(void* self, bool landable, const void* mi);
@@ -290,6 +326,7 @@ int install()
     else LOGF("[Landing] Could not hook MapUIManager.SwitchLandable");
     if(hooks::attach(mShowLandingGuide,&d_ShowLandingGuide,&o_ShowLandingGuide))++n;
     if(hooks::attach(mHideLandingGuide,&d_HideLandingGuide,&o_HideLandingGuide))++n;
+    if(game::is(game::Id::FF4)&&hooks::attach(mFF4LandingEvent,&d_ff4_landing_event,&o_ff4_landing_event))++n;
     events::on(events::Kind::MapChanging,[]{reset_landing_state();});
     events::on(events::Kind::BattleEntering,[]{reset_landing_state();});
 
@@ -309,8 +346,22 @@ core::Install s_install{"VehicleLanding", &install, 120};
 
 void reset_landing_state() {
     g_last_landable_state=false;g_landing_guide=nullptr;
+    g_can_lower_hovercraft=false;
     g_landing_action=LandingAction::Unknown;
     g_landing_vehicle_id=g_landing_vehicle_type=0;
+}
+
+std::optional<bool> hovercraft_carried()
+{
+    if(!game::is(game::Id::FF4)||!frame::on_main_thread()||!fMapSave||!fCarrying)return {};
+    // Inspect the already initialized save object. The native singleton getter
+    // can allocate during loading, so never use it for navigation.
+    return hooks::guarded_r("VehicleLanding.FF4CarryState",std::optional<bool>{},[]()->std::optional<bool>{
+        void* manager=il2cpp::read_static_ptr(kSaveMapManager.get(),"instance");
+        void* data=manager?ref::rd<void*>(manager,fMapSave):nullptr;
+        if(!data||!kSaveMapData.is(data))return {};
+        return ref::rd<bool>(data,fCarrying);
+    });
 }
 double last_announcement_time() { return g_last_announcement_time; }
 

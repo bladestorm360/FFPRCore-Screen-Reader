@@ -109,11 +109,13 @@ ref::Method mChangeState{kSubSceneManagerMainGame, "ChangeState", 1};
 constexpr int32_t kStateChangeMap = 1;
 constexpr int32_t kStatePlayer = 3;
 constexpr int32_t kStateTransport = 4;
+constexpr int32_t kStateGimmick = 11;
 constexpr int32_t kStateEvent = 12;
 
 int g_last_announced_map_id = -1;
 bool g_needs_map_scan = true;
 bool g_script_refresh = false;
+bool g_gimmick_refresh = false;
 int g_change_depth = 0;
 
 /// FFI_ScreenReaderMod.ClearMenuFlagsForMapTransition: clear menu and popup flags a set/clear
@@ -155,14 +157,17 @@ void check_map_transition()
 
     // Same map: no announcement
     if (current_map_id == g_last_announced_map_id && !g_needs_map_scan) {
-        if (g_script_refresh || ::field::scanner::needs_scan(current_map_id)) ::field::request_rescan();
+        if (g_script_refresh || (g_gimmick_refresh && (current_map_id==1||current_map_id==2||current_map_id==4)) ||
+            ::field::scanner::needs_scan(current_map_id)) ::field::request_rescan();
         g_script_refresh = false;
+        g_gimmick_refresh = false;
         return;
     }
 
     g_last_announced_map_id = current_map_id;
     g_needs_map_scan = false;
     g_script_refresh = false;
+    g_gimmick_refresh = false;
 
     // The map really changed, so the transition is over (no menu is possible during it).
     clear_menu_flags_for_map_transition();
@@ -201,7 +206,10 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
                 ::field::baked_nav::note_trap_start(map_id,at);
         });
     }
+    // Baron walk-open doors and the Enterprise's carry animation can change
+    // same-floor geometry/model ownership during FFIV's Gimmick state.
     if (state == kStateEvent) g_script_refresh = true;
+    if (state == kStateGimmick && game::is(game::Id::FF4)) g_gimmick_refresh = true;
     if (state == kStateChangeMap || same_map_drop) {
         events::fire(events::Kind::MapChanging);
         g_needs_map_scan = true;

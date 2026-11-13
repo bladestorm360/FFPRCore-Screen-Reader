@@ -1,5 +1,6 @@
 // Read-only projection of the navigation subset of a native map initializer.
 #include "map_state.h"
+#include "walk_open_doors.h"
 #include <vector>
 #include <climits>
 #include <algorithm>
@@ -593,6 +594,19 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
         const bool restricted=ids!=~uint64_t(0);
         const bool npc = o.type == baked::ObjType::NPC || o.type == baked::ObjType::ShopNPC;
         if(npc&&!with_npcs&&!(gates&&story_actor))continue;
+        if(const auto* door=walk_open_doors::blocker(sm,original)) {
+            int entry_mask=0;
+            for(const auto& source:baked::grids(sm).objects) {
+                const bool south=walk_open_doors::contact(*door,source,true);
+                const bool north=walk_open_doors::contact(*door,source,false);
+                if((south||north)&&source.tx==o.tx&&resolver.active(sm,source)&&!resolver.consumed(sm,source))
+                    entry_mask|=south?8:1;
+            }
+            if(entry_mask&&o.tx==original.tx&&o.ty==original.ty&&o.layer==original.layer) {
+                request.walk_open_doors.push_back({{o.layer,o.tx,o.ty},entry_mask});
+                continue;
+            }
+        }
         const bool solid = o.type == baked::ObjType::TreasureBox ||
             (gates&&story_actor&&o.type==baked::ObjType::Event)||
             (npc && (o.d & 1) && (story_actor?gates:with_npcs)) ||
@@ -602,7 +616,7 @@ void add_obstacles(Resolver& resolver, const baked::Submap& sm, baked_route::Req
         const bool terminal=baked::world_exit(o)&&!used;
         const auto* source_exit=baked::world_exit_at(baked::grids(sm),o.entity_id(),baked::object_identifier(o),o.tx,o.ty);
         const bool exit_source=source_exit&&(!(source_exit->d&(baked::kAutomaticCurrent|baked::kConditionalSceneExit))||!resolver.consumed(sm,*source_exit));
-        const bool trigger = baked_route::step_event(o)&&!used&&!exit_source;
+        const bool trigger = baked_route::step_event(o)&&!used&&!exit_source&&!walk_open_doors::is_contact(sm,original);
         const int transition_bits=used?0:baked::transition_bits(o);
         if (!solid && !collider && !trigger&&!terminal&&!(restricted&&transition_bits)) continue;
         for (int y = o.ty; y < o.ty + o.th; ++y) for (int x = o.tx; x < o.tx + o.tw; ++x) {

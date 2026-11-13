@@ -24,6 +24,7 @@
 #include "object_cache.h"
 #include "path_search.h"
 #include "../game.h"
+#include "../fieldnav/vehicle_landing.h"
 #include "../frame.h"
 #include "../hooks.h"
 #include "../il2cpp.h"
@@ -126,7 +127,10 @@ bool vehicle_type_of(void* fe, int& type, int& transportation_id, std::wstring& 
 std::vector<VehicleOnMap> vehicles_on_map()
 {
     std::vector<VehicleOnMap> out;
+    const bool carried=game::is(game::Id::FF4)&&
+        ffpr::fieldnav::vehicle_landing::hovercraft_carried()==std::optional<bool>(true);
     for (const auto& [fe, info] : g_vehicle_types) {
+        if(carried&&info.id==2)continue; // it cannot be boarded while attached
         if (info.map_id != current_map_id() || !live_entity(fe)) continue;
         void* tr = unity::transform(fe);
         if (!tr) continue;

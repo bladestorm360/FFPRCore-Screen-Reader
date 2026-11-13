@@ -253,3 +253,34 @@ User-scoped wording correction at `field/baked_nav.cpp::plan_browse_snapshot`: t
 Two mod-owned phrase keys, `Fly {0}, then {1}` and `Sail {0}, then {1}`, have all12 supported locale values with each placeholder once. Auto/manual language policy is unchanged; `tools/modtext_vehicle_wording.py` maintains the entries. Actual production browse assertions pass for airborne Enterprise before water landing and FFII ridden-Canoe distant-Ship browse before boarding. An earlier Walk expectation failed as expected and was updated. Full navigation and landing follow-ups pass. Canonical evidence:8287 names/0 missing;142 used/349 defined/0 undefined; `route_worker`0 failures; 47-export smoke pass. Earlier intermittent standalone `route_worker` 0xC00000FD is retained as a known fixture issue, not a universal stability claim. DLL11,037,696 bytes, SHA256 `9a4a87e3082b709a78a407035abc0f9b9e2d5f4c82d78e94fe03d5140bd6e8ab`. Localization, navigation, Enterprise and worker reports are in `build_check/vehicle_wording_20261027/`.
 
 Fixed formatting is on the existing worker path; no additional hook, capture, native read or queue was added. Reported route-worker samples are offline computation only; native/frame/audio/request-to-audible cost remains unmeasured against the cumulative25ms application-lag blocker. October26 installed baseline/history above remains distinct. October27 candidate is uninstalled and gameplay-unconfirmed; no game launch/control/probe occurred. Wording source is Closed. Continue the explicitly authorized outward and return floating-continent transition work, then Temple of Water investigation; Libra/Study display audit remains separately queued. See [WORLD_EVENTS](WORLD_EVENTS_20261026.md) for the current scope ledger.
+## November 13 FFIV hovercraft pickup and lowering
+
+The FFIV log gives the attached hovercraft a bearing of 90.5 steps west
+and routes to (128,128) from (216,117). After the native lowering sequence
+it routes to the newly parked (214,118). The matching FFIV binary parents
+the hovercraft to the Enterprise on pickup and restores its map parent
+on lowering. The cargo transform's local origin was mistaken for a map
+position. While attached, the entity row follows the carrier and says
+“Carried by the Enterprise.” The route worker and beacon receive no
+boardable target for the attached craft. After lowering, the real model
+becomes a target at its live map-local position. FFIV's normal return to
+field control requests a new snapshot on the relevant maps after Gimmick.
+
+Native `Serial.FF4.Map.TransportationEvent.IsLandingEvent` at RVA 3274A0
+has one matching body. For Enterprise-with-hook ID 10 carrying hovercraft
+ID 2, it writes the result of the native hovercraft lowering check to the
+boolean output. This is also the check the native confirmation path uses.
+The mod forwards the original once, observes that result and announces
+“Can lower hovercraft” on a new available edge during ready field control.
+Ordinary airship landing keeps its own guide. The carry bit comes from the
+ready SaveMapManager/SaveMapData instance, with no singleton construction,
+native delegate invocation, or save writes by the mod. The two strings are
+available in all 12 game languages.
+
+Native trace and assembly provenance are in the external
+`tools/ff4_underworld_20261112` archive. Offline checks cover native result
+forwarding, the distinct cue, fade suppression, live attached/parked
+positions and readiness-gated same-map refresh. In-game confirmation is
+pending. With the hovercraft attached, move the Enterprise until the
+lowering cue sounds. Lower it using the normal game control, then select
+Hovercraft and request directions to its new position.

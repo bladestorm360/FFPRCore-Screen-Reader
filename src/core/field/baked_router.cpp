@@ -112,6 +112,10 @@ static bool direction_allowed(const Request& r, const Cell& from, const Cell& to
                               int direction, const baked::Grids* grid)
 {
     const bool world=r.submap&&r.submap->world;
+    // Once the near-side contact has opened the door, the player can leave
+    // the doorway. Before then only the proved approach may enter it.
+    if(direction>=0)for(const auto& door:r.walk_open_doors)
+        if(door.cell==to&&!(door.entry_mask&kBits[kReverse[direction]]))return false;
     // FFIV's Underworld has a ground sub-collision overlay alongside its
     // transportation grids. Apply its wall faces in both directions on foot.
     if (world && r.vehicle_group <= 0 && direction >= 0 && direction < 4 && r.submap->collision_off[1]) {

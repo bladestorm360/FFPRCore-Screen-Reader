@@ -24,6 +24,13 @@ void set_on_foot(){}void set_vehicle_state(int,const std::wstring&){}void reset(
 }
 namespace landing_fixture {
 int originals=0;
+fixture::Node* save_manager=nullptr;
+bool lower_allowed=false;
+bool landing_event(void*,int32_t,void*,bool* result,const void*) {
+    ++originals;
+    *result=lower_allowed;
+    return lower_allowed;
+}
 int attribute=4,attribute_reads=0;
 bool attribute_throws=false;
 unity::Vec3 cell{3,4,0};
@@ -42,6 +49,9 @@ void hide(void* self,const void*){
     ++originals;static_cast<fixture::Node*>(fixture::get(*static_cast<fixture::Node*>(self),"landingGuide"))->active=false;
 }
 }
+namespace il2cpp {
+void* read_static_ptr(Class*,const char*) {fixture::native();return landing_fixture::save_manager;}
+}
 namespace unity {Vec3 position(void*){fixture::native();return {16,32,0};}}
 namespace ffpr::system {
 bool is_field_navigation_ready(){fixture::native();return landing_fixture::ready;}
@@ -49,8 +59,10 @@ bool input_transition_blocked(){fixture::native();return landing_fixture::blocke
 }
 int main(){
     using namespace fixture;using namespace ffpr::fieldnav::vehicle_landing;
+    frame::g_main_tid=fixture::owner;
     int failures=0;auto expect=[&](bool ok,const char* why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
     o_ShowLandingGuide=&landing_fixture::show;o_SwitchLandable=&landing_fixture::change;o_HideLandingGuide=&landing_fixture::hide;
+    o_ff4_landing_event=&landing_fixture::landing_event;
     for(int n=1;n<=6;++n){
         fixture::game=static_cast<game::Id>(n);Node manager,guide,other,hidden;
         guide.active=hidden.active=false;set(manager,"landingGuide",&guide);set(other,"landingGuide",&hidden);
@@ -180,6 +192,39 @@ int main(){
             expect(spoken==std::vector<std::wstring>{L"Can surface"},"both actual FFV submarine models use the same surface action term");}
         expect(landing_fixture::attribute_reads==reads,"submarine surfacing uses native guide availability without a terrain query");
         owners.erase("FieldMap");extra_methods.erase("ConvertWorldPositionToCellPosition");extra_methods.erase("GetCellAttribute");
+    }
+    {
+        fixture::game=game::Id::FF4;
+        Node manager,guide,save,data;
+        set(manager,"landingGuide",&guide);
+        set(save,"<SaveData>k__BackingField",&data);
+        auto& carrying=*reinterpret_cast<bool*>(reinterpret_cast<char*>(&data)+fixture::offset("carryingHoverShip"));
+        landing_fixture::save_manager=&save;
+        field::fixture_vehicle={true,10,8,{}};
+        bool available=false;
+        reset_landing_state();spoken.clear();landing_fixture::lower_allowed=true;
+        carrying=true;
+        d_ShowLandingGuide(&manager,true,nullptr);
+        expect(spoken.empty(),"the generic guide does not claim aircraft landing while carrying");
+        expect(d_ff4_landing_event(&data,10,nullptr,&available,nullptr)&&available,
+               "the observer preserves the native lowering result");
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        expect(spoken==std::vector<std::wstring>{L"Can lower hovercraft"},
+               "the cargo landing result speaks once on entering a native lowering area");
+        landing_fixture::lower_allowed=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        landing_fixture::lower_allowed=true;
+        landing_fixture::blocked=true;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        landing_fixture::blocked=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        expect(spoken.size()==1,"lowering availability during a transition remains silent");
+        carrying=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        d_ShowLandingGuide(&manager,true,nullptr);
+        expect(spoken==std::vector<std::wstring>{L"Can lower hovercraft",L"Can land"},
+               "the Enterprise's ordinary landing cue returns once the craft is released");
+        landing_fixture::save_manager=nullptr;
     }
     expect(wrong==0,"native view reads remain on their owner");
     fixture::game=game::Id::FF3;spoken.clear();field::fixture_move=0;field::fixture_asset=false;

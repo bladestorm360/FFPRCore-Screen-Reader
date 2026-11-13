@@ -147,6 +147,87 @@ template<class Expect> void check_dwarven_castle(Expect expect)
     worker.join();
 }
 
+template<class Expect> void check_baron_walk_open_doors(Expect expect)
+{
+    using namespace field;
+    using namespace field::baked_nav;
+    std::ifstream stream("data/ff4/mapstate.json",std::ios::binary);
+    const std::string bytes(std::istreambuf_iterator<char>(stream),{});
+    json::Value records;
+    const auto* map=baked::submap_by_map_id(4);
+    if(!map||!json::parse(bytes,records)) { expect(false,"Baron geometry and initializer load");return; }
+    const auto& grid=baked::grids(*map);
+    map_state::Flags flags;
+    flags.current_map_id=4;flags.current_area_id=3;
+    flags.scenario.fill(0);flags.local.fill(0);
+    flags.scenario[280]=1; // the player is inside the front gate in the log
+    // The native live actor list owns the engineers on the loaded courtyard.
+    // Its presence can be newer than the initializer's saved story branch.
+    std::thread worker([&] {
+        auto populate_snapshot=[&](RouteSnapshot& snapshot,bool powered) {
+            snapshot.map_id=4;snapshot.submap=map;snapshot.layer=0;
+            snapshot.position=world_of_cell(*map,{0,20,30});
+            snapshot.locale=L"en";snapshot.vehicle={true,1,1,{}};
+            snapshot.kind=TargetKind::Interact;
+            for(const auto& o:grid.objects) {
+                if(!snapshot.state.active(*map,o)&&!(o.type==baked::ObjType::NPC&&baked::str(o.group)==L"ev_e_0055"))continue;
+                const bool npc=o.type==baked::ObjType::NPC;
+                const bool gate=o.type==baked::ObjType::Entity&&(o.d&1);
+                const bool contact=baked_route::step_event(o);
+                if(!npc&&!gate&&!contact)continue;
+                NativeObstacle actor;
+                actor.id=o.entity_id();actor.type=int(o.type);actor.cell={o.layer,o.tx,o.ty};
+                actor.raw_name=baked::object_identifier(o);
+                actor.npc=npc;actor.solidity_known=npc;actor.solid=(o.d&1)!=0;
+                actor.trigger=contact&&powered;
+                snapshot.obstacles.push_back(std::move(actor));
+            }
+        };
+        std::vector<StoryTarget> targets;
+        for(int id:{56,57}) {
+            RouteSnapshot snapshot(map_state::Resolver(flags,records));
+            populate_snapshot(snapshot,true);
+            const auto o=std::find_if(grid.objects.begin(),grid.objects.end(),[&](const auto& object) {
+                return object.type==baked::ObjType::NPC&&object.entity_id()==id;
+            });
+            if(o==grid.objects.end()) {expect(false,"the two real Baron engineers exist");return;}
+            snapshot.goal={4,{o->layer,o->tx,o->ty},false,{},0,id,baked::object_identifier(*o)};
+            targets.push_back({snapshot.goal, snapshot.kind});
+            auto browse=plan_browse_snapshot(snapshot);
+            expect(browse.route.reason!=L"Story gated"&&(browse.route.direct||browse.route.via_map_id==5),
+                   "the engineer is listed as reachable through the ordinary Castle Baron door");
+            const auto plan=plan_snapshot(snapshot);
+            const auto& path=plan.path;
+            bool used_opening=false;
+            for(const auto& phase:path.walk_phases)for(size_t i=1;i<phase.cells.size();++i) {
+                const auto from=phase.cells[i-1],to=phase.cells[i];
+                if((to.x==19||to.x==20)&&to.layer==0&&to.y==19)
+                    used_opening|=from==Cell{0,to.x,20};
+            }
+            std::printf("Baron engineer %d: %d steps, direct %d, next map %d, rear opening %d, %ls %ls\n",
+                        id,path.step_count,browse.route.direct,path.next_map_id,used_opening,path.reason.c_str(),path.error.c_str());
+            expect(path.success&&(path.next_map_id==0||path.next_map_id==5)&&!path.event_on_route&&used_opening,
+                   "Castle Baron engineer directions walk onto the rear gate's native opening contact");
+        }
+        for(bool powered:{false,true}) {
+            ExitSnapshot exits(false,map_state::Resolver(flags,records));
+            populate_snapshot(exits.route,powered);
+            const auto hidden=story_gate_mask(exits,targets,{});
+            expect(hidden==std::vector<bool>(2,!powered),
+                   "story filtering requires a powered native walk-open contact");
+        }
+        RouteSnapshot live(map_state::Resolver(flags,records));
+        populate_snapshot(live,true);
+        SnapshotScope scope(live);
+        auto projected=walk_request(*map,{0,20,30});
+        map_state::add_obstacles(live.state,*map,projected);
+        expect(baked_route::direction_allowed(projected,{0,20,20},{0,20,19})&&
+               !baked_route::direction_allowed(projected,{0,20,18},{0,20,19}),
+               "remote courtyard uses only the authored rear gate approach");
+    });
+    worker.join();
+}
+
 template<class Expect> void check_baron_gate(Expect expect)
 {
     using namespace field;
@@ -192,7 +273,7 @@ template<class Expect> void check_baron_gate(Expect expect)
                     expect(route.path.success==!opened,"Baron gate remains available only until opened");
                 } else {
                     expect(route.path.success,"Baron exit routes from both logged floors");
-                    if(!opened) {
+                    if(!opened&&route.path.next_map_id>0) {
                         expect(route.pending.valid && route.pending.goal.entity_id==1 &&
                                route.pending.goal.map_id==4 && route.pending.incoming_transition,
                                "Baron exit retains its destination through the gate approach floor change");
@@ -293,6 +374,7 @@ int main() {
             check_ff4_underworld(expect);
             check_dwarven_castle(expect);
             check_baron_gate(expect);
+            check_baron_walk_open_doors(expect);
             check_baron_stair_chest(expect);
             const auto* jail=field::baked::submap_by_map_id(42);
             RouteSnapshot room(field::map_state::Resolver(field::map_state::Flags{},fixture::records));

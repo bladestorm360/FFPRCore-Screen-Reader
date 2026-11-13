@@ -1,4 +1,32 @@
 {
+  "Can lower hovercraft": {
+    "en": "Can lower hovercraft",
+    "ja": "ホバー船を降ろせます",
+    "fr": "Vous pouvez déposer l’aéroglisseur",
+    "de": "Luftkissenboot kann abgesetzt werden",
+    "es": "Puedes bajar el aerodeslizador",
+    "it": "Puoi calare l’eliscafo",
+    "pt": "É possível baixar o aerobote",
+    "ru": "Можно опустить автолёт",
+    "ko": "호버크래프트를 내릴 수 있습니다",
+    "zh-CN": "可以放下气垫船",
+    "zh-TW": "可以放下氣墊船",
+    "th": "สามารถปล่อยโฮเวอร์คราฟต์ลงได้"
+  },
+  "Carried by the Enterprise": {
+    "en": "Carried by the Enterprise",
+    "ja": "エンタープライズに搭載中",
+    "fr": "Transporté par l’Enterprise",
+    "de": "Wird von der Enterprise getragen",
+    "es": "Lo transporta el Enterprise",
+    "it": "Trasportato dall’Enterprise",
+    "pt": "Transportado pela Enterprise",
+    "ru": "Перевозится на «Энтерпрайзе»",
+    "ko": "엔터프라이즈에 실려 있음",
+    "zh-CN": "由企业号运载",
+    "zh-TW": "由企業號運載",
+    "th": "เอนเทอร์ไพรซ์กำลังบรรทุกอยู่"
+  },
   "Kain's Airship": {
     "en": "Kain's Airship",
     "ja": "カインの飛空艇",

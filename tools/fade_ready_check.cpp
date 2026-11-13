@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "../src/core/fieldnav/map_transition.cpp"
 namespace fixture { float alpha=0, image_alpha=1; int calls=0; bool used_ready=false; int manager=0,map_id=0,scans=0,invalidations=0,arrivals=0; bool same_map_drop=false; }
+namespace game {Id current(){return Id::FF4;}}
 bool ready_native(void*,const void*) { ++fixture::calls; return fixture::alpha==0; }
 bool old_finish(void*,const void*) { ++fixture::calls; return fixture::alpha==0 && fixture::alpha!=fixture::image_alpha; }
 namespace core { Install::Install(const char* n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){} }
@@ -52,5 +53,13 @@ int main(){
     expect(fixture::invalidations==1 && fixture::arrivals==initial_arrivals,"planned same-map drop invalidates before native script and waits for return");
     d_ChangeState(nullptr,3,nullptr);
     expect(fixture::arrivals==initial_arrivals+1 && fixture::scans==initial_scans+2,"planned same-map drop resumes route lifecycle after native return");
+    fixture::map_id=4;
+    d_ChangeState(nullptr,3,nullptr);
+    const int before_gimmick_scans=fixture::scans,before_gimmick_arrivals=fixture::arrivals;
+    d_ChangeState(nullptr,11,nullptr);
+    expect(fixture::scans==before_gimmick_scans,"FFIV door and cargo animations do not scan while native Gimmick owns the field");
+    d_ChangeState(nullptr,4,nullptr);
+    expect(fixture::scans==before_gimmick_scans+1&&fixture::arrivals==before_gimmick_arrivals,
+           "FFIV Gimmick return refreshes the current map without inventing a transition");
     std::printf("Fade readiness check: %d failures\n",failures);return failures?1:0;
 }

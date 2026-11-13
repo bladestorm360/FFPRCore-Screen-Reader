@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 13 FFIV Castle Baron and hovercraft
+
+The focused build took 67.7 seconds and passed the browse-route, vehicle
+landing, entity scanner, fade readiness and equipment/party fixtures.
+The smoke test passed all 47 exports and the native-name audit checked
+8,445 names. The candidate is 13,453,312 bytes with SHA256
+`820eae2cc028ea9aebf81d153bd9d4a787232d13831c4b9c59f3ad5d026b71f9`.
+Defender definitions `1.463.281.0` reported no threats on the 22 exact
+files. Hashes stayed stable and there were zero matching detection events.
+The OS denied the exclusion query. The DLL is unsigned.
+
+FFIV was running at verification. The delivery receipts and source
+locators are under `../tools/ff4_underworld_20261112/doors-hovercraft-20261113`
+relative to the checkout. Recovery uses prior source checkpoint
+`311a9f5` and the verified previously installed DLL hash
+`b99cc005befc5c759a66ff4d88f5a5cdf01866a0320d7626aaf474bf95823e11`.
+
 ## November 13 map close and field input
 
 The focused build passed three context fixtures, 8,439 native-name checks

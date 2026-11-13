@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 
 // Ports FF1 Patches/VehicleLandingPatches.cs (VehicleLandingPatches + MovementSpeechPatches).
 // The hooks install themselves; these are the two public resets of the C# classes (FF1 never
@@ -9,6 +10,8 @@ namespace ffpr::fieldnav::vehicle_landing {
 void reset_landing_state();
 /// Shared timestamp of actual landing-guide speech, including ShowLandingGuide.
 double last_announcement_time();
+// Native-owner read of the FFIV save state used by the Enterprise hook.
+std::optional<bool> hovercraft_carried();
 /// MovementSpeechPatches.ResetState: MoveStateHelper.ResetState.
 void reset_movement_state();
 

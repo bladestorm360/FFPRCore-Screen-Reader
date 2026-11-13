@@ -12,6 +12,7 @@
 #include "baked_map.h"
 #include "baked_nav.h"
 #include "../game.h"
+#include "../fieldnav/vehicle_landing.h"
 #include "../modtext.h"
 #include "../text.h"
 #include "../ui/preferences.h"
@@ -278,6 +279,7 @@ bool Entity::is_alive() const
     if (remote()) return true;   // another floor, from the baked data: nothing live to check
     if (!game || !live_entity(game)) return false;
     if (game_class && il2cpp::object_class(game) != game_class) return false;
+    if (hovercraft_is_carried()) return true; // attached cargo remains listable without an active boarding collider
     if (kind == Kind::NPC && !npc_navigation_available(game)) return false;
     if(kind==Kind::TreasureChest && pickup && is_opened())return false;
     if(kind==Kind::NPC && baked::submap_by_map_id(current_map_id())) {
@@ -289,12 +291,24 @@ bool Entity::is_alive() const
     return entity_is_present(game);
 }
 
-/// Position: NPCs and vehicles read the live position (ReadLivePosition); the rest keep the
+bool Entity::hovercraft_is_carried() const
+{
+    return kind==Kind::Vehicle && transportation_id==2 && game::is(game::Id::FF4) &&
+           ffpr::fieldnav::vehicle_landing::hovercraft_carried()==std::optional<bool>(true);
+}
+
+/// Position: NPCs and vehicles read the live position. Other rows keep the
 /// position from the scan.
 unity::Vec3 Entity::position() const
 {
     if ((kind == Kind::NPC || kind == Kind::Vehicle) && live_entity(game)) {
-        if (void* tr = unity::transform(game)) return unity::local_position(tr);
+        if (void* tr = unity::transform(game)) {
+            // The cargo transform is parented to the Enterprise. Its local
+            // offset is relative to that aircraft, whose pose is map-local.
+            if(hovercraft_is_carried())
+                if(void* carrier=unity::parent(tr))return unity::local_position(carrier);
+            return unity::local_position(tr);
+        }
     }
     return pos;
 }
@@ -346,6 +360,7 @@ std::wstring Entity::type_name() const
 std::wstring Entity::format_description(unity::Vec3 player_pos, bool directly_reachable,
                                         const std::wstring& route_note) const
 {
+    if(hovercraft_is_carried())return display_name()+L" ("+T(L"Carried by the Enterprise")+L") - "+type_name();
     // Another floor (user, 2026-10-11): "{name} ({floor}) - {type}". Steps and a direction
     // mean nothing across floors.
     if (remote()) return display_name() + L" (" + floor_name + L")" +

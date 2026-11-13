@@ -42,7 +42,7 @@
 #undef s_install
 
 namespace fixture {
-struct Node {int effect=0;bool has=true;void* animation=nullptr;void* list=nullptr;void* view=nullptr;void* description=nullptr;Node* parent=nullptr;bool alive=true,active=true,enabled=true;int state=0,id=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> text;};
+struct Node {int effect=0;bool has=true;void* animation=nullptr;void* list=nullptr;void* view=nullptr;void* description=nullptr;Node* parent=nullptr;bool alive=true,active=true,enabled=true;int state=0,id=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> text;unity::Vec3 pos{};};
 using List=std::vector<void*>;
 std::map<std::string,void*> owners;std::map<std::string,actions::Fn> actions;std::map<std::string,bool> states, bools;std::map<std::string,std::function<void()>> resets;
 std::map<int,Node*> shop_content;
@@ -94,7 +94,7 @@ namespace game {Id current(){return fixture::game;}const Flags&flags(){static Fl
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);}const std::wstring&lang(){static std::wstring s=L"en";return s;}LocaleScope::LocaleScope(std::wstring){}LocaleScope::~LocaleScope(){} }
 namespace ffpr {void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}void say_parts(std::vector<std::wstring>p,bool){fixture::spoken.emplace_back(text::join(p,L". "));}void say_sequence(std::vector<std::wstring>p,bool){say_parts(std::move(p),true);} }
 namespace ui {std::wstring menu_position(const std::wstring&s,int,int){return s;}int cursor_index(void*p){return static_cast<fixture::Node*>(p)->id;}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:0;} }
-namespace unity {bool alive(void*p){fixture::native();return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->active&&(!static_cast<fixture::Node*>(p)->parent||active_in_hierarchy(static_cast<fixture::Node*>(p)->parent));}void*transform(void*p){fixture::native();return p;}void*get_component_in_parent(void*p,ref::Class&){fixture::native();return p?static_cast<fixture::Node*>(p)->parent:nullptr;}Vec3 local_position(void*){fixture::native();return {};}Vec3 position(void*){fixture::native();return {};}std::wstring ui_text(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;} }
+namespace unity {bool alive(void*p){fixture::native();return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->active&&(!static_cast<fixture::Node*>(p)->parent||active_in_hierarchy(static_cast<fixture::Node*>(p)->parent));}void*transform(void*p){fixture::native();return p;}void*get_component_in_parent(void*p,ref::Class&){fixture::native();return p?static_cast<fixture::Node*>(p)->parent:nullptr;}Vec3 local_position(void* p){fixture::native();return p?static_cast<fixture::Node*>(p)->pos:Vec3{};}Vec3 position(void*){fixture::native();return {};}std::wstring ui_text(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){fixture::native();return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;} }
 namespace ffpr::battle::party_status {std::vector<std::wstring> current_lines(void*,void*){return {};}}
 namespace displayed {
 std::vector<std::wstring> charge_lines(void*){return {};}
@@ -105,6 +105,9 @@ std::vector<std::wstring>texts(void*){return {};}std::wstring comparison_arrow(v
 }
 namespace field::cache {void*get(ref::Class&c){auto i=fixture::owners.find(c.name);return i==fixture::owners.end()?nullptr:i->second;}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}void clear(ref::Class&c){fixture::owners.erase(c.name);} }
 namespace field {bool live_entity(void*p){return p!=nullptr;}bool treasure_opened(void*){return false;}bool entity_is_present(void*){return true;}std::wstring get_message(const std::wstring&s,bool){return s;} }
+namespace fixture {bool carrying_hovercraft=false;}
+namespace ffpr::fieldnav::vehicle_landing {std::optional<bool> hovercraft_carried(){return fixture::carrying_hovercraft;}}
+namespace unity {void* parent(void* p){return p?static_cast<fixture::Node*>(p)->parent:nullptr;}}
 namespace field::r {ref::Class kFieldMapObjectDefault{"Last.Entity.Field","FieldMapObjectDefault"};ref::Method mMapObjectGetCanAction{kFieldMapObjectDefault,"get_CanAction",0};}
 // The actual Entity lifetime implementation now reads native action assignment.
 // These owner fakes keep that lookup explicit even though this fixture has no NPC.
@@ -138,6 +141,22 @@ namespace log_ {void write(const char*,...){} }
 namespace sound {void initialize(){} }
 namespace speech {void request_load(){} }
 int main(){background::prepare();using namespace fixture;using namespace ffpr::menus;int failures=0;auto expect=[&](bool b,const char*s){if(!b){++failures;std::printf("FAIL %s\n",s);}};
+ {
+    fixture::game=game::Id::FF4;
+    Node hovercraft,enterprise;
+    hovercraft.parent=&enterprise;
+    hovercraft.pos={0,0,0};enterprise.pos={128,256,0};
+    field::Entity vehicle;vehicle.kind=field::Kind::Vehicle;vehicle.transportation_id=2;vehicle.transport_id=7;
+    vehicle.name=L"Hovercraft";vehicle.game=&hovercraft;
+    fixture::carrying_hovercraft=true;
+    expect(vehicle.position().x==128&&vehicle.format_description({},true).find(L"Carried by the Enterprise")!=std::wstring::npos,
+           "carried hovercraft tracks its carrier, without publishing a boarding route or a stale origin");
+    enterprise.pos.x=192;
+    expect(vehicle.position().x==192,"hovercraft follows movement of the same live carrier");
+    fixture::carrying_hovercraft=false;hovercraft.parent=nullptr;hovercraft.pos={176,240,0};
+    expect(vehicle.position().x==176&&vehicle.format_description({},true).find(L"Carried by the Enterprise")==std::wstring::npos,
+           "released hovercraft uses its new parked position immediately");
+ }
  equip_install();o_EquipWindowSetActive=&active;o_EquipInfoSelectContent=&slot;o_EquipSelectSelectContent=&select;o_difference=&difference;
  Node window,info,select,desc,desc_view,panel,cursor,slot_view,icon,candidate,status,status_view,stat,row,slot_label,slot_option,slot_both;
  List slots{&slot_view},candidates{&candidate},stats{&row};

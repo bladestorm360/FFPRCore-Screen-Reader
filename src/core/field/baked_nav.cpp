@@ -22,6 +22,7 @@
 #include "field_internal.h"
 #include "map_names.h"
 #include "map_state.h"
+#include "walk_open_doors.h"
 #include "entity_translator.h"
 #include "../game.h"
 #include "../hooks.h"
@@ -367,8 +368,8 @@ void annotate_facing(Phase& phase, const baked_route::Goals& goals)
 
 /// Live obstacles for an explicit route, by what they are (user, 2026-10-11: say why a route
 /// is blocked): a chest is a wall; a collision entity or a collision object that is active now
-/// is a story gate (FF1's bridge before it is built, a locked door, "no entry until after the
-/// event"); an NPC that stands still is a wall while it stands there; a wandering NPC is a
+/// can be a story gate (FF1's bridge before it is built, a locked door). A proved
+/// step-on opener gives its door an approach edge. A stationary NPC is a wall; a wandering NPC is a
 /// passing obstacle. Cells the route may end on are never obstacles. World maps: gates only.
 struct Blockers {
     std::vector<Cell> chests, gates, fixed_npcs, moving_npcs, triggers, traps;
@@ -376,9 +377,11 @@ struct Blockers {
     std::vector<Party> parties;
     std::vector<npc_route::Actor> actors;
     std::vector<baked_route::Request::Directional> directional;
+    std::vector<baked_route::Request::WalkOpenDoor> walk_open_doors;
     std::shared_ptr<const baked_route::TransportRules> transport_rules;
     void apply_transport(baked_route::Request& request,bool gates=true) const {
         request.transport_rules=transport_rules;request.transport_gates=gates;
+        if(!walk_open_doors.empty())request.walk_open_doors=walk_open_doors;
     }
     bool has_gates() const {
         if(!gates.empty()||!directional.empty())return true;
@@ -856,6 +859,7 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
                 const auto* o = raw.fixed_border?raw.fixed_border:baked_by_entity_id(g, raw.id, static_cast<baked::ObjType>(raw.type), c, raw.raw_name);
                 if (!o) o = baked_by_entity_id(g, raw.id, baked::ObjType::Warp, c, raw.raw_name);
                 if (o&&g_route_snapshot->state.consumed(sm,*o)) continue;
+                if (o&&walk_open_doors::is_contact(sm,*o)) continue;
                 if(o&&snapshot.state.story_barrier(sm,*o)&&!is_goal(c.x,c.y))append(out.gates,c,Rules::Gate);
                 // A completed scene may move its still-powered trigger away
                 // instead of destroying it (FF6 Ymir: native SetPos after the
@@ -873,6 +877,20 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
                 // excluded from the display-only destination detector chain.
                 const auto* o = baked_by_entity_id(g, raw.id, static_cast<baked::ObjType>(raw.type), c, raw.raw_name);
                 if (o && (o->d & kFlagCollision) && !snapshot.state.can_unlock(sm,*o)) {
+                    if(const auto* door=walk_open_doors::blocker(sm,*o);door&&c==Cell{o->layer,o->tx,o->ty}) {
+                        int entry_mask=0;
+                        for(const auto& observed:snapshot.obstacles) {
+                            if(!observed.trigger||!observed.enabled||!observed.applies||
+                               observed.cell.layer!=c.layer||observed.cell.x!=c.x||
+                               (observed.cell.y!=door->south_y&&observed.cell.y!=door->north_y))continue;
+                            const auto* source=baked_by_entity_id(g,observed.id,baked::ObjType::Event,
+                                                                  observed.cell,observed.raw_name);
+                            if(!source||snapshot.state.consumed(sm,*source))continue;
+                            if(walk_open_doors::contact(*door,*source,true))entry_mask|=8;
+                            if(walk_open_doors::contact(*door,*source,false))entry_mask|=1;
+                        }
+                        if(entry_mask&&!raw.transportation_restricted){out.walk_open_doors.push_back({c,entry_mask});continue;}
+                    }
                     // Scripted single-tile walls/rocks can move without a map
                     // reload. Their current native tile, including ID zero,
                     // owns collision; the baked home must not remain closed.
@@ -921,6 +939,7 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
             map_state::add_obstacles(g_route_snapshot->state,sm,predicted,true,true);
             out.gates.insert(out.gates.end(),predicted.blocked.begin(),predicted.blocked.end());
             out.directional.insert(out.directional.end(),predicted.directional.begin(),predicted.directional.end());
+            out.walk_open_doors.insert(out.walk_open_doors.end(),predicted.walk_open_doors.begin(),predicted.walk_open_doors.end());
             if(predicted.transport_rules) {
                 auto combined=out.transport_rules?std::make_shared<Rules>(*out.transport_rules):std::make_shared<Rules>();
                 baked_route::merge_transport_rules(*combined,*predicted.transport_rules);
@@ -4823,6 +4842,8 @@ bool teleport_landing_safe(ExitSnapshot& capture, Vec3 target) {
     req.passages = game::flags().has_hidden_passages;
     const auto live = live_blockers(sm, g, {});
     req.blocked = live.hard(); req.directional = live.directional;live.apply_transport(req);
+    // Landing directly on a closed door skips its approach contact.
+    for(const auto& door:live.walk_open_doors)req.blocked.push_back(door.cell);
     // World-map NPCs/chests are also solid teleport landings, even though world routing
     // normally only collects story gates there.
     if (sm.world) for (const auto& raw : snapshot.obstacles)

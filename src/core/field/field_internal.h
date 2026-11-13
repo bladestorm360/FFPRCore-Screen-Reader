@@ -239,6 +239,7 @@ struct Entity {
     std::wstring event_type;       // Event / ScriptTrigger: the raw English type ("ToLayer" ...)
     int transport_id = 0;          // Vehicle: MapConstants.TransportationType
     int transportation_id = 0;     // Vehicle: transportation master id (0 = unknown)
+    bool hovercraft_is_carried() const;
     std::wstring message_id;       // Vehicle: the master's message_id (its official name)
     // An entry from another floor of this map, listed from the baked data under the "Current
     // map" filter (user, 2026-10-11): no FieldEntity, no live position. Routed by its cell.
