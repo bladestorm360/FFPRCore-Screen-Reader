@@ -11,9 +11,12 @@ Defender definitions `1.463.281.0` reported no threats on the 22 exact
 files. Hashes stayed stable and there were zero matching detection events.
 The OS denied the exclusion query. The DLL is unsigned.
 
-FFIV was running at verification. The delivery receipts and source
-locators are under `../tools/ff4_underworld_20261112/doors-hovercraft-20261113`
-relative to the checkout. Recovery uses prior source checkpoint
+The FFIV Steam installation matched all 22 scanned files after the game
+closed. The installer verified 138 protected file states across all six
+games and verified the prior DLL hashes in the other five installations.
+Delivery receipts and source locators are under
+`../tools/ff4_underworld_20261112/doors-hovercraft-20261113` relative to
+the checkout. Recovery uses prior source checkpoint
 `311a9f5` and the verified previously installed DLL hash
 `b99cc005befc5c759a66ff4d88f5a5cdf01866a0320d7626aaf474bf95823e11`.
 
