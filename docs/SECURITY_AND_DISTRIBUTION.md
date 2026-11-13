@@ -1,5 +1,21 @@
 # Build and distribution security
 
+## November 13 map close and field input
+
+The focused build passed three context fixtures, 8,439 native-name checks
+and the 47-export smoke test. The DLL is 13,439,488 bytes with SHA256
+`b99cc005befc5c759a66ff4d88f5a5cdf01866a0320d7626aaf474bf95823e11`.
+Defender definitions `1.463.281.0` reported no threats on the 22 exact files,
+with zero matching events and stable hashes. The OS denied the exclusion
+query. The DLL is unsigned.
+
+All 22 installed hashes matched in FFI, FFII, FFIII, FFV and FFVI. The
+installer verified Prism read-only and preserved 138 protected file states
+across the six games. FFIV still had its previous verified build while
+running. Recovery starts from the prior source checkpoint
+`87d6c46002361ff442001e83f8e0673e5bba68c1`. Per-game prior DLL hashes and
+delivery receipts are in the external map-panels archive.
+
 ## November 12 FFIV–VI boss animation cues
 
 The focused boss-visual, battle-entry and battle-feedback checks

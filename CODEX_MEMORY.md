@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 13 map close.** All six desktop controllers inline the Q map's
+Cancel path. The mod now releases its map-owned review and field gate when
+that controller clears IsOpen. The three focused context checks passed.
+[Map lifecycle and gameplay check](docs/re/MAP_PANELS.md#november-13-return-to-field-navigation).
+
 ## C: workspace (2026-11-12)
 
 Current checkout is C:/Games/Dev/Unity/FFPR/FFPRCore-Screen-Reader. The

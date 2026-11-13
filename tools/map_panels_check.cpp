@@ -29,7 +29,17 @@ namespace ui {std::wstring menu_position(const std::wstring& s,int,int){return s
 namespace input {void add_binding(Key,Mod,Context,const char*,const char*){}}
 namespace {
 void empty(void*,const void*){}
-void basic(void*,void*,unity::Vec2,unity::Vec2,void*,const void*){}
+bool& basic_open(void* owner) {
+    return *reinterpret_cast<bool*>(static_cast<char*>(owner)+fixture::offset("<IsOpen>k__BackingField"));
+}
+void basic(void* owner,void*,unity::Vec2,unity::Vec2,void*,const void*) {
+    basic_open(owner)=true;
+    static_cast<fixture::Node*>(owner)->visible=true;
+}
+void close_basic_inline(void* owner,const void*) {
+    static_cast<fixture::Node*>(owner)->visible=false;
+    basic_open(owner)=false;
+}
 void gps(void*,void*,void*,bool,const void*){}
 void info(void*,void*,const void*){}
 void vector(void*,unity::Vec2,const void*){}
@@ -86,7 +96,37 @@ int main() {
         *reinterpret_cast<int*>(reinterpret_cast<char*>(&property)+offset("<IconType>k__BackingField"))=2;
         d_basic(&basic_owner,nullptr,{0,0},{0,1},&properties,nullptr);map_fixture::drain();
         expect(map_fixture::lines==std::vector<std::wstring>({L"Stairs, about 4 steps North"}),"basic map captures its visible native markers with player-relative bearing and never GPS chest totals");
-        d_hide(&basic_owner,nullptr);
+        o_basic_update=&empty;
+        d_basic_update(&basic_owner,nullptr);
+        expect(menu_state::any_active()&&active()&&ui::review::active(),"an open basic map retains its review and gates field input");
+        Node unrelated;
+        o_basic_update=&close_basic_inline;
+        d_basic_update(&unrelated,nullptr);
+        expect(menu_state::is_active("MapPanels")&&ui::review::owns(&basic_owner),"a different controller cannot retire the active map");
+        d_basic_update(&basic_owner,nullptr);
+        expect(!menu_state::any_active()&&!active()&&!ui::review::owns(&basic_owner),
+               "native inline Cancel retires the map review and releases the field input gate");
+
+        d_basic(&basic_owner,nullptr,{0,0},{0,1},&properties,nullptr);
+        fixture::tick(); // leave the map worker queued across a quick close
+        menu_state::set_active("OtherMenu",true);
+        d_basic_update(&basic_owner,nullptr);spoken.clear();map_fixture::drain();
+        expect(!menu_state::is_active("MapPanels")&&menu_state::any_active()&&spoken.empty(),
+               "map close cancels old speech and preserves another menu's field gate");
+        menu_state::reset("OtherMenu");
+
+        d_basic(&basic_owner,nullptr,{0,0},{0,1},&properties,nullptr);
+        o_basic_update=+[](void* self,const void* mi){
+            fixture::Node* gps_owner=static_cast<fixture::Node*>(displayed::field(self,"nextScreen"));
+            d_gps(gps_owner,nullptr,nullptr,true,nullptr);
+            close_basic_inline(self,mi);
+        };
+        set(basic_owner,"nextScreen",&owner);
+        d_basic_update(&basic_owner,nullptr);
+        expect(g_owner==&owner&&active()&&menu_state::is_active("MapPanels"),
+               "a synchronous switch to the location menu keeps the new owner and its gate");
+        d_close(&owner,nullptr);
+        expect(!menu_state::any_active(),"closing the location menu releases the gate after the handoff");
     }
     Snapshot wrapped;wrapped.basic=true;wrapped.locale=L"en";wrapped.x=15*16;wrapped.wrap_width=16*16;wrapped.markers={{1,0,0}};
     expect(build(wrapped).details==std::vector<std::wstring>({L"Map marker, about 1 steps East"}),"world marker bearing uses wrapped native coordinates");

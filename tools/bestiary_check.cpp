@@ -65,7 +65,13 @@ namespace game {Id current(){return fixture::game;}}
 namespace actions {void define(const char* name,Fn fn){fixture::registered_actions[name]=std::move(fn);}bool run(const char* name){auto it=fixture::registered_actions.find(name);if(it==fixture::registered_actions.end())return false;it->second();return true;}}
 namespace queries {void define(const char*,std::function<bool()> ){}bool is(const char*){return false;}}
 namespace events {void on(Kind,Handler){}}
-namespace menu_state {void reset(const char*){}void set_active(const char*,bool){}bool is_active(const char*){return false;}}
+namespace menu_state {
+static std::map<std::string,bool> states;
+void reset(const char* key){set_active(key,false);}
+void set_active(const char* key,bool active){states[key]=active;}
+bool is_active(const char* key){const auto it=states.find(key);return it!=states.end()&&it->second;}
+bool any_active(){for(const auto& entry:states)if(entry.second)return true;return false;}
+}
 namespace field::cache {void* get(ref::Class&){return nullptr;}void register_object(ref::Class&,void*){}}
 namespace modtext {
 std::wstring T(std::wstring_view s){return std::wstring(s);}

@@ -1,5 +1,48 @@
 # Basic maps and location-map menus
 
+## November 13 return to field navigation
+
+The FFIV log shows the Q map opening at 87716.859 and returning to native
+Player state at 87718.328 and 87728.578. The mod's MapPanels gate stayed
+active. Opening the main menu reset the shared menu registry, and field
+navigation worked after that menu closed. The other five installed logs
+had no matching MapPanels session. Offline inspection of their installed
+binaries established the same close path in all six.
+
+Desktop ExpandMinimapController.UpdateController inlines the Cancel hide
+and clears its IsOpen field. The enclosing ExpandMinimapUIManager reads
+that field after the controller returns and dispatches the native close
+callback. The existing standalone Hide hook cannot observe that input path.
+The post-update observer now checks IsOpen for the currently owned basic
+map and retires its review buffer, queued speech and menu gate. The
+ownership check preserves a replacement GPS panel and other menu gates.
+The ordinary native Player/Transport, fade, battle and loading checks
+still decide when field input is safe.
+
+| Game | Controller UpdateController RVA | Manager UpdateController RVA |
+|---|---:|---:|
+| FFI | 693AD0 | 9B43C0 |
+| FFII | 526830 | 4CD320 |
+| FFIII | 57DB00 | A5C400 |
+| FFIV | 628350 | 52AA30 |
+| FFV | 8A5FE0 | 6AFCD0 |
+| FFVI | ADD270 | B53260 |
+
+All six methods resolve uniquely on the installed binaries. The IsOpen
+backing field is at 0x38 in these builds and is resolved by name at runtime.
+Only the visible map's native owner reads the field, once per native map
+update. No field-wide polling or extra worker is involved. Source-bearing
+analysis and the executable hashes stay in the external map-panels archive.
+
+The focused build ran map_panels_check, key_help_check and battle_context_check.
+The map fixture covers ordinary updates, inline Cancel, pending speech, an
+unrelated controller, another menu gate and a synchronous switch to GPS for
+each game. The context fixture retains the scripted-map and fade/loading
+cases. In-game verification is pending. Open the field map with Q, close
+it with Cancel, then use the usual entity browsing key without opening Tab.
+
+## October 24 map reading
+
 October24 user request: inspect every game's basic and location-map screens,
 read Shift+I controls, speak highlighted location details only where rendered,
 and provide a basic-map marker buffer with approximate player-relative distance
@@ -28,8 +71,8 @@ zooming, map-switch and cancel controls retain their ownership.
 Menus.MapPanels registration125 is in menus/map_panels.cpp. Basic Show forwards
 the original first. GPS Show establishes its owner before forwarding because
 initial selection can update synchronously inside Show. Renderer captures start
-from Show or GpsMenuInfoController.UpdateView; Basic Hide, GPS Close, SceneLoaded
-and BattleStart retire that context. Desktop KeyInput variants cover all six;
+from Show or GpsMenuInfoController.UpdateView. Basic Hide, inline close,
+GPS Close, SceneLoaded and BattleStart retire that context. Desktop KeyInput variants cover all six;
 Touch classes were inspected as a separate interface, not installed as PC hooks.
 
 The basic map provides a nearest-first Information buffer of rendered markers.

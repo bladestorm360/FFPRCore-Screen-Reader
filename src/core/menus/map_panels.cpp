@@ -22,6 +22,8 @@ namespace ffpr::maps {
 namespace {
 ref::Class kBasic{"Last.UI.KeyInput","ExpandMinimapController"};
 ref::Method mBasicShow{kBasic,"Show",4},mBasicHide{kBasic,"Hide",0};
+ref::Method mBasicUpdate{kBasic,"UpdateController",0};
+ref::Field fBasicOpen{kBasic,"<IsOpen>k__BackingField"};
 ref::Class kGps{"Last.UI.KeyInput","GpsMenuController"};
 ref::Method mGpsShow{kGps,"Show",3},mGpsClose{kGps,"Close",0};
 ref::Class kInfo{"Last.UI.KeyInput","GpsMenuInfoController"};
@@ -44,7 +46,7 @@ void retire() {
     g_review_owner=nullptr;g_reading={};g_capture_pending=false;g_details_requested=false;
 }
 void close(void* owner) {
-    if(owner!=g_owner)return;
+    if(!owner||owner!=g_owner)return;
     retire();g_owner=nullptr;g_screen=Screen::None;menu_state::set_active("MapPanels",false);
 }
 void publish(Snapshot snapshot,void* review_owner,unsigned generation) {
@@ -156,9 +158,20 @@ void d_basic(void* self,void* texture,unity::Vec2 pos,unity::Vec2 dir,void* prop
     o_basic(self,texture,pos,dir,properties,mi);
     hooks::guarded("MapPanels.Basic",[=]{retire();g_owner=self;g_screen=Screen::Basic;menu_state::set_active("MapPanels",true);basic_capture(true);});
 }
-using Empty=void(*)(void*,const void*);Empty o_hide,o_close;
+using Empty=void(*)(void*,const void*);Empty o_hide,o_close,o_basic_update;
 void d_hide(void* self,const void* mi){o_hide(self,mi);hooks::guarded("MapPanels.Hide",[=]{close(self);});}
 void d_close(void* self,const void* mi){o_close(self,mi);hooks::guarded("MapPanels.Close",[=]{close(self);});}
+void d_basic_update(void* self,const void* mi) {
+    o_basic_update(self,mi);
+    if(g_screen!=Screen::Basic||g_owner!=self)return;
+    // All six desktop controllers inline Hide for Cancel and clear IsOpen
+    // on the GPS handoff too. The outer manager observes the same flag to
+    // return control. A synchronous GPS Show may already own the context.
+    hooks::guarded("MapPanels.BasicUpdate",[=]{
+        const int open_offset=fBasicOpen.get();
+        if(open_offset>=0&&!il2cpp::read_field<bool>(self,open_offset))close(self);
+    });
+}
 using GpsShow=void(*)(void*,void*,void*,bool,const void*);GpsShow o_gps;
 void d_gps(void* self,void* sprite,void* data,bool from_basic,const void* mi) {
     // Native Show invokes its first selection synchronously; establish only
@@ -187,6 +200,7 @@ int install() {
     events::on(events::Kind::BattleStart,[]{close(g_owner);});
     int n=0;
     n+=hooks::attach(mBasicShow,&d_basic,&o_basic);n+=hooks::attach(mBasicHide,&d_hide,&o_hide);
+    n+=hooks::attach(mBasicUpdate,&d_basic_update,&o_basic_update);
     n+=hooks::attach(mGpsShow,&d_gps,&o_gps);n+=hooks::attach(mGpsClose,&d_close,&o_close);
     n+=hooks::attach(mInfoUpdate,&d_info,&o_info);n+=hooks::attach(mScroll,&d_scroll,&o_scroll);n+=hooks::attach(mScale,&d_scale,&o_scale);
     return n;
