@@ -3,6 +3,7 @@
 **November 13 map close.** All six desktop controllers inline the Q map's
 Cancel path. The mod now releases its map-owned review and field gate when
 that controller clears IsOpen. The three focused context checks passed.
+The scanned build is installed and hash-verified in all six Steam games.
 [Map lifecycle and gameplay check](docs/re/MAP_PANELS.md#november-13-return-to-field-navigation).
 
 ## C: workspace (2026-11-12)
