@@ -14,17 +14,19 @@ namespace ffpr::battle::boss_visuals {
 namespace {
 constexpr auto kSpriteGames = game::kFF4 | game::kFF5;
 constexpr auto kVisualGames = kSpriteGames | game::kFF6;
-ref::Class kDeformation{"Last.Battle.Function", "DeformationEnemyFunction", kSpriteGames};
-ref::Method mCreate{kDeformation, "Create", 0};
+ref::Class kScriptedSprite{"Last.Battle.Function", "BattleFunction24", kSpriteGames};
+ref::Method mCreateSprite{kScriptedSprite, "Create", 0};
+ref::Class kDeformation{"Last.Battle.Function", "DeformationEnemyFunction", game::kFF5};
+ref::Method mCreateDeformation{kDeformation, "Create", 0};
 ref::Field fDeformedMonster{kDeformation, "monster"};
 ref::Class kReplacement{"Last.Battle.Function", "BattleFunction37", kSpriteGames};
 ref::Method mStartEnd{kReplacement, "StartEnd", 0};
 ref::Field fOldUnits{kReplacement, "beforeUnits"}, fNewUnits{kReplacement, "afterUnits"};
 ref::Class kFunction{"Last.Battle", "BattleBaseFunction", kSpriteGames};
 ref::Field fAct{kFunction, "<battleActData>k__BackingField"};
-ref::Field fValue1{kFunction, "<Value1>k__BackingField"}, fValue3{kFunction, "<Value3>k__BackingField"};
+ref::Field fValue1{kFunction, "<Value1>k__BackingField"}, fValue2{kFunction, "<Value2>k__BackingField"};
+ref::Field fValue3{kFunction, "<Value3>k__BackingField"};
 ref::Class kAct{"Last.Battle", "BattleActData", kSpriteGames};
-ref::Field fAttacker{kAct, "<AttackUnitData>k__BackingField"};
 ref::Field fTargets{kAct, "<TargetUnitDatas>k__BackingField"};
 ref::Class kInfo{"Last.Battle", "BattleUnitDataInfo", kVisualGames};
 ref::Field fEntity{kInfo, "<BattleSpriteEntity>k__BackingField"};
@@ -37,7 +39,9 @@ ref::Field fBody{kSprite, "characterSR"}, fAnimState{kSprite, "AnimStateControll
 ref::Class kMesh{"Last.Battle", "EntityMeshRenderer", kVisualGames};
 ref::Field fArt{kMesh, "sprite"}, fRenderer{kMesh, "meshRenderer"};
 ref::Class kAnimator{"Last.Battle", "BattleEnemyAnimatorBase", kSpriteGames};
-ref::Field fPendingArt{kAnimator, "changeSprite"}, fAnimatorEntity{kAnimator, "battleEnemyEntity"};
+ref::Field fAnimatorEntity{kAnimator, "battleEnemyEntity"};
+ref::Method mStageSprite{kAnimator, "ChangeSprite", 4};
+ref::Method mCommitSprite{kAnimator, "ExecuteChangeSprite", 0}, mExitSprite{kAnimator, "ExitChangeSprite", 0};
 ref::Class kAnimState{"Last.Battle", "AnimStateController", kVisualGames};
 ref::Field fAnimator{kAnimState, "myBattleAnimatorBase"};
 ref::Class kHide{"Last.Battle", "NoSelectConditionFunction", game::kFF6};
@@ -59,7 +63,7 @@ ref::Method mPlugInstance{kPlugManager, "Instance", 0}, mEnemyUnits{kPlugManager
 // These are identity tokens for native-owned objects. The only dereferences
 // happen inside a native callback using its current owner. No worker or frame
 // task retains a Unity object.
-struct Request { uintptr_t entity = 0; SpriteChange change; };
+struct Request { uintptr_t animator = 0; uintptr_t entity = 0; SpriteChange change; };
 std::array<Request, 8> requests;
 unsigned pending = 0;
 bool ready = false;
@@ -101,10 +105,10 @@ void speak(const wchar_t* key)
     if (key) say(T(key), false);
 }
 
-Request* request_for(uintptr_t entity)
+Request* request_for(uintptr_t animator)
 {
     for (auto& request : requests)
-        if (request.entity == entity) return &request;
+        if (request.animator == animator) return &request;
     return nullptr;
 }
 
@@ -114,41 +118,93 @@ void forget(Request& request)
     --pending;
 }
 
-void remember(void* entity, SpriteChange change)
-{
-    if (auto* old = request_for(token(entity))) forget(*old);
-    if (!change.presented(change.expected, true)) return;
-    if (auto* slot = request_for(0)) {
-        *slot = {token(entity), change};
-        ++pending;
-    }
-}
+// Match only the native staging call made by this action. Some conditions make
+// Create skip the sprite write, leaving the animator's previous request intact.
+thread_local Request creating;
+struct CreateScope {
+    Request previous = creating;
+    explicit CreateScope(Request request) { creating = request; }
+    ~CreateScope() { creating = previous; }
+};
 
 using Callback = void(*)(void*, const void*);
-Callback o_create, o_start_end, o_hide, o_show;
+Callback o_create_sprite, o_create_deformation, o_commit_sprite, o_exit_sprite, o_start_end, o_hide, o_show;
+using StageSprite = void(*)(void*, void*, void*, unity::Vec2, unity::Vec2, const void*);
+StageSprite o_stage_sprite;
 
-void d_create(void* self, const void* mi)
+void d_stage_sprite(void* animator, void* sprite, void* shadow, unity::Vec2 face, unity::Vec2 mouth, const void* mi)
 {
-    o_create(self, mi);
-    if (!observe()) return;
-    hooks::guarded("BossVisual.Deformation", [&] {
+    o_stage_sprite(animator, sprite, shadow, face, mouth, mi);
+    if ((!pending && !creating.animator) || !observe()) return;
+    const auto owner = token(animator);
+    if (auto* old = request_for(owner)) forget(*old);
+    if (creating.animator != owner || !creating.change.key) return;
+    creating.change.expected = token(sprite);
+    if (!creating.change.changes_art()) return;
+    if (auto* slot = request_for(0)) { *slot = creating; ++pending; }
+}
+
+void create_sprite(void* self, const void* mi, Callback original, bool changes_monster)
+{
+    Request request;
+    if (observe()) hooks::guarded("BossVisual.SpriteAction", [&] {
         auto* act = ref::rd<void*>(self, fAct);
         auto* targets = ref::rd<void*>(act, fTargets);
         if (unity::array_length(targets) != 1) return;
         auto* unit = unity::array_at(targets, 0);
-        if (unit != ref::rd<void*>(act, fAttacker)) return;
         auto* entity = entity_of(unit);
         if (!entity) return;
-        const auto owner = monster_id(unit);
-        const auto asset = ref::call<int32_t>(mAsset, ref::rd<void*>(self, fDeformedMonster));
-        const auto* key = deformation(game::current(), owner, asset,
-                                      ref::rd<int32_t>(self, fValue1), ref::rd<int32_t>(self, fValue3));
         auto* state = ref::rd<void*>(entity, fAnimState);
         auto* animator = ref::rd<void*>(state, fAnimator);
         if (ref::rd<void*>(animator, fAnimatorEntity) != entity) return;
-        remember(entity, {token(art_of(entity)), token(ref::rd<void*>(animator, fPendingArt)), key});
+        if (auto* old = request_for(token(animator))) forget(*old);
+        const auto owner = monster_id(unit);
+        if (!owner) return;
+        const auto title = game::current();
+        const auto value1 = ref::rd<int32_t>(self, fValue1);
+        const auto value2 = ref::rd<int32_t>(self, fValue2);
+        const auto value3 = ref::rd<int32_t>(self, fValue3);
+        const wchar_t* key;
+        if (changes_monster) {
+            auto* monster = ref::rd<void*>(self, fDeformedMonster);
+            if (!monster) return;
+            key = deformation(title, owner, value1, ref::call<int32_t>(mAsset, monster), value3, value2);
+        } else {
+            key = scripted_sprite(title, owner, value1, value2, value3);
+        }
+        if (key) request = {token(animator), token(entity), {token(art_of(entity)), 0, key}};
+    });
+    CreateScope scope(request);
+    original(self, mi);
+}
+
+void d_create_sprite(void* self, const void* mi) { create_sprite(self, mi, o_create_sprite, false); }
+void d_create_deformation(void* self, const void* mi) { create_sprite(self, mi, o_create_deformation, true); }
+
+// The animation first draws the previous art. Execute/Exit apply the new body
+// texture and rebuild the mesh. Check presentation only after that commit.
+void commit_sprite(void* animator, const void* mi, Callback original)
+{
+    original(animator, mi);
+    if (!observe() || !pending) return;
+    auto* request = request_for(token(animator));
+    if (!request) return;
+    hooks::guarded("BossVisual.SpritePresented", [&] {
+        auto* entity = ref::rd<void*>(animator, fAnimatorEntity);
+        const auto actual = token(art_of(entity));
+        if (token(entity) != request->entity || actual != request->change.expected) {
+            forget(*request);
+            return;
+        }
+        if (!request->change.presented(actual, visible_body(entity))) return;
+        const auto* key = request->change.key;
+        forget(*request);
+        speak(key);
     });
 }
+
+void d_commit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_commit_sprite); }
+void d_exit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_exit_sprite); }
 
 void d_start_end(void* self, const void* mi)
 {
@@ -304,31 +360,19 @@ int install()
         const int painting = hooks::attach(mPainting, &d_painting, &o_painting);
         return hide + show + painting + hooks::attach(mSetFloat, &d_set_float, &o_set_float);
     }
-    const int sprite = hooks::attach(mCreate, &d_create, &o_create);
+    const int sprite = hooks::attach(mCreateSprite, &d_create_sprite, &o_create_sprite);
+    const int stage = hooks::attach(mStageSprite, &d_stage_sprite, &o_stage_sprite);
+    const int commit = hooks::attach(mCommitSprite, &d_commit_sprite, &o_commit_sprite);
     const int party = hooks::attach(mStartEnd, &d_start_end, &o_start_end);
-    if (!game::is(game::Id::FF5)) return sprite + party;
+    const int shared = sprite + stage + commit + party;
+    // FFIV folds ExecuteChangeSprite and ExitChangeSprite to the same body.
+    if (!game::is(game::Id::FF5)) return shared;
+    const int exit = hooks::attach(mExitSprite, &d_exit_sprite, &o_exit_sprite);
+    const int deform = hooks::attach(mCreateDeformation, &d_create_deformation, &o_create_deformation);
     const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);
-    return sprite + party + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal);
+    return shared + exit + deform + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal);
 }
 core::Install registration{"Battle.BossVisuals", &install, 117};
-}
-
-SpriteChange before_sprite(void* entity, void* incoming)
-{
-    if (!observe() || !pending || !entity) return {};
-    auto* request = request_for(token(entity));
-    if (!request) return {};
-    const auto change = request->change;
-    forget(*request);
-    return hooks::guarded_r("BossVisual.BeforeSprite", SpriteChange{}, [&] {
-        return change.expected == token(incoming) && change.before == token(art_of(entity)) ? change : SpriteChange{};
-    });
-}
-
-void after_sprite(void* entity, const SpriteChange& change)
-{
-    if (change.key && observe() && token(art_of(entity)) == change.expected &&
-        change.presented(change.expected, visible_body(entity))) speak(change.key);
 }
 
 } // namespace ffpr::battle::boss_visuals

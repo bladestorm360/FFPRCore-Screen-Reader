@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 13 boss sprite correction.** FFIV and FFV type-45 actions now
+follow BattleFunction24 staging through the native presentation commit.
+FFV's Wing Raptor uses both type 45 and type 73. FFV matched the scan.
+FFIV delivery is queued with the shared walk-open door fix. See
+[the battle evidence](docs/re/BOSS_VISUALS_20261112.md#november-13-missing-cloak-and-wing-announcements).
+
 **November 13 FFIV navigation.** Castle Baron routes use the verified walk-open
 door approaches. The Enterprise now has a separate hovercraft lowering cue,
 and the hovercraft follows its carrier while attached and uses its parked

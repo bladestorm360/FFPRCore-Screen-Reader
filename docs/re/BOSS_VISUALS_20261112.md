@@ -23,13 +23,16 @@ research outside Git under `tools/boss_visuals_20261112`.
 
 ## Runtime ownership
 
-On IV and V the deformation callback reads the one self-targeted
-native request. The existing body sprite detour verifies that it
-applies the expected different sprite to the same body. Each battle
-can retain eight copied identity tokens. The party-change completion
+IV and V bind type 45 to `BattleFunction24.Create`. FFV also uses
+`DeformationEnemyFunction.Create` for the Wing Raptor master changes.
+The corresponding native staging call supplies the requested art.
+`ExecuteChangeSprite` or `ExitChangeSprite` must finish installing that
+different art on the same visible body before the mod queues speech.
+FFIV folds those two completion methods into one body. Each battle
+can retain eight copied identity records. The party-change completion
 checks the old body has left and the replacement body is visible.
-Mode changes with the same image and branches with native context
-are excluded by their exact native IDs.
+The presentation check rejects same-image requests. Exact encounter and
+action parameters preserve native context where it describes the change.
 
 VI observes the transition to a verified no-select emergence or
 retreat pose for the two head sprites, the two espers and the
@@ -62,3 +65,26 @@ Each visible change should speak once when it happens. For Mist
 Dragon, listen for the game's form messages without an added cue.
 The offline checks cover form selection and the native battle-entry
 sequence. Audible timing and native-frame responsiveness require gameplay.
+
+## November 13 missing cloak and wing announcements
+
+The installed FFIV DLL included the first feature. Its log confirms the
+old observer registered, then reports Rubicante recovering 3,216 HP with
+neither cloak cue (session 26532, lines 279–281 and 19078). The provider's
+type-45 branch goes through BattleFunction24 in both games. FFIV Create
+is at RVA `6D5D50`, and FFV Create at `7356B0`. It uses Value2 as a sprite
+asset and Value1 as an AI mode. FFV type 73 instead uses Value1 as the
+replacement monster ID, Value2 as the effect, and Value3 as the mode.
+The original reader watched the latter class for both routes and lost a
+pending cue when the earlier animation reapplied the previous art.
+
+Rubicante's repeatable fight uses abilities 336 and 337 for opening and
+closing. Its mode resets can also request the closed form. The other
+scripted encounter retains its accompanying native dialogue. The fix
+preserves same-art silence and observes the finished body presentation.
+No new per-frame callback or native state write is involved. The
+production-detour fixture exercises staging, completion, omitted writes,
+hidden art, repeated art, teardown, native dialogue precedence and both
+FFV action families. FFVI's separate pose and alpha producers did not
+use the affected hook. No matching FFVI fight was present in the actual
+game log. [Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-13-ffiv-and-ffv-boss-sprite-correction).

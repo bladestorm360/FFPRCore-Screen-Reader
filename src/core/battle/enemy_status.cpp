@@ -3,7 +3,6 @@
 // body renderer establish presentation. Worker inputs contain only text.
 #include "battle.h"
 #include "battle_util.h"
-#include "boss_visuals.h"
 #include "../condition_labels.h"
 #include "../core.h"
 #include "../displayed_ui.h"
@@ -138,7 +137,7 @@ void d_init_enemy(void* self,void* entity,int32_t asset,const void* mi) {
 }
 using SetSprite=void(*)(void*,void*,const void*);
 SetSprite o_set_sprite;
-void set_condition_sprite(void* self,void* sprite,const void* mi) {
+void d_set_sprite(void* self,void* sprite,const void* mi) {
     if(!frame::on_main_thread()||condition_request.entity!=self||!condition_request.matched) {
         o_set_sprite(self,sprite,mi);return;
     }
@@ -166,11 +165,6 @@ void set_condition_sprite(void* self,void* sprite,const void* mi) {
             return displayed::renderer_visible(ref::rd<void*>(mesh,fMeshRenderer))?1:0;
         });
     });
-}
-void d_set_sprite(void* self,void* sprite,const void* mi) {
-    const auto change=boss_visuals::before_sprite(self,sprite);
-    set_condition_sprite(self,sprite,mi);
-    if(change.key)hooks::guarded("BossVisual.AfterSprite",[&]{boss_visuals::after_sprite(self,change);});
 }
 using Init=void(*)(void*,void*,void*,const void*);
 Init o_init;

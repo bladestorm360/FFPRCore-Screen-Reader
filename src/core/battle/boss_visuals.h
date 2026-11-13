@@ -7,17 +7,15 @@ namespace ffpr::battle::boss_visuals {
 
 // Identity of an audited visible form, derived from the encounter and its
 // authored transition. A null key leaves the normal game speech in charge.
-constexpr const wchar_t* deformation(game::Id title, int owner, int asset, int mode, int effect)
+constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, int asset, int effect)
 {
-    if (title == game::Id::FF5 && (owner == 281 || owner == 282)) {
-        if (asset == 245 && mode == 281) return L"BossVisual.WingsOpen";
-        if (asset == 246 && mode == 282) return L"BossVisual.WingsClosed";
-    }
+    if (title == game::Id::FF5 && (owner == 281 || owner == 282) && mode == 2 && asset == 246 && effect == 0)
+        return L"BossVisual.WingsClosed";
     if (title != game::Id::FF4) return nullptr;
     switch (owner) {
     case 178:
         if (asset == 191 && mode == 1) return L"BossVisual.WindUp";
-        if (asset == 190 && mode == 2) return L"BossVisual.WindDown";
+        if (asset == 190 && (mode == 2 || mode == 0)) return L"BossVisual.WindDown";
         break;
     case 165:
         if (asset == 176) return L"BossVisual.BombSwells";
@@ -33,7 +31,10 @@ constexpr const wchar_t* deformation(game::Id title, int owner, int asset, int m
         break;
     case 188:
         if (effect == 167 && asset == 201) return L"BossVisual.CloakOpen";
-        if (effect == 167 && asset == 202) return L"BossVisual.CloakClosed";
+        // The mode resets also request the closed art. The presentation guard
+        // speaks only if they actually move Rubicante from open to closed.
+        if (asset == 202 && (effect == 167 || (effect == 0 && (mode == 0 || mode == 1))))
+            return L"BossVisual.CloakClosed";
         break;
     case 189:
         if (asset == 204) return L"BossVisual.SwordUp";
@@ -44,6 +45,14 @@ constexpr const wchar_t* deformation(game::Id title, int owner, int asset, int m
             return L"BossVisual.AsuraFace";
         break;
     }
+    return nullptr;
+}
+
+constexpr const wchar_t* deformation(game::Id title, int owner, int monster, int asset, int mode, int effect)
+{
+    if (title != game::Id::FF5 || (owner != 281 && owner != 282) || effect != 101) return nullptr;
+    if (monster == 281 && asset == 245 && (mode == 0 || mode == 3)) return L"BossVisual.WingsOpen";
+    if (monster == 282 && asset == 246 && (mode == 1 || mode == 2)) return L"BossVisual.WingsClosed";
     return nullptr;
 }
 
@@ -103,17 +112,15 @@ constexpr const wchar_t* painting(int previous, int asset)
     return nullptr;
 }
 
-// SetSprite has one native owner, shared with the condition-specific reader.
 struct SpriteChange {
     uintptr_t before = 0;
     uintptr_t expected = 0;
     const wchar_t* key = nullptr;
+    constexpr bool changes_art() const { return key && before && expected && before != expected; }
     constexpr bool presented(uintptr_t after, bool visible) const
     {
-        return key && before && expected && before != expected && expected == after && visible;
+        return changes_art() && expected == after && visible;
     }
 };
-SpriteChange before_sprite(void* entity, void* incoming);
-void after_sprite(void* entity, const SpriteChange& change);
 
 } // namespace ffpr::battle::boss_visuals

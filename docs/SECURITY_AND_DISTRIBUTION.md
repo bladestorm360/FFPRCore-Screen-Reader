@@ -1,5 +1,21 @@
 # Build and distribution security
 
+## November 13 FFIV and FFV boss sprite correction
+
+The focused build passed the production boss sprite, battle entry and
+battle feedback checks in 51.7 seconds. It verified 67 resources and
+8,450 native names. The 47-export smoke test passed. Defender definitions
+`1.463.284.0` found no threats across all 22 files, with stable hashes and
+zero matching detection events. The DLL is unsigned and the exclusion
+query was denied. SHA256 is
+`caaccaad05f650eaeb14267aa37c5c7f57acbd16672c45c727d45c9fa28933a4`.
+
+FFV matched all 22 hashes and the installer verified 138 protected file
+states across all six games. At the owner's request FFIV delivery is
+queued with the shared door routing fix. Recovery starts from `993e06e`
+for source and the previous per-game delivery records for installed hashes.
+Receipts are in `../tools/boss_visuals_20261112/sprite-fix-delivery`.
+
 ## November 13 FFIV Castle Baron and hovercraft
 
 The focused build took 67.7 seconds and passed the browse-route, vehicle
