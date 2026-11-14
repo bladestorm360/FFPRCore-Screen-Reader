@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 14 FFIV Sealed Cavern routing.** Guidance resumes after taking
+the only accessible B3 rope crossing. The owner deferred the fix until next week.
+[Logged examples and acceptance](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-14-ffiv-sealed-cavern-rope-crossing-across-floors).
+
 **November 13 shared door routing and FFIV navigation.** Exact step-on
 door contacts now let ordinary routes pass through the colliders they
 release. The Dwarven Castle throne route, four Underworld entrance

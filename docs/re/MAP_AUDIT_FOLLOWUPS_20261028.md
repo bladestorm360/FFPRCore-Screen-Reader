@@ -1,5 +1,32 @@
 # Remaining map-audit findings and evidence limits
 
+## November 14 FFIV Sealed Cavern rope crossing across floors
+
+**Deferred until next week.** The owner reports that destinations beyond the
+B3 rope crossing can be announced as “Not directly reachable” from earlier
+floors and still show that status on arrival at B3. Guidance resumes after
+the player uses the only accessible rope crossing. That crossing provides a
+workaround and allows progression. Investigation and implementation are pending.
+
+The November 14 FFIV Steam log `ffpr_screen_reader.log` records no route
+from map 279 to the B3 rope contact on map 284 at (26,28) at 173633.093.
+The other B3 rope contact at (26,10) gets a route from the same map at
+173634.015, with a first leg through B2. The player enters B3 at 173683.234.
+The rotated `ffpr_screen_reader.1.log` records the same announcement from
+map 282 for two B3 chests on map 286 at (18,5) and (12,10), at 172918.875
+and 172920.921, and for the B4 save point on map 287 at (15,10) at 172982.218.
+The current log also records a failed B4 save-point route from map 284 at
+173156.078. The exact arrival side and progression requirements for each
+destination still need verification.
+
+**Acceptance for a later fix.** From an earlier floor, browsing and
+directions should recognize a destination reachable through a usable event
+on a later floor. Give the route to the first exit, then guide the player
+to the rope and continue toward the original destination once the native
+crossing completes. Verify routes to the far-side contact and affected
+destinations from before B3 and on arrival at B3 before crossing. Preserve
+valid route failures for unavailable crossings or genuinely blocked paths.
+
 ## November 13 shared walk-open doors and FFIV route reports
 
 The six-game door bake matches step-on events whose complete supported
