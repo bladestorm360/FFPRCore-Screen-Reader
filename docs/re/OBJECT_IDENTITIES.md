@@ -147,3 +147,20 @@ category is for player-controlled vehicles and mounts.
 
 The existing event identity check verifies both native contacts, the live
 and copied label lookup keys, and the complete FFIV locale catalog.
+
+## November 15 FFIV duplicate navigation markers
+
+**Deferred.** The owner's reports are recorded below with evidence from the
+current FFIV Steam `ffpr_screen_reader.log`.
+
+- **Lunar Whale, Fat Chocobo.** On map 357, the log lists Fat Chocobo under
+  NPCs at 268079.296 and Conversation under Objects at 268081.390. The
+  route goals are adjacent at (7,28) and (8,28). Keep the Fat Chocobo NPC
+  destination and its native interaction. Remove the redundant Conversation
+  destination from Objects and All once its ownership is verified.
+- **Surface Overworld, Airship.** The log lists Airship under Objects on
+  map 1 at 267901.140, with a route goal of (211,45). The owner suspects it
+  represents the Enterprise or hovercraft, which already have named Vehicle
+  markers. Verify the object's identity and interaction before suppressing
+  it. If it duplicates a named vehicle, keep that vehicle as the destination.
+  Preserve independent story contacts such as Kain's airship at (41,70).

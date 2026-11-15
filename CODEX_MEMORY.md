@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 15 FFIV duplicate markers.** Deferred reports for the Lunar
+Whale's Fat Chocobo and the surface Overworld Airship object. The latter's
+identity needs verification. [Log evidence](docs/re/OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers).
+
 **November 15 FFIV airborne target retention.** Deferred intermittent loss
 of the selected Vehicle interaction while flying the Falcon. The log records
 recovery after reselection. [Evidence and acceptance](docs/re/VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection).
