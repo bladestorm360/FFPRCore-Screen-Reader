@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 15 FFIV airborne target retention.** Deferred intermittent loss
+of the selected Vehicle interaction while flying the Falcon. The log records
+recovery after reselection. [Evidence and acceptance](docs/re/VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection).
+
 **November 15 FFIV Falcon routing.** Deferred request for Current map with
 vehicles to route through hovercraft pickup, transport, release and separate
 Falcon parking before ground boarding. [Vehicle routing record](docs/re/VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes).

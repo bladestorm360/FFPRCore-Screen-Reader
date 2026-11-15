@@ -309,3 +309,27 @@ The current FFIV Steam log records Falcon travel and filter selection at
 262240.390–262260.375. The owner supplied the lowering and separate
 boarding sequence. The November 13 Enterprise pickup and lowering evidence
 above covers the related Enterprise behavior.
+
+## November 15 FFIV airborne vehicle interaction loses selection
+
+**Deferred.** While flying the Falcon on the Overworld, the owner reports
+that the selected Vehicle interaction event sometimes loses focus during
+repeated directions requests. Using the destination select keys restores
+the event. The owner noticed this around the “Planned landing is … in a
+straight line” fallback. That association and behavior on other airships
+still need verification.
+
+The FFIV Steam log `ffpr_screen_reader.1.log` gives directions for the
+selected Vehicle interaction event, followed by “30.5 steps Northwest in
+a straight line” at 262792.968. At 262793.953 and 262794.656 it says “No
+entity selected.” The next destination selection at 262795.328 restores the
+event, and directions resume at 262795.687. The specific “Planned landing”
+wording appears in earlier Castle Baron directions at 262215.906 and
+262217.390. That route resumes detailed directions at 262218.359 without
+a new selection.
+
+Later acceptance is to retain the same vehicle interaction through repeated
+directions requests while flying and through any landing fallback, so the
+player can continue without reselecting it. Preserve explicit selection
+changes and the handling of genuinely unavailable targets. See the existing
+[target retention contract](TARGET_RETENTION_20261024.md#selection-ownership).
