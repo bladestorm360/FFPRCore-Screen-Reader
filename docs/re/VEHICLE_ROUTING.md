@@ -284,3 +284,28 @@ positions and readiness-gated same-map refresh. In-game confirmation is
 pending. With the hovercraft attached, move the Enterprise until the
 lowering cue sounds. Lower it using the normal game control, then select
 Hovercraft and request directions to its new position.
+
+## November 15 FFIV Falcon and hovercraft routes
+
+**Reported by the owner. Deferred.** Once the Falcon can carry the
+hovercraft, **Current map with vehicles** should include destinations
+reachable by relocating the hovercraft. Browse and directions should use
+the same route and retain the selected destination through each handoff.
+
+1. Fly the Falcon to the hovercraft and pick it up if it is parked elsewhere.
+2. Carry it to a usable release tile and lower it onto the map. The party
+   remains aboard the Falcon after lowering.
+3. Fly to a legal Falcon landing with a walkable approach to the released
+   hovercraft. Land and park the Falcon separately, then walk to and board
+   the hovercraft from the ground.
+4. Use the hovercraft to reach the selected destination.
+
+Later verification should cover an already carried hovercraft, a parked
+hovercraft that needs relocation, and a release site with no usable Falcon
+landing and walking approach. Routes must respect the carry unlock, native
+release, landing and boarding rules, hovercraft terrain and any story gate.
+
+The current FFIV Steam log records Falcon travel and filter selection at
+262240.390–262260.375. The owner supplied the lowering and separate
+boarding sequence. The November 13 Enterprise pickup and lowering evidence
+above covers the related Enterprise behavior.

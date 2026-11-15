@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 15 FFIV Falcon routing.** Deferred request for Current map with
+vehicles to route through hovercraft pickup, transport, release and separate
+Falcon parking before ground boarding. [Vehicle routing record](docs/re/VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes).
+
 **November 14 FFIV Sealed Cavern routing.** Guidance resumes after taking
 the only accessible B3 rope crossing. The owner deferred the fix until next week.
 [Logged examples and acceptance](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-14-ffiv-sealed-cavern-rope-crossing-across-floors).
