@@ -1021,6 +1021,9 @@ autowalk replans a newly obstructed edge and beacons refresh wait boundaries.
 | Basic/location maps, visible markers/counters and controls | [Map panels](re/MAP_PANELS.md), [F9 and owned controls](re/INPUT_INTERCEPTION.md) |
 | Build/dependency provenance, signatures and local malware checks | [Security and distribution](SECURITY_AND_DISTRIBUTION.md) |
 
+Visual descriptions and Storyline mode follow gameplay fixes and local
+deployment. [Deferred scope](re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
+
 October24 also corrects [Attack ally rows](re/ALLY_TARGETS.md),
 [battle Items equipment and MP drain](re/BATTLE_ITEM_EQUIPMENT_20261024.md),
 [direct three-part Parasite rendering](re/PARASITE_THREE_PARTS_20261024.md),

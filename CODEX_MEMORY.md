@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 visual descriptions and Storyline.** After gameplay fixes and
+local deployment, add sprite and silent-animation descriptions across all
+six games and begin game-specific Storyline mode. [Scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
+
 **November 17 FFV save-point directions.** Deferred report that directions
 say “1 North” from the selected save point's own tile. Expected speech is
 “Already here.” [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffv-directions-while-standing-on-a-save-point).

@@ -237,6 +237,34 @@ runner. The baseline and corrected receipts are in
 `build_check/ff4_zot_chest_20261111`.
 [Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-11-ffiv-tower-of-zot-chest).
 
+## November 17 visual descriptions and Storyline follow-up
+
+**Deferred.** Finish the documented gameplay fixes and their local
+deployment first. The next task adds visual descriptions across FF I–VI
+and begins the [existing Storyline mode plan](#november-11-all-six-storyline-category)
+to lead the player through each game's objectives. The new description work
+is at the documentation stage.
+
+| Scope | Requested behavior |
+| --- | --- |
+| NPCs and party characters | Read the actual sprite. Describe facial features and expression where visible, apparent build, clothing and equipment details, and visible armaments. Cover both idle and distinct battle sprites. Keep the description concise and include every discernible feature. |
+| Enemies | Describe body type, limbs, claws, fangs, expression, and any obvious mode of attack supported by the visible art or animation. Include the full set of discernible features in concise language. |
+| Items | Describe distinctive item sprites, including weapons and armor with their own art. Skip generic weapon, armor and item sprites. |
+| Animations | Describe visual actions without an equivalent in the game's text. Prioritize opening cutscenes and prologues, then review the rest of the games for events where character animation conveys unexplained action. For repeated work such as an airship upgrade or bridge construction, describe the first meaningful action once for that sequence, for example, “Cid begins installing the upgrade with a hammer.” |
+
+**Controls.** In dialogue or an event, I describes the relevant NPC. During
+battle, I describes the currently targeted enemy. Ctrl+I describes the
+acting party character. Resolve the visible sprite for that context, and
+verify that [existing detail controls](../INPUT_BINDINGS.md#i-key-cascade-globalhotkeyhandlerhandleitemdetailskey)
+still work in their menus. Item-description controls remain to be defined.
+
+Plan several coverage passes. Record the game, exact sprite variant or event,
+and the description or native text that covers it. Use the existing
+[boss animation work](BOSS_VISUALS_20261112.md) when auditing battle scenes.
+Verify that event descriptions follow the visible action and preserve the
+native dialogue order. Localize added descriptions in each game's supported
+languages.
+
 ## November 11 all-six Storyline category
 
 The owner requests the next main-story objective in a Storyline category
@@ -282,9 +310,10 @@ existing receipts as evidence for individual stages.
 | Campaign coverage | Pending. Qualify every main-story stage and its native action in FF1–FF6, including optional branches that can already be complete. |
 | Verification and delivery | Pending. Cover state reload, readiness, route cancellation, bounded work, 12 locales, canonical verification and local deployment. Commit and push the verified change. |
 
-The request arrived during the FFIV airship-label build. Production changes
-to the shared mod follow that delivery. Gameplay and frame timing are
-separate verification steps.
+The request arrived during the FFIV airship-label build. The November 17
+priority places its implementation after the outstanding gameplay fixes and
+local deployment, in the [visual descriptions follow-up](#november-17-visual-descriptions-and-storyline-follow-up).
+Gameplay and frame timing are separate verification steps.
 
 ## November 11 FFIV Kain airship label
 
