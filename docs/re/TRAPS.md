@@ -140,3 +140,19 @@ Luna delegation: gpt-6-luna, medium, bounded warning preference/Speech row, twel
 locale translations and modal assertions. Sol reviewed its diff and integrated
 modal, warning producer, full build and smoke checks; accepted, no remaining issue
 within that handoff. Sol retained RE, routing, lifecycle, review and verification.
+
+## November 17 FFV Tower of Walse jumps labeled Trap
+
+**Deferred.** The owner reports that the character climbs vines to reach
+the upper floors and deliberately jumps back down. These descent events
+should be called “Jump” in the Events list and treated as normal traversal.
+
+The current FFV Steam `ffpr_screen_reader.log` announces three Tower of
+Walse 9F entries as “Trap” at 429855.093, 429855.390 and 429855.562. An
+earlier rotated part labels the Tower of Walse 5F event “Trap” at 185298.843
+and lists the 4F vine separately under Objects at 185293.093.
+
+For a later fix, verify the exact descent contacts and their landings.
+Use the localized “Jump” label and preserve the vine climbs and valid
+routes through the verified jumps. Keep trap warnings and avoidance for
+actual hazards.

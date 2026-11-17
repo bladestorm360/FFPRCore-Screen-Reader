@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 FFV Tower of Walse.** Deferred report that deliberate jumps
+back down from vine climbs are labeled Trap. The requested event label is
+Jump. [Log evidence](docs/re/TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap).
+
 **November 17 FFV field pause menu.** Deferred report of silence on X.
 Opening should announce Pause, then the focused Controls item in FFV.
 Audit the other five games and apply the same opening behavior wherever the
