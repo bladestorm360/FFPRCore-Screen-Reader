@@ -1,5 +1,19 @@
 # Remaining map-audit findings and evidence limits
 
+## November 17 FFV directions while standing on a save point
+
+**Deferred.** On Tower of Walse 5F, the FFV Steam log
+`ffpr_screen_reader.1.log` lists the selected Save Point at 0.0 steps at
+429972.734. A directions request says “1 North” at 429974.406. At
+429996.000 a fresh plan records one step with both the player and goal at
+(7,8), layer 1, on map 238. It again says “1 North” at 429996.015.
+
+When the selected destination is already reached, directions should say
+“Already here” without a movement instruction. Check whether existing
+arrival handling can be reused and why it misses this save point. Verify
+both fresh and reused routes. A nearby save point should still give valid
+directions until the player reaches it.
+
 <a id="november-15-ffiv-moon-route-to-crystal-palace"></a>
 
 ## November 17 FFIV Moon entrance routing

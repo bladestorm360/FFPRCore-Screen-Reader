@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 FFV save-point directions.** Deferred report that directions
+say “1 North” from the selected save point's own tile. Expected speech is
+“Already here.” [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffv-directions-while-standing-on-a-save-point).
+
 **November 17 FFV Tower of Walse.** Deferred report that deliberate jumps
 back down from vine climbs are labeled Trap. The requested event label is
 Jump. [Log evidence](docs/re/TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap).
