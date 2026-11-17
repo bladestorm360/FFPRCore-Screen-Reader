@@ -1,26 +1,32 @@
 # Remaining map-audit findings and evidence limits
 
-## November 15 FFIV Moon route to Crystal Palace
+<a id="november-15-ffiv-moon-route-to-crystal-palace"></a>
 
-**Deferred.** At the owner's current story state, landing near the Moon's
-Crystal Palace marker and walking to it fails to enter the palace. The
-owner reports that the usable approach is through Western Lunar Path.
-The direct contact may be outbound-only or enabled at a later story state.
-Its direction and availability still need verification.
+## November 17 FFIV Moon entrance routing
 
-The FFIV Steam log `ffpr_screen_reader.1.log` announces “Fly 50.0 steps,
-then land” for Crystal Palace at 268335.031 and gives a flight, landing and
-walk route to Moon map 3 at (22,37) at 268335.734. After landing, it gives
-walking directions from (20,36). The current `ffpr_screen_reader.log` still
-directs the player one step south from (22,36) at 268459.437, and the party
-remains on Moon map 3 in the following scan. Western Lunar Path is offered
-from the same position at 268462.625, with a route goal of (12,32).
+**Deferred.** The owner reports that none of the attempted Moon entrances
+work at the current story point. Western Lunar Path, previously suggested
+as the Crystal Palace approach, also fails after approaching on foot and
+after flying and landing nearby. The owner has seen “Lunar Cave” in guides
+and is unsure whether the selected Western Lunar Path contact is the intended
+entrance. Keep the existing in-game map names.
 
-For a later Moon routing check, verify the Palace contact's entry and exit
-directions and story conditions. From aboard the Lunar Whale and on foot,
-browsing and directions should use the verified Western Lunar Path approach
-while direct entry is unavailable. Check the other Moon exits for the same
-distinction between reaching a tile and activating its transition.
+- **November 15, Crystal Palace.** The FFIV Steam log announces “Fly 50.0
+  steps, then land” at 268335.031. It routes to Moon map 3 at (22,37) and
+  later says one step south from (22,36) at 268459.437. The next scan still
+  shows Moon map 3. The contact's direction and story availability remain
+  unverified.
+- **November 17, Western Lunar Path.** The FFIV Steam log routes on foot to
+  Moon map 3 at (12,32) at 428112.890 and repeatedly gives the same last
+  steps from (13,34). At 428161.843 it offers a flight and landing route to
+  that same contact. After landing at (12,31), requests continue to say one
+  step south through 428196.531, and the party remains on Moon map 3.
+
+For a later fix, check every Moon entrance against its actual entry tile,
+approach direction, terrain and story conditions. Verify which Western Lunar
+Path contact provides the onward route and whether the Crystal Palace contact
+allows entry. Browsing and directions from aboard the Lunar Whale and on foot
+should require a usable transition before presenting a route as reachable.
 
 ## November 14 FFIV Sealed Cavern rope crossing across floors
 

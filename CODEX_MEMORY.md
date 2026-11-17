@@ -1,8 +1,8 @@
 # Native FFPR durable memory
 
-**November 15 FFIV Moon routing.** Deferred report that the direct Crystal
-Palace approach fails at the current story state. The owner reports access
-through Western Lunar Path. [Log evidence and acceptance](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-15-ffiv-moon-route-to-crystal-palace).
+**November 17 FFIV Moon routing.** Deferred audit of Moon entrances. The
+reported Crystal Palace and Western Lunar Path routes both fail at the
+current story point. [Log evidence and acceptance](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffiv-moon-entrance-routing).
 
 **November 15 FFIV duplicate markers.** Deferred reports for the Lunar
 Whale's Fat Chocobo and the surface Overworld Airship object. The latter's
