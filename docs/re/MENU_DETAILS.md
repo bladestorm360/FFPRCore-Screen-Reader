@@ -211,3 +211,18 @@ Isolated smoke passes all 47 exports/forwarding/boot/logger checks. All six depl
 match SHA-256 `E3F6C174CAE0FE65D969E3258B72936035EBA579BE051084B1BBB0845D0602BE`.
 Prism was verified read-only and unchanged; no game was launched or probed.
 [Loading dispatcher evidence and remaining Deist retest](THREADING.md#large-map-loading-dispatcher-follow-up-october-13).
+
+## November 17 FFV field pause menu opens silently
+
+**Deferred.** The owner reports that pressing X on the FFV field opens
+the pause menu silently. The latest FFV Steam `ffpr_screen_reader.log`
+records “Controls” at 429473.031 and later reads “Return to field” and
+“Return to Title Screen.” It contains no “Pause” announcement for this
+sequence. The log does not identify the opening key or establish whether
+“Controls” was spoken at entry or after a later input.
+
+On each opening, announce “Pause” followed by the actual initially focused
+item, with no cursor movement required. In FFV that item is “Controls.”
+Keep normal cursor announcements and use the game's text language for the
+menu title and item. Whether other Pixel Remaster titles are affected
+remains open.
