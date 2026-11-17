@@ -1,5 +1,25 @@
 # Remaining map-audit findings and evidence limits
 
+## November 17 FFV Karnak world-map routing progress blocker
+
+**Highest-priority gameplay fix.** Fix and deploy before the other pending
+fixes and the visual descriptions and Storyline work. The owner reports
+that many destinations near Karnak are marked unreachable despite being
+accessible, blocking guided story progression.
+
+The current FFV Steam log records the party on world map 1 at (84,78),
+layer 1. At 434600.234 and 434600.859 the planner finds no goal cells for
+Karnak Castle at (84,77) and Fire-Powered Ship Above Deck at (84,79).
+Both are announced as “Not directly reachable.” The log then records
+native entry into Karnak Castle, map 95, at 434625.968. Some other exits
+still get routes from (84,78), including the town of Karnak at 434619.156.
+
+Verify the native approaches and progression conditions for the affected
+world-map exits. Browsing and directions should recognize usable contacts
+from the logged position and guide the party into Karnak Castle. Check the
+ship contact and other nearby exits against their actual story and vehicle
+requirements. Retain legitimate restrictions. Cause and fix are pending.
+
 ## November 17 FFV Karnak Pub 2F exit classified as an event
 
 **Priority gameplay fix.** Fix and deploy before the

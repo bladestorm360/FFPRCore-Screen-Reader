@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 FFV Karnak world map.** Highest-priority progression blocker.
+The log marks Karnak Castle unreachable and later records native entry.
+Fix and deploy before other pending work. [Log evidence and acceptance](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffv-karnak-world-map-routing-progress-blocker).
+
 **November 17 FFV shop labels.** Deferred removal of the parenthesized Temp
 suffix from navigation labels. [Log evidence](docs/re/OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix).
 
