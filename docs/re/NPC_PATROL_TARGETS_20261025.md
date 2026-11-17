@@ -126,10 +126,12 @@ repeats the same pair at 429309.406 and 429309.421. The
 on both entries. Moving the cursor to Lenna between those attempts produces
 one read. The first submission's producer still needs verification.
 
-For a later fix, verify which callback owns the initial target read. Opening
-or reopening the list should speak the focused target once per entry.
-Moving the cursor and changing between single and all targets should still
-announce the new selection.
+This is a double read on one menu entry. For a later fix, identify the
+callback that owns the initial target read and remove the redundant read
+at its source. Do not deduplicate by spoken text. Each opening or reopening
+should announce the focused target once, even when it is the same character
+with the same HP and MP. Cursor movement and single/all target changes should
+still announce the new selection.
 
 ## Enemy critical health
 

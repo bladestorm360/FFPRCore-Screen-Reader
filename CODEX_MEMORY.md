@@ -1,7 +1,8 @@
 # Native FFPR durable memory
 
 **November 17 FFV spell targeting.** The field Cure target reads twice on
-entry and reentry. Fix deferred. [Log evidence](docs/re/NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry).
+entry and reentry. The deferred fix is to remove the redundant read at its
+source. [Log evidence](docs/re/NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry).
 
 **November 17 FFIV Moon routing.** Deferred audit of Moon entrances. The
 reported Crystal Palace and Western Lunar Path routes both fail at the
