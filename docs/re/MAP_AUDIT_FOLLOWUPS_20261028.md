@@ -1,5 +1,21 @@
 # Remaining map-audit findings and evidence limits
 
+## November 17 FFV Karnak Pub 2F exit classified as an event
+
+**Priority gameplay fix.** Fix and deploy before the
+[visual descriptions and Storyline follow-up](#november-17-visual-descriptions-and-storyline-follow-up).
+
+The current FFV Steam log lists “Scene trigger (Karnak Pub)” under Events
+at 432833.062. The selected marker routes to (22,4) on Karnak Pub map 92
+at 432846.390. Following it enters Karnak Pub 2F, map 93, at 432857.218.
+The party returns to the pub at 432867.265. The owner suspects the contact
+is stairs. The log confirms the floor transition, and the exact native
+contact type remains to be verified.
+
+Verify the transition and list the 2F entrance under Map Exits with its
+destination name. Check that directions and the return from 2F follow the
+native approaches and that independent scenes keep their Event classification.
+
 ## November 17 FFV directions while standing on a save point
 
 **Deferred.** On Tower of Walse 5F, the FFV Steam log
@@ -258,9 +274,10 @@ runner. The baseline and corrected receipts are in
 
 ## November 17 visual descriptions and Storyline follow-up
 
-**Deferred.** Finish the documented gameplay fixes and their local
-deployment first. The next task adds visual descriptions across FF I–VI
-and begins the [existing Storyline mode plan](#november-11-all-six-storyline-category)
+**Deferred.** Finish the documented gameplay fixes, including the
+[Karnak Pub 2F exit](#november-17-ffv-karnak-pub-2f-exit-classified-as-an-event),
+and their local deployment first. The next task adds visual descriptions
+across FF I–VI and begins the [existing Storyline mode plan](#november-11-all-six-storyline-category)
 to lead the player through each game's objectives. The new description work
 is at the documentation stage.
 

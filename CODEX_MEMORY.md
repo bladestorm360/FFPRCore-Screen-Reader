@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 FFV Karnak Pub.** The 2F entrance appears under Events.
+Fix and deploy before visual descriptions and Storyline mode.
+[Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffv-karnak-pub-2f-exit-classified-as-an-event).
+
 **November 17 save-point traversal.** Deferred routing correction for paths
 that cross ordinary save points. Their shine and first-use tutorial do not
 make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-save-points-are-passable-during-routing).
