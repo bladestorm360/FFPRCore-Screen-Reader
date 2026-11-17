@@ -1,5 +1,8 @@
 # Native FFPR durable memory
 
+**November 17 FFV shop labels.** Deferred removal of the parenthesized Temp
+suffix from navigation labels. [Log evidence](docs/re/OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix).
+
 **November 17 FFV Karnak Pub.** The 2F entrance appears under Events.
 Fix and deploy before visual descriptions and Storyline mode.
 [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffv-karnak-pub-2f-exit-classified-as-an-event).

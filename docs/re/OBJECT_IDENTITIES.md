@@ -164,3 +164,11 @@ current FFIV Steam `ffpr_screen_reader.log`.
   markers. Verify the object's identity and interaction before suppressing
   it. If it duplicates a named vehicle, keep that vehicle as the destination.
   Preserve independent story contacts such as Kain's airship at (41,70).
+
+## November 17 FFV shop labels expose the Temp suffix
+
+**Deferred.** The current FFV Steam log lists “Weapon Shop (Temp)” at
+433107.265 and “Armor Shop (temp)” at 433110.125 in the NPC category.
+Remove the parenthesized temporary marker from player-facing navigation
+labels regardless of case. These entries should say “Weapon Shop” and
+“Armor Shop.” Preserve the underlying identifiers for lookup and routing.
