@@ -115,6 +115,22 @@ post-native callbacks cannot replace a newer owner/phase. field_targets_check
 tests all six producers, nested callbacks, single return, hidden/event contexts,
 FFV's existing producer and lifecycle cancellation.
 
+### November 17 FFV duplicate spell target on menu entry
+
+**Deferred.** From the field menu, selecting White Magic and confirming
+Cure opens the party target list. The latest FFV Steam log
+`ffpr_screen_reader.log` records two speech submissions for “Bartz, HP
+174/193, MP 65/72” at 429303.328 and 429303.359. Reopening the target list
+repeats the same pair at 429309.406 and 429309.421. The
+`FieldMagicTargets.SingleFF5` action is logged between the two submissions
+on both entries. Moving the cursor to Lenna between those attempts produces
+one read. The first submission's producer still needs verification.
+
+For a later fix, verify which callback owns the initial target read. Opening
+or reopening the list should speak the focused target once per entry.
+Moving the cursor and changing between single and all targets should still
+announce the new selection.
+
 ## Enemy critical health
 
 The Giant Rat screenshot has no enemy Critical label/icon/HP display. All-six
