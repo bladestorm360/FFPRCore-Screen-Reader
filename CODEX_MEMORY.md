@@ -2,6 +2,8 @@
 
 **November 17 FFV field pause menu.** Deferred report of silence on X.
 Opening should announce Pause, then the focused Controls item in FFV.
+Audit the other five games and apply the same opening behavior wherever the
+field pause menu exists.
 [Log evidence and acceptance](docs/re/MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently).
 
 **November 17 FFV spell targeting.** The field Cure target reads twice on

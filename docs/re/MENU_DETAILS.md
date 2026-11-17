@@ -224,5 +224,9 @@ sequence. The log does not identify the opening key or establish whether
 On each opening, announce “Pause” followed by the actual initially focused
 item, with no cursor movement required. In FFV that item is “Controls.”
 Keep normal cursor announcements and use the game's text language for the
-menu title and item. Whether other Pixel Remaster titles are affected
-remains open.
+menu title and item.
+
+Audit FFI, FFII, FFIII, FFIV and FFVI for the equivalent field pause menu
+and verify its opening behavior and initial focus in each title. Apply the
+same title-then-focus announcement across all six games wherever the menu
+exists, using each title's actual focused item.
