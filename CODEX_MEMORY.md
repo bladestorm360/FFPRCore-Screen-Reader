@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 17 save-point traversal.** Deferred routing correction for paths
+that cross ordinary save points. Their shine and first-use tutorial do not
+make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-save-points-are-passable-during-routing).
+
 **November 17 visual descriptions and Storyline.** After gameplay fixes and
 local deployment, add sprite and silent-animation descriptions across all
 six games and begin game-specific Storyline mode. [Scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).

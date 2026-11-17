@@ -14,6 +14,25 @@ arrival handling can be reused and why it misses this save point. Verify
 both fresh and reused routes. A nearby save point should still give valid
 directions until the player reaches it.
 
+## November 17 save points are passable during routing
+
+**Deferred.** Treat ordinary save-point tiles as passable on a route to
+another destination. Reserve “Event required” for an actual scene, a
+scripted stop that takes movement control away, or an event that transports
+the party. The save circle's normal shine animation leaves the party free
+to keep walking. The first visit can show a brief tutorial pop-up.
+
+On Tower of Walse 5F, the FFV Steam log at 429840.421 says “Event required”
+before directions from (7,10) to the selected chest at (10,5) on map 238.
+That route crosses the save point at (7,8). At 429844.765 the native
+consecrated-circle tutorial is spoken.
+
+Verify that a route can cross the save point before and after that tutorial
+without classifying the save point as a required event. If the native pop-up
+takes control, wait for normal field readiness before continuing autowalk.
+Keep the Save Points destination and preserve separate scene and relocation
+triggers.
+
 <a id="november-15-ffiv-moon-route-to-crystal-palace"></a>
 
 ## November 17 FFIV Moon entrance routing
