@@ -1,5 +1,23 @@
 # Remaining map-audit findings and evidence limits
 
+## November 19 gameplay fixes and accessibility follow-up
+
+The owner authorized implementation and local deployment of the documented
+gameplay fixes, followed by the all-six descriptive audit and Storyline work.
+Karnak world-map progression is the first delivery. The completion records
+below track implementation, offline evidence, installed verification, and
+player confirmation. Preserve earlier closed work and reconcile outstanding
+reports in the existing feature and maintenance records as each system opens.
+
+| Checkpoint | State and acceptance |
+| --- | --- |
+| [FFV Karnak world map](#november-17-ffv-karnak-world-map-routing-progress-blocker) | Closed for source, offline verification and FFV installation. Player confirmation pending. |
+| FFV routing and labels | In progress (~5%). Verify and deploy Karnak Pub 2F exit classification, save-point arrival and traversal, [Walse jump labels](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). Initial estimate 45–90 minutes. |
+| Field menu speech | Not started. Remove the [redundant FFV spell target read](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) at its producer. Audit the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently) and announce the title and initial focus where applicable. |
+| FFIV world and floor routing | Not started. Verify Moon entrances, Sealed Cavern rope prerequisites, [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes), [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | Not started. After gameplay fixes and deployment, complete the six-game sprite and animation coverage passes and verify the speech controls. |
+| [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
+
 ## November 17 FFV Karnak world-map routing progress blocker
 
 **Highest-priority gameplay fix.** Fix and deploy before the other pending
@@ -18,7 +36,27 @@ Verify the native approaches and progression conditions for the affected
 world-map exits. Browsing and directions should recognize usable contacts
 from the logged position and guide the party into Karnak Castle. Check the
 ship contact and other nearby exits against their actual story and vehicle
-requirements. Retain legitimate restrictions. Cause and fix are pending.
+requirements. Retain legitimate restrictions.
+
+The installed FFV misc bundle matches the Walse reference hash in
+[map exit evidence](MAP_EXITS.md#ffv-walse-terrain-november-10). Its world
+1 terrain table converts raw ID 62 at the ship contact from 20 to water
+16 at scenario flag 989. It converts raw ID 48 across the castle footprint
+from 20 to 6 at flag 992. Both conversion windows end at flag 1023. The
+existing FFV terrain resolver now applies those rules from the copied
+scenario state before goal discovery and movement checks. The change adds
+no native hook and retains transition groups and transportation requirements.
+Other dynamic terrain entries remain outside this focused fix.
+
+The new cases in `ff5_story_contacts_route_check` reproduced both failures
+on the previous source. The same test covers the two one-step approaches,
+the ship contact after it becomes water, and unknown ship progression.
+The corrected build passed 38 assertions across 27 route legs and both
+shared browse and route-worker checks. The 67 embedded resources and
+47 forwarded exports verified. FFV's 22 installed files matched the exact
+scanned payload, and 138 protected file hashes across the six installations
+matched the initial inventory. This closes focused delivery. Game-frame and
+audible response timing remain unmeasured. [Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-ffv-karnak-world-routing).
 
 ## November 17 FFV Karnak Pub 2F exit classified as an event
 

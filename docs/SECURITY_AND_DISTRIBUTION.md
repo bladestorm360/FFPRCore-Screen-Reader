@@ -1,5 +1,23 @@
 # Build and distribution security
 
+## November 19 FFV Karnak world routing
+
+The focused build passed FFV story contacts, browse routing and route
+worker, verified 67 embedded resources and completed in 192.1 seconds.
+It used one worker with a 25% CPU cap and a 514,588,672-byte peak job.
+The isolated smoke host resolved all 47 exports. The 13,474,304-byte
+unsigned DLL SHA-256 is
+`b2c9ed50cdf980c99e83d48317e0346c83750723001500adb963c36fa94cf638`.
+
+Defender definitions `1.463.368.0` found no threats in the 22 exact
+payload files. All file hashes stayed stable, and there were zero matching
+detection events. The separate exclusion query was denied. FFV's installed
+hashes matched all scanned files. The other five DLLs and 138 protected
+file states matched the pre-install inventory. The previous FFV DLL was
+`7c4580631476988bd9fcf0c3755142e55e5848686e549dea72924fdc62c79192`
+from `a6008be`. Rebuild that commit for recovery. Evidence is under
+`../tools/karnak_routing_20261119`. Gameplay confirmation remains pending.
+
 ## November 13 combined door, route and boss update
 
 The focused build ran five offline checks, matched 67 embedded resources,

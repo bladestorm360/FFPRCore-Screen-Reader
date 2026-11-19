@@ -1008,17 +1008,24 @@ bool any_reachable(const baked_route::Reach& reach, const std::vector<Cell>& goa
     return false;
 }
 
-void apply_walse_terrain(baked_route::Request& request, const map_state::Resolver* state)
+void apply_ff5_world_terrain(baked_route::Request& request, const map_state::Resolver* state)
 {
     if (!request.submap->world || request.submap->first_map_id != 1 || !game::is(game::Id::FF5)) return;
     const auto flag = [state](int id) { return state ? state->scenario_value(id) : map_state::scenario_flag(id); };
-    const auto meteor = flag(990), sunk = flag(991), end = flag(1023);
-    // MapAssetLoader.CreateMapFootInfo resolves Map_10010's six Walse foot
+    const auto end = flag(1023);
+    // MapAssetLoader.CreateMapFootInfo resolves Map_10010's story-dependent foot
     // IDs from serial_misc_assets before testing movement/landing permissions.
     // The loader also recalculates these collision tiles from the converted
     // foot ID. Every other native transport tile and story gate still applies.
-    if (meteor && (*meteor == 0 || end == 0))
-        request.world_terrain[42 - 33] = *meteor == 0 ? 6 : 20;
+    const auto resolve_terrain = [&](int raw, int threshold, uint8_t before, uint8_t after) {
+        const auto active = flag(threshold);
+        if (active && (*active == 0 || end == 0))
+            request.world_terrain[raw - 33] = *active == 0 ? before : after;
+    };
+    resolve_terrain(62, 989, 20, 16); // Fire-Powered Ship contact becomes water.
+    resolve_terrain(42, 990, 6, 20);  // Walse Meteorite.
+    resolve_terrain(48, 992, 20, 6);  // Karnak Castle footprint.
+    const auto sunk = flag(991);
     if (sunk && (*sunk == 0 || end == 0)) {
         constexpr std::array<uint8_t, 5> before{6, 3, 6, 6, 20}, after{16, 16, 16, 3, 16};
         const auto& terrain = *sunk == 0 ? before : after;
@@ -1038,7 +1045,7 @@ void world_mode(baked_route::Request& req)
         req.transportation_id=g_route_snapshot&&g_route_snapshot->vehicle.valid?g_route_snapshot->vehicle.id:1;
         return;
     }
-    apply_walse_terrain(req, g_route_snapshot ? &g_route_snapshot->state : nullptr);
+    apply_ff5_world_terrain(req, g_route_snapshot ? &g_route_snapshot->state : nullptr);
     req.auto_groups = planning_auto_groups();
     VehicleState v = planning_vehicle();
     if (v.valid && v.type != 1 && v.type != 0) {
@@ -2019,7 +2026,7 @@ baked_route::Request walk_request(const baked::Submap& sm, const Cell& start)
     req.passages = game::flags().has_hidden_passages;
     if (sm.world) {
         req.auto_groups = planning_auto_groups();
-        if (g_route_snapshot) apply_walse_terrain(req, &g_route_snapshot->state);
+        if (g_route_snapshot) apply_ff5_world_terrain(req, &g_route_snapshot->state);
     }
     return req;
 }

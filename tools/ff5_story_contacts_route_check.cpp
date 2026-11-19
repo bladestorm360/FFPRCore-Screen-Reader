@@ -72,6 +72,29 @@ int verify() {
     check(!route(1,{1,195,87},walse,tower,TargetKind::Transition).path.success,
           "unknown sinking state does not invent a walkable tower entrance");
 
+    auto karnak = exdeath_routes::flags(1,0,0);
+    karnak.current_area_id = 1;
+    const Cell between_castle_and_ship{1,84,78};
+    MapGoal castle;
+    castle.map_id = 1;
+    castle.cell = {1,84,77};
+    const auto castle_route = route(1,between_castle_and_ship,karnak,castle,TargetKind::Transition);
+    check(castle_route.path.success && castle_route.path.step_count == 1 &&
+          !castle_route.path.walk_phases.empty() && castle_route.path.walk_phases.back().cells.back() == castle.cell,
+          "the logged Karnak world pose reaches the castle's exact northern contact");
+    MapGoal fire_ship = castle;
+    fire_ship.cell = {1,84,79};
+    const auto ship_route = route(1,between_castle_and_ship,karnak,fire_ship,TargetKind::Transition);
+    check(ship_route.path.success && ship_route.path.step_count == 1 &&
+          !ship_route.path.walk_phases.empty() && ship_route.path.walk_phases.back().cells.back() == fire_ship.cell,
+          "the same pose reaches the Fire-Powered Ship contact before it becomes water");
+    karnak.scenario[989] = 1;
+    check(!route(1,between_castle_and_ship,karnak,fire_ship,TargetKind::Transition).path.success,
+          "the water at the original Fire-Powered Ship contact remains closed to foot travel");
+    karnak.scenario[989].reset();
+    check(!route(1,between_castle_and_ship,karnak,fire_ship,TargetKind::Transition).path.success,
+          "unknown Fire-Powered Ship terrain does not invent a ground entrance");
+
     auto valley = exdeath_routes::flags(577,0,0);
     valley.current_area_id = 4;
     valley.scenario[5] = valley.scenario[417] = 1;
