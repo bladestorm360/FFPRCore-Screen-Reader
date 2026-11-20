@@ -656,6 +656,31 @@ void command_reset_state()
 }
 
 void clear_cached_target_controller() { g_cached_target_controller = nullptr; }
+
+void* focused_enemy_unit()
+{
+    if (!state_active(menu_state::BATTLE_TARGET) || g_target_focus_side != 1 ||
+        !g_target_focus_unit || !unity::alive(g_cached_target_controller)) return nullptr;
+
+    auto* controller = g_cached_target_controller;
+    auto* cursor = ref::rd<void*>(controller, fSelectCursor);
+    if (!displayed::visible(cursor) || ui::cursor_index(cursor) != g_target_focus_index)
+        return nullptr;
+
+    // The saved focus is an identity only. Match it against the entry the
+    // current native controller owns before giving callers a live unit.
+    auto* list = ref::rd<void*>(controller, fEnemyDataList);
+    std::vector<void*> targets;
+    if (!unity::enumerate_bounded(list, targets, 64) || targets.empty()) {
+        list = ref::rd<void*>(controller, fTargetEnamyList);
+        if (!unity::enumerate_bounded(list, targets, 64)) return nullptr;
+    }
+    const int index = g_target_focus_index;
+    if (index < 0 || index >= static_cast<int>(targets.size())) return nullptr;
+    auto* unit = targets[static_cast<size_t>(index)];
+    return unit == g_target_focus_unit ? unit : nullptr;
+}
+
 void reset_target_focus()
 {
     g_target_focus_side = g_target_focus_index = -1;

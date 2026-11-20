@@ -1,4 +1,32 @@
 {
+  "Enemy appearance mn_ff1_001_c00": {
+    "en": "A squat, pink-skinned figure with pointed ears, wide eyes and a protruding nose. It wears a red cap, orange tunic and red boots, and holds a hooked silver blade overhead.",
+    "ja": "尖った耳、大きく見開いた目、突き出た鼻を持つ、桃色の肌の小柄な人型。赤い帽子とオレンジ色の上着、赤いブーツを着け、鉤形の銀色の刃を頭上に掲げている。",
+    "fr": "Une petite créature trapue à la peau rose, aux oreilles pointues, aux yeux écarquillés et au nez saillant. Elle porte un bonnet rouge, une tunique orange et des bottes rouges, et brandit une lame d’argent recourbée.",
+    "it": "Una figura tozza dalla pelle rosa, con orecchie a punta, occhi spalancati e naso sporgente. Indossa un berretto rosso, una tunica arancione e stivali rossi, e solleva sopra la testa una lama argentata ricurva.",
+    "de": "Eine gedrungene Gestalt mit rosa Haut, spitzen Ohren, weit aufgerissenen Augen und vorstehender Nase. Sie trägt eine rote Kappe, eine orange Tunika und rote Stiefel und hält eine hakenförmige Silberklinge über den Kopf.",
+    "es": "Una figura rechoncha de piel rosada, orejas puntiagudas, ojos muy abiertos y nariz prominente. Lleva un gorro rojo, una túnica naranja y botas rojas, y alza una hoja plateada en forma de gancho.",
+    "ko": "분홍색 피부에 뾰족한 귀, 부릅뜬 눈, 튀어나온 코가 있는 땅딸막한 인물. 붉은 모자와 주황색 튜닉, 붉은 장화를 착용하고 갈고리 모양의 은빛 칼날을 머리 위로 치켜든다.",
+    "zht": "矮壯的粉紅色人形生物，長著尖耳朵、睜得大大的眼睛和突出的鼻子。牠戴紅帽，穿橘色短衣和紅靴，頭頂高舉一把銀色鉤刃。",
+    "zhc": "矮壮的粉红色人形生物，长着尖耳朵、瞪大的眼睛和突出的鼻子。它戴红帽，穿橙色短衣和红靴，头顶高举一把银色钩刃。",
+    "ru": "Приземистое существо с розовой кожей, острыми ушами, широко раскрытыми глазами и выступающим носом. На нём красный колпак, оранжевая туника и красные сапоги. Над головой оно держит загнутый серебристый клинок.",
+    "th": "ร่างเตี้ยล่ำผิวชมพู หูแหลม ตาเบิกกว้างและจมูกยื่น สวมหมวกแดง เสื้อคลุมสั้นสีส้ม และรองเท้าบู๊ตแดง ชูใบมีดสีเงินปลายงอเหนือศีรษะ",
+    "pt": "Uma figura atarracada de pele rosada, orelhas pontudas, olhos arregalados e nariz saliente. Usa gorro vermelho, túnica laranja e botas vermelhas, e ergue uma lâmina prateada em forma de gancho acima da cabeça."
+  },
+  "Enemy appearance mn_ff1_001_c01": {
+    "en": "A squat, tan-skinned figure with pointed ears, bulging eyes and a protruding nose. Its blue cap trails behind matching blue clothes and boots. It holds a hooked silver blade overhead.",
+    "ja": "尖った耳、ぎょろりとした目、突き出た鼻を持つ、小麦色の肌の小柄な人型。青い服とブーツに揃えた青い帽子の先が後ろに垂れている。鉤形の銀色の刃を頭上に掲げている。",
+    "fr": "Une petite créature trapue à la peau hâlée, aux oreilles pointues, aux yeux globuleux et au nez saillant. La pointe de son bonnet bleu retombe derrière sa tenue et ses bottes bleues. Elle brandit une lame d’argent recourbée.",
+    "it": "Una figura tozza dalla pelle abbronzata, con orecchie a punta, occhi sporgenti e naso pronunciato. La punta del suo berretto blu ricade dietro gli abiti e gli stivali dello stesso colore. Solleva una lama argentata ricurva.",
+    "de": "Eine gedrungene Gestalt mit hellbrauner Haut, spitzen Ohren, hervortretenden Augen und vorstehender Nase. Ihre blaue Zipfelmütze passt zu Kleidung und Stiefeln. Sie hält eine hakenförmige Silberklinge über den Kopf.",
+    "es": "Una figura rechoncha de piel tostada, orejas puntiagudas, ojos saltones y nariz prominente. La punta de su gorro azul cae por detrás, a juego con la ropa y las botas azules. Alza sobre la cabeza una hoja plateada en forma de gancho.",
+    "ko": "황갈색 피부에 뾰족한 귀, 불거진 눈, 튀어나온 코가 있는 땅딸막한 인물. 뒤로 늘어진 파란 모자에 파란 옷과 장화를 착용했다. 머리 위로 갈고리 모양의 은빛 칼날을 치켜든다.",
+    "zht": "矮壯的棕膚人形生物，長著尖耳朵、凸眼和突出的鼻子。藍帽帽尖垂在身後，與藍衣和藍靴相配。牠頭頂高舉一把銀色鉤刃。",
+    "zhc": "矮壮的棕肤人形生物，长着尖耳朵、凸眼和突出的鼻子。蓝帽帽尖垂在身后，与蓝衣和蓝靴相配。它头顶高举一把银色钩刃。",
+    "ru": "Приземистое существо с загорелой кожей, острыми ушами, выпученными глазами и выступающим носом. Конец синего колпака свисает за спиной в тон синей одежде и сапогам. Над головой оно держит загнутый серебристый клинок.",
+    "th": "ร่างเตี้ยล่ำผิวสีน้ำตาลอ่อน หูแหลม ตาโปน และจมูกยื่น ปลายหมวกสีน้ำเงินห้อยไปด้านหลัง เข้าชุดกับเสื้อผ้าและรองเท้าบู๊ตสีน้ำเงิน ชูใบมีดสีเงินปลายงอเหนือศีรษะ",
+    "pt": "Uma figura atarracada de pele morena, orelhas pontudas, olhos saltados e nariz saliente. A ponta do gorro azul cai para trás, combinando com a roupa e as botas azuis. Ergue uma lâmina prateada em forma de gancho acima da cabeça."
+  },
   "Airship Landing": {
     "en": "Airship Landing",
     "ja": "飛空艇の着陸地点",

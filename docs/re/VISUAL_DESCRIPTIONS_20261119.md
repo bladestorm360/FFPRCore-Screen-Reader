@@ -3,7 +3,33 @@
 The November 19 gameplay fixes are installed. This audit records the exact art
 and scenes that need descriptions, with separate verification for the speech
 controls and for localization. The reviewed wording below is working audit
-content. It has yet to be wired to the in-game description controls.
+content. The first battle reader and four localized samples have passed
+their focused build and checks. They are still outside the installed mod.
+
+## Battle appearance reader
+
+On manual I, after the existing menu details checks, the current enemy
+selector reacquires the single target from its rooted native list. It
+matches the current cursor index and the last admitted focus identity.
+That identity never supplies a live pointer on its own. The battle-ready
+gate keeps the reader out of battle entry. No new hook, background work
+or per-frame scanning is involved.
+
+The reader uses the current unit's `BattleSpriteEntity`, body mesh, renderer
+and `Sprite.name`. The installed enemy Sprite names match the art master
+keys for every asset present across the six games. This lets the reader
+follow a changed sprite while the cursor stays on the same unit. Use the
+current art key, including its palette, to resolve the localized entry.
+The FF1 Goblin and Goblin Guard and FFV Wing Raptor's two forms are the
+first four entries, each with 12 localizations.
+
+The existing battle focus fixture covers the actual reader with fake
+native objects. The build verifies entry gating, both Wing Raptor sprites,
+hidden body, cursor change, row replacement, missing wording and all-target
+focus. The focused DLL build verified 67 embedded resources. The effects of
+material-only hiding, including the FFVI painted form, need separate
+visibility proof before that content is enabled. Actor appearance on
+Ctrl+I, dialogue/event appearance on I and automatic scene cues are open.
 
 ## Six-game source inventory
 

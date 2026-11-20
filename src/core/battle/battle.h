@@ -21,6 +21,10 @@ void* current_actor();
 
 /// FF1 BattleStateHelper.IsInBattle.
 bool in_battle();
+/// True after battle-opening presentation completes and until native return.
+bool battle_presentation_ready();
+/// Reads the currently targeted enemy's visible appearance when it has localized text.
+bool read_focused_enemy_appearance();
 /// Shared renderer-backed H/T/number-row readers, including targeting panels.
 void announce_active_status();
 void announce_active_turn();

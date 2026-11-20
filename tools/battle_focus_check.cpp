@@ -10,6 +10,7 @@
 #include "../src/core/battle/battle_command.cpp"
 #undef install
 #undef s_install
+#include "../src/core/battle/battle_appearance.cpp"
 #define install quantity_install
 #define s_install quantity_registration
 #include "../src/core/battle/battle_quantity.cpp"
@@ -57,6 +58,7 @@ using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 int ready_original_calls=0;
+bool battle_art_ready=false;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
 std::map<std::string,std::function<bool()>> queries;
@@ -91,7 +93,13 @@ namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 bool Class::is(void*p){return p!=nullptr;}il2cpp::Class*Class::get(){return nullptr;}
-int32_t Field::get(){std::string n=name;if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;}
+int32_t Field::get(){
+ const std::string n=name;
+ if(n=="<BattleSpriteEntity>k__BackingField"||n=="characterSR"||n=="sprite")
+  return offsetof(fixture::Node,data);
+ if(n=="meshRenderer")return offsetof(fixture::Node,view);
+ if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
+}
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
@@ -114,6 +122,7 @@ std::wstring character_overview(void* content,void* window){
  return line;
 }
 bool image_visible(void*p){return visible(p);}
+bool renderer_visible(void* renderer){return visible(renderer);}
 std::wstring text(void*p){return visible(p)?unity::ui_text(p):L"";}
 std::wstring character(void*p){return text_field(p,"nameText");}std::wstring target(void*p){return visible(p)?character(field(p,"view")):L"";}
 int target_count(void*p){int n=0;for(int i=0;i<unity::list_count(p);++i)if(!target(unity::list_at(p,i)).empty())++n;return n;}
@@ -128,7 +137,13 @@ namespace ui::character_row {void announce(void*,void*,std::wstring line,void*){
 namespace ui {void*list_item(void*p,int i){return unity::list_at(p,i);}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:-1;}int cursor_index(void*p){return p?static_cast<fixture::Node*>(p)->index:-1;}std::wstring menu_position(const std::wstring&s,int i,int n){return s+L" ("+std::to_wstring(i+1)+L" of "+std::to_wstring(n)+L")";}}
 namespace game {Id current(){return fixture::game;}}
 namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="AutoDetail")return fixture::auto_detail;return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
-namespace modtext {std::wstring T(std::wstring_view v){return std::wstring(v);}std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}}
+namespace modtext {
+bool has(std::wstring_view value){
+ return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00";
+}
+std::wstring T(std::wstring_view v){return std::wstring(v);}
+std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
+}
 namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;}void set_active_exclusive(const char*n){fixture::states.clear();fixture::states[n]=true;}void register_reset(const char*,std::function<void()>){}}
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
 namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guard[k]==v)return false;fixture::guard[k]=v;return true;}bool index(const char*k,long long value,Scope){auto [it,fresh]=fixture::index_guard.emplace(k,value);if(!fresh&&it->second==value)return false;it->second=value;return true;}void reset(const char*k){fixture::guard.erase(k);fixture::index_guard.erase(k);}}
@@ -145,6 +160,9 @@ namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
 namespace il2cpp {void*method_pointer(Method*){return nullptr;}}
 namespace ffpr::battle {
+ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
+void* unit_info(void* p){return p?static_cast<fixture::Node*>(p)->data:nullptr;}
+bool battle_presentation_ready(){return fixture::battle_art_ready;}
 bool in_battle(){return fixture::battle_active;}
 bool formation_first_turn(){return fixture::opening_turn;}
 void observe_target_party(void*){}
@@ -170,6 +188,35 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  b::d_ShowWindow(&target,true,nullptr);b::d_EnemysInit(&target,nullptr);for(int i=0;i<120;++i)b::d_SelectEnemy(&target,&enemies,0,nullptr);
  expect(spoken.size()==1&&spoken[0]==L"Rukh A (1 of 2)","FF6 continuous native target refresh speaks initial focus only once");
  b::d_SelectEnemy(&target,&enemies,1,nullptr);b::d_SelectEnemy(&target,&enemies,0,nullptr);expect(spoken.size()==3,"distinct identical-name targets and returning to prior target remain audible");
+ {
+  Node info,entity,body,renderer,open_wings,folded_wings;
+  info.data=&entity;entity.data=&body;body.view=&renderer;body.data=&open_wings;
+  enemy_a.data=&info;
+  open_wings.name=L"MN_FF5_121_C00";folded_wings.name=L"MN_FF5_122_C00";
+  expect(!b::read_focused_enemy_appearance(),"art reader stays closed during battle entry");
+  frame::g_main_tid=GetCurrentThreadId();battle_art_ready=true;
+  spoken.clear();
+  expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff5_121_c00",
+         "the selected unit's rendered sprite selects its appearance");
+  body.data=&folded_wings;
+  expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff5_122_c00",
+         "a changed sprite is resolved on demand without requiring another focus event");
+  renderer.visible=false;
+  expect(!b::read_focused_enemy_appearance(),"a hidden enemy body has no readable art");
+  renderer.visible=true;
+  cursor.index=1;
+  expect(!b::read_focused_enemy_appearance(),"a changed native cursor cannot read the previous enemy");
+  cursor.index=0;
+  enemies[0]=&enemy_b;
+  expect(!b::read_focused_enemy_appearance(),"a reused row cannot read the old target");
+  enemies[0]=&enemy_a;
+  folded_wings.name=L"MN_FF5_999_C00";
+  expect(!b::read_focused_enemy_appearance(),"a missing localization does not speak the internal art name");
+  b::d_EnemyAll(&target,nullptr);
+  expect(!b::read_focused_enemy_appearance(),"All Enemies does not reuse a prior single target");
+  enemy_a.data=nullptr;
+  battle_art_ready=false;
+ }
  // FF4/FF5 Items may be command 5, not command 3. Native graphics own readiness.
  for(int n=1;n<=6;++n){fixture::game=static_cast<game::Id>(n);Node item_ctl,item_view,root,item_row,row_view,icon,item_cursor;List rows{&item_row};
  item_ctl.fields["selectCursor"]=&item_cursor;item_ctl.view=&item_view;item_view.fields["rootObject"]=&root;item_ctl.fields["contentList"]=&rows;item_ctl.fields["displayDataList"]=&rows;item_row.view=&row_view;row_view.fields["IconTextView"]=&icon;icon.texts["nameText"]=L"Potion";row_view.texts["countText"]=L"1";item_view.texts["descriptionText"]=L"Restores HP.";item_cursor.parent=&item_row;

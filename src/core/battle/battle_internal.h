@@ -29,6 +29,8 @@ bool is_in_battle();
 void notify_command_submenu_active();
 void command_reset_state();
 void clear_cached_target_controller();
+/// Reacquire the focused enemy from its native list on the input thread.
+void* focused_enemy_unit();
 
 // battle_magic.cpp (FF1 Patches/BattleMagicPatches.cs) -----------------------------------------
 void magic_reset_state();

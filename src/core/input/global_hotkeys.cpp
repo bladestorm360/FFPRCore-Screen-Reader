@@ -11,6 +11,7 @@
 #include "../modtext.h"
 #include "../text.h"
 #include "../log.h"
+#include "../battle/battle.h"
 #include "../field/object_cache.h"
 
 namespace input {
@@ -136,6 +137,7 @@ void handle_item_details_key()
         actions::run("BattleItemPatches.AnnounceCurrentDescription");
         return;
     }
+    if (ffpr::battle::read_focused_enemy_appearance()) return;
     if (const auto row = queries::text("BattleParty.ChargeDetails"); !row.empty()) ffpr::say(row, true);
 }
 

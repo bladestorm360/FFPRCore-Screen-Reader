@@ -1,4 +1,32 @@
 {
+  "Enemy appearance mn_ff5_121_c00": {
+    "en": "A large violet bird with a pale bony face, a gold crest and orange talons. Wide black and red wings spread above an orange glow.",
+    "ja": "骨ばった白い顔、金色のとさか、オレンジ色の鉤爪を持つ大きな紫の鳥。黒と赤の広い翼を広げ、その間にオレンジ色の光が浮かぶ。",
+    "fr": "Un grand oiseau violet au visage pâle et osseux, à la crête dorée et aux serres orange. Ses larges ailes noires et rouges se déploient au-dessus d'une lueur orange.",
+    "it": "Un grande uccello viola dal volto pallido e ossuto, con cresta dorata e artigli arancioni. Le grandi ali nere e rosse si aprono sopra un bagliore arancione.",
+    "de": "Ein großer violetter Vogel mit blassem, knochigem Gesicht, goldenem Kamm und orangefarbenen Krallen. Breite schwarz-rote Flügel breiten sich über einem orangefarbenen Leuchten aus.",
+    "es": "Un ave violeta de gran tamaño, con rostro pálido y huesudo, cresta dorada y garras naranjas. Sus grandes alas negras y rojas se abren sobre un resplandor naranja.",
+    "ko": "창백하고 뼈가 도드라진 얼굴, 금빛 볏, 주황색 발톱을 가진 커다란 보라색 새. 붉은색과 검은색이 섞인 넓은 날개가 주황빛 위로 펼쳐져 있다.",
+    "zht": "一隻巨大的紫色鳥，長著蒼白而骨感的臉、金色羽冠和橘色利爪。寬大的黑紅雙翼在橘色光芒上方張開。",
+    "zhc": "一只巨大的紫色鸟，长着苍白而骨感的脸、金色羽冠和橙色利爪。宽大的黑红双翼在橙色光芒上方张开。",
+    "ru": "Крупная фиолетовая птица с бледной костистой мордой, золотистым гребнем и оранжевыми когтями. Широкие чёрно-красные крылья раскрыты над оранжевым свечением.",
+    "th": "นกสีม่วงตัวใหญ่ หน้าเรียวซีดคล้ายกระดูก หงอนสีทองและกรงเล็บสีส้ม ปีกสีดำสลับแดงแผ่กว้างเหนือแสงสีส้ม",
+    "pt": "Uma ave violeta de grande porte, com rosto pálido e ossudo, crista dourada e garras alaranjadas. As largas asas pretas e vermelhas se abrem acima de um brilho alaranjado."
+  },
+  "Enemy appearance mn_ff5_122_c00": {
+    "en": "The large bird shelters its face beneath folded black and red wings. Only its orange talons stick out below the overlapping feathers.",
+    "ja": "大きな鳥が黒と赤の翼を折りたたみ、その下に顔を隠している。重なった羽の下からオレンジ色の鉤爪だけが突き出ている。",
+    "fr": "Le grand oiseau cache son visage sous ses ailes noires et rouges repliées. Seules ses serres orange dépassent sous les plumes superposées.",
+    "it": "Il grande uccello ripara il volto sotto le ali nere e rosse ripiegate. Da sotto le piume sovrapposte spuntano solo gli artigli arancioni.",
+    "de": "Der große Vogel verbirgt sein Gesicht unter den angelegten schwarz-roten Flügeln. Nur seine orangefarbenen Krallen ragen unter den überlappenden Federn hervor.",
+    "es": "El ave grande esconde el rostro bajo sus alas negras y rojas plegadas. Solo asoman las garras naranjas por debajo de las plumas superpuestas.",
+    "ko": "커다란 새가 검고 붉은 날개를 접어 얼굴을 가린다. 겹쳐진 깃털 아래로 주황색 발톱만 삐져나와 있다.",
+    "zht": "大鳥收攏黑紅色雙翼，把臉藏在翼下。層疊的羽毛下只露出橘色的利爪。",
+    "zhc": "大鸟收拢黑红色双翼，把脸藏在翼下。层叠的羽毛下只露出橙色的利爪。",
+    "ru": "Крупная птица прячет голову под сложенными чёрно-красными крыльями. Из-под наложенных друг на друга перьев видны только оранжевые когти.",
+    "th": "นกตัวใหญ่ซ่อนหน้าไว้ใต้ปีกสีดำสลับแดงที่พับเข้าหากัน มีเพียงกรงเล็บสีส้มโผล่ออกมาใต้ขนที่ซ้อนกัน",
+    "pt": "A ave grande esconde o rosto sob as asas pretas e vermelhas dobradas. Apenas as garras alaranjadas aparecem sob as penas sobrepostas."
+  },
   "Jump": {
     "en": "Jump",
     "ja": "ジャンプ",

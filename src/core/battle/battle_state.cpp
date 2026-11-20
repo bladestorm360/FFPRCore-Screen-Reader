@@ -240,6 +240,7 @@ bool is_in_battle() { return g_in_battle; }
 
 void* current_actor() { return g_current_actor; }
 bool in_battle() { return g_in_battle; }
+bool battle_presentation_ready() { return g_battle_ready; }
 
 void main_game_transition(int state)
 {
