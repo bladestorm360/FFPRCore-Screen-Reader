@@ -21,6 +21,8 @@
 #include "map_names.h"
 #include "object_cache.h"
 #include "scene_events.h"
+#include "storyline.h"
+#include "map_state.h"
 #include "../core.h"
 #include "../frame.h"
 #include "../game.h"
@@ -47,6 +49,7 @@ std::wstring category_name(Category c)
     case Category::Vehicles: return T(L"Vehicles");
     case Category::SavePoints: return T(L"Save Points");
     case Category::Objects: return T(L"Objects");
+    case Category::Storyline: return T(L"Storyline");
     }
     return T(L"Unknown");
 }
@@ -71,6 +74,7 @@ void clear_target()
 // =========================================================================================
 int g_nav_last_scanned_map_id = -1;
 uint64_t g_category_generation = 0; // event identity, including a return to the same enum
+Category g_current_category = Category::All;
 
 /// EnsureFieldContext: the player is on an active field map and no menu is open.
 bool ensure_field_context()
@@ -91,6 +95,50 @@ bool ensure_field_context()
         return false;
     }
     return true;
+}
+
+std::optional<storyline::Objective> storyline_objective()
+{
+    if (!game::is(game::Id::FF1)) return {};
+    using map_state::scenario_flag;
+    return storyline::cornelia_objective({scenario_flag(0), scenario_flag(1), scenario_flag(2),
+        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7)});
+}
+
+std::wstring storyline_label()
+{
+    const auto objective = storyline_objective();
+    return objective ? T(objective->label) : T(L"No Storyline objective available");
+}
+
+void route_to_storyline(bool walking, double requested_at)
+{
+    const auto objective = storyline_objective();
+    if (!objective) { speak(T(L"No Storyline objective available")); return; }
+    if (!baked_nav::prepared()) { speak(T(L"Navigation map data unavailable")); return; }
+    auto candidates = storyline::contacts(*objective);
+    if (candidates.empty()) { speak(T(L"Navigation map data unavailable")); return; }
+
+    // Cornelia's departure contacts are one contiguous three-tile trigger.
+    // The center tile leads to the same script from either side of the hall.
+    auto target = std::move(candidates.front());
+    auto label = T(objective->label);
+    if (walking) {
+        ffpr::fieldnav::autowalk::request(std::move(target.goal), target.kind, std::move(label));
+        return;
+    }
+    target.goal.moving_flight_directions = true;
+    baked_nav::request_route(std::move(target.goal), target.kind, std::move(label),
+        [generation = g_category_generation, id = objective->id, requested_at](PathInfo path) {
+            if (generation != g_category_generation || g_current_category != Category::Storyline || !ensure_field_context()) return;
+            const auto current = storyline_objective();
+            if (!current || current->id != id) return;
+            const auto message = path.success && !path.description.empty() ? path.description :
+                (!path.reason.empty() ? path.reason : T(L"No path"));
+            const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
+            if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, true, timing);
+            else ffpr::say(message, true, timing);
+        });
 }
 
 /// Refresh live deltas asynchronously; browsing uses the prepared category views.
@@ -253,6 +301,7 @@ void announce_current_entity(bool walking = false)
     const double requested_at=frame::now();
     if (!ensure_field_context()) return;
     baked_nav::cancel_browse_route();
+    if (g_current_category == Category::Storyline) { route_to_storyline(walking, requested_at); return; }
     refresh_entities_if_needed();
     scanner::when_filter_ready([walking,requested_at,generation=g_category_generation] {
         if (generation==g_category_generation && ensure_field_context()) announce_ready_entity(walking,requested_at);
@@ -266,6 +315,10 @@ void navigate_to_entity()
     baked_nav::cancel_browse_route();
     if (ffpr::fieldnav::autowalk::stop_requested()) return;
     const double requested_at=frame::now();
+    if (g_current_category == Category::Storyline) {
+        route_to_storyline(ui::prefs::autowalk_enabled(), requested_at);
+        return;
+    }
     refresh_entities_if_needed();
     scanner::when_filter_ready([requested_at,generation=g_category_generation] {
         if (generation!=g_category_generation || !ensure_field_context()) return;
@@ -283,6 +336,7 @@ void navigate_to_entity()
 void announce_entity_only(speech::Timing timing = {})
 {
     if (!ensure_field_context()) return;
+    if (g_current_category == Category::Storyline) { ffpr::say(storyline_label(), true, timing); return; }
     refresh_entities_if_needed();
 
     if (!scanner::current_entity()) {
@@ -303,6 +357,7 @@ void cycle(bool next)
     if (!ensure_field_context()) return;
     baked_nav::cancel_browse_route();
     if (!ffpr::fieldnav::autowalk::active()) baked_nav::cancel_requests();
+    if (g_current_category == Category::Storyline) { speak(storyline_label()); return; }
     refresh_entities_if_needed();
     const auto generation = g_category_generation;
     scanner::when_filter_ready([next, generation, requested_at] {
@@ -319,16 +374,14 @@ void cycle(bool next)
 // =========================================================================================
 // CategoryManager
 // =========================================================================================
-Category g_current_category = Category::All;
-
 Category adjacent_category(Category from, bool next)
 {
     const int step=next?1:-1;
     int index=(static_cast<int>(from)+step+kCategoryCount)%kCategoryCount;
     // FFI-FFIII have no physical save points. Keep enum/view identities stable
     // and skip only this browse stop; empty categories in applicable games stay.
-    if(index==static_cast<int>(Category::SavePoints)&&
-        !game::in(game::kFF4|game::kFF5|game::kFF6))
+    while ((index == static_cast<int>(Category::SavePoints) && !game::in(game::kFF4|game::kFF5|game::kFF6)) ||
+           (index == static_cast<int>(Category::Storyline) && !game::is(game::Id::FF1)))
         index=(index+step+kCategoryCount)%kCategoryCount;
     return static_cast<Category>(index);
 }
@@ -340,6 +393,12 @@ void announce_category_change(double requested_at)
     if (!ffpr::fieldnav::autowalk::active()) baked_nav::cancel_requests();
     std::wstring category_text = TF(L"Category: {0}", {category_name(g_current_category)});
     baked_nav::clear_pending();   // the selection moves to the category's first entity
+    if (g_current_category == Category::Storyline) {
+        clear_target();
+        ffpr::say_sequence({category_text, storyline_label()}, true,
+            {speech::Feature::EntityCategory, requested_at, requested_at});
+        return;
+    }
 
     // Refresh so the new category's nearest entity is the current selection.
     refresh_entities_if_needed();

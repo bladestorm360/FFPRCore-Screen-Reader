@@ -212,8 +212,8 @@ bool entity_on_current_map(void* field_entity, const std::wstring& current_map_a
 
 // --- NavigableEntity (navigable_entity.cpp) -------------------------------------------------
 // Append categories to retain the established numeric identities of old views.
-enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5, SavePoints = 6, Objects = 7 };
-constexpr int kCategoryCount = 8;
+enum class Category { All = 0, Chests = 1, NPCs = 2, MapExits = 3, Events = 4, Vehicles = 5, SavePoints = 6, Objects = 7, Storyline = 8 };
+constexpr int kCategoryCount = 9;
 
 enum class Kind { TreasureChest, NPC, MapExit, SavePoint, Event, ScriptTrigger, Vehicle };
 

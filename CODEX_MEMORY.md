@@ -35,10 +35,11 @@ make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOL
 installed. Six-game enemy and character artwork prose covers 1,380 visible
 enemy sprites, 762 field candidates, 233 battle art and portrait variants
 and 371 representative equipment appearances. Thirteen localized appearance
-entries and one bridge narration are offline checked. The first five FF1
-Storyline objectives passed production route replays. The broader scene
-audit, remaining localization and Storyline runtime are open. The
-descriptive checkpoints are outside the installed mod.
+entries and one bridge narration are offline checked. The first FF1
+Storyline category uses five objectives covered by production route
+replays. The broader scene audit, remaining localization and later
+Storyline campaigns are open. These checkpoints are outside the installed
+mod.
 [Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
 and [scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
 

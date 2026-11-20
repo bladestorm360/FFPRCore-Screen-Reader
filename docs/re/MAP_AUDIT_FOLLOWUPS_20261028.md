@@ -16,7 +16,7 @@ reports in the existing feature and maintenance records as each system opens.
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
 | [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. Thirteen localized appearance cases and one bridge construction cue passed focused offline checks. The wider scene review, remaining localization and deployment are open. |
-| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first five FF1 objectives have native contacts and completion receipts. Ten offline route legs passed the production planner. Runtime category and campaign coverage remain open. |
+| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first FF1 category covers five objectives with native contacts and completion receipts. Ten offline route legs passed the production planner. Later campaign coverage and gameplay confirmation remain open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
 
@@ -441,7 +441,7 @@ existing receipts as evidence for individual stages.
 | Checkpoint | State and exit condition |
 | --- | --- |
 | Progression sources and order | Initial source review. Define start-to-finish cases for each game, including branches, existing saves, skipped steps and unknown state. |
-| Storyline category and global route | Pending. Prove that changing the origin cannot change the selected objective and that both directions and Autowalk reach the same target through supported maps. |
+| Storyline category and global route | Early FF1 implementation uses the existing category, directions and Autowalk entry points. Offline route replays select the same objective from different origins. Multi-map autowalk and later chapters remain open. |
 | Campaign coverage | Pending. Qualify every main-story stage and its native action in FF1–FF6, including optional branches that can already be complete. |
 | Verification and delivery | Pending. Cover state reload, readiness, route cancellation, bounded work, 12 locales, canonical verification and local deployment. Commit and push the verified change. |
 
@@ -467,7 +467,12 @@ map and scenario data. It checks the same objectives from the castle and
 overworld, a castle floor transfer, all five contacts, the Lute
 prerequisite, missing state and later saves. The bridge
 uses the existing selected-event route to its actual world foot tile. The
-Storyline category, full cross-world journeys and later campaigns are pending.
+Storyline category calls the same native-safe route request and Autowalk
+entry points. The selected objective comes from the seven saved receipts
+when it is requested. A delayed directions response must still match the
+category and objective. The first five objective labels have all 12
+localizations. This starter is outside the installed mod. Full cross-world
+journeys, native gameplay acceptance and later campaigns remain open.
 
 The request arrived during the FFIV airship-label build. The November 17
 priority places its implementation after the outstanding gameplay fixes and

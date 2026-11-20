@@ -354,6 +354,14 @@ All common battle/shop/status/results/information/modal keys come from shared co
 Ctrl+arrow and controller mod-mode stick teleport require `TeleportShortcuts` (default off).
 The action itself rechecks the setting/readiness and validates a fresh owned landing snapshot.
 
+The first FF1 Storyline category uses the existing category and navigation
+controls. In the Letters layout, Shift+J and Shift+L cycle categories, K
+reads the objective, and P requests directions or Autowalk according to
+the current setting. The Brackets layout uses Shift+Left/Right Bracket,
+P and Backslash respectively. The controller uses its assigned category
+and navigate actions. The opening implementation covers the five Cornelia
+objectives through the bridge. It is outside the installed mod.
+
 ### I key cascade (`GlobalHotkeyHandler.HandleItemDetailsKey`)
 
 The first match runs:
