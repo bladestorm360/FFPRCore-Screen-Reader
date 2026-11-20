@@ -50,6 +50,18 @@ def main():
         directory = ROOT / "data" / title
         shipped = load(directory / "appearances.json")
         overrides = load(directory / "mod_text.json")
+        bindings = shipped.pop("field_dialogue", None)
+        if bindings is not None:
+            if not isinstance(bindings, dict) or any(
+                not location.isdecimal() or not isinstance(scripts, dict) or
+                any(not script.startswith("sc_") or not isinstance(pages, dict) or
+                    any(not message or type(entity) is not int or not 0 < entity < 2**31
+                        for message, entity in pages.items())
+                    for script, pages in scripts.items())
+                for location, scripts in bindings.items()
+            ):
+                print(f"{title} invalid field dialogue bindings")
+                failures += 1
         missing = expected - shipped.keys()
         unexpected = shipped.keys() - expected
         for key in sorted(missing):

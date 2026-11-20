@@ -10,6 +10,7 @@
 #include "../modtext.h"
 #include "../say.h"
 #include <algorithm>
+#include <limits>
 #include <span>
 
 namespace ffpr::dialogue {
@@ -26,7 +27,7 @@ ref::Field fMessageText{kView, "messageText"};
 ref::Class kClient{"Last.Management", "MessageWindowClient"};
 ref::Method mClient{kClient, "Instance", 0};
 ref::Field fMessageId{kClient, "<CurrentMessageId>k__BackingField"};
-ref::Class kInterpreter{"Last.Interpreter", "Integrator", game::kFF3 | game::kFF6};
+ref::Class kInterpreter{"Last.Interpreter", "Integrator"};
 ref::Field fActiveScript{kInterpreter, "<scriptName>k__BackingField"};
 ref::Field fRunningFieldScript{kInterpreter, "isFieldScript"};
 ref::Class kFadeMessageClient{"Last.Management", "FadeMessageClient", game::kFF3};
@@ -85,6 +86,15 @@ void* unique_actor(void* controller, const auto& matches)
         result = actor;
     }
     return result;
+}
+
+void* placed_actor(void* controller, int entity)
+{
+    return unique_actor(controller, [&](void* candidate) {
+        return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
+               ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == entity &&
+               displayed::renderer_visible(ref::rd<void*>(candidate, fRenderer));
+    });
 }
 
 void* direct_talk_actor(void* controller, const std::wstring& message)
@@ -172,14 +182,23 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
     const auto speaker = std::find_if(speakers.begin(), speakers.end(), [&](const Speaker& row) {
         return row.map == map && row.script == script && row.message == message;
     });
-    if (speaker == speakers.end()) return nullptr;
-    // The stage reserves the entity ID for this utterance. The live renderer
-    // still determines the costume and can reject a hidden or unloaded actor.
-    return unique_actor(controller, [speaker](void* actor) {
-        return kSpriteEntity.is(actor) && ::field::live_entity(actor) &&
-               ref::rd<int>(::field::entity_property(actor), r::fPropEntityId) == speaker->entity &&
-               displayed::renderer_visible(ref::rd<void*>(actor, fRenderer));
-    });
+    if (speaker != speakers.end()) return placed_actor(controller, speaker->entity);
+
+    // Import only unique placed tracks verified for the caption's native
+    // speaker. A continuation can replace the original EventActionScript's
+    // script, so data bindings require the currently executing field script.
+    const auto* tables = data::game_json("appearances").get(L"field_dialogue");
+    const auto* pages = tables ? tables->get(std::to_wstring(map)) : nullptr;
+    if (!pages) return nullptr;
+    auto* interpreter = ref::instance(kInterpreter);
+    if (!ref::rd<bool>(interpreter, fRunningFieldScript)) return nullptr;
+    const auto active = ref::rd_str_bounded(interpreter, fActiveScript, 48);
+    const auto* binding = pages->get(active);
+    const auto* row = binding ? binding->get(message) : nullptr;
+    if (!row || row->type != json::Value::Type::Number ||
+        !(row->n >= 1 && row->n <= (std::numeric_limits<int>::max)())) return nullptr;
+    const int entity = static_cast<int>(row->n);
+    return entity == row->n ? placed_actor(controller, entity) : nullptr;
 }
 
 void* actor_sprite(void* actor)
@@ -207,14 +226,6 @@ std::wstring atlas_art(void* sprite)
 }
 
 std::wstring visible_art(void* actor) { return atlas_art(actor_sprite(actor)); }
-
-void* placed_actor(void* controller, int entity)
-{
-    return unique_actor(controller, [&](void* candidate) {
-        return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
-               ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == entity;
-    });
-}
 
 struct StagedCue {
     game::Id title;
@@ -258,7 +269,7 @@ std::wstring staged_cue(void* controller, const StagedCue& cue)
     if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != cue.script) return {};
     if (cue.actor) {
         auto* actor = placed_actor(controller, cue.actor);
-        if (!actor || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) return {};
+        if (!actor) return {};
         auto* sprite = actor_sprite(actor);
         if (atlas_art(sprite) != cue.art) return {};
         if (!cue.pose.empty()) {
@@ -430,8 +441,7 @@ std::wstring action_cue_at_fade(int font_size)
             auto* map = ::field::cache::get(r::kFieldMap);
             auto* controller = ref::rd<void*>(map, r::fFieldController);
             auto* actor = r::kFieldController.is(controller) ? placed_actor(controller, 3) : nullptr;
-            if (!displayed::renderer_visible(ref::rd<void*>(actor, fRenderer)) ||
-                visible_art(actor) != shot.actor_art) return {};
+            if (visible_art(actor) != shot.actor_art) return {};
         }
         return T(shot.text);
     }

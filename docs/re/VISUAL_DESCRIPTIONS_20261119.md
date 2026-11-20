@@ -229,7 +229,22 @@ entry to the same utterance. The first entry uses the weapon loader's
 exact art group and a live rendered sprite. The DLL build verified 67
 embedded resources.
 
-## Direct dialogue appearance reader
+## Direct and scripted dialogue appearance reader
+
+The six installed dialogue tables and placed actor tracks qualify 1,723
+additional scripted pages for I. The association requires an exact native
+speaker label or native character tag, an independently named placed
+sprite, and a unique matching puppet allocation in the installed script.
+It ships only map, script, message and actor IDs. The scene extract and
+generation evidence stay under `../tools/visual_audit_20261119`.
+
+The runtime looks up the current field interpreter's script as well as
+the current map and visible dialogue page. An event continuation can
+change the script while the original event owner is still active. The
+current renderer identifies the costume and must be drawn. The lookup
+runs on I only. A missing, hidden or ambiguous actor leaves the page
+with its existing speech. The check uses Figaro's actual speaker binding
+and rejects a wrong script, invisible costume and battle interpreter.
 
 Manual I can use the rendered field dialogue and the current message ID
 from the native `MessageWindowClient`. Across the six installed binaries,

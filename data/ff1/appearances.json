@@ -1038,5 +1038,40 @@
     "th": "ร่างกายโปร่งแสงจนเห็นโครงร่างเพียงเลือน ๆ",
     "pt": "O corpo fica translúcido, com o contorno pouco visível.",
     "zhc": "身体变得半透明，轮廓若隐若现。"
+  },
+  "field_dialogue": {
+    "33": {
+      "sc_e_0011": {
+        "MSG_ASTOS_02": 106,
+        "MSG_ASTOS_03": 106
+      }
+    },
+    "51": {
+      "sc_e_0048": {
+        "MSG_CLASS_CHG_01": 4,
+        "MSG_CLASS_CHG_02": 4,
+        "MSG_CLASS_CHG_03": 4,
+        "MSG_DRG_CAV_01": 4,
+        "MSG_DRG_CAV_02": 4
+      }
+    },
+    "72": {
+      "sc_e_0003": {
+        "MSG_HELPSERA_01": 32,
+        "MSG_HELPSERA_02": 32
+      },
+      "sc_e_0003_2": {
+        "MSG_HELPSERA_03": 33
+      }
+    },
+    "120": {
+      "sc_e_0044": {
+        "MSG_LAST_03": 6,
+        "MSG_LAST_04": 6,
+        "MSG_LAST_05": 6,
+        "MSG_LAST_06": 6,
+        "MSG_LAST_07": 6
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+// check-sources: json.cpp text.cpp
 #include <array>
 #include <cstdio>
 #include <cstdlib>
@@ -29,6 +30,7 @@ int current_map = 3;
 int actor_reads = 0;
 game::Id current_game = game::Id::FF1;
 std::wstring spoken;
+json::Value fixture_appearances;
 
 void put(Node& object, const char* field, void* value)
 {
@@ -110,6 +112,7 @@ bool is_state_changing() {return transition;}
 bool is_screen_fading() {return fading;}
 }
 namespace game { Id current() { return current_game; } }
+namespace data { const json::Value& game_json(const char*) { return fixture_appearances; } }
 namespace modtext {
 bool has(std::wstring_view key)
 {
@@ -120,7 +123,8 @@ bool has(std::wstring_view key)
            key == L"Field appearance mo_ff2_n005_c00" || key == L"Field appearance mo_ff2_n022_c00" ||
            key == L"Field appearance mo_ff2_p004_c00" || key == L"Field appearance mo_ff4_n003_c02" ||
            key == L"Field appearance mo_ff4_n006_c02" || key == L"Field appearance mo_ff3_n008_c00" ||
-           key == L"Field appearance mo_ff5_n012_c00" || key == L"Field appearance mo_ff6_n035_c00";
+           key == L"Field appearance mo_ff5_n012_c00" || key == L"Field appearance mo_ff6_n035_c00" ||
+           key == L"Field appearance mo_ff6_p005";
 }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
@@ -482,5 +486,25 @@ int main()
     transition = false;
     fading = true;
     require(fade_cue(52).empty(), "no prologue cue behind the map fade");
+    fading = false;
+    dialogue_open = true;
+    current_game = game::Id::FF6;
+    current_map = 21;
+    id.value = L"E0036_00_021_a_01";
+    script.value = L"sc_e_0035";
+    battle_script.value = L"sc_e_0036";
+    put(property, "entityId", reinterpret_cast<void*>(553));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF6_P005-12345678";
+    require(json::parse(R"({"field_dialogue":{"21":{"sc_e_0036":{"E0036_00_021_a_01":553}}}})",
+                        fixture_appearances), "load the actual Figaro speaker binding");
+    require(read() && spoken == L"Field appearance mo_ff6_p005", "a continuation describes the current script's named actor");
+    renderer.visible = false;
+    require(!read(), "the named speaker is still required to be visible");
+    renderer.visible = true;
+    battle_script.value = L"sc_e_0035";
+    require(!read(), "a stale caption key cannot claim a different active script");
+    battle_script.value = L"sc_e_0036";
+    put(interpreter, "isFieldScript", nullptr);
+    require(!read(), "battle interpreter cannot satisfy a field description");
     std::puts("Dialogue appearance checks passed");
 }
