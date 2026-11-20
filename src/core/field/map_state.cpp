@@ -2,8 +2,10 @@
 #include "baked_nav.h"
 #include "field_internal.h"
 #include "../core.h"
+#include "../frame.h"
 #include "../hooks.h"
 #include "../modtext.h"
+#include "../system/system.h"
 #include "map_state.h"
 
 namespace field {
@@ -199,36 +201,48 @@ std::optional<int> party_mini(void* user) {return party_condition(user,401,false
 int g_observed_map = 0;
 std::wstring g_observed_group;
 std::set<std::wstring> g_observed_groups;
-void copy_flags(void* source, std::array<std::optional<int>, 1024>& target)
+void* flag_words(void* source)
 {
+    if (!source || fBits.get() < 0 || fLength.get() < 0) return nullptr;
     void* bits = ref::rd<void*>(source, fBits);
     const int length = ref::rd<int32_t>(source, fLength);
     // All six native Flags constructors allocate ceil(bitLength / 8) uints,
     // although Get indexes 32 bits per uint. A 1024-flag bank therefore has
     // 128 backing words; only its first 32 words contain logical flags.
     const int words = unity::array_length(bits);
-    if (length != 1024 || words < 32 || words > 128) return;
-    for (int word = 0; word < 32; ++word) {
+    return length == 1024 && words >= 32 && words <= 128 ? bits : nullptr;
+}
+void copy_flags(void* source, std::span<std::optional<int>> target)
+{
+    void* bits = flag_words(source);
+    if (!bits || target.size() > 1024) return;
+    for (int word = 0; word * 32 < static_cast<int>(target.size()); ++word) {
         const uint32_t v = unity::array_value<uint32_t>(bits, word);
-        for (int bit = 0; bit < 32; ++bit) target[static_cast<size_t>(word * 32 + bit)] = (v >> bit) & 1;
+        const int count = std::min(32, static_cast<int>(target.size()) - word * 32);
+        for (int bit = 0; bit < count; ++bit) target[static_cast<size_t>(word * 32 + bit)] = (v >> bit) & 1;
     }
 }
 }
 std::optional<int> scenario_flag(int absolute_index)
 {
-    if (absolute_index < 0 || absolute_index >= 1024 || !mInstance ||
-        fScenario.get() < 0 || fBits.get() < 0 || fLength.get() < 0) return {};
+    if (absolute_index < 0 || absolute_index >= 1024 || !mInstance || fScenario.get() < 0) return {};
     void* storage = ref::call_static<void*>(mInstance);
     if (!storage) return {};
-    void* bank = ref::rd<void*>(storage, fScenario);
-    if (!bank) return {};
-    void* bits = ref::rd<void*>(bank, fBits);
-    if (!bits || ref::rd<int32_t>(bank, fLength) != 1024) return {};
-    const int words = unity::array_length(bits);
-    if (words < 32 || words > 128) return {};
+    void* bits = flag_words(ref::rd<void*>(storage, fScenario));
+    if (!bits) return {};
     // Native Get indexes 32 bits per word even though the constructor overallocates.
     const uint32_t word = unity::array_value<uint32_t>(bits, absolute_index >> 5);
     return static_cast<int>((word >> (absolute_index & 31)) & 1u);
+}
+void read_scenario_flags(std::span<std::optional<int>> flags)
+{
+    for (auto& flag : flags) flag.reset();
+    if (flags.empty() || !frame::on_main_thread() || !ffpr::system::is_field_navigation_ready()) return;
+    if (fScenario.get() < 0) return;
+    // Read the already initialized storage directly. Calling the native
+    // singleton accessor could create state outside the intended owner phase.
+    if (void* storage = il2cpp::read_static_ptr(kStorage.get(), "instance"))
+        copy_flags(ref::rd<void*>(storage, fScenario), flags);
 }
 std::optional<bool> keyword_learned(int content_id)
 {

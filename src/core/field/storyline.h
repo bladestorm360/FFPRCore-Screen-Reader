@@ -17,7 +17,13 @@ struct CorneliaProgress {
 enum class ObjectiveId {
     Audience, Garland, Lute, LeaveCastle, CrossBridge, GetShip, FindCrown, BringCrown,
     MeetMatoya, ReturnEye, WakePrince, GetPowder, OpenCanal,
-    BridgeAdvice, ShipAdvice, CrownAdvice, EyeAdvice, PrinceAdvice, PowderAdvice
+    BridgeAdvice, ShipAdvice, CrownAdvice, EyeAdvice, PrinceAdvice, PowderAdvice,
+    Vampire, StarRuby, GiveRuby, EarthRod, EarthSlab, Lich, Canoe, Marilith, Levistone,
+    Airship, BuyFairy, ReleaseFairy, Oxyale, MeetMermaid, BoardSubmarine, RosettaStone,
+    Kraken, LearnLufenian, Chime, WarpCube, Tiamat, EnterPast, ReturnToPast, LuteSlab,
+    PastLich, PastMarilith, PastKraken, PastTiamat, Chaos,
+    EarthAdvice, GiantAdvice, FireAdvice, IceAdvice, AirshipAdvice,
+    CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice
 };
 struct Objective {
     ObjectiveId id;
@@ -30,6 +36,13 @@ struct Objective {
 
 std::optional<Objective> cornelia_objective(const CorneliaProgress& progress);
 std::optional<Objective> cornelia_advice(ObjectiveId objective, const CorneliaProgress& progress);
+
+using Ff1Receipts = std::array<std::optional<int>, 43>;
+struct Stage {
+    std::optional<Objective> objective, advice;
+    bool complete = false;
+};
+Stage ff1_stage(const Ff1Receipts& scenario, int origin_map);
 
 // The saved receipts select the quest. The player's browse selection can skip
 // advice without inventing a completion flag for an ordinary conversation.

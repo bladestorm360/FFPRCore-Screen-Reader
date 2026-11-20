@@ -73,6 +73,88 @@ void replay(const CorneliaProgress& progress, ObjectiveId expected, int origin, 
     }
 }
 
+void verify_after_canal()
+{
+    struct Leg {
+        int flag, map, contact;
+        ObjectiveId id;
+        baked_route::Cell start;
+    };
+    using Id = ObjectiveId;
+    // Starts are nearby passable approaches on the installed production bake.
+    // Intermediate map traversal and item state are checked separately below.
+    constexpr std::array itinerary{
+        Leg{16, 78, 54, Id::Vampire, {0,31,42}},
+        Leg{17, 78, 22, Id::StarRuby, {0,31,40}},
+        Leg{18, 81, 11, Id::GiveRuby, {2,18,19}},
+        Leg{19, 40, 9, Id::EarthRod, {2,30,22}},
+        Leg{20, 78, 52, Id::EarthSlab, {0,31,40}},
+        Leg{21, 80, 33, Id::Lich, {0,13,32}},
+        Leg{22, 41, 57, Id::Canoe, {1,49,22}},
+        Leg{23, 87, 33, Id::Marilith, {0,12,60}},
+        Leg{24, 91, 8, Id::Levistone, {0,19,16}},
+        Leg{25, 1, 82, Id::Airship, {1,212,232}},
+        Leg{27, 59, 8, Id::BuyFairy, {1,11,10}},
+        Leg{28, 60, 97, Id::ReleaseFairy, {1,63,60}},
+        Leg{29, 60, 90, Id::Oxyale, {1,51,20}},
+        Leg{30, 52, 67, Id::MeetMermaid, {1,53,37}},
+        Leg{31, 103, 42, Id::RosettaStone, {0,40,14}},
+        Leg{34, 96, 38, Id::Kraken, {0,20,14}},
+        Leg{32, 34, 126, Id::LearnLufenian, {1,36,10}},
+        Leg{33, 70, 131, Id::Chime, {1,30,30}},
+        Leg{26, 104, 23, Id::WarpCube, {0,25,60}},
+        Leg{35, 112, 3, Id::Tiamat, {1,16,17}},
+        Leg{36, 72, 39, Id::EnterPast, {0,38,31}},
+        Leg{37, 115, 9, Id::LuteSlab, {0,38,26}},
+        Leg{38, 116, 20, Id::PastLich, {2,14,50}},
+        Leg{39, 117, 52, Id::PastMarilith, {2,27,35}},
+        Leg{40, 118, 69, Id::PastKraken, {2,11,6}},
+        Leg{41, 119, 14, Id::PastTiamat, {2,11,11}},
+        Leg{42, 120, 6, Id::Chaos, {0,27,26}},
+    };
+    Ff1Receipts flags;
+    flags.fill(0);
+    std::fill_n(flags.begin(), 16, 1);
+    auto state = progress_at({1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}, 1);
+    for (const auto& leg : itinerary) {
+        const auto stage = ff1_stage(flags, leg.map);
+        check(stage.objective && stage.objective->id == leg.id && !stage.complete,
+              "campaign chooses the next native receipt");
+        if (!stage.objective) break;
+        const auto targets = contacts(*stage.objective, leg.map);
+        const bool found = !targets.empty() && targets.front().goal.entity_id == leg.contact &&
+                           targets.front().goal.map_id == leg.map;
+        check(found, "the chosen stage retains the exact native map contact");
+        if (!found) std::printf("  no baked contact for map%d entity%d\n", leg.map, leg.contact);
+        if (found) {
+            const auto& target = targets.front();
+            state.current_map_id = leg.map;
+            const auto ok = exdeath_routes::route(leg.map, leg.start, state, target.goal, target.kind);
+            check(ok.path.success, "a movement leg can reach the actual native contact");
+            if (!ok.path.success)
+                std::printf("  map%d entity%d: %ls / %ls\n", leg.map, leg.contact, ok.path.reason.c_str(), ok.path.error.c_str());
+        }
+        if (stage.advice)
+            check(!contacts(*stage.advice, leg.map).empty(), "informational NPC retains an exact native contact");
+        if (leg.flag == 31 || leg.flag == 37) {
+            const auto entry = ff1_stage(flags, 1).objective;
+            const auto reentry = leg.flag == 31 ? Id::BoardSubmarine : Id::ReturnToPast;
+            check(entry && entry->id == reentry && !contacts(*entry, 1).empty(),
+                  "resuming outside the area uses the real repeatable entrance");
+        }
+        flags[leg.flag] = 1;
+        state.scenario[leg.flag] = 1;
+        if (leg.flag == 17) state.treasure[508] = 1;
+        if (leg.flag == 19) state.treasure[253] = 1;
+    }
+    check(ff1_stage(flags, 1).complete && !ff1_stage(flags, 1).objective,
+          "the native ending receipt completes the campaign");
+    flags[42] = 0;
+    flags[41] = std::nullopt;
+    check(!ff1_stage(flags, 120).objective && !ff1_stage(flags, 120).complete,
+          "an unavailable victory receipt does not infer further progression");
+}
+
 int verify()
 {
     const CorneliaProgress audience{1,0,0,0,0,0,0};
@@ -142,6 +224,7 @@ int verify()
     check(selection.resolve(*ship_quest, hint, false).id == ObjectiveId::GetShip, "repeated requests keep the chosen destination");
     hint = cornelia_advice(crown_quest->id, later_crown);
     check(selection.resolve(*crown_quest, hint, false).id == ObjectiveId::CrownAdvice, "a new stage selects its own advice");
+    verify_after_canal();
     std::printf("FF1 storyline: %d assertions, %d physical legs, %d failures\n",
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;

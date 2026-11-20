@@ -98,38 +98,36 @@ bool ensure_field_context()
     return true;
 }
 
-std::optional<storyline::Objective> storyline_objective(bool cycle = false)
+storyline::Stage storyline_stage(bool cycle = false)
 {
     if (!game::is(game::Id::FF1)) return {};
-    using map_state::scenario_flag;
-    const storyline::CorneliaProgress progress{scenario_flag(0), scenario_flag(1), scenario_flag(2),
-        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7), scenario_flag(9),
-        scenario_flag(10), scenario_flag(11), scenario_flag(8), scenario_flag(12), scenario_flag(13),
-        scenario_flag(14), scenario_flag(15)};
-    const auto objective = storyline::cornelia_objective(progress);
-    if (!objective) {
+    storyline::Ff1Receipts receipts;
+    map_state::read_scenario_flags(receipts);
+    auto stage = storyline::ff1_stage(receipts, current_map_id());
+    if (!stage.objective) {
         g_storyline_selection = {};
-        return {};
+        return stage;
     }
-    return g_storyline_selection.resolve(*objective, storyline::cornelia_advice(objective->id, progress), cycle);
+    stage.objective = g_storyline_selection.resolve(*stage.objective, stage.advice, cycle);
+    return stage;
 }
 
-std::wstring storyline_label(bool cycle = false)
+std::wstring storyline_label(const storyline::Stage& stage)
 {
-    const auto objective = storyline_objective(cycle);
-    return objective ? T(objective->label) : T(L"No Storyline objective available");
+    if (stage.objective) return T(stage.objective->label);
+    return T(stage.complete ? L"Storyline complete" : L"No Storyline objective available");
 }
 
 void route_to_storyline(bool walking, double requested_at)
 {
-    const auto objective = storyline_objective();
-    if (!objective) { speak(T(L"No Storyline objective available")); return; }
+    const auto stage = storyline_stage();
+    const auto& objective = stage.objective;
+    if (!objective) { speak(storyline_label(stage)); return; }
     if (!baked_nav::prepared()) { speak(T(L"Navigation map data unavailable")); return; }
     auto candidates = storyline::contacts(*objective, current_map_id());
     if (candidates.empty()) { speak(T(L"Navigation map data unavailable")); return; }
 
-    // Cornelia's departure contacts are one contiguous three-tile trigger.
-    // The center tile leads to the same script from either side of the hall.
+    // Multi-tile story triggers list the preferred center contact first.
     auto target = std::move(candidates.front());
     auto label = T(objective->label);
     if (walking) {
@@ -140,7 +138,7 @@ void route_to_storyline(bool walking, double requested_at)
     baked_nav::request_route(std::move(target.goal), target.kind, std::move(label),
         [generation = g_category_generation, id = objective->id, requested_at](PathInfo path) {
             if (generation != g_category_generation || g_current_category != Category::Storyline || !ensure_field_context()) return;
-            const auto current = storyline_objective();
+            const auto current = storyline_stage().objective;
             if (!current || current->id != id) return;
             const auto message = path.success && !path.description.empty() ? path.description :
                 (!path.reason.empty() ? path.reason : T(L"No path"));
@@ -345,7 +343,7 @@ void navigate_to_entity()
 void announce_entity_only(speech::Timing timing = {})
 {
     if (!ensure_field_context()) return;
-    if (g_current_category == Category::Storyline) { ffpr::say(storyline_label(), true, timing); return; }
+    if (g_current_category == Category::Storyline) { ffpr::say(storyline_label(storyline_stage()), true, timing); return; }
     refresh_entities_if_needed();
 
     if (!scanner::current_entity()) {
@@ -369,7 +367,7 @@ void cycle(bool next)
     if (g_current_category == Category::Storyline) {
         ++g_category_generation;
         baked_nav::clear_pending();
-        speak(storyline_label(true));
+        speak(storyline_label(storyline_stage(true)));
         return;
     }
     refresh_entities_if_needed();
@@ -410,7 +408,7 @@ void announce_category_change(double requested_at)
     if (g_current_category == Category::Storyline) {
         g_storyline_selection = {};
         clear_target();
-        ffpr::say_sequence({category_text, storyline_label()}, true,
+        ffpr::say_sequence({category_text, storyline_label(storyline_stage())}, true,
             {speech::Feature::EntityCategory, requested_at, requested_at});
         return;
     }

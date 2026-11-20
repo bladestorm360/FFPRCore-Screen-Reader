@@ -410,7 +410,7 @@ local delivery and gameplay confirmation distinct.
 
 | Milestone | Acceptance and current status |
 | --- | --- |
-| FF1 campaign | In progress. Finish the next route and its information stops from playable opening through Chaos. Start with the Matoya, elven prince and canal chain. Offer verified native NPC advice with the same browse, directions and Autowalk controls. Permit skipping ordinary advice. Use the game's actual saved state for progression and true prerequisites. |
+| FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
 | FFII–FFVI campaigns | Open. Reach the Emperor in Pandaemonium, the Cloud of Darkness, Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
@@ -460,8 +460,30 @@ The focused build verified the 67 embedded resources and the production
 planner passed 136 assertions and 31 path legs. The new fixture cases
 cover native quest advancement, description of the appropriate advice
 choice, skip and selection retention, route capture from the relevant
-entrances and the chest behind the castle lock. Later FF1 quests and
-full native gameplay remain open.
+entrances and the chest behind the castle lock.
+
+### FF1 canal to Chaos
+
+The campaign reads one bounded prefix of the initialized native scenario bank
+on explicit input. No worker accesses game pointers or runs scenario actions.
+Storyline follows the recommended quest order, skips any completed receipts
+and treats an unavailable required receipt as unknown. The final ending
+continuation records receipt 42 and ends Storyline.
+
+| Segment | Verified native contacts and receipts |
+| --- | --- |
+| Earth Crystal | Vampire and star ruby at map 78, entities 54 and 22, receipts 16 and 17. Give the ruby to the giant at 81/11 and speak to Sadda at 40/9, receipts 18 and 19. Open the earth-rod slab at 78/52 and fight Lich at 80/33, receipts 20 and 21. The Melmond villagers at 34/67 and 34/66 explain the cave location and what the giant eats. |
+| Canoe and airship | The post-Lich sage at 41/57 awards the canoe, receipt 22. Marilith is 87/33, and the levistone is 91/8, receipts 23 and 24. The native desert scene at 1/82 awards the airship in its return continuation, receipt 25. The Crescent Lake sage and resident at 41/42 and 41/32 explain Mount Gulg and the ice cavern. The Elfheim sage at 22/47 explains raising the airship. |
+| Sunken Shrine | The Caravan at 59/8 supports the native purchase gated by receipt 27. Gaia's release row enables the spring faerie at 60/90, receipts 28 and 29. The Onrac woman at 52/67 sets receipt 30 and enables the repeatable submarine at 52/64. The native map transfer reaches the shrine. The Rosetta Stone at 103/42 and Kraken at 96/38 use receipts 31 and 34. The Onrac resident at 52/40 identifies the camp and the pirate at 60/78 explains the faerie's capture. |
+| Wind Crystal | The Onrac scholar at 52/42 identifies his brother Unne. Unne at 34/126 teaches Lufenian with receipt 32. The Chime comes from Lufenia at 70/131, receipt 33. The Mirage Tower robot at 106/20 explains where the warp cube went. The Waterfall Cave robot at 104/23 gives it with receipt 26. Tiamat at 112/3 records receipt 35. |
+| Past and final boss | The bat at 72/12 explains the Black Crystal. Its first interaction at 72/39 sets receipt 36 and enters the past. Reentry uses the separate step trigger at 72/64. The lute slab at 115/9 sets receipt 37. Encounters at 116/20, 117/52, 118/69 and 119/14 set receipts 38–41 on victory. Garland at 120/6 begins the final Chaos encounter. Its victory continuation leads to the native ending. |
+
+The focused replay passed 231 assertions and 58 physical legs. It addresses
+every recommended objective and the separate Onrac and past-shrine reentry
+contacts. The first new replay used a blocked start position for past Kraken.
+The retry starts the four rematches at their native floor entries and passes.
+Forty new strings cover all 12 supported languages. Actual gameplay, extended
+cross-area vehicle and departure replays, and local delivery remain open.
 
 ## November 11 all-six Storyline category
 

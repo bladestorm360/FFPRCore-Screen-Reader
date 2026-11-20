@@ -13,6 +13,8 @@ const DWORD owner = GetCurrentThreadId();
 std::atomic<int> wrong_owner{0};
 int failures = 0;
 bool unresolved_flag_field=false;
+bool field_ready = true;
+int static_storage_reads = 0;
 bool missing_word_field=false,missing_word_user=false;
 bool missing_control=false,bad_control=false,hidden_control=false,hidden_parent=false,dead_control=false;
 int native_control_reads=0,current_map=256;
@@ -72,6 +74,7 @@ std::string read(const std::string& path) { std::ifstream f(path, std::ios::bina
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace ref {
 Class::Class(const char* n, const char* c, uint8_t g, const char* a) : ns(n), name(c), games(g), assembly(a) {}
+il2cpp::Class* Class::get() { fixture::native(); return reinterpret_cast<il2cpp::Class*>(this); }
 Field::Field(Class& c, const char* n, const char* a) : cls(c), name(n), alt(a) {}
 Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 int32_t Field::get() {
@@ -119,6 +122,17 @@ std::wstring rd_str_bounded(void*p,Field& f,size_t cap) {fixture::native();const
 void call_failed_note(const char*) { fixture::expect(false,"native getter must not fault"); }
 }
 namespace game {Id current(){return fixture::running_game;}}
+namespace frame { bool on_main_thread() { return GetCurrentThreadId() == fixture::owner; } }
+namespace ffpr::system { bool is_field_navigation_ready() { return fixture::field_ready; } }
+namespace il2cpp {
+void* read_static_ptr(Class* type, const char* field)
+{
+    fixture::native();
+    ++fixture::static_storage_reads;
+    return type == reinterpret_cast<Class*>(&field::map_state::kStorage) && std::strcmp(field, "instance") == 0
+        ? fixture::current : nullptr;
+}
+}
 namespace unity {
 int dict_count(void*p){fixture::native();if(!p)return 0;const auto& d=*static_cast<fixture::KeyDictionary*>(p);return d.size_override>=0?d.size_override:static_cast<int>(d.values.size());}
 void* dict_reference(void*p,int key){fixture::native();++fixture::key_lookups;fixture::key_lookup_id=key;if(!p)return nullptr;const auto& d=*static_cast<fixture::KeyDictionary*>(p);const auto it=d.values.find(key);return it==d.values.end()?nullptr:it->second;}
@@ -214,6 +228,21 @@ int main()
     scenario.values[0]=1u; scenario.values[6]=1u; scenario.values[31]=0x80000000u;
     expect(map_state::scenario_flag(0)==1 && map_state::scenario_flag(192)==1 && map_state::scenario_flag(1023)==1,"single-bit reader selects first, circuit and last bits");
     expect(map_state::scenario_flag(190)==0 && !map_state::scenario_flag(-1) && !map_state::scenario_flag(1024),"single-bit reader handles clear and out of range");
+    std::array<std::optional<int>, 43> story;
+    int static_reads = static_storage_reads;
+    map_state::read_scenario_flags(story);
+    expect(story[0] == 1 && story[31] == 0 && story[32] == 1 && story[42] == 0 &&
+           static_storage_reads == static_reads + 1, "Storyline copies the requested prefix from one ready storage instance");
+    field_ready = false;
+    static_reads = static_storage_reads;
+    map_state::read_scenario_flags(story);
+    expect(!story.front() && !story.back() && static_storage_reads == static_reads,
+           "a loading interval clears stale receipts before any native lookup");
+    field_ready = true;
+    std::thread off_owner([&] { map_state::read_scenario_flags(story); });
+    off_owner.join();
+    expect(!story.front() && !story.back() && static_storage_reads == static_reads,
+           "a worker never takes a native Storyline receipt");
     current=nullptr;expect(!map_state::scenario_flag(192),"missing singleton is unknown");current=&storage;
     storage.scenario=nullptr;expect(!map_state::scenario_flag(192),"missing bank is unknown");storage.scenario=&scenario_flags;
     scenario_flags.bits=nullptr;expect(!map_state::scenario_flag(192),"missing words are unknown");scenario_flags.bits=&scenario;

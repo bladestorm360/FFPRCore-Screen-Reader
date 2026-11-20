@@ -6,6 +6,7 @@
 #include <map>
 #include <optional>
 #include <set>
+#include <span>
 
 namespace field::map_state {
 inline constexpr std::array ff4_door_key_contents{68, 74, 75};
@@ -72,6 +73,9 @@ Selection project(const json::Value& record, const Flags& flags);
 Flags snapshot();
 // Read one native scenario bit on the owning thread; unavailable state is unknown.
 std::optional<int> scenario_flag(int absolute_index);
+// Explicit Storyline request on the ready field owner. Read only the requested
+// prefix of the scenario bank, leaving its output unknown if storage is absent.
+void read_scenario_flags(std::span<std::optional<int>> flags);
 // FFII explicit guide requests only. Read the bounded native learned-word list
 // on its owner; absence/malformed storage is unknown, never a learning receipt.
 std::optional<bool> keyword_learned(int content_id);
