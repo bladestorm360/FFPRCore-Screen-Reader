@@ -1,4 +1,18 @@
 {
+  "Pause": {
+    "en": "Pause",
+    "ja": "ポーズ",
+    "fr": "Pause",
+    "it": "Pausa",
+    "de": "Pause",
+    "es": "Pausa",
+    "ko": "일시 정지",
+    "zht": "暫停",
+    "zhc": "暂停",
+    "ru": "Пауза",
+    "th": "หยุดชั่วคราว",
+    "pt": "Pausa"
+  },
   "Control interception": {
     "en": "Control interception",
     "ja": "操作の割り込み",

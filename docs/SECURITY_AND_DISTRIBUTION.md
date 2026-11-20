@@ -1,5 +1,18 @@
 # Build and distribution security
 
+## November 19 field pause and spell targeting
+
+The focused build passed pause opening, all-six field magic range ownership,
+command context and native name checks. It verified all 67 resources and
+47 forwarded exports. The unsigned DLL SHA-256 is
+`9701e3afd36abd0ffa2998c4ed0c4c733368c3bdd18738f41dd176be6d89f9cc`.
+Defender found no threats and reported zero matching events on the 22
+payload files. The separate exclusion query was denied. All six installed
+copies match the scanned payload, and 138 protected file states match the
+initial inventory. Recovery source is `6ecf964`. Receipts are under
+`../tools/karnak_routing_20261119/field-menu`. Gameplay confirmation remains
+pending.
+
 ## November 19 shared save-point and FFV navigation fixes
 
 The focused build verified 67 embedded resources and completed in 159.2
@@ -15,7 +28,8 @@ hash-verified the 22 files in all six Steam targets and preserved 138
 protected file states. For recovery use `f7d0043` for FFV and `a6008be` for
 the other five games. Installation receipts are under
 `../tools/karnak_routing_20261119/ffv-navigation`. Gameplay confirmation
-remains pending.
+remains pending. Remote `master` was verified at
+`6ecf964424e71fb9953e2bbeb4012650a89d58e8`.
 
 ## November 19 FFV Karnak world routing
 

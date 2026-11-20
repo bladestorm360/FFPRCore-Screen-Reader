@@ -797,8 +797,9 @@ void use_list_init(void* self)
 {
     if(queries::is("FieldMagicTargets.OwnsRange"))return;
     if (!kAbilityUse.is(self)) return;
-    dedup::reset(kCtxUseTarget);
-    focus::request("AbilityTarget", [self] {
+    const auto spoken_before = g_use_target_spoken_seq;
+    focus::request("AbilityTarget", [self, spoken_before] {
+        if (g_use_target_spoken_seq != spoken_before) return true;
         if (!still(self, kAbilityUse) || !focus::alive(self)) return false;
         if (queries::is("BattleStateHelper.IsInBattle")) return false;   // battle has its own reader
         if (!focus::menu_open()) return false;
@@ -809,9 +810,15 @@ void use_list_init(void* self)
 V_t o_UseSingleInit;
 void d_UseSingleInit(void* self, const void* mi)
 {
-    if(kAbilityUse.is(self))actions::run("FieldMagicTargets.SingleFF5");
+    const bool field_use = kAbilityUse.is(self);
+    const bool from_all = field_use && queries::is("FieldMagicTargets.OwnsRange");
+    const auto spoken_before = g_use_target_spoken_seq;
+    if (field_use) actions::run("FieldMagicTargets.SingleFF5");
     o_UseSingleInit(self, mi);
-    hooks::guarded("FF5.AbilityUse.SingleInit", [&] { use_list_init(self); });
+    // UseTargetInit and native selection already own the first entry. A
+    // separate SingleInit read is needed only when leaving group targeting.
+    if (from_all && g_use_target_spoken_seq == spoken_before)
+        hooks::guarded("FF5.AbilityUse.SingleInit", [&] { use_list_init(self); });
 }
 
 V_t o_UseAllInit;
@@ -896,7 +903,8 @@ void d_WinUseTargetInit(void* self, const void* mi)
         dedup::reset(kCtxSpell);
         if (g_use_target_spoken_seq != spoken_before) return;   // the game's own SelectContent spoke it
         dedup::reset(kCtxUseTarget);   // self-clear kept: Single/All share this guard
-        focus::request("AbilityTarget", [self] {
+        focus::request("AbilityTarget", [self, spoken_before] {
+            if (g_use_target_spoken_seq != spoken_before) return true;
             if (!still(self, kAbilityWin) || !usable(self)) return false;
             void* use = ref::rd<void*>(self, fWinUseController);
             return use && announce_use_target_now(use);

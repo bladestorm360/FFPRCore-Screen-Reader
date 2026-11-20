@@ -230,3 +230,12 @@ Audit FFI, FFII, FFIII, FFIV and FFVI for the equivalent field pause menu
 and verify its opening behavior and initial focus in each title. Apply the
 same title-then-focus announcement across all six games wherever the menu
 exists, using each title's actual focused item.
+
+The six installed binaries have the desktop `FieldHelpController`. Its
+native `Open` places the command cursor in each game. FFVI also passes a
+32-bit Field, Chocobo or Airship mode. The new reader forwards the correct
+signature and reads the visible pause root's selected command on the next
+owner frame. The controller must remain open and the native readiness gate
+must allow the read. It queues the localized title before the displayed
+command in one speech sequence. A subsequent opening or scene teardown
+invalidates a pending read.

@@ -133,6 +133,14 @@ should announce the focused target once, even when it is the same character
 with the same HP and MP. Cursor movement and single/all target changes should
 still announce the new selection.
 
+FFV's desktop `AbilityWindowController.UseTargetInit` already owns initial
+selection and its fallback. The additional `SingleInit` focus request
+repeated that initial read on entry. `SingleInit` now requests a read only
+when leaving all-target mode and native selection has yet to speak. Both
+deferred requests yield when the native selection callback has produced a
+row since they were scheduled. This uses the producer's sequence counter
+and preserves repeated openings with the same target text.
+
 ## Enemy critical health
 
 The Giant Rat screenshot has no enemy Critical label/icon/HP display. All-six

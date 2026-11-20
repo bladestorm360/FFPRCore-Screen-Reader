@@ -1,9 +1,14 @@
 # Native FFPR durable memory
 
+**November 19 field menu delivery.** All six games now read Pause and the
+actual focused command. FFV's field spell entry uses one initial producer.
+Offline and installed checks passed. FFIV Moon routes are the next active
+checkpoint. [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-field-pause-and-spell-targeting).
+
 **November 19 navigation delivery.** Karnak Pub 2F, Walse jump labels,
 save-point arrival and traversal, and temporary actor qualifiers are
-implemented, offline verified and installed in all six games. Field menu
-speech is the active checkpoint. [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-shared-save-point-and-ffv-navigation-fixes).
+implemented, offline verified and installed in all six games.
+[Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-shared-save-point-and-ffv-navigation-fixes).
 
 **November 19 FFV Karnak world map.** Installed the verified terrain fix
 for the Castle and Fire-Powered Ship entrances. Gameplay confirmation is
