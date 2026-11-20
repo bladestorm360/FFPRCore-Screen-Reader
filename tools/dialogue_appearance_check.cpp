@@ -21,6 +21,7 @@ Node* message_client = nullptr;
 bool owner_thread = true;
 bool dialogue_open = true;
 bool transition = false;
+bool fading = false;
 int current_map = 3;
 int actor_reads = 0;
 game::Id current_game = game::Id::FF1;
@@ -101,6 +102,10 @@ bool renderer_visible(void* p) { return visible(p); }
 }
 namespace frame { bool on_main_thread() { return owner_thread; } }
 namespace queries { bool is(const char*) { return transition; } }
+namespace ffpr::fieldnav::map_transition {
+bool is_state_changing() {return transition;}
+bool is_screen_fading() {return fading;}
+}
 namespace game { Id current() { return current_game; } }
 namespace modtext {
 bool has(std::wstring_view key)
@@ -383,5 +388,19 @@ int main()
         }
         transition = true;
     }
+    const auto scroll_cue = &ffpr::dialogue::action_cue_at_scroll;
+    current_game = game::Id::FF1;
+    current_map = 124;
+    script.value = L"sc_e_0006_1";
+    require(scroll_cue(0, 90, 52).empty(), "native map change vetoes the bridge scroll cue");
+    transition = false;
+    dialogue_open = false;
+    require(scroll_cue(0, 90, 52) == L"Cornelia prologue birds cue", "the bridge scroll recaps the completed bird shot");
+    require(scroll_cue(0, 90, 40).empty(), "another scroll in the same event cannot claim the bird shot");
+    fading = true;
+    require(scroll_cue(0, 90, 52).empty(), "a native fade keeps scroll cues out of loading");
+    fading = false;
+    script.value = L"sc_e_0044_3";
+    require(scroll_cue(0, 90, 52).empty(), "credits do not repeat the bridge prologue cue");
     std::puts("Dialogue appearance checks passed");
 }

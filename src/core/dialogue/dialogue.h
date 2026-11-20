@@ -31,6 +31,8 @@ void repeat_last_dialogue();
 bool read_dialogue_appearance();
 /// One authored visual cue at the first page of a verified scene window.
 std::wstring action_cue_at_dialogue();
+/// Describe a completed, silent shot at its own native scroll handoff.
+std::wstring action_cue_at_scroll(int type, float duration, int font_size);
 
 // --- PopupState ------------------------------------------------------------------------
 namespace popup_state {

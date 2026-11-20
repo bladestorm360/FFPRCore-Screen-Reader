@@ -4,6 +4,7 @@
 #include "../core.h"
 #include "../dialogue/dialogue.h"
 #include "../displayed_ui.h"
+#include "../fieldnav/map_transition.h"
 #include "../frame.h"
 #include "../modtext.h"
 #include "../say.h"
@@ -316,5 +317,23 @@ std::wstring action_cue_at_dialogue()
         if (visible_art(actor) == L"mo_ff1_n101_c00") return T(L"Cornelia bridge construction cue");
     }
     return {};
+}
+
+std::wstring action_cue_at_scroll(int type, float duration, int font_size)
+{
+    // The FF1 bridge prologue's first native scroll follows the complete
+    // bird track. This scroll producer has a unique type, duration and size
+    // in that script. Its sibling credits use a different event owner.
+    if (!game::is(game::Id::FF1) || type != 0 || duration != 90 || font_size != 52 ||
+        !frame::on_main_thread() || fieldnav::map_transition::is_state_changing() ||
+        ::field::current_map_id() != 124) return {};
+    auto* map = ::field::cache::get(r::kFieldMap);
+    auto* controller = ref::rd<void*>(map, r::fFieldController);
+    if (!r::kFieldController.is(controller)) return {};
+    auto* owner = ref::rd<void*>(controller, fEventOwner);
+    auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
+    if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != L"sc_e_0006_1" ||
+        fieldnav::map_transition::is_screen_fading()) return {};
+    return T(L"Cornelia prologue birds cue");
 }
 } // namespace ffpr::dialogue

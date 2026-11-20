@@ -22860,5 +22860,19 @@
     "th": "เซ็ตเซอร์ก้มตัวไปข้างหน้าข้างเครื่องยนต์",
     "pt": "Setzer se inclina para a frente ao lado do motor.",
     "zhc": "塞策在引擎旁俯身。"
+  },
+  "Cornelia prologue birds cue": {
+    "en": "A flock of pale birds has flown across the screen.",
+    "ja": "淡い色の鳥の群れが画面を横切った。",
+    "fr": "Une volée d’oiseaux pâles vient de traverser l’écran.",
+    "it": "Uno stormo di uccelli chiari ha attraversato lo schermo.",
+    "de": "Ein Schwarm heller Vögel ist über das Bild geflogen.",
+    "es": "Una bandada de aves claras acaba de cruzar la pantalla.",
+    "ko": "옅은 색의 새 떼가 화면을 가로질러 날아갔다.",
+    "zht": "一群淺色的鳥飛過畫面。",
+    "ru": "По экрану пролетела стая светлых птиц.",
+    "th": "ฝูงนกสีอ่อนเพิ่งบินผ่านหน้าจอ",
+    "pt": "Um bando de aves claras acaba de cruzar a tela.",
+    "zhc": "一群浅色的鸟飞过画面。"
   }
 }

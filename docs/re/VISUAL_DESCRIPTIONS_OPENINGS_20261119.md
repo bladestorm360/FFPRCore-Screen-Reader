@@ -20,6 +20,15 @@ The focused replay passes the exact cues and rejects another script, a
 transition, a hidden actor and a replaced costume. The linked build and
 battle focus check also passed. These cues await the integrated install.
 
+The FF1 bridge prologue uses the existing scroll reader to describe the
+completed bird shot. The native `PrologueMessage` runs after the puppet
+track on map 124, script `sc_e_0006_1`. It starts the 90-second scroll at
+font size 52. That exact runtime path adds one localized sentence to the
+first native line. Credits, unrelated scrolls, fades and map changes do
+not claim the cue. Dialogue and modal speech checks passed, including
+the native scroll path. The extraction remains outside Git under
+`../tools/visual_audit_20261119`.
+
 The local scene review indexes 8,504 executable field script bodies across
 the six installed games. It keeps the ordered visual operations, speech
 locators, presentation branches, puppet entries and placed sprites.

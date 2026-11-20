@@ -145,7 +145,7 @@ void speak_next_scroll_line(const std::shared_ptr<ScrollRun>& run)
 
 // ScrollMessageManager.Play(ScrollType type, string message, float scrollTime, int fontSize,
 // Color32 color, TextAnchor anchor, Rect margin)
-void scroll_play_postfix(void* message_str, float scroll_time)
+void scroll_play_postfix(void* message_str, int type, float scroll_time, int font_size)
 {
     const std::wstring message = ref::str(message_str);
     if (message.empty()) return;
@@ -167,6 +167,10 @@ void scroll_play_postfix(void* message_str, float scroll_time)
     }
     if (!cur.empty()) run->lines.push_back(cur);
     run->delay = static_cast<double>(scroll_time) / static_cast<double>(run->lines.size() + 1);
+    if (!run->lines.empty()) {
+        auto cue = action_cue_at_scroll(type, scroll_time, font_size);
+        if (!cue.empty()) run->lines.front() = cue + L" " + run->lines.front();
+    }
     speak_next_scroll_line(run);
 }
 
@@ -210,7 +214,7 @@ void d_ScrollPlay(void* self, int32_t type, void* message, float scroll_time, in
                   int32_t anchor, Rect16 margin, const void* mi)
 {
     o_ScrollPlay(self, type, message, scroll_time, font_size, color, anchor, margin, mi);
-    hooks::guarded("ScrollMessageManager.Play", [&] { scroll_play_postfix(message, scroll_time); });
+    hooks::guarded("ScrollMessageManager.Play", [&] { scroll_play_postfix(message, type, scroll_time, font_size); });
 }
 
 int install()
