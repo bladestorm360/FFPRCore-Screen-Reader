@@ -15,7 +15,7 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game inventory complete. The first art passes cover 253 FF1–II enemy variants and selected opening scenes and actors. Remaining game, character, equipment and scene passes, localized wording and speech controls are open. |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game inventory complete. The first art passes cover 478 FF1–III enemy variants and selected opening scenes and actors. Remaining game, character, equipment and scene passes, localized wording and speech controls are open. |
 | [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first four FF1 objectives have native contacts and completion receipts. Runtime category and campaign coverage remain open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
@@ -375,7 +375,7 @@ runner. The baseline and corrected receipts are in
 
 The documented gameplay fixes have been installed. The [visual description
 audit](VISUAL_DESCRIPTIONS_20261119.md) records the six-game inventory,
-253 FF1–II enemy forms and the initial scene and actor review. The
+478 FF1–III enemy forms and the initial scene and actor review. The
 [Storyline mode plan](#november-11-all-six-storyline-category)
 tracks the next objective and the routes to it.
 

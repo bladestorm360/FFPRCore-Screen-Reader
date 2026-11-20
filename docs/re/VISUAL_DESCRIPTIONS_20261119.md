@@ -45,7 +45,8 @@ extract, `Map_20171_1/sc_e_0418` and `sc_e_0419`. Resolve both before closing
 scene coverage.
 
 The [FFII enemy art pass](VISUAL_DESCRIPTIONS_FF2_20261119.md) covers all 129
-art records including the separate Toad form.
+art records including the separate Toad form. The [FFIII enemy art pass](VISUAL_DESCRIPTIONS_FF3_20261119.md)
+covers all 225 rows including the alternate Sea Dragon art.
 
 ## Opening and early scene review
 
