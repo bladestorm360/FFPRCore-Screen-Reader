@@ -78,9 +78,12 @@ and promoted jobs. The [FFII appearance pass](VISUAL_DESCRIPTIONS_FF2_COSTUMES_2
 covers its 72 field candidates, nine battle outfits and nine separately
 drawn portraits. The [FFIII appearance pass](VISUAL_DESCRIPTIONS_FF3_COSTUMES_20261119.md)
 covers 142 field candidates and 25 battle outfits. Its Ranger and Scholar
-costumes use different numeric suffixes in field and battle art. Equipment
-held separately in battle needs its own visible-art mapping. The chapters
-below track costume use in specific dialogue and event contexts.
+costumes use different numeric suffixes in field and battle art. The
+[FFIV appearance pass](VISUAL_DESCRIPTIONS_FF4_COSTUMES_20261119.md)
+covers 166 field candidates and 30 battle art and portrait variants,
+including changed outfits for Cecil, Rydia and Kain. Equipment held
+separately in battle needs its own visible-art mapping. The chapters below
+track costume use in specific dialogue and event contexts.
 
 ## Opening and early scene review
 
