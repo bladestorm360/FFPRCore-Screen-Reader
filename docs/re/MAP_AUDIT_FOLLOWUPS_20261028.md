@@ -414,7 +414,8 @@ local delivery and gameplay confirmation distinct.
 | FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
 | FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. Selected approaches and a Nepto resume case pass the focused replay. Cross-area transport and integrated delivery remain open. |
 | FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The focused stage and approach replay passes. Full cross-area transport and integrated delivery remain open. |
-| FFV–FFVI campaigns | Open. Reach Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
+| FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 149 native objectives, representative approaches and a save already in the Rift. Full cross-area transport and integrated delivery remain open. |
+| FFVI campaign | Open. Reach Kefka through the three scenarios, the World of Ruin and Kefka's Tower. Test reloads, later saves, alternate orders and the final encounter. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
@@ -572,6 +573,25 @@ including both Lunar Whale crystals, FuSoYa and Zeromus. The retained FFV
 Exdeath fixture also passes 227 assertions and 109 legs. The 72 new labels
 have all 12 supported languages. Full campaign travel, gameplay confirmation
 and integrated delivery remain open.
+
+### FFV meteorite to Neo Exdeath
+
+The 149-objective itinerary follows the opening meteorite, the Wind Crystal,
+Walse, Karnak, the airship and the meteorite transfers to Galuf's world.
+The Karnak courtyard encounter and the timed escape use separate native
+contacts. The second world route includes the Big Bridge, Xezat's fleet,
+the Barrier Tower, Moore and the first Exdeath battle. The merged world
+sequence includes the recommended tablet order and the Rift. The native
+world-change and Rift receipts retire earlier objectives, including missed
+tablet stops once the party enters the Rift. The final Exdeath contact
+is 569/3 and native victory receipt 161 ends the itinerary.
+
+All 149 labels are present in the 12 supported languages. The focused
+replay checks every ordered receipt, actual baked target types, selected
+physical approaches, the Karnak escape and a late save entering the Rift.
+The separate Karnak regression passed all 29 assertions over 12 route
+legs. The build verified 67 embedded resources. Full campaign travel,
+gameplay confirmation and integrated delivery remain open.
 
 ## November 11 all-six Storyline category
 

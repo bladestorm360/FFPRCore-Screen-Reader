@@ -1,6 +1,7 @@
 #include "storyline.h"
 #include "baked_map.h"
 #include <algorithm>
+#include <span>
 
 namespace field::storyline {
 namespace {
@@ -178,6 +179,7 @@ Stage ff1_stage(const Ff1Receipts& scenario, int origin_map)
 #include "storyline_ff2.inl"
 #include "storyline_ff3.inl"
 #include "storyline_ff4.inl"
+#include "storyline_ff5.inl"
 
 Objective Selection::resolve(const Objective& objective, const std::optional<Objective>& hint, bool cycle)
 {
@@ -206,6 +208,14 @@ std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int ori
     const auto* map = baked::submap_by_map_id(next.map);
     if (!map) return targets;
     const auto& objects = baked::grids(*map).objects;
+    if (next.kind == Kind::Spot && next.contacts[0] < 0 && next.authored_spawn) {
+        baked_nav::MapGoal goal;
+        goal.map_id = next.map;
+        goal.cell = *next.authored_spawn;
+        goal.allow_world_transit = true;
+        targets.push_back({std::move(goal), Kind::Spot, {}});
+        return targets;
+    }
     for (const int entity : next.contacts) {
         if (entity < 0) continue;
         const auto match = std::find_if(objects.begin(), objects.end(), [entity, &next](const auto& object) {

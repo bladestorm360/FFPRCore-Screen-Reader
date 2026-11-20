@@ -444,6 +444,28 @@ int verify_ff4()
     };
     return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
 }
+
+int verify_ff5()
+{
+    constexpr std::array arrivals{
+        StoryArrival{189, 8, {1,25,21}},
+        StoryArrival{189, 12, {1,10,26}, 1, baked_route::Cell{1,16,21}},
+        StoryArrival{205, 17, {1,14,15}},
+        StoryArrival{88, 20, {1,18,10}},
+        StoryArrival{95, 55, {1,23,35}},
+        StoryArrival{12, -1, {1,206,110}},
+        StoryArrival{569, 3, {1,30,24}}
+    };
+    Ff5Receipts later;
+    later.fill(0);
+    later[0] = later[83] = later[125] = 1;
+    const auto merged = ff5_stage(later).objective;
+    check(merged && merged->map == 70, "the merged world retires early contacts from unavailable worlds");
+    later[153] = 1;
+    const auto rift = ff5_stage(later).objective;
+    check(rift && rift->map == 525, "a save inside the Rift does not return to optional tablet routes");
+    return verify_campaign("FFV", ff5_stage, ObjectiveId::Ff5Scenario, 0, 161, 120, arrivals);
+}
 }
 
 int main()
@@ -480,5 +502,12 @@ int main()
     fixture::game_id = game::Id::FF4;
     std::thread ff4_worker([&] { result = verify_ff4(); });
     ff4_worker.join();
+    if (result) return result;
+    const auto ff5_maps = read("data/ff5/maps.bin");
+    if (!baked::load(ff5_maps.data(), ff5_maps.size()) ||
+        !json::parse(read("data/ff5/mapstate.json"), fixture::records)) return 2;
+    fixture::game_id = game::Id::FF5;
+    std::thread ff5_worker([&] { result = verify_ff5(); });
+    ff5_worker.join();
     return result;
 }
