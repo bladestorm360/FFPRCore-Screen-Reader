@@ -7,14 +7,25 @@ locators, presentation branches, puppet entries and placed sprites.
 call. This broad set includes ordinary movement, fades, hidden setup and
 dialogue that already explains an action. It is a review inventory.
 
+The local `scene_review_queue.py` groups candidates only when the installed
+instruction bodies, operands, entry segments and system flags match on
+the same map. It retains every script name and keeps each variant's entry
+condition open for review. The queue contains 6,110 distinct bodies. Of
+these, 1,109 are named story motion bodies with no local message or
+general native call. The earliest audit gives these priority while
+preserving the remaining bodies for review. Dialogue in a neighboring
+scene can still explain what a body shows.
+
 The table below records reviewed opening actions and a possible order for
 their narration. The numbers are positions in the local compiled script
 extract. Effects with direct sprite art were checked from the installed
 bundles. Particle-only effects were checked from the prefab components
-and their script placement. No event cue in this audit is installed.
+and their script placement. The FF1 bridge cue has an offline-checked
+speech binding. All cue work is still outside the installed mod.
 
 | Game and source | Visual action and native text comparison | Proposed cue placement and wording |
 | --- | --- | --- |
+| FF1 construction, `Map_20170/sc_e_0005_2` and `sc_e_0005_6` | Both scripts give the first group of ten soldiers matching arm motions during the opening camera pan. The first dialogue is about the king's orders. The following work montage repeats the arm motions. | “Red-armored soldiers raise and lower their arms as they build the bridge.” The first visible dialogue page is the verified speech anchor. The cue follows the initial pan and precedes the recurring work montage. |
 | FF1 world, `Map_10010/sc_e_0001` | The opening calls the rough-sea effect at 2, switches on a sandstorm at 15 and switches it off at 22. It changes the sky at 43 and restores it at 54. The opening narration already mentions raging seas, dying winds and decaying earth. A generic darkness or rough-sea cue would repeat that narration. | At the visible start of the sandstorm, “Sand sweeps over the landscape.” A single later sky cue can cover the first visible flash beneath the dark clouds if the sky transition is visible when the native text clears. |
 | FF1 bridge prologue, `Map_40001/sc_e_0006_1` | Entity 1 uses `ef_ff1_e_017`. The renderer bundle and its shared texture dependency contain pale blue-white birds in alternating raised- and lowered-wing frames. The script starts the effect at 21. The prologue message begins at 5 and gives the party's story context. | “A flock of pale birds crosses the screen.” Once when the effect becomes visible. |
 | FFII Fynn, `Map_20020/sc_e_0001` | The scenario-101 branch stages the Emperor and imperial soldiers separately from the earlier ordinary town movement. Puppet 72 uses the Emperor's violet-and-gold outfit and `HandsUp` at 173. Puppet 106 starts the ring, fire and trail effect at 182, followed by the separate flame placements. The native opening narration covers the attack and the Emperor calling forth monsters. | “The Emperor raises both arms. Fire spreads across the town.” Once on the arm and fire sequence. |
@@ -45,3 +56,21 @@ loading gates, as well as localization and offline verification.
 | FFIV Baron Enterprise upgrade, `Map_20011_20/sc_e_0054_1` | Engineer actors 2 and 3 use the two palettes of the same overalls costume. They move in paired puppet bodies at 93–101 and separately at 104–117. Actor 3 starts the first named jump pose at 112. The engineers' dialogue covers the finished attachment, hovercraft controls and onward travel. | At the first visible work motion, describe the two engineers moving into position and the engineer hopping during the work. The atlas lacks a dedicated tool frame. Keep the later repeated motions within that one cue. |
 | FFV Adamantite airship upgrade, `Map_20231_9/sc_e_0071_1` | Cid wears a red coat and has white hair and beard. Mid has blond hair and a violet coat. Their paired puppets show them moving across the scene, with entrances, pauses and repositioning. The first coordinated move begins in the pair at 52–62. | “Cid and Mid move around the airship as they work on the upgrade.” Use one cue across the montage after verifying the first clearly visible shot. The exact body tracks establish the actors' movement. |
 | FFVI optional Blackjack repair, `Map_20171_3/sc_e_1033_1` | The native dialogue explains the engine damage first. Setzer actor 6 uses `DyingR` at 104. The atlas binds that cue to the exact forward-bent sprite. Setzer is hidden and repositioned to the engine, then shown using that pose at 110. | “Setzer leans forward beside the engine.” Use the reveal after 110. The dialogue supplies the reason for the repair. |
+
+## First FF1 event pass
+
+This pass reviews the eight FF1 story-motion bodies without a local
+message or generic native call, their relevant continuations and a set
+of treasure pickup bodies. The movement and effect findings use actor
+keys, decoded sprites and the installed effect prefab components.
+
+| Game scene | Visual action and placement |
+| --- | --- |
+| Cornelia bridge handoffs, `Map_10010/sc_e_0005_1`, `_5` and `sc_e_0006_3` | The first two scripts place their camera and player actors for the transfer into the bridge construction. The third restores the party's appearance and control on the world map after the prologue. The distinctive visuals belong in the construction and prologue themselves. |
+| Canal opening, `Map_10010/sc_e_0015_1` | One flash and two shakes accompany particle emitters for soil and stone and actor 102's distinct blue water plume. Candidate once as the plume appears: “A flash lights the ground. Dirt and blue water spray up as the canal opens.” The following room dialogue covers the opening's outcome. |
+| Fairy release, `Map_20150/sc_e_0028` | The field leader raises a hand before using the bottled fairy. Actor 119 then plays `ef_ff1_e_010`, which contains fairy light and star effects. Candidate: “The leader raises a hand. Points of light rise as the fairy is released.” Use the effect's first visible sequence. |
+| Levistone and airship, `Map_20180/sc_e_0025_1` and `Map_10010/sc_e_0025_2` | The subterranean shot stages the party around a small silver-blue diamond-shaped object and flashes the screen twice. The world shot uses nine sand effects, a camera change and the native airship reveal. The award message later says the party has the airship. Candidate pair: “The party gathers around a small silver-blue stone. The screen flashes white.” Then describe the airship appearing among clouds of sand at the first world reveal. |
+| Crystals, `Map_40000/sc_e_0001_5` | The opening hides the player and plays actor 1's full-screen effect at 18 between fades. Its prefab contains blue, green, red and yellow crystal components, stars and flares. Candidate: “Colored crystals and points of light appear against the darkness.” Verify the effect timeline before describing their order. |
+| Ending, `Map_40004/sc_e_0044_3` and `_4` | The first body shows actor 3 at 67 after the credits. Its blue outlined graphic reads “THE END.” The `_4` body hides the graphic and the preceding effect before the final save. Speak “The End” once at the actual reveal if the credits reader has not already announced those words. |
+| Named treasure pickups, `Map_20011_1/sc_e_0014`, `Map_30021_3/sc_e_0010_1`, `Map_30031_3/sc_e_0017`, `Map_30071_3/sc_e_0047` and `Map_30081_8/sc_e_0033` | Each uses the ordinary treasure pickup pose and a native item announcement. The reviewed bodies use the standing character pose and standard chest interaction. No bespoke item sprite is staged in these five scenes. |
+| Adamantite, `Map_30111_2/sc_e_0051` | Actor 31 is a visible cluster of upright violet crystal points with bright white edging and a dark base. The cluster is hidden as the party takes it. The native award names the item. Describe the violet cluster at its visible pickup, using the actual prop instead of the ordinary treasure pose. |

@@ -1,4 +1,18 @@
 {
+  "Cornelia bridge construction cue": {
+    "en": "Red-armored soldiers raise and lower their arms as they build the bridge.",
+    "ja": "赤い鎧の兵士たちが腕を上下させながら、橋を架けている。",
+    "fr": "Des soldats en armure rouge lèvent et abaissent les bras en construisant le pont.",
+    "it": "I soldati in armatura rossa alzano e abbassano le braccia mentre costruiscono il ponte.",
+    "de": "Rot gepanzerte Soldaten heben und senken die Arme, während sie die Brücke bauen.",
+    "es": "Unos soldados con armadura roja suben y bajan los brazos mientras construyen el puente.",
+    "ko": "붉은 갑옷을 입은 병사들이 팔을 올렸다 내리며 다리를 놓는다.",
+    "zht": "身穿紅甲的士兵一邊建橋，一邊上下揮動手臂。",
+    "zhc": "身穿红甲的士兵一边建桥，一边上下挥动手臂。",
+    "ru": "Солдаты в красных доспехах поднимают и опускают руки, строя мост.",
+    "th": "ทหารในชุดเกราะสีแดงยกแขนขึ้นลงขณะสร้างสะพาน",
+    "pt": "Soldados de armadura vermelha erguem e abaixam os braços enquanto constroem a ponte."
+  },
   "Field appearance mo_ff1_n038_c00": {
     "en": "A compact knight in dark armor has sweeping silver horns and a narrow silver-gray visor. Gold and violet bands stripe the chest and shoulders. The purple cape has a gold border.",
     "ja": "小柄な騎士が暗色の鎧をまとう。銀色の角が反り返り、細い銀灰色のバイザーが顔を隠す。胸と肩には金と紫の帯が走り、紫のマントには金の縁取りがある。",

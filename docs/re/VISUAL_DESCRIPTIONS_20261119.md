@@ -53,8 +53,8 @@ excluded from direct attribution. The scripted path has its own exact map,
 script, message and actor binding for Garland's first two lines. Both paths
 resolve the costume from the rendered sprite's packed atlas texture and use
 no new hooks or frame polling. FF1's Cornelia soldier and Garland have
-entries in all 12 languages. Remaining cutscene speaker bindings, automatic
-scene cues and localized entries are open.
+entries in all 12 languages. Remaining cutscene speaker bindings and
+localized entries are open.
 
 The focused offline build passes the field dialogue, battle focus and
 party checks. The dialogue fixture exercises explicit target resolution,
@@ -63,6 +63,19 @@ transition and thread gates, and a matching scripted speaker whose map and
 script can change. The six-game native name check and byte
 verification of 67 embedded resources passed. Field gameplay confirmation
 is pending.
+
+## First automatic scene cue
+
+The FF1 bridge construction cue uses the first visible native dialogue
+page after the opening pan. Both construction branches use the same
+message at this point. The reader checks the exact map, the live message
+window and a rendered soldier from the construction group. It puts the
+localized action before that page in the existing speech request. Later
+work loops, other pages and the repeat-dialogue command keep their native
+speech. The offline cue fixture covers the visible case, late message,
+wrong map, hidden actor and transition gate. The cue is outside the
+installed mod. Actions without a suitable dialogue anchor and the broader
+scene audit remain open.
 
 ## Six-game source inventory
 

@@ -142,4 +142,28 @@ bool read_dialogue_appearance()
     say(T(key), true);
     return true;
 }
+
+std::wstring action_cue_at_dialogue()
+{
+    // Both native bridge branches show the first construction pan before
+    // MSG_BRIDGE_01, then continue the work montage. The displayed first page
+    // is the presentation anchor, so later work loops have no speech producer.
+    if (!game::is(game::Id::FF1) || !frame::on_main_thread() || !in_dialogue() ||
+        queries::is("GameStatePatches.IsInputTransitionBlocked") || ::field::current_map_id() != 121 ||
+        field_message_key() != L"MSG_BRIDGE_01") return {};
+    auto* map = ::field::cache::get(r::kFieldMap);
+    auto* controller = ref::rd<void*>(map, r::fFieldController);
+    if (!r::kFieldController.is(controller)) return {};
+    auto* actors = ref::rd<void*>(controller, r::fEntityList);
+    const int count = unity::list_count(actors);
+    if (count < 1 || count > 64) return {};
+    for (int i = 0; i < count; ++i) {
+        auto* actor = unity::list_at(actors, i);
+        if (!kSpriteEntity.is(actor) || !::field::live_entity(actor)) continue;
+        const int id = ref::rd<int>(::field::entity_property(actor), r::fPropEntityId);
+        if (id < 1 || id > 10 || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) continue;
+        if (visible_art(actor) == L"mo_ff1_n101_c00") return T(L"Cornelia bridge construction cue");
+    }
+    return {};
+}
 } // namespace ffpr::dialogue

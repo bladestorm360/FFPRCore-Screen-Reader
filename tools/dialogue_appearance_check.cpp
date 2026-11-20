@@ -199,5 +199,21 @@ int main()
     current_map = 72;
     script.value = L"sc_e_0003_3";
     require(!read(), "same message key in another script");
+
+    const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
+    id.value = L"MSG_BRIDGE_01";
+    put(property, "entityId", reinterpret_cast<void*>(1));
+    texture.value = L"sactx-128x64-Uncompressed-MO_FF1_N101_C00-cd76ed62";
+    require(cue().empty(), "bridge message outside the construction map");
+    current_map = 121;
+    require(cue() == L"Cornelia bridge construction cue", "first construction dialogue and visible soldier");
+    id.value = L"MSG_BRIDGE_02";
+    require(cue().empty(), "later construction dialogue does not repeat the cue");
+    id.value = L"MSG_BRIDGE_01";
+    renderer.visible = false;
+    require(cue().empty(), "construction sprite is hidden");
+    renderer.visible = true;
+    transition = true;
+    require(cue().empty(), "construction cue during a native transition");
     std::puts("Dialogue appearance checks passed");
 }

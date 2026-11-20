@@ -136,6 +136,10 @@ void playing_init_postfix(void* self)
     }
 
     g_last_page = page;
+    if (page == 0) {
+        auto cue = action_cue_at_dialogue();
+        if (!cue.empty()) text_ = cue + L" " + text_;
+    }
     ffpr::say(text_, false);
 }
 
