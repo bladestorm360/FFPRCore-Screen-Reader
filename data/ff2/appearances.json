@@ -1,1099 +1,1373 @@
 {
   "Character appearance bc_ff2_p001": {
     "en": "A swept blue and orange band covers white-silver hair. Orange trim, pale metal or cloth details and a long red-orange cape stand out on blue armor. The battle sprite has a higher collar and spreads its blue boots and gauntlets when ready.",
-    "ja": "銀白色の髪を青と橙の鉢巻きで後ろへ流す。青い鎧に橙色の縁取りと淡色の飾りがあり、長い赤橙のマントが垂れる。戦闘では襟が高く、青い長靴と籠手を左右に開いて構える。"
+    "ja": "銀白色の髪を青と橙の鉢巻きで後ろへ流す。青い鎧に橙色の縁取りと淡色の飾りがあり、長い赤橙のマントが垂れる。戦闘では襟が高く、青い長靴と籠手を左右に開いて構える。",
+    "fr": "Un bandeau bleu et orange rejeté en arrière recouvre des cheveux blanc argenté. Des bordures orange, des détails clairs de métal ou de tissu et une longue cape rouge orangé tranchent sur l'armure bleue. En combat, le col est plus haut, les bottes écartées et les gantelets levés en garde."
   },
   "Character appearance bc_ff2_p002": {
     "en": "A pale figure has long swept violet hair, a dark pink outfit with pale shoulder trim and pink boots. The battle sprite shows more separated strands and the bare forearms of her ready stance.",
-    "ja": "色白で、長い紫の髪を流している。濃い桃色の服には淡い肩飾りがあり、長靴も桃色。戦闘では髪の房が分かれ、裸の前腕を前に出す。"
+    "ja": "色白で、長い紫の髪を流している。濃い桃色の服には淡い肩飾りがあり、長靴も桃色。戦闘では髪の房が分かれ、裸の前腕を前に出す。",
+    "fr": "Une silhouette pâle aux longs cheveux violets balayés en arrière, vêtue de rose foncé avec des bordures pâles aux épaules et des bottes roses. En combat, ses mèches se détachent davantage et ses avant-bras nus sont en garde."
   },
   "Character appearance bc_ff2_p003": {
     "en": "A broad brown-haired man wears a short green and pale-yellow top and violet trousers and cape. The battle sprite has an especially wide stance, bent muscular arms and pale wrist wraps.",
-    "ja": "茶髪で肩幅の広い男。緑と淡黄色の短い上着に、紫のズボンとマントを着ける。戦闘では大股に構え、淡色の布を巻いた筋肉質の腕を曲げる。"
+    "ja": "茶髪で肩幅の広い男。緑と淡黄色の短い上着に、紫のズボンとマントを着ける。戦闘では大股に構え、淡色の布を巻いた筋肉質の腕を曲げる。",
+    "fr": "Un homme large d'épaules aux cheveux bruns porte un haut court vert et jaune pâle, un pantalon violet et une cape assortie. En combat, ses jambes sont très écartées et les bandes pâles à ses poignets se détachent au bout de ses bras musclés et pliés."
   },
   "Character appearance bc_ff2_p004": {
     "en": "A small robed figure wraps its head, lower face and body in white, leaving a dark eye opening and a narrow red and gold belt or band. The longer battle robe trails behind the boots.",
-    "ja": "小柄な人物が白布で頭と顔の下半分、体を包む。目の部分だけ黒く開き、腰に細い赤と金の帯が見える。戦闘では長めの裾を長靴の後ろに引く。"
+    "ja": "小柄な人物が白布で頭と顔の下半分、体を包む。目の部分だけ黒く開き、腰に細い赤と金の帯が見える。戦闘では長めの裾を長靴の後ろに引く。",
+    "fr": "Une petite silhouette en robe s'enveloppe de blanc à la tête, au bas du visage et au corps. Une ouverture sombre aux yeux et une fine ceinture ou bande rouge et dorée restent visibles. La robe est plus longue en combat et traîne derrière les bottes."
   },
   "Character appearance bc_ff2_p005": {
     "en": "A stocky bald man with a small mustache wears a green coat with gray shoulder trim, a red collar detail, gloves or cuffs and blue-gray boots. The battle sprite braces its bare fists and shows the tail of his cloak.",
-    "ja": "がっしりした禿頭の男で、短い口ひげがある。灰色の肩飾りが付いた緑の上着に赤い襟飾り、手袋か袖口の飾り、青灰色の長靴を着ける。戦闘では素手の拳を構え、外套の裾が見える。"
+    "ja": "がっしりした禿頭の男で、短い口ひげがある。灰色の肩飾りが付いた緑の上着に赤い襟飾り、手袋か袖口の飾り、青灰色の長靴を着ける。戦闘では素手の拳を構え、外套の裾が見える。",
+    "fr": "Un homme chauve et trapu à fine moustache porte un manteau vert à épaules bordées de gris, à détail rouge au col, à gants ou poignets et à bottes gris bleuté. En combat, il lève ses poings nus et le pan de sa cape se voit derrière lui."
   },
   "Character appearance bc_ff2_p006": {
     "en": "A slim pale figure has long purple hair, a broad striped pink cap or head wrap and pink, blue, gold and white clothing. The battle sprite has a trailing hair or scarf tip, bright shoulder trim and striped boots.",
-    "ja": "ほっそりした色白の人物。長い紫髪に、縞のある幅広い桃色の帽子か頭巾をかぶる。服は桃色、青、金、白。戦闘では房か布の先が後ろへなびき、明るい肩飾りと縞の長靴が見える。"
+    "ja": "ほっそりした色白の人物。長い紫髪に、縞のある幅広い桃色の帽子か頭巾をかぶる。服は桃色、青、金、白。戦闘では房か布の先が後ろへなびき、明るい肩飾りと縞の長靴が見える。",
+    "fr": "Une silhouette mince et pâle aux longs cheveux violets porte une ample coiffe rose rayée ou un tissu noué, ainsi qu'une tenue rose, bleue, dorée et blanche. En combat, une mèche ou le bout du foulard traîne à l'arrière. Les épaules ont des bordures vives et les bottes sont rayées."
   },
   "Character appearance bc_ff2_p007": {
     "en": "A blond, pale-faced figure wears a narrow blue headband, gold-trimmed pale clothing and a long purple cape. The battle pose shows high boots, bare hands and more of the cape's gold border.",
-    "ja": "色白で金髪。細い青の鉢巻きに、金で縁取った淡色の服、長い紫のマントを着ける。戦闘では丈の高い長靴と素手、金縁の広いマントがよく見える。"
+    "ja": "色白で金髪。細い青の鉢巻きに、金で縁取った淡色の服、長い紫のマントを着ける。戦闘では丈の高い長靴と素手、金縁の広いマントがよく見える。",
+    "fr": "Une silhouette blonde au visage pâle porte un bandeau bleu étroit, des vêtements clairs bordés d'or et une longue cape violette. En combat, on distingue de hautes bottes, des mains nues et une plus grande partie du liseré doré de la cape."
   },
   "Character appearance bc_ff2_p008": {
     "en": "A dark armored figure wears a pointed gray-blue helmet with swept side horns. A slim face opening, layered dark armor, bare hands and tall dark boots show in field and battle. The ready pose leans forward.",
-    "ja": "暗い鎧に横へ反った角が付いた青灰色の尖り兜をかぶる。細い顔の開口部、重なった鎧、素手、暗色の長靴が野外でも戦闘でも見える。構える時は前へ身を乗り出す。"
+    "ja": "暗い鎧に横へ反った角が付いた青灰色の尖り兜をかぶる。細い顔の開口部、重なった鎧、素手、暗色の長靴が野外でも戦闘でも見える。構える時は前へ身を乗り出す。",
+    "fr": "Une silhouette en armure sombre porte un casque pointu gris bleuté aux cornes latérales recourbées. On distingue une fine ouverture au visage, des plaques sombres superposées, des mains nues et de hautes bottes sombres, en combat comme sur le terrain. En garde, la silhouette se penche en avant."
   },
   "Character appearance bc_ff2_p009": {
     "en": "A short gray-black hairstyle frames a pale angular face. Dark violet plate, dark trousers and gold-orange belt fittings cover the stocky figure. The battle sprite has a high collar and heavier shoulder plates.",
-    "ja": "短い灰黒色の髪に、色白で角張った顔。がっしりした体に濃い紫の板金鎧と暗いズボン、金橙色の帯金具を着ける。戦闘姿では襟が高く、肩甲も厚い。"
+    "ja": "短い灰黒色の髪に、色白で角張った顔。がっしりした体に濃い紫の板金鎧と暗いズボン、金橙色の帯金具を着ける。戦闘姿では襟が高く、肩甲も厚い。",
+    "fr": "Des cheveux courts gris-noir encadrent un visage pâle et anguleux. Une cuirasse violet foncé, un pantalon sombre et des attaches de ceinture orange doré habillent cette silhouette trapue. En combat, le col est haut et les épaulières plus lourdes."
   },
   "Character appearance fa_ff2_p001": {
     "en": "A light-skinned profile has a sharp nose and silver hair swept back by an orange headband under a blue cap.",
-    "ja": "色白の横顔に鼻筋が通る。青い帽子の下の銀髪は橙色の鉢巻きで後ろへ流している。"
+    "ja": "色白の横顔に鼻筋が通る。青い帽子の下の銀髪は橙色の鉢巻きで後ろへ流している。",
+    "fr": "Un profil à la peau claire, au nez aigu et aux cheveux argentés rejetés en arrière par un bandeau orange sous un bonnet bleu."
   },
   "Character appearance fa_ff2_p002": {
     "en": "A pale face with fine brows and pink lips is framed by bright violet waves.",
-    "ja": "細い眉と桃色の唇のある白い顔を、鮮やかな紫の波打つ髪が囲む。"
+    "ja": "細い眉と桃色の唇のある白い顔を、鮮やかな紫の波打つ髪が囲む。",
+    "fr": "Des ondulations violet vif encadrent un visage pâle aux sourcils fins et aux lèvres roses."
   },
   "Character appearance fa_ff2_p003": {
     "en": "A square-jawed, brown-haired man has a straight nose, pronounced brows and bare neck.",
-    "ja": "茶髪で顎の張った男。鼻筋が真っすぐで眉が濃く、首は覆われていない。"
+    "ja": "茶髪で顎の張った男。鼻筋が真っすぐで眉が濃く、首は覆われていない。",
+    "fr": "Un homme aux cheveux bruns et à la mâchoire carrée a le nez droit, les sourcils marqués et le cou nu."
   },
   "Character appearance fa_ff2_p004": {
     "en": "Layered white cloth frames two dark eyes and wraps the lower face. A red gem marks the forehead.",
-    "ja": "白布が重なって黒い両目をのぞかせ、顔の下半分を包む。額に赤い宝石がある。"
+    "ja": "白布が重なって黒い両目をのぞかせ、顔の下半分を包む。額に赤い宝石がある。",
+    "fr": "Des épaisseurs de tissu blanc encadrent deux yeux sombres et enveloppent le bas du visage. Un joyau rouge marque le front."
   },
   "Character appearance fa_ff2_p005": {
     "en": "A bald, broad-featured man has deep-set eyes, a dark mustache and a strong jaw.",
-    "ja": "禿頭で顔幅が広い。目は奥まっており、黒い口ひげと張った顎が目立つ。"
+    "ja": "禿頭で顔幅が広い。目は奥まっており、黒い口ひげと張った顎が目立つ。",
+    "fr": "Un homme chauve aux traits larges, aux yeux enfoncés, à la moustache sombre et à la mâchoire forte."
   },
   "Character appearance fa_ff2_p006": {
     "en": "A pale face with narrow eyes and pink lips is framed by lavender hair, a layered purple-pink turban and a gold earring.",
-    "ja": "細い目と桃色の唇のある色白の顔。淡紫の髪、紫と桃色が重なるターバン、金の耳飾りが見える。"
+    "ja": "細い目と桃色の唇のある色白の顔。淡紫の髪、紫と桃色が重なるターバン、金の耳飾りが見える。",
+    "fr": "Une chevelure lavande, un turban rose violet en plusieurs couches et une boucle d'oreille dorée encadrent un visage pâle aux yeux étroits et aux lèvres roses."
   },
   "Character appearance fa_ff2_p007": {
     "en": "The light-haired profile has a blue forehead band, narrow pale eye and blue-purple collar.",
-    "ja": "淡い髪の横顔に青い額当てがある。目は細く淡色で、襟は青紫。"
+    "ja": "淡い髪の横顔に青い額当てがある。目は細く淡色で、襟は青紫。",
+    "fr": "Un profil aux cheveux clairs, au bandeau bleu, à l'œil étroit et pâle et au col bleu violet."
   },
   "Character appearance fa_ff2_p008": {
     "en": "The navy helmet has a ridged crown, pale side horns and narrow cutouts around the eyes and mouth.",
-    "ja": "藍色の兜に隆起した頭頂と淡色の横角があり、目と口の周りが細く開いている。"
+    "ja": "藍色の兜に隆起した頭頂と淡色の横角があり、目と口の周りが細く開いている。",
+    "fr": "Un casque bleu marine au sommet strié, aux cornes latérales pâles et aux ouvertures étroites près des yeux et de la bouche."
   },
   "Character appearance fa_ff2_p009": {
     "en": "A broad-jawed figure has swept spiky gray hair, dark eyebrows and a violet collar edged with yellow.",
-    "ja": "幅のある顎と太い眉。尖った灰色の髪を後ろへ流し、黄で縁取った紫の襟を着ける。"
+    "ja": "幅のある顎と太い眉。尖った灰色の髪を後ろへ流し、黄で縁取った紫の襟を着ける。",
+    "fr": "Une silhouette à large mâchoire, aux cheveux gris hérissés et rabattus, aux sourcils sombres et au col violet bordé de jaune."
   },
   "Enemy appearance mn_ff2_001_c00": {
     "en": "A small, crouching humanoid with a long nose, pointed ears and long fingers. It wears a curled cap, ragged dark clothing and pointed shoes, and carries a long hafted blade across its knees. It has olive skin and a pale green cap.",
-    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。オリーブ色の肌に淡緑色の帽子。"
+    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。オリーブ色の肌に淡緑色の帽子。",
+    "fr": "Un petit humanoïde accroupi, au long nez, aux oreilles pointues et aux longs doigts. Il porte un bonnet recourbé, des vêtements sombres en lambeaux et des chaussures pointues. Il tient une longue lame emmanchée sur ses genoux. Il a la peau olive et le bonnet vert pâle."
   },
   "Enemy appearance mn_ff2_001_c01": {
     "en": "A small, crouching humanoid with a long nose, pointed ears and long fingers. It wears a curled cap, ragged dark clothing and pointed shoes, and carries a long hafted blade across its knees. It has green skin and a pink cap and shoes.",
-    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。緑の肌に桃色の帽子と靴。"
+    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。緑の肌に桃色の帽子と靴。",
+    "fr": "Un petit humanoïde accroupi, au long nez, aux oreilles pointues et aux longs doigts. Il porte un bonnet recourbé, des vêtements sombres en lambeaux et des chaussures pointues. Il tient une longue lame emmanchée sur ses genoux. Il a la peau verte, le bonnet et les chaussures roses."
   },
   "Enemy appearance mn_ff2_001_c02": {
     "en": "A small, crouching humanoid with a long nose, pointed ears and long fingers. It wears a curled cap, ragged dark clothing and pointed shoes, and carries a long hafted blade across its knees. It has blue skin and a white cap and shoes.",
-    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。青い肌に白い帽子と靴。"
+    "ja": "長い鼻ととがった耳、長い指を持つ小柄な人型がしゃがんでいる。先の巻いた帽子とぼろぼろの暗い服、とがった靴を着け、長い柄の刃物を膝に横たえる。青い肌に白い帽子と靴。",
+    "fr": "Un petit humanoïde accroupi, au long nez, aux oreilles pointues et aux longs doigts. Il porte un bonnet recourbé, des vêtements sombres en lambeaux et des chaussures pointues. Il tient une longue lame emmanchée sur ses genoux. Il a la peau bleue, le bonnet et les chaussures blancs."
   },
   "Enemy appearance mn_ff2_002_c00": {
     "en": "A thorny plant creature curls long tendrils around a pointed central head. A slanted eye and an open, toothed jaw show among the coils. It has purple tendrils and gold thorns.",
-    "ja": "とげだらけの植物が、とがった頭を中心に長いつるを巻き付けている。その隙間に斜めの目と、歯を見せた口がある。紫のつると金色のとげ。"
+    "ja": "とげだらけの植物が、とがった頭を中心に長いつるを巻き付けている。その隙間に斜めの目と、歯を見せた口がある。紫のつると金色のとげ。",
+    "fr": "Une plante épineuse enroule de longues vrilles autour d'une tête centrale pointue. Un œil oblique et une gueule ouverte et dentée se dessinent entre les replis. Ses vrilles sont violettes et ses épines dorées."
   },
   "Enemy appearance mn_ff2_002_c01": {
     "en": "A thorny plant creature curls long tendrils around a pointed central head. A slanted eye and an open, toothed jaw show among the coils. It has green tendrils, orange thorns and red and yellow accents around the mouth.",
-    "ja": "とげだらけの植物が、とがった頭を中心に長いつるを巻き付けている。その隙間に斜めの目と、歯を見せた口がある。緑のつると橙色のとげで、口の周りに赤と黄色が差す。"
+    "ja": "とげだらけの植物が、とがった頭を中心に長いつるを巻き付けている。その隙間に斜めの目と、歯を見せた口がある。緑のつると橙色のとげで、口の周りに赤と黄色が差す。",
+    "fr": "Une plante épineuse enroule de longues vrilles autour d'une tête centrale pointue. Un œil oblique et une gueule ouverte et dentée se dessinent entre les replis. Ses vrilles sont vertes, ses épines orange et le pourtour de sa bouche rouge et jaune."
   },
   "Enemy appearance mn_ff2_003_c00": {
     "en": "A flying insect with large compound eyes, bent legs, broad raised wings and a striped abdomen tapering to a stinger. It has a green-black body, coral wings and yellow stinger.",
-    "ja": "大きな複眼、曲がった脚、広げて高く上げた翼を持つ飛ぶ虫。しま模様の腹は先細りして針になる。緑がかった黒の体にサンゴ色の翼と黄色い針。"
+    "ja": "大きな複眼、曲がった脚、広げて高く上げた翼を持つ飛ぶ虫。しま模様の腹は先細りして針になる。緑がかった黒の体にサンゴ色の翼と黄色い針。",
+    "fr": "Un insecte volant aux grands yeux composés, aux pattes repliées, aux larges ailes relevées et à l'abdomen rayé qui s'amincit jusqu'au dard. Le corps est vert-noir, les ailes corail et le dard jaune."
   },
   "Enemy appearance mn_ff2_003_c01": {
     "en": "A flying insect with large compound eyes, bent legs, broad raised wings and a striped abdomen tapering to a stinger. It has a violet body, orange-and-violet bands, orange wings and a pink stinger.",
-    "ja": "大きな複眼、曲がった脚、広げて高く上げた翼を持つ飛ぶ虫。しま模様の腹は先細りして針になる。紫の体に橙と紫のしま、橙の翼と桃色の針。"
+    "ja": "大きな複眼、曲がった脚、広げて高く上げた翼を持つ飛ぶ虫。しま模様の腹は先細りして針になる。紫の体に橙と紫のしま、橙の翼と桃色の針。",
+    "fr": "Un insecte volant aux grands yeux composés, aux pattes repliées, aux larges ailes relevées et à l'abdomen rayé qui s'amincit jusqu'au dard. Le corps violet porte des bandes orange et violettes, des ailes orange et un dard rose."
   },
   "Enemy appearance mn_ff2_004_c00": {
     "en": "A shaggy, crouched ape-like creature with a low face, a bared mouth, long arms, thick legs and heavy clawed hands and feet. It is icy white and blue with a purple face and claws.",
-    "ja": "毛むくじゃらのサルのような獣。身を低くして口をむき、長い腕と太い脚を曲げる。大きな手足には爪がある。氷を思わせる白と青の毛に紫の顔と爪。"
+    "ja": "毛むくじゃらのサルのような獣。身を低くして口をむき、長い腕と太い脚を曲げる。大きな手足には爪がある。氷を思わせる白と青の毛に紫の顔と爪。",
+    "fr": "Une créature hirsute et accroupie qui rappelle un singe, au visage baissé, à la bouche retroussée, aux bras longs et aux pattes épaisses. De lourdes griffes arment ses mains et ses pieds. Le pelage est blanc et bleu glacier, la face et les griffes violettes."
   },
   "Enemy appearance mn_ff2_004_c01": {
     "en": "A shaggy, crouched ape-like creature with a low face, a bared mouth, long arms, thick legs and heavy clawed hands and feet. It is sandy brown with dark facial shading and green claw tips.",
-    "ja": "毛むくじゃらのサルのような獣。身を低くして口をむき、長い腕と太い脚を曲げる。大きな手足には爪がある。砂色の毛に暗い顔の陰と緑の爪先。"
+    "ja": "毛むくじゃらのサルのような獣。身を低くして口をむき、長い腕と太い脚を曲げる。大きな手足には爪がある。砂色の毛に暗い顔の陰と緑の爪先。",
+    "fr": "Une créature hirsute et accroupie qui rappelle un singe, au visage baissé, à la bouche retroussée, aux bras longs et aux pattes épaisses. De lourdes griffes arment ses mains et ses pieds. Le pelage est brun sable, la face ombrée et les pointes des griffes vertes."
   },
   "Enemy appearance mn_ff2_005_c00": {
     "en": "An upright cluster of jagged spikes frames a narrow face with a small open mouth. Long points taper below it and two curved spikes rise above. It is steel blue with a red mouth.",
-    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。鋼のような青色で、口は赤い。"
+    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。鋼のような青色で、口は赤い。",
+    "fr": "Une grappe dressée de pointes irrégulières entoure une face étroite à petite bouche ouverte. De longues pointes s'affinent en dessous et deux pointes courbes se dressent en haut. L'ensemble est bleu acier, avec une bouche rouge."
   },
   "Enemy appearance mn_ff2_005_c01": {
     "en": "An upright cluster of jagged spikes frames a narrow face with a small open mouth. Long points taper below it and two curved spikes rise above. It is yellow-green with dark crevices.",
-    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。黄緑色で、隙間は暗い。"
+    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。黄緑色で、隙間は暗い。",
+    "fr": "Une grappe dressée de pointes irrégulières entoure une face étroite à petite bouche ouverte. De longues pointes s'affinent en dessous et deux pointes courbes se dressent en haut. L'ensemble est jaune-vert avec des creux sombres."
   },
   "Enemy appearance mn_ff2_005_c02": {
     "en": "An upright cluster of jagged spikes frames a narrow face with a small open mouth. Long points taper below it and two curved spikes rise above. It is teal with pale blue points.",
-    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。青緑色で、針の先は淡い青。"
+    "ja": "ぎざぎざの針が上向きに集まり、小さく口を開けた細長い顔を囲む。下に細長い針が伸び、上には曲がった針が二本突き出す。青緑色で、針の先は淡い青。",
+    "fr": "Une grappe dressée de pointes irrégulières entoure une face étroite à petite bouche ouverte. De longues pointes s'affinent en dessous et deux pointes courbes se dressent en haut. L'ensemble est bleu-vert avec des pointes bleu pâle."
   },
   "Enemy appearance mn_ff2_006_c00": {
     "en": "A long-legged bird with a lowered head, prominent eye, hooked beak and ragged wings. Two thin legs extend downward to open toes. It is blue-gray with a crimson eye and a pale beak.",
-    "ja": "頭を低くした脚の長い鳥。大きな目、鉤形のくちばし、先の乱れた翼があり、二本の細い脚の先で指を広げる。青灰色の羽、深紅の目、淡い色のくちばし。"
+    "ja": "頭を低くした脚の長い鳥。大きな目、鉤形のくちばし、先の乱れた翼があり、二本の細い脚の先で指を広げる。青灰色の羽、深紅の目、淡い色のくちばし。",
+    "fr": "Un oiseau haut sur pattes, à la tête baissée, à l'œil saillant, au bec crochu et aux ailes déchiquetées. Ses deux pattes minces pendent, doigts écartés. Il est gris bleuté, à l'œil cramoisi et au bec pâle."
   },
   "Enemy appearance mn_ff2_006_c01": {
     "en": "A long-legged bird with a lowered head, prominent eye, hooked beak and ragged wings. Two thin legs extend downward to open toes. It has green feathers, a gold head and a long orange beak.",
-    "ja": "頭を低くした脚の長い鳥。大きな目、鉤形のくちばし、先の乱れた翼があり、二本の細い脚の先で指を広げる。緑の羽、金色の頭、細長い橙色のくちばし。"
+    "ja": "頭を低くした脚の長い鳥。大きな目、鉤形のくちばし、先の乱れた翼があり、二本の細い脚の先で指を広げる。緑の羽、金色の頭、細長い橙色のくちばし。",
+    "fr": "Un oiseau haut sur pattes, à la tête baissée, à l'œil saillant, au bec crochu et aux ailes déchiquetées. Ses deux pattes minces pendent, doigts écartés. Il est à plumes vertes, à tête dorée et à long bec orange."
   },
   "Enemy appearance mn_ff2_007_c00": {
     "en": "A bulky turtle with a long broad reptilian head, thick legs and large claws. Large spikes rise from its shell. It is olive green with a tan shell and reddish claws.",
-    "ja": "幅広く長い爬虫類の頭、太い脚、大きな爪を持つずんぐりしたカメ。甲羅から大きなとげが立つ。オリーブ色の体に薄茶色の甲羅と赤みのある爪。"
+    "ja": "幅広く長い爬虫類の頭、太い脚、大きな爪を持つずんぐりしたカメ。甲羅から大きなとげが立つ。オリーブ色の体に薄茶色の甲羅と赤みのある爪。",
+    "fr": "Une tortue massive à la longue tête reptilienne et large, aux grosses pattes et aux grandes griffes. De larges épines se dressent sur sa carapace. Elle est vert olive avec une carapace beige et des griffes rougeâtres."
   },
   "Enemy appearance mn_ff2_007_c01": {
     "en": "A bulky turtle with a long broad reptilian head, thick legs and large claws. Large spikes rise from its shell. It is cyan and blue with a dark underside and deep blue shell spikes.",
-    "ja": "幅広く長い爬虫類の頭、太い脚、大きな爪を持つずんぐりしたカメ。甲羅から大きなとげが立つ。水色と青の体で、下側は暗く、甲羅のとげは濃い青。"
+    "ja": "幅広く長い爬虫類の頭、太い脚、大きな爪を持つずんぐりしたカメ。甲羅から大きなとげが立つ。水色と青の体で、下側は暗く、甲羅のとげは濃い青。",
+    "fr": "Une tortue massive à la longue tête reptilienne et large, aux grosses pattes et aux grandes griffes. De larges épines se dressent sur sa carapace. Elle est cyan et bleue, avec le dessous sombre et de profondes pointes bleu foncé sur la carapace."
   },
   "Enemy appearance mn_ff2_008_c00": {
     "en": "A squat humanoid with long muscular arms, heavy hands, thick legs and a hunched bare torso. Its broad lowered face has a small glare between heavy brows. It has yellow skin and blue clothing.",
-    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。黄色い肌に青い服。"
+    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。黄色い肌に青い服。",
+    "fr": "Un humanoïde trapu aux longs bras musclés, aux lourdes mains, aux grosses jambes et au torse nu et voûté. Un regard mauvais se dessine entre les épais sourcils de sa large face baissée. Il a la peau jaune et des vêtements bleus."
   },
   "Enemy appearance mn_ff2_008_c01": {
     "en": "A squat humanoid with long muscular arms, heavy hands, thick legs and a hunched bare torso. Its broad lowered face has a small glare between heavy brows. It has teal skin, violet hair and dark trousers.",
-    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。青緑の肌に紫の髪、暗いズボン。"
+    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。青緑の肌に紫の髪、暗いズボン。",
+    "fr": "Un humanoïde trapu aux longs bras musclés, aux lourdes mains, aux grosses jambes et au torse nu et voûté. Un regard mauvais se dessine entre les épais sourcils de sa large face baissée. Il a la peau bleu-vert, les cheveux violets et un pantalon foncé."
   },
   "Enemy appearance mn_ff2_008_c02": {
     "en": "A squat humanoid with long muscular arms, heavy hands, thick legs and a hunched bare torso. Its broad lowered face has a small glare between heavy brows. It has green skin, gold hair and a brown belt and loincloth.",
-    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。緑の肌に金色の髪、茶色のベルトと腰布。"
+    "ja": "裸の上半身を丸めたずんぐりした人型。筋肉のついた長い腕と大きな手、太い脚を持つ。伏せた幅広い顔は太い眉の下からにらみつける。緑の肌に金色の髪、茶色のベルトと腰布。",
+    "fr": "Un humanoïde trapu aux longs bras musclés, aux lourdes mains, aux grosses jambes et au torse nu et voûté. Un regard mauvais se dessine entre les épais sourcils de sa large face baissée. Il a la peau verte, les cheveux dorés, une ceinture et un pagne bruns."
   },
   "Enemy appearance mn_ff2_009_c00": {
     "en": "A thick humanoid torso sprouts two snarling heads side by side. Each head has pointed ears and a protruding jaw. One massive arm crosses the chest, and the other reaches outward. It is yellow-green with blue and gold accents.",
-    "ja": "がっしりした人型の胴に、うなる二つの頭が並ぶ。どちらも耳がとがり、あごが突き出している。太い片腕を胸に渡し、もう一方を外へ伸ばす。黄緑の体に青と金色の差し色。"
+    "ja": "がっしりした人型の胴に、うなる二つの頭が並ぶ。どちらも耳がとがり、あごが突き出している。太い片腕を胸に渡し、もう一方を外へ伸ばす。黄緑の体に青と金色の差し色。",
+    "fr": "Deux têtes grondantes côte à côte émergent d'un torse humanoïde massif. Chacune a des oreilles pointues et une mâchoire saillante. Un bras massif traverse la poitrine et le second se tend vers l'extérieur. Le corps est jaune-vert avec des touches bleues et dorées."
   },
   "Enemy appearance mn_ff2_009_c01": {
     "en": "A thick humanoid torso sprouts two snarling heads side by side. Each head has pointed ears and a protruding jaw. One massive arm crosses the chest, and the other reaches outward. It is mottled cyan-green with pale faces and red mouth details.",
-    "ja": "がっしりした人型の胴に、うなる二つの頭が並ぶ。どちらも耳がとがり、あごが突き出している。太い片腕を胸に渡し、もう一方を外へ伸ばす。水色と緑のまだらで、顔は白っぽく、口元は赤い。"
+    "ja": "がっしりした人型の胴に、うなる二つの頭が並ぶ。どちらも耳がとがり、あごが突き出している。太い片腕を胸に渡し、もう一方を外へ伸ばす。水色と緑のまだらで、顔は白っぽく、口元は赤い。",
+    "fr": "Deux têtes grondantes côte à côte émergent d'un torse humanoïde massif. Chacune a des oreilles pointues et une mâchoire saillante. Un bras massif traverse la poitrine et le second se tend vers l'extérieur. Le corps est vert cyan marbré, avec des visages pâles et des bouches rehaussées de rouge."
   },
   "Enemy appearance mn_ff2_010_c00": {
     "en": "An upright rat-like beast with oversized round ears, whiskers, a pointed nose, clawed forepaws and a long upright tail. Its jaws are open and show rows of teeth. It is gray with red-orange accents and an orange-and-white tail.",
-    "ja": "大きな丸耳、ひげ、とがった鼻を持つネズミのような獣が立ち上がる。両前足に爪があり、長い尾を上に伸ばし、開いたあごには歯が並ぶ。灰色に赤橙色の差し色、橙と白の尾。"
+    "ja": "大きな丸耳、ひげ、とがった鼻を持つネズミのような獣が立ち上がる。両前足に爪があり、長い尾を上に伸ばし、開いたあごには歯が並ぶ。灰色に赤橙色の差し色、橙と白の尾。",
+    "fr": "Une bête dressée évoquant un rat, aux oreilles rondes démesurées, aux moustaches, au museau pointu, aux pattes avant griffues et à la longue queue dressée. Ses mâchoires ouvertes découvrent des rangées de dents. Elle est grise avec des détails rouge orangé et une queue orange et blanche."
   },
   "Enemy appearance mn_ff2_010_c01": {
     "en": "An upright rat-like beast with oversized round ears, whiskers, a pointed nose, clawed forepaws and a long upright tail. Its jaws are open and show rows of teeth. It is yellow-green with purple accents and a banded tail.",
-    "ja": "大きな丸耳、ひげ、とがった鼻を持つネズミのような獣が立ち上がる。両前足に爪があり、長い尾を上に伸ばし、開いたあごには歯が並ぶ。黄緑に紫の差し色、しま模様の尾。"
+    "ja": "大きな丸耳、ひげ、とがった鼻を持つネズミのような獣が立ち上がる。両前足に爪があり、長い尾を上に伸ばし、開いたあごには歯が並ぶ。黄緑に紫の差し色、しま模様の尾。",
+    "fr": "Une bête dressée évoquant un rat, aux oreilles rondes démesurées, aux moustaches, au museau pointu, aux pattes avant griffues et à la longue queue dressée. Ses mâchoires ouvertes découvrent des rangées de dents. Elle est jaune-vert avec des détails violets et une queue annelée."
   },
   "Enemy appearance mn_ff2_011_c00": {
     "en": "A floating skull with sunken eyes and tightly spaced teeth is wreathed in flames. It has a pale green skull, red eyes and green flames.",
-    "ja": "落ちくぼんだ目と細かく並んだ歯を持つ頭蓋骨が、炎をまとって浮かぶ。淡緑の頭蓋骨と赤い目を緑の炎が囲む。"
+    "ja": "落ちくぼんだ目と細かく並んだ歯を持つ頭蓋骨が、炎をまとって浮かぶ。淡緑の頭蓋骨と赤い目を緑の炎が囲む。",
+    "fr": "Un crâne flottant aux yeux enfoncés et aux dents serrées est entouré de flammes. Le crâne est vert pâle, les yeux rouges et les flammes vertes."
   },
   "Enemy appearance mn_ff2_011_c01": {
     "en": "A floating skull with sunken eyes and tightly spaced teeth is wreathed in flames. It has a blue skull, yellow eyes and violet-blue flames.",
-    "ja": "落ちくぼんだ目と細かく並んだ歯を持つ頭蓋骨が、炎をまとって浮かぶ。青い頭蓋骨と黄色い目を青紫の炎が囲む。"
+    "ja": "落ちくぼんだ目と細かく並んだ歯を持つ頭蓋骨が、炎をまとって浮かぶ。青い頭蓋骨と黄色い目を青紫の炎が囲む。",
+    "fr": "Un crâne flottant aux yeux enfoncés et aux dents serrées est entouré de flammes. Le crâne est bleu, les yeux jaunes et les flammes bleu violet."
   },
   "Enemy appearance mn_ff2_012_c00": {
     "en": "A ragged, hunched humanoid shambles with a skeletal face, narrow legs and both long, clawlike hands reaching forward. It has blue-gray skin and an olive coat.",
-    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。青灰色の肌にオリーブ色の上着。"
+    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。青灰色の肌にオリーブ色の上着。",
+    "fr": "Un humanoïde voûté et en haillons titube, le visage squelettique, les jambes fines et les deux longues mains griffues tendues devant lui. Il a la peau gris bleuté et un manteau olive."
   },
   "Enemy appearance mn_ff2_012_c01": {
     "en": "A ragged, hunched humanoid shambles with a skeletal face, narrow legs and both long, clawlike hands reaching forward. It has pale gray skin and ragged green cloth.",
-    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。淡灰色の肌に緑のぼろ布。"
+    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。淡灰色の肌に緑のぼろ布。",
+    "fr": "Un humanoïde voûté et en haillons titube, le visage squelettique, les jambes fines et les deux longues mains griffues tendues devant lui. Il a la peau gris pâle et porte un tissu vert en lambeaux."
   },
   "Enemy appearance mn_ff2_012_c02": {
     "en": "A ragged, hunched humanoid shambles with a skeletal face, narrow legs and both long, clawlike hands reaching forward. It is purple with magenta trim and a red foot.",
-    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。紫の体に赤紫の縁取りで、片足は赤い。"
+    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。紫の体に赤紫の縁取りで、片足は赤い。",
+    "fr": "Un humanoïde voûté et en haillons titube, le visage squelettique, les jambes fines et les deux longues mains griffues tendues devant lui. Il est violet avec un galon magenta et un pied rouge."
   },
   "Enemy appearance mn_ff2_012_c03": {
     "en": "A ragged, hunched humanoid shambles with a skeletal face, narrow legs and both long, clawlike hands reaching forward. It has a golden face and hands, red eyes and olive clothing.",
-    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。金色の顔と手、赤い目、オリーブ色の衣服。"
+    "ja": "ぼろをまとった人型が背を丸め、骨ばった顔を前に出して細い脚でよろめく。両手の長い指を爪のように伸ばす。金色の顔と手、赤い目、オリーブ色の衣服。",
+    "fr": "Un humanoïde voûté et en haillons titube, le visage squelettique, les jambes fines et les deux longues mains griffues tendues devant lui. Il a le visage et les mains dorés, les yeux rouges et des vêtements olive."
   },
   "Enemy appearance mn_ff2_013_c00": {
     "en": "A thin skeleton with swept head cloth and a long tattered cloak holds a narrow curved blade forward. Ribs, long legs and skeletal fingers show through the opening. It has a dark green cloak and silver-blue blade.",
-    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。暗緑色のマントと銀青色の刃。"
+    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。暗緑色のマントと銀青色の刃。",
+    "fr": "Un squelette mince, coiffé d'un tissu rejeté en arrière et vêtu d'une longue cape en lambeaux, tend une fine lame recourbée. Ses côtes, ses longues jambes et ses doigts osseux apparaissent dans l'ouverture. Sa cape est vert foncé et sa lame bleu argenté."
   },
   "Enemy appearance mn_ff2_013_c01": {
     "en": "A thin skeleton with swept head cloth and a long tattered cloak holds a narrow curved blade forward. Ribs, long legs and skeletal fingers show through the opening. It uses dark violet cloth and a pale face.",
-    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。濃い紫の布に白っぽい顔。"
+    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。濃い紫の布に白っぽい顔。",
+    "fr": "Un squelette mince, coiffé d'un tissu rejeté en arrière et vêtu d'une longue cape en lambeaux, tend une fine lame recourbée. Ses côtes, ses longues jambes et ses doigts osseux apparaissent dans l'ouverture. Un tissu violet foncé encadre son visage pâle."
   },
   "Enemy appearance mn_ff2_013_c02": {
     "en": "A thin skeleton with swept head cloth and a long tattered cloak holds a narrow curved blade forward. Ribs, long legs and skeletal fingers show through the opening. It is olive and lavender with a yellow-white blade.",
-    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。オリーブ色と薄紫の布、黄白色の刃。"
+    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。オリーブ色と薄紫の布、黄白色の刃。",
+    "fr": "Un squelette mince, coiffé d'un tissu rejeté en arrière et vêtu d'une longue cape en lambeaux, tend une fine lame recourbée. Ses côtes, ses longues jambes et ses doigts osseux apparaissent dans l'ouverture. Il est vert olive et lavande, avec une lame blanc jaunâtre."
   },
   "Enemy appearance mn_ff2_013_c03": {
     "en": "A thin skeleton with swept head cloth and a long tattered cloak holds a narrow curved blade forward. Ribs, long legs and skeletal fingers show through the opening. It wears brown-orange cloth around black and pale bones.",
-    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。茶がかった橙の布から黒ずんだ部分のある白い骨がのぞく。"
+    "ja": "細い骸骨が頭布と長いぼろのマントをなびかせ、細い曲刀を前に構える。マントの前から肋骨、長い脚、骨の指がのぞく。茶がかった橙の布から黒ずんだ部分のある白い骨がのぞく。",
+    "fr": "Un squelette mince, coiffé d'un tissu rejeté en arrière et vêtu d'une longue cape en lambeaux, tend une fine lame recourbée. Ses côtes, ses longues jambes et ses doigts osseux apparaissent dans l'ouverture. Un tissu brun orangé entoure ses os noirs et pâles."
   },
   "Enemy appearance mn_ff2_014_c00": {
     "en": "A broad segmented insect with splayed hooked legs, raised feelers, a ridged upper body and large front mandibles. It has red-and-green armor and pale green jaw tips.",
-    "ja": "幅広い節のある虫。鉤のついた脚を広げ、触角を上げる。背に隆起した筋があり、前には大きなあごが突き出す。赤と緑の外殻で、あご先は淡緑色。"
+    "ja": "幅広い節のある虫。鉤のついた脚を広げ、触角を上げる。背に隆起した筋があり、前には大きなあごが突き出す。赤と緑の外殻で、あご先は淡緑色。",
+    "fr": "Un insecte large et segmenté, aux pattes crochues et écartées, aux antennes dressées, au dos strié et aux grandes mandibules. Sa carapace est rouge et verte, ses mandibules à pointes vert pâle."
   },
   "Enemy appearance mn_ff2_014_c01": {
     "en": "A broad segmented insect with splayed hooked legs, raised feelers, a ridged upper body and large front mandibles. It is gray-black with yellow tips.",
-    "ja": "幅広い節のある虫。鉤のついた脚を広げ、触角を上げる。背に隆起した筋があり、前には大きなあごが突き出す。灰色がかった黒で、先端は黄色。"
+    "ja": "幅広い節のある虫。鉤のついた脚を広げ、触角を上げる。背に隆起した筋があり、前には大きなあごが突き出す。灰色がかった黒で、先端は黄色。",
+    "fr": "Un insecte large et segmenté, aux pattes crochues et écartées, aux antennes dressées, au dos strié et aux grandes mandibules. Il est gris-noir, avec des pointes jaunes."
   },
   "Enemy appearance mn_ff2_015_c00": {
     "en": "A bulky horned humanoid with pointed ears, a snarling face, broad shoulders and barely bent knees. Its clawed hand is raised beside a long staff topped with a skull, and a cloak hangs behind. It is dark blue with gold and orange accents.",
-    "ja": "角の生えた大柄な人型がひざをわずかに曲げて立つ。広い肩ととがった耳、うなり顔があり、頭蓋骨を載せた長い杖の脇に爪のある手を上げる。背にはマント。濃青色に金と橙の差し色。"
+    "ja": "角の生えた大柄な人型がひざをわずかに曲げて立つ。広い肩ととがった耳、うなり顔があり、頭蓋骨を載せた長い杖の脇に爪のある手を上げる。背にはマント。濃青色に金と橙の差し色。",
+    "fr": "Un humanoïde massif et cornu, aux oreilles pointues, au visage hargneux, aux larges épaules et aux genoux à peine pliés. Sa main griffue se lève près d'un long bâton surmonté d'un crâne. Une cape pend derrière lui. Il est bleu foncé, rehaussé d'or et d'orange."
   },
   "Enemy appearance mn_ff2_015_c01": {
     "en": "A bulky horned humanoid with pointed ears, a snarling face, broad shoulders and barely bent knees. Its clawed hand is raised beside a long staff topped with a skull, and a cloak hangs behind. It is purple with green trim and a red cape.",
-    "ja": "角の生えた大柄な人型がひざをわずかに曲げて立つ。広い肩ととがった耳、うなり顔があり、頭蓋骨を載せた長い杖の脇に爪のある手を上げる。背にはマント。紫に緑の縁取り、赤いマント。"
+    "ja": "角の生えた大柄な人型がひざをわずかに曲げて立つ。広い肩ととがった耳、うなり顔があり、頭蓋骨を載せた長い杖の脇に爪のある手を上げる。背にはマント。紫に緑の縁取り、赤いマント。",
+    "fr": "Un humanoïde massif et cornu, aux oreilles pointues, au visage hargneux, aux larges épaules et aux genoux à peine pliés. Sa main griffue se lève près d'un long bâton surmonté d'un crâne. Une cape pend derrière lui. Il est violet, bordé de vert et vêtu d'une cape rouge."
   },
   "Enemy appearance mn_ff2_016_c00": {
     "en": "A powerful clawed quadruped bears three different snarling animal heads, folded wings and a curled tail. It has yellow-gold flesh, dark wings and violet and green markings.",
-    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。黄金色の体に暗い翼と紫、緑の模様。"
+    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。黄金色の体に暗い翼と紫、緑の模様。",
+    "fr": "Un puissant quadrupède aux pattes griffues porte trois têtes animales différentes aux gueules grondantes, des ailes repliées et une queue enroulée. Sa chair est jaune d'or, ses ailes sombres et ses marques violettes et vertes."
   },
   "Enemy appearance mn_ff2_016_c01": {
     "en": "A powerful clawed quadruped bears three different snarling animal heads, folded wings and a curled tail. It has bronze fur, a magenta mane and teal wings.",
-    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。青銅色の毛に赤紫のたてがみと青緑の翼。"
+    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。青銅色の毛に赤紫のたてがみと青緑の翼。",
+    "fr": "Un puissant quadrupède aux pattes griffues porte trois têtes animales différentes aux gueules grondantes, des ailes repliées et une queue enroulée. Son pelage est bronze, sa crinière magenta et ses ailes bleu-vert."
   },
   "Enemy appearance mn_ff2_016_c02": {
     "en": "A powerful clawed quadruped bears three different snarling animal heads, folded wings and a curled tail. It has a dark slate-blue body with bright blue accents.",
-    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。暗い青灰色の体に鮮やかな青の差し色。"
+    "ja": "三つの異なる獣の頭がうなる、爪のあるたくましい四足獣。翼を折り畳み、尾を丸める。暗い青灰色の体に鮮やかな青の差し色。",
+    "fr": "Un puissant quadrupède aux pattes griffues porte trois têtes animales différentes aux gueules grondantes, des ailes repliées et une queue enroulée. Son corps est bleu ardoise foncé avec des accents bleu vif."
   },
   "Enemy appearance mn_ff2_017_c00": {
     "en": "A huge toothed plant mouth is ringed by fleshy petals, long branching green tendrils and rootlike feet. It has rust-red and orange petals.",
-    "ja": "歯が並んだ巨大な植物の口。肉厚な花びら、枝分かれした長い緑のつる、根のような足が周りを囲む。花びらは赤さび色と橙色。"
+    "ja": "歯が並んだ巨大な植物の口。肉厚な花びら、枝分かれした長い緑のつる、根のような足が周りを囲む。花びらは赤さび色と橙色。",
+    "fr": "Une immense gueule de plante garnie de dents est encadrée de pétales charnus, de longues vrilles ramifiées vertes et de pieds en forme de racines. Les pétales sont rouge rouille et orange."
   },
   "Enemy appearance mn_ff2_017_c01": {
     "en": "A huge toothed plant mouth is ringed by fleshy petals, long branching green tendrils and rootlike feet. It has magenta petals and bright lime-green tendrils.",
-    "ja": "歯が並んだ巨大な植物の口。肉厚な花びら、枝分かれした長い緑のつる、根のような足が周りを囲む。赤紫の花びらに明るい黄緑のつる。"
+    "ja": "歯が並んだ巨大な植物の口。肉厚な花びら、枝分かれした長い緑のつる、根のような足が周りを囲む。赤紫の花びらに明るい黄緑のつる。",
+    "fr": "Une immense gueule de plante garnie de dents est encadrée de pétales charnus, de longues vrilles ramifiées vertes et de pieds en forme de racines. Les pétales sont magenta et les vrilles vert lime vif."
   },
   "Enemy appearance mn_ff2_018_c00": {
     "en": "An upright, snarling fish has a broad mouth, sharp teeth and a strong fan of pointed fins running along its head and back. A forked tail hangs below. It is orange with cobalt and pale fins.",
-    "ja": "幅広い口で鋭い歯をむいた魚が直立する。頭から背にかけてとがったひれが扇形に広がり、二股の尾が下がる。橙色の体に濃い青と淡い色のひれ。"
+    "ja": "幅広い口で鋭い歯をむいた魚が直立する。頭から背にかけてとがったひれが扇形に広がり、二股の尾が下がる。橙色の体に濃い青と淡い色のひれ。",
+    "fr": "Un poisson dressé et hargneux, à la large gueule aux dents acérées et aux grandes nageoires en pointes en éventail sur la tête et le dos. Une queue fourchue pend en dessous. Il est orange avec des nageoires bleu cobalt et pâles."
   },
   "Enemy appearance mn_ff2_018_c01": {
     "en": "An upright, snarling fish has a broad mouth, sharp teeth and a strong fan of pointed fins running along its head and back. A forked tail hangs below. It is violet with pale silver fins.",
-    "ja": "幅広い口で鋭い歯をむいた魚が直立する。頭から背にかけてとがったひれが扇形に広がり、二股の尾が下がる。紫の体に淡い銀色のひれ。"
+    "ja": "幅広い口で鋭い歯をむいた魚が直立する。頭から背にかけてとがったひれが扇形に広がり、二股の尾が下がる。紫の体に淡い銀色のひれ。",
+    "fr": "Un poisson dressé et hargneux, à la large gueule aux dents acérées et aux grandes nageoires en pointes en éventail sur la tête et le dos. Une queue fourchue pend en dessous. Il est violet avec des nageoires argent pâle."
   },
   "Enemy appearance mn_ff2_019_c00": {
     "en": "A tightly curled flying creature with folded feathered wings, a hooked, open beak and a trailing pointed lower body. A small eye peers from inside the curl. It is gold and red-orange.",
-    "ja": "飛ぶ獣が体をきつく丸め、羽毛のある翼を畳んで鉤形のくちばしを開ける。丸みの内側から小さな目がのぞき、先のとがった下半身が後ろに伸びる。金色と赤橙色。"
+    "ja": "飛ぶ獣が体をきつく丸め、羽毛のある翼を畳んで鉤形のくちばしを開ける。丸みの内側から小さな目がのぞき、先のとがった下半身が後ろに伸びる。金色と赤橙色。",
+    "fr": "Une créature volante enroulée sur elle-même, aux ailes repliées et emplumées, au bec crochu et ouvert et au bas du corps effilé. Un petit œil guette dans le creux. Elle est dorée et rouge orangé."
   },
   "Enemy appearance mn_ff2_019_c01": {
     "en": "A tightly curled flying creature with folded feathered wings, a hooked, open beak and a trailing pointed lower body. A small eye peers from inside the curl. It is turquoise with blue wing tips and red facial accents.",
-    "ja": "飛ぶ獣が体をきつく丸め、羽毛のある翼を畳んで鉤形のくちばしを開ける。丸みの内側から小さな目がのぞき、先のとがった下半身が後ろに伸びる。青緑色で、翼の先は青く、顔に赤が差す。"
+    "ja": "飛ぶ獣が体をきつく丸め、羽毛のある翼を畳んで鉤形のくちばしを開ける。丸みの内側から小さな目がのぞき、先のとがった下半身が後ろに伸びる。青緑色で、翼の先は青く、顔に赤が差す。",
+    "fr": "Une créature volante enroulée sur elle-même, aux ailes repliées et emplumées, au bec crochu et ouvert et au bas du corps effilé. Un petit œil guette dans le creux. Elle est turquoise avec des pointes d'ailes bleues et des marques rouges au visage."
   },
   "Enemy appearance mn_ff2_020_c00": {
     "en": "A stocky, scowling swordsman wears a horned cap, sleeveless clothing, forearm bands and broad boots. He holds a wide, curved blade across his body. It wears teal and purple, with a pale cyan blade.",
-    "ja": "ずんぐりした剣士がしかめ面で太い曲刀を体の前に構える。角のある帽子、袖なしの服、前腕の帯、幅広いブーツを着ける。青緑と紫の服に淡い水色の刃。"
+    "ja": "ずんぐりした剣士がしかめ面で太い曲刀を体の前に構える。角のある帽子、袖なしの服、前腕の帯、幅広いブーツを着ける。青緑と紫の服に淡い水色の刃。",
+    "fr": "Un épéiste trapu à l'air renfrogné porte une coiffe cornue, une tenue sans manches, des bandeaux aux avant-bras et de larges bottes. Il tient une large lame courbe devant lui. Sa tenue est bleu-vert et violette, sa lame cyan pâle."
   },
   "Enemy appearance mn_ff2_020_c01": {
     "en": "A stocky, scowling swordsman wears a horned cap, sleeveless clothing, forearm bands and broad boots. He holds a wide, curved blade across his body. It wears green and brown, with a pale yellow-green blade.",
-    "ja": "ずんぐりした剣士がしかめ面で太い曲刀を体の前に構える。角のある帽子、袖なしの服、前腕の帯、幅広いブーツを着ける。緑と茶の服に淡い黄緑の刃。"
+    "ja": "ずんぐりした剣士がしかめ面で太い曲刀を体の前に構える。角のある帽子、袖なしの服、前腕の帯、幅広いブーツを着ける。緑と茶の服に淡い黄緑の刃。",
+    "fr": "Un épéiste trapu à l'air renfrogné porte une coiffe cornue, une tenue sans manches, des bandeaux aux avant-bras et de larges bottes. Il tient une large lame courbe devant lui. Sa tenue est verte et brune, sa lame jaune-vert pâle."
   },
   "Enemy appearance mn_ff2_021_c00": {
     "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It wears blue armor with a red scarf and red boots.",
-    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。青い鎧に赤いスカーフとブーツ。"
+    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。青い鎧に赤いスカーフとブーツ。",
+    "fr": "Un homme massif et voûté, à la coiffe anguleuse, aux larges épaules et aux épaisses jambes, tient une grande lame d'argent en travers du ventre. Il porte une armure bleue, une écharpe rouge et des bottes rouges."
   },
   "Enemy appearance mn_ff2_021_c01": {
     "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It has a gray-green face and blue-green armor and cloth.",
-    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。灰緑色の顔に青緑の鎧と服。"
+    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。灰緑色の顔に青緑の鎧と服。",
+    "fr": "Un homme massif et voûté, à la coiffe anguleuse, aux larges épaules et aux épaisses jambes, tient une grande lame d'argent en travers du ventre. Il a le visage gris-vert, l'armure et le tissu bleu-vert."
   },
   "Enemy appearance mn_ff2_022_c00": {
     "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is mottled blue with ivory tusks.",
-    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。青のまだら模様に象牙色の牙。"
+    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。青のまだら模様に象牙色の牙。",
+    "fr": "Une bête basse et musclée à quatre pattes abaisse sa tête allongée et pointe d'énormes défenses vers l'avant. Un œil rond, des cornes courtes rejetées en arrière et d'épaisses pattes griffues se détachent sous le large dos cuirassé. Elle est bleu tacheté, avec des défenses ivoire."
   },
   "Enemy appearance mn_ff2_022_c01": {
     "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is purple with greenish-white tusks and pale claws.",
-    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。紫の体に緑がかった白い牙と淡色の爪。"
+    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。紫の体に緑がかった白い牙と淡色の爪。",
+    "fr": "Une bête basse et musclée à quatre pattes abaisse sa tête allongée et pointe d'énormes défenses vers l'avant. Un œil rond, des cornes courtes rejetées en arrière et d'épaisses pattes griffues se détachent sous le large dos cuirassé. Elle est violette, avec des défenses blanc verdâtre et des griffes pâles."
   },
   "Enemy appearance mn_ff2_023_c00": {
     "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is orange and green with violet eyes.",
-    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。橙と緑の体に紫の目。"
+    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。橙と緑の体に紫の目。",
+    "fr": "Une grenouille ronde et trapue aux deux yeux saillants, aux pattes courtes et écartées et aux grosses bosses surmontées de courtes mèches. Elle est orange et verte, aux yeux violets."
   },
   "Enemy appearance mn_ff2_023_c01": {
     "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is violet with sea-green eyes and trailing green strands.",
-    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。紫の体に青緑の目と、垂れた緑の突起。"
+    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。紫の体に青緑の目と、垂れた緑の突起。",
+    "fr": "Une grenouille ronde et trapue aux deux yeux saillants, aux pattes courtes et écartées et aux grosses bosses surmontées de courtes mèches. Elle est violette, aux yeux vert marin et aux mèches vertes pendantes."
   },
   "Enemy appearance mn_ff2_024_c00": {
     "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is orange with violet details.",
-    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。橙色の体に紫の模様。"
+    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。橙色の体に紫の模様。",
+    "fr": "Un reptile au long cou émerge d'un anneau d'eau bleue, sa fine queue visible derrière lui. Des épines bordent son long cou et sa tête striée au-dessus d'un museau crochu. Il est orange avec des détails violets."
   },
   "Enemy appearance mn_ff2_024_c01": {
     "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is dark purple with a bright red eye and pale spines.",
-    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。濃い紫の体に鮮やかな赤い目と淡いとげ。"
+    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。濃い紫の体に鮮やかな赤い目と淡いとげ。",
+    "fr": "Un reptile au long cou émerge d'un anneau d'eau bleue, sa fine queue visible derrière lui. Des épines bordent son long cou et sa tête striée au-dessus d'un museau crochu. Il est violet foncé avec un œil rouge vif et des épines pâles."
   },
   "Enemy appearance mn_ff2_025_c00": {
     "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is gold with violet accents.",
-    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。金色に紫の差し色。"
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。金色に紫の差し色。",
+    "fr": "Une raie au corps large et aplati, aux nageoires en forme d'ailes, à la fine queue enroulée et aux dents pointues. Une grande tache ovale marque son front. De fins filaments pendent des nageoires et une langue recourbée sort de sa bouche. Elle est dorée avec des détails violets."
   },
   "Enemy appearance mn_ff2_025_c01": {
     "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is teal with blue accents.",
-    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。青緑に青の差し色。"
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。青緑に青の差し色。",
+    "fr": "Une raie au corps large et aplati, aux nageoires en forme d'ailes, à la fine queue enroulée et aux dents pointues. Une grande tache ovale marque son front. De fins filaments pendent des nageoires et une langue recourbée sort de sa bouche. Elle est bleu-vert avec des détails bleus."
   },
   "Enemy appearance mn_ff2_025_c02": {
     "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is lavender with green accents.",
-    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。薄紫に緑の差し色。"
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。薄紫に緑の差し色。",
+    "fr": "Une raie au corps large et aplati, aux nageoires en forme d'ailes, à la fine queue enroulée et aux dents pointues. Une grande tache ovale marque son front. De fins filaments pendent des nageoires et une langue recourbée sort de sa bouche. Elle est lavande avec des détails verts."
   },
   "Enemy appearance mn_ff2_026_c00": {
     "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has magenta folds, green tendrils and red-orange details.",
-    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。赤紫のひだに緑の触手と赤橙色の差し色。"
+    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。赤紫のひだに緑の触手と赤橙色の差し色。",
+    "fr": "Une masse flottante et arrondie évoquant un cerveau, aux plis profonds et aux petits yeux brillants. Sous la masse rétrécie pendent des dents et des vrilles. Les plis sont magenta, les vrilles vertes et les détails rouge orangé."
   },
   "Enemy appearance mn_ff2_026_c01": {
     "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has ochre folds, purple tendrils and orange details.",
-    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。黄土色のひだに紫の触手と橙の差し色。"
+    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。黄土色のひだに紫の触手と橙の差し色。",
+    "fr": "Une masse flottante et arrondie évoquant un cerveau, aux plis profonds et aux petits yeux brillants. Sous la masse rétrécie pendent des dents et des vrilles. Les plis sont ocre, les vrilles violettes et les détails orange."
   },
   "Enemy appearance mn_ff2_027_c00": {
     "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pink and green with a green eye.",
-    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。桃色と緑の体に緑の目。"
+    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。桃色と緑の体に緑の目。",
+    "fr": "Un œil rond et saillant au centre d'une créature organique à vrilles ramifiées et à longue tige inférieure qui se recourbe. La créature est rose et verte, avec un œil vert."
   },
   "Enemy appearance mn_ff2_027_c01": {
     "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pale blue-gray with a blue eye and dark blue strands.",
-    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。淡い青灰色の体に青い目と濃青色の触手。"
+    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。淡い青灰色の体に青い目と濃青色の触手。",
+    "fr": "Un œil rond et saillant au centre d'une créature organique à vrilles ramifiées et à longue tige inférieure qui se recourbe. Elle est gris bleuté pâle, avec un œil bleu et des filaments bleu foncé."
   },
   "Enemy appearance mn_ff2_028_c00": {
     "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is orange-brown.",
-    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。橙がかった茶色。"
+    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。橙がかった茶色。",
+    "fr": "Un humanoïde élancé à tête de loup, au museau ouvert et denté, aux oreilles pointues et aux longs bras musclés. Il tend ses griffes pâles devant lui et ses fines jambes griffues lui donnent une allure bondissante. Il est brun orangé."
   },
   "Enemy appearance mn_ff2_028_c01": {
     "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is icy blue with orange claw and mouth accents.",
-    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。氷のような青で、爪と口元に橙色が差す。"
+    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。氷のような青で、爪と口元に橙色が差す。",
+    "fr": "Un humanoïde élancé à tête de loup, au museau ouvert et denté, aux oreilles pointues et aux longs bras musclés. Il tend ses griffes pâles devant lui et ses fines jambes griffues lui donnent une allure bondissante. Il est bleu glacier, avec des touches orange aux griffes et à la gueule."
   },
   "Enemy appearance mn_ff2_029_c00": {
     "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is gray and violet with blue feet.",
-    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。灰色と紫の体に青い足。"
+    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。灰色と紫の体に青い足。",
+    "fr": "Un humanoïde mince et cornu s'accroupit sur ses pieds griffus, les ailes de chauve-souris relevées et les bras pliés vers l'extérieur. Une queue pointue s'enroule derrière. Il est gris et violet, avec les pieds bleus."
   },
   "Enemy appearance mn_ff2_029_c01": {
     "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is bright green with orange-brown wings and teal feet.",
-    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。鮮やかな緑の体に橙茶色の翼と青緑の足。"
+    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。鮮やかな緑の体に橙茶色の翼と青緑の足。",
+    "fr": "Un humanoïde mince et cornu s'accroupit sur ses pieds griffus, les ailes de chauve-souris relevées et les bras pliés vers l'extérieur. Une queue pointue s'enroule derrière. Il est vert vif, aux ailes brun orangé et aux pieds bleu-vert."
   },
   "Enemy appearance mn_ff2_030_c00": {
     "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is yellow-green with violet tips.",
-    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。黄緑の体につるの先が紫。"
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。黄緑の体につるの先が紫。",
+    "fr": "Une large gueule ovale occupe tout le corps rond de cette créature en forme de racine. Plusieurs rangées de dents acérées tapissent sa gueule. De nombreuses vrilles épaisses à pointes renflées rayonnent autour du corps. Elle est jaune-vert à pointes violettes."
   },
   "Enemy appearance mn_ff2_030_c01": {
     "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is gray with violet tips and a red inner mouth.",
-    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。灰色の体につるの先が紫で、口の中は赤い。"
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。灰色の体につるの先が紫で、口の中は赤い。",
+    "fr": "Une large gueule ovale occupe tout le corps rond de cette créature en forme de racine. Plusieurs rangées de dents acérées tapissent sa gueule. De nombreuses vrilles épaisses à pointes renflées rayonnent autour du corps. Elle est grise à pointes violettes, avec l'intérieur de la bouche rouge."
   },
   "Enemy appearance mn_ff2_030_c02": {
     "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is dark green with orange-red tips and amber teeth.",
-    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。暗緑の体につるの先が赤橙色で、歯は琥珀色。"
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。暗緑の体につるの先が赤橙色で、歯は琥珀色。",
+    "fr": "Une large gueule ovale occupe tout le corps rond de cette créature en forme de racine. Plusieurs rangées de dents acérées tapissent sa gueule. De nombreuses vrilles épaisses à pointes renflées rayonnent autour du corps. Elle est vert foncé à pointes rouge orangé et aux dents ambrées."
   },
   "Enemy appearance mn_ff2_031_c00": {
     "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is teal with pale claws and a pink tongue.",
-    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青緑の体に淡い爪と桃色の舌。"
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青緑の体に淡い爪と桃色の舌。",
+    "fr": "Un reptile accroupi, à la longue tête basse, à l'œil saillant, à la corne pointue et à la langue recourbée. Des plaques rugueuses forment un dos haut et irrégulier, au-dessus d'une queue courbée et de longs pieds griffus. Il est bleu-vert aux griffes pâles et à la langue rose."
   },
   "Enemy appearance mn_ff2_031_c01": {
     "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is purple-red with gold claws.",
-    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。赤紫色の体に金色の爪。"
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。赤紫色の体に金色の爪。",
+    "fr": "Un reptile accroupi, à la longue tête basse, à l'œil saillant, à la corne pointue et à la langue recourbée. Des plaques rugueuses forment un dos haut et irrégulier, au-dessus d'une queue courbée et de longs pieds griffus. Il est rouge violacé aux griffes dorées."
   },
   "Enemy appearance mn_ff2_031_c02": {
     "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is blue with gold-orange horns and violet tongue.",
-    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青い体に金橙色の角と紫の舌。"
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青い体に金橙色の角と紫の舌。",
+    "fr": "Un reptile accroupi, à la longue tête basse, à l'œil saillant, à la corne pointue et à la langue recourbée. Des plaques rugueuses forment un dos haut et irrégulier, au-dessus d'une queue courbée et de longs pieds griffus. Il est bleu aux cornes orange doré et à la langue violette."
   },
   "Enemy appearance mn_ff2_032_c00": {
     "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is bright green with purple eyes.",
-    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな緑の体に紫の目。"
+    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな緑の体に紫の目。",
+    "fr": "Un amas pyramidal aux plis mous, d'où de nombreux petits yeux guettent à différentes hauteurs. Des gouttes visqueuses et des pointes bordent sa base. Il est vert vif aux yeux violets."
   },
   "Enemy appearance mn_ff2_032_c01": {
     "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is electric blue with red eyes.",
-    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな青の体に赤い目。"
+    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな青の体に赤い目。",
+    "fr": "Un amas pyramidal aux plis mous, d'où de nombreux petits yeux guettent à différentes hauteurs. Des gouttes visqueuses et des pointes bordent sa base. Il est bleu électrique aux yeux rouges."
   },
   "Enemy appearance mn_ff2_033_c00": {
     "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is blue-violet with cyan spines.",
-    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。青紫の体に水色のとげ。"
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。青紫の体に水色のとげ。",
+    "fr": "Un grand ver lève une gorge ronde bordée de dents au-dessus de sa queue segmentée et enroulée. De courtes épines raides et des taches couvrent la crête externe. Il est bleu violet aux épines cyan."
   },
   "Enemy appearance mn_ff2_033_c01": {
     "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is gold with dark markings.",
-    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。金色の体に暗い斑紋。"
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。金色の体に暗い斑紋。",
+    "fr": "Un grand ver lève une gorge ronde bordée de dents au-dessus de sa queue segmentée et enroulée. De courtes épines raides et des taches couvrent la crête externe. Il est doré avec des marques sombres."
   },
   "Enemy appearance mn_ff2_033_c02": {
     "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is magenta with gold-tipped spines.",
-    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。赤紫の体に先の金色のとげ。"
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。赤紫の体に先の金色のとげ。",
+    "fr": "Un grand ver lève une gorge ronde bordée de dents au-dessus de sa queue segmentée et enroulée. De courtes épines raides et des taches couvrent la crête externe. Il est magenta aux pointes dorées."
   },
   "Enemy appearance mn_ff2_034_c00": {
     "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is green.",
-    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。緑色。"
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。緑色。",
+    "fr": "Un monticule de gelée brillante à la tête arrondie, aux deux yeux plissés et à la ligne de bouche sombre et dentelée. De mous renflements se replient dessous, à la place des membres. Il est vert."
   },
   "Enemy appearance mn_ff2_034_c01": {
     "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is golden yellow.",
-    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。黄金色。"
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。黄金色。",
+    "fr": "Un monticule de gelée brillante à la tête arrondie, aux deux yeux plissés et à la ligne de bouche sombre et dentelée. De mous renflements se replient dessous, à la place des membres. Il est jaune d'or."
   },
   "Enemy appearance mn_ff2_034_c02": {
     "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is orange-red.",
-    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。赤橙色。"
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。赤橙色。",
+    "fr": "Un monticule de gelée brillante à la tête arrondie, aux deux yeux plissés et à la ligne de bouche sombre et dentelée. De mous renflements se replient dessous, à la place des membres. Il est rouge orangé."
   },
   "Enemy appearance mn_ff2_034_c03": {
     "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is deep blue with beige eyes.",
-    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。深い青の体に薄茶色の目。"
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。深い青の体に薄茶色の目。",
+    "fr": "Un monticule de gelée brillante à la tête arrondie, aux deux yeux plissés et à la ligne de bouche sombre et dentelée. De mous renflements se replient dessous, à la place des membres. Il est bleu profond aux yeux beiges."
   },
   "Enemy appearance mn_ff2_035_c00": {
     "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are red-orange.",
-    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。赤橙色の炎。"
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。赤橙色の炎。",
+    "fr": "Un visage cornu flotte et brûle au creux d'un croissant de feu. Des orbites sombres, une bouche grimaçante et des langues de feu fourchues pointent vers l'avant. Les flammes sont rouge orangé."
   },
   "Enemy appearance mn_ff2_035_c01": {
     "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are green-teal.",
-    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。青緑がかった緑の炎。"
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。青緑がかった緑の炎。",
+    "fr": "Un visage cornu flotte et brûle au creux d'un croissant de feu. Des orbites sombres, une bouche grimaçante et des langues de feu fourchues pointent vers l'avant. Les flammes sont vert turquoise."
   },
   "Enemy appearance mn_ff2_035_c02": {
     "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are gold-yellow.",
-    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。黄金色の炎。"
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。黄金色の炎。",
+    "fr": "Un visage cornu flotte et brûle au creux d'un croissant de feu. Des orbites sombres, une bouche grimaçante et des langues de feu fourchues pointent vers l'avant. Les flammes sont jaune d'or."
   },
   "Enemy appearance mn_ff2_036_c00": {
     "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has blue skin and a red-orange cloak.",
-    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。青い肌に赤橙色のマント。"
+    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。青い肌に赤橙色のマント。",
+    "fr": "Une silhouette mince et droite déploie sa cape en deux longs pans évoquant des ailes. Un col haut et une coiffure cornue ou pointue encadrent ses traits aigus. Elle a la peau bleue et une cape rouge orangé."
   },
   "Enemy appearance mn_ff2_036_c01": {
     "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has green skin, dark green clothes and a magenta cloak.",
-    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。緑の肌に暗緑の服と赤紫のマント。"
+    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。緑の肌に暗緑の服と赤紫のマント。",
+    "fr": "Une silhouette mince et droite déploie sa cape en deux longs pans évoquant des ailes. Un col haut et une coiffure cornue ou pointue encadrent ses traits aigus. Elle a la peau verte, des vêtements vert foncé et une cape magenta."
   },
   "Enemy appearance mn_ff2_037_c00": {
     "en": "A tall armored figure with a pale, stern face stands with one arm raised. Spiked shoulder pieces and a flaring cape frame ornate armor and boots. It has gold armor and purple cloth.",
-    "ja": "背の高い鎧姿の人物が、青白い厳しい顔で片腕を上げて立つ。肩当てにはとげがあり、広がるマントの内側に装飾の多い鎧とブーツが見える。金色の鎧と紫の布。"
+    "ja": "背の高い鎧姿の人物が、青白い厳しい顔で片腕を上げて立つ。肩当てにはとげがあり、広がるマントの内側に装飾の多い鎧とブーツが見える。金色の鎧と紫の布。",
+    "fr": "Une haute silhouette en armure, au visage pâle et sévère, lève un bras. Des épaulières à pointes et une cape déployée encadrent l'armure et les bottes ouvragées. L'armure est dorée et le tissu violet."
   },
   "Enemy appearance mn_ff2_037_c01": {
     "en": "A tall armored figure with a pale, stern face stands with one arm raised. Spiked shoulder pieces and a flaring cape frame ornate armor and boots. It has silver-gray armor with red-brown lining.",
-    "ja": "背の高い鎧姿の人物が、青白い厳しい顔で片腕を上げて立つ。肩当てにはとげがあり、広がるマントの内側に装飾の多い鎧とブーツが見える。銀灰色の鎧に赤茶色の裏地。"
+    "ja": "背の高い鎧姿の人物が、青白い厳しい顔で片腕を上げて立つ。肩当てにはとげがあり、広がるマントの内側に装飾の多い鎧とブーツが見える。銀灰色の鎧に赤茶色の裏地。",
+    "fr": "Une haute silhouette en armure, au visage pâle et sévère, lève un bras. Des épaulières à pointes et une cape déployée encadrent l'armure et les bottes ouvragées. L'armure est gris argenté, avec une doublure brun rouge."
   },
   "Enemy appearance mn_ff2_038_c00": {
     "en": "An upright mantis has long antennae, clear pointed wings, jointed hind legs and two huge serrated scythe arms. It is orange with teal eyes and pale wings.",
-    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。橙色の体に青緑の目と淡い翼。"
+    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。橙色の体に青緑の目と淡い翼。",
+    "fr": "Une mante dressée, aux longues antennes, aux ailes transparentes et pointues et aux pattes arrière articulées. Ses deux énormes bras évoquent des faux dentelées. Elle est orange aux yeux bleu-vert et aux ailes pâles."
   },
   "Enemy appearance mn_ff2_038_c01": {
     "en": "An upright mantis has long antennae, clear pointed wings, jointed hind legs and two huge serrated scythe arms. It is dark green with pink eyes and pale pink wings.",
-    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。濃緑の体に桃色の目と淡い桃色の翼。"
+    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。濃緑の体に桃色の目と淡い桃色の翼。",
+    "fr": "Une mante dressée, aux longues antennes, aux ailes transparentes et pointues et aux pattes arrière articulées. Ses deux énormes bras évoquent des faux dentelées. Elle est vert foncé aux yeux roses et aux ailes rose pâle."
   },
   "Enemy appearance mn_ff2_038_c02": {
     "en": "An upright mantis has long antennae, clear pointed wings, jointed hind legs and two huge serrated scythe arms. It is blue with red eyes and pink-white wings.",
-    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。青い体に赤い目と桃色がかった白い翼。"
+    "ja": "直立したカマキリ。長い触角と透き通ったとがった翼、節のある後ろ脚があり、二本の巨大な鎌の腕にはぎざぎざの刃が並ぶ。青い体に赤い目と桃色がかった白い翼。",
+    "fr": "Une mante dressée, aux longues antennes, aux ailes transparentes et pointues et aux pattes arrière articulées. Ses deux énormes bras évoquent des faux dentelées. Elle est bleue aux yeux rouges et aux ailes blanc rosé."
   },
   "Enemy appearance mn_ff2_039_c00": {
     "en": "An armored rider on a rearing horse holds a long sword up at an angle. Both horse and rider have pointed head armor, and the rider's helmet has a narrow eye slit. It is brown-gold with a yellow sword.",
-    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。茶金色の姿に黄色い剣。"
+    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。茶金色の姿に黄色い剣。",
+    "fr": "Un cavalier en armure sur un cheval cabré brandit une longue épée en biais. Cheval et cavalier portent des protections de tête pointues, et le casque du cavalier est fendu d'une étroite visière. L'ensemble est brun doré et l'épée jaune."
   },
   "Enemy appearance mn_ff2_039_c01": {
     "en": "An armored rider on a rearing horse holds a long sword up at an angle. Both horse and rider have pointed head armor, and the rider's helmet has a narrow eye slit. It is blue-black with an orange blade.",
-    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。青みがかった黒の姿に橙色の刃。"
+    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。青みがかった黒の姿に橙色の刃。",
+    "fr": "Un cavalier en armure sur un cheval cabré brandit une longue épée en biais. Cheval et cavalier portent des protections de tête pointues, et le casque du cavalier est fendu d'une étroite visière. L'ensemble est bleu-noir et la lame orange."
   },
   "Enemy appearance mn_ff2_039_c02": {
     "en": "An armored rider on a rearing horse holds a long sword up at an angle. Both horse and rider have pointed head armor, and the rider's helmet has a narrow eye slit. It is black and violet with a silver blade.",
-    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。黒と紫の姿に銀色の刃。"
+    "ja": "前脚を上げた馬に鎧姿の騎士が乗り、長い剣を斜めに掲げる。馬も騎士もとがった兜を着け、騎士の兜には細い目の隙間がある。黒と紫の姿に銀色の刃。",
+    "fr": "Un cavalier en armure sur un cheval cabré brandit une longue épée en biais. Cheval et cavalier portent des protections de tête pointues, et le casque du cavalier est fendu d'une étroite visière. L'ensemble est noir et violet et la lame argentée."
   },
   "Enemy appearance mn_ff2_040_c00": {
     "en": "A massive humanoid stands on huge feet with thick segmented limbs, a broad blocky torso and a small squat head. Its heavy fists hang at either side. It is dark brown.",
-    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。濃い茶色。"
+    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。濃い茶色。",
+    "fr": "Un humanoïde massif se dresse sur d'immenses pieds. Il a des membres épais et articulés, un large torse anguleux et une petite tête aplatie. Ses lourds poings pendent sur les côtés. Il est brun foncé."
   },
   "Enemy appearance mn_ff2_040_c01": {
     "en": "A massive humanoid stands on huge feet with thick segmented limbs, a broad blocky torso and a small squat head. Its heavy fists hang at either side. It is slate blue-gray.",
-    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。粘板岩のような青灰色。"
+    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。粘板岩のような青灰色。",
+    "fr": "Un humanoïde massif se dresse sur d'immenses pieds. Il a des membres épais et articulés, un large torse anguleux et une petite tête aplatie. Ses lourds poings pendent sur les côtés. Il est gris bleu ardoise."
   },
   "Enemy appearance mn_ff2_040_c02": {
     "en": "A massive humanoid stands on huge feet with thick segmented limbs, a broad blocky torso and a small squat head. Its heavy fists hang at either side. It is a more saturated blue-violet.",
-    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。鮮やかな青紫色。"
+    "ja": "巨大な人型が大きな足で立つ。厚い節のある手足、幅広く角ばった胴、つぶれたように小さな頭を持ち、重そうな両こぶしを下げる。鮮やかな青紫色。",
+    "fr": "Un humanoïde massif se dresse sur d'immenses pieds. Il a des membres épais et articulés, un large torse anguleux et une petite tête aplatie. Ses lourds poings pendent sur les côtés. Il est bleu violet soutenu."
   },
   "Enemy appearance mn_ff2_041_c00": {
     "en": "A floating round face with narrowed eyes and an enormous toothed grin. Stubs and orb-tipped points radiate from its crown and sides. It is green with pink features.",
-    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。緑の顔に桃色の目元や口元。"
+    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。緑の顔に桃色の目元や口元。",
+    "fr": "Une face ronde et flottante, aux yeux plissés et à l'immense sourire denté. Des moignons et des pointes terminées par des boules rayonnent au sommet et sur les côtés. Elle est verte aux traits roses."
   },
   "Enemy appearance mn_ff2_041_c01": {
     "en": "A floating round face with narrowed eyes and an enormous toothed grin. Stubs and orb-tipped points radiate from its crown and sides. It is yellow-gold with bright pale teeth.",
-    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。黄金色の顔に明るい淡色の歯。"
+    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。黄金色の顔に明るい淡色の歯。",
+    "fr": "Une face ronde et flottante, aux yeux plissés et à l'immense sourire denté. Des moignons et des pointes terminées par des boules rayonnent au sommet et sur les côtés. Elle est jaune d'or avec des dents pâles et brillantes."
   },
   "Enemy appearance mn_ff2_041_c02": {
     "en": "A floating round face with narrowed eyes and an enormous toothed grin. Stubs and orb-tipped points radiate from its crown and sides. It is blue-white with lavender highlights.",
-    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。青みのある白に薄紫の光。"
+    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。青みのある白に薄紫の光。",
+    "fr": "Une face ronde et flottante, aux yeux plissés et à l'immense sourire denté. Des moignons et des pointes terminées par des boules rayonnent au sommet et sur les côtés. Elle est blanc bleuté avec des reflets lavande."
   },
   "Enemy appearance mn_ff2_041_c03": {
     "en": "A floating round face with narrowed eyes and an enormous toothed grin. Stubs and orb-tipped points radiate from its crown and sides. It is red-orange with bright yellow flame accents.",
-    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。赤橙色に鮮やかな黄色い炎の差し色。"
+    "ja": "細めた目と、歯を大きくむき出した丸い顔が浮かぶ。頭頂部と両側から短い突起と先の丸い突起が放射状に伸びる。赤橙色に鮮やかな黄色い炎の差し色。",
+    "fr": "Une face ronde et flottante, aux yeux plissés et à l'immense sourire denté. Des moignons et des pointes terminées par des boules rayonnent au sommet et sur les côtés. Elle est rouge orangé avec des flammes jaune vif."
   },
   "Enemy appearance mn_ff2_042_c00": {
     "en": "A compact armored soldier lunges with a sword held diagonally across the front and a tall patterned shield raised. A dark slitted helmet and layered shoulder plates cover the face and upper body. It has olive-gold armor and a blue shield.",
-    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。オリーブがかった金色の鎧に青い盾。"
+    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。オリーブがかった金色の鎧に青い盾。",
+    "fr": "Un soldat trapu en armure se fend, son épée en diagonale devant lui et son grand bouclier à motifs levé. Un casque sombre à fente et des épaulières superposées recouvrent son visage et son buste. Son armure est olive et dorée, son bouclier bleu."
   },
   "Enemy appearance mn_ff2_042_c01": {
     "en": "A compact armored soldier lunges with a sword held diagonally across the front and a tall patterned shield raised. A dark slitted helmet and layered shoulder plates cover the face and upper body. It has blue armor and a blue-and-gold shield.",
-    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。青い鎧に青と金の盾。"
+    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。青い鎧に青と金の盾。",
+    "fr": "Un soldat trapu en armure se fend, son épée en diagonale devant lui et son grand bouclier à motifs levé. Un casque sombre à fente et des épaulières superposées recouvrent son visage et son buste. Son armure est bleue, son bouclier bleu et or."
   },
   "Enemy appearance mn_ff2_043_c00": {
     "en": "A compact armored soldier lunges with a sword held diagonally across the front and a tall patterned shield raised. A dark slitted helmet and layered shoulder plates cover the face and upper body. It has green armor and a pink shield.",
-    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。緑の鎧に桃色の盾。"
+    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。緑の鎧に桃色の盾。",
+    "fr": "Un soldat trapu en armure se fend, son épée en diagonale devant lui et son grand bouclier à motifs levé. Un casque sombre à fente et des épaulières superposées recouvrent son visage et son buste. Son armure est verte, son bouclier rose."
   },
   "Enemy appearance mn_ff2_043_c01": {
     "en": "A compact armored soldier lunges with a sword held diagonally across the front and a tall patterned shield raised. A dark slitted helmet and layered shoulder plates cover the face and upper body. It has gunmetal armor, a crimson belt and a gold-edged shield.",
-    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。黒みのある金属色の鎧に深紅のベルトと金縁の盾。"
+    "ja": "小柄でがっしりした鎧の兵士が前に踏み込み、剣を体の前に斜めに構えて模様のある縦長の盾を掲げる。細い隙間のある暗い兜と重なった肩当てが顔と上半身を覆う。黒みのある金属色の鎧に深紅のベルトと金縁の盾。",
+    "fr": "Un soldat trapu en armure se fend, son épée en diagonale devant lui et son grand bouclier à motifs levé. Un casque sombre à fente et des épaulières superposées recouvrent son visage et son buste. Son armure est gris métal, avec une ceinture cramoisie et un bouclier bordé d'or."
   },
   "Enemy appearance mn_ff2_044_c00": {
     "en": "A hunched robed figure extends one clawlike hand from a tall, curled hood. Its sharp face peers out under the hood, and the cloak tapers into a curled hem. It has an olive cloak and blue and red face.",
-    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。オリーブ色のマントに青と赤の顔。"
+    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。オリーブ色のマントに青と赤の顔。",
+    "fr": "Une silhouette voûtée en robe et haute capuche recourbée tend une main griffue. Son visage anguleux guette sous le capuchon. Sa cape s'effile en un ourlet recourbé. Sa cape est olive, son visage bleu et rouge."
   },
   "Enemy appearance mn_ff2_044_c01": {
     "en": "A hunched robed figure extends one clawlike hand from a tall, curled hood. Its sharp face peers out under the hood, and the cloak tapers into a curled hem. It wears deep blue with pale hands and a red face detail.",
-    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。濃青色のローブに淡い手と赤い顔の差し色。"
+    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。濃青色のローブに淡い手と赤い顔の差し色。",
+    "fr": "Une silhouette voûtée en robe et haute capuche recourbée tend une main griffue. Son visage anguleux guette sous le capuchon. Sa cape s'effile en un ourlet recourbé. Elle est vêtue de bleu profond, avec des mains pâles et un détail rouge au visage."
   },
   "Enemy appearance mn_ff2_044_c02": {
     "en": "A hunched robed figure extends one clawlike hand from a tall, curled hood. Its sharp face peers out under the hood, and the cloak tapers into a curled hem. It wears green with a gold face and gold claws.",
-    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。緑のローブに金色の顔と爪。"
+    "ja": "ローブ姿の人物が背を丸め、先の巻いた高いフードの下から鋭い顔をのぞかせる。爪のような片手を伸ばし、マントは細く絞られて裾が巻いている。緑のローブに金色の顔と爪。",
+    "fr": "Une silhouette voûtée en robe et haute capuche recourbée tend une main griffue. Son visage anguleux guette sous le capuchon. Sa cape s'effile en un ourlet recourbé. Elle est vêtue de vert, avec le visage et les griffes dorés."
   },
   "Enemy appearance mn_ff2_045_c00": {
     "en": "A spotted cat crouches with ears raised and a long curled tail. Long, thin whisker tendrils sweep from its cheeks beyond its shoulders. It is yellow-green with pink tendrils.",
-    "ja": "斑点のあるネコが耳を立て、長い尾を巻いて身を低くする。頬から伸びる細長いひげは肩より外側まで弧を描く。黄緑の体に桃色のひげ。"
+    "ja": "斑点のあるネコが耳を立て、長い尾を巻いて身を低くする。頬から伸びる細長いひげは肩より外側まで弧を描く。黄緑の体に桃色のひげ。",
+    "fr": "Un félin tacheté s'accroupit, les oreilles dressées et la longue queue recourbée. De longues et fines moustaches s'étirent depuis ses joues jusqu'au-delà de ses épaules. Il est jaune-vert avec des moustaches roses."
   },
   "Enemy appearance mn_ff2_045_c01": {
     "en": "A spotted cat crouches with ears raised and a long curled tail. Long, thin whisker tendrils sweep from its cheeks beyond its shoulders. It is blue with red eyes and tan tendrils.",
-    "ja": "斑点のあるネコが耳を立て、長い尾を巻いて身を低くする。頬から伸びる細長いひげは肩より外側まで弧を描く。青い体に赤い目と薄茶のひげ。"
+    "ja": "斑点のあるネコが耳を立て、長い尾を巻いて身を低くする。頬から伸びる細長いひげは肩より外側まで弧を描く。青い体に赤い目と薄茶のひげ。",
+    "fr": "Un félin tacheté s'accroupit, les oreilles dressées et la longue queue recourbée. De longues et fines moustaches s'étirent depuis ses joues jusqu'au-delà de ses épaules. Il est bleu avec des yeux rouges et des moustaches beiges."
   },
   "Enemy appearance mn_ff2_046_c00": {
     "en": "A pale womanlike torso with a long horned headpiece rises from a thick coiled snake tail. Long wavy hair fans behind the shoulders, and one bent hand is lifted beside the face. It has copper hair and a teal tail.",
-    "ja": "厚くとぐろを巻いたヘビの尾から、長い角飾りを着けた青白い女性のような上半身が伸びる。波打つ長い髪が肩の後ろに広がり、曲げた片手を顔の脇に上げる。銅色の髪と青緑の尾。"
+    "ja": "厚くとぐろを巻いたヘビの尾から、長い角飾りを着けた青白い女性のような上半身が伸びる。波打つ長い髪が肩の後ろに広がり、曲げた片手を顔の脇に上げる。銅色の髪と青緑の尾。",
+    "fr": "Un buste de femme pâle à longue coiffe cornue se dresse sur une épaisse queue de serpent enroulée. De longs cheveux ondulés s'épanouissent derrière les épaules. Une main fléchie se lève près du visage. La chevelure est cuivrée et la queue bleu-vert."
   },
   "Enemy appearance mn_ff2_046_c01": {
     "en": "A pale womanlike torso with a long horned headpiece rises from a thick coiled snake tail. Long wavy hair fans behind the shoulders, and one bent hand is lifted beside the face. It has magenta hair and a pink-violet tail.",
-    "ja": "厚くとぐろを巻いたヘビの尾から、長い角飾りを着けた青白い女性のような上半身が伸びる。波打つ長い髪が肩の後ろに広がり、曲げた片手を顔の脇に上げる。赤紫の髪と桃紫色の尾。"
+    "ja": "厚くとぐろを巻いたヘビの尾から、長い角飾りを着けた青白い女性のような上半身が伸びる。波打つ長い髪が肩の後ろに広がり、曲げた片手を顔の脇に上げる。赤紫の髪と桃紫色の尾。",
+    "fr": "Un buste de femme pâle à longue coiffe cornue se dresse sur une épaisse queue de serpent enroulée. De longs cheveux ondulés s'épanouissent derrière les épaules. Une main fléchie se lève près du visage. La chevelure est magenta et la queue rose violet."
   },
   "Enemy appearance mn_ff2_047_c00": {
     "en": "A heavily muscled giant with a broad nose, deep brow and thick legs leans forward. One of its huge hands is raised by the face. Belts and straps cross its largely bare body. It is moss green.",
-    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。苔のような緑色。"
+    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。苔のような緑色。",
+    "fr": "Un géant très musclé au nez large, à l'arcade sourcilière profonde et aux grosses jambes se penche en avant. Il lève une immense main près de son visage. Des sangles et des ceintures traversent son corps presque nu. Il est vert mousse."
   },
   "Enemy appearance mn_ff2_047_c01": {
     "en": "A heavily muscled giant with a broad nose, deep brow and thick legs leans forward. One of its huge hands is raised by the face. Belts and straps cross its largely bare body. It is orange-red.",
-    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。赤橙色。"
+    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。赤橙色。",
+    "fr": "Un géant très musclé au nez large, à l'arcade sourcilière profonde et aux grosses jambes se penche en avant. Il lève une immense main près de son visage. Des sangles et des ceintures traversent son corps presque nu. Il est rouge orangé."
   },
   "Enemy appearance mn_ff2_047_c02": {
     "en": "A heavily muscled giant with a broad nose, deep brow and thick legs leans forward. One of its huge hands is raised by the face. Belts and straps cross its largely bare body. It is pale slate blue.",
-    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。淡い青灰色。"
+    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。淡い青灰色。",
+    "fr": "Un géant très musclé au nez large, à l'arcade sourcilière profonde et aux grosses jambes se penche en avant. Il lève une immense main près de son visage. Des sangles et des ceintures traversent son corps presque nu. Il est bleu ardoise pâle."
   },
   "Enemy appearance mn_ff2_047_c03": {
     "en": "A heavily muscled giant with a broad nose, deep brow and thick legs leans forward. One of its huge hands is raised by the face. Belts and straps cross its largely bare body. It is steel blue with crimson-violet bands.",
-    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。鋼のような青色に深紅がかった紫の帯。"
+    "ja": "太い脚を持つ筋肉質の巨人が前傾する。幅広い鼻と深い眉の隆起があり、大きな片手を顔の脇に上げる。ほぼ裸の体にベルトや帯が交差する。鋼のような青色に深紅がかった紫の帯。",
+    "fr": "Un géant très musclé au nez large, à l'arcade sourcilière profonde et aux grosses jambes se penche en avant. Il lève une immense main près de son visage. Des sangles et des ceintures traversent son corps presque nu. Il est bleu acier à bandes violet cramoisi."
   },
   "Enemy appearance mn_ff2_048_c00": {
     "en": "A low muscular beast crouches on four clawed legs with an open, fanged jaw. Two long horns sweep back from its head and a tall thick tail curls above its back. It has teal skin, a dark mane and red tail tips.",
-    "ja": "筋肉質の獣が、爪のある四足を曲げて身を低くし、開いたあごから牙を見せる。二本の長い角が頭から後ろへ伸び、太い尾が背の上で高く巻き上がる。青緑の肌に暗いたてがみと赤い尾の先。"
+    "ja": "筋肉質の獣が、爪のある四足を曲げて身を低くし、開いたあごから牙を見せる。二本の長い角が頭から後ろへ伸び、太い尾が背の上で高く巻き上がる。青緑の肌に暗いたてがみと赤い尾の先。",
+    "fr": "Une bête basse et musclée s'accroupit sur quatre pattes griffues, gueule ouverte et crocs apparents. Deux longues cornes se recourbent en arrière et une épaisse queue se dresse en boucle au-dessus de son dos. Elle a la peau bleu-vert, la crinière sombre et les pointes de la queue rouges."
   },
   "Enemy appearance mn_ff2_048_c01": {
     "en": "A low muscular beast crouches on four clawed legs with an open, fanged jaw. Two long horns sweep back from its head and a tall thick tail curls above its back. It has gold skin, violet horns and bright blue tail tips.",
-    "ja": "筋肉質の獣が、爪のある四足を曲げて身を低くし、開いたあごから牙を見せる。二本の長い角が頭から後ろへ伸び、太い尾が背の上で高く巻き上がる。金色の肌に紫の角と鮮やかな青い尾の先。"
+    "ja": "筋肉質の獣が、爪のある四足を曲げて身を低くし、開いたあごから牙を見せる。二本の長い角が頭から後ろへ伸び、太い尾が背の上で高く巻き上がる。金色の肌に紫の角と鮮やかな青い尾の先。",
+    "fr": "Une bête basse et musclée s'accroupit sur quatre pattes griffues, gueule ouverte et crocs apparents. Deux longues cornes se recourbent en arrière et une épaisse queue se dresse en boucle au-dessus de son dos. Elle a la peau dorée, les cornes violettes et les pointes de la queue bleu vif."
   },
   "Enemy appearance mn_ff2_049_c00": {
     "en": "A slender flying dragon with a horned head, bent claws, pointed wing membranes and a long trailing tail. A small breath plume leaves its open jaw. It is white and blue with pale blue breath.",
-    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。白と青の体に淡青色の息。"
+    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。白と青の体に淡青色の息。",
+    "fr": "Un dragon volant et élancé, à la tête cornue, aux griffes repliées, aux ailes membraneuses et pointues et à la longue queue traînante. Un petit jet de souffle s'échappe de sa gueule ouverte. Il est blanc et bleu et son souffle bleu pâle."
   },
   "Enemy appearance mn_ff2_049_c01": {
     "en": "A slender flying dragon with a horned head, bent claws, pointed wing membranes and a long trailing tail. A small breath plume leaves its open jaw. It is green and gold with green breath.",
-    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。緑と金の体に緑の息。"
+    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。緑と金の体に緑の息。",
+    "fr": "Un dragon volant et élancé, à la tête cornue, aux griffes repliées, aux ailes membraneuses et pointues et à la longue queue traînante. Un petit jet de souffle s'échappe de sa gueule ouverte. Il est vert et doré et son souffle vert."
   },
   "Enemy appearance mn_ff2_049_c02": {
     "en": "A slender flying dragon with a horned head, bent claws, pointed wing membranes and a long trailing tail. A small breath plume leaves its open jaw. It is blue and cream with blue breath.",
-    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。青とクリーム色の体に青い息。"
+    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。青とクリーム色の体に青い息。",
+    "fr": "Un dragon volant et élancé, à la tête cornue, aux griffes repliées, aux ailes membraneuses et pointues et à la longue queue traînante. Un petit jet de souffle s'échappe de sa gueule ouverte. Il est bleu et crème et son souffle bleu."
   },
   "Enemy appearance mn_ff2_049_c03": {
     "en": "A slender flying dragon with a horned head, bent claws, pointed wing membranes and a long trailing tail. A small breath plume leaves its open jaw. It is orange-red and teal with orange breath.",
-    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。赤橙色と青緑の体に橙色の息。"
+    "ja": "細身の竜が飛ぶ。角のある頭、曲げた爪、先のとがった膜の翼があり、長い尾を引く。開いたあごから小さな息の筋が伸びる。赤橙色と青緑の体に橙色の息。",
+    "fr": "Un dragon volant et élancé, à la tête cornue, aux griffes repliées, aux ailes membraneuses et pointues et à la longue queue traînante. Un petit jet de souffle s'échappe de sa gueule ouverte. Il est rouge orangé et bleu-vert et son souffle orange."
   },
   "Enemy appearance mn_ff2_050_c00": {
     "en": "A bulky blue-armored giant with a narrow red eye slit, horned helmet, layered shoulder plates and wide armored boots. It holds an enormous curved pale green blade across its waist.",
-    "ja": "青い鎧を着けた大柄な巨人。角のある兜の細い隙間から赤い目が見える。重なった肩当てと幅広い鉄靴を着け、緑がかった淡い色の巨大な曲刀を腰の前に構える。"
+    "ja": "青い鎧を着けた大柄な巨人。角のある兜の細い隙間から赤い目が見える。重なった肩当てと幅広い鉄靴を着け、緑がかった淡い色の巨大な曲刀を腰の前に構える。",
+    "fr": "Un géant massif en armure bleue, au casque cornu fendu d'une étroite visière rouge, aux épaulières superposées et aux larges bottes cuirassées. Il tient une énorme lame recourbée vert pâle en travers de la taille."
   },
   "Enemy appearance mn_ff2_051_c00": {
     "en": "A massive orange-gold dragon has several long necks ending in horned toothy heads. Its spread batlike wings are edged in dark brown. A heavy scaled tail curls behind its crouched body and clawed feet.",
-    "ja": "黄金がかった橙色の巨大な竜。何本もの長い首の先に、角と歯を持つ頭がある。広げたコウモリのような翼は濃茶色で縁取られ、身を低くした胴と爪のある足の後ろで、鱗のある太い尾が巻く。"
+    "ja": "黄金がかった橙色の巨大な竜。何本もの長い首の先に、角と歯を持つ頭がある。広げたコウモリのような翼は濃茶色で縁取られ、身を低くした胴と爪のある足の後ろで、鱗のある太い尾が巻く。",
+    "fr": "Un dragon massif orange doré porte plusieurs longs cous terminés par des têtes cornues aux gueules dentées. Ses ailes déployées de chauve-souris sont bordées de brun foncé. Sa lourde queue écailleuse se recourbe derrière son corps accroupi et ses pattes griffues."
   },
   "Enemy appearance mn_ff2_052_c00": {
     "en": "A wide-winged purple insect with a broad face, orange eye and mouth accents, layered armor and pale hooked wing tips. Slender segmented parts hang from the dark central body.",
-    "ja": "紫の虫が大きく翼を広げる。幅広い顔に橙色の目と口元があり、層になった外殻と先が鉤形に曲がった淡い翼が見える。暗い胴から節のある細い突起が垂れる。"
+    "ja": "紫の虫が大きく翼を広げる。幅広い顔に橙色の目と口元があり、層になった外殻と先が鉤形に曲がった淡い翼が見える。暗い胴から節のある細い突起が垂れる。",
+    "fr": "Un insecte violet aux larges ailes, à la large face rehaussée d'orange autour de l'œil et de la bouche, à la carapace en couches et aux pointes d'ailes pâles et crochues. De fins segments pendent du corps central sombre."
   },
   "Enemy appearance mn_ff2_053_c00": {
     "en": "A muscular green and gold humanoid with a horned head and broad pairs of pale blue feathered wings. Its bent arms hold a long gold spear across its body. One leg bends beneath the waist.",
-    "ja": "緑と金の筋肉質な人型。角のある頭と、淡青色の羽毛に覆われた幅広い翼を何枚も持つ。両腕を曲げて長い金色の槍を体の前に構え、片脚を腰の下で曲げる。"
+    "ja": "緑と金の筋肉質な人型。角のある頭と、淡青色の羽毛に覆われた幅広い翼を何枚も持つ。両腕を曲げて長い金色の槍を体の前に構え、片脚を腰の下で曲げる。",
+    "fr": "Un humanoïde musclé vert et or, à tête cornue et à plusieurs paires d'amples ailes à plumes bleu pâle. Ses bras pliés tiennent une longue lance dorée en travers du corps. Une jambe se replie sous la taille."
   },
   "Enemy appearance mn_ff2_054_c00": {
     "en": "A floating gold-armored figure with a spiked crownlike headpiece, narrow eyes and bright layered chest and shoulder plates. Red cape panels and long gold tassels flare below. One clawed hand grips a long violet tridentlike staff.",
-    "ja": "金色の鎧を着けた人型が浮かぶ。とげのある冠のような頭飾りに細い目、明るく重なった胸当てと肩当てがある。赤いマントと長い金色の房が下に広がり、爪のある手で紫色の三つ又の長い杖を握る。"
+    "ja": "金色の鎧を着けた人型が浮かぶ。とげのある冠のような頭飾りに細い目、明るく重なった胸当てと肩当てがある。赤いマントと長い金色の房が下に広がり、爪のある手で紫色の三つ又の長い杖を握る。",
+    "fr": "Une silhouette flottante en armure d'or porte une coiffe pointue en forme de couronne. Ses yeux sont bridés et ses plaques superposées brillent aux épaules et au torse. Des pans de cape rouges et de longues pampilles dorées s'évasent au-dessous. Une main griffue tient un long bâton violet en forme de trident."
   },
   "Enemy appearance mn_ff4_049_c02": {
     "en": "A small, low green frog with a pale yellow belly, big raised yellow eyes, a flat snout and four legs folded close to the ground.",
-    "ja": "小さな緑のカエルが身を低くする。腹は淡い黄色で、大きく盛り上がった黄色い目と平たい鼻先がある。四本の脚は地面近くで折り畳んでいる。"
+    "ja": "小さな緑のカエルが身を低くする。腹は淡い黄色で、大きく盛り上がった黄色い目と平たい鼻先がある。四本の脚は地面近くで折り畳んでいる。",
+    "fr": "Une petite grenouille verte au ras du sol, au ventre jaune pâle, aux gros yeux jaunes et saillants, au museau plat et aux quatre pattes repliées tout près du sol."
   },
   "Field appearance mo_ff2_e101_c00": {
     "en": "Tall pale-blue serif letters read “THE END.” Existing text can convey the words.",
-    "ja": "淡い青の縦長のセリフ体で「THE END」と表示される。文字は既存の読み上げでも伝えられる。"
+    "ja": "淡い青の縦長のセリフ体で「THE END」と表示される。文字は既存の読み上げでも伝えられる。",
+    "fr": "De grandes lettres à empattements bleu pâle composent « THE END ». Le texte existant peut en donner les mots."
   },
   "Field appearance mo_ff2_n001_c00": {
     "en": "A compact older man has swept white hair and bare forearms. A purple coat with pale blue shoulder bands and a bright red chest or cape covers dark trousers and boots.",
-    "ja": "小柄な年配の男で、白髪を後ろへ流し、前腕を出している。淡青の肩帯が付いた紫の上着と、胸元かマントの鮮やかな赤が暗いズボンと長靴を覆う。"
+    "ja": "小柄な年配の男で、白髪を後ろへ流し、前腕を出している。淡青の肩帯が付いた紫の上着と、胸元かマントの鮮やかな赤が暗いズボンと長靴を覆う。",
+    "fr": "Un homme âgé et trapu aux cheveux blancs rejetés en arrière et aux avant-bras nus. Son manteau violet à bandes bleu pâle aux épaules et à plastron ou cape rouge vif recouvre un pantalon et des bottes sombres."
   },
   "Field appearance mo_ff2_n002_c00": {
     "en": "A pale figure wears a broad purple-blue hat with an orange brim, a long red cape and a navy outfit with pale accents.",
-    "ja": "色白の人物で、橙色のつばがある幅広の青紫の帽子をかぶる。淡色の飾りのある紺の服に長い赤のマントを羽織る。"
+    "ja": "色白の人物で、橙色のつばがある幅広の青紫の帽子をかぶる。淡色の飾りのある紺の服に長い赤のマントを羽織る。",
+    "fr": "Une silhouette pâle porte un ample chapeau bleu violet à bordure orange, une longue cape rouge et une tenue bleu marine à touches claires."
   },
   "Field appearance mo_ff2_n002_c01": {
     "en": "A pale gray, dark-eyed figure wears a broad slate-blue and bronze hat and long teal robes and cape.",
-    "ja": "淡い灰色の顔に暗い目。くすんだ青と青銅色の幅広い帽子に、長い青緑のローブとマントを着ける。"
+    "ja": "淡い灰色の顔に暗い目。くすんだ青と青銅色の幅広い帽子に、長い青緑のローブとマントを着ける。",
+    "fr": "Une silhouette gris pâle aux yeux sombres porte un large chapeau bleu ardoise et bronze et de longues robes bleu-vert avec une cape assortie."
   },
   "Field appearance mo_ff2_n003_c00": {
     "en": "A pale face has swept lilac hair and dark eyes. Gold trim outlines a high-collared violet mantle, chest piece, boots and long purple cape.",
-    "ja": "淡い顔に黒い目があり、薄紫の髪を流す。襟の高い紫の肩衣と胸当て、長靴、長い紫マントに金の縁取りがある。"
+    "ja": "淡い顔に黒い目があり、薄紫の髪を流す。襟の高い紫の肩衣と胸当て、長靴、長い紫マントに金の縁取りがある。",
+    "fr": "Un visage pâle, aux cheveux lilas rejetés en arrière et aux yeux sombres. Un liseré doré souligne le mantelet violet à col haut, le plastron, les bottes et la longue cape violette."
   },
   "Field appearance mo_ff2_n004_c00": {
     "en": "A narrow face is hidden behind dark violet armor with gold side horns, shoulder pieces and a pale face stripe. A broad red cape flares behind the armored legs.",
-    "ja": "細い顔を暗い紫の鎧が覆う。兜の横角と肩甲は金色で、顔の部分には淡い筋がある。鎧を着けた脚の後ろに赤い大きなマントが広がる。"
+    "ja": "細い顔を暗い紫の鎧が覆う。兜の横角と肩甲は金色で、顔の部分には淡い筋がある。鎧を着けた脚の後ろに赤い大きなマントが広がる。",
+    "fr": "Un visage étroit se cache sous une armure violet foncé, avec des cornes et des épaulières dorées et une rayure pâle au visage. Une large cape rouge s'évase derrière les jambes cuirassées."
   },
   "Field appearance mo_ff2_n005_c00": {
     "en": "A fair blond figure wears a pale blue and white crown or wide headpiece with a small red center and pointed tips. A blue, white and gold costume surrounds the pale face and long yellow hair.",
-    "ja": "金髪で色白。中央に小さな赤い飾りがある淡青と白の幅広い冠をかぶり、先端が尖る。長い黄色の髪と淡い顔を青、白、金の衣装が囲む。"
+    "ja": "金髪で色白。中央に小さな赤い飾りがある淡青と白の幅広い冠をかぶり、先端が尖る。長い黄色の髪と淡い顔を青、白、金の衣装が囲む。",
+    "fr": "Une silhouette aux cheveux blonds pâles porte une couronne ou large coiffe bleu pâle et blanche, à pointes et à petit centre rouge. Une tenue bleue, blanche et dorée encadre son visage pâle et ses longs cheveux jaunes."
   },
   "Field appearance mo_ff2_n006_c00": {
     "en": "A pale figure has a short ash-blond fringe and dark eyes. A purple cape with red and blue shoulder trim frames a yellow chest and dark boots.",
-    "ja": "淡い顔に短い灰金色の前髪と黒い目。赤と青の肩飾りが付いた紫マントの間から黄色の胸元と暗い長靴が見える。"
+    "ja": "淡い顔に短い灰金色の前髪と黒い目。赤と青の肩飾りが付いた紫マントの間から黄色の胸元と暗い長靴が見える。",
+    "fr": "Une silhouette pâle à la frange courte blond cendré et aux yeux sombres. Sa cape violette bordée de rouge et de bleu aux épaules encadre un buste jaune et des bottes sombres."
   },
   "Field appearance mo_ff2_n008_c01": {
     "en": "A small magenta-haired figure wears a green head ornament and a dark rose dress with a pale neckline and puffy white-pink sleeves.",
-    "ja": "赤紫の髪の小柄な人物。緑の髪飾りを付け、襟元が淡く白桃色の袖がふくらむ濃いばら色のドレスを着る。"
+    "ja": "赤紫の髪の小柄な人物。緑の髪飾りを付け、襟元が淡く白桃色の袖がふくらむ濃いばら色のドレスを着る。",
+    "fr": "Une petite silhouette aux cheveux magenta porte un ornement de tête vert et une robe rose foncé à encolure pâle et à manches bouffantes blanc rosé."
   },
   "Field appearance mo_ff2_n009_c00": {
     "en": "A bearded, brown-haired figure wears a high gold crown and a heavy red robe and cape under a pale fur-like collar.",
-    "ja": "茶髪とひげのある人物が金の高い冠をかぶる。毛皮のような淡い襟の下に厚手の赤い長衣とマントを着ける。"
+    "ja": "茶髪とひげのある人物が金の高い冠をかぶる。毛皮のような淡い襟の下に厚手の赤い長衣とマントを着ける。",
+    "fr": "Une silhouette à la barbe et aux cheveux bruns porte une haute couronne d'or et une lourde robe rouge avec une cape assortie sous un col pâle évoquant de la fourrure."
   },
   "Field appearance mo_ff2_n010_c00": {
     "en": "A compact, dark-eyed figure wears a broad feathered hat, belt, gloves and short cloak. The hat is white with a red feather, and the cloak is violet.",
-    "ja": "暗い目の小柄な人物。赤い羽根付きの白い幅広帽、帯、手袋、短い紫の外套を着ける。"
+    "ja": "暗い目の小柄な人物。赤い羽根付きの白い幅広帽、帯、手袋、短い紫の外套を着ける。",
+    "fr": "Une silhouette compacte aux yeux sombres porte un large chapeau à plume, une ceinture, des gants et une cape courte. Le chapeau est blanc à plume rouge, la cape violette."
   },
   "Field appearance mo_ff2_n010_c01": {
     "en": "A compact, dark-eyed figure wears a broad feathered hat, belt, gloves and short cloak. The hat is red with a blue feather, and the outfit is blue.",
-    "ja": "暗い目の小柄な人物。青い羽根付きの赤い幅広帽、帯と手袋、短い外套の付いた青い服を着ける。"
+    "ja": "暗い目の小柄な人物。青い羽根付きの赤い幅広帽、帯と手袋、短い外套の付いた青い服を着ける。",
+    "fr": "Une silhouette compacte aux yeux sombres porte un large chapeau à plume, une ceinture, des gants et une cape courte. Le chapeau est rouge à plume bleue, la tenue bleue."
   },
   "Field appearance mo_ff2_n010_c02": {
     "en": "A compact, dark-eyed figure wears a broad feathered hat, belt, gloves and short cloak. The hat and cloak are green with a blue feather.",
-    "ja": "暗い目の小柄な人物。青い羽根付きの緑の幅広帽と短い緑の外套を着け、帯と手袋が見える。"
+    "ja": "暗い目の小柄な人物。青い羽根付きの緑の幅広帽と短い緑の外套を着け、帯と手袋が見える。",
+    "fr": "Une silhouette compacte aux yeux sombres porte un large chapeau à plume, une ceinture, des gants et une cape courte. Le chapeau et la cape sont verts, avec une plume bleue."
   },
   "Field appearance mo_ff2_n010_c03": {
     "en": "A compact, dark-eyed figure wears a broad feathered hat, belt, gloves and short cloak. The hat is blue-violet with a red feather. The cloak is violet with orange waist trim.",
-    "ja": "暗い目の小柄な人物。赤い羽根付きの青紫の幅広帽、帯、手袋、腰を橙で飾った短い紫の外套を着ける。"
+    "ja": "暗い目の小柄な人物。赤い羽根付きの青紫の幅広帽、帯、手袋、腰を橙で飾った短い紫の外套を着ける。",
+    "fr": "Une silhouette compacte aux yeux sombres porte un large chapeau à plume, une ceinture, des gants et une cape courte. Le chapeau est bleu violet à plume rouge. La cape est violette, bordée d'orange à la taille."
   },
   "Field appearance mo_ff2_n011_c00": {
     "en": "A pale young figure has a high golden ponytail tied in pink. A short gray and black outfit has bright pink shoulder and waist trim and pink boots.",
-    "ja": "色白の若者で、高い位置で結んだ金のポニーテールに桃色の結び目がある。短い灰黒の服の肩と腰が鮮やかな桃色で、長靴も桃色。"
+    "ja": "色白の若者で、高い位置で結んだ金のポニーテールに桃色の結び目がある。短い灰黒の服の肩と腰が鮮やかな桃色で、長靴も桃色。",
+    "fr": "Une jeune silhouette pâle aux cheveux dorés attachés haut en queue-de-cheval par un lien rose. Des bandes rose vif soulignent les épaules et la taille de sa tenue courte grise et noire, au-dessus de bottes roses."
   },
   "Field appearance mo_ff2_n012_c00": {
     "en": "A small golden-haired figure wears a white headband, a green and orange outfit and green-yellow shoes. Pale hands show against the dark belt.",
-    "ja": "金髪の小柄な人物。白い鉢巻きに緑と橙の服、黄緑の靴。暗い帯のそばに淡い手が見える。"
+    "ja": "金髪の小柄な人物。白い鉢巻きに緑と橙の服、黄緑の靴。暗い帯のそばに淡い手が見える。",
+    "fr": "Une petite silhouette aux cheveux dorés porte un bandeau blanc, une tenue verte et orange et des chaussures jaune-vert. Des mains pâles se détachent sur la ceinture sombre."
   },
   "Field appearance mo_ff2_n013_c00": {
     "en": "A short figure wears a bright blue knit-looking head wrap or cap, a red scarf, a white sleeveless outfit and dark shoes.",
-    "ja": "背の低い人物。鮮やかな青い編み物風の帽子か頭巾、赤いスカーフ、袖なしの白い服、暗い靴を着ける。"
+    "ja": "背の低い人物。鮮やかな青い編み物風の帽子か頭巾、赤いスカーフ、袖なしの白い服、暗い靴を着ける。",
+    "fr": "Une petite silhouette porte une coiffe bleu vif qui paraît tricotée, un foulard rouge, une tenue blanche sans manches et des chaussures sombres."
   },
   "Field appearance mo_ff2_n014_c00": {
     "en": "A small pale person wears an olive cap with a red stripe and orange trim. A short orange vest sits above white trousers and red shoes.",
-    "ja": "色白の小柄な人物。赤い筋と橙色の縁があるオリーブ色の帽子をかぶる。短い橙色のベストに白いズボンと赤い靴。"
+    "ja": "色白の小柄な人物。赤い筋と橙色の縁があるオリーブ色の帽子をかぶる。短い橙色のベストに白いズボンと赤い靴。",
+    "fr": "Une petite personne pâle porte un bonnet olive à bande rouge et bordure orange. Un petit gilet orange surmonte un pantalon blanc et des chaussures rouges."
   },
   "Field appearance mo_ff2_n015_c00": {
     "en": "A round-faced figure has thick swept white hair, wide ears, hooded eyes and a flaring robe. The face is brick red, the headband is pale red and the robe is blue-violet.",
-    "ja": "丸顔で、厚い白髪を後ろへ流し、耳が大きく目元が重い。顔はれんが色、鉢巻きは淡い赤、広がるローブは青紫。"
+    "ja": "丸顔で、厚い白髪を後ろへ流し、耳が大きく目元が重い。顔はれんが色、鉢巻きは淡い赤、広がるローブは青紫。",
+    "fr": "Une silhouette au visage rond, à l'épaisse chevelure blanche balayée, aux grandes oreilles et aux paupières lourdes porte une robe évasée. Le visage est rouge brique, le bandeau rouge pâle et la robe bleu violet."
   },
   "Field appearance mo_ff2_n015_c01": {
     "en": "A round-faced figure has thick swept white hair, wide ears, hooded eyes and a flaring robe. The face and stripe through the hair are green, and the robe is magenta-violet.",
-    "ja": "丸顔で、厚い白髪を後ろへ流し、耳が大きく目元が重い。顔と髪を横切る帯は緑、裾の広いローブは赤紫。"
+    "ja": "丸顔で、厚い白髪を後ろへ流し、耳が大きく目元が重い。顔と髪を横切る帯は緑、裾の広いローブは赤紫。",
+    "fr": "Une silhouette au visage rond, à l'épaisse chevelure blanche balayée, aux grandes oreilles et aux paupières lourdes porte une robe évasée. Le visage et la bande dans les cheveux sont verts et la robe violet magenta."
   },
   "Field appearance mo_ff2_n016_c00": {
     "en": "A soldier wears a red plume on a violet-gray helmet and a pale visor shading the face. Silver shoulder armor and a violet cape cover dark fitted armor.",
-    "ja": "赤い羽根飾りの付いた灰紫の兜をかぶる兵士。淡色の面頬が顔を隠す。銀の肩甲と紫マントの下に暗い体に沿う鎧を着ける。"
+    "ja": "赤い羽根飾りの付いた灰紫の兜をかぶる兵士。淡色の面頬が顔を隠す。銀の肩甲と紫マントの下に暗い体に沿う鎧を着ける。",
+    "fr": "Un soldat porte un plumet rouge sur son casque gris violet. Une visière pâle ombrage son visage. Des épaulières argentées et une cape violette couvrent une armure sombre et ajustée."
   },
   "Field appearance mo_ff2_n017_c00": {
     "en": "A squat suit of violet-gray armor has high pointed helmet horns, gold shoulder plates and two tiny red eyes behind the visor.",
-    "ja": "ずんぐりした灰紫の鎧。兜に上へ伸びる尖った角があり、金の肩甲を着ける。面の奥に小さな赤い目が二つ見える。"
+    "ja": "ずんぐりした灰紫の鎧。兜に上へ伸びる尖った角があり、金の肩甲を着ける。面の奥に小さな赤い目が二つ見える。",
+    "fr": "Une armure trapue gris violet, au casque à hautes cornes pointues et aux épaulières dorées. Deux yeux rouges minuscules percent derrière la visière."
   },
   "Field appearance mo_ff2_n018_c00": {
     "en": "A blue-faced armored figure has a gold horned crest, broad gold shoulder armor and a purple cape or side panels.",
-    "ja": "青い顔の鎧姿。金の角飾りと幅広い金の肩甲、紫のマントか脇の布が付く。"
+    "ja": "青い顔の鎧姿。金の角飾りと幅広い金の肩甲、紫のマントか脇の布が付く。",
+    "fr": "Une silhouette cuirassée au visage bleu porte un cimier doré et cornu, de larges épaulières dorées et une cape violette ou des pans de tissu violets."
   },
   "Field appearance mo_ff2_n019_c00": {
     "en": "A small beard and round eyes show under a broad hat. The hat and tunic are teal, with a white scarf.",
-    "ja": "幅広い帽子の下に小さなひげと丸い目がのぞく。帽子と上着は青緑で、白いスカーフを巻く。"
+    "ja": "幅広い帽子の下に小さなひげと丸い目がのぞく。帽子と上着は青緑で、白いスカーフを巻く。",
+    "fr": "Une petite barbe et des yeux ronds dépassent d'un grand chapeau. Le chapeau et la tunique sont bleu-vert, avec un foulard blanc."
   },
   "Field appearance mo_ff2_n019_c01": {
     "en": "A small beard and round eyes show under a broad hat. The hat and coat are violet, with cyan cuffs.",
-    "ja": "幅広い帽子の下に小さなひげと丸い目がのぞく。帽子と上着は紫で、袖口は水色。"
+    "ja": "幅広い帽子の下に小さなひげと丸い目がのぞく。帽子と上着は紫で、袖口は水色。",
+    "fr": "Une petite barbe et des yeux ronds dépassent d'un grand chapeau. Le chapeau et le manteau sont violets, avec des poignets cyan."
   },
   "Field appearance mo_ff2_n019_c02": {
     "en": "A small beard and round eyes show under a broad hat. A red hat and green top with white trim sit above brown boots.",
-    "ja": "幅広い赤い帽子の下に小さなひげと丸い目がのぞく。白縁の緑の上着と茶色の長靴。"
+    "ja": "幅広い赤い帽子の下に小さなひげと丸い目がのぞく。白縁の緑の上着と茶色の長靴。",
+    "fr": "Une petite barbe et des yeux ronds dépassent d'un grand chapeau. Un chapeau rouge et un haut vert bordé de blanc surmontent des bottes brunes."
   },
   "Field appearance mo_ff2_n020_c00": {
     "en": "A compact figure has a pale face, swept hair and a short fitted outfit. Brown hair and purple sleeves frame the navy and gray clothing.",
-    "ja": "小柄で顔は淡く、髪を流し、短い体に沿う服を着る。茶髪と紫の袖が紺と灰色の服を囲む。"
+    "ja": "小柄で顔は淡く、髪を流し、短い体に沿う服を着る。茶髪と紫の袖が紺と灰色の服を囲む。",
+    "fr": "Une petite silhouette au visage pâle, à la chevelure balayée et à la tenue courte et ajustée. Cheveux bruns et manches violettes encadrent des vêtements bleu marine et gris."
   },
   "Field appearance mo_ff2_n020_c01": {
     "en": "A compact figure has a pale face, swept hair and a short fitted outfit. Golden hair frames a red jacket and yellow-brown trousers.",
-    "ja": "小柄で顔は淡く、金髪を流す。短い体に沿う赤い上着に黄褐色のズボンを着ける。"
+    "ja": "小柄で顔は淡く、金髪を流す。短い体に沿う赤い上着に黄褐色のズボンを着ける。",
+    "fr": "Une petite silhouette au visage pâle, à la chevelure balayée et à la tenue courte et ajustée. Des cheveux dorés encadrent une veste rouge et un pantalon brun jaune."
   },
   "Field appearance mo_ff2_n021_c00": {
     "en": "A slender golden-haired figure has a trailing ponytail tied in pink and wears a bright pink dress or long top with a pale waist and pink shoes.",
-    "ja": "ほっそりした金髪の人物。後ろへ流れるポニーテールを桃色で結び、淡い腰帯のある鮮やかな桃色のドレスか長い上着と、桃色の靴を着ける。"
+    "ja": "ほっそりした金髪の人物。後ろへ流れるポニーテールを桃色で結び、淡い腰帯のある鮮やかな桃色のドレスか長い上着と、桃色の靴を着ける。",
+    "fr": "Une silhouette mince aux cheveux dorés attachés en longue queue-de-cheval par un lien rose. Elle porte une robe ou un haut long rose vif, à taille pâle et à chaussures roses."
   },
   "Field appearance mo_ff2_n022_c00": {
     "en": "A pale older figure with thick white hair and beard wears a small magenta cap, green outer coat and dark red shoes. A rolled blue strip shows at the back.",
-    "ja": "色白の年配の人物で、白髪と白ひげが濃い。小さな赤紫の帽子に緑の外套、暗赤色の靴。背中に巻いた青い帯状の物が見える。"
+    "ja": "色白の年配の人物で、白髪と白ひげが濃い。小さな赤紫の帽子に緑の外套、暗赤色の靴。背中に巻いた青い帯状の物が見える。",
+    "fr": "Une silhouette âgée et pâle aux épais cheveux blancs et à la barbe assortie porte un petit bonnet magenta, un manteau vert et des chaussures rouge sombre. Une bande bleue enroulée dépasse dans le dos."
   },
   "Field appearance mo_ff2_n023_c00": {
     "en": "A little orange-red flame surrounds a face with narrow dark eye holes and a jagged yellow grin.",
-    "ja": "小さな赤橙色の炎が顔を取り囲む。目は細い黒い穴で、黄色い口元はぎざぎざに笑っている。"
+    "ja": "小さな赤橙色の炎が顔を取り囲む。目は細い黒い穴で、黄色い口元はぎざぎざに笑っている。",
+    "fr": "Une petite flamme rouge orangé entoure un visage aux étroites cavités sombres pour les yeux et au rictus jaune et dentelé."
   },
   "Field appearance mo_ff2_n024_c00": {
     "en": "A small, compact masklike figure has two protruding ear-like points. The dark violet-gray face has yellow details.",
-    "ja": "小型で仮面のような形に、耳に似た突起が二本立つ。暗い灰紫の顔に黄色い模様がある。"
+    "ja": "小型で仮面のような形に、耳に似た突起が二本立つ。暗い灰紫の顔に黄色い模様がある。",
+    "fr": "Une petite silhouette compacte en forme de masque a deux pointes saillantes évoquant des oreilles. Le visage gris violet foncé porte des détails jaunes."
   },
   "Field appearance mo_ff2_n024_c01": {
     "en": "A small, compact masklike figure has two protruding ear-like points. The pale gray-blue face has two tiny red eyes or dots.",
-    "ja": "小型で仮面のような形に、耳に似た突起が二本立つ。淡い青灰色の顔に小さな赤い目か点が二つある。"
+    "ja": "小型で仮面のような形に、耳に似た突起が二本立つ。淡い青灰色の顔に小さな赤い目か点が二つある。",
+    "fr": "Une petite silhouette compacte en forme de masque a deux pointes saillantes évoquant des oreilles. Deux yeux ou points minuscules et rouges se détachent sur le visage gris bleuté pâle."
   },
   "Field appearance mo_ff2_n025_c00": {
     "en": "A tall broad figure wears gold spiked armor and a long dark red-lined gold cape. A violet-handled staff or pole rises beside the shoulders.",
-    "ja": "背が高く肩幅が広い。棘の付いた金の鎧と暗赤色の裏地がある長い金のマントを着け、肩の横に紫の柄の杖か棒が立つ。"
+    "ja": "背が高く肩幅が広い。棘の付いた金の鎧と暗赤色の裏地がある長い金のマントを着け、肩の横に紫の柄の杖か棒が立つ。",
+    "fr": "Une haute et large silhouette porte une armure dorée à pointes et une longue cape dorée doublée de rouge sombre. Un bâton ou une hampe à poignée violette se dresse près de ses épaules."
   },
   "Field appearance mo_ff2_n026_c00": {
     "en": "A little airborne golden creature has a thin dark tapering belly and two wide blue and cyan membrane wings edged in gold.",
-    "ja": "小さな金色の生き物が空を飛ぶ。腹は暗く細くなる。青と水色の広い膜状の翼二枚に金の縁がある。"
+    "ja": "小さな金色の生き物が空を飛ぶ。腹は暗く細くなる。青と水色の広い膜状の翼二枚に金の縁がある。",
+    "fr": "Une petite créature dorée vole sur deux larges ailes membraneuses bleues et cyan bordées d'or. Son ventre sombre et mince s'effile."
   },
   "Field appearance mo_ff2_n027_c00": {
     "en": "A longer gold creature flies sideways with a thin horned head, spread cobalt and bronze wings and a curled lower body.",
-    "ja": "細長い金色の生き物が横向きに飛ぶ。頭は細く角がある。濃青と青銅色の翼を広げ、下半身を巻く。"
+    "ja": "細長い金色の生き物が横向きに飛ぶ。頭は細く角がある。濃青と青銅色の翼を広げ、下半身を巻く。",
+    "fr": "Une créature dorée, plus longue, vole de profil, la fine tête cornue, les ailes cobalt et bronze déployées et le bas du corps enroulé."
   },
   "Field appearance mo_ff2_n028_c00": {
     "en": "A smooth egg-shaped object has cream highlights and a shaded turquoise and gray lower half.",
-    "ja": "滑らかな卵形。表面にクリーム色の光沢があり、下半分は青緑と灰色の陰になっている。"
+    "ja": "滑らかな卵形。表面にクリーム色の光沢があり、下半分は青緑と灰色の陰になっている。",
+    "fr": "Un objet lisse en forme d'œuf, aux reflets crème et au bas ombré de turquoise et gris."
   },
   "Field appearance mo_ff2_n029_c00": {
     "en": "A squat green reptile or turtle faces forward with a broad cream and rust shell fringed with long spikes. Small forefeet and a short blunt nose project from beneath it.",
-    "ja": "ずんぐりした緑の爬虫類か亀が前を向く。クリーム色と赤茶色の幅広い甲羅の縁から長い棘が伸び、小さな前足と短く丸い鼻が下から出る。"
+    "ja": "ずんぐりした緑の爬虫類か亀が前を向く。クリーム色と赤茶色の幅広い甲羅の縁から長い棘が伸び、小さな前足と短く丸い鼻が下から出る。",
+    "fr": "Un reptile ou une tortue verte et trapue fait face, sous une large carapace crème et rouille bordée de longues pointes. De petites pattes avant et un museau court et émoussé dépassent en dessous."
   },
   "Field appearance mo_ff2_n030_c00": {
     "en": "A yellow-green quadruped has two narrow projecting heads with open hooked jaws. Dark blue-gray spines or limbs angle back over its shoulders.",
-    "ja": "黄緑色の四足の生き物。前へ突き出た細い頭が二つあり、開いた顎の先がかぎ状。青灰色の棘か脚が肩から斜め後ろへ伸びる。"
+    "ja": "黄緑色の四足の生き物。前へ突き出た細い頭が二つあり、開いた顎の先がかぎ状。青灰色の棘か脚が肩から斜め後ろへ伸びる。",
+    "fr": "Un quadrupède jaune-vert à deux têtes fines et saillantes aux mâchoires ouvertes et crochues. Des épines ou des membres gris bleuté foncé s'inclinent vers l'arrière au-dessus de ses épaules."
   },
   "Field appearance mo_ff2_n031_c00": {
     "en": "A broad hot-pink creature stands on a curling purple lower body. A pale face peers from beneath a high gold and rose headpiece, with wide, curled appendages at both sides.",
-    "ja": "鮮やかな桃色で幅が広い。紫の下半身が巻き、高い金とばら色の頭飾りの下から淡い顔がのぞく。左右に幅広く巻いた突起がある。"
+    "ja": "鮮やかな桃色で幅が広い。紫の下半身が巻き、高い金とばら色の頭飾りの下から淡い顔がのぞく。左右に幅広く巻いた突起がある。",
+    "fr": "Une créature large et rose vif se dresse sur un bas du corps violet qui s'enroule. Son visage pâle paraît sous une haute coiffe dorée et rose. Des appendices larges et recourbés s'ouvrent des deux côtés."
   },
   "Field appearance mo_ff2_n032_c00": {
     "en": "A short dark teal winged creature has pale pointed horns, thick armored forelimbs and a thin red-tipped tail visible from the side.",
-    "ja": "暗い青緑の小さな翼のある生き物。淡い尖角と鎧のように太い前脚があり、横から赤い先端の細い尾が見える。"
+    "ja": "暗い青緑の小さな翼のある生き物。淡い尖角と鎧のように太い前脚があり、横から赤い先端の細い尾が見える。",
+    "fr": "Une petite créature ailée bleu-vert foncé aux cornes pâles et pointues, aux grosses pattes avant cuirassées et à la fine queue terminée de rouge, visible de profil."
   },
   "Field appearance mo_ff2_n033_c00": {
     "en": "A compact blue winged or armored creature has branching gold horns, a long pale stripe down its face and wide layered shoulder shapes.",
-    "ja": "青い小柄な翼か鎧のある生き物。枝分かれした金の角、顔を縦に走る長い淡色の筋、幅広く重なった肩の突起がある。"
+    "ja": "青い小柄な翼か鎧のある生き物。枝分かれした金の角、顔を縦に走る長い淡色の筋、幅広く重なった肩の突起がある。",
+    "fr": "Une petite créature bleue, ailée ou cuirassée, aux cornes dorées et ramifiées, à la longue bande pâle sur la face et aux larges épaules en couches."
   },
   "Field appearance mo_ff2_n034_c00": {
     "en": "A low blue and violet creature has a rounded head, a curled segmented body and a short row of cyan points or filaments along its upper edge.",
-    "ja": "地面に近い青紫の生き物。丸い頭に節のある体を巻き、上側の縁に水色の短い棘か毛が並ぶ。"
+    "ja": "地面に近い青紫の生き物。丸い頭に節のある体を巻き、上側の縁に水色の短い棘か毛が並ぶ。",
+    "fr": "Une créature basse bleue et violette, à la tête ronde et au corps enroulé et segmenté. Une courte rangée de pointes ou de filaments cyan borde son dos."
   },
   "Field appearance mo_ff2_n035_c00": {
     "en": "A bulky walking machine has a round inset face or chest plate, thick shoulders, heavy arms and short blocky legs. Its plates are copper and orange.",
-    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は銅色と橙色。"
+    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は銅色と橙色。",
+    "fr": "Une machine marcheuse massive, au visage ou plastron rond en retrait, aux grosses épaules, aux lourds bras et aux courtes jambes anguleuses. Ses plaques sont cuivrées et orange."
   },
   "Field appearance mo_ff2_n035_c01": {
     "en": "A bulky walking machine has a round inset face or chest plate, thick shoulders, heavy arms and short blocky legs. Its plates are steel-blue and gray.",
-    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は鋼の青と灰色。"
+    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は鋼の青と灰色。",
+    "fr": "Une machine marcheuse massive, au visage ou plastron rond en retrait, aux grosses épaules, aux lourds bras et aux courtes jambes anguleuses. Ses plaques sont bleu acier et grises."
   },
   "Field appearance mo_ff2_n035_c02": {
     "en": "A bulky walking machine has a round inset face or chest plate, thick shoulders, heavy arms and short blocky legs. Its plates are violet-blue with dark red trim.",
-    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は青紫で、暗赤色の縁がある。"
+    "ja": "ごつい歩行機械。丸くくぼんだ顔か胸板、大きな肩、重い腕、短い角張った脚を持つ。装甲は青紫で、暗赤色の縁がある。",
+    "fr": "Une machine marcheuse massive, au visage ou plastron rond en retrait, aux grosses épaules, aux lourds bras et aux courtes jambes anguleuses. Ses plaques sont bleu violet, avec des bordures rouge sombre."
   },
   "Field appearance mo_ff2_n102_c01": {
     "en": "A short figure has bright violet-blue hair, dark eyes, a teal top and sleeves, dark trousers and red shoes.",
-    "ja": "背が低く、鮮やかな青紫の髪と暗い目。袖も胴も青緑の上着に、暗いズボンと赤い靴を着ける。"
+    "ja": "背が低く、鮮やかな青紫の髪と暗い目。袖も胴も青緑の上着に、暗いズボンと赤い靴を着ける。",
+    "fr": "Une petite silhouette aux cheveux bleu violet vif et aux yeux sombres porte un haut à manches bleu-vert, un pantalon sombre et des chaussures rouges."
   },
   "Field appearance mo_ff2_n103_c00": {
     "en": "A pale figure with long light green hair wears pink shoulders and a broad yellow skirt. Dark eyes and a narrow waist show in the front frame.",
-    "ja": "色白で長い淡緑の髪。肩は桃色で、幅広い黄色のスカートをはく。正面から暗い目と細い腰が見える。"
+    "ja": "色白で長い淡緑の髪。肩は桃色で、幅広い黄色のスカートをはく。正面から暗い目と細い腰が見える。",
+    "fr": "Une silhouette pâle aux longs cheveux vert clair porte des épaulières roses et une large jupe jaune. Des yeux sombres et une taille fine se distinguent de face."
   },
   "Field appearance mo_ff2_n104_c00": {
     "en": "A short elder with a large white beard wears a pointed violet cap and wide purple robe with pale cuffs.",
-    "ja": "長く大きな白ひげの短身の老人物。尖った紫の帽子をかぶり、淡い袖口の付いた幅広い紫のローブを着る。"
+    "ja": "長く大きな白ひげの短身の老人物。尖った紫の帽子をかぶり、淡い袖口の付いた幅広い紫のローブを着る。",
+    "fr": "Une petite silhouette âgée à l'épaisse barbe blanche porte un bonnet violet pointu et une robe mauve ample à poignets clairs."
   },
   "Field appearance mo_ff2_n106_c00": {
     "en": "A small childlike figure has short swept hair, pale hands and little boots. Brown hair frames a pale lavender top, and the shoes are pink.",
-    "ja": "子供のように小さく、短い茶髪を流している。淡紫の上着に小さな桃色の靴。手は淡色。"
+    "ja": "子供のように小さく、短い茶髪を流している。淡紫の上着に小さな桃色の靴。手は淡色。",
+    "fr": "Une petite silhouette enfantine aux cheveux courts balayés, aux mains pâles et aux petites bottes. Des cheveux bruns encadrent un haut lavande pâle, et les chaussures sont roses."
   },
   "Field appearance mo_ff2_n106_c01": {
     "en": "A small childlike figure has short swept hair, pale hands and little boots. The hair is violet, the clothes are charcoal and gray, and the boots are reddish.",
-    "ja": "子供のように小さく、短い紫の髪を流している。濃淡の灰色の服に赤みのある小さな長靴。手は淡色。"
+    "ja": "子供のように小さく、短い紫の髪を流している。濃淡の灰色の服に赤みのある小さな長靴。手は淡色。",
+    "fr": "Une petite silhouette enfantine aux cheveux courts balayés, aux mains pâles et aux petites bottes. Les cheveux sont violets, les vêtements anthracite et gris, et les bottes rougeâtres."
   },
   "Field appearance mo_ff2_n111_c00": {
     "en": "A short person with a tied magenta head scarf wears a dark eye band, a pale turquoise top and purple trousers with green and pink sections.",
-    "ja": "背の低い人物で赤紫の頭巾を結ぶ。目元に暗い帯、胴は淡い青緑、紫のズボンには緑と桃色の部分がある。"
+    "ja": "背の低い人物で赤紫の頭巾を結ぶ。目元に暗い帯、胴は淡い青緑、紫のズボンには緑と桃色の部分がある。",
+    "fr": "Une petite personne à foulard magenta noué porte une bande sombre aux yeux, un haut turquoise pâle et un pantalon violet à pans verts et roses."
   },
   "Field appearance mo_ff2_n115_c00": {
     "en": "A squat golden furred creature has rounded pointed ears, a protruding pale muzzle, dark eyes, small forepaws and a short low tail.",
-    "ja": "金色の毛を持つずんぐりした生き物。丸みのある尖った耳、突き出た淡色の鼻面と暗い目、小さな前足、短く低い尾がある。"
+    "ja": "金色の毛を持つずんぐりした生き物。丸みのある尖った耳、突き出た淡色の鼻面と暗い目、小さな前足、短く低い尾がある。",
+    "fr": "Une créature trapue à fourrure dorée, aux oreilles pointues mais arrondies, au museau pâle et saillant, aux yeux sombres, aux petites pattes avant et à la queue basse et courte."
   },
   "Field appearance mo_ff2_n116_c00": {
     "en": "A small yellow bird has a large raised crest, bright blue-and-white eyes, a curved orange beak, short reddish legs and a small upturned tail.",
-    "ja": "黄色い小鳥。大きな冠羽が上を向き、青と白の明るい目、橙色に曲がるくちばし、赤みのある短い脚、小さく上を向く尾がある。"
+    "ja": "黄色い小鳥。大きな冠羽が上を向き、青と白の明るい目、橙色に曲がるくちばし、赤みのある短い脚、小さく上を向く尾がある。",
+    "fr": "Un petit oiseau jaune à grande huppe dressée, aux yeux bleu et blanc brillants, au bec orange recourbé, aux courtes pattes rougeâtres et à la petite queue relevée."
   },
   "Field appearance mo_ff2_n118_c00": {
     "en": "A large pointed mustard hat hides most of the face, with little yellow eyes under the brim. A wide blue cloak and sleeves cover the body.",
-    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。青い幅広の外套と袖が体を覆う。"
+    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。青い幅広の外套と袖が体を覆う。",
+    "fr": "Un grand chapeau pointu couleur moutarde cache presque tout le visage. De petits yeux jaunes apparaissent sous le bord. Une cape et de larges manches bleues couvrent le corps."
   },
   "Field appearance mo_ff2_n118_c01": {
     "en": "A large pointed mustard hat hides most of the face, with little yellow eyes under the brim. A wide red cloak and sleeves cover the body.",
-    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。赤い幅広の外套と袖が体を覆う。"
+    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。赤い幅広の外套と袖が体を覆う。",
+    "fr": "Un grand chapeau pointu couleur moutarde cache presque tout le visage. De petits yeux jaunes apparaissent sous le bord. Une cape et de larges manches rouges couvrent le corps."
   },
   "Field appearance mo_ff2_n118_c02": {
     "en": "A large pointed mustard hat hides most of the face, with little yellow eyes under the brim. A wide green cloak and sleeves cover the body.",
-    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。緑の幅広の外套と袖が体を覆う。"
+    "ja": "からし色の大きな尖り帽子が顔の大半を隠し、つばの下から小さな黄色い目が見える。緑の幅広の外套と袖が体を覆う。",
+    "fr": "Un grand chapeau pointu couleur moutarde cache presque tout le visage. De petits yeux jaunes apparaissent sous le bord. Une cape et de larges manches vertes couvrent le corps."
   },
   "Field appearance mo_ff2_p001_c00": {
     "en": "A swept blue and orange band covers white-silver hair. Orange trim, pale metal or cloth details and a long red-orange cape stand out on blue armor.",
-    "ja": "銀白色の髪を青と橙の鉢巻きで後ろへ流している。青い鎧に橙色の縁取りと淡色の飾りがあり、長い赤橙色のマントが垂れる。"
+    "ja": "銀白色の髪を青と橙の鉢巻きで後ろへ流している。青い鎧に橙色の縁取りと淡色の飾りがあり、長い赤橙色のマントが垂れる。",
+    "fr": "Un bandeau bleu et orange rejeté en arrière recouvre des cheveux blanc argenté. Des bordures orange, des détails clairs de métal ou de tissu et une longue cape rouge orangé tranchent sur l'armure bleue."
   },
   "Field appearance mo_ff2_p002_c00": {
     "en": "A pale figure has long swept violet hair, a dark pink outfit with pale shoulder trim and pink boots.",
-    "ja": "色白で長い紫の髪を流す。濃い桃色の服には淡い肩飾りがあり、長靴も桃色。"
+    "ja": "色白で長い紫の髪を流す。濃い桃色の服には淡い肩飾りがあり、長靴も桃色。",
+    "fr": "Une silhouette pâle aux longs cheveux violets balayés en arrière, vêtue de rose foncé avec des bordures pâles aux épaules et des bottes roses."
   },
   "Field appearance mo_ff2_p003_c00": {
     "en": "A broad brown-haired man wears a short green and pale-yellow top and violet trousers and cape.",
-    "ja": "茶髪で肩幅の広い男。緑と淡黄色の短い上着に紫のズボンと紫のマントを着ける。"
+    "ja": "茶髪で肩幅の広い男。緑と淡黄色の短い上着に紫のズボンと紫のマントを着ける。",
+    "fr": "Un homme large d'épaules aux cheveux bruns porte un haut court vert et jaune pâle, un pantalon violet et une cape assortie."
   },
   "Field appearance mo_ff2_p004_c00": {
     "en": "A small robed figure wraps its head, lower face and body in white, leaving a dark eye opening and a narrow red and gold belt or band.",
-    "ja": "小柄な人物が白布で頭と顔の下半分、体を包む。目の部分だけ黒く開き、腰に細い赤と金の帯が見える。"
+    "ja": "小柄な人物が白布で頭と顔の下半分、体を包む。目の部分だけ黒く開き、腰に細い赤と金の帯が見える。",
+    "fr": "Une petite silhouette en robe s'enveloppe de blanc à la tête, au bas du visage et au corps. Une ouverture sombre aux yeux et une fine ceinture ou bande rouge et dorée restent visibles."
   },
   "Field appearance mo_ff2_p005_c00": {
     "en": "A stocky bald man with a small mustache wears a green coat with gray shoulder trim, a red collar detail, gloves or cuffs and blue-gray boots.",
-    "ja": "がっしりした禿頭の男で短い口ひげがある。灰色の肩飾りが付いた緑の上着、赤い襟飾り、手袋か袖口の飾り、青灰色の長靴を着ける。"
+    "ja": "がっしりした禿頭の男で短い口ひげがある。灰色の肩飾りが付いた緑の上着、赤い襟飾り、手袋か袖口の飾り、青灰色の長靴を着ける。",
+    "fr": "Un homme chauve et trapu à fine moustache porte un manteau vert à épaules bordées de gris, à détail rouge au col, à gants ou poignets et à bottes gris bleuté."
   },
   "Field appearance mo_ff2_p006_c00": {
     "en": "A slim pale figure has long purple hair, a broad striped pink cap or head wrap and pink, blue, gold and white clothing.",
-    "ja": "ほっそりした色白の人物。長い紫髪に縞のある幅広い桃色の帽子か頭巾をかぶり、桃色、青、金、白の服を着る。"
+    "ja": "ほっそりした色白の人物。長い紫髪に縞のある幅広い桃色の帽子か頭巾をかぶり、桃色、青、金、白の服を着る。",
+    "fr": "Une silhouette mince et pâle aux longs cheveux violets porte une ample coiffe rose rayée ou un tissu noué, ainsi qu'une tenue rose, bleue, dorée et blanche."
   },
   "Field appearance mo_ff2_p007_c00": {
     "en": "A blond, pale-faced figure wears a narrow blue headband, gold-trimmed pale clothing and a long purple cape.",
-    "ja": "色白で金髪。細い青の鉢巻きに金で縁取った淡色の服、長い紫のマントを着ける。"
+    "ja": "色白で金髪。細い青の鉢巻きに金で縁取った淡色の服、長い紫のマントを着ける。",
+    "fr": "Une silhouette blonde au visage pâle porte un bandeau bleu étroit, des vêtements clairs bordés d'or et une longue cape violette."
   },
   "Field appearance mo_ff2_p008_c00": {
     "en": "A dark armored figure wears a pointed gray-blue helmet with swept side horns. A slim face opening, layered dark armor, bare hands and tall dark boots show in field and battle.",
-    "ja": "暗い鎧に横へ反った角が付いた青灰色の尖り兜をかぶる。細い顔の開口部、重なった鎧、素手、暗色の長靴が野外でも戦闘でも見える。"
+    "ja": "暗い鎧に横へ反った角が付いた青灰色の尖り兜をかぶる。細い顔の開口部、重なった鎧、素手、暗色の長靴が野外でも戦闘でも見える。",
+    "fr": "Une silhouette en armure sombre porte un casque pointu gris bleuté aux cornes latérales recourbées. On distingue une fine ouverture au visage, des plaques sombres superposées, des mains nues et de hautes bottes sombres, en combat comme sur le terrain."
   },
   "Field appearance mo_ff2_p009_c00": {
     "en": "A short gray-black hairstyle frames a pale angular face. Dark violet plate, dark trousers and gold-orange belt fittings cover the stocky figure.",
-    "ja": "短い灰黒色の髪に色白で角張った顔。がっしりした体に濃い紫の板金鎧、暗いズボン、金橙色の帯金具を着ける。"
+    "ja": "短い灰黒色の髪に色白で角張った顔。がっしりした体に濃い紫の板金鎧、暗いズボン、金橙色の帯金具を着ける。",
+    "fr": "Des cheveux courts gris-noir encadrent un visage pâle et anguleux. Une cuirasse violet foncé, un pantalon sombre et des attaches de ceinture orange doré habillent cette silhouette trapue."
   },
   "Field appearance mo_ff2_p010_c00": {
     "en": "A small fair-haired figure wears a red outfit with pale collar and waist details. A green cloak drapes behind the narrow figure.",
-    "ja": "金髪の小柄な人物。襟と腰に淡色の飾りがある赤い服を着け、細い体の背後に緑の外套を垂らす。"
+    "ja": "金髪の小柄な人物。襟と腰に淡色の飾りがある赤い服を着け、細い体の背後に緑の外套を垂らす。",
+    "fr": "Une petite silhouette aux cheveux clairs porte une tenue rouge à détails pâles au col et à la taille. Une cape verte tombe derrière sa silhouette mince."
   },
   "Field appearance mo_ff2_v002_c00": {
     "en": "A low brown boat carries broad blue-white sails and a little blue flag.",
-    "ja": "船体が低い茶色の船。広い青白の帆と小さな青い旗を掲げる。"
+    "ja": "船体が低い茶色の船。広い青白の帆と小さな青い旗を掲げる。",
+    "fr": "Un bateau bas et brun porte de larges voiles blanc bleuté et un petit drapeau bleu."
   },
   "Field appearance mo_ff2_v003_c00": {
     "en": "A small narrow wooden craft carries a single blue-white triangular sail and a little mast flag.",
-    "ja": "細い小型の木造船。青白の三角帆が一枚あり、帆柱には小さな旗がある。"
+    "ja": "細い小型の木造船。青白の三角帆が一枚あり、帆柱には小さな旗がある。",
+    "fr": "Une petite embarcation étroite en bois porte une unique voile triangulaire blanc bleuté et un petit drapeau au mât."
   },
   "Field appearance mo_ff2_v005_c00": {
     "en": "A gold-edged wooden vessel has a broad open deck and several bright little fittings or masts.",
-    "ja": "金縁の木造船。広い開放甲板に、小さく明るい金具か帆柱がいくつも並ぶ。"
+    "ja": "金縁の木造船。広い開放甲板に、小さく明るい金具か帆柱がいくつも並ぶ。",
+    "fr": "Un navire en bois bordé d'or, au large pont ouvert et aux petits accessoires ou mâts brillants."
   },
   "Field appearance mo_ff2_v006_c00": {
     "en": "A dark blue and gold craft has rotors above, long pointed side booms and a narrow round-ended hull below.",
-    "ja": "濃い青と金の飛行艇。上に回転翼、両脇に長く尖った張り出し、下に先が丸い細身の船体がある。"
+    "ja": "濃い青と金の飛行艇。上に回転翼、両脇に長く尖った張り出し、下に先が丸い細身の船体がある。",
+    "fr": "Un engin bleu foncé et doré, aux rotors sur le dessus, aux longs bras latéraux pointus et à la coque inférieure étroite et arrondie aux extrémités."
   },
   "Field appearance mo_ff2_v102_c00": {
     "en": "A dark, rounded open craft has a brown lip and pale edge, with short purple-blue projections on both sides.",
-    "ja": "丸く暗い開放船。茶の縁に淡色の線があり、両側に青紫の短い突起がある。"
+    "ja": "丸く暗い開放船。茶の縁に淡色の線があり、両側に青紫の短い突起がある。",
+    "fr": "Une embarcation sombre, ronde et ouverte, au rebord brun et à l'arête pâle, avec deux courts appendices bleu violet sur les côtés."
   },
   "Weapon appearance wp_ff2_ax00_c00": {
     "en": "A dark axe head has a bright silver edge on a brown haft.",
-    "ja": "茶色の柄に暗い斧頭があり、刃先は明るい銀色。"
+    "ja": "茶色の柄に暗い斧頭があり、刃先は明るい銀色。",
+    "fr": "Un fer de hache sombre au tranchant argenté brillant, sur un manche brun."
   },
   "Weapon appearance wp_ff2_ax01_c00": {
     "en": "A pale green-gray battle axe head has two cutting edges.",
-    "ja": "淡い緑灰色の戦斧で、両側に刃がある。"
+    "ja": "淡い緑灰色の戦斧で、両側に刃がある。",
+    "fr": "Un fer de hache de bataille gris-vert pâle à deux tranchants."
   },
   "Weapon appearance wp_ff2_ax02_c00": {
     "en": "The axe has a broad gray head with a cream-gold cutting edge.",
-    "ja": "幅広い灰色の斧頭に、クリームがかった金色の刃が付く。"
+    "ja": "幅広い灰色の斧頭に、クリームがかった金色の刃が付く。",
+    "fr": "Une hache à large fer gris et au fil crème et doré."
   },
   "Weapon appearance wp_ff2_ax03_c00": {
     "en": "A bright blue axe head has a cyan cutting edge and sweep.",
-    "ja": "鮮やかな青い斧で、湾曲した刃先が水色。"
+    "ja": "鮮やかな青い斧で、湾曲した刃先が水色。",
+    "fr": "Un fer de hache bleu vif au tranchant cyan, qui laisse une traînée de la même couleur."
   },
   "Weapon appearance wp_ff2_ax04_c00": {
     "en": "A copper axe head sits above a narrow blue grip.",
-    "ja": "細い青の握りの上に銅色の斧頭がある。"
+    "ja": "細い青の握りの上に銅色の斧頭がある。",
+    "fr": "Un fer de hache cuivré au-dessus d'une poignée bleue étroite."
   },
   "Weapon appearance wp_ff2_ax05_c00": {
     "en": "An emerald axe head sits above a purple grip.",
-    "ja": "紫の握りの上にエメラルド色の斧頭がある。"
+    "ja": "紫の握りの上にエメラルド色の斧頭がある。",
+    "fr": "Un fer de hache vert émeraude au-dessus d'une poignée violette."
   },
   "Weapon appearance wp_ff2_ax06_c00": {
     "en": "A broad golden crescent axe head sits on a teal shaft.",
-    "ja": "青緑の柄に幅広い金の三日月形の斧頭が付く。"
+    "ja": "青緑の柄に幅広い金の三日月形の斧頭が付く。",
+    "fr": "Un large fer de hache en croissant doré sur un manche bleu-vert."
   },
   "Weapon appearance wp_ff2_bw00_c00": {
     "en": "A short recurved brown and cream bow holds a fine arrow against a taut string.",
-    "ja": "茶色とクリーム色の短い反曲弓。張った弦に細い矢をつがえる。"
+    "ja": "茶色とクリーム色の短い反曲弓。張った弦に細い矢をつがえる。",
+    "fr": "Un arc court à double courbure, brun et crème, retient une flèche fine contre sa corde tendue."
   },
   "Weapon appearance wp_ff2_bw01_c00": {
     "en": "A short recurved dark red and gold bow holds a fine arrow against a taut string.",
-    "ja": "暗赤色と金の短い反曲弓。張った弦に細い矢をつがえる。"
+    "ja": "暗赤色と金の短い反曲弓。張った弦に細い矢をつがえる。",
+    "fr": "Un arc court à double courbure, rouge sombre et or, retient une flèche fine contre sa corde tendue."
   },
   "Weapon appearance wp_ff2_bw01_c01": {
     "en": "A short recurved bright blue and cyan bow holds a fine arrow against a taut string.",
-    "ja": "鮮やかな青と水色の短い反曲弓。張った弦に細い矢をつがえる。"
+    "ja": "鮮やかな青と水色の短い反曲弓。張った弦に細い矢をつがえる。",
+    "fr": "Un arc court à double courbure, bleu vif et cyan, retient une flèche fine contre sa corde tendue."
   },
   "Weapon appearance wp_ff2_bw02_c00": {
     "en": "A short recurved dark blue and rose bow holds a fine arrow against a taut string.",
-    "ja": "濃紺とばら色の短い反曲弓。張った弦に細い矢をつがえる。"
+    "ja": "濃紺とばら色の短い反曲弓。張った弦に細い矢をつがえる。",
+    "fr": "Un arc court à double courbure, bleu foncé et rose, retient une flèche fine contre sa corde tendue."
   },
   "Weapon appearance wp_ff2_bw03_c00": {
     "en": "A long horizontal silver-gray bow has gold center accents and supports an upright arrow.",
-    "ja": "横に長い銀灰色の弓。中央に金の飾りがあり、矢を縦に支える。"
+    "ja": "横に長い銀灰色の弓。中央に金の飾りがあり、矢を縦に支える。",
+    "fr": "Un long arc horizontal gris argenté, rehaussé d'or en son centre, porte une flèche dressée."
   },
   "Weapon appearance wp_ff2_bw03_c01": {
     "en": "A long horizontal steel-blue bow supports an upright blue arrow.",
-    "ja": "横に長い鋼青色の弓が青い矢を縦に支える。"
+    "ja": "横に長い鋼青色の弓が青い矢を縦に支える。",
+    "fr": "Un long arc horizontal bleu acier porte une flèche bleue dressée."
   },
   "Weapon appearance wp_ff2_bw04_c00": {
     "en": "A short recurved bow with violet trim holds a narrow yellow arrow against a taut string.",
-    "ja": "紫の縁がある短い反曲弓。張った弦に細い黄色の矢をつがえる。"
+    "ja": "紫の縁がある短い反曲弓。張った弦に細い黄色の矢をつがえる。",
+    "fr": "Un arc court à double courbure, bordé de violet, retient une flèche jaune et fine contre sa corde tendue."
   },
   "Weapon appearance wp_ff2_cw00_c00": {
     "en": "Several pale parallel blades or scratch lines streak horizontally from dark blue metal.",
-    "ja": "暗青色の金属から、淡色の平行な刃か引っかき跡が横に伸びる。"
+    "ja": "暗青色の金属から、淡色の平行な刃か引っかき跡が横に伸びる。",
+    "fr": "Plusieurs lames ou griffures pâles et parallèles partent à l'horizontale d'un métal bleu foncé."
   },
   "Weapon appearance wp_ff2_kn00_c00": {
     "en": "A thin, short, gray-white blade with a small blue grip leaves a narrow slash.",
-    "ja": "小さな青い柄の付いた細く短い灰白の刃が、細い斬撃の跡を残す。"
+    "ja": "小さな青い柄の付いた細く短い灰白の刃が、細い斬撃の跡を残す。",
+    "fr": "Une lame grise et blanche, courte et fine, à petite poignée bleue. Le coup dessine un trait étroit."
   },
   "Weapon appearance wp_ff2_kn01_c00": {
     "en": "A short blade with gold fittings leaves a thick rose-colored curved slash.",
-    "ja": "金の金具が付いた短い刃が、太いばら色の曲線を残す。"
+    "ja": "金の金具が付いた短い刃が、太いばら色の曲線を残す。",
+    "fr": "Une lame courte à garnitures dorées laisse une épaisse trace courbe et rose."
   },
   "Weapon appearance wp_ff2_kn02_c00": {
     "en": "A small green hilt holds a short blade that leaves a golden arc.",
-    "ja": "小さな緑の柄に付いた短い刃が、金色の弧を描く。"
+    "ja": "小さな緑の柄に付いた短い刃が、金色の弧を描く。",
+    "fr": "Une petite poignée verte porte une lame courte qui laisse un arc doré."
   },
   "Weapon appearance wp_ff2_kn03_c00": {
     "en": "A small gold hilt supports a short blade that leaves a broad pale silver arc.",
-    "ja": "小さな金色の柄の短い刃が、淡い銀色の幅広い弧を描く。"
+    "ja": "小さな金色の柄の短い刃が、淡い銀色の幅広い弧を描く。",
+    "fr": "Une petite poignée dorée porte une lame courte qui laisse un large arc argent pâle."
   },
   "Weapon appearance wp_ff2_kn04_c00": {
     "en": "A short blade leaves a purple slashing arc dotted with glints.",
-    "ja": "短い刃が紫の斬撃の弧を描き、その上に小さなきらめきが散る。"
+    "ja": "短い刃が紫の斬撃の弧を描き、その上に小さなきらめきが散る。",
+    "fr": "Une lame courte dessine un arc violet parsemé de reflets."
   },
   "Weapon appearance wp_ff2_kn05_c00": {
     "en": "A short blade sweeps in bright blue and cyan above a red and gold grip.",
-    "ja": "赤と金の握りの上の短い刃が、鮮やかな青と水色の弧を描く。"
+    "ja": "赤と金の握りの上の短い刃が、鮮やかな青と水色の弧を描く。",
+    "fr": "Une lame courte balaie l'air en bleu vif et cyan au-dessus d'une poignée rouge et dorée."
   },
   "Weapon appearance wp_ff2_pu00_c00": {
     "en": "A tan, clenched fist has a blue cuff.",
-    "ja": "薄茶色の握り拳に青い袖口が付く。"
+    "ja": "薄茶色の握り拳に青い袖口が付く。",
+    "fr": "Un poing fermé à la peau hâlée et au poignet bleu."
   },
   "Weapon appearance wp_ff2_sh00_c00": {
     "en": "A rounded rust-orange shield has a pale gray rim.",
-    "ja": "丸みのあるさび橙色の盾。縁は淡い灰色。"
+    "ja": "丸みのあるさび橙色の盾。縁は淡い灰色。",
+    "fr": "Un bouclier arrondi orange rouille à bordure gris pâle."
   },
   "Weapon appearance wp_ff2_sp00_c00": {
     "en": "A narrow red-brown spear shaft has a small silver tip.",
-    "ja": "細い赤茶色の槍の柄に、小さな銀の穂先が付く。"
+    "ja": "細い赤茶色の槍の柄に、小さな銀の穂先が付く。",
+    "fr": "Une hampe de lance brun rouge et étroite, à petite pointe argentée."
   },
   "Weapon appearance wp_ff2_sp01_c00": {
     "en": "Two thin red-orange streaks extend horizontally from the lance thrust.",
-    "ja": "槍を突くと赤橙の細い筋が二本、横に伸びる。"
+    "ja": "槍を突くと赤橙の細い筋が二本、横に伸びる。",
+    "fr": "Deux minces traits rouge orangé prolongent horizontalement le coup de lance."
   },
   "Weapon appearance wp_ff2_sp02_c00": {
     "en": "Two broad white-blue streaks extend horizontally from the lance thrust.",
-    "ja": "槍を突くと青白い幅広い筋が二本、横に伸びる。"
+    "ja": "槍を突くと青白い幅広い筋が二本、横に伸びる。",
+    "fr": "Deux larges traits blanc bleuté prolongent horizontalement le coup de lance."
   },
   "Weapon appearance wp_ff2_sp03_c00": {
     "en": "Two horizontal trails of jagged ice-blue shards follow the lance thrust.",
-    "ja": "槍を突くと、ぎざぎざした氷青色の破片が二列の横軌跡を残す。"
+    "ja": "槍を突くと、ぎざぎざした氷青色の破片が二列の横軌跡を残す。",
+    "fr": "Deux traînées horizontales de fragments dentelés bleu glacier suivent le coup de lance."
   },
   "Weapon appearance wp_ff2_sp04_c00": {
     "en": "A slender brown and dark blue javelin has a small metallic point.",
-    "ja": "茶色と濃い青の細い投げ槍に、小さな金属の先が付く。"
+    "ja": "茶色と濃い青の細い投げ槍に、小さな金属の先が付く。",
+    "fr": "Un javelot fin, brun et bleu foncé, à petite pointe métallique."
   },
   "Weapon appearance wp_ff2_sp05_c00": {
     "en": "A pale mint spearpoint is set into a narrow violet shaft.",
-    "ja": "細い紫の柄に淡いミント色の槍先がはまっている。"
+    "ja": "細い紫の柄に淡いミント色の槍先がはまっている。",
+    "fr": "Une pointe de lance vert menthe pâle sur une fine hampe violette."
   },
   "Weapon appearance wp_ff2_sp06_c00": {
     "en": "A blue spearpoint sits on a narrow gold shaft.",
-    "ja": "細い金色の柄に青い槍先が付く。"
+    "ja": "細い金色の柄に青い槍先が付く。",
+    "fr": "Une pointe de lance bleue sur une fine hampe dorée."
   },
   "Weapon appearance wp_ff2_sp07_c00": {
     "en": "A shaft with a pale banded grip flashes around a bright gold electric point and short branching rays.",
-    "ja": "淡い帯のある握りの槍。穂先に金色の電光が走り、そこから短い光が枝分かれする。"
+    "ja": "淡い帯のある握りの槍。穂先に金色の電光が走り、そこから短い光が枝分かれする。",
+    "fr": "Une hampe à poignée cerclée de bandes pâles. Sa pointe électrique et dorée jette de courts rayons ramifiés."
   },
   "Weapon appearance wp_ff2_sp08_c00": {
     "en": "A split silver trident head sits on an ochre shaft with a blue end band.",
-    "ja": "黄土色の柄に三つに分かれた銀の穂先。柄尻に青い帯がある。"
+    "ja": "黄土色の柄に三つに分かれた銀の穂先。柄尻に青い帯がある。",
+    "fr": "Une tête de trident argentée sur une hampe ocre à bande bleue à l'extrémité."
   },
   "Weapon appearance wp_ff2_st00_c00": {
     "en": "A short oblique staff has a curved red-orange head that leaves a warm orange sweep.",
-    "ja": "斜めに構えた短い杖。曲がった赤橙の頭部が暖かい橙の軌跡を残す。"
+    "ja": "斜めに構えた短い杖。曲がった赤橙の頭部が暖かい橙の軌跡を残す。",
+    "fr": "Un bâton court et incliné à tête incurvée rouge orangé, qui laisse une traînée orange chaude."
   },
   "Weapon appearance wp_ff2_st01_c00": {
     "en": "A short mace has a rounded blue-green head with small yellow details.",
-    "ja": "短いメイス。丸い青緑の頭部に小さな黄色の飾りがある。"
+    "ja": "短いメイス。丸い青緑の頭部に小さな黄色の飾りがある。",
+    "fr": "Une courte masse à tête ronde bleu-vert ponctuée de jaune."
   },
   "Weapon appearance wp_ff2_st02_c00": {
     "en": "A short staff with an oblique grip leaves a broad rose-pink trail.",
-    "ja": "斜めの握りの短い杖が、幅広いばら色の軌跡を残す。"
+    "ja": "斜めの握りの短い杖が、幅広いばら色の軌跡を残す。",
+    "fr": "Un bâton court à poignée inclinée laisse une large traînée rose."
   },
   "Weapon appearance wp_ff2_st03_c00": {
     "en": "A short mace with a small gray head swings through a broad icy-blue arc.",
-    "ja": "小さな灰色の頭部を持つ短いメイスが、氷青色の幅広い弧を描く。"
+    "ja": "小さな灰色の頭部を持つ短いメイスが、氷青色の幅広い弧を描く。",
+    "fr": "Une courte masse à petite tête grise décrit un large arc bleu glacier."
   },
   "Weapon appearance wp_ff2_st04_c00": {
     "en": "A short staff with a small pronged gold head leaves an ochre sweep.",
-    "ja": "先が分かれた小さな金の頭部を持つ短い杖が、黄土色の軌跡を残す。"
+    "ja": "先が分かれた小さな金の頭部を持つ短い杖が、黄土色の軌跡を残す。",
+    "fr": "Un bâton court à petite tête dorée et fourchue dessine une traînée ocre."
   },
   "Weapon appearance wp_ff2_st05_c00": {
     "en": "A short staff has a deep blue head and a broad turquoise strike arc.",
-    "ja": "短い杖の頭部は濃い青。攻撃すると青緑の幅広い弧が出る。"
+    "ja": "短い杖の頭部は濃い青。攻撃すると青緑の幅広い弧が出る。",
+    "fr": "Un bâton court à tête bleu profond dessine un large arc turquoise."
   },
   "Weapon appearance wp_ff2_st06_c00": {
     "en": "A bright blue spiked mace head swings through a broad cyan arc.",
-    "ja": "明るい青の棘付きメイスが、幅広い水色の弧を描く。"
+    "ja": "明るい青の棘付きメイスが、幅広い水色の弧を描く。",
+    "fr": "Une tête de masse bleu vif hérissée de pointes balaie un large arc cyan."
   },
   "Weapon appearance wp_ff2_st07_c00": {
     "en": "A short staff with a simple brown cap leaves a gold-brown strike arc.",
-    "ja": "簡素な茶色の頭部を持つ短い杖が、金褐色の弧を描く。"
+    "ja": "簡素な茶色の頭部を持つ短い杖が、金褐色の弧を描く。",
+    "fr": "Un bâton court à simple embout brun dessine un arc brun doré."
   },
   "Weapon appearance wp_ff2_st08_c00": {
     "en": "Very pale spikes show on a short angled weapon that swings through a broad pale green arc.",
-    "ja": "斜めに構えた短い武器に、ごく淡い棘が見える。振ると淡緑の幅広い弧を描く。"
+    "ja": "斜めに構えた短い武器に、ごく淡い棘が見える。振ると淡緑の幅広い弧を描く。",
+    "fr": "De très pâles pointes ressortent sur une arme courte et inclinée qui balaie un large arc vert pâle."
   },
   "Weapon appearance wp_ff2_sw00_c00": {
     "en": "A sword with a smooth gray-white edge and green hilt.",
-    "ja": "滑らかな灰白色の刃先と緑の柄がある剣。"
+    "ja": "滑らかな灰白色の刃先と緑の柄がある剣。",
+    "fr": "Une épée au fil lisse gris et blanc et à la poignée verte."
   },
   "Weapon appearance wp_ff2_sw01_c00": {
     "en": "A tapering dark red sword and grip leave a bright red sweeping edge.",
-    "ja": "先細りの暗赤色の剣と握りが、鮮やかな赤い斬撃の跡を残す。"
+    "ja": "先細りの暗赤色の剣と握りが、鮮やかな赤い斬撃の跡を残す。",
+    "fr": "Une épée effilée et une poignée rouge sombre laissent un large trait rouge vif."
   },
   "Weapon appearance wp_ff2_sw02_c00": {
     "en": "A bright jagged gold hilt sits beneath a thick gold fan-shaped sword stroke.",
-    "ja": "ぎざぎざした明るい金の柄の上に、太い金の扇形の斬撃が出る。"
+    "ja": "ぎざぎざした明るい金の柄の上に、太い金の扇形の斬撃が出る。",
+    "fr": "Une garde dorée et dentelée brille sous un épais coup d'épée en éventail doré."
   },
   "Weapon appearance wp_ff2_sw03_c00": {
     "en": "A slim silver blade, with a small orange guard, leaves a green sweep.",
-    "ja": "小さな橙の鍔が付いた細い銀の刃が、緑の軌跡を残す。"
+    "ja": "小さな橙の鍔が付いた細い銀の刃が、緑の軌跡を残す。",
+    "fr": "Une fine lame d'argent à petite garde orange laisse une traînée verte."
   },
   "Weapon appearance wp_ff2_sw04_c00": {
     "en": "A wide silver blade with a red and gold guard leaves a pale blue arc.",
-    "ja": "赤と金の鍔が付いた幅広い銀の刃が、淡青色の弧を描く。"
+    "ja": "赤と金の鍔が付いた幅広い銀の刃が、淡青色の弧を描く。",
+    "fr": "Une large lame d'argent à garde rouge et dorée laisse un arc bleu pâle."
   },
   "Weapon appearance wp_ff2_sw05_c00": {
     "en": "The sword leaves a jagged orange and gold slash.",
-    "ja": "剣が橙と金のぎざぎざした斬撃を描く。"
+    "ja": "剣が橙と金のぎざぎざした斬撃を描く。",
+    "fr": "L'épée laisse une entaille dentelée orange et dorée."
   },
   "Weapon appearance wp_ff2_sw06_c00": {
     "en": "A dark blue and silver hilt trails a cyan-white curve with little icy stars.",
-    "ja": "濃青と銀の柄が、氷の小さな星を伴う青白い曲線を引く。"
+    "ja": "濃青と銀の柄が、氷の小さな星を伴う青白い曲線を引く。",
+    "fr": "Une poignée bleu foncé et argentée laisse une traînée incurvée blanc cyan parsemée de petites étoiles glacées."
   },
   "Weapon appearance wp_ff2_sw07_c00": {
     "en": "A steel-blue guard and purple grip sit below a broad silver sword sweep.",
-    "ja": "鋼の青い鍔と紫の握りが、幅広い銀の斬撃の下に見える。"
+    "ja": "鋼の青い鍔と紫の握りが、幅広い銀の斬撃の下に見える。",
+    "fr": "Une garde bleu acier et une poignée violette sous un large coup d'épée argenté."
   },
   "Weapon appearance wp_ff2_sw08_c00": {
     "en": "A rough brown-gold sword has a visibly grained blade and ochre sweep.",
-    "ja": "粗い金褐色の剣の刃にはっきりした木目状の筋があり、黄土色の軌跡が残る。"
+    "ja": "粗い金褐色の剣の刃にはっきりした木目状の筋があり、黄土色の軌跡が残る。",
+    "fr": "Une épée rugueuse brun doré, à lame veinée, dessine une traînée ocre."
   },
   "Weapon appearance wp_ff2_sw09_c00": {
     "en": "A slender gray blade flashes at the edge of a violet arc with a bright downward point.",
-    "ja": "細い灰色の刃が紫の弧の縁で光り、明るい先端が下を向く。"
+    "ja": "細い灰色の刃が紫の弧の縁で光り、明るい先端が下を向く。",
+    "fr": "Une fine lame grise brille au bord d'un arc violet à pointe lumineuse tournée vers le bas."
   },
   "Weapon appearance wp_ff2_sw10_c00": {
     "en": "A cobalt and cyan sword has a little green-white guard.",
-    "ja": "濃青と水色の剣に、小さな緑白色の鍔が付く。"
+    "ja": "濃青と水色の剣に、小さな緑白色の鍔が付く。",
+    "fr": "Une épée bleu cobalt et cyan à petite garde blanc verdâtre."
   },
   "Weapon appearance wp_ff2_sw11_c00": {
     "en": "A narrow violet-red hilt sits below a thin pink crescent.",
-    "ja": "細い赤紫の柄の上に、桃色の細い三日月が弧を描く。"
+    "ja": "細い赤紫の柄の上に、桃色の細い三日月が弧を描く。",
+    "fr": "Une poignée étroite rouge violet sous un fin croissant rose."
   },
   "Weapon appearance wp_ff2_sw12_c00": {
     "en": "The sword strike forms concentric gold, orange and white rings with a glowing center.",
-    "ja": "斬撃が金、橙、白の同心円を作り、中心が光る。"
+    "ja": "斬撃が金、橙、白の同心円を作り、中心が光る。",
+    "fr": "Le coup d'épée forme des anneaux concentriques dorés, orange et blancs, au centre lumineux."
   },
   "Weapon appearance wp_ff2_sw13_c00": {
     "en": "A narrow dark blue grip holds a blade that leaves a slim icy-blue slash.",
-    "ja": "細い濃青の握りの刃が、氷青色の細い斬撃を残す。"
+    "ja": "細い濃青の握りの刃が、氷青色の細い斬撃を残す。",
+    "fr": "Une fine poignée bleu foncé porte une lame qui laisse une mince trace bleu glacier."
   },
   "Status appearance effect 47": {
     "en": "Small yellow stars and hollow diamond glints circle above the head.",
