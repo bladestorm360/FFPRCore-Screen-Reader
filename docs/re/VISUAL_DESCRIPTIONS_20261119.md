@@ -35,14 +35,17 @@ an actor's costume. Match each description to the art visible in the current
 context. Review openings first within the scene pass, and reuse the existing
 coverage of silent boss form changes. [Boss animation coverage](BOSS_VISUALS_20261112.md).
 
-Enemy sprites are now rendered into local sheets for all six games. One
-master row still needs exact asset resolution. FFIV art 242 names palette
+Enemy sprites are now rendered into local sheets for all six games. FFIV
+art 242 names palette
 C02 in bundle `mn_ff4_148`, whose installed Sprite and Texture2D records
-have C00, C01, C03 and C04. The base monster master does not select 242.
-Check battle transformation calls before deciding whether the row is used.
-Two FFV field script records have no readable instruction body in the local
-extract, `Map_20171_1/sc_e_0418` and `sc_e_0419`. Resolve both before closing
-scene coverage.
+have C00, C01, C03 and C04. The base monster master and the examined battle
+form producers do not select 242. The [FFIV enemy art pass](VISUAL_DESCRIPTIONS_FF4_20261119.md)
+describes the 247 sprites present in the installed assets.
+
+For FFV, `sc_e_0418` and `sc_e_0419` have full bodies on `Map_20170`.
+The same names in `Map_20171_1` declare no segments, flags or instructions.
+Keep those two declarations separate from the three executable variants on
+that submap. Review the playable original scenes and variants individually.
 
 The [FFII enemy art pass](VISUAL_DESCRIPTIONS_FF2_20261119.md) covers all 129
 art records including the separate Toad form. The [FFIII enemy art pass](VISUAL_DESCRIPTIONS_FF3_20261119.md)
