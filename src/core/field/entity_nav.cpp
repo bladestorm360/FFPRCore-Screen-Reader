@@ -75,6 +75,7 @@ void clear_target()
 int g_nav_last_scanned_map_id = -1;
 uint64_t g_category_generation = 0; // event identity, including a return to the same enum
 Category g_current_category = Category::All;
+storyline::Selection g_storyline_selection;
 
 /// EnsureFieldContext: the player is on an active field map and no menu is open.
 bool ensure_field_context()
@@ -97,18 +98,25 @@ bool ensure_field_context()
     return true;
 }
 
-std::optional<storyline::Objective> storyline_objective()
+std::optional<storyline::Objective> storyline_objective(bool cycle = false)
 {
     if (!game::is(game::Id::FF1)) return {};
     using map_state::scenario_flag;
-    return storyline::cornelia_objective({scenario_flag(0), scenario_flag(1), scenario_flag(2),
+    const storyline::CorneliaProgress progress{scenario_flag(0), scenario_flag(1), scenario_flag(2),
         scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7), scenario_flag(9),
-        scenario_flag(10), scenario_flag(11)});
+        scenario_flag(10), scenario_flag(11), scenario_flag(8), scenario_flag(12), scenario_flag(13),
+        scenario_flag(14), scenario_flag(15)};
+    const auto objective = storyline::cornelia_objective(progress);
+    if (!objective) {
+        g_storyline_selection = {};
+        return {};
+    }
+    return g_storyline_selection.resolve(*objective, storyline::cornelia_advice(objective->id, progress), cycle);
 }
 
-std::wstring storyline_label()
+std::wstring storyline_label(bool cycle = false)
 {
-    const auto objective = storyline_objective();
+    const auto objective = storyline_objective(cycle);
     return objective ? T(objective->label) : T(L"No Storyline objective available");
 }
 
@@ -358,7 +366,12 @@ void cycle(bool next)
     if (!ensure_field_context()) return;
     baked_nav::cancel_browse_route();
     if (!ffpr::fieldnav::autowalk::active()) baked_nav::cancel_requests();
-    if (g_current_category == Category::Storyline) { speak(storyline_label()); return; }
+    if (g_current_category == Category::Storyline) {
+        ++g_category_generation;
+        baked_nav::clear_pending();
+        speak(storyline_label(true));
+        return;
+    }
     refresh_entities_if_needed();
     const auto generation = g_category_generation;
     scanner::when_filter_ready([next, generation, requested_at] {
@@ -395,6 +408,7 @@ void announce_category_change(double requested_at)
     std::wstring category_text = TF(L"Category: {0}", {category_name(g_current_category)});
     baked_nav::clear_pending();   // the selection moves to the category's first entity
     if (g_current_category == Category::Storyline) {
+        g_storyline_selection = {};
         clear_target();
         ffpr::say_sequence({category_text, storyline_label()}, true,
             {speech::Feature::EntityCategory, requested_at, requested_at});
@@ -581,6 +595,7 @@ int install()
     });
     events::on(events::Kind::SceneLoaded, [] {
         if (scene_name() == L"Title") {
+            g_storyline_selection = {};
             scanner::clear_selection();
             scanner::invalidate_map(); baked_nav::clear_pending(true); baked_nav::invalidate();
         }

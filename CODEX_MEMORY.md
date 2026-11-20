@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 20 completion goal.** Continue the six-game visual descriptions,
+status-effect audit and Storyline campaigns through their final encounters.
+The fixed event inventory has one review and one high-priority
+reconciliation. FF1 includes routes to informative NPC conversations.
+[Active scope and checkpoints](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-20-six-game-completion-goal).
+
 **November 19 FFIV routing and markers.** The verified FFIV installation
 accounts for lunar entrance direction and cave detours, Sealed Cavern rope
 crossings, airborne target retention, duplicate marker suppression and

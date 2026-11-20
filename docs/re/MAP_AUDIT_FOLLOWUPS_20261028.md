@@ -400,6 +400,69 @@ Verify that event descriptions follow the visible action and preserve the
 native dialogue order. Localize added descriptions in each game's supported
 languages.
 
+## November 20 six-game completion goal
+
+The owner requests a complete visual audit and Storyline mode for FF1–FF6.
+Use this ledger for the active goal, superseding the starter checkpoint
+below. The November 19 installed gameplay fixes are closed to unrelated
+changes. Keep the source audit, integrated speech, offline verification,
+local delivery and gameplay confirmation distinct.
+
+| Milestone | Acceptance and current status |
+| --- | --- |
+| FF1 campaign | In progress. Finish the next route and its information stops from playable opening through Chaos. Start with the Matoya, elven prince and canal chain. Offer verified native NPC advice with the same browse, directions and Autowalk controls. Permit skipping ordinary advice. Use the game's actual saved state for progression and true prerequisites. |
+| FFII–FFVI campaigns | Open. Reach the Emperor in Pandaemonium, the Cloud of Darkness, Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
+| Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
+| Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
+| Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
+
+Retain the exact installed input identity in
+[audit baseline](visual_inventory_baseline_20261120.json).
+The original local evidence is under `../tools/visual_audit_20261119`.
+It includes 8,504 executable field bodies, the 6,163-body visual/native-call
+queue with 6,110 distinct same-map traces, and the first 379 routine
+dispositions. The previous sprite, pose and effects work remains useful.
+See [visual coverage](VISUAL_DESCRIPTIONS_20261119.md) and
+[scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md).
+
+The active capability is FF1 Storyline navigation. The first integration
+block uses current scenario receipts, the Cornelia dancer, Matoya's actual
+entrance scene, and the dwarf who names the castle treasure room. It adds
+no native hooks. Receipt reads and one optional conversation are bounded
+per requested interaction. The existing owned route worker plans movement
+and the same category generation cancels obsolete speech. The initial
+advice and canal block is estimated at one to two hours including route
+replays. The remaining FF1 arc and five subsequent campaigns need their
+own finite integration blocks. The six-game goal spans multiple sessions.
+Push each substantive checkpoint and keep the goal active through the
+remaining acceptance and delivery.
+
+### FF1 NPC advice and the canal route
+
+The Storyline category offers a verified conversation for the active quest
+when one is available. Previous and next destination switch between the
+conversation and the quest destination. Normal name, directions and
+Autowalk controls use that selection. Ordinary advice remains optional.
+Talking to a hint NPC never writes a game or mod completion flag. A new
+quest or a changed native hint resets the browse choice.
+
+| Phase | Actual contact and saved progression |
+| --- | --- |
+| Bridge, ship, Crown, eye and tonic advice | Cornelia town map 4, dancer entity 83 at Upper (23,18), script `sc_npc_20020_1`. Verified branches use the bridge, ship, Crown, crystal eye, Matoya introduction and tonic receipts. Before the Matoya introduction, the native dancer redirects the party to Matoya. The Storyline hint uses that entrance scene in the Crown phase. |
+| Matoya introduction | Cave map 12, event 17 at Bottom (17,16), script `sc_e_0007`. The native scene sets receipt 8. Optional before the Crown. Required before the crystal eye handover if the save skipped it. |
+| Crystal eye handover | Cave map 12, Matoya entity 15 at Bottom (17,7), group `ev_e_0012`. The entrance selector requires receipts 8 and 11. Script `sc_e_0012` awards jolt tonic, sets receipt 12 and treasure flag 247. |
+| Elven prince | Castle map 32, attendant 116 at Bottom (19,15). Using the tonic runs `sc_e_0013` and grants the Mystic Key with receipt 13 and treasure flag 248. |
+| Nitro powder advice | Mount Duergar map 21, dwarf 1 at Bottom (30,20), script `sc_npc_20051_6`. Before receipt 14 the native conversation names the castle treasure room. |
+| Nitro powder | Cornelia Castle map 2, chest 10 at Bottom (27,14). The key opens the actual castle lock. Script `sc_e_0014` sets receipt 14 and treasure flag 505. |
+| Canal | Mount Duergar map 21, Nerrick entity 45 at Upper (26,52). Script `sc_e_0015` sets receipt 15 and starts the Overworld canal sequence. |
+
+The focused build verified the 67 embedded resources and the production
+planner passed 136 assertions and 31 path legs. The new fixture cases
+cover native quest advancement, description of the appropriate advice
+choice, skip and selection retention, route capture from the relevant
+entrances and the chest behind the castle lock. Later FF1 quests and
+full native gameplay remain open.
+
 ## November 11 all-six Storyline category
 
 The owner requests the next main-story objective in a Storyline category

@@ -1,0 +1,377 @@
+{
+  "baseline": "2026-11-20",
+  "initial_mod_checkpoint": "9af335e52c0c05d109c2e981e0f54952e4f2f5dd",
+  "local_shared_indexes": {
+    "enemy-coverage.json": "54d1c689dc1d2433d685f005e00a4d5dab9b088c04ed300cc2816a1501945e78",
+    "scene-review-priority.json": "2b50340d98eaada7a60a0a9baac582c5bd4da479ec1abc7cb80d8fb6a994c889",
+    "scene-ordinary-review.json": "570e3b17f1859b93163983cd9f89fc682bf683936fc803593f02c0f55f91ff25"
+  },
+  "games": {
+    "ff1": {
+      "game_assembly_sha256": "33f001b4420bea06b44740c07c4afcf92547e7196bdfd3ec27ae5feaf0229108",
+      "installed_bundle_names_sha256": "363393b64c416cb17a637a85b62a6bf4d0315a882f3d06881dff99d271310c9f",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_84d883512faeeb160e0ff90f0eb758a6.bundle",
+          "sha256": "6f16e25ac9117e556a484fea04bf5c448a05f14cdff41e0530c2c6ee309e220c"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_f1fc6061c485809b2b7e776138183530.bundle",
+          "sha256": "7b9ce3cdc3e60a26a09caa7af763f77c85e8cfcf15beee89e0a9d3173b9f0393"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_422ce715886691b0fe9bf36c23227d4c.bundle",
+          "sha256": "13ea685e9eb306b11501cc776ece0f70c2c7937f9f29374ca9c00207d7528d35"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_0cd15384ed0315e57b8edf1ba6b3925c.bundle",
+          "sha256": "1c4f66bf186a77968a5aa0292d8d47d84fe035873a1bd7497709db25a085405d"
+        }
+      },
+      "source_fingerprints": {
+        "ff1_scripts.jsonl": "6b815904eb89348a672dd2b5938d279f47a3d30a46d13e18a1cf8864b919e09d",
+        "ff1_objects.jsonl": "05496a2fb235d1e3f3287179bb31431c3ab3592f9bb421759814afeefd3f9414",
+        "monster_asset.txt": "36056858241f8e245fe4bf6c38d5bbef9cf65943c2741144aaaee2facebb3d1e",
+        "mapobject.txt": "5439bed8b29b525628a0a491393a991ce17377b99fd69c182ff2ac6d55339935",
+        "field_character_asset.txt": "c472cd2686f096b82a850c0edf0cd916ce07b13e1168034e88616aaf0a7dbeec",
+        "character_asset.txt": "9b1b919818065ce3d2c506a67bda4c6918c88e46b0642641680b919d63b78102",
+        "battle_equipment_asset.txt": "78ab2cf4aef7666a2b9e270e9aaed127a9771fc0cd5a2dd623eaf32bfb70799b",
+        "condition.txt": "a0aa9cd1e973c06b3a94d5a0f9d053c28fd5e1a69d31cf19e57140812e6a2003",
+        "battle_effect_asset.txt": "289ce75a66a5da1a61a065a95f255150b224697da4ea1516252ad4a1ffc059f1",
+        "map.txt": "dc5cff22226e76f8e86f7631905d62b1ab1979e17b720424be409bc8eeefb6e7",
+        "script.txt": "24068845402c5a4ba8dc3e524d4437ea286ad6eae16ca38dea80e6b154950c92"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff1-inventory.json": "f3d5993e0e6cb3d152a5618a0ddccf76b5acbc7cd062758bd9b532083a4899cc",
+        "ff1-field-costumes.json": "ba70299780496d0e02fd462cc08671185e283ced950e04ff861c083af817014d",
+        "ff1-battle-costumes.json": "37d105a6b527fea5b2add44fed1a17fcb7f605a7c1c33e98e8558a079cd56345",
+        "ff1-equipment.json": "4257448165bec158ed7e5403a3f1acdadaa1f501c4cc3ea315b8e7c5396d3464",
+        "ff1-scene-review.jsonl": "0fff7c91f03f548b3f5bbd50709904de95f4338643aff533c9687cd0050422fd",
+        "ff1-scene-animation-frames.jsonl": "e495c325fec548edad274605270b81ec62318e1ec88608b0f4033bf42406d49d"
+      },
+      "counts": {
+        "enemy_rows": 124,
+        "visible_enemy_rows": 124,
+        "field_costume_art_keys": 76,
+        "battle_costume_and_portrait_art_keys": 12,
+        "equipment_index_keys": 39,
+        "condition_rows": 32,
+        "condition_effect_ids": 12,
+        "condition_icon_ids": 2,
+        "executable_field_bodies": 556,
+        "visual_native_call_candidates": 503,
+        "distinct_same_map_visual_traces": 495,
+        "prior_routine_dispositions": 270
+      }
+    },
+    "ff2": {
+      "game_assembly_sha256": "dbc8d9f674d3097b5bfa3c3b3ab877c32d92947bb40df545202ee574f2b0b19b",
+      "installed_bundle_names_sha256": "e10d9b304501e590318be8b1e191f9329f59029676adcfc8b994a4746dce5034",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_1f27aafd8842916b603ded34bb4b6bff.bundle",
+          "sha256": "5416d6092a01d494dd2b00bca951b23efbf37963871937ed0ef925973d2691dc"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_f1fc6061c485809b2b7e776138183530.bundle",
+          "sha256": "7b9ce3cdc3e60a26a09caa7af763f77c85e8cfcf15beee89e0a9d3173b9f0393"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_3815179274c29e82ac0041deef3a2c41.bundle",
+          "sha256": "f458a3e7bf1236041a68280f32738def4c4984461bc0527d340811c99fb6dc9c"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_0482435cef312b4df9c92e11ba991311.bundle",
+          "sha256": "0810e2afc1779d0bcd54b4811158ea8d35ab61fe5e436a59e79d0e608f06c3e5"
+        }
+      },
+      "source_fingerprints": {
+        "ff2_scripts.jsonl": "989a0c1ac921bea8f02fdf564142b2275ee2cce919d728045146c363bc859770",
+        "ff2_objects.jsonl": "aaf6a22ae23d585dce41d4718e75786fb117b551954eb46daad566ae90086cc3",
+        "monster_asset.txt": "79d00e26a981d384df3df67ca4c261a80852bdc08f562fd6ef61c018740daf2c",
+        "mapobject.txt": "875f62d149f98281dc363833623a3d4792ddf2edbd4125c361dc9145ef328dc7",
+        "field_character_asset.txt": "31ae3ecd98a93aa42030bb5fda3fb2120d8b27223a7f0fce4497ad95ec525f19",
+        "character_asset.txt": "38baa765efb51fa41954232e94ce62d4fb01aa5990b3edee5757b02e88a83764",
+        "battle_equipment_asset.txt": "e8ec0cf7286076ba068f36ddf8ce8db0a8daa4fa34032696f2ce7e6698c797b5",
+        "condition.txt": "1a550107744bcf0efe86b0e829fad96bfab3c53e80586aca4d6a83d200ccf8de",
+        "battle_effect_asset.txt": "a7e855eda712b8f3e4aa1d9bac525687ad8d1a4d1c9c347d7321d0efd46bc18c",
+        "map.txt": "654be95c8eededb1cec4707fdb6196e36cc5f78a6b91f2acc27320d270bee8e5",
+        "script.txt": "10e9e45da1abd04b70db67d88759de1e82a9d1896d0cd77646139f85637cc966"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff2-inventory.json": "66c2a147ceddd521063ec6a42166bd2f951d92c152ecc259b5ab01b350591f8c",
+        "ff2-field-costumes.json": "f3773e34832e04907fd2de6bd4f0bc37e49f5f2304270a51e315e2da048b8ee7",
+        "ff2-battle-costumes.json": "6de7a685b0cf99309032edab82ef45c537614e4db696141c5426b821212665b0",
+        "ff2-equipment.json": "a84f0f021c034b7872c031b00d2f192d1a006aa7ad51c86b162a57b082da20de",
+        "ff2-scene-review.jsonl": "e96061ba0b544ba07e719ad71be47f23472eb3ff941ce463eb8af1d7719422bb",
+        "ff2-scene-animation-frames.jsonl": "be17bd4f2e7e71745f116dc5d973fdafcb250e9e4f5b624441f8d87d4bf65147"
+      },
+      "counts": {
+        "enemy_rows": 129,
+        "visible_enemy_rows": 129,
+        "field_costume_art_keys": 72,
+        "battle_costume_and_portrait_art_keys": 18,
+        "equipment_index_keys": 55,
+        "condition_rows": 158,
+        "condition_effect_ids": 15,
+        "condition_icon_ids": 6,
+        "executable_field_bodies": 553,
+        "visual_native_call_candidates": 337,
+        "distinct_same_map_visual_traces": 337,
+        "prior_routine_dispositions": 32
+      }
+    },
+    "ff3": {
+      "game_assembly_sha256": "8db9ab31a893ca4b13e5e4d2e2b1b086ac6e3fb5699b9be1d8037dafaaa3ae31",
+      "installed_bundle_names_sha256": "13993ba8cfd0e58e9ec2677f0067d299a4dcade82e2a3bb42dc42951121a80b8",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_c592cf9b170d203065fbdb696ac7e464.bundle",
+          "sha256": "b6b8870bcab2fe6fb57a69346f67b9b419868bc10edc84c00f3fa5fe4f7c954b"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_f1fc6061c485809b2b7e776138183530.bundle",
+          "sha256": "7b9ce3cdc3e60a26a09caa7af763f77c85e8cfcf15beee89e0a9d3173b9f0393"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_5dccb1cf3fe2c28f26644897816e6791.bundle",
+          "sha256": "ef90e4f24538bf69f2da595d4ecb233a7cf04a7992562a09658ff3aa1fddde38"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_53d76474ca608ff5fbd06b1fa4f073b1.bundle",
+          "sha256": "2cbf9f73de205e584f58b4df25d20dfbbddde43d3c454cd0a7497f19e2bbcc56"
+        }
+      },
+      "source_fingerprints": {
+        "ff3_scripts.jsonl": "933c9ae51b97d68410f2a4bdbf74786f850b80f58971daf04418ed7009336c02",
+        "ff3_objects.jsonl": "c4e55d91a7519e18eecb970cd2a7da7266e9c0ffe88a3e362e4b506bf49ecd45",
+        "monster_asset.txt": "75d4e109cb83814c5a7e5ca529e979c9788db57b187f4073871d840b07b2821f",
+        "mapobject.txt": "cb7bef7605086a9ef2ce868d324a2cba1b5cf02b452a2f0f6473150f76d57e37",
+        "field_character_asset.txt": "fef604792ea4b84265fbf8a6907f5f790821b588819ee268670ac5f99696363f",
+        "character_asset.txt": "365584ac1657ef3bff339a10e31ccc258d3070602c0231717b8d27a81e3e257c",
+        "battle_equipment_asset.txt": "7331474322bdc3db18a9eea5696587b62e8c72071db9aa1f921aa95103b90712",
+        "condition.txt": "f0932567e340839b438ff9f67d1957b694750a7b9d60342df7931932f967c045",
+        "battle_effect_asset.txt": "b6f81cd26121174f3d98955495256e7071a311a942e8cf0cfe8933e203e112c5",
+        "map.txt": "c02a2bfaca1ec025c6e6b2dc88059f68c73397e821c3e5b6b35c2e4d1c6a3d01",
+        "script.txt": "544f96e352e0cff39f55a86c34d7fc4c1d3ce771931c9b765789da46517347a6"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff3-inventory.json": "ea8a64f01f0dcf7917c31c5e6ac5a2195b6676b024e8df0f3ae6ad1d47bf66d7",
+        "ff3-field-costumes.json": "481addcbf714a9e8379fc9e01099b563674d78639fd12d96d3a10656eb79f087",
+        "ff3-battle-costumes.json": "a997c77a9afc82927ce81fb2f2613eb210d0a8480a6569d3efb85826485eef8f",
+        "ff3-equipment.json": "a255b828c6bf6e57ab67242f7bf9ce4bfa4dc1d038d31ab2ba28ec0df514e65d",
+        "ff3-scene-review.jsonl": "f505713428f59a07f70d5547bae658bc46b8e0aa5c233088f37c8cd554972d14",
+        "ff3-scene-animation-frames.jsonl": "1eabf0707b58a6701ad39292815c35c808518c4aa22ac55d965d13521c7f71c4"
+      },
+      "counts": {
+        "enemy_rows": 225,
+        "visible_enemy_rows": 225,
+        "field_costume_art_keys": 142,
+        "battle_costume_and_portrait_art_keys": 25,
+        "equipment_index_keys": 72,
+        "condition_rows": 37,
+        "condition_effect_ids": 11,
+        "condition_icon_ids": 6,
+        "executable_field_bodies": 839,
+        "visual_native_call_candidates": 542,
+        "distinct_same_map_visual_traces": 540,
+        "prior_routine_dispositions": 17
+      }
+    },
+    "ff4": {
+      "game_assembly_sha256": "bb2f4c9db44c8ee9b065696aeafb77561a1709492130f045433e6d215abc42ed",
+      "installed_bundle_names_sha256": "a40d34c9601fb7d605ed7eb1d0d472d7ea1a82ddcbcef2d26c428d7eb73e72ab",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_c7bd4eeb8b152f120aca8f7ed4f17b86.bundle",
+          "sha256": "e2e347376a5c0a55a717f278341d7e4988934ffafc3e67562d2e92af000bbe50"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_f1fc6061c485809b2b7e776138183530.bundle",
+          "sha256": "7b9ce3cdc3e60a26a09caa7af763f77c85e8cfcf15beee89e0a9d3173b9f0393"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_5277009de2a7647557f7758c29508f8a.bundle",
+          "sha256": "83971c099ee651cb0128db72470b7a6ddd94e4476462f1c2971644861168f0d8"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_b4b384c8ccd0bb76d4a47c256ee1781f.bundle",
+          "sha256": "791d4113f6a4047d35e25166cb97cbedebeb56e0f860516fe3eef6d99821c39a"
+        }
+      },
+      "source_fingerprints": {
+        "ff4_scripts.jsonl": "298676492a7b109e5b1b42dea5f87dec06a3bb800378e0ef50ab0e2c74e925cb",
+        "ff4_objects.jsonl": "9581c3295f405afc639843b64a74cd73855f8df85bec239ee3e3f0df4caa2c26",
+        "monster_asset.txt": "bdd99e1b9e5bbfcb859ad991a94ab5a165456533d9fbe5f13ebf826069999f8c",
+        "mapobject.txt": "751f7e956e9f5b03638ec00ebd8b0d22979e8cd4e288a6b60a6f4d68e17808ef",
+        "field_character_asset.txt": "4784be542b26dc87118c5c84f43400f2844a2d81fe9bd7e6feea3e575e32eb58",
+        "character_asset.txt": "6ee685a0ea3ff0d344cb2a777c18c1e30dbfe66ddafc7e05c3559fc5e571802f",
+        "battle_equipment_asset.txt": "52a5aa71cd88d59583d1b2df7afe488c2b5b606f504e3c14fe8d0ff60bf8abbe",
+        "condition.txt": "2529541fba83b78fb8b0705370670364ca0ad6bc5f1242925a1bed04e245cb0d",
+        "battle_effect_asset.txt": "3b85721851938ecc14b9662b0dbd23eba33a8a226cfe6b77293b2efedf1e25ca",
+        "map.txt": "8e7a4f944f10197fd5ee2c6097d8750b9477446be7abd813251f1d499dc862bb",
+        "script.txt": "b2a2ba529b0e2c6658ec3ee4b070454d38bf91c8c275423fa8de75c541f613a5"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff4-inventory.json": "dd8410cb5d19cf1bd931f17256903b21659a19dec52087d30f62ba97c7a659ce",
+        "ff4-field-costumes.json": "fb81031a973f6bb45bb45acf11f80cc4cfd0a1496c9c888c81036f95ae5fc2fa",
+        "ff4-battle-costumes.json": "5a32b46350c640cf9914525165d2707745079be47a676b0d48105b4f3ce96f66",
+        "ff4-equipment.json": "8385e10e4ad99b5bc549e98f7637270b84c6cebfe9e11c4a154e094bb2446771",
+        "ff4-scene-review.jsonl": "e204364d3e1d009538d07df522f1e8dc4612e9a3e7db79d3b89da1ca772deb95",
+        "ff4-scene-animation-frames.jsonl": "00395ab0eba0f4af29f652205a9cce94fe018d8ef4bd19e606cff745ff9cc944"
+      },
+      "counts": {
+        "enemy_rows": 248,
+        "visible_enemy_rows": 247,
+        "field_costume_art_keys": 166,
+        "battle_costume_and_portrait_art_keys": 30,
+        "equipment_index_keys": 87,
+        "condition_rows": 88,
+        "condition_effect_ids": 14,
+        "condition_icon_ids": 8,
+        "executable_field_bodies": 901,
+        "visual_native_call_candidates": 569,
+        "distinct_same_map_visual_traces": 565,
+        "prior_routine_dispositions": 29
+      }
+    },
+    "ff5": {
+      "game_assembly_sha256": "355bb0eccd3cf6a2cb70d48f2329379eb98d4b5085971d46985154a882dcfb17",
+      "installed_bundle_names_sha256": "b1ac58ab61d0f6d98a4286e9f748ca320077fea1470027d212d43c520548a293",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_57093aabd9509d9fbf4bb15e3e875251.bundle",
+          "sha256": "a6d234367d06cf4b76f02aa14630ae513b49159400fbadad60b446ecd9f98337"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_f1fc6061c485809b2b7e776138183530.bundle",
+          "sha256": "7b9ce3cdc3e60a26a09caa7af763f77c85e8cfcf15beee89e0a9d3173b9f0393"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_189e3aa0b6638344d6f340c0079fbc6d.bundle",
+          "sha256": "b1190b92872520e3c41c21a74dc6f423daa3fcfacaed16bbbf9ab50f5d387ade"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_2c3f5c5e11072535b41fcc3a35ad8aad.bundle",
+          "sha256": "37e24634794861508d8b0b7c5cc9bb6745d3d6b5a9b5e4c27eea2fda24fca911"
+        }
+      },
+      "source_fingerprints": {
+        "ff5_scripts.jsonl": "56efc5afcbcb652253551ac04de01d20a32fd19b6b9b9218a5aaf105abb48fef",
+        "ff5_objects.jsonl": "d0bedfd68c7aafbe6cf60d8c44ec5d0f3e5ff1f76e7ec73fc076569fd713930c",
+        "monster_asset.txt": "63c29fd20a0781e5d0e47cbcea191817a154aaa022369809ee60e8cc7b4ab83d",
+        "mapobject.txt": "6bd68506cb3bcef16f69fb19048d5439f7dc72ac628ef0f057fa2f48206cbc7c",
+        "field_character_asset.txt": "0baf3795e6457c98884765594f5cb89509d20795ab9bf87083bf7983f072fda8",
+        "character_asset.txt": "1565e2c7e04567a32cf46f5515966dbef7b4fc35f42e89348e9b19173f79bc8e",
+        "battle_equipment_asset.txt": "1bd18b062c9980707c775e2e30e397e944420e5e829639e3050658536a356d86",
+        "condition.txt": "7ab048286fee16392d2aae4cdbd08b4d027646a8e05e32aa0b3f5647d780b766",
+        "battle_effect_asset.txt": "d6a6211b6572153336b37600e9295ad286b0bb7ea2cb65969865f7ccc803901d",
+        "map.txt": "4d9f99c7a2d2ca39939173e73fbc24ebba92c837fe681084430c9b49400e7d94",
+        "script.txt": "ea0f0a9f58480baf861dd812409a79009bdb91418547993b878e1b4e29ead5c0"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff5-inventory.json": "39d301eb744a879e33797e5e27b06928aa4a6474e17f8c64326bbfdb5ec8e727",
+        "ff5-field-costumes.json": "aebb4c5d695ff33cd63730c60c7acaeed2463a62d52cddb4e5099a21cf7087f8",
+        "ff5-battle-costumes.json": "6f71299eb893af65e76cae3de165ff12572219142f3f6b1f8215a1110143c0a2",
+        "ff5-equipment.json": "5879056b7f976e2204c8375d9106b1a2fa583d610dabd8a59298a931f32111cd",
+        "ff5-scene-review.jsonl": "85a21a9af55db1a73d3fcd089ae1d62904e3f7b461ed0195ef3c7ddb4372ad21",
+        "ff5-scene-animation-frames.jsonl": "e20d532fb773daa75551499d71f5a5b0dfdcb538ffc44e6f405fc8ae8c7bbb70"
+      },
+      "counts": {
+        "enemy_rows": 301,
+        "visible_enemy_rows": 300,
+        "field_costume_art_keys": 124,
+        "battle_costume_and_portrait_art_keys": 109,
+        "equipment_index_keys": 71,
+        "condition_rows": 108,
+        "condition_effect_ids": 18,
+        "condition_icon_ids": 7,
+        "executable_field_bodies": 2814,
+        "visual_native_call_candidates": 2149,
+        "distinct_same_map_visual_traces": 2130,
+        "prior_routine_dispositions": 31
+      }
+    },
+    "ff6": {
+      "game_assembly_sha256": "0029a22ed933aa3b6ea3b1290060502267f514d61ba6e6619308d844557f2ffd",
+      "installed_bundle_names_sha256": "e728c3aa20708801305422a346f89aa7dafe5fbad0444b2f1357794e430e2b62",
+      "fixed_bundles": {
+        "battle_script": {
+          "bundle": "battle_script_assets_all_d324779337d10824f4fb042faab0ca1f.bundle",
+          "sha256": "955e848d719db1f6b80cebe7e70fe65be25e236460ae1cd4494af38038ba2009"
+        },
+        "common_battle_script": {
+          "bundle": "common_battle_script_assets_all_4b25aa0dd3792ca5412967aad397e7ce.bundle",
+          "sha256": "e9a511abf9e2c45c4c4068b28093f6e517ce0262e53e25f4a208beefd6f7e2b3"
+        },
+        "map_script": {
+          "bundle": "map_script_assets_all_cc3ad7e0f113b923a820925e0805e894.bundle",
+          "sha256": "ef8aa2fe675ab16672ee9235b56c5d62a1e91821ed632f81ce89cb64e9374cca"
+        },
+        "condition_effect": {
+          "bundle": "condition_effect_assets_all_f0f31f83d99074028584c4946e19d38e.bundle",
+          "sha256": "8f33ec82c1c98a42777edd7b7146fec3ae16ae0700d83d8971b5dcb1bec6d2ee"
+        },
+        "master": {
+          "bundle": "master_assets_all_92a415ac286c74937ddf333fc4fd2f0a.bundle",
+          "sha256": "9a2cb2436e0725273666966e550826cbef92e8d7153271d54a26497e90adffd2"
+        }
+      },
+      "source_fingerprints": {
+        "ff6_scripts.jsonl": "7b989e8be83adfecbd038a62e9c1b1ce9055d1f983b4803d2a358e6e6794aecb",
+        "ff6_objects.jsonl": "17f6a180291875ebad43dd0e375a37493bee68f9d8077a8e3538353006abed23",
+        "monster_asset.txt": "fc74a4ff0546316200404b34f7a3e3abc06d1241a7aaf7bd829d891aa26a5567",
+        "mapobject.txt": "fc643ab8bc1d3c4dd6f6b797feb168bb9e0decd9567443619c35a97fa3ffb5e0",
+        "field_character_asset.txt": "7db4f34412c8a15f462b47cd30c9300df0b38db93f23fbad7df5a0e6f484cc33",
+        "character_asset.txt": "db846af71441c15d1947175bd655c6523243c77048d9500d9b2debda10373094",
+        "battle_equipment_asset.txt": "1b44ab952f7a88b8528077ae4ba970b17fc3e5423f915c718423be5a7a890404",
+        "condition.txt": "7f3045d3d1a1985f56d2fa261566ff3e385f5ac7979ef8e5029e27e42afd0847",
+        "battle_effect_asset.txt": "278f3f5be2e4acbd64e1fee033257ab59b3b5003937e34a94033b9d96ed16f73",
+        "map.txt": "1dedbff32eef5025db9a20e3180464e78d9be854c7acb9f91ebd4f3b9373fe36",
+        "script.txt": "f28e965a31655aa284f7802c90f0af70b3ca10ca4c36746eea76e46dd0919e71"
+      },
+      "prior_visual_index_fingerprints": {
+        "ff6-inventory.json": "0312bbe855b02e9cb63ec80e8af9762f717b333a17d05fbb77a3a9653bd45f47",
+        "ff6-field-costumes.json": "81dbfc5182e127ca0c2958caacac676a5bea9f127ca8f47e2b60e586de58716a",
+        "ff6-battle-costumes.json": "cb3a8ab57cdf1ca06afa798398364dc432451800613a33cd2ac5e26aa0bae095",
+        "ff6-equipment.json": "3f6495b6595ca103d785f1656524182839076e51b4e148e884375e0e7d0de874",
+        "ff6-scene-review.jsonl": "43ff4eb06d5ea42e3d477a2a9cbed08d36d21849d19fe0204443b9434e7dc397",
+        "ff6-scene-animation-frames.jsonl": "562a9bdd858abcf7ba209cfb54bea915d46d582739a1ce6a8fa4270dee79ad66"
+      },
+      "counts": {
+        "enemy_rows": 365,
+        "visible_enemy_rows": 355,
+        "field_costume_art_keys": 182,
+        "battle_costume_and_portrait_art_keys": 39,
+        "equipment_index_keys": 92,
+        "condition_rows": 102,
+        "condition_effect_ids": 15,
+        "condition_icon_ids": 8,
+        "executable_field_bodies": 2841,
+        "visual_native_call_candidates": 2063,
+        "distinct_same_map_visual_traces": 2043,
+        "prior_routine_dispositions": 0
+      }
+    }
+  }
+}
