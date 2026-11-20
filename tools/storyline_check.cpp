@@ -306,6 +306,74 @@ int verify_ff2()
     std::printf("FFII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
 }
+
+int verify_ff3()
+{
+    Ff3Receipts flags;
+    flags.fill(0);
+    check(!ff3_stage(flags).objective, "the native Altar Cave introduction owns the field before gameplay");
+    flags[0] = 1;
+    const int base = static_cast<int>(ObjectiveId::Ff3Scenario);
+    auto state = progress_at({}, 1);
+    struct Arrival { int map, entity; baked_route::Cell start; };
+    constexpr std::array arrivals{
+        Arrival{153, 10, {1,15,14}},
+        Arrival{155, 3, {1,10,20}},
+        Arrival{155, 0, {1,10,15}},
+        Arrival{164, 8, {1,35,8}},
+        Arrival{327, 4, {1,9,19}},
+        Arrival{335, 4, {1,11,11}}
+    };
+    int count = 0;
+    for (; count < 90; ++count) {
+        const auto stage = ff3_stage(flags);
+        if (!stage.objective) {
+            check(stage.complete && flags[105] == 1, "only the Cloud of Darkness ending receipt completes FFIII");
+            break;
+        }
+        const auto& objective = *stage.objective;
+        const int receipt = static_cast<int>(objective.id) - base;
+        const auto targets = contacts(objective, objective.map);
+        check(!targets.empty() && targets.front().goal.map_id == objective.map &&
+              targets.front().goal.entity_id == objective.contacts[0], "FFIII step binds a native contact");
+        if (targets.empty())
+            std::printf("  FFIII map%d/%d type%d %ls\n", objective.map, objective.contacts[0],
+                        static_cast<int>(objective.object_type), objective.label.data());
+        if (receipt == 33) {
+            auto interrupted = flags;
+            interrupted[32] = 1;
+            const auto recovery = ff3_stage(interrupted).objective;
+            check(recovery && recovery->id == ObjectiveId::Ff3EyeRecovery &&
+                  !contacts(*recovery, 173).empty(),
+                  "a defeated Giant Rat with no Eye receipt uses the exposed Eye");
+        }
+        if (receipt == 351) {
+            auto interrupted = flags;
+            interrupted[351] = {};
+            check(!ff3_stage(interrupted).objective, "the mirror story reads the actual second scenario bank");
+        }
+        if (!targets.empty()) {
+            const auto arrival = std::find_if(arrivals.begin(), arrivals.end(), [&objective](const auto& candidate) {
+                return objective.map == candidate.map && objective.contacts[0] == candidate.entity;
+            });
+            if (arrival != arrivals.end()) {
+                std::copy(flags.begin(), flags.end(), state.scenario.begin());
+                state.current_map_id = arrival->map;
+                const auto& target = targets.front();
+                const auto route = exdeath_routes::route(arrival->map, arrival->start, state, target.goal, target.kind);
+                check(route.path.success, "FFIII can reach the story contact from its native approach");
+                if (!route.path.success)
+                    std::printf("  FFIII approach map%d/%d: %ls / %ls\n", arrival->map, arrival->entity,
+                                route.path.reason.c_str(), route.path.error.c_str());
+            }
+        }
+        check(flags.at(static_cast<size_t>(receipt)) == 0, "FFIII replays each unsatisfied native receipt once");
+        flags.at(static_cast<size_t>(receipt)) = 1;
+    }
+    check(count >= 70 && count < 90, "FFIII story replay reaches a finite ending");
+    std::printf("FFIII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
+    return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
+}
 }
 
 int main()
@@ -328,5 +396,12 @@ int main()
     fixture::game_id = game::Id::FF2;
     std::thread ff2_worker([&] { result = verify_ff2(); });
     ff2_worker.join();
+    if (result) return result;
+    const auto ff3_maps = read("data/ff3/maps.bin");
+    if (!baked::load(ff3_maps.data(), ff3_maps.size()) ||
+        !json::parse(read("data/ff3/mapstate.json"), fixture::records)) return 2;
+    fixture::game_id = game::Id::FF3;
+    std::thread ff3_worker([&] { result = verify_ff3(); });
+    ff3_worker.join();
     return result;
 }

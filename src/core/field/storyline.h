@@ -24,7 +24,8 @@ enum class ObjectiveId {
     PastLich, PastMarilith, PastKraken, PastTiamat, Chaos,
     EarthAdvice, GiantAdvice, FireAdvice, IceAdvice, AirshipAdvice,
     CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice,
-    Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400
+    Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400,
+    Ff3Scenario = 500, Ff3EyeRecovery = 900
 };
 struct Objective {
     ObjectiveId id;
@@ -48,6 +49,9 @@ using Ff2Receipts = std::array<std::optional<int>, 101>;
 inline constexpr int kFirstFf2Keyword = 917;
 using Ff2Keywords = std::array<std::optional<bool>, 15>;
 Stage ff2_stage(const Ff2Receipts& scenario, const Ff2Keywords& learned);
+// The Crystal Tower mirror uses native ScenarioFlag2 slot 95.
+using Ff3Receipts = std::array<std::optional<int>, 352>;
+Stage ff3_stage(const Ff3Receipts& scenario);
 
 // The saved receipts select the quest. The player's browse selection can skip
 // advice without inventing a completion flag for an ordinary conversation.

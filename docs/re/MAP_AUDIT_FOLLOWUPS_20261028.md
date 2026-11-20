@@ -412,7 +412,8 @@ local delivery and gameplay confirmation distinct.
 | --- | --- |
 | FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
 | FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
-| FFIII–FFVI campaigns | Open. Reach the Cloud of Darkness, Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
+| FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. Selected approaches and a Nepto resume case pass the focused replay. Cross-area transport and integrated delivery remain open. |
+| FFIV–FFVI campaigns | Open. Reach Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
@@ -523,6 +524,30 @@ skips obsolete learned-word, pass and cell-bar prompts. The native-shaped
 fixture confirms one bounded list observation and no Storyline word read
 during field loading. Full cross-area transport and gameplay confirmation
 remain open.
+
+### FFIII Altar Cave to the World of Darkness
+
+The next objective uses the save's scenario receipts and the live map
+contacts. Entering as Mini or Frog remains a native spell action. The
+existing form-aware puzzle guides contain the matching instructions and
+safe follow-up. The Storyline labels identify when a form is needed.
+
+| Segment | Verified quest operations |
+| --- | --- |
+| Floating Continent opening | Approach and examine the rocky switch, defeat the Land Turtle, and receive the Wind Crystal's jobs. Topapa, the traveler, Cid and the king lead to Sara and the Djinn. Cid's first airship is at 21/3 with receipt 194. An older save with the boulder already broken can continue. |
+| Nepto and the Fire Crystal | Flee Bahamut and receive Mini, enter Tozus, then help the Vikings and retrieve the Nepto Eye through the statue. A loaded state with receipt 32 and no Eye receipt 33 targets the exposed Eye at 173/5. Toad opens the Owen and Underground Lake entrances. The Ice Horn, Fire Crystal and Hein sequences use their separate native receipts. |
+| Surface World and airships | Wheel of Time and Cid lead to the Enterprise, Aria and the Water Crystal. Gill and the old men open and guide the sewer sequence. Goldor unlocks the Enterprise, Saronia introduces Alus and the Nautilus, and Doga's first magic circle upgrades that craft. Once Unei joins, the Ancient Ruins lead to the Invincible. Hecatoncheir guards the Fang of Earth. |
+| Crystal Tower and finale | Doga and Unei's victory continuation enables the automatic two-key handover at 298/5. The Fangs remove the four statue checkpoints. The Earth Crystal and Syrcus door lead to the Crystal Tower mirror. The mirror transfer sets slot 95 of native ScenarioFlag2, absolute receipt 351. Xande and the first unwinnable Cloud of Darkness encounter do not end Storyline. The four Warriors of Dark and the final fight at 335/4 lead to ending receipt 105. |
+
+The first focused replay verified the full sequence of receipt changes and
+found two native types to correct. Gill uses an NPC contact and the Crystal
+Tower mirror uses an Entity contact. Their later transfer continuations do
+not change the types on the loaded floor. The Djinn approach now starts
+at the actual Sealed Cave floor arrival. The revised build verified 67
+resources and all 86 Storyline objectives. Six representative movement legs,
+including the Djinn and the final Cloud of Darkness approach, passed with
+zero failures. The 87 FFIII labels have all 12 supported languages. Full
+cross-area transport, gameplay and integrated delivery remain open.
 
 ## November 11 all-six Storyline category
 

@@ -176,6 +176,7 @@ Stage ff1_stage(const Ff1Receipts& scenario, int origin_map)
 }
 
 #include "storyline_ff2.inl"
+#include "storyline_ff3.inl"
 
 Objective Selection::resolve(const Objective& objective, const std::optional<Objective>& hint, bool cycle)
 {
