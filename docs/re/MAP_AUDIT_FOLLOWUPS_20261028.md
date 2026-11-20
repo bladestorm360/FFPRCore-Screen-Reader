@@ -15,7 +15,7 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Establish the sprite and scene inventory, work through all six games and verify the speech controls. |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game inventory complete. The first art pass covers all 124 FF1 enemy variants. Remaining game, character, equipment and scene passes, localized wording and speech controls are open. |
 | [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
@@ -373,12 +373,10 @@ runner. The baseline and corrected receipts are in
 
 ## November 17 visual descriptions and Storyline follow-up
 
-**Deferred.** Finish the documented gameplay fixes, including the
-[Karnak Pub 2F exit](#november-17-ffv-karnak-pub-2f-exit-classified-as-an-event),
-and their local deployment first. The next task adds visual descriptions
-across FF I–VI and begins the [existing Storyline mode plan](#november-11-all-six-storyline-category)
-to lead the player through each game's objectives. The new description work
-is at the documentation stage.
+The documented gameplay fixes have been installed. The [visual description
+audit](VISUAL_DESCRIPTIONS_20261119.md) records the six-game inventory and the
+first pass of 124 FF1 enemy forms. The [Storyline mode plan](#november-11-all-six-storyline-category)
+tracks the next objective and the routes to it.
 
 | Scope | Requested behavior |
 | --- | --- |
