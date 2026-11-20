@@ -48,7 +48,7 @@ void prepare_game_json()
 {
     if (game_data_ready()) return;
     auto* tables = new Tables;
-    for (const char* kind : {"translation", "eventlabels", "maptitles", "mapstate", "puzzles", "conditionvisuals"}) {
+    for (const char* kind : {"translation", "eventlabels", "maptitles", "mapstate", "puzzles", "conditionvisuals", "appearances"}) {
         json::Value v;
         const std::string raw = game_file(kind);
         if (!raw.empty()) {
@@ -107,6 +107,13 @@ const std::wstring* pick(const json::Value& file, const std::wstring& key)
     return nullptr;
 }
 
+bool appearance_key(std::wstring_view key)
+{
+    return key.starts_with(L"Enemy appearance ") || key.starts_with(L"Field appearance ") ||
+        key.starts_with(L"Character appearance ") || key.starts_with(L"Weapon appearance ") ||
+        key.starts_with(L"Status appearance ");
+}
+
 } // namespace
 
 void init()
@@ -131,6 +138,10 @@ std::wstring T(std::wstring_view key)
     std::wstring k(key);
     if (const std::wstring* s = pick(g_game, k)) return *s;
     if (const std::wstring* s = pick(g_common, k)) return *s;
+    // The current game's bulk visual prose is prepared with the other
+    // immutable data. Manual appearance reads never parse data in a callback.
+    if (appearance_key(key))
+        if (const std::wstring* s = pick(data::game_json("appearances"), k)) return *s;
     return k;
 }
 
@@ -142,7 +153,8 @@ std::wstring TF(std::wstring_view key, std::initializer_list<std::wstring> args)
 bool has(std::wstring_view key)
 {
     std::wstring k(key);
-    return g_game.get(k) || g_common.get(k);
+    return g_game.get(k) || g_common.get(k) ||
+        (appearance_key(key) && data::game_json("appearances").get(k));
 }
 
 const std::wstring& lang() { return g_worker_language ? *g_worker_language : g_lang; }

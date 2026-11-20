@@ -5,6 +5,27 @@ controls and for localization. The reviewed wording below is working audit
 content. The first appearance readers and localized samples are still
 outside the installed mod.
 
+## November 20 exact FF1 catalog
+
+The FF1 catalog supplies 124 enemy keys, 76 field keys, 12 battle
+character keys and 39 equipment keys from the frozen inventory. The
+two field costume families with three palettes apiece have separate
+wording for each palette. Enemy and character descriptions retain the
+anatomy, posture, clothing and equipment visible in the corresponding art.
+
+The existing appearance keys resolve this catalog alongside the earlier
+localized entries. The mod prepares the immutable table on its existing
+data worker. I and Ctrl+I perform an exact lookup after their existing
+rendered-actor and readiness checks. A visible weapon still needs the
+actual weapon render owner before its appearance can be appended.
+
+The frozen-index check found 251 of 251 exact FF1 keys. The focused build
+verified 68 embedded resources. The dialogue, battle focus and boss form
+fixtures passed. This checkpoint supplies English for each new key.
+Other locales use English for the 2,596 locale entries still awaiting
+translation. Status-effect presentation, broader scenes, further script
+speaker bindings and combined deployment remain open.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy
