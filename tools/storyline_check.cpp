@@ -466,6 +466,89 @@ int verify_ff5()
     check(rift && rift->map == 525, "a save inside the Rift does not return to optional tablet routes");
     return verify_campaign("FFV", ff5_stage, ObjectiveId::Ff5Scenario, 0, 161, 120, arrivals);
 }
+
+int verify_ff6()
+{
+    Ff6Receipts flags;
+    flags.fill(0);
+    const auto receipt = [](const Objective& objective) {
+        return static_cast<int>(objective.id) - static_cast<int>(ObjectiveId::Ff6Scenario);
+    };
+    const auto select = [&](int map, int ending) {
+        int count = 0;
+        while (flags[ending] == 0 && count < 120) {
+            const auto stage = ff6_stage(flags, map);
+            if (!stage.objective) break;
+            const auto& objective = *stage.objective;
+            const auto targets = contacts(objective, map);
+            check(!targets.empty(), "FFVI Storyline target has its exact baked identity");
+            if (targets.empty())
+                std::printf("  FFVI map%d/%d type%d %ls\n", objective.map, objective.contacts[0],
+                    static_cast<int>(objective.object_type), objective.label.data());
+            const int bit = receipt(objective);
+            if (bit < 0 || bit >= static_cast<int>(flags.size())) return -1;
+            check(flags[bit] == 0, "FFVI Storyline advances an unmet receipt");
+            flags[bit] = 1;
+            ++count;
+        }
+        check(flags[ending] == 1, "FFVI chapter reaches its own native receipt");
+        return count;
+    };
+    check(!ff6_stage(flags, 3).objective, "FFVI opening is native-owned");
+    flags[0] = 1;
+    int count = select(3, 50);
+    check(count >= 30, "FFVI opening and Returners' Hideout include intervening milestones");
+    const auto locke = ff6_stage(flags, 584).objective;
+    check(locke && receipt(*locke) == 51, "scenario selection recommends Locke first");
+    flags[103] = 1;
+    const auto sabin = ff6_stage(flags, 350).objective;
+    check(sabin && receipt(*sabin) == 72, "a player-picked Sabin scenario overrides the recommended order");
+    count += select(350, 135);
+    flags[126] = flags[135] = 0;
+    auto buy = ff6_stage(flags, 84, false);
+    auto feed = ff6_stage(flags, 87, true);
+    check(buy.objective && buy.objective->map == 87 && feed.objective && feed.objective->map == 1,
+          "Gau guidance switches from the Mobliz item shop to Veldt battles after buying meat");
+    flags[126] = flags[135] = 1;
+    flags[65] = 1;
+    const auto light = ff6_stage(flags, 320);
+    check(light.objective && !light.local_guide, "the Narshe guards and entrance are still prerequisites");
+    flags[66] = flags[67] = 1;
+    const auto light_ready = ff6_stage(flags, 320);
+    check(light_ready.objective && light_ready.local_guide, "the native light path uses existing local guidance");
+    count += select(320, 69);
+    const auto pending = ff6_stage(flags, 584).objective;
+    check(pending && receipt(*pending) == 51, "scenario selection only recommends unfinished scenarios");
+    flags[51] = 1;
+    count += select(38, 64);
+    flags[136] = 1;
+    count += select(3, 297);
+    count += select(2, 473);
+    auto tower = ff6_stage(flags, 549);
+    check(tower.objective && receipt(*tower.objective) == 591 && tower.local_guide,
+          "Kefka's Tower uses the native three-party guide");
+    auto retreat = ff6_stage(flags, 268);
+    check(retreat.objective && receipt(*retreat.objective) == 473 && !retreat.local_guide,
+          "a party that left the tower can route back to the Falcon's entrance");
+    flags[501] = 1;
+    check(!ff6_stage(flags, 571).complete, "the summit arrival does not certify Kefka's defeat");
+    flags[591] = 1;
+    check(ff6_stage(flags, 571).complete, "the final boss victory continuation completes FFVI");
+    check(count >= 95, "all FFVI pre-final chapters terminate with their own progression");
+
+    flags.fill(0);
+    flags[0] = 1;
+    const auto first = ff6_stage(flags, 3).objective;
+    if (first && !contacts(*first, 3).empty()) {
+        auto state = progress_at({}, 3);
+        std::copy(flags.begin(), flags.end(), state.scenario.begin());
+        const auto goal = contacts(*first, 3).front();
+        const auto route = exdeath_routes::route(3, {1,38,39}, state, goal.goal, goal.kind);
+        check(route.path.success, "the planner reaches the first Narshe patrol from its southern approach");
+    }
+    std::printf("FFVI Storyline: %d ordered objectives, %d total failures\n", count, exdeath_routes::failures);
+    return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
+}
 }
 
 int main()
@@ -509,5 +592,12 @@ int main()
     fixture::game_id = game::Id::FF5;
     std::thread ff5_worker([&] { result = verify_ff5(); });
     ff5_worker.join();
+    if (result) return result;
+    const auto ff6_maps = read("data/ff6/maps.bin");
+    if (!baked::load(ff6_maps.data(), ff6_maps.size()) ||
+        !json::parse(read("data/ff6/mapstate.json"), fixture::records)) return 2;
+    fixture::game_id = game::Id::FF6;
+    std::thread ff6_worker([&] { result = verify_ff6(); });
+    ff6_worker.join();
     return result;
 }

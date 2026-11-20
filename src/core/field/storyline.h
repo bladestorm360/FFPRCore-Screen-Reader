@@ -26,7 +26,7 @@ enum class ObjectiveId {
     CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice,
     Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400,
     Ff3Scenario = 500, Ff3EyeRecovery = 900,
-    Ff4Scenario = 1000, Ff5Scenario = 1400
+    Ff4Scenario = 1000, Ff5Scenario = 1400, Ff6Scenario = 1900
 };
 struct Objective {
     ObjectiveId id;
@@ -36,6 +36,7 @@ struct Objective {
     TargetKind kind;
     baked::ObjType object_type;
     std::optional<baked_route::Cell> authored_spawn{};
+    std::wstring_view instruction{};
 };
 
 std::optional<Objective> cornelia_objective(const CorneliaProgress& progress);
@@ -45,6 +46,7 @@ using Ff1Receipts = std::array<std::optional<int>, 43>;
 struct Stage {
     std::optional<Objective> objective, advice;
     bool complete = false;
+    bool local_guide = false;
 };
 Stage ff1_stage(const Ff1Receipts& scenario, int origin_map);
 using Ff2Receipts = std::array<std::optional<int>, 101>;
@@ -59,6 +61,8 @@ using Ff4Receipts = std::array<std::optional<int>, 274>;
 Stage ff4_stage(const Ff4Receipts& scenario);
 using Ff5Receipts = std::array<std::optional<int>, 429>;
 Stage ff5_stage(const Ff5Receipts& scenario);
+using Ff6Receipts = std::array<std::optional<int>, 592>;
+Stage ff6_stage(const Ff6Receipts& scenario, int origin_map, std::optional<bool> has_dried_meat = {});
 
 // The saved receipts select the quest. The player's browse selection can skip
 // advice without inventing a completion flag for an ordinary conversation.

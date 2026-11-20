@@ -15,8 +15,8 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. Fourteen localized appearance entries and one bridge construction cue passed focused offline checks. The wider scene review, remaining localization and deployment are open. |
-| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first FF1 category covers five objectives with native contacts and completion receipts. Ten offline route legs passed the production planner. Later campaign coverage and gameplay confirmation remain open. |
+| [Visual descriptions](#november-20-six-game-completion-goal) | In progress. The frozen artwork review covers 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. The broader runtime catalog, status effects, scene review and delivery are open. |
+| [Storyline mode](#november-20-six-game-completion-goal) | In progress. All six itineraries extend to their final encounters and have focused offline replays. Full travel replays, remaining localization and integrated delivery are open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
 
@@ -415,7 +415,7 @@ local delivery and gameplay confirmation distinct.
 | FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. Selected approaches and a Nepto resume case pass the focused replay. Cross-area transport and integrated delivery remain open. |
 | FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The focused stage and approach replay passes. Full cross-area transport and integrated delivery remain open. |
 | FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 149 native objectives, representative approaches and a save already in the Rift. Full cross-area transport and integrated delivery remain open. |
-| FFVI campaign | Open. Reach Kefka through the three scenarios, the World of Ruin and Kefka's Tower. Test reloads, later saves, alternate orders and the final encounter. |
+| FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. Storyline uses the existing guides for multi-party, timed and stateful map sequences. Localization, full travel replays and integrated delivery remain open. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
@@ -592,6 +592,32 @@ physical approaches, the Karnak escape and a late save entering the Rift.
 The separate Karnak regression passed all 29 assertions over 12 route
 legs. The build verified 67 embedded resources. Full campaign travel,
 gameplay confirmation and integrated delivery remain open.
+
+### FFVI Narshe to Kefka
+
+The recommended itinerary follows Terra and Locke through Narshe, Figaro,
+Mount Kolts and the Returners' Hideout. The three scenario selections use
+map 584. The current unfinished branch follows the native selection receipt
+51, 65 or 103 and its own completion receipt 64, 69 or 135. A player who
+chooses Sabin first receives that branch's objectives. In Sabin's scenario the
+Mobliz item shop is 87/14. A ready read of normal-inventory content 24 switches
+the objective from buying Dried Meat to using it on Gau after a Veldt battle.
+
+The World of Balance campaign covers the defense at Narshe, Zozo, the opera,
+Magitek Factory, Sealed Gate, the banquet, General Leo's ship, Thamasa and the
+Floating Continent. The pilot control at 119/9 owns the ascent choice. The
+existing local guides handle specialized scenes, puzzle states and player
+choices such as waiting for Shadow. Native receipt 297 starts the ruin
+itinerary, from Cid and the raft to Gerad, Setzer and the Falcon. Returning
+to the Falcon from Kefka's Tower selects its actual world entrance again.
+The three-party guide uses the current party and the tower's plates and
+boss receipts. Summit receipt 501 starts the final sequence. Encounter 472
+calls the native victory continuation 1006, which sets ending receipt 591.
+
+The first focused build passed 116 ordered objectives, the first Narshe
+approach, 156 story model plans and 709 existing guide identities. The
+branch and typed-contact checks use exact baked identities. Complete
+campaign travel, new label localization and integrated delivery remain open.
 
 ## November 11 all-six Storyline category
 

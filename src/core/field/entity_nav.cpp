@@ -124,6 +124,11 @@ storyline::Stage storyline_stage(bool cycle = false)
         storyline::Ff5Receipts receipts;
         map_state::read_scenario_flags(receipts);
         stage = storyline::ff5_stage(receipts);
+    } else if (game::is(game::Id::FF6)) {
+        storyline::Ff6Receipts receipts;
+        map_state::read_scenario_flags(receipts);
+        const auto meat = receipts[125] == 1 && receipts[126] == 0 ? map_state::has_dried_meat() : std::nullopt;
+        stage = storyline::ff6_stage(receipts, current_map_id(), meat);
     }
     if (!stage.objective) {
         g_storyline_selection = {};
@@ -144,25 +149,31 @@ void route_to_storyline(bool walking, double requested_at)
     const auto stage = storyline_stage();
     const auto& objective = stage.objective;
     if (!objective) { speak(storyline_label(stage)); return; }
+    if (stage.local_guide && actions::defined("GameModule.PuzzleGuide")) {
+        actions::run("GameModule.PuzzleGuide");
+        return;
+    }
     if (!baked_nav::prepared()) { speak(T(L"Navigation map data unavailable")); return; }
     auto candidates = storyline::contacts(*objective, current_map_id());
     if (candidates.empty()) { speak(T(L"Navigation map data unavailable")); return; }
 
-    // Multi-tile story triggers list the preferred center contact first.
-    auto target = std::move(candidates.front());
-    auto label = T(objective->label);
     if (walking) {
-        ffpr::fieldnav::autowalk::request(std::move(target.goal), target.kind, std::move(label));
+        auto target = std::move(candidates.front());
+        ffpr::fieldnav::autowalk::request(std::move(target.goal), target.kind, T(objective->label));
         return;
     }
-    target.goal.moving_flight_directions = true;
-    baked_nav::request_route(std::move(target.goal), target.kind, std::move(label),
+    for (auto& candidate : candidates) {
+        candidate.goal.moving_flight_directions = true;
+        if (!candidate.instruction.empty()) candidate.instruction = T(candidate.instruction);
+    }
+    baked_nav::request_guidance(std::move(candidates),
         [generation = g_category_generation, id = objective->id, requested_at](PathInfo path) {
             if (generation != g_category_generation || g_current_category != Category::Storyline || !ensure_field_context()) return;
             const auto current = storyline_stage().objective;
             if (!current || current->id != id) return;
-            const auto message = path.success && !path.description.empty() ? path.description :
+            auto message = path.success && !path.description.empty() ? path.description :
                 (!path.reason.empty() ? path.reason : T(L"No path"));
+            if (path.success && !path.guidance.empty()) message += L" " + path.guidance;
             const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
             if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, true, timing);
             else ffpr::say(message, true, timing);
@@ -412,9 +423,9 @@ Category adjacent_category(Category from, bool next)
     const int step=next?1:-1;
     int index=(static_cast<int>(from)+step+kCategoryCount)%kCategoryCount;
     // FFI-FFIII have no physical save points. Keep enum/view identities stable
-    // and skip only this browse stop; empty categories in applicable games stay.
+    // Skip only unavailable category stops. Empty categories stay selectable.
     while ((index == static_cast<int>(Category::SavePoints) && !game::in(game::kFF4|game::kFF5|game::kFF6)) ||
-           (index == static_cast<int>(Category::Storyline) && !game::in(game::kFF1|game::kFF2|game::kFF3|game::kFF4|game::kFF5)))
+           (index == static_cast<int>(Category::Storyline) && !game::in(game::kFF1|game::kFF2|game::kFF3|game::kFF4|game::kFF5|game::kFF6)))
         index=(index+step+kCategoryCount)%kCategoryCount;
     return static_cast<Category>(index);
 }

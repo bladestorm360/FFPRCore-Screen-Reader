@@ -57,9 +57,10 @@ ref::Class kMiniParameter{"Last.Data","CharacterParameterBase",game::kFF3};
 ref::Field fMiniConditions{kMiniParameter,"<CurrentConditionList>k__BackingField"};
 ref::Class kMiniCondition{"Last.Data.Master","Condition",game::kFF3};
 ref::Method mMiniType{kMiniCondition,"get_ConditionType",0};
-ref::Field fKeyItems{kMiniUser,"normalOwnedItems"}, fKeyCharacterSave{kMiniCharacter,"saveData"};
+ref::Class kNormalUser{"Last.Management","UserDataManager",game::kFF3|game::kFF6};
+ref::Field fKeyItems{kNormalUser,"normalOwnedItems"}, fKeyCharacterSave{kMiniCharacter,"saveData"};
 ref::Method mKeyJob{kMiniCharacter,"get_JobId",0}, mKeyEnabled{kMiniCharacter,"get_IsEnableCorps",0};
-ref::Class kKeyItem{"Last.Data.User","OwnedItemData",game::kFF3};
+ref::Class kKeyItem{"Last.Data.User","OwnedItemData",game::kFF3|game::kFF6};
 ref::Field fKeyItemSave{kKeyItem,"saveData"};
 ref::Method mKeyCount{kKeyItem,"get_Count",0},mKeyItemId{kKeyItem,"get_ItemId",0},mKeyContentId{kKeyItem,"get_ContentId",0};
 ref::Class kFF4KeyUser{"Last.Management","UserDataManager",game::kFF4};
@@ -243,6 +244,25 @@ void read_scenario_flags(std::span<std::optional<int>> flags)
     // singleton accessor could create state outside the intended owner phase.
     if (void* storage = il2cpp::read_static_ptr(kStorage.get(), "instance"))
         copy_flags(ref::rd<void*>(storage, fScenario), flags);
+}
+
+std::optional<bool> has_dried_meat()
+{
+    if (!game::is(game::Id::FF6) || !frame::on_main_thread() ||
+        !ffpr::system::is_field_navigation_ready() || fKeyItems.get() < 0 ||
+        fKeyItemSave.get() < 0 || !mKeyCount || !mKeyContentId) return {};
+    auto* user = il2cpp::read_static_ptr(kNormalUser.get(), "instance");
+    if (!user) return {};
+    auto* items = ref::rd<void*>(user, fKeyItems);
+    const int count = unity::dict_count(items);
+    if (!items || count < 0 || count > 4096) return {};
+    // Content 24 is the installed Mobliz item shop's Dried Meat entry.
+    auto* meat = unity::dict_reference(items, 24);
+    if (!meat) return false;
+    if (!kKeyItem.is(meat) || !ref::rd<void*>(meat, fKeyItemSave) ||
+        ref::call<int32_t>(mKeyContentId, meat) != 24) return {};
+    const int quantity = ref::call<int32_t>(mKeyCount, meat);
+    return quantity >= 0 ? std::optional<bool>(quantity > 0) : std::nullopt;
 }
 namespace {
 struct NativeKeywords { void* items; int size; };
