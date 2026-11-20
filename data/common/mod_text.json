@@ -23127,6 +23127,20 @@
     "pt": "Uma contagem regressiva acima do corpo mostra {0}.",
     "zhc": "身体上方的倒数显示{0}。"
   },
+  "Status appearance float": {
+    "en": "The body floats above its usual position.",
+    "ja": "体が普段の位置より上に浮いている。",
+    "fr": "Le corps flotte au-dessus de sa position habituelle.",
+    "it": "Il corpo fluttua sopra la sua posizione abituale.",
+    "de": "Der Körper schwebt über seiner normalen Position.",
+    "es": "El cuerpo flota por encima de su posición habitual.",
+    "ko": "몸이 평소 위치보다 위에 떠 있다.",
+    "zht": "身體浮在平常的位置上方。",
+    "zhc": "身体浮在平常的位置上方。",
+    "ru": "Тело парит выше обычного положения.",
+    "th": "ร่างลอยอยู่สูงกว่าตำแหน่งปกติ",
+    "pt": "O corpo flutua acima de sua posição habitual."
+  },
   "Status appearance freeze": {
     "en": "A blue tint covers the motionless body.",
     "ja": "動かない体が青みを帯びている。",

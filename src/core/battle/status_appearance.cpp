@@ -55,6 +55,10 @@ ref::Class kFreeze{"Last.Battle", "FreezeConditionFunction", game::kFF6};
 ref::Class kTranslucent{"Last.Battle", "TranslucentConditionFunction", game::kFF4};
 ref::Class kVanish{"Last.Battle", "VanishConditionFunction", game::kFF6};
 ref::Field fVanishMaterial{kVanish, "material"};
+ref::Class kFloat{"Last.Battle", "LevitetoConditionFunction", game::kFF4 | game::kFF5 | game::kFF6};
+ref::Class kFloatSprite{"Last.Battle", "BattleSpriteEntity", game::kFF4 | game::kFF5 | game::kFF6};
+ref::Field fMoveOffsets{kFloatSprite, "movePos"};
+ref::Method mMoveOffset{kFloatSprite, "GetMovePos", 1};
 
 constexpr int kStatusLimit = 64;
 struct SkinColor { float r, g, b, a; };
@@ -211,13 +215,23 @@ const wchar_t* transparency_key(void* function, void* renderer, bool vanish)
     return tint.a == (vanish ? 0.0f : 0.5f) ? L"Status appearance translucent body" : nullptr;
 }
 
-void add_function_appearances(void* info, void* body, int& work, std::vector<std::wstring>& details)
+bool float_is_drawn(void* entity, void* renderer)
+{
+    if (!displayed::renderer_visible(renderer) || !ref::rd<void*>(entity, fMoveOffsets)) return false;
+    // Native renderer updates write the Float displacement into the dedicated
+    // offset slot. The getter only reads that initialized dictionary entry.
+    constexpr int levitate_offset = 0;
+    const auto offset = ref::call<unity::Vec3>(mMoveOffset, entity, levitate_offset);
+    return std::isfinite(offset.y) && offset.y > 0.0f;
+}
+
+void add_function_appearances(void* entity, void* info, void* body, int& work, std::vector<std::wstring>& details)
 {
     auto* functions = info_functions(info);
     const int count = unity::list_count(functions);
     if (count < 1 || count > kStatusLimit) return;
     auto* renderer = ref::rd<void*>(body, fBodyMeshRenderer);
-    bool skin = false, blink = false, doom = false, freeze = false, transparent = false;
+    bool skin = false, blink = false, doom = false, freeze = false, transparent = false, floating = false;
     for (int index = 0; index < count && work > 0; ++index) {
         --work;
         auto* function = unity::list_at(functions, index);
@@ -231,6 +245,9 @@ void add_function_appearances(void* info, void* body, int& work, std::vector<std
         } else if (!freeze && kFreeze.is(function) && freeze_is_drawn(renderer)) {
             freeze = true;
             detail = T(L"Status appearance freeze");
+        } else if (!floating && kFloat.is(function) && float_is_drawn(entity, renderer)) {
+            floating = true;
+            detail = T(L"Status appearance float");
         } else if (const bool vanish = !transparent && kVanish.is(function);
                    !transparent && (vanish || kTranslucent.is(function))) {
             if (const auto* key = transparency_key(function, renderer, vanish)) {
@@ -328,7 +345,7 @@ std::wstring visible_status_appearance(void* entity, void* info)
     if (!body) return {};
     int work = kStatusLimit;
     std::vector<std::wstring> details;
-    add_function_appearances(info, body, work, details);
+    add_function_appearances(entity, info, body, work, details);
     auto* controller = ref::rd<void*>(entity, fStatusController);
     auto* effects = ref::rd<void*>(controller, fStatusEffects);
     const int count = unity::list_count(effects);

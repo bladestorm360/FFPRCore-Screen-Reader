@@ -110,7 +110,7 @@ bool Class::is(void*p){
  if(!p)return false;
  const std::string_view check=name;
  if(check=="ChangeSkinColorConditionFunctionBase"||check=="BlinkConditionFunction"||
-    check.starts_with("Doom")||check=="FreezeConditionFunction"||
+    check.starts_with("Doom")||check=="FreezeConditionFunction"||check=="LevitetoConditionFunction"||
     check=="VanishConditionFunction"||check=="TranslucentConditionFunction")
   return static_cast<fixture::Node*>(p)->type==check;
  return true;
@@ -137,6 +137,7 @@ int32_t Field::get(){
  if(n=="loadWeaponAsset")return offsetof(fixture::Node,data);
  if(n=="battleShield")return offsetof(fixture::Node,items);
  if(n=="shieldSR")return offsetof(fixture::Node,view);
+ if(n=="movePos")return offsetof(fixture::Node,cursor);
  if(n=="ConditionEffectEntityController")return offsetof(fixture::Node,status);
  if(n=="conditionEffectList"||n=="particleSystems")return offsetof(fixture::Node,list);
  if(n=="effectId")return offsetof(fixture::Node,index);
@@ -152,6 +153,10 @@ int32_t Field::get(){
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){
  if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
+ if(std::string_view(name)=="GetMovePos")return reinterpret_cast<void*>(+[](void* p,int type,const void*) {
+  if(type!=0)std::abort();
+  return unity::Vec3{0.0f,*static_cast<float*>(static_cast<fixture::Node*>(p)->cursor),0.0f};
+ });
  if(std::string_view(name)=="PropertyToID")return reinterpret_cast<void*>(+[](void* property,const void*){
   const auto& key=static_cast<fixture::Node*>(property)->name;
   if(key==L"_TintColorWeight")return 2;
@@ -487,6 +492,20 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   frozen_material.machine=false;
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the zero-weight Freeze material contributes no cue");
+  Node float_condition;
+  float_condition.type="LevitetoConditionFunction";
+  float float_height=0.0f;
+  entity.cursor=&float_height;
+  functions.assign({&float_condition});
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a pending Float condition does not describe a grounded sprite");
+  float_height=0.12f;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance float","the live Float position contributes one cue");
+  functions.clear();
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a stale movement offset has no live Float condition");
+  entity.cursor=nullptr;
   Node vanish,vanish_material;
   vanish.type="VanishConditionFunction";
   vanish.use=&vanish_material;renderer.use=&vanish_material;

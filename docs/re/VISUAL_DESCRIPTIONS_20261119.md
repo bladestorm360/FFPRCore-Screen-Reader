@@ -99,6 +99,13 @@ when it is hidden, and rejection of another Sprite with the same name.
 The native evidence and runner receipt are under the local audit folder
 with the `shield-renderer` name.
 
+FFIV through FFVI describe the raised body when Float is actually drawn.
+The current condition must own a visible renderer and the native Float
+offset must be positive. The accessor reads the existing displacement
+slot and runs only on a requested description. The fixture distinguishes
+an applied offset, a pending effect and a stale value after removal.
+The wording is available in all 12 game locales.
+
 The status review follows the 525 installed condition rows to 85
 title-specific effect IDs and 13 shared icon drawings. The per-title
 effect counts are 12, 15, 11, 14, 18 and 15. The local
