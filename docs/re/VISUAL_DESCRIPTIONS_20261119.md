@@ -109,6 +109,35 @@ finished in 119 seconds with a 362,688,512-byte peak for the full process
 tree. The battle fixture covers a drawn off-hand weapon and the effect
 renderer visibility veto. Native gameplay and deployment remain open.
 
+## November 20 transformed bodies and portraits
+
+The local `status_body_art.py` checked 324 installed battle or portrait
+groups outside the base character master list. The alternate body keys
+cover the Mini and Toad palettes in FFII–FFV, the Pig palettes in FFIV,
+and the Imp and glowing Trance bodies in FFVI. FFII and FFIV also have
+different status portraits. The available portraits have their own art
+descriptions. The 143 alternate body and portrait descriptions have all
+12 locales.
+
+FFV includes 109 Old and 109 Zombie battle costume sets. Comparison
+against each matching normal pose found 2,280 changed frames and 336
+matching frames. The installed art shows silver hair where it is exposed
+in the Old poses and an olive cast in the Zombie poses. Wording follows
+the exact altered pose, so a matching down or covered pose preserves the
+ordinary description. The two localized differences are shared across
+the affected art keys.
+
+When asked to describe the acting character, the mod matches the actual
+rendered Sprite against the initialized address and completed-asset
+dictionaries. The all-six native trace confirms that the game uses these
+dictionaries to populate the motion sprites. The manual reader tries at
+most eight alternate groups. It invokes no resource loading and retains
+no object pointers. A focused replay verifies that a loaded Pig sprite
+with the same pose name cannot replace the description of a different
+sprite. The appearance and dialogue checks passed with all 73 resources.
+Field changes, body material colors without an effect, portrait focus
+speech and gameplay confirmation still need their own verification.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy

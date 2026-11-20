@@ -22734,5 +22734,33 @@
     "th": "ตัวละครหมอบต่ำและโน้มตัวไปข้างหน้า",
     "pt": "O personagem se inclina para a frente e se agacha bem baixo.",
     "zhc": "角色向前弯身，蹲得很低。"
+  },
+  "Status appearance body old": {
+    "en": "The exposed hair has turned pale silver-gray.",
+    "ja": "見えている髪が淡い銀灰色になっている。",
+    "fr": "Les cheveux visibles ont pris une teinte gris argenté clair.",
+    "it": "I capelli visibili sono diventati grigio argento chiaro.",
+    "de": "Das sichtbare Haar ist hell silbergrau geworden.",
+    "es": "El pelo visible se ha vuelto de color gris plateado claro.",
+    "ko": "드러난 머리카락이 밝은 은회색으로 변했다.",
+    "zht": "露出的頭髮變成淺銀灰色。",
+    "ru": "Видимые волосы стали светлыми, серебристо-седыми.",
+    "th": "ผมส่วนที่มองเห็นเปลี่ยนเป็นสีเทาเงินอ่อน",
+    "pt": "O cabelo visível ficou cinza-prateado claro.",
+    "zhc": "露出的头发变成浅银灰色。"
+  },
+  "Status appearance body zombie": {
+    "en": "The exposed face, arms or legs have a dull olive-green tint.",
+    "ja": "露出した顔や手足がくすんだオリーブ色になっている。",
+    "fr": "La peau visible du visage ou des membres prend une teinte vert olive terne.",
+    "it": "La pelle visibile del viso o degli arti ha una tinta verde oliva spenta.",
+    "de": "Die sichtbare Haut im Gesicht oder an den Gliedmaßen ist stumpf olivgrün.",
+    "es": "La piel visible de la cara o de las extremidades tiene un tono verde oliva apagado.",
+    "ko": "얼굴이나 팔다리에서 드러난 피부가 탁한 올리브색이다.",
+    "zht": "臉部或四肢露出的皮膚泛著暗橄欖綠。",
+    "ru": "Видимая кожа лица или конечностей стала тускло-оливковой.",
+    "th": "ผิวที่เห็นบนใบหน้าหรือแขนขาเป็นสีเขียวมะกอกหม่น",
+    "pt": "A pele exposta do rosto ou dos membros tem um tom verde-oliva apagado.",
+    "zhc": "脸部或四肢露出的皮肤泛着暗橄榄绿。"
   }
 }

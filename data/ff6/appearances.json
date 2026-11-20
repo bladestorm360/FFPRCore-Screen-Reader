@@ -2206,5 +2206,47 @@
     "th": "กลิ่นอายคล้ายควันกระเพื่อมรอบตัว มีหย่อมแสงนวลอยู่ข้างใน",
     "pt": "Uma aura de fumaça ondula em volta do corpo, com manchas de brilho suave no interior.",
     "zhc": "烟雾般的光晕在身旁波动，其中有柔和发亮的斑块。"
+  },
+  "Status appearance body bc_ff6_p001_tr": {
+    "en": "A luminous white and pink humanoid has long swept-back hair, slender arms and pointed feet. Deep pink accents outline the face and body.",
+    "ja": "白とピンクに輝く人型。長い髪が後ろへ広がり、細い腕ととがった足がある。顔と体の輪郭は濃いピンク。",
+    "fr": "Une silhouette humaine lumineuse, blanche et rose, a de longs cheveux rejetés en arrière, des bras fins et des pieds pointus. Du rose foncé souligne le visage et le corps.",
+    "it": "Una figura umana luminosa bianca e rosa ha lunghi capelli all'indietro, braccia sottili e piedi appuntiti. Il rosa intenso delinea il viso e il corpo.",
+    "de": "Eine weiß und rosa leuchtende menschliche Gestalt hat langes zurückwehendes Haar, schmale Arme und spitze Füße. Dunkles Rosa zeichnet Gesicht und Körper nach.",
+    "es": "Una figura humanoide luminosa de color blanco y rosa tiene pelo largo hacia atrás, brazos delgados y pies puntiagudos. El rosa oscuro perfila el rostro y el cuerpo.",
+    "ko": "하얀색과 분홍색으로 빛나는 사람 형상에 뒤로 흩날리는 긴 머리, 가는 팔, 뾰족한 발이 있다. 진한 분홍색이 얼굴과 몸의 윤곽을 따라간다.",
+    "zht": "發亮的粉白人形有向後飄散的長髮、纖細手臂和尖腳。深粉紅勾勒臉與身體。",
+    "ru": "У светящейся бело-розовой фигуры длинные откинутые назад волосы, тонкие руки и заострённые ступни. Тёмно-розовые линии обводят лицо и тело.",
+    "th": "ร่างคนเรืองแสงสีขาวชมพูมีผมยาวพลิ้วไปด้านหลัง แขนเรียวและเท้าแหลม สีชมพูเข้มตัดขอบใบหน้าและลำตัว",
+    "pt": "Uma figura humanoide luminosa, branca e rosa, tem cabelos longos para trás, braços finos e pés pontudos. O rosa forte contorna o rosto e o corpo.",
+    "zhc": "发亮的粉白人形有向後飘散的长发、纤细手臂和尖脚。深粉红勾勒脸与身体。"
+  },
+  "Status appearance body bc_ff6_p015": {
+    "en": "A luminous white and pink humanoid has long swept-back hair, slender arms and pointed feet. Deep pink accents outline the face and body.",
+    "ja": "白とピンクに輝く人型。長い髪が後ろへ広がり、細い腕ととがった足がある。顔と体の輪郭は濃いピンク。",
+    "fr": "Une silhouette humaine lumineuse, blanche et rose, a de longs cheveux rejetés en arrière, des bras fins et des pieds pointus. Du rose foncé souligne le visage et le corps.",
+    "it": "Una figura umana luminosa bianca e rosa ha lunghi capelli all'indietro, braccia sottili e piedi appuntiti. Il rosa intenso delinea il viso e il corpo.",
+    "de": "Eine weiß und rosa leuchtende menschliche Gestalt hat langes zurückwehendes Haar, schmale Arme und spitze Füße. Dunkles Rosa zeichnet Gesicht und Körper nach.",
+    "es": "Una figura humanoide luminosa de color blanco y rosa tiene pelo largo hacia atrás, brazos delgados y pies puntiagudos. El rosa oscuro perfila el rostro y el cuerpo.",
+    "ko": "하얀색과 분홍색으로 빛나는 사람 형상에 뒤로 흩날리는 긴 머리, 가는 팔, 뾰족한 발이 있다. 진한 분홍색이 얼굴과 몸의 윤곽을 따라간다.",
+    "zht": "發亮的粉白人形有向後飄散的長髮、纖細手臂和尖腳。深粉紅勾勒臉與身體。",
+    "ru": "У светящейся бело-розовой фигуры длинные откинутые назад волосы, тонкие руки и заострённые ступни. Тёмно-розовые линии обводят лицо и тело.",
+    "th": "ร่างคนเรืองแสงสีขาวชมพูมีผมยาวพลิ้วไปด้านหลัง แขนเรียวและเท้าแหลม สีชมพูเข้มตัดขอบใบหน้าและลำตัว",
+    "pt": "Uma figura humanoide luminosa, branca e rosa, tem cabelos longos para trás, braços finos e pés pontudos. O rosa forte contorna o rosto e o corpo.",
+    "zhc": "发亮的粉白人形有向後飘散的长发、纤细手臂和尖脚。深粉红勾勒脸与身体。"
+  },
+  "Status appearance body bc_ff6_p016": {
+    "en": "A short lime-green creature has large eyes, a flat yellow beak, short arms and legs, a rounded blue crest and a blue shell on its back.",
+    "ja": "黄緑色の小さな体に、大きな目と黄色く平たいくちばしがある。手足は短く、頭に丸い青い飾り、背に青い甲羅がある。",
+    "fr": "Une petite créature vert vif a de grands yeux, un bec jaune plat et des membres courts. Elle porte une crête bleue arrondie et une carapace bleue.",
+    "it": "Una creatura verde lime ha grandi occhi, un becco giallo piatto, arti corti, una cresta blu rotonda e un guscio blu sul dorso.",
+    "de": "Ein kleines limettengrünes Wesen hat große Augen, einen flachen gelben Schnabel, kurze Gliedmaßen, einen runden blauen Kamm und einen blauen Panzer.",
+    "es": "Una criatura verde lima tiene ojos grandes, pico amarillo plano, extremidades cortas, una cresta azul redondeada y un caparazón azul en el lomo.",
+    "ko": "라임빛 초록색의 작은 생물은 눈이 크고 노란 부리가 납작하다. 팔다리는 짧고 머리에는 둥근 파란 볏, 등에는 파란 등딱지가 있다.",
+    "zht": "矮小的萊姆綠生物有大眼、扁平黃喙和短四肢。頭上有圓形藍冠，背上有藍殼。",
+    "ru": "У маленького ярко-зелёного существа большие глаза, плоский жёлтый клюв, короткие конечности, округлый синий хохолок и синий панцирь.",
+    "th": "ตัวเล็กสีเขียวมะนาวมีตาโต จะงอยปากเหลืองแบน แขนขาสั้น หงอนกลมสีฟ้าและกระดองสีฟ้าบนหลัง",
+    "pt": "Uma criatura pequena verde-limão tem olhos grandes, bico amarelo achatado, membros curtos, crista azul arredondada e casco azul nas costas.",
+    "zhc": "矮小的莱姆绿生物有大眼、扁平黄喙和短四肢。头上有圆形蓝冠，背上有蓝壳。"
   }
 }

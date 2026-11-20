@@ -122,9 +122,20 @@ void announce_acting_character_appearance()
     if (!kPlayerEntity.is(entity)) return;
     auto* sprite = visible_body_sprite(entity);
     if (!sprite) return;
-    const auto character = L"Character appearance " + visible_player_art(entity);
+    const auto base_art = visible_player_art(entity);
+    const auto sprite_name = unity::name(sprite);
+    const auto pose = art_key(sprite_name, L"");
+    const auto alternate = transformed_body_art(sprite, base_art, sprite_name);
+    const auto body_key = L"Status appearance body " + alternate;
+    const auto character = L"Character appearance " + base_art;
     auto description = modtext::has(character) ? T(character) : std::wstring{};
-    const auto pose = art_key(unity::name(sprite), L"");
+    if (!alternate.empty()) {
+        // A pose can keep the normal pixels even within a transformed set.
+        // The data supplies pose-specific wording where the change is drawn.
+        if (modtext::has(body_key)) description = T(body_key);
+        else if (game::is(game::Id::FF5) && modtext::has(L"Status appearance changed " + alternate + L" " + pose))
+            description = T(alternate.ends_with(L"_o") ? L"Status appearance body old" : L"Status appearance body zombie");
+    }
     if (pose == L"down_00") append(description, T(L"Status appearance pose down"));
     if (pose == L"dying_00" || pose == L"dyingr_00") append(description, T(L"Status appearance pose dying"));
     for (auto* hand : {&fRightWeapon, &fLeftWeapon}) {

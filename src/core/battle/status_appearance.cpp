@@ -27,8 +27,47 @@ ref::Field fReaction{kInspector, "currentReaction"}, fReactionStarted{kInspector
            fReactionEnded{kInspector, "isEnd"};
 ref::Class kReaction{"Last.Battle.Effect", "EffectReaction"};
 ref::Field fReactionTargets{kReaction, "entityMeshRenderers"};
+ref::Class kPaths{"System.Asset", "AssetBundlePathMatch"};
+ref::Field fPaths{kPaths, "originalData"};
+ref::Class kResources{"Last.Management", "ResourceManager"};
+ref::Field fCompleted{kResources, "completeAssetDic"};
 
 constexpr int kStatusLimit = 64;
+
+void* string_entry(void* dictionary, void* key)
+{
+    if (!dictionary || !key) return nullptr;
+    auto* method = il2cpp::find_method(il2cpp::object_class(dictionary), "TryGetValue", 2);
+    auto* address = method ? il2cpp::method_pointer(method) : nullptr;
+    if (!address) return nullptr;
+    using Lookup = bool (*)(void*, void*, void**, const il2cpp::Method*);
+    void* found = nullptr;
+    return reinterpret_cast<Lookup>(address)(dictionary, key, &found, method) ? found : nullptr;
+}
+
+std::vector<std::wstring> transformation_groups(std::wstring_view art)
+{
+    std::vector<std::wstring> groups;
+    auto add = [&](std::wstring_view base, std::initializer_list<std::wstring_view> suffixes) {
+        for (auto suffix : suffixes) groups.emplace_back(std::wstring(base) + std::wstring(suffix));
+    };
+    switch (game::current()) {
+        case game::Id::FF2: add(art, {L"_m", L"_t"}); break;
+        case game::Id::FF3:
+            // Each party slot has its own shape and palette, regardless of job.
+            for (auto slot : {L"bc_ff3_p022_c00", L"bc_ff3_p022_c01", L"bc_ff3_p022_c02", L"bc_ff3_p022_c03"})
+                add(slot, {L"_m", L"_t"});
+            break;
+        case game::Id::FF4: add(art, {L"_m", L"_p", L"_t"}); break;
+        case game::Id::FF5:
+            add(art.substr(0, art.find(L"_j")), {L"_m", L"_t"});
+            add(art, {L"_o", L"_z"});
+            break;
+        case game::Id::FF6: groups = {L"bc_ff6_p016", L"bc_ff6_p001_tr", L"bc_ff6_p015"}; break;
+        default: break;
+    }
+    return groups;
+}
 
 bool rendered_reaction(void* effect, void* body, int& work)
 {
@@ -69,6 +108,28 @@ bool status_is_drawn(void* effect, void* body, int id, int& work)
     }
     return rendered_reaction(effect, body, work);
 }
+}
+
+std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstring_view pose)
+{
+    if (!sprite || pose.empty() || pose.size() > 32 || game::is(game::Id::FF1)) return {};
+    // Use the initialized address and completed-asset dictionaries already
+    // used by LoadPlayerMotions. A pose name is shared by many different
+    // costumes. Only an exact match to the rendered Sprite is evidence of a
+    // transformation. No asset request or singleton getter runs here.
+    auto* paths = ref::rd<void*>(il2cpp::read_static_ptr(kPaths.get(), "instance"), fPaths);
+    auto* manager_class = kResources.get();
+    auto* manager = manager_class ? il2cpp::read_static_ptr(il2cpp::class_parent(manager_class), "instance") : nullptr;
+    auto* assets = ref::rd<void*>(manager, fCompleted);
+    if (!paths || !assets) return {};
+
+    auto* pose_key = ref::new_str(std::wstring(pose));
+    for (const auto& group : transformation_groups(art)) {
+        auto* group_table = string_entry(paths, ref::new_str(group));
+        auto* address = string_entry(group_table, pose_key);
+        if (string_entry(assets, address) == sprite) return group;
+    }
+    return {};
 }
 
 std::wstring visible_status_appearance(void* entity)

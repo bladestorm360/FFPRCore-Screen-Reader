@@ -62,6 +62,9 @@ bool battle_art_ready=false;
 int painting_art=0;
 Node* acting_art_unit=nullptr;
 Node player_art_name;
+Node asset_addresses, loaded_sprites;
+bool sprite_cache_ready=false;
+std::map<std::wstring, Node> managed_names;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
 std::map<std::string,std::function<bool()>> queries;
@@ -88,6 +91,7 @@ void* managed_name(void*p,const void*){return p;}
 void* player_art(void*,int32_t status,int32_t job,bool face,const void*){
  if(face)return nullptr;
  if(status==20){player_art_name.name=L"MO_FF6_N050_C00";return &player_art_name;}
+ if(status==24){player_art_name.name=L"BC_FF4_P001";return &player_art_name;}
  if(status!=1)return nullptr;
  player_art_name.name=job==7?L"BC_FF1_P007":L"BC_FF1_P001";
  return &player_art_name;
@@ -102,7 +106,13 @@ namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n)
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
-bool Class::is(void*p){return p!=nullptr;}il2cpp::Class*Class::get(){return nullptr;}
+bool Class::is(void*p){return p!=nullptr;}
+il2cpp::Class*Class::get(){
+ if(!fixture::sprite_cache_ready)return nullptr;
+ if(std::string_view(name)=="AssetBundlePathMatch")return reinterpret_cast<il2cpp::Class*>(&fixture::asset_addresses);
+ if(std::string_view(name)=="ResourceManager")return reinterpret_cast<il2cpp::Class*>(&fixture::loaded_sprites);
+ return nullptr;
+}
 int32_t Field::get(){
  const std::string n=name;
  if(n=="<BattleSpriteEntity>k__BackingField"||n=="characterSR"||n=="sprite")
@@ -117,6 +127,7 @@ int32_t Field::get(){
  if(n=="ConditionEffectEntityController")return offsetof(fixture::Node,status);
  if(n=="conditionEffectList"||n=="particleSystems")return offsetof(fixture::Node,list);
  if(n=="effectId")return offsetof(fixture::Node,index);
+ if(n=="originalData"||n=="completeAssetDic")return offsetof(fixture::Node,data);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
@@ -127,6 +138,7 @@ void*Method::ptr(){
 }
 il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
+void* new_str(const std::wstring& name){auto& value=fixture::managed_names[name];value.name=name;return &value;}
 std::wstring rd_str_bounded(void* p,Field& f,size_t size){auto value=rd_str(p,f);return value.size()<=size?value:std::wstring{};}
 }
 namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** original){
@@ -174,7 +186,8 @@ bool has(std::wstring_view value){
         value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
         value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Status appearance effect 83"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
-        value==L"Character appearance mo_ff6_n050_c00";
+        value==L"Character appearance mo_ff6_n050_c00"||value==L"Character appearance bc_ff4_p001"||
+        value==L"Status appearance body bc_ff4_p001_p";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
 std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
@@ -196,7 +209,24 @@ namespace ffpr::menus {std::wstring spell_description(void*){return L"Removes po
 
 namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref::Field&){return {};}void read_popup_when_ready(void*,const char*,std::function<std::wstring()>,std::function<bool()>){ }
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
-namespace il2cpp {void*method_pointer(Method*){return nullptr;}}
+namespace il2cpp {
+Class* class_parent(Class* type){return type;}
+Class* object_class(Object* value){return reinterpret_cast<Class*>(value);}
+void* read_static_ptr(Class* type,const char*){return reinterpret_cast<void*>(type);}
+Method* find_method(Class* type,const char* name,int argc){
+ return type&&std::string_view(name)=="TryGetValue"&&argc==2?reinterpret_cast<Method*>(&fixture::asset_addresses):nullptr;
+}
+void* method_pointer(Method* method){
+ if(method!=reinterpret_cast<Method*>(&fixture::asset_addresses))return nullptr;
+ return reinterpret_cast<void*>(+[](void* owner,void* key,void** found,const Method*){
+  const auto& name=static_cast<fixture::Node*>(key)->name;
+  const auto& values=static_cast<fixture::Node*>(owner)->fields;
+  const auto match=values.find(std::string(name.begin(),name.end()));
+  if(match==values.end())return false;
+  *found=match->second;return true;
+ });
+}
+}
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
 ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};
@@ -328,6 +358,21 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00",
          "a native field costume reused as a battle body selects its battle description");
+  fixture::game=game::Id::FF4;
+  entity.state=24;
+  Node groups,addresses,completed,pig,same_pose;
+  pig.name=pose.name;same_pose.name=pose.name;
+  groups.fields["bc_ff4_p001_p"]=&addresses;
+  addresses.fields["Default_00"]=ref::new_str(L"pig-address");
+  completed.fields["pig-address"]=&pig;
+  asset_addresses.data=&groups;loaded_sprites.data=&completed;
+  sprite_cache_ready=true;body.data=&pig;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Status appearance body bc_ff4_p001_p","drawn Pig art replaces the ordinary costume");
+  body.data=&same_pose;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff4_p001","loaded Pig art with the same pose name cannot override a different drawn sprite");
+  sprite_cache_ready=false;asset_addresses.data=nullptr;loaded_sprites.data=nullptr;
   acting_art_unit=nullptr;
   battle_art_ready=false;
  }
