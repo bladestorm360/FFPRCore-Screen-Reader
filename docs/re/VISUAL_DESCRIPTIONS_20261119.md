@@ -71,11 +71,11 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-29,989 remaining non-English entries in the new catalog. All 251
+29,950 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
 the variant's palette, anatomy, pose and visible equipment. FFII's first
-20 enemy asset groups now have Japanese wording for all 48 palettes.
+36 enemy asset groups now have Japanese wording for all 87 palettes.
 The local `ff2_palette_ja.tsv` preserves common anatomy and individual
 palette observations. Distinct
 status effects, field scene playback, additional draw bindings and local
@@ -88,6 +88,15 @@ fingerprint of the per-body inventory. This closes discovery of the
 review corpus.
 
 ## November 20 battle status effects and equipment
+
+The acting character's shield is read from the native guard renderer.
+An exact loaded Sprite distinguishes the six installed shield groups
+even when they share the same pose name. The requested read checks
+renderer visibility before doing the bounded lookup. The asset loader
+stays idle. The fixture confirms speech for the drawn shield, silence
+when it is hidden, and rejection of another Sprite with the same name.
+The native evidence and runner receipt are under the local audit folder
+with the `shield-renderer` name.
 
 The status review follows the 525 installed condition rows to 85
 title-specific effect IDs and 13 shared icon drawings. The per-title

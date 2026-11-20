@@ -26,6 +26,9 @@ ref::Class kPlayerEntity{"Last.Battle", "BattlePlayerEntity"};
 ref::Field fCharacterStatus{kPlayerEntity, "characterStatusId"};
 ref::Field fJob{kPlayerEntity, "jobId"};
 ref::Field fRightWeapon{kPlayerEntity, "battleWeaponRight"}, fLeftWeapon{kPlayerEntity, "battleWeaponLeft"};
+ref::Field fShield{kPlayerEntity, "battleShield"};
+ref::Class kShield{"Last.Battle", "BattleShield"};
+ref::Field fShieldRenderer{kShield, "shieldSR"};
 ref::Class kWeapon{"Last.Battle", "BattleWeapon"};
 ref::Field fWeaponRenderer{kWeapon, "BattleWeaponSR"};
 ref::Field fWeaponAsset{kWeapon, "loadWeaponAsset"};
@@ -105,6 +108,15 @@ std::wstring visible_weapon_art(void* weapon)
     return art_key(ref::rd_str_bounded(asset, fWeaponGroup, 48), L"wp_ff");
 }
 
+std::wstring visible_shield_art(void* entity)
+{
+    auto* shield = ref::rd<void*>(entity, fShield);
+    auto* renderer = ref::rd<void*>(shield, fShieldRenderer);
+    if (!displayed::renderer_visible(renderer)) return {};
+    auto* sprite = ref::call<void*>(mWeaponSprite, renderer);
+    return unity::alive(sprite) ? rendered_shield_art(sprite, unity::name(sprite)) : std::wstring{};
+}
+
 void append(std::wstring& description, const std::wstring& detail)
 {
     if (detail.empty()) return;
@@ -167,6 +179,8 @@ void announce_acting_character_appearance()
         const auto weapon = L"Weapon appearance " + visible_weapon_art(ref::rd<void*>(entity, *hand));
         if (modtext::has(weapon)) append(description, T(weapon));
     }
+    const auto shield = L"Weapon appearance " + visible_shield_art(entity);
+    if (modtext::has(shield)) append(description, T(shield));
     append(description, armor);
     append(description, visible_status_appearance(entity, info));
     append(description, visible_party_status_icons(unit));

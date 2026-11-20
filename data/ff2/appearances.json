@@ -246,121 +246,160 @@
     "ja": "ずんぐりした剣士がしかめ面で太い曲刀を体の前に構える。角のある帽子、袖なしの服、前腕の帯、幅広いブーツを着ける。緑と茶の服に淡い黄緑の刃。"
   },
   "Enemy appearance mn_ff2_021_c00": {
-    "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It wears blue armor with a red scarf and red boots."
+    "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It wears blue armor with a red scarf and red boots.",
+    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。青い鎧に赤いスカーフとブーツ。"
   },
   "Enemy appearance mn_ff2_021_c01": {
-    "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It has a gray-green face and blue-green armor and cloth."
+    "en": "A heavy, hunched man with an angular cap, broad shoulders and thick legs braces a large silver blade across his belly. It has a gray-green face and blue-green armor and cloth.",
+    "ja": "角ばった帽子をかぶった大柄な男が背を丸める。広い肩と太い脚で身構え、大きな銀色の刃を腹の前に横たえる。灰緑色の顔に青緑の鎧と服。"
   },
   "Enemy appearance mn_ff2_022_c00": {
-    "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is mottled blue with ivory tusks."
+    "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is mottled blue with ivory tusks.",
+    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。青のまだら模様に象牙色の牙。"
   },
   "Enemy appearance mn_ff2_022_c01": {
-    "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is purple with greenish-white tusks and pale claws."
+    "en": "A low, muscular four-legged beast lowers an elongated head and enormous forward tusks. A round eye, small backward horns and thick clawed feet sit beneath a broad plated back. It is purple with greenish-white tusks and pale claws.",
+    "ja": "筋肉質の四足獣が身を低くし、細長い頭と前に伸びた巨大な牙を下げる。板のような幅広い背の下に丸い目、後ろ向きの小さな角、太い爪のある足がのぞく。紫の体に緑がかった白い牙と淡色の爪。"
   },
   "Enemy appearance mn_ff2_023_c00": {
-    "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is orange and green with violet eyes."
+    "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is orange and green with violet eyes.",
+    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。橙と緑の体に紫の目。"
   },
   "Enemy appearance mn_ff2_023_c01": {
-    "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is violet with sea-green eyes and trailing green strands."
+    "en": "A squat, round frog has two protruding eyes, short splayed limbs and large raised knobs tipped with short strands. It is violet with sea-green eyes and trailing green strands.",
+    "ja": "丸くずんぐりしたカエル。丸い両目が飛び出し、短い手足を広げる。体には大きなこぶが盛り上がり、その先から短い糸状の突起が伸びる。紫の体に青緑の目と、垂れた緑の突起。"
   },
   "Enemy appearance mn_ff2_024_c00": {
-    "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is orange with violet details."
+    "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is orange with violet details.",
+    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。橙色の体に紫の模様。"
   },
   "Enemy appearance mn_ff2_024_c01": {
-    "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is dark purple with a bright red eye and pale spines."
+    "en": "A long-necked reptile rises from a ring of blue water, its thin tail visible behind it. Spines line the long neck and ridged head above a hooked muzzle. It is dark purple with a bright red eye and pale spines.",
+    "ja": "長い首の爬虫類が青い水の輪から顔を出す。後ろに細い尾が見える。鉤形の鼻先の上に隆起した頭があり、首から頭にかけてとげが並ぶ。濃い紫の体に鮮やかな赤い目と淡いとげ。"
   },
   "Enemy appearance mn_ff2_025_c00": {
-    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is gold with violet accents."
+    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is gold with violet accents.",
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。金色に紫の差し色。"
   },
   "Enemy appearance mn_ff2_025_c01": {
-    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is teal with blue accents."
+    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is teal with blue accents.",
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。青緑に青の差し色。"
   },
   "Enemy appearance mn_ff2_025_c02": {
-    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is lavender with green accents."
+    "en": "A flattened wide-bodied ray with winglike fins, a curled narrow tail and pointed teeth. A large oval marking sits on its forehead. Thin feelers hang from the fins and a curled tongue extends from the mouth. It is lavender with green accents.",
+    "ja": "エイのような平たく幅広い体に、翼のようなひれと丸まった細い尾がある。額に大きな楕円の模様があり、ひれから細いひげが垂れ、とがった歯の間から巻いた舌が伸びる。薄紫に緑の差し色。"
   },
   "Enemy appearance mn_ff2_026_c00": {
-    "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has magenta folds, green tendrils and red-orange details."
+    "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has magenta folds, green tendrils and red-orange details.",
+    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。赤紫のひだに緑の触手と赤橙色の差し色。"
   },
   "Enemy appearance mn_ff2_026_c01": {
-    "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has ochre folds, purple tendrils and orange details."
+    "en": "A floating, rounded brainlike mass with deep folds, small bright eyes and a narrow underside with teeth and trailing tendrils. It has ochre folds, purple tendrils and orange details.",
+    "ja": "脳のような丸い塊が浮かぶ。深いひだと小さく光る目があり、細い下側から歯と細長い触手がのぞく。黄土色のひだに紫の触手と橙の差し色。"
   },
   "Enemy appearance mn_ff2_027_c00": {
-    "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pink and green with a green eye."
+    "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pink and green with a green eye.",
+    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。桃色と緑の体に緑の目。"
   },
   "Enemy appearance mn_ff2_027_c01": {
-    "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pale blue-gray with a blue eye and dark blue strands."
+    "en": "A round central eye protrudes from an organic, one-eyed creature with branching tendrils and a long curling lower stalk. It is pale blue-gray with a blue eye and dark blue strands.",
+    "ja": "丸い一つ目がつき出した生き物。触手は枝分かれし、下から長い茎が巻きながら伸びる。淡い青灰色の体に青い目と濃青色の触手。"
   },
   "Enemy appearance mn_ff2_028_c00": {
-    "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is orange-brown."
+    "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is orange-brown.",
+    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。橙がかった茶色。"
   },
   "Enemy appearance mn_ff2_028_c01": {
-    "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is icy blue with orange claw and mouth accents."
+    "en": "A lean wolf-headed humanoid with an open toothy muzzle, pointed ears and long muscular arms. The forearms reach forward with pale claws while its thin clawed legs hold a loping pose. It is icy blue with orange claw and mouth accents.",
+    "ja": "細身の人型にオオカミの頭がつき、とがった耳を立て、開いた口から歯を見せる。筋肉のついた長い腕を淡い爪ごと前に伸ばし、爪のある細い脚で駆ける姿勢を取る。氷のような青で、爪と口元に橙色が差す。"
   },
   "Enemy appearance mn_ff2_029_c00": {
-    "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is gray and violet with blue feet."
+    "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is gray and violet with blue feet.",
+    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。灰色と紫の体に青い足。"
   },
   "Enemy appearance mn_ff2_029_c01": {
-    "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is bright green with orange-brown wings and teal feet."
+    "en": "A slim horned humanoid crouches on clawed feet with bat wings raised, arms bent outward and a pointed tail curled behind. It is bright green with orange-brown wings and teal feet.",
+    "ja": "細身で角のある人型が、爪のある足でしゃがむ。コウモリの翼を高く伸ばし、両腕を外へ曲げ、先のとがった尾を後ろで巻く。鮮やかな緑の体に橙茶色の翼と青緑の足。"
   },
   "Enemy appearance mn_ff2_030_c00": {
-    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is yellow-green with violet tips."
+    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is yellow-green with violet tips.",
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。黄緑の体につるの先が紫。"
   },
   "Enemy appearance mn_ff2_030_c01": {
-    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is gray with violet tips and a red inner mouth."
+    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is gray with violet tips and a red inner mouth.",
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。灰色の体につるの先が紫で、口の中は赤い。"
   },
   "Enemy appearance mn_ff2_030_c02": {
-    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is dark green with orange-red tips and amber teeth."
+    "en": "A broad oval maw spans a round root-bodied creature. Multiple rows of sharp teeth fill the mouth, and numerous thick tendrils tipped with knobs radiate from its body. It is dark green with orange-red tips and amber teeth.",
+    "ja": "根が集まったような丸い体を、横長の楕円の口が占める。鋭い歯が何列も並び、先にこぶのある太いつるが体から放射状に伸びる。暗緑の体につるの先が赤橙色で、歯は琥珀色。"
   },
   "Enemy appearance mn_ff2_031_c00": {
-    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is teal with pale claws and a pink tongue."
+    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is teal with pale claws and a pink tongue.",
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青緑の体に淡い爪と桃色の舌。"
   },
   "Enemy appearance mn_ff2_031_c01": {
-    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is purple-red with gold claws."
+    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is purple-red with gold claws.",
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。赤紫色の体に金色の爪。"
   },
   "Enemy appearance mn_ff2_031_c02": {
-    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is blue with gold-orange horns and violet tongue."
+    "en": "A crouching reptile with a long low head, a protruding eye, a pointed horn and a curling tongue. Rough plates form a high uneven back above a bent tail and long clawed feet. It is blue with gold-orange horns and violet tongue.",
+    "ja": "長い頭を低くした爬虫類がしゃがむ。出っ張った目、とがった角、巻いた舌を持つ。ごつごつした板が高い背を覆い、曲がった尾と爪のある長い足が下に見える。青い体に金橙色の角と紫の舌。"
   },
   "Enemy appearance mn_ff2_032_c00": {
-    "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is bright green with purple eyes."
+    "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is bright green with purple eyes.",
+    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな緑の体に紫の目。"
   },
   "Enemy appearance mn_ff2_032_c01": {
-    "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is electric blue with red eyes."
+    "en": "A pyramidal pile of soft folds has many small eyes peering out from different layers. Slime drips and pointed protrusions ring the bottom. It is electric blue with red eyes.",
+    "ja": "ピラミッドのように重なった柔らかいひだから、小さな目が何段にもわたってのぞく。粘液のしずくととがった突起が下の縁に並ぶ。鮮やかな青の体に赤い目。"
   },
   "Enemy appearance mn_ff2_033_c00": {
-    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is blue-violet with cyan spines."
+    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is blue-violet with cyan spines.",
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。青紫の体に水色のとげ。"
   },
   "Enemy appearance mn_ff2_033_c01": {
-    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is gold with dark markings."
+    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is gold with dark markings.",
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。金色の体に暗い斑紋。"
   },
   "Enemy appearance mn_ff2_033_c02": {
-    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is magenta with gold-tipped spines."
+    "en": "A large worm raises a round, tooth-ringed throat above a coiled, segmented tail. Short stiff spines and spots cover its outer ridge. It is magenta with gold-tipped spines.",
+    "ja": "節のある尾を巻いた大きな虫が、歯の輪のついた丸いのどを持ち上げる。外側の盛り上がりに短く硬いとげと斑点がある。赤紫の体に先の金色のとげ。"
   },
   "Enemy appearance mn_ff2_034_c00": {
-    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is green."
+    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is green.",
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。緑色。"
   },
   "Enemy appearance mn_ff2_034_c01": {
-    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is golden yellow."
+    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is golden yellow.",
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。黄金色。"
   },
   "Enemy appearance mn_ff2_034_c02": {
-    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is orange-red."
+    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is orange-red.",
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。赤橙色。"
   },
   "Enemy appearance mn_ff2_034_c03": {
-    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is deep blue with beige eyes."
+    "en": "A glossy mound of goo has a rounded head, two narrowed eyes and a dark, jagged mouth line. Soft bulges fold under it where limbs might otherwise be. It is deep blue with beige eyes.",
+    "ja": "光沢のあるゼリー状の塊。丸い頭に細い両目と、ぎざぎざした暗い口の線がある。手足に当たる場所では柔らかい塊が内側へ折れ込む。深い青の体に薄茶色の目。"
   },
   "Enemy appearance mn_ff2_035_c00": {
-    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are red-orange."
+    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are red-orange.",
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。赤橙色の炎。"
   },
   "Enemy appearance mn_ff2_035_c01": {
-    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are green-teal."
+    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are green-teal.",
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。青緑がかった緑の炎。"
   },
   "Enemy appearance mn_ff2_035_c02": {
-    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are gold-yellow."
+    "en": "A floating horned face burns inside a crescent of flame. Dark eye sockets, a grinning mouth and forking flame tongues jut out ahead. The flames are gold-yellow.",
+    "ja": "角のある顔が三日月形の炎の中に浮かぶ。落ちくぼんだ暗い目の下で口がにやりと開き、枝分かれした炎の先が前に突き出す。黄金色の炎。"
   },
   "Enemy appearance mn_ff2_036_c00": {
-    "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has blue skin and a red-orange cloak."
+    "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has blue skin and a red-orange cloak.",
+    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。青い肌に赤橙色のマント。"
   },
   "Enemy appearance mn_ff2_036_c01": {
-    "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has green skin, dark green clothes and a magenta cloak."
+    "en": "A narrow upright figure spreads a cloak into two long winglike drapes. Sharp facial features sit below a horned or pointed hairstyle and high collar. It has green skin, dark green clothes and a magenta cloak.",
+    "ja": "細身の人型が立ち、マントを左右に広げると、長く垂れた布が翼のように見える。高い襟の上に鋭い顔立ちがあり、髪は角のようにとがる。緑の肌に暗緑の服と赤紫のマント。"
   },
   "Enemy appearance mn_ff2_037_c00": {
     "en": "A tall armored figure with a pale, stern face stands with one arm raised. Spiked shoulder pieces and a flaring cape frame ornate armor and boots. It has gold armor and purple cloth."

@@ -135,6 +135,8 @@ int32_t Field::get(){
  if(n=="battleWeaponLeft")return offsetof(fixture::Node,window);
  if(n=="BattleWeaponSR")return offsetof(fixture::Node,view);
  if(n=="loadWeaponAsset")return offsetof(fixture::Node,data);
+ if(n=="battleShield")return offsetof(fixture::Node,items);
+ if(n=="shieldSR")return offsetof(fixture::Node,view);
  if(n=="ConditionEffectEntityController")return offsetof(fixture::Node,status);
  if(n=="conditionEffectList"||n=="particleSystems")return offsetof(fixture::Node,list);
  if(n=="effectId")return offsetof(fixture::Node,index);
@@ -223,7 +225,8 @@ bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
         value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
-        value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Status appearance effect 83"||
+        value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Weapon appearance wp_ff6_sh00_c00"||
+        value==L"Status appearance effect 83"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
         value==L"Character appearance mo_ff6_n050_c00"||value==L"Character appearance bc_ff4_p001"||
         value==L"Status appearance body bc_ff4_p001_p"||value==L"Status appearance body bc_ff6_p022"||
@@ -419,8 +422,25 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   costume_cache.fields["merchant-address"]=&merchant;
   asset_addresses.data=&costume_groups;loaded_sprites.data=&costume_cache;
   sprite_cache_ready=true;
+  Node shield, shield_renderer, shield_sprite, shield_addresses;
+  shield_sprite.name=pose.name;
+  shield.view=&shield_renderer;
+  entity.items=&shield;
+  costume_groups.fields["wp_ff6_sh00_c00"]=&shield_addresses;
+  shield_addresses.fields["Default_00"]=ref::new_str(L"shield-address");
+  costume_cache.fields["shield-address"]=&shield_sprite;
+  shield_renderer.data=&shield_sprite;
   b::announce_acting_character_appearance();
-  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a loaded disguise with the same pose name does not replace the visible body");
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Weapon appearance wp_ff6_sh00_c00",
+         "the shield renderer supplies the exact currently displayed shield group");
+  shield_renderer.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a hidden shield is silent");
+  shield_renderer.visible=true;
+  shield_renderer.data=&pose;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a different sprite with the same pose name cannot claim the cached shield or disguise");
+  entity.items=nullptr;
   body.data=&merchant;
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Status appearance body bc_ff6_p025","the exact rendered Merchant disguise uses its own description");

@@ -8,4 +8,5 @@ namespace ffpr::battle {
 std::wstring visible_status_appearance(void* entity, void* unit_info);
 std::wstring visible_party_status_icons(void* player);
 std::wstring transformed_body_art(void* sprite, std::wstring_view base_art, std::wstring_view pose);
+std::wstring rendered_shield_art(void* sprite, std::wstring_view pose);
 }

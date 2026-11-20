@@ -284,15 +284,13 @@ bool status_is_drawn(void* effect, void* body, int id, int& work)
     }
     return rendered_reaction(effect, body, work);
 }
-}
-
-std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstring_view pose)
+template<class Groups>
+std::wstring match_loaded_sprite(void* sprite, std::wstring_view pose, const Groups& groups)
 {
-    if (!sprite || pose.empty() || pose.size() > 32 || game::is(game::Id::FF1)) return {};
+    if (!sprite || pose.empty() || pose.size() > 32) return {};
     // Use the initialized address and completed-asset dictionaries already
-    // used by LoadPlayerMotions. A pose name is shared by many different
-    // costumes. Only an exact match to the rendered Sprite is evidence of a
-    // transformation. No asset request or singleton getter runs here.
+    // used by the native loaders. Different assets share pose names. Only an
+    // exact match to the rendered Sprite identifies the displayed asset.
     auto* paths = ref::rd<void*>(il2cpp::read_static_ptr(kPaths.get(), "instance"), fPaths);
     auto* manager_class = kResources.get();
     auto* manager = manager_class ? il2cpp::read_static_ptr(il2cpp::class_parent(manager_class), "instance") : nullptr;
@@ -300,12 +298,28 @@ std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstr
     if (!paths || !assets) return {};
 
     auto* pose_key = ref::new_str(std::wstring(pose));
-    for (const auto& group : transformation_groups(art)) {
-        auto* group_table = string_entry(paths, ref::new_str(group));
+    for (const auto& group : groups) {
+        auto* group_table = string_entry(paths, ref::new_str(std::wstring(group)));
         auto* address = string_entry(group_table, pose_key);
         if (string_entry(assets, address) == sprite) return group;
     }
     return {};
+}
+}
+
+std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstring_view pose)
+{
+    if (game::is(game::Id::FF1)) return {};
+    return match_loaded_sprite(sprite, pose, transformation_groups(art));
+}
+
+std::wstring rendered_shield_art(void* sprite, std::wstring_view pose)
+{
+    // Installed shields can use a group from a previous title. Both ordinary
+    // guarding and special guard actions share BattleShield's renderer.
+    constexpr const wchar_t* groups[]{L"wp_ff1_sh00_c00", L"wp_ff1_sh01_c00", L"wp_ff2_sh00_c00",
+        L"wp_ff5_sh00_c00", L"wp_ff6_sh00_c00", L"wp_ff6_sh01_c00"};
+    return match_loaded_sprite(sprite, pose, groups);
 }
 
 std::wstring visible_status_appearance(void* entity, void* info)
