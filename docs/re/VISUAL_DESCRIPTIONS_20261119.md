@@ -50,6 +50,8 @@ that submap. Review the playable original scenes and variants individually.
 The [FFII enemy art pass](VISUAL_DESCRIPTIONS_FF2_20261119.md) covers all 129
 art records including the separate Toad form. The [FFIII enemy art pass](VISUAL_DESCRIPTIONS_FF3_20261119.md)
 covers all 225 rows including the alternate Sea Dragon art.
+The [FFV enemy art pass](VISUAL_DESCRIPTIONS_FF5_20261119.md) covers 300
+visible sprites and confirms that the remaining art row is transparent.
 
 ## Opening and early scene review
 
