@@ -413,7 +413,8 @@ local delivery and gameplay confirmation distinct.
 | FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
 | FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
 | FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. Selected approaches and a Nepto resume case pass the focused replay. Cross-area transport and integrated delivery remain open. |
-| FFIV–FFVI campaigns | Open. Reach Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
+| FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The focused stage and approach replay passes. Full cross-area transport and integrated delivery remain open. |
+| FFV–FFVI campaigns | Open. Reach Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
@@ -548,6 +549,29 @@ resources and all 86 Storyline objectives. Six representative movement legs,
 including the Djinn and the final Cloud of Darkness approach, passed with
 zero failures. The 87 FFIII labels have all 12 supported languages. Full
 cross-area transport, gameplay and integrated delivery remain open.
+
+### FFIV Baron to Zeromus
+
+The recommended objectives start with Cecil's return to Baron and end with
+Zeromus. Native battles, item selection and vehicle controls remain under
+the player's control. The story contact uses the active room and quest state.
+
+| Segment | Verified quest operations |
+| --- | --- |
+| Baron to Fabul | Start with Rosa, Cid and Cecil's room. The scene-gated attendant after receipt 2 is 14/5. The Mist Dragon, Kaipo, Tellah, the waterfall, Edward and the Sand Ruby lead to Rosa. Rydia's fire scene and Yang lead to Fabul's defense. The actual Fabul departure trigger is 1/148. |
+| Mysidia and return to Baron | Mysidia and Mount Ordeals lead to both Scarmiglione fights and the mirror chamber. The elder, Yang and the Baron waterway precede Baigan and Cagnazzo. Edward and the Twin Harp open the Dark Elf's two encounters. Earth Crystal receipt 98 precedes returning it to Troia. Kain's contact is 1/135, an Entity whose later script takes the party to Zot. |
+| Underworld | Zot and Agart lead to the Enterprise's descent. The Dwarven Castle defense, Dr. Lugae and the cannon door precede Yang's scene. The lock uses ScenarioFlag2 slot 17, absolute receipt 273. The Baron engineers prepare the Enterprise. Edge's parents and Rubicante are separate steps. The floor initializer places Rubicante 10 at Bottom (21,16) after receipt 52. The Falcon, Luca's Necklace, the Sealed Cavern and the drill lead back to the surface. |
+| Moon and finale | Mysidia raises the Lunar Whale. Its Earth-side cabin is 357, with crystal 1. Its Moon-side cabin is 161, with the plot return crystal 14 after FuSoYa. The Crystal Palace uses the actual lunar approach. The archfiends and CPU scenes lead to the Lunar Subterrane, then Zeromus at 317/3. Ending receipt 70 closes Storyline. |
+
+The initial contact replay resolved the authored end-to-end receipt order.
+It identified the correct attendant variant, two native contact types and
+the projected Rubicante spawn to fix. The fixture now models his visible
+position after the native initializer moves him from the off-map staging
+tile. The final replay passes all 72 objectives and six physical approaches,
+including both Lunar Whale crystals, FuSoYa and Zeromus. The retained FFV
+Exdeath fixture also passes 227 assertions and 109 legs. The 72 new labels
+have all 12 supported languages. Full campaign travel, gameplay confirmation
+and integrated delivery remain open.
 
 ## November 11 all-six Storyline category
 

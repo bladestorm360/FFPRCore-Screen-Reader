@@ -33,7 +33,7 @@ map_state::Flags flags(int map, int layout, int bridge) {
 
 Planned route(int map, Cell start, const map_state::Flags& state,
               MapGoal goal, TargetKind kind, bool spinning = false, int vehicle = 1,
-              std::shared_ptr<const ActiveRoute> previous = {}) {
+              std::shared_ptr<const ActiveRoute> previous = {}, std::optional<Cell> observed_goal = {}) {
     ++legs;
     RouteSnapshot snapshot(map_state::Resolver(state, fixture::records));
     snapshot.map_id = map;
@@ -64,6 +64,9 @@ Planned route(int map, Cell start, const map_state::Flags& state,
         obstacle.id = object.entity_id();
         obstacle.raw_name = baked::object_identifier(original);
         obstacle.cell = {object.layer, object.tx, object.ty};
+        if (observed_goal && snapshot.goal.map_id == map && obstacle.id == snapshot.goal.entity_id &&
+            obstacle.raw_name == snapshot.goal.raw_name)
+            obstacle.cell = *observed_goal;
         obstacle.npc = object.type == baked::ObjType::NPC || object.type == baked::ObjType::ShopNPC;
         obstacle.chest = object.type == baked::ObjType::TreasureBox;
         obstacle.trigger = baked_route::step_event(object);

@@ -116,6 +116,10 @@ storyline::Stage storyline_stage(bool cycle = false)
         storyline::Ff3Receipts receipts;
         map_state::read_scenario_flags(receipts);
         stage = storyline::ff3_stage(receipts);
+    } else if (game::is(game::Id::FF4)) {
+        storyline::Ff4Receipts receipts;
+        map_state::read_scenario_flags(receipts);
+        stage = storyline::ff4_stage(receipts);
     }
     if (!stage.objective) {
         g_storyline_selection = {};
@@ -406,7 +410,7 @@ Category adjacent_category(Category from, bool next)
     // FFI-FFIII have no physical save points. Keep enum/view identities stable
     // and skip only this browse stop; empty categories in applicable games stay.
     while ((index == static_cast<int>(Category::SavePoints) && !game::in(game::kFF4|game::kFF5|game::kFF6)) ||
-           (index == static_cast<int>(Category::Storyline) && !game::in(game::kFF1|game::kFF2|game::kFF3)))
+           (index == static_cast<int>(Category::Storyline) && !game::in(game::kFF1|game::kFF2|game::kFF3|game::kFF4)))
         index=(index+step+kCategoryCount)%kCategoryCount;
     return static_cast<Category>(index);
 }

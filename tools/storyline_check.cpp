@@ -374,6 +374,76 @@ int verify_ff3()
     std::printf("FFIII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
 }
+
+struct StoryArrival {
+    int map, entity;
+    baked_route::Cell start;
+    int vehicle = 1;
+    std::optional<baked_route::Cell> observed_actor{};
+};
+
+template<class Receipts>
+int verify_campaign(const char* title, Stage (*next)(const Receipts&), ObjectiveId first,
+                    int opened, int ending, int minimum, std::span<const StoryArrival> arrivals)
+{
+    Receipts flags;
+    flags.fill(0);
+    check(!next(flags).objective, "the prologue owns the field until the native opening is ready");
+    flags[opened] = 1;
+    auto state = progress_at({}, 1);
+    int count = 0;
+    for (; count < 256; ++count) {
+        const auto stage = next(flags);
+        if (!stage.objective) {
+            check(stage.complete && flags[ending] == 1, "only the final ending receipt completes the campaign");
+            break;
+        }
+        const auto& objective = *stage.objective;
+        const int receipt = static_cast<int>(objective.id) - static_cast<int>(first);
+        const auto targets = contacts(objective, objective.map);
+        check(!targets.empty() && targets.front().goal.map_id == objective.map &&
+              targets.front().goal.entity_id == objective.contacts[0], "the story objective binds an exact native contact");
+        if (targets.empty())
+            std::printf("  %s map%d/%d type%d %ls\n", title, objective.map, objective.contacts[0],
+                        static_cast<int>(objective.object_type), objective.label.data());
+        if (!targets.empty()) {
+            const auto arrival = std::find_if(arrivals.begin(), arrivals.end(), [&objective](const auto& candidate) {
+                return objective.map == candidate.map && objective.contacts[0] == candidate.entity;
+            });
+            if (arrival != arrivals.end()) {
+                std::copy(flags.begin(), flags.end(), state.scenario.begin());
+                state.current_map_id = arrival->map;
+                const auto& target = targets.front();
+                const auto route = exdeath_routes::route(arrival->map, arrival->start, state,
+                                                         target.goal, target.kind, false, arrival->vehicle, {},
+                                                         arrival->observed_actor);
+                check(route.path.success, "the production planner reaches the contact from a native approach");
+                if (!route.path.success)
+                    std::printf("  %s approach map%d/%d: %ls / %ls\n", title, arrival->map, arrival->entity,
+                                route.path.reason.c_str(), route.path.error.c_str());
+            }
+        }
+        if (receipt < 0 || static_cast<size_t>(receipt) >= flags.size()) return 3;
+        check(flags[receipt] == 0, "each unsatisfied receipt advances the story once");
+        flags[receipt] = 1;
+    }
+    check(count >= minimum && count < 256, "the story replay reaches a finite ending");
+    std::printf("%s Storyline: %d objectives, %d total failures\n", title, count, exdeath_routes::failures);
+    return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
+}
+
+int verify_ff4()
+{
+    constexpr std::array arrivals{
+        StoryArrival{14, 5, {0,6,5}},
+        StoryArrival{239, 10, {0,21,19}, 1, baked_route::Cell{0,21,16}},
+        StoryArrival{357, 1, {0,2,12}},
+        StoryArrival{153, 12, {0,15,25}},
+        StoryArrival{161, 14, {0,2,12}},
+        StoryArrival{317, 3, {1,15,23}}
+    };
+    return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
+}
 }
 
 int main()
@@ -403,5 +473,12 @@ int main()
     fixture::game_id = game::Id::FF3;
     std::thread ff3_worker([&] { result = verify_ff3(); });
     ff3_worker.join();
+    if (result) return result;
+    const auto ff4_maps = read("data/ff4/maps.bin");
+    if (!baked::load(ff4_maps.data(), ff4_maps.size()) ||
+        !json::parse(read("data/ff4/mapstate.json"), fixture::records)) return 2;
+    fixture::game_id = game::Id::FF4;
+    std::thread ff4_worker([&] { result = verify_ff4(); });
+    ff4_worker.join();
     return result;
 }

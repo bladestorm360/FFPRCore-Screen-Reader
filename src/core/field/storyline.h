@@ -25,7 +25,8 @@ enum class ObjectiveId {
     EarthAdvice, GiantAdvice, FireAdvice, IceAdvice, AirshipAdvice,
     CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice,
     Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400,
-    Ff3Scenario = 500, Ff3EyeRecovery = 900
+    Ff3Scenario = 500, Ff3EyeRecovery = 900,
+    Ff4Scenario = 1000
 };
 struct Objective {
     ObjectiveId id;
@@ -34,6 +35,7 @@ struct Objective {
     std::array<int, 3> contacts;
     TargetKind kind;
     baked::ObjType object_type;
+    std::optional<baked_route::Cell> authored_spawn{};
 };
 
 std::optional<Objective> cornelia_objective(const CorneliaProgress& progress);
@@ -52,6 +54,9 @@ Stage ff2_stage(const Ff2Receipts& scenario, const Ff2Keywords& learned);
 // The Crystal Tower mirror uses native ScenarioFlag2 slot 95.
 using Ff3Receipts = std::array<std::optional<int>, 352>;
 Stage ff3_stage(const Ff3Receipts& scenario);
+// Tower of Babel's Lugae lock records slot 17 in ScenarioFlag2.
+using Ff4Receipts = std::array<std::optional<int>, 274>;
+Stage ff4_stage(const Ff4Receipts& scenario);
 
 // The saved receipts select the quest. The player's browse selection can skip
 // advice without inventing a completion flag for an ordinary conversation.

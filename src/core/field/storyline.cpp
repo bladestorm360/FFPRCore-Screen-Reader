@@ -177,6 +177,7 @@ Stage ff1_stage(const Ff1Receipts& scenario, int origin_map)
 
 #include "storyline_ff2.inl"
 #include "storyline_ff3.inl"
+#include "storyline_ff4.inl"
 
 Objective Selection::resolve(const Objective& objective, const std::optional<Objective>& hint, bool cycle)
 {
@@ -213,7 +214,7 @@ std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int ori
         if (match == objects.end()) continue;
         baked_nav::MapGoal goal;
         goal.map_id = next.map;
-        goal.cell = {map->world ? 1 : match->layer, match->tx, match->ty};
+        goal.cell = next.authored_spawn.value_or(baked_route::Cell{map->world ? 1 : match->layer, match->tx, match->ty});
         goal.entity_id = entity;
         goal.raw_name = baked::object_identifier(*match);
         goal.examine = next.kind == Kind::Interact && next.id >= Id::Vampire;
