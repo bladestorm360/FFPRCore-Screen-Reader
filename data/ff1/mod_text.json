@@ -1,4 +1,46 @@
 {
+  "Field appearance mo_ff1_n010_c00": {
+    "en": "A stocky, bearded man wears a tall gold crown. His red robe and broad red cape have a pale collar like fur, with patterned black and white edging.",
+    "ja": "がっしりしたひげの男性が高い金の王冠をかぶっている。赤い長衣と幅広の赤いマントには、毛皮のような淡い襟と白黒の模様の縁取りがある。",
+    "fr": "Un homme trapu et barbu porte une haute couronne dorée. Sa robe rouge et sa large cape rouge ont un col pâle qui évoque la fourrure et un liseré à motifs noirs et blancs.",
+    "it": "Un uomo tarchiato con la barba porta un'alta corona d'oro. La veste rossa e l'ampio mantello rosso hanno un colletto chiaro simile a pelliccia e bordi a motivi bianchi e neri.",
+    "de": "Ein gedrungener, bärtiger Mann trägt eine hohe goldene Krone. Sein rotes Gewand und der breite rote Umhang haben einen hellen, pelzartigen Kragen und schwarz-weiß gemusterte Säume.",
+    "es": "Un hombre bajo y robusto con barba lleva una corona alta de oro. Su túnica y su amplia capa rojas tienen un cuello pálido parecido a la piel y bordes con motivos blancos y negros.",
+    "ko": "체격이 다부지고 수염이 난 남자가 높은 금빛 왕관을 썼다. 붉은 예복과 넓은 붉은 망토에 밝은 털처럼 보이는 깃과 흑백 무늬의 테두리가 있다.",
+    "zht": "身材敦實的蓄鬍男子戴著高高的金冠。紅袍和寬大的紅披風有淺色毛皮般的領口，以及黑白花紋鑲邊。",
+    "zhc": "身材敦实的蓄须男子戴着高高的金冠。红袍和宽大的红披风有浅色毛皮般的领口，以及黑白花纹镶边。",
+    "ru": "Коренастый бородатый мужчина носит высокую золотую корону. У красного одеяния и широкой красной мантии светлый воротник, похожий на мех, и чёрно-белая узорная кайма.",
+    "th": "ชายร่างล่ำมีเคราสวมมงกุฎทองทรงสูง เสื้อคลุมแดงและผ้าคลุมไหล่แดงผืนกว้างมีปกสีอ่อนคล้ายขนสัตว์ ขลิบริมเป็นลายดำสลับขาว",
+    "pt": "Um homem robusto e barbudo usa uma coroa alta de ouro. A túnica e a ampla capa vermelhas têm uma gola clara que lembra pele e bordas com padrões em preto e branco."
+  },
+  "Field appearance mo_ff1_n012_c00": {
+    "en": "A pale woman with dark eyes and long pink hair wears a gold circlet. Her pale lavender and yellow dress has blue and green side panels.",
+    "ja": "色白の女性は暗い瞳と長いピンクの髪を持ち、金の髪飾りを着けている。淡い紫と黄色のドレスは、脇に青と緑の布があしらわれている。",
+    "fr": "Une femme au teint pâle, aux yeux sombres et aux longs cheveux roses porte un cercle d'or. Des pans bleus et verts bordent les côtés de sa robe lavande pâle et jaune.",
+    "it": "Una donna pallida, con occhi scuri e lunghi capelli rosa, indossa un cerchietto d'oro. L'abito lavanda chiaro e giallo ha pannelli laterali blu e verdi.",
+    "de": "Eine blasse Frau mit dunklen Augen und langem rosa Haar trägt einen goldenen Stirnreif. Ihr hell lavendelfarbenes und gelbes Kleid hat blaue und grüne Seitenteile.",
+    "es": "Una mujer pálida de ojos oscuros y pelo rosa largo lleva una diadema de oro. Su vestido lavanda claro y amarillo tiene paneles azules y verdes a los lados.",
+    "ko": "창백한 피부에 어두운 눈과 긴 분홍색 머리를 지닌 여성이 금빛 머리띠를 썼다. 연보라색과 노란색 드레스의 양옆은 파란색과 초록색 천으로 되어 있다.",
+    "zht": "膚色白皙的女子有一雙深色眼睛和粉紅長髮，頭戴金色細冠。淡紫與黃色的長裙兩側有藍綠色拼片。",
+    "zhc": "肤色白皙的女子有一双深色眼睛和粉红长发，头戴金色细冠。淡紫与黄色的长裙两侧有蓝绿色拼片。",
+    "ru": "У бледной женщины тёмные глаза и длинные розовые волосы под золотым обручем. По бокам её светло-сиреневого и жёлтого платья идут синие и зелёные вставки.",
+    "th": "หญิงผิวซีดตาสีเข้มและผมยาวสีชมพูสวมรัดเกล้าสีทอง ชุดสีม่วงลาเวนเดอร์อ่อนกับสีเหลืองมีแถบผ้าสีน้ำเงินและสีเขียวที่ด้านข้าง",
+    "pt": "Uma mulher de pele clara, olhos escuros e longos cabelos rosa usa um diadema de ouro. O vestido lavanda-claro e amarelo tem painéis azuis e verdes nas laterais."
+  },
+  "Enemy appearance mn_ff1_046_c00": {
+    "en": "A broad knight in silver armor has a horned helmet with a narrow dark visor slit. Gold details mark his massive boots. His layered violet cape flares behind him as he braces a weapon across his body.",
+    "ja": "幅広い体格の騎士が銀の鎧をまとい、角の付いた兜には細く暗い目の隙間がある。大きなブーツには金の飾りがあり、武器を体の前に構える背後に紫のマントが幾重にも広がる。",
+    "fr": "Un chevalier aux larges épaules porte une armure d'argent et un casque à cornes percé d'une étroite fente sombre. Des ornements dorés marquent ses lourdes bottes. Il tient une arme en travers du corps, sa cape violette à plusieurs pans déployée derrière lui.",
+    "it": "Un cavaliere dalle spalle larghe indossa un'armatura argentata e un elmo cornuto con una stretta fessura scura. Oro e metallo decorano i massicci stivali. Tiene un'arma di traverso davanti al corpo, mentre il mantello viola a strati si apre alle sue spalle.",
+    "de": "Ein breitschultriger Ritter in silberner Rüstung trägt einen gehörnten Helm mit einem schmalen dunklen Sehschlitz. Goldene Details zieren die gewaltigen Stiefel. Er hält eine Waffe quer vor den Körper, während sich sein mehrlagiger violetter Umhang hinter ihm auffächert.",
+    "es": "Un caballero corpulento viste armadura plateada y un yelmo con cuernos y una estrecha ranura oscura. Sus enormes botas tienen detalles dorados. Sujeta un arma en diagonal ante el cuerpo y su capa violeta de varias capas se abre tras él.",
+    "ko": "체격이 큰 기사가 은빛 갑옷을 입었다. 뿔 달린 투구에는 어둡고 좁은 눈구멍이 있다. 거대한 장화에 금빛 장식이 보인다. 무기를 몸 앞에 비껴 들고 있으며 여러 겹의 보라색 망토가 뒤로 펼쳐진다.",
+    "zht": "寬肩騎士穿著銀甲，帶角的頭盔有一道狹窄的深色視孔。巨大的靴子綴有金色細節。他把武器橫在身前，層疊的紫色披風在背後展開。",
+    "zhc": "宽肩骑士穿着银甲，带角的头盔有一道狭窄的深色视孔。巨大的靴子缀有金色细节。他把武器横在身前，层叠的紫色披风在背后展开。",
+    "ru": "Широкоплечий рыцарь в серебряном доспехе носит рогатый шлем с узкой тёмной прорезью. Огромные сапоги украшены золотом. Он держит оружие поперёк корпуса, а сзади расходятся складки многослойного фиолетового плаща.",
+    "th": "อัศวินไหล่กว้างสวมเกราะเงินและหมวกมีเขาพร้อมช่องมองสีเข้มแคบ รองเท้าบู๊ตขนาดใหญ่ประดับสีทอง เขายกอาวุธพาดขวางลำตัว ขณะที่ผ้าคลุมสีม่วงซ้อนชั้นแผ่ออกด้านหลัง",
+    "pt": "Um cavaleiro de ombros largos usa armadura prateada e um elmo com chifres e uma estreita abertura escura. As botas enormes têm ornamentos dourados. Ele segura uma arma à frente do corpo, com a capa violeta em camadas aberta atrás de si."
+  },
   "Cornelia bridge construction cue": {
     "en": "Red-armored soldiers raise and lower their arms as they build the bridge.",
     "ja": "赤い鎧の兵士たちが腕を上下させながら、橋を架けている。",

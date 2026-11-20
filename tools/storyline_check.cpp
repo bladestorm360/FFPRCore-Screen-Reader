@@ -66,10 +66,14 @@ int verify()
     check(!cornelia_objective({1,1,1,1,1,1,1}), "an existing save beyond the reviewed slice retires the earlier stages");
     replay(audience, ObjectiveId::Audience, 3, {2,20,17}, 3, {14});
     replay(audience, ObjectiveId::Audience, 2, {2,26,41}, 3, {14});
+    replay(audience, ObjectiveId::Audience, 1, {1,145,156}, 3, {14});
     replay(garland, ObjectiveId::Garland, 72, {0,38,31}, 72, {32});
+    replay(garland, ObjectiveId::Garland, 1, {1,145,156}, 72, {32});
+    replay(garland, ObjectiveId::Garland, 2, {2,26,41}, 72, {32});
     replay(lute, ObjectiveId::Lute, 3, {0,20,9}, 3, {7});
     replay(leave, ObjectiveId::LeaveCastle, 2, {2,26,41}, 2, {45,44,46});
     replay(bridge, ObjectiveId::CrossBridge, 1, {1,145,146}, 1, {89});
+    replay(bridge, ObjectiveId::CrossBridge, 1, {1,145,156}, 1, {89});
     std::printf("Cornelia storyline: %d assertions, %d physical legs, %d failures\n",
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;

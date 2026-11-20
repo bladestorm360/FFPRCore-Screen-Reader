@@ -155,6 +155,7 @@ namespace modtext {
 bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
+        value==L"Enemy appearance mn_ff1_046_c00"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
@@ -246,6 +247,9 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff6_144_c00",
          "the apparition supplies its description after the native reveal");
   painting_art=0;
+  folded_wings.name=L"MN_FF1_046_C00";
+  expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff1_046_c00",
+         "Garland has a separate description for his battle armor");
   b::d_EnemyAll(&target,nullptr);
   expect(!b::read_focused_enemy_appearance(),"All Enemies does not reuse a prior single target");
   enemy_a.data=nullptr;

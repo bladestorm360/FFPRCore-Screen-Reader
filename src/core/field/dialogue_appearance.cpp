@@ -7,6 +7,7 @@
 #include "../frame.h"
 #include "../modtext.h"
 #include "../say.h"
+#include <algorithm>
 
 namespace ffpr::dialogue {
 namespace {
@@ -87,14 +88,28 @@ void* direct_talk_actor(void* controller, const std::wstring& message)
 
 void* scripted_talk_actor(void* controller, void* action, const std::wstring& message)
 {
-    // Garland's first two lines belong to his pre-battle scene. A separate
-    // speaker and costume appear in its continuation back at Cornelia.
-    if (!game::is(game::Id::FF1) || (message != L"MSG_HELPSERA_01" && message != L"MSG_HELPSERA_02") ||
-        ref::rd_str_bounded(action, fScriptName, 48) != L"sc_e_0003" || ::field::current_map_id() != 72)
-        return nullptr;
-    return unique_actor(controller, [](void* actor) {
+    if (!game::is(game::Id::FF1)) return nullptr;
+    struct Speaker { int map; std::wstring_view script, message; int entity; };
+    static constexpr Speaker speakers[] = {
+        {72, L"sc_e_0003", L"MSG_HELPSERA_01", 32},
+        {72, L"sc_e_0003", L"MSG_HELPSERA_02", 32},
+        {3, L"sc_e_0002", L"MSG_MAP0A01_10", 14},
+        {3, L"sc_e_0002_1", L"MSG_EKKEN_02", 12},
+        {3, L"sc_e_0004_1", L"MSG_LUTE_02", 7},
+        {3, L"sc_e_0004_2", L"MSG_LUTE_01", 7},
+        {3, L"sc_e_0004_2", L"MSG_LUTE_02", 7},
+    };
+    const auto script = ref::rd_str_bounded(action, fScriptName, 48);
+    const auto map = ::field::current_map_id();
+    const auto* speaker = std::find_if(std::begin(speakers), std::end(speakers), [&](const Speaker& row) {
+        return row.map == map && row.script == script && row.message == message;
+    });
+    if (speaker == std::end(speakers)) return nullptr;
+    // The stage reserves the entity ID for this utterance. The live renderer
+    // still determines the costume and can reject a hidden or unloaded actor.
+    return unique_actor(controller, [speaker](void* actor) {
         return kSpriteEntity.is(actor) && ::field::live_entity(actor) &&
-               ref::rd<int>(::field::entity_property(actor), r::fPropEntityId) == 32 &&
+               ref::rd<int>(::field::entity_property(actor), r::fPropEntityId) == speaker->entity &&
                displayed::renderer_visible(ref::rd<void*>(actor, fRenderer));
     });
 }

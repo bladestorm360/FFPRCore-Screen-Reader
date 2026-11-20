@@ -102,7 +102,11 @@ namespace frame { bool on_main_thread() { return owner_thread; } }
 namespace queries { bool is(const char*) { return transition; } }
 namespace game { Id current() { return Id::FF1; } }
 namespace modtext {
-bool has(std::wstring_view key) { return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00"; }
+bool has(std::wstring_view key)
+{
+    return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
+           key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00";
+}
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
 namespace ffpr { void say(std::wstring_view text, bool) { spoken = text; } }
@@ -199,6 +203,20 @@ int main()
     current_map = 72;
     script.value = L"sc_e_0003_3";
     require(!read(), "same message key in another script");
+
+    current_map = 3;
+    script.value = L"sc_e_0002_1";
+    id.value = L"MSG_EKKEN_02";
+    put(property, "entityId", reinterpret_cast<void*>(12));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N010_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff1_n010_c00", "king owns the audience in its active stage");
+    script.value = L"sc_e_0004_1";
+    id.value = L"MSG_LUTE_02";
+    put(property, "entityId", reinterpret_cast<void*>(7));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N012_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff1_n012_c00", "Sarah owns the direct Lute scene");
+    script.value = L"sc_e_0004_2";
+    require(read(), "Sarah also owns the alternate Lute scene");
 
     const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
     id.value = L"MSG_BRIDGE_01";

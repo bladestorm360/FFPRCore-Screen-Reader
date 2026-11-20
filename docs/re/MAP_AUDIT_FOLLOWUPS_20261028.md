@@ -15,8 +15,8 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. Ten localized appearance cases and one bridge construction cue passed focused offline checks. The wider scene review, remaining localization and deployment are open. |
-| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first five FF1 objectives have native contacts and completion receipts. Six offline route legs passed the production planner. Runtime category and campaign coverage remain open. |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. Thirteen localized appearance cases and one bridge construction cue passed focused offline checks. The wider scene review, remaining localization and deployment are open. |
+| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first five FF1 objectives have native contacts and completion receipts. Ten offline route legs passed the production planner. Runtime category and campaign coverage remain open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
 
@@ -462,9 +462,10 @@ setting receipt 0. The playable opening stages follow that receipt.
 
 Receipt 2 can become true inside the rescue return chain. The model withholds
 the next objective until receipt 3 confirms the return. The production
-fixture passed 29 assertions and six movement legs with the installed FF1
-map and scenario data. It checks a castle floor transfer, all five exact
-contacts, the Lute prerequisite, missing state and later saves. The bridge
+fixture passed 45 assertions and ten movement legs with the installed FF1
+map and scenario data. It checks the same objectives from the castle and
+overworld, a castle floor transfer, all five contacts, the Lute
+prerequisite, missing state and later saves. The bridge
 uses the existing selected-event route to its actual world foot tile. The
 Storyline category, full cross-world journeys and later campaigns are pending.
 

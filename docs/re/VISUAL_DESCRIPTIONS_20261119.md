@@ -20,7 +20,8 @@ keys for every asset present across the six games. This lets the reader
 follow a changed sprite while the cursor stays on the same unit. Use the
 current art key, including its palette, to resolve the localized entry.
 The FF1 Goblin and Goblin Guard and FFV Wing Raptor's two forms are the
-first four enemy entries, each with 12 localizations.
+first four enemy entries, each with 12 localizations. Garland's battle
+armor is independent of his field costume and resolves to its own entry.
 
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
@@ -54,10 +55,12 @@ the indicator clears, the fallback checks at most 64 rooted field entities
 for a unique visible NPC with the exact active talk key. Scripted actions,
 non-field windows, duplicate keys without a target and hidden sprites are
 excluded from direct attribution. The scripted path has its own exact map,
-script, message and actor binding for Garland's first two lines. Both paths
+script, message and actor binding for the first Cornelia soldier and king
+exchanges, Princess Sarah's Lute scene variants and Garland's first two
+lines. Both paths
 resolve the costume from the rendered sprite's packed atlas texture and use
-no new hooks or frame polling. FF1's Cornelia soldier and Garland have
-entries in all 12 languages. Remaining cutscene speaker bindings and
+no new hooks or frame polling. These four field appearances have entries
+in all 12 languages. Remaining cutscene speaker bindings and
 localized entries are open.
 
 The focused offline build passes the field dialogue, battle focus and
