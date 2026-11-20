@@ -62,6 +62,22 @@ All 1,392 catalog rows are accounted for. The installed assets yielded
 FFIV palette. The external `enemy-coverage.json` records the decoded
 alpha and catalog coverage check.
 
+## NPC and party appearance review
+
+Map placement IDs join to `mapobject`. Party costumes also join to
+`field_character_asset` and `character_asset` by exact art, with job and
+actor assignments kept separate. The contact sheets use the available
+front, side and rear field frames, and the normal, ready and victory
+battle frames. All six games yielded sheets for 762 field candidates and
+233 battle character variants. The field count includes actors with
+prop, vehicle and text-rendering sprites.
+
+The [FF1 appearance pass](VISUAL_DESCRIPTIONS_FF1_COSTUMES_20261119.md)
+covers its 76 field candidates and 12 battle outfits, including all base
+and promoted jobs. Equipment held separately in battle needs its own
+visible-art mapping. The chapters below also track costume use in specific
+dialogue and event contexts.
+
 ## Opening and early scene review
 
 | Game | Opening source to follow | Review state |
