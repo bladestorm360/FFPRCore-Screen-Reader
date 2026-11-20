@@ -2548,6 +2548,12 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 (o.d&255) == 2 ? T(L"interact to cross") : T(L"examine the warp");
             p.manual_after = (o.d&255) != 1;
             if(o.d&baked::kAutomaticCurrent)p.action_after=T(L"Ride the current");
+            if (o.d & baked::kRopeCrossing) {
+                // The native rope event moves the party to the opposite bank.
+                // Name the next action while retaining the farther destination.
+                const auto rope = translate_entity_name_snapshot(baked::object_identifier(o),here->first_map_id,o.entity_id());
+                p.action_after = TF(L"Step on {0}.",{rope});
+            }
             // This exact Ship Graveyard contact runs its jumps after the
             // native timer. Another step can cancel that timer.
             if (game::is(game::Id::FF5) && here->first_map_id == 211 && o.entity_id() == 102 && o.a == -1)

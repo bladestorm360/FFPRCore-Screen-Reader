@@ -5,6 +5,109 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff4_sealed_cavern(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    std::ifstream input("data/ff4/mapstate.json",std::ios::binary);
+    const std::string encoded(std::istreambuf_iterator<char>(input),{});
+    json::Value records;
+    if (!json::parse(encoded,records)) {
+        expect(false,"FFIV Sealed Cavern field state loads");
+        return;
+    }
+    struct Destination { int map; int entity; baked::ObjType type; TargetKind kind; };
+    const std::array goals{
+        Destination{284,38,baked::ObjType::Event,TargetKind::Transition},
+        Destination{286,3,baked::ObjType::TreasureBox,TargetKind::Interact},
+        Destination{286,4,baked::ObjType::TreasureBox,TargetKind::Interact},
+        Destination{287,5,baked::ObjType::SavePoint,TargetKind::Spot},
+    };
+    const Cell entry{0,14,8}, rope{0,26,10}, arrival{0,26,29};
+    for (const auto& dest : goals) {
+        const auto* target_map = baked::submap_by_map_id(dest.map);
+        const auto& objects = baked::grids(*target_map).objects;
+        const auto target = std::find_if(objects.begin(),objects.end(),[&](const auto& object) {
+            return object.type == dest.type && object.entity_id() == dest.entity;
+        });
+        if (target == objects.end()) {
+            expect(false,"Native far-side Sealed Cavern destination is present");
+            continue;
+        }
+        const Cell target_cell{target->layer,target->tx,target->ty};
+        for (const auto& [map,start] : std::array{
+                 std::pair{271,Cell{0,23,11}},
+                 std::pair{279,Cell{0,13,7}}, std::pair{282,Cell{0,15,11}},
+                 std::pair{284,entry}, std::pair{284,arrival}}) {
+            map_state::Flags flags;
+            flags.current_map_id = map;
+            flags.current_area_id = 46;
+            flags.scenario.fill(0);
+            // Entering the save room and descending to B2 need their earlier
+            // opened Assault Doors. The B3 side room has its own receipt.
+            flags.scenario[264]=flags.scenario[266]=flags.scenario[269]=1;
+            const auto observation = [&] {
+                RouteSnapshot snapshot(map_state::Resolver(flags,records));
+                snapshot.map_id = map;
+                snapshot.submap = baked::submap_by_map_id(map);
+                snapshot.layer = start.layer;
+                snapshot.position = world_of_cell(*snapshot.submap,start);
+                snapshot.vehicle = {true,1,1,{}};
+                snapshot.locale = L"en";
+                snapshot.goal = {dest.map,target_cell,dest.kind==TargetKind::Interact,{},0,dest.entity,baked::object_identifier(*target)};
+                snapshot.kind = dest.kind;
+                for (const auto& object:baked::grids(*snapshot.submap).objects) {
+                    if (object.type!=baked::ObjType::Event || !snapshot.state.active(*snapshot.submap,object)) continue;
+                    NativeObstacle contact;
+                    contact.cell={object.layer,object.tx,object.ty};
+                    contact.type=int(object.type);
+                    contact.id=object.entity_id();
+                    contact.trigger=true;
+                    contact.raw_name=baked::object_identifier(object);
+                    snapshot.obstacles.push_back(std::move(contact));
+                }
+                return snapshot;
+            };
+            Planned result, blocked;
+            std::thread worker([&]{
+                auto snapshot=observation();
+                result = plan_snapshot(snapshot);
+                if (map==282 && dest.map==286) {
+                    flags.scenario[269]=0;
+                    auto locked=observation();
+                    blocked=plan_snapshot(locked);
+                }
+            });
+            worker.join();
+            std::printf("Sealed Cavern %d (%d,%d) to %d/%d: success %d next %d, %s %s\n",
+                        map,start.x,start.y,dest.map,dest.entity,result.path.success,
+                        result.path.next_map_id,text::to_utf8(result.path.full_description).c_str(),
+                        text::to_utf8(result.path.reason).c_str());
+            expect(result.path.success,"Sealed Cavern far-side destination is reachable");
+            if (map==282 && dest.map==286)
+                expect(!blocked.path.success && blocked.path.reason==L"Story gated",
+                       "The rope route keeps the unopened B3 Assault Door restriction");
+            if (start == entry && result.path.success) {
+                const auto& receipt = result.pending.incoming_transition;
+                const auto& phases = result.path.walk_phases;
+                expect(result.path.next_map_id==284 && receipt && receipt->arrival==arrival &&
+                       !phases.empty() && !phases.back().cells.empty() && phases.back().cells.back()==rope &&
+                       result.pending.goal.map_id==dest.map && result.pending.goal.cell==target_cell,
+                       "The B3 rope is an intermediate leg and retains the selected destination");
+                g_pending=&result.pending;
+                expect(note_trap_start(284,rope),"The native script entry marks the same-map crossing");
+                record_map_arrival(284,entry);
+                expect(result.pending.incoming_transition.has_value(),"The earlier bank cannot complete the crossing");
+                record_map_arrival(284,arrival);
+                expect(!result.pending.incoming_transition && result.pending.valid &&
+                       result.pending.completed_transitions.size()==1,
+                       "The opposite bank completes the leg while preserving the destination");
+                g_pending=nullptr;
+            }
+        }
+    }
+}
+
 template<class Expect> void check_ff4_moon(Expect expect)
 {
     using namespace field;
@@ -574,6 +677,7 @@ int main() {
         if(number==4) {
             check_ff4_underworld(expect);
             check_ff4_moon(expect);
+            check_ff4_sealed_cavern(expect);
             check_dwarven_castle(expect);
             check_tomra_shop(expect);
             check_baron_gate(expect);

@@ -1,5 +1,16 @@
 # Build and distribution security
 
+## November 19 FFIV Sealed Cavern rope crossings
+
+The focused browse, trap and route worker checks passed. All 67 resources and
+47 forwarded exports verified. The unsigned DLL SHA-256 is
+`2a6aa8a941543f14a195955f8cfb6039c58380531ccd65b4061e16fa5d8a28f8`.
+Defender found no threats on the 22 exact payload files. The exclusion query
+was denied. All 22 FFIV payloads matched the scanned files, and the installer
+verified 138 protected file states and the other five games. Recovery source
+is `10850d9`. Receipts are under `../tools/karnak_routing_20261119/ffiv-sealed-cavern`.
+Gameplay confirmation remains pending.
+
 ## November 19 FFIV Moon entrances
 
 The focused browse and vehicle landing checks passed. All 67 resources and

@@ -18,5 +18,209 @@
       0
     ],
     "evidence": "Complete native Main chain through an intermediate world scene; final controlled player and first-party SetPos6,6, unchanged Bottom layer; source hashes in tools/silent_family_decisions.json"
+  },
+  {
+    "submap": "Map_30201_2",
+    "entity_id": 17,
+    "object_id": 18,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 269,
+    "original_point": 0,
+    "continuation": "sc_rope_0001",
+    "continuation_sha256": "aeff5820bc217b52c0779805a120f93a1dbb74c9e0acd1037a094542c3728fdd",
+    "arrival_cell": [
+      33,
+      16,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_2",
+    "entity_id": 18,
+    "object_id": 19,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 269,
+    "original_point": 0,
+    "continuation": "sc_rope_0002",
+    "continuation_sha256": "fff90d4f13ebe7b1daa19c7cb769b81e4ea569087b6cc2b05695f8d74bd6c4c8",
+    "arrival_cell": [
+      33,
+      10,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_2",
+    "entity_id": 20,
+    "object_id": 21,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 269,
+    "original_point": 0,
+    "continuation": "sc_rope_0003",
+    "continuation_sha256": "7f6e47a45c6ad9b44d38ff523ceced3878acb11985fe5fdce3cc1073bea963a3",
+    "arrival_cell": [
+      16,
+      16,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_2",
+    "entity_id": 19,
+    "object_id": 20,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 269,
+    "original_point": 0,
+    "continuation": "sc_rope_0004",
+    "continuation_sha256": "112c1ef16df89fd874fc2ef8e516e486e6de2cadc6f944d04950f0fee1420fa4",
+    "arrival_cell": [
+      16,
+      10,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_7",
+    "entity_id": 40,
+    "object_id": 68,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 274,
+    "original_point": 0,
+    "continuation": "sc_rope_0005",
+    "continuation_sha256": "7216174508c10cf03d6fad242e3cd241116b4f048d046fccc39c1546e3ce2ac9",
+    "arrival_cell": [
+      29,
+      28,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_7",
+    "entity_id": 41,
+    "object_id": 69,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 274,
+    "original_point": 0,
+    "continuation": "sc_rope_0006",
+    "continuation_sha256": "88ec2f306310a2611a3df232898288b6d4a68f9d71630e7f34782867c4c27f4e",
+    "arrival_cell": [
+      29,
+      22,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_7",
+    "entity_id": 42,
+    "object_id": 70,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 274,
+    "original_point": 0,
+    "continuation": "sc_rope_0007",
+    "continuation_sha256": "3009db640903087cf8db0c20521f6c86113b3386eb7793bd453e50a77e7fd4fe",
+    "arrival_cell": [
+      31,
+      22,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_7",
+    "entity_id": 43,
+    "object_id": 71,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 274,
+    "original_point": 0,
+    "continuation": "sc_rope_0008",
+    "continuation_sha256": "4881f593c2bbec27dabaa416ff71c657463c3b4e6537291474509c8ffcbbd4b6",
+    "arrival_cell": [
+      21,
+      11,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_17",
+    "entity_id": 37,
+    "object_id": 45,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 284,
+    "original_point": 0,
+    "continuation": "sc_rope_0009",
+    "continuation_sha256": "b7ab6a2edbe9aa67a0a542f6b946197b24a8887929561e0cb8b3e29d6bc3c62a",
+    "arrival_cell": [
+      26,
+      29,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_17",
+    "entity_id": 38,
+    "object_id": 46,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 284,
+    "original_point": 0,
+    "continuation": "sc_rope_0010",
+    "continuation_sha256": "08800e504e429493226439593991af4b898ed7580c7a5524fc1043346ec46239",
+    "arrival_cell": [
+      26,
+      9,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_21",
+    "entity_id": 10,
+    "object_id": 8,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 288,
+    "original_point": 0,
+    "continuation": "sc_rope_0011",
+    "continuation_sha256": "9839b754fbf3b3eb9bd616c3a91de155c497ba3872cc9ba55117aa99b501eacb",
+    "arrival_cell": [
+      14,
+      7,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
+  },
+  {
+    "submap": "Map_30201_21",
+    "entity_id": 11,
+    "object_id": 9,
+    "same_map": true,
+    "rope_crossing": true,
+    "destination_map": 288,
+    "original_point": 0,
+    "continuation": "sc_rope_0012",
+    "continuation_sha256": "08d1a7f177d84f1ef04c87f09856b0e07ee058039059998b7fbb0e73804e265b",
+    "arrival_cell": [
+      26,
+      7,
+      0
+    ],
+    "evidence": "Controlled player puppet exits at the recorded Bottom cell."
   }
 ]

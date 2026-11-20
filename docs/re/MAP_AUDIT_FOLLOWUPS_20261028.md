@@ -14,7 +14,7 @@ reports in the existing feature and maintenance records as each system opens.
 | [FFV Karnak world map](#november-17-ffv-karnak-world-map-routing-progress-blocker) | Closed for source, offline verification and FFV installation. Player confirmation pending. |
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
-| FFIV world and floor routing | In progress (~25%). Moon entrances are offline verified and installed. Sealed Cavern rope prerequisites are active, followed by [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes), [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). |
+| FFIV world and floor routing | In progress (~40%). Moon entrances and Sealed Cavern rope prerequisites are offline verified and installed. [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes) are active, followed by [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection) and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). |
 | [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | Not started. After gameplay fixes and deployment, complete the six-game sprite and animation coverage passes and verify the speech controls. |
 | [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
 
@@ -167,11 +167,9 @@ FFIV. Gameplay confirmation remains pending. [Delivery record](../SECURITY_AND_D
 
 ## November 14 FFIV Sealed Cavern rope crossing across floors
 
-**Deferred until next week.** The owner reports that destinations beyond the
-B3 rope crossing can be announced as “Not directly reachable” from earlier
-floors and still show that status on arrival at B3. Guidance resumes after
-the player uses the only accessible rope crossing. That crossing provides a
-workaround and allows progression. Investigation and implementation are pending.
+The owner reported that destinations beyond the B3 rope crossing were announced
+as “Not directly reachable” from earlier floors and after entering B3.
+Guidance resumed after the player used the accessible rope crossing.
 
 The November 14 FFIV Steam log `ffpr_screen_reader.log` records no route
 from map 279 to the B3 rope contact on map 284 at (26,28) at 173633.093.
@@ -181,16 +179,29 @@ The rotated `ffpr_screen_reader.1.log` records the same announcement from
 map 282 for two B3 chests on map 286 at (18,5) and (12,10), at 172918.875
 and 172920.921, and for the B4 save point on map 287 at (15,10) at 172982.218.
 The current log also records a failed B4 save-point route from map 284 at
-173156.078. The exact arrival side and progression requirements for each
-destination still need verification.
+173156.078.
 
-**Acceptance for a later fix.** From an earlier floor, browsing and
-directions should recognize a destination reachable through a usable event
-on a later floor. Give the route to the first exit, then guide the player
-to the rope and continue toward the original destination once the native
-crossing completes. Verify routes to the far-side contact and affected
-destinations from before B3 and on arrival at B3 before crossing. Preserve
-valid route failures for unavailable crossings or genuinely blocked paths.
+The route bake records the controlled player's final Bottom-layer pose for
+12 rope contacts on maps 269, 274, 284 and 288. The two B3 contacts at
+(26,10) and (26,28) lead to (26,29) and (26,9) respectively. The other
+contacts use the native relative movement of the player puppet. For B2's
+first crossing, the player moves five tiles south and the separate party
+puppet moves six. Each route-data entry pins the object identity and full
+script hash in `data/ff4/warp_arrival_overrides.json`.
+
+An active rope contact ends its walking leg. Directions tell the player to
+step on the named rope bridge. The ready-route capture confirms the native
+landing and retains the selected destination. The native Assault Door state
+still governs the two side-room chests. Flags 264 and 266 track the earlier
+opened doors needed on the route from the save room, and flag 269 tracks the
+side-room door on B3. The existing object and map names are used throughout.
+
+The route worker passed 20 route replays from five origins, two closed-door
+cases, and four native transition start and landing replays. The fixture
+supplies opened door receipts for the reachable chest cases. The route still
+reports a closed door when its receipt is absent. FFIV installation is
+verified. Gameplay confirmation remains pending.
+[Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-ffiv-sealed-cavern-rope-crossings).
 
 ## November 13 shared walk-open doors and FFIV route reports
 

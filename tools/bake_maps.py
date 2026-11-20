@@ -550,6 +550,9 @@ def bake_game(game, out_dir, check=False):
                     # explicitly retains trap semantics,not a silent travel arc.
                     if not(correction and correction[1].get('trap_transfer'))and(reviewed_dest or ordinary_world_exit(o,s) or (correction and correction[1].get('ordinary_travel'))):w['props']['step_on']|=1<<16
                     if correction and correction[1].get('automatic_current'):w['props']['step_on']|=desert_currents.CURRENT_TAG
+                    if correction and correction[1].get('rope_crossing'):
+                        assert game == 'ff4' and correction[1]['same_map'] and t == 'Event'
+                        w['props']['step_on'] |= 1 << 27
                     import tycoon_exit
                     w['props']['step_on']|=tycoon_exit.flags(game,o,s)
                     from review_field_event_contacts import scene_transfer
