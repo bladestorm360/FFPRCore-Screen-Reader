@@ -23,6 +23,7 @@ bool dialogue_open = true;
 bool transition = false;
 int current_map = 3;
 int actor_reads = 0;
+game::Id current_game = game::Id::FF1;
 std::wstring spoken;
 
 void put(Node& object, const char* field, void* value)
@@ -100,12 +101,14 @@ bool renderer_visible(void* p) { return visible(p); }
 }
 namespace frame { bool on_main_thread() { return owner_thread; } }
 namespace queries { bool is(const char*) { return transition; } }
-namespace game { Id current() { return Id::FF1; } }
+namespace game { Id current() { return current_game; } }
 namespace modtext {
 bool has(std::wstring_view key)
 {
     return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
-           key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00";
+           key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00" ||
+           key == L"Field appearance mo_ff2_n005_c00" || key == L"Field appearance mo_ff2_n022_c00" ||
+           key == L"Field appearance mo_ff2_p004_c00";
 }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
@@ -218,7 +221,53 @@ int main()
     script.value = L"sc_e_0004_2";
     require(read(), "Sarah also owns the alternate Lute scene");
 
+    current_game = game::Id::FF2;
+    require(!read(), "a Cornelia speaker row cannot match a different game");
+    current_map = 7;
+    script.value = L"sc_e_0001_3";
+    id.value = L"E0001_03_007_a_04";
+    put(property, "entityId", reinterpret_cast<void*>(15));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF2_P004_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff2_p004_c00", "Minwu owns the healing dialogue");
+    id.value = L"E0001_03_007_a_05";
+    require(!read(), "the next healing scene line belongs to Hilda");
+    put(property, "entityId", reinterpret_cast<void*>(14));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF2_N005_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff2_n005_c00", "Hilda owns the next visible page");
+    current_map = 13;
+    script.value = L"sc_e_0016";
+    id.value = L"E0016_00_013_a_01";
+    put(property, "entityId", reinterpret_cast<void*>(9));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF2_N022_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff2_n022_c00", "Tobul's initial stage placement");
+    id.value = L"E0016_00_013_f_06";
+    require(!read(), "initial placement is rejected after the forging scene");
+    put(property, "entityId", reinterpret_cast<void*>(6));
+    require(read(), "Tobul's post-forging stage placement");
+    current_map = 104;
+    script.value = L"sc_e_0016_1";
+    id.value = L"N022_C00_013_02_01";
+    put(property, "entityId", reinterpret_cast<void*>(8));
+    require(read(), "Tobul's second smithy");
+
     const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
+    current_map = 6;
+    script.value = L"sc_e_0001_5";
+    id.value = L"E0001_04_003_a_05";
+    put(property, "entityId", reinterpret_cast<void*>(49));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF2_N005_C00-12345678";
+    require(cue() == L"Altair audience bow cue", "the first audience page follows the visible bow");
+    script.value = L"sc_e_0016_1";
+    require(cue().empty(), "same audience key under another script");
+    script.value = L"sc_e_0001_5";
+    id.value = L"E0001_04_006_e_09";
+    require(cue().empty(), "second bow has no repeated cue");
+    id.value = L"E0001_04_003_a_05";
+    renderer.visible = false;
+    require(cue().empty(), "hidden audience actor");
+    renderer.visible = true;
+
+    current_game = game::Id::FF1;
     id.value = L"MSG_BRIDGE_01";
     put(property, "entityId", reinterpret_cast<void*>(1));
     texture.value = L"sactx-128x64-Uncompressed-MO_FF1_N101_C00-cd76ed62";

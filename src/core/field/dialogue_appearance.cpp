@@ -8,6 +8,7 @@
 #include "../modtext.h"
 #include "../say.h"
 #include <algorithm>
+#include <span>
 
 namespace ffpr::dialogue {
 namespace {
@@ -88,9 +89,8 @@ void* direct_talk_actor(void* controller, const std::wstring& message)
 
 void* scripted_talk_actor(void* controller, void* action, const std::wstring& message)
 {
-    if (!game::is(game::Id::FF1)) return nullptr;
     struct Speaker { int map; std::wstring_view script, message; int entity; };
-    static constexpr Speaker speakers[] = {
+    static constexpr Speaker cornelians[] = {
         {72, L"sc_e_0003", L"MSG_HELPSERA_01", 32},
         {72, L"sc_e_0003", L"MSG_HELPSERA_02", 32},
         {3, L"sc_e_0002", L"MSG_MAP0A01_10", 14},
@@ -99,12 +99,35 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         {3, L"sc_e_0004_2", L"MSG_LUTE_01", 7},
         {3, L"sc_e_0004_2", L"MSG_LUTE_02", 7},
     };
+    static constexpr Speaker altair[] = {
+        {6, L"sc_e_0001_5", L"E0001_04_006_a_07", 49},
+        {6, L"sc_e_0001_5", L"E0001_04_006_e_09", 49},
+        {7, L"sc_e_0001_3", L"E0001_03_007_a_01", 14},
+        {7, L"sc_e_0001_3", L"E0001_03_007_a_02", 15},
+        {7, L"sc_e_0001_3", L"E0001_03_007_a_03", 14},
+        {7, L"sc_e_0001_3", L"E0001_03_007_a_04", 15},
+        {7, L"sc_e_0001_3", L"E0001_03_007_a_05", 14},
+        {13, L"sc_e_0016", L"E0016_00_013_a_01", 9},
+        {13, L"sc_e_0016", L"E0016_00_013_a_02", 9},
+        {13, L"sc_e_0016", L"E0016_00_013_d_03", 9},
+        {13, L"sc_e_0016", L"E0016_00_013_f_04", 9},
+        {13, L"sc_e_0016", L"E0016_00_013_f_05", 9},
+        {13, L"sc_e_0016", L"E0016_00_013_f_06", 6},
+        {13, L"sc_e_0016", L"N022_C00_013_02_01", 6},
+        {104, L"sc_e_0016_1", L"N022_C00_013_02_01", 8},
+    };
+    std::span<const Speaker> speakers;
+    switch (game::current()) {
+        case game::Id::FF1: speakers = cornelians; break;
+        case game::Id::FF2: speakers = altair; break;
+        default: return nullptr;
+    }
     const auto script = ref::rd_str_bounded(action, fScriptName, 48);
     const auto map = ::field::current_map_id();
-    const auto* speaker = std::find_if(std::begin(speakers), std::end(speakers), [&](const Speaker& row) {
+    const auto speaker = std::find_if(speakers.begin(), speakers.end(), [&](const Speaker& row) {
         return row.map == map && row.script == script && row.message == message;
     });
-    if (speaker == std::end(speakers)) return nullptr;
+    if (speaker == speakers.end()) return nullptr;
     // The stage reserves the entity ID for this utterance. The live renderer
     // still determines the costume and can reject a hidden or unloaded actor.
     return unique_actor(controller, [speaker](void* actor) {
@@ -160,15 +183,35 @@ bool read_dialogue_appearance()
 
 std::wstring action_cue_at_dialogue()
 {
-    // Both native bridge branches show the first construction pan before
-    // MSG_BRIDGE_01, then continue the work montage. The displayed first page
-    // is the presentation anchor, so later work loops have no speech producer.
-    if (!game::is(game::Id::FF1) || !frame::on_main_thread() || !in_dialogue() ||
-        queries::is("GameStatePatches.IsInputTransitionBlocked") || ::field::current_map_id() != 121 ||
-        field_message_key() != L"MSG_BRIDGE_01") return {};
+    const auto game_id = game::current();
+    if ((game_id != game::Id::FF1 && game_id != game::Id::FF2) ||
+        !frame::on_main_thread() || !in_dialogue() ||
+        queries::is("GameStatePatches.IsInputTransitionBlocked")) return {};
+    const int map_id = ::field::current_map_id();
+    const bool construction = game_id == game::Id::FF1 && map_id == 121;
+    const bool audience = game_id == game::Id::FF2 && map_id == 6;
+    if (!construction && !audience) return {};
+    const auto message = field_message_key();
+    if (message != (construction ? L"MSG_BRIDGE_01" : L"E0001_04_003_a_05")) return {};
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return {};
+    if (audience) {
+        // The audience's first page follows the completed head-lowering pose.
+        // The later repetition accompanies a different message in this script.
+        auto* owner = ref::rd<void*>(controller, fEventOwner);
+        auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
+        if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != L"sc_e_0001_5") return {};
+        auto* hilda = unique_actor(controller, [](void* actor) {
+            return kSpriteEntity.is(actor) && ::field::live_entity(actor) &&
+                   ref::rd<int>(::field::entity_property(actor), r::fPropEntityId) == 49;
+        });
+        if (hilda && displayed::renderer_visible(ref::rd<void*>(hilda, fRenderer)) &&
+            visible_art(hilda) == L"mo_ff2_n005_c00") return T(L"Altair audience bow cue");
+        return {};
+    }
+    // Both bridge branches show the first construction pan before this
+    // dialogue. The later work montage has no speech producer.
     auto* actors = ref::rd<void*>(controller, r::fEntityList);
     const int count = unity::list_count(actors);
     if (count < 1 || count > 64) return {};

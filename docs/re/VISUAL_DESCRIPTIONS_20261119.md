@@ -22,6 +22,8 @@ current art key, including its palette, to resolve the localized entry.
 The FF1 Goblin and Goblin Guard and FFV Wing Raptor's two forms are the
 first four enemy entries, each with 12 localizations. Garland's battle
 armor is independent of his field costume and resolves to its own entry.
+FFII Black Knight resolves to the blue-black rider with an orange blade
+through its exact native palette.
 
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
@@ -40,7 +42,8 @@ party actor. The body renderer carries the current character status and
 job. Its pose Sprite name is shared across outfits, so the initialized
 native character asset table resolves the body key. The six installed
 `GetAssetName` implementations have the same 70-instruction shape.
-The first localized FF1 variants are Warrior and Knight. Focus and
+The first localized FF1 variants are Warrior and Knight. FFII Firion has an
+independent battle body entry from the installed `bc_ff2_p001` group. Focus and
 party fixtures passed with both job keys, hidden bodies, actor handoffs
 and after-action cancellation. A visible FF1 blade can now add its own
 entry to the same utterance. The first entry uses the weapon loader's
@@ -59,10 +62,13 @@ non-field windows, duplicate keys without a target and hidden sprites are
 excluded from direct attribution. The scripted path has its own exact map,
 script, message and actor binding for the first Cornelia soldier and king
 exchanges, Princess Sarah's Lute scene variants and Garland's first two
-lines. Both paths resolve the costume from the rendered sprite's packed atlas texture and use
-no new hooks or frame polling. These four field appearances have entries
-in all 12 languages. Remaining cutscene speaker bindings and
-localized entries are open.
+lines. FFII uses the same reader for Hilda and Minwu's Altair opening
+dialogue and Tobul's scenes in both smithies. The first smithy switches
+from entity 9 to entity 6 when the smithy event group changes. Both paths
+resolve the costume from the rendered sprite's packed atlas texture
+without adding hooks or frame polling. These seven field appearances have
+entries in all 12 languages. Remaining cutscene speaker bindings and
+localization are open.
 
 The focused offline build passes the field dialogue, battle focus and
 party checks. The dialogue fixture exercises explicit target resolution,
@@ -72,7 +78,7 @@ script can change. The six-game native name check and byte
 verification of 67 embedded resources passed. Field gameplay confirmation
 is pending.
 
-## First automatic scene cue
+## Automatic cues anchored to dialogue
 
 The FF1 bridge construction cue uses the first visible native dialogue
 page after the opening pan. Both construction branches use the same
@@ -81,9 +87,19 @@ window and a rendered soldier from the construction group. It puts the
 localized action before that page in the existing speech request. Later
 work loops, other pages and the repeat-dialogue command keep their native
 speech. The offline cue fixture covers the visible case, late message,
-wrong map, hidden actor and transition gate. The cue is outside the
-installed mod. Actions without a suitable dialogue anchor and the broader
-scene audit remain open.
+wrong map, hidden actor and transition gate.
+
+The FFII Altair audience uses the same page reader. In map 6
+`sc_e_0001_5`, the blocking puppet block at 99 uses actor 49 for the
+brief head-lowering pose at 109 and resets it at 111. The first visible
+native page at 9 follows that block. Its cue describes the completed
+gesture and requires the correct live message, script and Hilda costume.
+The second head-lowering action at 119 accompanies a different page and
+produces no second cue. The dialogue fixture passes the first page, wrong
+script, repeated gesture and hidden actor cases. The bounded build and
+battle-focus check passed. All six new FFII entries have complete 12-language
+keys and are outside the installed mod. Visible actions without a suitable
+dialogue anchor and the broader scene audit remain open.
 
 ## Six-game source inventory
 

@@ -68,6 +68,16 @@ and the wider scene review remain open. A finished cue needs a verified
 native presentation and playback point that respects cutscene, skip and
 loading gates, as well as localization and offline verification.
 
+The first Altair audience pose is bound and offline checked in the existing
+dialogue reader. The first page follows the completed `LookDown` and
+`Default` sequence. It speaks a single short line before the native text.
+The later head-lowering animation retains its native dialogue. Tobul's
+first scene already gives the reason for forging, then plays five hammer
+sounds over the fade. His later visible hammer cycles at `sc_e_0016` 204
+and 211 and `sc_e_0016_1` 11 need their own presentation point. In the
+second smithy, the corresponding native talk page is at 2, before the
+hammer animation starts.
+
 ## Work and repair scenes
 
 | Game and source | Visual action and native context | Placement |
@@ -137,3 +147,25 @@ keys, decoded sprites and the installed effect prefab components.
 | Barrier, `Map_10040/sc_e_0207`, `_1`, `_2` and `sc_e_0355` | The same circular glow asset is used for several vessels. The Invincible has multiple winglike projections and bright orange bands. The Nautilus is smaller and oval. The Enterprise uses a separate striped hull. One cue introduces the visible rings when the barrier reacts. Later equivalent approaches can retain their vehicle and route context. |
 | Mirror, `Map_30261_2/sc_e_0321` | The effect's installed components contain a ring, rays, filtered light and stars. A separate native turning track moves the party into the transition. Describe the light and the first turn as the party is pulled toward the mirror. |
 | Crystal audiences, `Map_30011_3/sc_e_0007_1`, `Map_30251_2/sc_e_0089_1` and the four dark-crystal rooms in `Map_30281` | Upright, faceted blue crystals and separate violet dark crystals are held on their own actors. The nearby shadow effect has a dark aura, bright eye particles and a central sphere. State the actual color and shadow action on first reveal. Later copies of the same interaction keep their native text and ordinary movement. |
+## FFIV–FFVI world-scene actions
+
+The local `scene_nodes.py`, `scene_shortlist.py` and `scene_prop_review.py`
+retain the source positions, actor bindings and installed art evidence.
+Particle-only effects use prefab component evidence. Sprite frames were
+checked separately wherever the shot swaps a prop or plays a custom clip.
+These rows are editorial cues awaiting a verified presentation point.
+
+| Game scene | Action, visible detail and proposed wording |
+| --- | --- |
+| FFIV Damcyan, `Map_10010/sc_e_0015` | Three red airships move as a group. A second group starts the first explosion on actor 164 at 82 and stages successive blasts. The burning pale-stone castle at 171 hides at 148, and actor 1019 shows the damaged towers at 151. “Three red airships pass over Damcyan. Fire bursts around the pale towers, leaving them broken.” Use one cue for the attack and its result when the camera reveals them. |
+| FFIV Agart eruption, `Map_10010/sc_e_0045_1` | After the shake and fade, actor 1102 starts the eruption at 36. The prefab has rings, rising columns, rock and dust components. “The ground shakes and erupts, throwing rock and dust upward.” Use once as the eruption appears. |
+| FFIV sealed passage on the surface, `Map_10010/sc_e_0053_10` | Actor 1113 has a diamond-shaped, rimmed opening. The first four frames advance from a black interior through red-orange glow. Actors 1088–1097 play the smoke prefab. “A dark opening glows red as smoke spreads around it.” Place at the first lit opening. |
+| FFV Catapult launch, `Map_10010/sc_e_0066_1` | The four-panel gray surface plays the hatch sequence at 33. Its opening frames reveal the gold-and-orange propeller below. The airship rises at 40, then plays `propeller` at 51. “A stone hatch opens and the airship rises into view, its propeller turning.” Describe this launch once. |
+| FFV Ronka rises, `Map_10010/sc_e_0067_2` and `sc_e_0514_2` | Both branches use actor 431 and the same effect with a castle body, shadow, falling sand and an expanding dust ring. The first branch plays it at 35. “The Ronka Ruins rise above a widening cloud of sand.” Treat each branch as an alternate for the same cue. The later collapse uses its separate shot and description. |
+| FFV Ghido's shrine, `Map_10010/sc_e_0476_1` | Actor 723 uses an effect with upward-moving stones, broad spray and waves. “Spray and chunks of stone rise as the shrine goes under.” Use at the first clearly visible splash. |
+| FFV merged world and Bahamut, `Map_10040/sc_e_0137_2` and `sc_e_0137_4` | World effect 809 combines flying stone, dust, waves and spray. The second branch starts the effect at 33 and reveals the dragon with the `Flybaha` clip at 53. The dark dragon's wings flare blue-violet and its legs and curled tail hang below. “Water and rubble surge upward. A dark dragon spreads blue-violet wings and flies into view.” Let the second shot add the dragon if the water cue already ran. |
+| FFV the Void, `Map_10040/sc_e_0138_1` and `sc_e_0138_3`, with later site-specific branches | Actor 800 uses the first sphere prefab with a black core and surrounding wind, trail and lightning. Actor 801 uses the second version. At the Ancient Library, actor 189 then switches to `HoleShift` at 32 and shows the dark navy opening. “A black sphere forms amid flashes and swirling air. A dark opening remains where the library stood.” Use the second sentence when the place actually changes. Later attacks reuse the effect but have their own affected sites. |
+| FFVI first Figaro descent, `Map_10010/sc_e_0036_2` | The gray-brown castle, with bright blue central details, plays the shrinking `Hiddhing` silhouette frames at 39 before hiding. Actor 247 plays the spread-sand and dust effect. “Figaro Castle sinks into the sand, its towers disappearing in a cloud of dust.” Once on the first visible descent. |
+| FFVI Figaro re-emergence, `Map_10020/sc_e_0673_1` and later travel variants | Actor 156 plays its rising `Appear` frames at 39 and settles on `figaro8` at 40. Dust actor 193 uses the complementary emergence effect. `sc_e_0278_1`, `sc_e_0279_1`, `sc_e_0674_1`, `sc_e_0675_1`, `sc_e_0882_1`–`_3` and `sc_e_1067_1`–`_3` share the descent or ascent vocabulary according to the actual track. “The towers of Figaro Castle rise through the sand.” No cue for every step of the repeated travel sequence. |
+| FFVI Blackjack, `Map_10010/sc_e_0558_9` | The craft and shadow are separate actors 255 and 256. Five takeoff clips start at 49 through 58. The airship has a dark rounded balloon, an ochre lower outline and pale propellers. “The Blackjack lifts off, its dark balloon above the gold-edged hull.” Once when the hull first rises. |
+| FFVI Light of Judgment, `Map_10020/sc_e_1002_2` and `sc_e_1002_4` | The beam uses two directional prefabs with beam glow, wave and spark components. The first shot plays the left-to-right prefab at 35, with a parallel long movement track. The second uses the reverse prefab. “A beam sweeps across the land, leaving a wave of light and sparks.” Reserve the additional cue for the distinct reverse strike when it plays. |
