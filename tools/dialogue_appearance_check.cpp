@@ -109,7 +109,8 @@ bool has(std::wstring_view key)
            key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00" ||
            key == L"Field appearance mo_ff1_n017_c00" ||
            key == L"Field appearance mo_ff2_n005_c00" || key == L"Field appearance mo_ff2_n022_c00" ||
-           key == L"Field appearance mo_ff2_p004_c00";
+           key == L"Field appearance mo_ff2_p004_c00" || key == L"Field appearance mo_ff4_n003_c02" ||
+           key == L"Field appearance mo_ff4_n006_c02";
 }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
@@ -283,6 +284,19 @@ int main()
     renderer.visible = false;
     require(cue().empty(), "hidden audience actor");
     renderer.visible = true;
+
+    current_game = game::Id::FF4;
+    current_map = 8;
+    script.value = L"sc_e_0001_11";
+    id.value = L"E0001_11_008_a_01";
+    put(property, "entityId", reinterpret_cast<void*>(19));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF4_N003_C02-12345678";
+    require(read() && spoken == L"Field appearance mo_ff4_n003_c02", "Baron audience uses Baigan's field costume");
+    id.value = L"E0001_11_008_a_02";
+    require(!read(), "the next Baron page belongs to the king");
+    put(property, "entityId", reinterpret_cast<void*>(18));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF4_N006_C02-12345678";
+    require(read() && spoken == L"Field appearance mo_ff4_n006_c02", "Baron audience uses the king's red outfit");
 
     current_game = game::Id::FF1;
     id.value = L"MSG_BRIDGE_01";

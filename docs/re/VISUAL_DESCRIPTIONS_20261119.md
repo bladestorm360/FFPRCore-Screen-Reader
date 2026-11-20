@@ -28,6 +28,10 @@ Floating Eyeball and FFVI Guard have 12-language entries using the same
 current-sprite reader. FF1's Pirate has its own combat description.
 All six games have localized enemy entries.
 
+FFIV Baigan has a separate description for his dark-red-caped field sprite
+and the blue-lavender battle body. The right and left arm targets have their
+own exact art keys, so each cursor choice describes its corresponding sprite.
+
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
 hidden body, cursor change, row replacement, missing wording and all-target
@@ -69,9 +73,12 @@ lines. FF1 Bikke's art matches his initial challenge and the later
 post-battle dialogue. The pirate crew page has a separate speaker.
 FFII uses the same reader for Hilda and Minwu's Altair opening
 dialogue and Tobul's scenes in both smithies. The first smithy switches
-from entity 9 to entity 6 when the smithy event group changes. Both paths
+from entity 9 to entity 6 when the smithy event group changes. FFIV map 8
+`sc_e_0001_11` binds the Baron audience's Baigan lines to actor 19 and
+the king's lines to actor 18. The fixture checks the switch between their
+distinct rendered costumes. Both paths
 resolve the costume from the rendered sprite's packed atlas texture
-without adding hooks or frame polling. These eight field appearances have
+without adding hooks or frame polling. These ten field appearances have
 entries in all 12 languages. Remaining cutscene speaker bindings and
 localization are open.
 

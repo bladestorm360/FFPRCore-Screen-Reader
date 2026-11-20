@@ -119,10 +119,22 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         {13, L"sc_e_0016", L"N022_C00_013_02_01", 6},
         {104, L"sc_e_0016_1", L"N022_C00_013_02_01", 8},
     };
+    static constexpr Speaker baron[] = {
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_01", 19},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_02", 18},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_03", 19},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_04", 19},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_05", 18},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_08", 19},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_09", 18},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_11", 18},
+        {8, L"sc_e_0001_11", L"E0001_11_008_a_12", 19},
+    };
     std::span<const Speaker> speakers;
     switch (game::current()) {
         case game::Id::FF1: speakers = cornelians; break;
         case game::Id::FF2: speakers = altair; break;
+        case game::Id::FF4: speakers = baron; break;
         default: return nullptr;
     }
     const auto script = ref::rd_str_bounded(action, fScriptName, 48);
