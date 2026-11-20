@@ -373,9 +373,14 @@ int main()
         std::wstring atlas(stage.art);
         for (auto& ch : atlas) if (ch >= L'a' && ch <= L'z') ch -= L'a' - L'A';
         texture.value = L"sactx-64x64-Uncompressed-" + atlas + L"-12345678";
+        body.value = stage.pose;
         require(cue().empty(), "staged cue remains closed during transition");
         transition = false;
         require(cue() == stage.text, "the ready stage adds its cue to the exact first page");
+        if (!stage.pose.empty()) {
+            body.value = std::wstring(stage.pose) + L"(Clone)";
+            require(cue() == stage.text, "an atlas clone retains the same exact pose identity");
+        }
         script.value = L"sc_e_9999";
         require(cue().empty(), "the same message in an unrelated scene never triggers a cue");
         script.value = stage.script;
@@ -383,6 +388,10 @@ int main()
             renderer.visible = false;
             require(cue().empty(), "a hidden stage actor vetoes narration");
             renderer.visible = true;
+            if (!stage.pose.empty()) {
+                body.value = L"Default_00";
+                require(cue().empty(), "the same costume in an ordinary pose remains silent");
+            }
             texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N101_C00-12345678";
             require(cue().empty(), "a replaced actor costume vetoes narration");
         }

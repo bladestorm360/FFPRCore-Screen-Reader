@@ -175,10 +175,13 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
     });
 }
 
-std::wstring visible_art(void* actor)
+void* actor_sprite(void* actor)
 {
-    if (!actor) return {};
-    auto* sprite = ref::call<void*>(mSprite, ref::rd<void*>(actor, fRenderer));
+    return actor ? ref::call<void*>(mSprite, ref::rd<void*>(actor, fRenderer)) : nullptr;
+}
+
+std::wstring atlas_art(void* sprite)
+{
     if (!unity::alive(sprite)) return {};
     // All six packed field atlases place the authored costume key immediately
     // before the texture's final hash. Pose sprite names are shared by outfits.
@@ -196,12 +199,15 @@ std::wstring visible_art(void* actor)
     return art;
 }
 
+std::wstring visible_art(void* actor) { return atlas_art(actor_sprite(actor)); }
+
 struct StagedCue {
     game::Id title;
     int map;
     std::wstring_view script, message, text;
     int actor = 0;
     std::wstring_view art{};
+    std::wstring_view pose{};
 };
 
 // The first page follows the verified visible action on these exact event
@@ -214,6 +220,20 @@ constexpr StagedCue staged_cues[] = {
     {game::Id::FF5, 209, L"sc_e_0001_4", L"E0001_04_209_a_01", L"Wind Shrine opening cue", 30, L"mo_ff5_b002_c00"},
     {game::Id::FF6, 3, L"sc_e_0001_5", L"E0001_04_003_a_01", L"Narshe armored entry cue"},
     {game::Id::FF6, 122, L"sc_e_1033_1", L"E1033_00_122_a_03", L"Setzer engine cue", 6, L"mo_ff6_p010"},
+    {game::Id::FF2, 31, L"sc_e_0057", L"E0057_00_031_a_01", L"Leila raised arm cue", 98, L"mo_ff2_p006_c00", L"righthandup_00"},
+    {game::Id::FF3, 106, L"sc_e_0076_2", L"E0076_02_106_a_06", L"Saronia king down cue", 33, L"mo_ff3_n009_c01", L"down_00"},
+    {game::Id::FF5, 93, L"sc_e_0052_1", L"E0052_00_093_a_08", L"Mid raised hand cue", 17, L"mo_ff5_n017_c00", L"righthandup_00"},
+    {game::Id::FF5, 136, L"sc_e_0096_7", L"E0096_05_136_a_01", L"Moogle raised paw cue", 17, L"mo_ff5_n119_c00", L"righthandup_00"},
+    {game::Id::FF5, 298, L"sc_e_0066", L"E0066_00_298_a_05", L"Cid celebrates cue", 5, L"mo_ff5_n016_c00", L"handsup_00"},
+    {game::Id::FF5, 306, L"sc_e_0075_2", L"E0075_00_306_a_08", L"Krile reunion cue", 21, L"mo_ff5_p005_c00", L"handsup_00"},
+    {game::Id::FF5, 582, L"sc_e_0100_2", L"E0100_02_580_a_01", L"Exdeath fallen armor cue", 28, L"mo_ff5_n001_c00", L"down_00"},
+    {game::Id::FF6, 378, L"sc_e_0246", L"E0246_00_378_a_01", L"Gau bends forward cue", 15, L"mo_ff6_p012", L"dying_00"},
+    {game::Id::FF6, 425, L"sc_e_0546", L"E0546_00_425_a_03", L"Locke statue cue", 205, L"mo_ff6_p002", L"dying_00"},
+    {game::Id::FF6, 545, L"sc_e_1023", L"E1023_00_542_a_01", L"Strago stoops cue", 16, L"mo_ff6_p008", L"dying_00"},
+    {game::Id::FF6, 555, L"sc_e_1020", L"E1020_00_542_a_04", L"Celes bandana cue", 30, L"mo_ff6_p007", L"dying_00"},
+    {game::Id::FF6, 560, L"sc_e_1016", L"E1016_00_542_a_01", L"Gogo button cue", 41, L"mo_ff6_p013", L"dyingr_00"},
+    {game::Id::FF6, 585, L"sc_e_0461_b", L"E0461_02_582_a_16", L"Locke fallen cue", 2, L"mo_ff6_p002", L"down_00"},
+    {game::Id::FF6, 596, L"sc_e_1020", L"E1020_00_542_a_04", L"Celes bandana cue", 30, L"mo_ff6_p007", L"dying_00"},
 };
 
 std::wstring staged_cue(void* controller, const StagedCue& cue)
@@ -226,8 +246,15 @@ std::wstring staged_cue(void* controller, const StagedCue& cue)
             return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
                    ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == cue.actor;
         });
-        if (!actor || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer)) || visible_art(actor) != cue.art)
-            return {};
+        if (!actor || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) return {};
+        auto* sprite = actor_sprite(actor);
+        if (atlas_art(sprite) != cue.art) return {};
+        if (!cue.pose.empty()) {
+            auto pose = unity::name(sprite);
+            for (auto& ch : pose) if (ch >= L'A' && ch <= L'Z') ch += L'a' - L'A';
+            if (pose.ends_with(L"(clone)")) pose.resize(pose.size() - 7);
+            if (pose != cue.pose) return {};
+        }
     }
     return T(cue.text);
 }

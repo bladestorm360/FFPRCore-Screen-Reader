@@ -29,6 +29,31 @@ not claim the cue. Dialogue and modal speech checks passed, including
 the native scroll path. The extraction remains outside Git under
 `../tools/visual_audit_20261119`.
 
+## November 20 pose reconciliation
+
+The first finite pass rechecked all 6,110 frozen trace hashes. It
+assigned 381 routine dispositions from exact operations and placements.
+The local `finite-field-first-pass.json` retains row-level evidence. It
+keeps the remaining scene judgments visible in the same fixed inventory.
+
+The targeted reconciliation matched 42 authored pose occurrences to
+unique native pages. The 24 distinct atlas and pose combinations were
+decoded from the installed sprites. Fourteen stage bindings now carry
+13 new cues. Celes's ending pose has two native map branches using one
+spoken line. The selected moments include the fallen king in Saronia,
+Exdeath's fallen armor, a moogle gesture, Krile's reunion, Locke at the
+statues, and four different actions in the FFVI ending or later scenes.
+Later occurrences of the same pose in a scene retain their original
+dialogue. `field-pose-dialogue-dispositions.json` records all 42 choices.
+Its SHA-256 is
+`0216a6bb62bcce8c4a88b787aa1e485ea8399844eaa72a14347c140a4acd657c`.
+
+These cue bindings check the exact displayed actor's art and pose at the
+native first page. The pose name can have Unity's atlas clone suffix.
+The focused fixture admits the current exact pose and rejects another
+pose, actor, script or transition. Modal and dialogue speech checks
+passed in the linked build. All 13 spoken lines have all 12 locales.
+
 The local scene review indexes 8,504 executable field script bodies across
 the six installed games. It keeps the ordered visual operations, speech
 locators, presentation branches, puppet entries and placed sprites.
