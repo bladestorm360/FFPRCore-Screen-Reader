@@ -95,11 +95,11 @@ preserves the evidence against the same frozen trace hashes. Its SHA-256
 is `11d3c0651c919fd2ce12d6759ba85c89ae6216756289b6d9e16ad992bd3be674`.
 
 The local `finite-field-reconciliation.json` joins the same 6,110 bodies
-to 27 confirmed caption or scroll bindings and the exact unresolved
+to 35 confirmed caption, scroll or effect bindings and the exact unresolved
 actions, actors, art, native calls, pages and scene handoffs. Its SHA-256
-is `5f69aa6c4d65e75f727c4505540f953b543ea025c3b573383eba22018db0dafd`.
-5,479 bodies still require scene judgment or a playback disposition.
-That includes 1,108 of the original 1,109 silent priority bodies. Those
+is `df674e580fd2d0950518930bf13ff8eda8ec2ed7180fad92eebea09ccc5a1c12`.
+5,471 bodies still require scene judgment or a playback disposition.
+That includes 1,100 of the original 1,109 silent priority bodies. Those
 counts describe the remaining reconciliation against this fixed set.
 
 The targeted reconciliation matched 42 authored pose occurrences to
@@ -294,22 +294,47 @@ These rows are editorial cues awaiting a verified presentation point.
 
 ## Native playback boundaries
 
+Seven silent descriptions now have eight exact native effect bindings.
+The local `scene-effect-bindings.json` records each installed actor, track,
+instruction, bundle and emitter count. Its SHA-256 is
+`d10bbaa814f8b3ca2bf1e6a2896f3eab5d538589f58b8a7be2a4ad46ec35d177`.
+
+| Game | Visible cue |
+| --- | --- |
+| I | Dirt and stones spray upward at the canal opening. The blue-water sprite follows in a separate animation. |
+| II | A light ring and a rising beam show the seal opening at Mysidian Tower. |
+| III | Rays and points of light spread from the ring at the Crystal Tower mirror. |
+| IV | The ground erupts at Agart and throws up rock and dust. |
+| V | In either native branch, Ronka rises above a widening cloud of sand. |
+| VI | Figaro's first descent is accompanied by a dust cloud. A separate cue describes the first Light of Judgment beam. |
+
+The native `Puppet.PlayAnim` dispatch keeps its original return value.
+A matching first clock inside the settled native Event state arms one
+bounded render observation. The observer retains the event generation
+and the core index. It resolves the current actor on the owner thread,
+waits until the fade clears and checks actual particles on a visible
+renderer. The eight installed placements contain between 4 and 32
+emitters. The request expires after 16 owner frames and ends immediately
+on a changed script, map or event generation. Repeated native clocks
+share that observation. The loading and map-entry gates close before
+any interpreter or renderer reads. All seven descriptions have the 12
+game locales. The focused check covers native return, transitions,
+hidden emitters, missing particles, fades and cancelled observations.
+Actual gameplay timing awaits the installed confirmation.
+
 The six installed binaries agree on the split between interpreter dispatch
 and particle presentation. `Integrator.Update` can execute timers and a
 sandbox while its field script is idle. Its working flag therefore only
 identifies active interpreter work. `Puppet.PlayAnim` checks the core's
 first clock and also handles other play and wait paths for ongoing effects.
 `FieldEffectParticleEntity.PlayEffectIfNeed` can enter the same
-`PlayEffect` routine on automatic activation. These methods identify
-script and renderer activity. They need a current, native readiness signal
-before they can establish a visible cutscene action.
+`PlayEffect` routine on automatic activation. The effect reader takes its
+entry from the exact authored animation and settles on an active renderer.
 
 The existing dialogue admission covers visible modal content in the event
-state. The silent events use the same main-game state before and during
-presentation. A silent cue needs a verified indication that the exact
-authored action is active on a ready map, past fades and native entry,
-with skip and departure paths accounted for. The current cue reader
-continues using the runtime's displayed-page ownership. Local
+state. A silent sprite, camera or effect still needs a verified marker
+for its own visible action if the current producers cannot identify it.
+The caption and scroll readers use the runtime's displayed-page ownership. Local
 `native_scene_path.py` and the six `ff*-native-scene-path.txt` traces
 preserve the ABI and relevant paths for the silent cue work.
 

@@ -6,10 +6,11 @@
 #include <string_view>
 #include <vector>
 #include "../src/core/field/dialogue_appearance.cpp"
+#include "../src/core/field/scene_effect_cues.cpp"
 
 namespace {
 struct Node {
-    std::array<void*, 32> fields{};
+    std::array<void*, 48> fields{};
     const char* type = "";
     std::wstring value;
     bool visible = true;
@@ -31,6 +32,10 @@ int actor_reads = 0;
 game::Id current_game = game::Id::FF1;
 std::wstring spoken;
 json::Value fixture_appearances;
+uint64_t event_generation = 0;
+int instruction = 0, particle_count = 0, render_budget = 0, original_plays = 0;
+bool first_clock = true;
+frame::Step observation;
 
 void put(Node& object, const char* field, void* value)
 {
@@ -41,6 +46,7 @@ void put(Node& object, const char* field, void* value)
 
 void* client(const void*) { return message_client; }
 void* sprite(void* object, const void*) { return static_cast<Node*>(object)->fields.back(); }
+int native_animation(void*, const void*) { ++original_plays; return 3; }
 void require(bool result, const char* detail)
 {
     if (!result) { std::fprintf(stderr, "FAIL %s\n", detail); std::exit(1); }
@@ -70,7 +76,12 @@ int32_t Field::get()
 il2cpp::Method* Method::get() { return nullptr; }
 void* Method::ptr()
 {
-    return std::string_view(name) == "Instance" ? reinterpret_cast<void*>(&client) : reinterpret_cast<void*>(&sprite);
+    const std::string_view method = name;
+    if (method == "Instance") return reinterpret_cast<void*>(&client);
+    if (method == "get_pc") return reinterpret_cast<void*>(+[](void*, const void*) { return instruction; });
+    if (method == "IsFirstClock") return reinterpret_cast<void*>(+[](void*, const void*) { return first_clock; });
+    if (method == "get_particleCount") return reinterpret_cast<void*>(+[](void*, const void*) { return particle_count; });
+    return reinterpret_cast<void*>(&sprite);
 }
 void* instance(Class& cls) { return std::string_view(cls.name) == "Integrator" ? battle_interpreter : manager; }
 void call_failed_note(const char*) { std::abort(); }
@@ -100,12 +111,29 @@ bool alive(void* p) { return p != nullptr; }
 std::wstring name(void* p) { return p ? static_cast<Node*>(p)->value : L""; }
 int list_count(void* p) { return p ? static_cast<int>(static_cast<std::vector<void*>*>(p)->size()) : 0; }
 void* list_at(void* p, int n) { ++actor_reads; return (*static_cast<std::vector<void*>*>(p))[n]; }
+int array_length(void* p) { return list_count(p); }
+void* array_at(void* p, int n) { return (*static_cast<std::vector<void*>*>(p))[n]; }
+void* get_component(void* p, ref::Class&) { return p; }
 }
 namespace displayed {
 bool visible(void* p) { return p && static_cast<Node*>(p)->visible; }
 bool renderer_visible(void* p) { return visible(p); }
 }
-namespace frame { bool on_main_thread() { return owner_thread; } }
+namespace frame {
+bool on_main_thread() { return owner_thread; }
+int every_frame(Step step, const char*, int frames)
+{
+    require(!observation, "only one pending observation per fixture episode");
+    observation = std::move(step);
+    render_budget = frames;
+    return 1;
+}
+}
+namespace core { Install::Install(const char* n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){} }
+namespace hooks {
+bool attach_raw(ref::Method&, void*, void**) { return false; }
+void note_fault(const char*) { std::abort(); }
+}
 namespace queries { bool is(const char*) { return transition; } }
 namespace ffpr::fieldnav::map_transition {
 bool is_state_changing() {return transition;}
@@ -129,10 +157,76 @@ bool has(std::wstring_view key)
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
 namespace ffpr { void say(std::wstring_view text, bool) { spoken = text; } }
+namespace ffpr::system { uint64_t field_event_generation() { return transition ? 0 : event_generation; } }
 namespace ffpr::dialogue { bool in_dialogue() { return dialogue_open; } }
 namespace ffpr::battle {
 bool in_battle() { return ::in_battle; }
 bool battle_presentation_ready() { return battle_ready; }
+}
+
+void check_effect_cues()
+{
+    using namespace ffpr::dialogue;
+    Node interpreter, core, effect, particle, script;
+    core.type = "PuppetCore";
+    effect.type = "FieldEffectParticleEntity";
+    std::vector<void*> particles{&particle};
+    std::vector<void*> cores{nullptr, &core};
+    put(interpreter, "isFieldScript", reinterpret_cast<void*>(1));
+    put(interpreter, "working", reinterpret_cast<void*>(1));
+    put(interpreter, "<scriptName>k__BackingField", &script);
+    put(interpreter, "cores", &cores);
+    put(core, "<coreID>k__BackingField", reinterpret_cast<void*>(1));
+    put(core, "<entity>k__BackingField", &effect);
+    put(effect, "isPlaying", reinterpret_cast<void*>(1));
+    put(effect, "particleArray", &particles);
+    battle_interpreter = &interpreter;
+    native_play = native_animation;
+    for (const auto& cue : cues) {
+        current_game = cue.title;
+        current_map = cue.map;
+        script.value = cue.script;
+        instruction = cue.instruction;
+        put(core, "<entityID>k__BackingField", reinterpret_cast<void*>(static_cast<uintptr_t>(cue.actor)));
+        ++event_generation;
+        spoken.clear();
+        transition = true;
+        require(play_anim(&core, nullptr) == 3 && !observation, "transition preserves native animation without scheduling");
+        transition = false;
+        first_clock = false;
+        play_anim(&core, nullptr);
+        require(!observation, "an ordinary repeat clock cannot claim a cue");
+        first_clock = true;
+        ++instruction;
+        play_anim(&core, nullptr);
+        require(!observation, "another instruction on the same actor is silent");
+        --instruction;
+        play_anim(&core, nullptr);
+        play_anim(&core, nullptr);
+        require(observation && render_budget == 16, "the exact binding arms one finite owner observation");
+        fading = true;
+        require(observation() && spoken.empty(), "faded footage is silent");
+        fading = false;
+        particle_count = 0;
+        require(observation() && spoken.empty(), "a playing system without particles is silent");
+        particle_count = 3;
+        particles.resize(33, &particle);
+        require(observation() && spoken.empty(), "an unexpectedly large emitter list cannot claim a cue");
+        particles.resize(1);
+        particle.visible = false;
+        require(observation() && spoken.empty(), "hidden particles cannot claim the cue");
+        particle.visible = true;
+        require(!observation() && spoken == cue.text, "visible particles speak the exact description");
+        observation = {};
+        ++event_generation;
+        play_anim(&core, nullptr);
+        ++event_generation;
+        spoken.clear();
+        require(observation && !observation() && spoken.empty(), "new event generation cancels an old observation");
+        observation = {};
+    }
+    require(original_plays == static_cast<int>(cues.size()) * 6, "every captured call keeps the native return path");
+    battle_interpreter = nullptr;
 }
 
 int main()
@@ -506,5 +600,6 @@ int main()
     battle_script.value = L"sc_e_0036";
     put(interpreter, "isFieldScript", nullptr);
     require(!read(), "battle interpreter cannot satisfy a field description");
+    check_effect_cues();
     std::puts("Dialogue appearance checks passed");
 }

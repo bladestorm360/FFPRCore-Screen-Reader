@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -57,6 +58,8 @@ int field_command_count(void* cursor);
 bool is_field_player_state();
 /// Native Player or Transport state: map construction is finished.
 bool is_field_navigation_ready();
+/// Positive native Event state after the state-change callback has returned.
+uint64_t field_event_generation();
 /// Mod input is suspended during native state changes, loading and screen fades.
 bool input_transition_blocked();
 /// The main game is in a field state (Init, ChangeMap, FieldReady, Player, Transport) or its

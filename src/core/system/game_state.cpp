@@ -40,6 +40,7 @@ constexpr int kStateChangeMap = 1;
 constexpr int kStateFieldReady = 2;
 constexpr int kStatePlayer = 3;
 constexpr int kStateTransport = 4;   // the last field state; Menu is 5, Shop 9, Battle 13
+constexpr int kStateEvent = 12;
 
 // MenuLibraryUi (list) / MenuLibraryInfo (detail): FF1 19/20, FF2 18/19, FF3-FF6 17/18.
 int state_library_ui()
@@ -57,6 +58,7 @@ int state_library_info() { return state_library_ui() + 1; }
 void* g_main_game = nullptr;
 int g_state_change_depth = 0; // native owner only; nested ChangeState calls remain blocked
 int g_requested_state = -1; // ChangeState can queue its target before GetCurrentState updates
+uint64_t g_event_generation = 0;
 
 void run_action(const char* name)
 {
@@ -105,6 +107,7 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
     } changing;
     hooks::guarded("GameState.BattleTransition", [&] {
         if (self && kMainGame.is(self)) {
+            if (state == kStateEvent && g_requested_state != kStateEvent) ++g_event_generation;
             g_requested_state = state;
             battle::main_game_transition(state);
         }
@@ -188,6 +191,16 @@ bool is_field_navigation_ready()
         if (!g_main_game || !kMainGame.is(g_main_game)) return false;
         const int state = ref::call<int32_t>(mGetCurrentState, g_main_game);
         return state == kStatePlayer || state == kStateTransport;
+    });
+}
+
+uint64_t field_event_generation()
+{
+    if (g_requested_state != kStateEvent || g_state_change_depth || fieldnav::map_transition::is_state_changing())
+        return 0;
+    return hooks::guarded_r("GameState.FieldEventGeneration", uint64_t{0}, [] {
+        return g_main_game && kMainGame.is(g_main_game) && !battle::in_battle() &&
+            ref::call<int32_t>(mGetCurrentState, g_main_game) == kStateEvent ? g_event_generation : 0;
     });
 }
 
