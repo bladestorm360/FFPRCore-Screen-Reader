@@ -244,22 +244,47 @@ void read_scenario_flags(std::span<std::optional<int>> flags)
     if (void* storage = il2cpp::read_static_ptr(kStorage.get(), "instance"))
         copy_flags(ref::rd<void*>(storage, fScenario), flags);
 }
-std::optional<bool> keyword_learned(int content_id)
+namespace {
+struct NativeKeywords { void* items; int size; };
+std::optional<NativeKeywords> word_list(void* user)
 {
     // Native UserDataClient.AddKeyWord5DFC10 checks type6 and Contains before
     // appending to this exact typed field (FFII UserDataManager offset90).
     // Only explicit guide input reaches here; no hook/poll/worker owns this
     // pointer. Current master data has a finite word set; cap both size and
     // backing capacity before reading integers, and fail unknown on corruption.
-    if(!game::is(game::Id::FF2)||content_id<=0||!mWordInstance||fWords.get()<0)return {};
-    void* user=ref::call_static<void*>(mWordInstance);if(!user)return {};
+    if(!user||fWords.get()<0)return {};
     void* words=ref::rd<void*>(user,fWords);if(!words)return {};
     const int count=unity::list_count(words);if(count<0||count>32)return {};
-    if(!count)return false;
+    if(!count)return NativeKeywords{nullptr, 0};
     void* items=il2cpp::read_field<void*>(words,unity::kListItemsOff);if(!items)return {};
     const int capacity=unity::array_length(items);if(capacity<count||capacity>128)return {};
-    for(int i=0;i<count;++i)if(unity::array_value<int32_t>(items,i)==content_id)return true;
+    return NativeKeywords{items, count};
+}
+}
+std::optional<bool> keyword_learned(int content_id)
+{
+    if(!game::is(game::Id::FF2)||content_id<=0||!mWordInstance||fWords.get()<0)return {};
+    const auto words = word_list(ref::call_static<void*>(mWordInstance));
+    if (!words) return {};
+    for (int i=0; i<words->size; ++i)
+        if (unity::array_value<int32_t>(words->items, i)==content_id) return true;
     return false;
+}
+void read_keyword_flags(int first_content_id, std::span<std::optional<bool>> flags)
+{
+    for (auto& flag : flags) flag.reset();
+    if (!game::is(game::Id::FF2) || first_content_id <= 0 || flags.empty() || flags.size() > 32 ||
+        !frame::on_main_thread() || !ffpr::system::is_field_navigation_ready()) return;
+    const auto words = word_list(il2cpp::read_static_ptr(kWordUser.get(), "instance"));
+    if (!words) return;
+    for (auto& flag : flags) flag = false;
+    for (int i=0; i<words->size; ++i) {
+        const int content_id = unity::array_value<int32_t>(words->items, i);
+        if (content_id < first_content_id) continue;
+        const auto index = static_cast<size_t>(content_id - first_content_id);
+        if (index < flags.size()) flags[index] = true;
+    }
 }
 std::optional<int> party_condition_state(int condition_type)
 {

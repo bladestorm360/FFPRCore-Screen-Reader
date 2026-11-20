@@ -79,6 +79,8 @@ void read_scenario_flags(std::span<std::optional<int>> flags);
 // FFII explicit guide requests only. Read the bounded native learned-word list
 // on its owner; absence/malformed storage is unknown, never a learning receipt.
 std::optional<bool> keyword_learned(int content_id);
+// Copy a bounded group of FFII word receipts by content ID in one pass.
+void read_keyword_flags(int first_content_id, std::span<std::optional<bool>> flags);
 // FFIII explicit guide requests only:401 Mini/402 Frog;0 none,1 all,2 mixed.
 // Uses the same bounded active-member ownership as the navigation Mini predicate.
 std::optional<int> party_condition_state(int condition_type);

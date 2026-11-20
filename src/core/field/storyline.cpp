@@ -175,6 +175,8 @@ Stage ff1_stage(const Ff1Receipts& scenario, int origin_map)
     return {};
 }
 
+#include "storyline_ff2.inl"
+
 Objective Selection::resolve(const Objective& objective, const std::optional<Objective>& hint, bool cycle)
 {
     const auto hint_id = hint ? std::optional{hint->id} : std::nullopt;

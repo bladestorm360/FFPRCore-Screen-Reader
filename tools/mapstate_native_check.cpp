@@ -125,12 +125,14 @@ namespace game {Id current(){return fixture::running_game;}}
 namespace frame { bool on_main_thread() { return GetCurrentThreadId() == fixture::owner; } }
 namespace ffpr::system { bool is_field_navigation_ready() { return fixture::field_ready; } }
 namespace il2cpp {
-void* read_static_ptr(Class* type, const char* field)
+void* read_static_ptr(Class* type, const char* field_name)
 {
     fixture::native();
     ++fixture::static_storage_reads;
-    return type == reinterpret_cast<Class*>(&field::map_state::kStorage) && std::strcmp(field, "instance") == 0
-        ? fixture::current : nullptr;
+    if (std::strcmp(field_name, "instance") != 0) return nullptr;
+    if (type == reinterpret_cast<Class*>(&field::map_state::kStorage)) return fixture::current;
+    if (type == reinterpret_cast<Class*>(&field::map_state::kWordUser) && !fixture::missing_word_user) return &fixture::user;
+    return nullptr;
 }
 }
 namespace unity {
@@ -180,6 +182,16 @@ int main()
     word_array.values[0]=926;word_array.values[1]=927;word_array.values[2]=931;word_list.size=3;
     expect(map_state::keyword_learned(927)==true&&map_state::keyword_learned(931)==true&&map_state::keyword_learned(928)==false,
         "native-shaped learned-word storage resolves exact content IDs, not menu indices");
+    std::array<std::optional<bool>, 15> words;
+    const int prior_reads = static_storage_reads;
+    map_state::read_keyword_flags(917, words);
+    expect(words[9] == true && words[10] == true && words[11] == false && words[14] == true &&
+           static_storage_reads == prior_reads + 1, "Storyline reads every relevant word in one snapshot");
+    field_ready = false;
+    map_state::read_keyword_flags(917, words);
+    expect(!words.front() && !words.back() && static_storage_reads == prior_reads + 1,
+           "the loading gate prevents a native word-list read");
+    field_ready = true;
     missing_word_user=true;expect(!map_state::keyword_learned(927).has_value(),"missing native user is unknown");missing_word_user=false;
     missing_word_field=true;expect(!map_state::keyword_learned(927).has_value(),"unresolved typed word field is unknown");missing_word_field=false;
     user.words=nullptr;expect(!map_state::keyword_learned(927).has_value(),"missing word list is unknown");user.words=&word_list;

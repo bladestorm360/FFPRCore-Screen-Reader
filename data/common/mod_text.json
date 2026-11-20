@@ -1,4 +1,46 @@
 {
+  "Storyline": {
+    "en": "Storyline",
+    "ja": "ストーリー",
+    "fr": "Histoire",
+    "it": "Storia",
+    "de": "Handlung",
+    "es": "Historia",
+    "ko": "이야기",
+    "zht": "故事主線",
+    "zhc": "故事主线",
+    "ru": "Сюжет",
+    "th": "เนื้อเรื่อง",
+    "pt": "História"
+  },
+  "No Storyline objective available": {
+    "en": "No Storyline objective available",
+    "ja": "案内できるストーリー目標がありません",
+    "fr": "Aucun objectif de l'histoire disponible",
+    "it": "Nessun obiettivo della storia disponibile",
+    "de": "Kein Handlungsziel verfügbar",
+    "es": "No hay un objetivo de la historia disponible",
+    "ko": "안내할 수 있는 이야기 목표가 없습니다",
+    "zht": "目前沒有可引導的主線目標",
+    "zhc": "目前没有可引导的主线目标",
+    "ru": "Нет доступной сюжетной цели",
+    "th": "ไม่มีเป้าหมายเนื้อเรื่องที่นำทางได้",
+    "pt": "Nenhum objetivo da história disponível"
+  },
+  "Storyline complete": {
+    "en": "Storyline complete",
+    "ja": "ストーリー完了",
+    "fr": "Histoire terminée",
+    "it": "Storia completata",
+    "de": "Handlung abgeschlossen",
+    "es": "Historia completada",
+    "ko": "스토리 완료",
+    "zht": "劇情已完成",
+    "zhc": "剧情已完成",
+    "ru": "Сюжет завершён",
+    "th": "จบเนื้อเรื่องแล้ว",
+    "pt": "História concluída"
+  },
   "Acting character appearance": {
     "en": "Acting character appearance",
     "ja": "行動中のキャラクターの外見",

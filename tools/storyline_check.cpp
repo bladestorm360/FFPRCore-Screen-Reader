@@ -229,6 +229,83 @@ int verify()
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
 }
+
+int verify_ff2()
+{
+    Ff2Receipts flags;
+    flags.fill(0);
+    Ff2Keywords known;
+    known.fill(false);
+    check(!ff2_stage(flags, known).objective, "FFII opening owns the field until the native prologue finishes");
+    flags[0] = 1;
+    const auto unknown = ff2_stage(flags, {});
+    check(!unknown.objective && !unknown.complete, "unknown keyword storage does not supply a quest");
+    const int scenario_base = static_cast<int>(ObjectiveId::Ff2Scenario);
+    const int keyword_base = static_cast<int>(ObjectiveId::Ff2Keyword);
+    struct Arrival { int map, entity, vehicle; baked_route::Cell start; };
+    constexpr std::array arrivals{
+        Arrival{6, 49, 1, {0,13,16}},
+        Arrival{27, 12, 1, {0,5,5}},
+        Arrival{6, 29, 1, {0,13,16}},
+        Arrival{1, 108, 4, {1,30,194}},
+        Arrival{273, 5, 1, {0,22,28}},
+        Arrival{1, 49, 3, {1,233,170}},
+        Arrival{316, 46, 1, {0,22,25}}
+    };
+    auto state = progress_at({}, 1);
+    int count = 0;
+    for (; count < 90; ++count) {
+        const auto stage = ff2_stage(flags, known);
+        if (!stage.objective) {
+            check(stage.complete && flags[82] == 1, "only the Pandaemonium ending receipt completes FFII");
+            break;
+        }
+        const auto& objective = *stage.objective;
+        const auto targets = contacts(objective, objective.map);
+        check(!targets.empty() && targets.front().goal.map_id == objective.map &&
+              targets.front().goal.entity_id == objective.contacts[0], "FFII step binds a native contact");
+        if (targets.empty())
+            std::printf("  FFII map%d/%d type%d %ls\n", objective.map, objective.contacts[0],
+                        static_cast<int>(objective.object_type), objective.label.data());
+        if (stage.advice)
+            check(!contacts(*stage.advice, objective.map).empty(), "FFII optional advice binds a native conversation");
+        if (!targets.empty()) {
+            const auto arrival = std::find_if(arrivals.begin(), arrivals.end(), [&objective](const auto& candidate) {
+                return objective.map == candidate.map && objective.contacts[0] == candidate.entity;
+            });
+            if (arrival != arrivals.end()) {
+                std::copy(flags.begin(), flags.end(), state.scenario.begin());
+                if (flags[32] == 1) state.scenario[110] = 1; // native Dreadnought pursuit continuation
+                state.current_map_id = arrival->map;
+                const auto& target = targets.front();
+                const auto route = exdeath_routes::route(arrival->map, arrival->start, state, target.goal,
+                                                         target.kind, false, arrival->vehicle);
+                check(route.path.success, "FFII can reach the story contact from its native arrival");
+                if (!route.path.success)
+                    std::printf("  FFII approach map%d/%d: %ls / %ls\n", arrival->map, arrival->entity,
+                                route.path.reason.c_str(), route.path.error.c_str());
+            }
+        }
+        const int id = static_cast<int>(objective.id);
+        if (id >= keyword_base) {
+            check(id - keyword_base < static_cast<int>(known.size()), "learned keyword is bound to a real content ID");
+            known.at(id - keyword_base) = true;
+        } else {
+            check(flags.at(id - scenario_base) == 0, "FFII replays the next unsatisfied native receipt once");
+            flags.at(id - scenario_base) = 1;
+        }
+    }
+    check(count >= 60 && count < 90, "FFII qualified story order reaches a finite ending");
+    flags[82] = 0;
+    flags[17] = flags[100] = 0;
+    const auto resumed = ff2_stage(flags, {});
+    check(resumed.objective && resumed.objective->map == 316,
+          "a later save skips obsolete word prompts, the optional pass, and opened cell bars");
+    flags[75] = 0;
+    check(!ff2_stage(flags, known).complete, "the first Emperor victory cannot complete the campaign");
+    std::printf("FFII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
+    return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
+}
 }
 
 int main()
@@ -244,5 +321,12 @@ int main()
     int result = 2;
     std::thread worker([&] { result = verify(); });
     worker.join();
+    if (result) return result;
+    const auto ff2_maps = read("data/ff2/maps.bin");
+    if (!baked::load(ff2_maps.data(), ff2_maps.size()) ||
+        !json::parse(read("data/ff2/mapstate.json"), fixture::records)) return 2;
+    fixture::game_id = game::Id::FF2;
+    std::thread ff2_worker([&] { result = verify_ff2(); });
+    ff2_worker.join();
     return result;
 }

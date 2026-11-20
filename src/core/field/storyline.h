@@ -23,7 +23,8 @@ enum class ObjectiveId {
     Kraken, LearnLufenian, Chime, WarpCube, Tiamat, EnterPast, ReturnToPast, LuteSlab,
     PastLich, PastMarilith, PastKraken, PastTiamat, Chaos,
     EarthAdvice, GiantAdvice, FireAdvice, IceAdvice, AirshipAdvice,
-    CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice
+    CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice,
+    Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400
 };
 struct Objective {
     ObjectiveId id;
@@ -43,6 +44,10 @@ struct Stage {
     bool complete = false;
 };
 Stage ff1_stage(const Ff1Receipts& scenario, int origin_map);
+using Ff2Receipts = std::array<std::optional<int>, 101>;
+inline constexpr int kFirstFf2Keyword = 917;
+using Ff2Keywords = std::array<std::optional<bool>, 15>;
+Stage ff2_stage(const Ff2Receipts& scenario, const Ff2Keywords& learned);
 
 // The saved receipts select the quest. The player's browse selection can skip
 // advice without inventing a completion flag for an ordinary conversation.

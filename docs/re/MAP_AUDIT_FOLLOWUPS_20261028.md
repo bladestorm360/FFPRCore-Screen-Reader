@@ -411,7 +411,8 @@ local delivery and gameplay confirmation distinct.
 | Milestone | Acceptance and current status |
 | --- | --- |
 | FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
-| FFII–FFVI campaigns | Open. Reach the Emperor in Pandaemonium, the Cloud of Darkness, Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
+| FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
+| FFIII–FFVI campaigns | Open. Reach the Cloud of Darkness, Zeromus, Neo Exdeath and Kefka respectively. Use verified ready-state objectives, native conversations and gates, encounter results, branching parties and world changes. Test reloads, later saves, alternate orders where allowed, and each game's final encounter. |
 | Database appearance coverage | In progress from the November 19 prose. Reconcile every installed enemy and NPC art key, active palettes and alternate forms, character body/costume assets and status-effect renderers and icons to an art-supported description or a verified unrenderable record. Include distinctive item art from the prior scope. Supply all supported languages and exercise the existing appearance controls against the visible variant. |
 | Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
@@ -484,6 +485,44 @@ contacts. The first new replay used a blocked start position for past Kraken.
 The retry starts the four rematches at their native floor entries and passes.
 Forty new strings cover all 12 supported languages. Actual gameplay, extended
 cross-area vehicle and departure replays, and local delivery remain open.
+
+### FFII Altair to Pandaemonium
+
+Storyline is available after the native Altair opening completes. It reads
+that save's scenario receipts and the actual learned-word list. An opened
+secret door, accepted handover or later receipt can supersede an earlier
+keyword or optional item step. Native Learn, Ask and Item menus remain
+manual. Directions and Autowalk use the verified contact and then hand
+control back for the plot choice or battle.
+
+| Segment | Progression reviewed against the installed scripts |
+| --- | --- |
+| Rebellion | Learn Wild Rose from Hilda before using it with the Fynn barkeep. Scott's ring goes back to Hilda. Learning and asking about Mythril are separate. Minwu supplies the canoe. Talk to Josef for optional context, free Paul and Nelly, defeat the sergeant, and take the mythril to Tobul. |
+| Dreadnought | Ask the Bafsk agent about Dreadnought, follow the launch and collect the optional pass. Return to Hilda, learn Airship from Cid, ask him about it to learn Sunfire, and ask the king about Sunfire. Josef opens the snowcraft store. The Bell, Kashuan door, Gordon, Egil's Torch and Sunfire use separate receipts. The actual cell bars are at 169/28. On the Dreadnought, free the captives before using Sunfire on engine 175/12. |
+| Deist and Fynn | Return to the king, learn Dragoons from Gordon, and arrange transport through Leila. Learn Wyverns using the native conversation at Deist. Obtain the pendant, speak to the wyvern, defeat the guardian and place the egg at the Life Spring. The Coliseum rescue leads to the camp and the defeat of Gottos in Castle Fynn. |
+| Mysidia | Learn Mysidia, Mask and Ekmet Teloess from Hilda at 43/23. Open the secret wall, recover the two masks, and collect the crystal rod. Continue through Leviathan with Ricard and the Roundworm encounter. Enter Mysidian Tower, defeat the three Gigas guardians and reach Minwu and the Ultima Tome. |
+| Cyclone and final boss | Learn Cyclone and use the pendant at the mirror. The first Emperor fight at 273/5 sets receipt 75. Cid's scene enables the airship and Palamecia landing. The pit and Leon lead back to Fynn. The Jade Passage entrance and its exit into Pandaemonium are separate native scripted transitions. The final Emperor is 316/46, and ending receipt 82 completes Storyline. |
+
+The authoritative keyword bindings are in the
+[FFII native keyword inventory](ff2_keyword_mechanics_inventory_20261101.json).
+Exact local scripts and map placements remain under `../tools/mapdump`.
+The candidate has 85 localized FFII labels in all 12 supported languages.
+The first contact replay found that the mirror and Leon keep their native
+Entity and NPC types on the baked floor, even though their later continuations
+transfer the party. Their Storyline routes now use those types.
+The second replay exposed a separate Palamecia failure. Its pad uses FFII's
+native vehicle-action inference for landing, with Airship 3. The next
+candidate uses that inference and the matching boarding semantics for
+Leviathan's ship-only entry.
+
+The focused replay reaches all 84 FFII objectives with zero failures and
+keeps the 58 prior FF1 movement checks passing. FFII approach checks include
+the actual Altair and hidden Fynn arrivals, the Leviathan ship approach,
+the two Emperor fights and the Palamecia landing pad. An advanced save
+skips obsolete learned-word, pass and cell-bar prompts. The native-shaped
+fixture confirms one bounded list observation and no Storyline word read
+during field loading. Full cross-area transport and gameplay confirmation
+remain open.
 
 ## November 11 all-six Storyline category
 
