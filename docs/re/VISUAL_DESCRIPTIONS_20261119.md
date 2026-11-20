@@ -71,12 +71,12 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-30,153 remaining non-English entries in the new catalog. All 124
-visible FF1 enemy sprites now have Japanese wording. The 119 new
-translations preserve each variant's palette, anatomy, pose and visible
-equipment. The remaining FF1 artwork languages and the other titles'
-wording stay in the localization ledger. Distinct status effects, field
-scene playback, additional draw bindings and local delivery remain active.
+30,036 remaining non-English entries in the new catalog. All 251
+visible FF1 artwork keys have Japanese wording, including enemy forms,
+field sprites, battle characters and equipment. The translations retain
+the variant's palette, anatomy, pose and visible equipment. Distinct
+status effects, field scene playback, additional draw bindings and local
+delivery remain active.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script
