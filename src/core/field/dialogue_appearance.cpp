@@ -98,6 +98,9 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         {3, L"sc_e_0004_1", L"MSG_LUTE_02", 7},
         {3, L"sc_e_0004_2", L"MSG_LUTE_01", 7},
         {3, L"sc_e_0004_2", L"MSG_LUTE_02", 7},
+        {13, L"sc_e_0009", L"MSG_SHIP_01", 38},
+        {13, L"sc_e_0009", L"MSG_PBK_05", 38},
+        {13, L"sc_e_0009_2", L"MSG_SHIP_03", 38},
     };
     static constexpr Speaker altair[] = {
         {6, L"sc_e_0001_5", L"E0001_04_006_a_07", 49},
@@ -190,12 +193,25 @@ std::wstring action_cue_at_dialogue()
     const int map_id = ::field::current_map_id();
     const bool construction = game_id == game::Id::FF1 && map_id == 121;
     const bool audience = game_id == game::Id::FF2 && map_id == 6;
-    if (!construction && !audience) return {};
+    const bool surrender = game_id == game::Id::FF1 && map_id == 13;
+    if (!construction && !audience && !surrender) return {};
     const auto message = field_message_key();
-    if (message != (construction ? L"MSG_BRIDGE_01" : L"E0001_04_003_a_05")) return {};
+    if (construction && message != L"MSG_BRIDGE_01") return {};
+    if (audience && message != L"E0001_04_003_a_05") return {};
+    if (surrender && message != L"MSG_SHIP_03") return {};
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return {};
+    if (surrender) {
+        // The victory continuation plays both flashing poses, hides both
+        // pirates and then gives the first surrender page to Bikke.
+        auto* owner = ref::rd<void*>(controller, fEventOwner);
+        auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
+        if (kScriptAction.is(action) &&
+            visible_art(scripted_talk_actor(controller, action, message)) == L"mo_ff1_n017_c00")
+            return T(L"Pravoka pirate defeat cue");
+        return {};
+    }
     if (audience) {
         // The audience's first page follows the completed head-lowering pose.
         // The later repetition accompanies a different message in this script.

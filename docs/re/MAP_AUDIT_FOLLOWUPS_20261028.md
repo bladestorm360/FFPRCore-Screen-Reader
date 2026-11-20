@@ -459,18 +459,21 @@ setting receipt 0. The playable opening stages follow that receipt.
 | Receipt 3 set and receipt 5 clear | Receive the Lute from Princess Sarah. Speak to her on map 3, entity 7 in `ev_e_0004`. The native step contact at entity 42 can also begin the gift as the party leaves the room. | Both gift branches set receipt 5 and treasure flag 244. The production replay exposed this prerequisite for the castle departure group. |
 | Receipt 5 set and receipt 6 clear | Leave Cornelia Castle to see the bridge construction. Use the three step contacts on map 2, entities 44–46 at Upper (25–27,43), script 12 in group `ev_e_0005`. | The construction scene on map 121 returns to the castle and its continuation sets receipts 4 and 6. |
 | Receipt 6 set and receipt 7 clear | Cross the new bridge. Use the active Overworld contact on map 1, entity 89 at (145,145), script 17 in group `ev_e_0006`. | The prologue plays on map 124 and returns the party to the Overworld. The return continuation sets receipt 7. |
+| Receipt 7 set and receipt 9 clear | Get a ship from Bikke. Speak to entity 38 on map 13 in Pravoka, Ground (13,11). The native NPC contact runs script 22. | The encounter continuation `sc_e_0009_2` awards the ship before it sets receipt 9. Keep this objective through the battle and award sequence. |
 
 Receipt 2 can become true inside the rescue return chain. The model withholds
 the next objective until receipt 3 confirms the return. The production
-fixture passed 45 assertions and ten movement legs with the installed FF1
-map and scenario data. It checks the same objectives from the castle and
-overworld, a castle floor transfer, all five contacts, the Lute
-prerequisite, missing state and later saves. The bridge
+fixture passed 54 assertions and twelve movement legs with the installed FF1
+map and scenario data. It checks objectives from the castle, Overworld,
+Chaos Shrine and Pravoka, a castle floor transfer, the Lute prerequisite,
+missing state and later saves. The ship quest starts from the real
+post-prologue position (145,145) and the Pravoka arrival on Ground (27,37).
+The bridge
 uses the existing selected-event route to its actual world foot tile. The
 Storyline category calls the same native-safe route request and Autowalk
-entry points. The selected objective comes from the seven saved receipts
+entry points. The selected objective comes from eight saved receipts
 when it is requested. A delayed directions response must still match the
-category and objective. The first five objective labels have all 12
+category and objective. All six objective labels have all 12
 localizations. This starter is outside the installed mod. Full cross-world
 journeys, native gameplay acceptance and later campaigns remain open.
 

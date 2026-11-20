@@ -19,11 +19,13 @@ map_state::Flags progress_at(const CorneliaProgress& progress, int map)
     flags.local.fill(0);
     flags.current_map_id = map;
     flags.scenario[4] = progress.bridge;
+    flags.scenario[9] = progress.ship;
     for (const auto& [index, value] : std::array<std::pair<int, std::optional<int>>, 7>{{
          {0, progress.opening}, {1, progress.audience}, {2, progress.garland},
          {3, progress.returned}, {5, progress.lute}, {6, progress.bridge}, {7, progress.crossed}}})
         flags.scenario[index] = value;
     if (map == 1) flags.current_area_id = 1;
+    else if (map == 13) flags.current_area_id = 29;
     else if (map == 72) flags.current_area_id = 11;
     else flags.current_area_id = 16;
     return flags;
@@ -59,11 +61,13 @@ int verify()
     const CorneliaProgress lute{1,1,1,1,0,0,0};
     const CorneliaProgress leave{1,1,1,1,1,0,0};
     const CorneliaProgress bridge{1,1,1,1,1,1,0};
+    const CorneliaProgress ship{1,1,1,1,1,1,1,0};
     check(!cornelia_objective({0,0,0,0,0,0,0}), "opening must finish first");
     check(!cornelia_objective({1,1,1,0,0,0,0}), "rescue return transition withholds the next objective");
     check(!cornelia_objective({1,1,0,1,0,0,0}), "a missing earlier receipt is ambiguous");
     check(!cornelia_objective({1,1,1,1,1,1,{}}), "unavailable receipt stays unknown");
-    check(!cornelia_objective({1,1,1,1,1,1,1}), "an existing save beyond the reviewed slice retires the earlier stages");
+    check(!cornelia_objective({1,1,1,1,1,1,1}), "an unavailable ship receipt stays unknown");
+    check(!cornelia_objective({1,1,1,1,1,1,1,1}), "an existing save with the ship skips the earlier stages");
     replay(audience, ObjectiveId::Audience, 3, {2,20,17}, 3, {14});
     replay(audience, ObjectiveId::Audience, 2, {2,26,41}, 3, {14});
     replay(audience, ObjectiveId::Audience, 1, {1,145,156}, 3, {14});
@@ -74,6 +78,8 @@ int verify()
     replay(leave, ObjectiveId::LeaveCastle, 2, {2,26,41}, 2, {45,44,46});
     replay(bridge, ObjectiveId::CrossBridge, 1, {1,145,146}, 1, {89});
     replay(bridge, ObjectiveId::CrossBridge, 1, {1,145,156}, 1, {89});
+    replay(ship, ObjectiveId::GetShip, 1, {1,145,145}, 13, {38});
+    replay(ship, ObjectiveId::GetShip, 13, {1,27,37}, 13, {38});
     std::printf("Cornelia storyline: %d assertions, %d physical legs, %d failures\n",
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;

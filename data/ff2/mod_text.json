@@ -1,4 +1,18 @@
 {
+  "Enemy appearance mn_ff2_002_c00": {
+    "en": "A thorny plant twists purple tendrils around its pointed head. A slanted eye and an open jaw full of teeth peer through the coils. Gold thorns jut from the tendrils.",
+    "ja": "とげのある植物が、尖った頭のまわりに紫色のつるを巻きつけている。その隙間からつり上がった目と、歯が並ぶ開いた口がのぞく。つるには金色のとげが突き出ている。",
+    "fr": "Une plante épineuse enroule ses vrilles violettes autour de sa tête pointue. Un œil oblique et une gueule ouverte pleine de dents apparaissent entre les boucles. Des épines dorées saillent des vrilles.",
+    "it": "Una pianta spinosa avvolge viticci viola attorno alla testa appuntita. Tra le spire spuntano un occhio obliquo e una bocca spalancata piena di denti. Dai viticci sporgono spine dorate.",
+    "de": "Eine dornige Pflanze windet violette Ranken um ihren spitzen Kopf. Zwischen den Windungen sind ein schräges Auge und ein offenes Maul voller Zähne zu sehen. Goldene Dornen ragen aus den Ranken.",
+    "es": "Una planta espinosa enrosca zarcillos violetas alrededor de su cabeza puntiaguda. Entre las vueltas asoman un ojo oblicuo y una boca abierta llena de dientes. De los zarcillos sobresalen espinas doradas.",
+    "ko": "가시 달린 식물이 뾰족한 머리 주위로 보라색 덩굴을 감고 있다. 덩굴 사이로 비스듬한 눈과 이빨이 가득한 벌린 입이 보인다. 덩굴에는 금빛 가시가 돋았다.",
+    "zht": "帶刺的植物用紫色卷鬚纏繞自己的尖頭。蜿蜒的卷鬚間露出斜眼和張開的滿口尖牙。金色的刺從卷鬚上伸出。",
+    "zhc": "带刺的植物用紫色卷须缠绕自己的尖头。蜿蜒的卷须间露出斜眼和张开的满口尖牙。金色的刺从卷须上伸出。",
+    "ru": "Колючее растение обвивает острую голову фиолетовыми усиками. Между витками видны косой глаз и раскрытая зубастая пасть. Из усиков торчат золотистые шипы.",
+    "th": "พืชมีหนามขดเถาสีม่วงรอบหัวแหลม มองเห็นตาเฉียงและปากอ้าที่เต็มไปด้วยฟันระหว่างขดเถา มีหนามสีทองยื่นออกจากเถา",
+    "pt": "Uma planta espinhosa enrola gavinhas violetas ao redor da cabeça pontuda. Um olho oblíquo e uma boca aberta cheia de dentes aparecem entre as voltas. Espinhos dourados saem das gavinhas."
+  },
   "Altair audience bow cue": {
     "en": "Hilda briefly lowers her head.",
     "ja": "ヒルダがそっと頭を下げる。",

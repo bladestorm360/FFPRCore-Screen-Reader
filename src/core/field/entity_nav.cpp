@@ -102,7 +102,7 @@ std::optional<storyline::Objective> storyline_objective()
     if (!game::is(game::Id::FF1)) return {};
     using map_state::scenario_flag;
     return storyline::cornelia_objective({scenario_flag(0), scenario_flag(1), scenario_flag(2),
-        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7)});
+        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7), scenario_flag(9)});
 }
 
 std::wstring storyline_label()

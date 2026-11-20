@@ -24,6 +24,9 @@ std::optional<Objective> cornelia_objective(const CorneliaProgress& progress)
         return Objective{ObjectiveId::LeaveCastle, L"Leave Cornelia Castle", 2, {45, 44, 46}, TargetKind::Transition};
     if (progress.crossed == 0)
         return Objective{ObjectiveId::CrossBridge, L"Cross the new bridge", 1, {89, -1, -1}, TargetKind::Infer};
+    // Bikke's victory continuation awards the ship before recording receipt 9.
+    if (progress.ship == 0)
+        return Objective{ObjectiveId::GetShip, L"Get a ship from Bikke", 13, {38, -1, -1}, TargetKind::Interact};
     return {};
 }
 

@@ -23,7 +23,10 @@ The FF1 Goblin and Goblin Guard and FFV Wing Raptor's two forms are the
 first four enemy entries, each with 12 localizations. Garland's battle
 armor is independent of his field costume and resolves to its own entry.
 FFII Black Knight resolves to the blue-black rider with an orange blade
-through its exact native palette.
+through its exact native palette. FFII Leg Eater, FFIII Land Turtle, FFIV
+Floating Eyeball and FFVI Guard have 12-language entries using the same
+current-sprite reader. FF1's Pirate has its own combat description.
+All six games have localized enemy entries.
 
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
@@ -62,11 +65,13 @@ non-field windows, duplicate keys without a target and hidden sprites are
 excluded from direct attribution. The scripted path has its own exact map,
 script, message and actor binding for the first Cornelia soldier and king
 exchanges, Princess Sarah's Lute scene variants and Garland's first two
-lines. FFII uses the same reader for Hilda and Minwu's Altair opening
+lines. FF1 Bikke's art matches his initial challenge and the later
+post-battle dialogue. The pirate crew page has a separate speaker.
+FFII uses the same reader for Hilda and Minwu's Altair opening
 dialogue and Tobul's scenes in both smithies. The first smithy switches
 from entity 9 to entity 6 when the smithy event group changes. Both paths
 resolve the costume from the rendered sprite's packed atlas texture
-without adding hooks or frame polling. These seven field appearances have
+without adding hooks or frame polling. These eight field appearances have
 entries in all 12 languages. Remaining cutscene speaker bindings and
 localization are open.
 
@@ -98,8 +103,11 @@ The second head-lowering action at 119 accompanies a different page and
 produces no second cue. The dialogue fixture passes the first page, wrong
 script, repeated gesture and hidden actor cases. The bounded build and
 battle-focus check passed. All six new FFII entries have complete 12-language
-keys and are outside the installed mod. Visible actions without a suitable
-dialogue anchor and the broader scene audit remain open.
+keys. The FF1 Pravoka cue uses the first surrender page after the two
+pirates flicker and disappear. The fixture requires the exact continuation
+and live Bikke sprite, and rejects the pre-battle script. These cues are
+outside the installed mod. Visible actions without a suitable dialogue
+anchor and the broader scene audit remain open.
 
 ## Six-game source inventory
 

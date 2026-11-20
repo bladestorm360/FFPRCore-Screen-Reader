@@ -107,6 +107,7 @@ bool has(std::wstring_view key)
 {
     return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
            key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00" ||
+           key == L"Field appearance mo_ff1_n017_c00" ||
            key == L"Field appearance mo_ff2_n005_c00" || key == L"Field appearance mo_ff2_n022_c00" ||
            key == L"Field appearance mo_ff2_p004_c00";
 }
@@ -221,8 +222,25 @@ int main()
     script.value = L"sc_e_0004_2";
     require(read(), "Sarah also owns the alternate Lute scene");
 
+    current_map = 13;
+    script.value = L"sc_e_0009";
+    id.value = L"MSG_SHIP_01";
+    put(property, "entityId", reinterpret_cast<void*>(38));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N017_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff1_n017_c00", "Bikke owns the challenge before the pirate battle");
+    id.value = L"MSG_SHIP_02";
+    require(!read(), "the pirate crew page does not borrow Bikke's appearance");
+    script.value = L"sc_e_0009_2";
+    id.value = L"MSG_SHIP_03";
+    require(read(), "Bikke also owns the post-battle exchange");
+    const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
+    require(cue() == L"Pravoka pirate defeat cue", "the surrender page follows both crew animations");
+    script.value = L"sc_e_0009";
+    require(cue().empty(), "the fight opener cannot narrate the surrender");
+    script.value = L"sc_e_0009_2";
+
     current_game = game::Id::FF2;
-    require(!read(), "a Cornelia speaker row cannot match a different game");
+    require(!read(), "an FF1 speaker row cannot match a different game");
     current_map = 7;
     script.value = L"sc_e_0001_3";
     id.value = L"E0001_03_007_a_04";
@@ -250,7 +268,6 @@ int main()
     put(property, "entityId", reinterpret_cast<void*>(8));
     require(read(), "Tobul's second smithy");
 
-    const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
     current_map = 6;
     script.value = L"sc_e_0001_5";
     id.value = L"E0001_04_003_a_05";

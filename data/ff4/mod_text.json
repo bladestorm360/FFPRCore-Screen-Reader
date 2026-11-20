@@ -1,4 +1,18 @@
 {
+  "Enemy appearance mn_ff4_004_c00": {
+    "en": "One pale eye bulges from an oval teal body above a slanted grin full of little teeth. Long gray wings curl down around the body, with a tiny claw at each pointed tip.",
+    "ja": "青緑色の楕円形の体から、淡い色の一つ目が突き出ている。その下には細かい歯が並ぶ斜めの笑い口。長い灰色の翼は体の両側で下向きに曲がり、尖った先に小さな爪がある。",
+    "fr": "Un seul œil pâle ressort d'un corps ovale bleu-vert, au-dessus d'un sourire de biais plein de petites dents. De longues ailes grises s'incurvent vers le bas autour du corps, avec une minuscule griffe à chaque pointe.",
+    "it": "Un unico occhio chiaro sporge da un corpo ovale verde acqua, sopra un ghigno storto pieno di dentini. Lunghe ali grigie si curvano verso il basso attorno al corpo e ogni punta termina con un piccolo artiglio.",
+    "de": "Über einem schiefen Grinsen voller kleiner Zähne wölbt sich ein einzelnes blasses Auge aus dem ovalen blaugrünen Körper. Lange graue Flügel biegen sich an den Seiten nach unten und enden jeweils in einer winzigen Klaue.",
+    "es": "Un solo ojo pálido sobresale de un cuerpo ovalado verde azulado, sobre una sonrisa torcida llena de dientes pequeños. Unas alas largas y grises se curvan hacia abajo, con una garrita en cada punta.",
+    "ko": "청록색 타원형 몸에서 창백한 외눈이 툭 튀어나와 있다. 그 아래에는 작은 이빨이 가득한 비뚤어진 웃음이 보인다. 긴 회색 날개는 몸 양옆으로 아래를 향해 굽으며 뾰족한 끝마다 작은 발톱이 달려 있다.",
+    "zht": "橢圓形藍綠身體上凸出一隻淺色獨眼，下方是露出一排小牙的歪笑。兩片長灰翼沿著身體向下彎曲，尖端各有一隻小爪。",
+    "zhc": "椭圆形蓝绿身体上凸出一只浅色独眼，下方是露出一排小牙的歪笑。两片长灰翼沿着身体向下弯曲，尖端各有一只小爪。",
+    "ru": "Один бледный глаз выпячен из овального бирюзового тела над кривой ухмылкой с мелкими зубами. Длинные серые крылья загибаются вокруг тела вниз, на каждом остром конце крошечный коготь.",
+    "th": "ดวงตาสีอ่อนดวงเดียวโปนออกจากลำตัวรูปไข่สีเขียวอมฟ้า เหนือปากแสยะเฉียงที่เต็มไปด้วยฟันเล็ก ๆ ปีกยาวสีเทาโค้งลงขนาบลำตัว ปลายแหลมแต่ละข้างมีกรงเล็บจิ๋ว",
+    "pt": "Um único olho claro salta de um corpo oval verde-azulado acima de um sorriso torto cheio de dentes pequenos. Asas cinzentas compridas se curvam para baixo ao redor do corpo, com uma garrinha em cada ponta."
+  },
   "Can lower hovercraft": {
     "en": "Can lower hovercraft",
     "ja": "ホバー船を降ろせます",

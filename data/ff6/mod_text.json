@@ -1,4 +1,18 @@
 {
+  "Enemy appearance mn_ff6_001_c00": {
+    "en": "A broad guard stands in ash-brown and gray armor. Two narrow yellow points show under the helmet visor. One armored hand rests by a round forearm shield. The other hangs low with a short, heavy weapon.",
+    "ja": "がっしりした衛兵が灰茶色と灰色の鎧を着ている。兜の面頬の下に細い黄色の光が二つのぞく。片腕のそばに丸い小盾があり、下げたもう片手には短く重そうな武器を持つ。",
+    "fr": "Un garde large d'épaules porte une armure gris-brun et grise. Deux fins points jaunes percent la visière du casque. Une main gantée reste près d'un bouclier rond fixé à l'avant-bras. L'autre tient une arme courte et lourde, baissée.",
+    "it": "Una guardia larga di spalle indossa un'armatura grigio cenere e marrone. Due sottili punti gialli si vedono sotto la visiera. Una mano guantata sta accanto a uno scudo rotondo sull'avambraccio. L'altra tiene in basso un'arma corta e pesante.",
+    "de": "Eine breitschultrige Wache trägt aschbraune und graue Rüstung. Zwei schmale gelbe Punkte leuchten im Helmvisier. Eine gepanzerte Hand ruht am runden Unterarmschild. Die andere hält tief eine kurze, schwere Waffe.",
+    "es": "Un guardia corpulento lleva armadura de color gris y marrón ceniza. Dos puntos amarillos se ven bajo la visera. Una mano acorazada descansa junto a un escudo redondo en el antebrazo. La otra sostiene un arma corta y pesada a baja altura.",
+    "ko": "어깨가 넓은 경비병이 잿빛 갈색과 회색 갑옷을 입었다. 투구 가리개 아래로 가느다란 노란 점 두 개가 보인다. 한쪽 장갑 낀 손은 팔뚝의 둥근 방패 곁에 있고, 아래로 내린 다른 손에는 짧고 묵직한 무기가 들려 있다.",
+    "zht": "寬肩守衛身披灰褐與灰色的盔甲。面甲下露出兩點細窄的黃色光點。一隻戴甲手靠近前臂上的圓盾，另一隻手垂下，握著短而沉重的武器。",
+    "zhc": "宽肩守卫身披灰褐与灰色的盔甲。面甲下露出两点细窄的黄色光点。一只戴甲手靠近前臂上的圆盾，另一只手垂下，握着短而沉重的武器。",
+    "ru": "Широкоплечий страж одет в пепельно-коричневые и серые доспехи. Под забралом видны две узкие жёлтые точки. Одна рука в латной перчатке у круглого щита на предплечье, другая опущена с коротким тяжёлым оружием.",
+    "th": "ยามร่างกว้างสวมเกราะสีเทาและน้ำตาลหม่น ใต้กระบังหมวกเห็นจุดสีเหลืองเรียวสองจุด มือหุ้มเกราะข้างหนึ่งอยู่ข้างโล่กลมบนท่อนแขน อีกข้างห้อยลงพร้อมอาวุธสั้นหนัก",
+    "pt": "Um guarda de ombros largos usa armadura marrom-acinzentada e cinza. Dois pontos amarelos estreitos aparecem sob a viseira do elmo. Uma das mãos enluvadas fica perto de um escudo redondo no antebraço. A outra segura, abaixada, uma arma curta e pesada."
+  },
   "Enemy appearance mn_ff6_127_c00": {
     "en": "A brown-haired woman with softly shaded features and bare shoulders. Pale turquoise and white bands streak across the tall figure, with faint patches of skin between them.",
     "ja": "茶色い髪の女性。顔には柔らかな陰影があり、肩があらわになっている。縦に長い姿を淡い青緑と白の帯が横切り、その間から肌がかすかに見える。",

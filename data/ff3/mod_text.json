@@ -1,4 +1,18 @@
 {
+  "Enemy appearance mn_ff3_005_c00": {
+    "en": "A broad yellow-green turtle lowers its long head between thick forefeet. Jagged armor plates overlap across its domed indigo shell.",
+    "ja": "幅広い黄緑色のカメが、ごつい前足の間に長い頭を低く構えている。丸く盛り上がった藍色の甲羅に、ぎざぎざした装甲板が重なる。",
+    "fr": "Une large tortue jaune-vert abaisse sa longue tête entre ses grosses pattes avant. Des plaques dentelées se chevauchent sur sa carapace bombée indigo.",
+    "it": "Una larga tartaruga giallo-verde abbassa la testa allungata fra le robuste zampe anteriori. Placche frastagliate si sovrappongono sul carapace indaco e bombato.",
+    "de": "Eine breite gelbgrüne Schildkröte senkt ihren langen Kopf zwischen die kräftigen Vorderfüße. Gezackte Platten überlappen sich auf dem gewölbten indigoblauen Panzer.",
+    "es": "Una tortuga ancha de color verde amarillento baja la cabeza alargada entre las gruesas patas delanteras. Placas dentadas se superponen sobre su caparazón abombado de color índigo.",
+    "ko": "넓적한 황록색 거북이 굵은 앞발 사이로 긴 머리를 낮춘다. 둥글게 솟은 남색 등껍질 위에 들쭉날쭉한 갑판이 겹겹이 얹혀 있다.",
+    "zht": "寬大的黃綠色烏龜把細長的頭低低伸在粗壯的兩隻前腳之間。拱起的靛藍龜殼上疊著參差的甲片。",
+    "zhc": "宽大的黄绿色乌龟把细长的头低低伸在粗壮的两只前脚之间。拱起的靛蓝龟壳上叠着参差的甲片。",
+    "ru": "Широкая жёлто-зелёная черепаха опускает длинную голову между толстыми передними лапами. Зубчатые пластины налегают друг на друга поверх выпуклого панциря цвета индиго.",
+    "th": "เต่าตัวกว้างสีเขียวอมเหลืองก้มหัวยาวลงระหว่างเท้าหนาที่อยู่ด้านหน้า แผ่นเกราะขอบหยักซ้อนทับกันบนกระดองทรงโดมสีคราม",
+    "pt": "Uma tartaruga larga, verde-amarelada, baixa a cabeça comprida entre as patas dianteiras grossas. Placas serrilhadas se sobrepõem na carapaça abaulada de cor índigo."
+  },
   "Airship": {
     "en": "Airship",
     "ja": "飛空艇",

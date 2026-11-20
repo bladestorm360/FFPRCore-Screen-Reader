@@ -103,6 +103,7 @@ keys, decoded sprites and the installed effect prefab components.
 | Crystals, `Map_40000/sc_e_0001_5` | The opening hides the player and plays actor 1's full-screen effect at 18 between fades. Its prefab contains blue, green, red and yellow crystal components, stars and flares. Candidate: “Colored crystals and points of light appear against the darkness.” Verify the effect timeline before describing their order. |
 | Ending, `Map_40004/sc_e_0044_3` and `_4` | The first body shows actor 3 at 67 after the credits. Its blue outlined graphic reads “THE END.” The `_4` body hides the graphic and the preceding effect before the final save. Speak “The End” once at the actual reveal if the credits reader has not already announced those words. |
 | Named treasure pickups, `Map_20011_1/sc_e_0014`, `Map_30021_3/sc_e_0010_1`, `Map_30031_3/sc_e_0017`, `Map_30071_3/sc_e_0047` and `Map_30081_8/sc_e_0033` | Each uses the ordinary treasure pickup pose and a native item announcement. The reviewed bodies use the standing character pose and standard chest interaction. No bespoke item sprite is staged in these five scenes. |
+| Pravoka after the pirate fight, `Map_20040/sc_e_0009_2` | The crew's two bodies play `FlashingSurprise` at 43 and 59. The installed clip alternates opaque and transparent `Surprise_00` frames. Each actor then hides. “The two pirates flicker and disappear beside Bikke” uses the first surrender page at 11 after both blocking puppet bodies. The subsequent ship award keeps its native text. |
 | Adamantite, `Map_30111_2/sc_e_0051` | Actor 31 is a visible cluster of upright violet crystal points with bright white edging and a dark base. The cluster is hidden as the party takes it. The native award names the item. Describe the violet cluster at its visible pickup, using the actual prop instead of the ordinary treasure pose. |
 
 ## First FFII world-scene pass
@@ -169,3 +170,24 @@ These rows are editorial cues awaiting a verified presentation point.
 | FFVI Figaro re-emergence, `Map_10020/sc_e_0673_1` and later travel variants | Actor 156 plays its rising `Appear` frames at 39 and settles on `figaro8` at 40. Dust actor 193 uses the complementary emergence effect. `sc_e_0278_1`, `sc_e_0279_1`, `sc_e_0674_1`, `sc_e_0675_1`, `sc_e_0882_1`–`_3` and `sc_e_1067_1`–`_3` share the descent or ascent vocabulary according to the actual track. “The towers of Figaro Castle rise through the sand.” No cue for every step of the repeated travel sequence. |
 | FFVI Blackjack, `Map_10010/sc_e_0558_9` | The craft and shadow are separate actors 255 and 256. Five takeoff clips start at 49 through 58. The airship has a dark rounded balloon, an ochre lower outline and pale propellers. “The Blackjack lifts off, its dark balloon above the gold-edged hull.” Once when the hull first rises. |
 | FFVI Light of Judgment, `Map_10020/sc_e_1002_2` and `sc_e_1002_4` | The beam uses two directional prefabs with beam glow, wave and spark components. The first shot plays the left-to-right prefab at 35, with a parallel long movement track. The second uses the reverse prefab. “A beam sweeps across the land, leaving a wave of light and sparks.” Reserve the additional cue for the distinct reverse strike when it plays. |
+
+## Native playback boundaries
+
+The six installed binaries agree on the split between interpreter dispatch
+and particle presentation. `Integrator.Update` can execute timers and a
+sandbox while its field script is idle. Its working flag therefore only
+identifies active interpreter work. `Puppet.PlayAnim` checks the core's
+first clock and also handles other play and wait paths for ongoing effects.
+`FieldEffectParticleEntity.PlayEffectIfNeed` can enter the same
+`PlayEffect` routine on automatic activation. These methods identify
+script and renderer activity. They need a current, native readiness signal
+before they can establish a visible cutscene action.
+
+The existing dialogue admission covers visible modal content in the event
+state. The silent events use the same main-game state before and during
+presentation. A silent cue needs a verified indication that the exact
+authored action is active on a ready map, past fades and native entry,
+with skip and departure paths accounted for. The current cue reader
+continues using the runtime's displayed-page ownership. Local
+`native_scene_path.py` and the six `ff*-native-scene-path.txt` traces
+preserve the ABI and relevant paths for the silent cue work.

@@ -6,13 +6,13 @@
 #include <string_view>
 
 namespace field::storyline {
-// Persistent native receipts for the opening FF1 quest. The route origin is
+// Persistent native receipts for the opening FF1 quests. The route origin is
 // unnecessary until planning movement to the selected objective's contacts.
 struct CorneliaProgress {
-    std::optional<int> opening, audience, garland, returned, lute, bridge, crossed;
+    std::optional<int> opening, audience, garland, returned, lute, bridge, crossed, ship;
 };
 
-enum class ObjectiveId { Audience, Garland, Lute, LeaveCastle, CrossBridge };
+enum class ObjectiveId { Audience, Garland, Lute, LeaveCastle, CrossBridge, GetShip };
 struct Objective {
     ObjectiveId id;
     std::wstring_view label;
