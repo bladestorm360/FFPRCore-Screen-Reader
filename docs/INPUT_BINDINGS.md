@@ -333,7 +333,7 @@ Checked in this order:
 | V | `GlobalHotkeyHandler.AnnounceCurrentVehicle` (speaks text query `MoveStateHelper.GetMoveStateName`) | Global |
 | R | `MessageWindowPatches.RepeatLastDialogue` if `MessageWindowPatches.IsInDialogue` | Global |
 | I | `GlobalHotkeyHandler.HandleItemDetailsKey` (below) | Global |
-| Ctrl+I | Describes the acting party member's visible outfit when localized wording is available. | Battle |
+| Ctrl+I | Describes the acting party member's visible outfit and supported drawn equipment when localized wording is available. | Battle |
 | Shift+I | `ControllerRouter.AnnounceContextControls` | Global |
 | F8 (no modifier) | mod menu (`ui::mod_menu::open`) if `ControllerRouter.IsFieldActive`, else `ControllerRouter.SpeakModMenuUnavailable` | any |
 | F7 (no modifier) | `Mod.ToggleAutoDetail` | any |

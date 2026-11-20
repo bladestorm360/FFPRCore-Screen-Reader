@@ -14,6 +14,16 @@ the exact installed keys, assignment names, bundle, frame and fingerprint.
 Descriptions of slash arcs describe the displayed attack effect.
 Shared guard and bare-hand placeholders need no item-specific description.
 
+The first runtime entry describes the FF1 `wp_ff1_sw02_c00` blade shared
+by Broadsword and Great Sword. All four decoded frames show a broad silver
+blade, dark edge, gold guard and red grip. The later frames also contain
+a slash arc. Ctrl+I adds the common physical description only when the
+acting party member's weapon renderer is visible and has a sprite. The
+native loader supplies the complete group key with its palette. The
+four poses share generic frame names. The held, hidden and different
+palette cases passed the battle focus fixture. All 12 localizations are
+present. The new entry is outside the installed mod.
+
 ## FF1
 
 | Art rows | Artwork | Description |

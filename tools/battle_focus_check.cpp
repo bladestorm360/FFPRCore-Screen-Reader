@@ -108,15 +108,20 @@ int32_t Field::get(){
  if(n=="meshRenderer")return offsetof(fixture::Node,view);
  if(n=="characterStatusId")return offsetof(fixture::Node,state);
  if(n=="jobId")return offsetof(fixture::Node,index);
+ if(n=="battleWeaponRight")return offsetof(fixture::Node,use);
+ if(n=="BattleWeaponSR")return offsetof(fixture::Node,view);
+ if(n=="loadWeaponAsset")return offsetof(fixture::Node,data);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){
  if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
+ if(std::string_view(name)=="get_sprite")return reinterpret_cast<void*>(+[](void* p,const void*) { return static_cast<fixture::Node*>(p)->data; });
  if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;
 }
 il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
+std::wstring rd_str_bounded(void* p,Field& f,size_t size){auto value=rd_str(p,f);return value.size()<=size?value:std::wstring{};}
 }
 namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** original){
  if(fixture::native_commit&&std::string(method.cls.name)=="BattleMenuController"&&std::string(method.name).starts_with("<CommandSelectingInit>b__")){
@@ -155,7 +160,7 @@ namespace modtext {
 bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
-        value==L"Enemy appearance mn_ff1_046_c00"||
+        value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
@@ -256,7 +261,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   battle_art_ready=false;
  }
  {
-  Node actor,info,entity,body,renderer,pose;
+  Node actor,info,entity,body,renderer,pose,weapon,weapon_renderer,loader,blade;
   actor.data=&info;info.data=&entity;entity.data=&body;body.data=&pose;body.view=&renderer;
   entity.state=1;entity.index=1;pose.name=L"Default_00";
   acting_art_unit=&actor;
@@ -274,6 +279,20 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   renderer.visible=false;
   b::announce_acting_character_appearance();
   expect(spoken.size()==2,"an acting character whose body is hidden contributes no appearance");
+  fixture::game=game::Id::FF1;
+  renderer.visible=true;
+  entity.use=&weapon;weapon.view=&weapon_renderer;weapon.data=&loader;
+  weapon_renderer.data=&blade;blade.name=L"Default_00";loader.name=L"WP_FF1_SW02_C00";
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007 Weapon appearance wp_ff1_sw02_c00",
+         "the rendered sword adds its own appearance in the same utterance");
+  weapon_renderer.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007","a loaded but hidden sword is silent");
+  weapon_renderer.visible=true;loader.name=L"WP_FF1_SW02_C01";
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007","different sword art without wording stays silent");
+  fixture::game=game::Id::FF6;
   acting_art_unit=nullptr;
   battle_art_ready=false;
  }

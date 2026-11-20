@@ -42,8 +42,10 @@ native character asset table resolves the body key. The six installed
 `GetAssetName` implementations have the same 70-instruction shape.
 The first localized FF1 variants are Warrior and Knight. Focus and
 party fixtures passed with both job keys, hidden bodies, actor handoffs
-and after-action cancellation. The DLL build verified 67 embedded
-resources.
+and after-action cancellation. A visible FF1 blade can now add its own
+entry to the same utterance. The first entry uses the weapon loader's
+exact art group and a live rendered sprite. The DLL build verified 67
+embedded resources.
 
 ## Direct dialogue appearance reader
 
@@ -57,8 +59,7 @@ non-field windows, duplicate keys without a target and hidden sprites are
 excluded from direct attribution. The scripted path has its own exact map,
 script, message and actor binding for the first Cornelia soldier and king
 exchanges, Princess Sarah's Lute scene variants and Garland's first two
-lines. Both paths
-resolve the costume from the rendered sprite's packed atlas texture and use
+lines. Both paths resolve the costume from the rendered sprite's packed atlas texture and use
 no new hooks or frame polling. These four field appearances have entries
 in all 12 languages. Remaining cutscene speaker bindings and
 localized entries are open.

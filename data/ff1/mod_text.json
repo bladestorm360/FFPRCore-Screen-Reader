@@ -1,4 +1,18 @@
 {
+  "Weapon appearance wp_ff1_sw02_c00": {
+    "en": "The drawn sword has a broad silver blade with a dark edge, a gold crossguard and a red grip.",
+    "ja": "構えた剣には、暗い縁のある幅広い銀の刃、金色の鍔、赤い柄がある。",
+    "fr": "L'épée dégainée a une large lame d'argent au bord sombre, une garde dorée et une poignée rouge.",
+    "it": "La spada sguainata ha un'ampia lama argentata con un bordo scuro, una guardia dorata e un'impugnatura rossa.",
+    "de": "Das gezogene Schwert hat eine breite silberne Klinge mit dunkler Kante, eine goldene Parierstange und einen roten Griff.",
+    "es": "La espada desenvainada tiene una hoja plateada ancha de borde oscuro, una guarda dorada y una empuñadura roja.",
+    "ko": "뽑아 든 칼은 넓은 은빛 칼날에 어두운 가장자리가 있고, 금빛 가드와 붉은 손잡이가 달려 있다.",
+    "zht": "出鞘的劍有一把邊緣深色的寬銀刃，配上金色十字護手和紅色握柄。",
+    "zhc": "出鞘的剑有一把边缘深色的宽银刃，配上金色十字护手和红色握柄。",
+    "ru": "У обнажённого меча широкий серебристый клинок с тёмной кромкой, золотая крестовина и красная рукоять.",
+    "th": "ดาบที่ชักออกมามีใบดาบสีเงินกว้างขอบเข้ม กั่นดาบสีทอง และด้ามจับสีแดง",
+    "pt": "A espada desembainhada tem uma lâmina prateada larga de borda escura, uma guarda dourada e um punho vermelho."
+  },
   "Storyline": {
     "en": "Storyline",
     "ja": "ストーリー",

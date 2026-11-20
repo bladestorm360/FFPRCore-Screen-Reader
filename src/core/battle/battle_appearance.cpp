@@ -20,6 +20,15 @@ ref::Field fSprite{kMesh, "sprite"};
 ref::Class kPlayerEntity{"Last.Battle", "BattlePlayerEntity"};
 ref::Field fCharacterStatus{kPlayerEntity, "characterStatusId"};
 ref::Field fJob{kPlayerEntity, "jobId"};
+ref::Class kWeaponPlayer{"Last.Battle", "BattlePlayerEntity", game::kFF1};
+ref::Field fRightWeapon{kWeaponPlayer, "battleWeaponRight"};
+ref::Class kWeapon{"Last.Battle", "BattleWeapon", game::kFF1};
+ref::Field fWeaponRenderer{kWeapon, "BattleWeaponSR"};
+ref::Field fWeaponAsset{kWeapon, "loadWeaponAsset"};
+ref::Class kWeaponAsset{"Last.Battle", "LoadWeaponAsset", game::kFF1};
+ref::Field fWeaponGroup{kWeaponAsset, "<groupName>k__BackingField"};
+ref::Class kWeaponSpriteRenderer{"UnityEngine", "SpriteRenderer", game::kFF1};
+ref::Method mWeaponSprite{kWeaponSpriteRenderer, "get_sprite", 0};
 ref::Class kMasterManager{"Last.Data.Master", "MasterManager"};
 ref::Class kAssets{"Last.Data", "CharacterAssetNameProvider"};
 ref::Method mGetAssetName{kAssets, "GetAssetName", 4};
@@ -56,13 +65,8 @@ std::wstring visible_enemy_art(void* enemy)
     return art;
 }
 
-std::wstring visible_player_art(void* unit)
+std::wstring visible_player_art(void* entity)
 {
-    if (!kBattlePlayerData.is(unit)) return {};
-    auto* entity = ref::rd<void*>(unit_info(unit), fSpriteEntity);
-    auto* sprite = visible_body_sprite(entity);
-    if (!sprite || !kPlayerEntity.is(entity)) return {};
-
     // Battle character sprite names are pose names shared across outfits.
     // This asset provider uses the status and job from the live renderer owner
     // and resolves the same initialized body table used by the native loader.
@@ -72,6 +76,18 @@ std::wstring visible_player_art(void* unit)
     auto* master = ref::instance(kMasterManager);
     if (!master) return {};
     return art_key(ref::str(ref::call_static<void*>(mGetAssetName, master, status, job, false)), L"bc_ff");
+}
+
+std::wstring visible_weapon_art(void* entity)
+{
+    if (!game::is(game::Id::FF1)) return {};
+    auto* weapon = ref::rd<void*>(entity, fRightWeapon);
+    auto* renderer = ref::rd<void*>(weapon, fWeaponRenderer);
+    if (!displayed::renderer_visible(renderer) || !unity::alive(ref::call<void*>(mWeaponSprite, renderer))) return {};
+    // Weapon pose names are shared across different blades. The group's full
+    // art key, including its palette, identifies the assets for this renderer.
+    auto* asset = ref::rd<void*>(weapon, fWeaponAsset);
+    return art_key(ref::rd_str_bounded(asset, fWeaponGroup, 48), L"wp_ff");
 }
 } // namespace
 
@@ -89,9 +105,17 @@ bool read_focused_enemy_appearance()
 void announce_acting_character_appearance()
 {
     if (!frame::on_main_thread() || !battle_presentation_ready()) return;
-    const auto art = visible_player_art(acting_party_unit());
-    if (art.empty()) return;
-    const auto key = L"Character appearance " + art;
-    if (modtext::has(key)) say(T(key), true);
+    auto* unit = acting_party_unit();
+    if (!kBattlePlayerData.is(unit)) return;
+    auto* entity = ref::rd<void*>(unit_info(unit), fSpriteEntity);
+    if (!kPlayerEntity.is(entity) || !visible_body_sprite(entity)) return;
+    const auto character = L"Character appearance " + visible_player_art(entity);
+    auto description = modtext::has(character) ? T(character) : std::wstring{};
+    const auto weapon = L"Weapon appearance " + visible_weapon_art(entity);
+    if (modtext::has(weapon)) {
+        if (!description.empty()) description += L" ";
+        description += T(weapon);
+    }
+    if (!description.empty()) say(description, true);
 }
 } // namespace ffpr::battle
