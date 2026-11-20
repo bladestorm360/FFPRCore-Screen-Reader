@@ -358,5 +358,30 @@ int main()
     renderer.visible = true;
     transition = true;
     require(cue().empty(), "construction cue during a native transition");
+
+    for (const auto& stage : ffpr::dialogue::staged_cues) {
+        current_game = stage.title;
+        current_map = stage.map;
+        script.value = stage.script;
+        id.value = stage.message;
+        put(property, "entityId", reinterpret_cast<void*>(static_cast<intptr_t>(stage.actor)));
+        std::wstring atlas(stage.art);
+        for (auto& ch : atlas) if (ch >= L'a' && ch <= L'z') ch -= L'a' - L'A';
+        texture.value = L"sactx-64x64-Uncompressed-" + atlas + L"-12345678";
+        require(cue().empty(), "staged cue remains closed during transition");
+        transition = false;
+        require(cue() == stage.text, "the ready stage adds its cue to the exact first page");
+        script.value = L"sc_e_9999";
+        require(cue().empty(), "the same message in an unrelated scene never triggers a cue");
+        script.value = stage.script;
+        if (stage.actor) {
+            renderer.visible = false;
+            require(cue().empty(), "a hidden stage actor vetoes narration");
+            renderer.visible = true;
+            texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N101_C00-12345678";
+            require(cue().empty(), "a replaced actor costume vetoes narration");
+        }
+        transition = true;
+    }
     std::puts("Dialogue appearance checks passed");
 }

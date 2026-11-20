@@ -1,5 +1,25 @@
 # Opening and prologue visual actions
 
+## November 20 dialogue cues
+
+The mod now reads seven additional cues on the first page of the exact
+native event message. The page has to be visible after the existing
+transition gate opens. The lookup matches the title, live map, running
+script and message. NPC placements also match the currently drawn atlas.
+The cue is part of the existing page utterance in all 12 locales. It adds
+no scene polling or native hook.
+
+| Game | Stage and spoken addition |
+| --- | --- |
+| III | Altar Cave follows the leader's drop and the shake to the first page of `sc_e_0001_1` on map 153. The cue describes the four adventurers in the cavern. |
+| IV | The third page on the Red Wings deck in `sc_e_0001_1` on map 342 follows Cecil's lowered head and the soldiers turning. The first finished-work page of `sc_e_0054_1` on map 325 carries one description of the engineers' work movement. |
+| V | The pirate ship's first page in `sc_e_0001_1` on map 198 follows the dozing pirate and Faris's hair animation. The Wind Shrine page of `sc_e_0001_4` on map 209 follows the shaking chamber while the crystal is still visible. |
+| VI | The first actual Narshe arrival in `sc_e_0001_5` on map 3 describes the armored party after the mounting sequence. The third page in `sc_e_1033_1` on map 122 follows Setzer's movement beside the engine. |
+
+The focused replay passes the exact cues and rejects another script, a
+transition, a hidden actor and a replaced costume. The linked build and
+battle focus check also passed. These cues await the integrated install.
+
 The local scene review indexes 8,504 executable field script bodies across
 the six installed games. It keeps the ordered visual operations, speech
 locators, presentation branches, puppet entries and placed sprites.

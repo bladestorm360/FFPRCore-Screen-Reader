@@ -194,6 +194,42 @@ std::wstring visible_art(void* actor)
     }
     return art;
 }
+
+struct StagedCue {
+    game::Id title;
+    int map;
+    std::wstring_view script, message, text;
+    int actor = 0;
+    std::wstring_view art{};
+};
+
+// The first page follows the verified visible action on these exact event
+// paths. Some use the native player or mounted party, which has no NPC slot.
+constexpr StagedCue staged_cues[] = {
+    {game::Id::FF3, 153, L"sc_e_0001_1", L"E0001_01_153_a_01", L"Altar Cave opening cue"},
+    {game::Id::FF4, 342, L"sc_e_0001_1", L"E0001_01_342_a_03", L"Red Wings deck cue", 5, L"mo_ff4_n101_c02"},
+    {game::Id::FF4, 325, L"sc_e_0054_1", L"E0055_01_004_a_01", L"Enterprise workshop cue", 3, L"mo_ff4_n005_c01"},
+    {game::Id::FF5, 198, L"sc_e_0001_1", L"E0001_01_198_a_01", L"Pirate ship opening cue", 44, L"mo_ff5_n111_c00"},
+    {game::Id::FF5, 209, L"sc_e_0001_4", L"E0001_04_209_a_01", L"Wind Shrine opening cue", 30, L"mo_ff5_b002_c00"},
+    {game::Id::FF6, 3, L"sc_e_0001_5", L"E0001_04_003_a_01", L"Narshe armored entry cue"},
+    {game::Id::FF6, 122, L"sc_e_1033_1", L"E1033_00_122_a_03", L"Setzer engine cue", 6, L"mo_ff6_p010"},
+};
+
+std::wstring staged_cue(void* controller, const StagedCue& cue)
+{
+    auto* owner = ref::rd<void*>(controller, fEventOwner);
+    auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
+    if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != cue.script) return {};
+    if (cue.actor) {
+        auto* actor = unique_actor(controller, [&](void* candidate) {
+            return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
+                   ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == cue.actor;
+        });
+        if (!actor || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer)) || visible_art(actor) != cue.art)
+            return {};
+    }
+    return T(cue.text);
+}
 } // namespace
 
 bool read_dialogue_appearance()
@@ -221,15 +257,16 @@ bool read_dialogue_appearance()
 std::wstring action_cue_at_dialogue()
 {
     const auto game_id = game::current();
-    if ((game_id != game::Id::FF1 && game_id != game::Id::FF2) ||
-        !frame::on_main_thread() || !in_dialogue() ||
+    if (!frame::on_main_thread() || !in_dialogue() ||
         queries::is("GameStatePatches.IsInputTransitionBlocked")) return {};
     const int map_id = ::field::current_map_id();
     const bool construction = game_id == game::Id::FF1 && map_id == 121;
     const bool audience = game_id == game::Id::FF2 && map_id == 6;
     const bool surrender = game_id == game::Id::FF1 && map_id == 13;
     const bool reveal = game_id == game::Id::FF1 && map_id == 33;
-    if (!construction && !audience && !surrender && !reveal) return {};
+    const auto belongs_here = [&](const StagedCue& cue) { return cue.title == game_id && cue.map == map_id; };
+    if (!construction && !audience && !surrender && !reveal &&
+        std::none_of(std::begin(staged_cues), std::end(staged_cues), belongs_here)) return {};
     const auto message = field_message_key();
     if (construction && message != L"MSG_BRIDGE_01") return {};
     if (audience && message != L"E0001_04_003_a_05") return {};
@@ -238,6 +275,9 @@ std::wstring action_cue_at_dialogue()
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return {};
+    for (const auto& cue : staged_cues)
+        if (belongs_here(cue) && message == cue.message) return staged_cue(controller, cue);
+    if (!construction && !audience && !surrender && !reveal) return {};
     if (surrender || reveal) {
         // These scenes finish the animated change before the next page.
         // Require that page's exact script, speaker and currently visible art.
