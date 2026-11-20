@@ -40,8 +40,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("index_dir", type=Path, help="The external frozen artwork index directory")
     parser.add_argument("titles", nargs="+", choices=[f"ff{n}" for n in range(1, 7)])
-    parser.add_argument("--all-locales", action="store_true", help="Require all supported languages")
+    locales = parser.add_mutually_exclusive_group()
+    locales.add_argument("--all-locales", action="store_true", help="Require all supported languages")
+    locales.add_argument("--locale", action="append", choices=sorted(LANGUAGES),
+                         help="Require the given language for a translation checkpoint")
     args = parser.parse_args()
+    required = LANGUAGES if args.all_locales else set(args.locale or ())
     baseline = load(ROOT / "docs" / "re" / "visual_inventory_baseline_20261120.json")
     coverage = read_index(args.index_dir, baseline["local_shared_indexes"], "enemy-coverage.json")
     failures = 0
@@ -80,8 +84,10 @@ def main():
             for language in LANGUAGES:
                 if not localized.get(language, "").strip():
                     absent[language] += 1
-        if args.all_locales:
-            failures += sum(absent.values())
+        for language in sorted(required):
+            if absent[language]:
+                print(f"{title}: {absent[language]} missing descriptions in {language}")
+                failures += absent[language]
         print(f"{title}: {len(expected) - len(missing)}/{len(expected)} exact appearance keys. "
               f"Outstanding locale entries: {sum(absent.values())}.")
     return failures != 0
