@@ -4,7 +4,16 @@
   "local_shared_indexes": {
     "enemy-coverage.json": "54d1c689dc1d2433d685f005e00a4d5dab9b088c04ed300cc2816a1501945e78",
     "scene-review-priority.json": "2b50340d98eaada7a60a0a9baac582c5bd4da479ec1abc7cb80d8fb6a994c889",
-    "scene-ordinary-review.json": "570e3b17f1859b93163983cd9f89fc682bf683936fc803593f02c0f55f91ff25"
+    "scene-ordinary-review.json": "570e3b17f1859b93163983cd9f89fc682bf683936fc803593f02c0f55f91ff25",
+    "battle-scene-inventory.json": "3e3897793e4415abf332682f0d8b0fbcc784cd3f286c1b85919d06947983f802"
+  },
+  "battle_body_counts": {
+    "ff1": [1, 1],
+    "ff2": [3, 1],
+    "ff3": [2, 1],
+    "ff4": [13, 1],
+    "ff5": [42, 1],
+    "ff6": [52, 1]
   },
   "games": {
     "ff1": {

@@ -26,6 +26,22 @@ Other locales use English for the 2,596 locale entries still awaiting
 translation. Status-effect presentation, broader scenes, further script
 speaker bindings and combined deployment remain open.
 
+## November 20 exact FFII catalog
+
+The package contains 129 enemy, 72 field, 18 battle body and portrait,
+and 55 equipment entries. The 129 enemy descriptions use common anatomy
+where the same drawing has multiple palettes. Each key supplies only the
+colors and markings that belong to its installed variant. Art 129 is the
+distinct Toad body. The eight grouped NPC outfits have separate wording
+for each witnessed palette.
+
+The frozen-index check found all 274 keys. The focused build verified
+69 embedded resources and passed the dialogue, battle focus and boss
+form checks. Existing localized entries cover 66 of the non-English
+locale slots. FFII's equipment renderer and specific portrait presentation
+still need speech bindings. The effects and further event playback remain
+in the active scope.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy
