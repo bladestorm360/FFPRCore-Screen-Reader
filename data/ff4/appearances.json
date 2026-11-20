@@ -1,0 +1,1592 @@
+{
+  "Character appearance bc_ff4_n001": {
+    "en": "Broad blue and violet plate covers the limbs and broad shoulders. A yellow stripe and pointed gold ornaments cross the dark visor, and a dark blue cape fans outward in the raised battle pose."
+  },
+  "Character appearance bc_ff4_p001": {
+    "en": "A compact fighter wears dark indigo plate with layered spiked shoulders, pale wrist openings and a long pointed helmet. Gold marks show at the eye and below the boots. The side battle pose shows a hooked helmet crest and a bare hand held close to the chest."
+  },
+  "Character appearance bc_ff4_p002": {
+    "en": "A bright cyan dragon helm has a long pointed snout, swept gold side markings and a tiny red eye. Blue pointed shoulder plates, violet boots and a short tailing sash cover the rest. The battle pose shows a narrow exposed cheek beneath the visor and a long pointed waist panel."
+  },
+  "Character appearance bc_ff4_p002_c01": {
+    "en": "The long dragon helm, spiked shoulders and narrow waist use rich violet and pink-violet shades, with gold and red accents. The ready battle stance crouches behind large layered plates."
+  },
+  "Character appearance bc_ff4_p003": {
+    "en": "A fair-haired woman with a pale face and green eyes wears green upper clothing and a long white cloak or skirt with pink trim. A high ponytail and longer white cape trail in the battle pose."
+  },
+  "Character appearance bc_ff4_p004": {
+    "en": "A short pale figure has sweeping green hair, a pink hair accent and bright blue and pink clothing. A yellow cape trails behind the field and battle forms, with a gold shoulder detail clearly outlined in battle."
+  },
+  "Character appearance bc_ff4_p005": {
+    "en": "A broad bearded man has a large blue and orange helmet with a pale horizontal goggle band. The field outfit includes brown beard and shoes, red-orange sleeves and blue fabric. The battle sprite has heavy orange gloves, wide dark trousers and big boots."
+  },
+  "Character appearance bc_ff4_p006": {
+    "en": "A small elder has flyaway white hair, a long white beard and blue circular spectacles. He wears a bright purple and pink cloak edged with gold. The large cape swings outward in the battle Ready frame."
+  },
+  "Character appearance bc_ff4_p007": {
+    "en": "A slim fair-haired man wears a red cap with white trim, green scarf and long green cape, red tunic and short brown boots. His light sleeves and longer blond hair are clearer in the side battle frame."
+  },
+  "Character appearance bc_ff4_p008": {
+    "en": "A muscular bare-chested fighter has a shaved front scalp, short dark facial hair, a braided tail of hair, blue wraps and red trousers with yellow trim. Battle Ready shows large bare fists and the victory pose stretches one red leg and braid horizontally."
+  },
+  "Character appearance bc_ff4_p009": {
+    "en": "A young pale figure with a brown bob wears a short white and green outfit and a bright red cape. Small boots and a short trailing gold tie appear beside the cape in battle."
+  },
+  "Character appearance bc_ff4_p010": {
+    "en": "A young pale figure has swept brown hair, a small top tie and a bright green cape over a white-and-orange outfit. The battle Ready frame spreads the green cloth and emphasizes the cream front."
+  },
+  "Character appearance bc_ff4_p011": {
+    "en": "A lean pale figure has spiky white hair, a lavender lower-face guard and a white-violet scarf, arm guards and coat. The side battle frame shows the layered blue and gold trim, dark knees and long scarf ends."
+  },
+  "Character appearance bc_ff4_p012": {
+    "en": "A bald elder has a huge light blue-white beard and trailing white hair. A purple robe and cape drape to the floor. Battle sprites show the beard sweeping almost to the ground beside one pale edge of his robe."
+  },
+  "Character appearance bc_ff4_p013": {
+    "en": "A fair figure wears ivory and gold armor, a lavender swept hairstyle or headpiece and a red brow jewel. The battle figure has more gold armor at the knees and shoulders and a cream cape that opens to show red lining."
+  },
+  "Character appearance bc_ff4_p014": {
+    "en": "A slim pale figure wears a fitted bright green outfit with trailing sleeves or fabric. Long vivid green hair has a little pink ornament. Battle frames show the gold green collar, side-swept hair and a bare raised arm."
+  },
+  "Character appearance fa_ff4_p001": {
+    "en": "A navy full helm has curved silver side horns, a closed face guard and gold shoulder bands."
+  },
+  "Character appearance fa_ff4_p002": {
+    "en": "The angular blue dragon-shaped helm has red accents above two slate eyes and a narrow exposed mouth."
+  },
+  "Character appearance fa_ff4_p003": {
+    "en": "Long golden hair frames a pale face, with green eyes, pink lips and a red forehead jewel."
+  },
+  "Character appearance fa_ff4_p004": {
+    "en": "Bright green hair frames a round pale face, one blue-green eye and a pink hair ornament."
+  },
+  "Character appearance fa_ff4_p005": {
+    "en": "A big brown beard and broad nose show below a blue and orange cap with square gray goggles."
+  },
+  "Character appearance fa_ff4_p006": {
+    "en": "A wrinkled pale face has bushy white hair and beard, blue lenses and a pink and gold collar."
+  },
+  "Character appearance fa_ff4_p007": {
+    "en": "A long-haired blond profile wears a brimmed red feathered cap and a green collar."
+  },
+  "Character appearance fa_ff4_p008": {
+    "en": "A bald brow, straight dark mustache and long bound braid flank his light-brown face and red-orange neck ornament."
+  },
+  "Character appearance fa_ff4_p009": {
+    "en": "Round pale cheeks, dark eyes and a small mouth sit beneath a short brown bowl fringe."
+  },
+  "Character appearance fa_ff4_p010": {
+    "en": "A rounded young face has swept brown bangs, dark eyes and a small colored hair ornament."
+  },
+  "Character appearance fa_ff4_p011": {
+    "en": "Angular eyes peer over a violet mask beneath white spiked hair. A small colored earring sits near the mask edge."
+  },
+  "Character appearance fa_ff4_p012": {
+    "en": "A long silver-blue beard and hair stream behind a high bare brow and a single visible eye."
+  },
+  "Character appearance fa_ff4_p013": {
+    "en": "A light profile has long swept silver-blue hair, blue eyes and a gold headband with a red jewel."
+  },
+  "Character appearance fa_ff4_p014": {
+    "en": "A longer green hairstyle frames a pale face and narrow eyes, with a pink flower above the brow."
+  },
+  "Enemy appearance mn_ff4_001_c00": {
+    "en": "A small, hunched figure has a long pointed cap, a hooked nose, a large pointed ear and a raised clawlike hand. The other hand wields a short curved blade. It wears green and gold."
+  },
+  "Enemy appearance mn_ff4_001_c01": {
+    "en": "A small, hunched figure has a long pointed cap, a hooked nose, a large pointed ear and a raised clawlike hand. The other hand wields a short curved blade. It wears red and rose."
+  },
+  "Enemy appearance mn_ff4_001_c02": {
+    "en": "A small, hunched figure has a long pointed cap, a hooked nose, a large pointed ear and a raised clawlike hand. The other hand wields a short curved blade. It wears violet and orange."
+  },
+  "Enemy appearance mn_ff4_002_c00": {
+    "en": "A stocky four-legged lizard crouches with clawed feet, long curling tail, ridged back and two long horns over a toothy snout. Thin whiskerlike strands hang from the jaw. It is orange and gold."
+  },
+  "Enemy appearance mn_ff4_002_c01": {
+    "en": "A stocky four-legged lizard crouches with clawed feet, long curling tail, ridged back and two long horns over a toothy snout. Thin whiskerlike strands hang from the jaw. It is slate and olive-gray."
+  },
+  "Enemy appearance mn_ff4_002_c02": {
+    "en": "A stocky four-legged lizard crouches with clawed feet, long curling tail, ridged back and two long horns over a toothy snout. Thin whiskerlike strands hang from the jaw. It is indigo and bright blue."
+  },
+  "Enemy appearance mn_ff4_003_c00": {
+    "en": "A large bird lowers its hooked beak and trails bent legs with open talons. One great layered wing rises above its back and sweeps outward. It is brown and cream."
+  },
+  "Enemy appearance mn_ff4_003_c01": {
+    "en": "A large bird lowers its hooked beak and trails bent legs with open talons. One great layered wing rises above its back and sweeps outward. It is blue, cream and yellow."
+  },
+  "Enemy appearance mn_ff4_003_c02": {
+    "en": "A large bird lowers its hooked beak and trails bent legs with open talons. One great layered wing rises above its back and sweeps outward. It is green and dark pink with yellow feet."
+  },
+  "Enemy appearance mn_ff4_004_c00": {
+    "en": "A single round eye protrudes from an oval body above a slanting grin full of small teeth. Long pointed wings curve down around it, with little claws at the tips. It has a teal body, gray wings and a pale eye."
+  },
+  "Enemy appearance mn_ff4_004_c01": {
+    "en": "A single round eye protrudes from an oval body above a slanting grin full of small teeth. Long pointed wings curve down around it, with little claws at the tips. It has a red body, green wings and a mint eye."
+  },
+  "Enemy appearance mn_ff4_004_c02": {
+    "en": "A single round eye protrudes from an oval body above a slanting grin full of small teeth. Long pointed wings curve down around it, with little claws at the tips. It has a gold body and lavender wings and eye."
+  },
+  "Enemy appearance mn_ff4_004_c03": {
+    "en": "A single round eye protrudes from an oval body above a slanting grin full of small teeth. Long pointed wings curve down around it, with little claws at the tips. It is green with violet wings and eye."
+  },
+  "Enemy appearance mn_ff4_005_c00": {
+    "en": "A curled insectlike body has overlapping back plates, a row of short feet, upright antennae and a broad rounded belly. It has blue-gray plating with orange bands."
+  },
+  "Enemy appearance mn_ff4_005_c01": {
+    "en": "A curled insectlike body has overlapping back plates, a row of short feet, upright antennae and a broad rounded belly. It has green plating with violet bands."
+  },
+  "Enemy appearance mn_ff4_005_c02": {
+    "en": "A curled insectlike body has overlapping back plates, a row of short feet, upright antennae and a broad rounded belly. It has cyan plating with gold bands."
+  },
+  "Enemy appearance mn_ff4_006_c00": {
+    "en": "A small bat spreads two scalloped membrane wings. Pointed ears, bright eyes and small dangling feet surround its short body. It has sand-colored wings and gray-brown fur."
+  },
+  "Enemy appearance mn_ff4_006_c01": {
+    "en": "A small bat spreads two scalloped membrane wings. Pointed ears, bright eyes and small dangling feet surround its short body. It has rose and orange wings and violet-gray fur."
+  },
+  "Enemy appearance mn_ff4_006_c02": {
+    "en": "A small bat spreads two scalloped membrane wings. Pointed ears, bright eyes and small dangling feet surround its short body. It has red and violet wings and indigo fur."
+  },
+  "Enemy appearance mn_ff4_007_c00": {
+    "en": "An upright tree trunk stands on splayed roots. Bare angular branches reach from the sides. A jagged pale split runs down the front like an open mouth. It has charcoal-green bark and a gold-white center."
+  },
+  "Enemy appearance mn_ff4_007_c01": {
+    "en": "An upright tree trunk stands on splayed roots. Bare angular branches reach from the sides. A jagged pale split runs down the front like an open mouth. It has burgundy bark and an icy blue center."
+  },
+  "Enemy appearance mn_ff4_008_c00": {
+    "en": "A low ratlike quadruped has a pointed snout, short feet and a bare tail curled over its back. Long sharp quills stand above the body in dense rows. It is violet and gray."
+  },
+  "Enemy appearance mn_ff4_008_c01": {
+    "en": "A low ratlike quadruped has a pointed snout, short feet and a bare tail curled over its back. Long sharp quills stand above the body in dense rows. It is orange and brown."
+  },
+  "Enemy appearance mn_ff4_008_c02": {
+    "en": "A low ratlike quadruped has a pointed snout, short feet and a bare tail curled over its back. Long sharp quills stand above the body in dense rows. It is blue and pale cyan."
+  },
+  "Enemy appearance mn_ff4_009_c00": {
+    "en": "A small, round-faced figure has orange-brown hair or a hood, a green outfit and orange shoes. One arm sticks out beside its face."
+  },
+  "Enemy appearance mn_ff4_010_c00": {
+    "en": "A hunched biped has a pointed fishlike snout, a spiny silhouette and long bent arms with narrow claws. Its tapered legs end in pointed toes. It is pink, orange and cream."
+  },
+  "Enemy appearance mn_ff4_010_c01": {
+    "en": "A hunched biped has a pointed fishlike snout, a spiny silhouette and long bent arms with narrow claws. Its tapered legs end in pointed toes. It is blue and mint green."
+  },
+  "Enemy appearance mn_ff4_011_c00": {
+    "en": "A butterflylike insect spreads wide wings with large ringed eyespots. Narrow antennae and scattered spark-like flecks frame its thin body. It is lavender and cream with pink spots."
+  },
+  "Enemy appearance mn_ff4_011_c01": {
+    "en": "A butterflylike insect spreads wide wings with large ringed eyespots. Narrow antennae and scattered spark-like flecks frame its thin body. It is green and yellow with violet centers."
+  },
+  "Enemy appearance mn_ff4_011_c02": {
+    "en": "A butterflylike insect spreads wide wings with large ringed eyespots. Narrow antennae and scattered spark-like flecks frame its thin body. It is orange and green with red rings."
+  },
+  "Enemy appearance mn_ff4_012_c00": {
+    "en": "An upright segmented insect bends forward, with many thin legs along the inside of its curved body. Rounded front plates cover long dangling fangs. It has gray plating and straw-colored limbs."
+  },
+  "Enemy appearance mn_ff4_012_c01": {
+    "en": "An upright segmented insect bends forward, with many thin legs along the inside of its curved body. Rounded front plates cover long dangling fangs. It has indigo plating, orange markings and red-gold legs."
+  },
+  "Enemy appearance mn_ff4_013_c00": {
+    "en": "A thick segmented worm rises from its curled tail. Its circular mouth is lined with multiple rings of teeth and surrounded by small spikes. It is yellow-green with magenta spikes."
+  },
+  "Enemy appearance mn_ff4_013_c01": {
+    "en": "A thick segmented worm rises from its curled tail. Its circular mouth is lined with multiple rings of teeth and surrounded by small spikes. It is pale lavender with yellow spikes."
+  },
+  "Enemy appearance mn_ff4_013_c02": {
+    "en": "A thick segmented worm rises from its curled tail. Its circular mouth is lined with multiple rings of teeth and surrounded by small spikes. It is red-orange with violet spikes."
+  },
+  "Enemy appearance mn_ff4_014_c00": {
+    "en": "A broad flattened toad hunkers down with splayed toes, a wide mouth and raised eyes. Angular markings cross its back and face. It is yellow and cobalt."
+  },
+  "Enemy appearance mn_ff4_014_c01": {
+    "en": "A broad flattened toad hunkers down with splayed toes, a wide mouth and raised eyes. Angular markings cross its back and face. It is slate and violet with cyan markings."
+  },
+  "Enemy appearance mn_ff4_015_c00": {
+    "en": "A round, ridged shell or armored body is covered in blunt spikes. A tooth-edged seam and a thick crescent-shaped appendage show near the base. It is pink-brown with orange points and a bright orange appendage."
+  },
+  "Enemy appearance mn_ff4_015_c01": {
+    "en": "A round, ridged shell or armored body is covered in blunt spikes. A tooth-edged seam and a thick crescent-shaped appendage show near the base. It is dark blue and teal with yellow-green points and appendage."
+  },
+  "Enemy appearance mn_ff4_016_c00": {
+    "en": "A gaunt figure lurches with both hands lifted overhead. Its skull-like face has sunken eyes and a gaping mouth, and a ragged coat hangs open over a bare, ribbed torso. It has an olive face and hands, blue-violet coat and red trousers."
+  },
+  "Enemy appearance mn_ff4_016_c01": {
+    "en": "A gaunt figure lurches with both hands lifted overhead. Its skull-like face has sunken eyes and a gaping mouth, and a ragged coat hangs open over a bare, ribbed torso. It has green-blue skin, a pale green coat and violet trousers."
+  },
+  "Enemy appearance mn_ff4_016_c02": {
+    "en": "A gaunt figure lurches with both hands lifted overhead. Its skull-like face has sunken eyes and a gaping mouth, and a ragged coat hangs open over a bare, ribbed torso. It has share orange-red skin, a red coat and purple trousers."
+  },
+  "Enemy appearance mn_ff4_017_c00": {
+    "en": "A compact fish shows jagged dorsal spikes, sweeping ribbed side fins and a broad toothy mouth. It is orange with green fins."
+  },
+  "Enemy appearance mn_ff4_017_c01": {
+    "en": "A compact fish shows jagged dorsal spikes, sweeping ribbed side fins and a broad toothy mouth. It is cyan with gold fins."
+  },
+  "Enemy appearance mn_ff4_017_c02": {
+    "en": "A compact fish shows jagged dorsal spikes, sweeping ribbed side fins and a broad toothy mouth. It is mauve with reddish cream fins."
+  },
+  "Enemy appearance mn_ff4_018_c00": {
+    "en": "A flower head has broad petals, rows of teeth around a gaping center and thin curling stalks rising like feelers. A bent stem with leaves supports it. It has blue petals, a green mouth and an ochre stem."
+  },
+  "Enemy appearance mn_ff4_018_c01": {
+    "en": "A flower head has broad petals, rows of teeth around a gaping center and thin curling stalks rising like feelers. A bent stem with leaves supports it. It has scarlet petals, yellow teeth and a green stem."
+  },
+  "Enemy appearance mn_ff4_019_c00": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is dusty pink with pale eyes."
+  },
+  "Enemy appearance mn_ff4_019_c01": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is gold with green eyes."
+  },
+  "Enemy appearance mn_ff4_019_c02": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is lavender with red eyes."
+  },
+  "Enemy appearance mn_ff4_019_c03": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is pale cyan with lavender eyes."
+  },
+  "Enemy appearance mn_ff4_019_c04": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is slate-blue with lime eyes."
+  },
+  "Enemy appearance mn_ff4_019_c05": {
+    "en": "A sagging mound of slime has pointed, glowering eyes and a thin mouth lined with little teeth. Folds trail onto the ground. It is vivid pink with cream eyes."
+  },
+  "Enemy appearance mn_ff4_020_c00": {
+    "en": "A thin humanoid has exposed arms, streaming tendrils for hair and a long curling wisp in place of feet. Both hands reach forward. It has green tendrils and a lime tail."
+  },
+  "Enemy appearance mn_ff4_020_c01": {
+    "en": "A thin humanoid has exposed arms, streaming tendrils for hair and a long curling wisp in place of feet. Both hands reach forward. It has cyan tendrils and a blue tail."
+  },
+  "Enemy appearance mn_ff4_020_c02": {
+    "en": "A thin humanoid has exposed arms, streaming tendrils for hair and a long curling wisp in place of feet. Both hands reach forward. It has pink and pale-gold tendrils with pink, green and purple bands in its tail."
+  },
+  "Enemy appearance mn_ff4_021_c00": {
+    "en": "A low armored reptile has a jagged layered shell, heavy legs with long pale claws, and a raised snapping head with both rows of teeth visible. It is slate-blue and gold."
+  },
+  "Enemy appearance mn_ff4_021_c01": {
+    "en": "A low armored reptile has a jagged layered shell, heavy legs with long pale claws, and a raised snapping head with both rows of teeth visible. It is red-orange and gold."
+  },
+  "Enemy appearance mn_ff4_021_c02": {
+    "en": "A low armored reptile has a jagged layered shell, heavy legs with long pale claws, and a raised snapping head with both rows of teeth visible. It is violet and gray."
+  },
+  "Enemy appearance mn_ff4_022_c00": {
+    "en": "A helmeted fighter braces with knees bent and a sword held crosswise. A face guard, shoulder plates, gauntlets and tall boots cover the body. It wears dark teal and brown armor and braces a blue-white blade."
+  },
+  "Enemy appearance mn_ff4_022_c01": {
+    "en": "A helmeted fighter braces with knees bent and a sword held crosswise. A face guard, shoulder plates, gauntlets and tall boots cover the body. It wears green armor with pink trim."
+  },
+  "Enemy appearance mn_ff4_022_c02": {
+    "en": "A helmeted fighter braces with knees bent and a sword held crosswise. A face guard, shoulder plates, gauntlets and tall boots cover the body. It has ash-gray armor, yellow trim and a green-white blade."
+  },
+  "Enemy appearance mn_ff4_022_c03": {
+    "en": "A helmeted fighter braces with knees bent and a sword held crosswise. A face guard, shoulder plates, gauntlets and tall boots cover the body. It has ash-gray armor, orange trim and a lavender blade."
+  },
+  "Enemy appearance mn_ff4_023_c00": {
+    "en": "A twisting wisp forms a hoodlike outline around an angular face with deep eye slits. Thin trails peel away from its sides and base. It is pale blue and gray."
+  },
+  "Enemy appearance mn_ff4_023_c01": {
+    "en": "A twisting wisp forms a hoodlike outline around an angular face with deep eye slits. Thin trails peel away from its sides and base. It is green and cream."
+  },
+  "Enemy appearance mn_ff4_023_c02": {
+    "en": "A twisting wisp forms a hoodlike outline around an angular face with deep eye slits. Thin trails peel away from its sides and base. It is violet, magenta and yellow."
+  },
+  "Enemy appearance mn_ff4_024_c00": {
+    "en": "An upright skeleton has a bowed skull, exposed ribs and widely braced feet. It holds a curved sword in both hands. It has green shoulder cloth and brown shin guards."
+  },
+  "Enemy appearance mn_ff4_024_c01": {
+    "en": "An upright skeleton has a bowed skull, exposed ribs and widely braced feet. It holds a curved sword in both hands. It has red-brown armor and a pale blade."
+  },
+  "Enemy appearance mn_ff4_024_c02": {
+    "en": "An upright skeleton has a bowed skull, exposed ribs and widely braced feet. It holds a curved sword in both hands. It has blue armor and a blue-white blade."
+  },
+  "Enemy appearance mn_ff4_025_c00": {
+    "en": "A muscular horned creature spreads pointed bat wings and leans on long clawed limbs. A tail bends behind the raised leg. It is green with orange horns and claws."
+  },
+  "Enemy appearance mn_ff4_025_c01": {
+    "en": "A muscular horned creature spreads pointed bat wings and leans on long clawed limbs. A tail bends behind the raised leg. It is blue with orange horns and blue claws."
+  },
+  "Enemy appearance mn_ff4_026_c00": {
+    "en": "A huge raptor glides with both feathered wings stretched wide. It has a hooked beak, streaming head feathers and two yellow talons extended below. It is indigo with violet wing tips."
+  },
+  "Enemy appearance mn_ff4_026_c01": {
+    "en": "A huge raptor glides with both feathered wings stretched wide. It has a hooked beak, streaming head feathers and two yellow talons extended below. It is dark green with purple edging."
+  },
+  "Enemy appearance mn_ff4_027_c00": {
+    "en": "Four round cells float in a loose cluster. Each has a contrasting nucleus and fine radial filaments along a bright rim. It has yellow nuclei in pale green cells."
+  },
+  "Enemy appearance mn_ff4_027_c01": {
+    "en": "Four round cells float in a loose cluster. Each has a contrasting nucleus and fine radial filaments along a bright rim. It has violet nuclei in mint cells."
+  },
+  "Enemy appearance mn_ff4_027_c02": {
+    "en": "Four round cells float in a loose cluster. Each has a contrasting nucleus and fine radial filaments along a bright rim. It has fuchsia nuclei in pale pink cells."
+  },
+  "Enemy appearance mn_ff4_028_c00": {
+    "en": "A squat alligator opens a long saw-toothed jaw. It braces on short claws, and its ridge-backed tail loops high above its body. It is dusty violet and pale blue."
+  },
+  "Enemy appearance mn_ff4_028_c01": {
+    "en": "A squat alligator opens a long saw-toothed jaw. It braces on short claws, and its ridge-backed tail loops high above its body. It is green and turquoise."
+  },
+  "Enemy appearance mn_ff4_029_c00": {
+    "en": "A pale humanoid hangs upside down below a rocky overhang, its arms folded and its long hair pointing toward the floor. Pointed bat membranes frame the upper body. It has magenta hair and deep blue-violet clothing."
+  },
+  "Enemy appearance mn_ff4_029_c01": {
+    "en": "A pale humanoid hangs upside down below a rocky overhang, its arms folded and its long hair pointing toward the floor. Pointed bat membranes frame the upper body. It has olive-gold hair and red-brown clothing."
+  },
+  "Enemy appearance mn_ff4_030_c00": {
+    "en": "A stout serpent forms two loops, showing a segmented underside. A pale humanoid face with hanging strands emerges from the upper bend. It has a gray-blue body and gray face."
+  },
+  "Enemy appearance mn_ff4_030_c01": {
+    "en": "A stout serpent forms two loops, showing a segmented underside. A pale humanoid face with hanging strands emerges from the upper bend. It has green scales and a yellow-green face."
+  },
+  "Enemy appearance mn_ff4_030_c02": {
+    "en": "A stout serpent forms two loops, showing a segmented underside. A pale humanoid face with hanging strands emerges from the upper bend. It has green scales, orange belly markings and a white and gold face."
+  },
+  "Enemy appearance mn_ff4_031_c00": {
+    "en": "A skeletal dragon curls its spiked tail under exposed ribs and bent, clawed limbs. Its horned skull turns downward, and small flames hover around the bones. It has purple bones and flames."
+  },
+  "Enemy appearance mn_ff4_031_c01": {
+    "en": "A skeletal dragon curls its spiked tail under exposed ribs and bent, clawed limbs. Its horned skull turns downward, and small flames hover around the bones. It has glowing orange-red bones and yellow flames."
+  },
+  "Enemy appearance mn_ff4_031_c02": {
+    "en": "A skeletal dragon curls its spiked tail under exposed ribs and bent, clawed limbs. Its horned skull turns downward, and small flames hover around the bones. It has gray-green bones and violet flames."
+  },
+  "Enemy appearance mn_ff4_032_c00": {
+    "en": "Two large serpentine heads rise over overlapping coils. Both mouths gape with visible teeth. It is slate and pale gray with dull red markings."
+  },
+  "Enemy appearance mn_ff4_032_c01": {
+    "en": "Two large serpentine heads rise over overlapping coils. Both mouths gape with visible teeth. It has mottled red and green scales with yellow highlights."
+  },
+  "Enemy appearance mn_ff4_033_c00": {
+    "en": "A broad armored guard braces behind a pointed shield and holds a straight sword across its chest. A cloth cape sweeps back from its shoulders. It wears blue and gold with a yellow shield."
+  },
+  "Enemy appearance mn_ff4_033_c01": {
+    "en": "A broad armored guard braces behind a pointed shield and holds a straight sword across its chest. A cloth cape sweeps back from its shoulders. It wears dark teal and cyan with a pale cyan shield."
+  },
+  "Enemy appearance mn_ff4_033_c02": {
+    "en": "A broad armored guard braces behind a pointed shield and holds a straight sword across its chest. A cloth cape sweeps back from its shoulders. It wears red and magenta with a gold and pink shield."
+  },
+  "Enemy appearance mn_ff4_034_c00": {
+    "en": "A humanoid torso leans over a thick coiled snake body. Long hanging hair frames the eyes and nearly touches the coils. It is tan and gold."
+  },
+  "Enemy appearance mn_ff4_034_c01": {
+    "en": "A humanoid torso leans over a thick coiled snake body. Long hanging hair frames the eyes and nearly touches the coils. It has a pink-orange tail with violet patches and green hair."
+  },
+  "Enemy appearance mn_ff4_034_c02": {
+    "en": "A humanoid torso leans over a thick coiled snake body. Long hanging hair frames the eyes and nearly touches the coils. It has blue scales and lavender hair."
+  },
+  "Enemy appearance mn_ff4_035_c00": {
+    "en": "A robed figure has a gold, pointed hood and thin face tentacles. Robes have white-blue edges and red inner folds. It spreads its arms, holding a staff tipped with a pale orb in one hand."
+  },
+  "Enemy appearance mn_ff4_036_c00": {
+    "en": "A thick-bodied giant stoops with long muscular arms and heavy bare feet. Square brows, a wide toothy mouth and a belted loincloth are visible. It has green-blue skin and gold cloth."
+  },
+  "Enemy appearance mn_ff4_036_c01": {
+    "en": "A thick-bodied giant stoops with long muscular arms and heavy bare feet. Square brows, a wide toothy mouth and a belted loincloth are visible. It has lavender skin and red-orange cloth."
+  },
+  "Enemy appearance mn_ff4_037_c00": {
+    "en": "A crouching spotted cat has tall ears, broad front paws, long trailing whiskers and a tail curled near its feet. It has gold and brown spots."
+  },
+  "Enemy appearance mn_ff4_037_c01": {
+    "en": "A crouching spotted cat has tall ears, broad front paws, long trailing whiskers and a tail curled near its feet. It has pale blue and violet spots."
+  },
+  "Enemy appearance mn_ff4_038_c00": {
+    "en": "A squat armored knight crouches behind a huge curved shield, with a sword drawn diagonally across it. Heavy horns or ridges project from the helmet and shoulders. It has dark gray armor and gold trim."
+  },
+  "Enemy appearance mn_ff4_038_c01": {
+    "en": "A squat armored knight crouches behind a huge curved shield, with a sword drawn diagonally across it. Heavy horns or ridges project from the helmet and shoulders. It wears violet armor with green trim."
+  },
+  "Enemy appearance mn_ff4_039_c00": {
+    "en": "A helmeted riderlike torso merges into a four-legged horse body. The fighter holds a narrow upright lance and a small shield. A crest trails behind the helmet. It is blue-black with a gold crest."
+  },
+  "Enemy appearance mn_ff4_039_c01": {
+    "en": "A helmeted riderlike torso merges into a four-legged horse body. The fighter holds a narrow upright lance and a small shield. A crest trails behind the helmet. It wears brown plate with a cyan crest."
+  },
+  "Enemy appearance mn_ff4_040_c00": {
+    "en": "A hunched robed figure has a broad, buttoned pack or hood on its back and a bearded face under a low hat. Short arms clutch a thin walking staff. It wears purple and red with green trim."
+  },
+  "Enemy appearance mn_ff4_040_c01": {
+    "en": "A hunched robed figure has a broad, buttoned pack or hood on its back and a bearded face under a low hat. Short arms clutch a thin walking staff. It wears green and orange."
+  },
+  "Enemy appearance mn_ff4_040_c02": {
+    "en": "A hunched robed figure has a broad, buttoned pack or hood on its back and a bearded face under a low hat. Short arms clutch a thin walking staff. It wears red and blue with a cyan headband."
+  },
+  "Enemy appearance mn_ff4_041_c00": {
+    "en": "A little round-headed doll has hollow-looking eyes, a small mouth and tapered limbs, with one arm lifted and its feet spread. It has pale lilac limbs and yellow eyes."
+  },
+  "Enemy appearance mn_ff4_041_c01": {
+    "en": "A little round-headed doll has hollow-looking eyes, a small mouth and tapered limbs, with one arm lifted and its feet spread. It is almost white with pink cheeks."
+  },
+  "Enemy appearance mn_ff4_041_c02": {
+    "en": "A little round-headed doll has hollow-looking eyes, a small mouth and tapered limbs, with one arm lifted and its feet spread. It wears violet and teal."
+  },
+  "Enemy appearance mn_ff4_041_c03": {
+    "en": "A little round-headed doll has hollow-looking eyes, a small mouth and tapered limbs, with one arm lifted and its feet spread. It wears brown and orange and has bright cyan eyes."
+  },
+  "Enemy appearance mn_ff4_042_c00": {
+    "en": "A light-armored fighter kneels on one bent leg, with flying hair, a short curved sword and a round patterned shield. It has pale hair and red armor with a red shield center."
+  },
+  "Enemy appearance mn_ff4_042_c01": {
+    "en": "A light-armored fighter kneels on one bent leg, with flying hair, a short curved sword and a round patterned shield. It has blond hair and blue-violet armor with a violet shield."
+  },
+  "Enemy appearance mn_ff4_043_c00": {
+    "en": "A crouching, partly serpentine body has a pointed face, long clawed hands and many strands of snake-like hair trailing behind. It has salmon skin and violet and green strands."
+  },
+  "Enemy appearance mn_ff4_043_c01": {
+    "en": "A crouching, partly serpentine body has a pointed face, long clawed hands and many strands of snake-like hair trailing behind. It has mint skin and dark hair edged in gold."
+  },
+  "Enemy appearance mn_ff4_044_c00": {
+    "en": "A floating sphere is edged in jagged flame and has slanted eyes above a huge toothy grin. Detached glints float over its head. Its flames are red-orange with yellow-green highlights."
+  },
+  "Enemy appearance mn_ff4_044_c01": {
+    "en": "A floating sphere is edged in jagged flame and has slanted eyes above a huge toothy grin. Detached glints float over its head. Its flames are slate-blue and cyan."
+  },
+  "Enemy appearance mn_ff4_044_c02": {
+    "en": "A floating sphere is edged in jagged flame and has slanted eyes above a huge toothy grin. Detached glints float over its head. Its flames are lavender and pink."
+  },
+  "Enemy appearance mn_ff4_044_c03": {
+    "en": "A floating sphere is edged in jagged flame and has slanted eyes above a huge toothy grin. Detached glints float over its head. Its flames are dark gray with pale blue highlights."
+  },
+  "Enemy appearance mn_ff4_045_c00": {
+    "en": "A four-legged creature has a shaggy lion head near the ground, a second horned head rising above its back, small wings and a curled tail. It glows gold and orange with violet mane and wings."
+  },
+  "Enemy appearance mn_ff4_045_c01": {
+    "en": "A four-legged creature has a shaggy lion head near the ground, a second horned head rising above its back, small wings and a curled tail. It is green with gray-violet mane and wings."
+  },
+  "Enemy appearance mn_ff4_046_c00": {
+    "en": "An armadillo-like body curls into an arch almost enclosed by jagged overlapping shell plates. Claws show underneath and a narrow pointed head sticks out at the right. It has silver-gray armor and purple undersides."
+  },
+  "Enemy appearance mn_ff4_046_c01": {
+    "en": "An armadillo-like body curls into an arch almost enclosed by jagged overlapping shell plates. Claws show underneath and a narrow pointed head sticks out at the right. It has gold armor and olive undersides."
+  },
+  "Enemy appearance mn_ff4_047_c00": {
+    "en": "A heavily built four-legged hound crouches with a snarling muzzle, pointed teeth, muscular paws and an upward-curling tail. It is outlined by orange fire and bright sparks."
+  },
+  "Enemy appearance mn_ff4_047_c01": {
+    "en": "A heavily built four-legged hound crouches with a snarling muzzle, pointed teeth, muscular paws and an upward-curling tail. It is outlined by blue-white light and ice-colored flecks."
+  },
+  "Enemy appearance mn_ff4_048_c00": {
+    "en": "A hunchbacked humanoid is built from heavy angular blocks. It has a small scowling face, long blocky arms, thick hands and broad feet. It is ochre."
+  },
+  "Enemy appearance mn_ff4_048_c01": {
+    "en": "A hunchbacked humanoid is built from heavy angular blocks. It has a small scowling face, long blocky arms, thick hands and broad feet. It is light cyan and lavender."
+  },
+  "Enemy appearance mn_ff4_048_c02": {
+    "en": "A hunchbacked humanoid is built from heavy angular blocks. It has a small scowling face, long blocky arms, thick hands and broad feet. It is dark magenta-gray."
+  },
+  "Enemy appearance mn_ff4_049_c00": {
+    "en": "A squat little frog has large raised eyes, a pale chest and short splayed legs. The frog is pink and purple."
+  },
+  "Enemy appearance mn_ff4_049_c01": {
+    "en": "A squat little frog has large raised eyes, a pale chest and short splayed legs. The frog is green with a yellow chest and orange cheek."
+  },
+  "Enemy appearance mn_ff4_050_c00": {
+    "en": "A humanoid upper body with long flowing hair and slender arms rises from a broad spider body with long, pointed jointed legs. It has pink skin and violet legs."
+  },
+  "Enemy appearance mn_ff4_050_c01": {
+    "en": "A humanoid upper body with long flowing hair and slender arms rises from a broad spider body with long, pointed jointed legs. It has pale blue-green skin and dark olive legs."
+  },
+  "Enemy appearance mn_ff4_051_c00": {
+    "en": "A low mechanical turret has a ridged teal pedestal and a barrel built from blue and copper rings. An orange sphere glows in its barrel, with a pointed turquoise beam spreading ahead."
+  },
+  "Enemy appearance mn_ff4_052_c00": {
+    "en": "A long low dragon has an angular armored torso, a curling tail, jointed claws and swept-back wings tipped with long spines. It is silvery cyan."
+  },
+  "Enemy appearance mn_ff4_052_c01": {
+    "en": "A long low dragon has an angular armored torso, a curling tail, jointed claws and swept-back wings tipped with long spines. It is indigo and blue-white."
+  },
+  "Enemy appearance mn_ff4_052_c02": {
+    "en": "A long low dragon has an angular armored torso, a curling tail, jointed claws and swept-back wings tipped with long spines. It is orange and red with blue accents."
+  },
+  "Enemy appearance mn_ff4_053_c00": {
+    "en": "A slender imp balances on one bent leg. It has a grinning horned head, outstretched claws, small bat wings and a long tail. It is green with ochre membranes."
+  },
+  "Enemy appearance mn_ff4_053_c01": {
+    "en": "A slender imp balances on one bent leg. It has a grinning horned head, outstretched claws, small bat wings and a long tail. It is red-orange with dark blue wings."
+  },
+  "Enemy appearance mn_ff4_054_c00": {
+    "en": "A stooped figure floats or crouches in a broad billowing dress with one bent knee visible. A wide mantle shadows the face, and segmented bands hang from the curled tip of a thin staff. It has pale hair and green clothing."
+  },
+  "Enemy appearance mn_ff4_054_c01": {
+    "en": "A stooped figure floats or crouches in a broad billowing dress with one bent knee visible. A wide mantle shadows the face, and segmented bands hang from the curled tip of a thin staff. It has lavender hair and purple clothing."
+  },
+  "Enemy appearance mn_ff4_054_c02": {
+    "en": "A stooped figure floats or crouches in a broad billowing dress with one bent knee visible. A wide mantle shadows the face, and segmented bands hang from the curled tip of a thin staff. It has orange-brown hair and a navy and brown robe."
+  },
+  "Enemy appearance mn_ff4_055_c00": {
+    "en": "A bare muscular torso leans forward, dissolving into coils at the waist. Loose flames or wisps curl around the arms and base. It is white-hot orange and gold."
+  },
+  "Enemy appearance mn_ff4_055_c01": {
+    "en": "A bare muscular torso leans forward, dissolving into coils at the waist. Loose flames or wisps curl around the arms and base. It is bright violet and pink."
+  },
+  "Enemy appearance mn_ff4_056_c00": {
+    "en": "A bulky dragon sits upright on thick clawed limbs, its long horned head lowered near the ground. A pair of high angular wings spreads over its back. It has green scales and gold membranes."
+  },
+  "Enemy appearance mn_ff4_056_c01": {
+    "en": "A bulky dragon sits upright on thick clawed limbs, its long horned head lowered near the ground. A pair of high angular wings spreads over its back. It has orange-gold scales and violet-blue membranes."
+  },
+  "Enemy appearance mn_ff4_057_c00": {
+    "en": "A hovering mechanical eye has rounded overlapping shells. One large round lens peers from the lower opening, and narrow prongs project below. It uses yellow shells and an indigo casing."
+  },
+  "Enemy appearance mn_ff4_057_c01": {
+    "en": "A hovering mechanical eye has rounded overlapping shells. One large round lens peers from the lower opening, and narrow prongs project below. It uses gold shells and a pink casing."
+  },
+  "Enemy appearance mn_ff4_057_c02": {
+    "en": "A hovering mechanical eye has rounded overlapping shells. One large round lens peers from the lower opening, and narrow prongs project below. It uses gray-white shells and a dusky red casing."
+  },
+  "Enemy appearance mn_ff4_058_c00": {
+    "en": "A narrow hovering machine has a blue visor, gold and gray shoulder domes, a wedge-shaped torso and long sharp panels hanging like legs and arms."
+  },
+  "Enemy appearance mn_ff4_059_c00": {
+    "en": "A many-tentacled mass is built around one wide, red horizontal mouth lined with sharp teeth. Little pink buds cap the upright tendrils and thick green appendages trail along the floor."
+  },
+  "Enemy appearance mn_ff4_060_c00": {
+    "en": "A long serpentine dragon coils almost into a circle, with a narrow horned face, spines along the neck and a tail curling down from the coil. It is steel-blue and white."
+  },
+  "Enemy appearance mn_ff4_060_c01": {
+    "en": "A long serpentine dragon coils almost into a circle, with a narrow horned face, spines along the neck and a tail curling down from the coil. It is yellow and olive."
+  },
+  "Enemy appearance mn_ff4_060_c02": {
+    "en": "A long serpentine dragon coils almost into a circle, with a narrow horned face, spines along the neck and a tail curling down from the coil. It is bright blue with green flecks."
+  },
+  "Enemy appearance mn_ff4_060_c03": {
+    "en": "A long serpentine dragon coils almost into a circle, with a narrow horned face, spines along the neck and a tail curling down from the coil. It is violet and purple."
+  },
+  "Enemy appearance mn_ff4_061_c00": {
+    "en": "A round dark-centered organism trails many curling feelers and a dense fan of long fine filaments. It glows green and cyan."
+  },
+  "Enemy appearance mn_ff4_061_c01": {
+    "en": "A round dark-centered organism trails many curling feelers and a dense fan of long fine filaments. It glows orange, pink and violet."
+  },
+  "Enemy appearance mn_ff4_062_c00": {
+    "en": "A huge purple stone face has a long nose, deeply carved eyes, a broad brow and bared teeth. Sharp edges and ridged fragments frame the face."
+  },
+  "Enemy appearance mn_ff4_063_c00": {
+    "en": "A bulky armored machine has a curved horn atop its head, a large circular attachment on one shoulder, heavy boots and claws at the ends of its hands. It has red plating with green and gold trim."
+  },
+  "Enemy appearance mn_ff4_063_c01": {
+    "en": "A bulky armored machine has a curved horn atop its head, a large circular attachment on one shoulder, heavy boots and claws at the ends of its hands. It has silver-blue armor and a gold and red shoulder attachment."
+  },
+  "Enemy appearance mn_ff4_064_c00": {
+    "en": "An upright horned dragon has heavy clawed limbs, a long underplated tail and wide bat wings. Its folded wings and body use indigo, white and olive."
+  },
+  "Enemy appearance mn_ff4_064_c01": {
+    "en": "An upright horned dragon has heavy clawed limbs, a long underplated tail and wide bat wings. Its wings draw in close. The dark brown and red body has an orange belly."
+  },
+  "Enemy appearance mn_ff4_065_c00": {
+    "en": "An upright horned dragon has heavy clawed limbs, a long underplated tail and wide bat wings. Its blue and olive body stretches horizontally between spread pale-violet wings."
+  },
+  "Enemy appearance mn_ff4_065_c01": {
+    "en": "An upright horned dragon has heavy clawed limbs, a long underplated tail and wide bat wings. Its brown and red body stretches horizontally between spread salmon wings."
+  },
+  "Enemy appearance mn_ff4_066_c00": {
+    "en": "A massive low-slung beast is deep violet, with long red dorsal spines, yellow claws, a long thin tail and huge curved yellow fangs. Thin yellow strands extend from its head."
+  },
+  "Enemy appearance mn_ff4_067_c00": {
+    "en": "It is a translucent white-lavender dragon with an upright spiked head and a spread wing, rising from rippling mist."
+  },
+  "Enemy appearance mn_ff4_068_c00": {
+    "en": "It leaves a flat band of separate pale lavender mist streaks spreading across the ground."
+  },
+  "Enemy appearance mn_ff4_069_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Eight separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_070_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Seven separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_071_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Six separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_072_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Five separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_073_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Four separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_074_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Three separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_075_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. Two separated tentacles curve around its head."
+  },
+  "Enemy appearance mn_ff4_076_c00": {
+    "en": "A tapering orange-and-blue head with rows of tiny teeth is surrounded by separate orange-and-blue curling tentacles. One curled orange-and-blue tentacle lies beside the head."
+  },
+  "Enemy appearance mn_ff4_077_c00": {
+    "en": "A copper-brown insect rears with multiple jointed legs, stalklike eyes and a huge open jaw. It has a row of pointed teeth and two long hooked silver pincers."
+  },
+  "Enemy appearance mn_ff4_078_c00": {
+    "en": "A floating mass of orange-red flame has two broad raised sides resembling arms. A narrow-eyed face sits above a huge green-rimmed grin with jagged teeth."
+  },
+  "Enemy appearance mn_ff4_079_c00": {
+    "en": "It shows a hunched, almost fully covered shape in layered peach and tan cloth, with a small dark opening and thin fingers at one edge."
+  },
+  "Enemy appearance mn_ff4_080_c00": {
+    "en": "It shows a crouched gray-brown ghoul with a long spotted head, hooked claws, a cordlike yellow appendage and sweeping horns curving out from its back."
+  },
+  "Enemy appearance mn_ff4_081_c00": {
+    "en": "A broad blue-lavender humanoid braces its bent legs and raises thick arms near its head. Red and gold clothing stands out against its muscles."
+  },
+  "Enemy appearance mn_ff4_082_c00": {
+    "en": "A detached dark lavender arm curves into a raised rounded wrist. It has a fanged mouth and amber markings."
+  },
+  "Enemy appearance mn_ff4_083_c00": {
+    "en": "A detached bright magenta arm bends at the wrist and ends in three pointed digits."
+  },
+  "Enemy appearance mn_ff4_084_c00": {
+    "en": "A broad blue turtle-like body crouches on spread claws, with a ridged shell, lowered toothy face and thin tail."
+  },
+  "Enemy appearance mn_ff4_085_c00": {
+    "en": "The blue turtle-like creature tucks its head and limbs beneath a finely segmented shell."
+  },
+  "Enemy appearance mn_ff4_086_c00": {
+    "en": "A blue turtle-like creature crouches on spread claws inside a bright band of foaming blue water. Its toothy face and ridged shell break the surface."
+  },
+  "Enemy appearance mn_ff4_087_c00": {
+    "en": "A spindly mint and slate figure crouches on narrow angular limbs. Pale hornlike branches and sharp points frame a dark face, with thin clawed fingers splayed on each side."
+  },
+  "Enemy appearance mn_ff4_088_c00": {
+    "en": "A tall slim figure stands beside a long spear. She has flowing brown hair, pointed pink clothing with gold accents, exposed midriff and legs, and tall magenta boots."
+  },
+  "Enemy appearance mn_ff4_089_c00": {
+    "en": "A short, broad figure has a pale angular face, a purple hat and layered violet clothing trimmed with gold. She bends both knees and holds a long straight weapon crosswise."
+  },
+  "Enemy appearance mn_ff4_090_c00": {
+    "en": "A small figure in a pointed pink and violet outfit darts forward, a pale blade pointed back above one shoulder. A bright yellow and pink crest projects from her cap."
+  },
+  "Enemy appearance mn_ff4_091_c00": {
+    "en": "A tall figure wears heavy dark blue plate with gold highlights, spiked pauldrons and a high horned helmet. A long blue cape falls around his boots as he folds his arms at his chest."
+  },
+  "Enemy appearance mn_ff4_092_c00": {
+    "en": "A lithe, pale figure with long bright gold-green hair curls one leg under herself and reaches out. Her narrow gold outfit and hair frame her limbs."
+  },
+  "Enemy appearance mn_ff4_093_c00": {
+    "en": "A lithe, pale figure with long bright gold-green hair curls one leg under herself and reaches out. Her narrow gold outfit and hair frame her limbs. Thick yellow-white whorls of wind wrap her torso and legs and leave her head exposed at the top."
+  },
+  "Enemy appearance mn_ff4_094_c00": {
+    "en": "A large jointed doll has a pale violet face, lashes and a small pursed mouth. Two gold bows decorate its hair. Layered rounded body pieces and dark hinges are visible at the arms and legs."
+  },
+  "Enemy appearance mn_ff4_095_c00": {
+    "en": "A thin figure with a swept white crest and small angular face wears a violet-gray coat with pink details over narrow, straight trousers. One arm sticks out and the other hangs near the coat."
+  },
+  "Enemy appearance mn_ff4_096_c00": {
+    "en": "A lanky skeleton or mechanical frame hunches on two long, jointed legs. The pale round head has pink eyes. Gold, gray and red fittings join the narrow body and arms."
+  },
+  "Enemy appearance mn_ff4_097_c00": {
+    "en": "A stocky humanoid machine has silver-blue layered plate, square boots, large bronze hands and a squared face with yellow prongs on top."
+  },
+  "Enemy appearance mn_ff4_098_c00": {
+    "en": "A thin figure with a swept white crest and small angular face wears a violet-gray coat with pink details over narrow, straight trousers. One arm sticks out and the other hangs near the coat."
+  },
+  "Enemy appearance mn_ff4_099_c00": {
+    "en": "A hulking, horned beast with a grim face, long claws and hooflike feet has a jagged winglike shape behind one shoulder and a skull-shaped marking at the hip. It is gray-blue and muted purple."
+  },
+  "Enemy appearance mn_ff4_099_c01": {
+    "en": "A hulking, horned beast with a grim face, long claws and hooflike feet has a jagged winglike shape behind one shoulder and a skull-shaped marking at the hip. It is purple with yellow horns, teeth and skull trim."
+  },
+  "Enemy appearance mn_ff4_100_c00": {
+    "en": "A wide-eyed humanoid face and horned head crown a sprawling, coiled silhouette. Large claws, flowing locks and a long curved tail show among the coils. It uses green, purple and gold."
+  },
+  "Enemy appearance mn_ff4_100_c01": {
+    "en": "A wide-eyed humanoid face and horned head crown a sprawling, coiled silhouette. Large claws, flowing locks and a long curved tail show among the coils. It uses gold, orange and vivid magenta."
+  },
+  "Enemy appearance mn_ff4_101_c00": {
+    "en": "A tall horned figure wears a sweeping flame-red cloak with blue gems or clasps. He opens the cloak and lifts a pale hand, exposing one leg and more of his torso."
+  },
+  "Enemy appearance mn_ff4_102_c00": {
+    "en": "A tall horned figure wears a sweeping flame-red cloak with blue gems or clasps. He wraps the cloak close around his body. The eyes, horns and edges of his clothing remain visible."
+  },
+  "Enemy appearance mn_ff4_103_c00": {
+    "en": "A horned knight in silver-blue armor rides a green-gold horse with a striped mane and tail. He carries a circular shield. The rider holds a curved blade upright beside the shield."
+  },
+  "Enemy appearance mn_ff4_104_c00": {
+    "en": "A horned knight in silver-blue armor rides a green-gold horse with a striped mane and tail. He carries a circular shield. The rider extends a curved blade outward and above his helmet."
+  },
+  "Enemy appearance mn_ff4_105_c00": {
+    "en": "A horned knight in silver-blue armor rides a green-gold horse with a striped mane and tail. He carries a circular shield. The rider raises a curved blade across the front of his helmet."
+  },
+  "Enemy appearance mn_ff4_106_c00": {
+    "en": "A huge horned serpent with whiskers forms tall loops. A ridged underbelly and large finlike frills show around the head and neck. The pale violet dragon bends its head down. Red and green trim frame the scales."
+  },
+  "Enemy appearance mn_ff4_106_c01": {
+    "en": "A huge horned serpent with whiskers forms tall loops. A ridged underbelly and large finlike frills show around the head and neck. The gold and violet dragon lowers its head, with red trim across its scales."
+  },
+  "Enemy appearance mn_ff4_107_c00": {
+    "en": "A huge horned serpent with whiskers forms tall loops. A ridged underbelly and large finlike frills show around the head and neck. The pale violet serpent twists upright."
+  },
+  "Enemy appearance mn_ff4_107_c01": {
+    "en": "A huge horned serpent with whiskers forms tall loops. A ridged underbelly and large finlike frills show around the head and neck. The gold and dark violet serpent twists upright."
+  },
+  "Enemy appearance mn_ff4_108_c00": {
+    "en": "A tall carved gray-green door tilts open around a black horizontal maw. Rows of orange pointed teeth line both edges, and reddish cracks stripe the stone."
+  },
+  "Enemy appearance mn_ff4_109_c00": {
+    "en": "A huge gray-green rectangular wall turns to show one thick side. A distorted face and clawlike shapes are carved into its flat front."
+  },
+  "Enemy appearance mn_ff4_121_c00": {
+    "en": "A crowned many-armed figure sits cross-legged above hanging pale-blue cloth. Hands hold long narrow weapons around the bare shoulders. A pale gold and pink face looks forward beneath the crown."
+  },
+  "Enemy appearance mn_ff4_122_c00": {
+    "en": "A crowned many-armed figure sits cross-legged above hanging pale-blue cloth. Hands hold long narrow weapons around the bare shoulders. A stern orange-red face looks forward beneath the crown."
+  },
+  "Enemy appearance mn_ff4_123_c00": {
+    "en": "A crowned many-armed figure sits cross-legged above hanging pale-blue cloth. Hands hold long narrow weapons around the bare shoulders. A blue face with yellow crown ornaments looks forward."
+  },
+  "Enemy appearance mn_ff4_124_c00": {
+    "en": "A long pale serpent coils in a wide loop. Its narrow scaled snout droops at one side beneath thin curling whiskers, and a striped ridge follows the back of the head. It has muted gray, mauve and pale green bands."
+  },
+  "Enemy appearance mn_ff4_124_c01": {
+    "en": "A long pale serpent coils in a wide loop. Its narrow scaled snout droops at one side beneath thin curling whiskers, and a striped ridge follows the back of the head. It has brighter cyan and lavender shading."
+  },
+  "Enemy appearance mn_ff4_125_c00": {
+    "en": "A glossy dark-blue sphere reflects a white point of light near its upper edge. Small pale specks and a thin bright equatorial seam stand out against the sphere."
+  },
+  "Enemy appearance mn_ff4_126_c00": {
+    "en": "A glossy dark-blue sphere reflects a white point of light near its upper edge. The plain sphere has a violet edge."
+  },
+  "Enemy appearance mn_ff4_127_c00": {
+    "en": "A pale floating figure shadows most of its body in a long ragged violet robe. Its two narrow arms stretch upward and out. A dark crown or collar with gold stripes frames the face."
+  },
+  "Enemy appearance mn_ff4_128_c00": {
+    "en": "It shows a huge flowing blue mass with long swept-back ridges, narrow red-orange slits and a curled glowing opening near the front."
+  },
+  "Enemy appearance mn_ff4_129_c00": {
+    "en": "It is an enormous gray skeletal mass with fanged jaws, long branching spines, red channels in the riblike body and vivid blue and red circular cores."
+  },
+  "Enemy appearance mn_ff4_132_c00": {
+    "en": "A large silver-blue humanoid machine has a narrow horned head, blocky boots and gauntlets, orange joints and layered metal plates across the torso."
+  },
+  "Enemy appearance mn_ff4_133_c00": {
+    "en": "A rounded orange-yellow egg is mottled with green blotches."
+  },
+  "Enemy appearance mn_ff4_134_c00": {
+    "en": "A rounded orange-yellow egg is mottled with green blotches. A jagged vertical split runs down its front."
+  },
+  "Enemy appearance mn_ff4_135_c00": {
+    "en": "A round yellow bird has an upright feather crest, blue eye, curved bill, orange feet and raised tail feathers. Its body is upright with both feet down."
+  },
+  "Enemy appearance mn_ff4_136_c00": {
+    "en": "A round yellow bird has an upright feather crest, blue eye, curved bill, orange feet and raised tail feathers. The bird leans forward in a run with both feet extended."
+  },
+  "Enemy appearance mn_ff4_137_c00": {
+    "en": "A blue-white, winged humanoid floats with pointed head ornaments and a curling ribbonlike lower half. It spreads its arms near a few yellow sparks."
+  },
+  "Enemy appearance mn_ff4_138_c00": {
+    "en": "A blue-white, winged humanoid floats with pointed head ornaments and a curling ribbonlike lower half. It extends one arm toward a bright star-shaped flash."
+  },
+  "Enemy appearance mn_ff4_139_c00": {
+    "en": "A crouching green creature has heavy forelimbs, a long toothy muzzle, purple claws and two sweeping red-orange arcs above it."
+  },
+  "Enemy appearance mn_ff4_140_c00": {
+    "en": "A crouching green creature has heavy forelimbs, a long toothy muzzle, purple claws and two sweeping red-orange arcs above it. Bright orange streaks radiate outward from the creature."
+  },
+  "Enemy appearance mn_ff4_141_c00": {
+    "en": "A hunched elderly figure has a very long white-gray beard, exposed nose and bald crown, and a dark blue and olive cloak. He holds a long blue staff crosswise."
+  },
+  "Enemy appearance mn_ff4_142_c00": {
+    "en": "A hunched elderly figure has a very long white-gray beard, exposed nose and bald crown, and a dark blue and olive cloak. He raises a blue staff with a tiny pale-blue shape or glow at the tip."
+  },
+  "Enemy appearance mn_ff4_143_c00": {
+    "en": "Three small glowing figures are stacked in a vertical line. Each has yellow and red markings and blue-green wings. All three spread similarly broad wings."
+  },
+  "Enemy appearance mn_ff4_144_c00": {
+    "en": "Three small glowing figures are stacked in a vertical line. Each has yellow and red markings and blue-green wings. The top figure spreads long wings. The other two pull theirs in."
+  },
+  "Enemy appearance mn_ff4_145_c00": {
+    "en": "A round pale pink pig has a projecting square snout, small pointed ears, short legs and an upright curled tail."
+  },
+  "Enemy appearance mn_ff4_146_c00": {
+    "en": "A small pale figure wears green hair or a pointed green hood with a gold ornament, a blue and gold top and pink boots. One arm lifts at her side."
+  },
+  "Enemy appearance mn_ff4_147_c00": {
+    "en": "A pale blond man wears a red cap with a white feather, green scarf and cloak, and white sleeves over red and brown clothing."
+  },
+  "Enemy appearance mn_ff4_148_c00": {
+    "en": "A fighter has a dragon-shaped blue helmet with a red mark, pointed blue shoulder guards and exposed hands. The fighter stands in profile."
+  },
+  "Enemy appearance mn_ff4_148_c01": {
+    "en": "A fighter has a dragon-shaped blue helmet with a red mark, pointed blue shoulder guards and exposed hands. The fighter faces forward with bent arms."
+  },
+  "Enemy appearance mn_ff4_148_c03": {
+    "en": "A fighter has a dragon-shaped blue helmet with a red mark, pointed blue shoulder guards and exposed hands. The fighter leans down behind a pair of long blue points."
+  },
+  "Enemy appearance mn_ff4_149_c00": {
+    "en": "A fighter wears dark indigo armor, a swept helmet with a narrow yellow eye slit, and yellow accents at the feet. The fighter braces in a ready stance."
+  },
+  "Enemy appearance mn_ff4_149_c01": {
+    "en": "A fighter wears dark indigo armor, a swept helmet with a narrow yellow eye slit, and yellow accents at the feet. The fighter thrusts a large silver sword straight forward."
+  },
+  "Enemy appearance mn_ff4_149_c02": {
+    "en": "A fighter wears dark indigo armor, a swept helmet with a narrow yellow eye slit, and yellow accents at the feet. The fighter lifts a large silver sword diagonally across the body."
+  },
+  "Enemy appearance mn_ff4_150_c00": {
+    "en": "A bare-chested fighter has a shaved crown, trailing dark braid, dark goatee, blue wrist wraps and red trousers with yellow trim. He stands upright with his fists raised."
+  },
+  "Enemy appearance mn_ff4_150_c01": {
+    "en": "A bare-chested fighter has a shaved crown, trailing dark braid, dark goatee, blue wrist wraps and red trousers with yellow trim. He takes a wide side-on stance, with his back leg extended."
+  },
+  "Enemy appearance mn_ff4_150_c02": {
+    "en": "A bare-chested fighter has a shaved crown, trailing dark braid, dark goatee, blue wrist wraps and red trousers with yellow trim. He shifts the rear leg and keeps his fists raised in a wide side-on stance."
+  },
+  "Enemy appearance mn_ff4_150_c03": {
+    "en": "A bare-chested fighter has a shaved crown, trailing dark braid, dark goatee, blue wrist wraps and red trousers with yellow trim. He extends a leg in a high side kick."
+  },
+  "Enemy appearance mn_ff4_152_c03": {
+    "en": "A small, hunched figure has a long pointed cap, a hooked nose, a large pointed ear and a raised clawlike hand. The other hand wields a short curved blade. It wears orange-red with a gray face and hand."
+  },
+  "Field appearance mo_ff4_b004_c00": {
+    "en": "A tall faceted crystal has a white core and cyan and deep blue faces."
+  },
+  "Field appearance mo_ff4_b007_c00": {
+    "en": "A tall faceted crystal has a white core and gold and red faces."
+  },
+  "Field appearance mo_ff4_e016_c00": {
+    "en": "A white rounded bubble shows three red Z-shaped marks."
+  },
+  "Field appearance mo_ff4_e101_c00": {
+    "en": "Icy-blue serif lettering reads “THE END.” Existing text can convey the words."
+  },
+  "Field appearance mo_ff4_n001_c00": {
+    "en": "A bulky navy armored figure has branching gold horns, gold shoulder bars and a narrow dark visor. A long blue-violet cape hangs from a gold border across the armor's back."
+  },
+  "Field appearance mo_ff4_n002_c00": {
+    "en": "A little rounded orange creature has two high ear-like points, a short square muzzle, dark eyes and small pale paws."
+  },
+  "Field appearance mo_ff4_n003_c00": {
+    "en": "A short-haired pale figure wears heavy shoulder plates with contrasting cuffs and a long cape. It has auburn hair, gold trim and violet clothing and cape."
+  },
+  "Field appearance mo_ff4_n003_c01": {
+    "en": "A short-haired pale figure wears heavy shoulder plates with contrasting cuffs and a long cape. It has brown hair and a blue cape with gold shoulders."
+  },
+  "Field appearance mo_ff4_n003_c02": {
+    "en": "A short-haired pale figure wears heavy shoulder plates with contrasting cuffs and a long cape. It has blond hair, pale steel trim and a red cape."
+  },
+  "Field appearance mo_ff4_n004_c00": {
+    "en": "A bald elder has narrow eyes and a long thick beard. It has a gray beard and purple robe."
+  },
+  "Field appearance mo_ff4_n004_c01": {
+    "en": "A bald elder has narrow eyes and a long thick beard. It has a russet beard and blue coat."
+  },
+  "Field appearance mo_ff4_n004_c02": {
+    "en": "A bald elder has narrow eyes and a long thick beard. It has a gold beard and a dark gray coat with short pale trim."
+  },
+  "Field appearance mo_ff4_n005_c00": {
+    "en": "A compact figure has a large swept fringe, dark eyes, a simple tunic and short boots. It has copper-brown hair and purple sleeves over blue clothes."
+  },
+  "Field appearance mo_ff4_n005_c01": {
+    "en": "A compact figure has a large swept fringe, dark eyes, a simple tunic and short boots. It has dark brown hair and slate-blue and gray clothes."
+  },
+  "Field appearance mo_ff4_n005_c02": {
+    "en": "A compact figure has a large swept fringe, dark eyes, a simple tunic and short boots. It has gold hair and red and gold clothing."
+  },
+  "Field appearance mo_ff4_n006_c00": {
+    "en": "A heavy-set figure with a full beard wears a tall gold crown and a floor-length robe with a pale fur-like collar. It has a brown beard and purple cloak."
+  },
+  "Field appearance mo_ff4_n006_c01": {
+    "en": "A heavy-set figure with a full beard wears a tall gold crown and a floor-length robe with a pale fur-like collar. It has a gray beard and blue cloak."
+  },
+  "Field appearance mo_ff4_n006_c02": {
+    "en": "A heavy-set figure with a full beard wears a tall gold crown and a floor-length robe with a pale fur-like collar. It has a brown beard and red cloak."
+  },
+  "Field appearance mo_ff4_n007_c00": {
+    "en": "A compact woman wears a dress with a dark neckline and a large ornament on rounded hair. It has violet hair, an orange flower and a rose dress."
+  },
+  "Field appearance mo_ff4_n007_c01": {
+    "en": "A compact woman wears a dress with a dark neckline and a large ornament on rounded hair. It has blue-violet hair, a pink bow and a blue dress."
+  },
+  "Field appearance mo_ff4_n007_c02": {
+    "en": "A compact woman wears a dress with a dark neckline and a large ornament on rounded hair. It has brown hair, a golden bow and an orange-red dress."
+  },
+  "Field appearance mo_ff4_n008_c00": {
+    "en": "A small low magenta figure has a wide ridged lower edge, short tapered upper half and two raised corners."
+  },
+  "Field appearance mo_ff4_n008_c01": {
+    "en": "A small low blue-violet figure has a wide ridged lower edge, short tapered upper half and two raised corners."
+  },
+  "Field appearance mo_ff4_n008_c02": {
+    "en": "A small low orange-red figure has a wide ridged lower edge, short tapered upper half and two raised corners."
+  },
+  "Field appearance mo_ff4_n009_c00": {
+    "en": "A petite pale figure wears a broad ornate head garment with a flower over one side and a fitted dress. It is violet-blue with an orange ornament."
+  },
+  "Field appearance mo_ff4_n009_c01": {
+    "en": "A petite pale figure wears a broad ornate head garment with a flower over one side and a fitted dress. It is pink with a yellow-orange ornament."
+  },
+  "Field appearance mo_ff4_n009_c02": {
+    "en": "A petite pale figure wears a broad ornate head garment with a flower over one side and a fitted dress. It is russet with a yellow-white ornament."
+  },
+  "Field appearance mo_ff4_n010_c00": {
+    "en": "A slim figure with pinned-up hair wears a long formal dress with a low collar, matching cape and pale sleeves. It has brown hair and a wine-colored dress."
+  },
+  "Field appearance mo_ff4_n010_c01": {
+    "en": "A slim figure with pinned-up hair wears a long formal dress with a low collar, matching cape and pale sleeves. It has auburn hair with a violet ribbon and violet dress."
+  },
+  "Field appearance mo_ff4_n010_c02": {
+    "en": "A slim figure with pinned-up hair wears a long formal dress with a low collar, matching cape and pale sleeves. It has gold hair or headwear with red and gold fabric."
+  },
+  "Field appearance mo_ff4_n011_c00": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses violet on pale skin."
+  },
+  "Field appearance mo_ff4_n011_c01": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses blue on pale skin."
+  },
+  "Field appearance mo_ff4_n011_c02": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses red on pale skin."
+  },
+  "Field appearance mo_ff4_n011_c03": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses muted violet on a desaturated olive figure."
+  },
+  "Field appearance mo_ff4_n011_c04": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses ochre and gold with red shoes."
+  },
+  "Field appearance mo_ff4_n011_c05": {
+    "en": "A compact bald figure has a bare upper body, a dark oval eye or brow line, colored markings on the forehead and matching wrist and waist bands. It uses green on a muted olive-gray figure."
+  },
+  "Field appearance mo_ff4_n012_c00": {
+    "en": "A very short fair figure has wide horned headwear, small eyes, pale knit-looking clothing and short boots. It uses ochre and brown headwear with purple trim."
+  },
+  "Field appearance mo_ff4_n012_c01": {
+    "en": "A very short fair figure has wide horned headwear, small eyes, pale knit-looking clothing and short boots. It uses cream-gold headwear and blue trim."
+  },
+  "Field appearance mo_ff4_n012_c02": {
+    "en": "A very short fair figure has wide horned headwear, small eyes, pale knit-looking clothing and short boots. It uses white headwear, dark bands and orange-red trim."
+  },
+  "Field appearance mo_ff4_n013_c00": {
+    "en": "A short hooded figure wears a floor-length purple cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c01": {
+    "en": "A short hooded figure wears a floor-length navy cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c02": {
+    "en": "A short hooded figure wears a floor-length magenta cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c03": {
+    "en": "A short hooded figure wears a floor-length gray-violet cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c04": {
+    "en": "A short hooded figure wears a floor-length red cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c05": {
+    "en": "A short hooded figure wears a floor-length gold cloak. Two bright red eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c06": {
+    "en": "A short hooded figure wears a floor-length pale blue cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n013_c07": {
+    "en": "A short hooded figure wears a floor-length orange cloak. Two bright yellow eyes shine from its shadowed face."
+  },
+  "Field appearance mo_ff4_n014_c00": {
+    "en": "A small upward-looking figure wears two hair ornaments over a short skirt. It has indigo hair and a blue-violet outfit."
+  },
+  "Field appearance mo_ff4_n014_c01": {
+    "en": "A small upward-looking figure wears two hair ornaments over a short skirt. It has shoulder-length brown hair and a pink outfit."
+  },
+  "Field appearance mo_ff4_n014_c02": {
+    "en": "A small upward-looking figure wears two hair ornaments over a short skirt. It wears a light violet cap with a gold fastener and white and pink clothing."
+  },
+  "Field appearance mo_ff4_n015_c00": {
+    "en": "A short robed humanoid wears a very wide horned gold and purple helmet. Yellow eyes peer out from a shadowed face above a long brown-gold jaw trim and violet cape."
+  },
+  "Field appearance mo_ff4_n016_c00": {
+    "en": "A narrow pale-faced figure wears a tall dark blue headdress, blond hair at its sides and a long lavender and white robe with gold shoulder and wrist trim."
+  },
+  "Field appearance mo_ff4_n017_c00": {
+    "en": "A short hunched figure has wild pale gray hair, a little dark eye band and a long cream-gray coat. Violet and yellow details show at the front."
+  },
+  "Field appearance mo_ff4_n018_c00": {
+    "en": "A pale figure wears a floor-length blue or mauve gown, pale hanging sleeves and a small vivid head ornament. It has a violet and gold hood and magenta dress."
+  },
+  "Field appearance mo_ff4_n018_c01": {
+    "en": "A pale figure wears a floor-length blue or mauve gown, pale hanging sleeves and a small vivid head ornament. It has brown hair with gold trim and a navy dress."
+  },
+  "Field appearance mo_ff4_n018_c02": {
+    "en": "A pale figure wears a floor-length blue or mauve gown, pale hanging sleeves and a small vivid head ornament. It has lavender and pink hair or headwear and a mauve and blue dress with warm trim."
+  },
+  "Field appearance mo_ff4_n019_c00": {
+    "en": "A small round hovering body has two sharply slanted eyes, a broad many-toothed grin and three detached pale glints over its head. It is blue-violet."
+  },
+  "Field appearance mo_ff4_n019_c01": {
+    "en": "A small round hovering body has two sharply slanted eyes, a broad many-toothed grin and three detached pale glints over its head. It is bright orange-red."
+  },
+  "Field appearance mo_ff4_n020_c00": {
+    "en": "A blocky gray and orange flamelike creature has a dark angry brow, bared white teeth and jagged pointed edges."
+  },
+  "Field appearance mo_ff4_n021_c00": {
+    "en": "A small blue ridged shell curves down toward a pale-blue lowered head or mouth, with little side flaps or feet."
+  },
+  "Field appearance mo_ff4_n022_c00": {
+    "en": "A pale purple ear-like helmet or crest flares beside a shaded face. A blue-violet robe with red and white shoulder trim spreads along the ground."
+  },
+  "Field appearance mo_ff4_n023_c00": {
+    "en": "A gaunt gray and teal creature has long thin clawed limbs, a narrow dark face and a bright purple spike and collar details."
+  },
+  "Field appearance mo_ff4_n024_c00": {
+    "en": "A segmented violet hand or limb has four narrow fingertips with pale yellow ends. From the side the wrist stretches into a long bent shape."
+  },
+  "Field appearance mo_ff4_n025_c00": {
+    "en": "A little rigid dark-armored figure wears magenta and blue armor with a horned helmet and dark open face and chest areas. Small yellow eyes show inside the head."
+  },
+  "Field appearance mo_ff4_n026_c00": {
+    "en": "Two closely folded small poses show pale hands or a face beside a rounded body. It uses violet clothing and a red-orange tip."
+  },
+  "Field appearance mo_ff4_n026_c01": {
+    "en": "Two closely folded small poses show pale hands or a face beside a rounded body. It is warm brown with a yellow tip."
+  },
+  "Field appearance mo_ff4_n027_c00": {
+    "en": "A tiny pale hand-shaped form stands upright between two scattered cyan marks."
+  },
+  "Field appearance mo_ff4_n028_c00": {
+    "en": "A large round yellow-orange bird sits amid loose feathers. It has a large golden beak, a prominent blue eye, a brown foot lifted forward and a little pale glint above."
+  },
+  "Field appearance mo_ff4_n029_c00": {
+    "en": "A pale figure has shoulder-length brown hair, large blue eyes, a yellow waist band and a short bright gold dress."
+  },
+  "Field appearance mo_ff4_n030_c00": {
+    "en": "A compact figure has two dark brown tied bunches or panels and bright yellow eyes against a shaded face. A little pink and gold outfit shows beneath."
+  },
+  "Field appearance mo_ff4_n031_c00": {
+    "en": "A low orange shape has a thin curved taper reaching up to one side with a pale tip, like a lick of fire rising from a glowing puddle."
+  },
+  "Field appearance mo_ff4_n032_c00": {
+    "en": "A toy-like figure has rounded bunches at both sides of its head, a center ornament and a broad short dress. It has rust-red hair, a gold bow and a yellow dress."
+  },
+  "Field appearance mo_ff4_n032_c01": {
+    "en": "A toy-like figure has rounded bunches at both sides of its head, a center ornament and a broad short dress. It has purple hair, a blue bow and a blue dress."
+  },
+  "Field appearance mo_ff4_n033_c00": {
+    "en": "Two thin orange and gold curling streaks stand apart, edged in black with a pale glint beside them."
+  },
+  "Field appearance mo_ff4_n034_c00": {
+    "en": "A pale slender figure has long yellow-green hair, clear blue eyes and a short gold-colored outfit. Thick pointed strands curl around her sides."
+  },
+  "Field appearance mo_ff4_n035_c00": {
+    "en": "A little pale fairy has a wing-shaped headdress and long upward flaring wings. It uses green, yellow, cyan and blue."
+  },
+  "Field appearance mo_ff4_n035_c01": {
+    "en": "A little pale fairy has a wing-shaped headdress and long upward flaring wings. It uses lavender, mint and pale blue."
+  },
+  "Field appearance mo_ff4_n036_c00": {
+    "en": "A small ponytailed figure tips horizontally with arms and hair trailing. It is gray and white."
+  },
+  "Field appearance mo_ff4_n036_c01": {
+    "en": "A small ponytailed figure tips horizontally with arms and hair trailing. It shows brown hair, a pale shirt and a bright red trailing cloth."
+  },
+  "Field appearance mo_ff4_n037_c00": {
+    "en": "A small blond head bends almost flat above a dark red and charcoal bundled body."
+  },
+  "Field appearance mo_ff4_n038_c00": {
+    "en": "Short knotted streaks of orange and gold glow around a vivid blue center. It is pale flame orange, while."
+  },
+  "Field appearance mo_ff4_n038_c01": {
+    "en": "Short knotted streaks of orange and gold glow around a vivid blue center. It has deeper rust and red edges."
+  },
+  "Field appearance mo_ff4_n039_c00": {
+    "en": "A tall slender blue armored figure has round raised shoulder domes, a recessed dark face, narrow claws and long plated legs."
+  },
+  "Field appearance mo_ff4_n040_c00": {
+    "en": "A small pointed pale purple shape breaks through a thin white horizontal line, with a few pale flecks to the left."
+  },
+  "Field appearance mo_ff4_n041_c00": {
+    "en": "A compact red and violet dragon has long horns, several broad jagged wings, a low toothy snout and thick limbs that curl around the body."
+  },
+  "Field appearance mo_ff4_n042_c00": {
+    "en": "A long pale serpentine creature is visible in separate arches. Violet ridges peak over pale blue splashes, with a narrow spiked head at one end."
+  },
+  "Field appearance mo_ff4_n043_c00": {
+    "en": "A triangular white wave or spray rises above a horizontal lower edge and breaks into a detached pale dot."
+  },
+  "Field appearance mo_ff4_n044_c00": {
+    "en": "A tilted small figure with a trailing ponytail extends a pale arm forward. It is gray-white."
+  },
+  "Field appearance mo_ff4_n044_c01": {
+    "en": "A tilted small figure with a trailing ponytail extends a pale arm forward. It has brown hair and a short bright green cloth trail."
+  },
+  "Field appearance mo_ff4_n101_c00": {
+    "en": "A compact soldier wears a round helmet, matching tunic with a colored waist stripe and short armored boots. It has a bronze helmet and magenta and violet clothes."
+  },
+  "Field appearance mo_ff4_n101_c01": {
+    "en": "A compact soldier wears a round helmet, matching tunic with a colored waist stripe and short armored boots. It has a steel helmet and blue and gold clothes."
+  },
+  "Field appearance mo_ff4_n101_c02": {
+    "en": "A compact soldier wears a round helmet, matching tunic with a colored waist stripe and short armored boots. It has a gold helmet and red and gold clothes."
+  },
+  "Field appearance mo_ff4_n102_c00": {
+    "en": "A short figure with swept hair and dark eyes wears a simple long-sleeved tunic and narrowly cut trousers. It has rust-brown hair and plum clothes."
+  },
+  "Field appearance mo_ff4_n102_c01": {
+    "en": "A short figure with swept hair and dark eyes wears a simple long-sleeved tunic and narrowly cut trousers. It has brown hair and slate-blue clothes."
+  },
+  "Field appearance mo_ff4_n102_c02": {
+    "en": "A short figure with swept hair and dark eyes wears a simple long-sleeved tunic and narrowly cut trousers. It has yellow-blond hair, a deep red top and brown trousers."
+  },
+  "Field appearance mo_ff4_n103_c00": {
+    "en": "A pale woman has pulled-back hair, two colorful ties and short pale sleeves over a long dress. It has purple-pink hair and skirt with green ties."
+  },
+  "Field appearance mo_ff4_n103_c01": {
+    "en": "A pale woman has pulled-back hair, two colorful ties and short pale sleeves over a long dress. It wears violet and gold."
+  },
+  "Field appearance mo_ff4_n103_c02": {
+    "en": "A pale woman has pulled-back hair, two colorful ties and short pale sleeves over a long dress. It has copper hair and red clothing with yellow ties."
+  },
+  "Field appearance mo_ff4_n104_c00": {
+    "en": "A short old figure wears a pointed cap and thick robe around a long beard. It wears purple with a white beard."
+  },
+  "Field appearance mo_ff4_n104_c01": {
+    "en": "A short old figure wears a pointed cap and thick robe around a long beard. It wears dark blue with a rust beard."
+  },
+  "Field appearance mo_ff4_n104_c02": {
+    "en": "A short old figure wears a pointed cap and thick robe around a long beard. It wears pink with a yellow beard."
+  },
+  "Field appearance mo_ff4_n104_c03": {
+    "en": "A short old figure wears a pointed cap and thick robe around a long beard. It wears dark teal with a brown beard."
+  },
+  "Field appearance mo_ff4_n104_c04": {
+    "en": "A short old figure wears a pointed cap and thick robe around a long beard. It has an olive-gray muted face, beard and robes."
+  },
+  "Field appearance mo_ff4_n105_c00": {
+    "en": "A round-faced figure has hair in a large bun, long sleeves and a matching long robe. It has silver hair and purple robes."
+  },
+  "Field appearance mo_ff4_n105_c01": {
+    "en": "A round-faced figure has hair in a large bun, long sleeves and a matching long robe. It has brown hair and blue robes."
+  },
+  "Field appearance mo_ff4_n105_c02": {
+    "en": "A round-faced figure has hair in a large bun, long sleeves and a matching long robe. It has gold hair and red robes."
+  },
+  "Field appearance mo_ff4_n105_c03": {
+    "en": "A round-faced figure has hair in a large bun, long sleeves and a matching long robe. It has a pale olive-gray body and robe."
+  },
+  "Field appearance mo_ff4_n106_c00": {
+    "en": "A small childlike figure has a big fringe, cropped clothing and short boots. It has magenta hair and a gold shirt with blue boots."
+  },
+  "Field appearance mo_ff4_n106_c01": {
+    "en": "A small childlike figure has a big fringe, cropped clothing and short boots. It has violet hair and gray clothes with red boots."
+  },
+  "Field appearance mo_ff4_n106_c02": {
+    "en": "A small childlike figure has a big fringe, cropped clothing and short boots. It has brown hair, pale purple clothes and pink boots."
+  },
+  "Field appearance mo_ff4_n107_c00": {
+    "en": "A young figure with two tied bunches wears a short dress with squared pale cuffs. It uses violet hair and red clothing."
+  },
+  "Field appearance mo_ff4_n107_c01": {
+    "en": "A young figure with two tied bunches wears a short dress with squared pale cuffs. It uses dark violet hair and burnt red clothing."
+  },
+  "Field appearance mo_ff4_n107_c02": {
+    "en": "A young figure with two tied bunches wears a short dress with squared pale cuffs. It uses rust hair and gold clothing."
+  },
+  "Field appearance mo_ff4_n107_c03": {
+    "en": "A young figure with two tied bunches wears a short dress with squared pale cuffs. It uses sandy blond hair and pale blue clothing."
+  },
+  "Field appearance mo_ff4_n109_c00": {
+    "en": "A petite figure has hair swept under a large side bow and a short fitted outfit that leaves pale arms and legs exposed. It uses purple hair, orange bow and violet clothes."
+  },
+  "Field appearance mo_ff4_n109_c01": {
+    "en": "A petite figure has hair swept under a large side bow and a short fitted outfit that leaves pale arms and legs exposed. It uses indigo hair, pink bow and blue clothes."
+  },
+  "Field appearance mo_ff4_n109_c02": {
+    "en": "A petite figure has hair swept under a large side bow and a short fitted outfit that leaves pale arms and legs exposed. It uses brown hair, yellow bow and red clothes."
+  },
+  "Field appearance mo_ff4_n110_c00": {
+    "en": "A small figure wears a short cloak over a sleeveless tunic and has long hair gathered with a tie. It has bright blond hair, a plum cloak with pale trim and green clothes."
+  },
+  "Field appearance mo_ff4_n110_c01": {
+    "en": "A small figure wears a short cloak over a sleeveless tunic and has long hair gathered with a tie. It has brown hair tied with blue and wears a blue and pale coat over ochre trousers."
+  },
+  "Field appearance mo_ff4_n112_c00": {
+    "en": "A short armored figure has a tall horned helmet, dark face with yellow eyes and short boots. It uses violet and bright gold."
+  },
+  "Field appearance mo_ff4_n112_c01": {
+    "en": "A short armored figure has a tall horned helmet, dark face with yellow eyes and short boots. It has navy and gray plate."
+  },
+  "Field appearance mo_ff4_n112_c02": {
+    "en": "A short armored figure has a tall horned helmet, dark face with yellow eyes and short boots. It uses red, black and gold."
+  },
+  "Field appearance mo_ff4_n114_c00": {
+    "en": "A compact bearded figure wears a round broad hat, contrasting coat and short boots. It has a violet hat and clothes and pale blue cuffs."
+  },
+  "Field appearance mo_ff4_n114_c01": {
+    "en": "A compact bearded figure wears a round broad hat, contrasting coat and short boots. It has a dark blue cap and violet outer layers."
+  },
+  "Field appearance mo_ff4_n114_c02": {
+    "en": "A compact bearded figure wears a round broad hat, contrasting coat and short boots. It has a red cap, green and red clothes and a yellow-brown beard."
+  },
+  "Field appearance mo_ff4_n116_c00": {
+    "en": "A stocky bird has a swept pointed crest, rounded eyes, a hooked yellow-orange beak, little claws and a short tail. It has white feathers."
+  },
+  "Field appearance mo_ff4_n116_c01": {
+    "en": "A stocky bird has a swept pointed crest, rounded eyes, a hooked yellow-orange beak, little claws and a short tail. It has dark blue-violet feathers."
+  },
+  "Field appearance mo_ff4_n116_c02": {
+    "en": "A stocky bird has a swept pointed crest, rounded eyes, a hooked yellow-orange beak, little claws and a short tail. It has spread blue-violet wings."
+  },
+  "Field appearance mo_ff4_n116_c03": {
+    "en": "A stocky bird has a swept pointed crest, rounded eyes, a hooked yellow-orange beak, little claws and a short tail. It has yellow plumage."
+  },
+  "Field appearance mo_ff4_n116_c04": {
+    "en": "A stocky bird has a swept pointed crest, rounded eyes, a hooked yellow-orange beak, little claws and a short tail. It has red plumage."
+  },
+  "Field appearance mo_ff4_n117_c00": {
+    "en": "A narrow face under a deep white hood has a pale robe flaring below the waist. It has a plum band over the brow and lavender trim."
+  },
+  "Field appearance mo_ff4_n117_c01": {
+    "en": "A narrow face under a deep white hood has a pale robe flaring below the waist. It has brown hair and red trim at the sleeve and hem."
+  },
+  "Field appearance mo_ff4_n118_c00": {
+    "en": "A large pointed hat hides almost all of a black face except two pale eyes. It wears an orange-brown hat and bright violet robe."
+  },
+  "Field appearance mo_ff4_n118_c01": {
+    "en": "A large pointed hat hides almost all of a black face except two pale eyes. It wears a mustard hat and blue robe."
+  },
+  "Field appearance mo_ff4_n120_c00": {
+    "en": "A tiny squat frog has raised yellow or pale eyes, a low pointed head and bent feet. It is bright green."
+  },
+  "Field appearance mo_ff4_n120_c01": {
+    "en": "A tiny squat frog has raised yellow or pale eyes, a low pointed head and bent feet. It is vivid blue-violet."
+  },
+  "Field appearance mo_ff4_n120_c02": {
+    "en": "A tiny squat frog has raised yellow or pale eyes, a low pointed head and bent feet. It is muted pink-purple."
+  },
+  "Field appearance mo_ff4_n120_c03": {
+    "en": "A tiny squat frog has raised yellow or pale eyes, a low pointed head and bent feet. It is deep teal."
+  },
+  "Field appearance mo_ff4_n120_c04": {
+    "en": "A tiny squat frog has raised yellow or pale eyes, a low pointed head and bent feet. It is pale olive and white."
+  },
+  "Field appearance mo_ff4_n122_c00": {
+    "en": "A minuscule figure has a simple round face, blocky sweater and tiny brown feet. It has blond hair and green clothing."
+  },
+  "Field appearance mo_ff4_n122_c01": {
+    "en": "A minuscule figure has a simple round face, blocky sweater and tiny brown feet. It has lavender hair and blue clothing."
+  },
+  "Field appearance mo_ff4_n122_c02": {
+    "en": "A minuscule figure has a simple round face, blocky sweater and tiny brown feet. It has brown hair and a red shirt."
+  },
+  "Field appearance mo_ff4_n122_c03": {
+    "en": "A minuscule figure has a simple round face, blocky sweater and tiny brown feet. It has mint-green hair and a violet shirt."
+  },
+  "Field appearance mo_ff4_p001_c00": {
+    "en": "A compact fighter wears dark indigo plate with layered spiked shoulders, pale wrist openings and a long pointed helmet. Gold marks show at the eye and below the boots."
+  },
+  "Field appearance mo_ff4_p002_c00": {
+    "en": "A bright cyan dragon helm has a long pointed snout, swept gold side markings and a tiny red eye. Blue pointed shoulder plates, violet boots and a short tailing sash cover the rest."
+  },
+  "Field appearance mo_ff4_p002_c01": {
+    "en": "The long dragon helm, spiked shoulders and narrow waist use rich violet and pink-violet shades, with gold and red accents. The ready battle stance crouches behind large layered plates."
+  },
+  "Field appearance mo_ff4_p003_c00": {
+    "en": "A fair-haired woman with a pale face and green eyes wears green upper clothing and a long white cloak or skirt with pink trim. A high ponytail and longer white cape trail in the battle pose."
+  },
+  "Field appearance mo_ff4_p004_c00": {
+    "en": "A short pale figure has sweeping green hair, a pink hair accent and bright blue and pink clothing. A yellow cape trails behind the field and battle forms, with a gold shoulder detail clearly outlined in battle."
+  },
+  "Field appearance mo_ff4_p005_c00": {
+    "en": "A broad bearded man has a large blue and orange helmet with a pale horizontal goggle band. The field outfit includes brown beard and shoes, red-orange sleeves and blue fabric."
+  },
+  "Field appearance mo_ff4_p006_c00": {
+    "en": "A small elder has flyaway white hair, a long white beard and blue circular spectacles. He wears a bright purple and pink cloak edged with gold. The large cape swings outward in the battle Ready frame."
+  },
+  "Field appearance mo_ff4_p007_c00": {
+    "en": "A slim fair-haired man wears a red cap with white trim, green scarf and long green cape, red tunic and short brown boots. His light sleeves and longer blond hair are clearer in the side battle frame."
+  },
+  "Field appearance mo_ff4_p008_c00": {
+    "en": "A muscular bare-chested fighter has a shaved front scalp, short dark facial hair, a braided tail of hair, blue wraps and red trousers with yellow trim."
+  },
+  "Field appearance mo_ff4_p009_c00": {
+    "en": "A young pale figure with a brown bob wears a short white and green outfit and a bright red cape. Small boots and a short trailing gold tie appear beside the cape in battle."
+  },
+  "Field appearance mo_ff4_p010_c00": {
+    "en": "A young pale figure has swept brown hair, a small top tie and a bright green cape over a white-and-orange outfit."
+  },
+  "Field appearance mo_ff4_p011_c00": {
+    "en": "A lean pale figure has spiky white hair, a lavender lower-face guard and a white-violet scarf, arm guards and coat. The side battle frame shows the layered blue and gold trim, dark knees and long scarf ends."
+  },
+  "Field appearance mo_ff4_p012_c00": {
+    "en": "A bald elder has a huge light blue-white beard and trailing white hair. A purple robe and cape drape to the floor."
+  },
+  "Field appearance mo_ff4_p013_c00": {
+    "en": "A fair figure wears ivory and gold armor, a lavender swept hairstyle or headpiece and a red brow jewel."
+  },
+  "Field appearance mo_ff4_p014_c00": {
+    "en": "A slim pale figure wears a fitted bright green outfit with trailing sleeves or fabric. Long vivid green hair has a little pink ornament."
+  },
+  "Field appearance mo_ff4_v001_c00": {
+    "en": "A small wooden boat has a gold-rimmed hull, dark crossbars and a bright white side sail."
+  },
+  "Field appearance mo_ff4_v002_c00": {
+    "en": "A small orange craft stands over two dark wheels or side housings, with dark circular front and rear details."
+  },
+  "Field appearance mo_ff4_v003_c00": {
+    "en": "A narrow ship has a pointed red-orange lower hull, pale upper frame and short high propeller. It uses a purple and bright orange deck."
+  },
+  "Field appearance mo_ff4_v003_c01": {
+    "en": "A narrow ship has a pointed red-orange lower hull, pale upper frame and short high propeller. It has yellow rotor blades and a more pronounced red deck."
+  },
+  "Field appearance mo_ff4_v004_c00": {
+    "en": "A red and charcoal airship has gold fittings and a pale propeller and rail edges."
+  },
+  "Field appearance mo_ff4_v005_c00": {
+    "en": "A squat bright orange craft has a large dark gray windshield, gold and yellow lights, and thick squared trim at its sides."
+  },
+  "Field appearance mo_ff4_v006_c00": {
+    "en": "A broad dark silver craft has layered rounded ridges, side fins and red and yellow strips around its ends."
+  },
+  "Field appearance mo_ff4_v007_c00": {
+    "en": "A tiny red airship sprite has a pale metal frame, small pale tail pieces and a gold propeller."
+  },
+  "Weapon appearance wp_ff1_ma00_c00": {
+    "en": "A squarish orange-gold patch of folded cloth flashes brighter along the upper edge."
+  },
+  "Weapon appearance wp_ff1_sh00_c00": {
+    "en": "A rounded orange-gold shield has a broad gray metal rim."
+  },
+  "Weapon appearance wp_ff4_ar00_c00": {
+    "en": "A common narrow arrow has a straight brown shaft, a little orange-gold point, a silver band and a split pale tail."
+  },
+  "Weapon appearance wp_ff4_ar00_c01": {
+    "en": "A long straight arrow has two pale tail feathers and a navy-blue shaft and a tiny warm-colored head."
+  },
+  "Weapon appearance wp_ff4_ar00_c02": {
+    "en": "A long straight arrow has two pale tail feathers and a charcoal shaft and a tiny warm-colored head."
+  },
+  "Weapon appearance wp_ff4_ar00_c03": {
+    "en": "A long straight arrow has two pale tail feathers and a violet shaft and a green accent at the head."
+  },
+  "Weapon appearance wp_ff4_ar00_c04": {
+    "en": "A long straight arrow has two pale tail feathers and a green shaft and a tiny warm-colored head."
+  },
+  "Weapon appearance wp_ff4_ar00_c05": {
+    "en": "A long straight arrow has two pale tail feathers and a dark red shaft and a tiny warm-colored head."
+  },
+  "Weapon appearance wp_ff4_ar00_c06": {
+    "en": "A long straight arrow has two pale tail feathers and a burnt orange shaft and a tiny warm-colored head."
+  },
+  "Weapon appearance wp_ff4_ax00_c00": {
+    "en": "A short diagonal axe has a broad curved edge and a dark rear spur, with brass and red tones on a gray handle."
+  },
+  "Weapon appearance wp_ff4_ax00_c01": {
+    "en": "A short diagonal axe has a broad curved edge and a dark rear spur, with a blue and cyan edge."
+  },
+  "Weapon appearance wp_ff4_ax00_c02": {
+    "en": "A short diagonal axe has a broad curved edge and a dark rear spur, with a violet blade and green handle."
+  },
+  "Weapon appearance wp_ff4_ax00_c03": {
+    "en": "A short diagonal axe has a broad curved edge and a dark rear spur, with a green-yellow blade and gold handle."
+  },
+  "Weapon appearance wp_ff4_bw00_c00": {
+    "en": "A short bow has angled ends, a taut string and brown wood with a pale gray string."
+  },
+  "Weapon appearance wp_ff4_bw00_c01": {
+    "en": "A short bow has angled ends, a taut string and blue metal and pale gold trim."
+  },
+  "Weapon appearance wp_ff4_bw00_c02": {
+    "en": "A short bow has angled ends, a taut string and a gray frame and an ochre string."
+  },
+  "Weapon appearance wp_ff4_bw00_c03": {
+    "en": "A short bow has angled ends, a taut string and violet and lime trim."
+  },
+  "Weapon appearance wp_ff4_bw00_c04": {
+    "en": "A short bow has angled ends, a taut string and green and yellow trim."
+  },
+  "Weapon appearance wp_ff4_bw00_c05": {
+    "en": "A short bow has angled ends, a taut string and a red and gold frame."
+  },
+  "Weapon appearance wp_ff4_bw00_c06": {
+    "en": "A short bow has angled ends, a taut string and orange-red wood and a pale yellow string."
+  },
+  "Weapon appearance wp_ff4_cw00_c00": {
+    "en": "Short pale claws sit in a low knuckle fitting with red metal and gold offsets."
+  },
+  "Weapon appearance wp_ff4_cw00_c01": {
+    "en": "Short pale claws sit in a low knuckle fitting with cyan and cobalt metal."
+  },
+  "Weapon appearance wp_ff4_cw00_c02": {
+    "en": "Short pale claws sit in a low knuckle fitting with yellow metal and lavender bands."
+  },
+  "Weapon appearance wp_ff4_cw00_c03": {
+    "en": "Narrow bright green claws project from a hooked gauntlet with a dark grip and gold fittings."
+  },
+  "Weapon appearance wp_ff4_cw00_c04": {
+    "en": "Narrow red-orange claws project from a hooked gauntlet with a dark grip and gold fittings."
+  },
+  "Weapon appearance wp_ff4_cw00_c05": {
+    "en": "Narrow orange-yellow claws project from a hooked gauntlet with a dark grip and gold fittings."
+  },
+  "Weapon appearance wp_ff4_cw00_c06": {
+    "en": "Short pale claws sit in a low knuckle fitting with slate-violet metal and gold-white fittings."
+  },
+  "Weapon appearance wp_ff4_ha00_c00": {
+    "en": "A triangular harp has an upright column and vertical strings under its sloped arm, with an orange frame and golden strings."
+  },
+  "Weapon appearance wp_ff4_ha00_c01": {
+    "en": "A triangular harp has an upright column and vertical strings under its sloped arm, with a magenta frame and golden strings."
+  },
+  "Weapon appearance wp_ff4_ha00_c02": {
+    "en": "A triangular harp has an upright column and vertical strings under its sloped arm, with a gold-orange frame and pale blue strings."
+  },
+  "Weapon appearance wp_ff4_hm00_c00": {
+    "en": "A small double-sided hammerhead sits on an angled handle, with silver-lilac metal and a green handle."
+  },
+  "Weapon appearance wp_ff4_hm00_c01": {
+    "en": "A small double-sided hammerhead sits on an angled handle, with gold fittings and a blue handle."
+  },
+  "Weapon appearance wp_ff4_hm00_c02": {
+    "en": "A small double-sided hammerhead sits on an angled handle, with an orange-red head and golden shaft."
+  },
+  "Weapon appearance wp_ff4_hm00_c03": {
+    "en": "A small double-sided hammerhead sits on an angled handle, with a silver-gray head and red handle."
+  },
+  "Weapon appearance wp_ff4_ka00_c00": {
+    "en": "A long slender blade has a compact angled guard, with deep blue steel and a gold guard."
+  },
+  "Weapon appearance wp_ff4_ka00_c01": {
+    "en": "A long slender blade has a compact angled guard, with magenta steel and green beneath it."
+  },
+  "Weapon appearance wp_ff4_ka00_c02": {
+    "en": "A long slender blade has a compact angled guard, with yellow-green steel and a cobalt guard."
+  },
+  "Weapon appearance wp_ff4_ka00_c03": {
+    "en": "A long slender blade has a compact angled guard, with ice-blue steel and a blue guard."
+  },
+  "Weapon appearance wp_ff4_ka00_c04": {
+    "en": "A long slender blade has a compact angled guard, with gray steel and an amber guard."
+  },
+  "Weapon appearance wp_ff4_kn00_c00": {
+    "en": "A short knife has a lilac-white blade with a compact green guard."
+  },
+  "Weapon appearance wp_ff4_kn00_c01": {
+    "en": "A short knife has a golden-orange blade and yellow guard."
+  },
+  "Weapon appearance wp_ff4_kn00_c02": {
+    "en": "A short knife has a lilac-white blade and yellow guard."
+  },
+  "Weapon appearance wp_ff4_kn01_c00": {
+    "en": "A short knife has a narrow bright green blade and gold-green guard."
+  },
+  "Weapon appearance wp_ff4_pu00_c00": {
+    "en": "A square tan fist and long red sleeve form the unarmed effect."
+  },
+  "Weapon appearance wp_ff4_ro00_c00": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are brown and gray with amber at the head."
+  },
+  "Weapon appearance wp_ff4_ro00_c01": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are blue and cyan."
+  },
+  "Weapon appearance wp_ff4_ro00_c02": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are red and gold."
+  },
+  "Weapon appearance wp_ff4_ro00_c03": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are yellow and blue."
+  },
+  "Weapon appearance wp_ff4_ro00_c04": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are lime and green."
+  },
+  "Weapon appearance wp_ff4_ro00_c05": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are red-orange and amber."
+  },
+  "Weapon appearance wp_ff4_ro00_c06": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are pink and gold."
+  },
+  "Weapon appearance wp_ff4_ro00_c07": {
+    "en": "A short diagonal rod ends in a squared bright gem. Its colors are brick red, scarlet and gold."
+  },
+  "Weapon appearance wp_ff4_sp00_c00": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a gold shaft and white-gray point."
+  },
+  "Weapon appearance wp_ff4_sp00_c01": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a green shaft and violet point."
+  },
+  "Weapon appearance wp_ff4_sp00_c02": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with an orange-yellow shaft and orange point."
+  },
+  "Weapon appearance wp_ff4_sp00_c03": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a cobalt shaft and pale cyan point."
+  },
+  "Weapon appearance wp_ff4_sp00_c04": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with blue and lilac steel."
+  },
+  "Weapon appearance wp_ff4_sp00_c05": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a gold haft with red tip and shoulder."
+  },
+  "Weapon appearance wp_ff4_sp00_c06": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a gold shaft and violet-blue head."
+  },
+  "Weapon appearance wp_ff4_sp00_c07": {
+    "en": "A narrow spear shaft has a faceted point and angled flanges, with a blue shaft and narrow yellow head."
+  },
+  "Weapon appearance wp_ff4_st00_c00": {
+    "en": "A slender brown staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c01": {
+    "en": "A slender olive-gold staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c02": {
+    "en": "A slender violet-blue staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c03": {
+    "en": "A slender fiery orange staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c04": {
+    "en": "A slender yellow and white staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c05": {
+    "en": "A slender red staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_st00_c06": {
+    "en": "A slender green staff bends into a small raised round top."
+  },
+  "Weapon appearance wp_ff4_sw00_c00": {
+    "en": "A broad sword has a yellow blade and blue fittings."
+  },
+  "Weapon appearance wp_ff4_sw00_c01": {
+    "en": "A broad sword has a pale lilac blade and bright green guard."
+  },
+  "Weapon appearance wp_ff4_sw00_c02": {
+    "en": "A broad sword has a pale lilac blade and bright green guard."
+  },
+  "Weapon appearance wp_ff4_sw00_c03": {
+    "en": "A broad sword has a red-orange blade with gold fittings."
+  },
+  "Weapon appearance wp_ff4_sw00_c04": {
+    "en": "A broad sword has a blue and white blade."
+  },
+  "Weapon appearance wp_ff4_sw00_c05": {
+    "en": "A broad sword has a bright pink-white blade above a gold hilt."
+  },
+  "Weapon appearance wp_ff4_sw00_c06": {
+    "en": "A broad sword has a red-white blade and bright yellow guard."
+  },
+  "Weapon appearance wp_ff4_sw00_c07": {
+    "en": "A broad sword has a mottled amber blade and pale gray guard."
+  },
+  "Weapon appearance wp_ff4_sw00_c08": {
+    "en": "A broad sword has a pastel violet blade and green fittings."
+  },
+  "Weapon appearance wp_ff4_sw01_c00": {
+    "en": "A straight narrow blade with dark edges has blue metal and a gold guard."
+  },
+  "Weapon appearance wp_ff4_sw01_c01": {
+    "en": "A straight narrow blade with dark edges has yellow-green metal and a blue guard."
+  },
+  "Weapon appearance wp_ff4_sw01_c02": {
+    "en": "A straight narrow blade with dark edges has red metal and a gold guard."
+  },
+  "Weapon appearance wp_ff4_th00_c00": {
+    "en": "A bent dark-orange boomerang has sharp gold-brown edges."
+  },
+  "Weapon appearance wp_ff4_th01_c00": {
+    "en": "A long olive and yellow throwing ring has a hollow center."
+  },
+  "Weapon appearance wp_ff4_th02_c00": {
+    "en": "A gray-white throwing star has four narrow points."
+  },
+  "Weapon appearance wp_ff4_wi00_c00": {
+    "en": "A long thin lash curls into loops. The handle and lash use cream and brown-orange."
+  },
+  "Weapon appearance wp_ff4_wi00_c01": {
+    "en": "A long thin lash curls into loops. The handle and lash use gold and silver."
+  },
+  "Weapon appearance wp_ff4_wi00_c02": {
+    "en": "A long thin lash curls into loops. The handle and lash use violet and yellow."
+  },
+  "Weapon appearance wp_ff4_wi00_c03": {
+    "en": "A long thin lash curls into loops. The handle and lash use yellow and red-orange."
+  },
+  "Weapon appearance wp_ff4_wi00_c04": {
+    "en": "A long thin lash curls into loops. The handle and lash use yellow and green."
+  }
+}

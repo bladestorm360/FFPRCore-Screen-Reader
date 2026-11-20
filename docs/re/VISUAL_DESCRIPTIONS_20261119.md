@@ -42,6 +42,45 @@ locale slots. FFII's equipment renderer and specific portrait presentation
 still need speech bindings. The effects and further event playback remain
 in the active scope.
 
+## November 20 six-game artwork catalog
+
+The embedded English catalog covers each available artwork key in the
+frozen index. Field costumes include the exact rendered character art and
+distinct poses that have separate atlas keys. Battle body and portrait
+entries have separate wording when the installed art shows different
+features. Each equipment key with identical cropped pixels uses the same
+description as its verified representative.
+
+| Game | Visible enemy | Field | Battle body or portrait | Equipment | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| FF1 | 124 | 76 | 12 | 39 | 251 |
+| FFII | 129 | 72 | 18 | 55 | 274 |
+| FFIII | 225 | 142 | 25 | 72 | 464 |
+| FFIV | 247 | 166 | 30 | 87 | 530 |
+| FFV | 300 | 124 | 109 | 71 | 604 |
+| FFVI | 355 | 182 | 39 | 90 | 666 |
+| Total | 1,380 | 762 | 233 | 414 | 2,789 |
+
+The frozen artwork audit accounts for 11 transparent enemy rows, the
+absent FFIV enemy variant with no consumer and two absent FFVI
+equipment references. Those records have no visual wording. During FFVI
+battle, the actual asset provider can return a field costume. The
+acting-character reader now looks up that exact sprite under the
+battle context, with an offline focused fixture for the reused art.
+
+The build verified all 73 embedded resources and the dialogue
+appearance, battle focus and boss visual form checks. The coverage check
+matched every exact English catalog key to the frozen hashes. There are
+30,283 remaining non-English entries in the new catalog. Distinct
+status effects, field and battle scene playback, additional draw
+bindings and local delivery remain active.
+
+The event review also covers 119 frozen battle-script bodies. Of these,
+113 belong to the six title bundles and six to their common-script
+bundles. The baseline records the exact installed bundle hashes and the
+fingerprint of the per-body inventory. This closes discovery of the
+review corpus.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy

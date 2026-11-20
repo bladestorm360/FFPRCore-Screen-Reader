@@ -86,7 +86,9 @@ void equip_select(void*,void*p,int32_t index,int32_t,const void*){++original_cal
 void show_quantity(void*,void*,void*,void*,void*,const void*){++original_calls;}
 void* managed_name(void*p,const void*){return p;}
 void* player_art(void*,int32_t status,int32_t job,bool face,const void*){
- if(status!=1||face)return nullptr;
+ if(face)return nullptr;
+ if(status==20){player_art_name.name=L"MO_FF6_N050_C00";return &player_art_name;}
+ if(status!=1)return nullptr;
  player_art_name.name=job==7?L"BC_FF1_P007":L"BC_FF1_P001";
  return &player_art_name;
 }
@@ -161,7 +163,8 @@ bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
         value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
-        value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007";
+        value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
+        value==L"Character appearance mo_ff6_n050_c00";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
 std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
@@ -293,6 +296,10 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance bc_ff1_p007","different sword art without wording stays silent");
   fixture::game=game::Id::FF6;
+  entity.state=20;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00",
+         "a native field costume reused as a battle body selects its battle description");
   acting_art_unit=nullptr;
   battle_art_ready=false;
  }

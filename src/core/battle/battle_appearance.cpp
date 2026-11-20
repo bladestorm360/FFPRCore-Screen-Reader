@@ -75,7 +75,10 @@ std::wstring visible_player_art(void* entity)
     if (status <= 0 || job < 0) return {};
     auto* master = ref::instance(kMasterManager);
     if (!master) return {};
-    return art_key(ref::str(ref::call_static<void*>(mGetAssetName, master, status, job, false)), L"bc_ff");
+    auto art = art_key(ref::str(ref::call_static<void*>(mGetAssetName, master, status, job, false)), L"");
+    // FFVI also assigns a field costume to a battle body. The same key has
+    // separate field and battle wording selected by the current context.
+    return art.starts_with(L"bc_ff") || art.starts_with(L"mo_ff") ? art : std::wstring{};
 }
 
 std::wstring visible_weapon_art(void* entity)
