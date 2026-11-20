@@ -18,13 +18,13 @@ candidate still needs a scene-level review.
 
 | Game | Enemy forms | Battle character art | Field character art | Placed NPCs and shopkeepers | Equipment art | Candidate scripts with motion |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| I | 124 | 12 | 15 | 503 | 39 | 109 |
-| II | 129 | 18 | 15 | 854 | 55 | 217 |
-| III | 225 | 25 | 43 | 820 | 72 | 380 |
-| IV | 248 | 30 | 26 | 1,258 | 87 | 429 |
-| V | 301 | 109 | 27 | 1,313 | 71 | 1,785 |
-| VI | 365 | 39 | 34 | 2,214 | 90 | 1,515 |
-| Total | 1,392 | 233 | 160 | 6,962 | 414 | 4,435 |
+| I | 124 | 12 | 15 | 503 | 39 | 220 |
+| II | 129 | 18 | 15 | 854 | 55 | 259 |
+| III | 225 | 25 | 43 | 820 | 72 | 435 |
+| IV | 248 | 30 | 26 | 1,258 | 87 | 503 |
+| V | 301 | 109 | 27 | 1,313 | 71 | 2,001 |
+| VI | 365 | 39 | 34 | 2,214 | 90 | 1,737 |
+| Total | 1,392 | 233 | 160 | 6,962 | 414 | 5,155 |
 
 The external workspace folder `../tools/visual_audit_20261119` contains the
 inventory command, per-game asset and script index, decoded art sheets and
@@ -34,6 +34,45 @@ The same base outfit can be used by different speakers, and a scene can change
 an actor's costume. Match each description to the art visible in the current
 context. Review openings first within the scene pass, and reuse the existing
 coverage of silent boss form changes. [Boss animation coverage](BOSS_VISUALS_20261112.md).
+
+Enemy sprites are now rendered into local sheets for all six games. One
+master row still needs exact asset resolution. FFIV art 242 names palette
+C02 in bundle `mn_ff4_148`, whose installed Sprite and Texture2D records
+have C00, C01, C03 and C04. The base monster master does not select 242.
+Check battle transformation calls before deciding whether the row is used.
+Two FFV field script records have no readable instruction body in the local
+extract, `Map_20171_1/sc_e_0418` and `sc_e_0419`. Resolve both before closing
+scene coverage.
+
+The [FFII enemy art pass](VISUAL_DESCRIPTIONS_FF2_20261119.md) covers all 129
+art records including the separate Toad form.
+
+## Opening and early scene review
+
+| Game | Opening source to follow | Review state |
+| --- | --- | --- |
+| I | World `sc_e_0001`, then bridge prologue `Map_40001/sc_e_0006_1` after the early Cornelia events. | Rough-sea and sandstorm calls and two art-backed scene actions reviewed. The bridge prologue's scroll and remaining visuals need comparison. |
+| II | `Map_20020/sc_e_0001` and the continuations `sc_e_0001_11` and `sc_e_0001_12` on map 355. | Two initial branches located. Compare the motion, battle entry and native narration of each. |
+| III | `Map_40001/sc_e_0001`, Altar Cave `sc_e_0001_1` and the other prologue branches. | The native prologue message and initial Altar Cave sequence are located. The camera shake precedes the dialogue. The dialogue already identifies the fall through the sinkhole. |
+| IV | World `sc_e_0001`, followed by `Map_20230/sc_e_0001_1` and `sc_e_0001_2` on the next interior. | Opening formation reviewed. Audit the shipboard movements against the native dialogue and both scene continuations. |
+| V | `Map_20250/sc_e_0001` and `Map_30030/sc_e_0001_1`. | Reviewed the Wind Drake takeoff following the castle dialogue. Audit the other actions and the outdoor continuation against the relevant audio-option branch. |
+| VI | `Map_40037/sc_e_0001` continues through `Map_20010`, `Map_20260` and `Map_40000/sc_e_0001_4`. | The Magitek march on map 572 uses three exact armor puppets. Check the new-game and advertisement-demo entry conditions before assigning the runtime cue. |
+
+| Verified source | Scene or appearance description | Speech placement |
+| --- | --- | --- |
+| FF1 `Map_20170/sc_e_0005_2`. Ten soldier puppets use `mo_ff1_n101_c00`. The first arm-motion group starts at instructions 74, 77 and onward. | Red-uniformed soldiers begin building the bridge, raising and lowering their arms together. | Once at the first visible group movement. The sprite frames show raised arms. The native messages cover the construction dialogue, and later repeats belong to the same work sequence. |
+| FF1 Cornelia soldier, field art `mo_ff1_n101_c00`, Idle and arm-motion frames. | A small, square-faced soldier with dark eyes under a gold helmet. Red armor, boots and sleeves are banded in gold. The arm-motion frames show the soldier's bare hands raised. | Appearance candidate for this sprite in dialogue or an event. |
+| FF1 Garland, field art `mo_ff1_n038_c00`, map 72 entity 32. | A compact dark-armored knight with sweeping silver horns and a narrow silver-gray visor. Gold and violet bands stripe the chest and shoulders. From behind, the purple cape has a gold border. | Use this field appearance during dialogue. The larger battle sprite has its own appearance under art ID 115. |
+| FFII the Emperor, field art `mo_ff2_n003_c00`. | A small pale-faced figure with swept lilac hair, dark eyes and a high pointed collar. He wears a violet mantle and cape with gold trim, a gold chest piece and gold boots. | The normal field costume has a separate description from the armored battle Emperor and the final battle form, art IDs 85 and 128. |
+| FFII Palamecian soldier, field art `mo_ff2_n016_c00`. | A helmeted soldier with a pale visor that shades the face, a red plume and blue-gray armor. White shoulder plates and a purple cape flare behind the shoulders. | Appearance candidate for the soldiers used in the Fynn opening. Check any individual battle identity against the equipped art. |
+| FFIV `Map_10010/sc_e_0001`. Actor IDs 174–178 use `mo_ff4_v003_c01`. The five placements form a V, followed by simultaneous flight motions. | Five red-and-gold Red Wings airships fly in a V formation, their pale rotors turning. | Once as the formation begins its visible flight, before the interior shipboard dialogue. |
+| FFV King Tycoon, field art `mo_ff5_n012_c00`. The takeoff pairs actor 32 with the Wind Drake's head and body. | A bearded man with dark eyes and gold trim across his blue headpiece. A pale-blue cloak flares over a dark blue, gold-banded outfit. | Use the pose and clothing of the visible field sprite. |
+| FFV `Map_20250/sc_e_0001`, actors 48 and 50, `mo_ff5_n042_c00`. The takeoff sequences begin at instructions 300 and 305 and move the king with the dragon. | A gray Wind Drake with pale horns spreads its broad teal wings and lifts King Tycoon into the air. | Once after the last castle exchange, at the first coordinated takeoff. The native dialogue explains his destination. |
+| FFVI `Map_40000/sc_e_0001_4`, three actors use `mo_ff6_n076_c00`. Instructions 60, 63 and 66 move them to three separate positions. | Three dark blue-gray Magitek walkers advance in a staggered formation, their heavy legs striding below broad metal cabins. | Candidate for the first simultaneous movement after the native text scroll. Confirm the new-game presentation condition. |
+
+The cropped sprites and the exact action positions are verified from local
+assets and script extracts. Follow-up is needed for the runtime presentation
+signal and speech order. The scene candidates have no in-game narration yet.
 
 ## FF1 enemy art
 

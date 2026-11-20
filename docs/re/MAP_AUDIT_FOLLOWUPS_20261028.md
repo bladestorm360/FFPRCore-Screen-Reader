@@ -15,8 +15,8 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game inventory complete. The first art pass covers all 124 FF1 enemy variants. Remaining game, character, equipment and scene passes, localized wording and speech controls are open. |
-| [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game inventory complete. The first art passes cover 253 FF1–II enemy variants and selected opening scenes and actors. Remaining game, character, equipment and scene passes, localized wording and speech controls are open. |
+| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first four FF1 objectives have native contacts and completion receipts. Runtime category and campaign coverage remain open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
 
@@ -374,8 +374,9 @@ runner. The baseline and corrected receipts are in
 ## November 17 visual descriptions and Storyline follow-up
 
 The documented gameplay fixes have been installed. The [visual description
-audit](VISUAL_DESCRIPTIONS_20261119.md) records the six-game inventory and the
-first pass of 124 FF1 enemy forms. The [Storyline mode plan](#november-11-all-six-storyline-category)
+audit](VISUAL_DESCRIPTIONS_20261119.md) records the six-game inventory,
+253 FF1–II enemy forms and the initial scene and actor review. The
+[Storyline mode plan](#november-11-all-six-storyline-category)
 tracks the next objective and the routes to it.
 
 | Scope | Requested behavior |
@@ -442,6 +443,26 @@ existing receipts as evidence for individual stages.
 | Storyline category and global route | Pending. Prove that changing the origin cannot change the selected objective and that both directions and Autowalk reach the same target through supported maps. |
 | Campaign coverage | Pending. Qualify every main-story stage and its native action in FF1–FF6, including optional branches that can already be complete. |
 | Verification and delivery | Pending. Cover state reload, readiness, route cancellation, bounded work, 12 locales, canonical verification and local deployment. Commit and push the verified change. |
+
+### First FF1 objective sequence
+
+The following draft uses the actual ScenarioFlag1 receipts. Selection uses
+the save's progress and the next required action. The player's position
+affects how the route reaches that action. The startup script finishes after
+setting receipt 0. The playable opening stages follow that receipt.
+
+| Starting state | Objective and native contact | Completion evidence |
+| --- | --- | --- |
+| Opening complete and receipt 1 clear | Meet the King of Cornelia. Use the throne-room soldier, map 3 entity 14 at Upper (20,13), script 7 in group `ev_e_0002`. | The audience and its continuation set receipt 1 after the dialogue. |
+| Receipt 1 set and receipt 2 clear | Rescue Princess Sarah. Garland is map 72 entity 32 at Bottom (38,29), script 9 in group `ev_e_0003`. | The combat continuation sets receipt 2 and sends the party back to the throne room. The return sequence ends with receipt 3. |
+| Receipt 3 set and receipt 6 clear | Leave Cornelia Castle to see the bridge construction. Use the three step contacts on map 2, entities 44–46 at Upper (25–27,43), script 12 in group `ev_e_0005`. | The construction scene on map 121 returns to the castle and its continuation sets receipts 4 and 6. |
+| Receipt 6 set and receipt 7 clear | Cross the new bridge. Use the active Overworld contact on map 1, entity 89 at (145,145), script 17 in group `ev_e_0006`. | The prologue plays on map 124 and returns the party to the Overworld. The return continuation sets receipt 7. |
+
+Receipt 2 can become true inside the rescue return chain. Treat that interval
+as a native transition. Verify how any loadable state with receipt 2 set and
+receipt 3 clear recovers before assigning an independent objective to it.
+The Storyline category, routing replays for these four objectives, and the
+subsequent campaign stages are pending.
 
 The request arrived during the FFIV airship-label build. The November 17
 priority places its implementation after the outstanding gameplay fixes and
