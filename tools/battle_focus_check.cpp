@@ -126,6 +126,9 @@ int32_t Field::get(){
  if(n=="<BattleSpriteEntity>k__BackingField"||n=="characterSR"||n=="sprite")
   return offsetof(fixture::Node,data);
  if(n=="meshRenderer")return offsetof(fixture::Node,view);
+ if(n=="rideOnMagicArmor")return offsetof(fixture::Node,machine);
+ if(n=="battleMagicArmor")return offsetof(fixture::Node,eligible_players);
+ if(n=="entityMeshRenderer")return offsetof(fixture::Node,view);
  if(n=="characterStatusId")return offsetof(fixture::Node,state);
  if(n=="jobId")return offsetof(fixture::Node,index);
  if(n=="battleWeaponRight")return offsetof(fixture::Node,use);
@@ -223,7 +226,8 @@ bool has(std::wstring_view value){
         value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Status appearance effect 83"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
         value==L"Character appearance mo_ff6_n050_c00"||value==L"Character appearance bc_ff4_p001"||
-        value==L"Status appearance body bc_ff4_p001_p";
+        value==L"Status appearance body bc_ff4_p001_p"||value==L"Status appearance body bc_ff6_p022"||
+        value==L"Status appearance body bc_ff6_p025"||value==L"Character appearance bc_ff6_p011";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
 std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
@@ -395,6 +399,36 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00",
          "a native field costume reused as a battle body selects its battle description");
+  Node armor,armor_mesh,armor_sprite,armor_renderer;
+  armor.view=&armor_mesh;armor_mesh.data=&armor_sprite;armor_mesh.view=&armor_renderer;
+  entity.eligible_players=&armor;entity.machine=true;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance body bc_ff6_p022",
+         "the drawn walker supplements the drawn rider");
+  renderer.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Status appearance body bc_ff6_p022","the walker alone is described while the rider is hidden");
+  renderer.visible=true;armor_renderer.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a hidden walker cannot contribute a description");
+  entity.machine=false;entity.eligible_players=nullptr;
+  Node costume_groups,merchant_addresses,costume_cache,merchant;
+  merchant.name=pose.name;
+  costume_groups.fields["bc_ff6_p025"]=&merchant_addresses;
+  merchant_addresses.fields["Default_00"]=ref::new_str(L"merchant-address");
+  costume_cache.fields["merchant-address"]=&merchant;
+  asset_addresses.data=&costume_groups;loaded_sprites.data=&costume_cache;
+  sprite_cache_ready=true;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a loaded disguise with the same pose name does not replace the visible body");
+  body.data=&merchant;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Status appearance body bc_ff6_p025","the exact rendered Merchant disguise uses its own description");
+  costume_groups.fields.erase("bc_ff6_p025");
+  costume_groups.fields["bc_ff6_p011"]=&merchant_addresses;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff6_p011","a Mog Suit using the regular Mog art shares its description");
+  body.data=&pose;sprite_cache_ready=false;
   Node tint,tint_material,wrong_renderer;
   List functions{&tint};info.list=&functions;
   tint.type="ChangeSkinColorConditionFunctionBase";

@@ -30,7 +30,18 @@
     "en": "A narrow pale man has long flowing silver-green hair, a black coat with yellow edging, a pale chest panel and dark high boots. A long split coat trails behind in battle."
   },
   "Character appearance bc_ff6_p011": {
-    "en": "A little round white creature has pointed ears, blue eyes, a pink nose and bowlike pink wings. A bright pink pom floats above the head on a thin dark stem. The battle pose raises one paw and shows the feet."
+    "en": "A little round white creature has pointed ears, blue eyes, a pink nose and bowlike pink wings. A bright pink pom floats above the head on a thin dark stem. The battle pose raises one paw and shows the feet.",
+    "ja": "とがった耳、青い目、ピンクの鼻とリボン形のピンクの翼を持つ丸く小さな白い生き物。暗い細い茎の先に鮮やかなピンクのポンポンが浮かび、戦闘の姿では片方の前足を上げて足先を見せる。",
+    "fr": "Une petite créature blanche et ronde a des oreilles pointues, des yeux bleus, un nez rose et des ailes roses en forme de nœud. Un pompon rose vif flotte au bout d’une fine tige sombre. En combat, elle lève une patte et laisse voir ses pieds.",
+    "it": "Una creaturina bianca e tonda ha orecchie appuntite, occhi azzurri, naso rosa e ali rosa a fiocco. Un pompon rosa acceso fluttua sopra il capo su un sottile stelo scuro. Nella posa di battaglia solleva una zampa e mostra i piedi.",
+    "de": "Ein kleines rundes weißes Wesen hat spitze Ohren, blaue Augen, eine rosa Nase und schleifenförmige rosa Flügel. Über dem Kopf schwebt ein leuchtend rosa Bommel an einem dünnen dunklen Stiel. Im Kampf hebt es eine Pfote, und seine Füße sind zu sehen.",
+    "es": "Una criatura pequeña, redonda y blanca tiene orejas puntiagudas, ojos azules, nariz rosa y alas rosas en forma de lazo. Un pompón rosa vivo flota sobre la cabeza en un tallo fino y oscuro. En la pose de combate levanta una pata y deja ver los pies.",
+    "ko": "작고 둥근 하얀 생물에 뾰족한 귀, 파란 눈, 분홍 코와 리본 같은 분홍 날개가 있다. 머리 위로 어두운 가는 줄기 끝에 밝은 분홍 솜방울이 떠 있다. 전투 자세에서는 앞발 하나를 들고 발끝이 보인다.",
+    "zht": "圓滾滾的白色小生物有尖耳、藍眼、粉紅鼻子和蝴蝶結狀的粉色翅膀。頭頂細暗枝上浮著鮮粉色絨球。戰鬥時舉起一隻前爪，兩腳外露。",
+    "zhc": "圆滚滚的白色小生物有尖耳、蓝眼、粉红鼻子和蝴蝶结状的粉色翅膀。头顶细暗枝上浮着鲜粉色绒球。战斗时举起一只前爪，两脚外露。",
+    "ru": "У маленького круглого белого существа острые уши, голубые глаза, розовый нос и розовые крылья, похожие на бант. Над головой на тонком тёмном стебельке держится ярко-розовый помпон. В боевой стойке оно приподнимает одну лапу, и видны ступни.",
+    "th": "สิ่งมีชีวิตตัวเล็กสีขาวกลมมีหูแหลม ตาสีฟ้า จมูกสีชมพู และปีกชมพูรูปโบว์ พู่กลมสีชมพูสดอยู่เหนือหัวบนก้านสีเข้มเส้นบาง ท่าต่อสู้ยกอุ้งเท้าข้างหนึ่งและมองเห็นเท้า",
+    "pt": "Uma criaturinha branca e redonda tem orelhas pontudas, olhos azuis, nariz rosa e asas rosas em forma de laço. Um pompom rosa vivo flutua acima da cabeça numa haste fina e escura. Na pose de batalha, ergue uma pata e deixa os pés à vista."
   },
   "Character appearance bc_ff6_p012": {
     "en": "A slim tan figure has wild bright green hair, a yellow-orange scarf or shoulder wrap, green waist cloth and narrow red-orange leg wraps. The battle pose shows a bare chest and long hair trailing sideways."
@@ -2917,5 +2928,75 @@
         "E0594_01_431_b_23": 3
       }
     }
+  },
+  "Status appearance body bc_ff6_p017_c01": {
+    "en": "A broad figure has long silver hair, a full pale beard and green eyes. Gold trim brightens the dark blue tunic, with a mauve-brown cloak and brown boots.",
+    "ja": "肩幅の広い人物に長い銀髪、たっぷりした白いひげと緑の目がある。濃紺の上着を金色が縁取り、紫がかった茶色の外套と茶色のブーツを着けている。",
+    "fr": "Une silhouette large a de longs cheveux argentés, une barbe claire fournie et les yeux verts. Un galon doré éclaire sa tunique bleu foncé, avec une cape brun mauve et des bottes brunes.",
+    "it": "Una figura robusta ha lunghi capelli argentei, una folta barba chiara e occhi verdi. La tunica blu scuro ha finiture dorate, con mantello marrone violaceo e stivali marroni.",
+    "de": "Eine breite Gestalt hat langes silbernes Haar, einen vollen hellen Bart und grüne Augen. Der dunkelblaue Waffenrock ist goldgesäumt. Dazu trägt sie einen braunvioletten Umhang und braune Stiefel.",
+    "es": "Una figura corpulenta tiene cabello largo plateado, barba clara y tupida y ojos verdes. La túnica azul oscura tiene ribetes dorados, con capa marrón malva y botas marrones.",
+    "ko": "체격이 건장하고 은빛 긴 머리, 풍성한 흰빛 수염과 초록 눈이 보인다. 짙은 파란 상의에 금색 테두리가 있고 자줏빛 갈색 망토와 갈색 장화를 착용했다.",
+    "zht": "寬肩人物留著銀色長髮、濃密淺色鬍鬚與綠眼睛。深藍上衣鑲金邊，搭配紫棕披風和棕靴。",
+    "zhc": "宽肩人物留着银色长发、浓密浅色胡须与绿眼睛。深蓝上衣镶金边，搭配紫棕披风和棕靴。",
+    "ru": "У широкой фигуры длинные серебряные волосы, густая светлая борода и зелёные глаза. На тёмно-синем одеянии золотая отделка, плащ лилово-коричневый, сапоги коричневые.",
+    "th": "ร่างไหล่กว้างมีผมยาวสีเงิน เคราสีอ่อนเต็มใบหน้า และตาสีเขียว เสื้อสีน้ำเงินเข้มขลิบทอง สวมผ้าคลุมสีน้ำตาลอมม่วงและรองเท้าบู๊ตสีน้ำตาล",
+    "pt": "Uma figura de ombros largos tem cabelos prateados compridos, barba clara e cheia e olhos verdes. A túnica azul-escura tem detalhes dourados. Usa capa marrom-arroxeada e botas marrons."
+  },
+  "Status appearance body bc_ff6_p021_c01": {
+    "en": "A compact soldier wears a green helmet and segmented green armor. The low visor shades the face. Blue gauntlets and boots stand out beneath the dark joints.",
+    "ja": "小柄な兵士が緑の兜と節のある緑の鎧を着けている。低いひさしが顔を隠し、暗い関節の下に青い手甲とブーツが目立つ。",
+    "fr": "Un soldat trapu porte un casque vert et une armure verte articulée. La visière basse ombrage son visage. Des gantelets et des bottes bleus tranchent avec les articulations sombres.",
+    "it": "Un soldato compatto indossa un elmo verde e un’armatura verde a segmenti. La visiera bassa gli adombra il volto. Guanti d’armatura e stivali blu risaltano sotto le giunture scure.",
+    "de": "Ein gedrungener Soldat trägt einen grünen Helm und eine gegliederte grüne Rüstung. Das tiefe Visier beschattet das Gesicht. Blaue Panzerhandschuhe und Stiefel heben sich von den dunklen Gelenken ab.",
+    "es": "Un soldado de baja estatura lleva casco verde y armadura verde articulada. La visera baja le deja el rostro en sombra. Los guanteletes y las botas azules resaltan bajo las articulaciones oscuras.",
+    "ko": "다부진 병사가 초록색 투구와 마디가 있는 초록 갑옷을 착용했다. 낮은 얼굴 가리개에 얼굴이 가려지고 어두운 관절 아래로 파란 장갑과 장화가 두드러진다.",
+    "zht": "矮壯士兵戴著綠盔，穿綠色分節盔甲。低垂的面甲遮住臉部，深色關節下可見藍護手和藍靴。",
+    "zhc": "矮壮士兵戴着绿盔，穿绿色分节盔甲。低垂的面甲遮住脸部，深色关节下可见蓝护手和蓝靴。",
+    "ru": "Коренастый солдат носит зелёный шлем и зелёные сегментные доспехи. Низкое забрало затеняет лицо. Под тёмными сочленениями выделяются синие рукавицы и сапоги.",
+    "th": "ทหารร่างกะทัดรัดสวมหมวกเกราะสีเขียวและเกราะเขียวเป็นปล้อง กระบังหน้าต่ำบังใบหน้า ถุงมือเกราะและรองเท้าบู๊ตสีน้ำเงินเด่นใต้ข้อต่อสีเข้ม",
+    "pt": "Um soldado compacto usa capacete verde e armadura verde segmentada. O visor baixo sombreia o rosto. Manoplas e botas azuis se destacam abaixo das juntas escuras."
+  },
+  "Status appearance body bc_ff6_p022": {
+    "en": "An olive-green Magitek walker has a rounded armored hood, two upright pipes, gold fittings and bent mechanical limbs with pale claw tips.",
+    "ja": "オリーブ色の魔導アーマー。丸みのある装甲の覆いと、直立した二本の管、金色の金具がある。曲がった機械の脚や腕の先に淡い爪がある。",
+    "fr": "Un marcheur Magitek vert olive a un capot blindé arrondi, deux tuyaux verticaux, des garnitures dorées et des membres mécaniques coudés aux griffes pâles.",
+    "it": "Un camminatore Magitek verde oliva ha una calotta corazzata arrotondata, due tubi verticali, raccordi dorati e arti meccanici piegati, con artigli chiari.",
+    "de": "Ein olivgrüner Magitek-Läufer hat eine runde Panzerhaube, zwei senkrechte Rohre, goldene Beschläge und angewinkelte mechanische Glieder mit hellen Krallenspitzen.",
+    "es": "Un caminante magitec verde oliva tiene una cubierta blindada redonda, dos tubos verticales, herrajes dorados y extremidades mecánicas dobladas con garras de puntas claras.",
+    "ko": "올리브색 마도 아머에는 둥근 장갑 덮개와 똑바로 선 관 두 개, 금빛 부품이 있다. 굽은 기계 팔과 다리 끝에 옅은색 발톱이 달려 있다.",
+    "zht": "橄欖綠魔導裝甲行走機有圓形護罩、兩根直立管、金色配件，以及彎曲的機械肢和淺色爪尖。",
+    "zhc": "橄榄绿魔导装甲行走机有圆形护罩、两根直立管、金色配件，以及弯曲的机械肢和浅色爪尖。",
+    "ru": "У оливково-зелёной ходячей машины магитека округлый броневой кожух, две вертикальные трубы, золотистые детали и согнутые механические конечности со светлыми когтями.",
+    "th": "เกราะกลแมจิเทคสีเขียวมะกอกมีฝาครอบกลม ท่อตั้งสองท่อ ข้อต่อสีทอง และแขนขากลที่โค้งงอพร้อมปลายกรงเล็บสีอ่อน",
+    "pt": "Um andador Magitek verde-oliva tem uma cobertura blindada arredondada, dois tubos verticais, peças douradas e membros mecânicos curvados com garras claras nas pontas."
+  },
+  "Status appearance body bc_ff6_p023": {
+    "en": "Two rounded red shapes with yellow rims sit over a tapered gold-brown center. Blue-green side panels have yellow trim and small white tips.",
+    "ja": "黄色い縁のある丸い赤い形が二つ、先細りの金茶色の中央部の上に並ぶ。青緑の側面は黄色で縁取られ、先端に小さな白い部分がある。",
+    "fr": "Deux formes rouges arrondies bordées de jaune surmontent un centre effilé brun doré. Les panneaux latéraux bleu-vert ont des liserés jaunes et de petites pointes blanches.",
+    "it": "Due forme tonde rosse dal bordo giallo sovrastano un centro affusolato bruno dorato. Le parti laterali blu-verdi hanno finiture gialle e piccole punte bianche.",
+    "de": "Zwei runde rote Formen mit gelbem Rand sitzen über einer spitz zulaufenden goldbraunen Mitte. Die blaugrünen Seitenflächen sind gelb gesäumt und enden in kleinen weißen Spitzen.",
+    "es": "Dos formas rojas redondeadas con bordes amarillos coronan un centro estrecho de color marrón dorado. Los paneles laterales azul verdoso tienen ribetes amarillos y pequeñas puntas blancas.",
+    "ko": "노란 테두리가 둘러진 둥근 붉은 형태 두 개가 아래로 좁아지는 금갈색 중심 위에 있다. 청록색 양옆은 노랗게 테두리 처리되어 있고 작은 흰 끝이 보인다.",
+    "zht": "上方兩個圓紅形帶黃色邊緣，中間是漸窄的金棕形。兩側藍綠片鑲黃邊，帶有小白尖。",
+    "zhc": "上方两个圆红形带黄色边缘，中间是渐窄的金棕形。两侧蓝绿片镶黄边，带有小白尖。",
+    "ru": "Две округлые красные формы в жёлтой окантовке расположены над сужающейся золотисто-коричневой серединой. У сине-зелёных боков жёлтая отделка и маленькие белые кончики.",
+    "th": "รูปทรงกลมสีแดงขอบเหลืองสองส่วนอยู่เหนือแกนกลางสีน้ำตาลทองที่ค่อย ๆ เรียวลง แผงข้างสีเขียวอมฟ้าขลิบเหลืองและมีปลายสีขาวเล็ก ๆ",
+    "pt": "Duas formas vermelhas arredondadas com bordas amarelas ficam acima de um centro afunilado marrom-dourado. As partes laterais azul-esverdeadas têm debrum amarelo e pequenas pontas brancas."
+  },
+  "Status appearance body bc_ff6_p025": {
+    "en": "A short figure has a broad blue cap, a shaded face and an angular nose. A brown vest and pale sleeves sit over blue trousers and boots.",
+    "ja": "背の低い人物が幅広い青い帽子をかぶり、影になった顔に角張った鼻が見える。茶色のベストと淡い袖を、青いズボンとブーツに合わせている。",
+    "fr": "Une petite silhouette porte une large casquette bleue. Un nez anguleux se détache sur le visage ombragé. Un gilet brun et des manches claires surmontent un pantalon et des bottes bleus.",
+    "it": "Una figura bassa indossa un ampio berretto blu. Il viso è in ombra e il naso è spigoloso. Porta un gilet marrone, maniche chiare, pantaloni e stivali blu.",
+    "de": "Eine kleine Gestalt trägt eine breite blaue Kappe. Im beschatteten Gesicht fällt die kantige Nase auf. Dazu kommen eine braune Weste, helle Ärmel sowie blaue Hose und Stiefel.",
+    "es": "Una figura baja lleva una gorra azul ancha. La cara queda en sombra y tiene una nariz angulosa. Viste chaleco marrón, mangas claras, pantalón azul y botas azules.",
+    "ko": "키가 작은 인물이 넓은 파란 모자를 썼다. 그늘진 얼굴에서 각진 코가 보인다. 갈색 조끼에 밝은 소매, 파란 바지와 장화를 입었다.",
+    "zht": "矮個身影戴著寬藍帽，陰影中的臉露出稜角分明的鼻子。棕背心配淺袖，下身是藍褲和藍靴。",
+    "zhc": "矮个身影戴着宽蓝帽，阴影中的脸露出棱角分明的鼻子。棕背心配浅袖，下身是蓝裤和蓝靴。",
+    "ru": "У невысокой фигуры широкая синяя кепка, затенённое лицо и угловатый нос. Коричневый жилет и светлые рукава сочетаются с синими брюками и сапогами.",
+    "th": "ร่างเตี้ยสวมหมวกแก๊ปสีน้ำเงินทรงกว้าง ใบหน้าอยู่ในเงาและเห็นจมูกเป็นเหลี่ยม สวมเสื้อกั๊กสีน้ำตาล แขนเสื้อสีอ่อน กางเกงและรองเท้าบู๊ตสีน้ำเงิน",
+    "pt": "Uma figura baixa usa um boné azul largo. O rosto fica na sombra, com um nariz anguloso à vista. Veste colete marrom, mangas claras, calça e botas azuis."
   }
 }

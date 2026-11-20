@@ -71,7 +71,7 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-30,164 remaining non-English entries in the new catalog. All 124
+30,153 remaining non-English entries in the new catalog. All 124
 visible FF1 enemy sprites now have Japanese wording. The 119 new
 translations preserve each variant's palette, anatomy, pose and visible
 equipment. The remaining FF1 artwork languages and the other titles'
@@ -183,6 +183,30 @@ to own that exact material. The two cues use the 12 game locales.
 Battle focus, boss visual and feedback checks passed with the native
 shader states, restored materials and a material owned by a different
 body. The selected reads remain under the shared presentation bounds.
+
+## November 20 additional installed battle costumes
+
+The six manifest comparisons found six animated costume groups outside
+the original master and transformation sets. All have 12-language
+descriptions from their actual default and alternate poses. The local
+per-group indexes hold hashes of the installed art and contact sheets
+for the exact frames.
+
+| Game | Additional art and binding |
+| --- | --- |
+| II | `bc_ff2_p010` has a blond, green-caped figure in a red-orange coat. The art is in the installed manifest. A current runtime role still needs confirmation. |
+| VI | Locke's soldier and merchant disguises use `bc_ff6_p021_c01` and `bc_ff6_p025`. The installed condition asset selector names those exact groups. |
+| VI | The Mog Suit selector reuses Mog's original `bc_ff6_p011` sprite group. The costume read follows that sprite even when a different character wears it. |
+| VI | `bc_ff6_p022` is the actual walking Magitek armor. The native armor initializes with its own sprite and reads animation frames from the same group. |
+| VI | `bc_ff6_p017_c01` and `bc_ff6_p023` contain a bearded figure in blue and a two-frame red and blue-green shape. Their installed art has wording and the exact sprite can be recognized. The active script or battle use has yet to be identified. |
+
+The acting-character reader resolves the two disguises by the current
+Sprite instance. A loaded asset with the same pose name is insufficient.
+Magitek mounts use a separate renderer and the native riding flag. The
+visible rider and walker can both speak, and a hidden walker is omitted.
+Battle focus and boss visual checks pass in the linked DLL. Fixtures
+cover a visible rider and armor, the armor alone, a hidden armor and
+identical pose names belonging to different loaded costumes.
 
 ## Battle appearance reader
 

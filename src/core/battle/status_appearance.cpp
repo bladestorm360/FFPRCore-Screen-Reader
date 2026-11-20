@@ -77,7 +77,10 @@ std::vector<std::wstring> transformation_groups(std::wstring_view art)
         for (auto suffix : suffixes) groups.emplace_back(std::wstring(base) + std::wstring(suffix));
     };
     switch (game::current()) {
-        case game::Id::FF2: add(art, {L"_m", L"_t"}); break;
+        case game::Id::FF2:
+            add(art, {L"_m", L"_t"});
+            groups.emplace_back(L"bc_ff2_p010");
+            break;
         case game::Id::FF3:
             // Each party slot has its own shape and palette, regardless of job.
             for (auto slot : {L"bc_ff3_p022_c00", L"bc_ff3_p022_c01", L"bc_ff3_p022_c02", L"bc_ff3_p022_c03"})
@@ -88,7 +91,10 @@ std::vector<std::wstring> transformation_groups(std::wstring_view art)
             add(art.substr(0, art.find(L"_j")), {L"_m", L"_t"});
             add(art, {L"_o", L"_z"});
             break;
-        case game::Id::FF6: groups = {L"bc_ff6_p016", L"bc_ff6_p001_tr", L"bc_ff6_p015"}; break;
+        case game::Id::FF6:
+            groups = {L"bc_ff6_p016", L"bc_ff6_p001_tr", L"bc_ff6_p015", L"bc_ff6_p021_c01",
+                      L"bc_ff6_p025", L"bc_ff6_p011", L"bc_ff6_p017_c01", L"bc_ff6_p023"};
+            break;
         default: break;
     }
     return groups;

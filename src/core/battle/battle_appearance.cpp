@@ -15,6 +15,10 @@ ref::Class kUnitInfo{"Last.Battle", "BattleUnitDataInfo"};
 ref::Field fSpriteEntity{kUnitInfo, "<BattleSpriteEntity>k__BackingField"};
 ref::Class kSpriteEntity{"Last.Battle", "BattleSpriteEntity"};
 ref::Field fBodyRenderer{kSpriteEntity, "characterSR"};
+ref::Class kMountedEntity{"Last.Battle", "BattleSpriteEntity", game::kFF6};
+ref::Field fRidingArmor{kMountedEntity, "rideOnMagicArmor"}, fArmor{kMountedEntity, "battleMagicArmor"};
+ref::Class kMagicArmor{"Last.Battle", "BattleMagicArmor", game::kFF6};
+ref::Field fArmorBody{kMagicArmor, "entityMeshRenderer"};
 ref::Class kMesh{"Last.Battle", "EntityMeshRenderer"};
 ref::Field fRenderer{kMesh, "meshRenderer"};
 ref::Field fSprite{kMesh, "sprite"};
@@ -33,11 +37,23 @@ ref::Class kMasterManager{"Last.Data.Master", "MasterManager"};
 ref::Class kAssets{"Last.Data", "CharacterAssetNameProvider"};
 ref::Method mGetAssetName{kAssets, "GetAssetName", 4};
 
-void* visible_body_sprite(void* entity)
+void* visible_mesh_sprite(void* body)
 {
-    auto* body = ref::rd<void*>(entity, fBodyRenderer);
     auto* sprite = ref::rd<void*>(body, fSprite);
     return sprite && displayed::renderer_visible(ref::rd<void*>(body, fRenderer)) ? sprite : nullptr;
+}
+
+void* visible_body_sprite(void* entity) { return visible_mesh_sprite(ref::rd<void*>(entity, fBodyRenderer)); }
+
+std::wstring magic_armor_appearance(void* entity)
+{
+    if (!game::is(game::Id::FF6) || !ref::rd<bool>(entity, fRidingArmor)) return {};
+    // Native battle initialization loads bc_ff6_p022 into this separate
+    // walker renderer. The rider keeps their own visible costume.
+    auto* armor = ref::rd<void*>(entity, fArmor);
+    if (!visible_mesh_sprite(ref::rd<void*>(armor, fArmorBody))) return {};
+    const auto* key = L"Status appearance body bc_ff6_p022";
+    return modtext::has(key) ? T(key) : std::wstring{};
 }
 
 std::wstring art_key(std::wstring name, std::wstring_view prefix)
@@ -122,9 +138,11 @@ void announce_acting_character_appearance()
     auto* entity = ref::rd<void*>(info, fSpriteEntity);
     if (!kPlayerEntity.is(entity)) return;
     auto* sprite = visible_body_sprite(entity);
+    const auto armor = magic_armor_appearance(entity);
     if (!sprite) {
-        auto overlays = visible_status_appearance(entity, info);
-        if (!overlays.empty()) say(overlays, true);
+        auto description = armor;
+        append(description, visible_status_appearance(entity, info));
+        if (!description.empty()) say(description, true);
         return;
     }
     const auto base_art = visible_player_art(entity);
@@ -138,6 +156,8 @@ void announce_acting_character_appearance()
         // A pose can keep the normal pixels even within a transformed set.
         // The data supplies pose-specific wording where the change is drawn.
         if (modtext::has(body_key)) description = T(body_key);
+        else if (alternate != base_art && modtext::has(L"Character appearance " + alternate))
+            description = T(L"Character appearance " + alternate);
         else if (game::is(game::Id::FF5) && modtext::has(L"Status appearance changed " + alternate + L" " + pose))
             description = T(alternate.ends_with(L"_o") ? L"Status appearance body old" : L"Status appearance body zombie");
     }
@@ -147,6 +167,7 @@ void announce_acting_character_appearance()
         const auto weapon = L"Weapon appearance " + visible_weapon_art(ref::rd<void*>(entity, *hand));
         if (modtext::has(weapon)) append(description, T(weapon));
     }
+    append(description, armor);
     append(description, visible_status_appearance(entity, info));
     append(description, visible_party_status_icons(unit));
     if (!description.empty()) say(description, true);
