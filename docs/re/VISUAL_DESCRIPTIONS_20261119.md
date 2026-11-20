@@ -71,16 +71,16 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-29,909 remaining non-English entries in the new catalog. All 251
+29,768 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
-the variant's palette, anatomy, pose and visible equipment. All 129
-visible FFII enemy entries also have Japanese wording. This includes
-the frog drawn from an inherited FFIV sprite.
-The local `ff2_palette_ja.tsv` preserves common anatomy and individual
-palette observations. Distinct
-status effects, field scene playback, additional draw bindings and local
-delivery remain active.
+the variant's palette, anatomy, pose and visible equipment. All 274
+visible FFII keys also have Japanese wording. These include the 129 enemy
+forms, the frog drawn from inherited FFIV art, and 145 field, battle,
+portrait and equipment entries. The local `ff2_palette_ja.tsv` and
+`ff2_other_ja.tsv` preserve the English-linked palette observations and
+the translated wording. The catalog still needs the other missing
+translations, integrated delivery and gameplay confirmation.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script
@@ -114,8 +114,24 @@ and Material texture references, authored colors and shader parameters.
 The review sheets and `ffN-condition-art.json` fingerprints preserve the
 art evidence. All 85 effect entries, 13 icon entries and two body pose
 entries have wording in all 12 supported languages. Status rows without a
-direct effect or icon still need disposition through alternate body art,
-skin changes, visibility or a verified absence of visible change.
+direct effect or icon were reviewed through the alternate art, material,
+position and visibility producers and through their installed declarations.
+
+The local `condition-dispositions.json` records all 525 rows against
+the frozen master hashes. The 252 rows that assign an effect resolve to
+the 85 verified drawings. A further 20 rows designate a visible icon
+and 67 designate a described body pose, transformation, material or
+drawn countdown. The remaining 54 use existing body motion, visibility or
+native actions, 121 have condition logic without distinct catalog artwork,
+and 11 are data-only or unassigned conditions. The archive records the
+matching native classes, methods and disposition for each row. Its SHA-256
+is `7b8b0cd01640b33edd1e4ca612e62c7dff052dbc52f30c05c378adcd0e4aa9f7`.
+For example, the FFVI permanent Trance constructor uses the ordinary
+Trance body, the Chadarnook suppression path sets alpha to zero, and
+the FFVI Dance condition selects an action with a different field
+background. Guard uses the current body and may draw the described
+shield. FFV's two Costume and Crawling Down records assign no overlay
+or icon. Scripted costumes already have separate catalog descriptions.
 
 The manual I and Ctrl+I readers require the existing ready battle and
 exact visible body. An effect needs its visible renderer, emitted visible
@@ -158,8 +174,9 @@ most eight alternate groups. It invokes no resource loading and retains
 no object pointers. A focused replay verifies that a loaded Pig sprite
 with the same pose name cannot replace the description of a different
 sprite. The appearance and dialogue checks passed with all 73 resources.
-Field changes, portrait focus speech and gameplay confirmation still
-need their own verification.
+Field dialogue uses the displayed field atlas, including staged costumes.
+Status portrait artwork is cataloged. The requested speech controls are
+field dialogue and battle focus. Gameplay confirmation remains open.
 
 ## November 20 applied status palettes
 
