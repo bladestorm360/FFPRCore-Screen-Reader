@@ -95,11 +95,11 @@ preserves the evidence against the same frozen trace hashes. Its SHA-256
 is `11d3c0651c919fd2ce12d6759ba85c89ae6216756289b6d9e16ad992bd3be674`.
 
 The local `finite-field-reconciliation.json` joins the same 6,110 bodies
-to 35 confirmed caption, scroll or effect bindings and the exact unresolved
+to 50 confirmed caption, scroll or effect bindings and the exact unresolved
 actions, actors, art, native calls, pages and scene handoffs. Its SHA-256
-is `df674e580fd2d0950518930bf13ff8eda8ec2ed7180fad92eebea09ccc5a1c12`.
-5,471 bodies still require scene judgment or a playback disposition.
-That includes 1,100 of the original 1,109 silent priority bodies. Those
+is `e4047b27c6896b40a5bd22ce853cae8551b645eb2c0ee5b729972ae5dd0663eb`.
+5,456 bodies still require scene judgment or a playback disposition.
+That includes 1,086 of the original 1,109 silent priority bodies. Those
 counts describe the remaining reconciliation against this fixed set.
 
 The targeted reconciliation matched 42 authored pose occurrences to
@@ -294,10 +294,10 @@ These rows are editorial cues awaiting a verified presentation point.
 
 ## Native playback boundaries
 
-Seven silent descriptions now have eight exact native effect bindings.
+Twenty-two silent descriptions now have 23 exact native effect bindings.
 The local `scene-effect-bindings.json` records each installed actor, track,
 instruction, bundle and emitter count. Its SHA-256 is
-`d10bbaa814f8b3ca2bf1e6a2896f3eab5d538589f58b8a7be2a4ad46ec35d177`.
+`b7c4ace0246e7fdeae71242c40ce9ff45c7f3737e0b5c92c4484aa7b920c3532`.
 
 | Game | Visible cue |
 | --- | --- |
@@ -308,16 +308,26 @@ instruction, bundle and emitter count. Its SHA-256 is
 | V | In either native branch, Ronka rises above a widening cloud of sand. |
 | VI | Figaro's first descent is accompanied by a dust cloud. A separate cue describes the first Light of Judgment beam. |
 
+The additional bindings describe the FF1 opening crystals, fairy release
+and Levistone sand. FFII adds steam at the Dreadnought, the escape flames
+and the Cyclone funnel. FFIII adds the Saronia cannon smoke. FFIV adds the
+fires around Damcyan, the opening to the underworld and the explosions
+around the Giant of Babil. FFV adds Ghido's sinking shrine, the exploding
+Ronka Ruins, the merged-world eruption and the black sphere. FFVI adds
+Figaro's first return from the sand. Each cue belongs to the first verified
+appearance in its own sequence.
+
 The native `Puppet.PlayAnim` dispatch keeps its original return value.
 A matching first clock inside the settled native Event state arms one
 bounded render observation. The observer retains the event generation
 and the core index. It resolves the current actor on the owner thread,
 waits until the fade clears and checks actual particles on a visible
-renderer. The eight installed placements contain between 4 and 32
-emitters. The request expires after 16 owner frames and ends immediately
+renderer. The installed placements contain between 2 and 56 emitters. The
+reader checks at most eight per owner frame and continues at the next
+emitter if needed. The request expires after 16 owner frames and ends immediately
 on a changed script, map or event generation. Repeated native clocks
 share that observation. The loading and map-entry gates close before
-any interpreter or renderer reads. All seven descriptions have the 12
+any interpreter or renderer reads. All descriptions have the 12
 game locales. The focused check covers native return, transitions,
 hidden emitters, missing particles, fades and cancelled observations.
 Actual gameplay timing awaits the installed confirmation.
