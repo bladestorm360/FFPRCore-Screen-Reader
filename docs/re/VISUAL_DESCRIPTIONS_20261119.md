@@ -71,10 +71,13 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-30,036 remaining non-English entries in the new catalog. All 251
+29,989 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
-the variant's palette, anatomy, pose and visible equipment. Distinct
+the variant's palette, anatomy, pose and visible equipment. FFII's first
+20 enemy asset groups now have Japanese wording for all 48 palettes.
+The local `ff2_palette_ja.tsv` preserves common anatomy and individual
+palette observations. Distinct
 status effects, field scene playback, additional draw bindings and local
 delivery remain active.
 
