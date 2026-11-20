@@ -53,7 +53,7 @@
 #undef install
 #undef s_install
 namespace fixture {
-struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* eligible_players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;};
+struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* eligible_players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;std::string_view type;std::vector<void*> children;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
@@ -106,7 +106,13 @@ namespace core {Install::Install(const char*n,int(*f)(),int o,uint8_t g):name(n)
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
-bool Class::is(void*p){return p!=nullptr;}
+bool Class::is(void*p){
+ if(!p)return false;
+ const std::string_view check=name;
+ if(check=="ChangeSkinColorConditionFunctionBase"||check=="BlinkConditionFunction"||
+    check.starts_with("Doom")||check=="FreezeConditionFunction")return static_cast<fixture::Node*>(p)->type==check;
+ return true;
+}
 il2cpp::Class*Class::get(){
  if(!fixture::sprite_cache_ready)return nullptr;
  if(std::string_view(name)=="AssetBundlePathMatch")return reinterpret_cast<il2cpp::Class*>(&fixture::asset_addresses);
@@ -131,6 +137,8 @@ int32_t Field::get(){
  if(n=="changedSkinColor")return offsetof(fixture::Node,machine);
  if(n=="effectRender")return offsetof(fixture::Node,view);
  if(n=="effectMaterial")return offsetof(fixture::Node,use);
+ if(n=="copied")return offsetof(fixture::Node,data);
+ if(n=="doomCountEntityView")return offsetof(fixture::Node,status);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
@@ -138,8 +146,13 @@ void*Method::ptr(){
  if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
  if(std::string_view(name)=="PropertyToID")return reinterpret_cast<void*>(+[](void*,const void*){return 1;});
  if(std::string_view(name)=="GetColorImpl")return reinterpret_cast<void*>(+[](void* p,int,const void*) {
-  return static_cast<fixture::Node*>(p)->index == 1 ? std::array<float,4>{0.72f,0.56f,0.78f,1} : std::array<float,4>{1,1,1,1};
+  const int palette=static_cast<fixture::Node*>(p)->index;
+  if(palette==1)return std::array<float,4>{0.72f,0.56f,0.78f,1};
+  if(palette==2)return std::array<float,4>{40.0f/255,40.0f/255,200.0f/255,1};
+  return std::array<float,4>{1,1,1,1};
  });
+ if(std::string_view(name)=="GetFloatImpl")return reinterpret_cast<void*>(+[](void* p,int,const void*){return static_cast<fixture::Node*>(p)->machine?0.5f:0.0f;});
+ if(std::string_view(name)=="get_sharedMaterial")return reinterpret_cast<void*>(+[](void* p,const void*){return static_cast<fixture::Node*>(p)->use;});
  if(std::string_view(name)=="get_sprite")return reinterpret_cast<void*>(+[](void* p,const void*) { return static_cast<fixture::Node*>(p)->data; });
  if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;
 }
@@ -153,7 +166,7 @@ namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** origina
   *original=reinterpret_cast<void*>(fixture::native_commit);fixture::commit_dispatch=reinterpret_cast<fixture::Commit>(detour);fixture::commit_hook=method.name;return true;
  }return false;
 }bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
-namespace unity {void*transform(void*p){return p;}void*parent(void*p){return p?static_cast<fixture::Node*>(p)->parent:nullptr;}void*get_component_in_parent(void*p,ref::Class&){return parent(p);}void*get_component(void*p,ref::Class&){return p;}void*get_component_in_children(void*p,ref::Class&,bool){return p;}void*find_descendant(void*,const wchar_t*,int){return nullptr;}int child_count(void*){return 0;}void*child(void*,int){return nullptr;}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring ui_text(void*p){return name(p);}bool alive(void*p){return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->visible;}int list_count(void*p){return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
+namespace unity {void*transform(void*p){return p;}void*parent(void*p){return p?static_cast<fixture::Node*>(p)->parent:nullptr;}void*get_component_in_parent(void*p,ref::Class&){return parent(p);}void*get_component(void*p,ref::Class&){return p;}void*get_component_in_children(void*p,ref::Class&,bool){return p;}void*find_descendant(void*,const wchar_t*,int){return nullptr;}int child_count(void*p){return p?static_cast<int>(static_cast<fixture::Node*>(p)->children.size()):0;}void*child(void*p,int i){return i>=0&&i<child_count(p)?static_cast<fixture::Node*>(p)->children[i]:nullptr;}Vec3 local_position(void*p){return {p?static_cast<float>(static_cast<fixture::Node*>(p)->index):0.0f,0,0};}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring ui_text(void*p){return name(p);}bool alive(void*p){return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->visible;}int list_count(void*p){return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 bool enumerate_bounded(void*p,std::vector<void*>&out,int bound){out.clear();if(!p||list_count(p)>bound)return false;out=*static_cast<fixture::List*>(p);return true;}}
 namespace unity {
 int array_length(void* list){return list_count(list);}
@@ -368,6 +381,7 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
          "a native field costume reused as a battle body selects its battle description");
   Node tint,tint_material,wrong_renderer;
   List functions{&tint};info.list=&functions;
+  tint.type="ChangeSkinColorConditionFunctionBase";
   tint.machine=true;tint.view=&renderer;tint.use=&tint_material;tint_material.index=1;
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance skin violet","the visible body uses the active material palette");
@@ -377,6 +391,33 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   tint.view=&wrong_renderer;tint_material.index=1;
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the same tint on a different renderer produces no cue");
+  Node blink,copy,copy_renderer,doom,doom_view,ones,tens,two,five;
+  blink.type="BlinkConditionFunction";
+  blink.data=&copy;copy.view=&copy_renderer;
+  doom.type="DoomConditionFunction";
+  doom.status=&doom_view;doom_view.children={&ones,&tens};
+  ones.data=&five;ones.index=1;five.name=L"Battle_Common_DamageNumber_5";
+  tens.data=&two;tens.index=-1;two.name=L"Battle_Common_DamageNumber_2";
+  functions.assign({&blink,&doom});
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance blink Status appearance doom 25",
+         "a drawn Blink copy and left-to-right Doom glyphs extend the visible description");
+  renderer.visible=false;doom_view.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Status appearance blink","the visible Blink body remains available in an original-body gap");
+  renderer.visible=true;copy_renderer.visible=false;doom_view.visible=true;tens.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance doom 5","hidden copy and digit contribute no description");
+  Node freeze,frozen_material;
+  freeze.type="FreezeConditionFunction";
+  frozen_material.index=2;frozen_material.machine=true;renderer.use=&frozen_material;
+  functions.assign({&freeze});
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance freeze","the native Freeze shader contributes a visible cue");
+  frozen_material.machine=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the zero-weight Freeze material contributes no cue");
+  renderer.use=nullptr;
   info.list=nullptr;
   fixture::game=game::Id::FF4;
   entity.state=24;

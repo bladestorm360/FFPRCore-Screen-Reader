@@ -105,9 +105,8 @@ bool read_focused_enemy_appearance()
     auto* info = unit_info(enemy);
     auto* entity = ref::rd<void*>(info, fSpriteEntity);
     const auto art = visible_enemy_art(entity);
-    if (art.empty()) return false;
     const auto key = L"Enemy appearance " + art;
-    auto description = modtext::has(key) ? T(key) : std::wstring{};
+    auto description = !art.empty() && modtext::has(key) ? T(key) : std::wstring{};
     append(description, visible_status_appearance(entity, info));
     if (description.empty()) return false;
     say(description, true);
@@ -123,7 +122,11 @@ void announce_acting_character_appearance()
     auto* entity = ref::rd<void*>(info, fSpriteEntity);
     if (!kPlayerEntity.is(entity)) return;
     auto* sprite = visible_body_sprite(entity);
-    if (!sprite) return;
+    if (!sprite) {
+        auto overlays = visible_status_appearance(entity, info);
+        if (!overlays.empty()) say(overlays, true);
+        return;
+    }
     const auto base_art = visible_player_art(entity);
     const auto sprite_name = unity::name(sprite);
     const auto pose = art_key(sprite_name, L"");

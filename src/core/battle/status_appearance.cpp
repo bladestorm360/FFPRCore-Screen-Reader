@@ -8,6 +8,7 @@
 #include "../unity.h"
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <vector>
 
 namespace ffpr::battle {
@@ -38,6 +39,19 @@ ref::Class kBodyMesh{"Last.Battle", "EntityMeshRenderer"};
 ref::Field fBodyMeshRenderer{kBodyMesh, "meshRenderer"};
 ref::Class kShader{"UnityEngine", "Shader"}, kMaterial{"UnityEngine", "Material"};
 ref::Method mPropertyId{kShader, "PropertyToID", 1}, mColorAt{kMaterial, "GetColorImpl", 1};
+ref::Method mFloatAt{kMaterial, "GetFloatImpl", 1}, mSharedMaterial{kEffectRenderer, "get_sharedMaterial", 0};
+ref::Class kBlink{"Last.Battle", "BlinkConditionFunction"};
+ref::Field fBlinkBodies{kBlink, "copied"};
+ref::Class kDoom{"Last.Battle", "DoomConditionFunction", game::kFF4 | game::kFF5 | game::kFF6};
+ref::Field fDoomView{kDoom, "doomCountEntityView"};
+ref::Class kDoomEx{"Last.Battle", "DoomExConditionFunction", game::kFF4 | game::kFF5 | game::kFF6},
+           kDoomEquipment{"Last.Battle", "DoomEquipmentConditionFunction", game::kFF5 | game::kFF6},
+           kDoomZombie{"Last.Battle", "DoomZonbieConditionFunction", game::kFF6}; // native spelling
+ref::Field fDoomExView{kDoomEx, "doomCountEntityView"}, fDoomEquipmentView{kDoomEquipment, "doomCountEntityView"},
+           fDoomZombieView{kDoomZombie, "doomCountEntityView"};
+ref::Class kDoomGlyph{"UnityEngine", "SpriteRenderer"};
+ref::Method mDoomGlyph{kDoomGlyph, "get_sprite", 0};
+ref::Class kFreeze{"Last.Battle", "FreezeConditionFunction", game::kFF6};
 
 constexpr int kStatusLimit = 64;
 struct SkinColor { float r, g, b, a; };
@@ -77,33 +91,123 @@ std::vector<std::wstring> transformation_groups(std::wstring_view art)
     return groups;
 }
 
-std::wstring visible_skin(void* info, void* body, int& work)
+int property_id(const wchar_t* property)
+{
+    return ref::call_static<int>(mPropertyId, ref::new_str(property));
+}
+
+std::wstring skin_description(void* function, void* renderer)
+{
+    if (!ref::rd<bool>(function, fSkinApplied) || ref::rd<void*>(function, fSkinRenderer) != renderer ||
+        !displayed::renderer_visible(renderer)) return {};
+    auto* material = ref::rd<void*>(function, fSkinMaterial);
+    if (!unity::alive(material) || !mPropertyId.ptr() || !mColorAt.ptr()) return {};
+    // The status already owns this material. Read its active replacement
+    // color directly, because a higher priority condition can recolor it.
+    const auto color = ref::call<SkinColor>(mColorAt, material, property_id(L"_OverrideSkinColor1"));
+    if (color.a <= 0) return {};
+    if (color.r >= 0.94f && color.g <= 0.32f && color.b <= 0.05f) return T(L"Status appearance skin red");
+    if (game::is(game::Id::FF6)) {
+        if (color.g >= 0.49f && color.g + 0.004f >= color.r && color.g > color.b + 0.10f)
+            return T(L"Status appearance skin olive");
+        if (color.r >= 0.58f && color.r > color.g + 0.12f && color.b >= color.r - 0.02f)
+            return T(L"Status appearance skin violet");
+    }
+    return {};
+}
+
+bool blink_is_drawn(void* function, int& work)
+{
+    auto* copies = ref::rd<void*>(function, fBlinkBodies);
+    const bool many = game::is(game::Id::FF4) || game::is(game::Id::FF5);
+    const int count = many ? unity::list_count(copies) : copies ? 1 : 0;
+    if (count < 1 || count > 8) return false;
+    for (int index = 0; index < count && work > 0; ++index) {
+        --work;
+        auto* copy = many ? unity::list_at(copies, index) : copies;
+        if (displayed::renderer_visible(ref::rd<void*>(copy, fBodyMeshRenderer))) return true;
+    }
+    return false;
+}
+
+void* doom_view(void* function)
+{
+    if (kDoom.is(function)) return ref::rd<void*>(function, fDoomView);
+    if (kDoomEx.is(function)) return ref::rd<void*>(function, fDoomExView);
+    if (kDoomEquipment.is(function)) return ref::rd<void*>(function, fDoomEquipmentView);
+    if (kDoomZombie.is(function)) return ref::rd<void*>(function, fDoomZombieView);
+    return nullptr;
+}
+
+std::wstring doom_description(void* view, int& work)
+{
+    if (!displayed::container_visible(view)) return {};
+    auto* transform = unity::transform(view);
+    constexpr int kDigits = 3;
+    const int count = unity::child_count(transform);
+    if (count < 1 || count > kDigits || count > work) return {};
+    struct Digit { float x; wchar_t value; };
+    std::array<Digit, kDigits> digits{};
+    size_t shown = 0;
+    constexpr std::wstring_view prefix = L"Battle_Common_DamageNumber_";
+    for (int index = 0; index < count; ++index) {
+        --work;
+        auto* child = unity::child(transform, index);
+        auto* glyph = unity::get_component(child, kDoomGlyph);
+        if (!displayed::renderer_visible(glyph)) continue;
+        const auto name = unity::name(ref::call<void*>(mDoomGlyph, glyph));
+        const float x = unity::local_position(child).x;
+        if (!std::isfinite(x) || name.size() != prefix.size() + 1 || !name.starts_with(prefix) ||
+            name.back() < L'0' || name.back() > L'9') return {};
+        digits[shown++] = {x, name.back()};
+    }
+    if (!shown) return {};
+    std::sort(digits.begin(), digits.begin() + shown, [](Digit a, Digit b) { return a.x < b.x; });
+    std::wstring value;
+    for (size_t index = 0; index < shown; ++index) {
+        if (index && digits[index - 1].x == digits[index].x) return {};
+        value.push_back(digits[index].value);
+    }
+    return TF(L"Status appearance doom {0}", {value});
+}
+
+bool freeze_is_drawn(void* renderer)
+{
+    if (!displayed::renderer_visible(renderer) || !mPropertyId.ptr() || !mFloatAt.ptr() || !mColorAt.ptr()) return false;
+    auto* material = ref::call<void*>(mSharedMaterial, renderer);
+    if (!unity::alive(material) || ref::call<float>(mFloatAt, material, property_id(L"_ColorWeight")) <= 0.0f)
+        return false;
+    const auto color = ref::call<SkinColor>(mColorAt, material, property_id(L"_Color1"));
+    return color.a > 0.99f && std::abs(color.r - 40.0f / 255) < 0.005f &&
+           std::abs(color.g - 40.0f / 255) < 0.005f && std::abs(color.b - 200.0f / 255) < 0.005f;
+}
+
+void add_function_appearances(void* info, void* body, int& work, std::vector<std::wstring>& details)
 {
     auto* functions = info_functions(info);
-    auto* renderer = ref::rd<void*>(body, fBodyMeshRenderer);
     const int count = unity::list_count(functions);
-    if (count < 1 || count > kStatusLimit || !displayed::renderer_visible(renderer)) return {};
+    if (count < 1 || count > kStatusLimit) return;
+    auto* renderer = ref::rd<void*>(body, fBodyMeshRenderer);
+    bool skin = false, blink = false, doom = false, freeze = false;
     for (int index = 0; index < count && work > 0; ++index) {
         --work;
         auto* function = unity::list_at(functions, index);
-        if (!kSkin.is(function) || !ref::rd<bool>(function, fSkinApplied) ||
-            ref::rd<void*>(function, fSkinRenderer) != renderer) continue;
-        auto* material = ref::rd<void*>(function, fSkinMaterial);
-        if (!unity::alive(material) || !mPropertyId.ptr() || !mColorAt.ptr()) continue;
-        // The status already owns this material. Read its active override
-        // directly, because a higher priority condition can recolor it.
-        const auto id = ref::call_static<int>(mPropertyId, ref::new_str(L"_OverrideSkinColor1"));
-        const auto color = ref::call<SkinColor>(mColorAt, material, id);
-        if (color.a <= 0) continue;
-        if (color.r >= 0.94f && color.g <= 0.32f && color.b <= 0.05f) return T(L"Status appearance skin red");
-        if (game::is(game::Id::FF6)) {
-            if (color.g >= 0.49f && color.g + 0.004f >= color.r && color.g > color.b + 0.10f)
-                return T(L"Status appearance skin olive");
-            if (color.r >= 0.58f && color.r > color.g + 0.12f && color.b >= color.r - 0.02f)
-                return T(L"Status appearance skin violet");
+        std::wstring detail;
+        if (!skin && kSkin.is(function)) {
+            detail = skin_description(function, renderer);
+            skin = !detail.empty();
+        } else if (!blink && kBlink.is(function) && blink_is_drawn(function, work)) {
+            blink = true;
+            detail = T(L"Status appearance blink");
+        } else if (!freeze && kFreeze.is(function) && freeze_is_drawn(renderer)) {
+            freeze = true;
+            detail = T(L"Status appearance freeze");
+        } else if (!doom) {
+            if (auto* view = doom_view(function)) detail = doom_description(view, work);
+            doom = !detail.empty();
         }
+        if (!detail.empty()) details.push_back(std::move(detail));
     }
-    return {};
 }
 
 bool rendered_reaction(void* effect, void* body, int& work)
@@ -175,8 +279,7 @@ std::wstring visible_status_appearance(void* entity, void* info)
     if (!body) return {};
     int work = kStatusLimit;
     std::vector<std::wstring> details;
-    auto skin = visible_skin(info, body, work);
-    if (!skin.empty()) details.push_back(std::move(skin));
+    add_function_appearances(info, body, work, details);
     auto* controller = ref::rd<void*>(entity, fStatusController);
     auto* effects = ref::rd<void*>(controller, fStatusEffects);
     const int count = unity::list_count(effects);

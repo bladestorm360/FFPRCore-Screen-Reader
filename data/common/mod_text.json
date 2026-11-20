@@ -23098,5 +23098,47 @@
     "th": "ผิวที่มองเห็นติดสีม่วง",
     "pt": "A pele exposta tem um tom violeta.",
     "zhc": "外露的皮肤泛着紫色。"
+  },
+  "Status appearance blink": {
+    "en": "A double of the body appears slightly to one side.",
+    "ja": "体の分身が少し横にずれて現れる。",
+    "fr": "Un double du corps apparaît légèrement décalé sur le côté.",
+    "it": "Una copia del corpo appare leggermente spostata di lato.",
+    "de": "Ein Doppelbild des Körpers erscheint leicht seitlich versetzt.",
+    "es": "Una copia del cuerpo aparece ligeramente desplazada hacia un lado.",
+    "ko": "몸의 분신이 옆으로 약간 어긋나 나타난다.",
+    "zht": "身體的分身出現在稍偏一側的位置。",
+    "ru": "Копия тела появляется чуть в стороне.",
+    "th": "ร่างซ้อนปรากฏเยื้องไปด้านข้างเล็กน้อย",
+    "pt": "Uma cópia do corpo aparece um pouco deslocada para o lado.",
+    "zhc": "身体的分身出现在稍偏一侧的位置。"
+  },
+  "Status appearance doom {0}": {
+    "en": "A countdown above the body shows {0}.",
+    "ja": "体の上にカウントダウンの数字{0}が出ている。",
+    "fr": "Un compte à rebours au-dessus du corps affiche {0}.",
+    "it": "Sopra il corpo il conto alla rovescia mostra {0}.",
+    "de": "Über dem Körper steht die Countdown-Zahl {0}.",
+    "es": "Una cuenta atrás sobre el cuerpo muestra {0}.",
+    "ko": "몸 위의 카운트다운에 {0}이 표시된다.",
+    "zht": "身體上方的倒數顯示{0}。",
+    "ru": "Над телом виден обратный отсчёт. На нём {0}.",
+    "th": "ตัวเลขนับถอยหลังเหนือร่างแสดง {0}",
+    "pt": "Uma contagem regressiva acima do corpo mostra {0}.",
+    "zhc": "身体上方的倒数显示{0}。"
+  },
+  "Status appearance freeze": {
+    "en": "A blue tint covers the motionless body.",
+    "ja": "動かない体が青みを帯びている。",
+    "fr": "Une teinte bleue recouvre le corps immobile.",
+    "it": "Una tinta blu avvolge il corpo immobile.",
+    "de": "Der reglose Körper ist blau eingefärbt.",
+    "es": "Un tono azul cubre el cuerpo inmóvil.",
+    "ko": "움직이지 않는 몸이 푸른빛을 띤다.",
+    "zht": "靜止的身體覆上一層藍色。",
+    "ru": "Неподвижное тело окрашено в синий цвет.",
+    "th": "ร่างนิ่งถูกคลุมด้วยสีฟ้า",
+    "pt": "Um tom azul cobre o corpo imóvel.",
+    "zhc": "静止的身体覆上一层蓝色。"
   }
 }

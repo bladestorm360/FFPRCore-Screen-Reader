@@ -155,6 +155,23 @@ passed. The tint fixture exercises a visible palette, the restored
 material and a palette belonging to a different renderer. Field visual
 changes and further no-effect status art remain in scope.
 
+## November 20 Blink, Doom and Freeze
+
+Blink describes a visible body copy, including the phases when the original
+body is hidden. The reader checks the native condition's single copy or its
+bounded copy list in FFIV and FFV. Doom reads up to three drawn digit sprites
+from the condition's own view in visual order. It supports the standard,
+equipment and alternate native countdown owners. FFVI Freeze describes the
+blue body when the owning active condition has applied the verified color
+and weight to the visible shared material. All three descriptions have
+12-language wording.
+
+The checks cover hidden copies and digits, reversed digit insertion order,
+countdown owner variants and active and inactive Freeze material. The
+production DLL, battle focus and boss visual checks passed with 73 embedded
+resources. The reader runs on explicit request under the existing battle
+readiness and presentation bounds.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy
