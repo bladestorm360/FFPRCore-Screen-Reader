@@ -102,12 +102,13 @@ bool read_focused_enemy_appearance()
     if (!frame::on_main_thread() || !battle_presentation_ready()) return false;
     auto* enemy = focused_enemy_unit();
     if (!kBattleEnemyData.is(enemy)) return false;
-    auto* entity = ref::rd<void*>(unit_info(enemy), fSpriteEntity);
+    auto* info = unit_info(enemy);
+    auto* entity = ref::rd<void*>(info, fSpriteEntity);
     const auto art = visible_enemy_art(entity);
     if (art.empty()) return false;
     const auto key = L"Enemy appearance " + art;
     auto description = modtext::has(key) ? T(key) : std::wstring{};
-    append(description, visible_status_appearance(entity));
+    append(description, visible_status_appearance(entity, info));
     if (description.empty()) return false;
     say(description, true);
     return true;
@@ -118,7 +119,8 @@ void announce_acting_character_appearance()
     if (!frame::on_main_thread() || !battle_presentation_ready()) return;
     auto* unit = acting_party_unit();
     if (!kBattlePlayerData.is(unit)) return;
-    auto* entity = ref::rd<void*>(unit_info(unit), fSpriteEntity);
+    auto* info = unit_info(unit);
+    auto* entity = ref::rd<void*>(info, fSpriteEntity);
     if (!kPlayerEntity.is(entity)) return;
     auto* sprite = visible_body_sprite(entity);
     if (!sprite) return;
@@ -142,7 +144,7 @@ void announce_acting_character_appearance()
         const auto weapon = L"Weapon appearance " + visible_weapon_art(ref::rd<void*>(entity, *hand));
         if (modtext::has(weapon)) append(description, T(weapon));
     }
-    append(description, visible_status_appearance(entity));
+    append(description, visible_status_appearance(entity, info));
     append(description, visible_party_status_icons(unit));
     if (!description.empty()) say(description, true);
 }

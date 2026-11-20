@@ -1,4 +1,5 @@
 #include "status_appearance.h"
+#include "battle_util.h"
 #include "../displayed_ui.h"
 #include "../game.h"
 #include "../modtext.h"
@@ -31,8 +32,15 @@ ref::Class kPaths{"System.Asset", "AssetBundlePathMatch"};
 ref::Field fPaths{kPaths, "originalData"};
 ref::Class kResources{"Last.Management", "ResourceManager"};
 ref::Field fCompleted{kResources, "completeAssetDic"};
+ref::Class kSkin{"Last.Battle", "ChangeSkinColorConditionFunctionBase"};
+ref::Field fSkinApplied{kSkin, "changedSkinColor"}, fSkinRenderer{kSkin, "effectRender"}, fSkinMaterial{kSkin, "effectMaterial"};
+ref::Class kBodyMesh{"Last.Battle", "EntityMeshRenderer"};
+ref::Field fBodyMeshRenderer{kBodyMesh, "meshRenderer"};
+ref::Class kShader{"UnityEngine", "Shader"}, kMaterial{"UnityEngine", "Material"};
+ref::Method mPropertyId{kShader, "PropertyToID", 1}, mColorAt{kMaterial, "GetColorImpl", 1};
 
 constexpr int kStatusLimit = 64;
+struct SkinColor { float r, g, b, a; };
 
 void* string_entry(void* dictionary, void* key)
 {
@@ -67,6 +75,35 @@ std::vector<std::wstring> transformation_groups(std::wstring_view art)
         default: break;
     }
     return groups;
+}
+
+std::wstring visible_skin(void* info, void* body, int& work)
+{
+    auto* functions = info_functions(info);
+    auto* renderer = ref::rd<void*>(body, fBodyMeshRenderer);
+    const int count = unity::list_count(functions);
+    if (count < 1 || count > kStatusLimit || !displayed::renderer_visible(renderer)) return {};
+    for (int index = 0; index < count && work > 0; ++index) {
+        --work;
+        auto* function = unity::list_at(functions, index);
+        if (!kSkin.is(function) || !ref::rd<bool>(function, fSkinApplied) ||
+            ref::rd<void*>(function, fSkinRenderer) != renderer) continue;
+        auto* material = ref::rd<void*>(function, fSkinMaterial);
+        if (!unity::alive(material) || !mPropertyId.ptr() || !mColorAt.ptr()) continue;
+        // The status already owns this material. Read its active override
+        // directly, because a higher priority condition can recolor it.
+        const auto id = ref::call_static<int>(mPropertyId, ref::new_str(L"_OverrideSkinColor1"));
+        const auto color = ref::call<SkinColor>(mColorAt, material, id);
+        if (color.a <= 0) continue;
+        if (color.r >= 0.94f && color.g <= 0.32f && color.b <= 0.05f) return T(L"Status appearance skin red");
+        if (game::is(game::Id::FF6)) {
+            if (color.g >= 0.49f && color.g + 0.004f >= color.r && color.g > color.b + 0.10f)
+                return T(L"Status appearance skin olive");
+            if (color.r >= 0.58f && color.r > color.g + 0.12f && color.b >= color.r - 0.02f)
+                return T(L"Status appearance skin violet");
+        }
+    }
+    return {};
 }
 
 bool rendered_reaction(void* effect, void* body, int& work)
@@ -132,16 +169,18 @@ std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstr
     return {};
 }
 
-std::wstring visible_status_appearance(void* entity)
+std::wstring visible_status_appearance(void* entity, void* info)
 {
-    auto* controller = ref::rd<void*>(entity, fStatusController);
-    auto* effects = ref::rd<void*>(controller, fStatusEffects);
-    const int count = unity::list_count(effects);
-    if (count <= 0 || count > kStatusLimit) return {};
     auto* body = ref::rd<void*>(entity, fStatusBody);
     if (!body) return {};
     int work = kStatusLimit;
     std::vector<std::wstring> details;
+    auto skin = visible_skin(info, body, work);
+    if (!skin.empty()) details.push_back(std::move(skin));
+    auto* controller = ref::rd<void*>(entity, fStatusController);
+    auto* effects = ref::rd<void*>(controller, fStatusEffects);
+    const int count = unity::list_count(effects);
+    if (count <= 0 || count > kStatusLimit) return text::join(details, L" ");
     std::array<int, kStatusLimit> described{};
     int described_count = 0;
     for (int index = 0; index < count && work > 0; ++index) {

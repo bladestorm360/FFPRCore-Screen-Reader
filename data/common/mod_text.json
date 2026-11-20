@@ -23056,5 +23056,47 @@
     "th": "ล็อกนอนอยู่บนพื้น",
     "pt": "Locke está caído no chão.",
     "zhc": "洛克倒在地板上。"
+  },
+  "Status appearance skin red": {
+    "en": "The exposed skin has a vivid red cast.",
+    "ja": "露出した肌が鮮やかな赤を帯びている。",
+    "fr": "La peau visible prend une teinte rouge vif.",
+    "it": "La pelle visibile assume una tinta rosso acceso.",
+    "de": "Die sichtbare Haut ist kräftig rot gefärbt.",
+    "es": "La piel visible tiene un tono rojo intenso.",
+    "ko": "드러난 피부가 선명한 붉은빛을 띤다.",
+    "zht": "外露的皮膚泛著鮮紅色。",
+    "ru": "Открытые участки кожи приобретают ярко-красный оттенок.",
+    "th": "ผิวที่มองเห็นมีสีแดงสด",
+    "pt": "A pele exposta tem um tom vermelho vivo.",
+    "zhc": "外露的皮肤泛着鲜红色。"
+  },
+  "Status appearance skin olive": {
+    "en": "The exposed skin has an olive-green tint.",
+    "ja": "露出した肌がオリーブ色を帯びている。",
+    "fr": "La peau visible prend une teinte vert olive.",
+    "it": "La pelle visibile assume una tinta verde oliva.",
+    "de": "Die sichtbare Haut hat einen olivgrünen Ton.",
+    "es": "La piel visible tiene un tono verde oliva.",
+    "ko": "드러난 피부가 올리브빛 초록색을 띤다.",
+    "zht": "外露的皮膚泛著橄欖綠。",
+    "ru": "Открытые участки кожи приобретают оливковый оттенок.",
+    "th": "ผิวที่มองเห็นติดสีเขียวมะกอก",
+    "pt": "A pele exposta tem um tom verde-oliva.",
+    "zhc": "外露的皮肤泛着橄榄绿。"
+  },
+  "Status appearance skin violet": {
+    "en": "The exposed skin has a violet tint.",
+    "ja": "露出した肌が紫を帯びている。",
+    "fr": "La peau visible prend une teinte violette.",
+    "it": "La pelle visibile assume una tinta viola.",
+    "de": "Die sichtbare Haut hat einen violetten Ton.",
+    "es": "La piel visible tiene un tono violeta.",
+    "ko": "드러난 피부가 보랏빛을 띤다.",
+    "zht": "外露的皮膚泛著紫色。",
+    "ru": "Открытые участки кожи приобретают фиолетовый оттенок.",
+    "th": "ผิวที่มองเห็นติดสีม่วง",
+    "pt": "A pele exposta tem um tom violeta.",
+    "zhc": "外露的皮肤泛着紫色。"
   }
 }

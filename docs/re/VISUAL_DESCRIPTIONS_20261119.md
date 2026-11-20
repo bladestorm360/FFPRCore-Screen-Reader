@@ -135,8 +135,25 @@ most eight alternate groups. It invokes no resource loading and retains
 no object pointers. A focused replay verifies that a loaded Pig sprite
 with the same pose name cannot replace the description of a different
 sprite. The appearance and dialogue checks passed with all 73 resources.
-Field changes, body material colors without an effect, portrait focus
-speech and gameplay confirmation still need their own verification.
+Field changes, portrait focus speech and gameplay confirmation still
+need their own verification.
+
+## November 20 applied status palettes
+
+The six installed `serial_misc_assets` tables contain 143 authored skin
+palette records. Berserk has red and orange-red replacement colors.
+FFVI also has olive Zombie and violet Poison palettes. The current
+material determines the color when conditions overlap. All three color
+descriptions are localized into the 12 game languages.
+
+The manual reader uses the active unit's condition functions. It needs
+the game's applied color witness and the same visible body renderer.
+It reads the condition's existing material directly, with work charged
+to the same presentation budget. It neither creates a material nor
+hooks rendering. Battle focus, party status and boss visual checks
+passed. The tint fixture exercises a visible palette, the restored
+material and a palette belonging to a different renderer. Field visual
+changes and further no-effect status art remain in scope.
 
 ## Battle appearance reader
 

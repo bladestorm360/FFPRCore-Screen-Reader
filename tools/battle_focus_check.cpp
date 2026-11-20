@@ -128,11 +128,18 @@ int32_t Field::get(){
  if(n=="conditionEffectList"||n=="particleSystems")return offsetof(fixture::Node,list);
  if(n=="effectId")return offsetof(fixture::Node,index);
  if(n=="originalData"||n=="completeAssetDic")return offsetof(fixture::Node,data);
+ if(n=="changedSkinColor")return offsetof(fixture::Node,machine);
+ if(n=="effectRender")return offsetof(fixture::Node,view);
+ if(n=="effectMaterial")return offsetof(fixture::Node,use);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){
  if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
+ if(std::string_view(name)=="PropertyToID")return reinterpret_cast<void*>(+[](void*,const void*){return 1;});
+ if(std::string_view(name)=="GetColorImpl")return reinterpret_cast<void*>(+[](void* p,int,const void*) {
+  return static_cast<fixture::Node*>(p)->index == 1 ? std::array<float,4>{0.72f,0.56f,0.78f,1} : std::array<float,4>{1,1,1,1};
+ });
  if(std::string_view(name)=="get_sprite")return reinterpret_cast<void*>(+[](void* p,const void*) { return static_cast<fixture::Node*>(p)->data; });
  if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;
 }
@@ -231,6 +238,7 @@ namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
 ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};
 void* unit_info(void* p){return p?static_cast<fixture::Node*>(p)->data:nullptr;}
+void* info_functions(void* p){return p?static_cast<fixture::Node*>(p)->list:nullptr;}
 void* acting_party_unit(){return fixture::acting_art_unit;}
 bool battle_presentation_ready(){return fixture::battle_art_ready;}
 bool in_battle(){return fixture::battle_active;}
@@ -358,6 +366,18 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00",
          "a native field costume reused as a battle body selects its battle description");
+  Node tint,tint_material,wrong_renderer;
+  List functions{&tint};info.list=&functions;
+  tint.machine=true;tint.view=&renderer;tint.use=&tint_material;tint_material.index=1;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance skin violet","the visible body uses the active material palette");
+  tint_material.index=0;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","a restored neutral material produces no tint cue");
+  tint.view=&wrong_renderer;tint_material.index=1;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the same tint on a different renderer produces no cue");
+  info.list=nullptr;
   fixture::game=game::Id::FF4;
   entity.state=24;
   Node groups,addresses,completed,pig,same_pose;
