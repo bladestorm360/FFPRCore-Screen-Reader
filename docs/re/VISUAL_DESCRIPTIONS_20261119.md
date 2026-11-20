@@ -74,8 +74,10 @@ prop, vehicle and text-rendering sprites.
 
 The [FF1 appearance pass](VISUAL_DESCRIPTIONS_FF1_COSTUMES_20261119.md)
 covers its 76 field candidates and 12 battle outfits, including all base
-and promoted jobs. Equipment held separately in battle needs its own
-visible-art mapping. The chapters below also track costume use in specific
+and promoted jobs. The [FFII appearance pass](VISUAL_DESCRIPTIONS_FF2_COSTUMES_20261119.md)
+covers its 72 field candidates, nine battle outfits and nine separately
+drawn portraits. Equipment held separately in battle needs its own
+visible-art mapping. The chapters below track costume use in specific
 dialogue and event contexts.
 
 ## Opening and early scene review
