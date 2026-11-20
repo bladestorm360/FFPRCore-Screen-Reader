@@ -7,6 +7,9 @@ namespace field::event_semantics {
 // Reviewed developer identifiers. A message, battle, warp, generic actor fall or
 // scene containing a broken bridge is not evidence of an environmental trap.
 inline bool trap_identifier(std::wstring_view raw) {
+    // These four Walse Tower events are deliberate jumps from vine routes.
+    if (raw == L"sc_e_0212_8穴に落ちる" || raw == L"sc_e_0212_9穴に落ちる" ||
+        raw == L"sc_e_0212_10穴に落ちる" || raw == L"sc_e_0212_11穴に落ちる") return false;
     std::wstring name(raw);
     for (auto& c : name) c = static_cast<wchar_t>(std::towlower(c));
     for (const auto* token : {L"落とし穴",L"落し穴",L"穴に落ちる",L"地割れに落ちる",

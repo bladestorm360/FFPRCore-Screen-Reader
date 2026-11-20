@@ -40,9 +40,13 @@ SAFE = set(NOUNS) | {'Party chat', 'Conversation', 'Scene trigger', 'Trap',
 SAFE.update(label for entries in SPRITES.values() for label in entries.values())
 SAFE.update(label for label, _ in RULES)
 SAFE.add('Invincible ladder') # exact pinned physical-return occurrences only
+SAFE.add('Jump')
 
+WALSE_JUMPS = {f'sc_e_0212_{index}穴に落ちる' for index in (8, 9, 10, 11)}
 
 def trap_identifier(raw):
+    if raw in WALSE_JUMPS:
+        return False
     name = raw.lower()
     if any(word in name for word in ('落とし穴','落し穴','穴に落ちる','地割れに落ちる',
             'pitfall','trapdoor','floor_break','floorbreak','bridge_break','bridgebreak',
@@ -66,6 +70,8 @@ def infer(o, commands, script_name='', messages=()):
     if t == 21: return 'Vehicle interaction', 'native vehicle action type'
     if t == 30: return 'Switch trigger', 'native switch-event type'
     name = unicodedata.normalize('NFKC', raw).lower()
+    if t == 2 and raw in WALSE_JUMPS:
+        return 'Jump', 'deliberate Tower of Walse descent from the vine route'
     if t in {2, 28} and trap_identifier(raw):
         return 'Trap', 'environmental pit/drop identifier; story and reward withheld'
     if re.search(r'(?:ワープ(?:地点[A-Z]|装置|する.*)?$|(?:へ|に)ワープ$)',raw) or name.strip() in {'warp','teleport','warp pad'}:

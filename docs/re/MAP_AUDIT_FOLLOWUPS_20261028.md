@@ -12,8 +12,8 @@ reports in the existing feature and maintenance records as each system opens.
 | Checkpoint | State and acceptance |
 | --- | --- |
 | [FFV Karnak world map](#november-17-ffv-karnak-world-map-routing-progress-blocker) | Closed for source, offline verification and FFV installation. Player confirmation pending. |
-| FFV routing and labels | In progress (~5%). Verify and deploy Karnak Pub 2F exit classification, save-point arrival and traversal, [Walse jump labels](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). Initial estimate 45–90 minutes. |
-| Field menu speech | Not started. Remove the [redundant FFV spell target read](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) at its producer. Audit the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently) and announce the title and initial focus where applicable. |
+| FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
+| Field menu speech | In progress (~5%). Remove the [redundant FFV spell target read](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) at its producer. Audit the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently) and announce the title and initial focus where applicable. Initial estimate 45–90 minutes. |
 | FFIV world and floor routing | Not started. Verify Moon entrances, Sealed Cavern rope prerequisites, [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes), [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). |
 | [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | Not started. After gameplay fixes and deployment, complete the six-game sprite and animation coverage passes and verify the speech controls. |
 | [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
@@ -57,6 +57,7 @@ shared browse and route-worker checks. The 67 embedded resources and
 scanned payload, and 138 protected file hashes across the six installations
 matched the initial inventory. This closes focused delivery. Game-frame and
 audible response timing remain unmeasured. [Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-ffv-karnak-world-routing).
+Remote `master` was verified at `f7d0043820bd2f45dbb713cd45f753d861f18d15`.
 
 ## November 17 FFV Karnak Pub 2F exit classified as an event
 
@@ -74,6 +75,14 @@ Verify the transition and list the 2F entrance under Map Exits with its
 destination name. Check that directions and the return from 2F follow the
 native approaches and that independent scenes keep their Event classification.
 
+Both placements of the same native contact, entity 33, run script 146.
+Every branch enters map 93 at PointIn 1. Two branches play a scene after
+that arrival. The bake promotes the exact two existing warp records at
+(18,4) and (22,4) to named Map Exits and preserves the native story scripts.
+The staged FFV bake differs by only the two promotion flags. The focused
+replay verifies both exact map-exit entries and the one-step approach
+from the native return tile. [Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-shared-save-point-and-ffv-navigation-fixes).
+
 ## November 17 FFV directions while standing on a save point
 
 **Deferred.** On Tower of Walse 5F, the FFV Steam log
@@ -82,11 +91,10 @@ native approaches and that independent scenes keep their Event classification.
 429996.000 a fresh plan records one step with both the player and goal at
 (7,8), layer 1, on map 238. It again says “1 North” at 429996.015.
 
-When the selected destination is already reached, directions should say
-“Already here” without a movement instruction. Check whether existing
-arrival handling can be reused and why it misses this save point. Verify
-both fresh and reused routes. A nearby save point should still give valid
-directions until the player reaches it.
+Save Point selection now uses a spot goal so its own tile is the arrival.
+The existing zero-movement response says “Already here” in English with
+equivalent speech in the other 11 languages. The focused replay verifies
+zero steps on the circle and two steps from the original nearby position.
 
 ## November 17 save points are passable during routing
 
@@ -101,11 +109,12 @@ before directions from (7,10) to the selected chest at (10,5) on map 238.
 That route crosses the save point at (7,8). At 429844.765 the native
 consecrated-circle tutorial is spoken.
 
-Verify that a route can cross the save point before and after that tutorial
-without classifying the save point as a required event. If the native pop-up
-takes control, wait for normal field readiness before continuing autowalk.
-Keep the Save Points destination and preserve separate scene and relocation
-triggers.
+The route worker omits the reviewed IV–VI tutorial contacts from hazards
+only when they share the native save point's tile and layer. The existing
+native readiness gate governs any pause from the pop-up. The original
+chest route replay crosses the save point without an “Event required” warning.
+The Save Points destination and independent scene and relocation triggers
+keep their roles.
 
 <a id="november-15-ffiv-moon-route-to-crystal-palace"></a>
 

@@ -14,9 +14,8 @@ inline TargetKind navigation_target_kind(Kind kind,Category category,bool aerial
     switch(kind){
     case Kind::NPC:case Kind::TreasureChest:return TargetKind::Interact;
     case Kind::MapExit:return TargetKind::Transition;
-    case Kind::Vehicle:return TargetKind::Spot;
-    // Save points and automatic events retain their native inference, including
-    // tutorial overlaps, step-on warps and vehicle activation pads.
+    case Kind::Vehicle:case Kind::SavePoint:return TargetKind::Spot;
+    // Automatic events retain native inference for step-on warps and pads.
     default:return TargetKind::Infer;
     }
 }

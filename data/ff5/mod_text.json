@@ -1,4 +1,18 @@
 {
+  "Jump": {
+    "en": "Jump",
+    "ja": "ジャンプ",
+    "fr": "Sauter",
+    "it": "Salta",
+    "de": "Springen",
+    "es": "Saltar",
+    "ko": "점프",
+    "zht": "跳躍",
+    "zhc": "跳跃",
+    "ru": "Прыжок",
+    "th": "กระโดด",
+    "pt": "Pular"
+  },
   "No unlocked jobs can equip": {
     "en": "No unlocked jobs can equip",
     "ja": "装備可能なジョブはありません",

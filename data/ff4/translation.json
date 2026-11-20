@@ -2665,17 +2665,17 @@
     "pt": "Trancado, Não Pode Passar"
   },
   "カイン（仮）": {
-    "en": "Kain (Temp)",
-    "fr": "Kaïn (Temp.)",
-    "it": "Cain (Temp.)",
-    "de": "Kain (Temp.)",
-    "es": "Kain (Temp.)",
-    "ko": "카인 (임시)",
-    "zht": "凱因 (暫時)",
-    "zhc": "凯因 (暂时)",
-    "ru": "Каин (Врем.)",
-    "th": "ไคน์ (ชั่วคราว)",
-    "pt": "Kain (Temp.)"
+    "en": "Kain",
+    "fr": "Kaïn",
+    "it": "Cain",
+    "de": "Kain",
+    "es": "Kain",
+    "ko": "카인",
+    "zht": "凱因",
+    "zhc": "凯因",
+    "ru": "Каин",
+    "th": "ไคน์",
+    "pt": "Kain"
   },
   "亡きバロン王との会話": {
     "en": "Conversation with Late King of Baron",

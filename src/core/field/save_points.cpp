@@ -40,9 +40,8 @@ void consolidate(filter_worker::FilterInput& input) {
         // VI20 retains the established rule. Other events (including VI619's
         // separate route to the save room) retain their own destinations.
         for(const auto& object:baked::grids(*sm).objects) {
-            const bool script=game==4?(object.a==853||object.a==855):game==5?object.a==2006:object.a==20;
-            if(object.type!=baked::ObjType::Event || object.entity_id()!=row.entity_id ||
-               baked::object_identifier(object)!=row.raw_name || !script || object.b!=2 ||
+            if(object.entity_id()!=row.entity_id || !tutorial_script(object, game) ||
+               baked::object_identifier(object)!=row.raw_name ||
                object.layer!=row.cell_layer || !object.contains(std::get<2>(at),std::get<3>(at)))continue;
             for(const auto& native:baked::grids(*sm).objects)
                 if(native.type==baked::ObjType::SavePoint && native.entity_id()==canonical.entity_id &&

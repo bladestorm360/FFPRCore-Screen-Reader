@@ -16016,18 +16016,18 @@
     "zht": "武器店"
   },
   "武器屋（仮）": {
-    "de": "Waffenladen (vorläufig)",
-    "en": "Weapon Shop (Temp)",
-    "es": "Tienda de armas (provisional)",
-    "fr": "Armurerie (provisoire)",
-    "it": "Negozio di armi (provvisorio)",
-    "ja": "武器屋（仮）",
-    "ko": "무기점 (임시)",
-    "pt": "Loja de armas (temporário)",
-    "ru": "Оружейная лавка (временно)",
-    "th": "ร้านขายอาวุธ (ชั่วคราว)",
-    "zhc": "武器店（暂定）",
-    "zht": "武器店（暫定）"
+    "de": "Waffenladen",
+    "en": "Weapon Shop",
+    "es": "Tienda de armas",
+    "fr": "Armurerie",
+    "it": "Negozio di armi",
+    "ja": "武器屋",
+    "ko": "무기점",
+    "pt": "Loja de armas",
+    "ru": "Оружейная лавка",
+    "th": "ร้านขายอาวุธ",
+    "zhc": "武器店",
+    "zht": "武器店"
   },
   "水でもどされる": {
     "de": "Vom Wasser zurückgedrängt",
@@ -17318,18 +17318,18 @@
     "zht": "石門（左）"
   },
   "石像(仮)": {
-    "de": "Steinstatue (vorläufig)",
-    "en": "Stone Statue (temp)",
-    "es": "Estatua de piedra (temporal)",
-    "fr": "Statue de pierre (temporaire)",
-    "it": "Statua di pietra (temporanea)",
-    "ja": "石像(仮)",
-    "ko": "석상 (임시)",
-    "pt": "Estátua de pedra (temporário)",
-    "ru": "Каменная статуя (временно)",
-    "th": "รูปปั้นหิน (ชั่วคราว)",
-    "zhc": "石像（暂定）",
-    "zht": "石像（暫定）"
+    "de": "Steinstatue",
+    "en": "Stone Statue",
+    "es": "Estatua de piedra",
+    "fr": "Statue de pierre",
+    "it": "Statua di pietra",
+    "ja": "石像",
+    "ko": "석상",
+    "pt": "Estátua de pedra",
+    "ru": "Каменная статуя",
+    "th": "รูปปั้นหิน",
+    "zhc": "石像",
+    "zht": "石像"
   },
   "石像1": {
     "de": "Steinstatue 1",
@@ -18536,18 +18536,18 @@
     "zht": "防具店"
   },
   "防具屋（仮）": {
-    "de": "Rüstungsladen (vorläufig)",
-    "en": "Armor Shop (temp)",
-    "es": "Tienda de armaduras (temporal)",
-    "fr": "Boutique d'armures (temporaire)",
-    "it": "Negozio di armature (temporaneo)",
-    "ja": "防具屋（仮）",
-    "ko": "방어구점 (임시)",
-    "pt": "Loja de armaduras (temporário)",
-    "ru": "Магазин доспехов (временно)",
-    "th": "ร้านขายชุดเกราะ (ชั่วคราว)",
-    "zhc": "防具店（暂定）",
-    "zht": "防具店（暫定）"
+    "de": "Rüstungsladen",
+    "en": "Armor Shop",
+    "es": "Tienda de armaduras",
+    "fr": "Boutique d'armures",
+    "it": "Negozio di armature",
+    "ja": "防具屋",
+    "ko": "방어구점",
+    "pt": "Loja de armaduras",
+    "ru": "Магазин доспехов",
+    "th": "ร้านขายชุดเกราะ",
+    "zhc": "防具店",
+    "zht": "防具店"
   },
   "階段": {
     "de": "Treppe",

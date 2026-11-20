@@ -172,3 +172,7 @@ current FFIV Steam `ffpr_screen_reader.log`.
 Remove the parenthesized temporary marker from player-facing navigation
 labels regardless of case. These entries should say “Weapon Shop” and
 “Armor Shop.” Preserve the underlying identifiers for lookup and routing.
+
+The source catalog now uses the normal shop names for those two aliases.
+The label audit also found and removed the same temporary qualifier from
+FFIV's Kain and FFV's Stone Statue across their existing locale entries.

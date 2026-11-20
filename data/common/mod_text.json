@@ -5838,18 +5838,18 @@
     "pt": "Botão {0}"
   },
   "No movement needed": {
-    "en": "No movement needed",
-    "ja": "移動の必要はありません",
-    "fr": "Aucun déplacement nécessaire",
-    "it": "Nessuno spostamento necessario",
-    "de": "Keine Bewegung nötig",
-    "es": "No hace falta moverse",
-    "ko": "이동할 필요 없음",
-    "zht": "無需移動",
-    "zhc": "无需移动",
-    "ru": "Двигаться не нужно",
-    "th": "ไม่ต้องเคลื่อนที่",
-    "pt": "Nenhum movimento necessário"
+    "en": "Already here",
+    "ja": "すでに到着しています",
+    "fr": "Vous y êtes déjà",
+    "it": "Sei già a destinazione",
+    "de": "Schon am Ziel",
+    "es": "Ya estás aquí",
+    "ko": "이미 도착했습니다",
+    "zht": "已到達目的地",
+    "zhc": "已到达目的地",
+    "ru": "Вы уже на месте",
+    "th": "ถึงจุดหมายแล้ว",
+    "pt": "Já chegou ao destino"
   },
   "No waypoints": {
     "en": "No waypoints",

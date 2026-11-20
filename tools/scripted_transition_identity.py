@@ -59,6 +59,23 @@ def _sha(value):
     return hashlib.sha256(json.dumps(value,sort_keys=True,ensure_ascii=False,
                                     separators=(',',':')).encode()).hexdigest()
 
+def karnak_pub_destination(obj, script_name, scripts):
+    variants = {44: 'entity_default', 31: 'ev_e_0052'}
+    if obj['submap'] != 'Map_20061_5' or obj['id'] not in variants:
+        return None
+    prop = obj['props']
+    assert (obj['type_name'], obj['group'], prop['entity_id'], prop['script_id'], prop['action_id'], script_name) == (
+        'Event', variants[obj['id']], 33, 146, 2, 'sc_e_0052')
+    source = scripts[('Map_20061_5', script_name)]
+    assert _sha(source) == '0eafe4c2c5b2bca822b43f4adc17b6bc72fc7d1aa5cae7b5fcbd05ad4f8c0439'
+    assert _sha(scripts[('Map_20061_6', 'sc_e_0052_1')]) == '500b9ec3981ef76e2a7649c08d83c374d9ca1e399b643641d713b3d6c74ef7a0'
+    assert _sha(scripts[('Map_20061_6', 'sc_e_0190')]) == 'd8ac50944011d66b9bb67c4a113749519e8894ade738ef67a205c5b09de9bb2c'
+    # The two story scenes play after the same native 2F arrival as plain entry.
+    transfers = [(row['operands']['iValues'][:2], row['operands']['sValues'][0])
+                 for row in source['mnemonics'] if row['mnemonic'] == 'ChangeMap']
+    assert transfers == [([93, 1], ''), ([93, 1], 'sc_e_0052_1'), ([93, 1], 'sc_e_0190')]
+    return 93, 1, ''
+
 # Tower roller/duct travel uses movie-only map545 between two playable rooms.
 # Pin all three complete bodies. Returning the first transfer strands routing
 # in a scene with no player-controlled exit; the final continuation/landing is
@@ -103,6 +120,8 @@ def destination(game,obj,script_name,scripts,parents):
     actor identity is required even when a developer name happens to match.
     """
     n=int(game.removeprefix('ff'))
+    if n == 5 and (pub := karnak_pub_destination(obj, script_name, scripts)):
+        return pub
     if n==6:
         import solitary_passage
         if passage:=solitary_passage.destination(obj,script_name,scripts):return passage

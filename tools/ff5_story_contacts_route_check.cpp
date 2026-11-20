@@ -2,6 +2,7 @@
 #define main retained_exdeath_route_main
 #include "ff5_exdeath_route_check.cpp"
 #undef main
+#include "../src/core/field/target_kind.h"
 
 namespace story_contacts {
 using namespace field;
@@ -94,6 +95,59 @@ int verify() {
     karnak.scenario[989].reset();
     check(!route(1,between_castle_and_ship,karnak,fire_ship,TargetKind::Transition).path.success,
           "unknown Fire-Powered Ship terrain does not invent a ground entrance");
+
+    auto tower_state = exdeath_routes::flags(238,0,0);
+    tower_state.current_area_id = 71;
+    MapGoal circle;
+    circle.map_id = 238;
+    circle.cell = {1,7,8};
+    circle.entity_id = 17;
+    circle.raw_name = baked::object_identifier(object(238,17));
+    const auto circle_kind = navigation_target_kind(Kind::SavePoint, Category::SavePoints);
+    const auto at_circle = route(238,circle.cell,tower_state,circle,circle_kind);
+    check(at_circle.path.success && at_circle.path.step_count == 0,
+          "the occupied Walse save circle needs no movement");
+    const auto near_circle = route(238,{1,7,10},tower_state,circle,circle_kind);
+    check(near_circle.path.success && near_circle.path.step_count == 2 && !near_circle.path.event_on_route,
+          "the nearby Walse save circle has a real walking approach");
+    MapGoal walse_chest;
+    walse_chest.map_id = 238;
+    walse_chest.cell = {1,10,5};
+    const auto through_circle = route(238,{1,7,10},tower_state,walse_chest,TargetKind::Interact);
+    check(through_circle.path.success && !through_circle.path.event_on_route &&
+          std::any_of(through_circle.path.walk_phases.begin(),through_circle.path.walk_phases.end(),[&](const auto& phase) {
+              return std::find(phase.cells.begin(),phase.cells.end(),circle.cell) != phase.cells.end();
+          }), "the Walse chest route walks through the active save tutorial without a required event");
+
+    int jump_transfers = 0;
+    for (int floor : {238,242}) {
+        for (const auto& actor : baked::grids(*baked::submap_by_map_id(floor)).objects) {
+            if (actor.type != baked::ObjType::Warp || !baked::object_identifier(actor).starts_with(L"sc_e_0212_")) continue;
+            ++jump_transfers;
+            check(!baked::is_trap(actor) && baked::transition_bits(actor) != 0,
+                  "Walse jumps retain their real floor transfers without trap classification");
+        }
+    }
+    check(jump_transfers == 4, "all four Walse jumps are present");
+
+    auto pub = exdeath_routes::flags(92,0,0);
+    pub.current_area_id = 25;
+    const auto& pub_grid = baked::grids(*baked::submap_by_map_id(92));
+    const auto& pub_contact = object(92,33);
+    const auto pub_name = baked::object_identifier(pub_contact);
+    for (int x : {18,22}) {
+        const auto* exit = baked::world_exit_at(pub_grid,33,pub_name,x,4);
+        check(exit && exit->a == 93 && exit->b == 1,
+              "the exact native pub contacts are Map Exits to 2F PointIn 1");
+    }
+    MapGoal upstairs;
+    upstairs.map_id = 92;
+    upstairs.cell = {1,22,4};
+    upstairs.entity_id = 33;
+    upstairs.raw_name = pub_name;
+    const auto pub_route = route(92,{1,22,5},pub,upstairs,TargetKind::Transition);
+    check(pub_route.path.success && pub_route.path.step_count == 1,
+          "Karnak Pub directions use the verified 2F entry from the adjacent return tile");
 
     auto valley = exdeath_routes::flags(577,0,0);
     valley.current_area_id = 4;

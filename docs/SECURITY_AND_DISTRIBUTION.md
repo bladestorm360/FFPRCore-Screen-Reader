@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 19 shared save-point and FFV navigation fixes
+
+The focused build verified 67 embedded resources and completed in 159.2
+seconds with one worker, a 25% CPU cap and a 513,232,896-byte peak job.
+FFV story contacts passed 49 assertions and 31 route legs. The browse,
+scanner, filter and separate trap checks passed. The smoke host verified
+47 exports. The 13,475,328-byte unsigned DLL SHA-256 is
+`38e01de3caab8c27f27f3583f083e0b5a6ffcf8a3a274d1279f1906ef64b0586`.
+
+Defender found no threats in 22 exact payload files and reported no matching
+detection events. The separate exclusion query was denied. The installer
+hash-verified the 22 files in all six Steam targets and preserved 138
+protected file states. For recovery use `f7d0043` for FFV and `a6008be` for
+the other five games. Installation receipts are under
+`../tools/karnak_routing_20261119/ffv-navigation`. Gameplay confirmation
+remains pending.
+
 ## November 19 FFV Karnak world routing
 
 The focused build passed FFV story contacts, browse routing and route

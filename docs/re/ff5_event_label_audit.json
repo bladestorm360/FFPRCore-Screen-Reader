@@ -16022,9 +16022,9 @@
     "id": 15,
     "raw": "sc_e_0212_8穴に落ちる",
     "type": 2,
-    "label": "Trap",
-    "reason": "environmental pit/drop identifier; story and reward withheld",
-    "trap_hint": true
+    "label": "Jump",
+    "reason": "deliberate Tower of Walse descent from the vine route",
+    "trap_hint": false
   },
   {
     "submap": "Map_30121_5",
@@ -16117,9 +16117,9 @@
     "id": 23,
     "raw": "sc_e_0212_11穴に落ちる",
     "type": 2,
-    "label": "Trap",
-    "reason": "environmental pit/drop identifier; story and reward withheld",
-    "trap_hint": true
+    "label": "Jump",
+    "reason": "deliberate Tower of Walse descent from the vine route",
+    "trap_hint": false
   },
   {
     "submap": "Map_30121_9",
@@ -16127,9 +16127,9 @@
     "id": 24,
     "raw": "sc_e_0212_10穴に落ちる",
     "type": 2,
-    "label": "Trap",
-    "reason": "environmental pit/drop identifier; story and reward withheld",
-    "trap_hint": true
+    "label": "Jump",
+    "reason": "deliberate Tower of Walse descent from the vine route",
+    "trap_hint": false
   },
   {
     "submap": "Map_30121_9",
@@ -16137,9 +16137,9 @@
     "id": 25,
     "raw": "sc_e_0212_9穴に落ちる",
     "type": 2,
-    "label": "Trap",
-    "reason": "environmental pit/drop identifier; story and reward withheld",
-    "trap_hint": true
+    "label": "Jump",
+    "reason": "deliberate Tower of Walse descent from the vine route",
+    "trap_hint": false
   },
   {
     "submap": "Map_30130",

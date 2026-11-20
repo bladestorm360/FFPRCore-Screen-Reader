@@ -22,6 +22,7 @@
 #include "field_internal.h"
 #include "map_names.h"
 #include "map_state.h"
+#include "save_points.h"
 #include "entity_translator.h"
 #include "../game.h"
 #include "../hooks.h"
@@ -877,6 +878,7 @@ Blockers live_blockers(const baked::Submap& sm, const baked::Grids& g, const std
                 const auto* o = raw.fixed_border?raw.fixed_border:baked_by_entity_id(g, raw.id, static_cast<baked::ObjType>(raw.type), c, raw.raw_name);
                 if (!o) o = baked_by_entity_id(g, raw.id, baked::ObjType::Warp, c, raw.raw_name);
                 if (o&&g_route_snapshot->state.consumed(sm,*o)) continue;
+                if (o && save_points::passable_tutorial(g, *o, baked::game_number())) continue;
                 if (std::find(ordinary_contacts.begin(),ordinary_contacts.end(),o)!=ordinary_contacts.end()) continue;
                 if(o&&snapshot.state.story_barrier(sm,*o)&&!is_goal(c.x,c.y))append(out.gates,c,Rules::Gate);
                 // A completed scene may move its still-powered trigger away

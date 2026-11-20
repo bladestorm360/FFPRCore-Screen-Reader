@@ -152,7 +152,7 @@ Walse 9F entries as “Trap” at 429855.093, 429855.390 and 429855.562. An
 earlier rotated part labels the Tower of Walse 5F event “Trap” at 185298.843
 and lists the 4F vine separately under Objects at 185293.093.
 
-For a later fix, verify the exact descent contacts and their landings.
-Use the localized “Jump” label and preserve the vine climbs and valid
-routes through the verified jumps. Keep trap warnings and avoidance for
-actual hazards.
+The four exact 5F and 9F contacts transfer to lower Walse floors with a
+native animation. They now use the localized “Jump” label and retain their
+original scripted landings as deliberate travel. Other trap identifiers
+retain their warnings and avoidance behavior.
