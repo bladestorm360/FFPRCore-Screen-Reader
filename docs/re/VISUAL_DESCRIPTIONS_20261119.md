@@ -71,7 +71,7 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-28,782 remaining non-English entries in the new catalog. All 251
+28,181 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
 the variant's palette, anatomy, pose and visible equipment. All 274
@@ -86,8 +86,11 @@ The 167 field and character entries and 72 equipment entries include
 reused asset groups. FFIV has Japanese descriptions for all 530 visible
 keys. These include 247 enemy entries with changing attack and boss
 poses, 166 field sprites, 30 battle forms and portraits, and 87 visible
-equipment entries. The catalog still needs the other missing translations,
-integrated delivery and gameplay confirmation.
+equipment entries. FFV's 604 keys now also have Japanese wording, including
+300 enemy forms, 124 field sprites, 109 battle job outfits and 71 equipment
+entries. Thirty translations were reused where the asset key and English
+description both matched an earlier title. The catalog still needs the
+other missing translations, integrated delivery and gameplay confirmation.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script
