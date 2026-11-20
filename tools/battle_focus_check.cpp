@@ -110,7 +110,9 @@ bool Class::is(void*p){
  if(!p)return false;
  const std::string_view check=name;
  if(check=="ChangeSkinColorConditionFunctionBase"||check=="BlinkConditionFunction"||
-    check.starts_with("Doom")||check=="FreezeConditionFunction")return static_cast<fixture::Node*>(p)->type==check;
+    check.starts_with("Doom")||check=="FreezeConditionFunction"||
+    check=="VanishConditionFunction"||check=="TranslucentConditionFunction")
+  return static_cast<fixture::Node*>(p)->type==check;
  return true;
 }
 il2cpp::Class*Class::get(){
@@ -137,6 +139,7 @@ int32_t Field::get(){
  if(n=="changedSkinColor")return offsetof(fixture::Node,machine);
  if(n=="effectRender")return offsetof(fixture::Node,view);
  if(n=="effectMaterial")return offsetof(fixture::Node,use);
+ if(n=="material")return offsetof(fixture::Node,use);
  if(n=="copied")return offsetof(fixture::Node,data);
  if(n=="doomCountEntityView")return offsetof(fixture::Node,status);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
@@ -144,14 +147,27 @@ int32_t Field::get(){
 void* instance(Class&){return &fixture::manager;}
 void*Method::ptr(){
  if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
- if(std::string_view(name)=="PropertyToID")return reinterpret_cast<void*>(+[](void*,const void*){return 1;});
+ if(std::string_view(name)=="PropertyToID")return reinterpret_cast<void*>(+[](void* property,const void*){
+  const auto& key=static_cast<fixture::Node*>(property)->name;
+  if(key==L"_TintColorWeight")return 2;
+  if(key==L"_HollowOut")return 3;
+  if(key==L"_TranceHollowOut")return 4;
+  return 1;
+ });
  if(std::string_view(name)=="GetColorImpl")return reinterpret_cast<void*>(+[](void* p,int,const void*) {
   const int palette=static_cast<fixture::Node*>(p)->index;
   if(palette==1)return std::array<float,4>{0.72f,0.56f,0.78f,1};
   if(palette==2)return std::array<float,4>{40.0f/255,40.0f/255,200.0f/255,1};
+  if(palette==3)return std::array<float,4>{1,1,1,0.5f};
+  if(palette==4)return std::array<float,4>{1,1,1,0};
   return std::array<float,4>{1,1,1,1};
  });
- if(std::string_view(name)=="GetFloatImpl")return reinterpret_cast<void*>(+[](void* p,int,const void*){return static_cast<fixture::Node*>(p)->machine?0.5f:0.0f;});
+ if(std::string_view(name)=="GetFloatImpl")return reinterpret_cast<void*>(+[](void* p,int id,const void*){
+  const auto* material=static_cast<fixture::Node*>(p);
+  if(id==3||id==4)return material->state==id?1.0f:0.0f;
+  if(!material->machine)return 0.0f;
+  return id==2&&material->index==3?1.0f:0.5f;
+ });
  if(std::string_view(name)=="get_sharedMaterial")return reinterpret_cast<void*>(+[](void* p,const void*){return static_cast<fixture::Node*>(p)->use;});
  if(std::string_view(name)=="get_sprite")return reinterpret_cast<void*>(+[](void* p,const void*) { return static_cast<fixture::Node*>(p)->data; });
  if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;
@@ -417,6 +433,33 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   frozen_material.machine=false;
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the zero-weight Freeze material contributes no cue");
+  Node vanish,vanish_material;
+  vanish.type="VanishConditionFunction";
+  vanish.use=&vanish_material;renderer.use=&vanish_material;
+  vanish_material.state=3;
+  functions.assign({&vanish});
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance hollow body",
+         "the player Vanish shader removes the solid body fill");
+  vanish_material.state=4;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance hollow body",
+         "the Trance Vanish shader also removes the solid fill");
+  vanish_material.state=0;vanish_material.machine=true;vanish_material.index=4;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00 Status appearance translucent body",
+         "Vanish can instead blend the clear tint at half weight");
+  vanish.use=&frozen_material;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance mo_ff6_n050_c00","the condition cannot report another body's material");
+  Node translucent;
+  translucent.type="TranslucentConditionFunction";
+  vanish_material.index=3;
+  functions.assign({&translucent});
+  fixture::game=game::Id::FF4;entity.state=24;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff4_p001 Status appearance translucent body",
+         "FFIV's separate half-alpha tint is visible on the current body");
   renderer.use=nullptr;
   info.list=nullptr;
   fixture::game=game::Id::FF4;

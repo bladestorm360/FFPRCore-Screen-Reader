@@ -175,6 +175,15 @@ production DLL, battle focus and boss visual checks passed with 73 embedded
 resources. The reader runs on explicit request under the existing battle
 readiness and presentation bounds.
 
+FFIV's separate Translucent condition uses a half-alpha tint. FFVI
+Vanish removes the solid fill on the normal or Trance player shader.
+Its alternate branch blends a clear tint at half weight. The description
+checks those applied values on the rendered material. Vanish also has
+to own that exact material. The two cues use the 12 game locales.
+Battle focus, boss visual and feedback checks passed with the native
+shader states, restored materials and a material owned by a different
+body. The selected reads remain under the shared presentation bounds.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy

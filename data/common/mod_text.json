@@ -23252,5 +23252,33 @@
     "ru": "Четверо искателей приключений стоят порознь в тумане пещеры.",
     "th": "นักผจญภัยสี่คนยืนแยกกันอยู่ในหมอกภายในถ้ำ",
     "pt": "Quatro aventureiros estão espalhados pela névoa de uma caverna."
+  },
+  "Status appearance hollow body": {
+    "en": "The body loses its solid fill.",
+    "ja": "体の内側が透けて見える。",
+    "fr": "L’intérieur de la silhouette devient transparent.",
+    "it": "L’interno della sagoma diventa trasparente.",
+    "de": "Das Innere der Silhouette wird durchsichtig.",
+    "es": "El interior de la silueta se vuelve transparente.",
+    "ko": "몸의 윤곽 안쪽이 투명해진다.",
+    "zht": "身體輪廓內部變得透明。",
+    "zhc": "身体轮廓内部变得透明。",
+    "ru": "Внутри контура тело становится прозрачным.",
+    "th": "ด้านในของโครงร่างโปร่งใสขึ้น",
+    "pt": "O interior da silhueta fica transparente."
+  },
+  "Status appearance translucent body": {
+    "en": "The body is partly transparent.",
+    "ja": "体が半透明になっている。",
+    "fr": "Le corps est en partie transparent.",
+    "it": "Il corpo è in parte trasparente.",
+    "de": "Der Körper ist halb durchsichtig.",
+    "es": "El cuerpo es parcialmente transparente.",
+    "ko": "몸이 반투명하다.",
+    "zht": "身體呈半透明狀態。",
+    "zhc": "身体呈半透明状态。",
+    "ru": "Тело полупрозрачное.",
+    "th": "ลำตัวโปร่งแสงบางส่วน",
+    "pt": "O corpo está parcialmente transparente."
   }
 }

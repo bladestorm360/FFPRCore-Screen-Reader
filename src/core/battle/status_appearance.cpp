@@ -52,6 +52,9 @@ ref::Field fDoomExView{kDoomEx, "doomCountEntityView"}, fDoomEquipmentView{kDoom
 ref::Class kDoomGlyph{"UnityEngine", "SpriteRenderer"};
 ref::Method mDoomGlyph{kDoomGlyph, "get_sprite", 0};
 ref::Class kFreeze{"Last.Battle", "FreezeConditionFunction", game::kFF6};
+ref::Class kTranslucent{"Last.Battle", "TranslucentConditionFunction", game::kFF4};
+ref::Class kVanish{"Last.Battle", "VanishConditionFunction", game::kFF6};
+ref::Field fVanishMaterial{kVanish, "material"};
 
 constexpr int kStatusLimit = 64;
 struct SkinColor { float r, g, b, a; };
@@ -182,13 +185,33 @@ bool freeze_is_drawn(void* renderer)
            std::abs(color.g - 40.0f / 255) < 0.005f && std::abs(color.b - 200.0f / 255) < 0.005f;
 }
 
+const wchar_t* transparency_key(void* function, void* renderer, bool vanish)
+{
+    if (!displayed::renderer_visible(renderer) ||
+        !mPropertyId.ptr() || !mFloatAt.ptr() || !mColorAt.ptr()) return nullptr;
+    auto* material = ref::call<void*>(mSharedMaterial, renderer);
+    if (!unity::alive(material)) return nullptr;
+    if (vanish) {
+        if (ref::rd<void*>(function, fVanishMaterial) != material) return nullptr;
+        // Player and Trance shaders cut out their fills. The alternate
+        // branch blends a fully clear tint at half weight.
+        for (const auto* name : {L"_HollowOut", L"_TranceHollowOut"})
+            if (ref::call<float>(mFloatAt, material, property_id(name)) == 1.0f)
+                return L"Status appearance hollow body";
+    }
+    const float weight = ref::call<float>(mFloatAt, material, property_id(L"_TintColorWeight"));
+    if (weight != (vanish ? 0.5f : 1.0f)) return nullptr;
+    const auto tint = ref::call<SkinColor>(mColorAt, material, property_id(L"_TintColor"));
+    return tint.a == (vanish ? 0.0f : 0.5f) ? L"Status appearance translucent body" : nullptr;
+}
+
 void add_function_appearances(void* info, void* body, int& work, std::vector<std::wstring>& details)
 {
     auto* functions = info_functions(info);
     const int count = unity::list_count(functions);
     if (count < 1 || count > kStatusLimit) return;
     auto* renderer = ref::rd<void*>(body, fBodyMeshRenderer);
-    bool skin = false, blink = false, doom = false, freeze = false;
+    bool skin = false, blink = false, doom = false, freeze = false, transparent = false;
     for (int index = 0; index < count && work > 0; ++index) {
         --work;
         auto* function = unity::list_at(functions, index);
@@ -202,6 +225,12 @@ void add_function_appearances(void* info, void* body, int& work, std::vector<std
         } else if (!freeze && kFreeze.is(function) && freeze_is_drawn(renderer)) {
             freeze = true;
             detail = T(L"Status appearance freeze");
+        } else if (const bool vanish = !transparent && kVanish.is(function);
+                   !transparent && (vanish || kTranslucent.is(function))) {
+            if (const auto* key = transparency_key(function, renderer, vanish)) {
+                transparent = true;
+                detail = T(key);
+            }
         } else if (!doom) {
             if (auto* view = doom_view(function)) detail = doom_description(view, work);
             doom = !detail.empty();
