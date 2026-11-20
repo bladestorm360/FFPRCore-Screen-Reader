@@ -81,6 +81,34 @@ bundles. The baseline records the exact installed bundle hashes and the
 fingerprint of the per-body inventory. This closes discovery of the
 review corpus.
 
+## November 20 battle status effects and equipment
+
+The status review follows the 525 installed condition rows to 85
+title-specific effect IDs and 13 shared icon drawings. The per-title
+effect counts are 12, 15, 11, 14, 18 and 15. The local
+`condition_art_inventory.py` checks prefab component types, exact Sprite
+and Material texture references, authored colors and shader parameters.
+The review sheets and `ffN-condition-art.json` fingerprints preserve the
+art evidence. All 85 effect entries, 13 icon entries and two body pose
+entries have wording in all 12 supported languages. Status rows without a
+direct effect or icon still need disposition through alternate body art,
+skin changes, visibility or a verified absence of visible change.
+
+The manual I and Ctrl+I readers require the existing ready battle and
+exact visible body. An effect needs its visible renderer, emitted visible
+particles, or a live reaction targeting this exact body. A fixed budget of
+64 bounds presentation checks per request. FFVI Silence has a witnessed
+child renderer. The icon reader checks the acting party row and its
+currently visible images. Ctrl+I also identifies both visible weapon
+renderers by the native equipment asset group, with the body pose read
+from the displayed sprite. These are manual readers and add no hooks.
+
+The focused local build verified 73 resources. Battle focus, dialogue
+appearance, boss visuals, party and equipment fixtures passed. The job
+finished in 119 seconds with a 362,688,512-byte peak for the full process
+tree. The battle fixture covers a drawn off-hand weapon and the effect
+renderer visibility veto. Native gameplay and deployment remain open.
+
 ## Battle appearance reader
 
 On manual I, after the existing menu details checks, the current enemy

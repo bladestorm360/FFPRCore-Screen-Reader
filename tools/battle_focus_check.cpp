@@ -1,4 +1,4 @@
-// check-sources: text.cpp
+// check-sources: battle/status_appearance.cpp text.cpp
 // Actual battle target/command and quantity-list detours; native collections/views are fixtures.
 #include <map>
 #include <cstdio>
@@ -111,8 +111,12 @@ int32_t Field::get(){
  if(n=="characterStatusId")return offsetof(fixture::Node,state);
  if(n=="jobId")return offsetof(fixture::Node,index);
  if(n=="battleWeaponRight")return offsetof(fixture::Node,use);
+ if(n=="battleWeaponLeft")return offsetof(fixture::Node,window);
  if(n=="BattleWeaponSR")return offsetof(fixture::Node,view);
  if(n=="loadWeaponAsset")return offsetof(fixture::Node,data);
+ if(n=="ConditionEffectEntityController")return offsetof(fixture::Node,status);
+ if(n=="conditionEffectList"||n=="particleSystems")return offsetof(fixture::Node,list);
+ if(n=="effectId")return offsetof(fixture::Node,index);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
@@ -132,6 +136,10 @@ namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** origina
 }bool attach_addr(void*,const char*,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace unity {void*transform(void*p){return p;}void*parent(void*p){return p?static_cast<fixture::Node*>(p)->parent:nullptr;}void*get_component_in_parent(void*p,ref::Class&){return parent(p);}void*get_component(void*p,ref::Class&){return p;}void*get_component_in_children(void*p,ref::Class&,bool){return p;}void*find_descendant(void*,const wchar_t*,int){return nullptr;}int child_count(void*){return 0;}void*child(void*,int){return nullptr;}std::wstring name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring ui_text(void*p){return name(p);}bool alive(void*p){return p&&static_cast<fixture::Node*>(p)->alive;}bool active_in_hierarchy(void*p){return alive(p)&&static_cast<fixture::Node*>(p)->visible;}int list_count(void*p){return p?static_cast<int>(static_cast<fixture::List*>(p)->size()):0;}void*list_at(void*p,int i){return p&&i>=0&&i<list_count(p)?(*static_cast<fixture::List*>(p))[i]:nullptr;}
 bool enumerate_bounded(void*p,std::vector<void*>&out,int bound){out.clear();if(!p||list_count(p)>bound)return false;out=*static_cast<fixture::List*>(p);return true;}}
+namespace unity {
+int array_length(void* list){return list_count(list);}
+void* array_at(void* list,int index){return list_at(list,index);}
+}
 namespace displayed {bool visible(void*p){return unity::active_in_hierarchy(p);}bool container_visible(void*p){return visible(p);}void*field(void*p,const char*n){if(!p)return nullptr;auto&v=*static_cast<fixture::Node*>(p);if(std::string(n)=="view")return v.view;auto it=v.fields.find(n);return it==v.fields.end()?nullptr:it->second;}std::wstring text_field(void*p,const char*n){if(!visible(p))return {};auto&v=*static_cast<fixture::Node*>(p);auto it=v.texts.find(n);return it==v.texts.end()?L"":it->second;}std::wstring pair(void*p,const char*a,const char*b){auto x=text_field(p,a),y=text_field(p,b);return x.empty()||y.empty()?L"":x+L" "+y;}}
 namespace speech {void request_load(){}}
 namespace sound {void initialize(){}}
@@ -152,6 +160,7 @@ std::wstring formation_row(void*,void*){return {};}
 std::wstring spell_row(void*p){return text_field(field(p,"view"),"spell");}
 }
 namespace ffpr {void say(std::wstring_view v,bool interrupt){fixture::spoken.emplace_back(v);fixture::interruptions.push_back(interrupt);}}
+namespace ffpr::battle {std::wstring visible_party_status_icons(void*) { return {}; }}
 // Shared row sequencing/charge ownership is exercised with its actual source in
 // party_esper_check. This focus fixture keeps only that service boundary fake.
 namespace ui::character_row {void announce(void*,void*,std::wstring line,void*){ffpr::say(line,true);}}
@@ -163,6 +172,7 @@ bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
         value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
+        value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Status appearance effect 83"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
         value==L"Character appearance mo_ff6_n050_c00";
 }
@@ -295,6 +305,24 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   weapon_renderer.visible=true;loader.name=L"WP_FF1_SW02_C01";
   b::announce_acting_character_appearance();
   expect(spoken.back()==L"Character appearance bc_ff1_p007","different sword art without wording stays silent");
+  fixture::game=game::Id::FF2;
+  loader.name=L"WP_FF2_SW00_C00";
+  entity.use=nullptr;entity.window=&weapon;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007 Weapon appearance wp_ff2_sw00_c00",
+         "an actual rendered off-hand weapon uses its title's exact art key");
+  entity.window=nullptr;
+  fixture::game=game::Id::FF1;
+  Node controller,effect;
+  List effects{&effect};
+  effect.index=83;controller.list=&effects;entity.status=&controller;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007 Status appearance effect 83",
+         "a visible body overlay adds its exact art description");
+  effect.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.back()==L"Character appearance bc_ff1_p007","an attached hidden overlay contributes no wording");
+  entity.status=nullptr;
   fixture::game=game::Id::FF6;
   entity.state=20;
   b::announce_acting_character_appearance();

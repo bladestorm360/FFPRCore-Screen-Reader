@@ -2,6 +2,7 @@
 #include "battle_internal.h"
 #include "battle_util.h"
 #include "party_status.h"
+#include "status_appearance.h"
 #include "../core.h"
 #include "../displayed_ui.h"
 #include "../hooks.h"
@@ -313,6 +314,17 @@ void announce_active_turn()
     if(name.empty()&&!choosing&&g_execution_player)name=g_execution_name;
     ffpr::say(name.empty() ? T(L"No active character") : TF(L"{0}'s turn", {name}), true);
 }
+std::wstring visible_party_status_icons(void* player)
+{
+    // The active battle view owns the currently drawn status icons. Match
+    // the native actor object, since two rows can share a localized name.
+    for (void* row : rows()) {
+        if (displayed::field(row, "<TargetData>k__BackingField") == player)
+            return displayed::condition_appearance(displayed::field(row, "condtionController"));
+    }
+    return {};
+}
+
 void* acting_party_unit()
 {
     const bool choosing = choosing_command();

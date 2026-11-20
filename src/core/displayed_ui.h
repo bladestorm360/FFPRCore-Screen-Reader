@@ -44,6 +44,7 @@ bool cursor_matches(void* cursor, void* content);
 /// Read only condition icons whose native sprite is currently rendered.
 std::wstring conditions(void* content_or_controller);
 std::vector<std::wstring> condition_lines(void* content_or_controller);
+std::wstring condition_appearance(void* content_or_controller);
 /// A displayed targeting row, respecting its native HP/MP/icon visibility.
 std::wstring target(void* content);
 /// Active native party-target slots; raw pools may include empty or reordered rows.

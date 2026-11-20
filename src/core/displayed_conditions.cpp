@@ -98,15 +98,21 @@ int install() {
     return n + (hooks::attach(mUpdate, &d_update, &o_update) ? 1 : 0);
 }
 core::Install s_install{"Displayed.ConditionIcons", &install, 105};
+
+void* icon_controller(void* content)
+{
+    if (!visible(content)) return nullptr;
+    auto* controller = kIcons.is(content) ? content : field(content, "conditionIconController");
+    if (!controller) controller = field(content, "iconController");
+    return controller && visible(controller) ? controller : nullptr;
+}
 }
 std::vector<std::wstring> condition_lines(void* content)
 {
-    if (!visible(content)) return {};
-    void* controller = kIcons.is(content) ? content : field(content, "conditionIconController");
-    if (!controller) controller = field(content, "iconController");
+    void* controller = icon_controller(content);
     if (!controller) return {};
     auto it = g_icons.find(controller);
-    if (it == g_icons.end() || !visible(controller)) return {};
+    if (it == g_icons.end()) return {};
     void* images = field(field(controller, "view"), "iconImageList");
     std::vector<std::wstring> lines;
     for (int i = 0; i < unity::list_count(images); ++i) {
@@ -118,6 +124,23 @@ std::vector<std::wstring> condition_lines(void* content)
     return lines;
 }
 std::wstring conditions(void* content) { return ::text::join(condition_lines(content), L", "); }
+
+std::wstring condition_appearance(void* content)
+{
+    auto* controller = icon_controller(content);
+    if (!controller) return {};
+    auto* images = field(field(controller, "view"), "iconImageList");
+    const int count = unity::list_count(images);
+    if (count <= 0 || count > 16) return {};
+    std::vector<std::wstring> descriptions;
+    for (int index = 0; index < count; ++index) {
+        const auto name = unity::name(image_sprite(unity::list_at(images, index)));
+        if (name.size() != 19 || !name.starts_with(L"UI_Condition_Icon")) continue;
+        const auto key = L"Status appearance " + name;
+        if (modtext::has(key)) descriptions.push_back(T(key));
+    }
+    return ::text::join(descriptions, L" ");
+}
 std::wstring skill_name(void* content)
 {
     void* controller = kSkill.is(content) ? content : unity::get_component_in_children(content, kSkill, false);

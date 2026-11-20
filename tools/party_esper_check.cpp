@@ -70,6 +70,7 @@ int list_count(void*p){fixture::native();return p?static_cast<int>(static_cast<f
 namespace unity {int array_length(void*p){return list_count(p);}void*array_at(void*p,int i){return list_at(p,i);}}
 namespace unity {bool enumerate_bounded(void*p,std::vector<void*>&out,int bound){fixture::native();out.clear();if(!p||list_count(p)>bound)return false;out=*static_cast<fixture::List*>(p);return true;}}
 namespace displayed {std::wstring conditions(void*p){return p&&visible(p)?static_cast<fixture::Node*>(p)->value:std::wstring();}}
+namespace displayed {std::wstring condition_appearance(void*){return {};}}
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return false;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
 namespace field::cache {void*get(ref::Class&c){return fixture::owners[c.name];}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}}
