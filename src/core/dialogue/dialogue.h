@@ -27,6 +27,8 @@ void read_popup_message(void* popup, const char* context);
 bool in_dialogue();
 /// MessageWindowPatches.RepeatLastDialogue (R; pad mod mode + Square).
 void repeat_last_dialogue();
+/// Describe the visible actor who owns the current direct field dialogue.
+bool read_dialogue_appearance();
 
 // --- PopupState ------------------------------------------------------------------------
 namespace popup_state {

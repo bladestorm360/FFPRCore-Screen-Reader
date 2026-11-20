@@ -1,10 +1,9 @@
 # Visual description audit
-
 The November 19 gameplay fixes are installed. This audit records the exact art
 and scenes that need descriptions, with separate verification for the speech
 controls and for localization. The reviewed wording below is working audit
-content. The first battle readers and six localized samples have passed
-their focused build and checks. They are still outside the installed mod.
+content. The first appearance readers and localized samples are still
+outside the installed mod.
 
 ## Battle appearance reader
 
@@ -39,15 +38,37 @@ native character asset table resolves the body key. The six installed
 The first localized FF1 variants are Warrior and Knight. Focus and
 party fixtures passed with both job keys, hidden bodies, actor handoffs
 and after-action cancellation. The DLL build verified 67 embedded
-resources. Dialogue/event appearance on I and automatic scene cues
+resources.
+
+## Direct dialogue appearance reader
+
+Manual I can use the rendered field dialogue and the current message ID
+from the native `MessageWindowClient`. Across the six installed binaries,
+`MessageWindowClient.Play` is the direct caller of `SetContent`. An active
+direct field action and its interaction target identify the speaker. When
+the indicator clears, the fallback checks at most 64 rooted field entities
+for a unique visible NPC with the exact active talk key. Scripted actions,
+non-field windows, duplicate keys without a target and hidden sprites are
+excluded. The reader resolves the costume from the current rendered
+sprite's packed atlas texture,
+independent of the translated speaker label. It uses no new hooks or frame
+polling. FF1's Cornelia soldier is the first 12-language entry. Cutscene
+speaker bindings, automatic scene cues and remaining localized entries
 are open.
+
+The focused offline build passes the field dialogue, battle focus and
+party checks. The dialogue fixture exercises explicit target resolution,
+cleared indicators, ambiguous speakers, hidden sprites and windows, and
+transition and thread gates. The six-game native name check and byte
+verification of 67 embedded resources passed. Field gameplay confirmation
+is pending.
 
 ## Six-game source inventory
 
 The census reads the installed Addressables bundle names, the game masters and
-the local field script and object extracts. Every enumerated enemy, battle
-character, field character and equipment candidate has a matching installed
-bundle. Enemy rows distinguish alternate palettes and forms. Character outfit
+the local field script and object extracts. The art tables record exact
+installed bundles and isolate unresolved or transparent entries. Enemy rows
+distinguish alternate palettes and forms. Character outfit
 and job variants use their own art records. Equipment records are candidates
 for visual review of distinct sprites. Motion scripts include ordinary patrols,
 movement and visual actions that native dialogue may already explain. Each

@@ -36,3 +36,12 @@ actor, sprite and effect evidence. Remaining opening action candidates
 and the wider scene review remain open. A finished cue needs a verified
 native presentation and playback point that respects cutscene, skip and
 loading gates, as well as localization and offline verification.
+
+## Work and repair scenes
+
+| Game and source | Visual action and native context | Placement |
+| --- | --- | --- |
+| FFII Altair smithy, `Map_20011_9/sc_e_0016`, plus the smithy continuation `Map_20131_3/sc_e_0016_1` | Tobul tells the party he will make weapons and armor from the mythril. The first forging passage fades out during five hammer sounds at 30–38. The script also names hammer actions for Tobul's art `mo_ff2_n022_c00`. That atlas has two frames showing a raised and lowered tool. | Keep the craft dialogue and audio during the dark passage. If the hammer action is visibly presented in a later shot, describe Tobul swinging his hammer once for that shot. The animation alias still needs verification against the renderer. |
+| FFIV Baron Enterprise upgrade, `Map_20011_20/sc_e_0054_1` | Engineer actors 2 and 3 use the two palettes of the same overalls costume. They move in paired puppet bodies at 93–101 and separately at 104–117. Actor 3 starts the first named jump pose at 112. The engineers' dialogue covers the finished attachment, hovercraft controls and onward travel. | At the first visible work motion, describe the two engineers moving into position and the engineer hopping during the work. The atlas lacks a dedicated tool frame. Keep the later repeated motions within that one cue. |
+| FFV Adamantite airship upgrade, `Map_20231_9/sc_e_0071_1` | Cid wears a red coat and has white hair and beard. Mid has blond hair and a violet coat. Their paired puppets show them moving across the scene, with entrances, pauses and repositioning. The first coordinated move begins in the pair at 52–62. | “Cid and Mid move around the airship as they work on the upgrade.” Use one cue across the montage after verifying the first clearly visible shot. The exact body tracks establish the actors' movement. |
+| FFVI optional Blackjack repair, `Map_20171_3/sc_e_1033_1` | The native dialogue explains the engine damage first. Setzer actor 6 uses `DyingR` at 104. The atlas binds that cue to the exact forward-bent sprite. Setzer is hidden and repositioned to the engine, then shown using that pose at 110. | “Setzer leans forward beside the engine.” Use the reveal after 110. The dialogue supplies the reason for the repair. |

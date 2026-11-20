@@ -1,4 +1,18 @@
 {
+  "Field appearance mo_ff1_n101_c00": {
+    "en": "A small, square-faced soldier has dark eyes beneath a gold helmet. Gold bands edge the red armor, sleeves and boots.",
+    "ja": "小柄で四角い顔の兵士。金色の兜の下から黒い目がのぞく。赤い鎧と袖、ブーツを金色の帯が縁取っている。",
+    "fr": "Un petit soldat au visage carré a les yeux sombres sous un casque doré. Des bandes dorées bordent son armure rouge, ses manches et ses bottes.",
+    "it": "Un soldato di bassa statura dal viso squadrato ha occhi scuri sotto un elmo dorato. Fasce dorate orlano l'armatura rossa, le maniche e gli stivali.",
+    "de": "Ein kleiner Soldat mit kantigem Gesicht hat dunkle Augen unter einem goldenen Helm. Goldene Bänder säumen die rote Rüstung, die Ärmel und die Stiefel.",
+    "es": "Un soldado bajo de rostro cuadrado tiene ojos oscuros bajo un casco dorado. Unas bandas doradas ribetean la armadura roja, las mangas y las botas.",
+    "ko": "작고 각진 얼굴의 병사다. 금빛 투구 아래로 어두운 눈이 보인다. 붉은 갑옷과 소매, 장화의 가장자리를 금빛 띠가 두른다.",
+    "zht": "小個子的士兵有張方臉，金色頭盔下露出深色眼睛。紅色盔甲、衣袖和靴子都有金色鑲邊。",
+    "zhc": "小个子的士兵有张方脸，金色头盔下露出深色眼睛。红色盔甲、衣袖和靴子都有金色镶边。",
+    "ru": "Невысокий солдат с квадратным лицом и тёмными глазами носит золотой шлем. Золотые полосы окаймляют красный доспех, рукава и сапоги.",
+    "th": "ทหารตัวเล็กใบหน้าเหลี่ยมมีดวงตาสีเข้มใต้หมวกเกราะสีทอง แถบสีทองขลิบริมเกราะแดง แขนเสื้อ และรองเท้าบู๊ต",
+    "pt": "Um soldado baixo de rosto quadrado tem olhos escuros sob um elmo dourado. Faixas douradas contornam a armadura vermelha, as mangas e as botas."
+  },
   "Character appearance bc_ff1_p001": {
     "en": "A stocky fighter with swept brown hair and bare hands. Dark shoulder panels accent a fitted red armored tunic, and red boots anchor the bent-knee stance.",
     "ja": "横に流した茶色の髪で、がっしりした体格の戦士。暗色の肩当てが付いた赤い鎧をまとい、赤いブーツを履いて膝を曲げ、素手で構えている。",
