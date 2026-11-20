@@ -41,6 +41,20 @@
     "th": "จบเนื้อเรื่องแล้ว",
     "pt": "História concluída"
   },
+  "Request directions again on the world map.": {
+    "en": "Request directions again on the world map.",
+    "ja": "ワールドマップに出たら、もう一度道順を確認してください。",
+    "fr": "Demandez de nouveau l'itinéraire sur la carte du monde.",
+    "it": "Chiedi di nuovo le indicazioni sulla mappa del mondo.",
+    "de": "Rufe auf der Weltkarte erneut die Wegbeschreibung ab.",
+    "es": "Vuelve a pedir indicaciones en el mapa del mundo.",
+    "ko": "월드맵에 나가면 다시 길 안내를 요청하세요.",
+    "zht": "到達世界地圖後，再次查詢路線。",
+    "zhc": "到达世界地图后，再次查询路线。",
+    "ru": "На карте мира снова запросите маршрут.",
+    "th": "ขอเส้นทางอีกครั้งเมื่อออกสู่แผนที่โลก",
+    "pt": "Peça as direções novamente no mapa-múndi."
+  },
   "Acting character appearance": {
     "en": "Acting character appearance",
     "ja": "行動中のキャラクターの外見",

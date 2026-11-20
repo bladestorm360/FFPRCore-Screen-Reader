@@ -132,6 +132,7 @@ void* read_static_ptr(Class* type, const char* field_name)
     if (std::strcmp(field_name, "instance") != 0) return nullptr;
     if (type == reinterpret_cast<Class*>(&field::map_state::kStorage)) return fixture::current;
     if (type == reinterpret_cast<Class*>(&field::map_state::kWordUser) && !fixture::missing_word_user) return &fixture::user;
+    if (type == reinterpret_cast<Class*>(&field::map_state::kNormalUser)) return &fixture::user;
     return nullptr;
 }
 }
@@ -202,6 +203,24 @@ int main()
     word_array.length=129;expect(!map_state::keyword_learned(927).has_value(),"over-budget capacity is unknown");word_array.length=32;
     expect(!map_state::keyword_learned(0).has_value(),"invalid keyword ID is rejected");
     for(auto id:{game::Id::FF1,game::Id::FF3,game::Id::FF4,game::Id::FF5,game::Id::FF6}){running_game=id;expect(!map_state::keyword_learned(927).has_value(),"other games do not query FFII word storage");}
+    KeyItem dried_meat{23, 24, 2};
+    KeyDictionary veldt_inventory;
+    user.normal_items = &veldt_inventory;
+    expect(map_state::has_dried_meat() == false, "FFVI empty normal inventory proves Dried Meat is absent");
+    veldt_inventory.values.emplace(24, &dried_meat);
+    expect(map_state::has_dried_meat() == true && key_lookup_id == 24, "FFVI reads the exact Dried Meat content entry");
+    dried_meat.quantity = 0;
+    expect(map_state::has_dried_meat() == false, "spent Dried Meat does not preserve the owned receipt");
+    dried_meat.content = 23;
+    expect(!map_state::has_dried_meat(), "mismatched content cannot prove the Dried Meat receipt");
+    const auto before_inventory = key_lookups;
+    field_ready = false;
+    expect(!map_state::has_dried_meat() && key_lookups == before_inventory,
+           "native loading blocks inventory capture before the lookup");
+    field_ready = true;
+    std::thread inventory_worker([&] { expect(!map_state::has_dried_meat(), "a worker cannot observe FFVI inventory"); });
+    inventory_worker.join();
+    user.normal_items = nullptr;
     running_game=game::Id::FF3;
     // Recovered CheckChild checks all occupied active corps slots, not only the
     // leader or every character ever owned. No interpreter state is written.

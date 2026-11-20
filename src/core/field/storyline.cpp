@@ -214,6 +214,7 @@ std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int ori
         goal.map_id = next.map;
         goal.cell = *next.authored_spawn;
         goal.allow_world_transit = true;
+        goal.storyline = true;
         targets.push_back({std::move(goal), Kind::Spot, std::wstring(next.instruction)});
         return targets;
     }
@@ -230,6 +231,7 @@ std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int ori
         goal.raw_name = baked::object_identifier(*match);
         goal.examine = next.kind == Kind::Interact && next.id >= Id::Vampire;
         goal.allow_world_transit = true;
+        goal.storyline = true;
         targets.push_back({std::move(goal), next.kind, std::wstring(next.instruction)});
     }
     return targets;

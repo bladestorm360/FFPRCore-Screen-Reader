@@ -225,6 +225,36 @@ int verify()
     hint = cornelia_advice(crown_quest->id, later_crown);
     check(selection.resolve(*crown_quest, hint, false).id == ObjectiveId::CrownAdvice, "a new stage selects its own advice");
     verify_after_canal();
+
+    // Gaia and Onrac are on separate ground components. The first leg can
+    // only prove Gaia's real exit until the world vehicle is actually loaded.
+    Ff1Receipts travel;
+    travel.fill(0);
+    std::fill_n(travel.begin(), 30, 1);
+    auto state = progress_at(tonic, 60);
+    std::copy(travel.begin(), travel.end(), state.scenario.begin());
+    const auto mermaid = ff1_stage(travel, 60).objective;
+    if (mermaid) {
+        const auto goals = contacts(*mermaid, 60);
+        check(!goals.empty(), "the Onrac introduction remains the selected goal from Gaia");
+        if (!goals.empty()) {
+            auto goal = goals.front().goal;
+            const auto kind = goals.front().kind;
+            const auto leave = exdeath_routes::route(60, {1,63,60}, state, goal, kind);
+            check(leave.path.success && leave.path.next_map_id == 1 &&
+                  leave.path.description.find(L"Request directions again on the world map.") != std::wstring::npos,
+                  "Storyline proves Gaia's real departure when it cannot project a parked craft");
+            goal.storyline = false;
+            const auto ordinary = exdeath_routes::route(60, {1,63,60}, state, goal, kind);
+            check(!ordinary.path.success, "ordinary remote selection keeps its reachability contract");
+            goal.storyline = true;
+            state.current_map_id = 1;
+            const auto flight = exdeath_routes::route(1, {1,214,22}, state, goal, kind, false, 3);
+            check(flight.path.success && flight.path.next_map_id == 52,
+                  "after native world recapture the mounted airship can approach Onrac");
+        }
+    } else check(false, "the Onrac introduction is selected after Oxyale");
+
     std::printf("FF1 storyline: %d assertions, %d physical legs, %d failures\n",
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;

@@ -2087,7 +2087,8 @@ std::wstring map_name_of(int map_id) {
 }
 
 CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates, bool allow_traps, bool with_npcs, bool with_remote_npcs,
-    const std::vector<const baked::Object*>* world_targets, std::vector<int>* distances,const baked_route::Reach* current_world_reach)
+    const std::vector<const baked::Object*>* world_targets, std::vector<int>* distances,const baked_route::Reach* current_world_reach,
+    bool to_world_departure)
 {
     CrossLeg out;
     const baked::Submap* here = current_submap(map_handle);
@@ -2216,6 +2217,12 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
             const State cur = states[static_cast<size_t>(best)];
             const baked::Submap* sm = baked::submap_at(cur.submap);
             if (!sm) continue;
+            if (to_world_departure && sm->world) {
+                // The first real arrival is enough. Vehicle placement and
+                // gate state are checked again after it becomes the origin.
+                if (!there->world || sm == there) { goal_state = best; goal_steps = cur.cost; break; }
+                continue;
+            }
             if(bound_world_returns&&best>0&&sm==here&&initial_world_reach.submap) {
                 const int previous=initial_world_reach.distance(cur.at);
                 if(previous>=0&&previous<=cur.cost)continue;
@@ -2312,14 +2319,14 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                     target_traps[index]=cur.traps;(*distances)[index]=cur.cost+d;
                 }
             }
-            if (stair_chest && sm == there && cur.at == kBaronStair) {
+            if (!to_world_departure && stair_chest && sm == there && cur.at == kBaronStair) {
                 // The chest's only usable side is occupied by a floor exit.
                 // Accept the native arrival there, never a walked approach.
                 goal_state = best;
                 goal_steps = cur.cost;
                 break;
             }
-            if (!batch && sm == there && !stair_chest) {
+            if (!to_world_departure && !batch && sm == there && !stair_chest) {
                 int d = -1;
                 for (const Cell& c : goal_cells) {
                     int dc = reach.distance(c);
@@ -2437,7 +2444,7 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
             // leg; entry recaptures native actors and the existing NPC approach
             // stops at the real blocker. Keep current NPCs, gates, terrain,
             // trap policy and transition history. One bounded retry only.
-            if(!out.incomplete&&with_remote_npcs)
+            if(!out.incomplete&&with_remote_npcs && !to_world_departure)
                 return find_across(map_handle,player,goal,with_gates,allow_traps,with_npcs,false,nullptr,nullptr,
                     bound_world_returns?&initial_world_reach:nullptr);
             return out;
@@ -2593,6 +2600,7 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
         for(const auto& phase:phases)out.cells.insert(out.cells.end(),phase.cells.begin(),phase.cells.end());
         out.phases = phases;
         out.description = describe(phases);
+        if (to_world_departure) out.description += L" " + T(L"Request directions again on the world map.");
         for(const auto& phase:phases){const auto movement=phase_movement(req,phase);
             out.event_on_route|=event_on_route(phase.cells,req.hazards,req.goals,&movement);}
         out.steps_here = phase_steps(phases);
@@ -4012,6 +4020,23 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
                         return true;
                     }
                 }
+            }
+        }
+        if (!leg.found && !leg.incomplete && !leg.trap_repeat_blocked && !leg.transition_repeat_blocked &&
+            goal.storyline && !here->world) {
+            const auto& records = data::game_json("mapstate");
+            const auto area = [&](const baked::Submap& map) {
+                const auto* record = records.get(baked::str(map.name));
+                const auto* value = record ? record->get(L"area_id") : nullptr;
+                return value && value->type == json::Value::Type::Number ? static_cast<int>(value->n) : 0;
+            };
+            const int current_area = area(*here), target_area = area(*there);
+            // Offer a proved departure only between areas. Same-area
+            // story gates still use the ordinary unreachable/gated result.
+            if (there->world || (current_area > 0 && target_area > 0 && current_area != target_area)) {
+                auto departure = find_across(map_handle, player, across_goal, true, false, true, true,
+                                            nullptr, nullptr, nullptr, true);
+                if (departure.found) leg = std::move(departure);
             }
         }
         if (!leg.found) {
@@ -5504,7 +5529,7 @@ static void request_route_impl(MapGoal goal, TargetKind kind, std::wstring name,
     auto snapshot = std::make_shared<RouteSnapshot>(anticipated_release ?
         map_state::Resolver(*anticipated_release,data::game_json("mapstate")) : map_state::Resolver());
     snapshot->anticipated_release=std::move(anticipated_release);
-    snapshot->vehicle_shortcuts=capture_vehicle_shortcuts_policy();
+    snapshot->vehicle_shortcuts=goal.storyline || capture_vehicle_shortcuts_policy();
     snapshot->requested_at = requested_at;
     snapshot->map_id = field::current_map_id(); snapshot->submap = submap;
     snapshot->position = unity::local_position(unity::transform(pl));

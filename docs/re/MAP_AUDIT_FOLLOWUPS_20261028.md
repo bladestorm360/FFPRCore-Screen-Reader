@@ -619,6 +619,27 @@ approach, 156 story model plans and 709 existing guide identities. The
 branch and typed-contact checks use exact baked identities. Complete
 campaign travel, new label localization and integrated delivery remain open.
 
+### Storyline travel between areas
+
+A Storyline goal uses the current world vehicle snapshot regardless of the
+browse filter. From inside an area, the production planner first attempts
+the full route with the current evidence. When a different-area objective
+needs a connection the current snapshot cannot prove, the fallback reaches
+the first legal world-map departure. It retains native gates, contacts,
+arrival points and the original objective. A new request on the world map
+uses observed vehicle placement. Autowalk can replan on its existing
+native-ready continuation. Other categories and same-area Storyline routes
+retain their usual gate and reachability decisions.
+
+An actual FF1 replay from Gaia to Onrac verifies the real Gaia departure
+with foot-only indoor evidence and the actual Onrac approach with the
+mounted airship after arrival. The ordinary route remains unreachable from
+that indoor snapshot. All six campaign checks, the six-game navigation
+regressions and the native-state fixture passed. The latter also checks
+FFVI's exact Dried Meat inventory entry, quantity change and loading/worker
+exclusion. This verifies the shared departure behavior offline. Broader
+campaign travel and gameplay confirmation remain open.
+
 ## November 11 all-six Storyline category
 
 The owner requests the next main-story objective in a Storyline category

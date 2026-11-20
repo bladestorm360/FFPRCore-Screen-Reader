@@ -100,6 +100,9 @@ struct MapGoal {
     // between interiors. Ordinary indoor destinations never enable this:
     // their gate checks must not search unrelated world detours.
     bool allow_world_transit = false;
+    // A campaign objective can need a parked vehicle that will only be
+    // observable after leaving an interior. Prove that departure separately.
+    bool storyline = false;
     // Manual spoken directions may publish a bearing if flight moved again.
     // Automation and persistent guide previews always need an exact route.
     bool moving_flight_directions = false;
@@ -212,7 +215,7 @@ struct CrossLeg {
 // it borrows the identical current-capture walking/landing flood from its parent.
 CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool with_gates = true, bool allow_traps = false, bool with_npcs = true, bool with_remote_npcs = true,
     const std::vector<const baked::Object*>* world_targets = nullptr, std::vector<int>* distances = nullptr,
-    const baked_route::Reach* current_world_reach = nullptr);
+    const baked_route::Reach* current_world_reach = nullptr, bool to_world_departure = false);
 /// Retain a bounded completed-trap history for the current destination, preventing repeated legs.
 bool note_trap_start(int map_id, const baked_route::Cell& at);
 void record_map_arrival(int map_id, const baked_route::Cell& at);
