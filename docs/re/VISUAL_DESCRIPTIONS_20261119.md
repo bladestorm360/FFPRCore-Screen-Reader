@@ -81,9 +81,12 @@ covers 142 field candidates and 25 battle outfits. Its Ranger and Scholar
 costumes use different numeric suffixes in field and battle art. The
 [FFIV appearance pass](VISUAL_DESCRIPTIONS_FF4_COSTUMES_20261119.md)
 covers 166 field candidates and 30 battle art and portrait variants,
-including changed outfits for Cecil, Rydia and Kain. Equipment held
-separately in battle needs its own visible-art mapping. The chapters below
-track costume use in specific dialogue and event contexts.
+including changed outfits for Cecil, Rydia and Kain. The
+[FFV appearance pass](VISUAL_DESCRIPTIONS_FF5_COSTUMES_20261119.md)
+covers 124 field candidates and 109 battle outfits. Galuf's Mime resolves
+to his Freelancer sprite in the native master. Equipment held separately
+in battle needs its own visible-art mapping. The chapters below track
+costume use in specific dialogue and event contexts.
 
 ## Opening and early scene review
 
