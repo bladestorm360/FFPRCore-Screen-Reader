@@ -88,9 +88,10 @@ to his Freelancer sprite in the native master. The
 [FFVI appearance pass](VISUAL_DESCRIPTIONS_FF6_COSTUMES_20261119.md)
 covers 182 field candidates and 39 battle art and portrait variants,
 including shared guest and moogle art. The installed costume inventory is
-accounted for across all six games. Equipment held separately in battle
-needs its own visible-art mapping. The chapters below track costume use in
-specific dialogue and event contexts.
+accounted for across all six games. The [equipment artwork pass](VISUAL_DESCRIPTIONS_EQUIPMENT_20261119.md)
+covers 414 visible art keys and 371 representative appearances, with
+shared category icons, guard and bare-hand sprites accounted for. Scene
+props and exact visibility during battle use their own presentation context.
 
 ## Opening and early scene review
 

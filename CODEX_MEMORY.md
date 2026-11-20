@@ -31,9 +31,10 @@ make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOL
 
 **November 19 visual descriptions and Storyline.** Gameplay fixes are
 installed. Six-game enemy and character artwork prose covers 1,380 visible
-enemy sprites, 762 field candidates and 233 battle art and portrait variants.
-Equipment and silent scene actions, localized speech integration and
-Storyline mode are open. [Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
+enemy sprites, 762 field candidates, 233 battle art and portrait variants
+and 371 representative equipment appearances. Silent scene actions,
+localized speech integration and Storyline mode are open.
+[Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
 and [scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
 
 **November 17 FFV save-point directions.** Deferred report that directions
