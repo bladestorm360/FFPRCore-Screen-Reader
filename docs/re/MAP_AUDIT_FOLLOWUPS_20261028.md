@@ -461,10 +461,11 @@ setting receipt 0. The playable opening stages follow that receipt.
 | Receipt 6 set and receipt 7 clear | Cross the new bridge. Use the active Overworld contact on map 1, entity 89 at (145,145), script 17 in group `ev_e_0006`. | The prologue plays on map 124 and returns the party to the Overworld. The return continuation sets receipt 7. |
 | Receipt 7 set and receipt 9 clear | Get a ship from Bikke. Speak to entity 38 on map 13 in Pravoka, Ground (13,11). The native NPC contact runs script 22. | The encounter continuation `sc_e_0009_2` awards the ship before it sets receipt 9. Keep this objective through the battle and award sequence. |
 | Receipt 9 set and receipt 10 clear | Find the crown in Marsh Cave. Use chest entity 40 on map 75, Bottom (33,47). From Pravoka, the first leg reaches the real Ground exit at (27,39) so the next route can use live Overworld ship state. | The chest starts the encounter in script 24. The victory continuation opens chest 40, records receipt 10 and sets treasure flag 501. |
+| Receipt 10 set and receipt 11 clear | Bring the crown to the Western Keep. Speak with actor 105 on map 33 in group `ev_e_0011`. | The script begins the encounter after the transformation. Its continuation awards the crystal eye, sets treasure flag 246 and records receipt 11. |
 
 Receipt 2 can become true inside the rescue return chain. The model withholds
 the next objective until receipt 3 confirms the return. The production
-fixture passed 75 assertions and seventeen movement legs with the installed FF1
+fixture passed 88 assertions and twenty movement legs with the installed FF1
 map and scenario data. It checks objectives from the castle, Overworld,
 Chaos Shrine and Pravoka, a castle floor transfer, the Lute prerequisite,
 missing state and later saves. The ship quest starts from the real
@@ -472,12 +473,14 @@ post-prologue position (145,145) and the Pravoka arrival on Ground (27,37).
 The Crown cases check the departure from Pravoka, the Overworld approach
 near the cave and genuine arrivals on all three cave floors. The full
 voyage from Pravoka with a relocated ship still needs confirmation.
+The Western Keep route is checked from the keep, the Overworld approach
+near Marsh Cave and beside the just-opened Crown chest.
 The bridge
 uses the existing selected-event route to its actual world foot tile. The
 Storyline category calls the same native-safe route request and Autowalk
-entry points. The selected objective comes from nine saved receipts
+entry points. The selected objective comes from ten saved receipts
 when it is requested. A delayed directions response must still match the
-category and objective. All seven objective labels have all 12
+category and objective. All eight objective labels have all 12
 localizations. This starter is outside the installed mod. Full cross-world
 journeys, native gameplay acceptance and later campaigns remain open.
 

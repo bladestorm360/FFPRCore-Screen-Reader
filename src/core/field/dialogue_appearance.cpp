@@ -101,6 +101,9 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         {13, L"sc_e_0009", L"MSG_SHIP_01", 38},
         {13, L"sc_e_0009", L"MSG_PBK_05", 38},
         {13, L"sc_e_0009_2", L"MSG_SHIP_03", 38},
+        {33, L"sc_e_0011", L"MSG_ASTOS_01", 105},
+        {33, L"sc_e_0011", L"MSG_ASTOS_02", 106},
+        {33, L"sc_e_0011", L"MSG_ASTOS_03", 106},
     };
     static constexpr Speaker altair[] = {
         {6, L"sc_e_0001_5", L"E0001_04_006_a_07", 49},
@@ -130,11 +133,30 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         {8, L"sc_e_0001_11", L"E0001_11_008_a_11", 18},
         {8, L"sc_e_0001_11", L"E0001_11_008_a_12", 19},
     };
+    static constexpr Speaker ur[] = {
+        {12, L"sc_e_0010", L"E0010_00_020_a_03", 6},
+        {12, L"sc_e_0010", L"E0010_00_020_a_04", 6},
+        {12, L"sc_e_0010", L"E0010_00_020_a_05", 6},
+    };
+    static constexpr Speaker tycoon[] = {
+        {71, L"sc_e_0001", L"E0001_00_071_a_03", 32},
+        {71, L"sc_e_0001", L"E0001_00_071_a_05", 32},
+        {71, L"sc_e_0001", L"E0001_00_071_a_07", 32},
+    };
+    static constexpr Speaker narshe[] = {
+        {17, L"sc_e_0093", L"E0093_00_017_a_01", 14},
+        {17, L"sc_e_0093", L"E0093_00_017_a_03", 14},
+        {17, L"sc_e_0093", L"E0093_00_017_a_05", 14},
+        {17, L"sc_e_0093", L"E0093_00_017_a_07", 14},
+    };
     std::span<const Speaker> speakers;
     switch (game::current()) {
         case game::Id::FF1: speakers = cornelians; break;
         case game::Id::FF2: speakers = altair; break;
+        case game::Id::FF3: speakers = ur; break;
         case game::Id::FF4: speakers = baron; break;
+        case game::Id::FF5: speakers = tycoon; break;
+        case game::Id::FF6: speakers = narshe; break;
         default: return nullptr;
     }
     const auto script = ref::rd_str_bounded(action, fScriptName, 48);
@@ -206,22 +228,25 @@ std::wstring action_cue_at_dialogue()
     const bool construction = game_id == game::Id::FF1 && map_id == 121;
     const bool audience = game_id == game::Id::FF2 && map_id == 6;
     const bool surrender = game_id == game::Id::FF1 && map_id == 13;
-    if (!construction && !audience && !surrender) return {};
+    const bool reveal = game_id == game::Id::FF1 && map_id == 33;
+    if (!construction && !audience && !surrender && !reveal) return {};
     const auto message = field_message_key();
     if (construction && message != L"MSG_BRIDGE_01") return {};
     if (audience && message != L"E0001_04_003_a_05") return {};
     if (surrender && message != L"MSG_SHIP_03") return {};
+    if (reveal && message != L"MSG_ASTOS_02") return {};
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return {};
-    if (surrender) {
-        // The victory continuation plays both flashing poses, hides both
-        // pirates and then gives the first surrender page to Bikke.
+    if (surrender || reveal) {
+        // These scenes finish the animated change before the next page.
+        // Require that page's exact script, speaker and currently visible art.
         auto* owner = ref::rd<void*>(controller, fEventOwner);
         auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
-        if (kScriptAction.is(action) &&
-            visible_art(scripted_talk_actor(controller, action, message)) == L"mo_ff1_n017_c00")
-            return T(L"Pravoka pirate defeat cue");
+        if (!kScriptAction.is(action)) return {};
+        const auto art = visible_art(scripted_talk_actor(controller, action, message));
+        if (surrender && art == L"mo_ff1_n017_c00") return T(L"Pravoka pirate defeat cue");
+        if (reveal && art == L"mo_ff1_n035_c00") return T(L"Western Keep transformation cue");
         return {};
     }
     if (audience) {

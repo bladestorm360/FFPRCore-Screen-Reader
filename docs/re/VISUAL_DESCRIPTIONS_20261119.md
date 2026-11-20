@@ -27,6 +27,8 @@ through its exact native palette. FFII Leg Eater, FFIII Land Turtle, FFIV
 Floating Eyeball and FFVI Guard have 12-language entries using the same
 current-sprite reader. FF1's Pirate has its own combat description.
 All six games have localized enemy entries.
+Astos's battle sprite also has distinct wording from both of his field
+appearances at the Western Keep.
 
 FFIV Baigan has a separate description for his dark-red-caped field sprite
 and the blue-lavender battle body. The right and left arm targets have their
@@ -69,18 +71,20 @@ non-field windows, duplicate keys without a target and hidden sprites are
 excluded from direct attribution. The scripted path has its own exact map,
 script, message and actor binding for the first Cornelia soldier and king
 exchanges, Princess Sarah's Lute scene variants and Garland's first two
-lines. FF1 Bikke's art matches his initial challenge and the later
+lines. At the Western Keep, the first page resolves crowned actor 105 and
+the next two pages resolve the transformed actor 106. FF1 Bikke's art matches his initial challenge and the later
 post-battle dialogue. The pirate crew page has a separate speaker.
 FFII uses the same reader for Hilda and Minwu's Altair opening
 dialogue and Tobul's scenes in both smithies. The first smithy switches
 from entity 9 to entity 6 when the smithy event group changes. FFIV map 8
 `sc_e_0001_11` binds the Baron audience's Baigan lines to actor 19 and
 the king's lines to actor 18. The fixture checks the switch between their
-distinct rendered costumes. Both paths
-resolve the costume from the rendered sprite's packed atlas texture
-without adding hooks or frame polling. These ten field appearances have
-entries in all 12 languages. Remaining cutscene speaker bindings and
-localization are open.
+distinct rendered costumes. FFIII Topapa, FFV King Tycoon and FFVI Arvis
+have exact early scene bindings on maps 12, 71 and 17. These bring the
+field reader to all six games. Both paths resolve the costume from the
+rendered sprite's packed atlas texture without adding hooks or frame polling.
+These fifteen field appearances have entries in all 12 languages. Remaining
+cutscene speaker bindings and localization are open.
 
 The focused offline build passes the field dialogue, battle focus and
 party checks. The dialogue fixture exercises explicit target resolution,
@@ -115,6 +119,11 @@ pirates flicker and disappear. The fixture requires the exact continuation
 and live Bikke sprite, and rejects the pre-battle script. These cues are
 outside the installed mod. Visible actions without a suitable dialogue
 anchor and the broader scene audit remain open.
+
+The Western Keep transformation cue uses `MSG_ASTOS_02` after the native
+flash and costume change. The first speech page still describes the crowned
+actor on manual I. The cue requires the transformed costume, and the
+following line keeps its original text.
 
 ## Six-game source inventory
 

@@ -29,6 +29,9 @@ std::optional<Objective> cornelia_objective(const CorneliaProgress& progress)
         return Objective{ObjectiveId::GetShip, L"Get a ship from Bikke", 13, {38, -1, -1}, TargetKind::Interact, baked::ObjType::NPC};
     if (progress.ship == 1 && progress.crown == 0)
         return Objective{ObjectiveId::FindCrown, L"Find the crown in Marsh Cave", 75, {40, -1, -1}, TargetKind::Interact, baked::ObjType::TreasureBox};
+    if (progress.ship == 1 && progress.crown == 1 && progress.eye == 0)
+        return Objective{ObjectiveId::BringCrown, L"Bring the crown to the Western Keep", 33, {105, -1, -1},
+                         TargetKind::Interact, baked::ObjType::NPC};
     return {};
 }
 

@@ -1,4 +1,18 @@
 {
+  "Field appearance mo_ff6_n035_c00": {
+    "en": "A short, pale-faced man with ash-colored hair. His simple blue-green clothes have pale gray bands across the chest and sleeves.",
+    "ja": "灰色がかった髪と色白の顔の小柄な男性。質素な青緑の服には、胸と袖に淡い灰色の帯が入っている。",
+    "fr": "Un homme de petite taille au teint pâle et aux cheveux cendrés. Des bandes gris clair traversent la poitrine et les manches de sa tenue bleu-vert sobre.",
+    "it": "Un uomo basso dal viso pallido e dai capelli color cenere. Fasce grigio chiaro attraversano il petto e le maniche del suo semplice abito verde acqua.",
+    "de": "Ein kleiner Mann mit bleichem Gesicht und aschfarbenem Haar. Seine schlichte blaugrüne Kleidung hat hellgraue Bänder über Brust und Ärmeln.",
+    "es": "Un hombre bajo de rostro pálido y pelo ceniciento. Su ropa sencilla de color verde azulado tiene franjas gris claro en el pecho y las mangas.",
+    "ko": "잿빛 머리에 얼굴이 창백하고 키가 작은 남자. 수수한 청록색 옷의 가슴과 소매에 연회색 띠가 가로지른다.",
+    "zht": "矮個子男子面色蒼白，頭髮呈灰褐色。樸素的藍綠衣服在胸口和袖上都有淺灰條帶。",
+    "zhc": "矮个子男子面色苍白，头发呈灰褐色。朴素的蓝绿衣服在胸口和袖上都有浅灰条带。",
+    "ru": "Невысокий бледнолицый мужчина с волосами пепельного цвета. На его простой сине-зелёной одежде светло-серые полосы поперёк груди и рукавов.",
+    "th": "ชายตัวเตี้ยหน้าซีด ผมสีเทาหม่น เสื้อผ้าเรียบสีเขียวอมฟ้ามีแถบเทาอ่อนพาดหน้าอกและแขนเสื้อ",
+    "pt": "Um homem baixo de rosto pálido e cabelo acinzentado. A roupa simples verde-azulada tem faixas cinza-claras no peito e nas mangas."
+  },
   "Enemy appearance mn_ff6_001_c00": {
     "en": "A broad guard stands in ash-brown and gray armor. Two narrow yellow points show under the helmet visor. One armored hand rests by a round forearm shield. The other hangs low with a short, heavy weapon.",
     "ja": "がっしりした衛兵が灰茶色と灰色の鎧を着ている。兜の面頬の下に細い黄色の光が二つのぞく。片腕のそばに丸い小盾があり、下げたもう片手には短く重そうな武器を持つ。",

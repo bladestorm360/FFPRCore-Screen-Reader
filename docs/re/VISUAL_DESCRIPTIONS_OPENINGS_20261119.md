@@ -104,6 +104,7 @@ keys, decoded sprites and the installed effect prefab components.
 | Ending, `Map_40004/sc_e_0044_3` and `_4` | The first body shows actor 3 at 67 after the credits. Its blue outlined graphic reads “THE END.” The `_4` body hides the graphic and the preceding effect before the final save. Speak “The End” once at the actual reveal if the credits reader has not already announced those words. |
 | Named treasure pickups, `Map_20011_1/sc_e_0014`, `Map_30021_3/sc_e_0010_1`, `Map_30031_3/sc_e_0017`, `Map_30071_3/sc_e_0047` and `Map_30081_8/sc_e_0033` | Each uses the ordinary treasure pickup pose and a native item announcement. The reviewed bodies use the standing character pose and standard chest interaction. No bespoke item sprite is staged in these five scenes. |
 | Pravoka after the pirate fight, `Map_20040/sc_e_0009_2` | The crew's two bodies play `FlashingSurprise` at 43 and 59. The installed clip alternates opaque and transparent `Surprise_00` frames. Each actor then hides. “The two pirates flicker and disappear beside Bikke” uses the first surrender page at 11 after both blocking puppet bodies. The subsequent ship award keeps its native text. |
+| Western Keep, `Map_20081_1/sc_e_0011` | The crowned actor uses the `Laugh` clip before the first line. After the first reveal dialogue, the next puppet block flashes and shows actor 106 at the same tile. The first page after those actions describes the change to the small, dark green figure. The following encounter has a separate battle description. |
 | Adamantite, `Map_30111_2/sc_e_0051` | Actor 31 is a visible cluster of upright violet crystal points with bright white edging and a dark base. The cluster is hidden as the party takes it. The native award names the item. Describe the violet cluster at its visible pickup, using the actual prop instead of the ordinary treasure pose. |
 
 ## First FFII world-scene pass
@@ -191,3 +192,25 @@ with skip and departure paths accounted for. The current cue reader
 continues using the runtime's displayed-page ownership. Local
 `native_scene_path.py` and the six `ff*-native-scene-path.txt` traces
 preserve the ABI and relevant paths for the silent cue work.
+
+## Routine event review
+
+The offline pass checked 379 native script bodies against their installed
+actor placements and opcode sequences. It records each resolved script
+in `scene-ordinary-review.json` beside the source traces. Other actions in
+the same map remain individually reviewable.
+
+| Scope | Bodies | Existing visual or spoken context |
+| --- | ---: | --- |
+| FF1 roof setup | 110 | The sole native operation beyond setup and exit controls a map roof layer on entry. |
+| FF1 NPC exchanges | 75 | Native dialogue and ordinary turning to face the speaker. |
+| FF1 scripted pickups | 5 | The leader uses the shared pickup pose with a native item award. |
+| FF1 monster chests | 40 | The default chest lid is the only animated actor and native text warns of the monster encounter. |
+| FF1–FFIV standard chest rewards | 118 | The continuation fades in and awards the chest contents. The chest receiver resolves to the generic art placement. |
+| FFV guarded chest continuations | 31 | Success awards the generic chest contents. The other branch resets only the tile animation linked to that chest lid. |
+
+The six-game native event trace also confirms that
+`EventActionScript.RunScript` stores its requested name and that
+`EventProcedure.EventRunScript` supplies the actual loaded script name
+to the interpreter before execution. The visible page remains the
+presentation anchor for the existing dialogue cues.

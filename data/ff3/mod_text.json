@@ -1,4 +1,18 @@
 {
+  "Field appearance mo_ff3_n008_c00": {
+    "en": "A bald older man with a narrow nose and a long white beard. An open, full blue robe hangs around his body.",
+    "ja": "頭頂がはげた年配の男性。細い鼻と長い白ひげがあり、広がりのある青いローブを前を開けて羽織っている。",
+    "fr": "Un homme âgé et chauve au nez fin et à la longue barbe blanche. Une ample robe bleue ouverte lui enveloppe le corps.",
+    "it": "Un uomo anziano e calvo dal naso sottile e dalla lunga barba bianca. Una veste azzurra ampia e aperta gli avvolge il corpo.",
+    "de": "Ein älterer kahler Mann mit schmaler Nase und langem weißem Bart. Ein weites, offenes blaues Gewand fällt um seinen Körper.",
+    "es": "Un anciano calvo de nariz estrecha y barba blanca larga. Una túnica azul amplia y abierta le cae alrededor del cuerpo.",
+    "ko": "머리가 벗겨진 나이 든 남자로, 코가 좁고 흰 수염이 길다. 넉넉한 푸른 로브를 앞을 열고 걸쳤다.",
+    "zht": "禿頭老人，鼻子窄，留著一把白色長鬚。寬鬆的藍袍敞開披在身上。",
+    "zhc": "秃头老人，鼻子窄，留着一把白色长须。宽松的蓝袍敞开披在身上。",
+    "ru": "Пожилой лысый мужчина с узким носом и длинной белой бородой. На нём свободная распахнутая синяя мантия.",
+    "th": "ชายสูงวัยศีรษะล้าน จมูกเรียวและเคราขาวยาว สวมชุดคลุมสีน้ำเงินตัวหลวมเปิดด้านหน้า",
+    "pt": "Um homem idoso e calvo tem nariz estreito e barba branca comprida. Uma túnica azul ampla e aberta envolve seu corpo."
+  },
   "Enemy appearance mn_ff3_005_c00": {
     "en": "A broad yellow-green turtle lowers its long head between thick forefeet. Jagged armor plates overlap across its domed indigo shell.",
     "ja": "幅広い黄緑色のカメが、ごつい前足の間に長い頭を低く構えている。丸く盛り上がった藍色の甲羅に、ぎざぎざした装甲板が重なる。",

@@ -107,10 +107,12 @@ bool has(std::wstring_view key)
 {
     return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
            key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00" ||
-           key == L"Field appearance mo_ff1_n017_c00" ||
+           key == L"Field appearance mo_ff1_n017_c00" || key == L"Field appearance mo_ff1_n034_c00" ||
+           key == L"Field appearance mo_ff1_n035_c00" ||
            key == L"Field appearance mo_ff2_n005_c00" || key == L"Field appearance mo_ff2_n022_c00" ||
            key == L"Field appearance mo_ff2_p004_c00" || key == L"Field appearance mo_ff4_n003_c02" ||
-           key == L"Field appearance mo_ff4_n006_c02";
+           key == L"Field appearance mo_ff4_n006_c02" || key == L"Field appearance mo_ff3_n008_c00" ||
+           key == L"Field appearance mo_ff5_n012_c00" || key == L"Field appearance mo_ff6_n035_c00";
 }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
@@ -238,7 +240,22 @@ int main()
     require(cue() == L"Pravoka pirate defeat cue", "the surrender page follows both crew animations");
     script.value = L"sc_e_0009";
     require(cue().empty(), "the fight opener cannot narrate the surrender");
-    script.value = L"sc_e_0009_2";
+
+    current_map = 33;
+    script.value = L"sc_e_0011";
+    id.value = L"MSG_ASTOS_01";
+    put(property, "entityId", reinterpret_cast<void*>(105));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N034_C00-12345678";
+    require(read() && cue().empty() && spoken == L"Field appearance mo_ff1_n034_c00",
+            "the first page describes only the currently visible crowned figure");
+    id.value = L"MSG_ASTOS_02";
+    put(property, "entityId", reinterpret_cast<void*>(106));
+    require(cue().empty(), "the reveal requires the transformed sprite");
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF1_N035_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff1_n035_c00" &&
+            cue() == L"Western Keep transformation cue", "the next page follows the actual form change");
+    id.value = L"MSG_ASTOS_03";
+    require(read() && cue().empty(), "the transformed appearance remains available after the one cue");
 
     current_game = game::Id::FF2;
     require(!read(), "an FF1 speaker row cannot match a different game");
@@ -297,6 +314,34 @@ int main()
     put(property, "entityId", reinterpret_cast<void*>(18));
     texture.value = L"sactx-64x64-Uncompressed-MO_FF4_N006_C02-12345678";
     require(read() && spoken == L"Field appearance mo_ff4_n006_c02", "Baron audience uses the king's red outfit");
+
+    struct OpeningSpeaker {
+        game::Id game;
+        int map, entity;
+        const wchar_t* script;
+        const wchar_t* message;
+        const wchar_t* texture;
+        const wchar_t* key;
+    };
+    const OpeningSpeaker openings[] = {
+        {game::Id::FF3, 12, 6, L"sc_e_0010", L"E0010_00_020_a_03",
+         L"sactx-64x64-Uncompressed-MO_FF3_N008_C00-12345678", L"Field appearance mo_ff3_n008_c00"},
+        {game::Id::FF5, 71, 32, L"sc_e_0001", L"E0001_00_071_a_03",
+         L"sactx-64x64-Uncompressed-MO_FF5_N012_C00-12345678", L"Field appearance mo_ff5_n012_c00"},
+        {game::Id::FF6, 17, 14, L"sc_e_0093", L"E0093_00_017_a_01",
+         L"sactx-64x64-Uncompressed-MO_FF6_N035_C00-12345678", L"Field appearance mo_ff6_n035_c00"},
+    };
+    for (const auto& stage : openings) {
+        current_game = stage.game;
+        current_map = stage.map;
+        script.value = stage.script;
+        id.value = stage.message;
+        texture.value = stage.texture;
+        put(property, "entityId", reinterpret_cast<void*>(static_cast<intptr_t>(stage.entity)));
+        require(read() && spoken == stage.key, "opening dialogue resolves its exact field costume");
+        script.value = L"sc_e_0001_99";
+        require(!read(), "the same title, map and actor in another scene do not match");
+    }
 
     current_game = game::Id::FF1;
     id.value = L"MSG_BRIDGE_01";
