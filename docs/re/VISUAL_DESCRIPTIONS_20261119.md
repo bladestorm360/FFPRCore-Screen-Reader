@@ -52,6 +52,15 @@ art records including the separate Toad form. The [FFIII enemy art pass](VISUAL_
 covers all 225 rows including the alternate Sea Dragon art.
 The [FFV enemy art pass](VISUAL_DESCRIPTIONS_FF5_20261119.md) covers 300
 visible sprites and confirms that the remaining art row is transparent.
+The [FFVI enemy art pass](VISUAL_DESCRIPTIONS_FF6_20261119.md) covers 355
+visible sprites, including the complete Statue of the Gods composition.
+Ten FFVI art rows are fully transparent. The individual statue targets
+need an encounter position and tier mapping to the composite artwork.
+
+All 1,392 catalog rows are accounted for. The installed assets yielded
+1,380 visible sprites, eleven fully transparent entries and one missing
+FFIV palette. The external `enemy-coverage.json` records the decoded
+alpha and catalog coverage check.
 
 ## Opening and early scene review
 
