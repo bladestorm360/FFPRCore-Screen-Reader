@@ -63,16 +63,18 @@ std::wstring flatten(const std::wstring& message)
 
 // FadeMessageManager.Play(string message, int fontSize, Color32 color, float fadeinTime,
 // float fadeoutTime, float waitTime, bool isCenterAnchor, float postionX, float postionY)
-void fade_play_postfix(void* message_str)
+void fade_play_postfix(void* message_str, int font_size)
 {
     const std::wstring message = ref::str(message_str);
     if (message.empty()) return;
     if (!dedup::text(kCtxSystemMessage, message, dedup::Scope::Session)) return;
 
-    const std::wstring clean = flatten(message);
+    std::wstring clean = flatten(message);
     // Skip a banner that repeats the map transition's "Entering X" (LocationMessageTracker,
     // owned by the map-transition area).
     if (!fieldnav::location_message::should_announce_fade_message(clean)) return;
+    auto cue = action_cue_at_fade(font_size);
+    if (!cue.empty()) clean = cue + L" " + clean;
     ffpr::say(clean, false);
 }
 
@@ -194,7 +196,7 @@ void d_FadePlay(void* self, void* message, int32_t font_size, uint32_t color, fl
                 float wait, bool center, float pos_x, float pos_y, const void* mi)
 {
     o_FadePlay(self, message, font_size, color, fade_in, fade_out, wait, center, pos_x, pos_y, mi);
-    hooks::guarded("FadeMessageManager.Play", [&] { fade_play_postfix(message); });
+    hooks::guarded("FadeMessageManager.Play", [&] { fade_play_postfix(message, font_size); });
 }
 
 void d_LineFadeSetData(void* self, void* messages, uint32_t color, float fade_in, float fade_out, float wait,

@@ -33,6 +33,8 @@ bool read_dialogue_appearance();
 std::wstring action_cue_at_dialogue();
 /// Describe a completed, silent shot at its own native scroll handoff.
 std::wstring action_cue_at_scroll(int type, float duration, int font_size);
+/// Describe a prologue shot at its own native fade caption.
+std::wstring action_cue_at_fade(int font_size);
 
 // --- PopupState ------------------------------------------------------------------------
 namespace popup_state {

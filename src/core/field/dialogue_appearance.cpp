@@ -26,9 +26,12 @@ ref::Field fMessageText{kView, "messageText"};
 ref::Class kClient{"Last.Management", "MessageWindowClient"};
 ref::Method mClient{kClient, "Instance", 0};
 ref::Field fMessageId{kClient, "<CurrentMessageId>k__BackingField"};
-ref::Class kInterpreter{"Last.Interpreter", "Integrator", game::kFF6};
+ref::Class kInterpreter{"Last.Interpreter", "Integrator", game::kFF3 | game::kFF6};
 ref::Field fActiveScript{kInterpreter, "<scriptName>k__BackingField"};
 ref::Field fRunningFieldScript{kInterpreter, "isFieldScript"};
+ref::Class kFadeMessageClient{"Last.Management", "FadeMessageClient", game::kFF3};
+ref::Method mFadeMessageClient{kFadeMessageClient, "Instance", 0};
+ref::Field fFadeMessageId{kFadeMessageClient, "<CurrentMessageId>k__BackingField"};
 
 ref::Field fEventOwner{r::kFieldController, "eventHandle"};
 ref::Class kEventProcedure{"Last.Map", "EventProcedure"};
@@ -205,6 +208,14 @@ std::wstring atlas_art(void* sprite)
 
 std::wstring visible_art(void* actor) { return atlas_art(actor_sprite(actor)); }
 
+void* placed_actor(void* controller, int entity)
+{
+    return unique_actor(controller, [&](void* candidate) {
+        return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
+               ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == entity;
+    });
+}
+
 struct StagedCue {
     game::Id title;
     int map;
@@ -246,10 +257,7 @@ std::wstring staged_cue(void* controller, const StagedCue& cue)
     auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
     if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != cue.script) return {};
     if (cue.actor) {
-        auto* actor = unique_actor(controller, [&](void* candidate) {
-            return kSpriteEntity.is(candidate) && ::field::live_entity(candidate) &&
-                   ref::rd<int>(::field::entity_property(candidate), r::fPropEntityId) == cue.actor;
-        });
+        auto* actor = placed_actor(controller, cue.actor);
         if (!actor || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) return {};
         auto* sprite = actor_sprite(actor);
         if (atlas_art(sprite) != cue.art) return {};
@@ -390,5 +398,43 @@ std::wstring action_cue_at_scroll(int type, float duration, int font_size)
     if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != L"sc_e_0006_1" ||
         fieldnav::map_transition::is_screen_fading()) return {};
     return T(L"Cornelia prologue birds cue");
+}
+
+std::wstring action_cue_at_fade(int font_size)
+{
+    if (font_size != 52 || !game::is(game::Id::FF3) || !frame::on_main_thread() || battle::in_battle() ||
+        fieldnav::map_transition::is_state_changing()) return {};
+    // Each native prologue caption follows the fade and the opening placement.
+    // The Client records the caption ID before calling the existing producer.
+    struct Shot {
+        int map;
+        std::wstring_view script, message, text;
+        std::wstring_view actor_art{};
+    };
+    static constexpr Shot shots[] = {
+        {76, L"sc_e_0001_3", L"E0001_00_999_a_01", L"Gulgan prologue cue", L"mo_ff3_n023_c00"},
+        {340, L"sc_e_0001", L"E0001_00_999_a_05", L"Crystal prologue cue", L"mo_ff3_b002_c00"},
+        {1, L"sc_e_0001_4", L"E0001_00_999_a_06", L"Coast prologue cue"},
+        {158, L"sc_e_0001_5", L"E0001_00_999_a_08", L"Cavern prologue cue"},
+    };
+    const int map_id = ::field::current_map_id();
+    for (const auto& shot : shots) {
+        if (shot.map != map_id) continue;
+        auto* client = ref::call_static<void*>(mFadeMessageClient);
+        if (ref::rd_str_bounded(client, fFadeMessageId, 32) != shot.message) return {};
+        auto* engine = ref::instance(kInterpreter);
+        if (!ref::rd<bool>(engine, fRunningFieldScript) ||
+            ref::rd_str_bounded(engine, fActiveScript, 48) != shot.script ||
+            fieldnav::map_transition::is_screen_fading()) return {};
+        if (!shot.actor_art.empty()) {
+            auto* map = ::field::cache::get(r::kFieldMap);
+            auto* controller = ref::rd<void*>(map, r::fFieldController);
+            auto* actor = r::kFieldController.is(controller) ? placed_actor(controller, 3) : nullptr;
+            if (!displayed::renderer_visible(ref::rd<void*>(actor, fRenderer)) ||
+                visible_art(actor) != shot.actor_art) return {};
+        }
+        return T(shot.text);
+    }
+    return {};
 }
 } // namespace ffpr::dialogue

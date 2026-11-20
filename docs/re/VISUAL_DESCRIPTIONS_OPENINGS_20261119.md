@@ -29,6 +29,20 @@ not claim the cue. Dialogue and modal speech checks passed, including
 the native scroll path. The extraction remains outside Git under
 `../tools/visual_audit_20261119`.
 
+FFIII describes four opening shots with their existing native captions.
+The first prologue caption names the dark stone passage and the figure's
+green clothing and red face covering. The next shots introduce the
+faceted blue crystal, the moving view of the rocky coast and clouds,
+and the four adventurers standing apart in the mist.
+
+The native prologue wrappers select their exact keys from the installed
+eight-message list. The FadeMessage client records that key before
+handing a 52-point caption to the current speech producer. The lookup
+also checks the active field script, map and transition state. Two
+shots have a visible atlas and placed actor check. Later narration,
+skip and loading paths keep their original producer. All four cues use
+the 12 game locales.
+
 ## November 20 battle scene audit
 
 The frozen review accounts for all 119 installed battle script bodies

@@ -23196,5 +23196,61 @@
     "ru": "Кефка пересекает поле боя, останавливается и поворачивается лицом вперёд.",
     "th": "เคฟกาเดินข้ามสนามรบ หยุด แล้วหันหน้ามาด้านหน้า",
     "pt": "Kefka atravessa o campo de batalha, para e se vira de frente."
+  },
+  "Gulgan prologue cue": {
+    "en": "A figure in green with a bright red face covering stands between dark stone walls.",
+    "ja": "顔を鮮やかな赤い布で覆った緑の衣の人物が、暗い石壁の間に立っている。",
+    "fr": "Une silhouette vêtue de vert, le visage couvert d’un tissu rouge vif, se tient entre de sombres murs de pierre.",
+    "it": "Una figura vestita di verde, con il viso coperto da un panno rosso vivo, è in piedi tra scure pareti di pietra.",
+    "de": "Zwischen dunklen Steinwänden steht eine grün gekleidete Gestalt mit einem leuchtend roten Tuch vor dem Gesicht.",
+    "es": "Una figura vestida de verde, con el rostro cubierto por una tela de color rojo vivo, está en pie entre muros de piedra oscura.",
+    "ko": "초록색 옷을 입고 선명한 붉은 천으로 얼굴을 가린 인물이 어두운 돌벽 사이에 서 있다.",
+    "zht": "一個身穿綠衣、以鮮紅布遮面的身影站在幽暗的石牆之間。",
+    "zhc": "一个身穿绿衣、以鲜红布遮面的身影站在幽暗的石墙之间。",
+    "ru": "Между тёмными каменными стенами стоит фигура в зелёной одежде с ярко-красной повязкой на лице.",
+    "th": "ร่างในชุดสีเขียวมีผ้าสีแดงสดปิดหน้า ยืนอยู่ระหว่างผนังหินมืด",
+    "pt": "Uma figura de verde, com um pano vermelho vivo cobrindo o rosto, está de pé entre paredes de pedra escura."
+  },
+  "Crystal prologue cue": {
+    "en": "A bright blue crystal with sharp facets stands out against the dark.",
+    "ja": "鋭い面を持つ鮮やかな青いクリスタルが暗闇に浮かび上がる。",
+    "fr": "Un cristal bleu vif aux facettes anguleuses se détache sur le fond sombre.",
+    "it": "Un cristallo azzurro brillante, dalle facce spigolose, risalta sullo sfondo scuro.",
+    "de": "Ein leuchtend blauer Kristall mit scharfkantigen Facetten hebt sich vom dunklen Hintergrund ab.",
+    "es": "Un cristal azul brillante de facetas angulosas destaca en la oscuridad.",
+    "ko": "날카로운 면이 여러 개 난 밝은 파란색 크리스털이 어둠 속에서 돋보인다.",
+    "zht": "一顆有銳利切面的亮藍色水晶在黑暗中格外醒目。",
+    "zhc": "一颗有锐利切面的亮蓝色水晶在黑暗中格外醒目。",
+    "ru": "На тёмном фоне выделяется ярко-синий кристалл с острыми гранями.",
+    "th": "คริสตัลสีฟ้าสดที่มีเหลี่ยมคมเด่นขึ้นมาท่ามกลางความมืด",
+    "pt": "Um cristal azul vivo com facetas angulosas destaca-se na escuridão."
+  },
+  "Coast prologue cue": {
+    "en": "The view moves over a rocky coast beneath a deep blue sky with small white clouds.",
+    "ja": "濃い青空に小さな白い雲が浮かび、その下の岩がちな海岸を視点が移動する。",
+    "fr": "La vue glisse sur une côte rocheuse sous un ciel bleu profond où flottent de petits nuages blancs.",
+    "it": "La visuale scorre lungo una costa rocciosa sotto un cielo blu intenso con piccole nuvole bianche.",
+    "de": "Der Blick gleitet über eine felsige Küste unter einem tiefblauen Himmel mit kleinen weißen Wolken.",
+    "es": "La vista recorre una costa rocosa bajo un cielo azul intenso con pequeñas nubes blancas.",
+    "ko": "작은 흰 구름이 뜬 짙푸른 하늘 아래로 바위 해안이 지나간다.",
+    "zht": "畫面掠過岩石海岸，深藍的天空中飄著小朵白雲。",
+    "zhc": "画面掠过岩石海岸，深蓝的天空中飘着小朵白云。",
+    "ru": "Вид скользит над скалистым берегом под ярко-синим небом с небольшими белыми облаками.",
+    "th": "ภาพเคลื่อนผ่านชายฝั่งโขดหิน ใต้ท้องฟ้าสีน้ำเงินเข้มที่มีเมฆขาวกลุ่มเล็ก ๆ",
+    "pt": "A vista percorre uma costa rochosa sob um céu azul intenso com pequenas nuvens brancas."
+  },
+  "Cavern prologue cue": {
+    "en": "Four adventurers stand apart in the mist of a cavern.",
+    "ja": "洞窟の霧の中に、四人の冒険者が間を空けて立っている。",
+    "fr": "Quatre aventuriers se tiennent à distance les uns des autres dans la brume d’une grotte.",
+    "it": "Quattro avventurieri sono sparsi nella foschia di una caverna.",
+    "de": "Vier Abenteurer stehen mit Abstand voneinander im Nebel einer Höhle.",
+    "es": "Cuatro aventureros están separados en la niebla de una caverna.",
+    "ko": "동굴 안개 속에 모험가 넷이 서로 떨어져 서 있다.",
+    "zht": "四名冒險者各自站在洞窟的霧氣中。",
+    "zhc": "四名冒险者各自站在洞窟的雾气中。",
+    "ru": "Четверо искателей приключений стоят порознь в тумане пещеры.",
+    "th": "นักผจญภัยสี่คนยืนแยกกันอยู่ในหมอกภายในถ้ำ",
+    "pt": "Quatro aventureiros estão espalhados pela névoa de uma caverna."
   }
 }

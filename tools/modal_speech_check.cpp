@@ -82,7 +82,10 @@ void drain() { std::thread worker(&consume); worker.join(); }
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace actions { void define(const char*, Fn) {} bool defined(const char*) { return false; } bool run(const char*) { return false; } }
 namespace queries { void define(const char*, std::function<bool()>) {} std::wstring text(const char*) { return {}; } }
-namespace ffpr::dialogue {std::wstring action_cue_at_scroll(int, float, int) { return {}; }}
+namespace ffpr::dialogue {
+std::wstring action_cue_at_scroll(int, float, int) { return {}; }
+std::wstring action_cue_at_fade(int) { return {}; }
+}
 namespace log_ {
 void write(const char* format, ...) {
     if (std::strncmp(format,"[SpeechTiming]",14)!=0) return;
