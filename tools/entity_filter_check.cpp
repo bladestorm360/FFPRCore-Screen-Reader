@@ -60,6 +60,33 @@ int main() {
     expect(result.order.size() == 7 && result.restored >= 0 && result.order[result.restored] == 1,
         "existing pad/exit/layer guards and selected identity survive worker sort");
     expect(result.exits.size() == 2, "navigation filters do not remove wall-tone exit locations");
+    {
+        // The logged Falcon descent pads share one native marker name.
+        FilterInput pads;
+        pads.pads=true; pads.sort=true; pads.category=Category::Events; pads.current_map=1;
+        for (int i=0;i<2;++i) {
+            FilterRow pad;
+            pad.index=i; pad.kind=Kind::Event; pad.category=Category::Events;
+            pad.name=L"Vehicle interaction"; pad.pad=pad.raw_name=L"地下に降りる";
+            pad.entity_id=i==0?1072:1075; pad.cell_valid=true; pad.cell_x=112; pad.cell_y=198+2*i;
+            pad.position={0,float(32*i),0};
+            pads.rows.push_back(std::move(pad));
+        }
+        expect(build(pads).order==std::vector<size_t>{0},"Initially show the nearest Falcon descent tile");
+        pads.rows[0].selected=true;
+        pads.player=pads.rows[1].position;
+        auto view=build(pads);
+        expect(view.order==std::vector<size_t>{0} && view.restored==0,"Flight does not replace a selected descent with the nearer tile");
+        pads.rows[0].selected=false;
+        pads.selected_has=true; pads.selected_map=1; pads.selected_entity_id=1072;
+        pads.selected_category=Category::Events; pads.selected_raw=pads.rows[0].raw_name;
+        pads.selected_x=112; pads.selected_y=198;
+        view=build(pads);
+        expect(view.order==std::vector<size_t>{0} && view.restored==0,"A recreated descent restores the exact selected tile");
+        pads.rows[0].available=false;
+        view=build(pads);
+        expect(view.order==std::vector<size_t>{1} && view.restored<0,"An unavailable tile cannot capture selection through its sibling");
+    }
     input.rows[5].route_distance=-1; input.rows[6].route_distance=20;
     result=build(input);
     expect(std::find(result.order.begin(),result.order.end(),6)!=result.order.end() &&

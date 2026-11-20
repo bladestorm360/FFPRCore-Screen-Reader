@@ -150,7 +150,7 @@ and copied label lookup keys, and the complete FFIV locale catalog.
 
 ## November 15 FFIV duplicate navigation markers
 
-**Deferred.** The owner's reports are recorded below with evidence from the
+The owner's reports are recorded below with evidence from the
 current FFIV Steam `ffpr_screen_reader.log`.
 
 - **Lunar Whale, Fat Chocobo.** On map 357, the log lists Fat Chocobo under
@@ -164,6 +164,24 @@ current FFIV Steam `ffpr_screen_reader.log`.
   markers. Verify the object's identity and interaction before suppressing
   it. If it duplicates a named vehicle, keep that vehicle as the destination.
   Preserve independent story contacts such as Kain's airship at (41,70).
+
+Both Lunar Whale interiors bind the named NPC and its adjacent Conversation
+contact to native service script 392. The scanner omits only the exact helper
+contacts, map 161 entity 101 and map 357 entity 15. The named NPC and the
+native conversation are available through their existing routes.
+
+The logged Airship Objects row used an Interactive label. The two authored
+surface-world candidates for that label are Lunar Whale scene puppets
+1086 and 1127, sprite IDs 310 and 346. The emergence and storage scenes
+animate these puppets, which have no independent interaction script. The
+scanner omits these two exact identities. The log records the route endpoint
+at (211,45) and lacks the live actor ID. The named vehicle models and Kain's
+Airship retain their native destination entries.
+
+The focused scanner checks passed for these four marker identities and
+verified that Kain's Airship remains in the list. The update is installed
+with gameplay confirmation pending.
+[Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-vehicle-destination-focus-and-ffiv-markers).
 
 ## November 17 FFV shop labels expose the Temp suffix
 

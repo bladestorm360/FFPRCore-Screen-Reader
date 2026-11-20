@@ -106,7 +106,23 @@ static Filtered build_impl(FilterInput& input) {
         };
         return distance(a) < distance(b);
     });
-    std::unordered_set<std::wstring> pads;
+    // A grouped marker keeps its exact live or recreated selection. Without
+    // an explicit destination, the group's existing sorted order still wins.
+    const auto priority = [&](const FilterRow& candidate) {
+        if (continued_row(candidate, input)) return 3;
+        if (candidate.selected) return 2;
+        if (input.selected_map > 0 && (candidate.remote_map || candidate.cell_valid) &&
+            saved_selection_row(candidate, input)) return 1;
+        return 0;
+    };
+    std::unordered_map<std::wstring,size_t> pads;
+    if (input.pads) for (size_t index : result.order) {
+        check_cancelled(input);
+        const auto& row=input.rows[index];
+        if (row.pad.empty()) continue;
+        const auto [at,inserted]=pads.emplace(row.pad,index);
+        if (!inserted && priority(row)>priority(input.rows[at->second])) at->second=index;
+    }
     std::map<ExitGroup,size_t> exits;
     std::unordered_map<std::wstring,size_t> events;
     if(input.events)for(size_t index:result.order) {
@@ -131,15 +147,6 @@ static Filtered build_impl(FilterInput& input) {
         // Pending continuation wins; otherwise preserve the player's physical
         // selection before considering distance. Both candidates already passed
         // availability, story and world-reachability guards.
-        const auto priority = [&](const FilterRow& candidate) {
-            if (continued_row(candidate, input)) return 3;
-            if (candidate.selected) return 2;
-            // Recreated static exits require the copied map and cell; the
-            // legacy position-only fallback remains for ordinary restoration.
-            if (input.selected_map > 0 && (candidate.remote_map || candidate.cell_valid) &&
-                saved_selection_row(candidate, input)) return 1;
-            return 0;
-        };
         const int row_priority = priority(row), old_priority = priority(old);
         if (row_priority != old_priority) {
             if (row_priority > old_priority) found->second = index;
@@ -159,7 +166,7 @@ static Filtered build_impl(FilterInput& input) {
         const auto& row = input.rows[index];
         if (input.reachable_only && input.world && row.kind == Kind::MapExit && row.route_distance < 0) return true;
         // Group only explicitly enabled native identities, never spoken text.
-        if (input.pads && !row.pad.empty() && !pads.insert(row.pad).second) return true;
+        if (input.pads && !row.pad.empty() && pads.find(row.pad)->second != index) return true;
         if (input.exits && groupable_exit(row,input) && exits[exit_group(row,input)] != index) return true;
         if (input.events && !row.event_group.empty() && events[row.event_group] != index) {
             // A remembered explicit objective is never rebound to the group's

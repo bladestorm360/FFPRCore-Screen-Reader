@@ -279,6 +279,33 @@ int main() {
         auto event=event_trigger_detector(object);
         expect(event.result==Result::Detected&&event.entity->category()==Category::Events,"actual walk-on classes retain Events with the same script/name");
     }
+    {
+        fixture::selected_game=game::Id::FF4;
+        fixture::manual_object=true;
+        Context object;
+        object.fe=&fixture::object;
+        for (const auto& [map,id,type,name] : std::array{
+                 std::tuple{161,101,5,L"でぶチョコボ会話用"}, std::tuple{357,15,5,L"でぶチョコボ会話用"},
+                 std::tuple{1,1086,10,L"魔導船（水引版）"}, std::tuple{1,1127,10,L"魔導船格納"}}) {
+            fixture::map=map;
+            fixture::talk.id=id;
+            fixture::captured_object_type=type;
+            fixture::talk.name=name;
+            Context contact=object;
+            expect(interactive_detector(contact).result==Result::Skip,"Exact redundant FFIV marker is skipped");
+            fixture::talk.id=id+10000;
+            expect(interactive_detector(contact).result==Result::Detected,"Another native identity with the same label is retained");
+        }
+        fixture::map=1;
+        fixture::talk.id=135;
+        fixture::captured_object_type=5;
+        fixture::talk.name=L"ゾットの塔へ";
+        expect(interactive_detector(object).result==Result::Detected,"Kain's Airship remains a separate destination");
+        fixture::selected_game=game::Id::FF2;
+        fixture::captured_object_type=0;
+        fixture::talk.id=-1;
+        fixture::manual_object=false;
+    }
     RemoteInput remote;RemoteRow row;row.object.type=baked::ObjType::NPC;row.object.map_id=180;row.object.raw_name=L"飛竜";row.object.scripted=true;row.name=L"Wyvern";row.floor=L"Castle Deist: Wyvern's Room";remote.rows.push_back(row);
     auto built=build_remote(remote);expect(built.size()==1&&built[0]->kind==Kind::NPC&&built[0]->name==L"Wyvern","scripted Wyvern remains an NPC target across floors");
     {

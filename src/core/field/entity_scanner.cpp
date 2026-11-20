@@ -442,10 +442,32 @@ Detection event_trigger_detector(Context& c)
     return detected(make_event(c, L"Event"));
 }
 
+std::wstring_view ff4_non_destination(int map, int id, int type)
+{
+    // Both Lunar Whale interiors have a separate Fat Chocobo conversation
+    // contact bound to the same native service as the named NPC.
+    if (type == int(baked::ObjType::Entity) && ((map == 161 && id == 101) || (map == 357 && id == 15)))
+        return L"でぶチョコボ会話用";
+    // These Overworld Lunar Whale puppets belong to the emergence and
+    // storage scenes. The real craft is discovered through its vehicle model.
+    if (map == 1 && type == int(baked::ObjType::AnimEntity)) {
+        if (id == 1086) return L"魔導船（水引版）";
+        if (id == 1127) return L"魔導船格納";
+    }
+    return {};
+}
+
 /// InteractiveEntityDetector (130): FieldMapObjectDefault and any IInteractiveEntity left.
 Detection interactive_detector(Context& c)
 {
     if (entity_is_scenery(c.fe) || placeholder(c)) return skip();
+    if (game::is(game::Id::FF4)) {
+        if (auto* property=c.property(); property && r::fPropEntityId.get()>=0) {
+            const auto expected=ff4_non_destination(current_map_id_or_user_data(),
+                ref::rd<int32_t>(property,r::fPropEntityId),c.object_type());
+            if (!expected.empty() && expected==ref::rd_str(property,r::fPropName)) return skip();
+        }
+    }
 
     if (r::kFieldMapObjectDefault.is(c.fe)) {
         if (!call_virtual_bool(r::mMapObjectGetCanAction, c.fe)) return skip();
@@ -593,6 +615,10 @@ struct RemoteBuilder {
         for (; next < objects.size() && budget.available(); ++next) {
             const auto& object = objects[next];
             if (object.redundant_return) continue;
+            if (game::is(game::Id::FF4)) {
+                const auto expected=ff4_non_destination(object.map_id,object.entity_id,int(object.type));
+                if (!expected.empty() && expected==object.raw_name) continue;
+            }
             RemoteRow row; row.object = object; row.floor = resolve_map_name(object.map_id);
             if(object.world_exit) {
                 if(leaves_floor(object.map_id,object.dest_map_id)) {

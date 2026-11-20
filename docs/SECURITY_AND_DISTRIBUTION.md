@@ -1,5 +1,17 @@
 # Build and distribution security
 
+## November 19 vehicle destination focus and FFIV markers
+
+The focused scanner, filter and browse checks passed with 67 verified
+resources and 47 forwarded exports. The unsigned DLL SHA-256 is
+`f39aed2e86ce0f50d0619453684e044d49883da055954d00115f8f0df7e72c2b`.
+Defender found no threats on the 22 exact payload files. The exclusion query
+was denied. The installer verified all 22 payload files in each of the six
+games and 138 protected file states. Recovery uses `aa7d358` for FFIV and
+`10ace35` for the other five. Receipts are under
+`../tools/karnak_routing_20261119/vehicle-marker-focus`.
+Gameplay confirmation remains pending.
+
 ## November 19 FFIV Sealed Cavern rope crossings
 
 The focused browse, trap and route worker checks passed. All 67 resources and

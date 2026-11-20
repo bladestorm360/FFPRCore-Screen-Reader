@@ -287,16 +287,16 @@ Hovercraft and request directions to its new position.
 
 ## November 15 FFIV Falcon and hovercraft routes
 
-**Reported by the owner. Deferred.** Once the Falcon can carry the
-hovercraft, **Current map with vehicles** should include destinations
-reachable by relocating the hovercraft. Browse and directions should use
-the same route and retain the selected destination through each handoff.
+**In progress.** **Current map with vehicles** should include destinations
+reachable by relocating the hovercraft. Browse and directions should use the
+same route and retain the selected destination through each handoff. The
+installed game's carry action belongs to the Enterprise with the hook.
 
-1. Fly the Falcon to the hovercraft and pick it up if it is parked elsewhere.
+1. Fly the Enterprise to the hovercraft and pick it up if it is parked elsewhere.
 2. Carry it to a usable release tile and lower it onto the map. The party
-   remains aboard the Falcon after lowering.
-3. Fly to a legal Falcon landing with a walkable approach to the released
-   hovercraft. Land and park the Falcon separately, then walk to and board
+   remains aboard the Enterprise after lowering.
+3. Fly to a legal Enterprise landing with a walkable approach to the released
+   hovercraft. Land and park the Enterprise separately, then walk to and board
    the hovercraft from the ground.
 4. Use the hovercraft to reach the selected destination.
 
@@ -310,9 +310,20 @@ The current FFIV Steam log records Falcon travel and filter selection at
 boarding sequence. The November 13 Enterprise pickup and lowering evidence
 above covers the related Enterprise behavior.
 
+The installed transportation master binds the two Falcon variants to IDs 8
+and 9 and the hooked Enterprise to ID 10. FFIV `IsCarryingHoverShip` at
+RVA 327450, `IsLandingEvent` at 3274A0, `OnMoveFinished` at 327BF0, and
+`OnStartLanding` at 327D50 all require ID 10 for cargo behavior. Their
+native checks refer to the owned hovercraft model, ID 2. The lowering
+branch uses `CanLandToWorldMap(int)` at 275C40, which checks other vehicle
+occupancy, the appropriate collision rule, and the cargo's own landing
+attribute table. The planner still needs to prove both that release and a
+separate parking position with a legal foot approach. The trace is in the
+external November 13 hovercraft archive cited above.
+
 ## November 15 FFIV airborne vehicle interaction loses selection
 
-**Deferred.** While flying the Falcon on the Overworld, the owner reports
+While flying the Falcon on the Overworld, the owner reported
 that the selected Vehicle interaction event sometimes loses focus during
 repeated directions requests. Using the destination select keys restores
 the event. The owner noticed this around the “Planned landing is … in a
@@ -333,3 +344,17 @@ directions requests while flying and through any landing fallback, so the
 player can continue without reselecting it. Preserve explicit selection
 changes and the handling of genuinely unavailable targets. See the existing
 [target retention contract](TARGET_RETENTION_20261024.md#selection-ownership).
+
+The surface map has distinct Falcon descent tiles at (112,198) and (112,200).
+Native IDs 1072 and 1075 share script 357 and the same pad name. Before the
+fix, regrouping by that name kept the first row in the new distance order.
+That could drop the still-available selected tile before selection was
+restored. The group now prioritizes a continued objective or exact selection,
+including a recreated native row with the same identity and anchor. Unselected
+groups keep their normal order. An unavailable tile remains unselected.
+
+The focused filter replay exercises both logged coordinates. It verifies
+selection through movement and native row recreation, and verifies that an
+unavailable objective does not transfer selection. Installation is verified
+in all six games. Gameplay confirmation remains pending.
+[Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-vehicle-destination-focus-and-ffiv-markers).
