@@ -19,6 +19,7 @@
 #include "bindings.h"
 #include "../fieldnav/autowalk.h"
 #include "../field/object_cache.h"
+#include "../battle/battle.h"
 #include "../core.h"
 #include "../frame.h"
 #include "../refs.h"
@@ -241,6 +242,8 @@ void initialize_bindings()
 
     // --- Global: I (cascading menu priority) ---
     register_binding(Key::I, Mod::None, Context::Global, &global_hotkeys::handle_item_details_key, "Item details");
+    register_binding(Key::I, Mod::Ctrl, Context::Battle, &ffpr::battle::announce_acting_character_appearance,
+                     "Acting character appearance");
 
     // --- Field-only toggles ---
     reg_field(Key::Quote, Mod::None, "Mod.ToggleFootsteps", "Toggle footsteps");

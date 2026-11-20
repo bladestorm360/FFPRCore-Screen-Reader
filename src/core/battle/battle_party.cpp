@@ -1,4 +1,5 @@
 #include "battle.h"
+#include "battle_internal.h"
 #include "battle_util.h"
 #include "party_status.h"
 #include "../core.h"
@@ -312,6 +313,18 @@ void announce_active_turn()
     if(name.empty()&&!choosing&&g_execution_player)name=g_execution_name;
     ffpr::say(name.empty() ? T(L"No active character") : TF(L"{0}'s turn", {name}), true);
 }
+void* acting_party_unit()
+{
+    const bool choosing = choosing_command();
+    if (!choosing && !g_execution_player) return nullptr;
+    const auto content = rows();
+    auto* row = choosing ? command_row(content) : active_row(content);
+    auto* unit = displayed::field(row, "<TargetData>k__BackingField");
+    // Only a live row can supply the unit. At execution time an older party
+    // focus is no substitute for the actor the native action admitted.
+    return choosing || unit == g_execution_player ? unit : nullptr;
+}
+
 void action_actor_started(void* unit)
 {
     g_action_ongoing=unit!=nullptr;

@@ -3,7 +3,7 @@
 The November 19 gameplay fixes are installed. This audit records the exact art
 and scenes that need descriptions, with separate verification for the speech
 controls and for localization. The reviewed wording below is working audit
-content. The first battle reader and four localized samples have passed
+content. The first battle readers and six localized samples have passed
 their focused build and checks. They are still outside the installed mod.
 
 ## Battle appearance reader
@@ -21,15 +21,26 @@ keys for every asset present across the six games. This lets the reader
 follow a changed sprite while the cursor stays on the same unit. Use the
 current art key, including its palette, to resolve the localized entry.
 The FF1 Goblin and Goblin Guard and FFV Wing Raptor's two forms are the
-first four entries, each with 12 localizations.
+first four enemy entries, each with 12 localizations.
 
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
 hidden body, cursor change, row replacement, missing wording and all-target
-focus. The focused DLL build verified 67 embedded resources. The effects of
-material-only hiding, including the FFVI painted form, need separate
-visibility proof before that content is enabled. Actor appearance on
-Ctrl+I, dialogue/event appearance on I and automatic scene cues are open.
+focus. The effects of material-only hiding, including the FFVI painted
+form, need separate visibility proof before that content is enabled.
+
+Ctrl+I uses the command actor while a command or targeting panel owns
+input, and the actual party actor during execution. Both resolve through
+the rooted native party row. A stale focus or an enemy action supplies no
+party actor. The body renderer carries the current character status and
+job. Its pose Sprite name is shared across outfits, so the initialized
+native character asset table resolves the body key. The six installed
+`GetAssetName` implementations have the same 70-instruction shape.
+The first localized FF1 variants are Warrior and Knight. Focus and
+party fixtures passed with both job keys, hidden bodies, actor handoffs
+and after-action cancellation. The DLL build verified 67 embedded
+resources. Dialogue/event appearance on I and automatic scene cues
+are open.
 
 ## Six-game source inventory
 

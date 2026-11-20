@@ -25,6 +25,8 @@ bool in_battle();
 bool battle_presentation_ready();
 /// Reads the currently targeted enemy's visible appearance when it has localized text.
 bool read_focused_enemy_appearance();
+/// Reads the visible outfit of the party member choosing or executing a command.
+void announce_acting_character_appearance();
 /// Shared renderer-backed H/T/number-row readers, including targeting panels.
 void announce_active_status();
 void announce_active_turn();

@@ -1,4 +1,32 @@
 {
+  "Character appearance bc_ff1_p001": {
+    "en": "A stocky fighter with swept brown hair and bare hands. Dark shoulder panels accent a fitted red armored tunic, and red boots anchor the bent-knee stance.",
+    "ja": "横に流した茶色の髪で、がっしりした体格の戦士。暗色の肩当てが付いた赤い鎧をまとい、赤いブーツを履いて膝を曲げ、素手で構えている。",
+    "fr": "Un combattant trapu aux cheveux bruns balayés sur le côté et aux mains nues. Des épaulières sombres rehaussent sa tunique d'armure rouge ajustée. Il fléchit les genoux au-dessus de ses bottes rouges.",
+    "it": "Un combattente tarchiato con capelli castani mossi di lato e mani nude. Spallacci scuri risaltano sulla tunica corazzata rossa e aderente. Le sue ginocchia sono piegate sopra gli stivali rossi.",
+    "de": "Ein gedrungener Kämpfer mit zur Seite gestrichenem braunem Haar und bloßen Händen. Dunkle Schulterplatten heben sich vom eng anliegenden roten Panzer ab. In roten Stiefeln steht er mit gebeugten Knien.",
+    "es": "Un luchador robusto con el pelo castaño peinado de lado y las manos desnudas. Unas hombreras oscuras destacan sobre la túnica acorazada roja y ajustada. Flexiona las rodillas sobre unas botas rojas.",
+    "ko": "갈색 머리를 옆으로 넘기고 맨손을 드러낸 다부진 전사. 몸에 맞는 붉은 갑옷에 어두운 어깨 보호대가 돋보인다. 붉은 장화를 신고 무릎을 굽힌 채 서 있다.",
+    "zht": "身材敦實的戰士梳著向一側撥開的棕髮，雙手未戴手套。合身的紅色鎧衣配有深色護肩，穿著紅靴屈膝站立。",
+    "zhc": "身材敦实的战士梳着向一侧拨开的棕发，双手未戴手套。合身的红色铠衣配有深色护肩，穿着红靴屈膝站立。",
+    "ru": "Коренастый боец с зачёсанными набок каштановыми волосами и голыми руками. Тёмные наплечники выделяются на красном облегающем доспехе. Он стоит, согнув колени, в красных сапогах.",
+    "th": "นักสู้รูปร่างล่ำ ผมสีน้ำตาลปัดไปด้านข้างและไม่สวมถุงมือ แผ่นเกราะไหล่สีเข้มตัดกับเสื้อเกราะแดงเข้ารูป ย่อเข่าในรองเท้าบู๊ตแดง",
+    "pt": "Um lutador atarracado, com cabelo castanho penteado de lado e mãos nuas. Ombreiras escuras realçam a túnica de armadura vermelha e ajustada. Mantém os joelhos dobrados nas botas vermelhas."
+  },
+  "Character appearance bc_ff1_p007": {
+    "en": "A broad-shouldered fighter with a square jaw and a swept brown fringe. Heavy red armor covers the shoulders and chest, with thick gloves and wide red boots.",
+    "ja": "四角い顎と横に流した茶色の前髪が特徴の、肩幅の広い戦士。肩と胸を重厚な赤い鎧が覆い、分厚い手袋と幅広の赤いブーツを着けている。",
+    "fr": "Un combattant aux larges épaules, à la mâchoire carrée et à la frange brune balayée sur le côté. Une lourde armure rouge couvre ses épaules et sa poitrine, avec des gants épais et de larges bottes rouges.",
+    "it": "Un combattente dalle spalle larghe, con mascella squadrata e ciuffo castano di lato. Una pesante armatura rossa gli copre spalle e petto, con guanti spessi e larghi stivali rossi.",
+    "de": "Ein breitschultriger Kämpfer mit kantigem Kiefer und brauner Stirnfranse. Eine schwere rote Rüstung bedeckt Schultern und Brust. Dazu trägt er dicke Handschuhe und breite rote Stiefel.",
+    "es": "Un luchador de hombros anchos, mandíbula cuadrada y flequillo castaño peinado de lado. Una armadura roja y pesada le cubre los hombros y el pecho. Lleva guantes gruesos y botas rojas anchas.",
+    "ko": "각진 턱과 한쪽으로 넘긴 갈색 앞머리가 있는 어깨 넓은 전사. 묵직한 붉은 갑옷이 어깨와 가슴을 덮고, 두꺼운 장갑과 폭이 넓은 붉은 장화를 착용했다.",
+    "zht": "肩膀寬闊的戰士有方正的下巴和向一側撥開的棕色瀏海。厚重的紅色鎧甲覆蓋肩膀和胸口，配上厚手套和寬大的紅靴。",
+    "zhc": "肩膀宽阔的战士有方正的下巴和向一侧拨开的棕色刘海。厚重的红色铠甲覆盖肩膀和胸口，配上厚手套和宽大的红靴。",
+    "ru": "Широкоплечий боец с квадратной челюстью и каштановой чёлкой набок. Тяжёлый красный доспех закрывает плечи и грудь. На нём толстые перчатки и широкие красные сапоги.",
+    "th": "นักสู้ไหล่กว้าง กรามเหลี่ยม ผมหน้าม้าสีน้ำตาลปัดข้าง เกราะแดงหนาหุ้มไหล่และอก พร้อมถุงมือหนาและรองเท้าบู๊ตแดงทรงกว้าง",
+    "pt": "Um lutador de ombros largos, queixo quadrado e franja castanha de lado. A armadura vermelha e pesada cobre os ombros e o peito. Usa luvas grossas e botas vermelhas largas."
+  },
   "Enemy appearance mn_ff1_001_c00": {
     "en": "A squat, pink-skinned figure with pointed ears, wide eyes and a protruding nose. It wears a red cap, orange tunic and red boots, and holds a hooked silver blade overhead.",
     "ja": "尖った耳、大きく見開いた目、突き出た鼻を持つ、桃色の肌の小柄な人型。赤い帽子とオレンジ色の上着、赤いブーツを着け、鉤形の銀色の刃を頭上に掲げている。",

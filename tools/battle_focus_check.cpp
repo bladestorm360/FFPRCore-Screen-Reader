@@ -59,6 +59,8 @@ std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 int ready_original_calls=0;
 bool battle_art_ready=false;
+Node* acting_art_unit=nullptr;
+Node player_art_name;
 std::map<std::string,bool> states;
 std::map<std::string,void*> owners;
 std::map<std::string,std::function<bool()>> queries;
@@ -82,6 +84,11 @@ void quantity(void*,void*,int32_t,const void*){++original_calls;}
 void equip_select(void*,void*p,int32_t index,int32_t,const void*){++original_calls;if(p)static_cast<Node*>(p)->index=index;}
 void show_quantity(void*,void*,void*,void*,void*,const void*){++original_calls;}
 void* managed_name(void*p,const void*){return p;}
+void* player_art(void*,int32_t status,int32_t job,bool face,const void*){
+ if(status!=1||face)return nullptr;
+ player_art_name.name=job==7?L"BC_FF1_P007":L"BC_FF1_P001";
+ return &player_art_name;
+}
 bool is_open(void*,const void*){return menu_open;}
 bool side_range(int,const void*){return side_only;}
 void* party(void*p,const void*){return static_cast<Node*>(p)->list;}
@@ -98,10 +105,16 @@ int32_t Field::get(){
  if(n=="<BattleSpriteEntity>k__BackingField"||n=="characterSR"||n=="sprite")
   return offsetof(fixture::Node,data);
  if(n=="meshRenderer")return offsetof(fixture::Node,view);
+ if(n=="characterStatusId")return offsetof(fixture::Node,state);
+ if(n=="jobId")return offsetof(fixture::Node,index);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
-void*Method::ptr(){if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;}il2cpp::Method*Method::get(){return nullptr;}
+void*Method::ptr(){
+ if(std::string_view(name)=="GetAssetName")return reinterpret_cast<void*>(&fixture::player_art);
+ if(std::string(name)=="IsPlayerSingleSideAll"||std::string(name)=="IsEnemySingleSideAll")return reinterpret_cast<void*>(&fixture::side_range);if(std::string(name)=="get_IsOpen")return reinterpret_cast<void*>(&fixture::is_open);if(std::string(name)=="get_PartyList")return reinterpret_cast<void*>(&fixture::party);if(std::string(name)=="get_Name")return reinterpret_cast<void*>(&fixture::managed_name);return std::string(name).find("MesId")!=std::string::npos?reinterpret_cast<void*>(&fixture::managed_name):nullptr;
+}
+il2cpp::Method*Method::get(){return nullptr;}
 std::wstring str(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}std::wstring rd_str(void*p,Field&){return str(p);}void call_failed_note(const char*){std::abort();}
 }
 namespace hooks {bool attach_raw(ref::Method& method,void* detour,void** original){
@@ -139,7 +152,8 @@ namespace game {Id current(){return fixture::game;}}
 namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="AutoDetail")return fixture::auto_detail;return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
 namespace modtext {
 bool has(std::wstring_view value){
- return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00";
+ return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
+        value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
 std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
@@ -161,7 +175,9 @@ namespace popup_state {void*active_popup(){return nullptr;}void set_active(const
 namespace il2cpp {void*method_pointer(Method*){return nullptr;}}
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
+ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};
 void* unit_info(void* p){return p?static_cast<fixture::Node*>(p)->data:nullptr;}
+void* acting_party_unit(){return fixture::acting_art_unit;}
 bool battle_presentation_ready(){return fixture::battle_art_ready;}
 bool in_battle(){return fixture::battle_active;}
 bool formation_first_turn(){return fixture::opening_turn;}
@@ -215,6 +231,28 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::d_EnemyAll(&target,nullptr);
   expect(!b::read_focused_enemy_appearance(),"All Enemies does not reuse a prior single target");
   enemy_a.data=nullptr;
+  battle_art_ready=false;
+ }
+ {
+  Node actor,info,entity,body,renderer,pose;
+  actor.data=&info;info.data=&entity;entity.data=&body;body.data=&pose;body.view=&renderer;
+  entity.state=1;entity.index=1;pose.name=L"Default_00";
+  acting_art_unit=&actor;
+  spoken.clear();
+  b::announce_acting_character_appearance();
+  expect(spoken.empty(),"acting character description is closed during battle entry");
+  battle_art_ready=true;
+  b::announce_acting_character_appearance();
+  expect(spoken.size()==1&&spoken.back()==L"Character appearance bc_ff1_p001",
+         "the native owner supplies the actor's current status and job for its described outfit");
+  entity.index=7;
+  b::announce_acting_character_appearance();
+  expect(spoken.size()==2&&spoken.back()==L"Character appearance bc_ff1_p007",
+         "the promoted job resolves its own visible outfit despite the unchanged pose key");
+  renderer.visible=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.size()==2,"an acting character whose body is hidden contributes no appearance");
+  acting_art_unit=nullptr;
   battle_art_ready=false;
  }
  // FF4/FF5 Items may be command 5, not command 3. Native graphics own readiness.

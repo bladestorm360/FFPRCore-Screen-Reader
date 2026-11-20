@@ -406,6 +406,7 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
    for(const auto* context:{menu_state::BATTLE_COMMAND,menu_state::BATTLE_MAGIC,menu_state::BATTLE_ITEM,menu_state::BATTLE_TARGET}) {
     active_menus={context};b::action_actor_started(&enemy);spoken.clear();b::announce_active_turn();
     expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB enemy execution cannot replace the ready command/submenu character in T");
+    expect(b::acting_party_unit()==&second_unit,"appearance follows the ready actor in every command context");
    }
    active_menus={menu_state::BATTLE_COMMAND};b::action_actor_started(&live_unit);spoken.clear();b::announce_active_turn();
    expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB ready command owner outranks a different executing party member");
@@ -414,12 +415,15 @@ int main(){using namespace fixture;background::prepare();int failed=0;auto expec
    expect(spoken==std::vector<std::wstring>{L"Ryko's turn"},"ATB T retains its admitted rooted commander when a target/animation panel hides that party row");second_view.active=true;
    active_menus.clear();b::action_actor_started(&enemy);spoken.clear();b::announce_active_turn();
    expect(spoken==std::vector<std::wstring>{L"No active character"},"T never labels an enemy action as a character turn");
+   expect(!b::acting_party_unit(),"an enemy action has no party appearance owner");
    b::g_focused_player=&live_unit;spoken.clear();b::announce_active_status();
    expect(spoken==std::vector<std::wstring>{L"No active character"},"H retains its previous non-party-action behavior despite an old party focus marker");
    b::action_actor_started(&live_unit);spoken.clear();b::announce_active_turn();
    expect(spoken==std::vector<std::wstring>{L"Corrad's turn"},"executing party turns remain available without a command menu");
+   expect(b::acting_party_unit()==&live_unit,"appearance uses the admitted executing actor outside the command menus");
    b::action_actor_finished();spoken.clear();b::announce_active_turn();
    expect(spoken==std::vector<std::wstring>{L"No active character"},"finished action cannot turn an old focus marker into a new ready turn");
+   expect(!b::acting_party_unit(),"the previous party focus supplies no appearance after execution");
   }
   active_menus=previous_menus;owners["BattleCommandSelectController"]=previous_command;
   b::g_execution_player=previous_player;b::g_execution_name=previous_name;

@@ -1,4 +1,18 @@
 {
+  "Acting character appearance": {
+    "en": "Acting character appearance",
+    "ja": "行動中のキャラクターの外見",
+    "fr": "Apparence du personnage actif",
+    "it": "Aspetto del personaggio attivo",
+    "de": "Aussehen der aktiven Figur",
+    "es": "Aspecto del personaje activo",
+    "ko": "행동 중인 캐릭터의 외형",
+    "zht": "行動角色的外觀",
+    "zhc": "行动角色的外观",
+    "ru": "Внешность действующего персонажа",
+    "th": "รูปลักษณ์ตัวละครที่กำลังออกคำสั่งหรือกระทำ",
+    "pt": "Aparência do personagem ativo"
+  },
   "Pause": {
     "en": "Pause",
     "ja": "ポーズ",

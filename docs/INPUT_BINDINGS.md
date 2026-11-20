@@ -333,6 +333,7 @@ Checked in this order:
 | V | `GlobalHotkeyHandler.AnnounceCurrentVehicle` (speaks text query `MoveStateHelper.GetMoveStateName`) | Global |
 | R | `MessageWindowPatches.RepeatLastDialogue` if `MessageWindowPatches.IsInDialogue` | Global |
 | I | `GlobalHotkeyHandler.HandleItemDetailsKey` (below) | Global |
+| Ctrl+I | Describes the acting party member's visible outfit when localized wording is available. | Battle |
 | Shift+I | `ControllerRouter.AnnounceContextControls` | Global |
 | F8 (no modifier) | mod menu (`ui::mod_menu::open`) if `ControllerRouter.IsFieldActive`, else `ControllerRouter.SpeakModMenuUnavailable` | any |
 | F7 (no modifier) | `Mod.ToggleAutoDetail` | any |
@@ -368,6 +369,7 @@ The first match runs:
 | `ItemMenuState.IsItemMenuActive` | `ItemDescriptionAnnouncer.AnnounceCurrentDescription` |
 | `BattleMagicMenuState.IsActive` | `BattleMagicPatches.AnnounceCurrentDescription` |
 | `BattleItemMenuState.IsActive` | `BattleItemPatches.AnnounceCurrentDescription` |
+| A single visible enemy owns native target focus and has a localized appearance entry | Describes the visible enemy sprite, including its current form. |
 
 ## Controller (SDL3)
 
