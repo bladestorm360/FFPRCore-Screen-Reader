@@ -1,6 +1,7 @@
 #include "battle.h"
 #include "battle_internal.h"
 #include "battle_util.h"
+#include "boss_visuals.h"
 #include "../displayed_ui.h"
 #include "../frame.h"
 #include "../modtext.h"
@@ -47,7 +48,12 @@ std::wstring visible_enemy_art(void* enemy)
     auto* entity = ref::rd<void*>(unit_info(enemy), fSpriteEntity);
     // The displayed sprite encodes the group and palette. The monster master
     // can still name the opening art after a transformation.
-    return art_key(unity::name(visible_body_sprite(entity)), L"mn_ff");
+    auto art = art_key(unity::name(visible_body_sprite(entity)), L"mn_ff");
+    if (game::is(game::Id::FF6)) {
+        const int painting = art == L"mn_ff6_127_c00" ? 300 : art == L"mn_ff6_144_c00" ? 317 : 0;
+        if (painting && !boss_visuals::revealed_painting_art(painting)) return {};
+    }
+    return art;
 }
 
 std::wstring visible_player_art(void* unit)

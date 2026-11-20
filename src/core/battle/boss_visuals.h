@@ -5,6 +5,10 @@
 
 namespace ffpr::battle::boss_visuals {
 
+// Manual appearance reads can reuse the native reveal. Before a confirmed
+// alpha write or outside the current battle there is no visible painting.
+bool revealed_painting_art(int asset);
+
 // Identity of an audited visible form, derived from the encounter and its
 // authored transition. A null key leaves the normal game speech in charge.
 constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, int asset, int effect)

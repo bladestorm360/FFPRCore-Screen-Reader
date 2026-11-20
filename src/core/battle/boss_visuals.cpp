@@ -375,4 +375,9 @@ int install()
 core::Install registration{"Battle.BossVisuals", &install, 117};
 }
 
+bool revealed_painting_art(int asset)
+{
+    return observe() && painting_asset != 0 && painting_asset == asset;
+}
+
 } // namespace ffpr::battle::boss_visuals

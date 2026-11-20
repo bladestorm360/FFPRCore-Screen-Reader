@@ -1,4 +1,32 @@
 {
+  "Enemy appearance mn_ff6_127_c00": {
+    "en": "A brown-haired woman with softly shaded features and bare shoulders. Pale turquoise and white bands streak across the tall figure, with faint patches of skin between them.",
+    "ja": "茶色い髪の女性。顔には柔らかな陰影があり、肩があらわになっている。縦に長い姿を淡い青緑と白の帯が横切り、その間から肌がかすかに見える。",
+    "fr": "Une femme aux cheveux bruns, aux traits doucement ombrés et aux épaules nues. Des bandes turquoise pâle et blanches traversent sa silhouette élancée. On aperçoit un peu de peau entre elles.",
+    "it": "Una donna dai capelli castani, con lineamenti sfumati e spalle nude. Fasce turchesi chiare e bianche attraversano la figura slanciata, lasciando intravedere la pelle.",
+    "de": "Eine braunhaarige Frau mit weich schattierten Zügen und bloßen Schultern. Blass türkise und weiße Streifen ziehen sich über die hohe Gestalt. Dazwischen blitzt ein wenig Haut hervor.",
+    "es": "Una mujer de cabello castaño, rasgos suavemente sombreados y hombros desnudos. Franjas turquesa pálido y blancas cruzan su figura alargada. Entre ellas se vislumbran zonas de piel.",
+    "ko": "갈색 머리와 부드러운 음영이 진 얼굴, 드러난 어깨가 보이는 여성이다. 길쭉한 형체를 옅은 청록색과 흰색 띠가 가로지르며 그 사이로 살빛이 희미하게 비친다.",
+    "zht": "棕髮女子的臉部帶有柔和的陰影，雙肩裸露。淡青綠和白色條紋橫過細長的身形，間隙隱約透出膚色。",
+    "zhc": "棕发女子的脸部带有柔和的阴影，双肩裸露。淡青绿和白色条纹横过细长的身形，间隙隐约透出肤色。",
+    "ru": "У женщины каштановые волосы, мягко затенённые черты и открытые плечи. Высокую фигуру пересекают бледно-бирюзовые и белые полосы. Между ними едва видна кожа.",
+    "th": "หญิงผมสีน้ำตาลใบหน้าลงเงาอย่างนุ่มนวลและเผยไหล่เปลือย แถบสีฟ้าอมเขียวอ่อนกับสีขาวพาดผ่านเรือนร่างสูง มีสีผิวจาง ๆ ให้เห็นระหว่างแถบ",
+    "pt": "Uma mulher de cabelos castanhos, feições com sombras suaves e ombros nus. Faixas de turquesa-claro e branco atravessam a figura alta, deixando entrever pequenas áreas de pele."
+  },
+  "Enemy appearance mn_ff6_144_c00": {
+    "en": "A narrow face peers from a dark shroud above a swirling yellow-white and green mass. Knotted tendrils curl over the front. A pale haze separates the head from the base.",
+    "ja": "暗い覆いから細い顔がのぞき、その下で黄白色と緑の塊が渦を巻く。節くれだった触手が手前で丸まり、淡い霞が頭と下部を隔てている。",
+    "fr": "Un visage étroit sort d'un voile sombre au-dessus d'une masse tourbillonnante jaune pâle et verte. Des vrilles noueuses s'enroulent devant. Une brume claire sépare la tête de la base.",
+    "it": "Un volto stretto spunta da un velo scuro sopra una massa vorticosa bianco-giallastra e verde. Viticci nodosi si arricciano davanti. Una foschia chiara separa la testa dalla base.",
+    "de": "Ein schmales Gesicht blickt unter einer dunklen Hülle hervor. Darunter wirbelt eine gelblich weiße und grüne Masse. Knotige Ranken krümmen sich vorn. Heller Dunst trennt den Kopf vom unteren Teil.",
+    "es": "Un rostro estrecho asoma de un manto oscuro sobre una masa arremolinada de blanco amarillento y verde. Zarcillos nudosos se curvan al frente. Una neblina pálida separa la cabeza de la base.",
+    "ko": "어두운 장막 아래 좁은 얼굴이 드러난다. 아래에는 황백색과 초록색 덩어리가 소용돌이친다. 마디진 촉수가 앞쪽으로 말리고 옅은 안개가 머리와 밑부분을 가른다.",
+    "zht": "狹長的臉從深色罩袍中探出，下方是翻湧的黃白與綠色團塊。打結般的觸鬚向前捲曲，淡霧隔開了頭部與底座。",
+    "zhc": "狭长的脸从深色罩袍中探出，下方是翻涌的黄白与绿色团块。打结般的触须向前卷曲，淡雾隔开了头部与底座。",
+    "ru": "Из тёмного покрова выглядывает узкое лицо. Под ним клубится жёлто-белая и зелёная масса. Спереди изгибаются узловатые отростки. Бледная дымка отделяет голову от основания.",
+    "th": "ใบหน้าแคบโผล่จากผ้าคลุมมืดเหนือกลุ่มสีขาวอมเหลืองและสีเขียวที่หมุนวน หนวดเป็นปมขดอยู่ด้านหน้า หมอกสีอ่อนคั่นระหว่างศีรษะกับส่วนฐาน",
+    "pt": "Um rosto estreito espreita de um manto escuro acima de uma massa revolta de branco amarelado e verde. Gavinhas nodosas se curvam na frente. Uma névoa clara separa a cabeça da base."
+  },
   "Enemy HP Display": {
     "en": "Enemy HP Display",
     "ja": "敵HPの表示",

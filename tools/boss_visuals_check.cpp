@@ -242,6 +242,14 @@ void check_detours()
     d_commit_sprite(&animator, method_info);
     expect(spoken == 4 && pending == 0, "Battle teardown cancels pending form speech");
     expect(forwarded, "Native action arguments and original-before-speech ordering are preserved");
+
+    fixture::title = Id::FF6;
+    open();
+    expect(!revealed_painting_art(300) && !revealed_painting_art(317), "A new encounter has no remembered reveal");
+    painting_asset = 300;
+    expect(revealed_painting_art(300) && !revealed_painting_art(317), "Only the currently revealed painting qualifies");
+    close();
+    expect(!revealed_painting_art(300), "Battle teardown retires the last observed painting");
 }
 }
 
@@ -266,7 +274,8 @@ int main()
          no_select_pose(272,0,12,true),no_select_pose(272,0,11,false),
          no_select_pose(278,0,7,false),no_select_pose(279,0,7,false),
          no_select_pose(311,0,18,true),no_select_pose(311,0,19,false),
-         painting(317,300),painting(300,317)}) check_key(vi,cue);
+         painting(317,300),painting(300,317),L"Enemy appearance mn_ff6_127_c00",
+         L"Enemy appearance mn_ff6_144_c00"}) check_key(vi,cue);
 
     expect(!scripted_sprite(Id::FF4,162,1,166,167)&&!scripted_sprite(Id::FF4,162,2,165,167),
            "Mist Dragon uses native text in both directions");

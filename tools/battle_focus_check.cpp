@@ -59,6 +59,7 @@ std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 int ready_original_calls=0;
 bool battle_art_ready=false;
+int painting_art=0;
 Node* acting_art_unit=nullptr;
 Node player_art_name;
 std::map<std::string,bool> states;
@@ -153,10 +154,14 @@ namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="
 namespace modtext {
 bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
+        value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
 std::wstring TF(std::wstring_view v,std::initializer_list<std::wstring>a){return text::format(v,a);}
+}
+namespace ffpr::battle::boss_visuals {
+bool revealed_painting_art(int asset) { return asset == fixture::painting_art; }
 }
 namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;}bool is_active(const char*n){return fixture::states[n];}void reset(const char*n){fixture::states[n]=false;}void set_active_exclusive(const char*n){fixture::states.clear();fixture::states[n]=true;}void register_reset(const char*,std::function<void()>){}}
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
@@ -228,6 +233,19 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   enemies[0]=&enemy_a;
   folded_wings.name=L"MN_FF5_999_C00";
   expect(!b::read_focused_enemy_appearance(),"a missing localization does not speak the internal art name");
+  open_wings.name=L"MN_FF6_127_C00";
+  folded_wings.name=L"MN_FF6_144_C00";
+  body.data=&open_wings;
+  expect(!b::read_focused_enemy_appearance(),"painting stays silent until its native reveal is observed");
+  painting_art=300;
+  expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff6_127_c00",
+         "the visible painted form has its own appearance");
+  body.data=&folded_wings;
+  expect(!b::read_focused_enemy_appearance(),"material-hidden form cannot use its description");
+  painting_art=317;
+  expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff6_144_c00",
+         "the apparition supplies its description after the native reveal");
+  painting_art=0;
   b::d_EnemyAll(&target,nullptr);
   expect(!b::read_focused_enemy_appearance(),"All Enemies does not reuse a prior single target");
   enemy_a.data=nullptr;

@@ -182,3 +182,25 @@ localization and speech integration.
 | 354, 357–365 | Statue targets and transparent placeholders | Each installed image is one fully transparent pixel. Describe the relevant visible part of the large composition at 321 for an encounter target once its position and visible tier are established. |
 | 355 | Hand cursor effect | A white glove with a cyan edge points to the right above a dark oval shadow. |
 | 356 | Dark blue character art | A little figure with a covered face wears pointed blue headgear, layered dark blue clothes and light gold trim at the eyes, waist and feet. |
+
+## Statue of the Gods in the final battle
+
+The live battle uses `BG_FF6_50`, a 472 by 784 sprite. Its lower image
+contains the layered statue from art 321. The top adds a broad spiral of
+bright gold clouds and rays. The actual nine target rows A–I all use art
+354, a fully transparent pixel. The other blank art rows 357–365 do not
+provide separate figures. The authoritative figure is the battle backdrop.
+
+| Active tier | Native group and contacts | Visible composition |
+| --- | --- | --- |
+| Lower | Party 472 starts targets A, B and C in slots 2, 6 and 1. | A crouched silver-gray body has a red crest, blue collar, wide clawed hands and jagged pink fins or wings behind it. Pale mist breaks around the base. |
+| Middle | The round-two call loads party 513. D, E, F and G occupy slots 3, 4, 7 and 1. The background reaches offset 150. | Pale twisted arms and overlapping faces crowd around gold, red and blue-violet details. A violet drape drops beneath them, with a bright patterned form braced to the right. |
+| Upper | The round-three call loads party 514. H and I occupy slots 4 and 2. The background moves to offset 0. | A pale figure rises above folded blue-violet robes, two orange flames and a gold star. Broad light streaks cross the dark clouds. |
+| Kefka | Round four takes the background to offset minus 250 and uses Kefka's separate descent call. | Gold light radiates through a wide spiral of clouds above the statue. Kefka's current sprite needs its own staged appearance. |
+
+The installed battle script is `sc_b_2022`. It pauses targeting while
+the background scrolls and the enemy party changes. A stage-wide cue can
+describe the revealed tier. Per-target descriptions still need the exact
+cursor-to-background projection before they can name individual body
+parts. Keep the background and both installer-matched sprite samples in
+the local visual audit folder.

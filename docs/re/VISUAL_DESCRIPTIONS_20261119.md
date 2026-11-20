@@ -25,8 +25,12 @@ first four enemy entries, each with 12 localizations.
 The existing battle focus fixture covers the actual reader with fake
 native objects. The build verifies entry gating, both Wing Raptor sprites,
 hidden body, cursor change, row replacement, missing wording and all-target
-focus. The effects of material-only hiding, including the FFVI painted
-form, need separate visibility proof before that content is enabled.
+focus. FFVI Chadarnook needs a material check because both forms can keep
+enabled renderers. The manual reader uses the existing encounter observer's
+body alpha reveal. The painted form and apparition have separate localized
+entries. A new encounter, an unseen reveal or a switch to the other body
+cannot return a stale description. The focus and boss fixtures cover the
+two forms and the 12-language keys.
 
 Ctrl+I uses the command actor while a command or targeting panel owns
 input, and the actual party actor during execution. Both resolve through

@@ -1,8 +1,10 @@
 # Native FFPR durable memory
 
-**November 19 FFIV Moon.** The verified FFIV installation accounts for
-directional entrance collision and cave detours from the Lunar Whale.
-Sealed Cavern is next. [Route evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffiv-moon-entrance-routing).
+**November 19 FFIV routing and markers.** The verified FFIV installation
+accounts for lunar entrance direction and cave detours, Sealed Cavern rope
+crossings, airborne target retention, duplicate marker suppression and
+Enterprise hovercraft transport. Player confirmation is pending.
+[Route and delivery evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-19-gameplay-fixes-and-accessibility-follow-up).
 
 **November 19 field menu delivery.** All six games now read Pause and the
 actual focused command. FFV's field spell entry uses one initial producer.
@@ -14,9 +16,9 @@ implemented, offline verified and installed in all six games.
 [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-shared-save-point-and-ffv-navigation-fixes).
 
 **November 19 FFV Karnak world map.** Installed the verified terrain fix
-for the Castle and Fire-Powered Ship entrances. Gameplay confirmation is
-pending. Continue the remaining gameplay fixes before descriptions and
-Storyline work. [Active checkpoints](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-19-gameplay-fixes-and-accessibility-follow-up).
+for the Castle and Fire-Powered Ship entrances before the other gameplay
+deliveries. Player confirmation is pending.
+[Active checkpoints](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-19-gameplay-fixes-and-accessibility-follow-up).
 
 **November 17 FFV shop labels.** Deferred removal of the parenthesized Temp
 suffix from navigation labels. [Log evidence](docs/re/OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix).
@@ -32,8 +34,11 @@ make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOL
 **November 19 visual descriptions and Storyline.** Gameplay fixes are
 installed. Six-game enemy and character artwork prose covers 1,380 visible
 enemy sprites, 762 field candidates, 233 battle art and portrait variants
-and 371 representative equipment appearances. Silent scene actions,
-localized speech integration and Storyline mode are open.
+and 371 representative equipment appearances. Ten localized appearance
+entries and one bridge narration are offline checked. The first five FF1
+Storyline objectives passed production route replays. The broader scene
+audit, remaining localization and Storyline runtime are open. The
+descriptive checkpoints are outside the installed mod.
 [Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
 and [scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
 
