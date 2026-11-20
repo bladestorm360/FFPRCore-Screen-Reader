@@ -23140,5 +23140,61 @@
     "th": "ร่างนิ่งถูกคลุมด้วยสีฟ้า",
     "pt": "Um tom azul cobre o corpo imóvel.",
     "zhc": "静止的身体覆上一层蓝色。"
+  },
+  "Kefka wags finger cue": {
+    "en": "Kefka raises a hand and wags one finger.",
+    "ja": "ケフカが片手を上げ、指を一本振る。",
+    "fr": "Kefka lève la main et agite un doigt.",
+    "it": "Kefka alza una mano e agita un dito.",
+    "de": "Kefka hebt eine Hand und wedelt mit einem Finger.",
+    "es": "Kefka levanta la mano y mueve un dedo de lado a lado.",
+    "ko": "케프카가 한 손을 들고 손가락 하나를 까딱인다.",
+    "zht": "凱夫卡抬起一隻手，搖了搖一根手指。",
+    "zhc": "凯夫卡抬起一只手，摇了摇一根手指。",
+    "ru": "Кефка поднимает руку и грозит пальцем.",
+    "th": "เคฟกายกมือขึ้นแล้วส่ายนิ้วไปมา",
+    "pt": "Kefka ergue a mão e balança um dedo de um lado para o outro."
+  },
+  "Relm joins Ultros scene cue": {
+    "en": "A small girl in a gold-trimmed pink cap steps into the fight and turns toward Ultros.",
+    "ja": "金縁のピンク色の帽子をかぶった小柄な少女が戦いに割って入り、オルトロスの方を向く。",
+    "fr": "Une fillette à la casquette rose bordée d’or entre dans le combat et se tourne vers Orthros.",
+    "it": "Una bambina con un berretto rosa bordato d’oro entra nello scontro e si volta verso Ultros.",
+    "de": "Ein kleines Mädchen mit goldgesäumter rosa Mütze betritt das Kampfgeschehen und wendet sich Ultros zu.",
+    "es": "Una niña con un gorro rosa ribeteado de oro entra en la pelea y se vuelve hacia Ultros.",
+    "ko": "금색 테두리가 있는 분홍 모자를 쓴 어린 소녀가 전투에 뛰어들어 올트로스를 향해 돌아선다.",
+    "zht": "一個戴著金邊粉紅帽的小女孩走進戰場，轉身面向歐特羅斯。",
+    "zhc": "一个戴着金边粉红帽的小女孩走进战场，转身面向欧特罗斯。",
+    "ru": "Маленькая девочка в розовой шапочке с золотой каймой вступает в бой и поворачивается к Ультросу.",
+    "th": "เด็กหญิงตัวเล็กสวมหมวกสีชมพูขลิบทองก้าวเข้าสู่การต่อสู้แล้วหันไปทางอัลทรอส",
+    "pt": "Uma menina de gorro rosa com borda dourada entra na luta e se vira para Ultros."
+  },
+  "Kefka winged descent cue": {
+    "en": "Kefka descends against a luminous whirl of clouds, with great pale feathered wings and ragged purple and pink robes.",
+    "ja": "光の渦を巻く雲を背に、ケフカが大きな淡色の羽根の翼を広げ、紫とピンクのぼろぼろの衣をまとって降りてくる。",
+    "fr": "Kefka descend devant un tourbillon de nuages lumineux, avec de grandes ailes aux plumes pâles et des robes violettes et roses en lambeaux.",
+    "it": "Kefka scende davanti a un vortice di nubi luminose, con grandi ali dalle piume chiare e vesti viola e rosa a brandelli.",
+    "de": "Kefka sinkt vor einem leuchtenden Wolkenwirbel herab, mit großen Flügeln aus hellen Federn und zerrissenen violetten und rosa Gewändern.",
+    "es": "Kefka desciende frente a un remolino de nubes luminosas, con grandes alas de plumas claras y ropajes morados y rosas hechos jirones.",
+    "ko": "케프카가 빛나는 구름 소용돌이를 배경으로 내려온다. 옅은 깃털이 난 커다란 날개와 누더기가 된 보라색과 분홍색 옷이 보인다.",
+    "zht": "凱夫卡在發光的雲渦前降下，背生巨大的淺色羽翼，身披破碎的紫粉長袍。",
+    "zhc": "凯夫卡在发光的云涡前降下，背生巨大的浅色羽翼，身披破碎的紫粉长袍。",
+    "ru": "Кефка спускается на фоне светящегося вихря облаков. За спиной у него огромные крылья со светлыми перьями, на теле изорванные фиолетовые и розовые одежды.",
+    "th": "เคฟกาลอยลงมาตรงหน้ากลุ่มเมฆเรืองแสงที่หมุนวน มีปีกขนนกสีอ่อนขนาดใหญ่และเสื้อคลุมสีม่วงกับชมพูที่ขาดรุ่งริ่ง",
+    "pt": "Kefka desce diante de um redemoinho de nuvens luminosas, com grandes asas de penas claras e vestes roxas e rosas em farrapos."
+  },
+  "Kefka turns forward cue": {
+    "en": "Kefka walks across the battlefield, stops and turns to face forward.",
+    "ja": "ケフカは戦場を歩いて渡り、立ち止まって正面を向く。",
+    "fr": "Kefka traverse le champ de bataille, s’arrête et se tourne de face.",
+    "it": "Kefka attraversa il campo di battaglia, si ferma e si gira di fronte.",
+    "de": "Kefka geht über das Schlachtfeld, bleibt stehen und dreht sich nach vorn.",
+    "es": "Kefka cruza el campo de batalla, se detiene y se gira para mirar al frente.",
+    "ko": "케프카가 전장을 가로질러 걷다가 멈춰 정면을 향해 돌아선다.",
+    "zht": "凱夫卡走過戰場，停下腳步，轉身面向前方。",
+    "zhc": "凯夫卡走过战场，停下脚步，转身面向前方。",
+    "ru": "Кефка пересекает поле боя, останавливается и поворачивается лицом вперёд.",
+    "th": "เคฟกาเดินข้ามสนามรบ หยุด แล้วหันหน้ามาด้านหน้า",
+    "pt": "Kefka atravessa o campo de batalha, para e se vira de frente."
   }
 }

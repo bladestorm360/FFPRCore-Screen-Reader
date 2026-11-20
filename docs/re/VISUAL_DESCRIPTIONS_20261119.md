@@ -71,9 +71,9 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-30,283 remaining non-English entries in the new catalog. Distinct
-status effects, field and battle scene playback, additional draw
-bindings and local delivery remain active.
+30,251 remaining non-English entries in the new catalog after adding
+32 FF1 Japanese enemy descriptions. Distinct status effects, field
+scene playback, additional draw bindings and local delivery remain active.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script

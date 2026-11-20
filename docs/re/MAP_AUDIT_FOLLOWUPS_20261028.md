@@ -417,15 +417,15 @@ local delivery and gameplay confirmation distinct.
 | FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 149 native objectives, representative approaches and a save already in the Rift. Full cross-area transport and integrated delivery remain open. |
 | FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. Storyline uses the existing guides for multi-party, timed and stateful map sequences. All 126 labels and instructions have all 12 locales. Integrated travel verification and delivery remain open. |
 | Database appearance coverage | The English catalog matches all 2,789 visible keys in the frozen enemy, field, battle and equipment inventories. The 85 master-linked battle effects, 13 icons, alternate battle bodies and applied palette cues have 12-language wording. Further no-effect status visuals, field changes, portrait focus speech, base artwork localization and integrated delivery remain open. See the [artwork coverage and evidence](VISUAL_DESCRIPTIONS_20261119.md#november-20-six-game-artwork-catalog). |
-| Cutscene and event coverage | In progress. Start with the fixed six-game visual queue linked below, plus the original battle story scripts in the installed battle-script bundles. Review every body in scope once and make one reconciliation pass on unresolved significant scenes, especially prologues, endings and silent story actions. Each gets prose and a playback point, evidence of adequate native context or ordinary/repeated motion, or a specific unresolved exception. A reused animation gets its significant introduction once. This inventory and reconciliation are the finish line for event discovery. |
+| Cutscene and event coverage | All 119 battle script bodies have a disposition. Four FFVI scenes have new ready-page cues, including Kefka's descent. The fixed field review has 469 routine classifications plus the staged cues and scene prose recorded separately. Continue through the same field queue and reconcile the remaining significant actions once, prioritizing prologues, endings and silent story actions. Give each candidate a cue, an ordinary, repeated or native-equivalent disposition, or a specific reason an accessible cue could not be verified. This fixed inventory defines the end of event discovery. [Scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md). |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
 
 Retain the exact installed input identity in
 [audit baseline](visual_inventory_baseline_20261120.json).
 The original local evidence is under `../tools/visual_audit_20261119`.
 It includes 8,504 executable field bodies, the 6,163-body visual/native-call
-queue with 6,110 distinct same-map traces, and the first 379 routine
-dispositions. The previous sprite, pose and effects work remains useful.
+queue with 6,110 distinct same-map traces, the structural dispositions
+and the 119 original battle script dispositions.
 See [visual coverage](VISUAL_DESCRIPTIONS_20261119.md) and
 [scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md).
 

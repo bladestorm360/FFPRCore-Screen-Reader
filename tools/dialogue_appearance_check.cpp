@@ -18,8 +18,11 @@ std::map<std::string_view, size_t> offsets;
 Node* manager = nullptr;
 Node* player_map = nullptr;
 Node* message_client = nullptr;
+Node* battle_interpreter = nullptr;
 bool owner_thread = true;
 bool dialogue_open = true;
+bool in_battle = false;
+bool battle_ready = false;
 bool transition = false;
 bool fading = false;
 int current_map = 3;
@@ -67,7 +70,7 @@ void* Method::ptr()
 {
     return std::string_view(name) == "Instance" ? reinterpret_cast<void*>(&client) : reinterpret_cast<void*>(&sprite);
 }
-void* instance(Class&) { return manager; }
+void* instance(Class& cls) { return std::string_view(cls.name) == "Integrator" ? battle_interpreter : manager; }
 void call_failed_note(const char*) { std::abort(); }
 std::wstring rd_str_bounded(void* object, Field& field, size_t size)
 {
@@ -123,6 +126,10 @@ std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
 namespace ffpr { void say(std::wstring_view text, bool) { spoken = text; } }
 namespace ffpr::dialogue { bool in_dialogue() { return dialogue_open; } }
+namespace ffpr::battle {
+bool in_battle() { return ::in_battle; }
+bool battle_presentation_ready() { return battle_ready; }
+}
 
 int main()
 {
@@ -242,6 +249,37 @@ int main()
     id.value = L"MSG_SHIP_03";
     require(read(), "Bikke also owns the post-battle exchange");
     const auto cue = &ffpr::dialogue::action_cue_at_dialogue;
+    Node interpreter, battle_script;
+    battle_interpreter = &interpreter;
+    put(interpreter, "<scriptName>k__BackingField", &battle_script);
+    put(interpreter, "isFieldScript", nullptr);
+    current_game = game::Id::FF6;
+    in_battle = true;
+    id.value = L"E0460_01_606_b_04";
+    battle_script.value = L"sc_b_0460_1";
+    require(cue().empty(), "battle loading gate");
+    battle_ready = true;
+    require(cue() == L"Kefka wags finger cue", "reached Kefka's exact staged page");
+    id.value = L"E0460_01_606_b_05";
+    require(cue().empty(), "the next page stays native");
+    id.value = L"E1004_00_571_b_01";
+    require(cue().empty(), "same kind of window with a different battle script");
+    battle_script.value = L"sc_b_2022";
+    require(cue() == L"Kefka winged descent cue", "descent page after the final tier");
+    id.value = L"E0547_01_425_b_10";
+    battle_script.value = L"sc_b_0547";
+    require(cue() == L"Relm joins Ultros scene cue", "Relm's first line after entering");
+    id.value = L"E0555_05_180_b_03";
+    battle_script.value = L"sc_b_0555_2";
+    require(cue() == L"Kefka turns forward cue", "page following the walk and turn");
+    message.visible = false;
+    require(cue().empty(), "battle cue requires a visible page");
+    message.visible = true;
+    put(interpreter, "isFieldScript", reinterpret_cast<void*>(1));
+    require(cue().empty(), "field interpreter cannot supply a battle cue");
+    in_battle = battle_ready = false;
+    current_game = game::Id::FF1;
+    id.value = L"MSG_SHIP_03";
     require(cue() == L"Pravoka pirate defeat cue", "the surrender page follows both crew animations");
     script.value = L"sc_e_0009";
     require(cue().empty(), "the fight opener cannot narrate the surrender");

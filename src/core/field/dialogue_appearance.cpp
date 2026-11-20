@@ -1,6 +1,7 @@
 #include "field_internal.h"
 #include "field_api.h"
 #include "object_cache.h"
+#include "../battle/battle.h"
 #include "../core.h"
 #include "../dialogue/dialogue.h"
 #include "../displayed_ui.h"
@@ -25,6 +26,9 @@ ref::Field fMessageText{kView, "messageText"};
 ref::Class kClient{"Last.Management", "MessageWindowClient"};
 ref::Method mClient{kClient, "Instance", 0};
 ref::Field fMessageId{kClient, "<CurrentMessageId>k__BackingField"};
+ref::Class kInterpreter{"Last.Interpreter", "Integrator", game::kFF6};
+ref::Field fActiveScript{kInterpreter, "<scriptName>k__BackingField"};
+ref::Field fRunningFieldScript{kInterpreter, "isFieldScript"};
 
 ref::Field fEventOwner{r::kFieldController, "eventHandle"};
 ref::Class kEventProcedure{"Last.Map", "EventProcedure"};
@@ -258,6 +262,29 @@ std::wstring staged_cue(void* controller, const StagedCue& cue)
     }
     return T(cue.text);
 }
+
+std::wstring ready_battle_cue()
+{
+    if (!game::is(game::Id::FF6) || !battle::battle_presentation_ready()) return {};
+    // The scripted exchanges use Msg window 0, the same visible window as
+    // field dialogue, with the ready battle's Integrator as their owner.
+    const auto message = field_message_key();
+    struct Cue { std::wstring_view message, script, text; };
+    static constexpr Cue cues[] = {
+        {L"E0460_01_606_b_04", L"sc_b_0460_1", L"Kefka wags finger cue"},
+        {L"E0547_01_425_b_10", L"sc_b_0547", L"Relm joins Ultros scene cue"},
+        {L"E0555_05_180_b_03", L"sc_b_0555_2", L"Kefka turns forward cue"},
+        {L"E1004_00_571_b_01", L"sc_b_2022", L"Kefka winged descent cue"},
+    };
+    for (const auto& cue : cues) {
+        if (message != cue.message) continue;
+        auto* interpreter = ref::instance(kInterpreter);
+        if (!interpreter || !fRunningFieldScript || ref::rd<bool>(interpreter, fRunningFieldScript) ||
+            ref::rd_str_bounded(interpreter, fActiveScript, 48) != cue.script) return {};
+        return T(cue.text);
+    }
+    return {};
+}
 } // namespace
 
 bool read_dialogue_appearance()
@@ -287,6 +314,7 @@ std::wstring action_cue_at_dialogue()
     const auto game_id = game::current();
     if (!frame::on_main_thread() || !in_dialogue() ||
         queries::is("GameStatePatches.IsInputTransitionBlocked")) return {};
+    if (battle::in_battle()) return ready_battle_cue();
     const int map_id = ::field::current_map_id();
     const bool construction = game_id == game::Id::FF1 && map_id == 121;
     const bool audience = game_id == game::Id::FF2 && map_id == 6;

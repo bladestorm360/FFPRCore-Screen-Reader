@@ -29,12 +29,56 @@ not claim the cue. Dialogue and modal speech checks passed, including
 the native scroll path. The extraction remains outside Git under
 `../tools/visual_audit_20261119`.
 
+## November 20 battle scene audit
+
+The frozen review accounts for all 119 installed battle script bodies
+from the six games. It follows each title's encounter table, direct
+native script references, the operations delivered to the scene, and
+the native speech or existing boss cues. The local
+`finite-battle-dispositions.json` retains every body hash and disposition.
+Its SHA-256 is
+`e0d4b52ffd206a3e53673f59b0a1545484dc577868271bf43652f81c1577a4d3`.
+
+| Disposition | Bodies |
+| --- | ---: |
+| Battle control or ordinary battle loop | 37 |
+| Native dialogue, result or battle action conveys the stage | 28 |
+| Specific unverified visual boundary | 26 |
+| No installed encounter or confirmed native dispatch | 17 |
+| Mod speech covers the stage | 10 |
+| Mod speech with a recorded earlier-stage exception | 1 |
+
+Four FFVI descriptions enter the original dialogue utterance in all
+12 locales. They describe Kefka wagging his finger, the pink-capped girl
+stepping into the Ultros fight, Kefka walking and turning, and winged
+Kefka descending in front of the glowing cloud spiral. The game already
+voices the laugh. The final descent's earlier tier scrolls have no
+verified dialogue witness. Their rendered enemies have manual art reads.
+
+The native `EventCommand.Init` identifies the installed TextAsset by
+name and starts the same Integrator in battle mode. The four messages
+use the visible normal message controller, including in these battles.
+The cue checks that controller, the ready battle gate, the exact native
+script and the first native page. It uses no new hooks or frame work.
+The remaining exceptions retain their scene-specific reason, such as
+FFV's ending report overlay, Neo Exdeath's emergence after the last page,
+or Atomos's displacement without a stable page. Natural cue timing has
+not been tested in a game.
+
 ## November 20 pose reconciliation
 
 The first finite pass rechecked all 6,110 frozen trace hashes. It
 assigned 381 routine dispositions from exact operations and placements.
 The local `finite-field-first-pass.json` retains row-level evidence. It
 keeps the remaining scene judgments visible in the same fixed inventory.
+
+The structural classification now covers 469 routine bodies, including
+native keyword conversations, master-selected setup and transfers to a
+separately reviewed scene. The local `finite-field-structural-pass.json`
+preserves the reasons against the same frozen trace hashes. Its SHA-256
+is `df807b9790aa08db2582cdd84656b1bf58307f1bbb998cb53b81ef4a6300a5c7`.
+There are 5,641 candidates outside that classification, including scenes
+with cues or scene notes elsewhere in this record.
 
 The targeted reconciliation matched 42 authored pose occurrences to
 unique native pages. The 24 distinct atlas and pose combinations were
