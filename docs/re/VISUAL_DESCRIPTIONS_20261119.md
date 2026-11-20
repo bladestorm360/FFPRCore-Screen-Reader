@@ -84,9 +84,13 @@ covers 166 field candidates and 30 battle art and portrait variants,
 including changed outfits for Cecil, Rydia and Kain. The
 [FFV appearance pass](VISUAL_DESCRIPTIONS_FF5_COSTUMES_20261119.md)
 covers 124 field candidates and 109 battle outfits. Galuf's Mime resolves
-to his Freelancer sprite in the native master. Equipment held separately
-in battle needs its own visible-art mapping. The chapters below track
-costume use in specific dialogue and event contexts.
+to his Freelancer sprite in the native master. The
+[FFVI appearance pass](VISUAL_DESCRIPTIONS_FF6_COSTUMES_20261119.md)
+covers 182 field candidates and 39 battle art and portrait variants,
+including shared guest and moogle art. The installed costume inventory is
+accounted for across all six games. Equipment held separately in battle
+needs its own visible-art mapping. The chapters below track costume use in
+specific dialogue and event contexts.
 
 ## Opening and early scene review
 

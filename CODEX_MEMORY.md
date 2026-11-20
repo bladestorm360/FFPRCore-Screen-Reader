@@ -29,9 +29,12 @@ Fix and deploy before visual descriptions and Storyline mode.
 that cross ordinary save points. Their shine and first-use tutorial do not
 make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-save-points-are-passable-during-routing).
 
-**November 17 visual descriptions and Storyline.** After gameplay fixes and
-local deployment, add sprite and silent-animation descriptions across all
-six games and begin game-specific Storyline mode. [Scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
+**November 19 visual descriptions and Storyline.** Gameplay fixes are
+installed. Six-game enemy and character artwork prose covers 1,380 visible
+enemy sprites, 762 field candidates and 233 battle art and portrait variants.
+Equipment and silent scene actions, localized speech integration and
+Storyline mode are open. [Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
+and [scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
 
 **November 17 FFV save-point directions.** Deferred report that directions
 say “1 North” from the selected save point's own tile. Expected speech is
