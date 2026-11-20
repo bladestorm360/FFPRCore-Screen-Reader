@@ -214,3 +214,23 @@ The six-game native event trace also confirms that
 `EventProcedure.EventRunScript` supplies the actual loaded script name
 to the interpreter before execution. The visible page remains the
 presentation anchor for the existing dialogue cues.
+
+## Opening transitions and establishing shots
+
+The local `opening_family.py` enumerates the 52 visual and native-call
+bodies in the primary opening families. The opening tables above and the
+rows below cover their main cuts, ordinary handoffs and remaining exact
+presentation questions. Adjacent chapters still have their own audit.
+
+| Game and stage | Reviewed material and proposed wording |
+| --- | --- |
+| FF1 crystal sequence, `Map_40000/sc_e_0001_5` | The first puppet plays actor 1 before the white fade. Its installed effect prefab contains separate red, blue and green crystals, lights and stars against a black layer. “Red, blue and green crystals shine among points of light. The screen fades to white.” Use once before the handoff to the Overworld. |
+| FFII Overworld handoff, `Map_10010/sc_e_0001_2` | The authored camera track pans between its origin and the new view before a white fade leads back to the opening text. Preserve the text. A short cue can describe the pan and white fade before the next page. Terrain detail needs the exact full view. |
+| FFII transfer, `sc_e_0001_6` on `Map_10010` and `Map_40001` | Both bodies change saved party membership and transfer to the Altair room. They carry no visible character action. The room, healing effect and subsequent reunion have their own records above. |
+| FFIII shadowed cave, `Map_30011_6/sc_e_0001_5` | A half-opacity black overlay darkens the cave while the native prologue displays the adventurers' exploration text. The four visible placements and fog use the cave cue already listed above. The later fade returns to the prologue map. |
+| FFIV Baron entrance and corridors, `Map_20011_1/sc_e_0001_8`, `Map_20011_2/sc_e_0001_9` and `Map_20011_3/sc_e_0001_10` | Camera and actor tracks continue the ordinary escort through Baron. The dialogue in the third corridor identifies Baigan's departure and the destination. The throne-room helmet gesture remains a separate cue. |
+| FFV Lenna after the takeoff, `Map_20250/sc_e_0001_3` | Lenna follows the departing party with the camera and calls out about the wind and her father. This is the reaction to the Wind Drake shot above. Keep the native line and avoid repeating the takeoff. |
+| FFV first campsite, `Map_40000/sc_e_0001_5` | The ground shakes. Boko, actor 22, lowers and raises his head in the repeated three-frame nod and uses the surprise pose across the hop. The other track uses a one-arm pose at 43 and a two-arm pose at 45. The decoded custom one-arm clip uses a mirrored right-hand frame. “Boko bobs his head and hops as the ground shakes” covers the visible reaction once. Confirm the other actor's live placement before naming it. |
+| FFV Overworld cut, `Map_10010/sc_e_0001_7` and the `Map_10010_1` alias | The world view turns and moves in two native tracks. The first map has a separate ochre Ship Graveyard wreckage prop. “The view turns and glides over the world toward the wreckage” is a candidate where the location is in view. Inspect the alternate map's rendered prop before applying the same wording there. |
+| FFV end of the opening, `Map_10010/sc_e_0001_9` | The script sets transportation 3 at (157,150), which the native table identifies as Boko. Translucency and the default pose bridge into the player's travel. A single appearance cue after the fade can identify the yellow chocobo and mounted party if both are in view. |
+| FFVI Narshe cutaway, `Map_20010/sc_e_0001_1` | Two helmeted guards flank the group of townspeople. A man turns through the two `Angry` instructions at 61 and 65. The white-bearded man in blue holds `CloseEyes` at 81. The native opening text supplies historical context while this cut shows the town. “Two guards in pale helmets flank the townspeople. One man turns sharply and an older man closes his eyes.” The exact expression frames for the first man remain to verify. |
