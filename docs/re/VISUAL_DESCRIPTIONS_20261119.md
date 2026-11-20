@@ -71,7 +71,7 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-25,429 remaining non-English entries in the new catalog. All 251
+24,768 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
 the variant's palette, anatomy, pose and visible equipment. All 274
@@ -92,10 +92,12 @@ entries. Thirty translations were reused where the asset key and English
 description both matched an earlier title. FFVI completes the Japanese
 base catalog with 666 keys. Its reused sprite has separate descriptions
 for the field and battle. The exact coverage check requires Japanese
-wording for all 2,789 keys across the six games. FF1 through FFV also
-have complete French wording for all 2,123 keys, including 1,025 enemy
-palette and form entries and all 109 FFV battle outfits. The remaining
-translations, integrated delivery and gameplay confirmation are open.
+wording for all 2,789 keys across the six games. All six games also have
+complete French wording for the same 2,789 keys, including the 1,380
+enemy forms and palettes, the 109 FFV battle outfits, and FFVI's separate
+field and battle wording for the reused sprite. The remaining eight
+base-catalog languages, integrated delivery and gameplay confirmation
+are open.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script
