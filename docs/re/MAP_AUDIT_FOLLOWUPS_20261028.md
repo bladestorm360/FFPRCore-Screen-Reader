@@ -412,13 +412,30 @@ local delivery and gameplay confirmation distinct.
 | --- | --- |
 | FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
 | FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
-| FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. Selected approaches and a Nepto resume case pass the focused replay. Cross-area transport and integrated delivery remain open. |
-| FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The focused stage and approach replay passes. Full cross-area transport and integrated delivery remain open. |
-| FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 149 native objectives, representative approaches and a save already in the Rift. Full cross-area transport and integrated delivery remain open. |
-| FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. Storyline uses the existing guides for multi-party, timed and stateful map sequences. All 126 labels and instructions have all 12 locales. Integrated travel verification and delivery remain open. |
+| FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. The Nautilus dives for both native Temple of Time entrances, with guidance to bring Magic Keys or an active Thief. The Lute remains the objective inside. Selected approaches and a Nepto resume case pass. Integrated delivery remains open. |
+| FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The Lunar Whale route to FuSoYa leads to the Western Lunar Path. The focused stage and approach replay passes. Integrated delivery remains open. |
+| FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 150 native objectives, including the ship boarding that restores the airship. The merged-world terrain and the real flying Rift contact pass. Integrated delivery remains open. |
+| FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. The Falcon uses Kefka's Tower's actual vehicle action pad. Storyline uses the existing guides for multi-party, timed and stateful map sequences. All 126 labels and instructions have all 12 locales. Integrated delivery remains open. |
 | Database appearance coverage | The English catalog matches all 2,789 visible keys in the frozen enemy, field, battle and equipment inventories. The 85 master-linked battle effects, 13 icons, alternate battle bodies and applied palette cues have 12-language wording. Further no-effect status visuals, field changes, portrait focus speech, base artwork localization and integrated delivery remain open. See the [artwork coverage and evidence](VISUAL_DESCRIPTIONS_20261119.md#november-20-six-game-artwork-catalog). |
-| Cutscene and event coverage | All 119 battle script bodies have a disposition. Four FFVI scenes have new ready-page cues, including Kefka's descent. The fixed field review has 469 routine classifications plus the staged cues and scene prose recorded separately. Continue through the same field queue and reconcile the remaining significant actions once, prioritizing prologues, endings and silent story actions. Give each candidate a cue, an ordinary, repeated or native-equivalent disposition, or a specific reason an accessible cue could not be verified. This fixed inventory defines the end of event discovery. [Scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md). |
+| Cutscene and event coverage | All 119 battle script bodies have a disposition. Four FFVI scenes have new ready-page cues, including Kefka's descent. The fixed field review has 604 routine and repeated dispositions and 27 exact caption or scroll bindings. Reconcile the remaining significant actions once within the existing inventory, prioritizing prologues, endings and silent story actions. Give each candidate a cue, an ordinary, repeated or native-equivalent disposition, or a specific reason an accessible cue could not be verified. [Scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md). |
 | Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
+
+The connected travel checkpoint passed the six campaign replays, world
+map journey, navigation follow-up, battle focus and dialogue appearance
+checks. The runner completed in 150.7 seconds with a peak process-tree
+working set of 525,361,152 bytes and confirmed all 73 embedded resources.
+This is offline fixture evidence.
+
+FFV's first tablet script places ship 17 in the merged world. Its first
+boarding runs the scene that restores the airship and records 139. The
+installed field table changes the merged-world terrain at 988, 999 and
+1000. Resolving those cells allowed the actual route from the Guardian
+Tree's native return point to the ship. The native Rift group requires
+the first tablet and the airship recovery. The route recognizes only its
+exact script or the corresponding baked transfer and uses the native
+airship mask for models 7 and 19. The replay also rejects a foot approach
+and an attempt before airship recovery. FFVI's actual tower pad carries
+the native terminal vehicle action after the flight.
 
 Retain the exact installed input identity in
 [audit baseline](visual_inventory_baseline_20261120.json).

@@ -401,6 +401,27 @@ int verify_ff3()
         flags.at(static_cast<size_t>(receipt)) = 1;
     }
     check(count >= 70 && count < 90, "FFIII story replay reaches a finite ending");
+    flags[105] = 0;
+    for (int index = 79; index <= 105; ++index) flags[index] = 0;
+    const auto temple = ff3_stage(flags, 4).objective;
+    const auto lute = ff3_stage(flags, 242).objective;
+    check(temple && temple->map == 3 && !temple->instruction.empty() &&
+          lute && lute->map == 252 && lute->id == temple->id,
+          "FFIII approaches the Temple before routing inside to Noah's Lute on the same receipt");
+    if (temple) {
+        const auto targets = contacts(*temple, 4);
+        check(targets.size() == 2, "both native Temple entrance tiles are available for guidance");
+        if (!targets.empty()) {
+            std::copy(flags.begin(), flags.end(), state.scenario.begin());
+            state.current_map_id = 4;
+            state.current_area_id = 1;
+            const auto& goal = targets.front();
+            const auto planned = exdeath_routes::route(4, {1,151,74}, state, goal.goal, goal.kind, false, 9);
+            check(planned.path.success && planned.path.next_map_id == 3,
+                  "the Temple approach takes the upgraded Nautilus to a dive with unopened interior doors");
+            if (!planned.path.success) std::printf("  FFIII Temple: %ls / %ls\n", planned.path.reason.c_str(), planned.path.error.c_str());
+        }
+    }
     std::printf("FFIII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
 }
@@ -472,6 +493,24 @@ int verify_ff4()
         StoryArrival{161, 14, {0,2,12}},
         StoryArrival{317, 3, {1,15,23}}
     };
+    Ff4Receipts lunar;
+    lunar.fill(1);
+    lunar[65] = lunar[70] = 0;
+    const auto palace = ff4_stage(lunar).objective;
+    check(palace && palace->map == 153, "the Lunar Whale's outbound receipt advances to FuSoYa");
+    if (palace) {
+        const auto targets = contacts(*palace, 3);
+        if (!targets.empty()) {
+            auto flags = progress_at({}, 3);
+            std::copy(lunar.begin(), lunar.end(), flags.scenario.begin());
+            flags.current_area_id = 3;
+            const auto& goal = targets.front();
+            const auto planned = exdeath_routes::route(3, {1,59,11}, flags, goal.goal, goal.kind, false, 11);
+            check(planned.path.success && planned.path.next_map_id == 291,
+                  "FuSoYa's actual route lands for the lower entrance of Western Lunar Path");
+            if (!planned.path.success) std::printf("  FFIV Palace: %ls / %ls\n", planned.path.reason.c_str(), planned.path.error.c_str());
+        }
+    }
     return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
 }
 
@@ -484,6 +523,7 @@ int verify_ff5()
         StoryArrival{88, 20, {1,18,10}},
         StoryArrival{95, 55, {1,23,35}},
         StoryArrival{12, -1, {1,206,110}},
+        StoryArrival{19, 112, {1,175,138}, 7},
         StoryArrival{569, 3, {1,30,24}}
     };
     Ff5Receipts later;
@@ -494,7 +534,43 @@ int verify_ff5()
     later[153] = 1;
     const auto rift = ff5_stage(later).objective;
     check(rift && rift->map == 525, "a save inside the Rift does not return to optional tablet routes");
-    return verify_campaign("FFV", ff5_stage, ObjectiveId::Ff5Scenario, 0, 161, 120, arrivals);
+    later.fill(1);
+    later[139] = later[153] = later[161] = 0;
+    const auto boarding = ff5_stage(later).objective;
+    check(boarding && boarding->transportation_id == 17, "Lenna's return leads to the ship that recovers the airship");
+    if (boarding) {
+        const auto targets = contacts(*boarding, 19);
+        check(targets.size() == 1 && targets.front().goal.transportation_id == 17,
+              "the ship objective takes the live merged-world craft position");
+        if (!targets.empty()) {
+            auto state = progress_at({}, 19);
+            std::copy(later.begin(), later.end(), state.scenario.begin());
+            state.current_area_id = 1;
+            const auto& target = targets.front();
+            const auto boarded = exdeath_routes::route(19, {1,58,122}, state, target.goal, target.kind,
+                                                       false, 1, {}, {}, baked_route::Cell{1,87,105});
+            check(boarded.path.success, "the native Guardian Tree return can reach the ship's first boarding tile");
+            if (!boarded.path.success)
+                std::printf("  FFV Ship: %ls / %ls\n", boarded.path.reason.c_str(), boarded.path.error.c_str());
+        }
+    }
+    later[139] = 1;
+    if (const auto flight = ff5_stage(later).objective) {
+        const auto targets = contacts(*flight, 19);
+        if (!targets.empty()) {
+            auto state = progress_at({}, 19);
+            std::copy(later.begin(), later.end(), state.scenario.begin());
+            const auto& target = targets.front();
+            const auto alternate = exdeath_routes::route(19, {1,175,138}, state, target.goal, target.kind, false, 19);
+            check(alternate.path.success, "the Rift accepts the native upgraded airship variant");
+            const auto foot = exdeath_routes::route(19, {1,175,138}, state, target.goal, target.kind);
+            check(!foot.path.success, "the Rift cannot be approached on foot without a craft");
+            state.scenario[139] = 0;
+            const auto early = exdeath_routes::route(19, {1,175,138}, state, target.goal, target.kind, false, 7);
+            check(!early.path.success, "the Rift contact is closed before the airship recovery scene");
+        }
+    }
+    return verify_campaign("FFV", ff5_stage, ObjectiveId::Ff5Scenario, 0, 161, 150, arrivals);
 }
 
 int verify_ff6()
@@ -560,6 +636,23 @@ int verify_ff6()
     auto retreat = ff6_stage(flags, 268);
     check(retreat.objective && receipt(*retreat.objective) == 473 && !retreat.local_guide,
           "a party that left the tower can route back to the Falcon's entrance");
+    if (retreat.objective) {
+        const auto targets = contacts(*retreat.objective, 2);
+        if (!targets.empty()) {
+            auto state = progress_at({}, 2);
+            std::copy(flags.begin(), flags.end(), state.scenario.begin());
+            state.scenario[473] = 0;
+            state.current_area_id = 1;
+            const auto& goal = targets.front();
+            const auto flight = exdeath_routes::route(2, {1,128,195}, state, goal.goal, goal.kind, false, 5);
+            check(flight.path.success && !flight.path.walk_phases.empty() &&
+                  flight.path.walk_phases.back().manual_after &&
+                  !flight.path.walk_phases.back().cells.empty() &&
+                  flight.path.walk_phases.back().cells.back() == goal.goal.cell,
+                  "the actual Falcon route reaches the Kefka's Tower airship contact");
+            if (!flight.path.success) std::printf("  FFVI Tower: %ls / %ls\n", flight.path.reason.c_str(), flight.path.error.c_str());
+        }
+    }
     flags[501] = 1;
     check(!ff6_stage(flags, 571).complete, "the summit arrival does not certify Kefka's defeat");
     flags[591] = 1;
@@ -583,51 +676,26 @@ int verify_ff6()
 
 int main()
 {
-    const auto read = [](const char* path) {
+    const auto read = [](const std::string& path) {
         std::ifstream file(path, std::ios::binary);
         return std::string(std::istreambuf_iterator<char>(file), {});
     };
-    const auto maps = read("data/ff1/maps.bin");
-    if (!baked::load(maps.data(), maps.size()) || !json::parse(read("data/ff1/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF1;
-    baked_nav::g_loaded = baked_nav::g_prepared = true;
-    int result = 2;
-    std::thread worker([&] { result = verify(); });
-    worker.join();
-    if (result) return result;
-    const auto ff2_maps = read("data/ff2/maps.bin");
-    if (!baked::load(ff2_maps.data(), ff2_maps.size()) ||
-        !json::parse(read("data/ff2/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF2;
-    std::thread ff2_worker([&] { result = verify_ff2(); });
-    ff2_worker.join();
-    if (result) return result;
-    const auto ff3_maps = read("data/ff3/maps.bin");
-    if (!baked::load(ff3_maps.data(), ff3_maps.size()) ||
-        !json::parse(read("data/ff3/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF3;
-    std::thread ff3_worker([&] { result = verify_ff3(); });
-    ff3_worker.join();
-    if (result) return result;
-    const auto ff4_maps = read("data/ff4/maps.bin");
-    if (!baked::load(ff4_maps.data(), ff4_maps.size()) ||
-        !json::parse(read("data/ff4/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF4;
-    std::thread ff4_worker([&] { result = verify_ff4(); });
-    ff4_worker.join();
-    if (result) return result;
-    const auto ff5_maps = read("data/ff5/maps.bin");
-    if (!baked::load(ff5_maps.data(), ff5_maps.size()) ||
-        !json::parse(read("data/ff5/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF5;
-    std::thread ff5_worker([&] { result = verify_ff5(); });
-    ff5_worker.join();
-    if (result) return result;
-    const auto ff6_maps = read("data/ff6/maps.bin");
-    if (!baked::load(ff6_maps.data(), ff6_maps.size()) ||
-        !json::parse(read("data/ff6/mapstate.json"), fixture::records)) return 2;
-    fixture::game_id = game::Id::FF6;
-    std::thread ff6_worker([&] { result = verify_ff6(); });
-    ff6_worker.join();
+    constexpr std::array campaigns{verify, verify_ff2, verify_ff3, verify_ff4, verify_ff5, verify_ff6};
+    int result = 0;
+    for (size_t index = 0; index < campaigns.size(); ++index) {
+        const auto directory = "data/ff" + std::to_string(index + 1) + "/";
+        const auto maps = read(directory + "maps.bin");
+        if (!baked::load(maps.data(), maps.size()) ||
+            !json::parse(read(directory + "mapstate.json"), fixture::records)) {
+            std::printf("FF%zu Storyline fixtures could not load\n", index + 1);
+            result = std::max(result, 2);
+            continue;
+        }
+        fixture::game_id = static_cast<game::Id>(index + 1);
+        baked_nav::g_loaded = baked_nav::g_prepared = true;
+        exdeath_routes::failures = exdeath_routes::assertions = exdeath_routes::legs = 0;
+        std::thread worker([&] { result = std::max(result, campaigns[index]()); });
+        worker.join();
+    }
     return result;
 }

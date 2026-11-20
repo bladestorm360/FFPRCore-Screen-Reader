@@ -17,6 +17,7 @@ const Rule* match(int game_id,int map,int script,const std::wstring& raw) {
  return nullptr;
 }
 const Rule* match(int game_id,int map,const baked::Object& object) {
+ if(const auto* rule=rift_entry(game_id,map,object))return rule;
  if(object.type!=baked::ObjType::Event)return nullptr;
  return match(game_id,map,object.a,baked::object_identifier(object));
 }
@@ -37,5 +38,14 @@ const Rule* saronia_entry(int game_id,int map,int script,const std::wstring& raw
 }
 const Rule* saronia_entry(int game_id,int map,const baked::Object& object) {
  return object.type==baked::ObjType::Event?saronia_entry(game_id,map,object.a,baked::object_identifier(object)):nullptr;
+}
+const Rule* rift_entry(int game_id,int map,const baked::Object& object) {
+ // Script 446 runs while flying. Its derived Warp preserves the same
+ // identity and points to the first native scene map during the transfer.
+ static const Rule rift{19,446,601,L"sc_e_0153:次元のはざまへ移動",(1u<<7)|(1u<<19)};
+ if(game_id!=5||map!=rift.map)return nullptr;
+ const bool event=object.type==baked::ObjType::Event&&object.a==rift.script;
+ const bool warp=object.type==baked::ObjType::Warp&&object.a==rift.destination&&(object.d&255)==1;
+ return (event||warp)&&baked::object_identifier(object)==rift.raw?&rift:nullptr;
 }
 }

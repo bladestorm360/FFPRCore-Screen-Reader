@@ -215,6 +215,12 @@ std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int ori
         goal.cell = *next.authored_spawn;
         goal.allow_world_transit = true;
         goal.storyline = true;
+        if (next.transportation_id > 0) {
+            // Bind to the observed craft on its owning map. From an interior,
+            // the authored spawn identifies the onward world for the exit leg.
+            if (origin_map == next.map) goal.transportation_id = next.transportation_id;
+            else goal.cells = {goal.cell};
+        }
         targets.push_back({std::move(goal), Kind::Spot, std::wstring(next.instruction)});
         return targets;
     }

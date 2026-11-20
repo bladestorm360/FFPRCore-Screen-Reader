@@ -163,6 +163,10 @@ constexpr std::array kMergedWorld{
     ff5_contact(136, L"Open the Pyramid of Moore", 410, 17, Type::Entity),
     ff5_contact(137, L"Retrieve the first tablet in the Pyramid", 426, 3, Type::Entity),
     ff5_warp(138, L"Rescue Lenna at the Guardian Tree", 409, 18),
+    // The first boarding of ship 17 runs the Void montage and restores the
+    // airship. Its final scene opens the actual Rift contact group.
+    Ff5Step{139, {ff5_id(139), L"Board the ship to recover the airship", 19, {-1, -1, -1},
+                  Kind::Spot, Type::PointIn, baked_route::Cell{1,87,105}, {}, 17}},
     ff5_event(141, L"Enter the Island Shrine", 427, 1),
     ff5_contact(142, L"Retrieve the second tablet in the Island Shrine", 442, 1, Type::Entity),
     ff5_warp(143, L"Split the party at Fork Tower", 443, 1),
@@ -173,7 +177,7 @@ constexpr std::array kMergedWorld{
     ff5_contact(148, L"Retrieve the third tablet in the Great Sea Trench", 474, 1, Type::Entity),
     ff5_event(149, L"Enter Istory Falls", 476, 1),
     ff5_contact(150, L"Retrieve the fourth tablet at Istory Falls", 484, 4, Type::Entity),
-    ff5_warp(153, L"Fly into the Interdimensional Rift", 19, 112)
+    ff5_warp(153, L"Fly into the Interdimensional Rift", 19, 112, Kind::AirshipTransition)
 };
 constexpr std::array kRift{
     ff5_event(154, L"Proceed through the Rift desert", 525, 10),

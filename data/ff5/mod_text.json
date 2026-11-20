@@ -1833,6 +1833,34 @@
     "pt": "Recupere a primeira tábua na pirâmide",
     "zhc": "在金字塔取回第一块石板"
   },
+  "Galuf crystal chamber cue": {
+    "en": "Galuf spreads his arms as the chamber shakes.",
+    "ja": "部屋が揺れる中、ガラフが両腕を広げる。",
+    "fr": "Galuf écarte les bras tandis que la salle tremble.",
+    "it": "Galuf allarga le braccia mentre la sala trema.",
+    "de": "Galuf breitet die Arme aus, während der Raum bebt.",
+    "es": "Galuf abre los brazos mientras la sala tiembla.",
+    "ko": "방이 흔들리는 가운데 가라프가 두 팔을 벌린다.",
+    "zht": "房間震動時，加拉夫張開雙臂。",
+    "zhc": "房间震动时，加拉夫张开双臂。",
+    "ru": "Галуф разводит руки, пока зал сотрясается.",
+    "th": "กาลัฟกางแขนทั้งสองข้างขณะที่ห้องสั่นไหว",
+    "pt": "Galuf abre os braços enquanto a sala treme."
+  },
+  "Board the ship to recover the airship": {
+    "en": "Board the ship to recover the airship",
+    "ja": "船に乗って飛空艇を取り戻す",
+    "fr": "Monter à bord du navire pour récupérer l'aéronef",
+    "it": "Sali sulla nave per recuperare l'aeronave",
+    "de": "Geh an Bord des Schiffs, um das Luftschiff zurückzuholen",
+    "es": "Sube al barco para recuperar el barco volador",
+    "ko": "배에 타고 비공정 되찾기",
+    "zht": "登船取回飛空艇",
+    "zhc": "登船取回飞空艇",
+    "ru": "Подняться на корабль, чтобы вернуть воздушное судно",
+    "th": "ขึ้นเรือเพื่อเอาเรือเหาะคืน",
+    "pt": "Embarque no navio para recuperar a aeronave"
+  },
   "Rescue Lenna at the Guardian Tree": {
     "en": "Rescue Lenna at the Guardian Tree",
     "ja": "長老の木でレナを助ける",

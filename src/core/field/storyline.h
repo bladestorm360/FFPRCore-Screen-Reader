@@ -37,6 +37,7 @@ struct Objective {
     baked::ObjType object_type;
     std::optional<baked_route::Cell> authored_spawn{};
     std::wstring_view instruction{};
+    int transportation_id = 0;
 };
 
 std::optional<Objective> cornelia_objective(const CorneliaProgress& progress);
@@ -55,7 +56,7 @@ using Ff2Keywords = std::array<std::optional<bool>, 15>;
 Stage ff2_stage(const Ff2Receipts& scenario, const Ff2Keywords& learned);
 // The Crystal Tower mirror uses native ScenarioFlag2 slot 95.
 using Ff3Receipts = std::array<std::optional<int>, 352>;
-Stage ff3_stage(const Ff3Receipts& scenario);
+Stage ff3_stage(const Ff3Receipts& scenario, int origin_map = 0);
 // Tower of Babel's Lugae lock records slot 17 in ScenarioFlag2.
 using Ff4Receipts = std::array<std::optional<int>, 274>;
 Stage ff4_stage(const Ff4Receipts& scenario);

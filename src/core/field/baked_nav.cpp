@@ -596,6 +596,13 @@ bool planning_object_active(const baked::Submap& sm,const baked::Object& object)
         // Read the already copied bit here; no worker/native read or gate write.
         if(const auto complete=g_route_snapshot->state.scenario_value(73))return *complete==0;
     }
+    if(air_transitions::rift_entry(static_cast<int>(game::current()),sm.first_map_id,object)) {
+        // The native water update is opaque to the general initializer
+        // projector. The later Rift group has two known scenario guards.
+        const auto tablet=g_route_snapshot->state.scenario_value(137);
+        const auto airship=g_route_snapshot->state.scenario_value(139);
+        if(tablet&&airship)return *tablet!=0&&*airship==1;
+    }
     return g_route_snapshot->state.active(sm,object);
 }
 int planning_map_id() { return g_route_snapshot ? g_route_snapshot->map_id : field::current_map_id(); }
@@ -1018,21 +1025,38 @@ bool any_reachable(const baked_route::Reach& reach, const std::vector<Cell>& goa
 
 void apply_ff5_world_terrain(baked_route::Request& request, const map_state::Resolver* state)
 {
-    if (!request.submap->world || request.submap->first_map_id != 1 || !game::is(game::Id::FF5)) return;
+    if (!request.submap->world || !game::is(game::Id::FF5)) return;
+    const int map = request.submap->first_map_id;
+    if (map != 1 && map != 19) return;
     const auto flag = [state](int id) { return state ? state->scenario_value(id) : map_state::scenario_flag(id); };
     const auto end = flag(1023);
-    // MapAssetLoader.CreateMapFootInfo resolves Map_10010's story-dependent foot
+    // MapAssetLoader.CreateMapFootInfo resolves story-dependent foot
     // IDs from serial_misc_assets before testing movement/landing permissions.
     // The loader also recalculates these collision tiles from the converted
     // foot ID. Every other native transport tile and story gate still applies.
-    const auto resolve_terrain = [&](int raw, int threshold, uint8_t before, uint8_t after) {
-        const auto active = flag(threshold);
+    const auto resolve_terrain = [&](int raw, std::optional<int> active, uint8_t before, uint8_t after) {
         if (active && (*active == 0 || end == 0))
             request.world_terrain[raw - 33] = *active == 0 ? before : after;
     };
-    resolve_terrain(62, 989, 20, 16); // Fire-Powered Ship contact becomes water.
-    resolve_terrain(42, 990, 6, 20);  // Walse Meteorite.
-    resolve_terrain(48, 992, 20, 6);  // Karnak Castle footprint.
+    if (map == 19) {
+        // The merged world's bridge and Void terrain come from this separate
+        // table. Unconverted IDs leave the native ship approach disconnected.
+        resolve_terrain(63, flag(988), 19, 6);
+        constexpr uint8_t before[]{6, 0, 0, 6, 20, 0, 0, 7, 8, 19, 19, 7, 7, 8, 20, 6};
+        constexpr uint8_t after[]{16, 0, 0, 3, 16, 0, 0, 16, 16, 3, 16, 3, 6, 3, 3, 3};
+        const auto void_state = flag(999);
+        resolve_terrain(36, void_state, 19, 6);
+        for (int index = 0; index < static_cast<int>(std::size(before)); ++index)
+            if (before[index] != 0) resolve_terrain(43 + index, void_state, before[index], after[index]);
+        const auto fork = flag(1000);
+        resolve_terrain(59, fork, 20, 16);
+        resolve_terrain(60, fork, 15, 16);
+        resolve_terrain(64, fork, 15, 6);
+        return;
+    }
+    resolve_terrain(62, flag(989), 20, 16); // Fire-Powered Ship contact becomes water.
+    resolve_terrain(42, flag(990), 6, 20);  // Walse Meteorite.
+    resolve_terrain(48, flag(992), 20, 6);  // Karnak Castle footprint.
     const auto sunk = flag(991);
     if (sunk && (*sunk == 0 || end == 0)) {
         constexpr std::array<uint8_t, 5> before{6, 3, 6, 6, 20}, after{16, 16, 16, 3, 16};
@@ -3849,15 +3873,18 @@ bool route_to_goal(void* map_handle, void* player, const MapGoal& goal_in, Targe
                 // must not need the current-floor live-instance fallback.
                 // Only graph metadata has a separate ID
                 // domain; retain actual actor group/visibility/consumption.
+                // Storyline can select the baked form of a native scripted
+                // transfer. It still needs the exact active source group.
                 if (object.type != baked::ObjType::TelepoPoint && object.type != baked::ObjType::PointIn &&
-                    object.type != baked::ObjType::Warp &&
+                    (object.type != baked::ObjType::Warp || (goal.storyline && !goal.raw_name.empty())) &&
                     object.entity_id() == goal.entity_id && object.contains(goal.cell.x, goal.cell.y) &&
                     (goal.raw_name.empty()||baked::object_identifier(object)==goal.raw_name)) {
                     matched=true;
                     const bool used=state.consumed(*there,object);
                     all_consumed &= used;
-                    const bool current_scene=there==here&&air_transitions::saronia_entry(
-                        static_cast<int>(game::current()),goal.map_id,object);
+                    const int title=static_cast<int>(game::current());
+                    const bool current_scene=there==here&&(air_transitions::saronia_entry(title,goal.map_id,object)||
+                        air_transitions::rift_entry(title,goal.map_id,object));
                     active |= (current_scene?planning_object_active(*there,object):state.active(*there,object))&&!used;
                 }
             // A ready current native instance is authoritative if a remote initializer

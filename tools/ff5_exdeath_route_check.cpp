@@ -33,7 +33,8 @@ map_state::Flags flags(int map, int layout, int bridge) {
 
 Planned route(int map, Cell start, const map_state::Flags& state,
               MapGoal goal, TargetKind kind, bool spinning = false, int vehicle = 1,
-              std::shared_ptr<const ActiveRoute> previous = {}, std::optional<Cell> observed_goal = {}) {
+              std::shared_ptr<const ActiveRoute> previous = {}, std::optional<Cell> observed_goal = {},
+              std::optional<Cell> parked_goal = {}) {
     ++legs;
     RouteSnapshot snapshot(map_state::Resolver(state, fixture::records));
     snapshot.map_id = map;
@@ -41,10 +42,14 @@ Planned route(int map, Cell start, const map_state::Flags& state,
     snapshot.layer = start.layer;
     snapshot.position = world_of_cell(*snapshot.submap, start);
     snapshot.vehicle = {true, vehicle, baked::transport(vehicle)->type, {}};
-    snapshot.vehicle_shortcuts = false;
+    snapshot.vehicle_shortcuts = goal.storyline;
     snapshot.locale = L"en";
     snapshot.kind = kind;
     snapshot.goal = std::move(goal);
+    if (parked_goal && snapshot.goal.transportation_id > 0) {
+        const auto* model = baked::transport(snapshot.goal.transportation_id);
+        snapshot.vehicles.push_back({nullptr, model->type, model->id, {}, world_of_cell(*snapshot.submap, *parked_goal)});
+    }
     snapshot.previous_active = std::move(previous);
     for (const auto& original : baked::grids(*snapshot.submap).objects) {
         if (original.type == baked::ObjType::PointIn || original.type == baked::ObjType::GotoMap ||
@@ -72,6 +77,9 @@ Planned route(int map, Cell start, const map_state::Flags& state,
         obstacle.trigger = baked_route::step_event(object);
         obstacle.collider = object.type == baked::ObjType::CollisionEntity;
         obstacle.collision = object.a;
+        obstacle.transportation_ids = snapshot.state.transportation_mask(*snapshot.submap, original);
+        obstacle.transportation_restricted = obstacle.transportation_ids != ~uint64_t{0};
+        obstacle.applies = (obstacle.transportation_ids & baked_route::transportation_bit(vehicle)) != 0;
         snapshot.obstacles.push_back(std::move(obstacle));
     }
     return plan_snapshot(snapshot);

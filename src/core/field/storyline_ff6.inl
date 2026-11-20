@@ -48,8 +48,10 @@ constexpr auto kFloatingEntrance = ff6_contact(286, L"Fly to the Floating Contin
 constexpr auto kFloatingEscape = ff6_event(297, L"Defeat Ultima Weapon and escape the Floating Continent", 631, 11);
 constexpr auto kSolitaryIsland = ff6_contact(306, L"Help Cid and leave the Solitary Island", 191, 7);
 constexpr auto kGerad = ff6_contact(336, L"Follow Gerad and rescue Figaro Castle", 217, 3);
+// The Falcon descends at a native vehicle action pad. It uses the same
+// landed-action check as the ordinary world-map destination for the tower.
 constexpr auto kTowerEntrance = ff6_contact(473, L"Fly the Falcon to Kefka's Tower", 2, 162,
-    Type::TransportationEventAction, Kind::AirshipTransition);
+    Type::TransportationEventAction, Kind::Infer);
 constexpr auto kFinal = ff6_contact(591, L"Reach Kefka with all three parties and defeat him", 570, 15,
     Type::SwitchEvent, Kind::Spot);
 

@@ -839,6 +839,34 @@
     "th": "ไปถึงวงเวทของโดกา",
     "pt": "Chegue ao círculo mágico de Doga"
   },
+  "Enter the Temple of Time": {
+    "en": "Enter the Temple of Time",
+    "ja": "時の神殿に入る",
+    "fr": "Entrer dans le temple du temps",
+    "it": "Entra nel Tempio del Tempo",
+    "de": "Betritt den Tempel der Zeit",
+    "es": "Entra en el Templo del Tiempo",
+    "ko": "시간의 신전에 들어가기",
+    "zht": "進入時間神殿",
+    "zhc": "进入时间神殿",
+    "ru": "Войти в Храм времени",
+    "th": "เข้าไปในวิหารแห่งเวลา",
+    "pt": "Entre no Templo do Tempo"
+  },
+  "Bring Magic Keys or an active Thief to open the temple doors.": {
+    "en": "Bring Magic Keys or an active Thief to open the temple doors.",
+    "ja": "神殿の扉を開けるには、まほうのカギを持つか、パーティにシーフを入れてください。",
+    "fr": "Emportez des clés magiques ou ajoutez un voleur à l'équipe pour ouvrir les portes du temple.",
+    "it": "Porta delle Chiavi Magiche o un Ladro in squadra per aprire le porte del tempio.",
+    "de": "Nimm Zauberschlüssel oder einen Dieb in der Gruppe mit, um die Tempeltüren zu öffnen.",
+    "es": "Lleva llaves mágicas o un ladrón en el grupo para abrir las puertas del templo.",
+    "ko": "신전 문을 열려면 마법 열쇠를 가져가거나 파티에 도적을 넣으세요.",
+    "zht": "請帶上魔法鑰匙，或在隊伍中安排一名盜賊，以打開神殿的門。",
+    "zhc": "请带上魔法钥匙，或在队伍中安排一名盗贼，以打开神殿的门。",
+    "ru": "Возьмите волшебные ключи или включите в отряд вора, чтобы открыть двери храма.",
+    "th": "นำกุญแจเวทมนตร์หรือโจรในปาร์ตี้ไปเพื่อเปิดประตูวิหาร",
+    "pt": "Leve Chaves Mágicas ou um Ladrão no grupo para abrir as portas do templo."
+  },
   "Find Noah's Lute in the Temple of Time": {
     "en": "Find Noah's Lute in the Temple of Time",
     "ja": "時の神殿でノアのリュートを探す",

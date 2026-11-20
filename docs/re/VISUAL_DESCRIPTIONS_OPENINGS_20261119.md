@@ -2,7 +2,7 @@
 
 ## November 20 dialogue cues
 
-The mod now reads seven additional cues on the first page of the exact
+The mod now reads eight additional cues on the first page of the exact
 native event message. The page has to be visible after the existing
 transition gate opens. The lookup matches the title, live map, running
 script and message. NPC placements also match the currently drawn atlas.
@@ -13,7 +13,7 @@ no scene polling or native hook.
 | --- | --- |
 | III | Altar Cave follows the leader's drop and the shake to the first page of `sc_e_0001_1` on map 153. The cue describes the four adventurers in the cavern. |
 | IV | The third page on the Red Wings deck in `sc_e_0001_1` on map 342 follows Cecil's lowered head and the soldiers turning. The first finished-work page of `sc_e_0054_1` on map 325 carries one description of the engineers' work movement. |
-| V | The pirate ship's first page in `sc_e_0001_1` on map 198 follows the dozing pirate and Faris's hair animation. The Wind Shrine page of `sc_e_0001_4` on map 209 follows the shaking chamber while the crystal is still visible. |
+| V | The pirate ship's first page in `sc_e_0001_1` on map 198 follows the dozing pirate and Faris's hair animation. In the crystal chamber, `sc_e_0001_2` on map 190 stages Galuf spreading his arms before the unique page. The cue checks actor 9's actual atlas, which has both the open and resting poses. The Wind Shrine page of `sc_e_0001_4` on map 209 follows the shaking chamber while the crystal is still visible. |
 | VI | The first actual Narshe arrival in `sc_e_0001_5` on map 3 describes the armored party after the mounting sequence. The third page in `sc_e_1033_1` on map 122 follows Setzer's movement beside the engine. |
 
 The focused replay passes the exact cues and rejects another script, a
@@ -86,13 +86,21 @@ assigned 381 routine dispositions from exact operations and placements.
 The local `finite-field-first-pass.json` retains row-level evidence. It
 keeps the remaining scene judgments visible in the same fixed inventory.
 
-The structural classification now covers 469 routine bodies, including
+The structural classification now covers 604 routine and repeated
+bodies, including 72 copies of Teleport's shared effect and 42 inn
+sequences with the same stay pages and motions. Other reasons include
 native keyword conversations, master-selected setup and transfers to a
 separately reviewed scene. The local `finite-field-structural-pass.json`
-preserves the reasons against the same frozen trace hashes. Its SHA-256
-is `df807b9790aa08db2582cdd84656b1bf58307f1bbb998cb53b81ef4a6300a5c7`.
-There are 5,641 candidates outside that classification, including scenes
-with cues or scene notes elsewhere in this record.
+preserves the evidence against the same frozen trace hashes. Its SHA-256
+is `11d3c0651c919fd2ce12d6759ba85c89ae6216756289b6d9e16ad992bd3be674`.
+
+The local `finite-field-reconciliation.json` joins the same 6,110 bodies
+to 27 confirmed caption or scroll bindings and the exact unresolved
+actions, actors, art, native calls, pages and scene handoffs. Its SHA-256
+is `5f69aa6c4d65e75f727c4505540f953b543ea025c3b573383eba22018db0dafd`.
+5,479 bodies still require scene judgment or a playback disposition.
+That includes 1,108 of the original 1,109 silent priority bodies. Those
+counts describe the remaining reconciliation against this fixed set.
 
 The targeted reconciliation matched 42 authored pose occurrences to
 unique native pages. The 24 distinct atlas and pose combinations were

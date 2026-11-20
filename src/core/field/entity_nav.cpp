@@ -115,7 +115,7 @@ storyline::Stage storyline_stage(bool cycle = false)
     } else if (game::is(game::Id::FF3)) {
         storyline::Ff3Receipts receipts;
         map_state::read_scenario_flags(receipts);
-        stage = storyline::ff3_stage(receipts);
+        stage = storyline::ff3_stage(receipts, current_map_id());
     } else if (game::is(game::Id::FF4)) {
         storyline::Ff4Receipts receipts;
         map_state::read_scenario_flags(receipts);

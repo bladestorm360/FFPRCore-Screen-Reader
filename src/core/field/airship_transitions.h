@@ -12,4 +12,5 @@ bool accepts(const Rule& rule,int transport_id);
 // It ends at an active airborne scene trigger, not a town's foot entrance.
 const Rule* saronia_entry(int game_id,int map,int script,const std::wstring& raw);
 const Rule* saronia_entry(int game_id,int map,const baked::Object& object);
+const Rule* rift_entry(int game_id,int map,const baked::Object& object);
 }

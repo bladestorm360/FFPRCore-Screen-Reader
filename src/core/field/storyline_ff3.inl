@@ -15,6 +15,13 @@ constexpr Ff3Step ff3_event(int flag, std::wstring_view label, int map, int enti
 {
     return ff3_contact(flag, label, map, entity, Type::Event, Kind::Infer);
 }
+// Both native underwater contacts disembark into the same temple entrance.
+// The interior route can then use the current lock flags and party inventory.
+constexpr Objective kTempleEntrance{
+    static_cast<Id>(static_cast<int>(Id::Ff3Scenario) + 79),
+    L"Enter the Temple of Time", 3, {4, 5, -1}, Kind::Transition, Type::Warp, {},
+    L"Bring Magic Keys or an active Thief to open the temple doors."
+};
 constexpr std::array kFf3Journey{
     ff3_event(1, L"Approach the unusual rock", 153, 13),
     ff3_contact(2, L"Examine the unusual rock", 153, 10, Type::Entity),
@@ -105,7 +112,7 @@ constexpr std::array kFf3Journey{
 };
 }
 
-Stage ff3_stage(const Ff3Receipts& scenario)
+Stage ff3_stage(const Ff3Receipts& scenario, int origin_map)
 {
     if (scenario[105] == 1) return {{}, {}, true};
     if (scenario[0] != 1) return {};
@@ -117,6 +124,8 @@ Stage ff3_stage(const Ff3Receipts& scenario)
         if (scenario[step.receipt] == 1) continue;
         if (step.receipt == 33 && scenario[32] == 1)
             return {interact(Id::Ff3EyeRecovery, L"Take the Nepto Eye", 173, 5, Type::Entity)};
+        if (step.receipt == 79 && origin_map > 0 && (origin_map < 242 || origin_map > 252))
+            return {kTempleEntrance};
         return {step.target};
     }
     return {};
