@@ -95,12 +95,17 @@ props and exact visibility during battle use their own presentation context.
 
 ## Opening and early scene review
 
+The [opening cue review](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md)
+compares the six openings with their native text and records the verified
+puppet, art and effect references. Its broader scene inventory includes
+6,163 field scripts with visual candidates or scripted presentation calls.
+
 | Game | Opening source to follow | Review state |
 | --- | --- | --- |
 | I | World `sc_e_0001`, then bridge prologue `Map_40001/sc_e_0006_1` after the early Cornelia events. | Rough-sea and sandstorm calls and two art-backed scene actions reviewed. The bridge prologue's scroll and remaining visuals need comparison. |
 | II | `Map_20020/sc_e_0001` and the continuations `sc_e_0001_11` and `sc_e_0001_12` on map 355. | Two initial branches located. Compare the motion, battle entry and native narration of each. |
 | III | `Map_40001/sc_e_0001`, Altar Cave `sc_e_0001_1` and the other prologue branches. | The native prologue message and initial Altar Cave sequence are located. The camera shake precedes the dialogue. The dialogue already identifies the fall through the sinkhole. |
-| IV | World `sc_e_0001`, followed by `Map_20230/sc_e_0001_1` and `sc_e_0001_2` on the next interior. | Opening formation reviewed. Audit the shipboard movements against the native dialogue and both scene continuations. |
+| IV | World `sc_e_0001`, followed by `Map_20230/sc_e_0001_1` and the Mysidia flashback `Map_20241_1/sc_e_0001_2`. | Opening formation, flashback assault and crystal effect reviewed. Some shipboard movements still need exact actor binding. |
 | V | `Map_20250/sc_e_0001` and `Map_30030/sc_e_0001_1`. | Reviewed the Wind Drake takeoff following the castle dialogue. Audit the other actions and the outdoor continuation against the relevant audio-option branch. |
 | VI | `Map_40037/sc_e_0001` continues through `Map_20010`, `Map_20260` and `Map_40000/sc_e_0001_4`. | The Magitek march on map 572 uses three exact armor puppets. Check the new-game and advertisement-demo entry conditions before assigning the runtime cue. |
 
