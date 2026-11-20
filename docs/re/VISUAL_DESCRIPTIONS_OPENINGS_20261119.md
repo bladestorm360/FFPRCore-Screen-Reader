@@ -95,10 +95,10 @@ preserves the evidence against the same frozen trace hashes. Its SHA-256
 is `11d3c0651c919fd2ce12d6759ba85c89ae6216756289b6d9e16ad992bd3be674`.
 
 The local `finite-field-reconciliation.json` joins the same 6,110 bodies
-to 50 confirmed caption, scroll or effect bindings and the exact unresolved
+to 57 confirmed caption, scroll or rendered-scene bindings and the exact unresolved
 actions, actors, art, native calls, pages and scene handoffs. Its SHA-256
-is `e4047b27c6896b40a5bd22ce853cae8551b645eb2c0ee5b729972ae5dd0663eb`.
-5,456 bodies still require scene judgment or a playback disposition.
+is `0413b6e13bea852bfa40fd1bc2ab97e019ef9faf4495071512cc093cdd8a9cfd`.
+5,449 bodies still require scene judgment or a playback disposition.
 That includes 1,086 of the original 1,109 silent priority bodies. Those
 counts describe the remaining reconciliation against this fixed set.
 
@@ -244,7 +244,7 @@ keys, decoded sprites and the installed effect prefab components.
 | Cyclone approach, `Map_10010/sc_e_0081` | Actor 346 is the blue-winged drake. Separate wind, smoke and funnel effects surround the flight into the Cyclone. “The drake flies toward a swirling funnel” at the first full view of the wind effects. The `_2` continuation is a short positioning move. |
 | Jade Passage entrance and exit, `Map_10010/sc_e_0087` and `Map_30151_13/sc_e_0088` | The first effect gathers light in a whirlpool-like circle before the transfer into Jade Passage. The exit uses a different effect with light and lightning at the transition to Pandaemonium. Describe the first visible formation of each effect where it is staged. |
 | Pandaemonium ports, `Map_30161` group, `sc_e_0201` through `sc_e_0215` | All 15 scripts bind the same `ef_ff2_e_024` effect, then fade and transfer to their own destinations. Its components combine a twisted aura and lightning. One initial cue can introduce this visual. Later equivalent ports use their ordinary navigation context. |
-| FFII ending, `Map_40001/sc_e_0089_6` and `_7` | The credits body shows an icy blue “THE END” graphic at 61 after the scroll. The next body hides the graphic and its effect before the final save. The graphic needs its own cue if the existing credits text supplies no spoken equivalent. |
+| FFII ending, `Map_40001/sc_e_0089_6` and `_7` | The credits body shows an icy blue “THE END” graphic at 61 after the scroll. The cue identifies the actual visible card. The next body hides the graphic and its effect before the final save. |
 
 ## Additional silent scenes in FFIII–FFVI
 
@@ -331,6 +331,19 @@ any interpreter or renderer reads. All descriptions have the 12
 game locales. The focused check covers native return, transitions,
 hidden emitters, missing particles, fades and cancelled observations.
 Actual gameplay timing awaits the installed confirmation.
+
+FFI through FFIV and FFVI now describe the native end card when its exact
+sprite is shown. FFV describes the white birds and the mounted drake in
+the closing montage. Its existing gratitude and credits pages retain their
+usual speech. For sprite cues the same bounded observation checks the
+drawn atlas after native `Show` or `PlayAnim`. FFVI reuses the ending
+actor number for a save point in another group, so the atlas check is
+required. The installed-art evidence matches all 30 direct scene bindings
+and 25 localized phrases in `scene-effect-bindings.json` (SHA-256
+`77d5d058ad4a3aa7c660433c5443687f8aed1f143495cc338e5f85f90d14000d`).
+Dialogue appearance and modal speech passed in 33.1 seconds with 73
+embedded assets verified. The fixture covers hidden sprites, a different
+atlas and preservation of the original native call's return value.
 
 The six installed binaries agree on the split between interpreter dispatch
 and particle presentation. `Integrator.Update` can execute timers and a

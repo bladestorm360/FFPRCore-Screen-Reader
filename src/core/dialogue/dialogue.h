@@ -29,6 +29,8 @@ bool in_dialogue();
 void repeat_last_dialogue();
 /// Describe the visible actor who owns the current direct field dialogue.
 bool read_dialogue_appearance();
+/// Current atlas of a visible field sprite on the native owner thread.
+std::wstring drawn_field_actor_art(void* actor);
 /// One authored visual cue at the first page of a verified scene window.
 std::wstring action_cue_at_dialogue();
 /// Describe a completed, silent shot at its own native scroll handoff.

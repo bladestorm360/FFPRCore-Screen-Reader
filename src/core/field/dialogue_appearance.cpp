@@ -394,6 +394,12 @@ std::wstring action_cue_at_dialogue()
     return {};
 }
 
+std::wstring drawn_field_actor_art(void* actor)
+{
+    if (!kSpriteEntity.is(actor) || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) return {};
+    return visible_art(actor);
+}
+
 std::wstring action_cue_at_scroll(int type, float duration, int font_size)
 {
     // The FF1 bridge prologue's first native scroll follows the complete

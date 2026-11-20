@@ -23127,6 +23127,48 @@
     "pt": "Uma contagem regressiva acima do corpo mostra {0}.",
     "zhc": "身体上方的倒数显示{0}。"
   },
+  "Ending white birds cue": {
+    "en": "Several white birds sweep across the screen.",
+    "ja": "数羽の白い鳥が画面を横切る。",
+    "fr": "Plusieurs oiseaux blancs traversent l'écran.",
+    "it": "Alcuni uccelli bianchi attraversano lo schermo.",
+    "de": "Mehrere weiße Vögel ziehen über den Bildschirm.",
+    "es": "Varias aves blancas cruzan la pantalla.",
+    "ko": "하얀 새 여러 마리가 화면을 가로질러 날아간다.",
+    "zht": "幾隻白鳥掠過畫面。",
+    "zhc": "几只白鸟掠过画面。",
+    "ru": "Несколько белых птиц пролетают через экран.",
+    "th": "นกสีขาวหลายตัวบินโฉบข้ามจอ",
+    "pt": "Várias aves brancas cruzam a tela."
+  },
+  "Ending mounted drake cue": {
+    "en": "A tiny rider flies away on a drake with blue-violet wings and a long hanging tail.",
+    "ja": "青紫の翼と長く垂れた尾を持つ飛竜に小さな人影が乗り、飛び去る。",
+    "fr": "Un petit cavalier s'éloigne sur un dragon aux ailes bleu-violet et à la longue queue pendante.",
+    "it": "Una piccola figura vola via su un drago dalle ali blu-viola e dalla lunga coda pendente.",
+    "de": "Eine kleine Gestalt fliegt auf einem Drachen mit blauvioletten Flügeln und lang herabhängendem Schwanz davon.",
+    "es": "Una pequeña figura se aleja volando sobre un dragón de alas azul violeta y larga cola colgante.",
+    "ko": "작은 인물이 청보라색 날개와 길게 늘어진 꼬리를 가진 비룡을 타고 날아간다.",
+    "zht": "小小的騎手乘著飛龍遠去，飛龍有藍紫色雙翼和長長垂下的尾巴。",
+    "zhc": "小小的骑手乘着飞龙远去，飞龙有蓝紫色双翼和长长垂下的尾巴。",
+    "ru": "Маленький всадник улетает на драконе с сине-фиолетовыми крыльями и длинным свисающим хвостом.",
+    "th": "คนตัวเล็กขี่มังกรบินจากไป มังกรมีปีกสีน้ำเงินอมม่วงและหางยาวห้อยลงมา",
+    "pt": "Uma pequena figura se afasta montada num dragão de asas azul-violeta e cauda longa e pendente."
+  },
+  "Ending title card cue": {
+    "en": "Tall icy-blue serif letters spell ‘THE END.’",
+    "ja": "氷のような青い、飾りひげのある縦長の文字で「THE END」と書かれている。",
+    "fr": "De hautes lettres bleu glace à empattements forment les mots « THE END ».",
+    "it": "Alte lettere azzurro ghiaccio con grazie formano le parole «THE END».",
+    "de": "Hohe eisblaue Serifenbuchstaben bilden die Worte „THE END“.",
+    "es": "Altas letras con remates de color azul hielo forman las palabras «THE END».",
+    "ko": "길쭉한 얼음빛 세리프 글자로 ‘THE END’라고 쓰여 있다.",
+    "zht": "修長的冰藍色襯線字拼出「THE END」。",
+    "zhc": "修长的冰蓝色衬线字拼出「THE END」。",
+    "ru": "Высокие ледяно-голубые буквы с засечками складываются в надпись «THE END».",
+    "th": "ตัวอักษรทรงสูงมีเชิงสีฟ้าเย็นสะกดว่า ‘THE END’",
+    "pt": "Letras altas com serifa, em azul-gelo, formam as palavras ‘THE END’."
+  },
   "Levistone sand cue": {
     "en": "Clouds of sand burst upward from the ground.",
     "ja": "地面から砂煙が勢いよく舞い上がる。",
