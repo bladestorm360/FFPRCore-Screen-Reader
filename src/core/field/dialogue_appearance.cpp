@@ -227,6 +227,15 @@ std::wstring atlas_art(void* sprite)
 
 std::wstring visible_art(void* actor) { return atlas_art(actor_sprite(actor)); }
 
+bool matches_pose(void* sprite, std::wstring_view expected)
+{
+    if (expected.empty()) return true;
+    auto pose = unity::name(sprite);
+    for (auto& ch : pose) if (ch >= L'A' && ch <= L'Z') ch += L'a' - L'A';
+    if (pose.ends_with(L"(clone)")) pose.resize(pose.size() - 7);
+    return pose == expected;
+}
+
 struct StagedCue {
     game::Id title;
     int map;
@@ -272,13 +281,7 @@ std::wstring staged_cue(void* controller, const StagedCue& cue)
         auto* actor = placed_actor(controller, cue.actor);
         if (!actor) return {};
         auto* sprite = actor_sprite(actor);
-        if (atlas_art(sprite) != cue.art) return {};
-        if (!cue.pose.empty()) {
-            auto pose = unity::name(sprite);
-            for (auto& ch : pose) if (ch >= L'A' && ch <= L'Z') ch += L'a' - L'A';
-            if (pose.ends_with(L"(clone)")) pose.resize(pose.size() - 7);
-            if (pose != cue.pose) return {};
-        }
+        if (atlas_art(sprite) != cue.art || !matches_pose(sprite, cue.pose)) return {};
     }
     return T(cue.text);
 }
@@ -394,10 +397,11 @@ std::wstring action_cue_at_dialogue()
     return {};
 }
 
-std::wstring drawn_field_actor_art(void* actor)
+std::wstring drawn_field_actor_art(void* actor, std::wstring_view required_pose)
 {
     if (!kSpriteEntity.is(actor) || !displayed::renderer_visible(ref::rd<void*>(actor, fRenderer))) return {};
-    return visible_art(actor);
+    auto* sprite = actor_sprite(actor);
+    return unity::alive(sprite) && matches_pose(sprite, required_pose) ? atlas_art(sprite) : std::wstring{};
 }
 
 std::wstring action_cue_at_scroll(int type, float duration, int font_size)

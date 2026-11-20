@@ -36,6 +36,8 @@ uint64_t event_generation = 0;
 int instruction = 0, particle_count = 0, render_budget = 0, original_plays = 0;
 bool first_clock = true;
 frame::Step observation;
+frame::Task reveal;
+double reveal_delay = 0;
 
 void put(Node& object, const char* field, void* value)
 {
@@ -121,6 +123,12 @@ bool renderer_visible(void* p) { return visible(p); }
 }
 namespace frame {
 bool on_main_thread() { return owner_thread; }
+void after_seconds(double delay, Task task, const char*)
+{
+    require(!reveal && !observation, "the authored fade queues one task without frame reads");
+    reveal_delay = delay;
+    reveal = std::move(task);
+}
 int every_frame(Step step, const char*, int frames)
 {
     require(!observation, "only one pending observation per fixture episode");
@@ -210,6 +218,12 @@ void check_effect_cues()
         --instruction;
         dispatch(&core, nullptr);
         dispatch(&core, nullptr);
+        if (cue.settle_seconds > 0) {
+            require(reveal && reveal_delay == cue.settle_seconds && !observation && spoken.empty(),
+                    "the pre-fade effect waits for its authored delay");
+            auto due = std::move(reveal);
+            due();
+        }
         require(observation && render_budget == 16, "the exact binding arms one finite owner observation");
         fading = true;
         require(observation() && spoken.empty(), "faded footage is silent");
@@ -223,20 +237,26 @@ void check_effect_cues()
             card_renderer.visible = false;
             require(observation() && spoken.empty(), "the exact card waits until actually visible");
             card_renderer.visible = true;
-            require(!observation() && spoken == cue.text, "the visible title card is described once");
+            card_sprite.value = L"Default_00";
+            if (!cue.pose.empty()) {
+                require(observation() && spoken.empty(), "the same atlas in an idle pose cannot claim a motion cue");
+                card_sprite.value = std::wstring(cue.pose) + L"(Clone)";
+            }
+            require(!observation() && spoken == cue.text, "the exact visible sprite is described once");
         } else {
             particle_count = 0;
             require(observation() && spoken.empty(), "a playing system without particles is silent");
             particle_count = 3;
-            particles.resize(57, &particle);
+            particles.resize(67, &particle);
             require(observation() && spoken.empty(), "an unexpectedly large emitter list cannot claim a cue");
             particles.resize(1);
             particle.visible = false;
             require(observation() && spoken.empty(), "hidden particles cannot claim the cue");
             Node drawn_emitter;
-            particles.assign(10, &particle);
+            particles.assign(66, &particle);
             particles.back() = &drawn_emitter;
-            require(observation() && spoken.empty(), "a larger effect yields after the first eight emitters");
+            for (int slice = 0; slice < 8; ++slice)
+                require(observation() && spoken.empty(), "a larger effect yields after each slice of eight emitters");
             require(!observation() && spoken == cue.text, "a later visible emitter speaks the exact description");
             particle.visible = true;
             particles.assign(1, &particle);
@@ -246,7 +266,13 @@ void check_effect_cues()
         dispatch(&core, nullptr);
         ++event_generation;
         spoken.clear();
-        require(observation && !observation() && spoken.empty(), "new event generation cancels an old observation");
+        if (reveal) {
+            auto due = std::move(reveal);
+            due();
+            require(!observation && spoken.empty(), "changing events prevents the delayed render observation");
+        } else {
+            require(observation && !observation() && spoken.empty(), "new event generation cancels an old observation");
+        }
         observation = {};
     }
     require(original_plays == static_cast<int>(cues.size()) * 6, "every captured call keeps the native return path");

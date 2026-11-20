@@ -95,12 +95,30 @@ preserves the evidence against the same frozen trace hashes. Its SHA-256
 is `11d3c0651c919fd2ce12d6759ba85c89ae6216756289b6d9e16ad992bd3be674`.
 
 The local `finite-field-reconciliation.json` joins the same 6,110 bodies
-to 57 confirmed caption, scroll or rendered-scene bindings and the exact unresolved
-actions, actors, art, native calls, pages and scene handoffs. Its SHA-256
-is `0413b6e13bea852bfa40fd1bc2ab97e019ef9faf4495071512cc093cdd8a9cfd`.
-5,449 bodies still require scene judgment or a playback disposition.
-That includes 1,086 of the original 1,109 silent priority bodies. Those
-counts describe the remaining reconciliation against this fixed set.
+to confirmed caption, scroll and rendered-scene cues. It retains exact
+actions, actors, art, native calls, pages and scene handoffs.
+Its SHA-256 is `03290c0f7b0ca1934efd895fef36dfa982599aebcb430b319beb67c27296f8a1`.
+
+The final reconciliation records a disposition for all 6,110 same-map
+trace groups, including all 1,109 silent priorities. It also retains the
+opcodes and placed actor art behind each exception. The evidence archive
+`final-field-dispositions.json` has SHA-256
+`945674a48d887674558328bed9f4b73ebeb555835baa4a82b484e24ff97d9274`.
+
+| Field disposition | All fixed bodies | Silent priority bodies |
+| --- | ---: | ---: |
+| At least one stage with a verified cue | 65 | 28 |
+| Ordinary, repeated, or covered by native presentation | 768 | 1 |
+| Additional art or action could not be timed to a verified render or speech stage | 5,277 | 1,080 |
+
+The exception rows include the authored instruction, actor and placement
+or native page where available. They do not establish a visible shot.
+For example, the FFVI Magitek march initializes its sprites before the
+fade, then begins three moving tracks shared with the title demo. Those
+tracks have no verified new-game-only render witness. FFII's Dreadnought
+capture similarly changes to a distinct frame during vehicle movement,
+outside the verified show and animation producers. The fixed event
+inventory review ends at this reconciliation.
 
 The targeted reconciliation matched 42 authored pose occurrences to
 unique native pages. The 24 distinct atlas and pose combinations were
@@ -202,7 +220,7 @@ hammer animation starts.
 
 | Game and source | Visual action and native context | Placement |
 | --- | --- | --- |
-| FFII Altair smithy, `Map_20011_9/sc_e_0016`, plus the smithy continuation `Map_20131_3/sc_e_0016_1` | Tobul tells the party he will make weapons and armor from the mythril. The first forging passage fades out during five hammer sounds at 30–38. Both scripts' animation tables bind `hammer` to two mirrored poses of `mo_ff2_n022_c00`, showing the actual tool raised and lowered. | Keep the craft dialogue and audio during the dark passage. On a visible hammer cycle, “Tobul swings a short hammer” describes the first movement once. |
+| FFII Altair smithy, `Map_20011_9/sc_e_0016`, plus the smithy continuation `Map_20131_3/sc_e_0016_1` | Tobul tells the party he will make weapons and armor from the mythril. The first forging passage fades out during five hammer sounds at 30–38. Both scripts' animation tables bind `hammer` to two mirrored poses of `mo_ff2_n022_c00`, showing the actual tool raised and lowered. | The first visible cycle at 204 speaks once after the raised hammer frame appears. The later cycle at 211 and repeated smithy interaction keep their native audio. |
 | FFIV Baron Enterprise upgrade, `Map_20011_20/sc_e_0054_1` | Engineer actors 2 and 3 use the two palettes of the same overalls costume. They move in paired puppet bodies at 93–101 and separately at 104–117. Actor 3 starts the first named jump pose at 112. The engineers' dialogue covers the finished attachment, hovercraft controls and onward travel. | At the first visible work motion, describe the two engineers moving into position and the engineer hopping during the work. The atlas lacks a dedicated tool frame. Keep the later repeated motions within that one cue. |
 | FFV Adamantite airship upgrade, `Map_20231_9/sc_e_0071_1` | Cid wears a red coat and has white hair and beard. Mid has blond hair and a violet coat. Their paired puppets show them moving across the scene, with entrances, pauses and repositioning. The first coordinated move begins in the pair at 52–62. | “Cid and Mid move around the airship as they work on the upgrade.” Use one cue across the montage after verifying the first clearly visible shot. The exact body tracks establish the actors' movement. |
 | FFVI optional Blackjack repair, `Map_20171_3/sc_e_1033_1` | The native dialogue explains the engine damage first. Setzer actor 6 uses `DyingR` at 104. The atlas binds that cue to the exact forward-bent sprite. Setzer is hidden and repositioned to the engine, then shown using that pose at 110. | “Setzer leans forward beside the engine.” Use the reveal after 110. The dialogue supplies the reason for the repair. |
@@ -322,7 +340,7 @@ A matching first clock inside the settled native Event state arms one
 bounded render observation. The observer retains the event generation
 and the core index. It resolves the current actor on the owner thread,
 waits until the fade clears and checks actual particles on a visible
-renderer. The installed placements contain between 2 and 56 emitters. The
+renderer. The installed placements contain between 2 and 66 emitters. The
 reader checks at most eight per owner frame and continues at the next
 emitter if needed. The request expires after 16 owner frames and ends immediately
 on a changed script, map or event generation. Repeated native clocks
@@ -338,12 +356,22 @@ the closing montage. Its existing gratitude and credits pages retain their
 usual speech. For sprite cues the same bounded observation checks the
 drawn atlas after native `Show` or `PlayAnim`. FFVI reuses the ending
 actor number for a save point in another group, so the atlas check is
-required. The installed-art evidence matches all 30 direct scene bindings
-and 25 localized phrases in `scene-effect-bindings.json` (SHA-256
-`77d5d058ad4a3aa7c660433c5443687f8aed1f143495cc338e5f85f90d14000d`).
-Dialogue appearance and modal speech passed in 33.1 seconds with 73
+required.
+
+The reconciliation also adds the FF1 water plume, FFII's fire over Fynn
+and stars above a bed in Altair, Tobul's first visible hammer swing, the
+three Palamecia and Jade Passage effects, the FFIII Enterprise bubbles,
+the FFV crystal shatter and the incoming meteor. Only the meteor begins
+before its shot's fade. It waits for the authored 0.7-second fade interval
+without consulting the renderer, then admits speech once the fade clears
+and the exact effect has drawn particles. Leaving the event cancels that
+read. The installed-art evidence matches all 40 direct scene bindings
+and 35 localized phrases in `scene-effect-bindings.json` (SHA-256
+`14e747bc1fcc9e3f989088d7eabb159b6c9d58596d820d61d78afd7067163986`).
+Dialogue appearance and modal speech passed in 31.0 seconds with 73
 embedded assets verified. The fixture covers hidden sprites, a different
-atlas and preservation of the original native call's return value.
+atlas, an idle frame from the right atlas, the last of 66 emitters, a
+cancelled fade delay and preservation of the original native return value.
 
 The six installed binaries agree on the split between interpreter dispatch
 and particle presentation. `Integrator.Update` can execute timers and a
