@@ -287,10 +287,10 @@ Hovercraft and request directions to its new position.
 
 ## November 15 FFIV Falcon and hovercraft routes
 
-**In progress.** **Current map with vehicles** should include destinations
-reachable by relocating the hovercraft. Browse and directions should use the
-same route and retain the selected destination through each handoff. The
-installed game's carry action belongs to the Enterprise with the hook.
+**Offline verified and installed.** **Current map with vehicles** includes
+destinations reachable by relocating the hovercraft. Browse and directions
+share the reachability rules and retain the selected destination through the
+handoffs. The installed game's carry action belongs to the Enterprise with the hook.
 
 1. Fly the Enterprise to the hovercraft and pick it up if it is parked elsewhere.
 2. Carry it to a usable release tile and lower it onto the map. The party
@@ -320,6 +320,32 @@ occupancy, the appropriate collision rule, and the cargo's own landing
 attribute table. The planner still needs to prove both that release and a
 separate parking position with a legal foot approach. The trace is in the
 external November 13 hovercraft archive cited above.
+
+The Surface World planner uses the copied native cargo receipt and actual
+vehicle poses. It checks the carrier's approach to the parked hovercraft,
+hovercraft release terrain, a distinct carrier parking cell, the ground
+approach from that cell, and the hovercraft's ride and final landing. The
+parking search also supports release sites that require walking from a
+landable area. A previously released hovercraft is preferred when it can
+complete the journey. The reachable list evaluates those ground approaches
+once per owned snapshot and the directions worker builds the exact legs.
+
+Directions stop at a pickup or lowering action and retain the selected goal.
+After the native action, a fresh snapshot supplies the actual flight mode and
+cargo pose. A directions request then gives the next leg. The full plan
+includes the separate Enterprise landing and the subsequent ground boarding
+action. The game supplies the pickup and release controls. Both action
+instructions are localized in all 12 languages. Autowalk uses the published
+leg and stops at the manual action.
+
+The production replay uses the surface entrance at (224,123). It verifies
+the with-vehicles listing, complete attached and parked-cargo journeys,
+starting on foot, retained destination through manual cargo actions,
+separate parking, and walking to board the craft after release. It also
+checks unavailable parking and the Falcon's independent vehicle identity.
+The attached journey took 32 ms in the resource-capped offline fixture on
+the navigation worker. Gameplay and end-to-end audible timing remain unmeasured.
+[Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-ffiv-hovercraft-journeys).
 
 ## November 15 FFIV airborne vehicle interaction loses selection
 

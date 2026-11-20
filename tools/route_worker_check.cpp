@@ -9,6 +9,10 @@
 #include <mutex>
 #include "../src/core/field/baked_nav.cpp"
 #include "../src/core/field/entity_filter.h"
+namespace ffpr::fieldnav::vehicle_landing {
+std::optional<bool> hovercraft_carried() { return {}; }
+}
+
 namespace fixture {
 const DWORD native_owner = GetCurrentThreadId();
 std::atomic<int> wrong_owner{0};

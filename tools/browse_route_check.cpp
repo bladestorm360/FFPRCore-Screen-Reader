@@ -5,6 +5,120 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff4_hovercraft_journey(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    const auto* map=baked::submap_by_map_id(1);
+    const auto& grid=baked::grids(*map);
+    const Cell origin{1,158,186}, parked_hover{1,122,44}, destination{1,224,123};
+    RouteSnapshot snapshot(map_state::Resolver(map_state::Flags{},fixture::records));
+    snapshot.submap=map;
+    snapshot.map_id=1;
+    snapshot.layer=1;
+    snapshot.position=world_of_cell(*map,origin);
+    snapshot.vehicle={true,10,8,{}};
+    snapshot.vehicle_shortcuts=true;
+    snapshot.locale=L"en";
+    snapshot.goal={1,destination,false};
+    snapshot.kind=TargetKind::Transition;
+    auto set_parked=[&](Cell at){
+        VehicleOnMap model;
+        model.transportation_id=2;
+        model.type=7;
+        model.pos=world_of_cell(*map,at);
+        snapshot.vehicles={model};
+    };
+    std::thread worker([&] {
+        SnapshotScope scope(snapshot);
+        auto request=walk_request(*map,origin);
+        world_mode(request);
+        request.goals={destination}; request.goals_open=true;
+        snapshot.hovercraft_carried=true;
+        const auto started=frame::now();
+        auto loaded=hovercraft_directions(request);
+        std::printf("FFIV loaded hovercraft: %zu phases, %.2f ms offline\n",loaded.size(),(frame::now()-started)*1000);
+        expect(loaded.size()>=5,"Attached hovercraft has a complete release, separate parking, boarding and travel route");
+        if (loaded.size()<5) return;
+        expect(loaded[0].manual_after && loaded[0].movement_transportation_id==10 &&
+               loaded[0].action_after==L"Lower the hovercraft.","Lowering stops the first leg aboard the Enterprise");
+        const auto released=loaded[0].cells.back();
+        const auto park=loaded[1].cells.back();
+        expect(park!=released && loaded[2].vehicle_before==route_progress::VehicleAction::ConfirmLand &&
+               loaded[2].action_cell==std::optional<Cell>(park) && loaded[2].movement_transportation_id==0 &&
+               loaded[3].vehicle_before==route_progress::VehicleAction::ConfirmBoard && loaded[3].transportation_id==2 &&
+               baked_route::step_direction(loaded[2].cells.back(),released,grid.width,grid.height)>=0,
+               "The Enterprise parks separately and the party boards from a real ground approach");
+        expect(loaded.back().cells.back()==destination,"The completed loaded journey reaches the selected entrance");
+        const auto prefix=plan_snapshot(snapshot);
+        std::printf("FFIV hovercraft main route: success %d next %d legs %zu pending %d, %s %s\n",
+                    prefix.path.success,prefix.path.next_map_id,prefix.path.walk_phases.size(),prefix.pending.valid,
+                    text::to_utf8(prefix.path.full_description).c_str(),text::to_utf8(prefix.path.reason).c_str());
+        expect(prefix.path.success && prefix.path.next_map_id==1 && prefix.pending.goal.cell==destination &&
+               !prefix.path.walk_phases.empty() && prefix.path.walk_phases.back().manual_after,
+               "The production snapshot publishes only the safe leg up to release and retains the selected entrance");
+        const auto entrance=std::find_if(grid.objects.begin(),grid.objects.end(),[&](const auto& object) {
+            return object.type==baked::ObjType::GotoMap && object.contains(destination.x,destination.y);
+        });
+        if (entrance!=grid.objects.end()) {
+            ExitSnapshot browse(true,snapshot.state);
+            browse.route.submap=map;
+            browse.route.map_id=1;
+            browse.route.layer=1;
+            browse.route.position=world_of_cell(*map,origin);
+            browse.route.vehicle={true,10,8,{}};
+            browse.route.vehicle_shortcuts=true;
+            browse.route.hovercraft_carried=true;
+            const auto distances=exit_distances(browse,{{world_of_cell(*map,destination),1,entrance->a,destination}},{});
+            expect(distances.size()==1 && distances[0]>0,"The with-vehicles list keeps the hovercraft-only entrance");
+        } else expect(false,"The replay uses the real surface entrance");
+
+        snapshot.hovercraft_carried=false;
+        set_parked(parked_hover);
+        auto pickup=hovercraft_directions(request);
+        expect(!pickup.empty() && pickup.front().manual_after && pickup.front().cells.back()==parked_hover &&
+               pickup.front().action_after==L"Pick up the hovercraft.","A distant parked hovercraft is collected first");
+        set_parked(released);
+        snapshot.position=world_of_cell(*map,released);
+        request.start=released;
+        auto lowered=hovercraft_directions(request);
+        expect(lowered.size()>=4 && std::none_of(lowered.begin(),lowered.end(),[](const Phase& phase){return phase.manual_after;}) &&
+               lowered[0].cells.back()!=released,"An observed release resumes with separate parking and boarding");
+
+        snapshot.vehicle={true,9,8,{}};
+        expect(!prepare_hovercraft_route(request),"The Falcon cannot manufacture an Enterprise carry action");
+
+        set_parked(parked_hover);
+        VehicleOnMap carrier;
+        carrier.transportation_id=10; carrier.type=8; carrier.pos=world_of_cell(*map,origin);
+        snapshot.vehicles.push_back(carrier);
+        snapshot.vehicle={true,1,1,{}};
+        snapshot.position=world_of_cell(*map,{1,156,186});
+        request=walk_request(*map,{1,156,186});
+        world_mode(request);
+        request.goals={destination};
+        auto ground_start=hovercraft_directions(request);
+        expect(ground_start.size()>=6 && ground_start[0].movement_transportation_id==0 &&
+               ground_start[1].vehicle_before==route_progress::VehicleAction::ConfirmBoard &&
+               ground_start[1].transportation_id==10,
+               "Starting on foot first walks to and boards the available Enterprise");
+
+        auto no_parking=std::make_shared<baked_route::TransportRules>();
+        for (int y=0;y<grid.height;++y) for (int x=0;x<grid.width;++x)
+            if (baked::group_lands(9,baked::attribute(grid,x,y)))
+                baked_route::add_transport_cell(*no_parking,baked_route::TransportRules::Gate,*map,{1,x,y},
+                                                baked_route::transportation_bit(10));
+        snapshot.vehicle={true,10,8,{}};
+        snapshot.hovercraft_carried=true;
+        snapshot.vehicles.clear();
+        request.start=origin;
+        request.transport_rules=no_parking;
+        request.transport_gates=true;
+        expect(!prepare_hovercraft_route(request),"Release without a legal separate Enterprise parking place is unavailable");
+    });
+    worker.join();
+}
+
 template<class Expect> void check_ff4_sealed_cavern(Expect expect)
 {
     using namespace field;
@@ -678,6 +792,7 @@ int main() {
             check_ff4_underworld(expect);
             check_ff4_moon(expect);
             check_ff4_sealed_cavern(expect);
+            check_ff4_hovercraft_journey(expect);
             check_dwarven_castle(expect);
             check_tomra_shop(expect);
             check_baron_gate(expect);

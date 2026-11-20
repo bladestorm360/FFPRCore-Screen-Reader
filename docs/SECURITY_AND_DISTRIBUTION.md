@@ -1,5 +1,16 @@
 # Build and distribution security
 
+## November 19 FFIV hovercraft journeys
+
+The focused browse, landing and route worker checks passed with 67 verified
+resources and 47 forwarded exports. The unsigned DLL SHA-256 is
+`10462480d1dac8ce81f0c2ec3effcf59d2b9e8cc3c0b8e305f126b39e9437e87`.
+Defender found no threats on the 22 exact payload files. The exclusion query
+was denied. The installer verified all FFIV payload hashes, the 138 protected
+file states, and the other five games. Recovery uses `8f061ac`. Receipts are
+under `../tools/karnak_routing_20261119/ffiv-hovercraft-journey`.
+Gameplay confirmation remains pending.
+
 ## November 19 vehicle destination focus and FFIV markers
 
 The focused scanner, filter and browse checks passed with 67 verified

@@ -993,6 +993,34 @@
     "th": "แคกนาซโซออกมาต่อสู้แทน",
     "pt": "Cagnazzo assume o combate."
   },
+  "Pick up the hovercraft.": {
+    "en": "Pick up the hovercraft.",
+    "ja": "ホバー船を吊り上げる。",
+    "fr": "Hissez l’aéroglisseur.",
+    "it": "Solleva l’hovercraft.",
+    "de": "Nimm das Luftkissenboot auf.",
+    "es": "Recoge el aerodeslizador.",
+    "ko": "호버선을 들어 올리세요.",
+    "zht": "吊起氣墊船。",
+    "zhc": "吊起气垫船。",
+    "ru": "Поднимите катер на воздушной подушке.",
+    "th": "ยกยานโฮเวอร์คราฟต์ขึ้น",
+    "pt": "Ice o aerobarco."
+  },
+  "Lower the hovercraft.": {
+    "en": "Lower the hovercraft.",
+    "ja": "ホバー船を降ろす。",
+    "fr": "Descendez l’aéroglisseur.",
+    "it": "Cala l’hovercraft.",
+    "de": "Setze das Luftkissenboot ab.",
+    "es": "Baja el aerodeslizador.",
+    "ko": "호버선을 내려놓으세요.",
+    "zht": "放下氣墊船。",
+    "zhc": "放下气垫船。",
+    "ru": "Опустите катер на воздушной подушке.",
+    "th": "วางยานโฮเวอร์คราฟต์ลง",
+    "pt": "Baixe o aerobarco."
+  },
   "BossVisual.LordWind": {
     "en": "Barbariccia takes over the fight.",
     "ja": "バルバリシアが前に出て戦いを引き継いだ。",

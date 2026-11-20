@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <queue>
+#include <tuple>
 #include "baked_nav.h"
 #include "current_directions.h"
 #include "airship_transitions.h"
@@ -41,6 +42,7 @@
 #include "../say.h"
 #include "../text.h"
 #include "../fieldnav/move_state.h"
+#include "../fieldnav/vehicle_landing.h"
 #include "../ui/preferences.h"
 
 namespace field::baked_nav {
@@ -68,6 +70,7 @@ struct ActiveRoute {
     int blocking_party = -1; // partial approaches are replanned, never kept as completed goals
     bool npc_approach = false;
     bool key_approach = false; // replan after native unlock; never reuse this terminal prefix
+    bool hovercraft_handoff = false;
     int target_vehicle=0;
     bool vehicle_shortcuts=false; // captured filter policy; invalidates a kept route on change
     bool allow_world_transit=false; // authored fetch/return policy is part of kept-route identity
@@ -440,6 +443,7 @@ struct WorldOriginKey {
 };
 struct WorldOriginEntry {WorldOriginKey key;std::shared_ptr<const baked_route::Reach> reach;};
 struct RouteSnapshot {
+    std::optional<bool> hovercraft_carried;
     double requested_at = 0, captured_at = 0;
     double native_ms = 0;
     unsigned capture_slices = 0;
@@ -610,6 +614,8 @@ std::wstring planning_vehicle_name(int id, int type, const std::wstring& message
 void capture_vehicle_names(RouteSnapshot& snapshot) {
     snapshot.auto_groups = field::owned_auto_vehicle_groups();
     snapshot.vehicles = field::vehicles_on_map();
+    if (game::is(game::Id::FF4) && snapshot.map_id==1 && snapshot.vehicle_shortcuts)
+        snapshot.hovercraft_carried=ffpr::fieldnav::vehicle_landing::hovercraft_carried();
     const auto* destination=baked::submap_by_map_id(snapshot.goal.map_id);
     const bool world_scope=settings::get_int(ui::prefs::kPathfindingFilterMode,-1)==ui::prefs::kFilterWorldMap||
         (snapshot.submap->world&&destination&&snapshot.goal.map_id!=snapshot.map_id);
@@ -1693,6 +1699,7 @@ bool boarding_route(const baked::Submap& sm, const baked::Grids& g, const baked_
 }
 
 #include "world_vehicle_journey.inl"
+#include "ff4_hovercraft_route.inl"
 
 // A native mountain action skips closed cells. Keep it as a manual boundary,
 // never a fictitious sequence of ordinary movement inputs. The following phase
@@ -2623,6 +2630,7 @@ void set_active(int map_id, const Cell& target, int goal_map_id, const std::vect
     active.goal_map_id = goal_map_id; active.next_map_id = next_map_id; active.phases = phases;
     active.transportation_id = g_route_snapshot->vehicle.valid ? g_route_snapshot->vehicle.id : 0;
     active.requires_trap = false;
+    active.hovercraft_handoff = false;
     active.ends_at_exit_scene = false;
     active.blocking_party = -1;
     active.npc_approach = false;
@@ -2947,7 +2955,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         const auto exit_scene = selected_exit && req.vehicle_group == 0 &&
             (kind == TargetKind::Transition || kind == TargetKind::Infer) ?
             tule_exit_scene(*sm, g, target) : std::nullopt;
-        if (g_active && !enterprise_conversion_plan(*g_active) && g_active->blocking_party<0 && !g_active->npc_approach && g_active->allow_world_transit==g_route_snapshot->goal.allow_world_transit && g_active->vehicle_shortcuts==g_route_snapshot->vehicle_shortcuts && g_active->target_vehicle==g_route_snapshot->goal.transportation_id && g_active->transportation_id == (g_route_snapshot->vehicle.valid ? g_route_snapshot->vehicle.id : 0) &&
+        if (g_active && !g_active->hovercraft_handoff && !enterprise_conversion_plan(*g_active) && g_active->blocking_party<0 && !g_active->npc_approach && g_active->allow_world_transit==g_route_snapshot->goal.allow_world_transit && g_active->vehicle_shortcuts==g_route_snapshot->vehicle_shortcuts && g_active->target_vehicle==g_route_snapshot->goal.transportation_id && g_active->transportation_id == (g_route_snapshot->vehicle.valid ? g_route_snapshot->vehicle.id : 0) &&
             same_target(*g_active, map_id, target, map_id)) {
             std::vector<Phase> rest;
             if (remaining_from(*g_active, req.start, rest)) {
@@ -3198,6 +3206,23 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                 auto through_events = req;
                 through_events.ignore_hazards = true;
                 vehicle_journey_route(*sm, g, through_events, req.goals, phases,aerial);
+            }
+        }
+        if (phases.empty() && !aerial && !action_pad && !ship_goal && !surface_marker &&
+            !g_route_snapshot->goal.transportation_id && !req.goals.empty()) {
+            auto cargo=hovercraft_directions(req);
+            if (!cargo.empty()) {
+                annotate_facing(cargo.back(),goals);
+                const auto complete=describe_phases(cargo,true,sm);
+                const auto action=std::find_if(cargo.begin(),cargo.end(),[](const Phase& phase){return phase.manual_after;});
+                const int continuation=action==cargo.end()?0:map_id;
+                if (continuation) cargo.erase(std::next(action),cargo.end());
+                set_active(map_id,target,map_id,cargo,continuation);
+                g_route_snapshot->active.hovercraft_handoff=true;
+                fill_result(*sm,cargo,out);
+                out.full_description=complete;
+                out.next_map_id=continuation;
+                return true;
             }
         }
         std::wstring reason;
@@ -4899,6 +4924,7 @@ std::shared_ptr<ExitSnapshot> begin_exit_capture(bool with_vehicles, bool indoor
     auto& snapshot = capture->route;
     snapshot.map_id = field::current_map_id(); snapshot.submap = sm;
     if(with_vehicles&&game::is(game::Id::FF6)&&snapshot.map_id==119)snapshot.vehicle_shortcuts=true;
+    if(with_vehicles&&game::is(game::Id::FF4)&&snapshot.map_id==1)snapshot.vehicle_shortcuts=true;
     snapshot.position = unity::local_position(unity::transform(pl));
     snapshot.layer = sm->world ? 1 : player_layer(pl);
     snapshot.vehicle = field::current_vehicle();
@@ -4914,6 +4940,8 @@ void finish_exit_capture(ExitSnapshot& capture) {
     capture.route.auto_groups = field::owned_auto_vehicle_groups();
     if (capture.with_vehicles || capture.story_filter) {
         capture.route.vehicles = field::vehicles_on_map();
+        if (capture.route.vehicle_shortcuts && game::is(game::Id::FF4) && capture.route.map_id==1)
+            capture.route.hovercraft_carried=ffpr::fieldnav::vehicle_landing::hovercraft_carried();
         for (auto& vehicle : capture.route.vehicles) vehicle.game = nullptr;
         if(game::is(game::Id::FF3)&&settings::get_int(ui::prefs::kPathfindingFilterMode,-1)==ui::prefs::kFilterWorldMap)
             capture.route.saved_vehicles=field::saved_world_vehicles();
@@ -5227,6 +5255,19 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
     req.live_traps = true; req.traps = live.traps;
     const auto reach = baked_route::flood(req);
     const auto landed = land_after_ride(req,reach);
+    std::optional<HovercraftRoute> hovercraft;
+    bool hovercraft_ready=false;
+    auto hovercraft_distance=[&](Cell at,baked_route::GoalKind kind) {
+        if (!hovercraft_ready) {
+            hovercraft_ready=true;
+            hovercraft=prepare_hovercraft_route(req);
+        }
+        if (!hovercraft) return -1;
+        auto ground=hovercraft->foot;
+        ground.goals=baked_route::goals_for(ground,at,kind).cells;
+        ground.goals_open=true;
+        return baked_route::transition_distance(ground,hovercraft->landed);
+    };
     baked_route::Reach parked;
     bool parked_ready=false;
     struct MountedReach {int id=0,approach=0; baked_route::Reach reach;};
@@ -5374,6 +5415,7 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
             if(result[i]<0&&sm->world&&capture.with_vehicles&&req.vehicle_group==0) {
                 if(ship_goal)result[i]=ship_distance(at,*ship_goal,TargetKind::Infer);
             }
+            if(result[i]<0&&capture.with_vehicles&&!ship_goal)result[i]=hovercraft_distance(at,baked_route::GoalKind::Infer);
             continue;
         }
         const auto ship_goal=ship_goal_at(*sm,at);
@@ -5396,6 +5438,7 @@ std::vector<int> exit_distances(ExitSnapshot& capture, const std::vector<ExitTar
                 auto transfer=foot;transfer.goals=movement.goals;
                 distance=baked_route::transition_distance(transfer,parked);
             }
+            if (distance<0 && capture.with_vehicles && !ship_goal) distance=hovercraft_distance(at,baked_route::GoalKind::Transition);
             if (distance >= 0 && (result[i]<0 || distance<result[i])) result[i] = distance;
         }
         if(result[i]<0&&sm->world&&capture.with_vehicles&&req.vehicle_group==0&&ship_goal)
