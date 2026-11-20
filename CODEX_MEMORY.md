@@ -36,7 +36,7 @@ installed. Six-game enemy and character artwork prose covers 1,380 visible
 enemy sprites, 762 field candidates, 233 battle art and portrait variants
 and 371 representative equipment appearances. Twenty-five localized appearance
 entries and three action cues are offline checked. The first FF1
-Storyline category uses six objectives covered by production route
+Storyline category uses seven objectives covered by production route
 replays. The broader scene audit, remaining localization and later
 Storyline campaigns are open. These checkpoints are outside the installed
 mod.

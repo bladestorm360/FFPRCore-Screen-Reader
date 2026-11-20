@@ -20,6 +20,7 @@ map_state::Flags progress_at(const CorneliaProgress& progress, int map)
     flags.current_map_id = map;
     flags.scenario[4] = progress.bridge;
     flags.scenario[9] = progress.ship;
+    flags.scenario[10] = progress.crown;
     for (const auto& [index, value] : std::array<std::pair<int, std::optional<int>>, 7>{{
          {0, progress.opening}, {1, progress.audience}, {2, progress.garland},
          {3, progress.returned}, {5, progress.lute}, {6, progress.bridge}, {7, progress.crossed}}})
@@ -27,6 +28,7 @@ map_state::Flags progress_at(const CorneliaProgress& progress, int map)
     if (map == 1) flags.current_area_id = 1;
     else if (map == 13) flags.current_area_id = 29;
     else if (map == 72) flags.current_area_id = 11;
+    else if (map >= 73 && map <= 75) flags.current_area_id = 26;
     else flags.current_area_id = 16;
     return flags;
 }
@@ -37,14 +39,14 @@ void replay(const CorneliaProgress& progress, ObjectiveId expected, int origin, 
     const auto objective = cornelia_objective(progress);
     check(objective && objective->id == expected, "persistent receipts select the expected objective");
     if (!objective) return;
-    const auto targets = contacts(*objective);
+    const auto targets = contacts(*objective, origin);
     std::vector<int> actual;
     for (const auto& target : targets) actual.push_back(target.goal.entity_id);
     check(actual == contacts_expected, "exact baked placements and authored group are retained");
     if (targets.empty()) return;
     const auto& target = targets.front();
     check(target.goal.map_id == goal_map && target.goal.allow_world_transit,
-          "route goal is independent of current position and supports intervening world travel");
+          "the route leg targets the expected map and supports intervening world travel");
     const auto route = exdeath_routes::route(origin, at, progress_at(progress, origin), target.goal, target.kind);
     check(route.path.success && !route.path.required_trap, "the production worker plans a verified first movement leg");
     if (!route.path.success || route.path.required_trap) {
@@ -62,12 +64,14 @@ int verify()
     const CorneliaProgress leave{1,1,1,1,1,0,0};
     const CorneliaProgress bridge{1,1,1,1,1,1,0};
     const CorneliaProgress ship{1,1,1,1,1,1,1,0};
+    const CorneliaProgress crown{1,1,1,1,1,1,1,1,0};
     check(!cornelia_objective({0,0,0,0,0,0,0}), "opening must finish first");
     check(!cornelia_objective({1,1,1,0,0,0,0}), "rescue return transition withholds the next objective");
     check(!cornelia_objective({1,1,0,1,0,0,0}), "a missing earlier receipt is ambiguous");
     check(!cornelia_objective({1,1,1,1,1,1,{}}), "unavailable receipt stays unknown");
     check(!cornelia_objective({1,1,1,1,1,1,1}), "an unavailable ship receipt stays unknown");
-    check(!cornelia_objective({1,1,1,1,1,1,1,1}), "an existing save with the ship skips the earlier stages");
+    check(!cornelia_objective({1,1,1,1,1,1,1,1}), "an unavailable crown receipt stays unknown");
+    check(!cornelia_objective({1,1,1,1,1,1,1,1,1}), "an existing save with the crown skips the earlier stages");
     replay(audience, ObjectiveId::Audience, 3, {2,20,17}, 3, {14});
     replay(audience, ObjectiveId::Audience, 2, {2,26,41}, 3, {14});
     replay(audience, ObjectiveId::Audience, 1, {1,145,156}, 3, {14});
@@ -80,6 +84,11 @@ int verify()
     replay(bridge, ObjectiveId::CrossBridge, 1, {1,145,156}, 1, {89});
     replay(ship, ObjectiveId::GetShip, 1, {1,145,145}, 13, {38});
     replay(ship, ObjectiveId::GetShip, 13, {1,27,37}, 13, {38});
+    replay(crown, ObjectiveId::FindCrown, 75, {2,13,9}, 75, {40});
+    replay(crown, ObjectiveId::FindCrown, 74, {2,31,23}, 75, {40});
+    replay(crown, ObjectiveId::FindCrown, 73, {2,30,32}, 75, {40});
+    replay(crown, ObjectiveId::FindCrown, 1, {1,95,228}, 75, {40});
+    replay(crown, ObjectiveId::FindCrown, 13, {1,13,12}, 13, {5});
     std::printf("Cornelia storyline: %d assertions, %d physical legs, %d failures\n",
                 exdeath_routes::assertions, exdeath_routes::legs, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;

@@ -102,7 +102,7 @@ std::optional<storyline::Objective> storyline_objective()
     if (!game::is(game::Id::FF1)) return {};
     using map_state::scenario_flag;
     return storyline::cornelia_objective({scenario_flag(0), scenario_flag(1), scenario_flag(2),
-        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7), scenario_flag(9)});
+        scenario_flag(3), scenario_flag(5), scenario_flag(6), scenario_flag(7), scenario_flag(9), scenario_flag(10)});
 }
 
 std::wstring storyline_label()
@@ -116,7 +116,7 @@ void route_to_storyline(bool walking, double requested_at)
     const auto objective = storyline_objective();
     if (!objective) { speak(T(L"No Storyline objective available")); return; }
     if (!baked_nav::prepared()) { speak(T(L"Navigation map data unavailable")); return; }
-    auto candidates = storyline::contacts(*objective);
+    auto candidates = storyline::contacts(*objective, current_map_id());
     if (candidates.empty()) { speak(T(L"Navigation map data unavailable")); return; }
 
     // Cornelia's departure contacts are one contiguous three-tile trigger.

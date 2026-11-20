@@ -1,4 +1,18 @@
 {
+  "Find the crown in Marsh Cave": {
+    "en": "Find the crown in Marsh Cave",
+    "ja": "沼の洞窟でクラウンを探す",
+    "fr": "Trouver la couronne dans la Grotte des marais",
+    "it": "Trovare la corona nella Grotta paludosa",
+    "de": "Die Krone in der Sumpfhöhle finden",
+    "es": "Encontrar la corona en la Cueva del Pantano",
+    "ko": "늪의 동굴에서 왕관 찾기",
+    "zht": "在沼澤洞窟尋找王冠",
+    "zhc": "在沼泽洞窟寻找王冠",
+    "ru": "Найти корону в Болотной пещере",
+    "th": "ตามหามงกุฎในถ้ำหนองบึง",
+    "pt": "Encontrar a coroa na Caverna do Pântano"
+  },
   "Pravoka pirate defeat cue": {
     "en": "The two pirates flicker and disappear beside Bikke.",
     "ja": "ビッケの横にいた二人の海賊が明滅して姿を消す。",
