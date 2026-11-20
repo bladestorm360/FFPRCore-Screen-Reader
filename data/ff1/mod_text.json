@@ -1,4 +1,18 @@
 {
+  "Field appearance mo_ff1_n038_c00": {
+    "en": "A compact knight in dark armor has sweeping silver horns and a narrow silver-gray visor. Gold and violet bands stripe the chest and shoulders. The purple cape has a gold border.",
+    "ja": "小柄な騎士が暗色の鎧をまとう。銀色の角が反り返り、細い銀灰色のバイザーが顔を隠す。胸と肩には金と紫の帯が走り、紫のマントには金の縁取りがある。",
+    "fr": "Un chevalier trapu en armure sombre porte de longues cornes argentées et une étroite visière gris argenté. Des bandes dorées et violettes rayent le torse et les épaules. Sa cape violette est bordée d'or.",
+    "it": "Un cavaliere tarchiato in armatura scura ha lunghe corna argentate e una stretta visiera grigio argento. Fasce d'oro e viola attraversano il petto e le spalle. Il mantello viola ha un bordo dorato.",
+    "de": "Ein gedrungener Ritter in dunkler Rüstung trägt geschwungene Silberhörner und ein schmales silbergraues Visier. Goldene und violette Bänder ziehen sich über Brust und Schultern. Der violette Umhang ist golden gesäumt.",
+    "es": "Un caballero bajo y robusto con armadura oscura lleva cuernos plateados curvos y una estrecha visera gris plateada. Bandas doradas y violetas cruzan el pecho y los hombros. La capa morada tiene un borde dorado.",
+    "ko": "작고 다부진 기사가 어두운 갑옷을 입었다. 휘어진 은빛 뿔과 좁은 은회색 가리개가 달려 있다. 가슴과 어깨에 금색과 보라색 띠가 지나며 보라색 망토에는 금색 테두리가 있다.",
+    "zht": "敦實的騎士穿著深色盔甲，頭盔上有向外彎曲的銀角和狹長的銀灰色面罩。胸口和肩膀有金紫相間的條紋。紫色披風鑲著金邊。",
+    "zhc": "敦实的骑士穿着深色盔甲，头盔上有向外弯曲的银角和狭长的银灰色面罩。胸口和肩膀有金紫相间的条纹。紫色披风镶着金边。",
+    "ru": "Коренастый рыцарь в тёмном доспехе носит изогнутые серебряные рога и узкое серебристо-серое забрало. По груди и плечам проходят золотые и фиолетовые полосы. У пурпурного плаща золотая кайма.",
+    "th": "อัศวินร่างป้อมสวมเกราะสีเข้ม มีเขาสีเงินโค้งและกระบังหน้าสีเทาเงินแคบ แถบสีทองกับสีม่วงพาดอกและไหล่ ผ้าคลุมสีม่วงขลิบทอง",
+    "pt": "Um cavaleiro robusto de armadura escura tem chifres curvos prateados e uma viseira estreita cinza-prateada. Faixas douradas e violetas cruzam o peito e os ombros. A capa roxa tem borda dourada."
+  },
   "Field appearance mo_ff1_n101_c00": {
     "en": "A small, square-faced soldier has dark eyes beneath a gold helmet. Gold bands edge the red armor, sleeves and boots.",
     "ja": "小柄で四角い顔の兵士。金色の兜の下から黒い目がのぞく。赤い鎧と袖、ブーツを金色の帯が縁取っている。",

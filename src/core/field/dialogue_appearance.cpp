@@ -1,4 +1,5 @@
 #include "field_internal.h"
+#include "field_api.h"
 #include "object_cache.h"
 #include "../core.h"
 #include "../dialogue/dialogue.h"
@@ -27,6 +28,7 @@ ref::Class kEventProcedure{"Last.Map", "EventProcedure"};
 ref::Field fRunAction{kEventProcedure, "runAction"};
 ref::Class kEventAction{"Last.Map", "EventAction"};
 ref::Class kScriptAction{"Last.Map", "EventActionScript"};
+ref::Field fScriptName{kScriptAction, "scriptName"};
 ref::Field fObserver{r::kFieldController, "interactiveTargetObserver"};
 ref::Class kObserver{"Last.Map", "InteractiveTargetObserver"};
 ref::Field fTarget{kObserver, "interactiveTargetEntity"};
@@ -60,28 +62,41 @@ bool matches_direct_talk(void* actor, const std::wstring& message)
            displayed::renderer_visible(ref::rd<void*>(actor, fRenderer));
 }
 
-void* direct_talk_actor(void* controller, const std::wstring& message)
+void* unique_actor(void* controller, const auto& matches)
 {
-    auto* event_owner = ref::rd<void*>(controller, fEventOwner);
-    if (!kEventProcedure.is(event_owner)) return nullptr;
-    auto* action = ref::rd<void*>(event_owner, fRunAction);
-    if (!kEventAction.is(action) || !kScriptAction || kScriptAction.is(action)) return nullptr;
-    auto* target = ref::rd<void*>(ref::rd<void*>(controller, fObserver), fTarget);
-    if (matches_direct_talk(target, message)) return target;
-
-    // Some events clear the interaction indicator. Resolve the same native
-    // talk property only if one visible actor in the live map owns this key.
     auto* actors = ref::rd<void*>(controller, r::fEntityList);
     const int count = unity::list_count(actors);
     if (count < 1 || count > 64) return nullptr;
     void* result = nullptr;
     for (int i = 0; i < count; ++i) {
         auto* actor = unity::list_at(actors, i);
-        if (!matches_direct_talk(actor, message)) continue;
+        if (!matches(actor)) continue;
         if (result && result != actor) return nullptr;
         result = actor;
     }
     return result;
+}
+
+void* direct_talk_actor(void* controller, const std::wstring& message)
+{
+    auto* target = ref::rd<void*>(ref::rd<void*>(controller, fObserver), fTarget);
+    if (matches_direct_talk(target, message)) return target;
+    // When the indicator clears, require a unique visible actor with this key.
+    return unique_actor(controller, [&](void* actor) { return matches_direct_talk(actor, message); });
+}
+
+void* scripted_talk_actor(void* controller, void* action, const std::wstring& message)
+{
+    // Garland's first two lines belong to his pre-battle scene. A separate
+    // speaker and costume appear in its continuation back at Cornelia.
+    if (!game::is(game::Id::FF1) || (message != L"MSG_HELPSERA_01" && message != L"MSG_HELPSERA_02") ||
+        ref::rd_str_bounded(action, fScriptName, 48) != L"sc_e_0003" || ::field::current_map_id() != 72)
+        return nullptr;
+    return unique_actor(controller, [](void* actor) {
+        return kSpriteEntity.is(actor) && ::field::live_entity(actor) &&
+               ref::rd<int>(::field::entity_property(actor), r::fPropEntityId) == 32 &&
+               displayed::renderer_visible(ref::rd<void*>(actor, fRenderer));
+    });
 }
 
 std::wstring visible_art(void* actor)
@@ -114,7 +129,13 @@ bool read_dialogue_appearance()
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return false;
-    const auto art = visible_art(direct_talk_actor(controller, message));
+    auto* event_owner = ref::rd<void*>(controller, fEventOwner);
+    if (!kEventProcedure.is(event_owner)) return false;
+    auto* action = ref::rd<void*>(event_owner, fRunAction);
+    if (!kEventAction.is(action) || !kScriptAction) return false;
+    const bool scripted = kScriptAction.is(action);
+    const auto art = visible_art(scripted ? scripted_talk_actor(controller, action, message)
+                                          : direct_talk_actor(controller, message));
     if (art.empty()) return false;
     const auto key = L"Field appearance " + art;
     if (!modtext::has(key)) return false;

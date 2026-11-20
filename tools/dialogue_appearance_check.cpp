@@ -21,6 +21,7 @@ Node* message_client = nullptr;
 bool owner_thread = true;
 bool dialogue_open = true;
 bool transition = false;
+int current_map = 3;
 int actor_reads = 0;
 std::wstring spoken;
 
@@ -50,7 +51,9 @@ bool Class::is(void* p)
 {
     if (!p) return false;
     const std::string_view type = static_cast<Node*>(p)->type;
-    return type == name || (type == "EventActionScript" && std::string_view(name) == "EventAction");
+    const std::string_view expected = name;
+    return type == expected || (type == "EventActionScript" && expected == "EventAction") ||
+           (type == "FieldNonPlayer" && expected == "FieldSpriteEntity");
 }
 int32_t Field::get()
 {
@@ -76,11 +79,13 @@ ref::Class kFieldMap{"", "FieldMap"}, kFieldController{"Last.Map", "FieldControl
 ref::Class kFieldNonPlayer{"Last.Entity.Field", "FieldNonPlayer"}, kPropertyTalk{"", "PropertyTalk"};
 ref::Field fEntityList{kFieldController, "entityList"}, fFieldController{kFieldMap, "fieldController"};
 ref::Field fEventScriptId{kPropertyTalk, "scriptId"}, fTalkMessageKey{kPropertyTalk, "messageKey"};
+ref::Field fPropEntityId{kPropertyTalk, "entityId"};
 }
 namespace field {
 ref::Field fixture_property{r::kFieldNonPlayer, "Property"};
 void* entity_property(void* actor) { return ref::rd<void*>(actor, fixture_property); }
 bool live_entity(void* actor) { return unity::alive(actor); }
+int current_map_id() { return current_map; }
 }
 namespace field::cache { void* get(ref::Class&) { return player_map; } }
 namespace unity {
@@ -95,8 +100,9 @@ bool renderer_visible(void* p) { return visible(p); }
 }
 namespace frame { bool on_main_thread() { return owner_thread; } }
 namespace queries { bool is(const char*) { return transition; } }
+namespace game { Id current() { return Id::FF1; } }
 namespace modtext {
-bool has(std::wstring_view key) { return key == L"Field appearance mo_ff1_n101_c00"; }
+bool has(std::wstring_view key) { return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00"; }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
 namespace ffpr { void say(std::wstring_view text, bool) { spoken = text; } }
@@ -177,5 +183,21 @@ int main()
     require(!read(), "variant without wording");
     texture.value = L"non-atlas-MO_FF1_N101_C00";
     require(!read(), "unrelated texture with similar name");
+
+    Node script;
+    script.value = L"sc_e_0003";
+    put(action, "scriptName", &script);
+    put(property, "entityId", reinterpret_cast<void*>(32));
+    action.type = "EventActionScript";
+    current_map = 72;
+    actors.assign(1, &actor);
+    id.value = L"MSG_HELPSERA_02";
+    texture.value = L"sactx-32x32-Uncompressed-MO_FF1_N038_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff1_n038_c00", "scripted speaker and live costume");
+    current_map = 3;
+    require(!read(), "same message key after a map change");
+    current_map = 72;
+    script.value = L"sc_e_0003_3";
+    require(!read(), "same message key in another script");
     std::puts("Dialogue appearance checks passed");
 }

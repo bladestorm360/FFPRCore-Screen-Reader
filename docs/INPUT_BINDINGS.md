@@ -370,7 +370,7 @@ The first match runs:
 | `BattleMagicMenuState.IsActive` | `BattleMagicPatches.AnnounceCurrentDescription` |
 | `BattleItemMenuState.IsActive` | `BattleItemPatches.AnnounceCurrentDescription` |
 | A single visible enemy owns native target focus and has a localized appearance entry | Describes the visible enemy sprite, including its current form. |
-| A direct field dialogue has a visible speaker with a localized appearance entry | Describes the speaker's current field costume. |
+| A field dialogue has a verified visible speaker with a localized appearance entry | Describes the speaker's current field costume. |
 
 ## Controller (SDL3)
 

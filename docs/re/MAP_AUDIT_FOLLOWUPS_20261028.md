@@ -15,8 +15,8 @@ reports in the existing feature and maintenance records as each system opens.
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
 | FFIV world and floor routing | Closed for source, offline verification and FFIV installation. Player confirmation pending for Moon entrances, Sealed Cavern rope prerequisites, [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers), and [hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes). |
-| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. Selected opening cues and six localized battle appearance cases are verified offline. The wider scene review, localization, remaining controls and deployment are open. |
-| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first four FF1 objectives have native contacts and completion receipts. Runtime category and campaign coverage remain open. |
+| [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | In progress. Six-game artwork passes cover 1,380 visible enemy sprites, 762 field candidates, 233 battle art and portrait variants and 371 distinct representative equipment appearances. The first eight localized appearance cases passed focused offline checks. The wider scene review, localization, automatic cues and deployment are open. |
+| [Storyline mode](#november-11-all-six-storyline-category) | In progress. The first five FF1 objectives have native contacts and completion receipts. Six offline route legs passed the production planner. Runtime category and campaign coverage remain open. |
 
 ## November 17 FFV Karnak world-map routing progress blocker
 
@@ -456,14 +456,17 @@ setting receipt 0. The playable opening stages follow that receipt.
 | --- | --- | --- |
 | Opening complete and receipt 1 clear | Meet the King of Cornelia. Use the throne-room soldier, map 3 entity 14 at Upper (20,13), script 7 in group `ev_e_0002`. | The audience and its continuation set receipt 1 after the dialogue. |
 | Receipt 1 set and receipt 2 clear | Rescue Princess Sarah. Garland is map 72 entity 32 at Bottom (38,29), script 9 in group `ev_e_0003`. | The combat continuation sets receipt 2 and sends the party back to the throne room. The return sequence ends with receipt 3. |
-| Receipt 3 set and receipt 6 clear | Leave Cornelia Castle to see the bridge construction. Use the three step contacts on map 2, entities 44–46 at Upper (25–27,43), script 12 in group `ev_e_0005`. | The construction scene on map 121 returns to the castle and its continuation sets receipts 4 and 6. |
+| Receipt 3 set and receipt 5 clear | Receive the Lute from Princess Sarah. Speak to her on map 3, entity 7 in `ev_e_0004`. The native step contact at entity 42 can also begin the gift as the party leaves the room. | Both gift branches set receipt 5 and treasure flag 244. The production replay exposed this prerequisite for the castle departure group. |
+| Receipt 5 set and receipt 6 clear | Leave Cornelia Castle to see the bridge construction. Use the three step contacts on map 2, entities 44–46 at Upper (25–27,43), script 12 in group `ev_e_0005`. | The construction scene on map 121 returns to the castle and its continuation sets receipts 4 and 6. |
 | Receipt 6 set and receipt 7 clear | Cross the new bridge. Use the active Overworld contact on map 1, entity 89 at (145,145), script 17 in group `ev_e_0006`. | The prologue plays on map 124 and returns the party to the Overworld. The return continuation sets receipt 7. |
 
-Receipt 2 can become true inside the rescue return chain. Treat that interval
-as a native transition. Verify how any loadable state with receipt 2 set and
-receipt 3 clear recovers before assigning an independent objective to it.
-The Storyline category, routing replays for these four objectives, and the
-subsequent campaign stages are pending.
+Receipt 2 can become true inside the rescue return chain. The model withholds
+the next objective until receipt 3 confirms the return. The production
+fixture passed 29 assertions and six movement legs with the installed FF1
+map and scenario data. It checks a castle floor transfer, all five exact
+contacts, the Lute prerequisite, missing state and later saves. The bridge
+uses the existing selected-event route to its actual world foot tile. The
+Storyline category, full cross-world journeys and later campaigns are pending.
 
 The request arrived during the FFIV airship-label build. The November 17
 priority places its implementation after the outstanding gameplay fixes and
