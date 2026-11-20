@@ -1,9 +1,12 @@
 # Native FFPR durable memory
 
+**November 19 FFIV Moon.** The verified FFIV installation accounts for
+directional entrance collision and cave detours from the Lunar Whale.
+Sealed Cavern is next. [Route evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-ffiv-moon-entrance-routing).
+
 **November 19 field menu delivery.** All six games now read Pause and the
 actual focused command. FFV's field spell entry uses one initial producer.
-Offline and installed checks passed. FFIV Moon routes are the next active
-checkpoint. [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-field-pause-and-spell-targeting).
+Offline and installed checks passed. [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-19-field-pause-and-spell-targeting).
 
 **November 19 navigation delivery.** Karnak Pub 2F, Walse jump labels,
 save-point arrival and traversal, and temporary actor qualifiers are

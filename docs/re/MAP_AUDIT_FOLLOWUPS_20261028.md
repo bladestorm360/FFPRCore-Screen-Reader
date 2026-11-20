@@ -14,7 +14,7 @@ reports in the existing feature and maintenance records as each system opens.
 | [FFV Karnak world map](#november-17-ffv-karnak-world-map-routing-progress-blocker) | Closed for source, offline verification and FFV installation. Player confirmation pending. |
 | FFV routing and labels | Closed for source, offline verification and all-six local installation. Player confirmation pending for Karnak Pub 2F, both save-point cases, [Walse jumps](TRAPS.md#november-17-ffv-tower-of-walse-jumps-labeled-trap), and [shop names](OBJECT_IDENTITIES.md#november-17-ffv-shop-labels-expose-the-temp-suffix). |
 | Field menu speech | Closed for source, offline verification and all-six local installation. Player confirmation pending for the [FFV target producer](NPC_PATROL_TARGETS_20261025.md#november-17-ffv-duplicate-spell-target-on-menu-entry) and the six [field pause menus](MENU_DETAILS.md#november-17-ffv-field-pause-menu-opens-silently). |
-| FFIV world and floor routing | In progress (~5%). Moon entrances first, then Sealed Cavern rope prerequisites, [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes), [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). Estimate 30–60 minutes for Moon evidence and focused delivery. |
+| FFIV world and floor routing | In progress (~25%). Moon entrances are offline verified and installed. Sealed Cavern rope prerequisites are active, followed by [Falcon and hovercraft journeys](VEHICLE_ROUTING.md#november-15-ffiv-falcon-and-hovercraft-routes), [airborne selection](VEHICLE_ROUTING.md#november-15-ffiv-airborne-vehicle-interaction-loses-selection), and [duplicate markers](OBJECT_IDENTITIES.md#november-15-ffiv-duplicate-navigation-markers). |
 | [Visual descriptions](#november-17-visual-descriptions-and-storyline-follow-up) | Not started. After gameplay fixes and deployment, complete the six-game sprite and animation coverage passes and verify the speech controls. |
 | [Storyline mode](#november-11-all-six-storyline-category) | Initial source review recorded. Begin implementation in the same follow-up as descriptive work, with game-specific progression and routing checks. |
 
@@ -138,11 +138,32 @@ entrance. Keep the existing in-game map names.
   that same contact. After landing at (12,31), requests continue to say one
   step south through 428196.531, and the party remains on Moon map 3.
 
-For a later fix, check every Moon entrance against its actual entry tile,
-approach direction, terrain and story conditions. Verify which Western Lunar
-Path contact provides the onward route and whether the Crystal Palace contact
-allows entry. Browsing and directions from aboard the Lunar Whale and on foot
-should require a usable transition before presenting a route as reachable.
+The installed Moon bundle contains a 64 by 64 `GroundSubCollision` layer
+that the bake omitted. All seven native `GotoMap` contacts use collision ID 2,
+which closes the north face. The raw transportation grid alone permits the
+step south reported in the log. The previous browse replay gave that forbidden
+step at all seven entrances. The Moon bake now supplies the same directional
+ground plane that the Underworld uses. The round-trip bake comparison found
+only the added 1,236 bytes of encoded Moon collision and relocated offsets.
+Native contact destinations, approach names and scene conditions use their
+existing data. The production replay checks walking from both sides and the
+Lunar Whale's landing and final walking leg at every entrance.
+
+An independent flood over the native ground, flight and landing tables found
+direct landings for the lower Western Lunar Path contact, Hummingway Home
+and Cave of Bahamut. The other four entrance approaches have no landing on
+their connected plateaus. The shortest legal continuation uses the lower
+Western Lunar Path and, where required, the Eastern Lunar Path. The
+cross-floor planner now checks directional faces when proving a world goal
+from an adjacent cell, so a reachable tile north of the door cannot end the
+cave search before it reaches the usable side.
+
+All seven walking approaches, three direct flight-and-walk routes and four
+cave detours passed the production replay. The detours retain the selected
+entrance. The updated exact-entry checks use adjacent cells with a legal
+edge, and the dedicated Moon cases still verify the blocked approaches.
+The focused build and payload scan passed, and the installer hash-verified
+FFIV. Gameplay confirmation remains pending. [Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-ffiv-moon-entrances).
 
 ## November 14 FFIV Sealed Cavern rope crossing across floors
 

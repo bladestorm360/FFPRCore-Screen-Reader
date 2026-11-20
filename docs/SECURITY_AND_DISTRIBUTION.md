@@ -1,5 +1,17 @@
 # Build and distribution security
 
+## November 19 FFIV Moon entrances
+
+The focused browse and vehicle landing checks passed. All 67 resources and
+47 forwarded exports verified. The unsigned DLL SHA-256 is
+`135850aca7858b90cff6d17dff5d7ed0f96004376a5ad0056c4d35f48a7c88fd`.
+Defender found no threats and reported zero matching events in the 22 exact
+payload files. The exclusion query was denied. The installer verified all
+22 files in FFIV, all 138 protected file states and the other five DLLs.
+Recovery source is `10ace35`. Receipts are under
+`../tools/karnak_routing_20261119/ffiv-moon`. Gameplay confirmation remains
+pending.
+
 ## November 19 field pause and spell targeting
 
 The focused build passed pause opening, all-six field magic range ownership,
@@ -11,7 +23,7 @@ payload files. The separate exclusion query was denied. All six installed
 copies match the scanned payload, and 138 protected file states match the
 initial inventory. Recovery source is `6ecf964`. Receipts are under
 `../tools/karnak_routing_20261119/field-menu`. Gameplay confirmation remains
-pending.
+pending. Remote `master` was verified at `10ace35a583208e5e9d79bef846d91c7fe2babe6`.
 
 ## November 19 shared save-point and FFV navigation fixes
 

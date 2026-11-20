@@ -112,8 +112,8 @@ static bool direction_allowed(const Request& r, const Cell& from, const Cell& to
                               int direction, const baked::Grids* grid)
 {
     const bool world=r.submap&&r.submap->world;
-    // FFIV's Underworld has a ground sub-collision overlay alongside its
-    // transportation grids. Apply its wall faces in both directions on foot.
+    // FFIV's Underworld and Moon have ground sub-collision overlays alongside
+    // transportation grids. Apply wall faces in both directions on foot.
     if (world && r.vehicle_group <= 0 && direction >= 0 && direction < 4 && r.submap->collision_off[1]) {
         const auto& ground = grid ? *grid : baked::grids(*r.submap);
         const auto& faces = ground.collision[1];

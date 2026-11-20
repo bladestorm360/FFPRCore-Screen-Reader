@@ -5,6 +5,69 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff4_moon(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    const auto* moon = baked::submap_by_map_id(3);
+    if (!moon) { expect(false, "FFIV Moon data loads"); return; }
+    map_state::Flags flags;
+    flags.current_map_id = 3;
+    int entrances = 0;
+    for (const auto& entrance : baked::grids(*moon).objects) {
+        if (entrance.type != baked::ObjType::GotoMap) continue;
+        ++entrances;
+        const Cell target{1,entrance.tx,entrance.ty};
+        const Cell north{1,target.x,target.y-1}, south{1,target.x,target.y+1};
+        baked_route::Request walk;
+        walk.submap = moon;
+        walk.goals = {target};
+        expect(!baked_route::direction_allowed(walk,north,target), "Moon entrance blocks the north-side approach");
+        expect(baked_route::direction_allowed(walk,south,target), "Moon entrance accepts the south-side approach");
+
+        RouteSnapshot snapshot(map_state::Resolver(flags,fixture::records));
+        snapshot.map_id = 3;
+        snapshot.submap = moon;
+        snapshot.layer = 1;
+        snapshot.vehicle = {true,1,1,{}};
+        snapshot.locale = L"en";
+        snapshot.goal.map_id = 3;
+        snapshot.goal.cell = target;
+        snapshot.kind = TargetKind::Transition;
+        Planned from_south, from_north, from_air;
+        std::thread worker([&] {
+            snapshot.position = world_of_cell(*moon,south);
+            from_south = plan_snapshot(snapshot);
+            snapshot.position = world_of_cell(*moon,north);
+            from_north = plan_snapshot(snapshot);
+            snapshot.position = world_of_cell(*moon,{1,59,11});
+            snapshot.vehicle = {true,11,8,{}};
+            from_air = plan_snapshot(snapshot);
+        });
+        worker.join();
+        expect(from_south.path.success && from_south.path.step_count == 1,
+               "The real Moon entrance is one step north from its open side");
+        expect(!from_north.path.success || from_north.path.step_count > 1,
+               "The Moon route never publishes the forbidden south step from the opposite side");
+        const auto& phases = from_air.path.walk_phases;
+        // The other four contacts are on two plateaus with no legal landing.
+        // From the logged flight origin, their first leg uses the lower
+        // Western Lunar Path contact and retains the original destination.
+        const Cell west_entrance{1,12,32};
+        const bool direct = target == west_entrance || target == Cell{1,27,51} || target == Cell{1,55,35};
+        const Cell first_entrance = direct ? target : west_entrance;
+        const bool legal_air_route = from_air.path.success && phases.size() >= 2 && phases.back().cells.size() >= 2 &&
+            phases.back().cells.back() == first_entrance &&
+            baked_route::direction_allowed(walk,phases.back().cells[phases.back().cells.size()-2],first_entrance);
+        std::printf("Moon contact (%d,%d) -> %d: Lunar Whale success %d, next map %d, phases %zu\n",
+                    target.x,target.y,entrance.a,from_air.path.success,from_air.path.next_map_id,phases.size());
+        expect(legal_air_route && (direct || (from_air.path.next_map_id == 291 &&
+               from_air.pending.goal.map_id == 3 && from_air.pending.goal.cell == target)),
+               "Lunar Whale uses a legal direct landing or enters Western Lunar Path first");
+    }
+    expect(entrances == 7, "All seven native Moon entrances were checked");
+}
+
 template<class Expect> void check_ff4_underworld(Expect expect)
 {
     using namespace field;
@@ -510,6 +573,7 @@ int main() {
         g_loaded=true;g_prepared=true;
         if(number==4) {
             check_ff4_underworld(expect);
+            check_ff4_moon(expect);
             check_dwarven_castle(expect);
             check_tomra_shop(expect);
             check_baron_gate(expect);
@@ -604,6 +668,9 @@ int main() {
                 for(const auto& delta:{Cell{1,0,-1},Cell{1,1,0},Cell{1,0,1},Cell{1,-1,0}}) {
                     Cell start{1,(target.x+delta.x+grid.width)%grid.width,(target.y+delta.y+grid.height)%grid.height};
                     if(!field::baked_route::open(walking,grid,start))continue;
+                    // This assertion covers the exact adjacent approach. A
+                    // blocked world face instead belongs to the detour cases.
+                    if(map->collision_off[1] && !field::baked_route::direction_allowed(walking,start,target))continue;
                     RouteSnapshot snapshot(field::map_state::Resolver(field::map_state::Flags{},fixture::records));
                     snapshot.submap=map;snapshot.map_id=map->first_map_id;snapshot.layer=1;snapshot.position=world_of_cell(*map,start);
                     snapshot.goal.map_id=snapshot.map_id;snapshot.goal.cell=target;snapshot.kind=field::TargetKind::Transition;snapshot.locale=L"en";

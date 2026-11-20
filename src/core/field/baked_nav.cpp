@@ -2320,7 +2320,14 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                         // a closed goal cell (a chest, a switch): from beside it
                         static const int kSide[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
                         for (const auto& s : kSide) {
-                            const int dn = reach.distance(Cell{c.layer, c.x + s[0], c.y + s[1]});
+                            const Cell adjacent{c.layer, c.x + s[0], c.y + s[1]};
+                            // On worlds with directional ground faces, a
+                            // nearby landing cannot prove the final step into
+                            // a closed entrance. Let the cave-route search
+                            // continue until it reaches the open side.
+                            if (sm->world && sm->collision_off[1] &&
+                                !baked_route::direction_allowed(req, adjacent, c)) continue;
+                            const int dn = reach.distance(adjacent);
                             if (dn >= 0 && (dc < 0 || dn + 1 < dc)) dc = dn + 1;
                         }
                     }

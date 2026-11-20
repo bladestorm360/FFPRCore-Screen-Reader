@@ -13,7 +13,7 @@ What is baked, per sub-map (the Tiled sub-map "Map_20011_1"; a world map is "Map
   * the hidden-passage grids (cells the player walks that the game's searcher never enters);
   * world maps: the terrain attribute ids (one per cell, 1-32) and the per-transportation-GROUP
     passability layers "Transportation01".."NN" (0 open, 1 blocked: the riding route grid);
-    FFIV Underworld also uses the ground collision slot for its on-foot sub-collision faces;
+    FFIV Underworld and Moon use the ground collision slot for their on-foot sub-collision faces;
   * the routing objects: entry points (PointIn), exits (GotoMap), layer changes (ToLayer),
     counters (RelayInteraction), talk targets (NPC, ShopNPC, Entity, AnimEntity,
     TreasureBox), teleports (TelepoPoint), vehicle pads (TransportationEventAction),
@@ -183,7 +183,7 @@ def collision_rows(coll, li):
 
 def baked_collision_layers(game, name, grid, bounds):
     collision = grid.get("collision") or {}
-    if game != "ff4" or name != "Map_10020":
+    if game != "ff4" or name not in {"Map_10020", "Map_10030"}:
         return collision
     # The package supplies a separate directional ground overlay for this world.
     rows = (grid.get("sub_collision") or {}).get("GroundSubCollision", [])
@@ -191,7 +191,7 @@ def baked_collision_layers(game, name, grid, bounds):
     if (collision or not grid.get("attribute") or not grid.get("transportation")
             or not w or not h or len(rows) < y + h
             or any(len(row) < x + w or "?" in row for row in rows[y:y+h])):
-        raise ValueError("FFIV Map_10020 requires the extracted GroundSubCollision layer")
+        raise ValueError(f"FFIV {name} requires the extracted GroundSubCollision layer")
     return {"GroundSubCollision": rows}
 
 
