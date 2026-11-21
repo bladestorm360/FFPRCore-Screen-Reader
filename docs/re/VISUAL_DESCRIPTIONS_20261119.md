@@ -71,7 +71,7 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-12,794 remaining non-English entries in the new catalog. All 251
+12,270 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
 the variant's palette, anatomy, pose and visible equipment. All 274
@@ -103,8 +103,8 @@ Windows character conversion and checked regional spellings. The local
 record conversion differences for the exact keys. All six games also have Spanish
 wording for all 2,789 entries. Brazilian Portuguese also covers all 2,789 entries.
 The Portuguese inventory check covers all six games, and the packaged
-dialogue and battle speech checks passed. FFI through FFIII have Italian wording for
-all 989 keys, including the field and battle outfits in FFIII. Remaining translations,
+dialogue and battle speech checks passed. FFI through FFIV have Italian wording for
+all 1,519 keys, including FFIV's different boss states and party portraits. Remaining translations,
 delivery and gameplay confirmation are open.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
