@@ -423,8 +423,15 @@ entries and uses the same destination selection and worker route as FF1.
 The five labels have all 12 game locales. The campaign fixture covers the
 exact speaker, native entry point, destination selection in both directions
 and the direct objective when starting inside the destination. The Saronia
-case exercises the native door from the castle courtyard. This change adds
-no native hooks or frame work.
+case exercises the native door from the castle courtyard. The added lookup
+checks at most five entries on the existing Storyline selection path.
+
+All 86 FFIII objectives and five clue routes passed the focused offline
+replay. The shared story-filter checks passed for all six games. The verified
+build is installed in FFIII. Gameplay confirmation can begin on a save
+after learning Mini. Select Storyline, request directions to the gnome,
+use the native Talk action, then cycle to the direct Tozus objective.
+[Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-21-ffiii-storyline-clues).
 
 ## November 20 six-game completion goal
 

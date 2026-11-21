@@ -1,5 +1,28 @@
 # Build and distribution security
 
+## November 21 FFIII Storyline clues
+
+Source `e5243511b334977fa13b058c3f375e187a7ecc64`. The focused
+`build_local.bat storyline_check story_filter_check` passed in 115.2
+seconds under the enforced 2 GB, one-worker and 25 percent CPU limits.
+Peak aggregate memory was 516,616,192 bytes. The campaign replay passed
+86 FFIII objectives and five clue routes. Story-filter and live-trigger
+fixtures passed for all six games. The largest gate batch took 2.329 ms
+in the offline fixture. The build verified all 73 embedded resources
+and the isolated smoke test verified all 47 forwarded exports.
+
+The unsigned DLL SHA-256 is
+`d24853b083d40ced2b5cf693e19c9fc85b3a4c463db5302f5b9298185534378b`.
+Defender definitions `1.463.397.0` reported no threats in the 22 exact
+files and no matching detection events. Staged hashes were stable. The
+exclusion query was denied. The guarded install ran `deploy.bat ff3`.
+It verified 22 FFIII payload hashes, 138 protected states and the existing
+installations for the other five games. Gameplay confirmation remains pending.
+
+Recovery uses the previous build source `5efb0d3`. Compact evidence is
+under `../tools/ff3_storyline_clues_20261121`. Cleanup reclaimed 306,545,596
+bytes from test artifacts and staging and retained the production cache.
+
 ## November 20 visual descriptions and Storyline
 
 Built source `5efb0d37099f633c9306a78f11a51b9c624f3134` on master.

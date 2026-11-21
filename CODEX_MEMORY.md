@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 21 FFIII Storyline clues.** Five optional native conversations
+are installed in FFIII. The existing destination keys switch between the
+clue and the direct objective. The focused replay passed all 86 objectives
+and all five clues. Gameplay confirmation is pending.
+[Clues and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-21-ffiii-storyline-clue-conversations)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-21-ffiii-storyline-clues).
+
 **November 20 visual descriptions and Storyline.** Installed and hash-verified
 in all six games. Storyline runs from new game through each final boss and
 includes optional native clue conversations in FF1. All 2,789 frozen artwork
