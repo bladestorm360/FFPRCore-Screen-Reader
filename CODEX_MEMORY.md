@@ -1,10 +1,12 @@
 # Native FFPR durable memory
 
-**November 20 completion goal.** Continue the six-game visual descriptions,
-status-effect audit and Storyline campaigns through their final encounters.
-The fixed event inventory has one review and one high-priority
-reconciliation. FF1 includes routes to informative NPC conversations.
-[Active scope and checkpoints](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-20-six-game-completion-goal).
+**November 20 visual descriptions and Storyline.** Installed and hash-verified
+in all six games. Storyline runs from new game through each final boss and
+includes optional native clue conversations in FF1. All 2,789 frozen artwork
+keys have wording in all 12 languages. The 525 condition rows and fixed
+field and battle scene audits have recorded dispositions. Gameplay
+confirmation is pending. [Scope and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-20-six-game-completion-goal)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-20-visual-descriptions-and-storyline).
 
 **November 19 FFIV routing and markers.** The verified FFIV installation
 accounts for lunar entrance direction and cave detours, Sealed Cavern rope
@@ -36,17 +38,6 @@ Fix and deploy before visual descriptions and Storyline mode.
 **November 17 save-point traversal.** Deferred routing correction for paths
 that cross ordinary save points. Their shine and first-use tutorial do not
 make the save point a required route event. [Log evidence](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-save-points-are-passable-during-routing).
-
-**November 19 visual descriptions and Storyline.** Gameplay fixes are
-installed. Six-game enemy and character artwork prose covers 1,380 visible
-enemy sprites, 762 field candidates, 233 battle art and portrait variants
-and 371 representative equipment appearances. Thirty-six localized appearance
-entries and four action cues are offline checked. The November 20 source
-checkpoints extend all six Storyline itineraries to their final encounters.
-Full campaign travel, the broader scene and status audit, remaining
-localization and integrated delivery are open.
-[Visual audit](docs/re/VISUAL_DESCRIPTIONS_20261119.md)
-and [scope and controls](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-17-visual-descriptions-and-storyline-follow-up).
 
 **November 17 FFV save-point directions.** Deferred report that directions
 say “1 North” from the selected save point's own tile. Expected speech is

@@ -403,22 +403,43 @@ languages.
 ## November 20 six-game completion goal
 
 The owner requests a complete visual audit and Storyline mode for FF1–FF6.
-Use this ledger for the active goal, superseding the starter checkpoint
+This ledger records the completed scope and local delivery. It supersedes the starter checkpoint
 below. The November 19 installed gameplay fixes are closed to unrelated
 changes. Keep the source audit, integrated speech, offline verification,
 local delivery and gameplay confirmation distinct.
 
 | Milestone | Acceptance and current status |
 | --- | --- |
-| FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Full cross-area transport replays and integrated delivery remain open. |
-| FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Full cross-area transport replays and integrated delivery remain open. |
-| FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. The Nautilus dives for both native Temple of Time entrances, with guidance to bring Magic Keys or an active Thief. The Lute remains the objective inside. Selected approaches and a Nepto resume case pass. Integrated delivery remains open. |
-| FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The Lunar Whale route to FuSoYa leads to the Western Lunar Path. The focused stage and approach replay passes. Integrated delivery remains open. |
-| FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 150 native objectives, including the ship boarding that restores the airship. The merged-world terrain and the real flying Rift contact pass. Integrated delivery remains open. |
-| FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. The Falcon uses Kefka's Tower's actual vehicle action pad. Storyline uses the existing guides for multi-party, timed and stateful map sequences. All 126 labels and instructions have all 12 locales. Integrated delivery remains open. |
-| Database appearance coverage | All 2,789 visible keys in the six frozen enemy, field, battle and equipment inventories have descriptions in all 12 game languages. The strict offline check found no missing keys or locale entries. The status audit has a disposition for all 525 rows. The 85 distinct assigned battle effects, 13 icons, alternate battle bodies and applied palette cues have 12-language wording. Integrated delivery remains open. [Artwork coverage and evidence](VISUAL_DESCRIPTIONS_20261119.md#november-20-six-game-artwork-catalog). |
-| Cutscene and event coverage | Fixed inventory review closed. All 119 battle bodies and 6,110 field bodies have a disposition. A cue covers at least one stage in 65 field bodies, including all six endings, and 768 bodies are ordinary, repeated or covered by native presentation. The remaining 5,277 carry the recorded visual timing or presentation exception. The final reconciliation included all 1,109 silent priority bodies. Integrated delivery and natural timing confirmation remain open. [Scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md). |
-| Verification and delivery | Open. Run source-to-output, locale, exact route, focus, lifecycle, skip and timing checks. Preserve the loading gates. Verify the final DLL and local install for all six games with the existing build, smoke, exact-payload scan and installer. Record gameplay-only confirmation separately. |
+| FF1 campaign | Objective coverage reaches Chaos. Opening, item, teaching, transport, boss and ending receipts select the next objective. Optional native conversations use the same controls. Nearby routes and native encounters pass offline. Cross-area route fixtures cover selected native arrivals and transport transitions. |
+| FFII campaign | Objective coverage reaches the Emperor in Pandaemonium. The sequence reads both saved scenario receipts and the native learned-word list. Native contacts, selected approaches and late-save recovery pass the focused replay. Cross-area route fixtures cover selected native arrivals and transport transitions. |
+| FFIII campaign | Objective coverage reaches the Cloud of Darkness. Mini and Frog gates, vehicle changes, the four Fangs, Crystal Tower and the four Warriors of Dark have verified contacts. The Nautilus dives for both native Temple of Time entrances, with guidance to bring Magic Keys or an active Thief. The Lute remains the objective inside. Selected approaches and a Nepto resume case pass. |
+| FFIV campaign | Objective coverage reaches Zeromus. Surface, underworld and lunar transfers use distinct native contacts. The Lunar Whale route to FuSoYa leads to the Western Lunar Path. The focused stage and approach replay passes. |
+| FFV campaign | Objective coverage reaches Neo Exdeath across all three worlds. The focused replay covers 150 native objectives, including the ship boarding that restores the airship. The merged-world terrain and the real flying Rift contact pass. |
+| FFVI campaign | Objective coverage reaches Kefka. The focused replay covers the three scenarios, a Sabin-first branch and the native victory callback. The Falcon uses Kefka's Tower's actual vehicle action pad. Storyline uses the existing guides for multi-party, timed and stateful map sequences. All 126 labels and instructions have all 12 locales. |
+| Database appearance coverage | All 2,789 visible keys in the six frozen enemy, field, battle and equipment inventories have descriptions in all 12 game languages. The strict offline check found no missing keys or locale entries. The status audit has a disposition for all 525 rows. The 85 distinct assigned battle effects, 13 icons, alternate battle bodies and applied palette cues have 12-language wording. [Artwork coverage and evidence](VISUAL_DESCRIPTIONS_20261119.md#november-20-six-game-artwork-catalog). |
+| Cutscene and event coverage | Fixed inventory review closed. All 119 battle bodies and 6,110 field bodies have a disposition. A cue covers at least one stage in 65 field bodies, including all six endings, and 768 bodies are ordinary, repeated or covered by native presentation. The remaining 5,277 carry the recorded visual timing or presentation exception. The final reconciliation included all 1,109 silent priority bodies. Natural timing awaits gameplay confirmation. [Scene evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md). |
+| Verification and delivery | Complete offline and installed in all six Steam game folders. The 16 focused checks, 73 embedded resources, 47 forwarded exports and 22 exact payload files passed. Gameplay confirmation remains pending. [Build and installation record](../SECURITY_AND_DISTRIBUTION.md#november-20-visual-descriptions-and-storyline). |
+
+The final campaign replay reached Chaos, the Emperor, the Cloud of
+Darkness, Zeromus, Neo Exdeath and Kefka. FF1 passed 235 assertions and
+61 tested physical route legs. The other campaign replays passed with 84,
+86, 72, 150 and 116 objectives respectively. FF1 includes native clue
+conversations along the campaign, with the same directions controls as
+objectives. The selected native approach and transport fixtures cover
+route semantics and progression receipts at known story states.
+
+Gameplay checks can use normal saves. In FF1, select Storyline in the
+destination categories after the Cornelia audience. A clue-giver should
+be selectable, directions should lead to that person, and talking or
+advancing the story should move the list forward. Across the six games,
+on a later save, check that Storyline resumes at the current objective
+and gives the correct first exit or transport step. During a dialogue,
+I should describe the visible speaker. In battle, I should describe the
+target as currently drawn. Ctrl+I should describe the acting character
+and any equipment and status effects that are showing. At a covered
+cutscene, the action cue should speak once when the action appears.
+Natural cue timing, every playable route from arbitrary saves and
+end-to-end gameplay responsiveness await player confirmation.
 
 The connected travel checkpoint passed the six campaign replays, world
 map journey, navigation follow-up, battle focus and dialogue appearance

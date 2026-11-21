@@ -1,5 +1,49 @@
 # Build and distribution security
 
+## November 20 visual descriptions and Storyline
+
+Built source `5efb0d37099f633c9306a78f11a51b9c624f3134` on master.
+The 21,318,144-byte unsigned DLL SHA-256 is
+`bb8b5356300e117231568a354174cc0b0e2cdfdd86e40fe7ac74d6700b1c9b9b`.
+The canonical focused build used `build_local.bat` with 16 check targets.
+The resource receipt records 287.0 seconds, peak aggregate memory of
+525,459,456 bytes, a 2 GB cap, one worker and a 25 percent CPU cap.
+It verified 73 embedded resources and 9,113 native-name bindings. The
+isolated `smoketest.bat` loaded the same DLL and forwarded all 47 exports.
+
+Defender definitions `1.463.387.0` reported no threats in the 22 exact
+staged files and no matching detection events. Every staged hash was
+unchanged. The exclusion query was denied. The guarded `deploy.bat`
+installation verified all 22 files in each of the six Steam game folders
+and 138 protected file states. The installer verified Prism as read-only.
+The game processes remained closed.
+
+The full procedure, maintained check names, installed hashes, scan
+result, frozen corpus and compact check results are in the local
+`../tools/visual_audit_20261119/final-delivery` evidence folder.
+The reserved resource job and tested build inputs are reproducible
+from the source checkpoint, the existing pinned dependencies and the
+verified installed game inputs. Recovery sources for the preceding
+payload are `270661f` for FFIV and `8f061ac` for the other five games.
+Recovery of this build uses the exact source checkpoint above.
+
+The offline scheduler fixture ran 300 synthetic callbacks across 132
+native updates and measured a maximum dispatch of 0.528 ms. The movement
+fixture ran 2,400 warm owner reads in 0.070 ms total with no queued work.
+The world benchmark passed 24 worlds and 16 routes, with a worst worker
+flood of 17.399 ms and route of 49.391 ms under the same resource caps.
+The route-worker fixture observed 148.902 ms for its longest full
+vehicle route, 25.436 ms for its longest filter and 0.829 ms for its
+longest parked cancellation. Scene observation tests cover the loading
+gate, delayed and cancelled speech, exact draw state and the bounded
+scan of up to eight emitters per frame for 16 frames. These measurements
+are from offline fixtures. In-game combined lag, audible timing and
+end-to-end gameplay confirmation remain pending.
+
+The cleanup receipt records 1,848,933,018 bytes reclaimed from generated
+builds, test output, serial project files and payload staging. The
+source, frozen input evidence and installed files remain available.
+
 ## November 19 FFIV hovercraft journeys
 
 The focused browse, landing and route worker checks passed with 67 verified

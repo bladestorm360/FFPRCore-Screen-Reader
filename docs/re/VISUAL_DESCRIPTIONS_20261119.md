@@ -1,9 +1,9 @@
 # Visual description audit
-The November 19 gameplay fixes are installed. This audit records the exact art
-and scenes that need descriptions, with separate verification for the speech
-controls and for localization. The reviewed wording below is working audit
-content. The first appearance readers and localized samples are still
-outside the installed mod.
+The six-game catalog and visual speech are installed and offline verified.
+All 2,789 visible artwork entries have descriptions in all 12 languages.
+The status audit accounts for all 525 installed condition rows. The fixed
+event review and reconciliation are closed. Earlier checkpoints below
+record how coverage developed. Gameplay confirmation remains pending.
 
 ## November 20 exact FF1 catalog
 
@@ -108,7 +108,7 @@ FFV's 109 battle outfits and FFVI's separate descriptions for the same
 sprite when drawn in the field and in battle. The six-game Italian
 inventory and packaged speech checks passed. German also covers all 2,789
 keys, including FFVI's exact field and battle variants. Russian covers all
-2,789 keys across the six games. Korean and Thai complete the same 2,789 artwork keys. The strict six-game inventory check found wording in all 12 languages for every visible key. Integrated delivery and gameplay confirmation remain open.
+2,789 keys across the six games. Korean and Thai complete the same 2,789 artwork keys. The strict six-game inventory check found wording in all 12 languages for every visible key. All six local installs are verified. Gameplay confirmation remains pending.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
 113 belong to the six title bundles and six to their common-script
