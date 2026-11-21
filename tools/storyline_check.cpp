@@ -394,7 +394,7 @@ int verify_ff3()
                   "entering the destination keeps the objective and removes the earlier NPC detour");
             check(stage.advice && stage.advice->id == hint->id, "FFIII selects the expected optional speaker");
             if (stage.advice) {
-                ObjectiveSelection choice;
+                Selection choice;
                 check(choice.resolve(objective, stage.advice, false).id == hint->id &&
                       choice.resolve(objective, stage.advice, true).id == objective.id &&
                       choice.resolve(objective, stage.advice, false).id == objective.id &&
