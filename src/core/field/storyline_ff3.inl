@@ -110,6 +110,32 @@ constexpr std::array kFf3Journey{
     ff3_contact(104, L"Free the fourth Warrior of Dark", 333, 0, Type::Entity),
     ff3_contact(105, L"Face the Cloud of Darkness", 335, 4, Type::Entity)
 };
+
+struct Ff3Hint {
+    int objective_receipt;
+    Objective speaker;
+    int first_destination_map, last_destination_map;
+};
+// These contacts supply native dialogue at this step in the journey. Once
+// inside the destination, keep directions focused on the objective ahead.
+constexpr std::array kFf3Hints{
+    Ff3Hint{10, interact(Id::Ff3KazusAdvice, L"Ask the villager about Kazus", 5, 98), 13, 20},
+    Ff3Hint{29, interact(Id::Ff3TozusAdvice, L"Ask the gnome how to enter Tozus", 152, 3), 45, 50},
+    Ff3Hint{51, interact(Id::Ff3GutscoAdvice, L"Ask the dwarf where Gutsco went", 85, 19), 189, 193},
+    Ff3Hint{72, interact(Id::Ff3GoldorAdvice, L"Ask the villager about Goldor's Manor", 101, 10), 219, 227},
+    Ff3Hint{77, interact(Id::Ff3DalgAdvice, L"Ask the scholar how to fly through the gales", 110, 8), 131, 133},
+};
+
+std::optional<Objective> ff3_hint(int receipt, int origin_map)
+{
+    const auto hint = std::find_if(kFf3Hints.begin(), kFf3Hints.end(), [receipt](const Ff3Hint& candidate) {
+        return candidate.objective_receipt == receipt;
+    });
+    if (hint == kFf3Hints.end() ||
+        (origin_map >= hint->first_destination_map && origin_map <= hint->last_destination_map))
+        return {};
+    return hint->speaker;
+}
 }
 
 Stage ff3_stage(const Ff3Receipts& scenario, int origin_map)
@@ -126,7 +152,7 @@ Stage ff3_stage(const Ff3Receipts& scenario, int origin_map)
             return {interact(Id::Ff3EyeRecovery, L"Take the Nepto Eye", 173, 5, Type::Entity)};
         if (step.receipt == 79 && origin_map > 0 && (origin_map < 242 || origin_map > 252))
             return {kTempleEntrance};
-        return {step.target};
+        return {step.target, ff3_hint(step.receipt, origin_map)};
     }
     return {};
 }

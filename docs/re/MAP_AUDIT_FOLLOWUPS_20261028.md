@@ -400,6 +400,32 @@ Verify that event descriptions follow the visible action and preserve the
 native dialogue order. Localize added descriptions in each game's supported
 languages.
 
+## November 21 FFIII Storyline clue conversations
+
+FFIII now offers five optional conversations at specific points in Storyline.
+Use the existing destination selection keys to switch between the clue and the
+direct objective. At an NPC, use the game's normal Talk action. The current
+story objective remains available even if the conversation is skipped. The
+conversation itself uses native dialogue and has no new completion flag.
+Inside the destination area, Storyline guides onward without sending the
+party back to the clue-giver.
+
+| Story moment | Optional native conversation | Installed evidence |
+| --- | --- | --- |
+| Leaving Ur for Kazus | A villager points south from Ur. | Map 5, NPC 98, direct message `N102_C03_005_04_01`. |
+| After learning Mini | The gnome at the healing spring explains where Tozus is and how to enter. | Map 152, NPC 3, direct message `N122_C00_152_01_01`. |
+| After Gutsco steals the horns | A dwarf points toward the cave to the north. | Map 85, NPC 19, `sc_npc_20161_2_6` selects the clue after receipt 50 and before 51. |
+| After getting the Levigrass Shoes | An Amur villager explains where Goldor's Manor is and warns about the bog. | Map 101, NPC 10, `sc_npc_20201_4_2` serves the clue before receipt 72. |
+| After getting the Nautilus | A Saronia scholar explains the flight through the gales into Dalg. | Map 110, NPC 8, direct message `N118_C03_110_02_01`. |
+
+The FFIII stage selector checks the current receipt against five fixed
+entries and uses the same destination selection and worker route as FF1.
+The five labels have all 12 game locales. The campaign fixture covers the
+exact speaker, native entry point, destination selection in both directions
+and the direct objective when starting inside the destination. The Saronia
+case exercises the native door from the castle courtyard. This change adds
+no native hooks or frame work.
+
 ## November 20 six-game completion goal
 
 The owner requests a complete visual audit and Storyline mode for FF1–FF6.

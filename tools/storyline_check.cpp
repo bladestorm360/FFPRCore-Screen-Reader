@@ -354,6 +354,19 @@ int verify_ff3()
         Arrival{327, 4, {1,9,19}},
         Arrival{335, 4, {1,11,11}}
     };
+    struct Hint {
+        int receipt;
+        ObjectiveId id;
+        int map, entity, origin, area, inside;
+    };
+    constexpr std::array hints{
+        Hint{10, ObjectiveId::Ff3KazusAdvice, 5, 98, 5, 3, 14},
+        Hint{29, ObjectiveId::Ff3TozusAdvice, 152, 3, 152, 11, 46},
+        Hint{51, ObjectiveId::Ff3GutscoAdvice, 85, 19, 85, 22, 189},
+        Hint{72, ObjectiveId::Ff3GoldorAdvice, 101, 10, 101, 30, 219},
+        Hint{77, ObjectiveId::Ff3DalgAdvice, 110, 8, 104, 35, 131}
+    };
+    size_t hint_count = 0;
     int count = 0;
     for (; count < 90; ++count) {
         const auto stage = ff3_stage(flags);
@@ -369,6 +382,54 @@ int verify_ff3()
         if (targets.empty())
             std::printf("  FFIII map%d/%d type%d %ls\n", objective.map, objective.contacts[0],
                         static_cast<int>(objective.object_type), objective.label.data());
+        const auto hint = std::find_if(hints.begin(), hints.end(), [receipt](const auto& candidate) {
+            return candidate.receipt == receipt;
+        });
+        if (hint == hints.end()) {
+            check(!stage.advice, "FFIII only offers hints during their verified story stages");
+        } else {
+            ++hint_count;
+            const auto inside = ff3_stage(flags, hint->inside);
+            check(inside.objective && inside.objective->id == objective.id && !inside.advice,
+                  "entering the destination keeps the objective and removes the earlier NPC detour");
+            check(stage.advice && stage.advice->id == hint->id, "FFIII selects the expected optional speaker");
+            if (stage.advice) {
+                ObjectiveSelection choice;
+                check(choice.resolve(objective, stage.advice, false).id == hint->id &&
+                      choice.resolve(objective, stage.advice, true).id == objective.id &&
+                      choice.resolve(objective, stage.advice, false).id == objective.id &&
+                      choice.resolve(objective, stage.advice, true).id == hint->id,
+                      "the player can switch both ways without the hint advancing the save");
+                const auto speakers = contacts(*stage.advice, hint->origin);
+                check(speakers.size() == 1 && speakers.front().goal.map_id == hint->map &&
+                      speakers.front().goal.entity_id == hint->entity && speakers.front().goal.examine &&
+                      speakers.front().kind == TargetKind::Interact,
+                      "each hint resolves the exact native conversation");
+                const auto* map = baked::submap_by_map_id(hint->origin);
+                check(map != nullptr, "the hint's starting map is present in the shipped map data");
+                if (map && !speakers.empty()) {
+                    const auto& objects = baked::grids(*map).objects;
+                    const auto entry = std::find_if(objects.begin(), objects.end(), [](const auto& object) {
+                        return object.type == baked::ObjType::PointIn && object.a == 1;
+                    });
+                    check(entry != objects.end(), "the hint replay starts at the native entry point");
+                    if (entry != objects.end()) {
+                        std::copy(flags.begin(), flags.end(), state.scenario.begin());
+                        state.current_map_id = hint->origin;
+                        state.current_area_id = hint->area;
+                        const auto& speaker = speakers.front();
+                        const auto planned = exdeath_routes::route(hint->origin, {entry->layer, entry->tx, entry->ty},
+                                                                  state, speaker.goal, speaker.kind);
+                        check(planned.path.success && !planned.path.required_trap &&
+                              (hint->origin == hint->map || planned.path.next_map_id == hint->map),
+                              "FFIII directions reach the clue or its native first door");
+                        if (!planned.path.success)
+                            std::printf("  FFIII clue %ls: %ls / %ls\n", stage.advice->label.data(),
+                                        planned.path.reason.c_str(), planned.path.error.c_str());
+                    }
+                }
+            }
+        }
         if (receipt == 33) {
             auto interrupted = flags;
             interrupted[32] = 1;
@@ -401,6 +462,7 @@ int verify_ff3()
         flags.at(static_cast<size_t>(receipt)) = 1;
     }
     check(count >= 70 && count < 90, "FFIII story replay reaches a finite ending");
+    check(hint_count == hints.size(), "all five FFIII clues were exercised by the complete campaign replay");
     flags[105] = 0;
     for (int index = 79; index <= 105; ++index) flags[index] = 0;
     const auto temple = ff3_stage(flags, 4).objective;
@@ -422,7 +484,8 @@ int verify_ff3()
             if (!planned.path.success) std::printf("  FFIII Temple: %ls / %ls\n", planned.path.reason.c_str(), planned.path.error.c_str());
         }
     }
-    std::printf("FFIII Storyline: %d objectives, %d total failures\n", count, exdeath_routes::failures);
+    std::printf("FFIII Storyline: %d objectives, %zu optional clues, %d total failures\n",
+                count, hint_count, exdeath_routes::failures);
     return exdeath_routes::failures || fixture::wrong_owner ? 3 : 0;
 }
 

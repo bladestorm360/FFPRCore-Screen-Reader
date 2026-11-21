@@ -26,6 +26,7 @@ enum class ObjectiveId {
     CaravanAdvice, FairyAdvice, RosettaAdvice, WarpAdvice, PastAdvice,
     Ff2Scenario = 100, Ff2Keyword = 300, Ff2Advice = 400,
     Ff3Scenario = 500, Ff3EyeRecovery = 900,
+    Ff3KazusAdvice, Ff3TozusAdvice, Ff3GutscoAdvice, Ff3GoldorAdvice, Ff3DalgAdvice,
     Ff4Scenario = 1000, Ff5Scenario = 1400, Ff6Scenario = 1900
 };
 struct Objective {
