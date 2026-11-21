@@ -71,7 +71,7 @@ battle context, with an offline focused fixture for the reused art.
 The build verified all 73 embedded resources and the dialogue
 appearance, battle focus and boss visual form checks. The coverage check
 matched every exact English catalog key to the frozen hashes. There are
-18,760 remaining non-English entries in the new catalog. All 251
+18,298 remaining non-English entries in the new catalog. All 251
 visible FF1 artwork keys have Japanese wording, including enemy forms,
 field sprites, battle characters and equipment. The translations retain
 the variant's palette, anatomy, pose and visible equipment. All 274
@@ -100,8 +100,8 @@ have complete Traditional and Simplified Chinese wording for all 2,789
 keys. The Simplified Chinese catalog uses the reviewed Traditional text,
 Windows character conversion and checked regional spellings. The local
 `ff1_derived_zhc_review.tsv` through `ff6_derived_zhc_review.tsv` files
-record conversion differences for the exact keys. FFI and FFII also have Spanish
-wording for all 525 entries. Remaining translations,
+record conversion differences for the exact keys. FFI through FFIII also have Spanish
+wording for all 989 entries. Remaining translations,
 delivery and gameplay confirmation are open.
 
 The event review also covers 119 frozen battle-script bodies. Of these,
