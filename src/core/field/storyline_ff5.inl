@@ -64,7 +64,9 @@ constexpr std::array kFirstWorld{
     ff5_contact(425, L"Take the Summoner shard", 243, 32, Type::AnimEntity, Kind::Interact, 39),
     ff5_contact(426, L"Take the Time Mage shard", 243, 33, Type::AnimEntity, Kind::Interact, 39),
     ff5_contact(427, L"Take the Mystic Knight shard", 243, 22, Type::AnimEntity, Kind::Interact, 39),
-    ff5_contact(39, L"Speak to the wounded king of Walse", 57, 7),
+    // The optional conversation has its own receipt. The meteorite can
+    // transfer the party to Karnak without it, so that arrival retires it.
+    ff5_contact(39, L"Speak to the wounded king of Walse", 57, 7, Type::NPC, Kind::Interact, 40),
     ff5_warp(40, L"Use the Walse meteorite to reach Karnak", 246, 2),
     ff5_contact(41, L"Visit the weapon shop in Karnak", 88, 20),
     ff5_contact(42, L"Speak to Cid in the Karnak jail", 101, 2),

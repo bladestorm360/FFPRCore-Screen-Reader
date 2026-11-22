@@ -400,6 +400,15 @@ Verify that event descriptions follow the visible action and preserve the
 native dialogue order. Localize added descriptions in each game's supported
 languages.
 
+## November 22 FFV Storyline outside Karnak
+
+| Checkpoint | State and acceptance |
+| --- | --- |
+| Scope | Resume the active Storyline objective on an existing FFV save outside Karnak. Keep the Walse king conversation available before the meteorite and guide the party from the logged world-map location to the next active ship scene, then onward when the scene is complete. |
+| Source evidence | The Steam log at `856.296` shows Storyline targeting Walse castle map 57, tile `(8,4)`. The same session reaches the ordinary Karnak Castle entrance in one step and later enters the Fire-Powered Ship. The read-only save matching the loaded slot has flag 39 clear, flags 40–43 set, and flag 44 clear. The king's own script records 39. The independent Karnak Meteorite arrival records 40. The ship's interior arrival records 44. |
+| Change and bounds | The existing FFV stage selector retires the king's optional conversation at the confirmed meteorite arrival. It still uses the live saved bits and exact contacts. The change adds no native reads, hooks, route searches, or retries. The failed original request recorded 0.321 ms owner capture, 102.625 ms worker compute and 117.357 ms to speech submission. |
+| Offline and delivery | Open. Replay the saved state from world map 1, tile `(84,78)`, then from the ship's native arrival. Verify the pre-transfer branch, exact first leg, and continued progression after flag 44. Focused Storyline build, smoke test, exact scan and guarded FFV installation. Effort checkpoint 15–30 minutes. Gameplay confirmation remains separate. |
+
 ## November 22 FFIV Lunar Whale bed interaction
 
 The FFIV Steam log at `181337.156` records Bed 1 selected from `(5,20)`

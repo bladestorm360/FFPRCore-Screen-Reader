@@ -588,8 +588,58 @@ int verify_ff4()
     return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
 }
 
+void verify_ff5_karnak_resume()
+{
+    Ff5Receipts karnak;
+    karnak.fill(0);
+    std::fill_n(karnak.begin(), 44, 1);
+    karnak[36] = karnak[39] = 0;
+    for (int shard = 423; shard <= 427; ++shard) karnak[shard] = 1;
+
+    auto walse = karnak;
+    std::fill_n(walse.begin() + 40, 4, 0);
+    const auto before_transfer = ff5_stage(walse).objective;
+    check(before_transfer && before_transfer->map == 57 && before_transfer->contacts[0] == 7,
+          "FFV Storyline still offers the Walse king before using the meteorite");
+    walse[39] = 1;
+    const auto after_talk = ff5_stage(walse).objective;
+    check(after_talk && after_talk->map == 246 && after_talk->contacts[0] == 2,
+          "Speaking to the king still leads to the Walse meteorite");
+
+    const auto stage = ff5_stage(karnak);
+    check(stage.objective && stage.objective->map == 250 && stage.objective->contacts[0] == 28,
+          "The saved Karnak transfer retires the skipped Walse conversation and selects Cid's ship scene");
+    if (!stage.objective) return;
+    const auto targets = contacts(*stage.objective, 1);
+    check(targets.size() == 1, "The active Karnak objective binds its exact scripted contact");
+    if (targets.empty()) return;
+
+    const auto& target = targets.front();
+    auto state = progress_at({}, 1);
+    std::copy(karnak.begin(), karnak.end(), state.scenario.begin());
+    state.scenario[990] = state.scenario[991] = 1;
+    const auto land = exdeath_routes::route(1, {1,84,78}, state, target.goal, target.kind);
+    check(land.path.success && land.path.next_map_id == 250 && land.path.step_count == 1 &&
+          !land.path.walk_phases.empty() && !land.path.walk_phases.back().cells.empty() &&
+          land.path.walk_phases.back().cells.back() == baked_route::Cell{1,84,79},
+          "Storyline reaches the ship entrance one step south of the logged position");
+    state.current_map_id = 250;
+    state.current_area_id = 26;
+    const auto deck = exdeath_routes::route(250, {1,13,17}, state, target.goal, target.kind);
+    check(deck.path.success && !deck.path.walk_phases.empty() && !deck.path.walk_phases.back().cells.empty() &&
+          deck.path.walk_phases.back().cells.back() == target.goal.cell,
+          "From the ship's native arrival Storyline reaches Cid's scene on deck");
+    std::printf("FFV Karnak resume: world %ls, deck %ls\n", land.path.description.c_str(), deck.path.description.c_str());
+
+    karnak[44] = 1;
+    const auto onward = ff5_stage(karnak).objective;
+    check(onward && onward->map == 271 && onward->contacts[0] == 1,
+          "Completing the ship scene advances to Liquid Flame with the Walse conversation still skipped");
+}
+
 int verify_ff5()
 {
+    verify_ff5_karnak_resume();
     constexpr std::array arrivals{
         StoryArrival{189, 8, {1,25,21}},
         StoryArrival{189, 12, {1,10,26}, 1, baked_route::Cell{1,16,21}},
