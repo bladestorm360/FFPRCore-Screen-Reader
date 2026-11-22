@@ -355,6 +355,23 @@ int verify_ff3()
     check(!ff3_stage(flags).objective, "the native Altar Cave introduction owns the field before gameplay");
     flags[0] = 1;
     const int base = static_cast<int>(ObjectiveId::Ff3Scenario);
+    struct Resume { int conversation, continuation, next; };
+    constexpr std::array resumed_stories{
+        Resume{9,11,194}, Resume{10,11,194}, Resume{12,14,16},
+        Resume{30,31,33}, Resume{55,56,59}, Resume{68,69,70}
+    };
+    for (const auto& saved : resumed_stories) {
+        Ff3Receipts resumed;
+        resumed.fill(1);
+        resumed[32] = resumed[105] = resumed[saved.conversation] = resumed[saved.next] = 0;
+        const auto after = ff3_stage(resumed);
+        check(after.objective && static_cast<int>(after.objective->id) == base + saved.next && !after.advice,
+              "FFIII resumes the current objective without restoring an obsolete conversation or clue");
+        resumed[saved.continuation] = 0;
+        const auto before = ff3_stage(resumed);
+        check(before.objective && static_cast<int>(before.objective->id) == base + saved.conversation,
+              "FFIII still offers the conversation before its verified continuation");
+    }
     auto state = progress_at({}, 1);
     struct Arrival { int map, entity; baked_route::Cell start; };
     constexpr std::array arrivals{
@@ -559,6 +576,16 @@ int verify_campaign(const char* title, Stage (*next)(const Receipts&), Objective
 
 int verify_ff4()
 {
+    Ff4Receipts rested;
+    rested.fill(0);
+    rested[0] = rested[3] = 1;
+    const auto after_baron = ff4_stage(rested).objective;
+    check(after_baron && after_baron->map == 162, "FFIV retires the optional Baron conversations after resting");
+    rested.fill(1);
+    rested[37] = rested[39] = rested[70] = 0;
+    const auto after_troia = ff4_stage(rested).objective;
+    check(after_troia && after_troia->map == 1 && after_troia->contacts[0] == 135,
+          "FFIV keeps the Tower of Zot objective when the party skipped thanking Edward");
     constexpr std::array arrivals{
         StoryArrival{14, 5, {0,6,5}},
         StoryArrival{239, 10, {0,21,19}, 1, baked_route::Cell{0,21,16}},
@@ -640,6 +667,16 @@ void verify_ff5_karnak_resume()
 int verify_ff5()
 {
     verify_ff5_karnak_resume();
+    Ff5Receipts fleet;
+    fleet.fill(1);
+    fleet[105] = fleet[107] = fleet[125] = fleet[153] = fleet[161] = 0;
+    const auto on_fleet = ff5_stage(fleet).objective;
+    check(on_fleet && on_fleet->map == 351 && on_fleet->contacts[0] == 1,
+          "FFV continues on Xezat's fleet when the party flew there without visiting Castle Surgate");
+    fleet[106] = 0;
+    const auto before_fleet = ff5_stage(fleet).objective;
+    check(before_fleet && before_fleet->map == 153 && before_fleet->contacts[0] == 16,
+          "FFV still offers the Castle Surgate guards before the fleet landing");
     constexpr std::array arrivals{
         StoryArrival{189, 8, {1,25,21}},
         StoryArrival{189, 12, {1,10,26}, 1, baked_route::Cell{1,16,21}},

@@ -407,7 +407,37 @@ languages.
 | Scope | Resume the active Storyline objective on an existing FFV save outside Karnak. Keep the Walse king conversation available before the meteorite and guide the party from the logged world-map location to the next active ship scene, then onward when the scene is complete. |
 | Source evidence | The Steam log at `856.296` shows Storyline targeting Walse castle map 57, tile `(8,4)`. The same session reaches the ordinary Karnak Castle entrance in one step and later enters the Fire-Powered Ship. The read-only save matching the loaded slot has flag 39 clear, flags 40–43 set, and flag 44 clear. The king's own script records 39. The independent Karnak Meteorite arrival records 40. The ship's interior arrival records 44. |
 | Change and bounds | The existing FFV stage selector retires the king's optional conversation at the confirmed meteorite arrival. It still uses the live saved bits and exact contacts. The change adds no native reads, hooks, route searches, or retries. The failed original request recorded 0.321 ms owner capture, 102.625 ms worker compute and 117.357 ms to speech submission. |
-| Offline and delivery | Open. Replay the saved state from world map 1, tile `(84,78)`, then from the ship's native arrival. Verify the pre-transfer branch, exact first leg, and continued progression after flag 44. Focused Storyline build, smoke test, exact scan and guarded FFV installation. Effort checkpoint 15–30 minutes. Gameplay confirmation remains separate. |
+| Offline and delivery | Open. Replay the saved state from world map 1, tile `(84,78)`, then from the ship's native arrival. Verify the pre-transfer branch, exact first leg, and continued progression after flag 44. The owner added the all-six conversation review below before the focused build, smoke test, exact scan and guarded FFV/FFIII installation. Gameplay confirmation remains separate. |
+
+The king's English dialogue explains that Karnak amplifies its Fire Crystal
+with a machine like Walse's, mentions the meteorite near Karnak, and urges the
+party to hurry. This remains an available Storyline step before using the
+meteorite. The progress witness comes from the next area's arrival script.
+
+### Skipped Storyline conversations in all six games
+
+The finite pass reviewed the authored clue/quest selection and 142 authored
+conversation and scene candidates from FFII–VI against local native contact
+and receipt references. Existing prerequisites keep their order. New bypasses
+require a specific later native continuation to have run.
+
+| Game | Disposition |
+| --- | --- |
+| FFI | Clue selection is independent of quest completion. The current objective's native receipt advances the stage and releases the previous clue. Cornelia and the later quest stages retain their requested NPC advice. |
+| FFII | Optional Josef advice is tied to the current rescue objective. Existing learned-word prompts expire at the native story gate they support. The Deist child's conversations and the later Cid visit own actual downstream gates. |
+| FFIII | Cid retires Topapa and the Kazus traveler (9/10 → 11). Meeting Sara retires the opening Sasune king conversation (12 → 14). Entering Nepto Temple retires the Vikings' leader (30 → 31). Using the escape hole retires the optional Castle Hein soldier, who offers an item (55 → 56). Gill opening the sewer retires the Amur old men's introduction (68 → 69). The Tokkul warning still activates the capture scene. The five authored clues remain stage-bound and retire on entry to their destinations. |
+| FFIV | The existing rest receipt retires the early Baron conversations. Returning the Earth Crystal retires Edward's optional thanks. The ship upgrades and other travel/recruitment conversations still own progression. |
+| FFV | The Karnak Meteorite arrival retires the wounded King Walse (39 → 40). Xezat's fleet accepts the Wind Drake independently of the Castle Surgate introduction, and its landing receipt retires the guards (105 → 106). Existing skips cover the Carwen and Crescent advice, optional Regole inn, and introductory contacts displaced by their follow-ups. |
+| FFVI | Kefka's early exchanges enable the next Figaro dialogue. The Returners' three party exchanges enable the exit soldier. The Jidoor introduction and voyage dialogues control their next contacts. The optional Returners paper and sleep-talk scenes are outside the itinerary. |
+
+Source locators include `sc_e_0010/0011/0012/0013/0015`,
+`sc_e_0031/0032`, `sc_e_0056/0057`, and `sc_e_0069/0070` in FFIII,
+and `sc_e_0040/0041/0041_2`, `sc_e_0106/0106_1/0107/0107_1` in FFV.
+See the local `../tools/storyline_progression_20261122` evidence folder for
+the bounded contact index. This checkpoint covers stale conversations in
+the authored itinerary. It does not reopen route geometry or scene audits.
+The offline replay exercises the new saved-state skips and the preserved
+pre-continuation steps, with actual route legs for the reported Karnak case.
 
 ## November 22 FFIV Lunar Whale bed interaction
 

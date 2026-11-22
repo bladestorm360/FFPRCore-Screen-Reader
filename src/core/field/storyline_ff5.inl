@@ -133,7 +133,8 @@ constexpr std::array kSecondWorld{
     ff5_event(102, L"Visit Krile in the castle", 175, 53),
     ff5_contact(103, L"Heal and board the wind drake", 167, 201),
     ff5_event(104, L"Fly to the island where Ghido lives", 12, 66),
-    ff5_contact(105, L"Speak to the guards at Castle Surgate", 153, 16, Type::Entity),
+    // The fleet accepts the drake when the party flies there directly.
+    ff5_contact(105, L"Speak to the guards at Castle Surgate", 153, 16, Type::Entity, Kind::Interact, 106),
     ff5_contact(106, L"Land the wind drake on Xezat's fleet", 12, 71, Type::TransportationEventAction, Kind::Infer),
     ff5_event(107, L"Rest below deck on Xezat's ship", 351, 1),
     ff5_contact(108, L"Meet Xezat on deck during the attack", 347, 1),

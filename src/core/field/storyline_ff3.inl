@@ -4,12 +4,13 @@ namespace {
 struct Ff3Step {
     int receipt;
     Objective target;
+    int skip_after = -1;
 };
 constexpr Ff3Step ff3_contact(int flag, std::wstring_view label, int map, int entity,
-                             Type type = Type::NPC, Kind kind = Kind::Interact)
+                             Type type = Type::NPC, Kind kind = Kind::Interact, int skip_after = -1)
 {
     const auto id = static_cast<Id>(static_cast<int>(Id::Ff3Scenario) + flag);
-    return {flag, {id, label, map, {entity, -1, -1}, kind, type}};
+    return {flag, {id, label, map, {entity, -1, -1}, kind, type}, skip_after};
 }
 constexpr Ff3Step ff3_event(int flag, std::wstring_view label, int map, int entity)
 {
@@ -27,11 +28,11 @@ constexpr std::array kFf3Journey{
     ff3_contact(2, L"Examine the unusual rock", 153, 10, Type::Entity),
     ff3_event(6, L"Defeat the Land Turtle", 155, 3),
     ff3_contact(8, L"Speak to the Wind Crystal", 155, 0, Type::Entity),
-    ff3_contact(9, L"Visit Elder Topapa in Ur", 12, 6),
-    ff3_contact(10, L"Speak to the traveler in Kazus", 13, 49),
+    ff3_contact(9, L"Visit Elder Topapa in Ur", 12, 6, Type::NPC, Kind::Interact, 11),
+    ff3_contact(10, L"Speak to the traveler in Kazus", 13, 49, Type::NPC, Kind::Interact, 11),
     ff3_contact(11, L"Speak to Cid in Kazus", 14, 18),
     ff3_contact(194, L"Board Cid's airship in the desert", 21, 3, Type::Warp),
-    ff3_contact(12, L"Speak to the king of Sasune", 26, 11),
+    ff3_contact(12, L"Speak to the king of Sasune", 26, 11, Type::NPC, Kind::Interact, 14),
     ff3_contact(14, L"Find Princess Sara in the Sealed Cave", 163, 5),
     ff3_event(16, L"Defeat the Djinn with Sara", 164, 8),
     ff3_contact(17, L"Collect the king's reward in Sasune", 26, 3),
@@ -42,7 +43,7 @@ constexpr std::array kFf3Journey{
     ff3_event(24, L"Approach Dragon's Peak", 1, 77),
     ff3_contact(28, L"Escape Bahamut and obtain Mini", 166, 2, Type::AnimEntity),
     ff3_contact(29, L"Enter Tozus as Mini and give the antidote", 46, 25),
-    ff3_contact(30, L"Speak to the leader of the Vikings", 52, 17),
+    ff3_contact(30, L"Speak to the leader of the Vikings", 52, 17, Type::NPC, Kind::Interact, 31),
     ff3_contact(31, L"Enter the Nepto statue as Mini", 169, 8, Type::Warp),
     ff3_contact(33, L"Defeat the Giant Rat for the Nepto Eye", 173, 6),
     ff3_contact(34, L"Return the Nepto Eye to the statue", 169, 7, Type::Entity),
@@ -61,7 +62,7 @@ constexpr std::array kFf3Journey{
     ff3_contact(52, L"Speak to the Fire Crystal", 193, 27, Type::Entity),
     ff3_event(53, L"Hear the warning about Tokkul", 84, 8),
     ff3_contact(54, L"Enter Tokkul to reach Castle Hein", 55, 25, Type::Warp, Kind::Infer),
-    ff3_contact(55, L"Speak to the captive soldier in Castle Hein", 194, 9),
+    ff3_contact(55, L"Speak to the captive soldier in Castle Hein", 194, 9, Type::NPC, Kind::Interact, 56),
     ff3_contact(56, L"Enter the escape hole as Mini", 194, 18, Type::Warp),
     ff3_contact(59, L"Defeat Hein", 205, 5),
     ff3_event(60, L"Follow the Elder Tree to the Living Woods", 91, 12),
@@ -71,7 +72,7 @@ constexpr std::array kFf3Journey{
     ff3_contact(64, L"Collect the Water Crystal shard with Aria", 96, 5, Type::Entity),
     ff3_event(65, L"Open the Cave of Tides with Aria", 206, 38),
     ff3_event(66, L"Reach the Water Crystal and defeat Kraken", 211, 8),
-    ff3_contact(68, L"Speak to the four old men in Amur", 97, 42),
+    ff3_contact(68, L"Speak to the four old men in Amur", 97, 42, Type::NPC, Kind::Interact, 69),
     ff3_contact(69, L"Ask Gill to open the Amur sewers", 99, 6),
     ff3_event(70, L"Rescue the four old men in the sewers", 214, 12),
     ff3_event(71, L"Get the Levigrass Shoes from Delilah", 218, 6),
@@ -143,6 +144,9 @@ Stage ff3_stage(const Ff3Receipts& scenario, int origin_map)
     if (scenario[105] == 1) return {{}, {}, true};
     if (scenario[0] != 1) return {};
     for (const auto& step : kFf3Journey) {
+        // These conversations can be bypassed. The exact native continuation
+        // proves that the party has advanced past the contact.
+        if (step.skip_after >= 0 && scenario[step.skip_after] == 1) continue;
         // Later saves whose first airship has been spent never return to the
         // desert for a boarding receipt that can no longer be obtained.
         if (step.receipt == 194 && scenario[20] == 1) continue;
