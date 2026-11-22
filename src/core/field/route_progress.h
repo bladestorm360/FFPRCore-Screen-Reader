@@ -36,6 +36,7 @@ struct Phase {
     // ownership and exact half-tile movement points for every output consumer.
     // At most seven cardinal points, no game pointers, timers or worker native calls.
     std::vector<PrecisionPoint> precision;
+    bool announce_arrival_facing = false; // a stand-on interaction needs its turn after the walking directions
 };
 inline int steps(const Phase& phase) {
     if(!phase.precision.empty()) {

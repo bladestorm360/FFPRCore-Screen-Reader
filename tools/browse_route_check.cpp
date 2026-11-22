@@ -323,9 +323,12 @@ template<class Expect> void check_ff4_lunar_whale_beds(Expect expect)
                 const auto from_east = plan_snapshot(snapshot);
                 expect(from_east.path.success && from_east.path.step_count == 1 && from_east.path.walk_phases.size() == 1 &&
                        from_east.path.walk_phases.front().cells == std::vector<Cell>{east,bed} &&
-                       from_east.path.walk_phases.front().arrival_direction == 0 &&
-                       from_east.path.description == L"1 West, face North",
-                       "Lunar Whale Bed 1 directions walk West onto its interaction tile and face North");
+                       from_east.path.walk_phases.front().arrival_direction == 0,
+                       "Lunar Whale Bed 1 route walks West onto its interaction tile and ends facing North");
+                std::printf("Lunar Whale map %d Bed 1 directions: %ls\n",map_id,from_east.path.description.c_str());
+                expect(from_east.path.description == L"1 West, face North" &&
+                       from_east.path.full_description == L"1 West, face North",
+                       "Both direction reads include the walk and the turn for Lunar Whale Bed 1");
             }
         });
         worker.join();

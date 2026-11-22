@@ -367,6 +367,7 @@ void annotate_facing(Phase& phase, const baked_route::Goals& goals)
 {
     phase.arrival_direction = phase.cells.empty() ? -1 : baked_route::facing_direction(phase.cells.back(), goals);
     phase.arrival_facing = facing_text(phase.cells, goals);
+    phase.announce_arrival_facing = goals.arrival_facing >= 0;
 }
 
 /// Live obstacles for an explicit route, by what they are (user, 2026-10-11: say why a route
@@ -1761,6 +1762,7 @@ void prepare_mountain_phases(const baked::Submap& sm,std::vector<Phase>& phases)
         // Only the final segment owns the original terminal interaction/facing.
         segment.action_after=original.action_after;segment.manual_after=original.manual_after;
         segment.arrival_facing=original.arrival_facing;segment.arrival_direction=original.arrival_direction;
+        segment.announce_arrival_facing=original.announce_arrival_facing;
         segment.manual_displacement_steps=original.manual_displacement_steps;
         segment.wait_for_npc=original.wait_for_npc;
         prepared.push_back(std::move(segment));
@@ -1916,7 +1918,8 @@ static std::wstring describe_phases(const std::vector<Phase>& phases, bool full,
             ++spoken; // a manual mountain crossing is one concise route action
         }
         if (!p.action_after.empty()) parts.push_back(p.action_after);
-        if (route_progress::at_interaction(phases, pi) && !p.arrival_facing.empty()) parts.push_back(p.arrival_facing);
+        if (!p.arrival_facing.empty() && (route_progress::at_interaction(phases, pi) ||
+            (p.announce_arrival_facing && pi + 1 == phases.size()))) parts.push_back(p.arrival_facing);
     }
     if (parts.empty()) return T(L"No movement needed");
     std::wstring out = text::join(parts, L", ");
