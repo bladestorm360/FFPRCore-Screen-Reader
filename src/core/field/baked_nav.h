@@ -85,7 +85,7 @@ void reset_transition_history(); // native same-floor entity-group change, not a
 struct MapGoal {
     int map_id = 0;
     baked_route::Cell cell;
-    bool examine = false;   // the target is examined from a neighbouring cell (a switch, a clock)
+    bool examine = false;   // use the target's interaction approach
     std::vector<baked_route::Cell> cells;   // explicit goal cells (baked_router goals_for), else from cell/examine
     int transportation_id = 0;     // a selected vehicle uses its captured native model position
     int entity_id = -1;            // -1 for coordinate-only goals; zero is a valid native identity

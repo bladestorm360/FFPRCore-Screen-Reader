@@ -400,6 +400,29 @@ Verify that event descriptions follow the visible action and preserve the
 native dialogue order. Localize added descriptions in each game's supported
 languages.
 
+## November 22 FFIV Lunar Whale bed interaction
+
+The FFIV Steam log at `181337.156` records Bed 1 selected from `(5,20)`
+on Lunar Whale map 161. The planner stops there and says “face West.” A
+directions request from the bed tile sends the player back east. The owner
+confirmed the usable approach is one step west onto `(4,20)`, facing north.
+
+Both Lunar Whale interiors (maps 161 and 357) have six non-colliding bed
+entities with a zero adjacent-side mask and the same rest script. The
+previous bake treated the zero side mask as all four sides. The corrected
+bake marks those 12 exact entities with an on-tile approach, using the
+player-observed north orientation. The shared goal builder uses ordinary
+terrain and transition checks and hands the same final pose to browse,
+directions and Autowalk. The change adds no hooks or native observations.
+The FFIV collision grid round trip passed. Twelve object flag bytes are
+the only differences in the FFIV map data.
+
+The focused replay covers all 12 beds from their own tiles and checks the
+reported east-side approach, browse reachability and spoken output in
+both interiors. It uses the game bake and copied field state. The original
+gameplay report anchors the approach. Confirmation with the corrected
+build remains a player check.
+
 ## November 22 Storyline spoilers
 
 The **Storyline spoilers** switch lives in Speech in the F8 menu. A fresh
@@ -415,6 +438,10 @@ required action. Storyline Autowalk sends the exact goal without a spoken
 title, so a saved route cannot read a title after the setting changes.
 The game supplies its usual dialogue when the player talks to an NPC.
 The five new label and help keys have all 12 game locales.
+
+The Storyline and menu replays passed for all six games. The exact payload
+was installed and verified across all six before the Lunar Whale report
+arrived. [Delivery](../SECURITY_AND_DISTRIBUTION.md#november-22-storyline-spoilers).
 
 ## November 21 FFIII Storyline clue conversations
 

@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 22 Storyline spoilers.** The default-off switch in F8 Speech
+keeps Storyline selections to “Destination” and “Clue.” Verified offline
+and installed in all six games. [Controls and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-22-storyline-spoilers)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-22-storyline-spoilers).
+
 **November 21 FFIII Storyline clues.** Five optional native conversations
 are installed in FFIII. The existing destination keys switch between the
 clue and the direct objective. The focused replay passed all 86 objectives

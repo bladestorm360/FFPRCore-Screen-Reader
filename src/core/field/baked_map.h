@@ -85,6 +85,7 @@ struct Object {
 constexpr int kWorldExit = 1 << 16;
 inline bool world_exit(const Object& object) {return object.type==ObjType::Warp && (object.d&kWorldExit)!=0;}
 inline bool pickup_treasure(const Object& object) {return object.type==ObjType::TreasureBox && (object.d&32)!=0;}
+inline bool stand_on_facing_north(const Object& object) { return object.type == ObjType::Entity && (object.d & 64) != 0; }
 // Reviewed scripted sea scenes disembark after entry, unlike native town doors.
 // This flag permits Ship entry only; terrain, route and story state still apply.
 constexpr int kShipEntry = 1 << 17;

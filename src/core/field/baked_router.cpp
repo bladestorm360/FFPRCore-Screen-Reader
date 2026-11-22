@@ -826,7 +826,9 @@ int direction_towards(const Cell& from, const Cell& to, int wrap_width, int wrap
 
 int facing_direction(const Cell& from, const Goals& goals)
 {
-    if (!goals.face || goals.faced.empty()) return -1;
+    if (!goals.face) return -1;
+    if (goals.arrival_facing >= 0) return goals.arrival_facing;
+    if (goals.faced.empty()) return -1;
     const Cell* nearest = nullptr;
     int best = 1 << 30;
     for (const Cell& c : goals.faced) {
@@ -1070,6 +1072,16 @@ Goals goals_for(const Request& r, const Cell& target, GoalKind kind, const baked
     if (kind == GoalKind::Interact) {
         out.face = true;
         const baked::Object* object = talk ? talk : warp;
+        if (object && baked::stand_on_facing_north(*object)) {
+            // The rest prompt is reached on the bed's interaction tile.
+            // It keeps its own layer and must be walkable for this route.
+            const Cell stand{object->layer, target.x, target.y};
+            if (object->contains(stand.x, stand.y) && open(r, g, stand) && !terminal_transition(r, g, stand)) {
+                out.cells.push_back(stand);
+                out.arrival_facing = 0;
+            }
+            return out;
+        }
         if (object) footprint_of(*object, out.faced, world ? target.layer : object->layer);
         else out.faced.push_back(target);
         // A counter relay extends the interaction ray when the tile immediately

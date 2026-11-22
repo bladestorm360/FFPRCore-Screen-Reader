@@ -285,6 +285,55 @@ template<class Expect> void check_ff4_moon(Expect expect)
     expect(entrances == 7, "All seven native Moon entrances were checked");
 }
 
+template<class Expect> void check_ff4_lunar_whale_beds(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    const Cell bed1{0,4,20}, east{0,5,20};
+    for (int map_id : {161,357}) {
+        const auto* room = baked::submap_by_map_id(map_id);
+        if (!room) { expect(false,"Lunar Whale interior loads"); continue; }
+        map_state::Flags flags;
+        flags.current_map_id = map_id;
+        RouteSnapshot snapshot(map_state::Resolver(flags,fixture::records));
+        snapshot.submap = room;
+        snapshot.map_id = map_id;
+        snapshot.layer = 0;
+        snapshot.vehicle = {true,1,1,{}};
+        snapshot.locale = L"en";
+        snapshot.kind = TargetKind::Interact;
+        int beds = 0;
+        std::thread worker([&] {
+            for (const auto& object : baked::grids(*room).objects) {
+                if (!baked::stand_on_facing_north(object)) continue;
+                ++beds;
+                const Cell bed{object.layer,object.tx,object.ty};
+                snapshot.goal = {map_id,bed,true};
+                snapshot.goal.entity_id = object.entity_id();
+                snapshot.goal.raw_name = baked::object_identifier(object);
+                snapshot.position = world_of_cell(*room,bed);
+                const auto on_bed = plan_snapshot(snapshot);
+                expect(on_bed.path.success && on_bed.path.step_count == 0 && on_bed.path.walk_phases.size() == 1 &&
+                       on_bed.path.walk_phases.front().cells == std::vector<Cell>{bed} &&
+                       on_bed.path.walk_phases.front().arrival_direction == 0 && on_bed.path.description == L"face North",
+                       "Standing on each Lunar Whale bed gives only the north facing instruction");
+                if (bed != bed1) continue;
+                snapshot.position = world_of_cell(*room,east);
+                expect(plan_browse_snapshot(snapshot).route.direct,"The Lunar Whale bed is directly reachable from the east");
+                const auto from_east = plan_snapshot(snapshot);
+                expect(from_east.path.success && from_east.path.step_count == 1 && from_east.path.walk_phases.size() == 1 &&
+                       from_east.path.walk_phases.front().cells == std::vector<Cell>{east,bed} &&
+                       from_east.path.walk_phases.front().arrival_direction == 0 &&
+                       from_east.path.description == L"1 West, face North",
+                       "Lunar Whale Bed 1 directions walk West onto its interaction tile and face North");
+            }
+        });
+        worker.join();
+        expect(beds == 6,"All six beds in each Lunar Whale interior use the same approach");
+    }
+    std::puts("Lunar Whale bed approaches replayed in both interiors.");
+}
+
 template<class Expect> void check_ff4_underworld(Expect expect)
 {
     using namespace field;
@@ -791,6 +840,7 @@ int main() {
         if(number==4) {
             check_ff4_underworld(expect);
             check_ff4_moon(expect);
+            check_ff4_lunar_whale_beds(expect);
             check_ff4_sealed_cavern(expect);
             check_ff4_hovercraft_journey(expect);
             check_dwarven_castle(expect);

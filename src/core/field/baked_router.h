@@ -178,6 +178,7 @@ struct Goals {
     std::vector<Cell> cells;      // where the route may end (empty = nothing to route to)
     bool face = false;            // an interaction: the facing is spoken at the end
     std::vector<Cell> faced;      // the target's own cells, which the final cell faces
+    int arrival_facing = -1;     // an authored heading for a stand-on interaction
 };
 
 /// The goal cells for `target` under the request's movement rules (its submap, transport and
@@ -191,7 +192,7 @@ Goals goals_for(const Request& movement, const Cell& target, GoalKind kind,
 /// The direction index (0 north, 1 east, 2 south, 3 west) from `from` towards `to`, by the
 /// larger axis delta (ties: the vertical). -1 when the cells coincide.
 int direction_towards(const Cell& from, const Cell& to, int wrap_width = 0, int wrap_height = 0);
-/// Face the nearest cell of an interaction's actual footprint, including NPC counters.
+/// Use an authored heading when present, or face the nearest cell of the interaction footprint.
 int facing_direction(const Cell& from, const Goals& goals);
 
 /// Every cell reachable from `start` under the request's rules (goals ignored): one BFS, then

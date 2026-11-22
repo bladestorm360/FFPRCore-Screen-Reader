@@ -47,7 +47,8 @@ Object fields: PointIn a=point(object_id) b=direction c=entity_id; GotoMap a=des
 b=point_id c=entity_id d=direction; ToLayer a=target layer b=direction c=entity_id;
 RelayInteraction a=object_id c=entity_id; NPC/ShopNPC/Entity/AnimEntity/TreasureBox
 a=link_object_id b=accept_action_direction c=entity_id d=flags(1 collision, 2 all_layers,
-4 script, 8 navigation action, 16 wanders, 32 loose pickup; a TreasureBox also carries content_id << 8 in d);
+4 script, 8 navigation action, 16 wanders, 32 loose pickup, 64 stand on the Entity tile facing north;
+a TreasureBox also carries content_id << 8 in d);
 Warp (baked only: an Event / Entity whose script's Main runs ChangeMap, unless the destination's
 continuation script changes map straight back, a cutscene) a=dest map_id b=dest point_id
 c=entity_id d=step_on(1 Event, 0 examined, low byte 2 reviewed manual travel + optional approach mask bits 8..11; bit16 ordinary scripted world exit); Event/TransportationEventAction a=script_id b=action_id c=entity_id
@@ -682,6 +683,12 @@ def bake_game(game, out_dir, check=False):
                 flags |= 8
             if t in ("NPC", "ShopNPC") and to_int(p.get("move_type")) not in (0, 1) and p.get("move_step"):
                 flags |= 16   # Native None/Stamp remain on their tile; Area/Route/Following travel.
+            if (game == 'ff4' and o['submap'] in ('Map_20271_1', 'Map_20271_2') and t == 'Entity'
+                    and script_names.get(to_int(p.get('script_id'))) == 'sc_sty_20271_1'):
+                # Both Lunar Whale interiors dispatch the same rest script from
+                # the bed tile. North is the in-game bedside presentation.
+                assert action == 2 and p['accept_action_direction'] == 0 and p['collision'] is False and p['front'] is False
+                flags |= 64
             d = flags
             if t == "TreasureBox":
                 if p.get("pick_up") is True:d |= 32  # native disappearing loose treasure

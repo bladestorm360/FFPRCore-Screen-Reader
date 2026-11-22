@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 22 Storyline spoilers
+
+Source `3c31c016e52ed4526f361921f1b67ee233432b82`. The focused
+`build_local.bat storyline_check modal_input_check` passed in 307 seconds
+under the enforced 2 GB, one-worker and 25 percent CPU limits. Peak aggregate
+memory was 521,535,488 bytes. Both checks passed in all six games. All 73
+embedded resources, 9,113 name bindings and 47 forwarded exports verified.
+
+The 21,327,872-byte unsigned DLL SHA-256 is
+`a77fdf06ed58af55de26d64109d5769b2727fc49e82e20b02ef73e12dc7dc242`.
+Defender definitions `1.463.417.0` reported no threats in the 22 exact files
+and no matching detection events. The staged hashes were stable. The
+exclusion query was denied. The guarded installation verified the 22 files
+in all six games and 138 protected file states. Gameplay confirmation is
+pending. Recovery uses `e524351` for FFIII and `5efb0d3` for the other five.
+Compact evidence is under `../tools/storyline_spoilers_20261122`.
+
 ## November 21 FFIII Storyline clues
 
 Source `e5243511b334977fa13b058c3f375e187a7ecc64`. The focused
