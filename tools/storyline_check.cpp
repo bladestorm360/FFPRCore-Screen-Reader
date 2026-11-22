@@ -364,6 +364,7 @@ int verify_ff3()
         Ff3Receipts resumed;
         resumed.fill(1);
         resumed[32] = resumed[105] = resumed[saved.conversation] = resumed[saved.next] = 0;
+        if (saved.next == 194) resumed[20] = 0; // Cid has just lent the first airship.
         const auto after = ff3_stage(resumed);
         check(after.objective && static_cast<int>(after.objective->id) == base + saved.next && !after.advice,
               "FFIII resumes the current objective without restoring an obsolete conversation or clue");
@@ -647,6 +648,7 @@ void verify_ff5_karnak_resume()
     state.scenario[990] = state.scenario[991] = 1;
     const auto land = exdeath_routes::route(1, {1,84,78}, state, target.goal, target.kind);
     check(land.path.success && land.path.next_map_id == 250 && land.path.step_count == 1 &&
+          land.path.description.starts_with(L"1 South") &&
           !land.path.walk_phases.empty() && !land.path.walk_phases.back().cells.empty() &&
           land.path.walk_phases.back().cells.back() == baked_route::Cell{1,84,79},
           "Storyline reaches the ship entrance one step south of the logged position");
@@ -656,7 +658,8 @@ void verify_ff5_karnak_resume()
     check(deck.path.success && !deck.path.walk_phases.empty() && !deck.path.walk_phases.back().cells.empty() &&
           deck.path.walk_phases.back().cells.back() == target.goal.cell,
           "From the ship's native arrival Storyline reaches Cid's scene on deck");
-    std::printf("FFV Karnak resume: world %ls, deck %ls\n", land.path.description.c_str(), deck.path.description.c_str());
+    std::printf("FFV Karnak resume: %d step(s) to map %d, then %d step(s) to the deck scene\n",
+                land.path.step_count, land.path.next_map_id, deck.path.step_count);
 
     karnak[44] = 1;
     const auto onward = ff5_stage(karnak).objective;
