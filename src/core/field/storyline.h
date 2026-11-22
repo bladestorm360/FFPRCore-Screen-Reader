@@ -74,6 +74,9 @@ struct Selection {
     Objective resolve(const Objective& objective, const std::optional<Objective>& hint, bool cycle);
 };
 
+// The field caller has already applied Selection to the stage's objective.
+std::wstring_view selection_label_key(const Stage& selected, bool spoilers);
+
 // Copy exact baked contacts from their owning map. The caller must supply a
 // ready immutable map catalog and let the router check current state/movement.
 std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int origin_map);

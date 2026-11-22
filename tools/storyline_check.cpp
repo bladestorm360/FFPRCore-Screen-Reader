@@ -219,8 +219,19 @@ int verify()
     if (!ship_quest || !crown_quest) return 3;
     auto hint = cornelia_advice(ship_quest->id, ship);
     Selection selection;
-    check(selection.resolve(*ship_quest, hint, false).id == ObjectiveId::ShipAdvice, "advice is offered first");
-    check(selection.resolve(*ship_quest, hint, true).id == ObjectiveId::GetShip, "the player can skip optional advice");
+    const Stage selected_clue{selection.resolve(*ship_quest, hint, false), hint};
+    check(selected_clue.objective->id == ObjectiveId::ShipAdvice, "advice is offered first");
+    const Stage selected_destination{selection.resolve(*ship_quest, hint, true), hint};
+    check(selected_destination.objective->id == ObjectiveId::GetShip, "the player can skip optional advice");
+    check(selection_label_key(selected_clue, false) == L"Clue" &&
+          selection_label_key(selected_destination, false) == L"Destination",
+          "spoiler-free names distinguish the selected clue and destination");
+    check(selection_label_key(selected_clue, true) == selected_clue.objective->label &&
+          selection_label_key(selected_destination, true) == selected_destination.objective->label,
+          "enabling spoilers exposes both selected names");
+    check(selection_label_key({{}, {}, true}, false) == L"Storyline complete" &&
+          selection_label_key({}, false) == L"No Storyline objective available",
+          "spoiler-free selection preserves end and unavailable announcements");
     check(selection.resolve(*ship_quest, hint, false).id == ObjectiveId::GetShip, "repeated requests keep the chosen destination");
     hint = cornelia_advice(crown_quest->id, later_crown);
     check(selection.resolve(*crown_quest, hint, false).id == ObjectiveId::CrownAdvice, "a new stage selects its own advice");

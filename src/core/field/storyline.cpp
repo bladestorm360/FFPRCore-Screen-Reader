@@ -194,6 +194,14 @@ Objective Selection::resolve(const Objective& objective, const std::optional<Obj
     return prefer_advice && hint ? *hint : objective;
 }
 
+std::wstring_view selection_label_key(const Stage& selected, bool spoilers)
+{
+    if (!selected.objective)
+        return selected.complete ? L"Storyline complete" : L"No Storyline objective available";
+    if (spoilers) return selected.objective->label;
+    return selected.advice && selected.advice->id == selected.objective->id ? L"Clue" : L"Destination";
+}
+
 std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int origin_map)
 {
     // The acquired ship lives on the Overworld. Plan the first leg to the

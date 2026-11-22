@@ -400,6 +400,22 @@ Verify that event descriptions follow the visible action and preserve the
 native dialogue order. Localize added descriptions in each game's supported
 languages.
 
+## November 22 Storyline spoilers
+
+The **Storyline spoilers** switch lives in Speech in the F8 menu. A fresh
+or existing configuration without the new key starts off. Category entry,
+destination cycling and the current-selection read all say **Destination**
+for an objective and **Clue** for an optional conversation. The names
+return as soon as the saved setting is on. Storyline completion and
+unavailable announcements keep their usual wording.
+
+The shared selection label uses the chosen objective's identity to
+recognize the clue. Next-leg directions still give the movement and any
+required action. Storyline Autowalk sends the exact goal without a spoken
+title, so a saved route cannot read a title after the setting changes.
+The game supplies its usual dialogue when the player talks to an NPC.
+The five new label and help keys have all 12 game locales.
+
 ## November 21 FFIII Storyline clue conversations
 
 FFIII now offers five optional conversations at specific points in Storyline.

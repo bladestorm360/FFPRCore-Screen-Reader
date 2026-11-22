@@ -140,8 +140,7 @@ storyline::Stage storyline_stage(bool cycle = false)
 
 std::wstring storyline_label(const storyline::Stage& stage)
 {
-    if (stage.objective) return T(stage.objective->label);
-    return T(stage.complete ? L"Storyline complete" : L"No Storyline objective available");
+    return T(storyline::selection_label_key(stage, ui::prefs::storyline_spoilers_enabled()));
 }
 
 void route_to_storyline(bool walking, double requested_at)
@@ -159,7 +158,9 @@ void route_to_storyline(bool walking, double requested_at)
 
     if (walking) {
         auto target = std::move(candidates.front());
-        ffpr::fieldnav::autowalk::request(std::move(target.goal), target.kind, T(objective->label));
+        // Continuing a walk speaks directions. Keep the title on the
+        // selection channel so a saved route cannot replay it later.
+        ffpr::fieldnav::autowalk::request(std::move(target.goal), target.kind, {});
         return;
     }
     for (auto& candidate : candidates) {

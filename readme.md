@@ -115,7 +115,8 @@ Scene triggers can be selected as destinations. For a story-gated destination, d
 ### Storyline and visual descriptions
 
 - Choose Storyline with the destination category keys. Use the normal destination and directions keys to hear the current objective and reach its next route leg. The category follows the current save and advances after the game's progress markers change.
-- In Final Fantasy I and III, Storyline can offer an optional native clue conversation. Use the destination selection keys to switch between the conversation and the direct objective.
+- Some Storyline stages offer an optional native clue conversation. Use the destination selection keys to switch between the conversation and the direct objective.
+- By default, Storyline selections speak “Destination” or “Clue.” For full names, open the mod menu with F8, then turn on **Speech → Storyline spoilers**.
 - Press I during dialogue to describe an identified speaker whose sprite is visible. During battle, press I while targeting an enemy to hear its current form and visible effects. Press Ctrl+I to describe the acting character, their visible equipment and current effects.
 - Some scenes describe significant visible actions alongside the game's dialogue.
 

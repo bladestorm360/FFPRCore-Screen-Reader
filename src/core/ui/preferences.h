@@ -64,6 +64,7 @@ inline constexpr const char* kEnemyCriticalStatus = "EnemyCriticalStatus";
 inline constexpr const char* kStatusDamage = "StatusDamage";                // Status Damage Announcements
 inline constexpr const char* kModWarnings = "ModWarnings";
 inline constexpr const char* kSpoilTreasureChestContents = "SpoilTreasureChestContents";
+inline constexpr const char* kStorylineSpoilers = "StorylineSpoilers";
 inline constexpr const char* kStickClickNormalization = "StickClickNormalization"; // Stick Click Normalization
 inline constexpr const char* kAnnounceOnBeaconRestart = "AnnounceOnBeaconRestart"; // Announce Destination on Beacon Restart
 inline constexpr const char* kMenuPositionAnnouncements = "MenuPositionAnnouncements"; // Menu Position Announcements
@@ -110,6 +111,7 @@ inline constexpr bool kEnemyCriticalStatusDefault = false;
 inline constexpr bool kStatusDamageDefault = true;
 inline constexpr bool kModWarningsDefault = true;
 inline constexpr bool kSpoilTreasureChestContentsDefault = false;
+inline constexpr bool kStorylineSpoilersDefault = false;
 inline constexpr bool kStickClickNormalizationDefault = false;
 inline constexpr bool kAnnounceOnBeaconRestartDefault = false;
 inline constexpr bool kMenuPositionAnnouncementsDefault = false;
@@ -174,6 +176,7 @@ inline bool enemy_status_announcements_enabled() { return settings::get_bool(kEn
 inline bool enemy_critical_status_enabled() { return settings::get_bool(kEnemyCriticalStatus, kEnemyCriticalStatusDefault); }
 inline bool status_damage_enabled() { return settings::get_bool(kStatusDamage, kStatusDamageDefault); }
 inline bool mod_warnings_enabled() { return settings::get_bool(kModWarnings, kModWarningsDefault); }
+inline bool storyline_spoilers_enabled() { return settings::get_bool(kStorylineSpoilers, kStorylineSpoilersDefault); }
 inline bool spoil_treasure_chest_contents_enabled() { return settings::get_bool(kSpoilTreasureChestContents, kSpoilTreasureChestContentsDefault); }
 inline bool stick_click_normalization_enabled() { return settings::get_bool(kStickClickNormalization, kStickClickNormalizationDefault); }
 inline bool announce_on_beacon_restart_enabled() { return settings::get_bool(kAnnounceOnBeaconRestart, kAnnounceOnBeaconRestartDefault); }

@@ -177,6 +177,8 @@ void initialize()
     v.push_back(toggle(L"Spoil treasure chest contents", p::kSpoilTreasureChestContents,
                        p::kSpoilTreasureChestContentsDefault,
                        L"Spoil treasure chest contents on", L"Spoil treasure chest contents off"));
+    v.push_back(toggle(L"Storyline spoilers", p::kStorylineSpoilers, p::kStorylineSpoilersDefault,
+                       L"Storyline spoilers on", L"Storyline spoilers off"));
     v.push_back(toggle(L"Beacon Destination Announcement", p::kAnnounceOnBeaconRestart, p::kAnnounceOnBeaconRestartDefault,
                        L"On. Restarting the beacon also re-speaks the current destination.",
                        L"Off. Restarting the beacon only re-pings, without speaking."));

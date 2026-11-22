@@ -135,6 +135,7 @@ int main()
         {ui::prefs::kEntranceSuffixes, L"Speech"},
         {ui::prefs::kSpeechEnabled, L"Speech"},
         {ui::prefs::kResultNotificationsOnce, L"Speech"},
+        {ui::prefs::kStorylineSpoilers, L"Speech"},
         {ui::prefs::kSpeakAutowalkPath, L"Navigation"},
         {ui::prefs::kNavigationKeymap, L"Navigation"},
         {ui::prefs::kTeleportShortcuts, L"Navigation"},
@@ -195,6 +196,16 @@ int main()
                     ++warning_rows;
                     expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && item.bool_def,
                            "Mod warnings is a default-on Speech toggle");
+                }
+                if (std::string(item.key) == ui::prefs::kStorylineSpoilers) {
+                    fixture::values.erase(item.key);
+                    expect(item.kind == ui::mod_menu::Kind::Toggle && !item.bool_def &&
+                           !ui::prefs::storyline_spoilers_enabled(),
+                           "Storyline spoilers default off with no saved setting");
+                    ui::mod_menu::flip(item);
+                    expect(ui::prefs::storyline_spoilers_enabled(), "the menu stores the spoiler opt-in");
+                    ui::mod_menu::flip(item);
+                    expect(!ui::prefs::storyline_spoilers_enabled(), "the menu stores an explicit spoiler opt-out");
                 }
                 if (std::string(item.key) == ui::prefs::kResultNotificationsOnce) {
                     expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && item.bool_def &&
