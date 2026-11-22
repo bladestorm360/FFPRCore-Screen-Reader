@@ -1,5 +1,29 @@
 # Build and distribution security
 
+## November 22 FFIV Lunar Whale bed routing
+
+Source `0433a1c75bd913eef9f10b4c56ac93e172a92f69`. The focused
+`build_local.bat browse_route_check` passed in 296.6 seconds under the
+enforced 2 GB, one-worker and 25 percent CPU limits. Peak aggregate job
+memory was 531,140,608 bytes. The all-six browse replay passed all cases,
+including the 12 beds and both one-step approaches. Worst direct browse
+compute in the offline fixture was 0.433 ms. Game-frame and audible
+response were unmeasured. All 73 embedded resources, 9,113 native name
+bindings and 47 forwarded exports verified.
+
+The 21,328,384-byte unsigned DLL SHA-256 is
+`b7f02fe00c058bfed8267c81f92397ba7962917ecfbb6ec2f0046e68b95b0066`.
+Defender definitions `1.463.417.0` reported no threats in the 22 exact
+files and no matching detection events. The staged hashes were stable.
+The exclusion query was denied. The guarded `deploy.bat ff4` installation
+verified FFIV's 22 files, 138 protected file states and the other five
+installations. FFIV retains the Storyline spoilers setting. Gameplay
+confirmation is pending. Recovery uses `3c31c01`. Compact receipts for
+the map-data round trip and delta, replays, scan and installation are under
+`../tools/lunar_whale_beds_20261122`. Cleanup reclaimed 339,958,695 bytes
+of disposable outputs from the spoiler and Lunar Whale builds and kept
+the production cache.
+
 ## November 22 Storyline spoilers
 
 Source `3c31c016e52ed4526f361921f1b67ee233432b82`. The focused

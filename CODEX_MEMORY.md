@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 22 FFIV Lunar Whale beds.** Both interiors route onto the bed
+tile and give the north-facing instruction. The report's one-step replay
+says “1 West, face North.” The updated build is installed in FFIV. Gameplay
+confirmation is pending. [Approach and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-22-ffiv-lunar-whale-bed-interaction)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-22-ffiv-lunar-whale-bed-routing).
+
 **November 22 Storyline spoilers.** The default-off switch in F8 Speech
 keeps Storyline selections to “Destination” and “Clue.” Verified offline
 and installed in all six games. [Controls and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-22-storyline-spoilers)

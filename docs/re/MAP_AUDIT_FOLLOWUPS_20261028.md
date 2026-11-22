@@ -419,9 +419,14 @@ the only differences in the FFIV map data.
 
 The focused replay covers all 12 beds from their own tiles and checks the
 reported east-side approach, browse reachability and spoken output in
-both interiors. It uses the game bake and copied field state. The original
-gameplay report anchors the approach. Confirmation with the corrected
-build remains a player check.
+both interiors. It uses the game bake and copied field state. The first
+replay exposed the shared formatter's usual rule of holding the turn until
+arrival. A stand-on bed now gives “1 West, face North” in both brief and
+full directions, or “face North” when already on the bed tile. Normal
+interactions retain their on-arrival turn cue. The corrected all-six browse
+replay passed with zero failures. FFIV is installed and hash-verified.
+Gameplay confirmation with the corrected build is pending.
+[Delivery](../SECURITY_AND_DISTRIBUTION.md#november-22-ffiv-lunar-whale-bed-routing).
 
 ## November 22 Storyline spoilers
 
