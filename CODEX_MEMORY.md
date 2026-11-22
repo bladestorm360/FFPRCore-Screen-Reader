@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 22 Storyline resume.** Storyline correctly resumes outside Karnak
+after the optional Walse king conversation was skipped. The all-six review
+also corrected six FFIII conversations and the FFV Castle Surgate guards.
+The all-six replays passed. FFV and FFIII are installed and gameplay
+confirmation is pending. [Audit and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-22-ffv-storyline-outside-karnak)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-22-skipped-storyline-conversations).
+
 **November 22 FFIV Lunar Whale beds.** Both interiors route onto the bed
 tile and give the north-facing instruction. The report's one-step replay
 says “1 West, face North.” The updated build is installed in FFIV. Gameplay

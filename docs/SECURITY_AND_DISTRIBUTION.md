@@ -1,5 +1,28 @@
 # Build and distribution security
 
+## November 22 skipped Storyline conversations
+
+Source `9e172d3eb669e112c45e052b16e39bf707405e46`. The focused
+`build_local.bat storyline_check` passed in 67.0 seconds with the 2 GB,
+one-worker and 25 percent CPU limits enforced. Peak aggregate job memory
+was 513,105,920 bytes. All six campaign replays passed, including the exact
+Karnak save progression and first two route legs, the FFIII resume cases,
+the FFV fleet and the existing FFIV conversation gates. All 73 embedded
+resources, 9,113 native name bindings and 47 forwarded exports verified.
+The replay exercised production planning with saved-state inputs offline.
+Updated frame and audible response timing remain unmeasured.
+
+The 21,328,896-byte unsigned DLL SHA-256 is
+`a82f2c6ca4afc4249beec3408f6b740a5e441a48ad26834f5faf9eabdb70eb53`.
+Defender definitions `1.463.421.0` reported no threats in the 22 exact
+files and no matching detection events. Staged hashes were stable. The
+exclusion query was denied. The guarded installs ran FFV first and then
+FFIII. Each verified its 22 installed files, 138 protected file states and
+the other five games. The final read verified all six installed DLL hashes.
+Gameplay confirmation is pending. Recovery for both targets uses `3c31c01`.
+Compact evidence is under `../tools/storyline_progression_20261122`.
+Cleanup reclaimed 113,954,852 bytes and retained the production cache.
+
 ## November 22 FFIV Lunar Whale bed routing
 
 Source `0433a1c75bd913eef9f10b4c56ac93e172a92f69`. The focused
