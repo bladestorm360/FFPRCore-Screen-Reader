@@ -1,5 +1,28 @@
 # Build and distribution security
 
+## November 23 six-game major-scene audit
+
+Source checkpoint `1cf5c81a2d7494a90fc5435e6e87052c4bbb289f` produced a
+21,469,696-byte DLL with SHA-256
+`f8fbc50499aa06893cf732d296c789ebecd5dea8d08997a9c1ea9775a536bbf7`.
+The focused build passed in 48.4 seconds, with one worker and a 360,595,456-byte
+peak under the enforced 2 GB job limit. The dialogue appearance, boss visual,
+Storyline and battle focus checks passed, along with 73 embedded resources,
+9,131 native-name checks and the isolated 47-export smoke test.
+
+Defender signatures `1.463.439.0` reported no threats across 22 exact
+payload files, with stable hashes and zero matching detection events.
+Windows denied the exclusion query. No signing certificate was available.
+The guarded installer verified all 22 file hashes in each of the six Steam
+installations and preserved all 138 protected states. It verified Prism
+read-only. No game was launched. Audible timing remains unconfirmed.
+
+Compact build, smoke, scan and install receipts are in
+`../tools/major_scene_recheck_20261123/final-delivery` relative to the
+checkout. For recovery, rebuild the verified prior checkpoint below with
+the focused build, smoke test, exact-payload scan and guarded installer.
+That checkpoint carries the enemy target and FFIV Storyline fixes.
+
 ## November 23 Giant aftermath, Moon return and focused enemy descriptions
 
 The 21,371,392-byte candidate from source checkpoint `d7f92e6d8e2c058ea0373ccd3a7998b10dc2aced`
