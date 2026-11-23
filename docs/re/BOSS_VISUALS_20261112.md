@@ -1,5 +1,17 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 23 FFV Neo Exdeath reveal
+
+The final battle's `sc_b_30601` gives the native speeches before replacing
+Exdeath with party 608. The authored reveal observes the later
+`Current.NeoExDeathMove` command after the native replacement loads. It
+uses the existing ready battle state and reads at most nine slots on the
+owner thread. Enemy 388 carries the visible body. The other targetable
+parts use transparent art. After the body is drawn, the description
+queues once per encounter with the Visual descriptions switch enabled.
+The command's native return is preserved. The fixture covers a closed,
+hidden, disabled and repeated reveal with a fresh battle state.
+
 ## November 23 FFIV Elemental Lords rematch
 
 The owner's Giant of Babel log announces the rematch and its generic

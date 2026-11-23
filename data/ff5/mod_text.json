@@ -2099,6 +2099,20 @@
     "pt": "Derrote Twintania",
     "zhc": "击败双塔尼亚"
   },
+  "BossVisual.NeoExdeath": {
+    "en": "A huge mass of intertwined monsters emerges, with wings, claws, armored heads and exposed red ribs.",
+    "ja": "翼や爪、装甲で覆われた頭、むき出しの赤い肋骨を持つ怪物が絡み合い、巨大な塊となって現れる。",
+    "fr": "Une masse gigantesque de monstres entremêlés surgit, avec des ailes, des griffes, des têtes cuirassées et des côtes rouges à nu.",
+    "it": "Emerge un'enorme massa di mostri intrecciati, con ali, artigli, teste corazzate e costole rosse esposte.",
+    "de": "Eine gewaltige Masse ineinander verschlungener Monster taucht auf. Sie hat Flügel, Klauen, gepanzerte Köpfe und freiliegende rote Rippen.",
+    "es": "Surge una masa enorme de monstruos entrelazados, con alas, garras, cabezas acorazadas y costillas rojas al descubierto.",
+    "ko": "날개와 발톱, 갑옷을 두른 머리와 드러난 붉은 갈비뼈가 뒤엉킨 거대한 괴물 덩어리가 나타난다.",
+    "zht": "一大團糾纏在一起的怪物現身，身上長著翅膀、利爪、披甲的頭顱和外露的紅色肋骨。",
+    "zhc": "一大团纠缠在一起的怪物现身，身上长着翅膀、利爪、披甲的头颅和外露的红色肋骨。",
+    "ru": "Появляется огромная масса переплетённых чудовищ с крыльями, когтями, бронированными головами и обнажёнными красными рёбрами.",
+    "th": "กลุ่มสัตว์ประหลาดขนาดมหึมาที่พันกันปรากฏขึ้น มีปีก กรงเล็บ หัวหุ้มเกราะ และซี่โครงสีแดงโผล่ออกมา",
+    "pt": "Uma massa enorme de monstros entrelaçados surge, com asas, garras, cabeças blindadas e costelas vermelhas expostas."
+  },
   "Face Exdeath and Neo Exdeath": {
     "en": "Face Exdeath and Neo Exdeath",
     "ja": "エクスデスとネオエクスデスに立ち向かう",

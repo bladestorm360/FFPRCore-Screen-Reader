@@ -202,14 +202,16 @@ void check_effect_cues()
     put(effect, "isPlaying", reinterpret_cast<void*>(1));
     put(effect, "particleArray", &particles);
     battle_interpreter = &interpreter;
-    native_play = native_show = native_animation;
+    native_play = native_show = native_move_bird_view = native_animation;
     for (const auto& cue : cues) {
         current_game = cue.title;
         current_map = cue.map;
         script.value = cue.script;
         instruction = cue.instruction;
         const bool is_sprite = !cue.art.empty();
-        const auto dispatch = cue.trigger == CueTrigger::Show ? show : play_anim;
+        auto dispatch = play_anim;
+        if (cue.trigger == CueTrigger::Show) dispatch = show;
+        if (cue.trigger == CueTrigger::MoveBirdView) dispatch = move_bird_view;
         put(core, "<entity>k__BackingField", is_sprite ? &card : &effect);
         put(core, "<entityID>k__BackingField", reinterpret_cast<void*>(static_cast<uintptr_t>(cue.actor)));
         ++event_generation;

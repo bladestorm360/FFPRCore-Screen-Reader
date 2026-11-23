@@ -60,6 +60,14 @@ const unity::Vec2 face{1, 2}, mouth{3, 4};
 
 int monster_id(void* self, const void*) { return static_cast<Monster*>(self)->id; }
 int monster_asset(void* self, const void*) { return static_cast<Monster*>(self)->asset; }
+void* plug_instance(const void*) { return &lord_manager; }
+void* current_enemies(void*, const void*) { return &targets; }
+int32_t move_neo(void* interpreter, const void* mi)
+{
+    forwarded &= interpreter == &fn && mi == method_info;
+    finish_mesh = true;
+    return 3;
+}
 void stage(void* self, void* art, void* shadow_sprite, unity::Vec2 first, unity::Vec2 second, const void* mi)
 {
     forwarded &= self == &animator && shadow_sprite == &shadow && mi == method_info &&
@@ -122,6 +130,8 @@ il2cpp::Method* Method::get() { return nullptr; }
 void* Method::ptr() {
     if (this == &ffpr::battle::boss_visuals::mId) return reinterpret_cast<void*>(&fixture::monster_id);
     if (this == &ffpr::battle::boss_visuals::mAsset) return reinterpret_cast<void*>(&fixture::monster_asset);
+    if (this == &ffpr::battle::boss_visuals::mPlugInstance) return reinterpret_cast<void*>(&fixture::plug_instance);
+    if (this == &ffpr::battle::boss_visuals::mEnemyUnits) return reinterpret_cast<void*>(&fixture::current_enemies);
     return nullptr;
 }
 void call_failed_note(const char*) { std::abort(); }
@@ -365,6 +375,35 @@ void check_lord_swaps()
     expect(spoken == begin && !lord_step, "Battle teardown cancels the deferred reveal");
     expect(forwarded, "Replacement speech stays queued after native swap completion");
 }
+
+void check_neo_reveal()
+{
+    using namespace fixture;
+    title = Id::FF5;
+    o_neo_move = &move_neo;
+    const int begin = spoken;
+    close();
+    master.id = 388;
+    expect(d_neo_move(&fn, method_info) == 3 && spoken == begin, "The native result passes through while loading");
+    open();
+    master.id = 389;
+    d_neo_move(&fn, method_info);
+    expect(spoken == begin, "An invisible Neo Exdeath part cannot represent the visible boss");
+    master.id = 388;
+    fixture::renderer_visible = false;
+    d_neo_move(&fn, method_info);
+    expect(spoken == begin, "The actual boss must be drawn");
+    fixture::renderer_visible = true;
+    visual_descriptions = false;
+    d_neo_move(&fn, method_info);
+    expect(spoken == begin, "The appearance switch silences the reveal");
+    visual_descriptions = true;
+    d_neo_move(&fn, method_info);
+    d_neo_move(&fn, method_info);
+    expect(spoken == begin + 1 && last == L"BossVisual.NeoExdeath" && forwarded,
+           "The visible new form queues once after the original movement");
+    close();
+}
 }
 
 int main()
@@ -386,7 +425,7 @@ int main()
          deformation(Id::FF5,281,282,246,1,101),deformation(Id::FF5,282,281,245,0,101),
          scripted_sprite(Id::FF5,281,2,246,0),
          replacement(Id::FF5,445,291,290),replacement(Id::FF5,654,290,291),
-         replacement(Id::FF5,655,291,292),L"BossVisual.SandwormMoved"}) check_key(v,cue);
+         replacement(Id::FF5,655,291,292),L"BossVisual.SandwormMoved",L"BossVisual.NeoExdeath"}) check_key(v,cue);
     for (const auto& cue : {
          no_select_pose(271,0,4,true),no_select_pose(271,0,7,false),
          no_select_pose(272,0,12,true),no_select_pose(272,0,11,false),
@@ -423,6 +462,7 @@ int main()
            "A repeated sprite or missing request cannot produce another cue");
     check_detours();
     check_lord_swaps();
+    check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
     return failures?1:0;
 }

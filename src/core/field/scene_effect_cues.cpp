@@ -18,9 +18,9 @@
 namespace ffpr::dialogue {
 namespace {
 ref::Class kPuppet{"Last.Interpreter.Instructions", "Puppet"};
-ref::Method mPlayAnim{kPuppet, "PlayAnim", 1};
-ref::Class kEndingPuppet{"Last.Interpreter.Instructions", "Puppet", game::kFF1 | game::kFF2 | game::kFF3 | game::kFF4 | game::kFF6};
-ref::Method mShow{kEndingPuppet, "Show", 1};
+ref::Method mPlayAnim{kPuppet, "PlayAnim", 1}, mShow{kPuppet, "Show", 1};
+ref::Class kFlightPuppet{"Last.Interpreter.Instructions", "Puppet", game::kFF2 | game::kFF4};
+ref::Method mMoveBirdView{kFlightPuppet, "MoveBirdView", 1};
 ref::Class kCore{"Last.Interpreter", "Core"}, kPuppetCore{"Last.Interpreter", "PuppetCore"};
 ref::Method mFirstClock{kCore, "IsFirstClock", 0}, mProgramCounter{kCore, "get_pc", 0};
 ref::Field fCoreId{kCore, "<coreID>k__BackingField"};
@@ -33,7 +33,7 @@ ref::Field fPlaying{kEffect, "isPlaying"}, fParticles{kEffect, "particleArray"};
 ref::Class kParticle{"UnityEngine", "ParticleSystem"}, kParticleRenderer{"UnityEngine", "ParticleSystemRenderer"};
 ref::Method mParticleCount{kParticle, "get_particleCount", 0};
 
-enum class CueTrigger { PlayAnim, Show };
+enum class CueTrigger { PlayAnim, Show, MoveBirdView };
 struct Cue {
     game::Id title;
     int map, actor, instruction;
@@ -48,12 +48,20 @@ struct Cue {
 constexpr std::array cues{
     Cue{game::Id::FF1, 1, 204, 70, L"sc_e_0015_1", L"Canal excavation cue"},
     Cue{game::Id::FF1, 1, 102, 86, L"sc_e_0015_1", L"Canal water plume cue", CueTrigger::PlayAnim, L"mo_ff1_e009_c00"},
+    Cue{game::Id::FF1, 80, 28, 120, L"sc_e_0021_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c03"},
+    Cue{game::Id::FF1, 87, 39, 115, L"sc_e_0023_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c02"},
     Cue{game::Id::FF1, 1, 91, 91, L"sc_e_0025_2", L"Levistone sand cue"},
+    Cue{game::Id::FF1, 1, 203, 178, L"sc_e_0025_2", L"Levistone airship rise cue", CueTrigger::PlayAnim, L"mo_ff1_v001_c00"},
     Cue{game::Id::FF1, 60, 119, 56, L"sc_e_0028", L"Fairy release lights cue"},
+    Cue{game::Id::FF1, 52, 67, 46, L"sc_e_0030", L"Onrac woman vanishes cue", CueTrigger::PlayAnim, L"mo_ff1_n029_c00"},
+    Cue{game::Id::FF1, 96, 26, 111, L"sc_e_0036_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c00"},
+    Cue{game::Id::FF1, 112, 9, 109, L"sc_e_0037_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c01"},
+    Cue{game::Id::FF1, 72, 123, 153, L"sc_e_0038", L"Black Crystal fusion cue"},
     Cue{game::Id::FF1, 123, 1, 18, L"sc_e_0001_5", L"Opening crystals glow cue"},
     Cue{game::Id::FF1, 127, 3, 67, L"sc_e_0044_3", L"Ending title card cue", CueTrigger::Show, L"mo_ff1_e113_c00"},
     Cue{game::Id::FF2, 1, 333, 31, L"sc_e_0074", L"Mysidian seal light cue"},
     Cue{game::Id::FF2, 1, 335, 81, L"sc_e_0019_1", L"Dreadnought steam cue"},
+    Cue{game::Id::FF2, 1, 233, 91, L"sc_e_0035", L"Dreadnought captures airship cue", CueTrigger::MoveBirdView, L"mo_ff2_v006_c00"},
     Cue{game::Id::FF2, 1, 351, 100, L"sc_e_0039_8", L"Dreadnought escape flames cue"},
     Cue{game::Id::FF2, 1, 347, 74, L"sc_e_0081", L"Cyclone funnel cue"},
     Cue{game::Id::FF2, 1, 384, 53, L"sc_e_0086_1", L"Palamecia eruption cue"},
@@ -61,41 +69,94 @@ constexpr std::array cues{
     Cue{game::Id::FF2, 7, 18, 113, L"sc_e_0001_3", L"Altair bed stars cue"},
     Cue{game::Id::FF2, 13, 6, 204, L"sc_e_0016", L"Tobul hammer cue", CueTrigger::PlayAnim, L"mo_ff2_n022_c00", L"attackl_01"},
     Cue{game::Id::FF2, 14, 106, 182, L"sc_e_0001", L"Fynn fire ring cue"},
+    Cue{game::Id::FF2, 27, 12, 225, L"sc_e_0006", L"Scott falls still cue", CueTrigger::PlayAnim, L"mo_ff2_p010_c00"},
+    Cue{game::Id::FF2, 139, 21, 285, L"sc_e_0029_1", L"Snow Cavern boulder cue", CueTrigger::PlayAnim, L"mo_ff2_b002_c00"},
+    Cue{game::Id::FF2, 149, 300, 96, L"sc_e_0034", L"Kashuan Sunfire cue"},
+    Cue{game::Id::FF2, 175, 17, 190, L"sc_e_0039", L"Dreadnought engine ignites cue"},
+    Cue{game::Id::FF2, 180, 6, 159, L"sc_e_0050", L"Deist wyvern falls cue", CueTrigger::PlayAnim, L"mo_ff2_n027_c00"},
+    Cue{game::Id::FF2, 240, 44, 202, L"sc_e_0078", L"Minwu seal beam cue"},
+    Cue{game::Id::FF2, 316, 48, 77, L"sc_e_0089_1", L"Emperor dissolves cue"},
     Cue{game::Id::FF2, 292, 43, 13, L"sc_e_0088", L"Jade exit lightning cue"},
     Cue{game::Id::FF2, 355, 3, 61, L"sc_e_0089_6", L"Ending title card cue", CueTrigger::Show, L"mo_ff2_e101_c00"},
     Cue{game::Id::FF3, 306, 11, 22, L"sc_e_0321", L"Crystal Tower mirror light cue"},
     Cue{game::Id::FF3, 52, 24, 14, L"sc_e_0264", L"Saronia cannon smoke cue"},
     Cue{game::Id::FF3, 2, 2339, 36, L"sc_e_0067_1_1", L"Amur Enterprise bubbles cue"},
+    Cue{game::Id::FF3, 1, 73, 32, L"sc_e_0060_3", L"Hein castle flyover cue", CueTrigger::PlayAnim, L"mo_ff3_b053_c00"},
+    Cue{game::Id::FF3, 4, 932, 92, L"sc_e_0074", L"Saronia Enterprise hit cue"},
+    Cue{game::Id::FF3, 314, 24, 146, L"sc_e_0092_1", L"Cloud of Darkness arrival cue", CueTrigger::Show, L"mo_ff3_n033_c00"},
+    Cue{game::Id::FF3, 142, 6, 85, L"sc_e_0081", L"Unei wakes cue", CueTrigger::PlayAnim, L"mo_ff3_n007_c00"},
+    Cue{game::Id::FF3, 314, 22, 344, L"sc_e_0092_2", L"Doga and Unei restore the party cue"},
     Cue{game::Id::FF3, 341, 3, 83, L"sc_e_0101_19", L"Ending title card cue", CueTrigger::Show, L"mo_ff3_e102_c00"},
     Cue{game::Id::FF4, 1, 1102, 36, L"sc_e_0045_1", L"Agart eruption cue"},
+    Cue{game::Id::FF4, 1, 174, 27, L"sc_e_0001", L"Red Wings flight formation cue", CueTrigger::MoveBirdView, L"mo_ff4_v003_c01", L"", 2.5},
+    Cue{game::Id::FF4, 343, 16, 228, L"sc_e_0001_2", L"Mysidia soldiers strike cue"},
+    Cue{game::Id::FF4, 343, 20, 406, L"sc_e_0001_2", L"Mysidia crystal vanishes cue"},
+    Cue{game::Id::FF4, 67, 63, 126, L"sc_e_0008", L"Mist Bomb ring cue"},
+    Cue{game::Id::FF4, 67, 55, 138, L"sc_e_0008", L"Mist houses burn cue"},
     Cue{game::Id::FF4, 1, 164, 82, L"sc_e_0015", L"Damcyan flames cue"},
+    Cue{game::Id::FF4, 1, 1019, 151, L"sc_e_0015", L"Damcyan ruins reveal cue", CueTrigger::Show, L"mo_ff4_b049_c00"},
+    Cue{game::Id::FF4, 1, 193, 56, L"sc_e_0023_9", L"Fabul ship lurches cue", CueTrigger::MoveBirdView, L"mo_ff4_v001_c00"},
+    Cue{game::Id::FF4, 350, 21, 87, L"sc_e_0029_1", L"Paladin trial sword light cue"},
+    Cue{game::Id::FF4, 100, 18, 146, L"sc_e_0081_1", L"Edward plays harp cue", CueTrigger::PlayAnim, L"mo_ff4_p007_c00"},
+    Cue{game::Id::FF4, 208, 13, 290, L"sc_e_0042_1", L"Tower of Zot lightning cue"},
+    Cue{game::Id::FF4, 220, 17, 97, L"sc_e_0052_2", L"Super cannon bursts cue"},
     Cue{game::Id::FF4, 1, 1088, 48, L"sc_e_0053_10", L"Underground passage smoke cue"},
+    Cue{game::Id::FF4, 239, 33, 129, L"sc_e_0056_1", L"Edge anger flare cue"},
+    Cue{game::Id::FF4, 1, 100, 50, L"sc_e_0068_5", L"Lunar Whale rises cue", CueTrigger::MoveBirdView, L"mo_ff4_v006_c00"},
+    Cue{game::Id::FF4, 1, 1087, 97, L"sc_e_0070_5", L"Giant awakening smoke cue"},
+    Cue{game::Id::FF4, 1, 85, 103, L"sc_e_0070_5", L"Giant awakening reveal cue", CueTrigger::Show, L"mo_ff4_n039_c00"},
+    Cue{game::Id::FF4, 1, 95, 154, L"sc_e_0070_5", L"Giant awakening attack cue"},
     Cue{game::Id::FF4, 1, 1107, 126, L"sc_e_0070_14", L"Giant of Babil explosions cue"},
     // The CPU aftermath cuts to a separate, dialogue-free exterior shot.
     Cue{game::Id::FF4, 1, 1107, 180, L"sc_e_0072_2", L"Giant exterior destruction cue"},
+    Cue{game::Id::FF4, 358, 1, 19, L"sc_e_0072_5", L"Lunar Whale second moon transit cue"},
     Cue{game::Id::FF4, 248, 11, 67, L"sc_e_0071_1", L"Scarmiglione defeat cue"},
     Cue{game::Id::FF4, 248, 12, 80, L"sc_e_0071_1", L"Cagnazzo defeat cue"},
     Cue{game::Id::FF4, 248, 13, 93, L"sc_e_0071_1", L"Barbariccia defeat cue"},
     Cue{game::Id::FF4, 248, 14, 105, L"sc_e_0071_1", L"Rubicante defeat cue"},
+    Cue{game::Id::FF4, 317, 7, 226, L"sc_e_0074_1", L"Zeromus figure forms cue", CueTrigger::PlayAnim, L"mo_ff4_n038_c00"},
+    Cue{game::Id::FF4, 317, 13, 203, L"sc_e_0074_5", L"Zeromus final burst cue"},
     Cue{game::Id::FF4, 354, 3, 70, L"sc_e_0074_21", L"Ending title card cue", CueTrigger::Show, L"mo_ff4_e101_c00"},
     Cue{game::Id::FF5, 1, 431, 35, L"sc_e_0067_2", L"Ronka rising cue"},
     Cue{game::Id::FF5, 1, 431, 37, L"sc_e_0514_2", L"Ronka rising cue"},
     Cue{game::Id::FF5, 1, 723, 38, L"sc_e_0476_1", L"Ghido shrine spray cue"},
     Cue{game::Id::FF5, 1, 437, 87, L"sc_e_0075_8", L"Ronka ruins explosions cue"},
+    Cue{game::Id::FF5, 71, 48, 169, L"sc_e_0001", L"Tycoon wind drake cue", CueTrigger::PlayAnim, L"mo_ff5_n042_c00"},
+    Cue{game::Id::FF5, 209, 78, 190, L"sc_e_0017_9", L"Wind Shrine shards glow cue"},
+    Cue{game::Id::FF5, 211, 19, 210, L"sc_e_0030", L"Siren mirage appears cue", CueTrigger::PlayAnim, L"mo_ff5_n103_c02"},
+    Cue{game::Id::FF5, 271, 42, 172, L"sc_e_0046_1", L"Fire-Powered Ship engine blasts cue"},
+    Cue{game::Id::FF5, 1, 320, 43, L"sc_e_0048_2", L"Karnak Castle blasts cue"},
+    Cue{game::Id::FF5, 1, 162, 33, L"sc_e_0066_1", L"Catapult hatch opens cue", CueTrigger::PlayAnim, L"mo_ff5_b052_c00"},
+    Cue{game::Id::FF5, 1, 500, 51, L"sc_e_0066_1", L"Catapult airship launch cue", CueTrigger::PlayAnim, L"mo_ff5_v004_c00"},
+    Cue{game::Id::FF5, 584, 16, 187, L"sc_e_0084_1", L"Meteor journey light cue"},
+    Cue{game::Id::FF5, 136, 31, 43, L"sc_e_0094", L"Moogle village scatters cue", CueTrigger::PlayAnim, L"mo_ff5_n119_c00"},
     Cue{game::Id::FF5, 19, 809, 29, L"sc_e_0137_2", L"Merged world water cue"},
+    Cue{game::Id::FF5, 19, 400, 55, L"sc_e_0137_4", L"Merged world Bahamut cue", CueTrigger::Show, L"mo_ff5_n045_c00"},
     Cue{game::Id::FF5, 19, 800, 38, L"sc_e_0138_1", L"Void sphere cue"},
+    Cue{game::Id::FF5, 569, 33, 112, L"sc_e_0161_9", L"Rift final dark sphere cue"},
     Cue{game::Id::FF5, 209, 75, 114, L"sc_e_0001_4", L"Wind Shrine shatter cue"},
     Cue{game::Id::FF5, 596, 2, 21, L"sc_e_0001_6", L"Opening meteor cue", CueTrigger::PlayAnim, L"", L"", 0.7},
     Cue{game::Id::FF5, 629, 5, 46, L"sc_e_0162_47", L"Ending white birds cue"},
     Cue{game::Id::FF5, 644, 12, 62, L"sc_e_0162_48", L"Ending mounted drake cue", CueTrigger::PlayAnim, L"mo_ff5_n050_c01"},
     Cue{game::Id::FF6, 1, 247, 44, L"sc_e_0036_2", L"Figaro first descent cue"},
+    Cue{game::Id::FF6, 580, 7, 117, L"sc_e_0012_b", L"Frozen esper shines cue", CueTrigger::PlayAnim, L"mo_ff6_n085_c00"},
+    Cue{game::Id::FF6, 50, 11, 136, L"sc_e_0079", L"Celes in the cell cue", CueTrigger::PlayAnim, L"mo_ff6_p007"},
+    Cue{game::Id::FF6, 75, 72, 149, L"sc_e_0118_2", L"Doma guards fall cue", CueTrigger::PlayAnim, L"mo_ff6_n078_c01"},
+    Cue{game::Id::FF6, 581, 8, 189, L"sc_e_0259_b", L"Terra esper form appears cue", CueTrigger::PlayAnim, L"mo_ff6_p015"},
+    Cue{game::Id::FF6, 607, 9, 145, L"sc_e_0558_4", L"Opera soldiers onstage cue", CueTrigger::PlayAnim, L"mo_ff6_n003_c05"},
+    Cue{game::Id::FF6, 1, 255, 49, L"sc_e_0558_9", L"Blackjack lift off cue", CueTrigger::PlayAnim, L"mo_ff6_v004_c00"},
+    Cue{game::Id::FF6, 180, 219, 234, L"sc_e_0555_5", L"Thamasa magicite forms cue", CueTrigger::PlayAnim, L"mo_ff6_b065_c00"},
     Cue{game::Id::FF6, 2, 193, 44, L"sc_e_0673_1", L"Figaro return cue"},
     Cue{game::Id::FF6, 2, 197, 35, L"sc_e_1002_2", L"Light of Judgment sweep cue"},
+    Cue{game::Id::FF6, 431, 61, 70, L"sc_e_0607_2", L"Warring Triad flashes cue", CueTrigger::PlayAnim, L"mo_ff6_b009_c00"},
+    Cue{game::Id::FF6, 605, 6, 72, L"sc_e_0607_3", L"World of Ruin smoke cue"},
+    Cue{game::Id::FF6, 571, 28, 82, L"sc_e_1004", L"Kefka barrier cue"},
+    Cue{game::Id::FF6, 592, 11, 41, L"sc_e_1032_14", L"Falcon finale flock cue", CueTrigger::PlayAnim, L"mo_ff6_e016_c00"},
     Cue{game::Id::FF6, 584, 230, 42, L"sc_e_1032_18", L"Ending title card cue", CueTrigger::Show, L"mo_ff6_e101_c00"}
 };
 
 using PuppetCommand = int (*)(void*, const void*);
-PuppetCommand native_play = nullptr, native_show = nullptr;
+PuppetCommand native_play = nullptr, native_show = nullptr, native_move_bird_view = nullptr;
 uint64_t last_generation = 0;
 std::array<bool, cues.size()> queued{};
 
@@ -209,10 +270,19 @@ int show(void* core, const void* method)
     return result;
 }
 
+int move_bird_view(void* core, const void* method)
+{
+    const int result = native_move_bird_view(core, method);
+    if (frame::on_main_thread())
+        hooks::guarded("SceneEffects.MoveBirdView", [&] { observe_first_play(core, CueTrigger::MoveBirdView); });
+    return result;
+}
+
 int install_effect_cues()
 {
     int count = hooks::attach(mPlayAnim, &play_anim, &native_play) ? 1 : 0;
     if (hooks::attach(mShow, &show, &native_show)) ++count;
+    if (hooks::attach(mMoveBirdView, &move_bird_view, &native_move_bird_view)) ++count;
     return count;
 }
 core::Install install{"SceneEffects", &install_effect_cues, 130};

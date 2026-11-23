@@ -53,9 +53,10 @@ ref::Class kFF6AnimState{"Last.Battle", "AnimStateController", game::kFF6};
 ref::Field fStanding{kFF6AnimState, "currentStandingState"};
 ref::Class kPaintingScript{"Last.Interpreter.Instructions.SystemCall", "Current", game::kFF6};
 ref::Method mPainting{kPaintingScript, "ChadarnookSwich", 1};
-ref::Class kSandwormScript{"Last.Interpreter.Instructions.SystemCall", "Current", game::kFF5};
-ref::Method mSandwormMove{kSandwormScript, "SandWormMoveEnemy", 1};
-ref::Method mSandwormReveal{kSandwormScript, "SandWormEffectAfter", 1};
+ref::Class kFf5BattleScript{"Last.Interpreter.Instructions.SystemCall", "Current", game::kFF5};
+ref::Method mSandwormMove{kFf5BattleScript, "SandWormMoveEnemy", 1};
+ref::Method mSandwormReveal{kFf5BattleScript, "SandWormEffectAfter", 1};
+ref::Method mNeoMove{kFf5BattleScript, "NeoExDeathMove", 1};
 ref::Class kPaintMesh{"Last.Battle", "EntityMeshRenderer", game::kFF6};
 ref::Method mSetFloat{kPaintMesh, "SetFloat", 2};
 ref::Class kPlugManager{"Last.Battle", "BattlePlugManager", game::kFF5 | game::kFF6};
@@ -76,6 +77,7 @@ unsigned pending = 0;
 bool ready = false;
 int painting_asset = 0;
 bool sandworm_moved = false;
+bool neo_exdeath_described = false;
 int lord_read_task = 0;
 
 void cancel_lord_read()
@@ -96,6 +98,7 @@ void open()
     requests = {};
     painting_asset = 0;
     sandworm_moved = false;
+    neo_exdeath_described = false;
     ready = true;
 }
 
@@ -321,7 +324,7 @@ void d_set_float(void* mesh, void* property, float value, const void* mi)
 
 using Script = int32_t(*)(void*, const void*);
 Script o_painting;
-Script o_sandworm_move, o_sandworm_reveal;
+Script o_sandworm_move, o_sandworm_reveal, o_neo_move;
 void* enemy_units()
 {
     auto* manager = ref::call_static<void*>(mPlugInstance);
@@ -364,6 +367,28 @@ int32_t d_sandworm_reveal(void* interpreter, const void* mi)
     if (result == 0 && observe() && sandworm_moved) hooks::guarded("BossVisual.SandwormShown", [&] {
         sandworm_moved = false;
         if (visible_body(sandworm_body())) speak(L"BossVisual.SandwormMoved");
+    });
+    return result;
+}
+
+int32_t d_neo_move(void* interpreter, const void* mi)
+{
+    const auto result = o_neo_move(interpreter, mi);
+    if (!observe() || neo_exdeath_described || !ui::prefs::visual_descriptions_enabled()) return result;
+    // The later movement command runs after the native replacement has loaded
+    // its assets. Wait for the one visible body in the new party. The other
+    // targetable parts have transparent sprites.
+    hooks::guarded("BossVisual.NeoExdeathShown", [&] {
+        auto* enemies = enemy_units();
+        const int count = unity::array_length(enemies);
+        if (count < 1 || count > 9) return;
+        for (int index = 0; index < count; ++index) {
+            auto* unit = unity::array_at(enemies, index);
+            if (monster_id(unit) != 388 || !visible_body(entity_of(unit))) continue;
+            neo_exdeath_described = true;
+            speak(L"BossVisual.NeoExdeath");
+            break;
+        }
     });
     return result;
 }
@@ -419,7 +444,8 @@ int install()
     const int exit = hooks::attach(mExitSprite, &d_exit_sprite, &o_exit_sprite);
     const int deform = hooks::attach(mCreateDeformation, &d_create_deformation, &o_create_deformation);
     const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);
-    return shared + exit + deform + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal);
+    return shared + exit + deform + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal) +
+           hooks::attach(mNeoMove, &d_neo_move, &o_neo_move);
 }
 core::Install registration{"Battle.BossVisuals", &install, 117};
 }

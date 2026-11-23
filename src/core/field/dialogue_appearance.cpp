@@ -256,7 +256,15 @@ struct StagedCue {
 // The first page follows the verified visible action on these exact event
 // paths. Some use the native player or mounted party, which has no NPC slot.
 constexpr StagedCue staged_cues[] = {
+    {game::Id::FF1, 3, L"sc_e_0002", L"MSG_EKKEN_03", L"Cornelia crystal shards cue", 0, {}, {}, true},
+    {game::Id::FF1, 3, L"sc_e_0002_1", L"MSG_EKKEN_03", L"Cornelia crystal shards cue", 0, {}, {}, true},
+    {game::Id::FF1, 72, L"sc_e_0003_2", L"MSG_HELPSERA_03", L"Sarah rescue pose cue", 0, {}, {}, true},
+    {game::Id::FF1, 32, L"sc_e_0013", L"MSG_AWAKEELF_02", L"Elf Prince wakes cue"},
+    {game::Id::FF1, 120, L"sc_e_0044", L"MSG_LAST_07", L"Garland reveals Chaos cue"},
+    {game::Id::FF2, 228, L"sc_e_0070_1", L"E0070_00_228_a_01", L"Leviathan shipwreck cue", 0, {}, {}, true},
     {game::Id::FF3, 153, L"sc_e_0001_1", L"E0001_01_153_a_01", L"Altar Cave opening cue"},
+    {game::Id::FF3, 184, L"sc_e_0045", L"E0045_00_184_a_09", L"Desch jumps into the reactor cue", 0, {}, {}, true},
+    {game::Id::FF3, 211, L"sc_e_0067", L"E0067_00_211_a_04", L"Aria intercepts the arrow cue", 0, {}, {}, true},
     {game::Id::FF4, 342, L"sc_e_0001_1", L"E0001_01_342_a_03", L"Red Wings deck cue", 5, L"mo_ff4_n101_c02"},
     {game::Id::FF4, 325, L"sc_e_0054_1", L"E0055_01_004_a_01", L"Enterprise workshop cue", 3, L"mo_ff4_n005_c01"},
     // FuSoYa's effect and puppet reveal finish just before Cecil speaks.
@@ -277,7 +285,14 @@ constexpr StagedCue staged_cues[] = {
     {game::Id::FF5, 198, L"sc_e_0001_1", L"E0001_01_198_a_01", L"Pirate ship opening cue", 44, L"mo_ff5_n111_c00"},
     {game::Id::FF5, 190, L"sc_e_0001_2", L"E0001_02_190_a_01", L"Galuf crystal chamber cue", 9, L"mo_ff5_p003_c00"},
     {game::Id::FF5, 209, L"sc_e_0001_4", L"E0001_04_209_a_01", L"Wind Shrine opening cue", 30, L"mo_ff5_b002_c00"},
+    {game::Id::FF5, 243, L"sc_e_0039_1", L"E0039_00_234_a_04", L"Water Crystal shatters cue", 0, {}, {}, true},
+    {game::Id::FF5, 384, L"sc_e_0121_4", L"E0121_03_384_a_01", L"Galuf fallen cue", 0, {}, {}, true},
     {game::Id::FF6, 3, L"sc_e_0001_5", L"E0001_04_003_a_01", L"Narshe armored entry cue"},
+    {game::Id::FF6, 372, L"sc_e_0214_4", L"E0214_03_372_a_05", L"Phantom Train family boards cue", 0, {}, {}, true},
+    {game::Id::FF6, 403, L"sc_e_0402", L"E0402_00_403_a_03", L"Factory esper magicite cue", 0, {}, {}, true},
+    {game::Id::FF6, 403, L"sc_e_0402", L"E0402_00_403_a_23", L"Factory Celes flash cue", 0, {}, {}, true},
+    {game::Id::FF6, 192, L"sc_e_0628_1", L"E0628_00_192_a_01", L"Celes cliff and shore cue", 0, {}, {}, true},
+    {game::Id::FF6, 268, L"sc_e_0703_9", L"E0703_05_268_a_04", L"Falcon emerges cue", 0, {}, {}, true},
     {game::Id::FF6, 122, L"sc_e_1033_1", L"E1033_00_122_a_03", L"Setzer engine cue", 6, L"mo_ff6_p010"},
     {game::Id::FF2, 31, L"sc_e_0057", L"E0057_00_031_a_01", L"Leila raised arm cue", 98, L"mo_ff2_p006_c00", L"righthandup_00"},
     {game::Id::FF3, 106, L"sc_e_0076_2", L"E0076_02_106_a_06", L"Saronia king down cue", 33, L"mo_ff3_n009_c01", L"down_00"},
@@ -382,8 +397,12 @@ std::wstring action_cue_at_dialogue()
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
     if (!r::kFieldController.is(controller)) return {};
-    for (const auto& cue : staged_cues)
-        if (belongs_here(cue) && message == cue.message) return staged_cue(controller, cue);
+    for (const auto& cue : staged_cues) {
+        if (!belongs_here(cue) || message != cue.message) continue;
+        // Alternate native scripts can reuse the same dialogue page.
+        auto text = staged_cue(controller, cue);
+        if (!text.empty()) return text;
+    }
     if (!construction && !audience && !surrender && !reveal) return {};
     if (surrender || reveal) {
         // These scenes finish the animated change before the next page.

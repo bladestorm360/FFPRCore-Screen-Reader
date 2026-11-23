@@ -38,6 +38,19 @@ when every selected scene has that evidence and the authored cues pass
 their offline checks and delivery. The earlier script-count reconciliation
 alone is insufficient evidence that a scene was adequately described.
 
+The frozen scope has 82 sequences and 1,350 field script bodies from the
+prior corpus, including the direct Phantom Train, Solitary Island and
+Falcon continuations. The review follows the visual beats across each sequence.
+The local manifest is `../tools/major_scene_recheck_20261123/fixed-episode-manifest.json`
+with SHA-256 `961061054ae051fbcefb95dab858e6d68ec2e91dbadebdf3224c99b337a8f98d`.
+The companion index retains exact active script aliases, native page and
+transition keys, actor placements and the current cue matches. A branch
+with only a map transfer follows its destination's review.
+The FFVI roots `0319`, `0610`, `0653` and `0999` outside the retained field
+inventory are a short opener, state turns, a native conversation and a
+script handoff. They have no independent major visual. Roots `0081`,
+`0260`, `0321` and `0324` have no matching field body in this corpus.
+
 | Game | Story sequences in the repeat review |
 | --- | --- |
 | FF1 | Opening and Cornelia, Garland's defeat and Sarah's rescue, bridge prologue, Bikke's surrender, Astos and the Elf Prince, canal, four crystal restorations, airship rising, faerie release, the Onrac descent, the Black Crystal and Chaos through the ending. |
@@ -46,6 +59,135 @@ alone is insufficient evidence that a scene was adequately described.
 | FFIV | Red Wings and the Mysidia raid, Mist and Rydia, Damcyan, Leviathan, Cecil's trial, Baigan and Cagnazzo, the Dark Elf and harp, Tellah and the Tower of Zot, Agart, Golbez and Rydia in the Dwarven Castle, Yang at the super cannon, Cid's escape and vehicle upgrades, Edge's parents, the Falcon, the Sealed Cavern finale, the Lunar Whale and Moon arrival, FuSoYa, the Giant's awakening through its destruction and the return to the Moon, and Zeromus through the ending. |
 | FFV | Tycoon, the pirate ship and meteor, Wind Shrine, the Ship Graveyard, the Wind Drake and Water Crystal, Fire-Powered Ship and Karnak escape, Catapult and Ronka, the meteor journey, Galuf's world, the moogles and the Big Bridge, the Exdeath Castle confrontation, the merged world and its first Void strike, the Interdimensional Rift finale, Neo Exdeath and the ending variants. |
 | FFVI | Magitek opening and Narshe, Figaro, the resistance at South Figaro, Doma and the Phantom Train, Terra's transformation and Zozo, the opera and Blackjack, the Magitek Factory and Espers, Thamasa and Leo, the Floating Continent and the world's ruin, Celes and Cid, Figaro's return and the Falcon's rise, the Light of Judgment and key World of Ruin reunions, Kefka's tower and battle phases, and the ending escape. |
+
+### FF1 review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Opening and Cornelia | The native prologue names the failing elements. Its crystal shot already has a description. The audience adds a cue for the king lowering his head and the four shards flashing in sequence. |
+| Garland and Sarah | The battle challenge identifies Garland. The first post-battle page describes Sarah crouching and shaking as the party approaches her. |
+| Bridge and prologue | The existing construction cue covers the first group animation. The existing bird cue leads into the native scroll. Later copies of the work movement use the same information. |
+| Bikke's surrender | The existing post-battle cue describes both crew reactions before the surrender. The native dialogue explains the ship award. |
+| Astos and the Elf Prince | The Western Keep cue describes the transformation. The first waking page now describes the prince stirring, before the native exchange and key award. |
+| Canal | Two existing effects cover the digging and the blue water plume. The explosives exchange and result use the native dialogue. |
+| Four crystal restorations | Each victory continuation describes the first glowing shard over its altar. The other flashes and party poses repeat that visual action. |
+| Airship | The existing sand cue and the added airship motion describe the rise from the desert. |
+| Faerie release | The existing effect cue describes the emerging lights. The spring dialogue handles the result. |
+| Onrac descent | A cue begins when the woman fades from the dock. The ordinary barrel transport moves from the port to the shrine after the native boarding line. |
+| Black Crystal and past shrine | The fusion cue describes the four colored shards and the dark orb. The time-travel scene and later lute slab use separate native transitions. A cue for the slab itself still needs a confirmed first visible player or door witness. |
+| Chaos and ending | A cue on the final battle challenge describes Garland being replaced in the flash. The ending uses native narration and the existing final title cue. |
+
+### FFII review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Fynn and Altair | The prologue explains the invasion. Existing fire, stars and Hilda's reaction cues cover the opening recovery. |
+| Scott and the ring | Scott's collapse has an added cue. The dialogue identifies the ring and explains its use. |
+| Semitt Falls | The captives and their release use the native rescue dialogue. Remaining movement is the party and captives leaving. |
+| Bafsk launch and capture | The existing steam and the added rising Dreadnought cue cover the airborne departure. |
+| Josef and the boulder | The boulder rolling into Josef has an added cue. His farewell follows in native dialogue. |
+| Sunfire and the Dreadnought | The added engine cue covers the eruption of Sunfire. The exterior explosion already has a cue. |
+| Leviathan | The first shore page describes the wave and the ship's disappearance before the native dialogue identifies the missing crew. |
+| Deist and the wyvern | The sick wyvern's attempted rise and collapse have an added cue. The mirror flight in `sc_e_0080_1` still needs a visible timing witness across its initial fades. |
+| Arena and retaking Fynn | Native dialogue identifies the impostor and ambush. The regrouping and retaking use the existing field exchange and Leila cue. |
+| Mysidia and Ultima | The existing sealed-door sequence and the added cue for Minwu's spell cover the opening. The dialogue names Ultima and explains the cost. |
+| Cyclone | The existing funnel cue covers the approach. Native dialogue explains the threat and what changes after the fight. |
+| Palamecia | The existing eruption cue and native dialogue describe the collapse and the Emperor's return. |
+| Jade Passage | The existing passage and arrival cues cover the large visual transitions. Interior fades reuse the same travel information. |
+| Emperor and ending | The Emperor's defeat has an added dissolution cue. The native conclusion and existing title cue cover the return and final card. |
+
+### FFIII review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Altar Cave and the prologue | The existing opening and Crystal fades support the native introduction. |
+| Djinn and the curse | The native pages describe the raised ring and the Djinn dispersing like mist. The return identifies the change in town. |
+| Cid and the Nepto passage | The dialogue names the airship, missing eye and restored passage. The remaining dragon silhouette in `sc_e_0026` needs a visible pose witness independent of ordinary player movement. |
+| Owen's Tower | A new cue describes Desch jumping into the flames. The separate whirlpool in `sc_e_0045_1` begins from a placed effect whose first visible spin lacks a verified runtime witness. |
+| Hein's Castle | A new cue describes the airborne castle. The native exchange identifies Hein and explains the castle's release. |
+| Leaving the Floating Continent | The native captions identify the departure and describe the world beyond. The `sc_e_0061` flyaway has no verified independent camera cue. |
+| Aria and Kraken | A new cue describes Aria taking the arrow. Her final exchange and the crystal dialogue supply the outcome. |
+| Amur and the Enterprise | Existing underwater bubbles support the native access and Levigrass Shoes exchanges. |
+| Goldor's chains | The native dialogue explicitly describes the smashed crystal and identifies the key used to release the ship. |
+| Saronia and Garuda | The Enterprise bombardment has an added cue. The existing cannon smoke and king's collapse cover the later attack and aftermath. |
+| Doga and Unei | Unei waking has an added cue. The Crystal Tower and World of Darkness continuations cover the keys, sacrifice and returning light. |
+| The Nautilus | The native exchange explains the ship's new function. `sc_e_0077` has no verified separate visual presentation for the upgrade itself. |
+| Crystal Tower barrier and mirror | The existing mirror glow and added Cloud of Darkness appearance cover the transition. The native exchange explains how Doga and Unei free the party. |
+| World of Darkness and ending | Native dialogue explains the Dark Warriors and their crystals. An added light cue and the existing final card cover the major silent ending visuals. |
+
+### FFIV review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Red Wings and Mysidia | New cues cover the fleet formation and the crystal raid. The existing first-deck cue and native crew dialogue cover the return. |
+| Mist and Rydia | Added cues describe the Bomb Ring figures and the burning village. Rydia's native dialogue identifies the dragon and her loss. |
+| Damcyan | Existing flames and an added view of the ruined towers describe the attack's aftermath. |
+| Leviathan | The ship lurching has an added cue. Native party dialogue covers the attack and separation. |
+| Cecil's trial | The sword glint has an added cue. The native trial explains lowering the weapon and becoming a paladin. The kneel-to-stand motion in `sc_b_0020` has no confirmed visible battle witness. |
+| Baigan and Cagnazzo | The native introductions and battle announcements identify the disguises, forms and elemental changes. |
+| Dark Elf and the harp | An added cue describes Edward's harp. The native exchange explains the weakening spell and the Dark Elf encounter. |
+| Tellah and the Tower of Zot | An added cue describes Golbez's bolt. Native dialogue identifies Meteor, Tellah's final act and the rescue. |
+| Agart | The existing eruption cue covers the opening to the underworld. The native exchange identifies the object used. |
+| Golbez and Rydia | Native dialogue identifies the shadow dragon and Rydia's rescue. `sc_b_0047_2` would need a verified visible witness during the pre-ready battle action to describe either silent entrance independently. |
+| Yang and the super cannon | Added explosion cues follow the native farewell and cover Yang's sacrifice. |
+| Cid's escape and vehicle upgrades | Existing workshop and underground smoke cues cover the physical work and escape. The dialogue names the augments and explains their effect on travel. |
+| Edge's parents and the Falcon | Edge's aura has an added cue. Native dialogue identifies the transformations, deaths and Falcon acquisition. |
+| Sealed Cavern finale | Native dialogue identifies the stolen crystal and Kain's departure. The separate fleeing pose in `sc_e_0065_2` has no verified visible cue. |
+| Lunar Whale and first Moon arrival | A cue describes the Whale rising. Native crystal dialogue and the travel transition establish the destination. |
+| FuSoYa | The existing introduction and native dialogue identify FuSoYa and connect the Moon's history to Cecil. |
+| Giant of Babil and return to the Moon | Added cues cover the awakening, smoke and attack. The existing Lords cues, the new CPU aftermath and destruction cues, the regrouping and a later Moon transit cue cover the continuation. |
+| Zeromus and ending | Added cues cover Zeromus taking shape and the final burst. The native epilogue and existing title cue cover the conclusion. |
+
+### FFV review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Tycoon, pirates and meteor | The added Wind Drake cue and existing meteor and pirate scenes cover the opening departures and impact. |
+| Wind Shrine | Added shard and shattering cues accompany the native account of the Wind Crystal's loss. |
+| Ship Graveyard | Siren's staged mirage has an added cue. The native pages identify the people in the illusions and the deception. |
+| Wind Drake and Water Crystal | A cue describes the crystal fragments after the flash. The native exchanges explain the Wind Drake rescue. |
+| Fire-Powered Ship and Karnak | The engine failure and Karnak fire have added cues. The existing Mid gesture covers the reunion. The door in `sc_e_0045` still needs a verified visible opening cue. Cid's dialogue explains where it leads. |
+| Catapult and Ronka | The hatch and ship rising have added cues. Existing Ronka shots and the native exchanges cover the ruins and Krile's arrival. |
+| Meteor journey and Galuf's world | The transfer has an added cue. Native dialogue names the journey and destination. |
+| Big Bridge and moogles | The native battle and departure exchange cover the bridge. Added moogle reactions and the existing raised-paw cue cover the village. |
+| Guardian Tree and Exdeath Castle | An added cue covers Galuf lying motionless. Native pages name his sacrifice and the later fight. The curtain of flashes before the `sc_e_0125_1` transfer has no independently verified visible cue. |
+| Merged world and first Void strike | Existing merger and Void cues and an added Bahamut shot cover the main changes. Native dialogue names the growing threat. |
+| Interdimensional Rift and finale | The dark sphere and Neo Exdeath have added cues. Two existing ending shots accompany native letter variants. The `sc_b_0162_0` through `sc_b_0162_3` results overlay needs a separate safe ownership witness for its silent visuals. |
+
+### FFVI review
+
+| Sequence | What the narration covers |
+| --- | --- |
+| Magitek and Narshe | The existing armored arrival and added frozen Esper flash accompany the prologue. The silent Magitek march in `sc_e_0001_4` shares its script with the title demo and needs a gameplay-only visible cue. |
+| Figaro departure | The existing cue describes Figaro sinking. The native exchange explains its escape. |
+| South Figaro and Celes | An added cue describes Celes slumping in the cell. The native dialogue covers the rescue. |
+| Doma and the Phantom Train | Added cues describe the guards falling and Cyan's family at the train. Native dialogue identifies the poisoning and farewells. |
+| Terra's transformation and Zozo | A new cue describes Terra's Esper form. Ramuh's native explanation covers her identity and the response. |
+| Opera and Blackjack | Added stage and Blackjack cues accompany the native lyrics and exchanges. |
+| Magitek Factory and Espers | Added cues describe the Esper light and Celes disappearing in the flash. Native pages identify the magicite and explain the escape. |
+| Thamasa and Leo | An added magicite cue accompanies the earlier Leo and Kefka descriptions and the native aftermath. |
+| Floating Continent and ruin | Added cues describe the Warring Triad and smoke rising from the rupture. Native captions explain the time jump and devastation. |
+| Celes and Cid | The alternate Solitary Island paths retain their different dialogue. The cliff path cues describe the fall and Celes on the shore. |
+| Figaro's return and the Falcon | The existing Figaro cue and added Falcon emergence cover both returns. |
+| Light of Judgment and reunions | The existing beam cue and native reunion exchanges cover the attack and who rejoins the party. |
+| Kefka and ending escape | Added barrier and ending-bird cues accompany the existing winged Kefka and title cues. The earlier tiers in `sc_b_2022` need a verified renderer and skip boundary for independent automatic descriptions. |
+
+### Verification
+
+The repeat pass added 61 field animation bindings, 15 exact dialogue page
+bindings and one battle reveal. The installed script and asset corpus
+checks verified all 106 field animation bindings and 49 dialogue page
+bindings in the complete candidate catalog. Each uses one of the twelve
+supported locales. The new field flight observer runs only for the FFII
+and FFIV native motion method. It uses the same exact script and actor
+checks as the existing effect observer and cancels at the end of the
+event. The FFV Neo Exdeath cue reads the visible body after the later
+battle movement command. [Battle presentation](BOSS_VISUALS_20261112.md).
+
+The fixed inventory includes findings that still need a safe visible cue.
+They have explicit scene locators above. Audible timing in the running
+games remains a separate confirmation. Local binding and resource evidence
+is in `../tools/major_scene_recheck_20261123` relative to the checkout.
 
 ## November 23 visual descriptions switch and Cid on deck
 

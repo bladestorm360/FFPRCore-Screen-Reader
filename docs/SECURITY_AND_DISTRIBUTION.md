@@ -1,5 +1,24 @@
 # Build and distribution security
 
+## November 23 Giant aftermath, Moon return and focused enemy descriptions
+
+The 21,371,392-byte candidate from source checkpoint `d7f92e6d8e2c058ea0373ccd3a7998b10dc2aced`
+has SHA-256 `a31cc20effc91609bedf98b299207285a3eacd60f073ee56780b0bc8bbf0199f`.
+The focused build verified 73 embedded resources. The dialogue cue, six
+Storyline replays, fresh enemy focus in all six games, 9,136 native names
+and all 47 proxy exports passed. The enforced job peaked at 498,520,064
+bytes with one worker under the 2 GB aggregate limit and 25 percent CPU cap.
+
+Defender definitions `1.463.439.0` scanned the 22 exact candidate files
+with stable hashes and zero matching detection events. The OS denied the
+exclusion query. The machine has no signing certificate. The FFIV installer
+matched all 22 hashes and preserved 138 checked file states. The previous
+FFIV DLL hash is `55117bcab1da5acb1dc0c9b59bd1608560408324e9248542be0e6b83f652dcb7`.
+The owner then authorized the other five installs. They passed the same
+22-file verification against the exact candidate, with FFIV untouched
+during that second install. The source checkpoint is verified on the owner
+remote. In-game audible timing and the route remain pending confirmation.
+
 ## November 23 FFIV Elemental Lords narration
 
 Source `7fdf8d60f88b77edeecb7003ebd4a38bc95f4003`. The focused build passed
