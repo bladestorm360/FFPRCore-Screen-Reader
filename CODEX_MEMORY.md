@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 23 Visual descriptions switch.** F8 → Speech saves one
+default-on switch for appearance descriptions and automatic scene cues.
+Both use the same screen reader voice as dialogue. Verified offline and
+installed in all six games. [Controls and Cid scene evidence](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-23-visual-descriptions-switch-and-cid-on-deck)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-23-visual-descriptions-switch).
+
 **November 22 Storyline resume.** Storyline correctly resumes outside Karnak
 after the optional King's Chamber conversation was skipped. The automatic
 first audience in the Throne Room is a separate earlier step. The all-six review

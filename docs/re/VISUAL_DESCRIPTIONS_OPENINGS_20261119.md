@@ -25,8 +25,9 @@ existing cue producers.
 
 The focused checkpoint verifies the saved control in all six menus, the
 appearance readers and the caption, field-effect and boss cue paths.
-Installation requires the smoke test and exact-payload scan. Gameplay
-confirmation is separate.
+The checks, isolated smoke test and exact-payload scan passed. The same
+build is installed and verified in all six games. Gameplay confirmation
+is pending. [Delivery](../SECURITY_AND_DISTRIBUTION.md#november-23-visual-descriptions-switch).
 
 ## November 20 dialogue cues
 

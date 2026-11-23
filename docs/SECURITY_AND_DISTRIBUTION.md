@@ -1,5 +1,28 @@
 # Build and distribution security
 
+## November 23 Visual descriptions switch
+
+Source `05e9956b4b28b3fde14647029ebff6b43aa0888c`. The focused build
+passed in 269.9 seconds using the enforced 2 GB, one-worker and 25 percent
+CPU limits. Peak aggregate memory was 455,184,384 bytes. The modal menu,
+dialogue appearance, battle focus and boss visual fixtures passed. All 36
+new localized entries, 73 embedded resources, 9,113 native names and
+47 forwarded exports verified. All-six menu construction in the fixture
+peaked at 0.021 ms. Game-frame and audible timing remain unmeasured.
+
+The 21,332,480-byte unsigned DLL SHA-256 is
+`36da15bf8fa543a1eb6608e5846805634b1edce3fe2b732431cc117a8fc5b8de`.
+Defender definitions `1.463.429.0` reported no threats in the 22 exact
+files and no matching detection events. Staged hashes were stable. The
+exclusion query was denied. The guarded installation verified all 22
+files in each Steam game and 138 protected states. The final DLL hash
+was verified in all six games. Gameplay confirmation is pending.
+
+Recovery uses `9e172d3` for FFIII and FFV, `0433a1c` for FFIV and
+`3c31c01` for FFI, FFII and FFVI. Compact comparison, check and scan
+receipts are under `../tools/visual_descriptions_toggle_20261123`.
+Cleanup reclaimed 83,591,284 bytes and retained the production cache.
+
 ## November 22 skipped Storyline conversations
 
 Source `9e172d3eb669e112c45e052b16e39bf707405e46`. The focused
