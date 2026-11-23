@@ -613,6 +613,56 @@ int verify_ff4()
             if (!planned.path.success) std::printf("  FFIV Palace: %ls / %ls\n", planned.path.reason.c_str(), planned.path.error.c_str());
         }
     }
+    lunar[65] = 1;
+    lunar[66] = 0;
+    const auto return_trip = ff4_stage(lunar).objective;
+    check(return_trip && return_trip->map == 161, "FuSoYa's receipt advances to the return crystal");
+    if (return_trip) {
+        const auto replay = [&](int map, baked_route::Cell start, bool have_whale) {
+            using namespace field::baked_nav;
+            auto flags = progress_at({}, map);
+            std::copy(lunar.begin(), lunar.end(), flags.scenario.begin());
+            flags.current_area_id = map == 3 ? 39 : 40;
+            const auto target = contacts(*return_trip, map).front();
+            RouteSnapshot snapshot(map_state::Resolver(flags, fixture::records));
+            snapshot.map_id = map;
+            snapshot.submap = baked::submap_by_map_id(map);
+            snapshot.layer = start.layer;
+            snapshot.position = world_of_cell(*snapshot.submap, start);
+            snapshot.vehicle = {true, 1, 1, {}};
+            snapshot.vehicle_shortcuts = true;
+            snapshot.locale = L"en";
+            snapshot.candidates = {target};
+            snapshot.vehicle_names[11] = L"Lunar Whale";
+            // The actual landing before the report, preserved in the game log.
+            if (have_whale && map == 3)
+                snapshot.vehicles.push_back({nullptr, 8, 11, {}, world_of_cell(*snapshot.submap, {1,20,36})});
+            else if (have_whale) snapshot.saved_vehicles.push_back({11, 3, {20,36,0}});
+            return plan_snapshot(snapshot);
+        };
+        const auto outside = replay(3, {1,22,38}, true);
+        const auto eastern = replay(292, {0,4,27}, true);
+        const auto western = replay(291, {0,14,7}, true);
+        const auto beside_whale = replay(3, {1,20,36}, true);
+        const auto missing = replay(3, {1,22,38}, false);
+        if (!eastern.path.walk_phases.empty() && !eastern.path.walk_phases.back().cells.empty()) {
+            const auto exit = eastern.path.walk_phases.back().cells.back();
+            std::printf("FFIV Eastern Lunar Path exit: (%d,%d) L%d to map %d\n",
+                        exit.x, exit.y, exit.layer, eastern.path.next_map_id);
+        } else std::printf("FFIV Eastern Lunar Path: %ls / %ls\n", eastern.path.reason.c_str(), eastern.path.error.c_str());
+        check(outside.path.success && outside.path.next_map_id == 292 && outside.goal.map_id == 161,
+              "after FuSoYa, the logged Palace exit routes through Eastern Lunar Path and keeps the crystal objective");
+        check(eastern.path.success && eastern.path.next_map_id == 3 &&
+              !eastern.path.walk_phases.empty() && eastern.path.walk_phases.back().cells.back() == baked_route::Cell{0,16,6},
+              "the route through Eastern Lunar Path uses the far exit toward the parked Whale");
+        check(western.path.success && western.path.next_map_id == 3,
+              "Western Lunar Path can route to the same saved craft");
+        check(beside_whale.path.success && beside_whale.path.next_map_id == 0 &&
+              !beside_whale.path.walk_phases.empty() && beside_whale.path.walk_phases.back().manual_after &&
+              beside_whale.path.description.find(L"Lunar Whale") != std::wstring::npos,
+              "the craft approach announces boarding and leaves the native action manual");
+        check(!missing.path.success, "without an observed craft the route cannot invent a boarding position");
+    }
     return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
 }
 

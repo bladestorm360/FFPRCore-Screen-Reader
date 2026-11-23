@@ -1,4 +1,4 @@
-// FFIII off-map craft and FFVI's saved Blackjack departure position.
+// FFIII off-map craft, FFIV's Lunar Whale and FFVI's Blackjack.
 // Read ready value fields; never clone the collection, instantiate a singleton,
 // transform an unloaded object, serialize data or move a game pointer to work.
 #include "field_internal.h"
@@ -8,7 +8,7 @@
 #include <cmath>
 namespace field {
 namespace {
-constexpr auto kSavedGames=game::kFF3|game::kFF6;
+constexpr auto kSavedGames=game::kFF3|game::kFF4|game::kFF6;
 ref::Class kSavedUser{"Last.Management","UserDataManager",kSavedGames};
 ref::Class kSavedStorage{"Last.Interpreter","DataStorage",kSavedGames};
 ref::Class kSavedOwned{"Last.Data.User","OwnedTransportationData",kSavedGames};
@@ -23,8 +23,9 @@ ref::Method mSavedEnabled{kSavedOwned,"get_Enable",0};
 }
 std::vector<SavedWorldVehicle> saved_world_vehicles() {
     std::vector<SavedWorldVehicle> result;
+    const bool lunar_whale=game::is(game::Id::FF4);
     const bool blackjack=game::is(game::Id::FF6);
-    if((!game::is(game::Id::FF3)&&!blackjack)||!frame::on_main_thread()||!ffpr::system::is_field_navigation_ready())return result;
+    if((!game::is(game::Id::FF3)&&!lunar_whale&&!blackjack)||!frame::on_main_thread()||!ffpr::system::is_field_navigation_ready())return result;
     // get_Enable reads the existing interpreter flag bank. The static pointer
     // checks prevent its native singleton getter from creating missing state.
     void* user=il2cpp::read_static_ptr(kSavedUser.get(),"instance");
@@ -40,6 +41,7 @@ std::vector<SavedWorldVehicle> saved_world_vehicles() {
         // This extension is deliberately one reviewed craft/world, not a
         // general promise about every FFVI saved vehicle or cutscene.
         if(blackjack&&(id!=4||map!=1))continue;
+        if(lunar_whale&&(id!=11||map!=3))continue;
         const auto* row=baked::transport(id);
         if(!row||row->type<=1||row->type==4||row->type==5||id<=0||id>=32||map<1||map>4||!ref::call<bool>(mSavedEnabled,owned))continue;
         const auto cell=ref::rd<unity::Vec3>(saved,fSavedCell);

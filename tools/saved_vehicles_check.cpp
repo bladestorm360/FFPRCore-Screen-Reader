@@ -18,7 +18,7 @@ bool enabled(void* self,const void*){++enabled_calls;native();return static_cast
 namespace game {Id current(){return fixture::game;}}
 namespace frame {bool on_main_thread(){return fixture::owner;}}
 namespace ffpr::system {bool is_field_navigation_ready(){return fixture::ready;}}
-namespace field::baked {const TransportRow* transport(int id){static TransportRow row{9,6,10,3,0};row.type=fixture::transport_type;return id==9||id==4?&row:nullptr;}}
+namespace field::baked {const TransportRow* transport(int id){static TransportRow row{9,6,10,3,0};row.type=fixture::transport_type;return id==9||id==4||id==11?&row:nullptr;}}
 namespace ref {
 Class::Class(const char* n,const char* v,uint8_t mask,const char* a):ns(n),name(v),games(mask),assembly(a){}
 il2cpp::Class* Class::get(){fixture::native();return reinterpret_cast<il2cpp::Class*>(this);}
@@ -64,6 +64,10 @@ int main(){using field::saved_world_vehicles;int failures=0;
  fixture::saved.map=2;expect(saved_world_vehicles().empty(),"FFVI extension cannot reuse the ruined world's pose");fixture::saved.map=1;
  fixture::owned.enabled=false;expect(saved_world_vehicles().empty(),"FFVI unreleased craft supplies no saved aircraft");fixture::owned.enabled=true;
  fixture::ready=false;const int before_unready=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==before_unready,"FFVI transition performs no save access");fixture::ready=true;
- for(int number:{1,2,4,5}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
+ fixture::game=game::Id::FF4;fixture::saved.id=11;fixture::saved.map=3;fixture::saved.cell={20,36,0};
+ actual=saved_world_vehicles();expect(actual.size()==1&&actual[0].id==11&&actual[0].map==3&&actual[0].cell.x==20,"FFIV copies the Lunar Whale's saved Moon position");
+ fixture::saved.map=1;expect(saved_world_vehicles().empty(),"FFIV does not substitute the surface craft");fixture::saved.map=3;
+ fixture::saved.id=9;expect(saved_world_vehicles().empty(),"FFIV ignores other transportation records");
+ for(int number:{1,2,5}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
  std::printf("Saved vehicle reader: %d failures; no native allocation, clone, scene scan or retained game pointer\n",failures);return failures?1:0;
 }

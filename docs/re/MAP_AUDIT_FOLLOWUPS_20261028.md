@@ -790,6 +790,23 @@ approach, 156 story model plans and 709 existing guide identities. The
 branch and typed-contact checks use exact baked identities. Complete
 campaign travel, new label localization and integrated delivery remain open.
 
+### November 23 FFIV return to the Lunar Whale
+
+The owner’s log returns “No path” three times after leaving Crystal Palace
+with FuSoYa. Storyline contacts map 161’s crystal from Moon map 3. The route
+graph has no static link into a moving cabin. The same log puts the party at
+Moon (22,38) and records vehicle 11 parked at (20,36). The normal vehicle
+directions take the party to Eastern Lunar Path first.
+
+The return crystal remains the Storyline objective. On the Moon, route to its
+required vehicle using the current Lunar Whale model. Inside the Western or
+Eastern Lunar Path, use the ready save’s enabled Moon craft to choose the exit
+that can reach it. The read is limited to the existing bounded transportation
+list. Its field layout is in FFIV’s local `dump.cs` at `OwnedTransportationData`,
+`SaveTransportationData` and `SaveEntityData`. Native `sc_ship_0002` takes the
+party into the Moon cabin. Directions announce boarding and Autowalk stops
+there for the manual action. Request directions inside to reach the crystal.
+
 ### Storyline travel between areas
 
 A Storyline goal uses the current world vehicle snapshot regardless of the

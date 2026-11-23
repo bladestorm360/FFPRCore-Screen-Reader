@@ -46,6 +46,35 @@ the queue flag. The checks passed against the code already installed in
 all six games. Audible timing was not measured. Compact evidence is in
 `../tools/scene_speech_order_20261123`.
 
+### FFIV Crystal Palace reveal
+
+The owner’s FFIV log has the opening greeting at `81961.250`, Cecil’s
+question at `81976.718` and FuSoYa’s introduction at `82006.328`. The installed
+configuration had no override for Visual descriptions, so the default was On.
+The build playing that scene had no cue for the animation between the greeting
+and question. Crystal Palace map 153’s `sc_e_0069` darkens and flashes the room
+around the reveal puppet and effect asset 266 before the second dialogue page.
+The field costume audit identifies the white beard and purple robe.
+
+The exact second page adds the cue before speaking Cecil’s question, in the
+same queued utterance. The introduction still supplies the name. The fixture
+checks the two neighboring pages and the saved switch. The cue uses the
+existing visible-page and transition checks.
+
+### FFIV Giant of Babel awakening report
+
+The owner’s FFIV log goes from FuSoYa’s warning at `82809.562` to Rydia’s
+reaction at `82865.781` with native event changes and no spoken animation
+description. The awakening is the silent overworld cut `sc_e_0070_5`.
+The audit recorded smoke effect actor 1087 at instruction 97 as an evidence
+exception. The same body shows the Giant’s blue armored sprite at 103,
+then moves it through several steps with smoke, red tints and eruptions.
+The recorded review of an effect placement did not cover this full action
+or deliver a cue. The earlier “described” disposition was for the later
+counterattack at `sc_e_0070_14`, whose cue binds the first explosion at
+126. The log also has no matching speech for that cue before the party
+boards the Giant. Its runtime admission remains unverified.
+
 ## November 20 dialogue cues
 
 The mod now reads eight additional cues on the first page of the exact
