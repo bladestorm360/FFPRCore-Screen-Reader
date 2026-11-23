@@ -157,6 +157,9 @@ int main() {
         binding(K::P, M::Shift, layout ? "Mod.ResetToAllCategory" : "Mod.TogglePathfindingFilter");
         binding(K::P, M::Ctrl, layout ? nullptr : "Mod.ToggleToLayerFilter");
         binding(K::Backslash, M::Alt, "Mod.ToggleEventGroupFilter");
+        binding(K::Backslash, M::CtrlShift, "Mod.ToggleStoryGateFilter");
+        binding(K::Backslash, M::ShiftAlt, "Mod.ToggleAutowalk");
+        binding(K::Backslash, M::CtrlShiftAlt, nullptr);
         binding(K::K, M::None, layout ? nullptr : "Mod.AnnounceEntityOnly");
         binding(K::K, M::Shift, layout ? nullptr : "Mod.ResetToAllCategory");
         binding(K::J, M::None, layout ? nullptr : "Mod.CyclePrevious");
@@ -181,6 +184,29 @@ int main() {
     fixture::keymap=1;input::update();
     expect(fixture::actions==before_layout+1&&fixture::last_action=="Mod.NavigateToEntity"&&fixture::soundscape,
         "selecting Brackets dispatches actual full-tick navigation without disabling soundscape");
+    for (const auto context : {input::Context::Global, input::Context::Battle, input::Context::Shop,
+                               input::Context::Information}) {
+        expect(fixture::execute(K::Backslash, M::ShiftAlt, context) && fixture::last_action == "Mod.ToggleAutowalk",
+               "the Autowalk chord dispatches the shared action outside the field");
+    }
+    fixture::modifier = int(M::ShiftAlt);
+    fixture::last_action.clear();
+    input::update();
+    expect(fixture::last_action == "Mod.ToggleAutowalk", "the full keyboard tick runs the Autowalk toggle");
+    fixture::last_action.clear();
+    fixture::focused = false;
+    input::update();
+    fixture::focused = true;
+    expect(fixture::last_action.empty(), "the Autowalk toggle rejects background input");
+    fixture::text_input = true;
+    input::update();
+    fixture::text_input = false;
+    expect(fixture::last_action.empty(), "text entry owns the Autowalk chord while open");
+    fixture::blocked = true;
+    input::update();
+    fixture::blocked = false;
+    expect(fixture::last_action.empty(), "the Autowalk chord rejects an input transition");
+    fixture::modifier = 0;
     namespace b=input::bindings;
     auto index=[](const char*id) {const auto&v=b::entries();for(size_t i=0;i<v.size();++i)if(v[i].id==id)return int(i);return -1;};
     auto pad_frame=[&](int button,input::Context context=input::Context::Field) {

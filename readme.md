@@ -135,6 +135,7 @@ In the waypoint name window, type normally. Left/Right reviews letters, Up/Down 
 
 ### Other toggles
 
+- Alt+Shift+Backslash: toggle Autowalk in any game context that accepts mod shortcuts. The setting is also under F8 → Navigation → Autowalk.
 - Apostrophe: toggle footsteps.
 - Semicolon: toggle wall tones.
 - Shift+Semicolon / Shift+Apostrophe: reduce / increase soundscape distance by five steps, from 5 to 25. These do nothing when Soundscape is off. They do not change the unshifted wall-tone and footstep toggles.

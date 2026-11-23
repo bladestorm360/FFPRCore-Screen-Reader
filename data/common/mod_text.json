@@ -16561,6 +16561,34 @@
     "th": "ปิด แสดงจุดเรียกเหตุการณ์ทั้งหมดแยกกันในการนำทาง",
     "pt": "Desligado. Todos os pontos de ativação de eventos aparecem separadamente na navegação."
   },
+  "Autowalk": {
+    "en": "Autowalk",
+    "ja": "自動移動",
+    "fr": "Déplacement automatique",
+    "it": "Camminata automatica",
+    "de": "Automatisches Gehen",
+    "es": "Desplazamiento automático",
+    "ko": "자동 이동",
+    "zht": "自動行走",
+    "zhc": "自动行走",
+    "ru": "Автоматическое перемещение",
+    "th": "เดินอัตโนมัติ",
+    "pt": "Caminhada automática"
+  },
+  "Toggle autowalk": {
+    "en": "Toggle autowalk",
+    "ja": "自動移動の切り替え",
+    "fr": "Activer ou désactiver le déplacement automatique",
+    "it": "Attiva o disattiva la camminata automatica",
+    "de": "Automatisches Gehen umschalten",
+    "es": "Activar o desactivar el desplazamiento automático",
+    "ko": "자동 이동 전환",
+    "zht": "切換自動行走",
+    "zhc": "切换自动行走",
+    "ru": "Переключить автоматическое перемещение",
+    "th": "สลับการเดินอัตโนมัติ",
+    "pt": "Alternar caminhada automática"
+  },
   "Toggle event group filter": {
     "en": "Toggle event group filter",
     "ja": "イベントグループの絞り込みを切り替え",

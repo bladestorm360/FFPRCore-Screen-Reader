@@ -1,5 +1,15 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 23 global Autowalk shortcut
+
+Alt+Shift+Backslash invokes the existing Autowalk setting in all six games,
+with either navigation layout. It uses the shared global input context,
+so the shortcut works in the foreground game wherever normal mod shortcuts
+are available. It saves the same per-game setting as F8 → Navigation and
+announces the new value. Turning it off cancels an active walk through the
+existing settings notification. The shortcut is listed as Toggle autowalk
+under F8 → Controls → Keyboard bindings and can be remapped there.
+
 October23 [NPC detour/temporary doorway behavior](NPC_BLOCKERS.md#october23-mysidia-detour-and-temporary-occupancy-follow-up)
 replans after a newly obstructed native edge or stalled tile instead of stopping
 immediately. Complete detours win. Open-approach patrol waits retain the selected
