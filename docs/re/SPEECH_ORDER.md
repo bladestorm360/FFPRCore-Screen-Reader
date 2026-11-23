@@ -1,5 +1,11 @@
 # Speech ordering and Prism priority audit, October 13
 
+November 23 scene narration check. Automatic descriptions and the next
+native dialogue or caption use the same noninterrupting queue. A cue tied
+to a page precedes the dialogue in that utterance. The offline regression
+covers both a pending and an already-submitted standalone description.
+[Evidence](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#speech-order-after-an-automatic-description).
+
 November3 [puzzle verbosity](PUZZLE_VERBOSITY_20261103.md): omitting a Minimal
 activation header preserves the first direction's intentional interruption.
 Verbose interrupts once for activation and queues subsequent step information.

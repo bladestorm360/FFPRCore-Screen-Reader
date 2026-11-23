@@ -32,6 +32,7 @@ int current_map = 3;
 int actor_reads = 0;
 game::Id current_game = game::Id::FF1;
 std::wstring spoken;
+bool speech_interrupted = false;
 json::Value fixture_appearances;
 uint64_t event_generation = 0;
 int instruction = 0, particle_count = 0, render_budget = 0, original_plays = 0;
@@ -172,7 +173,7 @@ bool has(std::wstring_view key)
 }
 std::wstring T(std::wstring_view key) { return std::wstring(key); }
 }
-namespace ffpr { void say(std::wstring_view text, bool) { spoken = text; } }
+namespace ffpr { void say(std::wstring_view text, bool interrupt) { spoken = text; speech_interrupted = interrupt; } }
 namespace ffpr::system { uint64_t field_event_generation() { return transition ? 0 : event_generation; } }
 namespace ffpr::dialogue { bool in_dialogue() { return dialogue_open; } }
 namespace ffpr::battle {
@@ -254,7 +255,8 @@ void check_effect_cues()
                 require(observation() && spoken.empty(), "the same atlas in an idle pose cannot claim a motion cue");
                 card_sprite.value = std::wstring(cue.pose) + L"(Clone)";
             }
-            require(!observation() && spoken == cue.text, "the exact visible sprite is described once");
+            require(!observation() && spoken == cue.text && !speech_interrupted,
+                    "the exact visible sprite queues one description without interrupting");
         } else {
             particle_count = 0;
             require(observation() && spoken.empty(), "a playing system without particles is silent");
@@ -269,7 +271,8 @@ void check_effect_cues()
             particles.back() = &drawn_emitter;
             for (int slice = 0; slice < 8; ++slice)
                 require(observation() && spoken.empty(), "a larger effect yields after each slice of eight emitters");
-            require(!observation() && spoken == cue.text, "a later visible emitter speaks the exact description");
+            require(!observation() && spoken == cue.text && !speech_interrupted,
+                    "a later visible emitter queues the exact description without interrupting");
             particle.visible = true;
             particles.assign(1, &particle);
         }

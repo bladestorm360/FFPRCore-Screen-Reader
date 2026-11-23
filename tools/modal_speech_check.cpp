@@ -14,6 +14,16 @@
 #include "../src/core/ui/initial_speech.h"
 #include "../src/core/battle/battle_message_line.h"
 #include "../src/core/dialogue/scroll_message.cpp"
+namespace unity {
+template<> int32_t list_value<int32_t>(void* value, int index) {
+    return (*static_cast<std::vector<int32_t>*>(value))[index];
+}
+}
+#define install install_message_fixture
+#define s_install message_installation_fixture
+#include "../src/core/dialogue/message_window.cpp"
+#undef s_install
+#undef install
 #define install install_popup_fixture
 #define s_install popup_installation_fixture
 #include "../src/core/dialogue/popup.cpp"
@@ -32,6 +42,13 @@ std::atomic<bool> block{false};
 using StoryLines = std::vector<std::wstring>;
 struct StoryData { StoryLines* messages = nullptr; };
 struct StoryWindow { StoryData data; StoryData* execution = &data; int index = 0; };
+struct DialogueWindow {
+    StoryLines* lines = nullptr;
+    void* page_breaks = nullptr;
+    std::wstring* speaker = nullptr;
+    int page = 0;
+};
+std::wstring dialogue_cue;
 struct PopupCommand { std::wstring* text = nullptr; };
 struct PopupWindow {
     int* cursor = nullptr;
@@ -83,6 +100,7 @@ namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) :
 namespace actions { void define(const char*, Fn) {} bool defined(const char*) { return false; } bool run(const char*) { return false; } }
 namespace queries { void define(const char*, std::function<bool()>) {} std::wstring text(const char*) { return {}; } }
 namespace ffpr::dialogue {
+std::wstring action_cue_at_dialogue() { return fixture::dialogue_cue; }
 std::wstring action_cue_at_scroll(int, float, int) { return {}; }
 std::wstring action_cue_at_fade(int) { return {}; }
 }
@@ -112,7 +130,10 @@ void after_seconds(double, Task, const char*) { ++fixture::delayed; }
 void after_frames(int, Task, const char*) { ++fixture::delayed; }
 }
 namespace game { Id current() { return Id::FF4; } }
-namespace events { void on(Kind kind, Handler action) { if (kind == Kind::MapChanging) fixture::clear_story = std::move(action); } }
+namespace events {
+void on(Kind kind, Handler action) { if (kind == Kind::MapChanging) fixture::clear_story = std::move(action); }
+void fire(Kind) {}
+}
 namespace dedup { bool text(const char*, std::wstring_view, Scope) { return true; } bool index(const char*, long long, Scope) { return true; } void reset(const char*) {} }
 namespace menu_state {
 bool is_active(const char* name) { return std::strcmp(name, POPUP) == 0 && fixture::popup_active; }
@@ -128,6 +149,10 @@ bool Class::is(void*) { return std::strcmp(name, "JobChangePopup") == 0; }
 Field::Field(Class& c, const char* n, const char* a) : cls(c), name(n), alt(a) {}
 Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
 int32_t Field::get() {
+    if (std::strcmp(name, "messageList") == 0) return offsetof(fixture::DialogueWindow, lines);
+    if (std::strcmp(name, "newPageLineList") == 0) return offsetof(fixture::DialogueWindow, page_breaks);
+    if (std::strcmp(name, "spekerValue") == 0) return offsetof(fixture::DialogueWindow, speaker);
+    if (std::strcmp(name, "currentPageNumber") == 0) return offsetof(fixture::DialogueWindow, page);
     if (std::strcmp(name, "targetIndex") == 0) return offsetof(fixture::StoryWindow, index);
     if (std::strcmp(name, "executionData") == 0) return offsetof(fixture::StoryWindow, execution);
     if (std::strcmp(name, "selectCursor") == 0) return offsetof(fixture::PopupWindow, cursor);
@@ -136,6 +161,7 @@ int32_t Field::get() {
     return offsetof(fixture::StoryData, messages);
 }
 std::wstring str(void* value) { return value ? *static_cast<std::wstring*>(value) : std::wstring(); }
+std::wstring rd_str(void* value, Field& field) { return str(rd<void*>(value, field)); }
 }
 namespace hooks {
 bool attach_raw(ref::Method& method, void*, void** original) {
@@ -330,6 +356,41 @@ int main() {
     expect(fixture::output.empty(),"opening source classification obeys the central gameplay speech master");
     fixture::game_speech=true;
     expect(fixture::delayed==0,"opening condition speech adds no timer or action-pair delay");
+    {
+        using namespace ffpr::dialogue;
+        fixture::StoryLines pages{L"We have to hurry."};
+        std::wstring actor = L"Bartz";
+        fixture::DialogueWindow window{&pages, nullptr, &actor};
+        for (bool description_already_submitted : {false, true}) {
+            fixture::output.clear();
+            clear_state();
+            // Standalone visual cues publish through this same queue on the
+            // first visible frame. The real page producer follows immediately.
+            ffpr::say_queued(L"The Wind Crystal shatters.");
+            if (description_already_submitted) fixture::drain();
+            set_content_postfix(&window);
+            playing_init_postfix(&window);
+            fixture::drain();
+            expect(fixture::output.size() == 2 && fixture::output[0].text == "The Wind Crystal shatters." &&
+                   fixture::output[1].text == "Bartz: We have to hurry." &&
+                   !fixture::output[0].interrupt && !fixture::output[1].interrupt,
+                   "native dialogue queues behind both pending and already submitted scene speech");
+        }
+        fixture::output.clear();
+        clear_state();
+        fixture::dialogue_cue = L"Cid puts down the hammer.";
+        set_content_postfix(&window);
+        playing_init_postfix(&window);
+        fixture::dialogue_cue.clear();
+        std::wstring caption = L"Later that day.";
+        fade_play_postfix(&caption, 52);
+        fixture::drain();
+        expect(fixture::output.size() == 2 && fixture::output[0].text == "Cid puts down the hammer. Bartz: We have to hurry." &&
+               fixture::output[1].text == "Later that day." && !fixture::output[0].interrupt && !fixture::output[1].interrupt,
+               "an in-page description leads its dialogue, and the next native caption queues behind both");
+        fixture::output.clear();
+        clear_state();
+    }
     {
         using namespace ffpr::dialogue;
         expect(install() == 2, "FFIV registers SetData and the per-line presentation hook");

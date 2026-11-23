@@ -29,6 +29,23 @@ The checks, isolated smoke test and exact-payload scan passed. The same
 build is installed and verified in all six games. Gameplay confirmation
 is pending. [Delivery](../SECURITY_AND_DISTRIBUTION.md#november-23-visual-descriptions-switch).
 
+### Speech order after an automatic description
+
+Standalone animation descriptions, ordinary dialogue pages, captions and
+scroll lines enter the existing speech queue without interruption. A
+description tied to a specific page precedes that page's text in one
+utterance. For a standalone cue the following page queues in order, both
+when the cue is pending in the mod and when it has reached the screen
+reader. Prism passes the noninterrupting flag to NVDA. The pinned backend
+uses cancellation only for an explicit interrupt or stop.
+
+The focused regression exercises the real dialogue and caption producers,
+the cue bindings, the production queue and a fake Prism backend. It
+checks both queue states and verifies that each follow-up carries
+the queue flag. The checks passed against the code already installed in
+all six games. Audible timing was not measured. Compact evidence is in
+`../tools/scene_speech_order_20261123`.
+
 ## November 20 dialogue cues
 
 The mod now reads eight additional cues on the first page of the exact
