@@ -1,11 +1,17 @@
 # Native FFPR durable memory
 
+**November 23 FFIV Elemental Lords.** The three battle swaps announce the
+incoming visible body after native completion. The post-battle farewell
+includes four new descriptions keyed to the distinct disappearance effects.
+Offline checks and FFIV installation passed. [Cue evidence](docs/re/BOSS_VISUALS_20261112.md#november-23-ffiv-elemental-lords-rematch)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-23-ffiv-elemental-lords-narration).
+
 **November 23 Autowalk and FFIV follow-up.** Alt+Shift+Backslash toggles
 Autowalk in all six games. The combined build routes FFIV Storyline to the
 Lunar Whale after FuSoYa joins and reads the Crystal Palace reveal before
 Cecil. I uses the native selected enemy identity in FFIV–FFVI. Offline
 verification passed. FF1, FFII, FFIII, FFV and FFVI are installed. The verified
-FFIV candidate awaits game exit.
+FFIV build was installed with the Elemental Lords follow-up.
 [Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-23-enemy-target-description-update).
 
 **Planned Ctrl+M map descriptions.** Record a full current-map overview and

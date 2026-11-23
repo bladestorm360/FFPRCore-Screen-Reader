@@ -1,5 +1,26 @@
 # Build and distribution security
 
+## November 23 FFIV Elemental Lords narration
+
+Source `7fdf8d60f88b77edeecb7003ebd4a38bc95f4003`. The focused build passed
+in 35.4 seconds with an enforced 2 GB limit, one worker and a 25 percent CPU
+cap. Peak aggregate memory was 366,133,248 bytes. The boss and dialogue
+checks passed, together with 73 embedded resources, 9,136 native name
+bindings and 47 forwarded exports. The four defeat effects were checked
+against their exact installed particle assets and 12 localized cues each.
+
+The 21,348,352-byte unsigned `hid.dll` has SHA-256
+`55117bcab1da5acb1dc0c9b59bd1608560408324e9248542be0e6b83f652dcb7`.
+Defender definitions `1.463.429.0` reported no threats or matching events
+for all 22 exact files. The scan preserved their hashes. The guarded FFIV
+installation verified those files and 138 protected file states across
+all six games. This also installs the previously pending Autowalk, enemy
+appearance, Lunar Whale and Crystal Palace updates in FFIV. Actual in-game
+speech remains to be confirmed. Recovery uses `05e9956`.
+Receipts are in `../tools/elemental_lords_20261123/delivery`. Cleanup
+removed 74,657,417 bytes of disposable output and retained the production
+compiler cache.
+
 ## November 23 enemy-target description update
 
 Source `12c55d0a547c85775d14dfa7c7296a0391660173` supersedes the shortcut
