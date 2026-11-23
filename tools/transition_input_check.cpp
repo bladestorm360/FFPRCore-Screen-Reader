@@ -68,6 +68,7 @@ std::wstring T(std::wstring_view value) { return std::wstring(value); }
 std::wstring TF(std::wstring_view value, std::initializer_list<std::wstring>) { return std::wstring(value); }
 }
 namespace ffpr { void say(std::wstring_view, bool) { ++fixture::speech; } void say_menu(std::wstring_view,bool){++fixture::speech;} void silence() { ++fixture::speech; } }
+namespace ffpr::battle { void announce_acting_character_appearance() { ++fixture::actions; } }
 namespace ffpr::fieldnav::autowalk { void input_updated() {} }
 namespace ui {
 namespace confirmation {bool is_open(){return false;}}
