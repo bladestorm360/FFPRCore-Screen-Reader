@@ -5,6 +5,24 @@ The status audit accounts for all 525 installed condition rows. The fixed
 event review and reconciliation are closed. Earlier checkpoints below
 record how coverage developed. Gameplay confirmation remains pending.
 
+## Planned Ctrl+M map descriptions
+
+Add an on-demand description of the full current playable map in FF1–FFVI.
+Ctrl+M should speak a concise overview of the layout, terrain or architecture,
+and major landmarks across the map. Give broad spatial relationships where
+they help the player form a mental picture. Moving to another part of the
+same map should still return the full overview. This applies to overworlds,
+towns, interiors and individual floors as well as fields and dungeons.
+
+Wendy Quest's visually authored overviews are the reference for style and
+level of detail. Its Russetwood and Chillcrest entries explain the overall
+setting, then locate distinctive buildings, terrain and connecting features.
+Use FFPR's full current map as the scope even where Wendy Quest uses a
+regional overworld read. Author the FFPR descriptions against the installed
+map art and cover visually distinct map states where they affect major
+landmarks. Check coverage against a fixed all-six playable-map inventory and
+provide the same locale coverage as the existing visual descriptions.
+
 ## November 20 exact FF1 catalog
 
 The FF1 catalog supplies 124 enemy keys, 76 field keys, 12 battle

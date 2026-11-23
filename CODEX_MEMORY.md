@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**Planned Ctrl+M map descriptions.** Record a full current-map overview and
+major landmarks for all six games using Wendy Quest's authored summaries as
+a reference. [Scope](docs/re/VISUAL_DESCRIPTIONS_20261119.md#planned-ctrlm-map-descriptions).
+
 **November 23 Visual descriptions switch.** F8 → Speech saves one
 default-on switch for appearance descriptions and automatic scene cues.
 Both use the same screen reader voice as dialogue. Verified offline and
