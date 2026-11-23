@@ -28,7 +28,10 @@ struct Animator { Entity* entity; void* staged; };
 struct Unit { Entity* entity; Monster* master; };
 struct Targets { int length; Unit* unit; };
 struct Act { Targets* targets; };
-struct Function { Act* act; int value1, value2, value3; Monster* monster; };
+struct Function { Act* act; int value1, value2, value3; Monster* monster; Targets* before; Targets* after; };
+struct StatusInfo { Targets* enemies; };
+struct Status { StatusInfo* info; };
+struct Manager { Status* status; };
 
 int previous_art, next_art, shadow;
 Mesh mesh{&previous_art, &mesh};
@@ -39,7 +42,19 @@ Monster master{188, 202}, open_wings{281, 245};
 Unit unit{&entity, &master};
 Targets targets{1, &unit};
 Act act{&targets};
-Function fn{&act, 0, 201, 167, &open_wings};
+Function fn{&act, 0, 201, 167, &open_wings, nullptr, nullptr};
+Mesh lord_mesh{&next_art, &lord_mesh};
+Entity lord_entity{&lord_mesh, nullptr};
+Monster lord_master{195, 184};
+Unit lord_unit{&lord_entity, &lord_master};
+Targets lord_party{1, &lord_unit};
+StatusInfo lord_info{&lord_party};
+Status lord_status{&lord_info};
+Manager lord_manager{&lord_status};
+bool lord_drawn = false;
+bool outgoing_active = false;
+frame::Step lord_step;
+int allowed_frames = 0;
 const void* method_info = &fn;
 const unity::Vec2 face{1, 2}, mouth{3, 4};
 
@@ -63,11 +78,28 @@ void commit(void* self, const void* mi)
     mesh.sprite = static_cast<Animator*>(self)->staged;
     finish_mesh = true;
 }
+void complete_swap(void* self, const void* mi)
+{
+    forwarded &= self == &fn && mi == method_info;
+    finish_mesh = true;
+}
+void tick_lord()
+{
+    if (lord_step && !lord_step()) lord_step = {};
+}
 }
 
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace game { Id current() { return fixture::title; } }
-namespace frame { bool on_main_thread() { return fixture::main_thread; } }
+namespace frame {
+bool on_main_thread() { return fixture::main_thread; }
+int every_frame(Step step, const char*, int max_frames) {
+    fixture::allowed_frames = max_frames;
+    fixture::lord_step = std::move(step);
+    return 1;
+}
+void cancel(int) { fixture::lord_step = {}; }
+}
 namespace settings {
 bool get_bool(const char* key, bool fallback)
 {
@@ -83,7 +115,8 @@ namespace ref {
 Class::Class(const char* n, const char* c, uint8_t g, const char* a) : ns(n), name(c), games(g), assembly(a) {}
 Field::Field(Class& c, const char* n, const char* a) : cls(c), name(n), alt(a) {}
 Method::Method(Class& c, const char* n, int a) : cls(c), name(n), argc(a) {}
-bool Class::is(void* object) { return object == &fixture::unit; }
+bool Class::is(void* object) { return object == &fixture::unit || object == &fixture::lord_unit; }
+il2cpp::Class* Class::get() { return reinterpret_cast<il2cpp::Class*>(this); }
 int32_t Field::get() { return off_; }
 il2cpp::Method* Method::get() { return nullptr; }
 void* Method::ptr() {
@@ -94,15 +127,23 @@ void* Method::ptr() {
 void call_failed_note(const char*) { std::abort(); }
 std::wstring str(void*) { return {}; }
 }
+namespace il2cpp {
+void* read_static_ptr(Class*, const char*) { return &fixture::lord_manager; }
+}
 namespace unity {
 int array_length(void* array) { return array ? static_cast<fixture::Targets*>(array)->length : 0; }
 void* array_at(void* array, int) { return static_cast<fixture::Targets*>(array)->unit; }
+int list_count(void* list) { return array_length(list); }
+void* list_at(void* list, int index) { return array_at(list, index); }
 void* transform(void*) { return nullptr; }
 Vec3 local_position(void*) { return {}; }
 }
 namespace displayed {
-bool container_visible(void*) { return false; }
-bool renderer_visible(void* renderer) { return renderer == &fixture::mesh && fixture::renderer_visible; }
+bool container_visible(void* entity) { return entity == &fixture::entity && fixture::outgoing_active; }
+bool renderer_visible(void* renderer) {
+    return (renderer == &fixture::mesh && fixture::renderer_visible) ||
+           (renderer == &fixture::lord_mesh && fixture::lord_drawn);
+}
 }
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle", "BattleEnemyData"};
@@ -258,6 +299,72 @@ void check_detours()
     close();
     expect(!revealed_painting_art(300), "Battle teardown retires the last observed painting");
 }
+
+void check_lord_swaps()
+{
+    using namespace fixture;
+    fixture::title = Id::FF4;
+    fOldUnits.off_ = offsetof(Function, before);
+    fNewUnits.off_ = offsetof(Function, after);
+    fLordStatus.off_ = offsetof(Manager, status);
+    fLordStatusInfo.off_ = offsetof(Status, info);
+    fLordEnemies.off_ = offsetof(StatusInfo, enemies);
+    o_start_end = &complete_swap;
+    fn.before = &targets;
+    fn.after = &lord_party;
+    open();
+
+    constexpr struct Swap { int party, outgoing, incoming; const wchar_t* cue; } swaps[] = {
+        {541, 194, 195, L"BossVisual.LordWater"},
+        {542, 195, 228, L"BossVisual.LordWind"},
+        {540, 228, 227, L"BossVisual.LordFire"},
+    };
+    for (const auto& swap : swaps) {
+        fn.value1 = swap.party;
+        master.id = swap.outgoing;
+        lord_master.id = swap.incoming;
+        const int begin = spoken;
+        outgoing_active = true;
+        lord_drawn = false;
+        finish_mesh = false;
+        d_start_end(&fn, method_info);
+        expect(finish_mesh && spoken == begin && lord_step && allowed_frames == 4,
+               "Native swap completion can precede outgoing destruction and incoming draw");
+        tick_lord();
+        expect(spoken == begin && lord_step, "An undrawn incoming body cannot speak");
+        outgoing_active = false;
+        lord_drawn = true;
+        tick_lord();
+        tick_lord();
+        expect(spoken == begin + 1 && last == swap.cue && !lord_step,
+               "Each replacement speaks once after its exact body is drawn");
+    }
+
+    const int begin = spoken;
+    d_start_end(&fn, method_info);
+    lord_info.enemies = &targets;
+    tick_lord();
+    expect(spoken == begin && !lord_step, "A new roster cannot publish the retired form");
+    lord_info.enemies = &lord_party;
+
+    lord_drawn = false;
+    d_start_end(&fn, method_info);
+    for (int frames = 0; frames < allowed_frames; ++frames) tick_lord();
+    expect(spoken == begin && !lord_step && !lord_read_task, "A hidden replacement has a finite read budget");
+
+    lord_drawn = true;
+    d_start_end(&fn, method_info);
+    visual_descriptions = false;
+    tick_lord();
+    d_start_end(&fn, method_info);
+    expect(spoken == begin && !lord_step, "Turning descriptions off retires a queued and a new reveal");
+    visual_descriptions = true;
+    d_start_end(&fn, method_info);
+    close();
+    tick_lord();
+    expect(spoken == begin && !lord_step, "Battle teardown cancels the deferred reveal");
+    expect(forwarded, "Replacement speech stays queued after native swap completion");
+}
 }
 
 int main()
@@ -315,6 +422,7 @@ int main()
     expect(!SpriteChange{2,2,wind.key}.presented(2,true)&&!SpriteChange{}.presented(2,true),
            "A repeated sprite or missing request cannot produce another cue");
     check_detours();
+    check_lord_swaps();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
     return failures?1:0;
 }

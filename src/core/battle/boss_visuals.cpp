@@ -60,6 +60,12 @@ ref::Class kPaintMesh{"Last.Battle", "EntityMeshRenderer", game::kFF6};
 ref::Method mSetFloat{kPaintMesh, "SetFloat", 2};
 ref::Class kPlugManager{"Last.Battle", "BattlePlugManager", game::kFF5 | game::kFF6};
 ref::Method mPlugInstance{kPlugManager, "Instance", 0}, mEnemyUnits{kPlugManager, "GetEnemyUnits", 0};
+ref::Class kLordPlugManager{"Last.Battle", "BattlePlugManager", game::kFF4};
+ref::Field fLordStatus{kLordPlugManager, "<BattleStatusControl>k__BackingField"};
+ref::Class kLordStatus{"Last.Battle", "BattleStatusControl", game::kFF4};
+ref::Field fLordStatusInfo{kLordStatus, "<BattleStatusControlInfo>k__BackingField"};
+ref::Class kLordStatusInfo{"Last.Battle", "BattleStatusControlInfo", game::kFF4};
+ref::Field fLordEnemies{kLordStatusInfo, "battleEnemyDatas"};
 
 // These are identity tokens for native-owned objects. The only dereferences
 // happen inside a native callback using its current owner. No worker or frame
@@ -70,11 +76,19 @@ unsigned pending = 0;
 bool ready = false;
 int painting_asset = 0;
 bool sandworm_moved = false;
+int lord_read_task = 0;
+
+void cancel_lord_read()
+{
+    if (lord_read_task) frame::cancel(lord_read_task);
+    lord_read_task = 0;
+}
 
 void close()
 {
     ready = false;
     pending = 0;
+    cancel_lord_read();
 }
 
 void open()
@@ -207,9 +221,38 @@ void commit_sprite(void* animator, const void* mi, Callback original)
 void d_commit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_commit_sprite); }
 void d_exit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_exit_sprite); }
 
+void observe_lord_reveal(uintptr_t expected_unit, const wchar_t* key)
+{
+    if (!ui::prefs::visual_descriptions_enabled()) return;
+    cancel_lord_read();
+    // StartEnd queues destruction of the old body. Reacquire the replacement
+    // from the current status list after the renderer has had a frame to draw.
+    // The deferred check owns only an identity token, never a native pointer.
+    constexpr int max_frames = 4;
+    lord_read_task = frame::every_frame([expected_unit, key, remaining = max_frames]() mutable {
+        const bool finished = hooks::guarded_r("BossVisual.LordVisible", true, [&] {
+            if (!observe() || !ui::prefs::visual_descriptions_enabled()) return true;
+            auto* manager = il2cpp::read_static_ptr(kLordPlugManager.get(), "instance");
+            auto* status = ref::rd<void*>(manager, fLordStatus);
+            auto* info = ref::rd<void*>(status, fLordStatusInfo);
+            auto* enemies = ref::rd<void*>(info, fLordEnemies);
+            if (unity::list_count(enemies) != 1) return true;
+            auto* unit = unity::list_at(enemies, 0);
+            if (token(unit) != expected_unit) return true;
+            if (!visible_body(entity_of(unit))) return false;
+            speak(key);
+            return true;
+        });
+        if (!finished && --remaining > 0) return true;
+        lord_read_task = 0;
+        return false;
+    }, "BossVisual.LordVisible", max_frames);
+}
+
 void d_start_end(void* self, const void* mi)
 {
     const wchar_t* key = nullptr;
+    uintptr_t lord = 0;
     if (observe()) hooks::guarded("BossVisual.PartyIdentity", [&] {
         const int party = ref::rd<int32_t>(self, fValue1);
         if (party != 445 && party != 654 && party != 655 && (party < 540 || party > 542)) return;
@@ -219,12 +262,17 @@ void d_start_end(void* self, const void* mi)
         auto* old_unit = unity::array_at(before, 0);
         auto* new_unit = unity::array_at(after, 0);
         const auto* candidate = replacement(game::current(), party, monster_id(old_unit), monster_id(new_unit));
-        // Native StartEnd is reached after the flashing swap has settled.
-        if (candidate && !displayed::container_visible(entity_of(old_unit)) &&
+        if (candidate && game::is(game::Id::FF4)) {
+            key = candidate;
+            lord = token(new_unit);
+        } else if (candidate && !displayed::container_visible(entity_of(old_unit)) &&
             visible_body(entity_of(new_unit))) key = candidate;
     });
     o_start_end(self, mi);
-    if (key && observe()) hooks::guarded("BossVisual.PartyShown", [&] { speak(key); });
+    if (key && observe()) hooks::guarded("BossVisual.PartyShown", [&] {
+        if (lord) observe_lord_reveal(lord, key);
+        else speak(key);
+    });
 }
 
 void hide_change(void* self, const void* mi, Callback original, bool withdrawing)

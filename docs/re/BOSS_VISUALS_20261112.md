@@ -1,5 +1,46 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 23 FFIV Elemental Lords rematch
+
+The owner's Giant of Babel log announces the rematch and its generic
+Elemental Lord target. It has no description for any of the three enemy
+swaps. The encounter starts with Scarmiglione and uses party replacements
+541, 542 and 540 to reveal Cagnazzo, Barbariccia and Rubicante in that order.
+
+FFIV's `BattleFunction37.ChangePartys` alternates the old and new bodies.
+`StartEnd` queues destruction of the outgoing body as the swap completes.
+The old check ran before that cleanup and depended on same-frame renderer
+visibility. The FFIV cue now uses that completion as its trigger. On the
+owner thread it checks the current battle status list for the exact incoming
+unit and its drawn body, for up to four frames. It reads the existing list
+directly, preserves only an identity across frames, and cancels on teardown,
+an enemy list change, or when Visual descriptions is turned off. No new
+hook, game-object allocation, or ongoing frame reader is needed.
+
+The three cues describe the flicker and the new art in every game locale.
+Cagnazzo arrives crouched in foaming blue water, Barbariccia appears inside
+a pale wind spiral, and Rubicante appears with his red cloak open and one
+hand raised. Native attack announcements retain their existing producer.
+The focused fixture runs all three transitions with delayed drawing and
+checks one queued cue, the switch, roster changes and teardown.
+
+After the results, the same log records the four farewell lines from
+`85768.687` through `85777.078`. The defeat scene was a separate omission
+in the audit. Stairwell map 248's `sc_e_0071_1` plays four particle effects
+as the speaking actors disappear. The new calls use the existing visible
+field-effect producer. Each begins on its own authored action and queues
+behind the line that precedes it.
+
+| Lord | Effect actor and animation instruction | Verified effect details |
+| --- | --- | --- |
+| Scarmiglione | 11, 67 | Dark smoke and rings in asset 260. |
+| Cagnazzo | 12, 80 | Blue foam and splashes in asset 261. |
+| Barbariccia | 13, 93 | Green wind and glow in asset 262. |
+| Rubicante | 14, 105 | Fire rings and glow in asset 263. |
+
+All four action bindings, installed effect assets, and the 12 translations
+per cue were checked offline. Audible confirmation is pending.
+
 The FFIV log at 14413–15138 shows Barbariccia's attacks and the
 wind warnings after attacks hit the barrier. Her encounter script
 changes the sprite on abilities 318 and 317 without a matching
