@@ -663,6 +663,66 @@ int verify_ff4()
               "the craft approach announces boarding and leaves the native action manual");
         check(!missing.path.success, "without an observed craft the route cannot invent a boarding position");
     }
+    lunar[66] = 1;
+    lunar[69] = 0;
+    const auto finale = ff4_stage(lunar).objective;
+    check(finale && finale->map == 154, "post-Giant Storyline retains the Lunar Subterrane receipt");
+    if (finale) {
+        using namespace field::baked_nav;
+        const auto replay = [&](int map, baked_route::Cell start, int riding, bool whale_visible) {
+            auto flags = progress_at({}, map);
+            std::copy(lunar.begin(), lunar.end(), flags.scenario.begin());
+            flags.current_area_id = map == 1 ? 1 : map == 357 ? 57 : 10;
+            RouteSnapshot snapshot(map_state::Resolver(flags, fixture::records));
+            snapshot.map_id = map;
+            snapshot.submap = baked::submap_by_map_id(map);
+            snapshot.layer = start.layer;
+            snapshot.position = world_of_cell(*snapshot.submap, start);
+            snapshot.vehicle = {true, riding, riding == 1 ? 1 : 8, {}};
+            snapshot.vehicle_shortcuts = true;
+            snapshot.locale = L"en";
+            snapshot.candidates = contacts(*finale, map);
+            snapshot.vehicle_names[5] = L"Lunar Whale";
+            if (whale_visible && map == 1)
+                snapshot.vehicles.push_back({nullptr, 8, 5, {}, world_of_cell(*snapshot.submap, {1,156,186})});
+            else if (whale_visible) snapshot.saved_vehicles.push_back({5, 1, {156,186,0}});
+            return plan_snapshot(snapshot);
+        };
+        const auto on_foot = replay(1, {1,158,186}, 1, true);
+        check(on_foot.path.success && on_foot.goal.map_id == 357 &&
+              on_foot.path.description.find(L"board the Lunar Whale") != std::wstring::npos &&
+              !on_foot.path.walk_phases.empty() && on_foot.path.walk_phases.back().manual_after,
+              "a voluntary surface return sends the party to the live Lunar Whale");
+        const auto from_falcon = replay(1, {1,158,186}, 8, true);
+        check(from_falcon.path.success && from_falcon.path.description.find(L"land") != std::wstring::npos &&
+              from_falcon.path.description.find(L"board the Lunar Whale") != std::wstring::npos,
+              "flying another craft must land before boarding the Whale");
+        const auto flying = replay(1, {1,156,186}, 5, false);
+        check(flying.path.success && flying.path.description == L"land" &&
+              !flying.path.walk_phases.empty() && flying.path.walk_phases.back().manual_after,
+              "the flown Whale lands directly into the cabin without a second boarding action");
+        const auto cabin = replay(357, {0,7,6}, 1, false);
+        check(cabin.path.success && cabin.goal.entity_id == 1 &&
+              cabin.path.guidance == L"Use the Lunar Whale crystal to reach the Moon",
+              "the surface cabin directs the player to use the native crystal");
+        // Mysidia's world arrival uses the Ground layer one tile inside the gate.
+        const auto landward = replay(57, {1,28,32}, 1, true);
+        check(landward.path.success && landward.path.next_map_id == 1,
+              "a surface town first routes to its world exit toward the saved Whale");
+        if (!landward.path.success)
+            std::printf("  FFIV Mysidia to Whale: %ls / %ls\n", landward.path.reason.c_str(), landward.path.error.c_str());
+        check(!replay(1, {1,158,186}, 1, false).path.success,
+              "a missing surface Whale cannot acquire a fabricated position");
+        for (const int map : {3, 152, 153, 154, 161, 291, 292, 293, 317}) {
+            const auto targets = contacts(*finale, map);
+            check(!targets.empty() && targets.front().goal.map_id == 154,
+                  "lunar origins resume the Lunar Subterrane objective");
+        }
+        lunar[69] = 1;
+        const auto zeromus = ff4_stage(lunar).objective;
+        check(zeromus && zeromus->map == 317 && contacts(*zeromus, 1).front().goal.map_id == 357,
+              "after entering the Subterrane the same recovery preserves the final boss objective");
+    }
     return verify_campaign("FFIV", ff4_stage, ObjectiveId::Ff4Scenario, 0, 70, 65, arrivals);
 }
 

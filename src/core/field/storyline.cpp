@@ -204,14 +204,23 @@ std::wstring_view selection_label_key(const Stage& selected, bool spoilers)
 
 std::vector<baked_nav::GuideTarget> contacts(const Objective& objective, int origin_map)
 {
+    auto next = objective;
     // The acquired ship lives on the Overworld. Plan the first leg to the
     // actual town exit so the next request can use the live docked vessel.
-    auto next = objective;
     if (objective.id == ObjectiveId::FindCrown && origin_map == 13) {
         next.map = 13;
         next.contacts = {5, -1, -1};
         next.kind = TargetKind::Transition;
         next.object_type = baked::ObjType::GotoMap;
+    }
+    // The Giant's scripted Moon trip is reversible. Preserve the finale's
+    // saved receipt and temporarily route to the surface cabin's crystal.
+    const int ff4_receipt = static_cast<int>(objective.id) - static_cast<int>(Id::Ff4Scenario);
+    const bool on_moon = origin_map == 3 || (origin_map >= 152 && origin_map <= 154) ||
+                         origin_map == 161 || (origin_map >= 291 && origin_map <= 317);
+    if ((ff4_receipt == 69 || ff4_receipt == 70) && origin_map > 0 && !on_moon) {
+        next = kFf4MoonCrystal.target;
+        if (origin_map == next.map) next.instruction = next.label;
     }
     std::vector<baked_nav::GuideTarget> targets;
     const auto* map = baked::submap_by_map_id(next.map);

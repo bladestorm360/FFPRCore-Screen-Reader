@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 23 Giant aftermath and major-scene re-audit.** The installed
+audit missed the CPU dialogue and exterior destruction. The repair covers
+the exact native continuation and Lunar Whale regroup. The owner requested
+a finite repeat review of major scenes in all six games. [Scope and evidence](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-23-major-scene-re-audit).
+
 **November 23 FFIV Elemental Lords.** The three battle swaps announce the
 incoming visible body after native completion. The post-battle farewell
 includes four new descriptions keyed to the distinct disappearance effects.

@@ -71,6 +71,8 @@ constexpr std::array cues{
     Cue{game::Id::FF4, 1, 164, 82, L"sc_e_0015", L"Damcyan flames cue"},
     Cue{game::Id::FF4, 1, 1088, 48, L"sc_e_0053_10", L"Underground passage smoke cue"},
     Cue{game::Id::FF4, 1, 1107, 126, L"sc_e_0070_14", L"Giant of Babil explosions cue"},
+    // The CPU aftermath cuts to a separate, dialogue-free exterior shot.
+    Cue{game::Id::FF4, 1, 1107, 180, L"sc_e_0072_2", L"Giant exterior destruction cue"},
     Cue{game::Id::FF4, 248, 11, 67, L"sc_e_0071_1", L"Scarmiglione defeat cue"},
     Cue{game::Id::FF4, 248, 12, 80, L"sc_e_0071_1", L"Cagnazzo defeat cue"},
     Cue{game::Id::FF4, 248, 13, 93, L"sc_e_0071_1", L"Barbariccia defeat cue"},

@@ -132,9 +132,10 @@ bool same_target_focus(bool enemy, int index, void* unit)
 }
 bool changed_target_focus(bool enemy, int index, void* unit)
 {
-    if (!game::is(game::Id::FF6)) return true;
+    // Every title supplies the current target to the on-demand reader.
+    // Only FFVI's per-frame refresh uses the existing speech guard.
+    if (same_target_focus(enemy, index, unit)) return false;
     const int side = enemy ? 1 : 0;
-    if (side == g_target_focus_side && index == g_target_focus_index && unit == g_target_focus_unit) return false;
     g_target_focus_side = side; g_target_focus_index = index; g_target_focus_unit = unit;
     return true;
 }

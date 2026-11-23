@@ -25,6 +25,16 @@ provide the same locale coverage as the existing visual descriptions.
 
 ## November 23 focused enemy descriptions
 
+The owner reported that I still stayed silent in FFIV after the first
+target-list fix. The current log records normal Warrior and Summoner
+target announcements. The selection helper returned early in FF1–FFV,
+so those announcements left the reader without a stored target. The
+earlier fixture accidentally kept an FFVI target alive while switching
+its game to FFIV. Each game's native selection now records its own
+identity. Only FFVI retains the repeat-refresh speech guard. The fixture
+opens a fresh target window in all six games, then exercises FFIV's
+actual I dispatch with different filtered and rooted list indexes.
+
 The owner’s FFIV log announces Giant Soldier as the battle target without its
 description. The same battle reads Rosa’s acting-character description, and
 Giant Soldier has all 12 localized entries under its visible `mn_ff4_063_c01`

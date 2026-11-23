@@ -41,7 +41,7 @@ std::vector<SavedWorldVehicle> saved_world_vehicles() {
         // This extension is deliberately one reviewed craft/world, not a
         // general promise about every FFVI saved vehicle or cutscene.
         if(blackjack&&(id!=4||map!=1))continue;
-        if(lunar_whale&&(id!=11||map!=3))continue;
+        if(lunar_whale&&!((id==5&&map==1)||(id==11&&map==3)))continue;
         const auto* row=baked::transport(id);
         if(!row||row->type<=1||row->type==4||row->type==5||id<=0||id>=32||map<1||map>4||!ref::call<bool>(mSavedEnabled,owned))continue;
         const auto cell=ref::rd<unity::Vec3>(saved,fSavedCell);

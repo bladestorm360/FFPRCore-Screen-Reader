@@ -64,6 +64,13 @@ std::wstring field_message_key()
     return ref::rd_str_bounded(client, fMessageId, 96);
 }
 
+std::wstring active_field_script()
+{
+    auto* interpreter = ref::instance(kInterpreter);
+    return ref::rd<bool>(interpreter, fRunningFieldScript)
+        ? ref::rd_str_bounded(interpreter, fActiveScript, 48) : std::wstring{};
+}
+
 bool matches_direct_talk(void* actor, const std::wstring& message)
 {
     if (!r::kFieldNonPlayer.is(actor) || !::field::live_entity(actor)) return false;
@@ -191,9 +198,8 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
     const auto* tables = data::game_json("appearances").get(L"field_dialogue");
     const auto* pages = tables ? tables->get(std::to_wstring(map)) : nullptr;
     if (!pages) return nullptr;
-    auto* interpreter = ref::instance(kInterpreter);
-    if (!ref::rd<bool>(interpreter, fRunningFieldScript)) return nullptr;
-    const auto active = ref::rd_str_bounded(interpreter, fActiveScript, 48);
+    const auto active = active_field_script();
+    if (active.empty()) return nullptr;
     const auto* binding = pages->get(active);
     const auto* row = binding ? binding->get(message) : nullptr;
     if (!row || row->type != json::Value::Type::Number ||
@@ -244,6 +250,7 @@ struct StagedCue {
     int actor = 0;
     std::wstring_view art{};
     std::wstring_view pose{};
+    bool continuation = false;
 };
 
 // The first page follows the verified visible action on these exact event
@@ -254,6 +261,19 @@ constexpr StagedCue staged_cues[] = {
     {game::Id::FF4, 325, L"sc_e_0054_1", L"E0055_01_004_a_01", L"Enterprise workshop cue", 3, L"mo_ff4_n005_c01"},
     // FuSoYa's effect and puppet reveal finish just before Cecil speaks.
     {game::Id::FF4, 153, L"sc_e_0069", L"E0069_00_153_a_02", L"Crystal Palace reveal cue"},
+    // These pages follow the CPU battle or a scripted map transfer. The
+    // event action can still name the parent script while the continuation runs.
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_01", L"Giant CPU flash cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_04", L"Giant Golbez arrival cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_06", L"Giant FuSoYa approach cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_10", L"Giant FuSoYa spell cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_18", L"Giant party gathers cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_28", L"Giant Golbez departure cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_35", L"Giant chamber shaking cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_42", L"Giant Kain arrival cue", 0, {}, {}, true},
+    {game::Id::FF4, 249, L"sc_e_0072_1", L"E0072_01_249_a_45", L"Giant chamber jolts cue", 0, {}, {}, true},
+    {game::Id::FF4, 161, L"sc_e_0072_3", L"E0072_03_161_a_1", L"Giant Lunar Whale regroup cue", 0, {}, {}, true},
+    {game::Id::FF4, 161, L"sc_e_0072_3", L"E0072_03_161_a_3", L"Giant Kain lowers head cue", 0, {}, {}, true},
     {game::Id::FF5, 198, L"sc_e_0001_1", L"E0001_01_198_a_01", L"Pirate ship opening cue", 44, L"mo_ff5_n111_c00"},
     {game::Id::FF5, 190, L"sc_e_0001_2", L"E0001_02_190_a_01", L"Galuf crystal chamber cue", 9, L"mo_ff5_p003_c00"},
     {game::Id::FF5, 209, L"sc_e_0001_4", L"E0001_04_209_a_01", L"Wind Shrine opening cue", 30, L"mo_ff5_b002_c00"},
@@ -277,9 +297,13 @@ constexpr StagedCue staged_cues[] = {
 
 std::wstring staged_cue(void* controller, const StagedCue& cue)
 {
-    auto* owner = ref::rd<void*>(controller, fEventOwner);
-    auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
-    if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != cue.script) return {};
+    if (cue.continuation) {
+        if (active_field_script() != cue.script) return {};
+    } else {
+        auto* owner = ref::rd<void*>(controller, fEventOwner);
+        auto* action = kEventProcedure.is(owner) ? ref::rd<void*>(owner, fRunAction) : nullptr;
+        if (!kScriptAction.is(action) || ref::rd_str_bounded(action, fScriptName, 48) != cue.script) return {};
+    }
     if (cue.actor) {
         auto* actor = placed_actor(controller, cue.actor);
         if (!actor) return {};

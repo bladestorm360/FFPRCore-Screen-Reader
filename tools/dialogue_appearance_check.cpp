@@ -587,7 +587,12 @@ int main()
     for (const auto& stage : ffpr::dialogue::staged_cues) {
         current_game = stage.title;
         current_map = stage.map;
-        script.value = stage.script;
+        auto& owning_script = stage.continuation ? battle_script : script;
+        owning_script.value = stage.script;
+        if (stage.continuation) {
+            script.value = L"sc_e_0072";
+            put(interpreter, "isFieldScript", reinterpret_cast<void*>(1));
+        }
         id.value = stage.message;
         put(property, "entityId", reinterpret_cast<void*>(static_cast<intptr_t>(stage.actor)));
         std::wstring atlas(stage.art);
@@ -601,9 +606,19 @@ int main()
             body.value = std::wstring(stage.pose) + L"(Clone)";
             require(cue() == stage.text, "an atlas clone retains the same exact pose identity");
         }
-        script.value = L"sc_e_9999";
+        owning_script.value = L"sc_e_9999";
         require(cue().empty(), "the same message in an unrelated scene never triggers a cue");
-        script.value = stage.script;
+        owning_script.value = stage.script;
+        if (stage.continuation) {
+            put(interpreter, "isFieldScript", nullptr);
+            require(cue().empty(), "a continuation cue needs the active field interpreter");
+            put(interpreter, "isFieldScript", reinterpret_cast<void*>(1));
+            visual_descriptions = false;
+            require(cue().empty(), "descriptions Off omits the continuation cue");
+            visual_descriptions = true;
+            id.value = L"E0072_01_249_a_02";
+            require(cue().empty(), "an unannotated page in the CPU aftermath stays native");
+        }
         if (stage.actor) {
             renderer.visible = false;
             require(cue().empty(), "a hidden stage actor vetoes narration");

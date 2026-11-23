@@ -26,6 +26,8 @@ constexpr Ff4Step kRubicante{
     53, {static_cast<Id>(static_cast<int>(Id::Ff4Scenario) + 53), L"Defeat Rubicante", 239,
          {10, -1, -1}, Kind::Interact, Type::NPC, baked_route::Cell{0,21,16}}
 };
+constexpr auto kFf4MoonCrystal = ff4_contact(108, L"Use the Lunar Whale crystal to reach the Moon",
+                                            357, 1, Type::Warp, Kind::Interact, 65);
 constexpr std::array kFf4Journey{
     ff4_event(1, L"Meet Rosa in Baron Castle", 9, 7, 3),
     ff4_event(2, L"Meet Cid in Baron Castle", 4, 76, 3),
@@ -92,7 +94,7 @@ constexpr std::array kFf4Journey{
     ff4_event(62, L"Have Cid fit the Falcon's drill", 120, 15),
     ff4_contact(63, L"Drill to the surface with the Falcon", 2, 52, Type::TransportationEventAction, Kind::Infer),
     ff4_event(64, L"Raise the Lunar Whale in Mysidia", 57, 45),
-    ff4_contact(108, L"Use the Lunar Whale crystal to reach the Moon", 357, 1, Type::Warp, Kind::Interact, 65),
+    kFf4MoonCrystal,
     ff4_event(65, L"Meet FuSoYa at the Crystal Palace", 153, 12),
     ff4_contact(66, L"Use the Lunar Whale crystal to return to the surface", 161, 14, Type::AnimEntity),
     ff4_event(67, L"Defeat the archfiends inside the Giant of Babel", 248, 5),

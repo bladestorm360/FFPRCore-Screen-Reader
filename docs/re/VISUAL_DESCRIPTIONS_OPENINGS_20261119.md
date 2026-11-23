@@ -1,5 +1,52 @@
 # Opening and prologue visual actions
 
+## November 23 Giant of Babil aftermath
+
+The owner's FFIV journal reaches the post-CPU exchanges after the reloaded
+session. The descriptions preference still defaults to On. The installed
+catalog did not contain any cues for either the post-battle dialogue or the
+exterior destruction. The original audit recorded both as evidence
+exceptions even though it identified staged explosions and the Giant's
+placed art. That left a major story sequence without narration.
+
+The CPU victory continues on map 249 in `sc_e_0072_1`. Its authored
+page boundaries follow the explosions and white flash, Golbez's arrival,
+FuSoYa approaching him and casting, the party gathering, the departure,
+the renewed shaking and Kain's arrival. Descriptions use the actual
+field interpreter's script, the current map and the first page of each
+exact window. The event action may still name the original fight script.
+The text enters the same queued utterance just before the native dialogue.
+
+The silent exterior uses map 1, `sc_e_0072_2`, actor 1107 and its first
+animation at instruction 180. That bound observation waits for visible
+particles in the current event. The Lunar Whale dialogue then describes
+the rescued party facing Kain and his first head-lowering gesture on
+map 161 in `sc_e_0072_3`. All twelve game languages have cue text.
+
+## November 23 major-scene re-audit
+
+The owner reopened the major story scene scope for all six games. The
+first checkpoint is the paired FFIV Giant aftermath and return-to-Moon
+fix, with the enemy-target I repair and focused local delivery. The wider review
+works from the prior frozen script inventory and the six Storyline paths.
+It follows a fixed list of openings, story turns, boss aftermaths, silent
+handoffs and endings that will carry a scene-by-scene decision. Each major
+visual beat needs a reachable cue, a specific native line that supplies the
+same information, or a named presentation blocker. Repeating a routine
+animation does not open another review item. The active inventory ends
+when every selected scene has that evidence and the authored cues pass
+their offline checks and delivery. The earlier script-count reconciliation
+alone is insufficient evidence that a scene was adequately described.
+
+| Game | Story sequences in the repeat review |
+| --- | --- |
+| FF1 | Opening and Cornelia, Garland's defeat and Sarah's rescue, bridge prologue, Bikke's surrender, Astos and the Elf Prince, canal, four crystal restorations, airship rising, faerie release, the Onrac descent, the Black Crystal and Chaos through the ending. |
+| FFII | Fynn opening and Altair recovery, Scott's ring, Semitt Falls captives, Bafsk and the Dreadnought, Josef's boulder, Sunfire and the Dreadnought's destruction, Leviathan, Deist, the arena and Fynn's retaking, Ultima and Mysidia, the Cyclone, Palamecia, Jade Passage, and the Emperor through the ending. |
+| FFIII | Altar Cave and the prologue, the crystal audiences, Djinn's defeat and the curse lifting, Cid's airship and the Nepto passage, Owen's Tower, Hein's Castle, leaving the Floating Continent, Aria and Kraken, Amur and the Enterprise, Goldor's chains, Saronia and Garuda, Doga and Unei, the Nautilus dive, the Crystal Tower barrier and mirror, the World of Darkness and the ending. |
+| FFIV | Red Wings and the Mysidia raid, Mist and Rydia, Damcyan, Leviathan, Cecil's trial, Baigan and Cagnazzo, the Dark Elf and harp, Tellah and the Tower of Zot, Agart, Golbez and Rydia in the Dwarven Castle, Yang at the super cannon, Cid's escape and vehicle upgrades, Edge's parents, the Falcon, the Sealed Cavern finale, the Lunar Whale and Moon arrival, FuSoYa, the Giant's awakening through its destruction and the return to the Moon, and Zeromus through the ending. |
+| FFV | Tycoon, the pirate ship and meteor, Wind Shrine, the Ship Graveyard, the Wind Drake and Water Crystal, Fire-Powered Ship and Karnak escape, Catapult and Ronka, the meteor journey, Galuf's world, the moogles and the Big Bridge, the Exdeath Castle confrontation, the merged world and its first Void strike, the Interdimensional Rift finale, Neo Exdeath and the ending variants. |
+| FFVI | Magitek opening and Narshe, Figaro, the resistance at South Figaro, Doma and the Phantom Train, Terra's transformation and Zozo, the opera and Blackjack, the Magitek Factory and Espers, Thamasa and Leo, the Floating Continent and the world's ruin, Celes and Cid, Figaro's return and the Falcon's rise, the Light of Judgment and key World of Ruin reunions, Kefka's tower and battle phases, and the ending escape. |
+
 ## November 23 visual descriptions switch and Cid on deck
 
 F8 → Speech → Visual descriptions saves one switch for the authored

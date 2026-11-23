@@ -377,6 +377,8 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
    List rooted{&enemy_b,&enemy_a};
    target.enemies=&rooted;
    folded_wings.name=L"MN_FF4_063_C01";
+   b::d_ShowWindow(&target,true,nullptr);
+   expect(!b::focused_enemy_unit(),"a newly opened target window starts without an inherited target");
    b::d_SelectEnemy(&target,&filtered,0,nullptr);
    queries::define("BattleMagicMenuState.IsActive",[]{return true;});
    detail_action.clear();
@@ -398,6 +400,19 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   enemy_a.data=nullptr;
   battle_art_ready=false;
  }
+ for (auto title : {::game::Id::FF1, ::game::Id::FF2, ::game::Id::FF3, ::game::Id::FF4, ::game::Id::FF5, ::game::Id::FF6}) {
+  fixture::game=title;
+  enemy_a.enemy_id=target.enemy_id=138;
+  b::d_ShowWindow(&target,true,nullptr);
+  spoken.clear();
+  b::d_SelectEnemy(&target,&enemies,0,nullptr);
+  expect(b::focused_enemy_unit()==&enemy_a,"fresh native selection records its enemy in every title");
+  b::d_SelectEnemy(&target,&enemies,0,nullptr);
+  expect(spoken.size()==(title==::game::Id::FF6?1:2),"the native refresh speech guard stays exclusive to FFVI");
+  b::d_ShowWindow(&target,false,nullptr);
+  expect(!b::focused_enemy_unit(),"closing targeting releases the enemy in every title");
+ }
+ fixture::game=::game::Id::FF6;
  {
   Node actor,info,entity,body,renderer,pose,weapon,weapon_renderer,loader,blade;
   actor.data=&info;info.data=&entity;entity.data=&body;body.data=&pose;body.view=&renderer;

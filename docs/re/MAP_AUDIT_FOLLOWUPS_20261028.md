@@ -807,6 +807,24 @@ list. Its field layout is in FFIV’s local `dump.cs` at `OwnedTransportationDat
 party into the Moon cabin. Directions announce boarding and Autowalk stops
 there for the manual action. Request directions inside to reach the crystal.
 
+### November 23 FFIV surface recovery after the Giant
+
+After the automatic Moon trip, the owner returned to the surface and requested
+Storyline directions twice. The log at 89613.031 and 89614.281 tries to reach
+the Lunar Subterrane entrance on map 154 directly from map 1 and says “No path.”
+It also records the live surface Whale at (156,186) and entrance to cabin 357.
+The native surface craft is 5. Its `sc_ship_0005` landing enters cabin 357 at
+the helm, where crystal 1 starts `sc_ship_0003` and reaches the Moon via the
+normal travel sequence. The Moon craft and cabin retain their separate IDs.
+
+The Lunar Subterrane and Zeromus objectives keep their existing saved receipts.
+When the party is on the surface, Storyline uses the Whale as the immediate
+prerequisite. It rebinds to a live position on the world or the enabled saved
+craft when planning the route out of an interior. If the party is flying the
+Whale, directions end at a legal manual landing. Inside its surface cabin,
+directions reach the crystal and say to use it. The original objective resumes
+on the Moon. Storyline spoiler settings continue to govern the selection label.
+
 ### Storyline travel between areas
 
 A Storyline goal uses the current world vehicle snapshot regardless of the

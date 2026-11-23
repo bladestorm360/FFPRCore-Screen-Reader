@@ -617,12 +617,16 @@ std::wstring planning_vehicle_name(int id, int type, const std::wstring& message
     const auto name = g_route_snapshot->vehicle_names.find(id);
     return name == g_route_snapshot->vehicle_names.end() ? std::wstring() : name->second;
 }
-// FuSoYa's return crystal is inside the Lunar Whale. From either lunar
-// passage or the Moon, the movable craft is the next required contact.
-bool lunar_whale_storyline(const MapGoal& goal, int map)
+struct WhaleBoarding { int world, transport; };
+
+std::optional<WhaleBoarding> lunar_whale_storyline(const MapGoal& goal, int map)
 {
-    return game::is(game::Id::FF4) && goal.storyline && goal.map_id == 161 && goal.entity_id == 14 &&
-           (map == 3 || map == 291 || map == 292);
+    if (!game::is(game::Id::FF4) || !goal.storyline || map == goal.map_id) return {};
+    // Each cabin's crystal is reached through its own native craft and world.
+    if (goal.map_id == 357 && goal.entity_id == 1) return WhaleBoarding{1, 5};
+    if (goal.map_id == 161 && goal.entity_id == 14 && (map == 3 || map == 291 || map == 292))
+        return WhaleBoarding{3, 11};
+    return {};
 }
 
 // Native owner only, shared by list descriptions and explicit direction jobs.
@@ -638,7 +642,7 @@ void capture_vehicle_names(RouteSnapshot& snapshot) {
     if(world_scope&&snapshot.vehicle_shortcuts&&game::is(game::Id::FF3))snapshot.saved_vehicles=field::saved_world_vehicles();
     if(game::is(game::Id::FF6)&&snapshot.map_id==119&&snapshot.vehicle_shortcuts)
         snapshot.saved_vehicles=field::saved_world_vehicles();
-    if(snapshot.map_id!=3 && lunar_whale_storyline(snapshot.goal,snapshot.map_id))
+    if (const auto whale = lunar_whale_storyline(snapshot.goal, snapshot.map_id); whale && snapshot.map_id != whale->world)
         snapshot.saved_vehicles=field::saved_world_vehicles();
     for (auto& vehicle : snapshot.vehicles) {
         vehicle.game = nullptr;
@@ -4396,19 +4400,25 @@ struct Planned {
 #include "manual_key_prefix.inl"
 #include "troia_passages.inl"
 #include "baron_gate.inl"
+#include "lunar_whale_landing.inl"
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
     snapshot.flight_to_landing.reset();
+    const auto whale = lunar_whale_storyline(snapshot.goal, snapshot.map_id);
     std::optional<GuideTarget> lunar_destination;
-    if (lunar_whale_storyline(snapshot.goal, snapshot.map_id)) {
+    if (whale) {
         lunar_destination = GuideTarget{snapshot.goal, snapshot.kind, {}};
         snapshot.goal = {};
-        snapshot.goal.map_id = 3;
+        snapshot.goal.map_id = whale->world;
         snapshot.goal.storyline = true;
         snapshot.goal.allow_world_transit = true;
-        snapshot.goal.transportation_id = 11;
+        snapshot.goal.transportation_id = whale->transport;
         snapshot.kind = TargetKind::Spot;
     }
+    const bool on_whale = whale && snapshot.map_id == whale->world &&
+                          snapshot.vehicle.valid && snapshot.vehicle.id == whale->transport;
+    if (whale && snapshot.map_id == whale->world && !on_whale &&
+        snapshot.vehicle.valid && ff4_airship(snapshot.vehicle.type)) snapshot.kind = TargetKind::Interact;
     bool vehicle_missing=snapshot.goal.transportation_id>0;
     std::optional<TrapVisit> parked_craft_arrival;
     // The live actor list no longer contains a parked craft after entering
@@ -4443,12 +4453,12 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
         });
         if(model!=snapshot.vehicles.end()) {vehicle_missing=false;snapshot.goal.cell=cell_of(*snapshot.submap,model->pos,1);}
     }
-    if (lunar_destination && snapshot.map_id != 3) {
-        const auto moon = baked::submap_by_map_id(3);
+    if (whale && snapshot.map_id != whale->world) {
+        const auto* world = baked::submap_by_map_id(whale->world);
         for (const auto& saved : snapshot.saved_vehicles) {
-            if (saved.id != 11 || saved.map != 3 || !moon) continue;
+            if (saved.id != whale->transport || saved.map != whale->world || !world) continue;
             const Cell cell{1, static_cast<int>(saved.cell.x), static_cast<int>(saved.cell.y)};
-            if (!baked::in_bounds(baked::grids(*moon), cell.x, cell.y)) continue;
+            if (!baked::in_bounds(baked::grids(*world), cell.x, cell.y)) continue;
             snapshot.goal.cell = cell;
             vehicle_missing = false;
             break;
@@ -4487,16 +4497,19 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
         invalidate_active();
         clear_pending();
         result.path.reason = T(L"Navigation data is loading");
+    } else if (on_whale) {
+        plan_whale_landing(snapshot, result.start, result.path);
     } else if(vehicle_missing)result.path.reason=T(L"Destination is no longer available");
     else if (!route_to_goal(nullptr, nullptr, snapshot.goal, snapshot.kind, snapshot.name, result.path)) {
         result.path.reason = result.path.error = T(L"Navigation map data unavailable");
     }
-    if (lunar_destination && snapshot.map_id == 3 && result.path.success &&
+    if (whale && !on_whale && snapshot.map_id == whale->world && result.path.success &&
         result.path.next_map_id == 0 && !snapshot.active.phases.empty()) {
         auto& phase = snapshot.active.phases.back();
         // Boarding enters the cabin through a native script. Stop at this
         // manual boundary and let the next request use the cabin crystal.
-        phase.action_after = TF(L"board the {0}", {planning_vehicle_name(11, 8, {})});
+        if (!phase.action_after.empty()) phase.action_after += L", ";
+        phase.action_after += TF(L"board the {0}", {planning_vehicle_name(whale->transport, 8, {})});
         phase.manual_after = true;
         fill_result(*snapshot.submap, snapshot.active.phases, result.path);
     }
