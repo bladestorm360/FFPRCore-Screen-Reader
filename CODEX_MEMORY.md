@@ -1,7 +1,8 @@
 # Native FFPR durable memory
 
 **November 22 Storyline resume.** Storyline correctly resumes outside Karnak
-after the optional Walse king conversation was skipped. The all-six review
+after the optional King's Chamber conversation was skipped. The automatic
+first audience in the Throne Room is a separate earlier step. The all-six review
 also corrected six FFIII conversations and the FFV Castle Surgate guards.
 The all-six replays passed. FFV and FFIII are installed and gameplay
 confirmation is pending. [Audit and checks](docs/re/MAP_AUDIT_FOLLOWUPS_20261028.md#november-22-ffv-storyline-outside-karnak)

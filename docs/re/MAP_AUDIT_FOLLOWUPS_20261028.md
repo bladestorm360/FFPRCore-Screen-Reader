@@ -409,10 +409,23 @@ languages.
 | Change and bounds | The existing FFV stage selector retires the king's optional conversation at the confirmed meteorite arrival. It still uses the live saved bits and exact contacts. The change adds no native reads, hooks, route searches, or retries. The failed original request recorded 0.321 ms owner capture, 102.625 ms worker compute and 117.357 ms to speech submission. |
 | Offline and delivery | Closed for source, offline checks, and verified installation in FFV and FFIII. From the logged world tile the planner says “1 South” and directs entry to the Fire-Powered Ship. The next route reaches the deck scene in two steps. The replay also verifies the pre-transfer path and the objective after the scene. All six campaign checks passed. Gameplay confirmation remains pending. [Delivery](../SECURITY_AND_DISTRIBUTION.md#november-22-skipped-storyline-conversations). |
 
-The king's English dialogue explains that Karnak amplifies its Fire Crystal
-with a machine like Walse's, mentions the meteorite near Karnak, and urges the
-party to hurry. This remains an available Storyline step before using the
-meteorite. The progress witness comes from the next area's arrival script.
+**November 23 dialogue recheck.** The first audience is a walk-on scene on
+approach to the Throne Room. Castle Walse 2F map 55 uses events 19–21 to
+launch `sc_e_0038` in the Throne Room, map 56. The king there is a scripted
+actor with no separate Talk action. Lenna warns about the Water Crystal,
+a soldier reports the meteorite near the Tower of Walse, and the king
+leaves for the tower. The scene's continuation records flag 37.
+
+The optional talk is later and in the King's Chamber, map 57. Its room
+initializer shows the wounded king only once the Tower of Walse sequence
+has set flag 38. The king there is interactive, and `sc_e_0040` gives the
+Karnak Fire Crystal warning and mentions the meteorite near Karnak before
+recording flag 39. The Walse Meteorite's transfer event 2 is in the default
+entity group and its script can run with flag 39 clear. The player's
+rotated log records using that warp, and the loaded save has 37, 38 and 40
+set with 39 clear. The original Storyline failure was the stale optional
+King's Chamber target. The delivered guard retires it while preserving
+the first audience as its own earlier objective.
 
 ### Skipped Storyline conversations in all six games
 
