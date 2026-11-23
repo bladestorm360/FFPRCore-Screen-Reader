@@ -1,5 +1,27 @@
 # Build and distribution security
 
+## November 23 enemy-target description update
+
+Source `12c55d0a547c85775d14dfa7c7296a0391660173` supersedes the shortcut
+candidate below. All six focused checks passed, including an I-key replay
+with the Giant Soldier in the filtered native selector. The 45.8-second
+build used the enforced 2 GB, one-worker and 25 percent CPU limits, with
+368,209,920 bytes peak aggregate memory. It verifies all 73 embedded
+resources, 9,130 native name bindings and 47 forwarded exports.
+
+The 21,338,624-byte unsigned DLL SHA-256 is
+`d0997746cb8aba9903ecc072351544affb5e9233e895a5ab02eb12f8c2dfe12e`.
+Defender definitions `1.463.429.0` reported no threats and no matching
+detection events on all 22 exact payload files. Staged hashes were stable.
+The individually guarded installs verified 110 payload hashes across
+FF1, FFII, FFIII, FFV and FFVI, and 138 protected states across all six.
+FFIV remained open and awaits installation. The verified candidate and
+its scan manifest are retained for that install. Recovery for the five
+installed builds uses `fceb1fe`. The prior FFIV install uses `05e9956`.
+Receipts are in `../tools/autowalk_shortcut_20261123/enemy-description-final`.
+Cleanup reclaimed 142,322,966 bytes of disposable output. Gameplay and
+audible timing remain unverified.
+
 ## November 23 Autowalk shortcut and FFIV follow-up
 
 Source `fceb1fe860684c550092496b7826546d551d0999`. The focused build passed in
