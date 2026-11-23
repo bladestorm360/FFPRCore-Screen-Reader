@@ -11,6 +11,11 @@
 #undef install
 #undef s_install
 #include "../src/core/battle/battle_appearance.cpp"
+#define install hotkey_install
+#define s_install hotkey_registration
+#include "../src/core/input/global_hotkeys.cpp"
+#undef install
+#undef s_install
 #define install quantity_install
 #define s_install quantity_registration
 #include "../src/core/battle/battle_quantity.cpp"
@@ -53,9 +58,10 @@
 #undef install
 #undef s_install
 namespace fixture {
-struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* eligible_players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;std::string_view type;std::vector<void*> children;};
+struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* enemies=nullptr;void* players=nullptr;void* eligible_players=nullptr;void* cursor=nullptr;void* data=nullptr;void* view=nullptr;void* use=nullptr;void* status=nullptr;bool alive=true,visible=true,machine=false;Node* parent=nullptr;int state=0,index=0,enemy_id=0;std::wstring name;std::map<std::string,void*> fields;std::map<std::string,std::wstring> texts;std::string_view type;std::vector<void*> children;};
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
+std::string detail_action;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 bool visual_descriptions = true;
 int ready_original_calls=0;
@@ -149,6 +155,7 @@ int32_t Field::get(){
  if(n=="material")return offsetof(fixture::Node,use);
  if(n=="copied")return offsetof(fixture::Node,data);
  if(n=="doomCountEntityView")return offsetof(fixture::Node,status);
+ if(n=="selectEnemyUniqueId"||n=="<UniqueId>k__BackingField")return offsetof(fixture::Node,enemy_id);
  if(n=="commandSelectController")return offsetof(fixture::Node,window);if(n=="targetData")return offsetof(fixture::Node,data);if(n=="useController")return offsetof(fixture::Node,use);if(n=="statusController")return offsetof(fixture::Node,status);if(n=="abilityWindowController")return offsetof(fixture::Node,window);if(n=="abilityItemList")return offsetof(fixture::Node,items);if(n=="rangeType")return offsetof(fixture::Node,state);if(n=="isMachineState")return offsetof(fixture::Node,machine);if(n=="contentList")return offsetof(fixture::Node,list);if(n=="enemyDataList"||n=="<TargetEnamyList>k__BackingField")return offsetof(fixture::Node,enemies);if(n=="playerDataList")return offsetof(fixture::Node,players);if(n=="<TargetPlayerList>k__BackingField")return offsetof(fixture::Node,eligible_players);if(n=="selectCursor")return offsetof(fixture::Node,cursor);if(n=="listController")return offsetof(fixture::Node,list);if(n=="<TargetCommand>k__BackingField"||n=="<Data>k__BackingField"||n=="<CurrentData>k__BackingField"||n=="<CharacterData>k__BackingField")return offsetof(fixture::Node,data);return -1;
 }
 void* instance(Class&){return &fixture::manager;}
@@ -238,6 +245,7 @@ bool get_bool(const char* key, bool fallback)
 namespace modtext {
 bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
+        value==L"Enemy appearance mn_ff4_063_c01"||
         value==L"Enemy appearance mn_ff6_127_c00"||value==L"Enemy appearance mn_ff6_144_c00"||
         value==L"Enemy appearance mn_ff1_046_c00"||value==L"Weapon appearance wp_ff1_sw02_c00"||
         value==L"Weapon appearance wp_ff2_sw00_c00"||value==L"Weapon appearance wp_ff6_sh00_c00"||
@@ -257,8 +265,8 @@ namespace menu_state {void set_active(const char*n,bool v){fixture::states[n]=v;
 namespace ffpr::ff2 {void set_active_exclusive(const char*n){menu_state::set_active_exclusive(n);}}
 namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guard[k]==v)return false;fixture::guard[k]=v;return true;}bool index(const char*k,long long value,Scope){auto [it,fresh]=fixture::index_guard.emplace(k,value);if(!fresh&&it->second==value)return false;it->second=value;return true;}void reset(const char*k){fixture::guard.erase(k);fixture::index_guard.erase(k);}}
 namespace field::cache {void*get(ref::Class&c){return fixture::owners[c.name];}void register_object(ref::Class&c,void*p){fixture::owners[c.name]=p;}void clear(ref::Class&c){fixture::owners.erase(c.name);}}
-namespace actions {void define(const char*,Fn){}}
-namespace queries {void define(const char*n,std::function<bool()> f){fixture::queries[n]=std::move(f);}void define_text(const char*,std::function<std::wstring()>){ }bool is(const char*n){auto f=fixture::queries.find(n);return f!=fixture::queries.end()&&f->second();}}
+namespace actions {void define(const char*,Fn){}bool run(const char* action){fixture::detail_action=action;return true;}}
+namespace queries {void define(const char*n,std::function<bool()> f){fixture::queries[n]=std::move(f);}void define_text(const char*,std::function<std::wstring()>){ }bool is(const char*n){auto f=fixture::queries.find(n);return f!=fixture::queries.end()&&f->second();}std::wstring text(const char*){return {};}}
 namespace events {void on(Kind k,Handler f){fixture::events[k].push_back(std::move(f));}void fire(Kind k){for(auto& f:fixture::events[k])f();}}
 namespace cursor {void add_suppressor(const char*){}}
 namespace log_ {void write(const char*,...){}}
@@ -266,6 +274,7 @@ namespace ffpr::system {void clear_other_menu_states(const std::string&){}bool i
 namespace ffpr::menus {std::wstring spell_description(void*){return L"Removes poison.";}std::wstring spell_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}void set_last_announced_ability(void*){}}
 
 namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref::Field&){return {};}void read_popup_when_ready(void*,const char*,std::function<std::wstring()>,std::function<bool()>){ }
+bool read_dialogue_appearance(){return false;}
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
 namespace il2cpp {
 Class* class_parent(Class* type){return type;}
@@ -360,6 +369,30 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   folded_wings.name=L"MN_FF1_046_C00";
   expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff1_046_c00",
          "Garland has a separate description for his battle armor");
+  {
+   fixture::game=::game::Id::FF4;
+   enemy_a.enemy_id=target.enemy_id=138;
+   enemy_b.enemy_id=137;
+   List filtered{&enemy_a};
+   List rooted{&enemy_b,&enemy_a};
+   target.enemies=&rooted;
+   folded_wings.name=L"MN_FF4_063_C01";
+   b::d_SelectEnemy(&target,&filtered,0,nullptr);
+   queries::define("BattleMagicMenuState.IsActive",[]{return true;});
+   detail_action.clear();
+   spoken.clear();
+   input::global_hotkeys::handle_item_details_key();
+   expect(spoken.size()==1&&spoken.back()==L"Enemy appearance mn_ff4_063_c01"&&detail_action.empty(),
+          "I describes the Giant Soldier indexed through FFIV's filtered list before the underlying spell detail");
+   target.enemy_id=enemy_b.enemy_id;
+   expect(!b::read_focused_enemy_appearance(),"a changed native selected ID vetoes the previous target");
+   b::d_EnemyAll(&target,nullptr);
+   input::global_hotkeys::handle_item_details_key();
+   expect(detail_action=="BattleMagicPatches.AnnounceCurrentDescription","without a single target I still reads the spell detail");
+   queries::define("BattleMagicMenuState.IsActive",[]{return false;});
+   target.enemies=&enemies;
+   fixture::game=::game::Id::FF6;
+  }
   b::d_EnemyAll(&target,nullptr);
   expect(!b::read_focused_enemy_appearance(),"All Enemies does not reuse a prior single target");
   enemy_a.data=nullptr;

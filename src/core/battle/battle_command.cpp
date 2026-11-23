@@ -71,6 +71,9 @@ ref::Field fSelectCursor{kTargetSelect, "selectCursor"};
 ref::Field fEnemyDataList{kTargetSelect, "enemyDataList"};
 ref::Field fTargetPlayerList{kTargetSelect, "<TargetPlayerList>k__BackingField"};
 ref::Field fTargetEnamyList{kTargetSelect, "<TargetEnamyList>k__BackingField"};
+ref::Class kTargetSelectATB{"Last.UI.KeyInput", "BattleTargetSelectController", game::kFF4 | game::kFF5 | game::kFF6};
+ref::Field fSelectedEnemyId{kTargetSelectATB, "selectEnemyUniqueId"};
+ref::Field fEnemyUniqueId{kBattleEnemyData, "<UniqueId>k__BackingField"};
 ref::Class kTargetSelectFF6{"Last.UI.KeyInput", "BattleTargetSelectController", game::kFF6};
 ref::Method mSideAttackPlayerInit{kTargetSelectFF6, "SideAttackPlayerInit", 0};
 ref::Method mEnemySideAttackPlayerInit{kTargetSelectFF6, "EnemySideAttackPlayerInit", 0};
@@ -669,6 +672,21 @@ void* focused_enemy_unit()
 
     // The saved focus is an identity only. Match it against the entry the
     // current native controller owns before giving callers a live unit.
+    if (game::in(game::kFF4 | game::kFF5 | game::kFF6) &&
+        fSelectedEnemyId.get() >= 0 && fEnemyUniqueId.get() >= 0) {
+        // The ATB selector indexes a temporary filtered list. Its native
+        // selected ID ties that cursor to the unit in the rooted source list.
+        const int selected_id = ref::rd<int>(controller, fSelectedEnemyId);
+        std::vector<void*> targets;
+        for (auto* field : {&fTargetEnamyList, &fEnemyDataList}) {
+            if (!unity::enumerate_bounded(ref::rd<void*>(controller, *field), targets, 64)) continue;
+            for (auto* unit : targets) {
+                if (unit == g_target_focus_unit && kBattleEnemyData.is(unit) &&
+                    ref::rd<int>(unit, fEnemyUniqueId) == selected_id) return unit;
+            }
+        }
+        return nullptr;
+    }
     auto* list = ref::rd<void*>(controller, fEnemyDataList);
     std::vector<void*> targets;
     if (!unity::enumerate_bounded(list, targets, 64) || targets.empty()) {

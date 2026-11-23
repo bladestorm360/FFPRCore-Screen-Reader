@@ -1,5 +1,24 @@
 # Build and distribution security
 
+## November 23 Autowalk shortcut and FFIV follow-up
+
+Source `fceb1fe860684c550092496b7826546d551d0999`. The focused build passed in
+72.2 seconds under the enforced 2 GB, one-worker and 25 percent CPU limits.
+Peak aggregate memory was 492,236,800 bytes. Global input, native Autowalk,
+dialogue descriptions, the six Storyline campaigns and the saved vehicle
+reader passed. All 73 embedded resources, 9,113 native name bindings and
+47 forwarded exports verified. Game-frame and audible timing are unmeasured.
+
+The 21,338,112-byte unsigned DLL SHA-256 is
+`557e9c24c01d2658a5899207e9d201564d543271f5c304579a95ea3675b9af20`.
+Defender definitions `1.463.429.0` reported no threats in the 22 exact files
+and no matching detection events. The staged hashes were stable. The
+exclusion query was denied. The individual guarded installs in FF1, FFII,
+FFIII, FFV and FFVI verified 110 payload hashes and 138 protected file
+states across all six. FFIV deployment waits for the running game to close.
+Recovery uses `05e9956`. Compact receipts are under
+`../tools/autowalk_shortcut_20261123`. Gameplay confirmation is pending.
+
 ## November 23 Visual descriptions switch
 
 Source `05e9956b4b28b3fde14647029ebff6b43aa0888c`. The focused build

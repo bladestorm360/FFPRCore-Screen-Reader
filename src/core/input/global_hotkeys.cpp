@@ -127,6 +127,10 @@ void handle_item_details_key()
         return;
     }
 
+    // A selected enemy owns I while the underlying battle item or spell list
+    // can remain active beneath the targeting layer.
+    if (ffpr::battle::read_focused_enemy_appearance()) return;
+
     // Battle magic description on demand (the only way to it with Auto Detail off).
     if (queries::is("BattleMagicMenuState.IsActive")) {
         actions::run("BattleMagicPatches.AnnounceCurrentDescription");
@@ -138,7 +142,6 @@ void handle_item_details_key()
         actions::run("BattleItemPatches.AnnounceCurrentDescription");
         return;
     }
-    if (ffpr::battle::read_focused_enemy_appearance()) return;
     if (ffpr::dialogue::read_dialogue_appearance()) return;
     if (const auto row = queries::text("BattleParty.ChargeDetails"); !row.empty()) ffpr::say(row, true);
 }

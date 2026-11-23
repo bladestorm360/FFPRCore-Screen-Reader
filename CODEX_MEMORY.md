@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 23 Autowalk and FFIV follow-up.** Alt+Shift+Backslash toggles
+Autowalk in all six games. FFIV's Storyline now routes to the Lunar Whale
+after FuSoYa joins, and the Crystal Palace reveal speaks before Cecil.
+Offline verification passed. FF1, FFII, FFIII, FFV and FFVI are installed.
+FFIV installation is waiting for the running game to close.
+[Delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-23-autowalk-shortcut-and-ffiv-follow-up).
+
 **Planned Ctrl+M map descriptions.** Record a full current-map overview and
 major landmarks for all six games using Wendy Quest's authored summaries as
 a reference. [Scope](docs/re/VISUAL_DESCRIPTIONS_20261119.md#planned-ctrlm-map-descriptions).

@@ -23,6 +23,25 @@ map art and cover visually distinct map states where they affect major
 landmarks. Check coverage against a fixed all-six playable-map inventory and
 provide the same locale coverage as the existing visual descriptions.
 
+## November 23 focused enemy descriptions
+
+The owner’s FFIV log announces Giant Soldier as the battle target without its
+description. The same battle reads Rosa’s acting-character description, and
+Giant Soldier has all 12 localized entries under its visible `mn_ff4_063_c01`
+palette. FFIV's native `EnemysInit` and `EnemysUpdate` select an index in a
+filtered list. FFIV, FFV and FFVI `SelectContent` also store the selected
+enemy’s unique identity. A slot in the source list can belong to a different
+enemy even when the cursor index matches.
+
+I checks the live selected identity and the rooted enemy lists in the three
+ATB games. The existing battle and cursor checks guard the request. The
+enemy description takes priority over the underlying battle spell or item
+detail while a single enemy has focus. In other contexts the same I key still
+reads the active menu detail. The targeted fixture uses the actual shortcut
+handler, a differently ordered source list, the Giant Soldier sprite, and a
+still-open spell list. It also checks a changed native ID and an all-target
+state. No per-frame observation was added.
+
 ## November 20 exact FF1 catalog
 
 The FF1 catalog supplies 124 enemy keys, 76 field keys, 12 battle
