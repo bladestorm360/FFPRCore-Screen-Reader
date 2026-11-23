@@ -252,6 +252,8 @@ constexpr StagedCue staged_cues[] = {
     {game::Id::FF3, 153, L"sc_e_0001_1", L"E0001_01_153_a_01", L"Altar Cave opening cue"},
     {game::Id::FF4, 342, L"sc_e_0001_1", L"E0001_01_342_a_03", L"Red Wings deck cue", 5, L"mo_ff4_n101_c02"},
     {game::Id::FF4, 325, L"sc_e_0054_1", L"E0055_01_004_a_01", L"Enterprise workshop cue", 3, L"mo_ff4_n005_c01"},
+    // FuSoYa's effect and puppet reveal finish just before Cecil speaks.
+    {game::Id::FF4, 153, L"sc_e_0069", L"E0069_00_153_a_02", L"Crystal Palace reveal cue"},
     {game::Id::FF5, 198, L"sc_e_0001_1", L"E0001_01_198_a_01", L"Pirate ship opening cue", 44, L"mo_ff5_n111_c00"},
     {game::Id::FF5, 190, L"sc_e_0001_2", L"E0001_02_190_a_01", L"Galuf crystal chamber cue", 9, L"mo_ff5_p003_c00"},
     {game::Id::FF5, 209, L"sc_e_0001_4", L"E0001_04_209_a_01", L"Wind Shrine opening cue", 30, L"mo_ff5_b002_c00"},

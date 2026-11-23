@@ -617,10 +617,25 @@ int main()
         }
         transition = true;
     }
+    current_game = game::Id::FF4;
+    current_map = 153;
+    script.value = L"sc_e_0069";
+    transition = false;
+    id.value = L"E0069_00_153_a_01";
+    require(cue().empty(), "Crystal Palace welcome precedes the reveal");
+    id.value = L"E0069_00_153_a_02";
+    require(cue() == L"Crystal Palace reveal cue", "Cecil's question follows the reveal");
+    visual_descriptions = false;
+    require(cue().empty(), "descriptions Off leaves Cecil's native line alone");
+    visual_descriptions = true;
+    id.value = L"E0069_00_153_a_03";
+    require(cue().empty(), "FuSoYa's introduction does not repeat the reveal cue");
+
     const auto scroll_cue = &ffpr::dialogue::action_cue_at_scroll;
     current_game = game::Id::FF1;
     current_map = 124;
     script.value = L"sc_e_0006_1";
+    transition = true;
     require(scroll_cue(0, 90, 52).empty(), "native map change vetoes the bridge scroll cue");
     transition = false;
     dialogue_open = false;
