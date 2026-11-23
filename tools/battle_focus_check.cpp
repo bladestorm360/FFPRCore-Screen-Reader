@@ -57,6 +57,7 @@ struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* e
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
+bool visual_descriptions = true;
 int ready_original_calls=0;
 bool battle_art_ready=false;
 int painting_art=0;
@@ -224,7 +225,16 @@ namespace ffpr::battle {std::wstring visible_party_status_icons(void*) { return 
 namespace ui::character_row {void announce(void*,void*,std::wstring line,void*){ffpr::say(line,true);}}
 namespace ui {void*list_item(void*p,int i){return unity::list_at(p,i);}int state_tag(void*p,ref::Field&){return p?static_cast<fixture::Node*>(p)->state:-1;}int cursor_index(void*p){return p?static_cast<fixture::Node*>(p)->index:-1;}std::wstring menu_position(const std::wstring&s,int i,int n){return s+L" ("+std::to_wstring(i+1)+L" of "+std::to_wstring(n)+L")";}}
 namespace game {Id current(){return fixture::game;}}
-namespace settings {bool get_bool(const char* key,bool d){if(std::string(key)=="AutoDetail")return fixture::auto_detail;return std::string(key)=="InterruptCharacterTurn"?fixture::interrupt_turn:d;}}
+namespace settings {
+bool get_bool(const char* key, bool fallback)
+{
+    const std::string_view name(key);
+    if (name == "AutoDetail") return fixture::auto_detail;
+    if (name == "InterruptCharacterTurn") return fixture::interrupt_turn;
+    if (name == ui::prefs::kVisualDescriptions) return fixture::visual_descriptions;
+    return fallback;
+}
+}
 namespace modtext {
 bool has(std::wstring_view value){
  return value==L"Enemy appearance mn_ff5_121_c00"||value==L"Enemy appearance mn_ff5_122_c00"||
@@ -315,6 +325,9 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   expect(!b::read_focused_enemy_appearance(),"art reader stays closed during battle entry");
   frame::g_main_tid=GetCurrentThreadId();battle_art_ready=true;
   spoken.clear();
+  visual_descriptions=false;
+  expect(!b::read_focused_enemy_appearance()&&spoken.empty(),"descriptions Off suppresses the focused enemy appearance");
+  visual_descriptions=true;
   expect(b::read_focused_enemy_appearance()&&spoken.back()==L"Enemy appearance mn_ff5_121_c00",
          "the selected unit's rendered sprite selects its appearance");
   body.data=&folded_wings;
@@ -361,6 +374,10 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   b::announce_acting_character_appearance();
   expect(spoken.empty(),"acting character description is closed during battle entry");
   battle_art_ready=true;
+  visual_descriptions=false;
+  b::announce_acting_character_appearance();
+  expect(spoken.empty(),"descriptions Off suppresses the acting character appearance");
+  visual_descriptions=true;
   b::announce_acting_character_appearance();
   expect(spoken.size()==1&&spoken.back()==L"Character appearance bc_ff1_p001",
          "the native owner supplies the actor's current status and job for its described outfit");

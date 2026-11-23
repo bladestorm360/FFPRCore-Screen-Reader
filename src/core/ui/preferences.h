@@ -57,6 +57,7 @@ inline constexpr int kPuzzleGuideMinimal = 0, kPuzzleGuideVerbose = 1;
 inline constexpr int kPuzzleGuideVerbosityDefault = kPuzzleGuideMinimal;
 inline constexpr int kPuzzleGuideVerbosityMax = kPuzzleGuideVerbose;
 inline constexpr const char* kAutoDetail = "AutoDetail";                    // Auto Announcement Detail
+inline constexpr const char* kVisualDescriptions = "VisualDescriptions";
 inline constexpr const char* kResultNotificationsOnce = "ResultNotificationsOnce";
 inline constexpr const char* kInterruptCharacterTurn = "InterruptCharacterTurn";
 inline constexpr const char* kEnemyStatusAnnouncements = "EnemyStatusAnnouncements";
@@ -102,6 +103,7 @@ inline constexpr bool kSpeechEnabledDefault = true;
 inline constexpr bool kSpeakAutowalkPathDefault = false;
 inline constexpr bool kBeaconWithDirectionsDefault = false;
 inline constexpr bool kAutoDetailDefault = false;
+inline constexpr bool kVisualDescriptionsDefault = true; // preserve existing description playback
 // Automatic notifications are once per results session; deliberate buffer review
 // always retains all displayed messages. An explicitly saved Off still wins.
 inline constexpr bool kResultNotificationsOnceDefault = true;
@@ -170,6 +172,7 @@ inline bool puzzle_guide_verbose() { return puzzle_guide_verbosity() == kPuzzleG
 inline bool navigation_puzzle_guidance() { return settings::get_bool(kNavigationPuzzleGuidance,kNavigationPuzzleGuidanceDefault); }
 inline bool other_puzzle_guidance() { return settings::get_bool(kOtherPuzzleGuidance,kOtherPuzzleGuidanceDefault); }
 inline bool auto_detail_enabled() { return settings::get_bool(kAutoDetail, kAutoDetailDefault); }
+inline bool visual_descriptions_enabled() { return settings::get_bool(kVisualDescriptions, kVisualDescriptionsDefault); }
 inline bool result_notifications_once_enabled() { return settings::get_bool(kResultNotificationsOnce, kResultNotificationsOnceDefault); }
 inline bool interrupt_character_turn_enabled() { return settings::get_bool(kInterruptCharacterTurn, kInterruptCharacterTurnDefault); }
 inline bool enemy_status_announcements_enabled() { return settings::get_bool(kEnemyStatusAnnouncements, kEnemyStatusAnnouncementsDefault); }

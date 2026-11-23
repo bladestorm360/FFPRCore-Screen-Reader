@@ -118,7 +118,8 @@ Scene triggers can be selected as destinations. For a story-gated destination, d
 - Some Storyline stages offer an optional native clue conversation. Use the destination selection keys to switch between the conversation and the direct objective.
 - By default, Storyline selections speak “Destination” or “Clue.” For full names, open the mod menu with F8, then turn on **Speech → Storyline spoilers**.
 - Press I during dialogue to describe an identified speaker whose sprite is visible. During battle, press I while targeting an enemy to hear its current form and visible effects. Press Ctrl+I to describe the acting character, their visible equipment and current effects.
-- Some scenes describe significant visible actions alongside the game's dialogue.
+- Some scenes describe significant visible actions alongside the game's dialogue. Both use the same screen reader voice.
+- **F8 → Speech → Visual descriptions** controls automatic scene cues and on-demand appearance descriptions. It defaults to On. Game dialogue and the usual item and spell descriptions remain available with either setting.
 
 ### Waypoints (field only)
 

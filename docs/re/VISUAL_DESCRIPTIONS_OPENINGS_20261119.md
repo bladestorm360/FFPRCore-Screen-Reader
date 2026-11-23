@@ -1,5 +1,33 @@
 # Opening and prologue visual actions
 
+## November 23 visual descriptions switch and Cid on deck
+
+F8 → Speech → Visual descriptions saves one switch for the authored
+appearance and scene speech. It defaults to On to preserve installed
+behavior. On-demand field and battle appearance, dialogue and prologue
+additions, silent field effects and boss visuals all use the existing Prism
+speech queue. The owner's FFV log selects NVDA. Dialogue, native captions,
+ordinary menu descriptions and standard battle announcements keep their
+existing controls. Switching off also retires an outstanding field-effect
+observation before it posts a description. Boss render tracking still owns
+the observed forms. There are no new native hooks, timers or voices.
+
+The FFV log records the Fire-Powered Ship deck scene between `66920.171`
+and `66944.328`. The description catalog indexes Cid's visible speaker
+sprite in map 250 and `sc_e_0045`. The automatic cue list has no action in
+that scene. The script turns and moves the actors, groups the party at the
+door, then runs the door animation before transfer to map 251. Cid's native
+line already explains where the door leads. The distinct door opening
+would make a useful single cue, while routine glances and movement can
+stay within ordinary dialogue pacing. A door cue would need a verified
+visible door animation presentation point. The current switch uses the
+existing cue producers.
+
+The focused checkpoint verifies the saved control in all six menus, the
+appearance readers and the caption, field-effect and boss cue paths.
+Installation requires the smoke test and exact-payload scan. Gameplay
+confirmation is separate.
+
 ## November 20 dialogue cues
 
 The mod now reads eight additional cues on the first page of the exact

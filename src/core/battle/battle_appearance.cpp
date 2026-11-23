@@ -7,6 +7,7 @@
 #include "../frame.h"
 #include "../modtext.h"
 #include "../say.h"
+#include "../ui/preferences.h"
 #include "../unity.h"
 
 namespace ffpr::battle {
@@ -127,7 +128,7 @@ void append(std::wstring& description, const std::wstring& detail)
 
 bool read_focused_enemy_appearance()
 {
-    if (!frame::on_main_thread() || !battle_presentation_ready()) return false;
+    if (!frame::on_main_thread() || !battle_presentation_ready() || !ui::prefs::visual_descriptions_enabled()) return false;
     auto* enemy = focused_enemy_unit();
     if (!kBattleEnemyData.is(enemy)) return false;
     auto* info = unit_info(enemy);
@@ -143,7 +144,7 @@ bool read_focused_enemy_appearance()
 
 void announce_acting_character_appearance()
 {
-    if (!frame::on_main_thread() || !battle_presentation_ready()) return;
+    if (!frame::on_main_thread() || !battle_presentation_ready() || !ui::prefs::visual_descriptions_enabled()) return;
     auto* unit = acting_party_unit();
     if (!kBattlePlayerData.is(unit)) return;
     auto* info = unit_info(unit);

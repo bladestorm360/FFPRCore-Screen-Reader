@@ -9,6 +9,7 @@
 #include "../frame.h"
 #include "../modtext.h"
 #include "../say.h"
+#include "../ui/preferences.h"
 #include <algorithm>
 #include <limits>
 #include <span>
@@ -312,7 +313,8 @@ std::wstring ready_battle_cue()
 
 bool read_dialogue_appearance()
 {
-    if (!frame::on_main_thread() || !in_dialogue() || queries::is("GameStatePatches.IsInputTransitionBlocked")) return false;
+    if (!frame::on_main_thread() || !in_dialogue() || !ui::prefs::visual_descriptions_enabled() ||
+        queries::is("GameStatePatches.IsInputTransitionBlocked")) return false;
     const auto message = field_message_key();
     if (message.empty()) return false;
     auto* map = ::field::cache::get(r::kFieldMap);
@@ -335,7 +337,7 @@ bool read_dialogue_appearance()
 std::wstring action_cue_at_dialogue()
 {
     const auto game_id = game::current();
-    if (!frame::on_main_thread() || !in_dialogue() ||
+    if (!frame::on_main_thread() || !in_dialogue() || !ui::prefs::visual_descriptions_enabled() ||
         queries::is("GameStatePatches.IsInputTransitionBlocked")) return {};
     if (battle::in_battle()) return ready_battle_cue();
     const int map_id = ::field::current_map_id();
@@ -410,7 +412,7 @@ std::wstring action_cue_at_scroll(int type, float duration, int font_size)
     // bird track. This scroll producer has a unique type, duration and size
     // in that script. Its sibling credits use a different event owner.
     if (!game::is(game::Id::FF1) || type != 0 || duration != 90 || font_size != 52 ||
-        !frame::on_main_thread() || fieldnav::map_transition::is_state_changing() ||
+        !frame::on_main_thread() || !ui::prefs::visual_descriptions_enabled() || fieldnav::map_transition::is_state_changing() ||
         ::field::current_map_id() != 124) return {};
     auto* map = ::field::cache::get(r::kFieldMap);
     auto* controller = ref::rd<void*>(map, r::fFieldController);
@@ -424,7 +426,8 @@ std::wstring action_cue_at_scroll(int type, float duration, int font_size)
 
 std::wstring action_cue_at_fade(int font_size)
 {
-    if (font_size != 52 || !game::is(game::Id::FF3) || !frame::on_main_thread() || battle::in_battle() ||
+    if (font_size != 52 || !game::is(game::Id::FF3) || !frame::on_main_thread() ||
+        !ui::prefs::visual_descriptions_enabled() || battle::in_battle() ||
         fieldnav::map_transition::is_state_changing()) return {};
     // Each native prologue caption follows the fade and the opening placement.
     // The Client records the caption ID before calling the existing producer.

@@ -157,6 +157,8 @@ void initialize()
                        L"Off. Use the I key to read descriptions on demand."));
     v.push_back(toggle(L"Battle results: notifications once", p::kResultNotificationsOnce, p::kResultNotificationsOnceDefault,
                        L"Battle results: notifications once on", L"Battle results: notifications once off"));
+    v.push_back(toggle(L"Visual descriptions", p::kVisualDescriptions, p::kVisualDescriptionsDefault,
+                       L"Visual descriptions on", L"Visual descriptions off"));
     v.push_back(toggle(L"Interrupt speech on character turn", p::kInterruptCharacterTurn, p::kInterruptCharacterTurnDefault,
                        L"On. A character's turn announcement interrupts current speech.",
                        L"Off. A character's turn announcement queues after current speech."));

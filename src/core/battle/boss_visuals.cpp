@@ -6,6 +6,7 @@
 #include "../hooks.h"
 #include "../modtext.h"
 #include "../say.h"
+#include "../ui/preferences.h"
 #include "../unity.h"
 #include <array>
 #include <cmath>
@@ -102,7 +103,7 @@ bool visible_body(void* entity)
 
 void speak(const wchar_t* key)
 {
-    if (key) say(T(key), false);
+    if (key && ui::prefs::visual_descriptions_enabled()) say(T(key), false);
 }
 
 Request* request_for(uintptr_t animator)

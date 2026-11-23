@@ -23,6 +23,7 @@ Node* message_client = nullptr;
 Node* battle_interpreter = nullptr;
 bool owner_thread = true;
 bool dialogue_open = true;
+bool visual_descriptions = true;
 bool in_battle = false;
 bool battle_ready = false;
 bool transition = false;
@@ -54,6 +55,13 @@ void require(bool result, const char* detail)
     if (!result) { std::fprintf(stderr, "FAIL %s\n", detail); std::exit(1); }
 }
 } // namespace
+
+namespace settings {
+bool get_bool(const char* key, bool fallback)
+{
+    return std::string_view(key) == ui::prefs::kVisualDescriptions ? visual_descriptions : fallback;
+}
+}
 
 namespace ref {
 Class::Class(const char* space, const char* type, uint8_t mask, const char* image)
@@ -205,6 +213,10 @@ void check_effect_cues()
         put(core, "<entityID>k__BackingField", reinterpret_cast<void*>(static_cast<uintptr_t>(cue.actor)));
         ++event_generation;
         spoken.clear();
+        visual_descriptions = false;
+        require(dispatch(&core, nullptr) == 3 && !observation && !reveal,
+                "descriptions Off keeps the native instruction and schedules no cue");
+        visual_descriptions = true;
         transition = true;
         require(dispatch(&core, nullptr) == 3 && !observation, "transition preserves the native instruction without scheduling");
         transition = false;
@@ -274,8 +286,20 @@ void check_effect_cues()
             require(observation && !observation() && spoken.empty(), "new event generation cancels an old observation");
         }
         observation = {};
+        ++event_generation;
+        dispatch(&core, nullptr);
+        visual_descriptions = false;
+        if (reveal) {
+            auto due = std::move(reveal);
+            due();
+            require(!observation && spoken.empty(), "descriptions Off cancels the delayed observation");
+        } else {
+            require(observation && !observation() && spoken.empty(), "descriptions Off cancels the pending cue");
+        }
+        visual_descriptions = true;
+        observation = {};
     }
-    require(original_plays == static_cast<int>(cues.size()) * 6, "every captured call keeps the native return path");
+    require(original_plays == static_cast<int>(cues.size()) * 8, "every captured call keeps the native return path");
     battle_interpreter = nullptr;
 }
 
@@ -316,6 +340,10 @@ int main()
 
     const auto read = &ffpr::dialogue::read_dialogue_appearance;
     require(read() && spoken == L"Field appearance mo_ff1_n101_c00" && actor_reads == 0, "native target and current atlas");
+    spoken.clear();
+    visual_descriptions = false;
+    require(!read() && spoken.empty(), "descriptions Off suppresses the native speaker's appearance");
+    visual_descriptions = true;
     renderer.visible = false;
     require(!read(), "hidden actor");
     renderer.visible = true;
@@ -429,6 +457,9 @@ int main()
     current_game = game::Id::FF1;
     id.value = L"MSG_SHIP_03";
     require(cue() == L"Pravoka pirate defeat cue", "the surrender page follows both crew animations");
+    visual_descriptions = false;
+    require(cue().empty(), "descriptions Off omits the cue prefix from an otherwise valid page");
+    visual_descriptions = true;
     script.value = L"sc_e_0009";
     require(cue().empty(), "the fight opener cannot narrate the surrender");
 
@@ -591,6 +622,9 @@ int main()
     transition = false;
     dialogue_open = false;
     require(scroll_cue(0, 90, 52) == L"Cornelia prologue birds cue", "the bridge scroll recaps the completed bird shot");
+    visual_descriptions = false;
+    require(scroll_cue(0, 90, 52).empty(), "descriptions Off leaves the bridge scroll's native text alone");
+    visual_descriptions = true;
     require(scroll_cue(0, 90, 40).empty(), "another scroll in the same event cannot claim the bird shot");
     fading = true;
     require(scroll_cue(0, 90, 52).empty(), "a native fade keeps scroll cues out of loading");
@@ -606,6 +640,9 @@ int main()
     put(property, "entityId", reinterpret_cast<void*>(3));
     texture.value = L"sactx-64x64-Uncompressed-MO_FF3_N023_C00-12345678";
     require(fade_cue(52) == L"Gulgan prologue cue", "first Gulgan narration follows the visible prologue costume");
+    visual_descriptions = false;
+    require(fade_cue(52).empty(), "descriptions Off leaves the prologue caption's native text alone");
+    visual_descriptions = true;
     require(fade_cue(40).empty(), "another native caption style cannot claim the scene");
     id.value = L"E0001_00_999_a_02";
     require(fade_cue(52).empty(), "different prologue line keeps native narration");

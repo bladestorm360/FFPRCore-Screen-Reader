@@ -9,6 +9,7 @@
 #include "../refs.h"
 #include "../say.h"
 #include "../system/system.h"
+#include "../ui/preferences.h"
 #include "../unity.h"
 #include <algorithm>
 #include <array>
@@ -123,7 +124,7 @@ void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
     // Retain only an authored row, the fixed core index and the native event
     // generation. Each deferred observation resolves its current renderer.
     auto observe = [index, core_index, generation, next = 0]() mutable {
-        if (system::field_event_generation() != generation) return false;
+        if (system::field_event_generation() != generation || !ui::prefs::visual_descriptions_enabled()) return false;
         const auto& cue = cues[index];
         auto* interpreter = running_scene();
         if (!interpreter || ::field::current_map_id() != cue.map ||
@@ -146,7 +147,7 @@ void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
         // This effect begins before an authored initial fade. Start the bounded
         // read near the end of that fade without repeatedly consulting the screen.
         frame::after_seconds(delay, [observe, generation] {
-            if (system::field_event_generation() == generation)
+            if (system::field_event_generation() == generation && ui::prefs::visual_descriptions_enabled())
                 frame::every_frame(observe, "SceneEffects.Draw", 16);
         }, "SceneEffects.Reveal");
     } else {
@@ -179,6 +180,7 @@ void observe_first_play(void* core, CueTrigger trigger)
         const auto& cue = cues[index];
         if (!queued[index] && cue.title == title && cue.map == map && cue.actor == actor && cue.trigger == trigger &&
             cue.instruction == instruction && cue.script == script) {
+            if (!ui::prefs::visual_descriptions_enabled()) return;
             if (cue.art.empty() && !kEffect.is(ref::rd<void*>(core, fActor))) return;
             schedule_scene_cue(index, core_index, generation);
             return;

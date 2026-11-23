@@ -13,6 +13,7 @@ game::Id title = game::Id::FF4;
 bool main_thread = true;
 bool stage_art = true;
 bool renderer_visible = true;
+bool visual_descriptions = true;
 bool finish_mesh = false;
 bool forwarded = true;
 int spoken = 0;
@@ -67,6 +68,12 @@ void commit(void* self, const void* mi)
 namespace core { Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {} }
 namespace game { Id current() { return fixture::title; } }
 namespace frame { bool on_main_thread() { return fixture::main_thread; } }
+namespace settings {
+bool get_bool(const char* key, bool fallback)
+{
+    return std::string_view(key) == ui::prefs::kVisualDescriptions ? fixture::visual_descriptions : fallback;
+}
+}
 namespace events { void on(Kind, Handler) {} }
 namespace hooks {
 bool attach_raw(ref::Method&, void*, void**) { return false; }
@@ -255,6 +262,10 @@ void check_detours()
 
 int main()
 {
+    fixture::visual_descriptions = false;
+    ffpr::battle::boss_visuals::speak(L"BossVisual.CloakOpen");
+    expect(fixture::spoken == 0, "descriptions Off suppresses an automatic boss appearance cue");
+    fixture::visual_descriptions = true;
     const auto iv=catalog(4), v=catalog(5), vi=catalog(6);
     for (const auto& cue : {
          scripted_sprite(Id::FF4,178,1,191,167),scripted_sprite(Id::FF4,178,2,190,167),

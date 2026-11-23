@@ -27,6 +27,48 @@
     "th": "เบาะแส",
     "pt": "Pista"
   },
+  "Visual descriptions": {
+    "en": "Visual descriptions",
+    "ja": "映像と外見の説明",
+    "fr": "Descriptions visuelles",
+    "it": "Descrizioni visive",
+    "de": "Bildbeschreibungen",
+    "es": "Descripciones visuales",
+    "ko": "시각적 묘사",
+    "zht": "視覺描述",
+    "zhc": "视觉描述",
+    "ru": "Визуальные описания",
+    "th": "คำบรรยายภาพ",
+    "pt": "Descrições visuais"
+  },
+  "Visual descriptions on": {
+    "en": "On. Announce selected scene actions automatically. Use I or Control plus I for appearance descriptions.",
+    "ja": "オン。一部の場面の動作を自動で読み上げます。外見の説明は I キーまたは Ctrl キーを押しながら I キーで聞けます。",
+    "fr": "Activé. Décrit automatiquement certaines actions des scènes. Utilisez I ou Ctrl plus I pour entendre les descriptions d’apparence.",
+    "it": "Attivo. Descrive automaticamente alcune azioni nelle scene. Premi I o Ctrl più I per le descrizioni dell’aspetto.",
+    "de": "Ein. Ausgewählte Handlungen in Szenen werden automatisch beschrieben. Drücke I oder Strg plus I für Beschreibungen des Aussehens.",
+    "es": "Activado. Describe automáticamente ciertas acciones de las escenas. Pulsa I o Control más I para oír descripciones de la apariencia.",
+    "ko": "켜짐. 일부 장면의 동작을 자동으로 설명합니다. 외형 설명을 들으려면 I 또는 Ctrl과 I를 누르세요.",
+    "zht": "開啟。自動描述部分場景動作。按 I 或 Ctrl 加 I 聆聽外觀描述。",
+    "zhc": "开启。自动描述部分场景动作。按 I 或 Ctrl 加 I 收听外观描述。",
+    "ru": "Включено. Некоторые действия в сценах описываются автоматически. Чтобы услышать описание внешности, нажмите I или Ctrl и I.",
+    "th": "เปิด บรรยายการกระทำในบางฉากโดยอัตโนมัติ กด I หรือ Ctrl พร้อม I เพื่อฟังคำอธิบายลักษณะภายนอก",
+    "pt": "Ativado. Descreve automaticamente algumas ações nas cenas. Pressione I ou Ctrl mais I para ouvir descrições da aparência."
+  },
+  "Visual descriptions off": {
+    "en": "Off. Game dialogue and standard menu descriptions stay available.",
+    "ja": "オフ。ゲーム内の会話や通常のメニュー説明は引き続き聞けます。",
+    "fr": "Désactivé. Les dialogues du jeu et les descriptions habituelles des menus restent disponibles.",
+    "it": "Disattivo. I dialoghi del gioco e le normali descrizioni dei menu restano disponibili.",
+    "de": "Aus. Die Dialoge des Spiels und die üblichen Menübeschreibungen bleiben verfügbar.",
+    "es": "Desactivado. Los diálogos del juego y las descripciones habituales de los menús siguen disponibles.",
+    "ko": "꺼짐. 게임 대화와 기본 메뉴 설명은 계속 들을 수 있습니다.",
+    "zht": "關閉。仍可聆聽遊戲對話和一般選單說明。",
+    "zhc": "关闭。仍可收听游戏对话和常规菜单说明。",
+    "ru": "Выключено. Диалоги игры и обычные описания в меню остаются доступны.",
+    "th": "ปิด ยังฟังบทสนทนาในเกมและคำอธิบายเมนูตามปกติได้",
+    "pt": "Desativado. Os diálogos do jogo e as descrições normais dos menus continuam disponíveis."
+  },
   "Storyline spoilers": {
     "en": "Storyline spoilers",
     "ja": "ストーリーのネタバレ",

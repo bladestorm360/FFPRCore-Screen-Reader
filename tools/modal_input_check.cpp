@@ -136,6 +136,7 @@ int main()
         {ui::prefs::kSpeechEnabled, L"Speech"},
         {ui::prefs::kResultNotificationsOnce, L"Speech"},
         {ui::prefs::kStorylineSpoilers, L"Speech"},
+        {ui::prefs::kVisualDescriptions, L"Speech"},
         {ui::prefs::kSpeakAutowalkPath, L"Navigation"},
         {ui::prefs::kNavigationKeymap, L"Navigation"},
         {ui::prefs::kTeleportShortcuts, L"Navigation"},
@@ -206,6 +207,16 @@ int main()
                     expect(ui::prefs::storyline_spoilers_enabled(), "the menu stores the spoiler opt-in");
                     ui::mod_menu::flip(item);
                     expect(!ui::prefs::storyline_spoilers_enabled(), "the menu stores an explicit spoiler opt-out");
+                }
+                if (std::string(item.key) == ui::prefs::kVisualDescriptions) {
+                    fixture::values.erase(item.key);
+                    expect(item.kind == ui::mod_menu::Kind::Toggle && item.bool_def &&
+                           ui::prefs::visual_descriptions_enabled(), "existing saves retain visual descriptions by default");
+                    ui::mod_menu::flip(item);
+                    expect(!ui::prefs::visual_descriptions_enabled() && ui::prefs::speech_enabled(),
+                           "the menu saves descriptions Off independently of game speech");
+                    ui::mod_menu::flip(item);
+                    expect(ui::prefs::visual_descriptions_enabled(), "the menu saves descriptions On again");
                 }
                 if (std::string(item.key) == ui::prefs::kResultNotificationsOnce) {
                     expect(section == L"Speech" && item.kind == ui::mod_menu::Kind::Toggle && item.bool_def &&
