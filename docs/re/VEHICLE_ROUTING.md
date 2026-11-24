@@ -253,6 +253,36 @@ User-scoped wording correction at `field/baked_nav.cpp::plan_browse_snapshot`: t
 Two mod-owned phrase keys, `Fly {0}, then {1}` and `Sail {0}, then {1}`, have all12 supported locale values with each placeholder once. Auto/manual language policy is unchanged; `tools/modtext_vehicle_wording.py` maintains the entries. Actual production browse assertions pass for airborne Enterprise before water landing and FFII ridden-Canoe distant-Ship browse before boarding. An earlier Walk expectation failed as expected and was updated. Full navigation and landing follow-ups pass. Canonical evidence:8287 names/0 missing;142 used/349 defined/0 undefined; `route_worker`0 failures; 47-export smoke pass. Earlier intermittent standalone `route_worker` 0xC00000FD is retained as a known fixture issue, not a universal stability claim. DLL11,037,696 bytes, SHA256 `9a4a87e3082b709a78a407035abc0f9b9e2d5f4c82d78e94fe03d5140bd6e8ab`. Localization, navigation, Enterprise and worker reports are in `build_check/vehicle_wording_20261027/`.
 
 Fixed formatting is on the existing worker path; no additional hook, capture, native read or queue was added. Reported route-worker samples are offline computation only; native/frame/audio/request-to-audible cost remains unmeasured against the cumulative25ms application-lag blocker. October26 installed baseline/history above remains distinct. October27 candidate is uninstalled and gameplay-unconfirmed; no game launch/control/probe occurred. Wording source is Closed. Continue the explicitly authorized outward and return floating-continent transition work, then Temple of Water investigation; Libra/Study display audit remains separately queued. See [WORLD_EVENTS](WORLD_EVENTS_20261026.md) for the current scope ledger.
+## November 24 FFIV hovercraft pickup and Adamant Grotto
+
+The owner's log records the Enterprise boarding and successful carrying
+state, followed by “Can lower hovercraft” at `160942.593`. Pickup had no
+mod announcement. `TransportationEvent.IsLandingEvent` (RVA `3274A0`)
+checks uncarried hovercraft ID 2 from hooked Enterprise ID 10. Its pickup
+branch returns handled and displays the disabled ordinary landing guide
+while leaving the caller's ordinary landing flag as received. In the
+carried branch the same method sets that flag from the cargo's native
+lowering test. The existing hook now treats these as two separate actions
+and queues “Can pick up hovercraft” on entry into the first. Both cues
+respect field readiness and use the same position and state as the game.
+
+At Adamant Grotto the observed release is near `(227,127)` on surface map
+1. The next instructions at `161008.187` direct the Enterprise one tile
+north to land. During `OnStartLanding` (RVA `327D50`), a parked hovercraft
+in the pickup area takes priority over parking the Enterprise. The native
+duplicate-transportation check resolves the centered three-tile square
+through `FieldController` RVAs `282490` and `282310`. Each axis includes
+one tile on both sides of the craft, including diagonals.
+
+The worker now parks the Enterprise outside that square and finds a valid
+foot approach back to the hovercraft. Ground transition tiles are excluded
+from cargo release. The Adamant Grotto replay uses the actual surface
+contact `(224,123)` for map 117 and the observed release. It checks the
+release, separate landing, foot approach and a positive hovercraft ride
+to the island before the final entry. Directions and exit distance use
+the same preparation. The pickup and landing checks remain native and
+owner-thread only. The route change adds no new flood or game-thread work.
+
 ## November 13 FFIV hovercraft pickup and lowering
 
 The FFIV log gives the attached hovercraft a bearing of 90.5 steps west

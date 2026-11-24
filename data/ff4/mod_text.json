@@ -1091,6 +1091,20 @@
     "th": "ดวงตาสีอ่อนดวงเดียวโปนออกจากลำตัวรูปไข่สีเขียวอมฟ้า เหนือปากแสยะเฉียงที่เต็มไปด้วยฟันเล็ก ๆ ปีกยาวสีเทาโค้งลงขนาบลำตัว ปลายแหลมแต่ละข้างมีกรงเล็บจิ๋ว",
     "pt": "Um único olho claro salta de um corpo oval verde-azulado acima de um sorriso torto cheio de dentes pequenos. Asas cinzentas compridas se curvam para baixo ao redor do corpo, com uma garrinha em cada ponta."
   },
+  "Can pick up hovercraft": {
+    "en": "Can pick up hovercraft",
+    "ja": "ホバー船を持ち上げられます",
+    "fr": "Vous pouvez soulever l’aéroglisseur",
+    "de": "Luftkissenboot kann aufgenommen werden",
+    "es": "Puedes recoger el aerodeslizador",
+    "it": "Puoi sollevare l’eliscafo",
+    "pt": "É possível içar o aerobote",
+    "ru": "Можно поднять автолёт",
+    "ko": "호버크래프트를 들어 올릴 수 있습니다",
+    "zhc": "可以吊起气垫船",
+    "zht": "可以吊起氣墊船",
+    "th": "สามารถยกโฮเวอร์คราฟต์ขึ้นได้"
+  },
   "Can lower hovercraft": {
     "en": "Can lower hovercraft",
     "ja": "ホバー船を降ろせます",
@@ -1101,8 +1115,8 @@
     "pt": "É possível baixar o aerobote",
     "ru": "Можно опустить автолёт",
     "ko": "호버크래프트를 내릴 수 있습니다",
-    "zh-CN": "可以放下气垫船",
-    "zh-TW": "可以放下氣墊船",
+    "zhc": "可以放下气垫船",
+    "zht": "可以放下氣墊船",
     "th": "สามารถปล่อยโฮเวอร์คราฟต์ลงได้"
   },
   "Carried by the Enterprise": {

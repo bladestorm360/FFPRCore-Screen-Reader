@@ -1,8 +1,15 @@
 # Native FFPR durable memory
 
+**November 24 FFIV hovercraft and Adamant Grotto.** The native pickup result
+now has its own cue. The route parks the Enterprise outside the pickup area,
+retains a foot approach to the hovercraft and excludes entrance tiles from
+release. [Native behavior and replay](docs/re/VEHICLE_ROUTING.md#november-24-ffiv-hovercraft-pickup-and-adamant-grotto).
+
 **November 24 Leviathan windup.** FFIV has cues for Leviathan lowering his
 horned head before Tidal Wave and returning to an upright coil.
-[Battle script and timing](docs/re/BOSS_VISUALS_20261112.md#november-24-ffiv-leviathan-windup).
+The current combined FFIV update also carries Asura and the hovercraft fixes.
+[Battle script and timing](docs/re/BOSS_VISUALS_20261112.md#november-24-ffiv-leviathan-windup)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-24-ffiv-leviathan-and-asura-update).
 
 **November 24 boss form announcements.** Asura has distinct cues for her
 calm, angry and grinning faces. The Ifrit, Shiva and Chadarnook cues now

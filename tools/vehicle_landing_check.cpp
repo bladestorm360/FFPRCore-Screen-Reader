@@ -25,11 +25,12 @@ void set_on_foot(){}void set_vehicle_state(int,const std::wstring&){}void reset(
 namespace landing_fixture {
 int originals=0;
 fixture::Node* save_manager=nullptr;
-bool lower_allowed=false;
+bool cargo_event_handled=false;
+std::optional<bool> cargo_landing_output;
 bool landing_event(void*,int32_t,void*,bool* result,const void*) {
     ++originals;
-    *result=lower_allowed;
-    return lower_allowed;
+    if (result && cargo_landing_output) *result=*cargo_landing_output;
+    return cargo_event_handled;
 }
 int attribute=4,attribute_reads=0;
 bool attribute_throws=false;
@@ -201,9 +202,38 @@ int main(){
         auto& carrying=*reinterpret_cast<bool*>(reinterpret_cast<char*>(&data)+fixture::offset("carryingHoverShip"));
         landing_fixture::save_manager=&save;
         field::fixture_vehicle={true,10,8,{}};
-        bool available=false;
-        reset_landing_state();spoken.clear();landing_fixture::lower_allowed=true;
+        bool available=true;
+        reset_landing_state();spoken.clear();
+        carrying=false;
+        landing_fixture::cargo_event_handled=false;
+        expect(!d_ff4_landing_event(&data,10,nullptr,&available,nullptr)&&available&&spoken.empty(),
+               "ordinary landable terrain does not mean a hovercraft can be picked up");
+        landing_fixture::cargo_event_handled=true;
+        available=false;
+        expect(d_ff4_landing_event(&data,10,nullptr,&available,nullptr)&&!available,
+               "a native pickup keeps both the handled return and the original landing flag");
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        expect(spoken==std::vector<std::wstring>{L"Can pick up hovercraft"},
+               "the parked hovercraft speaks once even though the ordinary landing flag is false");
+        landing_fixture::cargo_event_handled=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        landing_fixture::cargo_event_handled=true;
+        d_ff4_landing_event(&data,8,nullptr,&available,nullptr);
+        expect(spoken.size()==1,"the Falcon is not the hovercraft carrier");
+        landing_fixture::blocked=true;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        landing_fixture::blocked=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        expect(spoken.size()==1,"a pickup edge during a transition remains silent");
+        landing_fixture::cargo_event_handled=false;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        landing_fixture::cargo_event_handled=true;
+        d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
+        expect(spoken.size()==2&&spoken.back()==L"Can pick up hovercraft", "flying away and back re-arms pickup speech");
+
+        spoken.clear();
         carrying=true;
+        landing_fixture::cargo_landing_output=true;
         d_ShowLandingGuide(&manager,true,nullptr);
         expect(spoken.empty(),"the generic guide does not claim aircraft landing while carrying");
         expect(d_ff4_landing_event(&data,10,nullptr,&available,nullptr)&&available,
@@ -211,15 +241,17 @@ int main(){
         d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
         expect(spoken==std::vector<std::wstring>{L"Can lower hovercraft"},
                "the cargo landing result speaks once on entering a native lowering area");
-        landing_fixture::lower_allowed=false;
+        landing_fixture::cargo_landing_output=false;
         d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
-        landing_fixture::lower_allowed=true;
+        landing_fixture::cargo_landing_output=true;
         landing_fixture::blocked=true;
         d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
         landing_fixture::blocked=false;
         d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
         expect(spoken.size()==1,"lowering availability during a transition remains silent");
         carrying=false;
+        landing_fixture::cargo_event_handled=false;
+        landing_fixture::cargo_landing_output.reset();
         d_ff4_landing_event(&data,10,nullptr,&available,nullptr);
         d_ShowLandingGuide(&manager,true,nullptr);
         expect(spoken==std::vector<std::wstring>{L"Can lower hovercraft",L"Can land"},

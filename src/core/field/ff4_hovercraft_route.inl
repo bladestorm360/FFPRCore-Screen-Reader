@@ -154,7 +154,12 @@ std::optional<HovercraftRoute> prepare_hovercraft_route(const baked_route::Reque
         for (size_t i=0;i<queue.size();++i) {
             if (planning_cancelled()) return {};
             const auto entry=queue[i];
-            if (parkable[offset(entry.at)]) return entry;
+            // Native pickup takes precedence over landing within the centered
+            // 3-by-3 overlap. Walk back through that area after parking outside it.
+            if (parkable[offset(entry.at)]) {
+                const int dx=std::abs(at.x-entry.at.x), dy=std::abs(at.y-entry.at.y);
+                if (std::min(dx,grid.width-dx)>1 || std::min(dy,grid.height-dy)>1) return entry;
+            }
             for (const auto& next:hover_neighbors(grid,entry.at)) {
                 const auto index=offset(next);
                 if (next==at || seen[index]==search || !walkable[index] ||
@@ -171,6 +176,9 @@ std::optional<HovercraftRoute> prepare_hovercraft_route(const baked_route::Reque
         if (planning_cancelled()) return {};
         for (int x=0;x<grid.width;++x) {
             const Cell at{source.start.layer,x,y};
+            // A release leaves the hovercraft parked. It cannot perform the
+            // step that enters a grotto or any other ground map transition.
+            if (baked_route::terminal_transition(result.foot,grid,at)) continue;
             const bool already_parked=cargo && at==*cargo && !attached;
             const int carry=loaded.distance(at);
             if (!already_parked && (carry<0 || !hover_landing(result.hover,grid,at))) continue;

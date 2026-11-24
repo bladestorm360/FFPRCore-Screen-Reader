@@ -11,7 +11,7 @@ template<class Expect> void check_ff4_hovercraft_journey(Expect expect)
     using namespace baked_nav;
     const auto* map=baked::submap_by_map_id(1);
     const auto& grid=baked::grids(*map);
-    const Cell origin{1,158,186}, parked_hover{1,122,44}, destination{1,224,123};
+    const Cell origin{1,158,186}, parked_hover{1,122,44}, destination{1,224,123}; // Adamant Grotto
     RouteSnapshot snapshot(map_state::Resolver(map_state::Flags{},fixture::records));
     snapshot.submap=map;
     snapshot.map_id=1;
@@ -44,12 +44,14 @@ template<class Expect> void check_ff4_hovercraft_journey(Expect expect)
                loaded[0].action_after==L"Lower the hovercraft.","Lowering stops the first leg aboard the Enterprise");
         const auto released=loaded[0].cells.back();
         const auto park=loaded[1].cells.back();
-        expect(park!=released && loaded[2].vehicle_before==route_progress::VehicleAction::ConfirmLand &&
+        expect((std::abs(park.x-released.x)>1 || std::abs(park.y-released.y)>1) &&
+               loaded[2].vehicle_before==route_progress::VehicleAction::ConfirmLand &&
                loaded[2].action_cell==std::optional<Cell>(park) && loaded[2].movement_transportation_id==0 &&
                loaded[3].vehicle_before==route_progress::VehicleAction::ConfirmBoard && loaded[3].transportation_id==2 &&
                baked_route::step_direction(loaded[2].cells.back(),released,grid.width,grid.height)>=0,
-               "The Enterprise parks separately and the party boards from a real ground approach");
-        expect(loaded.back().cells.back()==destination,"The completed loaded journey reaches the selected entrance");
+               "The Enterprise parks outside the pickup range and the party walks back to the hovercraft");
+        expect(released!=destination && loaded[3].cells.size()>1 && loaded.back().cells.back()==destination,
+               "Adamant Grotto requires a release away from the entrance and a real hovercraft ride before entry");
         const auto prefix=plan_snapshot(snapshot);
         std::printf("FFIV hovercraft main route: success %d next %d legs %zu pending %d, %s %s\n",
                     prefix.path.success,prefix.path.next_map_id,prefix.path.walk_phases.size(),prefix.pending.valid,
@@ -78,12 +80,17 @@ template<class Expect> void check_ff4_hovercraft_journey(Expect expect)
         auto pickup=hovercraft_directions(request);
         expect(!pickup.empty() && pickup.front().manual_after && pickup.front().cells.back()==parked_hover &&
                pickup.front().action_after==L"Pick up the hovercraft.","A distant parked hovercraft is collected first");
-        set_parked(released);
-        snapshot.position=world_of_cell(*map,released);
-        request.start=released;
+        const Cell logged_release{1,227,127};
+        set_parked(logged_release);
+        snapshot.position=world_of_cell(*map,logged_release);
+        request.start=logged_release;
         auto lowered=hovercraft_directions(request);
         expect(lowered.size()>=4 && std::none_of(lowered.begin(),lowered.end(),[](const Phase& phase){return phase.manual_after;}) &&
-               lowered[0].cells.back()!=released,"An observed release resumes with separate parking and boarding");
+               (std::abs(lowered[0].cells.back().x-logged_release.x)>1 ||
+                std::abs(lowered[0].cells.back().y-logged_release.y)>1) &&
+               lowered[2].movement_transportation_id==2 && lowered[2].cells.size()>1 &&
+               lowered.back().cells.back()==destination,
+               "The logged release resumes outside the native pickup area and completes the hovercraft leg");
 
         snapshot.vehicle={true,9,8,{}};
         expect(!prepare_hovercraft_route(request),"The Falcon cannot manufacture an Enterprise carry action");

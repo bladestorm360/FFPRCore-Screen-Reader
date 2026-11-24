@@ -46,7 +46,8 @@ ref::Class kSaveMapManager{"Last.Map","SaveMapManager",game::kFF4};
 ref::Class kSaveMapData{"Last.Map","SaveMapData",game::kFF4};
 ref::Field fMapSave{kSaveMapManager,"<SaveData>k__BackingField"};
 ref::Field fCarrying{kSaveMapData,"carryingHoverShip"};
-bool g_can_lower_hovercraft=false;
+enum class HovercraftAction { None, PickUp, Lower };
+HovercraftAction g_hovercraft_action = HovercraftAction::None;
 // The native boolean stays true across land<->dive terrain. Remember the
 // available action, rather than treating those distinct native choices as one.
 enum class LandingAction { Unknown, Land, Dive, Surface };
@@ -114,7 +115,7 @@ void observe_landing_guide(void* self, bool landable)
     // still say on foot during boarding; nearby parked models aren't mounted.
     const auto vehicle=::field::current_vehicle();
     // The native generic guide can describe either the aircraft or its cargo.
-    // The FFIV landing-event producer below owns the carried case.
+    // The FFIV landing-event producer below owns cargo pickup and lowering.
     if(game::is(game::Id::FF4)&&vehicle.id==10&&hovercraft_carried()!=std::optional<bool>(false)) {
         g_last_landable_state=false;g_landing_action=LandingAction::Unknown;
         return;
@@ -153,19 +154,22 @@ LandingEvent o_ff4_landing_event=nullptr;
 bool d_ff4_landing_event(void* self,int32_t id,void* can_land,bool* landable,const void* mi)
 {
     const bool handled=o_ff4_landing_event(self,id,can_land,landable,mi);
+    if (!frame::on_main_thread()) return handled;
     hooks::guarded("VehicleLanding.FF4Hovercraft",[&]{
-        if(id!=10||!landable||hovercraft_carried()!=std::optional<bool>(true)) {
-            g_can_lower_hovercraft=false;
-            return;
+        auto action = HovercraftAction::None;
+        if (id == 10 && handled) {
+            // Over a parked hovercraft, the original returns true without
+            // changing the ordinary landing output. With cargo aboard, it
+            // writes the result of the hovercraft's native lowering check.
+            const auto carried = hovercraft_carried();
+            if (carried == false) action = HovercraftAction::PickUp;
+            if (carried == true && landable && *landable) action = HovercraftAction::Lower;
         }
-        // On the carried branch native code fills this output with the result
-        // of the hovercraft's own landing check, including native blockers.
-        const bool available=handled&&*landable;
-        const bool entered=available&&!g_can_lower_hovercraft;
-        g_can_lower_hovercraft=available;
-        if(entered&&system::is_field_navigation_ready()&&!system::input_transition_blocked()) {
-            g_last_announcement_time=frame::now();
-            ffpr::say(T(L"Can lower hovercraft"),false);
+        const bool entered = action != HovercraftAction::None && action != g_hovercraft_action;
+        g_hovercraft_action = action;
+        if (entered && system::is_field_navigation_ready() && !system::input_transition_blocked()) {
+            g_last_announcement_time = frame::now();
+            ffpr::say(T(action == HovercraftAction::PickUp ? L"Can pick up hovercraft" : L"Can lower hovercraft"), false);
         }
     });
     return handled;
@@ -346,7 +350,7 @@ core::Install s_install{"VehicleLanding", &install, 120};
 
 void reset_landing_state() {
     g_last_landable_state=false;g_landing_guide=nullptr;
-    g_can_lower_hovercraft=false;
+    g_hovercraft_action=HovercraftAction::None;
     g_landing_action=LandingAction::Unknown;
     g_landing_vehicle_id=g_landing_vehicle_type=0;
 }

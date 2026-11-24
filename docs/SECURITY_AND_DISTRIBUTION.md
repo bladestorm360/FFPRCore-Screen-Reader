@@ -1,5 +1,23 @@
 # Build and distribution security
 
+## November 24 FFIV Leviathan and Asura update
+
+Source checkpoint `aa6d37f6375fb3f7ff26401d17925ba49c46909b` produced a
+21,477,376-byte DLL with SHA-256
+`9818d03305042a1038546db7d82f34f8698bf5a2985933993ae59e33cf2f242c`.
+The focused build passed in 28.0 seconds, with a one-worker peak of
+315,576,320 bytes under the enforced 2 GB limit. The boss visual fixture,
+73 embedded resources, 9,131 native-name checks and 47-export smoke
+test passed. Both cues use the native boss name in all twelve languages.
+
+Defender signatures `1.463.451.0` reported no threats across 22 exact
+payload files, with stable hashes and zero matching detection events.
+Windows denied the exclusion query. No signing certificate was available.
+FFIV was running and the installer deferred. The combined hovercraft
+build carries these fixes. Compact receipts for this intermediate candidate
+are in `../tools/leviathan_windup_20261124`. In-game speech timing remains
+pending.
+
 ## November 24 boss form announcements
 
 Source checkpoint `e531611d528b2d0a22188b706618e06d3855caac` produced a
@@ -14,15 +32,10 @@ Defender signatures `1.463.451.0` reported no threats across 22 exact
 payload files, with stable hashes and zero matching detection events.
 Windows denied the exclusion query. No signing certificate was available.
 FFVI installation verified 22 hashes and all 138 protected file states.
-FFIV installation is pending game closure. Audible gameplay confirmation
-is pending. Compact receipts are in `../tools/boss_forms_20261124` relative
-to the checkout. The previous installed hash is the November 23 six-game
-major-scene build below.
-
-The verified FFIV candidate remains at `out/hid.dll`. After closure,
-refresh the pre-install inventory and use the guarded installer with the
-retained exact scan manifest and result. The installer requires the current
-candidate to match these bytes and verifies the affected installation.
+The combined Leviathan and Asura build above carries the FFIV portion.
+Audible gameplay confirmation is pending. Compact receipts are in
+`../tools/boss_forms_20261124` relative to the checkout. The previous
+installed hash is the November 23 six-game major-scene build below.
 
 ## November 23 six-game major-scene audit
 
