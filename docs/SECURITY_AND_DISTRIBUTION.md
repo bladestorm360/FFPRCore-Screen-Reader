@@ -1,5 +1,29 @@
 # Build and distribution security
 
+## November 24 boss form announcements
+
+Source checkpoint `e531611d528b2d0a22188b706618e06d3855caac` produced a
+21,474,816-byte DLL with SHA-256
+`1eaa8d5e44ab349243ddbc825c05a14dfae35e742207012291210d433b3d38e4`.
+The focused boss visual fixture passed, along with 73 embedded resources,
+9,131 native-name checks and the isolated 47-export smoke test. The build
+took 53.9 seconds, with one worker and a 360,083,456-byte peak under the
+enforced 2 GB job limit.
+
+Defender signatures `1.463.451.0` reported no threats across 22 exact
+payload files, with stable hashes and zero matching detection events.
+Windows denied the exclusion query. No signing certificate was available.
+FFVI installation verified 22 hashes and all 138 protected file states.
+FFIV installation is pending game closure. Audible gameplay confirmation
+is pending. Compact receipts are in `../tools/boss_forms_20261124` relative
+to the checkout. The previous installed hash is the November 23 six-game
+major-scene build below.
+
+The verified FFIV candidate remains at `out/hid.dll`. After closure,
+refresh the pre-install inventory and use the guarded installer with the
+retained exact scan manifest and result. The installer requires the current
+candidate to match these bytes and verifies the affected installation.
+
 ## November 23 six-game major-scene audit
 
 Source checkpoint `1cf5c81a2d7494a90fc5435e6e87052c4bbb289f` produced a

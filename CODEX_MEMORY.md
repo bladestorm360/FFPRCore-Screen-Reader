@@ -2,7 +2,9 @@
 
 **November 24 boss form announcements.** Asura has distinct cues for her
 calm, angry and grinning faces. The Ifrit, Shiva and Chadarnook cues now
-identify visible details of the incoming form. [Face mapping and wording](docs/re/BOSS_VISUALS_20261112.md#november-24-distinct-incoming-boss-forms).
+identify visible details of the incoming form. FFVI is installed. FFIV
+awaits game closure. [Face mapping and wording](docs/re/BOSS_VISUALS_20261112.md#november-24-distinct-incoming-boss-forms)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-24-boss-form-announcements).
 
 **November 23 Giant aftermath and major-scene re-audit.** The installed
 audit missed the CPU dialogue and exterior destruction. The repair covers
