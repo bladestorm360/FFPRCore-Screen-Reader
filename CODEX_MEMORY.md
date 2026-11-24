@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 24 Leviathan windup.** FFIV has cues for Leviathan lowering his
+horned head before Tidal Wave and returning to an upright coil.
+[Battle script and timing](docs/re/BOSS_VISUALS_20261112.md#november-24-ffiv-leviathan-windup).
+
 **November 24 boss form announcements.** Asura has distinct cues for her
 calm, angry and grinning faces. The Ifrit, Shiva and Chadarnook cues now
 identify visible details of the incoming form. FFVI is installed. FFIV

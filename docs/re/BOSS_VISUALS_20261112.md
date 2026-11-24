@@ -1,5 +1,21 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 24 FFIV Leviathan windup
+
+The owner's FFIV log reads the attack name at `160476.812` and `160604.968`.
+The preceding silent sprite change had no cue. In `sc_ai_190_Leviathan`,
+ability 368 uses function group 212 to shake and swap to the lower-headed
+sprite (206). The encounter pauses before it runs Tidal Wave (133). Later,
+ability 367 uses group 211 to bring back the upright sprite (208).
+
+The existing visible sprite-completion observer now queues concise cues
+for both poses in all twelve locales. A first-turn upright reapplication
+produces no cue when the sprite is already upright. Leviathan's attack
+name continues through the native battle message reader. The offline
+fixture exercises the matching action, same-sprite suppression, and
+native completion on the production detour. This FFIV build also carries
+the pending Asura face wording below.
+
 ## November 24 distinct incoming boss forms
 
 The owner's FFIV log records the same “Asura changes faces” announcement

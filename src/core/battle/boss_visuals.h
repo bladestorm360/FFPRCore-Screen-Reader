@@ -44,6 +44,13 @@ constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, in
         if (asset == 204) return L"BossVisual.SwordUp";
         if (asset == 203) return L"BossVisual.SwordDown";
         break;
+    case 190:
+        // The windup uses a lowered head before the separate Tidal Wave action.
+        if (mode == 0 && effect == 168) {
+            if (asset == 206) return L"BossVisual.LeviathanWindup";
+            if (asset == 208) return L"BossVisual.LeviathanUpright";
+        }
+        break;
     case 193:
         // Each face has a distinct battle sprite. The intervening AI mode
         // resets reapply the same face and do not announce a new one.

@@ -318,7 +318,7 @@ void check_asura_faces(const json::Value& catalog)
         {214, 2, 0, L"BossVisual.AsuraGrinning"},
         {212, 1, 2, L"BossVisual.AsuraCalm"},
     };
-    for (const auto& face : faces) check_key(catalog, face.key);
+    for (const auto& form : faces) check_key(catalog, form.key);
 
     title = Id::FF4;
     master.id = 193;
@@ -327,19 +327,19 @@ void check_asura_faces(const json::Value& catalog)
     open();
     for (const int effect : {0, 167}) {
         for (size_t index = 0; index < std::size(faces); ++index) {
-            const auto& face = faces[index];
+            const auto& form = faces[index];
             const int begin = spoken;
-            fn.value1 = face.mode;
-            fn.value2 = face.asset;
+            fn.value1 = form.mode;
+            fn.value2 = form.asset;
             fn.value3 = effect;
             incoming_art = &sprites[index];
             finish_mesh = false;
             d_create_sprite(&fn, method_info);
             expect(spoken == begin, "Asura's face is silent until the new sprite is committed");
             d_commit_sprite(&animator, method_info);
-            expect(spoken == begin + 1 && last == face.key, "Asura announces the actual incoming face");
+            expect(spoken == begin + 1 && last == form.key, "Asura announces the actual incoming face");
 
-            fn.value1 = face.reset_mode;
+            fn.value1 = form.reset_mode;
             fn.value3 = 0;
             d_create_sprite(&fn, method_info);
             d_commit_sprite(&animator, method_info);
@@ -350,6 +350,46 @@ void check_asura_faces(const json::Value& catalog)
     mesh.sprite = &previous_art;
     incoming_art = &next_art;
     expect(forwarded, "Asura's face cues queue after native sprite completion");
+}
+
+void check_leviathan_forms(const json::Value& catalog)
+{
+    using namespace fixture;
+    check_key(catalog, scripted_sprite(Id::FF4, 190, 0, 206, 168));
+    check_key(catalog, scripted_sprite(Id::FF4, 190, 0, 208, 168));
+    expect(!scripted_sprite(Id::FF4, 190, 0, 206, 167) &&
+           !scripted_sprite(Id::FF4, 191, 0, 206, 168),
+           "Only Leviathan's authored shake actions can cue these forms");
+
+    title = Id::FF4;
+    master.id = 190;
+    mesh.sprite = incoming_art = &previous_art;
+    fn.value1 = 0;
+    fn.value2 = 208;
+    fn.value3 = 168;
+    open();
+    const int begin = spoken;
+    d_create_sprite(&fn, method_info);
+    d_commit_sprite(&animator, method_info);
+    expect(spoken == begin, "Reapplying Leviathan's current upright pose stays quiet");
+
+    fn.value2 = 206;
+    incoming_art = &next_art;
+    finish_mesh = false;
+    d_create_sprite(&fn, method_info);
+    expect(spoken == begin, "The windup waits for the lowered head to become visible");
+    d_commit_sprite(&animator, method_info);
+    d_exit_sprite(&animator, method_info);
+    expect(spoken == begin + 1 && last == L"BossVisual.LeviathanWindup", "The visible windup queues once");
+
+    fn.value2 = 208;
+    incoming_art = &previous_art;
+    d_create_sprite(&fn, method_info);
+    d_commit_sprite(&animator, method_info);
+    expect(spoken == begin + 2 && last == L"BossVisual.LeviathanUpright", "The return names the upright pose");
+    expect(forwarded, "Leviathan's form cues queue after native sprite completion");
+    close();
+    incoming_art = &next_art;
 }
 
 void check_lord_swaps()
@@ -504,6 +544,7 @@ int main()
            "A repeated sprite or missing request cannot produce another cue");
     check_detours();
     check_asura_faces(iv);
+    check_leviathan_forms(iv);
     check_lord_swaps();
     check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);

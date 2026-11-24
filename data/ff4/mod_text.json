@@ -2043,6 +2043,34 @@
     "th": "โอดินลดดาบลง",
     "pt": "Odin baixa sua espada."
   },
+  "BossVisual.LeviathanWindup": {
+    "en": "Leviathan shudders and lowers his horned head.",
+    "ja": "リヴァイアサンが身を震わせ、角のある頭を下げた。",
+    "fr": "Léviathan frémit et baisse sa tête cornue.",
+    "it": "Leviatano trema e abbassa il capo cornuto.",
+    "de": "Leviathan bebt und senkt seinen gehörnten Kopf.",
+    "es": "Leviatán se estremece y baja su cabeza cornuda.",
+    "ko": "리바이어던이 몸을 떨며 뿔 달린 머리를 낮춥니다.",
+    "zht": "利維坦全身顫動，低下長著角的頭。",
+    "zhc": "利维亚桑全身颤动，低下长着角的头。",
+    "ru": "Левиафан содрогается и опускает рогатую голову.",
+    "th": "เลวีอาธานสั่นสะท้านแล้วก้มหัวที่มีเขาลง",
+    "pt": "Leviatã estremece e baixa a cabeça com chifres."
+  },
+  "BossVisual.LeviathanUpright": {
+    "en": "Leviathan raises his head and coils upright again.",
+    "ja": "リヴァイアサンが頭を上げ、再びとぐろを巻いて身を起こした。",
+    "fr": "Léviathan relève la tête et se redresse sur ses anneaux.",
+    "it": "Leviatano solleva il capo e si raddrizza sulle sue spire.",
+    "de": "Leviathan hebt den Kopf und richtet sich in seinen Windungen wieder auf.",
+    "es": "Leviatán alza la cabeza y vuelve a erguirse sobre sus anillos.",
+    "ko": "리바이어던이 머리를 들고 다시 몸을 휘감아 곧추세웁니다.",
+    "zht": "利維坦抬起頭，再次盤起身子直立。",
+    "zhc": "利维亚桑抬起头，再次盘起身子直立。",
+    "ru": "Левиафан поднимает голову и снова выпрямляется на кольцах своего тела.",
+    "th": "เลวีอาธานเงยหัวและชูตัวขึ้นเป็นขดอีกครั้ง",
+    "pt": "Leviatã ergue a cabeça e volta a se aprumar sobre as próprias espirais."
+  },
   "BossVisual.AsuraCalm": {
     "en": "Asura turns her calm, pale face forward.",
     "ja": "アスラが穏やかな色白の顔を正面に向けた。",
