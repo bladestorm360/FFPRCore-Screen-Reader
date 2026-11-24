@@ -45,8 +45,11 @@ constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, in
         if (asset == 203) return L"BossVisual.SwordDown";
         break;
     case 193:
-        if ((asset == 212 && mode == 1) || (asset == 213 && mode == 0) || (asset == 214 && mode == 2))
-            return L"BossVisual.AsuraFace";
+        // Each face has a distinct battle sprite. The intervening AI mode
+        // resets reapply the same face and do not announce a new one.
+        if (asset == 212 && mode == 1) return L"BossVisual.AsuraCalm";
+        if (asset == 213 && mode == 0) return L"BossVisual.AsuraAngry";
+        if (asset == 214 && mode == 2) return L"BossVisual.AsuraGrinning";
         break;
     }
     return nullptr;

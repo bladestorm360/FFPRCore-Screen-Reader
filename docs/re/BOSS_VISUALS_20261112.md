@@ -1,5 +1,33 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 24 distinct incoming boss forms
+
+The owner's FFIV log records the same “Asura changes faces” announcement
+at `159585.250`, `159595.078` and `159603.578`. The three faces were already
+visible to the observer and shared a single sentence. Each cue now briefly
+identifies the incoming expression and color. The native Asura encounter
+and the installed sprites provide the following mapping.
+
+| Incoming face | Native asset and mode | Automatic description |
+| --- | --- | --- |
+| Calm | 212, mode 1 | Asura turns her calm, pale face forward. |
+| Angry | 213, mode 0 | Asura turns her angry red face forward. |
+| Grinning | 214, mode 2 | Asura turns her grinning blue face forward. |
+
+Both the regular action and the counter can reveal each face. The native
+command may later update the AI mode while keeping the current sprite.
+The existing presentation guard and completion timing still apply. The
+focused fixture runs all three faces through both action paths and checks
+their follow-up mode changes, queued timing and 12 locales.
+
+The current cue catalog across all six titles was reviewed for the same
+wording gap. In FFVI the Ifrit and Shiva swaps now include their crouched
+or floating posture and distinctive sprite details. Chadarnook's demon and
+goddess cues now identify visible features of the revealed painting form.
+Future transformation cues should briefly identify the new visible form,
+stance or expression. Use existing native announcements when they already
+identify the new form. Invisible AI state is outside visual narration.
+
 ## November 23 FFV Neo Exdeath reveal
 
 The final battle's `sc_b_30601` gives the native speeches before replacing

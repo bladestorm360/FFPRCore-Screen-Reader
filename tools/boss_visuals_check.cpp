@@ -310,6 +310,48 @@ void check_detours()
     expect(!revealed_painting_art(300), "Battle teardown retires the last observed painting");
 }
 
+void check_asura_faces(const json::Value& catalog)
+{
+    using namespace fixture;
+    constexpr struct Face { int asset, mode, reset_mode; const wchar_t* key; } faces[] = {
+        {213, 0, 1, L"BossVisual.AsuraAngry"},
+        {214, 2, 0, L"BossVisual.AsuraGrinning"},
+        {212, 1, 2, L"BossVisual.AsuraCalm"},
+    };
+    for (const auto& face : faces) check_key(catalog, face.key);
+
+    title = Id::FF4;
+    master.id = 193;
+    int sprites[3]{};
+    mesh.sprite = &sprites[2]; // Asura starts with the calm face.
+    open();
+    for (const int effect : {0, 167}) {
+        for (size_t index = 0; index < std::size(faces); ++index) {
+            const auto& face = faces[index];
+            const int begin = spoken;
+            fn.value1 = face.mode;
+            fn.value2 = face.asset;
+            fn.value3 = effect;
+            incoming_art = &sprites[index];
+            finish_mesh = false;
+            d_create_sprite(&fn, method_info);
+            expect(spoken == begin, "Asura's face is silent until the new sprite is committed");
+            d_commit_sprite(&animator, method_info);
+            expect(spoken == begin + 1 && last == face.key, "Asura announces the actual incoming face");
+
+            fn.value1 = face.reset_mode;
+            fn.value3 = 0;
+            d_create_sprite(&fn, method_info);
+            d_commit_sprite(&animator, method_info);
+            expect(spoken == begin + 1, "Changing Asura's mode without changing her face is silent");
+        }
+    }
+    close();
+    mesh.sprite = &previous_art;
+    incoming_art = &next_art;
+    expect(forwarded, "Asura's face cues queue after native sprite completion");
+}
+
 void check_lord_swaps()
 {
     using namespace fixture;
@@ -418,7 +460,7 @@ int main()
          scripted_sprite(Id::FF4,165,1,176,167),scripted_sprite(Id::FF4,163,4,168,167),
          scripted_sprite(Id::FF4,171,3,182,167),scripted_sprite(Id::FF4,188,0,201,167),
          scripted_sprite(Id::FF4,188,0,202,167),scripted_sprite(Id::FF4,189,0,204,0),
-         scripted_sprite(Id::FF4,189,0,203,0),scripted_sprite(Id::FF4,193,2,214,0),
+         scripted_sprite(Id::FF4,189,0,203,0),
          replacement(Id::FF4,540,228,227),replacement(Id::FF4,541,194,195),
          replacement(Id::FF4,542,195,228)}) check_key(iv,cue);
     for (const auto& cue : {
@@ -461,6 +503,7 @@ int main()
     expect(!SpriteChange{2,2,wind.key}.presented(2,true)&&!SpriteChange{}.presented(2,true),
            "A repeated sprite or missing request cannot produce another cue");
     check_detours();
+    check_asura_faces(iv);
     check_lord_swaps();
     check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
