@@ -4525,6 +4525,7 @@
           "role": "armor",
           "correct": false,
           "label_before": "Armor Shop (temp)",
+          "label_current": "Armor Shop",
           "caption": "Armor",
           "product_group": 20,
           "script_sha256": ""
@@ -4540,6 +4541,7 @@
           "role": "weapons",
           "correct": false,
           "label_before": "Weapon Shop (Temp)",
+          "label_current": "Weapon Shop",
           "caption": "Weapons",
           "product_group": 5,
           "script_sha256": ""
@@ -4555,6 +4557,7 @@
           "role": "weapons",
           "correct": false,
           "label_before": "Weapon Shop (Temp)",
+          "label_current": "Weapon Shop",
           "caption": "Weapons",
           "product_group": 6,
           "script_sha256": ""
@@ -4570,6 +4573,7 @@
           "role": "armor",
           "correct": false,
           "label_before": "Armor Shop (temp)",
+          "label_current": "Armor Shop",
           "caption": "Armor",
           "product_group": 20,
           "script_sha256": ""
@@ -4585,6 +4589,7 @@
           "role": "weapons",
           "correct": false,
           "label_before": "Weapon Shop (Temp)",
+          "label_current": "Weapon Shop",
           "caption": "Weapons",
           "product_group": 5,
           "script_sha256": ""

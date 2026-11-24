@@ -1,5 +1,16 @@
 # Native FFPR durable memory
 
+**November 24 FFIV animation, Namingway and Magnetic Cavern.** Actual
+game logs showed missing narration and a false story restriction at the
+cavern. Exact FFIV color-filter cues and both ordinary Lunar Whale
+spaceflight cues are implemented. Namingway drops the sound-effect
+annotation. Pathfinder retains the cavern while taking the route through
+Chocobo Village. Shared Autowalk stops at a final world-exit landing and
+replans to moving NPCs through interaction range.
+[Scene evidence](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-24-ffiv-narration-follow-up),
+[cavern route](docs/re/VEHICLE_ROUTING.md#magnetic-cavern-approach-november-24)
+and [Autowalk](docs/re/AUTOWALK.md#november-24-final-dismounts-and-moving-npcs).
+
 **November 24 I in field dialogue and Baron apparition.** The shared reader
 can identify the visible speaker after the native Talk task retires.
 Adamant Grotto and the King of Baron have verified speaker bindings. The

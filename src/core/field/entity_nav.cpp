@@ -664,6 +664,7 @@ Target selected()
         t.cell_y = e->cell_y;
         t.entity_id = e->entity_id;
         t.transportation_id=e->kind==Kind::Vehicle?e->transportation_id:0;
+        t.npc = e->kind == Kind::NPC;
     });
     return t;
 }

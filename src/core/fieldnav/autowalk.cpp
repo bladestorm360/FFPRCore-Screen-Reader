@@ -77,6 +77,7 @@ uint64_t g_walk_generation=0;
 std::wstring g_wait_instruction;
 bool g_battle_interrupted = false;
 bool g_exit_approach = false;
+bool g_verify_interaction = false;
 Transition g_transition;
 int g_map = 0, g_next_map = 0, g_width = 0, g_height = 0;
 Route* g_route = nullptr;
@@ -142,8 +143,11 @@ bool player_cell(void* map, void* pl, Cell& cell)
 void begin(const field::PathInfo& path, bool speak_path=true)
 {
     if (!g_route) g_route = new Route();
-    g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps, path.loop_axes);
     g_map = field::current_map_id(); g_next_map = path.next_map_id;
+    const bool local_world_exit = g_has_goal && g_goal->map_id == g_map && path.wraps &&
+        g_kind == field::TargetKind::Transition && g_next_map == 0;
+    g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps, path.loop_axes, local_world_exit);
+    g_verify_interaction = path.verify_interaction_on_arrival && path.step_count > 0;
     g_transition.set_next(g_next_map);
     g_exit_approach = path.walk_phases.size() == 1 && path.walk_phases.front().cells.size() <= 1;
     g_width = path.map_width; g_height = path.map_height;
@@ -203,15 +207,6 @@ unity::Vec2 axis(unity::Vec2 native)
         if (pl && map && field::current_map_id() == g_map && g_boundary_deadline > frame::now()) return {};
         cancel(); return native;
     }
-    if (g_has_goal && g_goal->map_id == g_map && g_entity_map == g_map && g_entity_identity) {
-        const auto target = field::selected();
-        Cell cell;
-        if (target.valid && !target.remote_map_id && target.identity == g_entity_identity &&
-            field::baked_nav::cell_at(map, target.position, cell) &&
-            (cell.x != g_goal->cell.x || cell.y != g_goal->cell.y)) {
-            cancel(); ffpr::say(T(L"Autowalk stopped. Destination moved.")); return native;
-        }
-    }
     // A move may take several frames. Wait until the actual native move has finished before
     // comparing cells or turning; crossing a cell boundary mid-animation is not arrival.
     if (ref::call<bool>(mIsMoving, pl)) {
@@ -234,6 +229,24 @@ unity::Vec2 axis(unity::Vec2 native)
             g_retry_at=g_retry_until=0;g_wait_announced=false;g_wait_instruction.clear();
         }
         g_last_cell = at; g_have_cell = true; g_progress_at = frame::now();
+    }
+    if (g_has_goal && g_goal->map_id == g_map && g_entity_map == g_map && g_entity_identity) {
+        const auto target = field::selected();
+        Cell cell;
+        if (target.valid && !target.remote_map_id && target.identity == g_entity_identity &&
+            field::baked_nav::cell_at(map, target.position, cell) &&
+            (cell.x != g_goal->cell.x || cell.y != g_goal->cell.y)) {
+            if (target.npc && g_kind == field::TargetKind::Interact) {
+                // Hold native input until the existing worker recomputes a
+                // legal adjacent/facing position for this same live actor.
+                cell.layer = g_goal->cell.layer;
+                g_goal->cell = cell;
+                g_goal->cells.clear();
+                retry_obstacle();
+                return {};
+            }
+            cancel(); ffpr::say(T(L"Autowalk stopped. Destination moved.")); return {};
+        }
     }
     std::optional<PrecisionPosition> precise_position;
     // One position read scoped to FF1's reviewed pit room; ordinary movement
@@ -299,6 +312,11 @@ unity::Vec2 axis(unity::Vec2 native)
     }
     if (step.result == Result::Arrived && g_next_map > 0 && g_has_goal) {
         g_transition.begin(frame::now()); return {};
+    }
+    if (step.result == Result::Action && g_verify_interaction && g_has_goal &&
+        step.vehicle_action == VehicleAction::None) {
+        retry_obstacle();
+        return {};
     }
     const bool faced = step.face_direction >= 0 && field::face_player(pl, step.face_direction);
     if (step.result == Result::Action && step.vehicle_action != VehicleAction::None) {
@@ -436,6 +454,7 @@ void cancel(bool announce)
     ++g_walk_generation;
     g_replan_needed=g_wait_announced=false;g_retry_at=g_retry_until=0;g_wait_instruction.clear();
     g_turning=false;
+    g_verify_interaction = false;
     g_vehicle_action = VehicleAction::None; g_key_action = -1; g_key_frame = 0; g_boundary_deadline = 0;
     g_transition.clear();
     frame::cancel_label("Autowalk.");

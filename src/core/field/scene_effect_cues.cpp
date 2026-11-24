@@ -21,6 +21,8 @@ ref::Class kPuppet{"Last.Interpreter.Instructions", "Puppet"};
 ref::Method mPlayAnim{kPuppet, "PlayAnim", 1}, mShow{kPuppet, "Show", 1};
 ref::Class kFlightPuppet{"Last.Interpreter.Instructions", "Puppet", game::kFF2 | game::kFF4};
 ref::Method mMoveBirdView{kFlightPuppet, "MoveBirdView", 1};
+ref::Class kFader{"Last.Interpreter.Instructions", "External.Fader", game::kFF4};
+ref::Method mColorFade{kFader, "ColorFade", 1};
 ref::Class kCore{"Last.Interpreter", "Core"}, kPuppetCore{"Last.Interpreter", "PuppetCore"};
 ref::Method mFirstClock{kCore, "IsFirstClock", 0}, mProgramCounter{kCore, "get_pc", 0};
 ref::Field fCoreId{kCore, "<coreID>k__BackingField"};
@@ -33,7 +35,7 @@ ref::Field fPlaying{kEffect, "isPlaying"}, fParticles{kEffect, "particleArray"};
 ref::Class kParticle{"UnityEngine", "ParticleSystem"}, kParticleRenderer{"UnityEngine", "ParticleSystemRenderer"};
 ref::Method mParticleCount{kParticle, "get_particleCount", 0};
 
-enum class CueTrigger { PlayAnim, Show, MoveBirdView };
+enum class CueTrigger { PlayAnim, Show, MoveBirdView, ColorFade };
 struct Cue {
     game::Id title;
     int map, actor, instruction;
@@ -89,6 +91,7 @@ constexpr std::array cues{
     Cue{game::Id::FF3, 341, 3, 83, L"sc_e_0101_19", L"Ending title card cue", CueTrigger::Show, L"mo_ff3_e102_c00"},
     Cue{game::Id::FF4, 1, 1102, 36, L"sc_e_0045_1", L"Agart eruption cue"},
     Cue{game::Id::FF4, 1, 174, 27, L"sc_e_0001", L"Red Wings flight formation cue", CueTrigger::MoveBirdView, L"mo_ff4_v003_c01", L"", 2.5},
+    Cue{game::Id::FF4, 21, 0, 9, L"sc_e_0108", L"Baron chamber flashes cue", CueTrigger::ColorFade},
     Cue{game::Id::FF4, 21, 6, 69, L"sc_e_0108", L"Baron king apparition cue", CueTrigger::PlayAnim, L"mo_ff4_n006_c02"},
     Cue{game::Id::FF4, 343, 16, 228, L"sc_e_0001_2", L"Mysidia soldiers strike cue"},
     Cue{game::Id::FF4, 343, 20, 406, L"sc_e_0001_2", L"Mysidia crystal vanishes cue"},
@@ -104,6 +107,7 @@ constexpr std::array cues{
     Cue{game::Id::FF4, 1, 1088, 48, L"sc_e_0053_10", L"Underground passage smoke cue"},
     Cue{game::Id::FF4, 239, 33, 129, L"sc_e_0056_1", L"Edge anger flare cue"},
     Cue{game::Id::FF4, 1, 100, 50, L"sc_e_0068_5", L"Lunar Whale rises cue", CueTrigger::MoveBirdView, L"mo_ff4_v006_c00"},
+    Cue{game::Id::FF4, 1, 0, 16, L"sc_e_0070_5", L"Giant awakening red light cue", CueTrigger::ColorFade},
     Cue{game::Id::FF4, 1, 1087, 97, L"sc_e_0070_5", L"Giant awakening smoke cue"},
     Cue{game::Id::FF4, 1, 85, 103, L"sc_e_0070_5", L"Giant awakening reveal cue", CueTrigger::Show, L"mo_ff4_n039_c00"},
     Cue{game::Id::FF4, 1, 95, 154, L"sc_e_0070_5", L"Giant awakening attack cue"},
@@ -111,6 +115,10 @@ constexpr std::array cues{
     // The CPU aftermath cuts to a separate, dialogue-free exterior shot.
     Cue{game::Id::FF4, 1, 1107, 180, L"sc_e_0072_2", L"Giant exterior destruction cue"},
     Cue{game::Id::FF4, 358, 1, 19, L"sc_e_0072_5", L"Lunar Whale second moon transit cue"},
+    Cue{game::Id::FF4, 161, 0, 1, L"sc_ship_0004", L"Lunar Whale crystal flashes cue", CueTrigger::ColorFade},
+    Cue{game::Id::FF4, 357, 0, 1, L"sc_ship_0003", L"Lunar Whale crystal flashes cue", CueTrigger::ColorFade},
+    Cue{game::Id::FF4, 355, 1, 19, L"sc_ship_0004_2", L"Lunar Whale spaceflight cue"},
+    Cue{game::Id::FF4, 358, 1, 19, L"sc_ship_0003_2", L"Lunar Whale spaceflight cue"},
     Cue{game::Id::FF4, 248, 11, 67, L"sc_e_0071_1", L"Scarmiglione defeat cue"},
     Cue{game::Id::FF4, 248, 12, 80, L"sc_e_0071_1", L"Cagnazzo defeat cue"},
     Cue{game::Id::FF4, 248, 13, 93, L"sc_e_0071_1", L"Barbariccia defeat cue"},
@@ -156,8 +164,8 @@ constexpr std::array cues{
     Cue{game::Id::FF6, 584, 230, 42, L"sc_e_1032_18", L"Ending title card cue", CueTrigger::Show, L"mo_ff6_e101_c00"}
 };
 
-using PuppetCommand = int (*)(void*, const void*);
-PuppetCommand native_play = nullptr, native_show = nullptr, native_move_bird_view = nullptr;
+using SceneCommand = int (*)(void*, const void*);
+SceneCommand native_play = nullptr, native_show = nullptr, native_move_bird_view = nullptr, native_color_fade = nullptr;
 uint64_t last_generation = 0;
 std::array<bool, cues.size()> queued{};
 
@@ -225,17 +233,18 @@ void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
 
 void observe_first_play(void* core, CueTrigger trigger)
 {
+    const bool color_fade = trigger == CueTrigger::ColorFade;
+    const int core_index = ref::rd<int>(core, fCoreId);
+    if (color_fade ? core_index != 0 : core_index < 1 || core_index > 32) return;
     const auto generation = system::field_event_generation();
     if (!generation) return;
-    const int actor = ref::rd<int>(core, fActorId);
+    const int actor = color_fade ? 0 : ref::rd<int>(core, fActorId);
     const auto title = game::current();
     const auto found = std::find_if(cues.begin(), cues.end(), [title, actor, trigger](const Cue& cue) {
         return cue.title == title && cue.actor == actor && cue.trigger == trigger;
     });
     if (found == cues.end() || !ref::call<bool>(mFirstClock, core)) return;
     const int instruction = ref::call<int>(mProgramCounter, core);
-    const int core_index = ref::rd<int>(core, fCoreId);
-    if (core_index < 1 || core_index > 32) return;
     auto* interpreter = running_scene();
     if (!interpreter) return;
     const auto script = ref::rd_str_bounded(interpreter, fScript, 48);
@@ -249,6 +258,14 @@ void observe_first_play(void* core, CueTrigger trigger)
         if (!queued[index] && cue.title == title && cue.map == map && cue.actor == actor && cue.trigger == trigger &&
             cue.instruction == instruction && cue.script == script) {
             if (!ui::prefs::visual_descriptions_enabled()) return;
+            if (color_fade) {
+                // This exact first-clock command has started the native color
+                // filter. A loading fade can still obscure it.
+                if (fieldnav::map_transition::is_screen_fading()) return;
+                queued[index] = true;
+                say(T(cue.text), false);
+                return;
+            }
             if (cue.art.empty() && !kEffect.is(ref::rd<void*>(core, fActor))) return;
             schedule_scene_cue(index, core_index, generation);
             return;
@@ -279,11 +296,20 @@ int move_bird_view(void* core, const void* method)
     return result;
 }
 
+int color_fade(void* core, const void* method)
+{
+    const int result = native_color_fade(core, method);
+    if (frame::on_main_thread())
+        hooks::guarded("SceneEffects.ColorFade", [&] { observe_first_play(core, CueTrigger::ColorFade); });
+    return result;
+}
+
 int install_effect_cues()
 {
     int count = hooks::attach(mPlayAnim, &play_anim, &native_play) ? 1 : 0;
     if (hooks::attach(mShow, &show, &native_show)) ++count;
     if (hooks::attach(mMoveBirdView, &move_bird_view, &native_move_bird_view)) ++count;
+    if (hooks::attach(mColorFade, &color_fade, &native_color_fade)) ++count;
     return count;
 }
 core::Install install{"SceneEffects", &install_effect_cues, 130};

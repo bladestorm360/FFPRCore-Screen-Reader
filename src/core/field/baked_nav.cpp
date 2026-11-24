@@ -1122,6 +1122,19 @@ bool mounted_foot_target(const baked_route::Request& req, const Cell& target, Ta
     });
 }
 
+bool magnetic_cavern_target(const MapGoal& goal, TargetKind kind)
+{
+    if (!game::is(game::Id::FF4) || goal.map_id != 1 || goal.transportation_id ||
+        (kind != TargetKind::Transition && kind != TargetKind::Infer)) return false;
+    const auto* world = baked::submap_by_map_id(1);
+    if (!world) return false;
+    const auto& exits = baked::grids(*world).objects;
+    return std::any_of(exits.begin(), exits.end(), [&](const auto& exit) {
+        return exit.type == baked::ObjType::GotoMap && exit.entity_id() == 63 && exit.a == 192 &&
+            exit.layer == goal.cell.layer && exit.contains(goal.cell.x, goal.cell.y);
+    });
+}
+
 /// Test hypothetical terrain access from an actually missing vehicle group,
 /// cheapest first. Owned vehicles cannot explain a missing prerequisite; their
 /// boarding/landing failures have separate constraints. Unknown future vehicles
@@ -3161,7 +3174,8 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                 vehicle_journey_route(*sm, g, alternate, alternate.goals, equivalent_landing, aerial);
             }
         }
-        const bool world_dungeon_return = !route.found && equivalent_landing.empty() && sm->world &&
+        const bool magnetic_cavern = magnetic_cavern_target(g_route_snapshot->goal, kind);
+        const bool world_dungeon_return = !magnetic_cavern && !route.found && equivalent_landing.empty() && sm->world &&
             ((parked_airship&&req.vehicle_group==0) ||
             ((kind == TargetKind::Transition || kind == TargetKind::Infer) &&
             std::any_of(g.objects.begin(), g.objects.end(), [&](const auto& object) {
@@ -3257,7 +3271,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                 vehicle_journey_route(*sm, g, through_events, req.goals, phases,aerial);
             }
         }
-        if (phases.empty() && !aerial && !action_pad && !ship_goal && !surface_marker &&
+        if (phases.empty() && !magnetic_cavern && !aerial && !action_pad && !ship_goal && !surface_marker &&
             !g_route_snapshot->goal.transportation_id && !req.goals.empty()) {
             auto cargo=hovercraft_directions(req);
             if (!cargo.empty()) {
@@ -3329,7 +3343,11 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         }
         if (phases.empty()) {
             out.error = L"No path found";
-            out.reason = reason.empty() ? no_route_reason(*sm, g, req, live) : reason;
+            if (magnetic_cavern) {
+                if (req.transportation_id != 7) out.reason = TF(L"Requires {0}", {T(L"Black Chocobo")});
+            } else {
+                out.reason = reason.empty() ? no_route_reason(*sm, g, req, live) : reason;
+            }
             if (g_active && same_target(*g_active, map_id, target, map_id)) invalidate_active();
             LOGF("[BakedNav] no route: (%d,%d) L%d -> (%d,%d) on map %d, %zu goal cells; %zu chests, %zu gates, %zu fixed and %zu moving NPCs; %ls",
                  req.start.x, req.start.y, req.start.layer, target.x, target.y, map_id, req.goals.size(),
@@ -4400,6 +4418,7 @@ struct Planned {
 #include "manual_key_prefix.inl"
 #include "troia_passages.inl"
 #include "baron_gate.inl"
+#include "magnetic_cavern.inl"
 #include "lunar_whale_landing.inl"
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
@@ -4499,6 +4518,8 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
         result.path.reason = T(L"Navigation data is loading");
     } else if (on_whale) {
         plan_whale_landing(snapshot, result.start, result.path);
+    } else if (snapshot.map_id == 160 && magnetic_cavern_target(snapshot.goal, snapshot.kind)) {
+        prepare_magnetic_cavern_prefix(snapshot, result.path);
     } else if(vehicle_missing)result.path.reason=T(L"Destination is no longer available");
     else if (!route_to_goal(nullptr, nullptr, snapshot.goal, snapshot.kind, snapshot.name, result.path)) {
         result.path.reason = result.path.error = T(L"Navigation map data unavailable");
@@ -4516,6 +4537,7 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     prepare_manual_key_prefix(snapshot,result.path);
     prepare_troia_passage_prefix(snapshot,result.path);
     prepare_baron_gate_prefix(snapshot,result.path);
+    if (snapshot.map_id == 1) prepare_magnetic_cavern_prefix(snapshot, result.path);
     if (waterfall_state == 0 && !result.path.success && result.path.reason.empty() &&
         result.path.error == L"No path found") {
         result.path.reason = T(L"Event required");

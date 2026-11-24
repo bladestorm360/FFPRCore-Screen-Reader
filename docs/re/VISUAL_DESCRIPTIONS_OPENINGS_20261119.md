@@ -32,6 +32,31 @@ particles in the current event. The Lunar Whale dialogue then describes
 the rescued party facing Kain and his first head-lowering gesture on
 map 161 in `sc_e_0072_3`. All twelve game languages have cue text.
 
+## November 24 FFIV narration follow-up
+
+The earlier audit authored visual cues for FFIV, including the Red Wings
+opening, the Giant of Babil awakening and destruction, and the Elemental
+Lords' disappearances. It established the source anchors offline.
+A review of the current game log and five rotated parts found no matches
+for 44 existing English FFIV field cues. Some sequences predate their
+updates or did not occur in this log window. The installed FFIV settings
+have no override for the default-on Visual descriptions setting.
+
+The shared effect reader now also accepts FFIV's exact native field
+color-filter commands. The Baron chamber flashes, the red wash as the
+Giant awakens, and the cyan and dark/light pulses when using the Lunar
+Whale crystal follow the native command on its first clock. The stable
+event, map and script checks still apply. A loading fade can obscure a
+command. These cues avoid depending on a sprite or particle draw. The
+Baron's separately authored appearance follows the king sprite, and
+both ordinary spaceflight scripts gain a description for the light
+streaks. The new cues use the same queue as dialogue in all 12 locales.
+The earlier dialogue I-key fix is included in this FFIV delivery.
+
+Audible behavior awaits gameplay confirmation. Both cabin crystals
+provide a repeatable entry point for checking the description after
+installation.
+
 ## November 23 major-scene re-audit
 
 The owner reopened the major story scene scope for all six games. The

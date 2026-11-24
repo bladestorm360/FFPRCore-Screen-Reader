@@ -15,6 +15,9 @@ bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
 game::Id game=game::Id::FF1;
 field::VehicleState vehicle{true,1,1,L""};
 field::baked_route::Cell cell{1,1,1};
+field::Target selected_target;
+field::baked_nav::MapGoal last_requested;
+int facing = -1;
 int map_id=1,precision_queries=0;unity::Vec3 position{};
 unity::Vec2 native{};
 unity::Vec2 moved{};int calls=0, airship_calls=0, key_calls=0, cleaned=0; bool shoulders=false;
@@ -67,18 +70,25 @@ namespace game {Id current(){return fixture::game;}}
 namespace frame {uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
 namespace actions {void define(const char*,Fn){} bool run(const char*){return false;}bool defined(const char*){return false;} }
 namespace events {void on(Kind kind,Handler handler){fixture::handlers[kind].push_back(std::move(handler));} void fire(Kind kind){for(auto& handler:fixture::handlers[kind])handler();} }
-namespace queries {void define(const char*,std::function<bool()>){}bool is(const char*n){return std::string(n)=="GameStatePatches.IsFieldNavigationReady"?fixture::ready:false;} }
+namespace queries {
+void define(const char*, std::function<bool()>) {}
+bool is(const char* name) {
+    const std::string_view key = name;
+    if (key == "GameStatePatches.IsFieldNavigationReady") return fixture::ready;
+    return key == "NavigationTargetTracker.IsEntity" && fixture::selected_target.valid;
+}
+}
 namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){return std::string(k)=="Autowalk"?true:d;}void set_bool(const char*,bool){} }
 namespace menu_state {bool any_active(){return fixture::menu;} }
 namespace field::cache {void*get(ref::Class&t){return std::string(t.name)=="FieldMap"?&fixture::map:&fixture::controller;}void*get_or_refresh(ref::Class&t){return get(t);} }
 namespace field {
 void*player_controller(){return &fixture::controller;}
-void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}bool face_player(void*,int){return true;}Target selected(){return {};}
+void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}bool face_player(void*,int direction){fixture::facing=direction;return true;}Target selected(){return fixture::selected_target;}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
-namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3,baked_route::Cell&c){c=fixture::cell;return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
+namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3 position,baked_route::Cell&c){c={fixture::cell.layer,static_cast<int>(position.x),static_cast<int>(position.y)};return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
 unity::Vec3 world_of(void*,const baked_route::Cell& cell){return {cell.x*16.f,-cell.y*16.f,0};}
 bool walk_precision_edge(void*,void*,const route_progress::PrecisionPoint&,const route_progress::PrecisionPoint&){++fixture::precision_queries;return fixture::edge_open;}
-void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
+void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal goal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){fixture::last_requested=std::move(goal);++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
 }
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);} }
 namespace ffpr {void say(std::wstring_view value,bool){fixture::spoken.emplace_back(value);} }
@@ -223,6 +233,62 @@ int main(){
  fixture::cell={0,18,18};fixture::position={288,-288,0};a::start(precision);fixture::edge_open=false;
  fine_axis=a::d_InputAxis(nullptr,nullptr);expect(!fine_axis.x&&!fine_axis.y,"a native precision collision veto releases movement");a::cancel();
  fixture::edge_open=true;fixture::map_id=1;fixture::position={};
+ {
+    fixture::game = game::Id::FF4;
+    fixture::cell = {1,79,41};
+    fixture::vehicle = {true,7,10,L""};
+    const field::baked_nav::MapGoal exit{1,{1,79,40}};
+    a::Phase dismount;
+    dismount.cells = {{1,79,41},{1,79,40}};
+    dismount.action_cell = fixture::cell;
+    dismount.vehicle_before = a::VehicleAction::ConfirmLand;
+    dismount.transportation_id = 7;
+    dismount.action_before = L"dismount";
+    field::PathInfo path;
+    path.success = path.wraps = true;
+    path.step_count = 1;
+    path.walk_phases = {dismount};
+    a::start(path,&exit,field::TargetKind::Transition);
+    const auto stopped = a::d_InputAxis(nullptr,nullptr);
+    expect(!stopped.x && !stopped.y && !a::active() && !a::virtual_input_active() &&
+           fixture::spoken.back() == L"Autowalk stopped, dismount",
+           "the final landing by a world exit releases native movement and leaves dismount and entry to the player");
+ }
+ {
+    fixture::map_id = 160;
+    fixture::cell = {0,17,19};
+    fixture::vehicle = {true,1,1,L""};
+    fixture::selected_target.valid = fixture::selected_target.npc = true;
+    fixture::selected_target.identity = &fixture::field_controller;
+    fixture::selected_target.position = {17,18,0};
+    field::baked_nav::MapGoal bird{160,{0,19,18},true,{},0,14,L"Black Chocobo"};
+    a::Phase approach;
+    approach.cells = {{0,17,19},{0,18,19},{0,19,19}};
+    field::PathInfo path;
+    path.success = true;
+    path.step_count = 2;
+    path.walk_phases = {approach};
+    a::start(path,&bird,field::TargetKind::Interact);
+    const auto held = a::d_InputAxis(nullptr,nullptr);
+    expect(!held.x && !held.y && a::active() && a::g_replan_needed,
+           "a moving selected NPC holds movement and keeps autowalk active");
+    const int requests_before = fixture::requests;
+    a::input_updated();
+    a::input_updated();
+    expect(fixture::requests == requests_before + 1 && fixture::last_requested.entity_id == 14 &&
+           fixture::last_requested.cell == a::Cell{0,17,18},
+           "the existing route worker receives one fresh request for the same NPC");
+    approach.cells = {fixture::cell};
+    approach.arrival_direction = 0;
+    path.step_count = 0;
+    path.walk_phases = {approach};
+    fixture::route_results.back()(path);
+    const auto arrived = a::d_InputAxis(nullptr,nullptr);
+    expect(!arrived.x && !arrived.y && !a::active() && fixture::facing == 0 &&
+           fixture::spoken.back() == L"Arrived",
+           "fresh interaction range ends the walk and faces the NPC without walking onto its tile");
+    fixture::selected_target = {};
+ }
  std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
  std::printf("Autowalk native input/vehicle waits/FF6 flight: %d failures\n",failures);return failures?1:0;
 }

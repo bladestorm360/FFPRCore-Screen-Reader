@@ -294,6 +294,14 @@ bool strip_suffix_number(std::wstring_view text, std::wstring_view& base, long l
 Label parsed_base(std::wstring_view raw, std::wstring_view base, long long prefix_ordinal)
 {
     base = trim(base);
+    // FFIV marks Namingway actors whose conversations play a sound effect.
+    // Drop the designer's note before interpreting the actor's trailing number.
+    for (const std::wstring_view note : {L" *With SE", L"※会話にSEあり"}) {
+        if (base.size() > note.size() && base.ends_with(note)) {
+            base = trim(base.substr(0, base.size() - note.size()));
+            break;
+        }
+    }
     if (base.empty()) return {materialize(raw), -1};
     std::wstring_view suffix_base;
     long long suffix_ordinal = -1;

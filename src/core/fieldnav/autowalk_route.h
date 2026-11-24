@@ -38,7 +38,24 @@ class Route {
         return d;
     }
 public:
-    void set(std::vector<Phase> phases, int width, int height, bool world, int loop_axes = -1) {
+    void set(std::vector<Phase> phases, int width, int height, bool world,
+             int loop_axes = -1, bool stop_at_final_landing = false) {
+        if (stop_at_final_landing && !phases.empty()) {
+            auto& final = phases.back();
+            // A local world exit immediately after a landing is the player's
+            // next action. Keep the already planned landing cell as the stop.
+            const auto action = final.vehicle_before;
+            if (final.action_cell && !final.action_before.empty() &&
+                (action == VehicleAction::ConfirmLand || action == VehicleAction::BackLand ||
+                 action == VehicleAction::WalkOff) &&
+                !final.cells.empty() && final.cells.size() <= 2) {
+                Phase boundary;
+                boundary.cells = {*final.action_cell};
+                boundary.action_after = std::move(final.action_before);
+                boundary.manual_after = true;
+                final = std::move(boundary);
+            }
+        }
         phases_ = std::move(phases); phase_ = cell_ = 0; action_done_ = false;
         if(loop_axes<0||(!loop_axes&&world))loop_axes=world?3:0;
         width_ = (loop_axes&1)?width:0; height_ = (loop_axes&2)?height:0; cardinal_only_ = world;

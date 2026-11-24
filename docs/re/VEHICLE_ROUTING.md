@@ -414,3 +414,20 @@ selection through movement and native row recreation, and verifies that an
 unavailable objective does not transfer selection. Installation is verified
 in all six games. Gameplay confirmation remains pending.
 [Delivery record](../SECURITY_AND_DISTRIBUTION.md#november-19-vehicle-destination-focus-and-ffiv-markers).
+
+## Magnetic Cavern approach, November 24
+
+The FFIV game log records the same surface entrance at (79,40) as “Story
+gated” aboard the Falcon and “Requires vehicle” on foot. The cavern
+entrance is an ordinary map transfer. Its approach is accessible through
+the Black Chocobo's forest landing rules. The game identifies the nearby
+source of flying Black Chocobos as Chocobo Village.
+
+The route keeps the original cavern entrance selected and plans the
+ordinary travel leg to Chocobo Village. In the village the next request
+selects a reachable live mount NPC. Talking to that actor returns the
+party to the surface aboard a Black Chocobo. Subsequent directions use
+the actual ridden vehicle, a legal forest landing and the foot approach
+to the cavern. The route never treats a temporary NPC mount as a parked
+airship. The exact cavern entrance no longer enters the generic
+gate-removal proof, which could give a false story explanation.

@@ -5,6 +5,85 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff4_magnetic_cavern(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    const auto* world = baked::submap_by_map_id(1);
+    const auto* forest = baked::submap_by_map_id(160);
+    const auto& exits = baked::grids(*world).objects;
+    const auto cave = std::find_if(exits.begin(), exits.end(), [](const auto& object) {
+        return object.type == baked::ObjType::GotoMap && object.entity_id() == 63 && object.a == 192;
+    });
+    expect(forest && cave != exits.end(), "the real Magnetic Cavern and Black Chocobo forest are baked");
+    if (!forest || cave == exits.end()) return;
+
+    const MapGoal goal{1, {cave->layer, cave->tx, cave->ty}, false, {}, 0, 63};
+    RouteSnapshot snapshot(map_state::Resolver(map_state::Flags{}, fixture::records));
+    snapshot.submap = world;
+    snapshot.map_id = snapshot.layer = 1;
+    snapshot.position = world_of_cell(*world, {1, 158, 186});
+    snapshot.vehicle = {true, 9, 8, {}};
+    snapshot.goal = goal;
+    snapshot.kind = TargetKind::Transition;
+    snapshot.locale = L"en";
+    std::thread worker([&] {
+        const auto falcon = plan_snapshot(snapshot);
+        expect(falcon.path.success && falcon.path.next_map_id == 160 && falcon.pending.goal.cell == goal.cell &&
+               falcon.pending.incoming_transition && falcon.pending.incoming_transition->entity_id == 82,
+               "the Falcon route leads to the forest without losing the cavern destination");
+        expect(falcon.path.description.find(L"Black Chocobo") != std::wstring::npos,
+               "the Falcon route names the black chocobo interaction after the directions");
+
+        snapshot.vehicle = {};
+        snapshot.position = world_of_cell(*world, {1, 45, 41});
+        const auto on_foot = plan_snapshot(snapshot);
+        expect(on_foot.path.success && on_foot.path.next_map_id == 160,
+               "a party already walking near the village can reach the mount without a parked vehicle");
+
+        snapshot.submap = forest;
+        snapshot.map_id = 160;
+        snapshot.vehicle = {};
+        snapshot.goal = goal;
+        snapshot.pending = {};
+        snapshot.obstacles.clear();
+        const auto& objects = baked::grids(*forest).objects;
+        const auto bird = std::find_if(objects.begin(), objects.end(), [](const auto& object) {
+            return object.type == baked::ObjType::NPC && object.entity_id() == 14;
+        });
+        if (bird == objects.end()) { expect(false, "the forest has the scripted mount NPC"); return; }
+        snapshot.layer = bird->layer;
+        snapshot.position = world_of_cell(*forest, {bird->layer, bird->tx - 1, bird->ty});
+        NativeObstacle actor;
+        actor.type = static_cast<int>(baked::ObjType::NPC);
+        actor.id = bird->entity_id();
+        actor.cell = {bird->layer, bird->tx, bird->ty};
+        actor.raw_name = baked::object_identifier(*bird);
+        actor.npc = true;
+        snapshot.obstacles.push_back(actor);
+        const auto inside = plan_snapshot(snapshot);
+        expect(inside.path.success && inside.path.next_map_id == 1 && inside.pending.goal.cell == goal.cell &&
+               inside.path.full_description.find(L"Black Chocobo") != std::wstring::npos,
+               "the forest route approaches the live mount NPC and retains the cavern");
+
+        const auto departure = std::find_if(exits.begin(), exits.end(), [](const auto& object) {
+            return object.type == baked::ObjType::PointIn && object.a == 32;
+        });
+        if (departure == exits.end()) { expect(false, "the mount script has its surface arrival"); return; }
+        snapshot.submap = world;
+        snapshot.map_id = snapshot.layer = 1;
+        snapshot.position = world_of_cell(*world, {departure->layer, departure->tx, departure->ty});
+        snapshot.vehicle = {true, 7, 10, {}};
+        snapshot.obstacles.clear();
+        const auto mounted = plan_snapshot(snapshot);
+        expect(mounted.path.success && !mounted.path.walk_phases.empty() &&
+               mounted.path.walk_phases.back().vehicle_before == route_progress::VehicleAction::ConfirmLand &&
+               cave->contains(mounted.path.walk_phases.back().cells.back().x, mounted.path.walk_phases.back().cells.back().y),
+               "the ridden Black Chocobo leaves the village, lands legally and reaches the cavern");
+    });
+    worker.join();
+}
+
 template<class Expect> void check_ff4_hovercraft_journey(Expect expect)
 {
     using namespace field;
@@ -853,6 +932,7 @@ int main() {
             check_ff4_lunar_whale_beds(expect);
             check_ff4_sealed_cavern(expect);
             check_ff4_hovercraft_journey(expect);
+            check_ff4_magnetic_cavern(expect);
             check_dwarven_castle(expect);
             check_tomra_shop(expect);
             check_baron_gate(expect);

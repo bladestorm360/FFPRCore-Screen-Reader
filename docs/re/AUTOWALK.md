@@ -1,5 +1,23 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 24 final dismounts and moving NPCs
+
+The FFIV game log shows a planned dismount one step from Magnetic
+Cavern, followed by an Autowalk block. Autowalk now stops on the planned
+landing cell if a selected world exit is the immediate follow-up. It
+announces the pending dismount and leaves the player there. A verified
+landing that is part of a longer onward route retains its usual input
+and continuation.
+
+The log also shows a walk to a Black Chocobo ending as soon as the actor
+moves. A settled player tile and a moved, still-selected NPC now yield
+one fresh route to the same live actor on the existing Navigation worker.
+Autowalk holds native movement until the result arrives. It stops and
+faces the NPC from a legal interaction square. The cave route also
+rechecks its Chocobo Village contact on arrival before announcing the
+mount action, so the indirect route retains the cavern selection.
+Existing retry bounds and manual-input cancellation apply throughout.
+
 ## November 23 global Autowalk shortcut
 
 Alt+Shift+Backslash invokes the existing Autowalk setting in all six games,

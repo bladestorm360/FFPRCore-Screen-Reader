@@ -52,6 +52,22 @@ int main(int argc, char** argv)
         std::puts("FAIL dictionary load"); return 1;
     }
     field::prepare_entity_translations();
+    if (game == "ff4") {
+        constexpr auto blue_eight = L"ネミングウェイ（青）⑧※会話にSEあり";
+        constexpr auto blue_nine = L"ネミングウェイ（青）⑨※会話にSEあり";
+        for (const wchar_t* locale : {L"en", L"ja", L"fr", L"it", L"de", L"es", L"ko", L"zht", L"zhc", L"ru", L"th", L"pt"}) {
+            fixture::language = locale;
+            const auto eight = field::npc_display_label(field::translate_entity_name_for_actor(blue_eight, 152, 11));
+            const auto nine = field::npc_display_label_snapshot(field::translate_entity_name_snapshot(blue_nine, 152, 10));
+            if (eight.base != nine.base || eight.ordinal != 8 || nine.ordinal != 9 ||
+                eight.base.find(L"SE") != std::wstring::npos ||
+                (fixture::language == L"en" && eight.base != L"Namingway (Blue)")) {
+                std::puts("FAIL FFIV Namingway sound-effect annotation or numbering");
+                return 1;
+            }
+        }
+        fixture::language = L"en";
+    }
     if (argc == 3) {
         // Optional factual census uses the production translator and the exact
         // service map/raw identity, including the live property's pre-fallback
@@ -138,8 +154,11 @@ int main(int argc, char** argv)
                 if (!localized || localized->s.empty() || live != localized->s) {
                     ++failures; std::puts("FAIL service actor/locale correction missing");
                 }
-            } else if (fixture::language == L"en" && live != row.get(L"label_before")->s) {
-                ++failures; std::puts("FAIL useful service or personal name changed");
+            } else if (fixture::language == L"en") {
+                const auto* current = row.get(L"label_current");
+                if (live != (current ? current : row.get(L"label_before"))->s) {
+                    ++failures; std::puts("FAIL useful service or personal name changed");
+                }
             }
             if (field::translate_entity_name_for_actor(raw,map,-1) != field::translate_entity_name_for_map(raw,map) ||
                 field::translate_entity_name_for_actor(raw,0,actor) != field::translate_entity_name(raw) ||

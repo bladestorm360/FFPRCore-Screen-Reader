@@ -205,35 +205,54 @@ void check_effect_cues()
     put(effect, "isPlaying", reinterpret_cast<void*>(1));
     put(effect, "particleArray", &particles);
     battle_interpreter = &interpreter;
-    native_play = native_show = native_move_bird_view = native_animation;
+    native_play = native_show = native_move_bird_view = native_color_fade = native_animation;
+    int expected_native_plays = original_plays;
     for (const auto& cue : cues) {
         current_game = cue.title;
         current_map = cue.map;
         script.value = cue.script;
         instruction = cue.instruction;
         const bool is_sprite = !cue.art.empty();
+        const bool is_color = cue.trigger == CueTrigger::ColorFade;
+        expected_native_plays += is_color ? 7 : 8;
         auto dispatch = play_anim;
         if (cue.trigger == CueTrigger::Show) dispatch = show;
         if (cue.trigger == CueTrigger::MoveBirdView) dispatch = move_bird_view;
+        if (is_color) dispatch = color_fade;
+        put(core, "<coreID>k__BackingField", reinterpret_cast<void*>(is_color ? uintptr_t{0} : uintptr_t{1}));
         put(core, "<entity>k__BackingField", is_sprite ? &card : &effect);
         put(core, "<entityID>k__BackingField", reinterpret_cast<void*>(static_cast<uintptr_t>(cue.actor)));
         ++event_generation;
         spoken.clear();
         visual_descriptions = false;
-        require(dispatch(&core, nullptr) == 3 && !observation && !reveal,
+        require(dispatch(&core, nullptr) == 3 && !observation && !reveal && spoken.empty(),
                 "descriptions Off keeps the native instruction and schedules no cue");
         visual_descriptions = true;
         transition = true;
-        require(dispatch(&core, nullptr) == 3 && !observation, "transition preserves the native instruction without scheduling");
+        require(dispatch(&core, nullptr) == 3 && !observation && spoken.empty(),
+                "transition preserves the native instruction without a cue");
         transition = false;
         first_clock = false;
         dispatch(&core, nullptr);
-        require(!observation, "an ordinary repeat clock cannot claim a cue");
+        require(!observation && spoken.empty(), "an ordinary repeat clock cannot claim a cue");
         first_clock = true;
         ++instruction;
         dispatch(&core, nullptr);
-        require(!observation, "another instruction on the same actor is silent");
+        require(!observation && spoken.empty(), "another instruction on the same actor is silent");
         --instruction;
+        if (is_color) {
+            fading = true;
+            dispatch(&core, nullptr);
+            require(spoken.empty(), "a loading fade can obscure a native color filter");
+            fading = false;
+            dispatch(&core, nullptr);
+            require(!observation && !reveal && spoken == cue.text && !speech_interrupted,
+                    "the visible color command queues speech without depending on an actor renderer");
+            spoken.clear();
+            dispatch(&core, nullptr);
+            require(spoken.empty(), "the same color command cannot claim the cue twice in one event");
+            continue;
+        }
         dispatch(&core, nullptr);
         dispatch(&core, nullptr);
         if (cue.settle_seconds > 0) {
@@ -307,7 +326,7 @@ void check_effect_cues()
         visual_descriptions = true;
         observation = {};
     }
-    require(original_plays == static_cast<int>(cues.size()) * 8, "every captured call keeps the native return path");
+    require(original_plays == expected_native_plays, "every captured call keeps the native return path");
     battle_interpreter = nullptr;
 }
 
