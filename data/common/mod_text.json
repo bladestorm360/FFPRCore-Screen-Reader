@@ -23995,6 +23995,20 @@
     "th": "วาฬจันทราลอยขึ้นจากผิวน้ำ",
     "pt": "A Baleia Lunar emerge da água."
   },
+  "Baron king apparition cue": {
+    "en": "Yellow-green and white light flickers through the chamber. The king appears in red robes.",
+    "ja": "黄緑と白の光が部屋を明滅させ、赤い衣を着た王が姿を現す。",
+    "fr": "Des éclats jaune-vert et blancs traversent la salle. Le roi apparaît, vêtu de rouge.",
+    "it": "Lampi giallo-verdi e bianchi illuminano la sala. Appare il re, in vesti rosse.",
+    "de": "Gelbgrünes und weißes Licht flackert durch die Kammer. Der König erscheint in roten Gewändern.",
+    "es": "La cámara destella con luces verdes amarillentas y blancas. El rey aparece vestido de rojo.",
+    "ko": "연두색과 흰빛이 방 안에서 깜박입니다. 붉은 예복을 입은 왕이 모습을 드러냅니다.",
+    "zht": "黃綠色與白色的光在房內閃爍。身穿紅袍的國王現身。",
+    "zhc": "黄绿色与白色的光在房间里闪烁。身穿红袍的国王现身。",
+    "ru": "В зале мерцают жёлто-зелёные и белые вспышки. Появляется король в красных одеждах.",
+    "th": "แสงเขียวอมเหลืองสลับกับแสงขาวกะพริบทั่วห้อง กษัตริย์ในฉลองพระองค์สีแดงปรากฏขึ้น",
+    "pt": "Luzes verde-amareladas e brancas tremeluzem pela câmara. O rei aparece em vestes vermelhas."
+  },
   "Zeromus figure forms cue": {
     "en": "A translucent figure takes shape where Zemus fell.",
     "ja": "ゼムスが倒れた場所に、半透明の人影が形を成す。",

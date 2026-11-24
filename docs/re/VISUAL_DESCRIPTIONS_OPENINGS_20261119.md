@@ -1,5 +1,14 @@
 # Opening and prologue visual actions
 
+## November 24 King of Baron apparition
+
+The FFIV log shows the king's first line on map 21 before Cecil speaks.
+In `sc_e_0108`, the yellow-green and white chamber flashes follow that
+line. The script moves the king to his visible position and plays Flash
+on actor 6 at instruction 69. The exact cue waits for the drawn red-robed
+sprite and queues before the next native page. All twelve locales have
+the description. [Manual speaker evidence](VISUAL_DESCRIPTIONS_20261119.md#november-24-i-during-a-visible-conversation).
+
 ## November 23 Giant of Babil aftermath
 
 The owner's FFIV journal reaches the post-CPU exchanges after the reloaded

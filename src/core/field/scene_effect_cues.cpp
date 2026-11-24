@@ -89,6 +89,7 @@ constexpr std::array cues{
     Cue{game::Id::FF3, 341, 3, 83, L"sc_e_0101_19", L"Ending title card cue", CueTrigger::Show, L"mo_ff3_e102_c00"},
     Cue{game::Id::FF4, 1, 1102, 36, L"sc_e_0045_1", L"Agart eruption cue"},
     Cue{game::Id::FF4, 1, 174, 27, L"sc_e_0001", L"Red Wings flight formation cue", CueTrigger::MoveBirdView, L"mo_ff4_v003_c01", L"", 2.5},
+    Cue{game::Id::FF4, 21, 6, 69, L"sc_e_0108", L"Baron king apparition cue", CueTrigger::PlayAnim, L"mo_ff4_n006_c02"},
     Cue{game::Id::FF4, 343, 16, 228, L"sc_e_0001_2", L"Mysidia soldiers strike cue"},
     Cue{game::Id::FF4, 343, 20, 406, L"sc_e_0001_2", L"Mysidia crystal vanishes cue"},
     Cue{game::Id::FF4, 67, 63, 126, L"sc_e_0008", L"Mist Bomb ring cue"},

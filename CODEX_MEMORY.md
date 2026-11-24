@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 24 I in field dialogue and Baron apparition.** The shared reader
+can identify the visible speaker after the native Talk task retires.
+Adamant Grotto and the King of Baron have verified speaker bindings. The
+Baron scene now describes the flashes and the king's arrival.
+[Speaker ownership](docs/re/VISUAL_DESCRIPTIONS_20261119.md#november-24-i-during-a-visible-conversation)
+and [animation](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-24-king-of-baron-apparition).
+
 **November 24 FFIV hovercraft and Adamant Grotto.** The native pickup result
 now has its own cue. The route parks the Enterprise outside the pickup area,
 retains a foot approach to the hovercraft and excludes entrance tiles from

@@ -31,6 +31,7 @@ ref::Field fMessageId{kClient, "<CurrentMessageId>k__BackingField"};
 ref::Class kInterpreter{"Last.Interpreter", "Integrator"};
 ref::Field fActiveScript{kInterpreter, "<scriptName>k__BackingField"};
 ref::Field fRunningFieldScript{kInterpreter, "isFieldScript"};
+ref::Field fScriptWorking{kInterpreter, "working"};
 ref::Class kFadeMessageClient{"Last.Management", "FadeMessageClient", game::kFF3};
 ref::Method mFadeMessageClient{kFadeMessageClient, "Instance", 0};
 ref::Field fFadeMessageId{kFadeMessageClient, "<CurrentMessageId>k__BackingField"};
@@ -67,7 +68,7 @@ std::wstring field_message_key()
 std::wstring active_field_script()
 {
     auto* interpreter = ref::instance(kInterpreter);
-    return ref::rd<bool>(interpreter, fRunningFieldScript)
+    return ref::rd<bool>(interpreter, fScriptWorking) && ref::rd<bool>(interpreter, fRunningFieldScript)
         ? ref::rd_str_bounded(interpreter, fActiveScript, 48) : std::wstring{};
 }
 
@@ -113,7 +114,7 @@ void* direct_talk_actor(void* controller, const std::wstring& message)
     return unique_actor(controller, [&](void* actor) { return matches_direct_talk(actor, message); });
 }
 
-void* scripted_talk_actor(void* controller, void* action, const std::wstring& message)
+void* scripted_talk_actor(void* controller, void* action, const std::wstring& message, std::wstring active = {})
 {
     struct Speaker { int map; std::wstring_view script, message; int entity; };
     static constexpr Speaker cornelians[] = {
@@ -185,7 +186,7 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
         case game::Id::FF6: speakers = narshe; break;
         default: return nullptr;
     }
-    const auto script = ref::rd_str_bounded(action, fScriptName, 48);
+    const auto script = action ? ref::rd_str_bounded(action, fScriptName, 48) : active;
     const auto map = ::field::current_map_id();
     const auto speaker = std::find_if(speakers.begin(), speakers.end(), [&](const Speaker& row) {
         return row.map == map && row.script == script && row.message == message;
@@ -198,7 +199,7 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
     const auto* tables = data::game_json("appearances").get(L"field_dialogue");
     const auto* pages = tables ? tables->get(std::to_wstring(map)) : nullptr;
     if (!pages) return nullptr;
-    const auto active = active_field_script();
+    if (active.empty()) active = active_field_script();
     if (active.empty()) return nullptr;
     const auto* binding = pages->get(active);
     const auto* row = binding ? binding->get(message) : nullptr;
@@ -355,7 +356,7 @@ std::wstring ready_battle_cue()
 bool read_dialogue_appearance()
 {
     if (!frame::on_main_thread() || !in_dialogue() || !ui::prefs::visual_descriptions_enabled() ||
-        queries::is("GameStatePatches.IsInputTransitionBlocked")) return false;
+        battle::in_battle() || queries::is("GameStatePatches.IsInputTransitionBlocked")) return false;
     const auto message = field_message_key();
     if (message.empty()) return false;
     auto* map = ::field::cache::get(r::kFieldMap);
@@ -364,9 +365,13 @@ bool read_dialogue_appearance()
     auto* event_owner = ref::rd<void*>(controller, fEventOwner);
     if (!kEventProcedure.is(event_owner)) return false;
     auto* action = ref::rd<void*>(event_owner, fRunAction);
-    if (!kEventAction.is(action) || !kScriptAction) return false;
-    const bool scripted = kScriptAction.is(action);
-    const auto art = visible_art(scripted ? scripted_talk_actor(controller, action, message)
+    if ((action && !kEventAction.is(action)) || !kScriptAction) return false;
+    // The direct Talk task finishes after starting the separate message
+    // coroutine. Its action slot can clear while that page is still visible.
+    // A running script still owns its pages and cannot borrow a direct speaker.
+    const auto active = action ? std::wstring{} : active_field_script();
+    const bool scripted = kScriptAction.is(action) || !active.empty();
+    const auto art = visible_art(scripted ? scripted_talk_actor(controller, action, message, active)
                                           : direct_talk_actor(controller, message));
     if (art.empty()) return false;
     const auto key = L"Field appearance " + art;

@@ -376,6 +376,30 @@ embedded resources.
 
 ## Direct and scripted dialogue appearance reader
 
+### November 24 I during a visible conversation
+
+The owner reported silence on I in conversations. The FFIV log records
+Mini Blue and Mini Red in Adamant Grotto and the King of Baron in the
+East Tower. Visual descriptions default to On. The descriptions for those
+sprites already exist in the catalog.
+
+The native direct Talk action launches a separate message coroutine and
+returns completion. `EventProcedure.UpdateController` can release its action
+slot while the field window still shows the page. The reader now permits
+that lifetime. It still requires the exact displayed talk key and either
+the matching visible interaction target or a unique visible direct speaker.
+A working field interpreter preserves ownership of scripted pages, even
+when the event action has changed or gone. The global I handler gives a
+qualified field dialogue priority over underlying detail menus. A visible
+event item selector, map panel or review buffer owns its own details key.
+
+Map 117 binds Mini Blue's three spoken lines in `sc_e_0105` to actor 3.
+Mini Red remains an exact direct talk through actor 4. The two installed
+atlas variants distinguish their blue and red costumes. Map 21 binds the
+King of Baron in `sc_e_0108` and its victory continuation to actor 6.
+Cecil's response and item awards have no king or Mini attribution.
+All descriptions still need the current rendered sprite.
+
 The six installed dialogue tables and placed actor tracks qualify 1,723
 additional scripted pages for I. The association requires an exact native
 speaker label or native character tag, an independently named placed

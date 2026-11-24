@@ -2,6 +2,8 @@
 #include <array>
 #include <cstdio>
 #include <cstdlib>
+#include <fstream>
+#include <iterator>
 #include <map>
 #include <string_view>
 #include <vector>
@@ -161,7 +163,8 @@ namespace data { const json::Value& game_json(const char*) { return fixture_appe
 namespace modtext {
 bool has(std::wstring_view key)
 {
-    return key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
+    return fixture_appearances.get(std::wstring(key)) ||
+           key == L"Field appearance mo_ff1_n101_c00" || key == L"Field appearance mo_ff1_n038_c00" ||
            key == L"Field appearance mo_ff1_n010_c00" || key == L"Field appearance mo_ff1_n012_c00" ||
            key == L"Field appearance mo_ff1_n017_c00" || key == L"Field appearance mo_ff1_n034_c00" ||
            key == L"Field appearance mo_ff1_n035_c00" ||
@@ -433,6 +436,7 @@ int main()
     Node interpreter, battle_script;
     battle_interpreter = &interpreter;
     put(interpreter, "<scriptName>k__BackingField", &battle_script);
+    put(interpreter, "working", reinterpret_cast<void*>(1));
     put(interpreter, "isFieldScript", nullptr);
     current_game = game::Id::FF6;
     in_battle = true;
@@ -722,6 +726,57 @@ int main()
     battle_script.value = L"sc_e_0036";
     put(interpreter, "isFieldScript", nullptr);
     require(!read(), "battle interpreter cannot satisfy a field description");
+
+    // Direct Talk's immediate task retires before the independent native
+    // message coroutine. Exercise that lifetime in each game's shared reader.
+    put(procedure, "runAction", nullptr);
+    put(observer, "interactiveTargetEntity", nullptr);
+    put(interpreter, "isFieldScript", reinterpret_cast<void*>(1));
+    put(interpreter, "working", nullptr);
+    current_map = 3;
+    id.value = L"MSG_DIRECT_TALK";
+    texture.value = L"sactx-128x64-Uncompressed-MO_FF1_N101_C00-cd76ed62";
+    for (int number = 1; number <= 6; ++number) {
+        current_game = static_cast<game::Id>(number);
+        require(read() && spoken == L"Field appearance mo_ff1_n101_c00",
+                "the exact visible direct speaker survives action retirement across all six titles");
+    }
+    put(interpreter, "working", reinterpret_cast<void*>(1));
+    require(!read(), "a running field script cannot borrow a direct speaker after action retirement");
+
+    std::ifstream appearances("data/ff4/appearances.json", std::ios::binary);
+    const std::string bytes{std::istreambuf_iterator<char>(appearances), {}};
+    require(json::parse(bytes, fixture_appearances), "load the shipped FFIV speaker and costume catalog");
+    current_game = game::Id::FF4;
+    current_map = 117;
+    put(interpreter, "working", nullptr);
+    id.value = L"N122_C02_117_01_01";
+    texture.value = L"sactx-128x64-Uncompressed-MO_FF4_N122_C02-7b58a04e";
+    require(read() && spoken == L"Field appearance mo_ff4_n122_c02", "the logged direct Mini Red page has its red costume");
+
+    put(interpreter, "working", reinterpret_cast<void*>(1));
+    battle_script.value = L"sc_e_0105";
+    put(property, "entityId", reinterpret_cast<void*>(3));
+    texture.value = L"sactx-128x64-Uncompressed-MO_FF4_N122_C01-7f64a408";
+    for (const auto* page : {L"E0105_00_117_a_01", L"E0105_00_117_a_02", L"N122_C01_117_02_01"}) {
+        id.value = page;
+        require(read() && spoken == L"Field appearance mo_ff4_n122_c01", "Mini Blue owns each verified spoken exchange");
+    }
+    id.value = L"E0105_00_117_a_03";
+    require(!read(), "the item award is not an NPC speech page");
+
+    current_map = 21;
+    battle_script.value = L"sc_e_0108";
+    put(property, "entityId", reinterpret_cast<void*>(6));
+    texture.value = L"sactx-128x64-Uncompressed-MO_FF4_N006_C02-12345678";
+    id.value = L"E0108_00_021_a_01";
+    renderer.visible = false;
+    require(!read(), "the king's voice cannot describe him before he appears");
+    renderer.visible = true;
+    id.value = L"E0108_00_021_a_02";
+    require(!read(), "Cecil's response cannot borrow the king's costume");
+    id.value = L"E0108_00_021_a_03";
+    require(read() && spoken == L"Field appearance mo_ff4_n006_c02", "the revealed king has an on-demand description");
     check_effect_cues();
     std::puts("Dialogue appearance checks passed");
 }

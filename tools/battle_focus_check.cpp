@@ -62,6 +62,7 @@ struct Node {void* window=nullptr;void* items=nullptr;void* list=nullptr;void* e
 using List=std::vector<void*>;
 std::vector<std::wstring> spoken;
 std::string detail_action;
+bool dialogue_details = false;
 std::vector<bool> interruptions;bool interrupt_turn=true,opening_turn=false,auto_detail=false;
 bool visual_descriptions = true;
 int ready_original_calls=0;
@@ -274,7 +275,11 @@ namespace ffpr::system {void clear_other_menu_states(const std::string&){}bool i
 namespace ffpr::menus {std::wstring spell_description(void*){return L"Removes poison.";}std::wstring spell_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"";}void set_last_announced_ability(void*){}}
 
 namespace ffpr::dialogue {std::wstring read_focused_button(void*,ref::Field&,ref::Field&){return {};}void read_popup_when_ready(void*,const char*,std::function<std::wstring()>,std::function<bool()>){ }
-bool read_dialogue_appearance(){return false;}
+bool read_dialogue_appearance(){
+    if (!fixture::dialogue_details) return false;
+    ffpr::say(L"NPC appearance", true);
+    return true;
+}
 namespace popup_state {void*active_popup(){return nullptr;}void set_active(const char*,void*,ref::Field*,bool){}void clear(){}}}
 namespace il2cpp {
 Class* class_parent(Class* type){return type;}
@@ -319,6 +324,23 @@ void command_data_ready(void* command,void* actor,void* targets,void* items,cons
 }
 }
 int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto expect=[&](bool ok,const char*why){if(!ok){++failures;std::printf("FAIL %s\n",why);}};
+ {
+  dialogue_details=true;
+  queries::define("ShopMenuTracker.ValidateState",[]{return true;});
+  input::global_hotkeys::handle_item_details_key();
+  expect(spoken.size()==1 && spoken.back()==L"NPC appearance" && detail_action.empty(),
+         "a visible field conversation owns I ahead of a stale underlying menu context");
+  queries::define("EventItemSelectState.IsActive",[]{return true;});
+  input::global_hotkeys::handle_item_details_key();
+  expect(spoken.size()==1 && detail_action=="EventItemSelect.ReadDetails",
+         "the actual event item selector retains its own details key");
+  dialogue_details=false;
+  detail_action.clear();
+  spoken.clear();
+  interruptions.clear();
+  queries::define("ShopMenuTracker.ValidateState",[]{return false;});
+  queries::define("EventItemSelectState.IsActive",[]{return false;});
+ }
  b::o_CommandSelectInit=+[](void*,const void*){++fixture::ready_original_calls;};
  b::o_SelectPlayer=b::o_SelectEnemy=&select;b::o_ShowWindow=&show;b::o_EnemysInit=b::o_PlayerInit=b::o_PlayerAll=b::o_EnemyAll=b::o_All=b::o_SidePlayerAll=b::o_SideEnemyAll=&phase;b::o_SetCursor=&command_cursor;
  Node target,cursor,enemy_a,enemy_b,ally,command,content,attack;enemy_a.name=enemy_b.name=L"Rukh";ally.name=L"Rydia";attack.name=L"Attack";content.data=&attack;

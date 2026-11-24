@@ -71,6 +71,7 @@ void handle_item_details_key()
     if (queries::is("ReviewBuffer.IsActive")) { actions::run("ReviewBuffer.Details"); return; }
     if (queries::is("MapPanels.IsActive")) { actions::run("MapPanels.ReadDetails");return; }
     if (queries::is("EventItemSelectState.IsActive")) {actions::run("EventItemSelect.ReadDetails");return;}
+    if (ffpr::dialogue::read_dialogue_appearance()) return;
     // Exact native row focus takes precedence over the item/spell that opened
     // its target panel. All MP levels follow the selected row's short layout.
     if (const auto row = queries::text("CharacterRow.Details"); !row.empty()) {
@@ -142,7 +143,6 @@ void handle_item_details_key()
         actions::run("BattleItemPatches.AnnounceCurrentDescription");
         return;
     }
-    if (ffpr::dialogue::read_dialogue_appearance()) return;
     if (const auto row = queries::text("BattleParty.ChargeDetails"); !row.empty()) ffpr::say(row, true);
 }
 
