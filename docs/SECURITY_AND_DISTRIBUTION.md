@@ -1,5 +1,26 @@
 # Build and distribution security
 
+## November 24 FFIV hovercraft and boss cues
+
+Source checkpoint `7b9a893cd564f03c10c5a8d33024c4eb6cebb3f2` produced a
+21,477,888-byte DLL with SHA-256
+`e7803c929679607ef4d78ca4d6b2bbfab26427e3e58dba19c271ab7b1c9e1ed3`.
+The focused build took 118.3 seconds under the enforced 2 GB job limit.
+It peaked at 508,579,840 bytes. The landing guide, browse route and boss
+visual fixtures, 73 embedded resources, 9,131 native-name checks and
+isolated 47-export smoke test passed.
+
+Defender signatures `1.463.451.0` reported no threats across 22 exact
+payload files, with stable hashes and zero matching detection events.
+Windows denied the exclusion query. No signing certificate was available.
+After game closure, the FFIV installer verified 22 file hashes and all
+138 protected file states. It preserved the other five installations.
+In-game directions and speech timing await confirmation.
+
+Compact results are in `../tools/hovercraft_adamant_20261124`. Recovery
+uses the prior installed FFIV checkpoint from the six-game major-scene
+audit below. The verified FFVI boss-form installation is documented below.
+
 ## November 24 FFIV Leviathan and Asura update
 
 Source checkpoint `aa6d37f6375fb3f7ff26401d17925ba49c46909b` produced a
