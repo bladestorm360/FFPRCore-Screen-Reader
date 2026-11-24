@@ -10,12 +10,15 @@ replans to moving NPCs through interaction range.
 [Scene evidence](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-24-ffiv-narration-follow-up),
 [cavern route](docs/re/VEHICLE_ROUTING.md#magnetic-cavern-approach-november-24)
 and [Autowalk](docs/re/AUTOWALK.md#november-24-final-dismounts-and-moving-npcs).
+Checks passed and the five closed games are installed. FFIV awaits game
+closure. [Delivery record](docs/SECURITY_AND_DISTRIBUTION.md#november-24-ffiv-narration-magnetic-cavern-and-shared-autowalk).
 
 **November 24 I in field dialogue and Baron apparition.** The shared reader
 can identify the visible speaker after the native Talk task retires.
 Adamant Grotto and the King of Baron have verified speaker bindings. The
-Baron scene now describes the flashes and the king's arrival. The shared
-fix is verified and installed in the five other games. FFIV awaits closure.
+Baron scene describes the flashes and the king's arrival. The shared fix
+was installed in the five other games. The newer candidate above carries
+the FFIV update forward.
 [Speaker ownership](docs/re/VISUAL_DESCRIPTIONS_20261119.md#november-24-i-during-a-visible-conversation)
 and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-24-npc-dialogue-and-baron-apparition).
 

@@ -428,6 +428,6 @@ ordinary travel leg to Chocobo Village. In the village the next request
 selects a reachable live mount NPC. Talking to that actor returns the
 party to the surface aboard a Black Chocobo. Subsequent directions use
 the actual ridden vehicle, a legal forest landing and the foot approach
-to the cavern. The route never treats a temporary NPC mount as a parked
-airship. The exact cavern entrance no longer enters the generic
-gate-removal proof, which could give a false story explanation.
+to the cavern. The native mount interaction supplies vehicle ownership.
+The exact cavern entrance uses its verified vehicle prerequisite to
+explain a blocked approach.

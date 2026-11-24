@@ -1,5 +1,26 @@
 # Build and distribution security
 
+## November 24 FFIV narration, Magnetic Cavern and shared Autowalk
+
+Source checkpoint `6a4a100467e98d77e86baab1dff99b78dd2f4449` produced a
+21,498,880-byte DLL with SHA-256
+`fc74f277ee0c9c9e694346522f3b607ea2d31eed5f17a378f4d6fb5097452ab3`.
+The focused build and checks took 286.6 seconds. The 2 GB job peaked
+at 506,572,800 bytes. Dialogue appearance, modal speech, all-six NPC
+labels, real-map routing, native Autowalk, movement replay, all 73
+embedded resources and 9,138 native-name checks passed. The installed-data
+review confirmed 109 puppet and particle anchors and four color-filter
+anchors in 12 locales. The isolated 47-export smoke test passed.
+
+Defender signatures `1.463.451.0` produced zero matching detections and
+stable hashes for all 22 staged files. Windows denied the exclusion query
+and no signing certificate was available. The installer verified all
+22 hashes in FFI, FFII, FFIII, FFV and FFVI, and preserved all 138
+protected file states. FFIV is still running and awaits closure.
+Gameplay confirmation is pending. Compact receipts are in
+`../tools/ff4_cavern_narration_20261124`. Recovery sources are
+`d1beccae` for the five games and `7b9a893c` for FFIV.
+
 ## November 24 NPC dialogue and Baron apparition
 
 Source checkpoint `d1beccae8ee400624507bbe7c07c3f90d6d9a9a8` produced a
@@ -14,10 +35,9 @@ Defender signatures `1.463.451.0` reported no threats across 22 exact
 payload files, with stable hashes and zero matching detection events.
 Windows denied the exclusion query. No signing certificate was available.
 The five closed games passed the 22-file installed verification and all
-138 protected state checks. FFIV awaits game closure. Audible timing
-remains pending. Compact evidence is in `../tools/dialogue_speaker_20261124`.
-The current candidate and exact scan records support guarded FFIV delivery
-after a fresh pre-install inventory.
+138 protected state checks. That delivery omitted the still-running FFIV.
+The newer candidate above carries the FFIV change. Audible timing remains
+pending. Compact evidence is in `../tools/dialogue_speaker_20261124`.
 
 ## November 24 FFIV hovercraft and boss cues
 
