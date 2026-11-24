@@ -3,9 +3,10 @@
 **November 24 I in field dialogue and Baron apparition.** The shared reader
 can identify the visible speaker after the native Talk task retires.
 Adamant Grotto and the King of Baron have verified speaker bindings. The
-Baron scene now describes the flashes and the king's arrival.
+Baron scene now describes the flashes and the king's arrival. The shared
+fix is verified and installed in the five other games. FFIV awaits closure.
 [Speaker ownership](docs/re/VISUAL_DESCRIPTIONS_20261119.md#november-24-i-during-a-visible-conversation)
-and [animation](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-24-king-of-baron-apparition).
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-24-npc-dialogue-and-baron-apparition).
 
 **November 24 FFIV hovercraft and Adamant Grotto.** The native pickup result
 now has its own cue. The route parks the Enterprise outside the pickup area,

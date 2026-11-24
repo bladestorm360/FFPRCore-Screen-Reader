@@ -1,5 +1,24 @@
 # Build and distribution security
 
+## November 24 NPC dialogue and Baron apparition
+
+Source checkpoint `d1beccae8ee400624507bbe7c07c3f90d6d9a9a8` produced a
+21,483,008-byte DLL with SHA-256
+`4d151784e612c7647160d8a0e515ba1339b65c47f5633f12f0400b9c5db1b09c`.
+The focused build finished in 65.2 seconds with a 370,851,840-byte peak
+under the enforced 2 GB job limit. Dialogue appearance, battle focus,
+107 field cue anchors, 73 embedded resources, 9,137 native-name checks
+and the isolated 47-export smoke test passed.
+
+Defender signatures `1.463.451.0` reported no threats across 22 exact
+payload files, with stable hashes and zero matching detection events.
+Windows denied the exclusion query. No signing certificate was available.
+The five closed games passed the 22-file installed verification and all
+138 protected state checks. FFIV awaits game closure. Audible timing
+remains pending. Compact evidence is in `../tools/dialogue_speaker_20261124`.
+The current candidate and exact scan records support guarded FFIV delivery
+after a fresh pre-install inventory.
+
 ## November 24 FFIV hovercraft and boss cues
 
 Source checkpoint `7b9a893cd564f03c10c5a8d33024c4eb6cebb3f2` produced a
