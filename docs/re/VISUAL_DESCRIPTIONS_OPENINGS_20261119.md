@@ -1,5 +1,35 @@
 # Opening and prologue visual actions
 
+## Next audit after usage resets
+
+The November 25 owner report records no major-scene narration heard in
+FFIV. Audible gameplay playback remains unestablished across FFI–FFVI.
+The original inventory of 6,110 distinct field script groups establishes
+what was indexed. Only 65 groups had an authored cue verified offline.
+Use that inventory and the later scene reviews as starting evidence.
+The owner deferred the audit until usage resets and resumes this work.
+
+Freeze a campaign-scale checklist for each of the six games from opening
+through ending. Include major field and battle sequences, significant
+alternate branches, and continuations across dialogue, battles and map
+changes. Give FFV and FFVI room for their larger scene inventories.
+For each major sequence, recover the animation, visible action and its
+timing from the installed game data. Record the order relative to native
+dialogue, fades and transitions. Author concise descriptions for visual
+beats the game leaves unspoken, with one cue for repeated animation that
+conveys the same action.
+
+Verify as much as possible offline through the actual mod cue and speech
+producers. Use installed script and asset evidence and representative
+replays of native timing, visibility, state changes and speech order.
+Check that dialogue queues behind an automatic description. For every
+checklist entry, record the recovered visuals and timing, the resulting
+cue or reason native presentation covers it, and the specific evidence
+and limits. Keep major sequences with unresolved evidence visible and
+resolve them as far as the available offline sources allow. Finish at
+the end of the frozen major-sequence checklist. Gameplay playback and
+another owner playthrough are outside the completion criteria.
+
 ## November 24 King of Baron apparition
 
 The FFIV log shows the king's first line on map 21 before Cecil speaks.
@@ -34,9 +64,10 @@ map 161 in `sc_e_0072_3`. All twelve game languages have cue text.
 
 ## November 24 FFIV narration follow-up
 
-The earlier audit authored visual cues for FFIV, including the Red Wings
-opening, the Giant of Babil awakening and destruction, and the Elemental
-Lords' disappearances. It established the source anchors offline.
+The original audit authored seven FFIV field cues, including the Red Wings
+deck exchange and explosions around the Giant. Later follow-ups added
+cues for the Giant's awakening and destruction and the Elemental Lords'
+disappearances. The source anchors were established offline.
 A review of the current game log and five rotated parts found no matches
 for 44 existing English FFIV field cues. Some sequences predate their
 updates or did not occur in this log window. The installed FFIV settings

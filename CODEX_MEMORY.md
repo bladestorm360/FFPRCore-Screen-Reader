@@ -1,5 +1,14 @@
 # Native FFPR durable memory
 
+**First task after usage resets: six-game major-scene narration audit.**
+The owner reports hearing no major scene descriptions in FFIV. In-game
+playback is unestablished across the six games. When the owner resumes
+work, inventory the major sequences in FFI–FFVI from opening to ending,
+derive animation and narration timing from the game data, and maximize
+offline verification of the speech path. FFV and FFVI need particular
+attention for their larger scene inventories. Completion is offline.
+[Scope and completion criteria](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#next-audit-after-usage-resets).
+
 **November 24 FFIV animation, Namingway and Magnetic Cavern.** Actual
 game logs showed missing narration and a false story restriction at the
 cavern. Exact FFIV color-filter cues and both ordinary Lunar Whale

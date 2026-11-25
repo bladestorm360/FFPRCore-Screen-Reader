@@ -1,9 +1,10 @@
 # Visual description audit
 The six-game catalog and visual speech are installed and offline verified.
 All 2,789 visible artwork entries have descriptions in all 12 languages.
-The status audit accounts for all 525 installed condition rows. The fixed
-event review and reconciliation are closed. Earlier checkpoints below
-record how coverage developed. Gameplay confirmation remains pending.
+The status audit accounts for all 525 installed condition rows. The
+original field-script reconciliation is preserved as historical evidence.
+The next major-scene narration audit is deferred until usage resets.
+[Audit scope and completion criteria](VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#next-audit-after-usage-resets).
 
 ## Planned Ctrl+M map descriptions
 
