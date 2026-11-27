@@ -9,6 +9,7 @@
 #include "autowalk.h"
 #include "fieldnav_util.h"
 #include "nav_target.h"
+#include "route_readout.h"
 #include "waypoints.h"
 #include "../core.h"
 #include "../modtext.h"
@@ -39,6 +40,7 @@ void cycle_next()
     }
 
     nav::cycle_next();
+    route_readout::cancel();
     nav_target::mark_waypoint();
     ffpr::say(nav::format_current_waypoint());
 }
@@ -56,6 +58,7 @@ void cycle_previous()
     }
 
     nav::cycle_previous();
+    route_readout::cancel();
     nav_target::mark_waypoint();
     ffpr::say(nav::format_current_waypoint());
 }
@@ -66,6 +69,7 @@ void cycle_next_category()
 
     std::wstring map_id = map_id_string();
     nav::cycle_next_category(map_id);
+    route_readout::cancel();
     if (nav::count() > 0)
         nav_target::mark_waypoint();
     ffpr::say(nav::category_announcement());
@@ -77,9 +81,29 @@ void cycle_previous_category()
 
     std::wstring map_id = map_id_string();
     nav::cycle_previous_category(map_id);
+    route_readout::cancel();
     if (nav::count() > 0)
         nav_target::mark_waypoint();
     ffpr::say(nav::category_announcement());
+}
+
+void announce_waypoint_route(::field::baked_nav::MapGoal goal, EntityPtr waypoint, bool automatic = false)
+{
+    const auto token = route_readout::begin();
+    goal.spoken_leg_limit = route_readout::leg_limit();
+    ::field::baked_nav::request_route(goal, ::field::TargetKind::Spot, waypoint->name,
+        [goal, waypoint, token, automatic](::field::PathInfo path) {
+            if (!route_readout::current(token) || !ensure_field_context() || nav::selected() != waypoint) return;
+            auto line = path.success && !path.description.empty() ? path.description :
+                (!path.reason.empty() ? path.reason : T(L"No path"));
+            if (ui::prefs::mod_warnings_enabled() && !path.warning.empty())
+                ffpr::say_sequence({path.warning, std::move(line)}, !automatic);
+            else ffpr::say(line, !automatic);
+            route_readout::follow(path, token, [goal, waypoint] {
+                if (nav::selected() == waypoint && ensure_field_context())
+                    announce_waypoint_route(goal, waypoint, true);
+            });
+        });
 }
 
 void pathfind_to_current_waypoint()
@@ -116,17 +140,10 @@ void pathfind_to_current_waypoint()
     if (!::field::baked_nav::cell_at(::field::map_handle(), waypoint->position, goal.cell)) {
         ffpr::say(T(L"Navigation map data unavailable")); return;
     }
-    if (ui::prefs::autowalk_enabled()) autowalk::request(goal, ::field::TargetKind::Spot, waypoint->name);
-    else ::field::baked_nav::request_route(goal, ::field::TargetKind::Spot, waypoint->name,
-        [waypoint](::field::PathInfo path_info) {
-            if (!ensure_field_context()) return;
-            if (nav::selected() != waypoint) return;
-            auto line = (path_info.success && !path_info.description.empty()) ? path_info.description
-                : (!path_info.reason.empty() ? path_info.reason : T(L"No path"));
-            if (ui::prefs::mod_warnings_enabled() && !path_info.warning.empty())
-                ffpr::say_sequence({path_info.warning, std::move(line)}, true);
-            else ffpr::say(line);
-        });
+    if (ui::prefs::autowalk_enabled()) {
+        route_readout::cancel();
+        autowalk::request(goal, ::field::TargetKind::Spot, waypoint->name);
+    } else announce_waypoint_route(goal, waypoint);
 }
 
 void add_new_waypoint_with_naming()

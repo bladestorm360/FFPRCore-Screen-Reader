@@ -106,6 +106,7 @@ struct MapGoal {
     // Manual spoken directions may publish a bearing if flight moved again.
     // Automation and persistent guide previews always need an exact route.
     bool moving_flight_directions = false;
+    int spoken_leg_limit = -1;     // -1 other consumers, 0 legacy manual readout, >0 manual chunk
 };
 
 /// Capture bounded native state on its owner, then plan/format on an owned worker.
@@ -133,6 +134,8 @@ struct DefenseAdvice {
 };
 void request_guidance(std::vector<GuideTarget> candidates, std::function<void(PathInfo)> publish,
                       const map_state::Flags* anticipated_release = nullptr, const DefenseContext* defense = nullptr);
+void request_storyline_guidance(std::vector<GuideTarget> candidates, std::function<void(PathInfo)> publish,
+                                bool keep_destination);
 // anticipated_release, when present, is copied synchronously. Only static gates
 // are projected for departure; live NPCs retain captured positions. No game write.
 void cancel_requests();
@@ -274,7 +277,7 @@ void clear_pending(bool include_preview = false);
 /// After a map change (entity_nav subscribes, 0.8 s after "Entering X"): speaks "<name>: <the
 /// next leg>" to the pending destination from where the player arrived. Cleared when that leg
 /// ends at the destination or nothing reaches it any more.
-void continue_pending();
+void continue_pending(std::function<void(PathInfo)> readout = {});
 /// The beacon's next corner towards a goal on this map or another floor: the plan is kept and
 /// re-made silently when the player leaves it, like `follow`.
 bool follow_goal(void* map_handle, void* player, const MapGoal& goal, TargetKind kind, Corner& out);

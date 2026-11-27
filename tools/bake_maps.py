@@ -518,6 +518,9 @@ def bake_game(game, out_dir, check=False):
                         cont = s if row.get('same_map') else scripts_by_key[(submap_of_mapid[dest[0]], dest[2])]
                         digest = hashlib.sha256(json.dumps(cont, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode('utf-8')).hexdigest()
                         assert digest == row['continuation_sha256'], 'Reviewed trap landing script changed'
+                        if 'departure_sha256' in row:
+                            digest = hashlib.sha256(json.dumps(s, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode('utf-8')).hexdigest()
+                            assert digest == row['departure_sha256'], 'Reviewed route departure script changed'
                         if 'arrival_cell' in row:
                             # Owned graph-only PointIn: scripts may finish somewhere
                             # other than their native ChangeMap point, or on the same map.
@@ -551,6 +554,9 @@ def bake_game(game, out_dir, check=False):
                     # explicitly retains trap semantics,not a silent travel arc.
                     if not(correction and correction[1].get('trap_transfer'))and(reviewed_dest or ordinary_world_exit(o,s) or (correction and correction[1].get('ordinary_travel'))):w['props']['step_on']|=1<<16
                     if correction and correction[1].get('automatic_current'):w['props']['step_on']|=desert_currents.CURRENT_TAG
+                    if correction and correction[1].get('elevator'):
+                        assert game == 'ff5' and t == 'Entity' and correction[1].get('interaction_travel')
+                        w['props']['step_on'] |= 1 << 28
                     if correction and correction[1].get('rope_crossing'):
                         assert game == 'ff4' and correction[1]['same_map'] and t == 'Event'
                         w['props']['step_on'] |= 1 << 27

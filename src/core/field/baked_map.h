@@ -29,6 +29,7 @@ inline constexpr int kAutomaticCurrent = 1 << 24;
 inline constexpr int kConditionalSceneExit = 1 << 25;
 // The native step-on rope script supplies the same-floor player landing.
 inline constexpr int kRopeCrossing = 1 << 27;
+inline constexpr int kFireShipElevator = 1 << 28;
 inline constexpr int kSerpentDiveChoice = 1 << 22;
 
 /// MapConstants.ObjectType values that are baked (bake_maps.py BAKED_TYPES).

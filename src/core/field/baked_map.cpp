@@ -284,9 +284,8 @@ const Grids& grids(const Submap& s)
         }
     }
     g->entity_index_prepared=true;
-    // These FFV contact scripts throw the party away from the contact or back
-    // to the ship's earlier passage. Their forced movement offers no forward
-    // walking edge. The reviewed desert and Istory crossings use other IDs.
+    // These FFV contacts throw the party away from the contact. Reviewed
+    // pipe transfers have exact graph arrivals, while pushbacks stay blocked.
     const auto is_pushback = [&](const Object& o) {
         if (game_number() != 5 || o.type != ObjType::Event || o.b != 2) return false;
         switch (s.first_map_id) {
@@ -294,7 +293,6 @@ const Grids& grids(const Submap& s)
         case 54: return o.a == 1226 || o.a == 1227;
         case 112: return o.a == 1024;
         case 261: return o.a == 1038 || o.a == 1039;
-        case 265: return o.a == 2015 || o.a == 2266 || o.a == 2268 || o.a == 2270;
         case 268: return o.a == 1040;
         case 476: return o.a == 2132 || o.a == 2136 || o.a == 2137;
         case 478: return o.a == 2340 || o.a == 2341;

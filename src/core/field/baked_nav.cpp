@@ -94,6 +94,7 @@ struct Pending {
     std::vector<TrapVisit> completed_transitions;
     std::optional<TrapVisit> incoming_transition;
     uint64_t state_signature = 0;
+    bool unfinished_readout = false;
 };
 thread_local Pending* g_pending = nullptr;
 Pending* g_preview_pending = nullptr; // native-owner receipt for the latest guide/follower request
@@ -485,6 +486,7 @@ struct RouteSnapshot {
     std::shared_ptr<const ActiveRoute> previous_active;
     Pending pending;
     bool keep_destination = true;
+    bool auto_readout = false;
     bool vehicle_shortcuts = false;
     bool projected_origin = false; // worker-only future arrival; no live actor inventory exists there
     std::shared_ptr<std::atomic<uint64_t>> epoch;
@@ -1892,12 +1894,14 @@ std::vector<Cell> goal_cells(void* map_handle, Vec3 target)
     return goals_for(*sm, cell_of(*sm, target, 1), TargetKind::Infer).cells;
 }
 
-static std::wstring describe_phases(const std::vector<Phase>& phases, bool full, const baked::Submap* map)
+static std::wstring describe_phases(const std::vector<Phase>& phases, bool full, const baked::Submap* map,
+                                    int leg_limit = 0, PathInfo* readout = nullptr)
 {
     const int width = map ? baked::wrap_width(*map) : 0;
     const int height = map ? baked::wrap_height(*map) : 0;
     std::vector<std::wstring> parts;
     std::vector<std::vector<baked_route::Leg>> movement;
+    std::vector<bool> shore_steps;
     size_t total_legs = 0;
     int total_steps = 0;
     for (const Phase& p : phases) {
@@ -1905,11 +1909,13 @@ static std::wstring describe_phases(const std::vector<Phase>& phases, bool full,
         auto legs=current_directions::legs(p.cells,map?&baked::grids(*map):nullptr,width,height,&planning_cancelled);
         // The spoken board/land action already performs this one shore step.
         // Keep physical phase cells intact for native movement and route reuse.
-        if (!p.action_before.empty() && p.action_cell && !p.cells.empty() &&
+        const bool shore_step = !p.action_before.empty() && p.action_cell && !p.cells.empty() &&
             *p.action_cell==p.cells.front() && !legs.empty() &&
-            (p.vehicle_before==route_progress::VehicleAction::WalkOn || p.vehicle_before==route_progress::VehicleAction::WalkOff)) {
+            (p.vehicle_before==route_progress::VehicleAction::WalkOn || p.vehicle_before==route_progress::VehicleAction::WalkOff);
+        if (shore_step) {
             if (--legs.front().count==0) legs.erase(legs.begin());
         }
+        if (readout) shore_steps.push_back(shore_step);
         if(!p.precision.empty())legs.clear();
         total_legs += legs.size()+(!p.precision.empty()?p.precision.size()-1:0)+(p.manual_displacement_steps>0?1:0);
         movement.push_back(std::move(legs));
@@ -1917,46 +1923,75 @@ static std::wstring describe_phases(const std::vector<Phase>& phases, bool full,
     }
     // Only the short spoken summary is abbreviated after six direction runs.
     // Geometry, full directions and destination reachability remain complete.
-    const size_t cap = !full && total_steps > kLongRouteSpeechThreshold ? kMaxSpokenLegs : total_legs;
+    const size_t cap = leg_limit > 0 ? std::min(total_legs, static_cast<size_t>(leg_limit)) :
+        !full && total_steps > kLongRouteSpeechThreshold ? kMaxSpokenLegs : total_legs;
+    const bool chunked = readout && cap < total_legs;
+    if (chunked) readout->readout_limited = true;
+    bool observable = chunked;
     size_t spoken = 0;
     for (size_t pi = 0; pi < phases.size(); ++pi) {
         const Phase& p = phases[pi];
+        if (chunked && spoken >= cap) break;
         if (!p.action_before.empty()) parts.push_back(p.action_before);
+        size_t edges = readout && shore_steps[pi] ? 1 : 0;
+        observable = observable && p.precision.empty() && p.action_before.empty() &&
+            p.manual_displacement_steps == 0 && !p.cells.empty() &&
+            (readout->readout_cells.empty() || readout->readout_cells.back() == p.cells.front());
+        bool whole = true;
         if(!p.precision.empty())for(size_t i=1;i<p.precision.size();++i) {
-            if(spoken>=cap)break;
+            if(spoken>=cap){ if (chunked) whole = false; break; }
             const auto a=p.precision[i-1],b=p.precision[i];const int dx=b.x2-a.x2,dy=b.y2-a.y2;
             const int halves=std::max(std::abs(dx),std::abs(dy));
             const int dir=baked_route::step_direction({a.layer,0,0},{b.layer,(dx>0)-(dx<0),(dy>0)-(dy<0)});
             const auto amount=(halves&1)?text::num(halves/2)+L".5":text::num(halves/2);
             parts.push_back(amount+L" "+T(direction_key(dir)));++spoken;
         }
-        bool whole = true;
         for (const baked_route::Leg& leg : movement[pi]) {
             if (spoken >= cap) {
                 whole = false;
                 break;
             }
             parts.push_back(leg.dir==current_directions::ride?T(L"Ride the current"):text::num(leg.count) + L" " + T(direction_key(leg.dir)));
+            if (leg.dir == current_directions::ride) observable = false;
+            edges += leg.count;
             ++spoken;
         }
+        if (observable && edges < p.cells.size())
+            readout->readout_cells.insert(readout->readout_cells.end(),
+                p.cells.begin() + (readout->readout_cells.empty() ? 0 : 1), p.cells.begin() + edges + 1);
         if (!whole) break;
         if(p.manual_displacement_steps>0) {
             if(spoken>=cap)break;
             ++spoken; // a manual mountain crossing is one concise route action
         }
-        if (!p.action_after.empty()) parts.push_back(p.action_after);
+        if (!p.action_after.empty()) {
+            parts.push_back(p.action_after);
+            observable = false; // native action still has to complete
+        }
         if (!p.arrival_facing.empty() && (route_progress::at_interaction(phases, pi) ||
             (p.announce_arrival_facing && pi + 1 == phases.size()))) parts.push_back(p.arrival_facing);
     }
+    if (readout && !observable) readout->readout_cells.clear();
     if (parts.empty()) return T(L"No movement needed");
     std::wstring out = text::join(parts, L", ");
-    if (total_legs > spoken) out += L", " + TF(L"and {0} more", {text::num(static_cast<long long>(total_legs - spoken))});
+    if (!readout && total_legs > spoken) out += L", " + TF(L"and {0} more", {text::num(static_cast<long long>(total_legs - spoken))});
     return out;
 }
 
 std::wstring describe(const std::vector<Phase>& phases, bool full)
 {
     return describe_phases(phases,full,snapshot_submap());
+}
+
+static void apply_manual_readout(PathInfo& path, int limit, bool automatic, const baked::Submap* map)
+{
+    if (limit < 0 || (limit == 0 && !automatic) || !path.success || path.walk_phases.empty()) return;
+    path.readout_limited = false;
+    path.readout_cells.clear();
+    // The legacy readout can summarize a long route. Keep its existing words
+    // and use the exact spoken prefix for auto continuation when opted in.
+    const auto chunk = describe_phases(path.walk_phases, limit > 0, map, limit, &path);
+    if (limit > 0 && (path.readout_limited || path.description != path.full_description)) path.description = chunk;
 }
 
 void invalidate()
@@ -2616,6 +2651,8 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 (o.d&255) == 2 ? T(L"interact to cross") : T(L"examine the warp");
             p.manual_after = (o.d&255) != 1;
             if(o.d&baked::kAutomaticCurrent)p.action_after=T(L"Ride the current");
+            if (o.d & baked::kFireShipElevator)
+                p.action_after = TF(L"Interact: {0}", {T(L"Elevator")});
             if (o.d & baked::kRopeCrossing) {
                 // The native rope event moves the party to the opposite bank.
                 // Name the next action while retaining the farther destination.
@@ -4243,14 +4280,31 @@ void reset_transition_history()
     }
 }
 
-void continue_pending()
+void continue_pending(std::function<void(PathInfo)> readout)
 {
     if (!g_pending || !g_pending->valid) return;
     void* map = field::map_handle();
     void* pl = field::player();
     if (!map || !pl) return;
     hooks::guarded("BakedNav.ContinuePending", [&] {
-        const Pending p = *g_pending;   // route_to_goal re-remembers or clears it
+        Pending p = *g_pending;   // route_to_goal re-remembers or clears it
+        if (p.goal.spoken_leg_limit >= 0) {
+            const bool automatic = ui::prefs::auto_route_readout();
+            if (!ui::prefs::full_route_readout() || automatic) {
+                if (!automatic || p.unfinished_readout) return;
+                const auto expected = p.incoming_transition ? p.incoming_transition : p.incoming_trap;
+                if (!expected || !expected->observed || expected->random_transfer ||
+                    expected->destination != field::current_map_id()) return;
+                Cell at;
+                if (expected->map_id == expected->destination &&
+                    (!player_cell(map, pl, at) || at != expected->arrival)) return;
+            }
+            p.goal.spoken_leg_limit = ui::prefs::full_route_readout() ? 0 : ui::prefs::route_legs_per_readout();
+            if (automatic && readout) {
+                request_route(std::move(p.goal), p.kind, p.name, std::move(readout));
+                return;
+            }
+        }
         request_route(p.goal, p.kind, p.name, [name = p.name](PathInfo info) {
             std::wstring line = name.empty() ? std::wstring() : name + L": ";
             if (info.success && !info.description.empty()) line += info.description;
@@ -4414,12 +4468,14 @@ struct Planned {
     TargetKind kind = TargetKind::Infer;
     std::wstring name;
     bool keep_destination = true;
+    bool auto_readout = false;
 };
 #include "manual_key_prefix.inl"
 #include "troia_passages.inl"
 #include "baron_gate.inl"
 #include "magnetic_cavern.inl"
 #include "lunar_whale_landing.inl"
+#include "fire_ship_passages.inl"
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
     snapshot.flight_to_landing.reset();
@@ -4508,6 +4564,7 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     result.defense=snapshot.defense;
     result.anticipated_release=snapshot.anticipated_release;
     result.name = snapshot.name; result.keep_destination = snapshot.keep_destination;
+    result.auto_readout = snapshot.auto_readout;
     // This exact chest needs the timed waterfall contact to be inactive.
     const bool waterfall_chest = game::is(game::Id::FF5) && snapshot.map_id == 478 &&
         snapshot.goal.map_id == 478 && snapshot.goal.entity_id == 12 && snapshot.goal.cell == Cell{1,10,8};
@@ -4537,16 +4594,21 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     prepare_manual_key_prefix(snapshot,result.path);
     prepare_troia_passage_prefix(snapshot,result.path);
     prepare_baron_gate_prefix(snapshot,result.path);
+    prepare_fire_ship_prefix(snapshot, result.path);
     if (snapshot.map_id == 1) prepare_magnetic_cavern_prefix(snapshot, result.path);
     if (waterfall_state == 0 && !result.path.success && result.path.reason.empty() &&
         result.path.error == L"No path found") {
         result.path.reason = T(L"Event required");
     }
-    // A nearby event is not evidence that it unlocks this destination. Keep
-    // the confirmed gate reason; authored story guidance owns causal next steps.
+    // A campaign objective is already the next incomplete story step. A
+    // failed approach describes missing directions, not a later story lock.
+    if (result.goal.storyline && !result.path.success && result.path.reason == T(L"Story gated"))
+        result.path.reason = T(L"No path to the next step");
     result.active = std::make_shared<ActiveRoute>(std::move(snapshot.active)); result.pending = std::move(snapshot.pending);
     result.flight_to_landing=std::move(snapshot.flight_to_landing);
     result.path.warning = route_warning(result.path, snapshot.goal);
+    apply_manual_readout(result.path, snapshot.goal.spoken_leg_limit, snapshot.auto_readout, snapshot.submap);
+    result.pending.unfinished_readout = result.path.readout_limited;
     result.compute_ms = (frame::now() - compute_started) * 1000;
     return result;
 }
@@ -4620,7 +4682,7 @@ Planned plan_snapshot(RouteSnapshot& snapshot) {
         // A cross-floor or scripted same-floor leg already describes its
         // immediate native action. The final objective's action belongs only
         // at the last leg, so a ladder is not followed by "push the weight".
-        if(result.path.next_map_id==0&&result.path.blocking_party<0&&!result.path.npc_approach&&
+        if(!result.path.readout_limited&&result.path.next_map_id==0&&result.path.blocking_party<0&&!result.path.npc_approach&&
            (!result.active||!result.active->key_approach))
             result.path.guidance=candidate.instruction;
         result.path.guidance_index=static_cast<int>(i);
@@ -4694,6 +4756,8 @@ void rebase_airship(Planned& result, Cell at, std::function<bool()> cancelled) {
         result.active->phases.front().cells=std::move(leg.cells);
         modtext::LocaleScope locale(result.locale);
         fill_result(*flight.submap,result.active->phases,result.path);
+        apply_manual_readout(result.path, result.goal.spoken_leg_limit, result.auto_readout, flight.submap);
+        result.pending.unfinished_readout = result.path.readout_limited;
         result.start=at;
     }
     result.compute_ms+=(frame::now()-started)*1000;
@@ -5640,6 +5704,7 @@ static void request_route_impl(MapGoal goal, TargetKind kind, std::wstring name,
     auto snapshot = std::make_shared<RouteSnapshot>(anticipated_release ?
         map_state::Resolver(*anticipated_release,data::game_json("mapstate")) : map_state::Resolver());
     snapshot->anticipated_release=std::move(anticipated_release);
+    snapshot->auto_readout = goal.spoken_leg_limit >= 0 && ui::prefs::auto_route_readout();
     snapshot->vehicle_shortcuts=goal.storyline || capture_vehicle_shortcuts_policy();
     snapshot->requested_at = requested_at;
     snapshot->map_id = field::current_map_id(); snapshot->submap = submap;
@@ -5750,14 +5815,23 @@ void request_route(MapGoal goal, TargetKind kind, std::wstring name,
                    std::function<void(PathInfo)> publish, bool keep_destination) {
     request_route_impl(std::move(goal),kind,std::move(name),std::move(publish),keep_destination,{});
 }
-void request_guidance(std::vector<GuideTarget> candidates,std::function<void(PathInfo)> publish,const map_state::Flags* anticipated_release,const DefenseContext* defense) {
+static void request_guidance_impl(std::vector<GuideTarget> candidates,std::function<void(PathInfo)> publish,
+                                  const map_state::Flags* anticipated_release,const DefenseContext* defense,bool keep_destination) {
     if(candidates.empty()||candidates.size()>32) {
         PathInfo failure;failure.reason=T(L"No path to the next step");publish(std::move(failure));return;
     }
     const auto first=candidates.front();
-    request_route_impl(first.goal,first.kind,L"",std::move(publish),false,std::move(candidates),
+    request_route_impl(first.goal,first.kind,L"",std::move(publish),keep_destination,std::move(candidates),
         anticipated_release?std::make_shared<const map_state::Flags>(*anticipated_release):nullptr,
         defense?std::optional<DefenseContext>(*defense):std::nullopt);
+}
+void request_guidance(std::vector<GuideTarget> candidates, std::function<void(PathInfo)> publish,
+                      const map_state::Flags* anticipated_release, const DefenseContext* defense) {
+    request_guidance_impl(std::move(candidates), std::move(publish), anticipated_release, defense, false);
+}
+void request_storyline_guidance(std::vector<GuideTarget> candidates, std::function<void(PathInfo)> publish,
+                                bool keep_destination) {
+    request_guidance_impl(std::move(candidates), std::move(publish), nullptr, nullptr, keep_destination);
 }
 
 } // namespace field::baked_nav

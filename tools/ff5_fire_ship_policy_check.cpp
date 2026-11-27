@@ -18,6 +18,63 @@ baked_route::Request request(int mask,Cell at){map_state::Resolver r(flags(mask)
  // A native exit ends this room. Never use it as an indoor walking passage.
  for(const auto& o:baked::grids(*room).objects)if(o.type==baked::ObjType::GotoMap)q.blocked.push_back({o.layer,o.tx,o.ty});return q;}
 int add(int mask,Cell at){auto q=request(mask,at);auto reach=baked_route::flood(q);std::string key=std::to_string(mask)+":";for(int y=0;y<height;++y)for(int x=0;x<width;++x)key+=reach.reachable({1,x,y})?'1':'0';const auto old=seen.find(key);if(old!=seen.end())return old->second;const int index=int(nodes.size());seen[key]=index;nodes.push_back({mask,at,std::move(reach)});return index;}
+// Back-propagate the exact switch outcomes from each selected object's
+// reachable approaches. A zero-operation row lets ordinary routing own it.
+bool write_target_rows(std::ostream& out)
+{
+ const auto& objects=baked::grids(*room).objects;
+ out << "\"target_rows\":{";
+ for(int entity:{15,17,19,20,21,22,23,24,25,26}){
+  const auto type=entity==15?baked::ObjType::GotoMap:entity==17?baked::ObjType::TreasureBox:baked::ObjType::Entity;
+  const auto target=std::find_if(objects.begin(),objects.end(),[&](const auto& o){return o.entity_id()==entity&&o.type==type;});
+  if(target==objects.end())return false;
+  std::vector<int> distances(nodes.size(),INT_MAX);
+  for(size_t i=0;i<nodes.size();++i){
+   const auto& node=nodes[i];
+   if(entity==15){if(node.reach.reachable({1,10,21}))distances[i]=0;continue;}
+   const auto movement=request(node.mask,node.at);
+   const auto goals=baked_route::goals_for(movement,{target->layer,target->tx,target->ty},
+       baked_route::GoalKind::Interact,&*target);
+   if(std::any_of(goals.cells.begin(),goals.cells.end(),[&](Cell at){return node.reach.reachable(at);}))distances[i]=0;
+  }
+  bool changed=true;
+  while(changed){
+   changed=false;
+   for(size_t i=0;i<nodes.size();++i)for(auto edge:nodes[i].edges){
+    if(distances[edge.to]==INT_MAX||distances[edge.to]+1>=distances[i])continue;
+    distances[i]=distances[edge.to]+1;changed=true;
+   }
+  }
+  std::vector<std::string> rows(128,std::string(width*height,'.'));
+  int direct=0,staged=0;
+  for(size_t i=0;i<nodes.size();++i){
+   if(distances[i]==0){++direct;continue;}
+   if(distances[i]==INT_MAX)continue;
+   const auto& node=nodes[i];
+   const auto step=std::find_if(node.edges.begin(),node.edges.end(),[&](auto edge){return distances[edge.to]==distances[i]-1;});
+   if(step==node.edges.end())return false;
+   ++staged;
+   for(int y=0;y<height;++y)for(int x=0;x<width;++x)if(node.reach.reachable({1,x,y})){
+    auto& code=rows[node.mask][y*width+x];
+    if(code!='.'&&code!=alphabet[step->code])return false;
+    code=alphabet[step->code];
+   }
+  }
+  std::printf("Ship target %d: %d direct, %d staged, %zu without a verified route\n",entity,direct,staged,nodes.size()-direct-staged);
+  if(!direct)return false;
+  if(entity!=15)out << ',';
+  out << '"' << entity << "\":[";
+  for(size_t i=0;i<rows.size();++i){
+   if(i)out<<',';
+   out << '"';
+   if(rows[i].find_first_not_of('.')!=std::string::npos)out<<rows[i];
+   out << '"';
+  }
+  out << ']';
+ }
+ out << '}';
+ return true;
+}
 int compile(){
  const auto* layouts=facts.get(L"layouts"),*effects=facts.get(L"transitions");if(!layouts||layouts->arr.size()!=128||!effects||effects->arr.size()!=4096)return 2;
  int comparisons=0;
@@ -48,7 +105,9 @@ int compile(){
  // this includes unchanged-flag carriers into a different walking region.
  for(size_t i=0;i<nodes.size();++i){size_t at=i;for(size_t k=0;k<=nodes.size();++k){if(!nodes[at].distance)break;const auto& n=nodes[at];const auto e=std::find_if(n.edges.begin(),n.edges.end(),[&](auto e){return e.code==action[at];});if(e==n.edges.end()||nodes[e->to].distance>=n.distance)return 10;at=e->to;if(k==nodes.size())return 11;}}
  if(consumer&&!consumer())return 13;
- std::ofstream output("build_check/ff5_fire_ship_policy.json");output<<"{\"rows\":[";for(int m=0;m<128;++m){if(m)output<<',';output<<'\"'<<rows[m]<<'\"';}output<<"],\"states\":"<<nodes.size()<<",\"edges\":"<<edges<<",\"comparisons\":"<<comparisons<<"}\n";
+ std::ofstream output("build_check/ff5_fire_ship_policy.json");output<<"{\"rows\":[";for(int m=0;m<128;++m){if(m)output<<',';output<<'\"'<<rows[m]<<'\"';}output<<"],\"states\":"<<nodes.size()<<",\"edges\":"<<edges<<",\"comparisons\":"<<comparisons<<',';
+ if(!write_target_rows(output))return 14;
+ output<<"}\n";
  return fixture::wrong_owner?12:0;
 }
 }

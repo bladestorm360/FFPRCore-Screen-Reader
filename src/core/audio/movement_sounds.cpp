@@ -14,6 +14,7 @@
 #include <cmath>
 #include "sound.h"
 #include "../core.h"
+#include "../fieldnav/route_readout.h"
 #include "../frame.h"
 #include "../hooks.h"
 #include "../log.h"
@@ -151,6 +152,8 @@ void d_OnTouchPadCallback(void* self, unity::Vec2 axis, const void* mi)
 {
     hooks::guarded("MovementSoundPatches.OnTouchPadCallback", [&] { on_touch_pad_prefix(self, axis); });
     o_OnTouchPadCallback(self, axis, mi);
+    if (has_movement_input(axis))
+        hooks::guarded("RouteReadout.Movement", [] { ffpr::fieldnav::route_readout::motion_input(); });
     // The puzzle guide checks the player's cell against its current step on each movement
     // input (an input event, not a poll): see src/core/field/puzzle_guide.cpp.
     hooks::guarded("PuzzleGuide.OnMove", [] {

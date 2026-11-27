@@ -28,6 +28,7 @@
 #include "../game.h"
 #include "../fieldnav/autowalk.h"
 #include "../fieldnav/audio_loops.h"
+#include "../fieldnav/route_readout.h"
 #include "../ui/preferences.h"
 #include "../hooks.h"
 #include "../log.h"
@@ -55,6 +56,7 @@ std::wstring category_name(Category c)
 }
 
 namespace {
+namespace readout = ffpr::fieldnav::route_readout;
 
 void speak(const std::wstring& t) { ffpr::say(t, true); }
 
@@ -143,7 +145,7 @@ std::wstring storyline_label(const storyline::Stage& stage)
     return T(storyline::selection_label_key(stage, ui::prefs::storyline_spoilers_enabled()));
 }
 
-void route_to_storyline(bool walking, double requested_at)
+void route_to_storyline(bool walking, double requested_at, bool automatic = false)
 {
     const auto stage = storyline_stage();
     const auto& objective = stage.objective;
@@ -157,6 +159,7 @@ void route_to_storyline(bool walking, double requested_at)
     if (candidates.empty()) { speak(T(L"Navigation map data unavailable")); return; }
 
     if (walking) {
+        readout::cancel();
         auto target = std::move(candidates.front());
         // Continuing a walk speaks directions. Keep the title on the
         // selection channel so a saved route cannot replay it later.
@@ -165,20 +168,28 @@ void route_to_storyline(bool walking, double requested_at)
     }
     for (auto& candidate : candidates) {
         candidate.goal.moving_flight_directions = true;
+        candidate.goal.spoken_leg_limit = readout::leg_limit();
         if (!candidate.instruction.empty()) candidate.instruction = T(candidate.instruction);
     }
-    baked_nav::request_guidance(std::move(candidates),
-        [generation = g_category_generation, id = objective->id, requested_at](PathInfo path) {
-            if (generation != g_category_generation || g_current_category != Category::Storyline || !ensure_field_context()) return;
+    const auto token = readout::begin();
+    baked_nav::request_storyline_guidance(std::move(candidates),
+        [generation = g_category_generation, id = objective->id, requested_at, token, automatic](PathInfo path) {
+            if (!readout::current(token) || generation != g_category_generation ||
+                g_current_category != Category::Storyline || !ensure_field_context()) return;
             const auto current = storyline_stage().objective;
             if (!current || current->id != id) return;
             auto message = path.success && !path.description.empty() ? path.description :
                 (!path.reason.empty() ? path.reason : T(L"No path"));
             if (path.success && !path.guidance.empty()) message += L" " + path.guidance;
             const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
-            if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, true, timing);
-            else ffpr::say(message, true, timing);
-        });
+            if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, !automatic, timing);
+            else ffpr::say(message, !automatic, timing);
+            readout::follow(path, token, [generation, id] {
+                if (generation != g_category_generation || g_current_category != Category::Storyline) return;
+                const auto current = storyline_stage().objective;
+                if (current && current->id == id) route_to_storyline(false, frame::now(), true);
+            });
+        }, ui::prefs::auto_route_readout());
 }
 
 /// Refresh live deltas asynchronously; browsing uses the prepared category views.
@@ -267,7 +278,7 @@ void format_current_entity(std::function<void(std::wstring)> publish)
         });
 }
 
-void announce_ready_entity(bool walking, double requested_at)
+void announce_ready_entity(bool walking, double requested_at, bool automatic = false)
 {
     const EntityPtr e = scanner::current_entity();
     baked_nav::MapGoal walk_goal;
@@ -304,11 +315,14 @@ void announce_ready_entity(bool walking, double requested_at)
         name=e->display_name()+(floor.empty()?std::wstring():L" ("+floor+L")");
     }
     if (walking) {
+        readout::cancel();
         ffpr::fieldnav::autowalk::request(walk_goal, kind, name);
     } else {
+        const auto token = readout::begin();
         walk_goal.moving_flight_directions = true;
-        baked_nav::request_route(walk_goal, kind, name, [e, walk_goal, category_generation = g_category_generation, requested_at](PathInfo p) {
-            if(category_generation!=g_category_generation||!ensure_field_context())return;
+        walk_goal.spoken_leg_limit = readout::leg_limit();
+        baked_nav::request_route(walk_goal, kind, name, [e, walk_goal, category_generation = g_category_generation, requested_at, token, automatic](PathInfo p) {
+            if(!readout::current(token)||category_generation!=g_category_generation||!ensure_field_context())return;
             const auto selected=scanner::current_entity();
             if(e) {if(selected!=e||!e->is_alive())return;}
             else if(selected) {
@@ -329,8 +343,12 @@ void announce_ready_entity(bool walking, double requested_at)
                 }
             }
             const speech::Timing timing{speech::Feature::Directions, requested_at, requested_at};
-            if (!p.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({p.warning, message}, true, timing);
-            else ffpr::say(message, true, timing);
+            if (!p.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({p.warning, message}, !automatic, timing);
+            else ffpr::say(message, !automatic, timing);
+            readout::follow(p, token, [selected, category_generation] {
+                if (category_generation == g_category_generation && scanner::current_entity() == selected && ensure_field_context())
+                    announce_ready_entity(false, frame::now(), true);
+            });
         });
     }
 }
@@ -373,6 +391,25 @@ void navigate_to_entity()
     }, true);
 }
 
+void present_continued_readout(PathInfo path, const baked_nav::MapGoal& goal, TargetKind kind,
+                               const std::wstring& name, uint64_t generation, uint64_t token)
+{
+    if (!readout::current(token) || generation != g_category_generation || !ensure_field_context()) return;
+    auto message = path.success && !path.description.empty() ? path.description :
+        (!path.reason.empty() ? path.reason : T(L"No path"));
+    if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, false);
+    else ffpr::say(message, false);
+    readout::follow(path, token, [goal, kind, name, generation] {
+        if (generation != g_category_generation || !ensure_field_context()) return;
+        const auto next_token = readout::begin();
+        auto next_goal = goal;
+        next_goal.spoken_leg_limit = readout::leg_limit();
+        baked_nav::request_route(std::move(next_goal), kind, name, [goal, kind, name, generation, next_token](PathInfo next) {
+            present_continued_readout(std::move(next), goal, kind, name, generation, next_token);
+        });
+    });
+}
+
 void announce_entity_only(speech::Timing timing = {})
 {
     if (!ensure_field_context()) return;
@@ -395,6 +432,7 @@ void cycle(bool next)
 {
     const double requested_at = frame::now();
     if (!ensure_field_context()) return;
+    readout::cancel();
     baked_nav::cancel_browse_route();
     if (!ffpr::fieldnav::autowalk::active()) baked_nav::cancel_requests();
     if (g_current_category == Category::Storyline) {
@@ -433,6 +471,7 @@ Category adjacent_category(Category from, bool next)
 
 void announce_category_change(double requested_at)
 {
+    readout::cancel();
     const auto generation = ++g_category_generation;
     baked_nav::cancel_browse_route();
     if (!ffpr::fieldnav::autowalk::active()) baked_nav::cancel_requests();
@@ -597,7 +636,17 @@ int install()
                 !queries::is("GameStatePatches.IsFieldNavigationReady") ||
                 queries::is("BattleStateHelper.IsInBattle")) return true;
             if (!ensure_field_context()) return false;
-            hooks::guarded("BakedNav.ContinuePending", [] { baked_nav::continue_pending(); });
+            hooks::guarded("BakedNav.ContinuePending", [generation] {
+                if (!ui::prefs::auto_route_readout()) { baked_nav::continue_pending(); return; }
+                baked_nav::MapGoal goal;
+                TargetKind kind;
+                std::wstring name;
+                if (!baked_nav::pending_goal(goal, kind, name)) return;
+                const auto token = readout::begin();
+                baked_nav::continue_pending([goal, kind, name, token, generation](PathInfo path) {
+                    present_continued_readout(std::move(path), goal, kind, name, generation, token);
+                });
+            });
             return false;
         }, "BakedNav.ContinuePending", INT_MAX);
     });

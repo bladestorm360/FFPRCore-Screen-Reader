@@ -23,7 +23,9 @@ def author():
   o,=[o for o in objects['Map_30151_20']if o['props'].get('entity_id')==t['entity']and o['type_name']=='Entity'];assert o['props']['collision']and o['props']['accept_action_direction']==15 and t['layer']==1
  policy=read(R/'build_check/ff5_fire_ship_policy.json');rows=policy['rows'];assert len(rows)==128 and all(len(s)==675 and set(s)<=set('.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh')for s in rows)
  assert policy['states']<=4096 and policy['edges']<=65536 and policy['comparisons']==5376
- return dict(id='fire_ship_passages',maps=[270],transit_maps=[269],controls=controls,exit=target('Map_30151_20',16,'GotoMap'),reset_exit=target('Map_30151_20',15,'GotoMap'),return_exit=target('Map_30151_19',6,'GotoMap'),rows=rows,source_script_hashes=actual,evidence='docs/re/FF5_FIRE_SHIP_20261105.md')
+ target_rows=policy['target_rows'];assert set(target_rows)=={str(i) for i in (15,17,19,20,21,22,23,24,25,26)}
+ assert all(len(table)==128 and all(not row or len(row)==675 and set(row)<=set('.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh') for row in table) for table in target_rows.values())
+ return dict(id='fire_ship_passages',maps=[270],transit_maps=[269],controls=controls,exit=target('Map_30151_20',16,'GotoMap'),reset_exit=target('Map_30151_20',15,'GotoMap'),return_exit=target('Map_30151_19',6,'GotoMap'),rows=rows,target_rows=target_rows,source_script_hashes=actual,evidence='docs/re/FF5_FIRE_SHIP_20261105.md')
 def main():
  # Canonical builds compile checks before producers. Regenerate the original
  # policy from the current source-qualified comparison data;never certify a

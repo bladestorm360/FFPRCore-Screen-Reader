@@ -35,6 +35,8 @@ struct PathInfo {
     std::vector<unity::Vec3> world_path;
     std::vector<route_progress::Phase> walk_phases; // exact cells, layers and manual action boundaries
     std::wstring full_description;
+    bool readout_limited = false;  // the visible instructions stop before the rest of the path
+    std::vector<baked_route::Cell> readout_cells; // exact prefix, for manual progress observation
     std::wstring warning;         // optional mod warning; distinct from usable directions/failure
     bool required_trap = false, event_on_route = false;
     bool trap_repeat_blocked = false;

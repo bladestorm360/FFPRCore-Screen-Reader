@@ -5,12 +5,71 @@
 #undef main
 
 namespace {
+template<class Expect> void check_manual_readout(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    Phase phase;
+    phase.cells = {{1,0,0},{1,0,1},{1,0,2},{1,1,2},{1,2,2},{1,3,2},
+                   {1,3,3},{1,3,4},{1,3,5},{1,3,6},{1,4,6}};
+    phase.action_after = L"Operate the control";
+    phase.manual_after = true;
+    const std::vector<Phase> phases{phase};
+    PathInfo chunk;
+    expect(describe_phases(phases,true,nullptr,3,&chunk)==L"2 South, 3 East, 4 South",
+           "Three direction runs are read exactly, without later movement or the final action");
+    expect(chunk.readout_limited && chunk.readout_cells.size()==10 &&
+           chunk.readout_cells.back()==Cell{1,3,6},"The announced route owns its exact final walking tile");
+    PathInfo full;
+    expect(describe_phases(phases,true,nullptr,4,&full)==describe_phases(phases,true,nullptr) &&
+           !full.readout_limited && full.readout_cells.empty(),
+           "The last chunk includes the reachable action and has no additional progress trigger");
+    using route_progress::ChunkProgress;
+    using route_progress::advance_chunk;
+    size_t cursor=0;
+    expect(advance_chunk(chunk.readout_cells,cursor,{1,0,0})==ChunkProgress::Unchanged &&
+           advance_chunk(chunk.readout_cells,cursor,{1,1,2})==ChunkProgress::Advanced &&
+           advance_chunk(chunk.readout_cells,cursor,{1,9,9})==ChunkProgress::Deviated &&
+           advance_chunk(chunk.readout_cells,cursor,{1,3,4})==ChunkProgress::Advanced &&
+           advance_chunk(chunk.readout_cells,cursor,{1,3,6})==ChunkProgress::Completed,
+           "Only actual progress through the issued cells can complete the chunk");
+    Phase first;
+    first.cells={{1,0,0},{1,0,1}};
+    first.action_after=L"Operate the control";
+    first.manual_after=true;
+    Phase second;
+    second.cells={{1,0,1},{1,1,1}};
+    PathInfo boundary;
+    expect(describe_phases({first,second},true,nullptr,1,&boundary)==L"1 South, Operate the control" &&
+           boundary.readout_limited && boundary.readout_cells.empty(),
+           "An interaction at the chunk boundary is voiced and must complete before any continuation");
+    Phase long_route;
+    long_route.cells.push_back({1,0,0});
+    for (int leg=0;leg<8;++leg) for (int step=0;step<5;++step) {
+        auto at=long_route.cells.back();
+        at.x+=leg%2; at.y+=1-leg%2;
+        long_route.cells.push_back(at);
+    }
+    PathInfo legacy;
+    legacy.success=true;
+    legacy.walk_phases={long_route};
+    const auto old_description=describe_phases(legacy.walk_phases,false,nullptr);
+    legacy.description=old_description;
+    apply_manual_readout(legacy,0,false,nullptr);
+    expect(legacy.description==old_description && legacy.readout_cells.empty(),
+           "Default full directions keep the original summary with no automatic tracking");
+    apply_manual_readout(legacy,0,true,nullptr);
+    expect(legacy.description==old_description && legacy.readout_limited &&
+           legacy.readout_cells.size()==31 && legacy.readout_cells.back()==long_route.cells[30],
+           "With auto on, the unchanged legacy summary can advance after its spoken prefix");
+}
+
 template<class Expect> void check_ff5_water_pushbacks(Expect expect)
 {
     using namespace field;
     using baked_route::Cell;
     int contacts = 0;
-    for (const int map_id : {48, 54, 112, 261, 265, 268, 476, 478, 545}) {
+    for (const int map_id : {48, 54, 112, 261, 268, 476, 478, 545}) {
         const auto* map = baked::submap_by_map_id(map_id);
         if (!map) { expect(false, "Missing FFV current map"); continue; }
         const auto& grid = baked::grids(*map);
@@ -31,7 +90,7 @@ template<class Expect> void check_ff5_water_pushbacks(Expect expect)
             }
         }
     }
-    expect(contacts == 90, "All source-qualified FFV current contacts are baked on their native layers");
+    expect(contacts == 86, "All source-qualified FFV pushbacks retain their native layers");
 }
 
 template<class Expect> void check_ff4_lunar_subterrane_exits(Expect expect)
@@ -978,6 +1037,7 @@ int main() {
     int failures=0, direct_games=0, detours=0;
     double worst_ms=0;
     auto expect=[&](bool ok,const char* reason){if(!ok){++failures;std::printf("FAIL %s\n",reason);}};
+    check_manual_readout(expect);
     std::vector<std::string> storage;storage.reserve(6);
     for(int number=1;number<=6;++number) {
         fixture::game_id=static_cast<game::Id>(number);

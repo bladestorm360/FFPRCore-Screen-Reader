@@ -1,5 +1,18 @@
 # Native FFPR durable memory
 
+**November 27 manual directions.** Shared Navigation settings control full
+readout, chunk size and automatic continuation. Confirmed progress keeps the
+same selected route. Autowalk narration remains separately configurable.
+Verified offline and installed in all six games. Natural-play confirmation
+is pending. [Behavior](docs/re/AUTOWALK.md#november-27-manual-route-readout)
+and [installation evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-27-fire-powered-ship-and-manual-route-readout).
+
+**November 27 Fire-Powered Ship directions.** The live FFV log identifies
+Storyline and selected destination failures through the engine rooms.
+The pathfinder uses five two-way elevators, four exact pipe landings and
+the native switch outcomes for each passage destination.
+[Source evidence and replay](docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md).
+
 **November 26 reported defects and narration audit.** Installed and
 hash-verified in all six games. The focused update covers Bahamut's boss
 and summon phases, the Lunar Subterrane and FFIV ending, current-floor

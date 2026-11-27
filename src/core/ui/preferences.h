@@ -48,6 +48,11 @@ inline constexpr const char* kNavigationKeymap = "NavigationKeymap";
 inline constexpr const char* kTeleportShortcuts = "TeleportShortcuts";
 inline constexpr const char* kSpeechEnabled = "SpeechEnabled";
 inline constexpr const char* kSpeakAutowalkPath = "SpeakAutowalkPath";
+inline constexpr const char* kFullRouteReadout = "FullRouteReadout";
+inline constexpr const char* kAutoRouteReadout = "AutoRouteReadout";
+inline constexpr const char* kRouteLegsPerReadout = "RouteLegsPerReadout";
+inline constexpr bool kFullRouteReadoutDefault = true, kAutoRouteReadoutDefault = false;
+inline constexpr int kRouteLegsDefault = 3, kRouteLegsMin = 1, kRouteLegsMax = 12;
 inline constexpr const char* kBeaconWithDirections = "BeaconWithDirections";
 inline constexpr const char* kPuzzleGuideVerbosity = "PuzzleGuideVerbosity";
 inline constexpr const char* kNavigationPuzzleGuidance = "NavigationPuzzleGuidance";
@@ -163,6 +168,11 @@ inline bool autowalk_enabled() { return settings::get_bool(kAutowalk, kAutowalkD
 inline bool teleport_shortcuts_enabled() { return settings::get_bool(kTeleportShortcuts, kTeleportShortcutsDefault); }
 inline bool speech_enabled() { return settings::get_bool(kSpeechEnabled, kSpeechEnabledDefault); }
 inline bool speak_autowalk_path_enabled() { return settings::get_bool(kSpeakAutowalkPath, kSpeakAutowalkPathDefault); }
+inline bool full_route_readout() { return settings::get_bool(kFullRouteReadout, kFullRouteReadoutDefault); }
+inline bool auto_route_readout() { return settings::get_bool(kAutoRouteReadout, kAutoRouteReadoutDefault); }
+inline int route_legs_per_readout() {
+    return std::clamp(settings::get_int(kRouteLegsPerReadout, kRouteLegsDefault), kRouteLegsMin, kRouteLegsMax);
+}
 inline bool beacon_with_directions_enabled() { return settings::get_bool(kBeaconWithDirections, kBeaconWithDirectionsDefault); }
 // Guide metadata is optional; instructions, choices and safe timing are always
 // retained. Missing settings select the owner's default Minimal mode; values

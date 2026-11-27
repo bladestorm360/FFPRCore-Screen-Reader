@@ -1,5 +1,33 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 27 manual route readout
+
+The shared Navigation menu saves the full readout switch, the chunk size
+and the automatic continuation switch. Full readout defaults on and keeps
+the existing directions text. Chunk mode defaults to three direction runs
+at a time and accepts one through twelve. Automatic continuation defaults
+off. The game-specific language catalog resolves all seven new menu and
+help entries in the twelve supported languages.
+
+The navigation worker formats the spoken prefix from the same route
+phases used for the full report. It keeps the underlying route and
+Autowalk plans intact. An action and its facing instruction stay with
+their actual arrival. The worker provides exact walking cells for an
+incomplete chunk when those cells can be observed. The native movement
+input callback schedules a bounded position sample for that issued chunk.
+Verified progress to its end requests fresh directions for the same
+selected target. Menus, transition prefixes, battle entry and target
+changes retire old ownership. Automatic continuation uses queued
+speech.
+
+Cross-floor continuation requires the observed route entry and a ready
+arrival on the expected map. Transfers with an unverified landing and
+manual actions that change the route in place can still be followed by
+another directions request. Availability of gameplay speech and the
+timing of movement observations need natural-play confirmation.
+
+[Readout verification procedure](../TESTING.md#manual-route-readout)
+
 ## November 24 final dismounts and moving NPCs
 
 The FFIV game log shows a planned dismount one step from Magnetic

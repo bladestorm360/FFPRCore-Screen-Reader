@@ -57,6 +57,8 @@ Opening and closing the mod menu have separate entries, both defaulting to F8 on
 
 Choose a pathfinding layout in F8, Navigation, Navigation keymap. Letters is the default; only the selected layout is active. The choice is saved separately for each game.
 
+Under F8 → Navigation, **Full route readout** defaults to On and keeps the current directions style. Turn it off to hear a chunk at a time. **Route legs per readout** defaults to three and accepts one through twelve. A leg is consecutive movement in one direction, such as “2 south.” Backslash or P, depending on your layout, reads directions from where you are. With **Automatically speak next leg of route** on, ordinary walking chunks continue when you finish the announced movement. Confirmed route transitions can continue once the new floor is ready. If a switch or other manual action changes the route without a confirmed handoff, request directions again after using it. The setting defaults to Off. These settings apply to manual pathfinder directions and are independent of Autowalk.
+
 Letters layout:
 
 - J / L: previous / next destination.

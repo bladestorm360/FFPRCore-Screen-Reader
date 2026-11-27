@@ -1,5 +1,28 @@
 # Build and distribution security
 
+## November 27 Fire-Powered Ship and manual route readout
+
+The shared candidate is 22,064,640 bytes with SHA-256
+`8dfe749461362078a6c8887530e9fdde5ebf313fb734bc900daf2ffaf7888939`.
+The build passed the source and dependency checks, three production route
+and campaign fixtures, 73 embedded resource checks and all 47 isolated
+smoke exports. It ran in 174.5 seconds with one worker and 535,089,152
+bytes of peak job memory. The ship fixture verified 1,055 assertions
+across 242 actual route legs, including all ten directions of lift travel.
+The shared readout fixture verifies the three-leg example, the exact
+completion tile, off-route cancellation, the interaction boundary and
+the legacy long-route summary with automatic continuation.
+
+Defender signatures `1.463.492.0` reported no threats on all 22 exact
+payload files. Their hashes were stable and no matching detection events
+were found. Windows denied exclusion inspection and there was no signing
+certificate. The closed-game install matched 132 exact file hashes across
+all six games and preserved all 138 recorded protected file states.
+Gameplay timing and speech delivery remain for natural-play confirmation.
+Compact receipts are under `build_check/route-readout-delivery` and
+`build_check/fire-ship-routing`. The previous six-game candidate is
+recorded below.
+
 ## November 26 narration and routing
 
 Source `616d697232d172abd5973740e0f25d02fc8ee2c8` produced a

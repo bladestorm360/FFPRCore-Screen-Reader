@@ -2454,3 +2454,17 @@ of Time, the two deeper locked rooms need two keys while the earlier door is
 closed, or one key after that earlier door is opened. Thief uses no key.
 These checks remain natural gameplay confirmation, not a launch/revisit request.
 [Exact evidence and limits](re/FF3_KEY_GATES_20261101.md).
+## Manual route readout
+
+Use a field route with at least four turns. In F8 → Navigation, keep Full
+route readout on and request directions with Backslash or P for your
+layout. Turn it off and set Route legs per readout to three. Request
+directions again. The mod should give only the first three movement legs.
+
+Follow those directions with Automatically speak next leg of route off.
+Wait at the last tile, then use the directions key to get the next chunk.
+Repeat with the automatic setting on. The next chunk should be queued as you
+reach that tile. Change targets or leave the issued path during a chunk and
+check that automatic speech stops. Try a door between two floors and a
+switch that alters a passage. The route should never describe movement
+through a native action while that action is still pending.

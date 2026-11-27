@@ -208,6 +208,20 @@ void initialize()
     v.push_back(toggle(L"Speak autowalk path", p::kSpeakAutowalkPath, p::kSpeakAutowalkPathDefault,
                        L"On. Reads the full current route when autowalk starts, and the next leg after a map transition.",
                        L"Off. Autowalk starts without reading the route. Arrival and required actions are still announced."));
+    v.push_back(toggle(L"Full route readout", p::kFullRouteReadout, p::kFullRouteReadoutDefault,
+                       L"Read the route using the standard directions announcement.",
+                       L"Read only the chosen number of direction legs at a time."));
+    Item legs = volume(L"Route legs per readout", p::kRouteLegsPerReadout, p::kRouteLegsDefault,
+                       L"Read only the chosen number of direction legs at a time.");
+    legs.kind = Kind::Range;
+    legs.int_min = p::kRouteLegsMin;
+    legs.int_max = p::kRouteLegsMax;
+    legs.int_step = 1;
+    legs.unit = L"{0}";
+    v.push_back(std::move(legs));
+    v.push_back(toggle(L"Automatically speak next leg of route", p::kAutoRouteReadout, p::kAutoRouteReadoutDefault,
+                       L"Speak more directions when the current chunk is complete.",
+                       L"Request directions again for the next chunk."));
     v.push_back(enumeration(L"Pathfinding Filter", {p::kPathfindingFilterModeNames[0], p::kPathfindingFilterModeNames[1], p::kPathfindingFilterModeNames[2], p::kPathfindingFilterModeNames[3]},
                             p::kPathfindingFilterMode, p::kPathfindingFilterModeDefault, p::kPathfindingFilterModeMax,
                             L"Current floor: entity cycling shows only what walking reaches on this floor. Current map with vehicles: also what a vehicle you have here reaches. Current map: everything, and a target cut off on this floor is routed through another floor."));

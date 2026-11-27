@@ -69,4 +69,22 @@ inline bool at_interaction(const std::vector<Phase>& phases, size_t index)
 {
     return index + 1 == phases.size() && phases[index].cells.size() == 1;
 }
+
+enum class ChunkProgress { Unchanged, Advanced, Completed, Deviated };
+inline ChunkProgress advance_chunk(const std::vector<baked_route::Cell>& cells, size_t& cursor,
+                                   const baked_route::Cell& at)
+{
+    if (cursor >= cells.size()) return ChunkProgress::Deviated;
+    if (cells[cursor] == at) return ChunkProgress::Unchanged;
+    // A dash or delayed owner frame can deliver a short run in one update.
+    // Bound the lookahead and accept the first matching occurrence in order.
+    constexpr size_t max_cell_advance = 4;
+    const size_t end = std::min(cells.size(), cursor + 1 + max_cell_advance);
+    for (size_t next = cursor + 1; next < end; ++next) {
+        if (cells[next] != at) continue;
+        cursor = next;
+        return cursor + 1 == cells.size() ? ChunkProgress::Completed : ChunkProgress::Advanced;
+    }
+    return ChunkProgress::Deviated;
+}
 }
