@@ -1,5 +1,39 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 27 FFV Atomos and Magnet
+
+Atomos's fallen-target action 1140 uses its FFV calculation provider.
+The provider's completion loop advances with Unity's delta time and
+requests lateral Event offsets. It selects eligible fallen units before
+motion begins. `BattleSpriteEntity.UpdateEntity` applies the change to
+the battle transform and records the applied offset. The observer speaks
+after the first advancing offset commits on a currently drawn body.
+It uses at most four targets and retains only offsets and native identity
+values. A stage-only, zero-progress or hidden update cannot announce a
+pull. Repeated frames in the same action remain quiet. Battle teardown
+retires all pending presentation.
+
+The encounter script's separate `Current.AtmosAct` checks the active
+battle and empty execution stack, then consults the Wait-mode menu and
+the fallen targets' applied path toward the native threshold. It can
+request Wormhole after the drag. The cue follows the motion producer and
+does not depend on Wormhole or an estimated countdown.
+
+The Steam log shows Liquid Flame's humanoid, hand and vortex descriptions
+played in the reported fight. It also shows Magnet's name without an
+accessible result. Native ability 483 checks the first selected party
+member's formation and moves a back-row target to the front. A front-row
+target stays in place. The FFV-specific result observer uses the concrete
+battle-unit parameter overload and reports the target's committed row or
+that they were already there. The party's Row command has a separate
+ability identity and retains its own behavior. Both results use the base
+battle speech stream and all twelve locales.
+
+The native-detour fixtures exercise delayed commit, actual draw, repeated
+motion, a new pull and teardown. Magnet checks cover both row outcomes,
+an unchanged back row, repeated callbacks and the separate Row ability.
+The fixtures run offline. [Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-27-ffv-scene-timing-and-magnet)
+
 ## November 27 FFV Liquid Flame transformations
 
 Liquid Flame's three counter paths use the same native party replacement
@@ -56,10 +90,8 @@ health on the existing roster. They provide no basis for revealing the
 real target in narration. Timers and ordinary named attacks keep their
 native feedback.
 
-Atomos remains a documented gap. Its drag is real visible party movement,
-owned by `sc_b_0115` and `Current.AtmosAct`, separate from the named
-Wormhole action. Its repeated native loop does not yet provide a verified
-one-shot presentation boundary for the narration observer.
+Atomos's drag remained open in this pass. The follow-up above binds its
+cue to the applied motion of the rendered battle body.
 
 The production-detour fixture runs all five additions against their
 native timing, live roster and locale requirements, and retains all six

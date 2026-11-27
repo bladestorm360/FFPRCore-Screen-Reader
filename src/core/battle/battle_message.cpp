@@ -244,7 +244,7 @@ void d_EndFinishingState(void* self, const void* mi)
         if(act)stat_feedback::finish_action(ref::rd<void*>(act,fAttackUnitData),ref::rd<void*>(act,fStatTargets));
     });
     // Finish before native completion callbacks can initialize the next command/action.
-    hooks::guarded("Battle.ActionFinished", [] { if(game::is(game::Id::FF3))action_effects::finish_action();action_actor_finished(); });
+    hooks::guarded("Battle.ActionFinished", [] { if(game::in(game::kFF3 | game::kFF5))action_effects::finish_action();action_actor_finished(); });
     { timing::Scope native("Battle EndFinishingState",timing::Kind::Original);
       o_EndFinishingState(self, mi); }
     timing::mark("Battle action finished");

@@ -1,10 +1,20 @@
 # Native FFPR durable memory
 
+**November 27 FFV animation timing and Magnet.** The ship's pre-battle,
+after-battle and Fire Crystal sequences use actual draw, movement or tile
+state witnesses. Reusable script replay checked their dialogue and phase
+order and all 140 field registry bindings. Atomos now describes the first
+visible pull. Magnet names the party member affected and their resulting
+row. The reported battle log confirms existing Liquid Flame form speech.
+[Field replay](docs/re/VISUAL_DESCRIPTIONS_OPENINGS_20261119.md#november-27-ffv-field-timing-and-repeatable-replay),
+[battle cues](docs/re/BOSS_VISUALS_20261112.md#november-27-ffv-atomos-and-magnet)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-27-ffv-scene-timing-and-magnet).
+
 **November 27 FFV boss animation audit.** The audit added cues for Siren's
 restoration, Iron Claw, Jura Aevis, the Gargoyle revival and Dragon Flower
 appearances. The final deployment retains all Liquid Flame cues. Offline
-checks and installed hashes passed. Atomos's dragging animation remains an
-open timing gap. [Audit](docs/re/BOSS_VISUALS_20261112.md#november-27-ffv-boss-animation-audit)
+checks and installed hashes passed. The later timing fix covers Atomos.
+[Audit](docs/re/BOSS_VISUALS_20261112.md#november-27-ffv-boss-animation-audit)
 and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-27-ffv-boss-animation-audit).
 
 **November 27 FFV Liquid Flame.** The humanoid, hand and vortex cues now

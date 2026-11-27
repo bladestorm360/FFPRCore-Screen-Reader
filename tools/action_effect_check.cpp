@@ -9,7 +9,7 @@
 #include <map>
 #include "../src/core/battle/action_effects.cpp"
 namespace fixture {
-struct Node {std::wstring name;void* abilities=nullptr;void* command=nullptr;void* attacker=nullptr;void* act=nullptr;int id=0,type=0;bool enemy=false;};
+struct Node {std::wstring name;void* abilities=nullptr;void* command=nullptr;void* attacker=nullptr;void* act=nullptr;int id=0,type=0;bool enemy=false;void* targets=nullptr;Node* corps=nullptr;};
 using List=std::vector<void*>;
 DWORD owner=GetCurrentThreadId();int wrong_owner=0,native_reads=0;bool battle=true,missing=false;
 game::Id game_id=game::Id::FF3;
@@ -20,19 +20,33 @@ void native(){if(GetCurrentThreadId()!=owner)++wrong_owner;else ++native_reads;}
 void tick(){auto old=std::move(due);due.clear();for(auto& row:old)if(--row.frames<=0)row.task();else due.push_back(std::move(row));}
 void flush(){tick();tick();}
 int id(void* p,const void*){native();return static_cast<Node*>(p)->id;}
+int result_row = 1;
+int forwarded_updates = 0;
+void update_row(void* self,void*,void*,void*,il2cpp::String*,const void*) {
+    ++forwarded_updates;
+    auto* provider=static_cast<Node*>(self);
+    auto* act=static_cast<Node*>(provider->act);
+    if (!act->targets) return;
+    auto* selected=static_cast<Node*>(static_cast<List*>(act->targets)->front());
+    if (selected->corps && result_row) selected->corps->id=result_row;
+}
 }
 namespace core {Install::Install(const char* n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){}}
 namespace game {Id current(){return fixture::game_id;}}
 namespace ref {
 Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),games(g),assembly(a){}
-bool Class::is(void* p){fixture::native();return p&&static_cast<fixture::Node*>(p)->enemy;}
+bool Class::is(void* p){fixture::native();return p&&(!std::strcmp(name,"BattlePlayerData")?
+    !static_cast<fixture::Node*>(p)->enemy:static_cast<fixture::Node*>(p)->enemy);}
+il2cpp::Class* Class::get(){return reinterpret_cast<il2cpp::Class*>(this);}
 Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 int32_t Field::get(){fixture::native();if(fixture::missing)return -1;
  if(!std::strcmp(name,"abilityList"))return offsetof(fixture::Node,abilities);
  if(!std::strcmp(name,"<Command>k__BackingField"))return offsetof(fixture::Node,command);
  if(!std::strcmp(name,"<CurrentActType>k__BackingField"))return offsetof(fixture::Node,type);
  if(!std::strcmp(name,"<AttackUnitData>k__BackingField"))return offsetof(fixture::Node,attacker);
- if(!std::strcmp(name,"<battleActData>k__BackingField"))return offsetof(fixture::Node,act);return -1;}
+ if(!std::strcmp(name,"<TargetUnitDatas>k__BackingField"))return offsetof(fixture::Node,targets);
+ if(!std::strcmp(name,"<corps>k__BackingField"))return offsetof(fixture::Node,corps);
+ if(!std::strcmp(name,"battleActData")||!std::strcmp(name,"<battleActData>k__BackingField"))return offsetof(fixture::Node,act);return -1;}
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}
 il2cpp::Method* Method::get(){fixture::native();return reinterpret_cast<il2cpp::Method*>(1);}
 void* Method::ptr(){fixture::native();return reinterpret_cast<void*>(&fixture::id);}
@@ -41,11 +55,23 @@ void call_failed_note(const char*){std::abort();}
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData",game::kFF3};
 bool in_battle(){return fixture::battle;}
+bool battle_presentation_ready(){return fixture::battle;}
+il2cpp::Method* find_method_param_type(il2cpp::Class*,const char*,int,int,const char*){return nullptr;}
 std::wstring unit_name(void* p){fixture::native();return p?static_cast<fixture::Node*>(p)->name:L"";}
 }
 namespace unity {
 int list_count(void* p){fixture::native();return p?int(static_cast<fixture::List*>(p)->size()):0;}
 void* list_at(void* p,int i){fixture::native();return static_cast<fixture::List*>(p)->at(i);}
+int array_length(void* p){return list_count(p);}
+void* array_at(void* p,int i){return list_at(p,i);}
+}
+namespace hooks {
+bool attach_addr(void*,const char*,void*,void**){return false;}
+void note_fault(const char*){std::abort();}
+}
+namespace il2cpp {
+void* method_pointer(Method*){return nullptr;}
+bool read_string(String* s,wchar_t* out,size_t count){return wcscpy_s(out,count,reinterpret_cast<const wchar_t*>(s))==0;}
 }
 namespace frame {bool on_main_thread(){return GetCurrentThreadId()==fixture::owner;}void after_frames(int n,Task task,const char*){fixture::due.push_back({n,std::move(task)});}}
 namespace modtext {
@@ -130,6 +156,23 @@ int main(){
  }
  std::printf("100 complete32-target episodes %.3fms aggregate, %.3fms peak; max%d fake SDK observations/episode; actual native/audio unmeasured\n",episode_total,episode_peak,episode_reads);
  missing=true;a::install();expect(!a::enabled,"missing required metadata fails closed");missing=false;game_id=game::Id::FF2;expect(a::install()==0,"other games add no hooks");
+ game_id=game::Id::FF5;spoken.clear();a::original_ff5_update=&update_row;
+ Node formation;formation.id=2;caster.corps=&formation;
+ List selected{&caster};root.targets=&selected;root_ability.id=483;function.act=&root;
+ auto* row_key=reinterpret_cast<il2cpp::String*>(const_cast<wchar_t*>(L"POSITION_CHANGE"));
+ a::ff5_parameter_update(&function,&one,&other,nullptr,row_key,nullptr);
+ a::ff5_parameter_update(&function,&one,&other,nullptr,row_key,nullptr);
+ expect(spoken==std::vector<std::wstring>{L"Magnet moved Rae to front row"}&&formation.id==1&&forwarded_updates==2,
+        "Magnet names the selected player's committed change once and leaves both native calls intact");
+ a::finish_action();
+ a::ff5_parameter_update(&function,&one,&other,nullptr,row_key,nullptr);
+ expect(spoken.size()==2&&spoken.back()==L"Magnet target Rae already in front row","A new Magnet says why an already-front target did not move");
+ a::finish_action();formation.id=2;result_row=0;
+ a::ff5_parameter_update(&function,&one,&other,nullptr,row_key,nullptr);
+ expect(spoken.size()==2&&formation.id==2,"An unchanged back row does not claim a successful move");
+ root_ability.id=482;result_row=1;
+ a::ff5_parameter_update(&function,&one,&other,nullptr,row_key,nullptr);
+ expect(spoken.size()==2,"The separate Row ability does not borrow Magnet speech");
  std::printf("Per-target effects: %d failures; 10000 unrelated result callbacks %.3fms aggregate; wrong-owner=%d; no game run\n",failures,elapsed,wrong_owner);
  return failures?1:0;
 }

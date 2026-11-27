@@ -6,6 +6,7 @@
 #include "battle_util.h"
 #include "battle_message_line.h"
 #include "../core.h"
+#include "../hooks.h"
 #include "../modtext.h"
 #include "../unity.h"
 #include <array>
@@ -70,6 +71,78 @@ int install() {
     return 0; // metadata only: the existing CreateDamageView hook owns this phase
 }
 core::Install registration{"Battle.ActionEffects",&install,109,game::kFF3};
+
+ref::Class kFf5Provider{"Serial.FF5.Calc", "UniqueUpdateParameterProvider", game::kFF5};
+ref::Field fFf5Act{kFf5Provider, "battleActData"};
+ref::Class kFf5Act{"Last.Battle", "BattleActData", game::kFF5};
+ref::Field fFf5Abilities{kFf5Act, "abilityList"}, fFf5Targets{kFf5Act, "<TargetUnitDatas>k__BackingField"};
+ref::Class kFf5Ability{"Last.Data.Master", "Ability", game::kFF5};
+ref::Method mFf5AbilityId{kFf5Ability, "get_Id", 0};
+ref::Class kFf5Player{"", "BattlePlayerData", game::kFF5};
+ref::Field fPlayerCorps{kFf5Player, "<corps>k__BackingField"};
+ref::Class kCorps{"Last.Data.User", "Corps", game::kFF5};
+ref::Method mCorpsId{kCorps, "get_Id", 0};
+
+using ParameterUpdate = void (*)(void*, void*, void*, void*, il2cpp::String*, const void*);
+ParameterUpdate original_ff5_update;
+constexpr int kFrontRow = 1, kBackRow = 2, kMagnet = 483;
+uintptr_t magnet_reported_action = 0;
+
+void retire_magnet() { magnet_reported_action = 0; }
+
+int party_row(void* player)
+{
+    auto* corps = ref::rd<void*>(player, fPlayerCorps);
+    return corps ? ref::call<int32_t>(mCorpsId, corps) : 0;
+}
+
+void ff5_parameter_update(void* self, void* attacker_unit, void* target, void* results_dict,
+                          il2cpp::String* key, const void* mi)
+{
+    void* player = nullptr;
+    uintptr_t action = 0;
+    int previous = 0;
+    if (key && frame::on_main_thread() && battle_presentation_ready())
+        hooks::guarded("Battle.MagnetBefore", [&] {
+            wchar_t name[24]{};
+            if (!il2cpp::read_string(key, name, std::size(name)) || std::wstring_view(name) != L"POSITION_CHANGE") return;
+            auto* act = ref::rd<void*>(self, fFf5Act);
+            action = reinterpret_cast<uintptr_t>(act);
+            if (!action || action == magnet_reported_action) return;
+            auto* abilities = ref::rd<void*>(act, fFf5Abilities);
+            if (unity::list_count(abilities) < 1 ||
+                ref::call<int32_t>(mFf5AbilityId, unity::list_at(abilities, 0)) != kMagnet) return;
+            // Magnet uses the first native selected target. The separate Row
+            // command uses the callback's target argument and has its own path.
+            auto* targets = ref::rd<void*>(act, fFf5Targets);
+            if (unity::array_length(targets) < 1) return;
+            auto* selected = unity::array_at(targets, 0);
+            if (!kFf5Player.is(selected)) return;
+            previous = party_row(selected);
+            if (previous == kBackRow || previous == kFrontRow) player = selected;
+        });
+    original_ff5_update(self, attacker_unit, target, results_dict, key, mi);
+    if (player && battle_presentation_ready()) hooks::guarded("Battle.MagnetResult", [&] {
+        if (reinterpret_cast<uintptr_t>(ref::rd<void*>(self, fFf5Act)) != action ||
+            magnet_reported_action == action || party_row(player) != kFrontRow) return;
+        const auto name = unit_name(player);
+        if (name.empty()) return;
+        magnet_reported_action = action;
+        ffpr::say(TF(previous == kBackRow ? L"Magnet moved {0} to front row" :
+                                           L"Magnet target {0} already in front row", {name}), false);
+    });
+}
+
+int install_ff5_formation_results()
+{
+    auto* method = find_method_param_type(kFf5Provider.get(), "UpdateParameter", 4, 0, "BattleUnitData");
+    events::on(events::Kind::BattleEntering, &retire_magnet);
+    events::on(events::Kind::BattleEnd, &retire_magnet);
+    events::on(events::Kind::SceneLoaded, &retire_magnet);
+    return hooks::attach_addr(il2cpp::method_pointer(method), "FFV.UpdateParameter.BattleUnitData",
+        reinterpret_cast<void*>(&ff5_parameter_update), reinterpret_cast<void**>(&original_ff5_update));
+}
+core::Install ff5_formation_results{"Battle.FormationResult", &install_ff5_formation_results, 109, game::kFF5};
 }
 bool redundant_boost_use(void* act) {
     if(!game::is(game::Id::FF3)||!frame::on_main_thread()||!child_identity_ready||!act)return false;
@@ -105,7 +178,11 @@ bool invincible_artillery_result(void* value) {
     return game::is(game::Id::FF3)&&frame::on_main_thread()&&enabled&&value&&
         ref::call<int32_t>(mAbilityId,value)==141;
 }
-void finish_action() {if(frame::on_main_thread())finish();}
+void finish_action() {
+    if (!frame::on_main_thread()) return;
+    if (game::is(game::Id::FF5)) retire_magnet();
+    else finish();
+}
 void observe_result(void* function,void* target,int value,int hit_type) {
     // Native Hit(0) with zero value suppresses digits; Miss(2) keeps its own
     // actual visible Miss producer. Non/Zero/recovery are not successful cues.

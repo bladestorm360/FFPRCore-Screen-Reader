@@ -1,5 +1,19 @@
 # Build and distribution security
 
+## November 27 FFV scene timing and Magnet
+
+The focused candidate has 22,111,744 bytes and SHA-256
+`81a6b59ccd56dd8e305b3c20974ae2dc736e1df78590e696c4ef64fb3072d74b`.
+The scene timing, boss visual, action effect and battle entry fixtures
+passed. The script replay checked the three FFV sequences at three
+rates and all 140 field registry bindings across six games.
+The build matched 73 embedded resources, and the isolated smoke host
+resolved all 47 exports. Defender definitions `1.463.499.0` reported
+no threats on the 22 exact staged files. Windows denied inspection of
+scanner exclusions. The scanned DLL matches the focused build and smoke
+DLL. Receipts are in `build_check/atomos-timing-20261127`. The prior
+FFV build can be reproduced from `c5df864`.
+
 ## November 27 FFV boss animation audit
 
 The final FFV DLL has 22,087,168 bytes and SHA-256

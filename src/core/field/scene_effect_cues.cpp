@@ -19,6 +19,8 @@ namespace ffpr::dialogue {
 namespace {
 ref::Class kPuppet{"Last.Interpreter.Instructions", "Puppet"};
 ref::Method mPlayAnim{kPuppet, "PlayAnim", 1}, mShow{kPuppet, "Show", 1};
+ref::Class kFirePuppet{"Last.Interpreter.Instructions", "Puppet", game::kFF5};
+ref::Method mSetPos{kFirePuppet, "SetPos", 1}, mMove{kFirePuppet, "Move", 1}, mCueAnim{kFirePuppet, "CueAnim", 1};
 ref::Class kFlightPuppet{"Last.Interpreter.Instructions", "Puppet", game::kFF2 | game::kFF4};
 ref::Method mMoveBirdView{kFlightPuppet, "MoveBirdView", 1};
 ref::Class kFader{"Last.Interpreter.Instructions", "External.Fader", game::kFF4};
@@ -34,8 +36,10 @@ ref::Class kEffect{"Last.Entity.Field", "FieldEffectParticleEntity"};
 ref::Field fPlaying{kEffect, "isPlaying"}, fParticles{kEffect, "particleArray"};
 ref::Class kParticle{"UnityEngine", "ParticleSystem"}, kParticleRenderer{"UnityEngine", "ParticleSystemRenderer"};
 ref::Method mParticleCount{kParticle, "get_particleCount", 0};
+ref::Class kTileAnim{"Last.Entity.Field", "FieldTileAnimRegionEntity", game::kFF5};
+ref::Method mTileAnimFrame{kTileAnim, "GetElapsedFrame", 0};
 
-enum class CueTrigger { PlayAnim, Show, MoveBirdView, ColorFade };
+enum class CueTrigger { PlayAnim, Show, MoveBirdView, ColorFade, SetPos, Move, CueAnim };
 struct Cue {
     game::Id title;
     int map, actor, instruction;
@@ -43,6 +47,9 @@ struct Cue {
     CueTrigger trigger = CueTrigger::PlayAnim;
     std::wstring_view art{}, pose{};
     double settle_seconds = 0;
+    double observe_seconds = 0;
+    bool tile_region = false;
+    bool flicker = false;
 };
 // The planet fracture is the largest inspected prefab in this registry.
 // Only eight emitters are checked on any one owner frame.
@@ -147,7 +154,21 @@ constexpr std::array cues{
     Cue{game::Id::FF5, 71, 48, 169, L"sc_e_0001", L"Tycoon wind drake cue", CueTrigger::PlayAnim, L"mo_ff5_n042_c00"},
     Cue{game::Id::FF5, 209, 78, 190, L"sc_e_0017_9", L"Wind Shrine shards glow cue"},
     Cue{game::Id::FF5, 211, 19, 210, L"sc_e_0030", L"Siren mirage appears cue", CueTrigger::PlayAnim, L"mo_ff5_n103_c02"},
-    Cue{game::Id::FF5, 271, 42, 172, L"sc_e_0046_1", L"Fire-Powered Ship engine blasts cue"},
+    // Some emitters start later than 16 rendered frames. Use their asset
+    // timing as a watch limit and report the first actual draw within it.
+    Cue{game::Id::FF5, 271, 21, 110, L"sc_e_0046", L"Queen Karnak mist cue", CueTrigger::Show, {}, {}, 0, 0.28},
+    Cue{game::Id::FF5, 271, 8, 117, L"sc_e_0046", L"Queen Karnak flames appear cue", CueTrigger::SetPos},
+    Cue{game::Id::FF5, 271, 8, 197, L"sc_e_0046", L"Queen Karnak flames sweep cue", CueTrigger::Move},
+    Cue{game::Id::FF5, 271, 42, 172, L"sc_e_0046_1", L"Fire-Powered Ship engine blasts cue", CueTrigger::PlayAnim, {}, {}, 0, 0.48},
+    Cue{game::Id::FF5, 271, 6, 262, L"sc_e_0046_1", L"Queen Karnak falls cue", CueTrigger::CueAnim, L"mo_ff5_n014_c00", L"down_00"},
+    Cue{game::Id::FF5, 104, 204, 517, L"sc_e_0047", L"Fire Crystal right duct cue", CueTrigger::CueAnim, {}, {}, 0, 0, true},
+    Cue{game::Id::FF5, 104, 207, 568, L"sc_e_0047", L"Fire Crystal left duct cue", CueTrigger::CueAnim, {}, {}, 0, 0, true},
+    Cue{game::Id::FF5, 104, 100, 614, L"sc_e_0047", L"Fire Crystal werewolf braces cue", CueTrigger::CueAnim, L"mo_ff5_n024_c00", L"handsup_00"},
+    Cue{game::Id::FF5, 104, 105, 643, L"sc_e_0047", L"Fire Crystal flames rise cue", CueTrigger::SetPos},
+    Cue{game::Id::FF5, 104, 201, 787, L"sc_e_0047", L"Fire Crystal floor breaks cue", CueTrigger::CueAnim, {}, {}, 0, 0, true},
+    Cue{game::Id::FF5, 104, 200, 858, L"sc_e_0047", L"Fire Crystal party falls cue", CueTrigger::CueAnim, {}, {}, 0, 0, true},
+    Cue{game::Id::FF5, 104, 75, 877, L"sc_e_0047", L"Fire Crystal shatters cue", CueTrigger::PlayAnim, {}, {}, 0, 1.25},
+    Cue{game::Id::FF5, 104, 100, 888, L"sc_e_0047", L"Fire Crystal werewolf flickers cue", CueTrigger::PlayAnim, L"mo_ff5_n024_c00", L"lookdown_00", 0, 0.48, false, true},
     Cue{game::Id::FF5, 1, 320, 43, L"sc_e_0048_2", L"Karnak Castle blasts cue"},
     Cue{game::Id::FF5, 1, 162, 33, L"sc_e_0066_1", L"Catapult hatch opens cue", CueTrigger::PlayAnim, L"mo_ff5_b052_c00"},
     Cue{game::Id::FF5, 1, 500, 51, L"sc_e_0066_1", L"Catapult airship launch cue", CueTrigger::PlayAnim, L"mo_ff5_v004_c00"},
@@ -184,6 +205,7 @@ constexpr std::array cues{
 
 using SceneCommand = int (*)(void*, const void*);
 SceneCommand native_play = nullptr, native_show = nullptr, native_move_bird_view = nullptr, native_color_fade = nullptr;
+SceneCommand native_set_pos = nullptr, native_move = nullptr, native_cue_anim = nullptr;
 uint64_t last_generation = 0;
 std::array<bool, cues.size()> queued{};
 
@@ -212,13 +234,16 @@ bool shown_particles(void* actor, int& next)
     return false;
 }
 
-void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
+void schedule_scene_cue(size_t index, int core_index, uint64_t generation, unity::Vec3 origin)
 {
     queued[index] = true;
+    const auto duration = cues[index].observe_seconds;
+    const auto deadline = duration > 0 ? frame::now() + duration : 0;
     // Retain only an authored row, the fixed core index and the native event
     // generation. Each deferred observation resolves its current renderer.
-    auto observe = [index, core_index, generation, next = 0]() mutable {
+    auto observe = [index, core_index, generation, origin, deadline, next = 0, seen_drawn = false]() mutable {
         if (system::field_event_generation() != generation || !ui::prefs::visual_descriptions_enabled()) return false;
+        if (deadline > 0 && frame::now() > deadline) return false;
         const auto& cue = cues[index];
         auto* interpreter = running_scene();
         if (!interpreter || ::field::current_map_id() != cue.map ||
@@ -229,10 +254,21 @@ void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
         if (!kPuppetCore.is(core) || ref::rd<int>(core, fActorId) != cue.actor) return false;
         if (fieldnav::map_transition::is_screen_fading()) return true;
         auto* actor = ref::rd<void*>(core, fActor);
+        if (cue.trigger == CueTrigger::Move) {
+            auto* transform = unity::transform(actor);
+            if (!transform) return false;
+            const auto now = unity::position(transform);
+            if (now.x == origin.x && now.y == origin.y && now.z == origin.z) return true;
+        }
         const bool drawn = cue.art.empty()
             ? shown_particles(actor, next)
             : drawn_field_actor_art(actor, cue.pose) == cue.art;
-        if (!drawn) return true;
+        if (cue.flicker) {
+            // Flash3 alternates the alpha of one pose. Its first shown frame
+            // has the standing art, so wait for the first visible drop.
+            if (drawn) seen_drawn = true;
+            if (drawn || !seen_drawn || !unity::alive(actor)) return true;
+        } else if (!drawn) return true;
         say(T(cue.text), false);
         return false;
     };
@@ -245,26 +281,26 @@ void schedule_scene_cue(size_t index, int core_index, uint64_t generation)
                 frame::every_frame(observe, "SceneEffects.Draw", 16);
         }, "SceneEffects.Reveal");
     } else {
-        frame::every_frame(observe, "SceneEffects.Draw", 16);
+        frame::every_frame(observe, "SceneEffects.Draw", duration > 0 ? 320 : 16);
     }
 }
 
-void observe_first_play(void* core, CueTrigger trigger)
+size_t current_cue(void* core, CueTrigger trigger, int& core_index, uint64_t& generation)
 {
     const bool color_fade = trigger == CueTrigger::ColorFade;
-    const int core_index = ref::rd<int>(core, fCoreId);
-    if (color_fade ? core_index != 0 : core_index < 1 || core_index > 32) return;
-    const auto generation = system::field_event_generation();
-    if (!generation) return;
+    core_index = ref::rd<int>(core, fCoreId);
+    if (color_fade ? core_index != 0 : core_index < 1 || core_index > 32) return cues.size();
     const int actor = color_fade ? 0 : ref::rd<int>(core, fActorId);
     const auto title = game::current();
     const auto found = std::find_if(cues.begin(), cues.end(), [title, actor, trigger](const Cue& cue) {
         return cue.title == title && cue.actor == actor && cue.trigger == trigger;
     });
-    if (found == cues.end() || !ref::call<bool>(mFirstClock, core)) return;
+    if (found == cues.end() || !ref::call<bool>(mFirstClock, core)) return cues.size();
+    generation = system::field_event_generation();
+    if (!generation || !ui::prefs::visual_descriptions_enabled()) return cues.size();
     const int instruction = ref::call<int>(mProgramCounter, core);
     auto* interpreter = running_scene();
-    if (!interpreter) return;
+    if (!interpreter) return cues.size();
     const auto script = ref::rd_str_bounded(interpreter, fScript, 48);
     const int map = ::field::current_map_id();
     if (generation != last_generation) {
@@ -275,20 +311,34 @@ void observe_first_play(void* core, CueTrigger trigger)
         const auto& cue = cues[index];
         if (!queued[index] && cue.title == title && cue.map == map && cue.actor == actor && cue.trigger == trigger &&
             cue.instruction == instruction && cue.script == script) {
-            if (!ui::prefs::visual_descriptions_enabled()) return;
-            if (color_fade) {
-                // This exact first-clock command has started the native color
-                // filter. A loading fade can still obscure it.
-                if (fieldnav::map_transition::is_screen_fading()) return;
-                queued[index] = true;
-                say(T(cue.text), false);
-                return;
-            }
-            if (cue.art.empty() && !kEffect.is(ref::rd<void*>(core, fActor))) return;
-            schedule_scene_cue(index, core_index, generation);
-            return;
+            return index;
         }
     }
+    return cues.size();
+}
+
+void observe_first_play(void* core, CueTrigger trigger)
+{
+    int core_index = 0;
+    uint64_t generation = 0;
+    const auto index = current_cue(core, trigger, core_index, generation);
+    if (index == cues.size()) return;
+    const auto& cue = cues[index];
+    if (trigger == CueTrigger::ColorFade) {
+        if (fieldnav::map_transition::is_screen_fading()) return;
+        queued[index] = true;
+        say(T(cue.text), false);
+        return;
+    }
+    auto* actor = ref::rd<void*>(core, fActor);
+    if (cue.art.empty() && !kEffect.is(actor)) return;
+    unity::Vec3 origin{};
+    if (trigger == CueTrigger::Move) {
+        auto* transform = unity::transform(actor);
+        if (!transform) return;
+        origin = unity::position(transform);
+    }
+    schedule_scene_cue(index, core_index, generation, origin);
 }
 
 int play_anim(void* core, const void* method)
@@ -322,12 +372,65 @@ int color_fade(void* core, const void* method)
     return result;
 }
 
+template <CueTrigger trigger, SceneCommand& native>
+int motion(void* core, const void* method)
+{
+    // Move runs across several clocks. Sample its origin before the first
+    // native step, and keep SetPos as a post-commit observation.
+    if constexpr (trigger == CueTrigger::Move) {
+        if (frame::on_main_thread()) hooks::guarded("SceneEffects.Move", [&] { observe_first_play(core, trigger); });
+        return native(core, method);
+    } else {
+        const int result = native(core, method);
+        if (frame::on_main_thread()) hooks::guarded("SceneEffects.SetPos", [&] { observe_first_play(core, trigger); });
+        return result;
+    }
+}
+
+int cue_anim(void* core, const void* method)
+{
+    size_t index = cues.size();
+    uint64_t generation = 0;
+    int core_index = 0;
+    int tile_frame = 0;
+    void* tile_region = nullptr;
+    if (frame::on_main_thread()) hooks::guarded("SceneEffects.CueAnimBefore", [&] {
+        index = current_cue(core, CueTrigger::CueAnim, core_index, generation);
+        if (index == cues.size() || !cues[index].tile_region) return;
+        auto* actor = ref::rd<void*>(core, fActor);
+        if (!kTileAnim.is(actor) || !mTileAnimFrame.ptr()) return;
+        tile_frame = ref::call<int>(mTileAnimFrame, actor);
+        tile_region = actor;
+    });
+    const int result = native_cue_anim(core, method);
+    if (index == cues.size() || system::field_event_generation() != generation) return result;
+    hooks::guarded("SceneEffects.CueAnimAfter", [&] {
+        if (!cues[index].tile_region) {
+            schedule_scene_cue(index, core_index, generation, {});
+            return;
+        }
+        // A region applies its authored UV frame synchronously. Confirm the
+        // live frame update before describing these on-camera map tiles.
+        if (tile_region && ref::rd<void*>(core, fActor) == tile_region &&
+            ref::call<int>(mTileAnimFrame, tile_region) != tile_frame && !fieldnav::map_transition::is_screen_fading()) {
+            queued[index] = true;
+            say(T(cues[index].text), false);
+        }
+    });
+    return result;
+}
+
 int install_effect_cues()
 {
     int count = hooks::attach(mPlayAnim, &play_anim, &native_play) ? 1 : 0;
     if (hooks::attach(mShow, &show, &native_show)) ++count;
     if (hooks::attach(mMoveBirdView, &move_bird_view, &native_move_bird_view)) ++count;
     if (hooks::attach(mColorFade, &color_fade, &native_color_fade)) ++count;
+    if (game::is(game::Id::FF5)) {
+        if (hooks::attach(mSetPos, &motion<CueTrigger::SetPos, native_set_pos>, &native_set_pos)) ++count;
+        if (hooks::attach(mMove, &motion<CueTrigger::Move, native_move>, &native_move)) ++count;
+        if (hooks::attach(mCueAnim, &cue_anim, &native_cue_anim)) ++count;
+    }
     return count;
 }
 core::Install install{"SceneEffects", &install_effect_cues, 130};

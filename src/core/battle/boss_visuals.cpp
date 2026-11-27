@@ -8,6 +8,7 @@
 #include "../say.h"
 #include "../ui/preferences.h"
 #include "../unity.h"
+#include <algorithm>
 #include <array>
 #include <cmath>
 
@@ -68,6 +69,12 @@ ref::Class kFf5BattleScript{"Last.Interpreter.Instructions.SystemCall", "Current
 ref::Method mSandwormMove{kFf5BattleScript, "SandWormMoveEnemy", 1};
 ref::Method mSandwormReveal{kFf5BattleScript, "SandWormEffectAfter", 1};
 ref::Method mNeoMove{kFf5BattleScript, "NeoExDeathMove", 1};
+ref::Class kAtomosProvider{"Serial.FF5.Calc", "UniqueUpdateParameterProvider", game::kFF5};
+ref::Method mAtomosMove{kAtomosProvider, "AtomosMove", 1};
+ref::Field fAtomosAct{kAtomosProvider, "battleActData"};
+ref::Class kBattleMotion{"Last.Battle", "BattleSpriteEntity", game::kFF5};
+ref::Method mUpdateEntity{kBattleMotion, "UpdateEntity", 0}, mGetMovePos{kBattleMotion, "GetMovePos", 1};
+ref::Field fAppliedMotion{kBattleMotion, "prevTotalMovePos"};
 ref::Class kPaintMesh{"Last.Battle", "EntityMeshRenderer", game::kFF6};
 ref::Method mSetFloat{kPaintMesh, "SetFloat", 2};
 ref::Class kPlugManager{"Last.Battle", "BattlePlugManager", game::kFF5 | game::kFF6};
@@ -91,6 +98,14 @@ bool sandworm_moved = false;
 bool neo_exdeath_described = false;
 int replacement_read_task = 0;
 std::array<uintptr_t, 5> presented_flowers;
+struct PullTarget { uintptr_t entity = 0; float requested_x = 0; };
+struct AtomosPull {
+    uintptr_t action = 0;
+    bool spoken = false;
+    float progress = 0;
+    std::array<PullTarget, 4> pending;
+};
+AtomosPull atomos_pull;
 
 void cancel_replacement_read()
 {
@@ -102,6 +117,7 @@ void close()
 {
     ready = false;
     pending = 0;
+    atomos_pull = {};
     cancel_replacement_read();
 }
 
@@ -112,6 +128,7 @@ void open()
     sandworm_moved = false;
     neo_exdeath_described = false;
     presented_flowers = {};
+    atomos_pull = {};
     ready = true;
 }
 
@@ -134,6 +151,88 @@ bool visible_body(void* entity)
 void speak(const wchar_t* key)
 {
     if (key && ui::prefs::visual_descriptions_enabled()) say(T(key), false);
+}
+
+using AtomosMove = void (*)(void*, float, const void*);
+using UpdateEntity = void (*)(void*, const void*);
+AtomosMove o_atomos_move;
+UpdateEntity o_update_entity;
+constexpr int kEventMoveOffset = 1;
+
+float event_move_x(void* entity)
+{
+    return ref::call<unity::Vec3>(mGetMovePos, entity, kEventMoveOffset).x;
+}
+
+void d_atomos_move(void* provider, float progress, const void* mi)
+{
+    if (!observe() || !ui::prefs::visual_descriptions_enabled())
+        return o_atomos_move(provider, progress, mi);
+
+    // This provider has already selected the eligible fallen targets. The
+    // native call writes their event offsets. BattleSpriteEntity applies the
+    // offsets to the transforms later in its update.
+    std::array<PullTarget, 4> before{};
+    bool has_target = false;
+    hooks::guarded("BossVisual.AtomosStage", [&] {
+        auto* action = ref::rd<void*>(provider, fAtomosAct);
+        if (atomos_pull.action != token(action) || progress < atomos_pull.progress) {
+            atomos_pull = {};
+            atomos_pull.action = token(action);
+        }
+        atomos_pull.progress = progress;
+        if (!action || atomos_pull.spoken) return;
+        auto* targets = ref::rd<void*>(action, fTargets);
+        const int count = unity::array_length(targets);
+        if (count < 1 || count > static_cast<int>(before.size())) return;
+        for (int index = 0; index < count; ++index) {
+            auto* entity = entity_of(unity::array_at(targets, index));
+            if (!entity) continue;
+            before[index] = {token(entity), event_move_x(entity)};
+            has_target = true;
+        }
+    });
+    o_atomos_move(provider, progress, mi);
+    if (!has_target || !observe()) return;
+    hooks::guarded("BossVisual.AtomosOffset", [&] {
+        auto* action = ref::rd<void*>(provider, fAtomosAct);
+        if (!action || token(action) != atomos_pull.action || atomos_pull.spoken) return;
+        auto* targets = ref::rd<void*>(action, fTargets);
+        const int count = unity::array_length(targets);
+        if (count < 1 || count > static_cast<int>(before.size())) return;
+        for (int index = 0; index < count; ++index) {
+            auto* entity = entity_of(unity::array_at(targets, index));
+            if (!entity || token(entity) != before[index].entity) continue;
+            const auto requested = event_move_x(entity);
+            if (requested < before[index].requested_x)
+                atomos_pull.pending[index] = {token(entity), requested};
+        }
+    });
+}
+
+void d_battle_entity_update(void* entity, const void* mi)
+{
+    if (!observe() || !atomos_pull.action || atomos_pull.spoken) return o_update_entity(entity, mi);
+    auto found = std::find_if(atomos_pull.pending.begin(), atomos_pull.pending.end(), [entity](auto& target) {
+        return target.entity && target.entity == token(entity);
+    });
+    if (found == atomos_pull.pending.end()) return o_update_entity(entity, mi);
+
+    const float prior = ref::rd<unity::Vec3>(entity, fAppliedMotion).x;
+    o_update_entity(entity, mi);
+    if (!observe()) return;
+    hooks::guarded("BossVisual.AtomosDrawn", [&] {
+        if (!ui::prefs::visual_descriptions_enabled() || event_move_x(entity) != found->requested_x) {
+            *found = {};
+            return;
+        }
+        if (!(ref::rd<unity::Vec3>(entity, fAppliedMotion).x < prior)) return;
+        *found = {};
+        if (!visible_body(entity)) return;
+        atomos_pull.spoken = true;
+        atomos_pull.pending = {};
+        speak(L"BossVisual.AtomosPull");
+    });
 }
 
 Request* request_for(uintptr_t animator)
@@ -535,9 +634,11 @@ int install()
     const int exit = hooks::attach(mExitSprite, &d_exit_sprite, &o_exit_sprite);
     const int deform = hooks::attach(mCreateDeformation, &d_create_deformation, &o_create_deformation);
     const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);
+    const int motion = hooks::attach(mUpdateEntity, &d_battle_entity_update, &o_update_entity);
+    const int pull = motion && hooks::attach(mAtomosMove, &d_atomos_move, &o_atomos_move);
     return shared + exit + deform + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal) +
            hooks::attach(mNeoMove, &d_neo_move, &o_neo_move) +
-           hooks::attach(mFlowerPlayedEnd, &d_flower_played_end, &o_flower_played_end);
+           hooks::attach(mFlowerPlayedEnd, &d_flower_played_end, &o_flower_played_end) + motion + pull;
 }
 core::Install registration{"Battle.BossVisuals", &install, 117};
 }

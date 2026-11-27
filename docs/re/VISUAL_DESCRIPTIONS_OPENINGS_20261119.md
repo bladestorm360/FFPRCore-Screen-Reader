@@ -1,5 +1,56 @@
 # Opening and prologue visual actions
 
+## November 27 FFV field timing and repeatable replay
+
+The owner's FFV log identified omissions both before and after Liquid Flame
+and around four dialogue anchors in the Fire Crystal chamber. The previous
+boss inventory examined encounter scripts and did not cover the adjoining
+field events. The field cue table also lacked bindings for these scenes'
+relocated effects and requested tile poses. The Fire-Powered Ship aftermath
+had one registered engine-burst cue. Its fixed 16-frame observation window
+can end before some of the installed blast emitters start at 0.40 seconds.
+The red screen tint is a separate field color filter. Native loading fades
+still block scene cue observation.
+
+| Script | Presentation order covered |
+| --- | --- |
+| `sc_e_0046`, map 271 | The red-lit mist draws before page 03. After dismissal, the staged flames first appear and then visibly move across the chamber before formation 445. |
+| `sc_e_0046_1`, map 271 | The return fade precedes the engine blast request. Actor 42's effect can report its first visible particle during a bounded 0.48-second window. The queen's actual down sprite draws before page 04. |
+| `sc_e_0047`, map 104 | After page 11, the right and left duct regions change and the werewolf raises both arms. Fire spreads between pages 12 and 13. Two floor changes fall between pages 13 and 16. After page 16, the crystal shatters and the werewolf flickers in red light before the map transfer. |
+
+Scene effect narration keeps the exact map, script, actor and instruction
+as its identity. Show and SetPos use the first visible live particle. Move
+also requires displacement from the sampled origin, and sprite cues
+require the intended art and pose. The werewolf cue observes his drawn
+pose blink away during the native two-frame `Flash3` alpha cycle. Tile
+regions use the native change in
+applied animation frame at verified on-camera cutscene positions. The
+observer keeps native objects on the owner thread and holds only the
+cue, event generation, puppet slot and copied position between frames.
+A new scene, loading transition, or settings change cancels the observation.
+The localized line is queued once per authored cue in each scene instance.
+
+The script replay reads the local extraction. It walks the main track,
+call stack, parallel puppets, explicit waits, dialogue dismissal and
+transition boundaries. A branch requires a supplied condition outcome.
+Use a supplied duration for native-controlled movement or fades when
+their completion affects a scenario. Interpret times as modeled script
+clock values. Actual presentation still needs the native draw or state
+change observed by the mod. A visual command marked for review is an
+audit candidate, and repeated steps in one visual beat can share a cue.
+
+Run `python -B tools/replay_animation_timing.py ../tools/mapdump --verify-bindings`
+to check the registered instruction, puppet and locale links in all six
+games. Run `python -B tools/replay_animation_timing.py ../tools/mapdump --verify-ff5-fire-scenes`
+to check these three scenes at 30, 60 and 144 Hz, with different ready and
+dialogue timings. The current audit found 140 structurally valid bindings.
+All 13 field cues in these three sequences are reachable in all three
+scenarios. The production-detour fixtures separately check late drawing,
+an opaque fade, scene retirement, actual movement, and a tile command that
+leaves the frame unchanged. The game log confirms the already installed
+Liquid Flame form speech. Natural-play confirmation of the new cues remains
+pending. [Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-27-ffv-scene-timing-and-magnet)
+
 ## Next audit after usage resets
 
 The November 25 owner report records no major-scene narration heard in
@@ -211,7 +262,7 @@ script handoff. They have no independent major visual. Roots `0081`,
 | Wind Shrine | Added shard and shattering cues accompany the native account of the Wind Crystal's loss. |
 | Ship Graveyard | Siren's staged mirage has an added cue. The native pages identify the people in the illusions and the deception. |
 | Wind Drake and Water Crystal | A cue describes the crystal fragments after the flash. The native exchanges explain the Wind Drake rescue. |
-| Fire-Powered Ship and Karnak | The engine failure and Karnak fire have added cues. The existing Mid gesture covers the reunion. The door in `sc_e_0045` still needs a verified visible opening cue. Cid's dialogue explains where it leads. |
+| Fire-Powered Ship and Karnak | The queen encounter and aftermath, engine failure, Fire Crystal collapse and Karnak fire have cues. The existing Mid gesture covers the reunion. The door in `sc_e_0045` still needs a verified visible opening cue. Cid's dialogue explains where it leads. |
 | Catapult and Ronka | The hatch and ship rising have added cues. Existing Ronka shots and the native exchanges cover the ruins and Krile's arrival. |
 | Meteor journey and Galuf's world | The transfer has an added cue. Native dialogue names the journey and destination. |
 | Big Bridge and moogles | The native battle and departure exchange cover the bridge. Added moogle reactions and the existing raised-paw cue cover the village. |

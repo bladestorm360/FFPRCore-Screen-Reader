@@ -23,11 +23,12 @@ struct Monster { int id, asset; };
 struct Mesh { void* sprite; void* renderer; };
 struct Animator;
 struct State { Animator* animator; };
-struct Entity { Mesh* body; State* state; };
+struct Entity { Mesh* body; State* state; unity::Vec3 requested{}, applied{}; };
 struct Animator { Entity* entity; void* staged; };
 struct Unit { Entity* entity; Monster* master; int slot = 0; };
 struct Targets { int length; void* unit; void* other = nullptr; };
 struct Act { Targets* targets; Targets* abilities = nullptr; };
+struct PullProvider { Act* action; };
 struct Function { Act* act; int value1, value2, value3; Monster* monster; Targets* before; Targets* after; };
 struct StatusInfo { Targets* enemies; };
 struct Status { StatusInfo* info; };
@@ -59,6 +60,26 @@ frame::Step lord_step;
 int allowed_frames = 0;
 const void* method_info = &fn;
 const unity::Vec2 face{1, 2}, mouth{3, 4};
+bool apply_pull = true;
+
+unity::Vec3 event_offset(void* self, int type, const void*) {
+    forwarded &= type == 1;
+    return static_cast<Entity*>(self)->requested;
+}
+void request_pull(void* self, float progress, const void* mi)
+{
+    forwarded &= mi == method_info;
+    auto* cast = static_cast<PullProvider*>(self);
+    if (cast->action && cast->action->targets)
+        static_cast<Unit*>(cast->action->targets->unit)->entity->requested.x = -progress * 20;
+}
+void draw_pull(void* self, const void* mi)
+{
+    forwarded &= mi == method_info;
+    auto* body = static_cast<Entity*>(self);
+    if (apply_pull) body->applied = body->requested;
+    finish_mesh = true;
+}
 
 int monster_id(void* self, const void*) { return static_cast<Monster*>(self)->id; }
 int monster_asset(void* self, const void*) { return static_cast<Monster*>(self)->asset; }
@@ -141,6 +162,7 @@ void* Method::ptr() {
     if (this == &ffpr::battle::boss_visuals::mAsset) return reinterpret_cast<void*>(&fixture::monster_asset);
     if (this == &ffpr::battle::boss_visuals::mPlugInstance) return reinterpret_cast<void*>(&fixture::plug_instance);
     if (this == &ffpr::battle::boss_visuals::mEnemyUnits) return reinterpret_cast<void*>(&fixture::current_enemies);
+    if (this == &ffpr::battle::boss_visuals::mGetMovePos) return reinterpret_cast<void*>(&fixture::event_offset);
     return nullptr;
 }
 void call_failed_note(const char*) { std::abort(); }
@@ -724,6 +746,49 @@ void check_neo_reveal()
            "The visible new form queues once after the original movement");
     close();
 }
+
+void check_atomos_pull(const json::Value& catalog)
+{
+    using namespace fixture;
+    check_key(catalog, L"BossVisual.AtomosPull");
+    title = Id::FF5;
+    fAtomosAct.off_ = offsetof(PullProvider, action);
+    fAppliedMotion.off_ = offsetof(Entity, applied);
+    o_atomos_move = &request_pull;
+    o_update_entity = &draw_pull;
+    PullProvider pull{&act};
+    const int begin = spoken;
+    open();
+    entity.requested = entity.applied = {};
+    d_atomos_move(&pull, 0.f, method_info);
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin, "A zero-progress command does not describe motion");
+    fixture::renderer_visible = false;
+    d_atomos_move(&pull, .1f, method_info);
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin, "An applied but hidden movement is silent");
+    fixture::renderer_visible = true;
+    d_atomos_move(&pull, .2f, method_info);
+    apply_pull = false;
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin, "A staged offset with no native sprite commit is silent");
+    apply_pull = true;
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin + 1 && last == L"BossVisual.AtomosPull", "First visible movement speaks after the original");
+    d_atomos_move(&pull, .3f, method_info);
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin + 1, "Further frames in the same pull are quiet");
+    Act next = act;
+    pull.action = &next;
+    d_atomos_move(&pull, .4f, method_info);
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin + 2 && forwarded, "A separate native pull can speak again");
+    pull.action = &act;
+    d_atomos_move(&pull, .5f, method_info);
+    close();
+    d_battle_entity_update(&entity, method_info);
+    expect(spoken == begin + 2, "Teardown drops a staged pull");
+}
 }
 
 int main()
@@ -790,6 +855,7 @@ int main()
     check_ff5_audit_forms(v);
     check_ff5_returning_enemies(v);
     check_neo_reveal();
+    check_atomos_pull(v);
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
     return failures?1:0;
 }
