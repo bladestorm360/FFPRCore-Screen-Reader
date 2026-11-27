@@ -2456,10 +2456,11 @@ These checks remain natural gameplay confirmation, not a launch/revisit request.
 [Exact evidence and limits](re/FF3_KEY_GATES_20261101.md).
 ## Manual route readout
 
-Use a field route with at least four turns. In F8 → Navigation, keep Full
-route readout on and request directions with Backslash or P for your
-layout. Turn it off and set Route legs per readout to three. Request
-directions again. The mod should give only the first three movement legs.
+Use a field route with at least four turns. With no saved readout choices,
+request directions with Backslash or P for your layout. The mod should
+give only the first three movement legs. In F8 → Navigation, turn Full
+route readout on and request directions again for the original format.
+Turn it off and set Route legs per readout to three for the rest of this test.
 
 Follow those directions with Automatically speak next leg of route off.
 Wait at the last tile, then use the directions key to get the next chunk.

@@ -3,11 +3,12 @@
 ## November 27 manual route readout
 
 The shared Navigation menu saves the full readout switch, the chunk size
-and the automatic continuation switch. Full readout defaults on and keeps
-the existing directions text. Chunk mode defaults to three direction runs
-at a time and accepts one through twelve. Automatic continuation defaults
-off. The game-specific language catalog resolves all seven new menu and
-help entries in the twelve supported languages.
+and the automatic continuation switch. Full readout defaults off, so new
+settings start with three direction runs at a time. Chunk size accepts one
+through twelve. Turning full readout on gives the original directions format.
+Saved choices take precedence. Automatic continuation defaults off. The
+game-specific language catalog resolves all seven menu and help entries in
+the twelve supported languages.
 
 The navigation worker formats the spoken prefix from the same route
 phases used for the full report. It keeps the underlying route and

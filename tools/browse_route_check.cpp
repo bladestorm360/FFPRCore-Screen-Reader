@@ -9,6 +9,8 @@ template<class Expect> void check_manual_readout(Expect expect)
 {
     using namespace field;
     using namespace baked_nav;
+    expect(!ui::prefs::full_route_readout() && ui::prefs::route_legs_per_readout() == 3,
+           "Manual directions default to three-leg chunks without saved options");
     Phase phase;
     phase.cells = {{1,0,0},{1,0,1},{1,0,2},{1,1,2},{1,2,2},{1,3,2},
                    {1,3,3},{1,3,4},{1,3,5},{1,3,6},{1,4,6}};
@@ -16,7 +18,7 @@ template<class Expect> void check_manual_readout(Expect expect)
     phase.manual_after = true;
     const std::vector<Phase> phases{phase};
     PathInfo chunk;
-    expect(describe_phases(phases,true,nullptr,3,&chunk)==L"2 South, 3 East, 4 South",
+    expect(describe_phases(phases,true,nullptr,ui::prefs::route_legs_per_readout(),&chunk)==L"2 South, 3 East, 4 South",
            "Three direction runs are read exactly, without later movement or the final action");
     expect(chunk.readout_limited && chunk.readout_cells.size()==10 &&
            chunk.readout_cells.back()==Cell{1,3,6},"The announced route owns its exact final walking tile");
@@ -57,7 +59,7 @@ template<class Expect> void check_manual_readout(Expect expect)
     legacy.description=old_description;
     apply_manual_readout(legacy,0,false,nullptr);
     expect(legacy.description==old_description && legacy.readout_cells.empty(),
-           "Default full directions keep the original summary with no automatic tracking");
+           "Full directions keep the original summary with automatic continuation off");
     apply_manual_readout(legacy,0,true,nullptr);
     expect(legacy.description==old_description && legacy.readout_limited &&
            legacy.readout_cells.size()==31 && legacy.readout_cells.back()==long_route.cells[30],

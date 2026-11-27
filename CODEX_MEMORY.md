@@ -1,11 +1,13 @@
 # Native FFPR durable memory
 
 **November 27 manual directions.** Shared Navigation settings control full
-readout, chunk size and automatic continuation. Confirmed progress keeps the
-same selected route. Autowalk narration remains separately configurable.
+readout, chunk size and automatic continuation. Full readout and automatic
+continuation default off. Players with no saved choices get three-leg chunks.
+Confirmed progress keeps the same selected route. Autowalk narration remains
+separately configurable.
 Verified offline and installed in all six games. Natural-play confirmation
 is pending. [Behavior](docs/re/AUTOWALK.md#november-27-manual-route-readout)
-and [installation evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-27-fire-powered-ship-and-manual-route-readout).
+and [installation evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-27-default-route-readout).
 
 **November 27 Fire-Powered Ship directions.** The live FFV log identifies
 Storyline and selected destination failures through the engine rooms.

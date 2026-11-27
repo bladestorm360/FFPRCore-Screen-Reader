@@ -1,5 +1,17 @@
 # Build and distribution security
 
+## November 27 default route readout
+
+The default-off follow-up produced a 22,064,640-byte DLL with SHA-256
+`dadc9ada4461db5ae306696c077b7aa6f844f6154e8e88c23a336da24a5e5c66`.
+The focused browse check verified that an unsaved readout uses three-leg
+chunks. The build, 73-resource check and 47-export smoke test passed.
+Defender reported no threats across 22 exact payload files. Installation
+verification matched all 132 payload hashes and 138 protected file states
+across the six games. The prior candidate below is reproducible from the
+local checkpoint `32e883d`. Receipts are in
+`build_check/route-readout-default-off`.
+
 ## November 27 Fire-Powered Ship and manual route readout
 
 The shared candidate is 22,064,640 bytes with SHA-256

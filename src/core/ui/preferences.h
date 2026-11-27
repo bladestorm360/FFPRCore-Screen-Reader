@@ -51,7 +51,7 @@ inline constexpr const char* kSpeakAutowalkPath = "SpeakAutowalkPath";
 inline constexpr const char* kFullRouteReadout = "FullRouteReadout";
 inline constexpr const char* kAutoRouteReadout = "AutoRouteReadout";
 inline constexpr const char* kRouteLegsPerReadout = "RouteLegsPerReadout";
-inline constexpr bool kFullRouteReadoutDefault = true, kAutoRouteReadoutDefault = false;
+inline constexpr bool kFullRouteReadoutDefault = false, kAutoRouteReadoutDefault = false;
 inline constexpr int kRouteLegsDefault = 3, kRouteLegsMin = 1, kRouteLegsMax = 12;
 inline constexpr const char* kBeaconWithDirections = "BeaconWithDirections";
 inline constexpr const char* kPuzzleGuideVerbosity = "PuzzleGuideVerbosity";
