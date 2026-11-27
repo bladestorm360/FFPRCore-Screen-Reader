@@ -59,6 +59,12 @@ by bladestorm360 and verify the destination branch tip. Apply the source-content
 gate before staging, check the staged content, and review every commit newly
 exposed by a push. Follow the separate release workflow for packaged releases.
 
+Owner clarification, November 27. Routine checkpoint pushes to `master` at
+the public repository `https://github.com/bladestorm360/FFPRCore-Screen-Reader.git`
+have standing approval. Proceed automatically after the existing source and
+destination checks. Honor explicit holds and reverify authorization if the
+destination changes.
+
 Owner build sequencing update, November 6. Use at most one shared slot for an
 FFPR build across all chats, including separate folders and game targets. Batch
 fixes that are close to ready into one build and deployment. If the owner asks
