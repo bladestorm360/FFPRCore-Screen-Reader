@@ -1,5 +1,24 @@
 # Build and distribution security
 
+## November 26 narration and routing
+
+Source `616d697232d172abd5973740e0f25d02fc8ee2c8` produced a
+21,545,984-byte DLL with SHA-256
+`5d7e7b3a22c7cff3a5e25fb5d3d0b4fd7495d721f5cab803d61b3a60c51427ba`.
+The focused build took 71.3 seconds and peaked at 505,663,488 bytes in
+the one-worker, 2 GB, 25% CPU job. Six focused fixtures, 9,146 native
+name checks, 73 embedded resources, the source boundary gate and all
+47 isolated smoke exports passed.
+
+Defender signatures `1.463.485.0` reported no threats and zero matching
+detections across all 22 exact payload files. Their hashes remained stable.
+Windows denied the exclusion query and no signing certificate was
+available. The closed-game install verified 132 file hashes across the six
+Steam folders, and all 138 protected file states matched their pre-install
+values. No game was launched. Recovery uses `7b9a893` for FFIV and
+`6a4a100` for the five other games. Compact receipts are in
+`../tools/narration_and_routing_20261126`. [Offline evidence and gameplay checks](re/NARRATION_AND_ROUTING_20261126.md).
+
 ## November 24 FFIV narration, Magnetic Cavern and shared Autowalk
 
 Source checkpoint `6a4a100467e98d77e86baab1dff99b78dd2f4449` produced a

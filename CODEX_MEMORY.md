@@ -1,11 +1,14 @@
 # Native FFPR durable memory
 
-**November 26 reported defects and narration audit.** The active checkpoint
-covers the FFIV Bahamut, Lunar Subterrane, dialogue and ending reports, the
-shared route list and FFV water currents. The six-game narration pass uses
-the fixed major-sequence inventory. [Current scope and evidence](docs/re/NARRATION_AND_ROUTING_20261126.md).
+**November 26 reported defects and narration audit.** Installed and
+hash-verified in all six games. The focused update covers Bahamut's boss
+and summon phases, the Lunar Subterrane and FFIV ending, current-floor
+sorting and route labels, I in dialogue, and FFV's 90 pushback contacts.
+New visual cues were matched to native timelines. Gameplay playback and
+the campaign's unresolved presentation boundaries are open.
+[Evidence and retest](docs/re/NARRATION_AND_ROUTING_20261126.md).
 
-**First task after usage resets: six-game major-scene narration audit.**
+**Campaign narration coverage.**
 The owner reports hearing no major scene descriptions in FFIV. In-game
 playback is unestablished across the six games. When the owner resumes
 work, inventory the major sequences in FFI–FFVI from opening to ending,

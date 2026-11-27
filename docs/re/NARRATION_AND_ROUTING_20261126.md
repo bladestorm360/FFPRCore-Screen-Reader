@@ -13,9 +13,10 @@
    combined candidate in the established Steam targets. Record audible
    confirmation separately.
 
-The first focused replay passed the shared browse, Fire-Powered Ship, boss,
-dialogue and modal fixtures. A second focused replay covers the newly
-identified summon path and the combined campaign cues.
+The reported behaviors passed offline checks and the verified candidate is
+installed in all six games. The additional campaign pass closes the
+anchors listed below. Independent presentation gaps and live confirmation
+remain open.
 
 ## Reported behavior and source changes
 
@@ -64,3 +65,32 @@ presentation state. Those paths need a safe, independently verified visible
 boundary. The recorded dispositions identify other gaps. Installed data and
 fixtures can establish cue binding and queue order. Audible timing still
 requires gameplay confirmation.
+
+## Verification and short gameplay checks
+
+The combined build from `616d697232d172abd5973740e0f25d02fc8ee2c8` passed
+`entity_filter_check`, `browse_route_check`, `ff5_fire_ship_route_check`,
+`boss_visuals_check`, `dialogue_appearance_check`, and
+`modal_speech_check`. It verified 9,146 managed names and all 73 embedded
+resources. The asset check matched 121 actor or effect commands and seven
+color filter commands to native data, including all 15 new field cues.
+Each cue has all 12 game languages. The maximum direct browse fixture
+took 0.285 ms. The fake speech SDK reported 0.910 ms cold and 0.131 ms
+worst warm submission. These are fixture results. Game-frame impact
+and time to audible speech have not been measured in this candidate.
+
+1. In FFIV, visit the Lunar Subterrane through the Crystal Palace. Expect
+   the crystal transport, then the cavern reveal. Browse Treasure Chests.
+   Current-floor chests should come first. Use Backslash or P on a B1 exit.
+   Its browse label and directions should agree on whether a route exists.
+2. In FFIV, let Bahamut use Mega Flare and try Rydia's Bahamut summon.
+   Listen for the enemy's wings opening and folding, or for the summon
+   gathering light and the battle returning. At the sealed sword, advance
+   the challenge dialogue and listen before battle starts. During a visible
+   NPC page, press I for the speaker's appearance.
+3. In the FFIV ending, listen for Kain at Mount Ordeals and for the wedding
+   gestures. Let the credits reach the end card to test its separate cue.
+4. In FFV's Fire-Powered Ship, request directions past a water current.
+   The route should lead around the contact or report the route blocked.
+
+[Exact-payload scan and installed verification](../SECURITY_AND_DISTRIBUTION.md#november-26-narration-and-routing)
