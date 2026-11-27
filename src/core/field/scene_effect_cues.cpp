@@ -44,6 +44,9 @@ struct Cue {
     std::wstring_view art{}, pose{};
     double settle_seconds = 0;
 };
+// The planet fracture is the largest inspected prefab in this registry.
+// Only eight emitters are checked on any one owner frame.
+constexpr int scene_emitter_limit = 74;
 
 // Selected native animation and display commands from the frozen field corpus. A clip
 // can share an actor with a setup, repeat or alternate script on the same map.
@@ -56,6 +59,7 @@ constexpr std::array cues{
     Cue{game::Id::FF1, 1, 203, 178, L"sc_e_0025_2", L"Levistone airship rise cue", CueTrigger::PlayAnim, L"mo_ff1_v001_c00"},
     Cue{game::Id::FF1, 60, 119, 56, L"sc_e_0028", L"Fairy release lights cue"},
     Cue{game::Id::FF1, 52, 67, 46, L"sc_e_0030", L"Onrac woman vanishes cue", CueTrigger::PlayAnim, L"mo_ff1_n029_c00"},
+    Cue{game::Id::FF1, 98, 19, 59, L"sc_e_0031_1", L"Onrac barrel surfaces cue", CueTrigger::PlayAnim, L"mo_ff1_v005_c00"},
     Cue{game::Id::FF1, 96, 26, 111, L"sc_e_0036_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c00"},
     Cue{game::Id::FF1, 112, 9, 109, L"sc_e_0037_2", L"Crystal altar restoration cue", CueTrigger::PlayAnim, L"mo_ff1_b022_c01"},
     Cue{game::Id::FF1, 72, 123, 153, L"sc_e_0038", L"Black Crystal fusion cue"},
@@ -80,6 +84,7 @@ constexpr std::array cues{
     Cue{game::Id::FF2, 316, 48, 77, L"sc_e_0089_1", L"Emperor dissolves cue"},
     Cue{game::Id::FF2, 292, 43, 13, L"sc_e_0088", L"Jade exit lightning cue"},
     Cue{game::Id::FF2, 355, 3, 61, L"sc_e_0089_6", L"Ending title card cue", CueTrigger::Show, L"mo_ff2_e101_c00"},
+    Cue{game::Id::FF2, 41, 8, 55, L"sc_e_0080_2", L"Deist wyvern lands cue", CueTrigger::PlayAnim, L"mo_ff2_n026_c00"},
     Cue{game::Id::FF3, 306, 11, 22, L"sc_e_0321", L"Crystal Tower mirror light cue"},
     Cue{game::Id::FF3, 52, 24, 14, L"sc_e_0264", L"Saronia cannon smoke cue"},
     Cue{game::Id::FF3, 2, 2339, 36, L"sc_e_0067_1_1", L"Amur Enterprise bubbles cue"},
@@ -89,6 +94,7 @@ constexpr std::array cues{
     Cue{game::Id::FF3, 142, 6, 85, L"sc_e_0081", L"Unei wakes cue", CueTrigger::PlayAnim, L"mo_ff3_n007_c00"},
     Cue{game::Id::FF3, 314, 22, 344, L"sc_e_0092_2", L"Doga and Unei restore the party cue"},
     Cue{game::Id::FF3, 341, 3, 83, L"sc_e_0101_19", L"Ending title card cue", CueTrigger::Show, L"mo_ff3_e102_c00"},
+    Cue{game::Id::FF3, 1, 72, 37, L"sc_e_0026", L"Nepto approach Bahamut cue", CueTrigger::PlayAnim, L"mo_ff3_n038_c00"},
     Cue{game::Id::FF4, 1, 1102, 36, L"sc_e_0045_1", L"Agart eruption cue"},
     Cue{game::Id::FF4, 1, 174, 27, L"sc_e_0001", L"Red Wings flight formation cue", CueTrigger::MoveBirdView, L"mo_ff4_v003_c01", L"", 2.5},
     Cue{game::Id::FF4, 21, 0, 9, L"sc_e_0108", L"Baron chamber flashes cue", CueTrigger::ColorFade},
@@ -123,8 +129,16 @@ constexpr std::array cues{
     Cue{game::Id::FF4, 248, 12, 80, L"sc_e_0071_1", L"Cagnazzo defeat cue"},
     Cue{game::Id::FF4, 248, 13, 93, L"sc_e_0071_1", L"Barbariccia defeat cue"},
     Cue{game::Id::FF4, 248, 14, 105, L"sc_e_0071_1", L"Rubicante defeat cue"},
+    Cue{game::Id::FF4, 154, 20, 79, L"sc_e_0073", L"Lunar Subterrane transport cue"},
+    Cue{game::Id::FF4, 296, 0, 9, L"sc_e_0073_1", L"Lunar Subterrane arrival cue", CueTrigger::ColorFade},
+    Cue{game::Id::FF4, 298, 20, 14, L"sc_e_0116", L"Lunar Subterrane sealed sword cue"},
+    Cue{game::Id::FF4, 302, 0, 4, L"sc_e_0117", L"Lunar Subterrane blue chamber cue", CueTrigger::ColorFade},
+    Cue{game::Id::FF4, 312, 0, 7, L"sc_e_0118", L"Lunar Subterrane green chamber cue", CueTrigger::ColorFade},
     Cue{game::Id::FF4, 317, 7, 226, L"sc_e_0074_1", L"Zeromus figure forms cue", CueTrigger::PlayAnim, L"mo_ff4_n038_c00"},
     Cue{game::Id::FF4, 317, 13, 203, L"sc_e_0074_5", L"Zeromus final burst cue"},
+    Cue{game::Id::FF4, 329, 27, 135, L"sc_e_0074_20", L"Baron wedding Edge leap cue", CueTrigger::PlayAnim, L"mo_ff4_p011_c00"},
+    Cue{game::Id::FF4, 329, 3, 146, L"sc_e_0074_20", L"Baron wedding raised hands cue", CueTrigger::PlayAnim, L"mo_ff4_p003_c00"},
+    Cue{game::Id::FF4, 351, 3, 16, L"sc_e_0074_16", L"Mount Ordeals Kain epilogue cue", CueTrigger::PlayAnim, L"mo_ff4_p002_c00"},
     Cue{game::Id::FF4, 354, 3, 70, L"sc_e_0074_21", L"Ending title card cue", CueTrigger::Show, L"mo_ff4_e101_c00"},
     Cue{game::Id::FF5, 1, 431, 35, L"sc_e_0067_2", L"Ronka rising cue"},
     Cue{game::Id::FF5, 1, 431, 37, L"sc_e_0514_2", L"Ronka rising cue"},
@@ -147,6 +161,8 @@ constexpr std::array cues{
     Cue{game::Id::FF5, 596, 2, 21, L"sc_e_0001_6", L"Opening meteor cue", CueTrigger::PlayAnim, L"", L"", 0.7},
     Cue{game::Id::FF5, 629, 5, 46, L"sc_e_0162_47", L"Ending white birds cue"},
     Cue{game::Id::FF5, 644, 12, 62, L"sc_e_0162_48", L"Ending mounted drake cue", CueTrigger::PlayAnim, L"mo_ff5_n050_c01"},
+    Cue{game::Id::FF5, 644, 4, 134, L"sc_e_0162_48", L"Ending mounted chocobo cue", CueTrigger::Show, L"mo_ff5_n047_c02"},
+    Cue{game::Id::FF5, 406, 12, 156, L"sc_e_0125_1", L"Exdeath castle shards cue"},
     Cue{game::Id::FF6, 1, 247, 44, L"sc_e_0036_2", L"Figaro first descent cue"},
     Cue{game::Id::FF6, 580, 7, 117, L"sc_e_0012_b", L"Frozen esper shines cue", CueTrigger::PlayAnim, L"mo_ff6_n085_c00"},
     Cue{game::Id::FF6, 50, 11, 136, L"sc_e_0079", L"Celes in the cell cue", CueTrigger::PlayAnim, L"mo_ff6_p007"},
@@ -159,6 +175,8 @@ constexpr std::array cues{
     Cue{game::Id::FF6, 2, 197, 35, L"sc_e_1002_2", L"Light of Judgment sweep cue"},
     Cue{game::Id::FF6, 431, 61, 70, L"sc_e_0607_2", L"Warring Triad flashes cue", CueTrigger::PlayAnim, L"mo_ff6_b009_c00"},
     Cue{game::Id::FF6, 605, 6, 72, L"sc_e_0607_3", L"World of Ruin smoke cue"},
+    Cue{game::Id::FF6, 1, 253, 34, L"sc_e_0607_7", L"World of Ruin shockwave cue"},
+    Cue{game::Id::FF6, 584, 229, 25, L"sc_e_0607_9", L"World of Ruin planet fracture cue", CueTrigger::PlayAnim, L"", L"", 1.4},
     Cue{game::Id::FF6, 571, 28, 82, L"sc_e_1004", L"Kefka barrier cue"},
     Cue{game::Id::FF6, 592, 11, 41, L"sc_e_1032_14", L"Falcon finale flock cue", CueTrigger::PlayAnim, L"mo_ff6_e016_c00"},
     Cue{game::Id::FF6, 584, 230, 42, L"sc_e_1032_18", L"Ending title card cue", CueTrigger::Show, L"mo_ff6_e101_c00"}
@@ -182,8 +200,8 @@ bool shown_particles(void* actor, int& next)
     auto* particles = ref::rd<void*>(actor, fParticles);
     const int count = unity::array_length(particles);
     // Larger effects use consecutive slices on the same short observation.
-    // The Palamecia eruption includes 66 particle systems in its bundle.
-    if (count < 1 || count > 66) return false;
+    // The Palamecia eruption and the planet fracture use multiple slices.
+    if (count < 1 || count > scene_emitter_limit) return false;
     for (int tried = 0; tried < std::min(count, 8); ++tried) {
         const int index = next % count;
         next = index + 1;

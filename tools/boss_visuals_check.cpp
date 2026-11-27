@@ -26,8 +26,8 @@ struct State { Animator* animator; };
 struct Entity { Mesh* body; State* state; };
 struct Animator { Entity* entity; void* staged; };
 struct Unit { Entity* entity; Monster* master; };
-struct Targets { int length; Unit* unit; };
-struct Act { Targets* targets; };
+struct Targets { int length; void* unit; };
+struct Act { Targets* targets; Targets* abilities = nullptr; };
 struct Function { Act* act; int value1, value2, value3; Monster* monster; Targets* before; Targets* after; };
 struct StatusInfo { Targets* enemies; };
 struct Status { StatusInfo* info; };
@@ -128,7 +128,8 @@ il2cpp::Class* Class::get() { return reinterpret_cast<il2cpp::Class*>(this); }
 int32_t Field::get() { return off_; }
 il2cpp::Method* Method::get() { return nullptr; }
 void* Method::ptr() {
-    if (this == &ffpr::battle::boss_visuals::mId) return reinterpret_cast<void*>(&fixture::monster_id);
+    if (this == &ffpr::battle::boss_visuals::mId || this == &ffpr::battle::boss_visuals::mSummonAbilityId)
+        return reinterpret_cast<void*>(&fixture::monster_id);
     if (this == &ffpr::battle::boss_visuals::mAsset) return reinterpret_cast<void*>(&fixture::monster_asset);
     if (this == &ffpr::battle::boss_visuals::mPlugInstance) return reinterpret_cast<void*>(&fixture::plug_instance);
     if (this == &ffpr::battle::boss_visuals::mEnemyUnits) return reinterpret_cast<void*>(&fixture::current_enemies);
@@ -392,6 +393,66 @@ void check_leviathan_forms(const json::Value& catalog)
     incoming_art = &next_art;
 }
 
+void check_bahamut_forms(const json::Value& catalog)
+{
+    using namespace fixture;
+    check_key(catalog, scripted_sprite(Id::FF4, 191, 0, 162, 168));
+    check_key(catalog, scripted_sprite(Id::FF4, 191, 0, 160, 168));
+    expect(!scripted_sprite(Id::FF4, 153, 0, 162, 168),
+           "Dark Bahamut does not use the Bahamut pose commands");
+    title = Id::FF4;
+    master.id = 191;
+    fn.value1 = 0;
+    fn.value3 = 168;
+    mesh.sprite = &previous_art;
+    incoming_art = &next_art;
+    open();
+    const int begin = spoken;
+    fn.value2 = 162;
+    d_create_sprite(&fn, method_info);
+    expect(spoken == begin, "Bahamut's windup waits for the drawn sprite");
+    d_commit_sprite(&animator, method_info);
+    expect(spoken == begin + 1 && last == L"BossVisual.BahamutWindup", "Bahamut opens his wings");
+    incoming_art = &previous_art;
+    fn.value2 = 160;
+    d_create_sprite(&fn, method_info);
+    d_exit_sprite(&animator, method_info);
+    expect(spoken == begin + 2 && last == L"BossVisual.BahamutRecovery", "Bahamut returns to his folded-wing pose");
+    close();
+    incoming_art = &next_art;
+}
+
+void check_bahamut_summon(const json::Value& catalog)
+{
+    using namespace fixture;
+    check_key(catalog, L"BossVisual.BahamutSummon");
+    check_key(catalog, L"BossVisual.BahamutSummonEnd");
+    fSummonAction.off_ = offsetof(Function, act);
+    fSummonAbilities.off_ = offsetof(Act, abilities);
+    o_summon_effect = o_summon_fade_back = &complete_swap;
+    Monster ability{75, 91};
+    Targets abilities{1, &ability};
+    act.abilities = &abilities;
+    open();
+    const int begin = spoken;
+    finish_mesh = false;
+    d_summon_effect(&fn, method_info);
+    expect(spoken == begin + 1 && last == L"BossVisual.BahamutSummon", "Mega Flare's summon attack phase is described");
+    finish_mesh = false;
+    d_summon_fade_back(&fn, method_info);
+    expect(spoken == begin + 2 && last == L"BossVisual.BahamutSummonEnd", "The return fade describes Bahamut's departure");
+    ability.id = 149;
+    d_summon_effect(&fn, method_info);
+    expect(spoken == begin + 2, "Enemy Mega Flare cannot claim the summon cue");
+    ability.id = 459;
+    d_summon_effect(&fn, method_info);
+    expect(spoken == begin + 3, "The second native summon ability plays the same visual");
+    close();
+    d_summon_fade_back(&fn, method_info);
+    expect(spoken == begin + 3 && forwarded, "Native battle closure and original-first execution are preserved");
+    act.abilities = nullptr;
+}
+
 void check_lord_swaps()
 {
     using namespace fixture;
@@ -545,6 +606,8 @@ int main()
     check_detours();
     check_asura_faces(iv);
     check_leviathan_forms(iv);
+    check_bahamut_forms(iv);
+    check_bahamut_summon(iv);
     check_lord_swaps();
     check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);

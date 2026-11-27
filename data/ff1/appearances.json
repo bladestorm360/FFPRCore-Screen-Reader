@@ -3680,6 +3680,10 @@
         "MSG_CLASS_CHG_03": 4,
         "MSG_DRG_CAV_01": 4,
         "MSG_DRG_CAV_02": 4
+      },
+      "sc_npc_20121_1": {
+        "MSG_DRG_CAV_01": 4,
+        "MSG_DRG_CAV_02": 4
       }
     },
     "72": {

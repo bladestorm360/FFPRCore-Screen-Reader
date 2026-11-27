@@ -284,13 +284,32 @@ const Grids& grids(const Submap& s)
         }
     }
     g->entity_index_prepared=true;
-    // Step-on warps and trapdoors: cells an ordinary route must not cross.
+    // These FFV contact scripts throw the party away from the contact or back
+    // to the ship's earlier passage. Their forced movement offers no forward
+    // walking edge. The reviewed desert and Istory crossings use other IDs.
+    const auto is_pushback = [&](const Object& o) {
+        if (game_number() != 5 || o.type != ObjType::Event || o.b != 2) return false;
+        switch (s.first_map_id) {
+        case 48: return o.a == 1014 || o.a == 1015;
+        case 54: return o.a == 1226 || o.a == 1227;
+        case 112: return o.a == 1024;
+        case 261: return o.a == 1038 || o.a == 1039;
+        case 265: return o.a == 2015 || o.a == 2266 || o.a == 2268 || o.a == 2270;
+        case 268: return o.a == 1040;
+        case 476: return o.a == 2132 || o.a == 2136 || o.a == 2137;
+        case 478: return o.a == 2340 || o.a == 2341;
+        case 545: return o.a == 1074 || o.a == 1075;
+        default: return false;
+        }
+    };
+    // Step-on warps, pushbacks and trapdoors are walking boundaries.
     if (cells) {
         for (const Object& o : g->objects) {
-            if(o.type==ObjType::CurrentArea||(o.type==ObjType::Warp&&(o.d&kAutomaticCurrent))) {
+            const bool pushback = is_pushback(o);
+            if(pushback||o.type==ObjType::CurrentArea||(o.type==ObjType::Warp&&(o.d&kAutomaticCurrent))) {
                 auto& current=g->currents[o.layer];if(current.empty())current.assign(cells,0);
-                const int bits=o.type==ObjType::CurrentArea?o.a:16;
-                if(bits==1||bits==2||bits==4||bits==8||bits==16)
+                const int bits=pushback?32:o.type==ObjType::CurrentArea?o.a:16;
+                if(bits==1||bits==2||bits==4||bits==8||bits==16||bits==32)
                     for(int y=std::max(0,int(o.ty));y<std::min(g->height,int(o.ty)+o.th);++y)
                         for(int x=std::max(0,int(o.tx));x<std::min(g->width,int(o.tx)+o.tw);++x)
                             current[static_cast<size_t>(y)*g->width+x]|=static_cast<uint8_t>(bits);

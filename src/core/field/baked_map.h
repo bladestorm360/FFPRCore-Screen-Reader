@@ -143,13 +143,18 @@ struct Grids {
                                          // an ordinary route, only entered as its goal
     std::vector<uint8_t> traps[3];       // identified pitfalls, retaining their native layer
     // Allocated only on source-qualified current floors. Low four bits are
-    // forced outgoing direction;bit16 marks an automatic scripted crossing.
+    // forced outgoing direction; bit 16 marks an automatic scripted crossing.
+    // Bit 32 marks a pushback contact that cannot be entered by a walking route.
     std::vector<uint8_t> currents[3];
     TransitionGrid transitions;        // prepared immutable terminal-entry lookup
 };
 inline int current_bits(const Grids& grid,int layer,int x,int y) {
     if(layer<0||layer>2||x<0||y<0||x>=grid.width||y>=grid.height||grid.currents[layer].empty())return 0;
     return grid.currents[layer][static_cast<size_t>(y)*grid.width+x];
+}
+inline bool current_pushback(const Grids& grid, int layer, int x, int y)
+{
+    return (current_bits(grid, layer, x, y) & 32) != 0;
 }
 
 /// Bind the baked data (the bytes must outlive the process; a resource does). False when the

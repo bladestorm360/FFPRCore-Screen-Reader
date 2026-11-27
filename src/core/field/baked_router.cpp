@@ -199,6 +199,7 @@ bool terminal_transition(const Request& r,const baked::Grids& g,const Cell& cell
 }
 bool edge_allowed(const Request& r, const baked::Grids& g, const Cell& from, const Cell& to) {
     const bool world = r.submap && r.submap->world;
+    if (baked::current_pushback(g, to.layer, to.x, to.y)) return false;
     // A door/warp terminates this map leg. It stays usable as the actual goal,
     // including a graph-selected exit; ignoring scene hazards cannot bypass it.
     if(terminal_transition(r,g,to)&&!((r.goals_open||r.terminal_goal)&&is_goal_cell(r,to)))return false;

@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 26 reported defects and narration audit.** The active checkpoint
+covers the FFIV Bahamut, Lunar Subterrane, dialogue and ending reports, the
+shared route list and FFV water currents. The six-game narration pass uses
+the fixed major-sequence inventory. [Current scope and evidence](docs/re/NARRATION_AND_ROUTING_20261126.md).
+
 **First task after usage resets: six-game major-scene narration audit.**
 The owner reports hearing no major scene descriptions in FFIV. In-game
 playback is unestablished across the six games. When the owner resumes

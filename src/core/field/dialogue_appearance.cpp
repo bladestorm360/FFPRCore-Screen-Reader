@@ -193,7 +193,7 @@ void* scripted_talk_actor(void* controller, void* action, const std::wstring& me
     });
     if (speaker != speakers.end()) return placed_actor(controller, speaker->entity);
 
-    // Import only unique placed tracks verified for the caption's native
+    // Import only unique placed actors verified for the caption's native
     // speaker. A continuation can replace the original EventActionScript's
     // script, so data bindings require the currently executing field script.
     const auto* tables = data::game_json("appearances").get(L"field_dialogue");

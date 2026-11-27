@@ -5,6 +5,66 @@
 #undef main
 
 namespace {
+template<class Expect> void check_ff5_water_pushbacks(Expect expect)
+{
+    using namespace field;
+    using baked_route::Cell;
+    int contacts = 0;
+    for (const int map_id : {48, 54, 112, 261, 265, 268, 476, 478, 545}) {
+        const auto* map = baked::submap_by_map_id(map_id);
+        if (!map) { expect(false, "Missing FFV current map"); continue; }
+        const auto& grid = baked::grids(*map);
+        for (const auto& object : grid.objects) {
+            if (object.type != baked::ObjType::Event ||
+                !baked::current_pushback(grid, object.layer, object.tx, object.ty)) continue;
+            ++contacts;
+            const Cell contact{object.layer, object.tx, object.ty};
+            baked_route::Request request;
+            request.submap = map;
+            request.goals = {contact};
+            request.goals_open = request.ignore_hazards = true;
+            for (const Cell offset : {Cell{0, 1, 0}, Cell{0, -1, 0}, Cell{0, 0, 1}, Cell{0, 0, -1}}) {
+                const Cell neighbor{contact.layer, contact.x + offset.x, contact.y + offset.y};
+                if (baked::in_bounds(grid, neighbor.x, neighbor.y))
+                    expect(!baked_route::edge_allowed(request, grid, neighbor, contact),
+                           "A real pushback cannot be entered even as a goal with event hazards ignored");
+            }
+        }
+    }
+    expect(contacts == 90, "All source-qualified FFV current contacts are baked on their native layers");
+}
+
+template<class Expect> void check_ff4_lunar_subterrane_exits(Expect expect)
+{
+    using namespace field;
+    using namespace baked_nav;
+    const auto* map = baked::submap_by_map_id(296);
+    if (!map) { expect(false, "Missing Lunar Subterrane B1"); return; }
+    RouteSnapshot snapshot(map_state::Resolver(map_state::Flags{}, fixture::records));
+    snapshot.submap = map;
+    snapshot.map_id = 296;
+    snapshot.layer = 0;
+    snapshot.position = world_of_cell(*map, {0, 22, 19});
+    snapshot.kind = TargetKind::Transition;
+    snapshot.locale = L"en";
+    std::thread worker([&] {
+        int reachable_stairs = 0;
+        for (const auto& exit : baked::grids(*map).objects) {
+            if (exit.type != baked::ObjType::GotoMap || (exit.a != 154 && exit.a != 296)) continue;
+            snapshot.goal = {296, {exit.layer, exit.tx, exit.ty}, false, {}, 0, exit.entity_id()};
+            const auto directions = plan_snapshot(snapshot).path;
+            if (exit.a == 154) expect(directions.success, "The nearby Crystal Palace exit is reachable");
+            if (!directions.success) continue;
+            if (exit.a == 296) ++reachable_stairs;
+            const auto browse = plan_browse_snapshot(snapshot).route;
+            expect(browse.direct || browse.via_map_id || !browse.reason.empty(),
+                   "A reachable Lunar Subterrane exit always has a meaningful browse description");
+        }
+        expect(reachable_stairs > 0, "The fixture exercises the real same-map stairs on B1");
+    });
+    worker.join();
+}
+
 template<class Expect> void check_ff4_magnetic_cavern(Expect expect)
 {
     using namespace field;
@@ -926,7 +986,9 @@ int main() {
         expect(field::baked::load(storage.back().data(),storage.back().size()),"real game bake loads");
         for(int i=0;i<field::baked::submap_count();++i)field::baked::grids(*field::baked::submap_at(i));
         g_loaded=true;g_prepared=true;
+        if(number==5) check_ff5_water_pushbacks(expect);
         if(number==4) {
+            check_ff4_lunar_subterrane_exits(expect);
             check_ff4_underworld(expect);
             check_ff4_moon(expect);
             check_ff4_lunar_whale_beds(expect);

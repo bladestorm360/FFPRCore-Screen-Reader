@@ -98,13 +98,21 @@ static Filtered build_impl(FilterInput& input) {
         result.names.push_back(row.name);
         if (row.available && (!input.reachable_only || !row.story_gated) && (input.category == Category::All || input.category == row.category)) result.order.push_back(row.index);
     }
-    if (input.sort) std::stable_sort(result.order.begin(), result.order.end(), [&](size_t a, size_t b) {
+    std::stable_sort(result.order.begin(), result.order.end(), [&](size_t a, size_t b) {
         check_cancelled(input);
-        const auto distance = [&](size_t i) {
-            const auto& row = input.rows[i];
-            return row.remote_map ? 1.0e9f + static_cast<float>(i) : point_distance(row.position, input.player);
-        };
-        return distance(a) < distance(b);
+        const auto& left = input.rows[a];
+        const auto& right = input.rows[b];
+        // Remote rows use coordinates from a different map. Keep them after
+        // local rows even when the native player pose is temporarily missing.
+        const bool left_remote = left.remote_map != 0;
+        const bool right_remote = right.remote_map != 0;
+        if (left_remote != right_remote) return !left_remote;
+        if (!input.sort || left_remote) return false;
+        const float left_distance = point_distance(left.position, input.player);
+        const float right_distance = point_distance(right.position, input.player);
+        if (std::isfinite(left_distance) != std::isfinite(right_distance))
+            return std::isfinite(left_distance);
+        return left_distance < right_distance;
     });
     // A grouped marker keeps its exact live or recreated selection. Without
     // an explicit destination, the group's existing sorted order still wins.

@@ -4948,6 +4948,11 @@ BrowsePlanned plan_browse_snapshot(RouteSnapshot& snapshot) {
         }
     if (!result.route.direct && result.route.reason.empty() && path.success)
         result.route.reason = route_warning(path,snapshot.goal);
+    // The directions key can give a usable same-floor detour or a scripted
+    // crossing with no change of map ID. Keep its first-leg instructions
+    // instead of presenting that successful plan as unreachable.
+    if (!result.route.direct && !result.route.via_map_id && result.route.reason.empty() && path.success)
+        result.route.reason = path.description;
     result.compute_ms=(frame::now()-compute_started)*1000;
     // Route geometry, phase text and temporary plans are destroyed here on the
     // worker. Only small owned evidence goes back to the native owner.

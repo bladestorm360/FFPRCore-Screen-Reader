@@ -51,6 +51,13 @@ constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, in
             if (asset == 208) return L"BossVisual.LeviathanUpright";
         }
         break;
+    case 191:
+        // Bahamut's windup and recovery bracket the separate Mega Flare action.
+        if (mode == 0 && effect == 168) {
+            if (asset == 162) return L"BossVisual.BahamutWindup";
+            if (asset == 160) return L"BossVisual.BahamutRecovery";
+        }
+        break;
     case 193:
         // Each face has a distinct battle sprite. The intervening AI mode
         // resets reapply the same face and do not announce a new one.

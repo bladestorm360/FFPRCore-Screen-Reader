@@ -29,6 +29,13 @@ ref::Field fValue1{kFunction, "<Value1>k__BackingField"}, fValue2{kFunction, "<V
 ref::Field fValue3{kFunction, "<Value3>k__BackingField"};
 ref::Class kAct{"Last.Battle", "BattleActData", kSpriteGames};
 ref::Field fTargets{kAct, "<TargetUnitDatas>k__BackingField"};
+ref::Class kSummon{"Last.Battle", "SummonActFunction", game::kFF4};
+ref::Method mStartSummonEffect{kSummon, "StartEffect", 0}, mFadeBackFromSummon{kSummon, "StartWhiteInEffect", 0};
+ref::Class kActFunction{"Last.Battle", "ActFunctionBase", game::kFF4};
+ref::Field fSummonAction{kActFunction, "<BattleActData>k__BackingField"};
+ref::Field fSummonAbilities{kAct, "abilityList"};
+ref::Class kSummonAbility{"Last.Data.Master", "Ability", game::kFF4};
+ref::Method mSummonAbilityId{kSummonAbility, "get_Id", 0};
 ref::Class kInfo{"Last.Battle", "BattleUnitDataInfo", kVisualGames};
 ref::Field fEntity{kInfo, "<BattleSpriteEntity>k__BackingField"};
 ref::Class kEnemy{"Last.Battle", "BattleEnemyData", kSpriteGames};
@@ -147,6 +154,7 @@ struct CreateScope {
 
 using Callback = void(*)(void*, const void*);
 Callback o_create_sprite, o_create_deformation, o_commit_sprite, o_exit_sprite, o_start_end, o_hide, o_show;
+Callback o_summon_effect, o_summon_fade_back;
 using StageSprite = void(*)(void*, void*, void*, unity::Vec2, unity::Vec2, const void*);
 StageSprite o_stage_sprite;
 
@@ -198,6 +206,33 @@ void create_sprite(void* self, const void* mi, Callback original, bool changes_m
 
 void d_create_sprite(void* self, const void* mi) { create_sprite(self, mi, o_create_sprite, false); }
 void d_create_deformation(void* self, const void* mi) { create_sprite(self, mi, o_create_deformation, true); }
+
+// The summon is a different native sequence from the boss's sprite swaps.
+// Its attack phase starts after the whiteout, and the next fade brings the
+// battle back. Both callbacks own the same action and run once per cast.
+void describe_bahamut_summon(void* self, const wchar_t* key)
+{
+    if (!observe() || !ui::prefs::visual_descriptions_enabled()) return;
+    hooks::guarded("BossVisual.BahamutSummon", [&] {
+        auto* act = ref::rd<void*>(self, fSummonAction);
+        auto* abilities = ref::rd<void*>(act, fSummonAbilities);
+        if (unity::list_count(abilities) != 1) return;
+        const auto id = ref::call<int32_t>(mSummonAbilityId, unity::list_at(abilities, 0));
+        if (id == 75 || id == 459) speak(key);
+    });
+}
+
+void d_summon_effect(void* self, const void* mi)
+{
+    o_summon_effect(self, mi);
+    describe_bahamut_summon(self, L"BossVisual.BahamutSummon");
+}
+
+void d_summon_fade_back(void* self, const void* mi)
+{
+    o_summon_fade_back(self, mi);
+    describe_bahamut_summon(self, L"BossVisual.BahamutSummonEnd");
+}
 
 // The animation first draws the previous art. Execute/Exit apply the new body
 // texture and rebuild the mesh. Check presentation only after that commit.
@@ -440,7 +475,10 @@ int install()
     const int party = hooks::attach(mStartEnd, &d_start_end, &o_start_end);
     const int shared = sprite + stage + commit + party;
     // FFIV folds ExecuteChangeSprite and ExitChangeSprite to the same body.
-    if (!game::is(game::Id::FF5)) return shared;
+    if (game::is(game::Id::FF4)) {
+        const int summon = hooks::attach(mStartSummonEffect, &d_summon_effect, &o_summon_effect);
+        return shared + summon + hooks::attach(mFadeBackFromSummon, &d_summon_fade_back, &o_summon_fade_back);
+    }
     const int exit = hooks::attach(mExitSprite, &d_exit_sprite, &o_exit_sprite);
     const int deform = hooks::attach(mCreateDeformation, &d_create_deformation, &o_create_deformation);
     const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);

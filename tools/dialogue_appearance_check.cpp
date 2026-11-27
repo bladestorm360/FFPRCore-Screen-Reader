@@ -285,7 +285,7 @@ void check_effect_cues()
             particle_count = 0;
             require(observation() && spoken.empty(), "a playing system without particles is silent");
             particle_count = 3;
-            particles.resize(67, &particle);
+            particles.resize(scene_emitter_limit + 1, &particle);
             require(observation() && spoken.empty(), "an unexpectedly large emitter list cannot claim a cue");
             particles.resize(1);
             particle.visible = false;
@@ -796,6 +796,15 @@ int main()
     require(!read(), "Cecil's response cannot borrow the king's costume");
     id.value = L"E0108_00_021_a_03";
     require(read() && spoken == L"Field appearance mo_ff4_n006_c02", "the revealed king has an on-demand description");
+    current_map = 100;
+    battle_script.value = L"sc_e_0038";
+    id.value = L"E0038_00_100_a_01";
+    put(property, "entityId", reinterpret_cast<void*>(18));
+    texture.value = L"sactx-64x64-Uncompressed-MO_FF4_P007_C00-12345678";
+    require(read() && spoken == L"Field appearance mo_ff4_p007_c00",
+            "the shipped stationary speaker binding describes Edward during dialogue");
+    renderer.visible = false;
+    require(!read(), "a named but hidden stationary speaker stays silent");
     check_effect_cues();
     std::puts("Dialogue appearance checks passed");
 }

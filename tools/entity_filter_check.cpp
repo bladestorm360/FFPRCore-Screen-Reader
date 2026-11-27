@@ -35,6 +35,23 @@ int main() {
     row(Kind::Event, Category::Events, L"Layer", 9); input.rows.back().event_type = L"ToLayer";
     Filtered result;
     {
+        FilterInput chests;
+        chests.category = Category::Chests;
+        for (const int floor : {296, 0, 0, 297}) {
+            FilterRow value;
+            value.index = chests.rows.size();
+            value.category = chests.category;
+            value.remote_map = floor;
+            value.position = {static_cast<float>(4 - value.index), 0, 0};
+            chests.rows.push_back(value);
+        }
+        expect(build(chests).order == std::vector<size_t>{1, 2, 0, 3},
+               "Current-floor chests come first even before a player pose is available");
+        chests.sort = true;
+        expect(build(chests).order == std::vector<size_t>{2, 1, 0, 3},
+               "Distances rank only local chests; remote chests keep their source order");
+    }
+    {
         FilterInput books;books.category=Category::Objects;books.sort=true;
         for(int i=0;i<12;++i){FilterRow value;value.index=books.rows.size();value.kind=Kind::Event;value.category=Category::Objects;
             value.name=i==9?L"Switch":L"Book";value.label={value.name,-1};value.remote_map=i>=10?50:0;
