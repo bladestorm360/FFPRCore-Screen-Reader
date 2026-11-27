@@ -1,5 +1,41 @@
 # FFV Fire-Powered Ship pathfinder
 
+## Return routes after a platform carry
+
+The later November 27 Steam log shows a platform operation followed by the
+party's arrival at map 270, tile (12,21). Pathfinder then repeated “No path”
+for the two chests on 261 and the chest on 256. The replay reproduced the
+failures from that tile and from the three floors immediately behind it.
+The same-floor chest on 270 still used its own platform route.
+
+The return journey needs the lower current in the chamber on 268. Entering
+that contact from its south side invokes the native script that moves the
+controlled player north to (9,8), beside the route to the elevator. The
+bake records the exact terminal contact and landing. It keeps the upper
+contact and unrelated pushbacks out of walking routes. The lower contact
+is usable as an explicit ride and ends that route segment. The planner
+continues from the resulting native position.
+
+The separate chest behind the one-switch door on 256 can still require
+that switch when the lower exit on 270 is already reachable. Pathfinder proves
+the route to the actual switch before offering the lower exit as the
+first leg.
+
+The final replay found routes for eight earlier ship chests from all 28
+native layouts compatible with the logged landing. It separately checked
+the return current's entry direction, the exact landing, and the onward
+route to the elevator. The ship check passed 1,308 assertions across 492
+route legs. The all-six browse check passed. The verified build was
+installed in FFV. [Installation evidence](../SECURITY_AND_DISTRIBUTION.md#november-27-ffv-platform-chest-return-routes)
+
+The gameplay follow-up is to select either earlier Engine Room chest
+after the platform carries the party back down. Directions should lead
+back through the previous room and then tell the player to ride the return
+current where needed. After landing, request the next directions or use
+automatic continuation.
+
+## Initial routing fix
+
 The November 27 Steam log records Storyline asking for the Liquid Flame
 contact on map 271 from the save room on 269. It repeatedly returned “Story
 gated.” Navigation also reported that the chest and controls on 270 and the
@@ -30,7 +66,7 @@ uses separate local layout flags 301–307.
   and tell the player to interact.
 - Four pipes on 265 carry the party to real landing cells on 261. Those cells
   are route endpoints for the native transfer. The intermediate pipe is
-  never traversed as walking geometry. The other 86 source-qualified
+  never traversed as walking geometry. The other source-qualified
   pushback triggers still block ordinary walking.
 - The shared Storyline planner uses “No path to the next step” if it cannot
   supply a verified approach to the active objective. Ordinary destinations

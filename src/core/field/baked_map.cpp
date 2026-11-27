@@ -293,7 +293,15 @@ const Grids& grids(const Submap& s)
         case 54: return o.a == 1226 || o.a == 1227;
         case 112: return o.a == 1024;
         case 261: return o.a == 1038 || o.a == 1039;
-        case 268: return o.a == 1040;
+        case 268: {
+            if (o.a != 1040) return false;
+            if (o.entity_id() != 15) return true;
+            // The lower current returns the player to the elevator side
+            // when entered from the south. Keep it closed unless the current
+            // bake contains that exact terminal crossing.
+            const auto* crossing = world_exit_at(*g, o.entity_id(), object_identifier(o), o.tx, o.ty);
+            return !crossing || !(crossing->d & kAutomaticCurrent);
+        }
         case 476: return o.a == 2132 || o.a == 2136 || o.a == 2137;
         case 478: return o.a == 2340 || o.a == 2341;
         case 545: return o.a == 1074 || o.a == 1075;

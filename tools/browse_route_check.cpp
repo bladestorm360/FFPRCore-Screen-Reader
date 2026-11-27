@@ -92,7 +92,7 @@ template<class Expect> void check_ff5_water_pushbacks(Expect expect)
             }
         }
     }
-    expect(contacts == 86, "All source-qualified FFV pushbacks retain their native layers");
+    expect(contacts == 85, "All source-qualified FFV pushbacks retain their native layers");
 }
 
 template<class Expect> void check_ff4_lunar_subterrane_exits(Expect expect)

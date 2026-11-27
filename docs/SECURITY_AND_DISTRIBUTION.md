@@ -1,5 +1,16 @@
 # Build and distribution security
 
+## November 27 FFV platform chest return routes
+
+The FFV install uses the 22,065,664-byte build with SHA-256
+`40e8b0c5407ddcf36156cc9a9ade62b27baf18a971bb28fbb0f72bf7933dc7f4`.
+The ship replay, all-six browse, 73 embedded resource checks and 47 smoke
+exports passed. Defender reported no threats across the 22 exact files.
+All 22 installed hashes, 138 protected file states and the other five
+games' payloads matched their expected values. Receipts are under
+`build_check/ff5-platform-chests`. The prior FFV build can be reproduced
+from local checkpoint `57b936a`. Gameplay confirmation is pending.
+
 ## November 27 default route readout
 
 The default-off follow-up produced a 22,064,640-byte DLL with SHA-256

@@ -8,7 +8,8 @@ using namespace ship_policy;
 int assertions=0,errors=0,legs=0,cells=0;
 void check(bool v,const char* why){++assertions;if(!v){++errors;if(errors<12)std::printf("FAIL %s\n",why);}}
 ff5::library::Plan advice(int mask,Cell at,int map=270,std::wstring id={}){ff5::mechanics::Snapshot s;s.flags=flags(mask);s.map=map;s.player=at;s.guide_id=id;s.locale=L"en";return ff5::mechanics::plan(s,fixture::guide_recipes);}
-Planned route(int mask,Cell at,const field::baked_nav::GuideTarget& target,int map=270){auto state=flags(mask);state.current_map_id=map;state.scenario[44]=1;RouteSnapshot s(map_state::Resolver(state,fixture::records));s.map_id=map;s.submap=baked::submap_by_map_id(map);s.layer=at.layer;s.position=world_of_cell(*s.submap,at);s.vehicle={true,1,baked::transport(1)->type,{}};s.vehicle_shortcuts=false;s.locale=L"en";s.candidates={target};
+Planned route(int mask,Cell at,const field::baked_nav::GuideTarget& target,int map=270,bool manual_request=false){auto state=flags(mask);state.current_map_id=map;state.scenario[44]=1;RouteSnapshot s(map_state::Resolver(state,fixture::records));s.map_id=map;s.submap=baked::submap_by_map_id(map);s.layer=at.layer;s.position=world_of_cell(*s.submap,at);s.vehicle={true,1,baked::transport(1)->type,{}};s.vehicle_shortcuts=false;s.locale=L"en";
+ if(manual_request){s.goal=target.goal;s.kind=target.kind;}else s.candidates={target};
  for(const auto& source:baked::grids(*s.submap).objects){if(source.type==baked::ObjType::PointIn||source.type==baked::ObjType::GotoMap||source.type==baked::ObjType::Warp||!s.state.active(*s.submap,source,true))continue;const auto o=s.state.effective(*s.submap,source);NativeObstacle n;n.type=int(o.type);n.id=o.entity_id();n.raw_name=baked::object_identifier(source);n.cell={o.layer,o.tx,o.ty};n.npc=o.type==baked::ObjType::NPC||o.type==baked::ObjType::ShopNPC;n.chest=o.type==baked::ObjType::TreasureBox;n.trigger=baked_route::step_event(o);n.collider=o.type==baked::ObjType::CollisionEntity;n.collision=o.a;s.obstacles.push_back(n);}
  ++legs;return plan_snapshot(s);}
 GuideTarget destination(int map, int entity, baked::ObjType type, TargetKind kind)
@@ -44,6 +45,42 @@ void verify_pathfinder()
  check(locked.success&&!locked.walk_phases.empty()&&
        locked.walk_phases.back().action_after==T(L"Examine the switch"),
        "The one-switch side room explains which control opens the chest route");
+ const Cell carried{1,12,21};
+ std::set<int> carried_layouts;
+ for(const auto& node:nodes)if(node.reach.reachable(carried))carried_layouts.insert(node.mask);
+ check(carried_layouts.size()==28,"All native layouts compatible with the logged carry landing are replayed");
+ for(const auto& [map,entity] : {std::pair{261,26},std::pair{261,27},std::pair{256,8},std::pair{259,0},std::pair{255,11},std::pair{253,17},std::pair{254,0},std::pair{258,0}}) {
+  const auto goal=destination(map,entity,baked::ObjType::TreasureBox,TargetKind::Interact);
+  for(int layout:carried_layouts){
+   const auto path=route(layout,carried,goal,270,true).path;
+   check(path.success&&path.next_map_id==269,"The logged post-carry pose takes the lower exit towards earlier chests");
+  }
+  for(const auto& [from,at] : {std::pair{269,Cell{1,5,5}},std::pair{268,Cell{1,6,10}},std::pair{261,Cell{1,16,26}}}) {
+   const auto path=route(0,at,goal,from,true).path;
+   check(path.success,"The chest remains reachable from each floor on the real return route");
+  }
+ }
+ const auto elevator_return=destination(266,14,baked::ObjType::GotoMap,TargetKind::Transition);
+ const auto crossing=route(0,{1,6,10},elevator_return,268,true);
+ check(crossing.path.success&&crossing.path.next_map_id==268&&crossing.pending.incoming_transition&&
+       crossing.pending.incoming_transition->entity_id==15&&
+       crossing.pending.incoming_transition->entry==Cell{1,9,10}&&
+       crossing.pending.incoming_transition->arrival==Cell{1,9,8},
+       "The return current ends at the native trigger and records the exact same-floor landing");
+ const auto landed=route(0,{1,9,8},elevator_return,268,true).path;
+ check(landed.success&&landed.next_map_id==266,"The actual current landing opens the onward elevator route");
+ const auto* current_room=baked::submap_by_map_id(268);
+ const auto& currents=baked::grids(*current_room);
+ baked_route::Request walking;
+ walking.submap=current_room;
+ walking.ignore_hazards=true;
+ check(!baked_route::edge_allowed(walking,currents,{1,9,11},{1,9,10})&&
+       baked::current_pushback(currents,1,9,9),"Ordinary walking cannot cross either water contact");
+ walking.goals={{1,9,10}};
+ walking.goal_entry_mask=4;
+ check(baked_route::edge_allowed(walking,currents,{1,9,11},{1,9,10})&&
+       !baked_route::edge_allowed(walking,currents,{1,9,9},{1,9,10}),
+       "A deliberate current ride can enter only from the south");
  struct Lift { int lower, from_x, lower_exit; };
  constexpr Lift lifts[]{{257,5,16},{260,4,14},{263,4,14},{264,4,17},{266,5,14}};
  for(int i=0;i<5;++i){

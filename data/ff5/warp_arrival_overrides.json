@@ -2007,5 +2007,20 @@
       1
     ],
     "automatic_current": true
+  },
+  {
+    "submap": "Map_30151_18",
+    "entity_id": 15,
+    "object_id": 15,
+    "destination_map": 268,
+    "original_point": 0,
+    "continuation": "sc_30151_18_carry",
+    "continuation_sha256": "83b00642f7214730b5a80109dd9f9a3a9a3c2c00849db4930df625c2b35bd22d",
+    "same_map": true,
+    "arrival_cell": [9, 8, 1],
+    "approach_mask": 4,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "South approach to the native engine-room current, docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md"
   }
 ]

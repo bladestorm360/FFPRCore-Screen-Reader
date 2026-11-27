@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 27 FFV platform chest return.** The logged platform landing
+keeps routes to eight earlier ship chests across all 28 compatible
+layouts. The earlier current now supplies the exact return to the
+elevator side. Verified offline and installed in FFV.
+[Route and delivery evidence](docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md#return-routes-after-a-platform-carry).
+
 **November 27 manual directions.** Shared Navigation settings control full
 readout, chunk size and automatic continuation. Full readout and automatic
 continuation default off. Players with no saved choices get three-leg chunks.

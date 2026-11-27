@@ -41,11 +41,19 @@ void prepare_fire_ship_prefix(RouteSnapshot& snapshot, PathInfo& path)
             const int target = behind_passage ? 15 : destination.entity_id;
             if (target != 16) rows = targets ? targets->get(std::to_wstring(target)) : nullptr;
         }
-        if (!rows || rows->arr.size() != 128 || rows->arr[mask].s.size() != 675) return;
+        if (!rows || rows->arr.size() != 128) return;
+        const auto& row = rows->arr[mask].s;
+        if (!row.empty() && row.size() != 675) return;
         constexpr std::wstring_view codes = L".ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh";
-        const auto code = codes.find(rows->arr[mask].s[start.y * 25 + start.x]);
-        if (code == 0 || code == codes.npos) return;
-        if (code <= 32) {
+        const auto code = row.empty() ? 0 : codes.find(row[start.y * 25 + start.x]);
+        if (code == codes.npos) return;
+        if (code == 0) {
+            if (!side_room) return;
+            // A walking route can reach the lower exit without a platform
+            // action. Prove the full onward approach to the side-room switch.
+            stage_map = 256;
+            entity = 13;
+        } else if (code <= 32) {
             constexpr int controls[]{21,19,20,23,24,26,25,22};
             entity = controls[(code - 1) / 4];
             direction = static_cast<int>((code - 1) % 4);
