@@ -8,6 +8,9 @@
 namespace owner {
 bool ready=true,menu=false,battle=false,busy=false,position_valid=true;
 bool nav_guidance=true,other_guidance=true;
+bool auto_walk=false,walk_active=false;
+std::optional<int> karnak_time;
+std::optional<field::baked_nav::MapGoal> walking_goal;
 bool timers_frozen=false;double phase_test_time=1.;int interruptions=0;
 std::map<std::string,actions::Fn> actions;
 std::map<std::string,std::function<bool()>> queries;
@@ -26,6 +29,7 @@ void pulse(){std::vector<int> ids;for(const auto& [id,task]:tasks)ids.push_back(
 void drain(){auto work=std::move(jobs);jobs.clear();std::thread worker([&]{for(auto& fn:work)fn();});worker.join();auto ready_posts=std::move(posts);posts.clear();for(auto& fn:ready_posts)fn();}
 bool same(const field::baked_nav::MapGoal& a,const field::baked_nav::MapGoal& b){return a.map_id==b.map_id&&a.cell==b.cell&&a.entity_id==b.entity_id&&a.raw_name==b.raw_name;}
 void respond(size_t index=0){if(!publish||index>=targets.size()){check(false,"a real pending route is required for publication");return;}field::PathInfo path;path.success=true;path.guidance_index=int(index);path.description=L"Owned route";path.guidance=targets[index].instruction;
+ if(auto_walk){field::route_progress::Phase phase;phase.cells={position};path.walk_phases.push_back(std::move(phase));}
  beacon=targets[index].goal;auto callback=std::move(publish);publish={};callback(std::move(path));}
 void native_scene(int map) {
  fixture::current_map=map;fixture::running_game=game::Id::FF5;fixture::hidden_control=fixture::hidden_parent=fixture::bad_control=fixture::missing_control=fixture::dead_control=false;
@@ -55,7 +59,19 @@ std::wstring T(std::wstring_view value){return std::wstring(value);}
 std::wstring TF(std::wstring_view key,std::initializer_list<std::wstring> args){std::wstring out(key);int i=0;for(const auto& arg:args){auto token=L"{"+std::to_wstring(i++)+L"}";auto at=out.find(token);if(at!=out.npos)out.replace(at,token.size(),arg);}return out;}
 }
 namespace data {bool game_data_ready(){return true;}}
-namespace settings {bool get_bool(const char* key,bool fallback){return std::string(key)==ui::prefs::kNavigationPuzzleGuidance?owner::nav_guidance:std::string(key)==ui::prefs::kOtherPuzzleGuidance?owner::other_guidance:fallback;}}
+namespace settings {bool get_bool(const char* key,bool fallback){return std::string(key)==ui::prefs::kNavigationPuzzleGuidance?owner::nav_guidance:std::string(key)==ui::prefs::kOtherPuzzleGuidance?owner::other_guidance:std::string(key)==ui::prefs::kAutowalk?owner::auto_walk:fallback;}}
+namespace ffpr::ff5 {std::optional<int> karnak_seconds_remaining(){fixture::native();return owner::karnak_time;}}
+namespace ffpr::fieldnav::autowalk {
+bool active(){return owner::walk_active;}
+bool following_guide(){return owner::walk_active;}
+void cancel(bool){owner::walk_active=false;}
+void start(const field::PathInfo&,const field::baked_nav::MapGoal* goal,field::TargetKind,const std::wstring&,bool keep) {
+    fixture::native();
+    owner::check(goal && !keep,"a guided walk has its own target and does not replace the selected destination");
+    if (goal) owner::walking_goal=*goal;
+    owner::walk_active=goal!=nullptr;
+}
+}
 namespace field {
 void* player(){fixture::native();return reinterpret_cast<void*>(1);}
 std::wstring translate_entity_name_snapshot(const std::wstring& value){return value;}
@@ -228,6 +244,34 @@ int FFPR_LIBRARY_OWNER_MAIN(){
  nav_guidance=false;other_guidance=true;native_scene(272);actions::run("GameModule.PuzzleGuide");
  check(!ff5::library::active&&spoken.back()==L"Navigation puzzle guidance is off","library maze has independent navigation ownership");
  nav_guidance=other_guidance=true;
+ auto_walk=true;karnak_time=600;flags({42,43,46,353});native_scene(102);position={1,4,7};
+ fixture::storage.treasure=&fixture::treasure_flags;fixture::treasure_flags.bits=&fixture::treasure;
+ fixture::treasure_flags.length=1024;fixture::treasure.length=128;fixture::treasure.values.fill(0);
+ actions::run("GameModule.PuzzleGuide");drain();
+ check(!targets.empty()&&targets[0].goal.map_id==101&&targets[0].goal.entity_id==22,
+       "Karnak starts with the first timed chest");
+ respond();
+ check(walk_active&&walking_goal&&walking_goal->entity_id==22,
+       "Shift+G hands the finished route to autowalk");
+ const int before_chest=routes;
+ native_scene(101);position={1,12,16};
+ event(events::Kind::MapChanged);event(events::Kind::BattleEnd);pulse();drain();
+ check(routes==before_chest,"an active guided walk keeps its own floor and battle continuation");
+ walk_active=false;
+ actions::run("GameModule.FieldStateChanged");pulse();drain();
+ check(routes==before_chest,"proximity or a canceled walk does not advance the treasure queue");
+ fixture::treasure.values[86/32]|=1u<<(86%32);karnak_time=595;
+ actions::run("GameModule.FieldStateChanged");pulse();drain();
+ check(routes==before_chest+1&&!targets.empty()&&targets[0].goal.entity_id==23,
+       "the native chest receipt advances once to the next chest in the same room");
+ respond();
+ walk_active=false;karnak_time=40;
+ actions::run("GameModule.GuidedWalkReturnedAfterBattle");pulse();drain();
+ check(routes==before_chest+2&&!targets.empty()&&targets[0].goal.entity_id==29,
+       "an en-route battle can send the guide to the exit before the next chest fight");
+ respond();
+ actions::run("GameModule.StopPuzzleGuide");
+ check(!walk_active,"stopping Karnak guidance releases only its owned walk");
  check(fixture::wrong_owner==0,"no native read or speech on layout worker");
  std::printf("FFV native guide owner: %d cases/%d failures; bounded controls, no blocked-frame/movement scans, cancellation/repeat/preview/native completion verified\n",cases,fixture::failures);return fixture::failures?1:0;
 }

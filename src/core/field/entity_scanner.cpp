@@ -554,6 +554,7 @@ Category g_sel_category = Category::All;
 std::wstring g_sel_name;
 int g_sel_remote = 0;            // another floor's entry: its floor and cell identify it
 int g_sel_cx = 0, g_sel_cy = 0;
+int g_sel_layer = -1;
 int g_sel_entity_id = -1;
 int g_sel_map = 0;
 int g_sel_transportation_id = 0;
@@ -918,6 +919,7 @@ void clear_selected_identifier()
     g_sel_name.clear();
     g_sel_remote = 0;
     g_sel_entity_id = -1;
+    g_sel_layer = -1;
     g_sel_map = 0;
     g_sel_transportation_id = 0;
 }
@@ -935,12 +937,17 @@ void save_selected_identifier()
     g_sel_remote = e->remote_map_id;
     g_sel_cx = e->cell_x;
     g_sel_cy = e->cell_y;
+    g_sel_layer = e->cell_layer;
     g_sel_entity_id = e->entity_id;
     g_sel_map = e->remote() ? e->remote_map_id : current_map_id_or_user_data();
     g_sel_transportation_id = e->kind == Kind::Vehicle ? e->transportation_id : 0;
     if (!e->remote()) {
         baked_route::Cell cell;
-        if (baked_nav::cell_at(field::map_handle(), e->position(), cell)) { g_sel_cx = cell.x; g_sel_cy = cell.y; }
+        if (baked_nav::cell_at(field::map_handle(), e->position(), cell)) {
+            g_sel_cx = cell.x;
+            g_sel_cy = cell.y;
+            if (e->kind == Kind::TreasureChest && e->game) g_sel_layer = game_object_layer(e->game) - 9;
+        } else g_sel_layer = -1;
     }
 }
 
@@ -957,6 +964,19 @@ void ensure_correct_map()
 // =========================================================================================
 namespace scanner {
 void remember_selection() { save_selected_identifier(); }
+bool remembered_chest(baked_nav::MapGoal& goal, std::wstring& name)
+{
+    if (!g_sel || !g_sel_has || g_sel->kind != Kind::TreasureChest ||
+        g_sel_map <= 0 || g_sel_entity_id < 0 || g_sel_layer < 0 || g_sel_layer > 2) return false;
+    goal = {};
+    goal.map_id = g_sel_map;
+    goal.cell = {g_sel_layer, g_sel_cx, g_sel_cy};
+    goal.entity_id = g_sel_entity_id;
+    goal.object_type = int(baked::ObjType::TreasureBox);
+    if (g_sel->raw_name_known && g_sel->audio_hint.size() < 256) goal.raw_name = g_sel->audio_hint;
+    name = g_sel_name;
+    return true;
+}
 void clear_selection() { clear_selected_identifier(); }
 void when_filter_ready(std::function<void()> ready, bool existing_selection) {
     if (!ffpr::system::is_field_navigation_ready() || ffpr::system::input_transition_blocked()) return;

@@ -107,6 +107,7 @@ struct MapGoal {
     // Automation and persistent guide previews always need an exact route.
     bool moving_flight_directions = false;
     int spoken_leg_limit = -1;     // -1 other consumers, 0 legacy manual readout, >0 manual chunk
+    int object_type = -1;         // exact type for a native arrival interaction, if known
 };
 
 /// Capture bounded native state on its owner, then plan/format on an owned worker.

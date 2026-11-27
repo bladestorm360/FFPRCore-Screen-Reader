@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 27 timed Karnak loot and battle continuation
+
+The shared DLL has 22,136,832 bytes and SHA-256
+`10c2695b427a15c3db66778c3996b4f245e6911ab29ca510d2cb616379c560d4`.
+The Karnak route replay passed 68 assertions over 54 physical route legs.
+The FFV guide owner passed 150 cases. The build also passed the native
+Autowalk, selection, readiness and whole-ship checks, verified 73 embedded
+resources and checked 9,242 native names. The isolated load resolved all
+47 exports.
+
+Defender definitions `1.463.500.0` reported no threats on the 22 exact
+files, and the staged hashes stayed unchanged. Windows denied inspection
+of scanner exclusions. The installer verified 22 files in each of the
+six Steam installs and preserved 138 protected file states. Receipts are
+in `build_check/karnak-loot-20261127`. Source checkpoint `bf0c80e` builds
+the prior door and arrival update.
+
 ## November 27 door continuation and automatic interaction
 
 The shared DLL has 22,122,496 bytes and SHA-256

@@ -3,11 +3,14 @@
 
 namespace ffpr::fieldnav::autowalk {
 bool active();
+bool following_guide();
 /// All input devices use this start/stop contract. A second request stops the walk.
 bool stop_requested();
-void request(field::baked_nav::MapGoal goal, field::TargetKind kind, std::wstring name);
+void request(field::baked_nav::MapGoal goal, field::TargetKind kind, std::wstring name,
+             bool keep_destination = true);
 void start(const field::PathInfo& path, const field::baked_nav::MapGoal* goal = nullptr,
-           field::TargetKind kind = field::TargetKind::Spot, const std::wstring& name = L"");
+           field::TargetKind kind = field::TargetKind::Spot, const std::wstring& name = L"",
+           bool keep_destination = true);
 void cancel(bool announce = false);
 /// Called after keyboard/SDL polling, before dispatch, even with no keyboard key pressed.
 void input_updated();

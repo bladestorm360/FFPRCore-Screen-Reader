@@ -79,6 +79,7 @@ SearchInteractions o_search_interactions = nullptr;
 bool g_interact_hooked = false;
 bool g_hooked = false, g_active = false, g_has_goal = false;
 bool g_planning = false;
+bool g_keep_destination = true;
 // Native input only marks a blocked edge. The existing owner update requests
 // one fresh snapshot at a time; the Navigation worker does every detour search.
 // A wait episode has bounded duration and never repeats its spoken notice.
@@ -86,7 +87,8 @@ bool g_replan_needed=false, g_wait_announced=false;
 double g_retry_at=0, g_retry_until=0;
 uint64_t g_walk_generation=0;
 std::wstring g_wait_instruction;
-bool g_battle_interrupted = false;
+enum class BattlePause { None, Fighting, Returning };
+BattlePause g_battle_pause = BattlePause::None;
 bool g_exit_approach = false;
 bool g_verify_interaction = false;
 Transition g_transition;
@@ -232,14 +234,15 @@ void begin(const field::PathInfo& path, bool speak_path=true)
     // A selected ordinary interaction can end at a legal adjacent or stand-on
     // cell. Give only that terminal phase a confirm target. Authored actions
     // that already carry an exact prerequisite retain their own target.
+    const bool chest = g_has_goal && g_goal->object_type == int(field::baked::ObjType::TreasureBox);
     if (!last.arrival_interaction && g_has_goal && g_goal->map_id == g_map && !path.next_map_id &&
         (g_kind == field::TargetKind::Interact || g_goal->examine) && !g_goal->storyline &&
-        !g_goal->avoid_other_events && !g_goal->transportation_id && g_goal->entity_id >= 0 &&
+        (!g_goal->avoid_other_events || chest) && !g_goal->transportation_id && g_goal->entity_id >= 0 &&
         !path.npc_approach && path.blocking_party < 0 && !last.manual_after && !last.cells.empty() &&
         last.arrival_direction >= 0) {
         auto target = g_goal->cell;
         target.layer = last.cells.back().layer;
-        last.arrival_interaction = field::route_progress::InteractionTarget{target, g_goal->entity_id};
+        last.arrival_interaction = field::route_progress::InteractionTarget{target, g_goal->entity_id, g_goal->object_type};
     }
     g_route->set(std::move(phases), path.map_width, path.map_height, path.wraps, path.loop_axes, local_world_exit);
     g_verify_interaction = path.verify_interaction_on_arrival && path.step_count > 0;
@@ -254,7 +257,7 @@ void begin(const field::PathInfo& path, bool speak_path=true)
     // The asynchronous scanner may finish after movement is ready. Keep its destination
     // token even on the final floor until arrival/cancellation, so it and the beacon select
     // the same target rather than the first entry on that floor.
-    if (g_has_goal) field::baked_nav::remember_destination(*g_goal, g_kind, *g_name);
+    if (g_has_goal && g_keep_destination) field::baked_nav::remember_destination(*g_goal, g_kind, *g_name);
     if (speak_path && ui::prefs::speak_autowalk_path_enabled())
         ffpr::say(path.full_description.empty() ? path.description : path.full_description, false);
 }
@@ -550,21 +553,29 @@ int install()
     queries::define("Autowalk.IsActive", [] { return active(); });
     actions::define("Autowalk.Cancel", [] { cancel(); });
     events::on(events::Kind::BattleEntering, [] {
-        g_battle_interrupted = active();
+        if (g_battle_pause == BattlePause::Fighting) return;
+        g_battle_pause = g_active && g_has_goal ? BattlePause::Fighting : BattlePause::None;
         g_active = g_planning = false;
+        ++g_walk_generation;
         g_key_action = -1;
+        g_vehicle_action = VehicleAction::None;
+        g_boundary_deadline = 0;
         g_interaction.reset();
         g_door_wait.reset();
         g_door_script_frame.reset();
     });
-    events::on(events::Kind::BattleStart, [] { cancel(); });
+    events::on(events::Kind::BattleStart, [] { if (g_battle_pause == BattlePause::None) cancel(); });
+    events::on(events::Kind::BattleEnd, [] {
+        if (g_battle_pause == BattlePause::Fighting) g_battle_pause = BattlePause::Returning;
+    });
     events::on(events::Kind::PartyChanging, [] {
         g_active=g_planning=false;g_key_action=-1;
+        g_battle_pause = BattlePause::None;
         g_interaction.reset();
         g_door_wait.reset();
         g_door_script_frame.reset();
     });
-    events::on(events::Kind::MenuOpened, [] { cancel(); });
+    events::on(events::Kind::MenuOpened, [] { if (g_battle_pause == BattlePause::None) cancel(); });
     events::on(events::Kind::SceneLoaded, [] { if (field::scene_name() == L"Title") cancel(); });
     events::on(events::Kind::MapChanging, [] {
         if (!g_active) {g_planning=false;return;}
@@ -593,7 +604,7 @@ int install()
                     cancel(); ffpr::say(T(L"Autowalk stopped. Route changed.")); return;
                 }
                 begin(path);
-            });
+            }, g_keep_destination);
             return false;
         }, "Autowalk.Continue", 3600);
     });
@@ -602,7 +613,8 @@ int install()
 core::Install s_install{"Autowalk", &install, 120};
 }
 
-bool active() { return g_active || g_planning; }
+bool active() { return g_active || g_planning || g_battle_pause != BattlePause::None; }
+bool following_guide() { return active() && !g_keep_destination; }
 bool door_phase_started(bool scripted)
 {
     const auto script_frame = std::exchange(g_door_script_frame, std::nullopt);
@@ -621,8 +633,8 @@ void door_phase_returned(int map_id)
 }
 void cancel(bool announce)
 {
-    const bool was_active = active() || g_battle_interrupted;
-    g_battle_interrupted = false;
+    const bool was_active = active();
+    g_battle_pause = BattlePause::None;
     if (g_planning) field::baked_nav::cancel_requests();
     g_planning = false;
     g_active = false;
@@ -637,8 +649,10 @@ void cancel(bool announce)
     g_transition.clear();
     frame::cancel_label("Autowalk.");
     if (was_active) {
-        field::baked_nav::clear_pending();
-        frame::cancel_label("BakedNav.ContinuePending");
+        if (g_keep_destination) {
+            field::baked_nav::clear_pending();
+            frame::cancel_label("BakedNav.ContinuePending");
+        } else if (g_goal) field::baked_nav::clear_preview_destination(*g_goal);
         if (announce) ffpr::say(T(L"Autowalk stopped"));
     }
 }
@@ -647,26 +661,32 @@ bool stop_requested()
     if (!active()) return false;
     cancel(true); return true;
 }
-void request(field::baked_nav::MapGoal goal, field::TargetKind kind, std::wstring name)
+void request(field::baked_nav::MapGoal goal, field::TargetKind kind, std::wstring name, bool keep_destination)
 {
     cancel();
     if (!context_ok()) return;
     g_planning = true;
+    g_keep_destination = keep_destination;
+    if (!keep_destination) {
+        if (!g_goal) g_goal = new field::baked_nav::MapGoal();
+        *g_goal = goal;
+    }
     // Separate copies avoid unspecified argument evaluation moving the goal/name
     // before request_route receives them.
-    auto completion = [goal, kind, name](field::PathInfo path) {
+    auto completion = [goal, kind, name, keep_destination](field::PathInfo path) {
         if (!g_planning || !context_ok()) return;
         g_planning = false;
-        start(path, &goal, kind, name);
+        start(path, &goal, kind, name, keep_destination);
     };
-    field::baked_nav::request_route(std::move(goal), kind, std::move(name), std::move(completion));
+    field::baked_nav::request_route(std::move(goal), kind, std::move(name), std::move(completion), keep_destination);
 }
 void start(const field::PathInfo& path, const field::baked_nav::MapGoal* goal, field::TargetKind kind,
-           const std::wstring& name)
+           const std::wstring& name, bool keep_destination)
 {
     cancel();
     if (!path.success || path.walk_phases.empty()) {
-        field::baked_nav::clear_pending();
+        if (keep_destination) field::baked_nav::clear_pending();
+        else if (goal) field::baked_nav::clear_preview_destination(*goal);
         ffpr::say(!path.reason.empty() ? path.reason : T(L"No path")); return;
     }
     void* pl = field::player();
@@ -677,17 +697,18 @@ void start(const field::PathInfo& path, const field::baked_nav::MapGoal* goal, f
         const double deadline=frame::now()+.75;
         g_planning=true;
         ffpr::say(T(L"Autowalk is waiting for player input."));
-        frame::every_frame([target,kind,name,requested_map,deadline] {
+        g_keep_destination = keep_destination;
+        frame::every_frame([target,kind,name,requested_map,deadline,keep_destination] {
             if(!g_planning)return false;
             if(!safe_context() || requested_map!=field::current_map_id()) {cancel();return false;}
-            if(context_ok() && controller_ok(field::player())) {request(target,kind,name);return false;}
+            if(context_ok() && controller_ok(field::player())) {request(target,kind,name,keep_destination);return false;}
             if(frame::now()>=deadline) {cancel();ffpr::say(T(L"Autowalk could not start. Player input is disabled."));return false;}
             return true;
         },"Autowalk.InputReady",120);
         return;
     }
     if (!g_hooked || !context_ok() || !pl || !controller_ok(pl)) {
-        field::baked_nav::clear_pending();
+        if (keep_destination) field::baked_nav::clear_pending();
         const wchar_t* reason=kChoice.is(controller)?L"Choose an option before starting autowalk.":
             !g_hooked || (controller && !controller_supported(controller))?L"Autowalk input hook is unavailable.":
             !context_ok()?L"Autowalk is waiting for player input.":L"Autowalk could not start. Player input is disabled.";
@@ -695,12 +716,12 @@ void start(const field::PathInfo& path, const field::baked_nav::MapGoal* goal, f
         ffpr::say(T(reason)); return;
     }
     if (ref::call<bool>(mIsMoving, pl)) {
-        field::baked_nav::clear_pending();
+        if (keep_destination) field::baked_nav::clear_pending();
         ffpr::say(T(L"Stop moving before starting autowalk")); return;
     }
-    g_has_goal = goal != nullptr; g_kind = kind;
+    g_has_goal = goal != nullptr; g_kind = kind; g_keep_destination = keep_destination;
     g_entity_identity = nullptr; g_entity_map = field::current_map_id();
-    if (queries::is("NavigationTargetTracker.IsEntity")) g_entity_identity = field::selected().identity;
+    if (keep_destination && queries::is("NavigationTargetTracker.IsEntity")) g_entity_identity = field::selected().identity;
     if (!g_goal) g_goal = new field::baked_nav::MapGoal();
     if (!g_name) g_name = new std::wstring();
     if (goal) *g_goal = *goal;
@@ -713,6 +734,10 @@ void input_updated()
 {
     if (queries::is("GameStatePatches.IsInputTransitionBlocked")) return;
     if (!active()) return;
+    // Battle commands belong entirely to the game. A result can arrive before
+    // the field, its controller or the player pose is restored.
+    if (g_battle_pause != BattlePause::None &&
+        (g_battle_pause == BattlePause::Fighting || !queries::is("GameStatePatches.IsFieldNavigationReady"))) return;
     if (g_vehicle_action != VehicleAction::None && frame::now() > g_vehicle_deadline) {
         cancel(); ffpr::say(T(L"Autowalk blocked")); return;
     }
@@ -742,6 +767,30 @@ void input_updated()
     if (g_interaction) {
         if (!request_key) check_interaction_arrival();
         return;
+    }
+    if (g_battle_pause == BattlePause::Returning) {
+        if (request_key || !context_ok()) return;
+        auto* player = field::player();
+        if (!controller_ok(player) || ref::call<bool>(mIsMoving, player)) return;
+        const int landed_map = field::current_map_id();
+        if (landed_map <= 0) return;
+        if (!g_keep_destination && actions::defined("GameModule.GuidedWalkReturnedAfterBattle")) {
+            // Timed guides can re-evaluate their objective before movement.
+            // The field owns input here and the battle prefix has finished.
+            cancel();
+            actions::run("GameModule.GuidedWalkReturnedAfterBattle");
+            return;
+        }
+        g_map = landed_map;
+        g_battle_pause = BattlePause::None;
+        g_transition.clear();
+        g_vehicle_action = VehicleAction::None;
+        g_boundary_deadline = 0;
+        g_active = true;
+        g_replan_needed = g_wait_announced = false;
+        g_retry_at = g_retry_until = 0;
+        g_wait_instruction.clear();
+        retry_obstacle();
     }
     if (g_door_wait) {
         if (request_key) return;
@@ -786,7 +835,7 @@ void input_updated()
             // Announce a usable changed route under the existing path-speech
             // setting; repeated temporary prefixes remain one wait episode.
             begin(path,!waiting);
-        });
+        }, g_keep_destination);
         return;
     }
     if (g_planning && !g_active) return; // no native movement while worker plans or input handoff settles

@@ -11,6 +11,7 @@
 #include "../unity.h"
 
 namespace field {
+namespace baked_nav { struct MapGoal; }
 void* current_native_player();
 
 // --- game names (field_refs.cpp) ----------------------------------------------------------
@@ -291,6 +292,8 @@ void cancel_navigation_work();
 void interrupt_navigation_work(); // epoch/flags only, safe before native loading
 void invalidate_map();
 void remember_selection();
+/// Exact chest identity retained when a floor refresh cannot publish its row.
+bool remembered_chest(baked_nav::MapGoal& goal, std::wstring& name);
 void clear_selection();
 bool needs_scan(int map_id);
 void force_rescan();

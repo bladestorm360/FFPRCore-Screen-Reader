@@ -530,6 +530,7 @@ std::optional<bool> Resolver::treasure_opened(const baked::Submap& sm, const bak
     for (const auto& v : chests->arr) {
         const auto& r = v.arr;
         if (r.size() < 3 || number(r[0]) != object.entity_id() || r[1].s != baked::str(object.group)) continue;
+        if (r.size() == 4 && (!r[3].is_string() || r[3].s != baked::object_identifier(object))) continue;
         // Native MapUIManager.GetFlag uses flag_id/256 and flag_id%256 directly.
         const int bit = number(r[2]);
         if (bit < 0 || bit >= 1024) return {};

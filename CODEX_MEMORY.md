@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 27 Karnak escape loot.** Timed chest guidance uses all 15
+native treasure receipts, room-grouped route costs and the actual
+countdown. Autowalk retains its destination through battle, and its
+native interaction can open verified unopened chests. [Karnak guide and route evidence](docs/re/FF5_KARNAK_20261105.md#november-27-timed-treasure-route).
+
 **November 27 Autowalk door continuation.** Native walk-open doors pause
 autowalk and refresh the same destination from the placed player when the
 field returns. [Behavior and verification](docs/re/AUTOWALK.md#november-27-continuation-through-doors).

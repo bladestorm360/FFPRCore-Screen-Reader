@@ -463,7 +463,12 @@ def build(game, initializers_only=False):
         flag=p.get('flag_id')
         if o['type']==7 and type(flag) is int and 0<=flag<1024:
             row=scripts.setdefault(o['submap'],{'entry':0,'code':[]})
-            row.setdefault('treasures',[]).append([p.get('entity_id',0),o['group'],flag])
+            key=[p.get('entity_id',0),o['group'],flag]
+            # The two money chests on Karnak 2F share ID zero and the same
+            # group. The same baked raw name identifies each native chest.
+            if game=='ff5' and o['submap']=='Map_20071_10' and key[0]==0:
+                key.append(o['name'])
+            row.setdefault('treasures',[]).append(key)
         if o['type'] not in (2,5,6,17,21,28,30) or not p.get('script_id') or p.get('action_id')!=2 or p.get('message_key'):continue
         name=masters.get(p['script_id'],'');s=source.get((o['submap'],name))
         pending=[]

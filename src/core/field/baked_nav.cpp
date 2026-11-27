@@ -2931,6 +2931,17 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         req.start = cell_of(*sm, from, sm->world ? 1 : (g_route_snapshot ? snapshot_layer() : (!player ? 1 : player_layer(player))));
         const Cell target = cell_of(*sm, to, 1);
         auto goals = goals_for(*sm, target, kind);
+        const auto& destination = g_route_snapshot->goal;
+        // Authored chest itineraries use the same approach on the local
+        // leg as the cross-floor distance calculation. Keep only approaches
+        // the native interaction geometry actually allows.
+        if (kind == TargetKind::Interact && destination.object_type == int(baked::ObjType::TreasureBox) &&
+            destination.map_id == planning_map_id() && destination.cell.x == target.x &&
+            destination.cell.y == target.y && !destination.cells.empty()) {
+            std::erase_if(goals.cells, [&](const Cell& cell) {
+                return std::find(destination.cells.begin(),destination.cells.end(),cell)==destination.cells.end();
+            });
+        }
         const bool stair_chest = kind == TargetKind::Interact && sm->first_map_id == 17 &&
             target.x == kBaronChest.x && target.y == kBaronChest.y &&
             baron_stair_chest(g_route_snapshot->goal);

@@ -292,7 +292,8 @@ void announce_ready_entity(bool walking, double requested_at, bool automatic = f
         // During a floor transition local rows can publish before the remote
         // target is restored. The stable pending destination owns that gap;
         // category/browse changes already clear it. Never select another chest.
-        if(!baked_nav::pending_goal(walk_goal,kind,name)) {
+        if (scanner::remembered_chest(walk_goal, name)) kind = TargetKind::Interact;
+        else if(!baked_nav::pending_goal(walk_goal,kind,name)) {
             speak(T(L"No entity selected"));return;
         }
     } else {
@@ -313,6 +314,7 @@ void announce_ready_entity(bool walking, double requested_at, bool automatic = f
             walk_goal.map_id=current_map_id();
         }
         walk_goal.entity_id=e->entity_id;
+        if(e->kind==Kind::TreasureChest)walk_goal.object_type=int(baked::ObjType::TreasureBox);
         if(e->kind==Kind::Vehicle)walk_goal.transportation_id=e->transportation_id;
         if(e->raw_name_known&&e->audio_hint.size()<256)walk_goal.raw_name=e->audio_hint;
         const auto floor=e->remote()?e->floor_name:current_map_name();

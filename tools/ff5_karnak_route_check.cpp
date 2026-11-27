@@ -23,7 +23,8 @@ map_state::Flags flags(int map, int encountered, bool timer = true, bool escaped
 }
 
 ff5::library::Plan advice(int map, Cell at, const map_state::Flags& state,
-                         std::wstring guide = {}, puzzle_policy::Policy policy = {true,true}) {
+                         std::wstring guide = {}, puzzle_policy::Policy policy = {true,true},
+                         std::optional<int> seconds = {}) {
     ff5::mechanics::Snapshot snapshot;
     snapshot.map = map;
     snapshot.player = at;
@@ -31,7 +32,101 @@ ff5::library::Plan advice(int map, Cell at, const map_state::Flags& state,
     snapshot.guide_id = std::move(guide);
     snapshot.locale = L"en";
     snapshot.policy = policy;
+    snapshot.karnak_seconds = seconds;
     return ff5::mechanics::plan(snapshot,fixture::guide_recipes);
+}
+
+struct Position { int map; Cell cell; };
+constexpr Position timer_start{102,{1,4,7}};
+
+// Feed each exact native landing back to the production planner.
+int traverse(Position from, const MapGoal& goal, TargetKind kind, Position& finish,
+             map_state::Flags states, bool require_facing = false) {
+    int steps = 0;
+    for (int floors=0; floors<20; ++floors) {
+        states.current_map_id = from.map;
+        auto leg = route(from.map,from.cell,states,goal,kind);
+        if (!leg.path.success || leg.path.walk_phases.empty()) return -1;
+        steps += leg.path.step_count + (leg.path.next_map_id ? 4 : 0);
+        if (!leg.path.next_map_id) {
+            const auto& last = leg.path.walk_phases.back();
+            if (from.map != goal.map_id || last.cells.empty() ||
+                (require_facing && (last.arrival_direction < 0 || last.manual_after))) return -1;
+            finish = {from.map,last.cells.back()};
+            return steps;
+        }
+        const auto& hop = leg.pending.incoming_transition;
+        if (!hop) return -1;
+        from = {hop->destination,hop->arrival};
+    }
+    return -1;
+}
+
+void verify_loot() {
+    const auto chests = ff5::mechanics::karnak_chests(fixture::guide_recipes);
+    check(chests.size()==15,"all 15 distinct treasure flags have exact native objects");
+    if (chests.size()!=15) return;
+    auto state = flags(timer_start.map,0);
+    Position at=timer_start;
+    double seconds=600;
+    int distance=0;
+    constexpr std::array expected{86,87,88,89,99,92,93,96,97,98,94,95,100,90,91};
+    for (const int receipt : expected) {
+        const auto plan=advice(at.map,at.cell,state,L"karnak_escape",{true,true},int(seconds));
+        check(plan.karnak_treasure_flag==receipt && plan.targets.size()==1,
+              "full countdown selects the shortest room-grouped chest sequence");
+        if (plan.karnak_treasure_flag!=receipt || plan.targets.size()!=1) return;
+        const auto& next=plan.targets.front();
+        Position reached;
+        const int steps=traverse(at,next.goal,next.kind,reached,state,true);
+        check(steps>=0 && reached.cell==next.goal.cells.front(),
+              "every chest route reaches the planned exact facing stance");
+        if (steps<0 || reached.cell!=next.goal.cells.front())
+            std::printf("Chest %d reached L%d (%d,%d), planned L%d (%d,%d), route cost %d\n",
+                        receipt,reached.cell.layer,reached.cell.x,reached.cell.y,next.goal.cells.front().layer,
+                        next.goal.cells.front().x,next.goal.cells.front().y,steps);
+        if (steps<0) return;
+        distance+=steps;
+        seconds-=1 + steps*.14 + (chests[size_t(receipt-86)].fight ? 36 : 0);
+        state.treasure[receipt]=1;
+        at=reached;
+    }
+    const auto exit=advice(at.map,at.cell,state,L"karnak_escape",{true,true},int(seconds));
+    check(exit.targets.size()==1 && exit.targets.front().goal.entity_id==29,
+          "all collected chests hand off to the native courtyard fight");
+    if (exit.targets.size()==1) {
+        Position outside;
+        const auto steps=traverse(at,exit.targets.front().goal,exit.targets.front().kind,outside,state);
+        check(steps>=0 && distance+steps==674 && seconds-steps*.14>=55,
+              "full guided route matches the measured physical cost and reserves the exit fight");
+        std::printf("Karnak loot route: %d weighted steps with %.1f seconds reserved on the modeled clock\n",
+                    distance+steps,seconds-steps*.14);
+    }
+    auto late=flags(108,0);
+    const auto gear=advice(108,{1,4,7},late,L"karnak_escape",{true,true},109);
+    check(gear.karnak_treasure_flag==99,"reduced countdown prioritizes nearby equipment");
+    const auto hurry=advice(108,{1,4,7},late,L"karnak_escape",{true,true},45);
+    check(hurry.karnak_treasure_flag<0 && hurry.targets.size()==1 &&
+          hurry.targets.front().goal.entity_id==29 &&
+          hurry.targets.front().instruction.find(L"Time is short")!=std::wstring::npos,
+          "critical countdown bypasses loot and states the escape priority");
+    const auto separate = [&](int opened, int closed) {
+        auto two_gil=flags(105,0);
+        two_gil.treasure[opened]=1;
+        map_state::Resolver resolver(two_gil,fixture::records);
+        const auto& floor=*baked::submap_by_map_id(105);
+        const auto& objects=baked::grids(floor).objects;
+        for (const int flag : {opened,closed}) {
+            const auto& goal=chests[size_t(flag-86)].target.goal;
+            const auto object=std::find_if(objects.begin(),objects.end(),[&](const auto& item) {
+                return item.type==baked::ObjType::TreasureBox && item.entity_id()==0 &&
+                       baked::object_identifier(item)==goal.raw_name;
+            });
+            check(object!=objects.end() && resolver.treasure_opened(floor,*object)==(flag==opened),
+                  "the two ID-zero gil chests keep independent opened states");
+        }
+    };
+    separate(92,95); separate(95,92);
 }
 
 int verify() {
@@ -98,13 +193,47 @@ int verify() {
           "only the full native world callback completes the escape");
     check(!advice(1,{2,83,78},flags(1,1,true,true,true)).supported,"ordinary world entry never activates the castle recipe");
     check(advice(102,{1,4,7},flags(102,0),{}, {false,true}).targets.empty(),"Navigation toggle independently controls the timed route");
+    verify_loot();
     std::printf("Karnak production: %d assertions, %d route legs, %d stairs, %d failures\n",
                 exdeath_routes::assertions,exdeath_routes::legs,stair_legs,exdeath_routes::failures);
     return fixture::wrong_owner || exdeath_routes::failures ? 5 : 0;
 }
+
+// Report shortest production routes among the save point, exact chest
+// approaches and courtyard encounter. Ordinary room exits retain their
+// native arrival poses on each leg.
+int print_chest_distances() {
+    const auto chests = ff5::mechanics::karnak_chests(fixture::guide_recipes);
+    if (chests.size() != 15) return 2;
+    const Position start=timer_start;
+    const auto state=flags(start.map,0);
+    std::vector<Position> origins{start};
+    std::vector<MapGoal> goals;
+    for (const auto& chest : chests) {
+        Position at;
+        auto goal = chest.target.goal;
+        goal.cells.clear();
+        if (traverse(start,goal,chest.target.kind,at,state) < 0) {
+            std::printf("Chest flag %d cannot be reached\n",chest.flag);
+            return 3;
+        }
+        origins.push_back(at);
+        goal.cells = {at.cell};
+        goals.push_back(std::move(goal));
+        std::printf("Chest %d approach %d %d %d %d\n",chest.flag,at.map,at.cell.layer,at.cell.x,at.cell.y);
+    }
+    const auto exit = advice(start.map,start.cell,flags(start.map,0)).targets.front();
+    std::printf("Karnak distance matrix rows (last column: courtyard)\n");
+    for (const auto& origin : origins) {
+        Position end;
+        for (const auto& goal : goals) std::printf("%d,",traverse(origin,goal,TargetKind::Interact,end,state));
+        std::printf("%d\n",traverse(origin,exit.goal,exit.kind,end,state));
+    }
+    return 0;
+}
 }
 
-int main() {
+int main(int argc, char** argv) {
     using namespace karnak_routes;
     std::setvbuf(stdout,nullptr,_IONBF,0);
     const auto read = [](const char* path) {
@@ -117,7 +246,7 @@ int main() {
     fixture::game_id = game::Id::FF5;
     g_loaded = g_prepared = true;
     int result = 2;
-    std::thread worker([&] { result = verify(); });
+    std::thread worker([&] { result = argc==2 && std::string_view(argv[1])=="--matrix" ? print_chest_distances() : verify(); });
     worker.join();
     return result;
 }

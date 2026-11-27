@@ -14,6 +14,7 @@ struct Snapshot {
  // Read only at the moving floor's center. A reload can retain layout zero
  // without replaying the scene that made the stop contacts visible.
  std::optional<bool> exdeath_stop_visible;
+ std::optional<int> karnak_seconds;
 };
 inline bool supported(int map){return types(map)!=0;}
 library::Plan plan(const Snapshot&,const json::Value&);

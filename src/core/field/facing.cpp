@@ -57,6 +57,8 @@ void* autowalk_interaction_candidate(void* map, void* player, const void* observ
     auto* candidate = ref::rd<void*>(observer, fNativeTarget);
     if (!candidate || (identity && candidate != identity) || !entity_is_active(candidate) ||
         !implements(candidate, r::kIInteractiveEntity)) return nullptr;
+    if (r::kFieldTresureBox.is(candidate) && (r::fTresureIsOpen.get() < 0 ||
+        ref::rd<bool>(candidate, r::fTresureIsOpen))) return nullptr;
     auto* property = entity_property(candidate);
     if (!property || ref::rd<int>(property, r::fPropEntityId) != expected.entity_id ||
         (expected.object_type >= 0 && object_type_of(property) != expected.object_type)) return nullptr;

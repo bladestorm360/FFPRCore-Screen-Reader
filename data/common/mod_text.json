@@ -20649,6 +20649,20 @@
     "pt": "Fale com seu aliado.",
     "th": "พูดคุยกับพันธมิตร"
   },
+  "Time is short. Head for the exit.": {
+    "en": "Time is short. Head for the exit.",
+    "ja": "時間がありません。出口へ向かってください。",
+    "fr": "Le temps presse. Dirigez-vous vers la sortie.",
+    "de": "Die Zeit wird knapp. Geh zum Ausgang.",
+    "es": "Queda poco tiempo. Ve hacia la salida.",
+    "it": "Resta poco tempo. Vai verso l’uscita.",
+    "pt": "O tempo está acabando. Vá para a saída.",
+    "ru": "Времени мало. Идите к выходу.",
+    "ko": "시간이 얼마 남지 않았습니다. 출구로 향하세요.",
+    "zhc": "时间不多了。请前往出口。",
+    "zht": "時間不多了。請前往出口。",
+    "th": "เหลือเวลาไม่มาก ไปที่ทางออก"
+  },
   "Open the chest.": {
     "en": "Open the chest.",
     "ja": "宝箱を開けてください。",

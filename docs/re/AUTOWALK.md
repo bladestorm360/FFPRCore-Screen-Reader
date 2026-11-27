@@ -1,5 +1,21 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 27 battle return and chest selection
+
+Battle entry retires synthetic input and pending route work in the native
+prefix. A walk with an owned destination keeps its goal through the battle.
+Native battle results alone do not start movement. Once the field owner,
+controller and player placement are ready, Autowalk requests one new route
+from the actual landed floor. Native battle input remains usable throughout.
+Title entry, explicit stop and party changes retire the held destination.
+
+The selected chest keeps its map, ID, tile and identifying name if the next
+floor's filtered view temporarily omits it. A manual navigation request still
+uses that chest during the gap. Auto-interact requires the matching native
+unopened chest to be actionable at the planned stance. The Karnak guide owns
+its walking target separately and continues only on the actual chest or story
+receipt. [Timed Karnak guide](FF5_KARNAK_20261105.md#november-27-timed-treasure-route)
+
 ## November 27 continuation through doors
 
 Karnak Castle’s automatic doors can enter and leave the native Gimmick
@@ -18,7 +34,8 @@ the old geometry before marking the door complete. The regular input
 owner waits for the native controller and final placement, then requests
 one route from the current position. Existing expected-map continuation
 takes over whenever a real map transition starts. Manual input, battle,
-party changes and menus retain their stop behavior.
+party changes and menus interrupt the walk. Battle has its own field-return
+sequence described above.
 
 The native fixture covers the stock and scripted door sources, a door
 with no state change, the wait for controller ownership and final

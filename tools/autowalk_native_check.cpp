@@ -15,10 +15,11 @@ struct Node { void* player=nullptr; void* controller=nullptr; bool enabled=true,
     void* observer=nullptr; void* candidate=nullptr; bool observing=true; unity::Vec2 heading{}; };
 Node player, controller, map, field_controller;
 Node interaction_observer, wrong_observer;
-struct Interactive { int id = 19, type = 5, floor = 1; bool active = true, actionable = true; unity::Vec3 position{2,1,0}; };
+struct Interactive { int id = 19, type = 5, floor = 1; bool active = true, actionable = true, opened = false; unity::Vec3 position{2,1,0}; };
 Interactive interactible, wrong_interactible;
 bool auto_interact=false, request_pressed=false, face_available=true;
-int interaction_calls=0;
+int interaction_calls=0, guided_battle_returns=0;
+bool guide_can_replan=false;
 bool dispatched_while_walking=false;
 void* dispatched_candidate=nullptr;
 uint64_t tick=10; double seconds=1;
@@ -85,6 +86,8 @@ bool Class::is(void* p){
  if(!p || !game::in(games))return false;const std::string type=name;
  if(type=="FieldController")return p==&fixture::map;
  if(type=="FieldPlayer")return p==&fixture::player;
+ if(type=="FieldTresureBox")return (p==&fixture::interactible||p==&fixture::wrong_interactible)&&
+    static_cast<fixture::Interactive*>(p)->type==int(field::baked::ObjType::TreasureBox);
  if(type=="InteractiveTargetObserver")return p==&fixture::interaction_observer||p==&fixture::wrong_observer;
  auto*n=static_cast<fixture::Node*>(p);
  if(type=="FieldPlayerKeyAirshipController")return n->airship;
@@ -102,6 +105,7 @@ int32_t Field::get(){std::string n=name;if(n=="fieldPlayer"||n=="fieldPlayerEnti
  if(n=="isObserving")return offsetof(fixture::Node,observing);
  if(n=="directionVector")return offsetof(fixture::Node,heading);
  if(n=="<EntityId>k__BackingField")return offsetof(fixture::Interactive,id);
+ if(n=="isOpen")return offsetof(fixture::Interactive,opened);
  return -1;}
 void* Method::ptr(){std::string n=name;if(n=="get_IsMoving")return reinterpret_cast<void*>(&fixture::moving);if(n=="GetZAxisRotateBirdCamera")return reinterpret_cast<void*>(&fixture::angle);if(n=="OnTouchPadCallback")return reinterpret_cast<void*>(&fixture::touch);if(n=="OnKey")return reinterpret_cast<void*>(&fixture::on_key);if(n=="OnKeyUp")return reinterpret_cast<void*>(&fixture::on_key_up);
  if(n=="LookAt"&&fixture::face_available)return reinterpret_cast<void*>(&fixture::look_at);
@@ -119,7 +123,17 @@ namespace hooks {bool attach_raw(ref::Method&,void*,void**){return true;}void no
 namespace game {Id current(){return fixture::game;}}
 namespace frame {bool on_main_thread(){return true;}uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
 namespace frame {void after_seconds(double,Task fn,const char*){fixture::wall_checks.push_back(std::move(fn));}}
-namespace actions {void define(const char*,Fn){} bool run(const char*){return false;}bool defined(const char*){return false;} }
+namespace actions {
+void define(const char*,Fn){}
+bool defined(const char* name) {
+    return fixture::guide_can_replan && std::string_view(name)=="GameModule.GuidedWalkReturnedAfterBattle";
+}
+bool run(const char* name) {
+    if (!defined(name)) return false;
+    ++fixture::guided_battle_returns;
+    return true;
+}
+}
 namespace events {void on(Kind kind,Handler handler){fixture::handlers[kind].push_back(std::move(handler));} void fire(Kind kind){for(auto& handler:fixture::handlers[kind])handler();} }
 namespace queries {
 void define(const char*, std::function<bool()>) {}
@@ -155,7 +169,9 @@ std::wstring name_of(const Submap&) { return L"DoorFloor"; }
 }
 namespace r {
 ref::Class kFieldController{"Last.Map","FieldController"}, kIInteractiveEntity{"Last.Entity.Field","IInteractiveEntity"};
+ref::Class kFieldTresureBox{"Last.Entity.Field","FieldTresureBox"};
 ref::Field fPropEntityId{kFieldController,"<EntityId>k__BackingField"};
+ref::Field fTresureIsOpen{kFieldTresureBox,"isOpen"};
 }
 bool entity_is_active(void* target){return (target==&fixture::interactible||target==&fixture::wrong_interactible)&&static_cast<fixture::Interactive*>(target)->active;}
 bool implements(void* target, ref::Class&){return target==&fixture::interactible||target==&fixture::wrong_interactible;}
@@ -168,6 +184,7 @@ void*player_controller(){return &fixture::controller;}
 void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}Target selected(){return fixture::selected_target;}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
 namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){++fixture::pose_reads;c=fixture::cell;return fixture::pose_ready;}bool cell_at(void*,unity::Vec3 position,baked_route::Cell&c){c={fixture::cell.layer,static_cast<int>(position.x),static_cast<int>(position.y)};return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
+void clear_preview_destination(const MapGoal&) {}
 unity::Vec3 world_of(void*,const baked_route::Cell& cell){return {cell.x*16.f,-cell.y*16.f,0};}
 bool walk_precision_edge(void*,void*,const route_progress::PrecisionPoint&,const route_progress::PrecisionPoint&){++fixture::precision_queries;return fixture::edge_open;}
 void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal goal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){fixture::last_requested=std::move(goal);++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
@@ -292,11 +309,43 @@ template<class Expect> void check_door_continuation(Expect expect)
     expect(!walk::active(), "Manual input still cancels autowalk while the door opens");
     start();
     open();
+    const int before_battle = fixture::requests;
     events::fire(events::Kind::BattleEntering);
     events::fire(events::Kind::BattleStart);
     walk::door_phase_returned(101);
-    expect(!walk::active(), "A battle retires the door wait before field input resumes");
+    fixture::manual = true;
+    walk::input_updated();
+    fixture::manual = false;
+    expect(walk::active() && !walk::g_door_wait && fixture::requests == before_battle &&
+        walk::d_InputAxis(nullptr, nullptr).x == 0,
+        "The battle retires the door wait, keeps the destination and owns native input");
+    events::fire(events::Kind::BattleEnd);
+    events::fire(events::Kind::MapChanging);
+    events::fire(events::Kind::MapChanged);
+    walk::input_updated();
+    expect(fixture::requests == before_battle, "Battle end alone cannot restart movement");
     fixture::ready = true;
+    fixture::map_id = 100;
+    fixture::player.moving = true;
+    walk::input_updated();
+    expect(fixture::requests == before_battle, "Battle return waits for final placement");
+    fixture::player.moving = false;
+    walk::input_updated();
+    walk::input_updated();
+    expect(fixture::requests == before_battle + 1 && fixture::last_requested.map_id == destination.map_id &&
+        fixture::last_requested.cell == destination.cell, "Battle return replans the same destination from the landed floor");
+    fixture::route_results.back()(path);
+    expect(walk::d_InputAxis(nullptr, nullptr).x == 1, "Autowalk resumes moving after battle");
+    walk::cancel();
+    fixture::guide_can_replan = true;
+    walk::start(path, &destination, TargetKind::Spot, {}, false);
+    const int before_guide = fixture::requests;
+    events::fire(events::Kind::BattleEntering);
+    events::fire(events::Kind::BattleEnd);
+    walk::input_updated();
+    expect(fixture::guided_battle_returns == 1 && fixture::requests == before_guide &&
+        !walk::active(), "A timed guide rechecks its objective before borrowing field movement again");
+    fixture::guide_can_replan = false;
 }
 
 template<class Expect> void check_arrival_interaction(Expect expect)
@@ -391,6 +440,20 @@ template<class Expect> void check_arrival_interaction(Expect expect)
     fixture::interactible.actionable = true;
     native_observation();
     expect(!walk::active() && fixture::interaction_calls == 2, "A known switch prerequisite works once");
+    destination = {270,{1,2,1}};
+    destination.entity_id = fixture::interactible.id;
+    destination.object_type = int(field::baked::ObjType::TreasureBox);
+    destination.avoid_other_events = true;
+    path.walk_phases[0] = arrival;
+    fixture::interactible.type = destination.object_type;
+    fixture::interactible.opened = true;
+    finish_walking();
+    native_observation();
+    expect(walk::active() && fixture::interaction_calls == 2, "An already opened chest cannot be confirmed again");
+    fixture::interactible.opened = false;
+    native_observation();
+    expect(!walk::active() && fixture::interaction_calls == 3, "A chest receives native confirm at its verified approach");
+    fixture::interactible.type = 5;
     fixture::auto_interact = false;
 }
 
@@ -601,7 +664,7 @@ int main(){
  expect(!a::active()&&!a::virtual_input_active()&&fixture::cleaned==cleaned_before,
   "battle prefix immediately releases virtual movement/keys/planning without route cleanup");
  events::fire(events::Kind::BattleStart);
- expect(fixture::cleaned==cleaned_before+1,"native opening ready retires the interrupted autowalk destination once");
+ expect(fixture::cleaned==cleaned_before,"a goal-free walk has nothing to retain or retire at battle readiness");
  a::cancel();fixture::controller.airship=false;fixture::controller.mode=0;fixture::cell={1,2,1};
  for(int game=1;game<=6;++game) {
   fixture::game=game::Id(game);

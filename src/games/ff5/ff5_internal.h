@@ -7,9 +7,13 @@
 //
 // Main thread only, like the C# originals.
 #include <functional>
+#include <optional>
 #include <string>
 
 namespace ffpr::ff5 {
+
+/// Snapshot the native 600-second escape timer on the ready field owner.
+std::optional<int> karnak_seconds_remaining();
 
 // --- FF5 MenuStateRegistry keys the core does not define (FF5 Utils/MenuStateRegistry.cs) ------
 constexpr const char* JOB_MENU = "JobMenu";

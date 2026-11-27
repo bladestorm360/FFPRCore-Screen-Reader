@@ -63,6 +63,10 @@ Autowalk turns you toward an interaction target when you arrive. **Auto-interact
 
 During a walk, an automatic door can briefly take control. Autowalk waits for it to open and continues toward your original destination, including routes that cross floors. This works with Auto-interact off.
 
+Autowalk also resumes toward the same destination after battle, once field movement returns. With Auto-interact on, it opens your selected unopened chest from the correct stance.
+
+In FFV's timed Karnak Castle escape, Shift+G guides you through the 15 chests and to the exit. With Autowalk on, it walks each leg for you. With Auto-interact off, confirm at each chest yourself. Finish any battles and close the result or reward screens to continue. The guide reads the game countdown, groups chests by room and favors equipment when the time budget tightens. It heads for the exit when there is too little time for another chest.
+
 Letters layout:
 
 - J / L: previous / next destination.

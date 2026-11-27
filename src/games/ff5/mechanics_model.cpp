@@ -2,7 +2,9 @@
 // scripts,write flags,advance from proximity or retain a step counter on reload.
 #include "mechanics_model.h"
 #include "../../core/modtext.h"
+#include <bit>
 #include <cmath>
+#include <unordered_map>
 namespace ff5::mechanics {
 namespace {
 bool integer(const json::Value* v,int lo,int hi){return v&&v->type==json::Value::Type::Number&&std::isfinite(v->n)&&v->n>=lo&&v->n<=hi&&v->n==int(v->n);}
@@ -35,6 +37,157 @@ std::optional<field::baked_nav::GuideTarget> target(const json::Value& row){
  if(mode!=L"spot"&&mode!=L"interact"&&mode!=L"transition")return {};
  t.kind=mode==L"spot"?field::TargetKind::Spot:mode==L"transition"?field::TargetKind::Transition:field::TargetKind::Interact;t.instruction=T(text);return t;
 }
+
+struct KarnakChest {
+ field::baked_nav::GuideTarget target;
+ int flag = 0, room = 0, priority = 0;
+ bool fight = false;
+};
+
+std::vector<KarnakChest> karnak_chests(const json::Value& root)
+{
+ const auto* loot = root.get(L"karnak_loot");
+ const auto* rows = loot ? loot->get(L"chests") : nullptr;
+ const auto* stances = loot ? loot->get(L"stances") : nullptr;
+ if (!rows || rows->arr.size() != 15 || !stances || stances->arr.size() != 15) return {};
+ std::vector<KarnakChest> chests;
+ for (const auto& row : rows->arr) {
+  const auto n = [&](const wchar_t* key) { return row.get(key); };
+  if (!integer(n(L"flag"),86,100) || !integer(n(L"map"),95,111) || !integer(n(L"id"),0,100) ||
+      !integer(n(L"x"),0,100) || !integer(n(L"y"),0,100) || !integer(n(L"room"),1,7) ||
+      !integer(n(L"priority"),0,4) || !n(L"fight") || n(L"fight")->type != json::Value::Type::Bool) return {};
+  const int flag = int(n(L"flag")->n);
+  if (flag != 86 + int(chests.size())) return {};
+  field::baked_nav::MapGoal goal{int(n(L"map")->n), {1, int(n(L"x")->n), int(n(L"y")->n)}};
+  goal.entity_id = int(n(L"id")->n);
+  const auto* map = field::baked::submap_by_map_id(goal.map_id);
+  if (!map) return {};
+  const field::baked::Object* chest = nullptr;
+  for (const auto& object : field::baked::grids(*map).objects) {
+   if (object.type != field::baked::ObjType::TreasureBox || object.entity_id() != goal.entity_id ||
+       object.layer != goal.cell.layer || object.tx != goal.cell.x || object.ty != goal.cell.y) continue;
+   if (chest) return {};
+   chest = &object;
+  }
+  if (!chest) return {};
+  const auto& stance = stances->arr[chests.size()].arr;
+  if (stance.size()!=2 || !integer(&stance[0],0,map->width-1) || !integer(&stance[1],0,map->height-1)) return {};
+  goal.cells = {{1,int(stance[0].n),int(stance[1].n)}};
+  goal.raw_name = field::baked::object_identifier(*chest);
+  goal.object_type = int(chest->type);
+  goal.avoid_other_events = true;
+  goal.allow_scripted_crossings = true;
+  chests.push_back({{std::move(goal),field::TargetKind::Interact,T(L"Open the chest.")},
+                    flag,int(n(L"room")->n),int(n(L"priority")->n),n(L"fight")->b});
+ }
+ return chests;
+}
+
+// Distances are replayed against the production router at the authored chest
+// approaches. A room is finished in one visit if its chests fit the budget.
+// Reevaluate after each confirmed reward using the live countdown.
+bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Plan& out, bool& short_on_time)
+{
+ if (!s.karnak_seconds || s.flags.scenario[245] != 0 || s.map == 95) return false;
+ auto chests = karnak_chests(root);
+ if (chests.size()!=15) return false;
+ const auto* distances = root.get(L"karnak_loot")->get(L"distance");
+ if (!distances || distances->arr.size()!=16) return false;
+ std::array<std::array<int,16>,16> distance{};
+ for (size_t row=0; row<distance.size(); ++row) {
+  const auto& entries = distances->arr[row].arr;
+  if (entries.size()!=16) return false;
+  for (size_t col=0; col<entries.size(); ++col) {
+   if (!integer(&entries[col],0,1000)) return false;
+   distance[row][col] = int(entries[col].n);
+  }
+ }
+ unsigned pending=0, fights=0;
+ std::array<unsigned,8> rooms{};
+ int origin=0, remaining_walk=0;
+ int closest=1000;
+ for (size_t i=0; i<chests.size(); ++i) {
+  const auto& chest=chests[i];
+  const auto opened=s.flags.treasure[size_t(chest.flag)];
+  if (!opened || (*opened!=0 && *opened!=1)) return false;
+  const unsigned bit=1u<<i;
+  if (!*opened) pending|=bit;
+  if (chest.fight) fights|=bit;
+  rooms[chest.room]|=bit;
+  const auto& at=chest.target.goal.cells.front();
+  const int steps=std::abs(s.player.x-at.x)+std::abs(s.player.y-at.y);
+  if (s.map==chest.target.goal.map_id && at.layer==s.player.layer && steps<closest) {
+   origin=int(i)+1; closest=steps;
+  }
+ }
+ if (!pending) return false;
+ if (origin) remaining_walk=closest;
+ else if (s.map==102) remaining_walk=std::abs(s.player.x-4)+std::abs(s.player.y-7);
+ else {
+  // Off a chest floor, prefer the nearby verified route anchor. The actual
+  // first leg is still resolved from the current pose by the normal router.
+  if (s.map==97 || s.map==98 || s.map==99) origin=3;
+  if (s.map==106 || s.map==107) origin=14;
+  if (s.map==109 || s.map==110) origin=15;
+  remaining_walk=24;
+ }
+ struct Choice { int distance; int first; };
+ constexpr int unavailable=100000;
+ std::unordered_map<unsigned, Choice> memo;
+ memo.reserve(4096);
+ auto best = [&](auto&& self, int from, unsigned mask) -> Choice {
+  if (!mask) return {distance[from][15],-1};
+  const unsigned key=(unsigned(from)<<15)|mask;
+  if (const auto it=memo.find(key);it!=memo.end()) return it->second;
+  if (memo.size()>=16384 || (s.cancelled && s.cancelled())) return {unavailable,-1};
+  unsigned choices=mask;
+  if (from) {
+   const auto within=mask&rooms[chests[size_t(from-1)].room];
+   if (within) choices=within;
+  }
+  Choice result{unavailable,-1};
+  while (choices) {
+   const int next=std::countr_zero(choices);
+   const unsigned bit=1u<<next;
+   choices&=~bit;
+   const int cost=distance[from][next]+self(self,next+1,mask&~bit).distance;
+   if (cost<result.distance) result={cost,next};
+  }
+  memo.emplace(key,result);
+  return result;
+ };
+ // Hundredths of a second. The allowance covers running, one interaction
+ // per chest, the observed middle of castle battle lengths and the exit fight.
+ const auto estimate=[&](unsigned mask,Choice choice) {
+  return 14*(remaining_walk+choice.distance)+100*std::popcount(mask)+
+      3600*std::popcount(mask&fights)+5500;
+ };
+ auto choice=best(best,origin,pending);
+ const int time_budget=100 * *s.karnak_seconds;
+ while (pending && estimate(pending,choice)>time_budget) {
+  int priority=5, least_time=unavailable*100, drop=-1;
+  Choice shorter{};
+  for (size_t i=0;i<chests.size();++i) {
+   if (!(pending&(1u<<i)) || chests[i].priority>priority) continue;
+   const unsigned subset=pending&~(1u<<i);
+   const auto candidate=best(best,origin,subset);
+   const int time=estimate(subset,candidate);
+   if (chests[i].priority<priority || time<least_time) {
+    priority=chests[i].priority;least_time=time;drop=int(i);shorter=candidate;
+   }
+  }
+  if (drop<0) break;
+  pending&=~(1u<<drop);
+  choice=shorter;
+ }
+ if (choice.first<0 || !pending) {short_on_time=true;return false;}
+ auto& chest=chests[size_t(choice.first)];
+ out.puzzle_types=1;
+ out.karnak_treasure_flag=chest.flag;
+ out.targets.push_back(std::move(chest.target));
+ return true;
+}
+
 library::Plan exdeath(const Snapshot& snapshot, const json::Value& root) {
  library::Plan out;
  out.map = snapshot.map;
@@ -271,6 +424,8 @@ library::Plan plan(const Snapshot& s,const json::Value& root){
    }
   }
   const auto eligible=matches(guide.get(L"when"),s);if(!eligible){unknown();return out;}if(!*eligible){out.supported=false;continue;}
+  bool karnak_short_on_time=false;
+  if(id==L"karnak_escape" && choose_karnak_chest(s,root,out,karnak_short_on_time))return out;
   // Istory's sheep landing is a separate native terrain component. The
   // authored upper exit is a recovery operation,not a wall-opening shortcut.
   // One cancellable indoor flood on Navigation distinguishes the components;
@@ -300,6 +455,7 @@ library::Plan plan(const Snapshot& s,const json::Value& root){
     // ordinary world-entry planner. On town arrival strict selection resumes.
     if(!*present){t->goal.avoid_other_events=false;t->goal.allow_world_transit=true;}
     const auto step_kind=field::puzzle_policy::kind(root,id,text);if(!s.policy.allows(step_kind)){out.targets.clear();out.puzzle_types=0;out.note=T(field::puzzle_policy::disabled_key(step_kind));return out;}
+    if(karnak_short_on_time)t->instruction=T(L"Time is short. Head for the exit.")+L" "+t->instruction;
     out.puzzle_types|=field::puzzle_policy::mask(step_kind);out.targets.push_back(std::move(*t));
    }return out;
   }

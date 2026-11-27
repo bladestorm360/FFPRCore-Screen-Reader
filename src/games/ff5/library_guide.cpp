@@ -8,6 +8,7 @@
 #include "pyramid_model.h"
 #include "jachol_model.h"
 #include "mechanics_model.h"
+#include "ff5_internal.h"
 #include <climits>
 #include <type_traits>
 #include <variant>
@@ -20,10 +21,12 @@
 #include "../../core/field/map_state.h"
 #include "../../core/field/scene_events.h"
 #include "../../core/field/puzzle_policy.h"
+#include "../../core/fieldnav/autowalk.h"
 #include "../../core/ui/preferences.h"
 
 namespace ff5::library {
 namespace {
+namespace autowalk = ffpr::fieldnav::autowalk;
 worker_job::Owner work;
 bool active=false,pending=false;
 uint64_t context=0;
@@ -33,6 +36,9 @@ std::wstring rule_id;
 int finish_map=0,finish_source=0;bool finish_departed=false;
 unsigned finish_types=0;
 bool observe_waypoint_arrival=true;
+bool follow_karnak=false;
+bool karnak_battle_replan=false;
+int karnak_chest_receipt=-1, karnak_story_receipt=-1;
 unsigned rule_types(int map){return mechanics::types(map)|mechanics::context_types(map,rule_id);}
 bool supports(int map){return supported(map)||catapult::supported(map)||stone::supported(map)||book::supported(map)||pyramid::supported(map)||jachol::supported(map)||rule_types(map);}
 field::puzzle_policy::Kind kind() {
@@ -51,6 +57,8 @@ bool during_event(){return active&&!queries::is("BattleStateHelper.IsInBattle")&
 void retire(){if(preview)field::baked_nav::clear_preview_destination(*preview);preview.reset();}
 void stop(bool announce) {
  const bool was=active;active=pending=false;++context;work.cancel();retire();instruction.clear();rule_id.clear();
+ if(follow_karnak&&autowalk::following_guide())autowalk::cancel();
+ follow_karnak=karnak_battle_replan=false;karnak_chest_receipt=karnak_story_receipt=-1;
  finish_map=finish_source=0;finish_departed=false;finish_types=0;
  observe_waypoint_arrival=true;
  frame::cancel_label("FF5.Library.Ready");if(was&&announce)ffpr::say(T(L"Puzzle guide stopped"),true);
@@ -69,6 +77,9 @@ CurrentSnapshot capture_current(){
  if(rule_types(field::current_map_id())){
   mechanics::Snapshot s;s.map=field::current_map_id();s.flags=field::map_state::snapshot();s.locale=modtext::lang();s.policy={ui::prefs::navigation_puzzle_guidance(),ui::prefs::other_puzzle_guidance()};s.guide_id=rule_id;
   if(!field::baked_nav::player_cell(field::map_handle(),field::player(),s.player))s.map=0;
+  if(s.map>=95&&s.map<=111 && s.flags.scenario[42]==1 && s.flags.scenario[43]==1 &&
+     s.flags.scenario[46]==1 && s.flags.scenario[47]==0)
+   s.karnak_seconds=ffpr::ff5::karnak_seconds_remaining();
   if(s.map==397&&s.flags.area[0]==0&&s.player==field::baked_route::Cell{2,6,10}) {
    const auto hidden=field::map_state::entity_hidden(397,27,L"床を止める");
    if(hidden)s.exdeath_stop_visible=!*hidden;
@@ -118,11 +129,18 @@ CurrentSnapshot capture_current(){
 void refresh(bool explicit_request) {
  if(!enabled()){stop(false);if(explicit_request)ffpr::say(T(field::puzzle_policy::disabled_key(kind())),true);return;}
  if(!ready())return;
+ if(!explicit_request&&follow_karnak&&autowalk::active())return;
  if(!data::game_data_ready()||!field::baked_nav::prepared()){if(explicit_request)ffpr::say(T(L"Navigation data is loading"),true);return;}
  if(!supports(field::current_map_id())){const bool complete=finish_map==field::current_map_id()&&finish_departed;stop(false);if(complete)ffpr::say(T(L"Puzzle guide finished"),explicit_request);return;}
  finish_map=finish_source=0;finish_departed=false;finish_types=0;
  const double requested=frame::now();auto snapshot=capture_current();
  if(std::visit([](const auto& s){return s.map==0;},snapshot)){++context;work.cancel();retire();if(explicit_request)ffpr::say(T(L"Navigation data is loading"),true);return;}
+ if(!explicit_request&&follow_karnak&&!karnak_battle_replan) {
+  const auto* state=std::get_if<mechanics::Snapshot>(&snapshot);
+  if(!state || (karnak_chest_receipt>=0 && state->flags.treasure[size_t(karnak_chest_receipt)]!=1) ||
+     (karnak_story_receipt>=0 && state->flags.scenario[size_t(karnak_story_receipt)]!=1))return;
+ }
+ karnak_battle_replan=false;
  active=true;const auto token=++context;work.cancel();const auto epoch=work.epoch();const auto generation=epoch->load();
  std::visit([epoch,generation](auto& s){s.cancelled=[epoch,generation]{return epoch->load()!=generation;};},snapshot);
  worker_job::start(work,std::move(snapshot),[](const CurrentSnapshot& s){return std::visit([](const auto& input){
@@ -138,19 +156,32 @@ void refresh(bool explicit_request) {
    if(!active||context!=token||!ready()||result.map!=field::current_map_id()||!publication_enabled(result.puzzle_types))return;
    if(!result.supported){stop(false);if(explicit_request)ffpr::say(T(L"No puzzle guide for this map"),true);return;}
    rule_id=result.guide_id;
+   if(explicit_request)follow_karnak=rule_id==L"karnak_escape"&&ui::prefs::autowalk_enabled();
    observe_waypoint_arrival=result.observe_waypoint_arrival;
    if(!phase_ready(result.floor_phase,result.phase_map)){retire();instruction=wait_note(result.phase_map);ffpr::say(instruction,explicit_request);return;}
    if(result.finished){stop(false);ffpr::say(T(L"Puzzle guide finished"),explicit_request);return;}
    if(result.targets.empty()){retire();instruction=result.note;if(!instruction.empty())ffpr::say(instruction,explicit_request);return;}
    retire();
    auto targets=std::make_shared<std::vector<field::baked_nav::GuideTarget>>(result.targets);
-   field::baked_nav::request_guidance(std::move(result.targets),[targets,token,requested,explicit_request,phase=result.floor_phase,phase_map=result.phase_map,finish=result.finish_map,source=result.map,types=result.puzzle_types](field::PathInfo path) {
+   field::baked_nav::request_guidance(std::move(result.targets),[targets,token,requested,explicit_request,phase=result.floor_phase,phase_map=result.phase_map,finish=result.finish_map,source=result.map,types=result.puzzle_types,chest=result.karnak_treasure_flag](field::PathInfo path) {
     if(!active||context!=token||!ready()||!publication_enabled(types))return;
     if(!phase_ready(phase,phase_map)){for(const auto& target:*targets)field::baked_nav::clear_preview_destination(target.goal);retire();instruction=wait_note(phase_map);ffpr::say(instruction,explicit_request);return;}
     if(path.success&&finish){finish_map=finish;finish_source=source;finish_departed=false;finish_types=types;}
     preview.reset();instruction.clear();
     if(path.guidance_index>=0&&path.guidance_index<int(targets->size())) {
      preview=(*targets)[size_t(path.guidance_index)].goal;instruction=(*targets)[size_t(path.guidance_index)].instruction;
+    }
+    if(follow_karnak&&ui::prefs::autowalk_enabled()&&path.success&&preview&&!path.walk_phases.empty()) {
+     karnak_chest_receipt=chest;
+     karnak_story_receipt=chest>=0 ? -1 : preview->entity_id==29 ? 245 : 47;
+     const auto& chosen=(*targets)[size_t(path.guidance_index)];
+     autowalk::start(path,&chosen.goal,chosen.kind,{},false);
+     if(autowalk::following_guide()) {
+      // The native chest interaction supplies its own audio. A manual chest
+      // or a rapid-escape instruction still needs the guide's cue.
+      if(chest<0||!ui::prefs::auto_interact_enabled())ffpr::say(instruction,false);
+      return;
+     }
     }
     auto line=path.success?path.description:(!path.reason.empty()?path.reason:T(L"No path to the next step"));
     if(path.success&&!path.guidance.empty()){if(!line.empty())line+=L". ";line+=path.guidance;}
@@ -164,7 +195,7 @@ void schedule() {
  if(!active||pending)return;pending=true;
  frame::every_frame([]{if(!active||!pending)return false;if(!ready())return true;pending=false;refresh(false);return false;},"FF5.Library.Ready",INT_MAX);
 }
-void invalidate(){if(!active)return;++context;work.interrupt();if(field::current_map_id()==424){field::baked_nav::interrupt_requests();retire();instruction=wait_note(424);actions::run("Autowalk.Cancel");}schedule();}
+void invalidate(){if(!active||(follow_karnak&&autowalk::following_guide()))return;++context;work.interrupt();if(field::current_map_id()==424){field::baked_nav::interrupt_requests();retire();instruction=wait_note(424);actions::run("Autowalk.Cancel");}schedule();}
 void jachol_phase_changed(){if(!active||field::current_map_id()!=284)return;field::baked_nav::interrupt_requests();retire();instruction=wait_note(284);actions::run("Autowalk.Cancel");invalidate();}
 void next() {
  if(!enabled()){stop(false);ffpr::say(T(field::puzzle_policy::disabled_key(kind())),true);return;}
@@ -183,6 +214,9 @@ int install() {
  actions::define("GameModule.StopPuzzleGuide",[]{stop(true);});
  actions::define("GameModule.PuzzleGuideMove",[]{if(active)move();});
  actions::define("GameModule.FieldStateChanged",[]{invalidate();});
+ actions::define("GameModule.GuidedWalkReturnedAfterBattle",[]{
+  if(active&&follow_karnak){karnak_battle_replan=true;invalidate();}
+ });
  actions::define("FF5.Jachol.PhaseChanged",[]{jachol_phase_changed();});
  queries::define("GameModule.HasPuzzleGuide",[]{return supports(field::current_map_id());});
  queries::define("GameModule.PuzzleGuideActive",[]{return active;});

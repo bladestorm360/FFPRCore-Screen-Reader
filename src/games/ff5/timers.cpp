@@ -10,6 +10,7 @@
 // .Update has its own RVA in FF5 (0x49EED0, one method) and no core file hooks it.
 // This is the one exception in the module to "hooks go through hooks::attach".
 #include <cstdint>
+#include <cmath>
 #include <string>
 #include "ff5_internal.h"
 #include "../../core/core.h"
@@ -32,6 +33,11 @@ constexpr uint8_t k5 = game::kFF5;
 
 ref::Class  kTimer{"Last.Timer", "Timer", k5};
 ref::Method mTimerUpdate{kTimer, "Update", 1};
+ref::Field fRequired{kTimer, "requiredSec"}, fElapsed{kTimer, "elapsedSec"};
+ref::Class kTimerManager{"Last.Management", "TimerInstanceManager", k5};
+ref::Field fGlobalTimer{kTimerManager, "<GrobalTimer>k__BackingField"};
+ref::Class kTimerStructure{"Last.Timer", "TimerStructure", k5};
+ref::Field fTimer{kTimerStructure, "<Timer>k__BackingField"};
 
 ref::Class  kScreenTimer{"Last.UI", "ScreenTimerController", k5};
 ref::Field  fScreenTimerView{kScreenTimer, "view"};
@@ -193,4 +199,18 @@ int install()
 core::Install s_install{"FF5.Timers", &install, 505, game::kFF5};
 
 } // namespace
+
+std::optional<int> karnak_seconds_remaining()
+{
+    return hooks::guarded_r("FF5.Timers.Karnak", std::optional<int>{}, []() -> std::optional<int> {
+        if (fGlobalTimer.get() < 0 || fTimer.get() < 0 || fRequired.get() < 0 || fElapsed.get() < 0) return {};
+        auto* manager = il2cpp::read_static_ptr(kTimerManager.get(), "instance");
+        auto* global = ref::rd<void*>(manager, fGlobalTimer);
+        auto* timer = ref::rd<void*>(global, fTimer);
+        if (!timer || ref::rd<float>(timer, fRequired) != 600.f) return {};
+        const auto elapsed = ref::rd<float>(timer, fElapsed);
+        if (!std::isfinite(elapsed) || elapsed < 0.f || elapsed > 600.f) return {};
+        return static_cast<int>(600.f - elapsed);
+    });
+}
 } // namespace ffpr::ff5

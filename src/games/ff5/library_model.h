@@ -34,6 +34,7 @@ struct Plan {
  // Passage controls use exact standing/facing points. Arrival alone cannot
  // operate them;only the actual native script-ready event changes the layout.
  bool observe_waypoint_arrival=true;
+ int karnak_treasure_flag=-1; // Native receipt for the chosen timed chest.
 };
 Plan plan(const Snapshot& snapshot,const json::Value& puzzles);
 }
