@@ -1,5 +1,20 @@
 # Build and distribution security
 
+## November 27 FFV whole-ship round trips
+
+The 22,069,248-byte FFV candidate has SHA-256
+`c67063379a5ffbbbc4751f6f34d8243feafd4b186f81a16c73ff2c4160feb583`.
+The focused build passed the ship, all-six browse and all-six Storyline
+checks, 9,146 native name checks and 73 embedded resource checks. The
+isolated load resolved all 47 HID exports. Windows Defender definitions
+`1.463.492.0` reported no threats on the 22 exact payload files, and their
+hashes were unchanged. Windows denied inspection of scanner exclusions.
+The compact build and scan receipts are in `build_check/ff5-ship-round-trip`.
+FFV was installed. All 22 installed hashes matched the scanned manifest.
+The before-and-after inventory matched 138 protected file states and the
+other five games’ payloads. The previous FFV build can be reproduced from
+local checkpoint `3952c69`. Gameplay confirmation is pending.
+
 ## November 27 FFV platform chest return routes
 
 The FFV install uses the 22,065,664-byte build with SHA-256

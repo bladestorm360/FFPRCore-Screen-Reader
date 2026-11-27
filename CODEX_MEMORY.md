@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 27 FFV whole-ship round trips.** The Thief’s Gloves pocket has a
+verified northbound current to the engine room. The replay covers all 26
+playable rooms, including return trips from all chests and the castle side.
+Verified offline and installed in FFV. Gameplay confirmation is pending.
+[Route and delivery evidence](docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md#whole-ship-round-trips-after-the-thiefs-gloves).
+
 **November 27 FFV platform chest return.** The logged platform landing
 keeps routes to eight earlier ship chests across all 28 compatible
 layouts. The earlier current now supplies the exact return to the

@@ -2139,29 +2139,48 @@ bool baron_stair_chest(const MapGoal& goal)
     return game::is(game::Id::FF4) && goal.map_id == 17 && goal.entity_id == 9 && goal.cell == kBaronChest;
 }
 
-bool baron_reentry(const ActiveRoute& route)
+bool fire_ship_room(int map)
 {
-    if (!game::is(game::Id::FF4) || route.map_id != 20 || route.goal_map_id != 17 ||
-        route.next_map_id != 17 || route.target != kBaronChest || route.phases.size() != 1) return false;
-    const auto& cells = route.phases.front().cells;
-    return cells.size() == 3 && cells.front() == kBaronStair && cells.back() == kBaronStair;
+    return (map >= 250 && map <= 271 && map != 267) || (map >= 634 && map <= 638);
 }
 
-// The B1 PointIn shares the return stair. A transfer requires stepping
-// onto it again. Validate both cardinal steps with ordinary movement rules.
-std::optional<Cell> baron_return_step(baked_route::Request request)
+bool fire_ship_return_door(const baked::Submap& room, const baked::Object& door, const Cell& entry)
 {
-    request.goals = {kBaronStair};
+    if (!game::is(game::Id::FF5) || !fire_ship_room(room.first_map_id) ||
+        door.type != baked::ObjType::GotoMap || !fire_ship_room(door.a) ||
+        door.layer != entry.layer || !door.contains(entry.x, entry.y)) return false;
+    const auto& objects = baked::grids(room).objects;
+    return std::any_of(objects.begin(), objects.end(), [&](const auto& object) {
+        return object.type == baked::ObjType::PointIn && object.a > 0 && object.layer == entry.layer &&
+               object.contains(entry.x, entry.y);
+    });
+}
+
+bool return_door_plan(const ActiveRoute& route)
+{
+    if (route.phases.size() != 1) return false;
+    const auto& cells = route.phases.front().cells;
+    if (cells.size() != 3 || cells.front() != cells.back()) return false;
+    if (game::is(game::Id::FF5) && fire_ship_room(route.map_id)) return true;
+    return game::is(game::Id::FF4) && route.map_id == 20 && route.goal_map_id == 17 &&
+           route.next_map_id == 17 && route.target == kBaronChest && cells.front() == kBaronStair;
+}
+
+// Native arrivals can share the outgoing trigger. A return requires stepping
+// onto it again, with both cardinal steps validated against the live route.
+std::optional<Cell> return_door_step(baked_route::Request request, const Cell& entry)
+{
+    request.goals = {entry};
     request.ignore_hazards = false;
     const auto& grid = baked::grids(*request.submap);
     std::array<Cell,8> away{}, back{};
-    const auto exits = baked_route::successors(request, kBaronStair, away);
+    const auto exits = baked_route::successors(request, entry, away);
     for (size_t i = 0; i < exits; ++i) {
         const auto& at = away[i];
-        if (at.layer != kBaronStair.layer || std::abs(at.x - kBaronStair.x) + std::abs(at.y - kBaronStair.y) != 1 ||
+        if (at.layer != entry.layer || std::abs(at.x - entry.x) + std::abs(at.y - entry.y) != 1 ||
             baked_route::terminal_transition(request, grid, at)) continue;
         const auto count = baked_route::successors(request, at, back);
-        if (std::find(back.begin(), back.begin() + count, kBaronStair) != back.begin() + count) return at;
+        if (std::find(back.begin(), back.begin() + count, entry) != back.begin() + count) return at;
     }
     return {};
 }
@@ -2477,9 +2496,10 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 // discovery and hundreds of redundant floods for a local gate.
                 if(!here->world&&!there->world&&dest->world&&!goal.allow_world_transit)continue;
                 if (sm == here && sealed(*e.object)) continue;
-                const bool reenter = stair_chest && sm->first_map_id == 20 && e.object->entity_id() == 3 &&
-                    e.dest_map_id == 17 && e.dest_point == 3 && cur.at == kBaronStair;
-                const int d = reenter ? (baron_return_step(req) ? 2 : -1) :
+                const bool reenter = (stair_chest && sm->first_map_id == 20 && e.object->entity_id() == 3 &&
+                    e.dest_map_id == 17 && e.dest_point == 3 && cur.at == kBaronStair) ||
+                    fire_ship_return_door(*sm, *e.object, cur.at);
+                const int d = reenter ? (return_door_step(req, cur.at) ? 2 : -1) :
                     distance_to_object(req, reach, *e.object, cur.at.layer, sm->world);
                 if (d < 0) continue;
                 const baked::Object* arrival = point_in(*dest, e.dest_point, state);
@@ -2607,9 +2627,9 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
         apply_origin(req);
         req.allow_trap_goal = out.trap_leg||baked::world_exit(o);
         baked_route::Route route = baked_route::find(req);
-        if (stair_chest && here->first_map_id == 20 && o.entity_id() == 3 && hop.via_dest == 17 &&
-            o.b == 3 && start == kBaronStair) {
-            const auto step = baron_return_step(req);
+        if ((stair_chest && here->first_map_id == 20 && o.entity_id() == 3 && hop.via_dest == 17 &&
+             o.b == 3 && start == kBaronStair) || fire_ship_return_door(*here, o, start)) {
+            const auto step = return_door_step(req, start);
             if (!step || !route.found) return out;
             route.cells = {start, *step, start};
         }
@@ -2746,7 +2766,7 @@ bool remaining_from(const ActiveRoute& r, const Cell& at, std::vector<Phase>& ou
 {
     // The second occurrence triggers a floor change. While this floor is still
     // active, standing on the stair means the outbound step remains pending.
-    if (at == kBaronStair && baron_reentry(r)) {
+    if (return_door_plan(r) && at == r.phases.front().cells.front()) {
         out = r.phases;
         return true;
     }
@@ -3392,6 +3412,20 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
                  out.reason.empty() ? L"no reason known" : out.reason.c_str());
             return true;
         }
+        if (kind == TargetKind::Transition && !next_map && phases.size() == 1 &&
+            phases.front().cells.size() == 1 && req.start.x == target.x && req.start.y == target.y &&
+            std::any_of(g.objects.begin(), g.objects.end(), [&](const auto& door) {
+                return (g_route_snapshot->goal.entity_id < 0 || door.entity_id() == g_route_snapshot->goal.entity_id) &&
+                       fire_ship_return_door(*sm, door, req.start) && planning_object_active(*sm, door);
+            })) {
+            const auto step = return_door_step(req, req.start);
+            if (!step) {
+                invalidate_active();
+                out.error = L"No path found";
+                return true;
+            }
+            phases.front().cells = {req.start, *step, req.start};
+        }
         if(surface_marker) {
             // Native confirmation owns surfacing. End the movement/beacon at
             // the real basin tile and leave this action manual, including at0 steps.
@@ -3483,12 +3517,13 @@ CornerResult build_corner(CornerSnapshot& input) {
     if(input.route&&input.submap&&same_target(*input.route,input.map_id,input.target,input.goal_map))
         result.index=build_beacon_corner_index(*input.submap,input.route->phases,
             input.route->blocking_party>=0||input.route->npc_approach,&world_of_cell,input.cancelled);
-    if (input.route && input.submap && baron_reentry(*input.route)) {
+    if (input.route && input.submap && return_door_plan(*input.route)) {
+        const auto& arrival = input.route->phases.front().cells.front();
         Corner step;
-        corner_of(*input.submap, input.route->phases, kBaronStair, step, input.cancelled);
+        corner_of(*input.submap, input.route->phases, arrival, step, input.cancelled);
         if (step.found)
             for (auto& entry : result.index.entries)
-                if (entry.cell == kBaronStair) entry.corner = step;
+                if (entry.cell == arrival) entry.corner = step;
     }
     return result;
 }

@@ -1,5 +1,48 @@
 # FFV Fire-Powered Ship pathfinder
 
+## Whole-ship round trips after the Thief’s Gloves
+
+The latest Steam log placed the party on map 261 at (13,26), directly north
+of the Thief’s Gloves. Selecting other chests, engine-room exits, the save
+point and Storyline then returned “No path.” The pipe route into the pocket
+worked. Pathfinder treated its exit current as a pushback.
+
+- From the chest stance, walk one tile north onto contact 44. Its native
+  script carries the player to (13,22). Contact 46 similarly carries the
+  player from the western corridor to (13,9). Both contacts have a verified
+  entry side and landing recorded in the map bake. The other contacts
+  retain their pushback behavior.
+- When a native arrival shares the outgoing door tile, directions give a
+  safe cardinal step away and back to trigger it. The two steps are checked
+  against the live door, collision and other contacts.
+- A return through the boiler room uses its southern stairs to reach the
+  upper passage. The changing passage is replanned from the resulting
+  platform state. From the far side of the room, Liquid Flame can be the
+  only way into the return corridor. Directions then lead to the encounter
+  and keep the destination through its victory continuation.
+- The closed side-room door supplies its verified switch as a prerequisite
+  when either the door itself or its room is selected. Pathfinder checks the
+  native blocker on the door and replans once the switch removes it.
+
+The production directions replay follows each route through its actual
+transition landing, including the deck entry with access to the engine room,
+both boiler-room conveyor landings, each pipe pocket, both sides of the
+lifts and the standing tile for each chest. It models the same flagless
+door and verified platform switch effects used by the game. It also checks
+the exit to the overworld, the return from Liquid Flame’s victory landing,
+and the routes in and out from the castle side. The playable set comes from
+the native map master. Unlisted source layouts have no playable map entry.
+
+The complete replay covers 26 playable rooms, 64 arrival positions and 71
+outward objectives. It passed 1,471 assertions across 2,949 route legs,
+with zero failures. The independent passage policy replay checks 200 native
+layouts and walking regions. The all-six browse and Storyline checks also
+passed. Those checks include the existing FFIV basement return and the
+FFV Storyline approach to the ship. In-game movement and spoken timing
+remain for gameplay confirmation.
+
+[Installation evidence](../SECURITY_AND_DISTRIBUTION.md#november-27-ffv-whole-ship-round-trips)
+
 ## Return routes after a platform carry
 
 The later November 27 Steam log shows a platform operation followed by the

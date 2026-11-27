@@ -6,19 +6,23 @@ void prepare_fire_ship_prefix(RouteSnapshot& snapshot, PathInfo& path)
         snapshot.goal.avoid_other_events || snapshot.goal.transportation_id > 0) return;
     const int map = snapshot.map_id;
     const auto& destination = snapshot.goal;
-    const bool side_room = destination.map_id == 259;
+    const bool side_door = destination.map_id == 256 && destination.entity_id == 6 &&
+        destination.cell == Cell{1,8,8} && snapshot.kind == TargetKind::Transition;
+    const bool side_room = destination.map_id == 259 || side_door;
     const bool passage_destination = destination.map_id == 270 && destination.entity_id >= 15 && destination.entity_id <= 26;
-    const auto on_ship = [](int id) { return (id >= 250 && id <= 271) || (id >= 634 && id <= 638); };
-    const bool behind_passage = map == 270 && on_ship(destination.map_id) &&
+    const bool behind_passage = map == 270 && fire_ship_room(destination.map_id) &&
         destination.map_id != 270 && destination.map_id != 271;
-    if (!side_room && !passage_destination && !behind_passage && destination.map_id != 271) return;
-    if (map == 271 || (side_room && map == 259) ||
-        !on_ship(map)) return;
+    const bool back_from_boss = map == 271 && destination.map_id != 271 && fire_ship_room(destination.map_id);
+    if (!side_room && !passage_destination && !behind_passage && !back_from_boss && destination.map_id != 271) return;
+    if ((map == 271 && !back_from_boss) || (destination.map_id == 259 && map == 259) || !fire_ship_room(map)) return;
 
     int stage_map = 269;
     int entity = 6;
     int direction = -1;
-    if (side_room && map != 270) {
+    if (back_from_boss) {
+        stage_map = 271;
+        entity = 2;
+    } else if (side_room && map != 270) {
         stage_map = 256;
         entity = 13;
         if (map == stage_map && std::none_of(snapshot.obstacles.begin(), snapshot.obstacles.end(), [](const auto& actor) {
@@ -102,6 +106,29 @@ void prepare_fire_ship_prefix(RouteSnapshot& snapshot, PathInfo& path)
     }
     PathInfo approach;
     route_to_goal(nullptr, nullptr, snapshot.goal, snapshot.kind, {}, approach);
+    bool requires_boss = false;
+    if (!approach.success && back_from_boss && !planning_cancelled() &&
+        snapshot.state.scenario_value(45) == 0) {
+        // From the far side of the boiler room, the only return corridor
+        // crosses Liquid Flame's contact. Stop at the encounter and keep the
+        // original destination for the next request after the native battle.
+        const auto boss = std::find_if(objects.begin(), objects.end(), [&](const auto& object) {
+            return object.type == baked::ObjType::Event && object.entity_id() == 1 &&
+                object.layer == 1 && object.tx == 15 && object.ty == 24 &&
+                snapshot.state.active(*stage, object) && !snapshot.state.consumed(*stage, object);
+        });
+        if (boss != objects.end()) {
+            snapshot.active = {};
+            snapshot.pending = {};
+            snapshot.goal.cell = {boss->layer, boss->tx, boss->ty};
+            snapshot.goal.entity_id = boss->entity_id();
+            snapshot.goal.raw_name = baked::object_identifier(*boss);
+            snapshot.kind = TargetKind::Infer;
+            approach = {};
+            route_to_goal(nullptr, nullptr, snapshot.goal, snapshot.kind, {}, approach);
+            requires_boss = approach.success && approach.next_map_id == 0;
+        }
+    }
     snapshot.goal = original_goal;
     snapshot.kind = original_kind;
     if (!approach.success || approach.walk_phases.empty()) {
@@ -109,7 +136,14 @@ void prepare_fire_ship_prefix(RouteSnapshot& snapshot, PathInfo& path)
         snapshot.pending = std::move(original_pending);
         return;
     }
-    if (direction >= 0 && approach.next_map_id == 0 && !approach.npc_approach) {
+    if (requires_boss) {
+        auto phases = std::move(approach.walk_phases);
+        phases.back().action_after = T(L"Defeat Liquid Flame");
+        phases.back().manual_after = true;
+        fill_result(*snapshot.submap, phases, approach);
+        approach.event_on_route = true;
+        snapshot.active.phases = std::move(phases);
+    } else if (direction >= 0 && approach.next_map_id == 0 && !approach.npc_approach) {
         auto phases = std::move(approach.walk_phases);
         phases.back().action_after = TF(L"Face {0}. Operate the switch.", {T(direction_key(direction))});
         phases.back().manual_after = true;

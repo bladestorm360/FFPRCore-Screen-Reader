@@ -2022,5 +2022,35 @@
     "ordinary_travel": true,
     "automatic_current": true,
     "evidence": "South approach to the native engine-room current, docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md"
+  },
+  {
+    "submap": "Map_30151_11",
+    "entity_id": 44,
+    "object_id": 44,
+    "destination_map": 261,
+    "original_point": 0,
+    "continuation": "sc_30151_11_carry_2",
+    "continuation_sha256": "c38d626a576d4a7bae3327904479b1ade1d440bd68e87e4604a3b661e3da3628",
+    "same_map": true,
+    "arrival_cell": [13, 22, 1],
+    "approach_mask": 4,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Return from the lower pipe landing, docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md"
+  },
+  {
+    "submap": "Map_30151_11",
+    "entity_id": 46,
+    "object_id": 46,
+    "destination_map": 261,
+    "original_point": 0,
+    "continuation": "sc_30151_11_carry_1",
+    "continuation_sha256": "e0ff67adf7d112adc085f348126e306fe65cb9b7d688a1d04c761e206a112a93",
+    "same_map": true,
+    "arrival_cell": [13, 9, 1],
+    "approach_mask": 8,
+    "ordinary_travel": true,
+    "automatic_current": true,
+    "evidence": "Eastbound return from the western chest corridor, docs/re/FF5_FIRE_SHIP_ROUTING_20261127.md"
   }
 ]
