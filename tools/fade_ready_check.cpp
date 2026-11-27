@@ -3,8 +3,16 @@
 #include <cstdio>
 #include <cstdlib>
 #include "../src/core/fieldnav/map_transition.cpp"
-namespace fixture { float alpha=0, image_alpha=1; int calls=0; bool used_ready=false; int manager=0,map_id=0,scans=0,invalidations=0,arrivals=0; bool same_map_drop=false; }
-namespace game {Id current(){return Id::FF4;}}
+namespace fixture {
+float alpha=0, image_alpha=1;
+int calls=0;
+bool used_ready=false;
+int manager=0,map_id=0,scans=0,invalidations=0,arrivals=0;
+bool same_map_drop=false, door=false;
+int door_returns=0, door_return_scan=0;
+game::Id title=game::Id::FF4;
+}
+namespace game {Id current(){return fixture::title;}}
 bool ready_native(void*,const void*) { ++fixture::calls; return fixture::alpha==0; }
 bool old_finish(void*,const void*) { ++fixture::calls; return fixture::alpha==0 && fixture::alpha!=fixture::image_alpha; }
 namespace core { Install::Install(const char* n,int(*f)(),int o,uint8_t g):name(n),fn(f),order(o),games(g){} }
@@ -26,6 +34,20 @@ namespace field {int current_map_id(){return fixture::map_id;} void request_resc
 namespace field {void* map_handle(){return nullptr;} void* player(){return nullptr;}}
 namespace field::baked_nav {bool player_cell(void*,void*,baked_route::Cell&){return true;} bool note_trap_start(int,const baked_route::Cell&){return fixture::same_map_drop;}}
 namespace field::scanner {bool needs_scan(int){return false;} void invalidate_map(){++fixture::invalidations;} }
+namespace ffpr::fieldnav::route_readout {
+bool expects_field_action(){return false;}
+void field_action_started(int,const field::baked_route::Cell&){}
+void field_returned(bool){}
+}
+namespace ffpr::fieldnav::autowalk {
+bool door_phase_started(bool){return fixture::door;}
+void door_phase_returned(int map) {
+    if (fixture::door && map == fixture::map_id) {
+        ++fixture::door_returns;
+        fixture::door_return_scan = fixture::scans;
+    }
+}
+}
 namespace ffpr {void say(std::wstring_view,bool){} }
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);} std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>){return std::wstring(s);} }
 namespace text {std::wstring trim(std::wstring_view s){return std::wstring(s);} bool is_blank(std::wstring_view s){return s.empty();}}
@@ -61,5 +83,16 @@ int main(){
     d_ChangeState(nullptr,4,nullptr);
     expect(fixture::scans==before_gimmick_scans+1&&fixture::arrivals==before_gimmick_arrivals,
            "FFIV Gimmick return refreshes the current map without inventing a transition");
+    fixture::title=game::Id::FF1;
+    fixture::door=true;
+    const int before_door_scans=fixture::scans;
+    d_ChangeState(nullptr,11,nullptr);
+    expect(fixture::scans==before_door_scans&&fixture::door_returns==0,
+           "A verified stock door also waits outside native Gimmick in FFI");
+    d_ChangeState(nullptr,3,nullptr);
+    d_ChangeState(nullptr,3,nullptr);
+    expect(fixture::door_returns==1&&fixture::door_return_scan==before_door_scans+1&&
+           fixture::scans==fixture::door_return_scan&&fixture::arrivals==before_gimmick_arrivals,
+           "The same-map door resumes once after its geometry is invalidated");
     std::printf("Fade readiness check: %d failures\n",failures);return failures?1:0;
 }

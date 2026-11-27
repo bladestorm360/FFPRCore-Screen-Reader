@@ -22,6 +22,7 @@ struct Step {
     bool precision = false;
     float axis_x=0,axis_y=0;
     field::route_progress::PrecisionPoint precision_from,precision_to;
+    std::optional<field::route_progress::InteractionTarget> interaction;
 };
 struct PrecisionPosition {double x2=0,y2=0;};
 class Route {
@@ -98,9 +99,12 @@ public:
                     automatic && cell_ == 0 ? p.vehicle_before : VehicleAction::None, p.transportation_id};
             }
             if (p.wait_for_npc) return {Result::Wait, {}, 0, 0, p.action_after};
-            if (p.manual_after) return {Result::Action, {}, 0, 0, p.action_after, false, p.arrival_direction};
-            if (phase_ + 1 == phases_.size())
-                return {Result::Arrived, {}, 0, 0, p.arrival_facing, false, p.arrival_direction};
+            if (p.manual_after || phase_ + 1 == phases_.size()) {
+                Step arrival{p.manual_after ? Result::Action : Result::Arrived, at, 0, 0,
+                    p.manual_after ? p.action_after : p.arrival_facing, false, p.arrival_direction};
+                arrival.interaction = p.arrival_interaction;
+                return arrival;
+            }
             ++phase_; cell_ = 0; action_done_ = false;
         }
         return {};

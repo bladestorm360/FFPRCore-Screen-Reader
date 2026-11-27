@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "map_transition.h"
+#include "autowalk.h"
 #include "route_readout.h"
 #include "../core.h"
 #include "../frame.h"
@@ -163,6 +164,7 @@ void check_map_transition()
             ::field::scanner::needs_scan(current_map_id)) ::field::request_rescan();
         g_script_refresh = false;
         g_gimmick_refresh = false;
+        if (action_return) autowalk::door_phase_returned(current_map_id);
         route_readout::field_returned(action_return);
         return;
     }
@@ -202,6 +204,8 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
     } changing;
     const double started = frame::now();
     bool same_map_drop = false;
+    const bool walk_open_door = (state == kStateGimmick || state == kStateEvent) &&
+        autowalk::door_phase_started(state == kStateEvent);
     const bool planned_gimmick = state == kStateGimmick && route_readout::expects_field_action();
     if (state == kStateEvent || state == kStateChangeMap || planned_gimmick) {
         same_map_drop = hooks::guarded_r("MapTransition.TrapStart", false, [state, planned_gimmick] {
@@ -215,7 +219,8 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
     // Walk-open doors and the Enterprise's carry animation can change
     // same-floor geometry/model ownership during Gimmick state.
     if (state == kStateEvent) g_script_refresh = true;
-    if (state == kStateGimmick && (planned_gimmick || game::in(game::kFF4|game::kFF5|game::kFF6))) g_gimmick_refresh = true;
+    if (state == kStateGimmick && (walk_open_door || planned_gimmick || game::in(game::kFF4|game::kFF5|game::kFF6)))
+        g_gimmick_refresh = true;
     if (state == kStateChangeMap || same_map_drop) {
         events::fire(events::Kind::MapChanging);
         g_needs_map_scan = true;

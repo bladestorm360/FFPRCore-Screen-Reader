@@ -88,6 +88,13 @@ unity::Vec3 player_position();
 /// Turn the idle native player in place (0 north, 1 east, 2 south, 3 west), without movement
 /// or interaction. True only when native direction state confirms the requested heading.
 bool face_player(void* player, int direction);
+/// The native field observer's current, actionable candidate, when it matches
+/// the planned ID, cell, heading and optional exact live identity.
+void* autowalk_interaction_candidate(void* map, void* player, const void* observed_by, int direction,
+    const route_progress::InteractionTarget& expected, const void* identity);
+/// Dispatch the same target action used by ordinary native field confirmation.
+/// The caller releases navigation before this call can enter a different phase.
+bool confirm_autowalk_interaction(void* player, void* candidate);
 /// FFI_ScreenReaderMod.GetCurrentMapId: the current map id, or -1.
 int current_map_id();
 /// World positions of the current map's exits (for wall tones near exits).

@@ -146,12 +146,17 @@ void prepare_fire_ship_prefix(RouteSnapshot& snapshot, PathInfo& path)
     } else if (direction >= 0 && approach.next_map_id == 0 && !approach.npc_approach) {
         auto phases = std::move(approach.walk_phases);
         phases.back().action_after = TF(L"Face {0}. Operate the switch.", {T(direction_key(direction))});
+        phases.back().arrival_direction = direction;
+        phases.back().arrival_interaction =
+            route_progress::InteractionTarget{{actor->layer, actor->tx, actor->ty}, entity, int(actor->type)};
         phases.back().manual_after = true;
         fill_result(*snapshot.submap, phases, approach);
         snapshot.active.phases = std::move(phases);
     } else if (unlock_door && map == stage_map && approach.next_map_id == 0 && !approach.npc_approach) {
         auto phases = std::move(approach.walk_phases);
         phases.back().action_after = T(L"Examine the switch");
+        phases.back().arrival_interaction =
+            route_progress::InteractionTarget{{actor->layer, actor->tx, actor->ty}, entity, int(actor->type)};
         phases.back().manual_after = true;
         fill_result(*snapshot.submap, phases, approach);
         snapshot.active.phases = std::move(phases);

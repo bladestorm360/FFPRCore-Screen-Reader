@@ -133,7 +133,7 @@ def generate(game, dump):
                     continue
                 blockers.append(blocker)
             if blockers:
-                result.append({'contact': contact, 'script': sid, 'blockers': blockers})
+                result.append({'contact': contact, 'script': sid, 'blockers': blockers, 'asset': names[sid]})
         if result:
             yield floor, result
 

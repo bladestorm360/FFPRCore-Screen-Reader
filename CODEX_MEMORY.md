@@ -1,5 +1,14 @@
 # Native FFPR durable memory
 
+**November 27 Autowalk door continuation.** Native walk-open doors pause
+autowalk and refresh the same destination from the placed player when the
+field returns. [Behavior and verification](docs/re/AUTOWALK.md#november-27-continuation-through-doors).
+
+**November 27 Autowalk facing and Auto-interact.** FFV's switch shortcuts
+retain their structured native heading. The shared Navigation toggle
+defaults off and uses a fresh native target observation before one action
+at a verified arrival. [Autowalk behavior and checks](docs/re/AUTOWALK.md#november-27-facing-and-automatic-interaction).
+
 **November 27 FFV animation timing and Magnet.** The ship's pre-battle,
 after-battle and Fire Crystal sequences use actual draw, movement or tile
 state witnesses. Reusable script replay checked their dialogue and phase

@@ -12,6 +12,11 @@ struct PrecisionPoint {
     bool operator==(const PrecisionPoint& other) const {return layer==other.layer&&x2==other.x2&&y2==other.y2;}
 };
 enum class VehicleAction { None, WalkOn, WalkOff, ConfirmBoard, ConfirmLand, BackLand };
+struct InteractionTarget {
+    baked_route::Cell cell;
+    int entity_id = -1;
+    int object_type = -1; // authored object class when the route names a prerequisite
+};
 struct Phase {
     std::vector<baked_route::Cell> cells;
     std::wstring action_before;
@@ -37,6 +42,7 @@ struct Phase {
     // At most seven cardinal points, no game pointers, timers or worker native calls.
     std::vector<PrecisionPoint> precision;
     bool announce_arrival_facing = false; // a stand-on interaction needs its turn after the walking directions
+    std::optional<InteractionTarget> arrival_interaction; // one verified native confirm at this phase's endpoint
 };
 inline int steps(const Phase& phase) {
     if(!phase.precision.empty()) {

@@ -6,10 +6,13 @@
 #include "../core.h"
 #include "../frame.h"
 #include "../hooks.h"
+#include "../il2cpp.h"
 #include "../input/input.h"
 #include "../input/bindings.h"
+#include "../json.h"
 #include "../modtext.h"
 #include "../say.h"
+#include "../field/baked_map.h"
 #include "../field/object_cache.h"
 #include "../field/scene_events.h"
 #include "../ui/preferences.h"
@@ -64,8 +67,16 @@ Profile* profile(void* c) {
 }
 ref::Class kEntity{"Last.Entity.Field", "FieldEntity"};
 ref::Method mIsMoving{kEntity, "get_IsMoving", 0};
+ref::Class kInteractionObserver{"Last.Map", "InteractiveTargetObserver"};
+ref::Method mSearchInteractions{kInteractionObserver, "SearchInteractiveArea", 0};
+ref::Class kEventProcedure{"Last.Map", "EventProcedure"};
+ref::Method mOpenTrigger{kEventProcedure, "EventOpenTrigger", 3};
+ref::Method mRunScript{kEventProcedure, "EventRunScript", 2};
 using AxisFn = unity::Vec2 (*)(void*, const void*);
 AxisFn o_InputAxis = nullptr;
+using SearchInteractions = void (*)(void*, const void*);
+SearchInteractions o_search_interactions = nullptr;
+bool g_interact_hooked = false;
 bool g_hooked = false, g_active = false, g_has_goal = false;
 bool g_planning = false;
 // Native input only marks a blocked edge. The existing owner update requests
@@ -101,6 +112,76 @@ int g_boundary_vehicle = 0;
 const void* g_entity_identity = nullptr; // identity only, never dereferenced
 void* g_flight_axis_owner = nullptr; // release only through this controller's native input callback
 int g_entity_map = 0;
+struct InteractionArrival {
+    field::route_progress::InteractionTarget target;
+    Cell standing_cell;
+    int direction;
+    const void* identity; // compared only while the same field is ready
+    const void* observed_by = nullptr;
+    double deadline;
+    Result result;
+    std::wstring instruction;
+};
+std::optional<InteractionArrival> g_interaction;
+bool g_native_door = false;
+std::optional<uint64_t> g_door_script_frame;
+struct DoorWait {
+    double deadline = 0;
+    bool returned = false;
+};
+std::optional<DoorWait> g_door_wait;
+
+struct DoorScope {
+    bool previous;
+    explicit DoorScope(bool opening) : previous(std::exchange(g_native_door, opening)) {}
+    ~DoorScope() { g_native_door = previous; }
+};
+
+bool walking_to_goal()
+{
+    return g_active && g_has_goal && !g_interaction && !g_door_wait && !g_transition.waiting() &&
+        g_vehicle_action == VehicleAction::None;
+}
+
+using OpenTrigger = void (*)(void*, int32_t, void*, int32_t, const void*);
+OpenTrigger o_open_trigger = nullptr;
+void d_open_trigger(void* self, int32_t link, void* trigger, int32_t sound, const void* mi)
+{
+    if (!frame::on_main_thread()) { o_open_trigger(self, link, trigger, sound, mi); return; }
+    const DoorScope source{walking_to_goal() && trigger};
+    o_open_trigger(self, link, trigger, sound, mi);
+}
+
+bool is_walk_open_script(std::wstring_view name)
+{
+    const auto* map = field::baked::submap_by_map_id(g_map);
+    if (!map) return false;
+    const auto* record = data::game_json("mapstate").get(field::baked::name_of(*map));
+    const auto* rows = record ? record->get(L"walk_open") : nullptr;
+    if (!rows || rows->arr.size() > 16) return false;
+    for (const auto& row : rows->arr) {
+        const auto* asset = row.get(L"asset");
+        if (asset && asset->is_string() && asset->s == name) return true;
+    }
+    return false;
+}
+
+using RunScript = bool (*)(void*, void*, void*, const void*);
+RunScript o_run_script = nullptr;
+bool d_run_script(void* self, void* name, void* callbacks, const void* mi)
+{
+    const bool accepted = o_run_script(self, name, callbacks, mi);
+    const bool walk_open = accepted && name && frame::on_main_thread() && walking_to_goal() &&
+        hooks::guarded_r("Autowalk.DoorScript", false, [&] {
+            const auto length = il2cpp::read_field<int32_t>(name, static_cast<int32_t>(il2cpp::kStringLengthOff));
+            return length > 0 && length <= 48 && is_walk_open_script(ref::str(name));
+        });
+    // The script action calls this through IEventAccessor, then immediately
+    // requests Gimmick/Event. FFIV inlines the action into its coroutine.
+    // Keep only a one-frame receipt for that native state request.
+    if (walk_open) g_door_script_frame = frame::count();
+    return accepted;
+}
 
 bool safe_context()
 {
@@ -146,7 +227,21 @@ void begin(const field::PathInfo& path, bool speak_path=true)
     g_map = field::current_map_id(); g_next_map = path.next_map_id;
     const bool local_world_exit = g_has_goal && g_goal->map_id == g_map && path.wraps &&
         g_kind == field::TargetKind::Transition && g_next_map == 0;
-    g_route->set(path.walk_phases, path.map_width, path.map_height, path.wraps, path.loop_axes, local_world_exit);
+    auto phases = path.walk_phases;
+    auto& last = phases.back();
+    // A selected ordinary interaction can end at a legal adjacent or stand-on
+    // cell. Give only that terminal phase a confirm target. Authored actions
+    // that already carry an exact prerequisite retain their own target.
+    if (!last.arrival_interaction && g_has_goal && g_goal->map_id == g_map && !path.next_map_id &&
+        (g_kind == field::TargetKind::Interact || g_goal->examine) && !g_goal->storyline &&
+        !g_goal->avoid_other_events && !g_goal->transportation_id && g_goal->entity_id >= 0 &&
+        !path.npc_approach && path.blocking_party < 0 && !last.manual_after && !last.cells.empty() &&
+        last.arrival_direction >= 0) {
+        auto target = g_goal->cell;
+        target.layer = last.cells.back().layer;
+        last.arrival_interaction = field::route_progress::InteractionTarget{target, g_goal->entity_id};
+    }
+    g_route->set(std::move(phases), path.map_width, path.map_height, path.wraps, path.loop_axes, local_world_exit);
     g_verify_interaction = path.verify_interaction_on_arrival && path.step_count > 0;
     g_transition.set_next(g_next_map);
     g_exit_approach = path.walk_phases.size() == 1 && path.walk_phases.front().cells.size() <= 1;
@@ -172,6 +267,49 @@ void retry_obstacle(std::wstring instruction={})
     if(!instruction.empty())g_wait_instruction=std::move(instruction);
 }
 
+void finish_arrival(Result result, std::wstring instruction, bool faced)
+{
+    cancel();
+    if (result == Result::Action) ffpr::say(T(L"Autowalk stopped") + L", " + instruction);
+    else ffpr::say(T(L"Arrived") + (faced || instruction.empty() ? L"" : L", " + instruction), false);
+}
+
+void check_interaction_arrival()
+{
+    auto& arrival = *g_interaction;
+    if (!context_ok() || field::current_map_id() != g_map) { cancel(); return; }
+    auto* player = field::player();
+    auto* map = field::map_handle();
+    Cell at;
+    if (!map || !controller_ok(player) || !unity::alive(player) ||
+        ref::call<bool>(mIsMoving, player) || !field::baked_nav::player_cell(map, player, at) ||
+        !(at == arrival.standing_cell)) { cancel(); return; }
+    if (!ui::prefs::auto_interact_enabled() || frame::now() >= arrival.deadline) {
+        finish_arrival(arrival.result, arrival.instruction, true);
+        return;
+    }
+    // Only the native search, after turning, can authorize the action.
+    const auto* observed_by = std::exchange(arrival.observed_by, nullptr);
+    if (!observed_by) return;
+    auto* candidate = field::autowalk_interaction_candidate(map, player, observed_by, arrival.direction,
+        arrival.target, arrival.identity);
+    if (!candidate) return;
+    const auto result = arrival.result;
+    auto instruction = std::move(arrival.instruction);
+    cancel(); // release movement and pending work before the native action can change the field
+    if (!field::confirm_autowalk_interaction(player, candidate))
+        finish_arrival(result, std::move(instruction), true);
+}
+
+void d_search_interactions(void* observer, const void* mi)
+{
+    o_search_interactions(observer, mi);
+    // Store an identity only. The field owner checks it on the next input
+    // update, after real input has had the opportunity to cancel.
+    if (frame::on_main_thread() && g_interaction && kInteractionObserver.is(observer))
+        g_interaction->observed_by = observer;
+}
+
 unity::Vec2 axis(unity::Vec2 native)
 {
     if (!g_active) return native;
@@ -179,6 +317,8 @@ unity::Vec2 axis(unity::Vec2 native)
         cancel(true); return native; // native remaps/touch input take immediate priority
     }
     if (!safe_context()) { cancel(); return native; }
+    if (g_door_wait) return {};
+    if (g_interaction) return {};
     if(g_planning || g_replan_needed)return {}; // release movement until a fresh route is published
     if (g_transition.waiting()) return native;
     if (g_vehicle_action != VehicleAction::None) {
@@ -326,14 +466,21 @@ unity::Vec2 axis(unity::Vec2 native)
         g_key_frame = frame::count(); g_vehicle_deadline = frame::now() + 10.0;
         return {};
     }
-    cancel();
     if (step.result == Result::OffRoute) {
+        cancel();
         LOGF("[Autowalk] off route map %d cell (%d,%d) L%d vehicle %d type %d",
             g_map, at.x, at.y, at.layer, field::current_vehicle().id, field::current_vehicle().type);
         ffpr::say(T(L"Autowalk stopped. Route changed."));
+    } else if (faced && step.interaction && g_interact_hooked && ui::prefs::auto_interact_enabled()) {
+        const bool selected_here = g_has_goal && g_goal->map_id == g_map && g_entity_map == g_map &&
+            g_goal->entity_id == step.interaction->entity_id && g_goal->cell.x == step.interaction->cell.x &&
+            g_goal->cell.y == step.interaction->cell.y;
+        g_interaction = InteractionArrival{*step.interaction, at, step.face_direction,
+            selected_here ? g_entity_identity : nullptr, nullptr, frame::now() + .25,
+            step.result, step.instruction};
+    } else {
+        finish_arrival(step.result, step.instruction, faced);
     }
-    else if (step.result == Result::Action) ffpr::say(T(L"Autowalk stopped") + L", " + step.instruction);
-    else ffpr::say(T(L"Arrived") + (faced || step.instruction.empty() ? L"" : L", " + step.instruction), false);
     return {};
 }
 
@@ -389,6 +536,10 @@ int install()
     g_touch_airship.translation=&fTranslation;
     g_key_bird.left_scale=&fLeftScale;g_key_bird.right_scale=&fRightScale;
     g_hooked = mIsMoving.ptr() && hooks::attach(mInputAxis, &d_InputAxis, &o_InputAxis);
+    g_interact_hooked = g_hooked && hooks::attach(mSearchInteractions, &d_search_interactions, &o_search_interactions);
+    const bool open_hooked = g_hooked && hooks::attach(mOpenTrigger, &d_open_trigger, &o_open_trigger);
+    const bool script_hooked = g_hooked && game::in(game::kFF4|game::kFF5|game::kFF6) &&
+        hooks::attach(mRunScript, &d_run_script, &o_run_script);
     g_airship_hooked = hooks::attach(mAirshipUpdate, &d_airship_update, &o_airship_update) && mAirshipAxis.ptr();
     g_touch_airship.hooked=hooks::attach(g_touch_airship.update,&d_touch_airship,&g_touch_airship.original) && g_touch_airship.axis.ptr();
     if(game::in(game::kFF3|game::kFF5|game::kFF6)) {
@@ -402,15 +553,23 @@ int install()
         g_battle_interrupted = active();
         g_active = g_planning = false;
         g_key_action = -1;
+        g_interaction.reset();
+        g_door_wait.reset();
+        g_door_script_frame.reset();
     });
     events::on(events::Kind::BattleStart, [] { cancel(); });
     events::on(events::Kind::PartyChanging, [] {
         g_active=g_planning=false;g_key_action=-1;
+        g_interaction.reset();
+        g_door_wait.reset();
+        g_door_script_frame.reset();
     });
     events::on(events::Kind::MenuOpened, [] { cancel(); });
     events::on(events::Kind::SceneLoaded, [] { if (field::scene_name() == L"Title") cancel(); });
     events::on(events::Kind::MapChanging, [] {
         if (!g_active) {g_planning=false;return;}
+        g_door_wait.reset();
+        g_door_script_frame.reset();
         if (g_next_map > 0 && g_has_goal) {
             g_transition.begin(frame::now());
         } else cancel();
@@ -438,12 +597,28 @@ int install()
             return false;
         }, "Autowalk.Continue", 3600);
     });
-    return g_hooked ? 1 : 0;
+    return int(g_hooked) + int(g_interact_hooked) + int(open_hooked) + int(script_hooked);
 }
 core::Install s_install{"Autowalk", &install, 120};
 }
 
 bool active() { return g_active || g_planning; }
+bool door_phase_started(bool scripted)
+{
+    const auto script_frame = std::exchange(g_door_script_frame, std::nullopt);
+    if (!walking_to_goal() || ((!g_native_door || scripted) &&
+        (!script_frame || *script_frame != frame::count()))) return false;
+    // Retire any obsolete route completion. MapTransition invalidates the
+    // snapshot when the native field returns.
+    g_planning = false;
+    ++g_walk_generation;
+    g_door_wait = DoorWait{frame::now() + 30.0};
+    return true;
+}
+void door_phase_returned(int map_id)
+{
+    if (g_door_wait && map_id == g_map) g_door_wait->returned = true;
+}
 void cancel(bool announce)
 {
     const bool was_active = active() || g_battle_interrupted;
@@ -455,6 +630,9 @@ void cancel(bool announce)
     g_replan_needed=g_wait_announced=false;g_retry_at=g_retry_until=0;g_wait_instruction.clear();
     g_turning=false;
     g_verify_interaction = false;
+    g_interaction.reset();
+    g_door_wait.reset();
+    g_door_script_frame.reset();
     g_vehicle_action = VehicleAction::None; g_key_action = -1; g_key_frame = 0; g_boundary_deadline = 0;
     g_transition.clear();
     frame::cancel_label("Autowalk.");
@@ -560,6 +738,25 @@ void input_updated()
     if (queries::is("BattleStateHelper.IsInBattle") || menu_state::any_active()
         || queries::is("MessageWindowPatches.IsInDialogue") || queries::is("PuzzleGameState.IsActive")) {
         cancel(); return;
+    }
+    if (g_interaction) {
+        if (!request_key) check_interaction_arrival();
+        return;
+    }
+    if (g_door_wait) {
+        if (request_key) return;
+        if (frame::now() >= g_door_wait->deadline) {
+            cancel(); ffpr::say(T(L"Autowalk stopped. Route changed.")); return;
+        }
+        if (!g_door_wait->returned || !context_ok()) return;
+        if (field::current_map_id() != g_map) { cancel(); return; }
+        auto* player = field::player();
+        if (!controller_ok(player) || ref::call<bool>(mIsMoving, player)) return;
+        g_door_wait.reset();
+        g_replan_needed = g_wait_announced = false;
+        g_retry_at = g_retry_until = 0;
+        g_wait_instruction.clear();
+        retry_obstacle();
     }
     if(g_replan_needed) {
         if(!g_has_goal || !context_ok() || !controller_ok(field::player()) || field::current_map_id()!=g_map) {cancel();return;}

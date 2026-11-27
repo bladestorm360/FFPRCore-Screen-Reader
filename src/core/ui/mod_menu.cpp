@@ -199,6 +199,9 @@ void initialize()
     v.push_back(toggle(L"Autowalk", p::kAutowalk, p::kAutowalkDefault,
                        L"On. The selected layout's navigation key, Slash for a waypoint, or controller LT walks to the destination. Press again to stop. Manual input, menus and battles stop the walk.",
                        L"Off. Navigation requests give directions or restart the beacon."));
+    v.push_back(toggle(L"Auto-interact", p::kAutoInteract, p::kAutoInteractDefault,
+                       L"On. Autowalk faces the target and interacts once when the game recognizes it.",
+                       L"Off. Autowalk faces the target and leaves the interaction to you."));
     v.push_back(enumeration(L"Navigation keymap", {L"Letters", L"Brackets and backslash"},
                             p::kNavigationKeymap, p::kNavigationKeymapDefault, p::kNavigationKeymapMax,
                             L"Navigation keymap help"));

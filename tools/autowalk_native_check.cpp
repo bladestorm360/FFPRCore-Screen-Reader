@@ -1,4 +1,4 @@
-// check-sources: text.cpp
+// check-sources: text.cpp json.cpp
 // Actual movement/input detours with bounded native owners; no game is launched.
 #include <map>
 #include <algorithm>
@@ -7,11 +7,20 @@
 #include "../src/core/text.h"
 #include "../src/core/fieldnav/autowalk.cpp"
 #include "../src/core/fieldnav/route_readout.cpp"
+#include "../src/core/field/facing.cpp"
 #include "../src/core/audio/movement_sounds.cpp"
 #include "../src/core/input/input_passthrough.cpp"
 namespace fixture {
-struct Node { void* player=nullptr; void* controller=nullptr; bool enabled=true, airship=false, moving=false, up=false, down=false; float angle=0; unity::Vec2 cached{}; int mode=0;float acceleration=0,left_scale=1,right_scale=1;bool translation=false; };
+struct Node { void* player=nullptr; void* controller=nullptr; bool enabled=true, airship=false, moving=false, up=false, down=false; float angle=0; unity::Vec2 cached{}; int mode=0;float acceleration=0,left_scale=1,right_scale=1;bool translation=false;
+    void* observer=nullptr; void* candidate=nullptr; bool observing=true; unity::Vec2 heading{}; };
 Node player, controller, map, field_controller;
+Node interaction_observer, wrong_observer;
+struct Interactive { int id = 19, type = 5, floor = 1; bool active = true, actionable = true; unity::Vec3 position{2,1,0}; };
+Interactive interactible, wrong_interactible;
+bool auto_interact=false, request_pressed=false, face_available=true;
+int interaction_calls=0;
+bool dispatched_while_walking=false;
+void* dispatched_candidate=nullptr;
 uint64_t tick=10; double seconds=1;
 bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
 bool automatic_readout=false, transition_blocked=false, pose_ready=true;
@@ -31,8 +40,28 @@ std::vector<frame::Step> waits;int requests=0;
 std::vector<frame::Task> wall_checks;
 std::vector<std::function<void(field::PathInfo)>> route_results;
 std::vector<std::wstring> spoken;
+struct ScriptName { uint64_t header[2]{}; int32_t size=0; const wchar_t* text=nullptr; };
+static_assert(offsetof(ScriptName,size)==il2cpp::kStringLengthOff);
+bool door_changes_state = true;
+void start_native_door(bool script) {
+    if (!door_changes_state) return;
+    ffpr::fieldnav::autowalk::door_phase_started(script);
+    ready = false;
+}
+void open_trigger(void*, int32_t, void*, int32_t, const void*) { start_native_door(false); }
+bool run_script(void*, void*, void*, const void*) { return door_changes_state; }
 void step() { ++tick; seconds+=.016; }
 bool moving(void* o,const void*) { return static_cast<Node*>(o)->moving; }
+void look_at(void* self, unity::Vec2 heading, bool, const void*) {
+    static_cast<Node*>(self)->heading = heading;
+    facing = heading.y > 0 ? 0 : heading.x > 0 ? 1 : heading.y < 0 ? 2 : 3;
+}
+void take_action(void*, void* target, const void*) {
+    ++interaction_calls;
+    dispatched_while_walking |= ffpr::fieldnav::autowalk::active();
+    dispatched_candidate = target;
+}
+void search_interactions(void*, const void*) {}
 float angle(void* o,const void*) { return static_cast<Node*>(o)->angle; }
 void on_key(void* o,int k,const void*) { ++key_calls; if(k==2)static_cast<Node*>(o)->up=true; if(k==3)static_cast<Node*>(o)->down=true; }
 void on_key_up(void* o,int k,const void*) { ++key_calls; if(k==2)static_cast<Node*>(o)->up=false; if(k==3)static_cast<Node*>(o)->down=false; }
@@ -53,7 +82,11 @@ Class::Class(const char*n,const char*c,uint8_t g,const char*a):ns(n),name(c),gam
 Method::Method(Class&c,const char*n,int a):cls(c),name(n),argc(a){}
 Field::Field(Class&c,const char*n,const char*a):cls(c),name(n),alt(a){}
 bool Class::is(void* p){
- if(!p || !game::in(games))return false;auto*n=static_cast<fixture::Node*>(p);const std::string type=name;
+ if(!p || !game::in(games))return false;const std::string type=name;
+ if(type=="FieldController")return p==&fixture::map;
+ if(type=="FieldPlayer")return p==&fixture::player;
+ if(type=="InteractiveTargetObserver")return p==&fixture::interaction_observer||p==&fixture::wrong_observer;
+ auto*n=static_cast<fixture::Node*>(p);
  if(type=="FieldPlayerKeyAirshipController")return n->airship;
  if(type=="FieldPlayerKeyController")return !n->airship&&(n->mode==0||n->mode==6);
  if(type=="FieldPlayerTouchBaseController")return n->mode==1||n->mode==2||n->mode==4||n->mode==5;
@@ -63,17 +96,28 @@ bool Class::is(void* p){
  if(type=="FieldPlayerKeyTwoStepController")return n->mode==7;
  return type=="FieldPlayerController";
 }
-int32_t Field::get(){std::string n=name;if(n=="fieldPlayer")return offsetof(fixture::Node,player);if(n=="fieldController")return offsetof(fixture::Node,controller);if(n=="<InputEnable>k__BackingField")return offsetof(fixture::Node,enabled);if(n=="isDownShiftUp")return offsetof(fixture::Node,up);if(n=="isDownShiftDown")return offsetof(fixture::Node,down);if(n=="rotateAccelerator")return offsetof(fixture::Node,acceleration);if(n=="leftFastRotateScale")return offsetof(fixture::Node,left_scale);if(n=="rightFastRotateScale")return offsetof(fixture::Node,right_scale);if(n=="isTranslationMode")return offsetof(fixture::Node,translation);return -1;}
-void* Method::ptr(){std::string n=name;if(n=="get_IsMoving")return reinterpret_cast<void*>(&fixture::moving);if(n=="GetZAxisRotateBirdCamera")return reinterpret_cast<void*>(&fixture::angle);if(n=="OnTouchPadCallback")return reinterpret_cast<void*>(&fixture::touch);if(n=="OnKey")return reinterpret_cast<void*>(&fixture::on_key);if(n=="OnKeyUp")return reinterpret_cast<void*>(&fixture::on_key_up);return nullptr;}
+int32_t Field::get(){std::string n=name;if(n=="fieldPlayer"||n=="fieldPlayerEntity")return offsetof(fixture::Node,player);if(n=="fieldController")return offsetof(fixture::Node,controller);if(n=="<InputEnable>k__BackingField")return offsetof(fixture::Node,enabled);if(n=="isDownShiftUp")return offsetof(fixture::Node,up);if(n=="isDownShiftDown")return offsetof(fixture::Node,down);if(n=="rotateAccelerator")return offsetof(fixture::Node,acceleration);if(n=="leftFastRotateScale")return offsetof(fixture::Node,left_scale);if(n=="rightFastRotateScale")return offsetof(fixture::Node,right_scale);if(n=="isTranslationMode")return offsetof(fixture::Node,translation);
+ if(n=="interactiveTargetObserver")return offsetof(fixture::Node,observer);
+ if(n=="interactiveTargetEntity")return offsetof(fixture::Node,candidate);
+ if(n=="isObserving")return offsetof(fixture::Node,observing);
+ if(n=="directionVector")return offsetof(fixture::Node,heading);
+ if(n=="<EntityId>k__BackingField")return offsetof(fixture::Interactive,id);
+ return -1;}
+void* Method::ptr(){std::string n=name;if(n=="get_IsMoving")return reinterpret_cast<void*>(&fixture::moving);if(n=="GetZAxisRotateBirdCamera")return reinterpret_cast<void*>(&fixture::angle);if(n=="OnTouchPadCallback")return reinterpret_cast<void*>(&fixture::touch);if(n=="OnKey")return reinterpret_cast<void*>(&fixture::on_key);if(n=="OnKeyUp")return reinterpret_cast<void*>(&fixture::on_key_up);
+ if(n=="LookAt"&&fixture::face_available)return reinterpret_cast<void*>(&fixture::look_at);
+ if(n=="TakeAction")return reinterpret_cast<void*>(&fixture::take_action);
+ return nullptr;}
 il2cpp::Method* Method::get(){return reinterpret_cast<il2cpp::Method*>(ptr());}
 std::wstring rd_str(void*,Field&){return L"Action";}
+std::wstring str(void* name){return static_cast<fixture::ScriptName*>(name)->text;}
 void call_failed_note(const char*){std::abort();}
 }
-namespace unity {bool alive(void*p){return p!=nullptr;}bool active_in_hierarchy(void*p){return p!=nullptr;}void*transform(void*p){return p;}Vec3 local_position(void*){return fixture::position;}}
+namespace unity {bool alive(void*p){return p!=nullptr;}bool active_in_hierarchy(void*p){return p!=nullptr;}void*transform(void*p){return p;}
+Vec3 local_position(void* p){if(p==&fixture::interactible||p==&fixture::wrong_interactible)return static_cast<fixture::Interactive*>(p)->position;return fixture::position;}}
 namespace log_ {void write(const char*,...){} }
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return true;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
-namespace frame {uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
+namespace frame {bool on_main_thread(){return true;}uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
 namespace frame {void after_seconds(double,Task fn,const char*){fixture::wall_checks.push_back(std::move(fn));}}
 namespace actions {void define(const char*,Fn){} bool run(const char*){return false;}bool defined(const char*){return false;} }
 namespace events {void on(Kind kind,Handler handler){fixture::handlers[kind].push_back(std::move(handler));} void fire(Kind kind){for(auto& handler:fixture::handlers[kind])handler();} }
@@ -87,7 +131,17 @@ bool is(const char* name) {
     return key == "NavigationTargetTracker.IsEntity" && fixture::selected_target.valid;
 }
 }
-namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){const std::string_view key=k;if(key=="Autowalk")return true;if(key==ui::prefs::kAutoRouteReadout)return fixture::automatic_readout;return d;}void set_bool(const char*,bool){} }
+namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){const std::string_view key=k;if(key=="Autowalk")return true;if(key==ui::prefs::kAutoInteract)return fixture::auto_interact;if(key==ui::prefs::kAutoRouteReadout)return fixture::automatic_readout;return d;}void set_bool(const char*,bool){} }
+namespace data {
+const json::Value& game_json(const char*) {
+    static const auto records = [] {
+        json::Value value;
+        if (!json::parse(R"({"DoorFloor":{"walk_open":[{"asset":"door"}]}})", value)) std::abort();
+        return value;
+    }();
+    return records;
+}
+}
 namespace menu_state {bool any_active(){return fixture::menu;} }
 namespace ffpr::system {
 bool is_field_navigation_ready(){return fixture::ready;}
@@ -95,9 +149,23 @@ bool input_transition_blocked(){return fixture::transition_blocked;}
 }
 namespace field::cache {void*get(ref::Class&t){return std::string(t.name)=="FieldMap"?&fixture::map:&fixture::controller;}void*get_or_refresh(ref::Class&t){return get(t);} }
 namespace field {
+namespace baked {
+const Submap* submap_by_map_id(int id) { static const Submap map{}; return id==101 ? &map : nullptr; }
+std::wstring name_of(const Submap&) { return L"DoorFloor"; }
+}
+namespace r {
+ref::Class kFieldController{"Last.Map","FieldController"}, kIInteractiveEntity{"Last.Entity.Field","IInteractiveEntity"};
+ref::Field fPropEntityId{kFieldController,"<EntityId>k__BackingField"};
+}
+bool entity_is_active(void* target){return (target==&fixture::interactible||target==&fixture::wrong_interactible)&&static_cast<fixture::Interactive*>(target)->active;}
+bool implements(void* target, ref::Class&){return target==&fixture::interactible||target==&fixture::wrong_interactible;}
+void* entity_property(void* target){return target;}
+int object_type_of(void* target){return static_cast<fixture::Interactive*>(target)->type;}
+int game_object_layer(void* target){return static_cast<fixture::Interactive*>(target)->floor+9;}
+bool call_virtual_bool(ref::Method&, void* target){return static_cast<fixture::Interactive*>(target)->actionable;}
 bool confirm_blocked_move(void*,unity::Vec3 destination){++fixture::obstacle_queries;fixture::attempted_destination=destination;return !fixture::edge_open;}
 void*player_controller(){return &fixture::controller;}
-void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}bool face_player(void*,int direction){fixture::facing=direction;return true;}Target selected(){return fixture::selected_target;}
+void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}Target selected(){return fixture::selected_target;}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
 namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){++fixture::pose_reads;c=fixture::cell;return fixture::pose_ready;}bool cell_at(void*,unity::Vec3 position,baked_route::Cell&c){c={fixture::cell.layer,static_cast<int>(position.x),static_cast<int>(position.y)};return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
 unity::Vec3 world_of(void*,const baked_route::Cell& cell){return {cell.x*16.f,-cell.y*16.f,0};}
@@ -119,13 +187,211 @@ bool remapped_keyboard_in_use(){return false;}
 bool event_guide_keyboard_in_use(){return false;}
 bool battle_party_keyboard_in_use(){return false;}
 bool consumed(int){return false;}
-bool navigation_request_pressed(){return false;}
+bool navigation_request_pressed(){return fixture::request_pressed;}
 bool navigation_controller_input(int){return false;}
 bool keyboard_in_use(Context c){
     for(Key k:{Key::UpArrow,Key::DownArrow,Key::LeftArrow,Key::RightArrow,Key::I})if(key_in_use(k))return true;
     if(c==Context::Results)for(Key k:{Key::W,Key::A,Key::S,Key::D,Key::F7,Key::F8,Key::F5})if(key_in_use(k))return true;
     return false;
 }
+}
+
+template<class Expect> void check_door_continuation(Expect expect)
+{
+    namespace walk = ffpr::fieldnav::autowalk;
+    using field::TargetKind;
+    fixture::game = game::Id::FF5;
+    fixture::ready = fixture::focus = fixture::pose_ready = true;
+    fixture::map_id = 101;
+    fixture::controller = {};
+    fixture::controller.player = &fixture::player;
+    fixture::player = {};
+    fixture::cell = {1,19,10};
+    fixture::vehicle = {true,1,1,L""};
+    fixture::native = {};
+    walk::o_open_trigger = &fixture::open_trigger;
+    walk::o_run_script = &fixture::run_script;
+    field::PathInfo path;
+    path.success = true;
+    path.next_map_id = 100;
+    walk::Phase approach;
+    approach.cells = {{1,19,10}, {1,20,10}, {1,21,10}, {1,22,10}};
+    path.walk_phases = {approach};
+    const field::baked_nav::MapGoal destination{99, {1,4,5}};
+    auto start = [&] {
+        fixture::ready = true;
+        fixture::cell = approach.cells.front();
+        walk::start(path, &destination, TargetKind::Spot);
+        expect(walk::d_InputAxis(nullptr, nullptr).x == 1, "Autowalk approaches an intermediate door");
+    };
+    auto open = [&] { walk::d_open_trigger(nullptr, 15, &fixture::map, 1, nullptr); };
+    auto resume = [&] {
+        const int before = fixture::requests;
+        const int poses = fixture::pose_reads;
+        const auto paused = walk::d_InputAxis(nullptr, nullptr);
+        walk::input_updated();
+        expect(!paused.x && !paused.y && walk::active() && fixture::requests == before &&
+            fixture::pose_reads == poses, "Door opening holds movement and avoids native pose or route work");
+        walk::door_phase_returned(102);
+        fixture::ready = true;
+        walk::input_updated();
+        expect(fixture::requests == before, "An unrelated map's field return cannot renew the route");
+        walk::door_phase_returned(101);
+        walk::door_phase_returned(101);
+        fixture::controller.enabled = false;
+        walk::input_updated();
+        expect(fixture::requests == before, "The returned door waits for its native controller");
+        fixture::controller.enabled = true;
+        fixture::player.moving = true;
+        walk::input_updated();
+        expect(fixture::requests == before, "The returned door waits for final native placement");
+        fixture::player.moving = false;
+        fixture::cell = approach.cells[1];
+        walk::input_updated();
+        walk::input_updated();
+        expect(fixture::requests == before + 1 && fixture::last_requested.map_id == destination.map_id &&
+            fixture::last_requested.cell == destination.cell, "Door return renews the original destination once");
+        auto renewed = path;
+        renewed.walk_phases[0].cells.erase(renewed.walk_phases[0].cells.begin());
+        fixture::route_results.back()(renewed);
+        expect(walk::active() && walk::d_InputAxis(nullptr, nullptr).x == 1,
+            "Refreshed autowalk moves through the door and continues toward the next map");
+        walk::cancel();
+    };
+    start();
+    open();
+    resume();
+    start();
+    fixture::ScriptName confirmed{{},4,L"door"};
+    expect(walk::d_run_script(nullptr, &confirmed, nullptr, nullptr),
+        "Scripted door hook preserves the native result");
+    fixture::start_native_door(true);
+    resume();
+    start();
+    fixture::ScriptName unrelated{{},5,L"event"};
+    walk::d_run_script(nullptr, &unrelated, nullptr, nullptr);
+    fixture::start_native_door(true);
+    walk::input_updated();
+    expect(!walk::active(), "An unrelated native script still cancels autowalk");
+    start();
+    walk::d_run_script(nullptr, &confirmed, nullptr, nullptr);
+    fixture::step();
+    fixture::start_native_door(true);
+    walk::input_updated();
+    expect(!walk::active(), "A script acceptance expires before an unrelated later phase");
+    start();
+    fixture::door_changes_state = false;
+    open();
+    fixture::door_changes_state = true;
+    expect(walk::active() && walk::d_InputAxis(nullptr, nullptr).x == 1,
+        "An already opened door without a native pause does not hold input");
+    open();
+    fixture::manual = true;
+    walk::input_updated();
+    fixture::manual = false;
+    expect(!walk::active(), "Manual input still cancels autowalk while the door opens");
+    start();
+    open();
+    events::fire(events::Kind::BattleEntering);
+    events::fire(events::Kind::BattleStart);
+    walk::door_phase_returned(101);
+    expect(!walk::active(), "A battle retires the door wait before field input resumes");
+    fixture::ready = true;
+}
+
+template<class Expect> void check_arrival_interaction(Expect expect)
+{
+    namespace walk = ffpr::fieldnav::autowalk;
+    using field::TargetKind;
+    fixture::game = game::Id::FF5;
+    fixture::map_id = 270;
+    fixture::ready = fixture::focus = true;
+    fixture::controller = {};
+    fixture::controller.player = &fixture::player;
+    fixture::player = {};
+    fixture::map.observer = &fixture::interaction_observer;
+    fixture::interaction_observer.player = &fixture::player;
+    fixture::interaction_observer.candidate = &fixture::interactible;
+    fixture::cell = {1,1,1};
+    fixture::vehicle = {true,1,1,L""};
+    fixture::native = {};
+    fixture::selected_target = {};
+    fixture::auto_interact = false;
+    walk::o_search_interactions = &fixture::search_interactions;
+    field::baked_nav::MapGoal destination{270, {1,2,1}};
+    destination.entity_id = fixture::interactible.id;
+    walk::Phase arrival;
+    arrival.cells = {fixture::cell};
+    arrival.arrival_direction = 1;
+    field::PathInfo path;
+    path.success = true;
+    path.walk_phases = {arrival};
+    auto finish_walking = [&] {
+        walk::start(path, &destination, TargetKind::Interact);
+        const auto axis = walk::d_InputAxis(nullptr, nullptr);
+        expect(!axis.x && !axis.y, "The arrival turns in place with no extra movement");
+    };
+    auto native_observation = [](void* owner = &fixture::interaction_observer) {
+        walk::d_search_interactions(owner, nullptr);
+        fixture::step();
+        walk::input_updated();
+    };
+    finish_walking();
+    expect(fixture::facing == 1 && !walk::active() && fixture::interaction_calls == 0,
+           "The default-off setting still turns on a zero-step interaction route");
+    fixture::auto_interact = true;
+    fixture::selected_target.valid = true;
+    fixture::selected_target.identity = &fixture::interactible;
+    fixture::selected_target.position = fixture::interactible.position;
+    finish_walking();
+    walk::input_updated();
+    expect(walk::active() && fixture::interaction_calls == 0,
+           "A previously cached target cannot fire before native search after the turn");
+    native_observation(&fixture::wrong_observer);
+    expect(walk::active() && fixture::interaction_calls == 0, "A different observer cannot authorize the action");
+    fixture::interaction_observer.candidate = &fixture::wrong_interactible;
+    native_observation();
+    expect(fixture::interaction_calls == 0, "A different live entity sharing the ID and cell is rejected");
+    fixture::interaction_observer.candidate = &fixture::interactible;
+    native_observation();
+    native_observation();
+    expect(!walk::active() && fixture::interaction_calls == 1 && !fixture::dispatched_while_walking &&
+           fixture::dispatched_candidate == &fixture::interactible,
+           "The exact candidate receives one native action after movement is released");
+
+    fixture::selected_target = {};
+    destination = {271,{1,9,9}};
+    path.walk_phases.back().manual_after = true;
+    path.walk_phases.back().action_after = L"Operate the switch.";
+    path.walk_phases.back().arrival_interaction = field::route_progress::InteractionTarget{{1,2,1},19,5};
+    finish_walking();
+    fixture::interactible.floor = 2;
+    native_observation();
+    expect(walk::active() && fixture::interaction_calls == 1, "A candidate on the wrong floor stays manual");
+    fixture::seconds += .26;
+    walk::input_updated();
+    expect(!walk::active() && fixture::spoken.back() == L"Autowalk stopped, Operate the switch.",
+           "A candidate that never matches falls back to the normal instruction");
+    fixture::interactible.floor = 1;
+    finish_walking();
+    fixture::manual = true;
+    native_observation();
+    fixture::manual = false;
+    expect(!walk::active() && fixture::interaction_calls == 1, "Manual input cancels a pending interaction");
+    finish_walking();
+    fixture::request_pressed = true;
+    native_observation();
+    expect(walk::active() && fixture::interaction_calls == 1 && walk::stop_requested(),
+           "The navigation stop key wins before any pending automatic interaction");
+    fixture::request_pressed = false;
+    finish_walking();
+    fixture::interactible.actionable = false;
+    native_observation();
+    expect(walk::active() && fixture::interaction_calls == 1, "Native CanAction veto prevents dispatch");
+    fixture::interactible.actionable = true;
+    native_observation();
+    expect(!walk::active() && fixture::interaction_calls == 2, "A known switch prerequisite works once");
+    fixture::auto_interact = false;
 }
 
 template<class Expect> void check_route_refresh(Expect expect)
@@ -472,6 +738,8 @@ int main(){
     fixture::selected_target = {};
  }
  std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
+ check_arrival_interaction(expect);
+ check_door_continuation(expect);
  check_route_refresh(expect);
  std::printf("Autowalk native input, vehicle waits and route refresh: %d failures\n",failures);return failures?1:0;
 }

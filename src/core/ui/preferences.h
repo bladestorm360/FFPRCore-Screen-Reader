@@ -44,6 +44,7 @@ inline constexpr int kBeaconFollowRoute = 0, kBeaconObjectLocation = 1;
 inline constexpr int kBeaconModeDefault = kBeaconFollowRoute, kBeaconModeMax = kBeaconObjectLocation;
 inline const wchar_t* const kBeaconModeNames[2] = {L"Follow route", L"Object location"};
 inline constexpr const char* kAutowalk = "Autowalk";
+inline constexpr const char* kAutoInteract = "AutoInteract";
 inline constexpr const char* kNavigationKeymap = "NavigationKeymap";
 inline constexpr const char* kTeleportShortcuts = "TeleportShortcuts";
 inline constexpr const char* kSpeechEnabled = "SpeechEnabled";
@@ -102,6 +103,7 @@ inline constexpr bool kWallTonesDefault = false;
 inline constexpr bool kFootstepsDefault = false;
 inline constexpr bool kAudioBeaconsDefault = false;
 inline constexpr bool kAutowalkDefault = false;
+inline constexpr bool kAutoInteractDefault = false;
 inline constexpr int kNavigationKeymapDefault = 0;
 inline constexpr bool kTeleportShortcutsDefault = false;
 inline constexpr bool kSpeechEnabledDefault = true;
@@ -165,6 +167,7 @@ inline bool footsteps_enabled() { return settings::get_bool(kFootsteps, kFootste
 inline bool audio_beacons_enabled() { return settings::get_bool(kAudioBeacons, kAudioBeaconsDefault); }
 inline int beacon_mode() { return std::clamp(settings::get_int(kBeaconMode,kBeaconModeDefault),0,kBeaconModeMax); }
 inline bool autowalk_enabled() { return settings::get_bool(kAutowalk, kAutowalkDefault); }
+inline bool auto_interact_enabled() { return settings::get_bool(kAutoInteract, kAutoInteractDefault); }
 inline bool teleport_shortcuts_enabled() { return settings::get_bool(kTeleportShortcuts, kTeleportShortcutsDefault); }
 inline bool speech_enabled() { return settings::get_bool(kSpeechEnabled, kSpeechEnabledDefault); }
 inline bool speak_autowalk_path_enabled() { return settings::get_bool(kSpeakAutowalkPath, kSpeakAutowalkPathDefault); }

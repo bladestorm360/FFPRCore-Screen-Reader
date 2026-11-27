@@ -16575,6 +16575,48 @@
     "th": "เดินอัตโนมัติ",
     "pt": "Caminhada automática"
   },
+  "Auto-interact": {
+    "en": "Auto-interact",
+    "ja": "自動で調べる・話しかける",
+    "fr": "Interaction automatique",
+    "it": "Interazione automatica",
+    "de": "Automatische Interaktion",
+    "es": "Interacción automática",
+    "ko": "자동 상호작용",
+    "zht": "自動互動",
+    "zhc": "自动互动",
+    "ru": "Автоматическое взаимодействие",
+    "th": "โต้ตอบอัตโนมัติ",
+    "pt": "Interação automática"
+  },
+  "On. Autowalk faces the target and interacts once when the game recognizes it.": {
+    "en": "On. Autowalk faces the target and interacts once when the game recognizes it.",
+    "ja": "オン。自動移動で対象の方を向き、ゲームが操作できると判断したら一度だけ操作します。",
+    "fr": "Activé. Le déplacement automatique se tourne vers la cible et interagit une fois quand le jeu la reconnaît.",
+    "it": "Attiva. La camminata automatica si volta verso il bersaglio e interagisce una volta quando il gioco lo riconosce.",
+    "de": "An. Beim automatischen Gehen wendet sich die Figur dem Ziel zu und interagiert einmal, sobald das Spiel es erkennt.",
+    "es": "Activada. El desplazamiento automático se orienta hacia el objetivo e interactúa una vez cuando el juego lo reconoce.",
+    "ko": "켜짐. 자동 이동이 대상 쪽으로 돌아서고 게임에서 대상을 인식하면 한 번 상호작용합니다.",
+    "zht": "開啟。自動行走會轉向目標，等遊戲辨識目標後互動一次。",
+    "zhc": "开启。自动行走会转向目标，等游戏识别目标后互动一次。",
+    "ru": "Включено. При автоматическом перемещении персонаж поворачивается к цели и взаимодействует с ней один раз, когда игра её распознаёт.",
+    "th": "เปิด เมื่อเดินอัตโนมัติถึงเป้าหมาย ตัวละครจะหันไปหาและโต้ตอบหนึ่งครั้งเมื่อเกมตรวจพบเป้าหมาย",
+    "pt": "Ativada. A caminhada automática vira para o alvo e interage uma vez quando o jogo o reconhece."
+  },
+  "Off. Autowalk faces the target and leaves the interaction to you.": {
+    "en": "Off. Autowalk faces the target and leaves the interaction to you.",
+    "ja": "オフ。自動移動で対象の方を向き、操作は自分で行います。",
+    "fr": "Désactivé. Le déplacement automatique se tourne vers la cible et vous laisse interagir.",
+    "it": "Disattiva. La camminata automatica si volta verso il bersaglio e lascia a te l'interazione.",
+    "de": "Aus. Beim automatischen Gehen wendet sich die Figur dem Ziel zu. Du interagierst selbst.",
+    "es": "Desactivada. El desplazamiento automático se orienta hacia el objetivo y deja que interactúes.",
+    "ko": "꺼짐. 자동 이동이 대상 쪽으로 돌아서면 직접 상호작용할 수 있습니다.",
+    "zht": "關閉。自動行走會轉向目標，互動由你操作。",
+    "zhc": "关闭。自动行走会转向目标，互动由你操作。",
+    "ru": "Выключено. При автоматическом перемещении персонаж поворачивается к цели, а взаимодействие выполняете вы.",
+    "th": "ปิด เมื่อเดินอัตโนมัติถึงเป้าหมาย ตัวละครจะหันไปหาแล้วให้คุณโต้ตอบเอง",
+    "pt": "Desativada. A caminhada automática vira para o alvo e deixa a interação com você."
+  },
   "Toggle autowalk": {
     "en": "Toggle autowalk",
     "ja": "自動移動の切り替え",

@@ -63,6 +63,8 @@ bool finish_walk(int map,Cell at,const GuideTarget& goal,Opened opened={},
    }
    const bool side_door=goal.goal.map_id==256&&goal.goal.entity_id==6&&goal.goal.cell==Cell{1,8,8};
    if(map==256&&(goal.goal.map_id==259||side_door)&&!opened.side_room){
+    if (phase.arrival_direction < 0 || !phase.arrival_interaction || phase.arrival_interaction->entity_id != 13)
+        return false;
     opened.side_room=true;at=phase.cells.back();continue;
    }
    if(map!=270||at.layer!=1||at.x<0||at.y<0||at.x>=width||at.y>=height)return false;
@@ -75,6 +77,10 @@ bool finish_walk(int map,Cell at,const GuideTarget& goal,Opened opened={},
    if(!rows||rows->arr[mask].s.size()!=width*height)return false;
    const auto code=std::string_view(alphabet).find(static_cast<char>(rows->arr[mask].s[at.y*width+at.x]));
    if(code==0||code>32||phase.cells.back()!=stand(static_cast<int>(code)))return false;
+   const int direction=static_cast<int>((code - 1) % 4);
+   constexpr int controls[]{21,19,20,23,24,26,25,22};
+   if (phase.arrival_direction != direction || !phase.arrival_interaction ||
+       phase.arrival_interaction->entity_id != controls[(code - 1) / 4]) return false;
    const auto& effect=facts.get(L"transitions")->arr[mask*32+code-1];
    mask=static_cast<int>(effect.get(L"after")->n);
    at=phase.cells.back();

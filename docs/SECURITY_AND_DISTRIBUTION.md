@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 27 door continuation and automatic interaction
+
+The shared DLL has 22,122,496 bytes and SHA-256
+`2c5090a029f0e9ef08d64fbe636e721eb1ab62002200b55f895ad8138bfb46f3`.
+The native Autowalk, six-game route replay, transition and Fire-Powered
+Ship checks passed. The ship replay passed 1,471 assertions and 2,949
+route legs. The build matched 73 resources and checked 9,237 native names.
+The isolated smoke test resolved 47 exports.
+
+Defender definitions `1.463.500.0` reported no threats on the 22 exact
+staged files. The bytes were unchanged after scanning. Windows denied
+the scanner exclusion query, and no signing certificate was available.
+The installer verified all 22 installed files in each of the six Steam
+games and preserved 138 protected file states. Receipts are in
+`build_check/autowalk-interact-20261127`. The previous source checkpoint
+for the FFV scene update is `729e37a`.
+
 ## November 27 FFV scene timing and Magnet
 
 The focused candidate has 22,111,744 bytes and SHA-256

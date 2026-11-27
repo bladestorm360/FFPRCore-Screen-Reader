@@ -1,5 +1,61 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 27 continuation through doors
+
+Karnak Castle’s automatic doors can enter and leave the native Gimmick
+state on the same map while a route still has several turns to go. This
+previously canceled autowalk. The matching binaries for all six games
+request that state from `EventProcedure.EventOpenTrigger`. FFIV–VI also
+have script-open doors identified by the navigation bake. The bake saves
+the script asset from the same row as the already verified contact and
+collider changes. The script hook compares the asset with that floor’s
+bounded door list before the native event starts.
+
+Autowalk pauses only after one of those calls actually requests the native
+door phase. It keeps the selected destination and releases movement during
+the animation. On return to the same map, the field observer invalidates
+the old geometry before marking the door complete. The regular input
+owner waits for the native controller and final placement, then requests
+one route from the current position. Existing expected-map continuation
+takes over whenever a real map transition starts. Manual input, battle,
+party changes and menus retain their stop behavior.
+
+The native fixture covers the stock and scripted door sources, a door
+with no state change, the wait for controller ownership and final
+placement, one replan for the original destination, and an unrelated
+script. Karnak Castle gameplay confirmation remains pending.
+
+## November 27 facing and automatic interaction
+
+Autowalk uses the planned cardinal heading after the final native move
+finishes. The Fire-Powered Ship control prefixes previously put their heading
+only in localized guidance. The route now carries the heading and the
+control's native entity ID, type and cell through the same follower.
+The side-room unlock uses its verified normal interaction approach.
+
+The independent Auto-interact preference is saved under Navigation and
+defaults off. With it enabled, selected ordinary NPCs, chests and objects
+can use one native confirm at their planned approach. The verified ship
+switch prerequisites can do the same. A fresh native interactive search
+must occur after the turn. The current observer, heading, actionable
+target, ID, tile, layer and any available selected live identity must match.
+Manual input and the navigation stop key have priority. The wait ends
+after a quarter-second if the native target never matches.
+
+The field owner releases movement and retires the route before calling
+`FieldPlayer.TakeAction`. Native keyboard and touch paths call the same
+method in the installed titles. FFIII's keyboard path calls it from the
+field controller's callback. Each interaction retains the game's usual
+dialogue, scripts and world changes. The player can request the next leg
+after the field is ready. Walk-on exits and other manual route actions keep
+their own control rules.
+
+The offline checks exercise zero-step facing, post-turn native searches,
+same-ID impostors, a different observer and layer, the stop key, manual
+input, native interaction veto and one action per arrival. The full ship
+route replay checks the authored headings and entity IDs while retaining
+all forward and return trips. In-game playback remains to confirm.
+
 ## November 27 manual route readout
 
 The shared Navigation menu saves the full readout switch, the chunk size
