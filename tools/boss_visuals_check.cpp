@@ -459,9 +459,9 @@ void check_lord_swaps()
     fixture::title = Id::FF4;
     fOldUnits.off_ = offsetof(Function, before);
     fNewUnits.off_ = offsetof(Function, after);
-    fLordStatus.off_ = offsetof(Manager, status);
-    fLordStatusInfo.off_ = offsetof(Status, info);
-    fLordEnemies.off_ = offsetof(StatusInfo, enemies);
+    fSwapStatus.off_ = offsetof(Manager, status);
+    fSwapStatusInfo.off_ = offsetof(Status, info);
+    fSwapEnemies.off_ = offsetof(StatusInfo, enemies);
     o_start_end = &complete_swap;
     fn.before = &targets;
     fn.after = &lord_party;
@@ -503,7 +503,7 @@ void check_lord_swaps()
     lord_drawn = false;
     d_start_end(&fn, method_info);
     for (int frames = 0; frames < allowed_frames; ++frames) tick_lord();
-    expect(spoken == begin && !lord_step && !lord_read_task, "A hidden replacement has a finite read budget");
+    expect(spoken == begin && !lord_step && !replacement_read_task, "A hidden replacement has a finite read budget");
 
     lord_drawn = true;
     d_start_end(&fn, method_info);
@@ -517,6 +517,64 @@ void check_lord_swaps()
     tick_lord();
     expect(spoken == begin && !lord_step, "Battle teardown cancels the deferred reveal");
     expect(forwarded, "Replacement speech stays queued after native swap completion");
+}
+
+void check_liquid_flame()
+{
+    using namespace fixture;
+    title = Id::FF5;
+    constexpr struct Form { int party, monster, asset; const wchar_t* cue; } forms[] = {
+        {445, 290, 253, L"BossVisual.FlamePerson"},
+        {654, 291, 254, L"BossVisual.FlameHand"},
+        {655, 292, 255, L"BossVisual.FlameVortex"},
+    };
+    open();
+    for (const auto& before : forms) for (const auto& after : forms) {
+        master = {before.monster, before.asset};
+        lord_master = {after.monster, after.asset};
+        fn.value1 = after.party;
+        fn.value2 = 1;
+        fn.value3 = 0;
+        const int begin = spoken;
+        // The native flashing phase can still own the old body when StartEnd
+        // begins. Even the next field observation can precede the camera draw.
+        outgoing_active = true;
+        lord_drawn = false;
+        finish_mesh = false;
+        d_start_end(&fn, method_info);
+        expect(finish_mesh && spoken == begin, "Liquid Flame stays silent through the native finish callback");
+        if (before.monster == after.monster) {
+            expect(!lord_step, "Reapplying the same Liquid Flame form cannot queue a cue");
+            continue;
+        }
+        expect(lord_step && allowed_frames == 4, "Every real Liquid Flame swap arms the bounded ready-body check");
+        tick_lord();
+        expect(spoken == begin && lord_step, "An undrawn Liquid Flame form cannot speak");
+        outgoing_active = false;
+        lord_drawn = true;
+        tick_lord();
+        tick_lord();
+        expect(spoken == begin + 1 && last == after.cue && !lord_step,
+               "Every ordered change speaks exactly one description of the revealed form");
+    }
+
+    const int begin = spoken;
+    master = {290, 253};
+    lord_master = {291, 254};
+    fn.value1 = 654;
+    d_start_end(&fn, method_info);
+    lord_info.enemies = &targets;
+    tick_lord();
+    expect(spoken == begin && !lord_step, "A different live unit cannot publish the Liquid Flame cue");
+    lord_info.enemies = &lord_party;
+    visual_descriptions = false;
+    d_start_end(&fn, method_info);
+    expect(spoken == begin && !lord_step, "Visual descriptions off prevents Liquid Flame speech");
+    visual_descriptions = true;
+    d_start_end(&fn, method_info);
+    close();
+    tick_lord();
+    expect(spoken == begin && !lord_step && forwarded, "Battle teardown cancels Liquid Flame speech");
 }
 
 void check_neo_reveal()
@@ -609,6 +667,7 @@ int main()
     check_bahamut_forms(iv);
     check_bahamut_summon(iv);
     check_lord_swaps();
+    check_liquid_flame();
     check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
     return failures?1:0;

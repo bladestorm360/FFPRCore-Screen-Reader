@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 27 FFV Liquid Flame.** The humanoid, hand and vortex cues now
+wait for the exact incoming body to draw after the native swap. All six
+ordered changes passed offline. Installed in FFV, with gameplay timing
+still to confirm. [Narration evidence](docs/re/BOSS_VISUALS_20261112.md#november-27-ffv-liquid-flame-transformations)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-27-ffv-liquid-flame-narration).
+
 **November 27 automatic route refresh.** The owner confirmed ordinary
 next-chunk speech. Pathfinder also refreshes on the ready return from
 battle, a verified same-floor interaction, or a blocked walking attempt.

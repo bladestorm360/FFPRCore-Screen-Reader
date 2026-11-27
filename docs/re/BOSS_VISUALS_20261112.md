@@ -1,5 +1,27 @@
 # Boss animation speech in FFIV, FFV and FFVI
 
+## November 27 FFV Liquid Flame transformations
+
+Liquid Flame's three counter paths use the same native party replacement
+function. Abilities 619, 620 and 621 lead to the humanoid (party 445,
+enemy 290, art 253), the hand (654, 291, art 254), and the vortex (655,
+292, art 255). Every form can change into either of the other two.
+
+The descriptions already identified the three incoming shapes in all
+twelve languages. The FFV observer previously decided whether to speak
+before the native callback finalized the replacement. During that point
+the flashing sequence can still show the outgoing body or leave the new
+one waiting for its first draw. FFV now uses the existing post-completion
+observer. It checks the current enemy list for the exact incoming unit
+and queues the description only when its body is drawn. The observation
+can run for up to four frames and retires at battle teardown or when
+Visual descriptions is turned off. It retains an identity and a cue key.
+
+The offline playback check covers all six ordered changes, all three
+same-form cases, late drawing, a different roster, teardown, and the
+setting off. The available Steam logs show the observer installed.
+Gameplay confirmation of spoken timing is pending.
+
 ## November 24 FFIV Leviathan windup
 
 The owner's FFIV log reads the attack name at `160476.812` and `160604.968`.

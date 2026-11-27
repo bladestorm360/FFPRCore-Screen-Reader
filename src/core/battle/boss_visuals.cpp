@@ -68,12 +68,12 @@ ref::Class kPaintMesh{"Last.Battle", "EntityMeshRenderer", game::kFF6};
 ref::Method mSetFloat{kPaintMesh, "SetFloat", 2};
 ref::Class kPlugManager{"Last.Battle", "BattlePlugManager", game::kFF5 | game::kFF6};
 ref::Method mPlugInstance{kPlugManager, "Instance", 0}, mEnemyUnits{kPlugManager, "GetEnemyUnits", 0};
-ref::Class kLordPlugManager{"Last.Battle", "BattlePlugManager", game::kFF4};
-ref::Field fLordStatus{kLordPlugManager, "<BattleStatusControl>k__BackingField"};
-ref::Class kLordStatus{"Last.Battle", "BattleStatusControl", game::kFF4};
-ref::Field fLordStatusInfo{kLordStatus, "<BattleStatusControlInfo>k__BackingField"};
-ref::Class kLordStatusInfo{"Last.Battle", "BattleStatusControlInfo", game::kFF4};
-ref::Field fLordEnemies{kLordStatusInfo, "battleEnemyDatas"};
+ref::Class kSwapPlugManager{"Last.Battle", "BattlePlugManager", kSpriteGames};
+ref::Field fSwapStatus{kSwapPlugManager, "<BattleStatusControl>k__BackingField"};
+ref::Class kSwapStatus{"Last.Battle", "BattleStatusControl", kSpriteGames};
+ref::Field fSwapStatusInfo{kSwapStatus, "<BattleStatusControlInfo>k__BackingField"};
+ref::Class kSwapStatusInfo{"Last.Battle", "BattleStatusControlInfo", kSpriteGames};
+ref::Field fSwapEnemies{kSwapStatusInfo, "battleEnemyDatas"};
 
 // These are identity tokens for native-owned objects. The only dereferences
 // happen inside a native callback using its current owner. No worker or frame
@@ -85,19 +85,19 @@ bool ready = false;
 int painting_asset = 0;
 bool sandworm_moved = false;
 bool neo_exdeath_described = false;
-int lord_read_task = 0;
+int replacement_read_task = 0;
 
-void cancel_lord_read()
+void cancel_replacement_read()
 {
-    if (lord_read_task) frame::cancel(lord_read_task);
-    lord_read_task = 0;
+    if (replacement_read_task) frame::cancel(replacement_read_task);
+    replacement_read_task = 0;
 }
 
 void close()
 {
     ready = false;
     pending = 0;
-    cancel_lord_read();
+    cancel_replacement_read();
 }
 
 void open()
@@ -259,21 +259,21 @@ void commit_sprite(void* animator, const void* mi, Callback original)
 void d_commit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_commit_sprite); }
 void d_exit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_exit_sprite); }
 
-void observe_lord_reveal(uintptr_t expected_unit, const wchar_t* key)
+void observe_replacement_reveal(uintptr_t expected_unit, const wchar_t* key)
 {
     if (!ui::prefs::visual_descriptions_enabled()) return;
-    cancel_lord_read();
+    cancel_replacement_read();
     // StartEnd queues destruction of the old body. Reacquire the replacement
     // from the current status list after the renderer has had a frame to draw.
     // The deferred check owns only an identity token, never a native pointer.
     constexpr int max_frames = 4;
-    lord_read_task = frame::every_frame([expected_unit, key, remaining = max_frames]() mutable {
-        const bool finished = hooks::guarded_r("BossVisual.LordVisible", true, [&] {
+    replacement_read_task = frame::every_frame([expected_unit, key, remaining = max_frames]() mutable {
+        const bool finished = hooks::guarded_r("BossVisual.ReplacementVisible", true, [&] {
             if (!observe() || !ui::prefs::visual_descriptions_enabled()) return true;
-            auto* manager = il2cpp::read_static_ptr(kLordPlugManager.get(), "instance");
-            auto* status = ref::rd<void*>(manager, fLordStatus);
-            auto* info = ref::rd<void*>(status, fLordStatusInfo);
-            auto* enemies = ref::rd<void*>(info, fLordEnemies);
+            auto* manager = il2cpp::read_static_ptr(kSwapPlugManager.get(), "instance");
+            auto* status = ref::rd<void*>(manager, fSwapStatus);
+            auto* info = ref::rd<void*>(status, fSwapStatusInfo);
+            auto* enemies = ref::rd<void*>(info, fSwapEnemies);
             if (unity::list_count(enemies) != 1) return true;
             auto* unit = unity::list_at(enemies, 0);
             if (token(unit) != expected_unit) return true;
@@ -282,15 +282,15 @@ void observe_lord_reveal(uintptr_t expected_unit, const wchar_t* key)
             return true;
         });
         if (!finished && --remaining > 0) return true;
-        lord_read_task = 0;
+        replacement_read_task = 0;
         return false;
-    }, "BossVisual.LordVisible", max_frames);
+    }, "BossVisual.ReplacementVisible", max_frames);
 }
 
 void d_start_end(void* self, const void* mi)
 {
     const wchar_t* key = nullptr;
-    uintptr_t lord = 0;
+    uintptr_t incoming = 0;
     if (observe()) hooks::guarded("BossVisual.PartyIdentity", [&] {
         const int party = ref::rd<int32_t>(self, fValue1);
         if (party != 445 && party != 654 && party != 655 && (party < 540 || party > 542)) return;
@@ -299,17 +299,12 @@ void d_start_end(void* self, const void* mi)
         if (unity::array_length(before) != 1 || unity::array_length(after) != 1) return;
         auto* old_unit = unity::array_at(before, 0);
         auto* new_unit = unity::array_at(after, 0);
-        const auto* candidate = replacement(game::current(), party, monster_id(old_unit), monster_id(new_unit));
-        if (candidate && game::is(game::Id::FF4)) {
-            key = candidate;
-            lord = token(new_unit);
-        } else if (candidate && !displayed::container_visible(entity_of(old_unit)) &&
-            visible_body(entity_of(new_unit))) key = candidate;
+        key = replacement(game::current(), party, monster_id(old_unit), monster_id(new_unit));
+        if (key) incoming = token(new_unit);
     });
     o_start_end(self, mi);
     if (key && observe()) hooks::guarded("BossVisual.PartyShown", [&] {
-        if (lord) observe_lord_reveal(lord, key);
-        else speak(key);
+        observe_replacement_reveal(incoming, key);
     });
 }
 

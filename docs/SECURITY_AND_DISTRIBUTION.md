@@ -1,5 +1,16 @@
 # Build and distribution security
 
+## November 27 FFV Liquid Flame narration
+
+The installed FFV DLL has 22,080,512 bytes and SHA-256
+`b36bbe2da18cae96fad5587e9608003ce014625d806bcbd5d0f5a69b48da8b7c`.
+The boss visual, battle entry and action effect checks passed. The build
+verified 73 embedded resources and the isolated load resolved 47 exports.
+Defender reported no threats on the 22 exact payload files. Windows denied
+exclusion inspection. Installed hashes, 138 protected file states and the
+other five games' payloads matched the expected values. Receipts are in
+`build_check/liquid-flame-20261127`. Prior build recovery uses `ab324dd`.
+
 ## November 27 automatic route refresh
 
 All six games use the verified 22,080,512-byte DLL with SHA-256
