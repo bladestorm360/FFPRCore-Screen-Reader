@@ -1,5 +1,12 @@
 # Native FFPR durable memory
 
+**November 27 FFV boss animation audit.** The audit added cues for Siren's
+restoration, Iron Claw, Jura Aevis, the Gargoyle revival and Dragon Flower
+appearances. The final deployment retains all Liquid Flame cues. Offline
+checks and installed hashes passed. Atomos's dragging animation remains an
+open timing gap. [Audit](docs/re/BOSS_VISUALS_20261112.md#november-27-ffv-boss-animation-audit)
+and [delivery](docs/SECURITY_AND_DISTRIBUTION.md#november-27-ffv-boss-animation-audit).
+
 **November 27 FFV Liquid Flame.** The humanoid, hand and vortex cues now
 wait for the exact incoming body to draw after the native swap. All six
 ordered changes passed offline. Installed in FFV, with gameplay timing

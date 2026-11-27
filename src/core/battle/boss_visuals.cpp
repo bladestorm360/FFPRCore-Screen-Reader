@@ -23,6 +23,9 @@ ref::Field fDeformedMonster{kDeformation, "monster"};
 ref::Class kReplacement{"Last.Battle.Function", "BattleFunction37", kSpriteGames};
 ref::Method mStartEnd{kReplacement, "StartEnd", 0};
 ref::Field fOldUnits{kReplacement, "beforeUnits"}, fNewUnits{kReplacement, "afterUnits"};
+ref::Class kFlowerSummon{"Last.Battle.Function", "BattleFunction20FF5", game::kFF5};
+ref::Method mFlowerPlayedEnd{kFlowerSummon, "IsPlayedEnd", 0};
+ref::Field fSummonedMonster{kFlowerSummon, "monster"}, fSummonedSlot{kFlowerSummon, "uniqueId"};
 ref::Class kFunction{"Last.Battle", "BattleBaseFunction", kSpriteGames};
 ref::Field fAct{kFunction, "<battleActData>k__BackingField"};
 ref::Field fValue1{kFunction, "<Value1>k__BackingField"}, fValue2{kFunction, "<Value2>k__BackingField"};
@@ -40,6 +43,7 @@ ref::Class kInfo{"Last.Battle", "BattleUnitDataInfo", kVisualGames};
 ref::Field fEntity{kInfo, "<BattleSpriteEntity>k__BackingField"};
 ref::Class kEnemy{"Last.Battle", "BattleEnemyData", kSpriteGames};
 ref::Field fMaster{kEnemy, "<MonsterMaster>k__BackingField"};
+ref::Field fEnemySlot{kEnemy, "<UniqueId>k__BackingField"};
 ref::Class kMonster{"Last.Data.Master", "Monster", kSpriteGames};
 ref::Method mId{kMonster, "get_Id", 0}, mAsset{kMonster, "get_MonsterAssetId", 0};
 ref::Class kSprite{"Last.Battle", "BattleSpriteEntity", kVisualGames};
@@ -86,6 +90,7 @@ int painting_asset = 0;
 bool sandworm_moved = false;
 bool neo_exdeath_described = false;
 int replacement_read_task = 0;
+std::array<uintptr_t, 5> presented_flowers;
 
 void cancel_replacement_read()
 {
@@ -106,6 +111,7 @@ void open()
     painting_asset = 0;
     sandworm_moved = false;
     neo_exdeath_described = false;
+    presented_flowers = {};
     ready = true;
 }
 
@@ -259,7 +265,15 @@ void commit_sprite(void* animator, const void* mi, Callback original)
 void d_commit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_commit_sprite); }
 void d_exit_sprite(void* self, const void* mi) { commit_sprite(self, mi, o_exit_sprite); }
 
-void observe_replacement_reveal(uintptr_t expected_unit, const wchar_t* key)
+void* current_enemy_list()
+{
+    auto* manager = il2cpp::read_static_ptr(kSwapPlugManager.get(), "instance");
+    auto* status = ref::rd<void*>(manager, fSwapStatus);
+    auto* info = ref::rd<void*>(status, fSwapStatusInfo);
+    return ref::rd<void*>(info, fSwapEnemies);
+}
+
+void observe_replacement_reveal(std::array<uintptr_t, 2> expected, const wchar_t* key)
 {
     if (!ui::prefs::visual_descriptions_enabled()) return;
     cancel_replacement_read();
@@ -267,17 +281,19 @@ void observe_replacement_reveal(uintptr_t expected_unit, const wchar_t* key)
     // from the current status list after the renderer has had a frame to draw.
     // The deferred check owns only an identity token, never a native pointer.
     constexpr int max_frames = 4;
-    replacement_read_task = frame::every_frame([expected_unit, key, remaining = max_frames]() mutable {
+    replacement_read_task = frame::every_frame([expected, key, remaining = max_frames]() mutable {
         const bool finished = hooks::guarded_r("BossVisual.ReplacementVisible", true, [&] {
             if (!observe() || !ui::prefs::visual_descriptions_enabled()) return true;
-            auto* manager = il2cpp::read_static_ptr(kSwapPlugManager.get(), "instance");
-            auto* status = ref::rd<void*>(manager, fSwapStatus);
-            auto* info = ref::rd<void*>(status, fSwapStatusInfo);
-            auto* enemies = ref::rd<void*>(info, fSwapEnemies);
-            if (unity::list_count(enemies) != 1) return true;
-            auto* unit = unity::list_at(enemies, 0);
-            if (token(unit) != expected_unit) return true;
-            if (!visible_body(entity_of(unit))) return false;
+            auto* enemies = current_enemy_list();
+            const int count = expected[1] ? 2 : 1;
+            if (unity::list_count(enemies) != count) return true;
+            bool drawn = true;
+            for (int i = 0; i < count; ++i) {
+                auto* unit = unity::list_at(enemies, i);
+                if (token(unit) != expected[i]) return true;
+                drawn &= visible_body(entity_of(unit));
+            }
+            if (!drawn) return false;
             speak(key);
             return true;
         });
@@ -290,22 +306,64 @@ void observe_replacement_reveal(uintptr_t expected_unit, const wchar_t* key)
 void d_start_end(void* self, const void* mi)
 {
     const wchar_t* key = nullptr;
-    uintptr_t incoming = 0;
+    std::array<uintptr_t, 2> incoming{};
     if (observe()) hooks::guarded("BossVisual.PartyIdentity", [&] {
         const int party = ref::rd<int32_t>(self, fValue1);
-        if (party != 445 && party != 654 && party != 655 && (party < 540 || party > 542)) return;
+        if (party != 445 && party != 519 && party != 601 && party != 654 && party != 655 && (party < 540 || party > 542)) return;
         auto* before = ref::rd<void*>(self, fOldUnits);
         auto* after = ref::rd<void*>(self, fNewUnits);
+        if (party == 601 && game::is(game::Id::FF5) && unity::array_length(after) == 2) {
+            // The surviving Gargoyle invokes this exact party only after
+            // losing its partner. Both restored bodies must actually appear.
+            auto* first = unity::array_at(after, 0);
+            auto* second = unity::array_at(after, 1);
+            if (first != second && monster_id(first) == 345 && monster_id(second) == 345) {
+                key = L"BossVisual.GargoylesRise";
+                incoming = {token(first), token(second)};
+            }
+            return;
+        }
         if (unity::array_length(before) != 1 || unity::array_length(after) != 1) return;
         auto* old_unit = unity::array_at(before, 0);
         auto* new_unit = unity::array_at(after, 0);
         key = replacement(game::current(), party, monster_id(old_unit), monster_id(new_unit));
-        if (key) incoming = token(new_unit);
+        if (key) incoming = {token(new_unit), 0};
     });
     o_start_end(self, mi);
     if (key && observe()) hooks::guarded("BossVisual.PartyShown", [&] {
         observe_replacement_reveal(incoming, key);
     });
+}
+
+using PlayedEnd = bool(*)(void*, const void*);
+PlayedEnd o_flower_played_end;
+
+bool d_flower_played_end(void* self, const void* mi)
+{
+    const bool finished = o_flower_played_end(self, mi);
+    if (!finished || !observe() || !ui::prefs::visual_descriptions_enabled()) return finished;
+    hooks::guarded("BossVisual.FlowerSummoned", [&] {
+        // The native completion can also return true without creating an
+        // enemy. Require its actual slot and a drawn Flower in the live list.
+        const int slot = ref::rd<int32_t>(self, fSummonedSlot);
+        if (slot <= 0) return;
+        const int id = ref::call<int32_t>(mId, ref::rd<void*>(self, fSummonedMonster));
+        if (id < 320 || id > 324) return;
+        auto* enemies = current_enemy_list();
+        const int count = unity::list_count(enemies);
+        if (count < 1 || count > 9) return;
+        for (int i = 0; i < count; ++i) {
+            auto* unit = unity::list_at(enemies, i);
+            if (ref::rd<int32_t>(unit, fEnemySlot) != slot || monster_id(unit) != id) continue;
+            auto& presented = presented_flowers[id - 320];
+            if (presented != token(unit) && visible_body(entity_of(unit))) {
+                presented = token(unit);
+                speak(L"BossVisual.DragonFlower");
+            }
+            return;
+        }
+    });
+    return finished;
 }
 
 void hide_change(void* self, const void* mi, Callback original, bool withdrawing)
@@ -478,7 +536,8 @@ int install()
     const int deform = hooks::attach(mCreateDeformation, &d_create_deformation, &o_create_deformation);
     const int sandworm = hooks::attach(mSandwormMove, &d_sandworm_move, &o_sandworm_move);
     return shared + exit + deform + sandworm + hooks::attach(mSandwormReveal, &d_sandworm_reveal, &o_sandworm_reveal) +
-           hooks::attach(mNeoMove, &d_neo_move, &o_neo_move);
+           hooks::attach(mNeoMove, &d_neo_move, &o_neo_move) +
+           hooks::attach(mFlowerPlayedEnd, &d_flower_played_end, &o_flower_played_end);
 }
 core::Install registration{"Battle.BossVisuals", &install, 117};
 }

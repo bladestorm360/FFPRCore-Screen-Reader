@@ -25,13 +25,15 @@ struct Animator;
 struct State { Animator* animator; };
 struct Entity { Mesh* body; State* state; };
 struct Animator { Entity* entity; void* staged; };
-struct Unit { Entity* entity; Monster* master; };
-struct Targets { int length; void* unit; };
+struct Unit { Entity* entity; Monster* master; int slot = 0; };
+struct Targets { int length; void* unit; void* other = nullptr; };
 struct Act { Targets* targets; Targets* abilities = nullptr; };
 struct Function { Act* act; int value1, value2, value3; Monster* monster; Targets* before; Targets* after; };
 struct StatusInfo { Targets* enemies; };
 struct Status { StatusInfo* info; };
 struct Manager { Status* status; };
+struct FlowerSummon { Monster* monster; int slot; };
+bool flower_finished = false;
 
 int previous_art, next_art, shadow;
 Mesh mesh{&previous_art, &mesh};
@@ -91,6 +93,12 @@ void complete_swap(void* self, const void* mi)
     forwarded &= self == &fn && mi == method_info;
     finish_mesh = true;
 }
+bool finish_flower(void*, const void* mi)
+{
+    forwarded &= mi == method_info;
+    finish_mesh = flower_finished;
+    return flower_finished;
+}
 void tick_lord()
 {
     if (lord_step && !lord_step()) lord_step = {};
@@ -143,7 +151,7 @@ void* read_static_ptr(Class*, const char*) { return &fixture::lord_manager; }
 }
 namespace unity {
 int array_length(void* array) { return array ? static_cast<fixture::Targets*>(array)->length : 0; }
-void* array_at(void* array, int) { return static_cast<fixture::Targets*>(array)->unit; }
+void* array_at(void* array, int index) { return index == 0 ? static_cast<fixture::Targets*>(array)->unit : static_cast<fixture::Targets*>(array)->other; }
 int list_count(void* list) { return array_length(list); }
 void* list_at(void* list, int index) { return array_at(list, index); }
 void* transform(void*) { return nullptr; }
@@ -577,6 +585,117 @@ void check_liquid_flame()
     expect(spoken == begin && !lord_step && forwarded, "Battle teardown cancels Liquid Flame speech");
 }
 
+void check_ff5_audit_forms(const json::Value& catalog)
+{
+    using namespace fixture;
+    title = Id::FF5;
+    open();
+    constexpr struct Change { int before, before_art, monster, art, mode, effect; const wchar_t* cue; } changes[] = {
+        {286, 298, 285, 250, 0, 101, L"BossVisual.SirenRestored"},
+        {362, 65, 361, 227, 1, 103, L"BossVisual.IronClawForm"},
+    };
+    for (const auto& change : changes) {
+        check_key(catalog, change.cue);
+        for (int owner : {change.before, change.monster}) {
+            master = {owner, change.before_art};
+            open_wings = {change.monster, change.art};
+            fn.value1 = change.monster;
+            fn.value2 = change.effect;
+            fn.value3 = change.mode;
+            incoming_art = &next_art;
+            mesh.sprite = &previous_art;
+            const int begin = spoken;
+            finish_mesh = false;
+            fixture::renderer_visible = false;
+            d_create_deformation(&fn, method_info);
+            d_exit_sprite(&animator, method_info);
+            expect(spoken == begin, "An audited FFV form cannot speak before the body is drawn");
+            fixture::renderer_visible = true;
+            d_commit_sprite(&animator, method_info);
+            d_exit_sprite(&animator, method_info);
+            expect(spoken == begin + 1 && last == change.cue,
+                   "An audited FFV form speaks once with either native master update order");
+        }
+    }
+    expect(!deformation(Id::FF5,285,286,298,1,101), "Siren's undead change keeps its native form message");
+    expect(!deformation(Id::FF5,362,361,227,1,101)&&!deformation(Id::FF5,444,361,227,1,103),
+           "Only the exact Iron Claw transformation qualifies");
+
+    check_key(catalog, L"BossVisual.JuraAevisForm");
+    master = {377, 131};
+    lord_master = {355, 263};
+    fn.value1 = 519;
+    fn.value2 = fn.value3 = 0;
+    const int begin = spoken;
+    lord_drawn = false;
+    finish_mesh = false;
+    d_start_end(&fn, method_info);
+    tick_lord();
+    expect(finish_mesh && spoken == begin && lord_step, "Alte Roite's replacement waits for the dragon to draw");
+    lord_drawn = true;
+    tick_lord();
+    tick_lord();
+    expect(spoken == begin + 1 && last == L"BossVisual.JuraAevisForm" && !lord_step && forwarded,
+           "Alte Roite's visible Jura Aevis form queues one description after native completion");
+    close();
+}
+
+void check_ff5_returning_enemies(const json::Value& catalog)
+{
+    using namespace fixture;
+    title = Id::FF5;
+    check_key(catalog, L"BossVisual.GargoylesRise");
+    check_key(catalog, L"BossVisual.DragonFlower");
+    Targets pair{2, &unit, &lord_unit};
+    lord_info.enemies = &pair;
+    fn.after = &pair;
+    master = lord_master = {345, 244};
+    open();
+    const int begin = spoken;
+    fn.value1 = 601;
+    fixture::renderer_visible = true;
+    lord_drawn = false;
+    d_start_end(&fn, method_info);
+    tick_lord();
+    expect(spoken == begin && lord_step, "The restored Gargoyle pair waits for both bodies");
+    lord_drawn = true;
+    tick_lord();
+    tick_lord();
+    expect(spoken == begin + 1 && last == L"BossVisual.GargoylesRise",
+           "The two rendered Gargoyles produce one revival description");
+
+    fSummonedMonster.off_ = offsetof(FlowerSummon, monster);
+    fSummonedSlot.off_ = offsetof(FlowerSummon, slot);
+    fEnemySlot.off_ = offsetof(Unit, slot);
+    o_flower_played_end = &finish_flower;
+    master = {319, 270};
+    lord_master = {320, 271};
+    lord_unit.slot = 2;
+    FlowerSummon flower{&lord_master, 2};
+    flower_finished = false;
+    expect(!d_flower_played_end(&flower, method_info) && spoken == begin + 1,
+           "A native Flower animation in progress cannot speak");
+    flower_finished = true;
+    flower.slot = 0;
+    expect(d_flower_played_end(&flower, method_info) && spoken == begin + 1,
+           "A completed native no-slot result is not a visible summon");
+    flower.slot = 3;
+    d_flower_played_end(&flower, method_info);
+    expect(spoken == begin + 1, "Only the exact Flower slot can speak");
+    flower.slot = 2;
+    lord_drawn = false;
+    d_flower_played_end(&flower, method_info);
+    expect(spoken == begin + 1, "An undrawn Flower cannot speak");
+    lord_drawn = true;
+    d_flower_played_end(&flower, method_info);
+    d_flower_played_end(&flower, method_info);
+    expect(spoken == begin + 2 && last == L"BossVisual.DragonFlower" && forwarded,
+           "The Flower speaks once after visible native completion and preserves its result");
+    close();
+    lord_info.enemies = &lord_party;
+    fn.after = &lord_party;
+}
+
 void check_neo_reveal()
 {
     using namespace fixture;
@@ -668,6 +787,8 @@ int main()
     check_bahamut_summon(iv);
     check_lord_swaps();
     check_liquid_flame();
+    check_ff5_audit_forms(v);
+    check_ff5_returning_enemies(v);
     check_neo_reveal();
     std::printf("Boss visual form, native text and locale checks: %d failures\n",failures);
     return failures?1:0;

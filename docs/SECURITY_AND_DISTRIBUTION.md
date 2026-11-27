@@ -1,5 +1,18 @@
 # Build and distribution security
 
+## November 27 FFV boss animation audit
+
+The final FFV DLL has 22,087,168 bytes and SHA-256
+`53c59341520a931f750ca23122013071f882a6e263448bb1c726f6577c38aa66`.
+The boss visual, battle entry and action effect checks passed with the
+five added cues and all Liquid Flame cases. The build verified 73 embedded
+resources and the isolated load resolved all 47 exports. Defender
+reported no threats on the 22 exact payload files. Windows denied
+exclusion inspection. The 22 installed hashes matched the scan, and the
+before-and-after inventory preserved 138 protected file states and the
+other five games' payloads. Receipts are in `build_check/ff5-boss-audit-20261127`.
+The Liquid Flame-only checkpoint `2b78f7e` provides the prior FFV build.
+
 ## November 27 FFV Liquid Flame narration
 
 The installed FFV DLL has 22,080,512 bytes and SHA-256

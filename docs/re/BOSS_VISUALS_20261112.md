@@ -22,6 +22,50 @@ same-form cases, late drawing, a different roster, teardown, and the
 setting off. The available Steam logs show the observer installed.
 Gameplay confirmation of spoken timing is pending.
 
+## November 27 FFV boss animation audit
+
+After installing the Liquid Flame fix, the follow-up joined all 383
+monster AI scripts, 42 encounter scripts and the common battle script
+with the ability, function, monster and formation masters. It checked
+2,816 field scripts for boss calls and found 51 calls to 49 formations.
+Those formations, boss-score variants and authored encounter assignments
+formed a 120-formation review pool out of the 658 formation rows. This
+pool includes repeat, optional and scripted variants.
+
+The review followed multi-ability counters as well as ordinary actions.
+It checked 67 sprite actions, 23 party replacements, 36 monster swaps,
+44 enemy additions, and the encounter scripts' bespoke movement and
+effects. It compared changes against the reviewed art and the native
+English messages. The shipped cues remain localized in all twelve
+languages.
+
+| Added cue | Verified trigger and presentation |
+| --- | --- |
+| Siren's blond hair and blue dress return. | Ability 611 commits art 250 after her undead phase. Her earlier undead transformation retains its native line. |
+| The soldier changes into a huge steel claw on two legs. | Ability 819 uses effect 103 to reveal Iron Claw, art 227. Native dialogue identifies the bounty hunter. The cue describes the visible body after the sprite commits. |
+| The old man flickers into a blue dragon with pale green wings. | Alte Roite's ability 639 replaces him with Jura Aevis, art 263. His native text introduces the change. The cue waits for the actual new body. |
+| The fallen Gargoyle flickers back into view beside its partner. | The survivor uses ability 822 and party 601. Both restored bodies must draw before the one revival cue. |
+| A blue flower appears beside the Dragon Pod. | The FFV add-enemy action finishes its appearance animation. The observer checks the actual live slot, the matching Flower identity and the drawn body. A failed add or repeated completion stays quiet. |
+
+Wing Raptor, Sandworm's resurfacing and the Neo Exdeath body reveal
+already have cues. Native messages cover Twintania's charge,
+Archeoaevis's revival and the Void engulfing Exdeath. The additional
+Archeoaevis, Carbuncle, Melusine and Bahamut mode rows retain the same
+sprite. Wendigo and Pantera's selector updates change eligibility and
+health on the existing roster. They provide no basis for revealing the
+real target in narration. Timers and ordinary named attacks keep their
+native feedback.
+
+Atomos remains a documented gap. Its drag is real visible party movement,
+owned by `sc_b_0115` and `Current.AtmosAct`, separate from the named
+Wormhole action. Its repeated native loop does not yet provide a verified
+one-shot presentation boundary for the narration observer.
+
+The production-detour fixture runs all five additions against their
+native timing, live roster and locale requirements, and retains all six
+Liquid Flame transition cases. Installed in FFV. Natural-play speech
+remains to confirm. [Delivery evidence](../SECURITY_AND_DISTRIBUTION.md#november-27-ffv-boss-animation-audit)
+
 ## November 24 FFIV Leviathan windup
 
 The owner's FFIV log reads the attack name at `160476.812` and `160604.968`.

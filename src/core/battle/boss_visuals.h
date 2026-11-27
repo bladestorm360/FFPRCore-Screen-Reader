@@ -71,18 +71,30 @@ constexpr const wchar_t* scripted_sprite(game::Id title, int owner, int mode, in
 
 constexpr const wchar_t* deformation(game::Id title, int owner, int monster, int asset, int mode, int effect)
 {
-    if (title != game::Id::FF5 || (owner != 281 && owner != 282) || effect != 101) return nullptr;
-    if (monster == 281 && asset == 245 && (mode == 0 || mode == 3)) return L"BossVisual.WingsOpen";
-    if (monster == 282 && asset == 246 && (mode == 1 || mode == 2)) return L"BossVisual.WingsClosed";
+    if (title != game::Id::FF5) return nullptr;
+    if ((owner == 281 || owner == 282) && effect == 101) {
+        if (monster == 281 && asset == 245 && (mode == 0 || mode == 3)) return L"BossVisual.WingsOpen";
+        if (monster == 282 && asset == 246 && (mode == 1 || mode == 2)) return L"BossVisual.WingsClosed";
+    }
+    // The native message identifies Siren's undead transformation. Her
+    // restoration has no matching message. Some actions already update the
+    // monster master before changing the renderer, so accept either owner ID.
+    if ((owner == 285 || owner == 286) && monster == 285 && asset == 250 && mode == 0 && effect == 101)
+        return L"BossVisual.SirenRestored";
+    if ((owner == 361 || owner == 362) && monster == 361 && asset == 227 && mode == 1 && effect == 103)
+        return L"BossVisual.IronClawForm";
     return nullptr;
 }
 
 constexpr const wchar_t* replacement(game::Id title, int party, int before, int after)
 {
-    if (title == game::Id::FF5 && before >= 290 && before <= 292 && before != after) {
-        if (party == 445 && after == 290) return L"BossVisual.FlamePerson";
-        if (party == 654 && after == 291) return L"BossVisual.FlameHand";
-        if (party == 655 && after == 292) return L"BossVisual.FlameVortex";
+    if (title == game::Id::FF5) {
+        if (party == 519 && before == 377 && after == 355) return L"BossVisual.JuraAevisForm";
+        if (before >= 290 && before <= 292 && before != after) {
+            if (party == 445 && after == 290) return L"BossVisual.FlamePerson";
+            if (party == 654 && after == 291) return L"BossVisual.FlameHand";
+            if (party == 655 && after == 292) return L"BossVisual.FlameVortex";
+        }
     }
     if (title == game::Id::FF4) {
         if (party == 540 && before == 228 && after == 227) return L"BossVisual.LordFire";
