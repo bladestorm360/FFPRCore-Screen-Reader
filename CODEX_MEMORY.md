@@ -1,5 +1,13 @@
 # Native FFPR durable memory
 
+**November 27 automatic route refresh.** The owner confirmed ordinary
+next-chunk speech. Pathfinder also refreshes on the ready return from
+battle, a verified same-floor interaction, or a blocked walking attempt.
+An overshoot stays silent and a held wall hit prompts once. Verified
+offline and installed in all six games. In-game confirmation of the new
+triggers is pending. [Behavior](docs/re/AUTOWALK.md#november-27-manual-route-readout)
+and [delivery evidence](docs/SECURITY_AND_DISTRIBUTION.md#november-27-automatic-route-refresh).
+
 **November 27 FFV whole-ship round trips.** The Thief’s Gloves pocket has a
 verified northbound current to the engine room. The replay covers all 26
 playable rooms, including return trips from all chests and the castle side.

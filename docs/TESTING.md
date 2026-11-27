@@ -2466,6 +2466,19 @@ Follow those directions with Automatically speak next leg of route off.
 Wait at the last tile, then use the directions key to get the next chunk.
 Repeat with the automatic setting on. The next chunk should be queued as you
 reach that tile. Change targets or leave the issued path during a chunk and
-check that automatic speech stops. Try a door between two floors and a
-switch that alters a passage. The route should never describe movement
-through a native action while that action is still pending.
+check that the old chunk does not advance. Try a door between two floors.
+
+Overshoot a turn by one tile. Expect silence for the detour. Walk into an
+obstacle and expect refreshed directions from that tile. Hold the direction
+against the same obstacle to check that the readout happens once.
+
+With automatic readout on, get a route and let a battle interrupt it.
+Dismiss the results. On return to the field, expect one fresh readout
+for that route without pressing Backslash or P. With Storyline selected,
+the readout should follow the current objective after the encounter.
+
+In FFV, follow directions to a Fire-Powered Ship passage switch and
+operate it. Expect the next directions after the same-floor action
+finishes, using the new platform layout and the tile where the party
+ends up. Turn automatic readout off and repeat either test to confirm
+that directions wait for the key.

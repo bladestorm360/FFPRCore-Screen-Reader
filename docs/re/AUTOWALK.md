@@ -18,14 +18,43 @@ incomplete chunk when those cells can be observed. The native movement
 input callback schedules a bounded position sample for that issued chunk.
 Verified progress to its end requests fresh directions for the same
 selected target. Menus, transition prefixes, battle entry and target
-changes retire old ownership. Automatic continuation uses queued
-speech.
+changes retire old walking instructions. Automatic continuation uses
+queued speech.
 
 Cross-floor continuation requires the observed route entry and a ready
-arrival on the expected map. Transfers with an unverified landing and
-manual actions that change the route in place can still be followed by
-another directions request. Availability of gameplay speech and the
-timing of movement observations need natural-play confirmation.
+arrival on the expected map. Battle entry keeps the manual route’s selected
+destination while retiring its old walking instructions. When native
+Player or Transportation state returns, the readout waits for field
+readiness and the placed player before planning once from that position.
+An ordinary target keeps its identity. Storyline reads the current objective
+again, allowing native battle progress to advance it. The return refresh
+also owns scripted battlefield-to-map handoffs.
+
+A spoken same-floor interaction, such as a Fire-Powered Ship switch,
+records its verified standing tile. Native event or gimmick entry at that
+tile and the subsequent same-map return trigger one refresh after the
+route and entity state have been invalidated. The new route uses the
+resulting collision and player position. A truncated chunk leaves future
+actions unarmed. Autowalk owns its existing separate behavior.
+
+Leaving a spoken chunk quietly retires its walking progress while keeping
+the destination available for correction. The existing movement observer
+checks a settled, unchanged on-foot pose after a cardinal input. One
+native edge query must deny that attempted step before the readout asks
+for directions again. The input attempt and pose own this check, so a
+held direction stays silent across reroutes. Releasing the control or
+moving to another edge admits a new attempt. The wall sound and its
+cooldown are independent of route speech. The same settled-movement
+sample retires the readout on arrival at a verified final route tile.
+
+The FFV Steam log shows the battle return to Player state and same-map
+Event and Gimmick returns. The native offline fixture verifies a single
+refresh, no reads during loading, the actual landing, and cancellation
+on title or with the setting off. Its movement replay covers a west
+overshoot, a separate blocked north move, releasing and retrying, and a
+stationary pose with an open edge. The ship route replay checks navigation
+through the changed switch layouts. Audible timing remains for gameplay
+confirmation.
 
 [Readout verification procedure](../TESTING.md#manual-route-readout)
 

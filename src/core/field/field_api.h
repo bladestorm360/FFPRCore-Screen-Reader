@@ -18,6 +18,9 @@ namespace field {
 // Current input-enabled controller from the native field owner (bounded list fallback).
 void* player_controller();
 
+// A failed or unavailable native collision query cannot prove an obstacle.
+bool confirm_blocked_move(void* player, unity::Vec3 destination);
+
 // Bounded capture over the published pathfinder All view. No new scene/database
 // scan. Native pointers stay here; output contains only owned values. 1 complete,
 // 0 continue next frame, -1 changed/invalid registry (caller discards the snapshot).

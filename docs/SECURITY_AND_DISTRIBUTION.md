@@ -1,5 +1,20 @@
 # Build and distribution security
 
+## November 27 automatic route refresh
+
+All six games use the verified 22,080,512-byte DLL with SHA-256
+`45922d1656a65c86be9d228e83acd4313a90c1db5ec39524a666d81f82674dc9`.
+The focused build passed the native input and route refresh replay,
+all-six browsing, the 1,471-assertion ship replay, 9,146 native names
+and 73 embedded resources. The isolated load resolved all 47 exports.
+Defender definitions `1.463.492.0` reported no threats on 22 exact
+payload files. Windows denied exclusion inspection. All 132 installed
+hashes matched the scan, and 138 protected file states matched the
+pre-install inventory. Receipts are in `build_check/route-refresh`.
+Previous FFV and other-game builds can be reproduced from `ce12132`
+and `57b936a`, respectively. Gameplay confirmation of the new triggers
+is pending.
+
 ## November 27 FFV whole-ship round trips
 
 The 22,069,248-byte FFV candidate has SHA-256

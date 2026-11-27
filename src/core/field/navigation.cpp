@@ -232,6 +232,20 @@ int current_map_id()
 
 bool native_position_walkable(void* pl, Vec3 position) { return position_walkable(pl, position); }
 
+bool confirm_blocked_move(void* player, Vec3 destination)
+{
+    return hooks::guarded_r("Field.ConfirmBlockedMove", false, [&] {
+        void* map = cache::get(r::kFieldMap);
+        void* controller = map ? ref::rd<void*>(map, r::fFieldController) : nullptr;
+        auto& method = r::mIsCanMoveToDestPosition;
+        void* fp = method.ptr();
+        if (!player || !controller || !fp) return false;
+        using CanMove = bool (*)(void*, void*, Vec3*, const void*);
+        timing::Scope measured(method.cls.name, timing::Kind::Native, method.name, reinterpret_cast<uintptr_t>(fp));
+        return !reinterpret_cast<CanMove>(fp)(controller, player, &destination, method.get());
+    });
+}
+
 #include "entity_cursor.inl"
 
 bool is_direction_near_map_exit(unity::Vec3 player_pos, unity::Vec3 dir, const std::vector<unity::Vec3>& exits)

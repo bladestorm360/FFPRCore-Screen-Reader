@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "map_transition.h"
+#include "route_readout.h"
 #include "../core.h"
 #include "../frame.h"
 #include "../hooks.h"
@@ -157,10 +158,12 @@ void check_map_transition()
 
     // Same map: no announcement
     if (current_map_id == g_last_announced_map_id && !g_needs_map_scan) {
-        if (g_script_refresh || g_gimmick_refresh ||
+        const bool action_return = g_script_refresh || g_gimmick_refresh;
+        if (action_return ||
             ::field::scanner::needs_scan(current_map_id)) ::field::request_rescan();
         g_script_refresh = false;
         g_gimmick_refresh = false;
+        route_readout::field_returned(action_return);
         return;
     }
 
@@ -174,6 +177,7 @@ void check_map_transition()
 
     events::fire(events::Kind::MapChanged);
     ::field::request_rescan();
+    route_readout::field_returned(false);
 
     std::wstring map_name = queries::text("MapNameResolver.GetCurrentMapName");
     if (map_name.empty() || map_name == T(L"Unknown"))
@@ -198,18 +202,20 @@ void d_ChangeState(void* self, int32_t state, const void* mi)
     } changing;
     const double started = frame::now();
     bool same_map_drop = false;
-    if (state == kStateEvent || state == kStateChangeMap) {
-        same_map_drop = hooks::guarded_r("MapTransition.TrapStart", false, [] {
+    const bool planned_gimmick = state == kStateGimmick && route_readout::expects_field_action();
+    if (state == kStateEvent || state == kStateChangeMap || planned_gimmick) {
+        same_map_drop = hooks::guarded_r("MapTransition.TrapStart", false, [state, planned_gimmick] {
             ::field::baked_route::Cell at;
             const int map_id = ::field::current_map_id();
-            return map_id > 0 && ::field::baked_nav::player_cell(::field::map_handle(),::field::player(),at) &&
-                ::field::baked_nav::note_trap_start(map_id,at);
+            if (map_id <= 0 || !::field::baked_nav::player_cell(::field::map_handle(),::field::player(),at)) return false;
+            if (state != kStateChangeMap) route_readout::field_action_started(map_id, at);
+            return !planned_gimmick && ::field::baked_nav::note_trap_start(map_id,at);
         });
     }
     // Walk-open doors and the Enterprise's carry animation can change
     // same-floor geometry/model ownership during Gimmick state.
     if (state == kStateEvent) g_script_refresh = true;
-    if (state == kStateGimmick && game::in(game::kFF4|game::kFF5|game::kFF6)) g_gimmick_refresh = true;
+    if (state == kStateGimmick && (planned_gimmick || game::in(game::kFF4|game::kFF5|game::kFF6))) g_gimmick_refresh = true;
     if (state == kStateChangeMap || same_map_drop) {
         events::fire(events::Kind::MapChanging);
         g_needs_map_scan = true;

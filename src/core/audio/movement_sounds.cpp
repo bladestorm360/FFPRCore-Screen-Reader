@@ -20,7 +20,9 @@
 #include "../log.h"
 #include "../refs.h"
 #include "../settings.h"
+#include "../system/system.h"
 #include "../unity.h"
+#include "../field/baked_nav.h"
 #include "../field/field_api.h"
 
 namespace ffpr::audio {
@@ -47,6 +49,9 @@ int g_same_position_count = 0;
 
 // Only one wall check at a time (no stacking while a direction is held).
 bool g_wall_check_pending = false;
+uint64_t g_movement_epoch = 0, g_direction_epoch = 0;
+int g_obstacle_direction = -1;
+bool g_tested_obstacle_edge = false;
 
 // Set by a wall check that saw no movement, so the footstep poll skips the coincident step.
 bool g_collision_detected_this_frame = false;
@@ -62,10 +67,58 @@ float distance(const unity::Vec3& a, const unity::Vec3& b)
     return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+constexpr float kInputThreshold = 0.1f;
 bool has_movement_input(unity::Vec2 axis)
 {
-    constexpr float kInputThreshold = 0.1f;
     return std::fabs(axis.x) > kInputThreshold || std::fabs(axis.y) > kInputThreshold;
+}
+
+int cardinal_direction(unity::Vec2 axis)
+{
+    constexpr int north = 0, east = 1, south = 2, west = 3;
+    const bool horizontal = std::fabs(axis.x) > kInputThreshold;
+    const bool vertical = std::fabs(axis.y) > kInputThreshold;
+    if (horizontal == vertical) return -1;
+    if (horizontal) return axis.x > 0 ? east : west;
+    return axis.y > 0 ? north : south;
+}
+
+void observe_direction(int direction)
+{
+    if (g_obstacle_direction == direction) return;
+    g_obstacle_direction = direction;
+    // A tap can release before the move settles. Its pending observation is
+    // still valid until a new direction attempt replaces it.
+    if (direction >= 0) {
+        ++g_direction_epoch;
+        g_tested_obstacle_edge = false;
+    }
+}
+
+void retire_movement_check()
+{
+    ++g_movement_epoch;
+    g_wall_check_pending = false;
+    observe_direction(-1);
+}
+
+void confirm_route_obstacle(void* observed_player, const unity::Vec3& origin, int direction,
+                            uint64_t direction_epoch, uint64_t route_token)
+{
+    namespace readout = fieldnav::route_readout;
+    if (!route_token || !readout::current(route_token) || direction_epoch != g_direction_epoch ||
+        direction < 0 || g_tested_obstacle_edge) return;
+    if (system::input_transition_blocked() || !system::is_field_navigation_ready() ||
+        menu_state::any_active() || queries::is("ModMenu.IsOpen") || !queries::is("MoveStateHelper.IsOnFoot")) return;
+    auto* player = ::field::player();
+    if (!player || player != observed_player) return;
+    ::field::baked_route::Cell at;
+    if (!::field::baked_nav::player_cell(::field::map_handle(), player, at)) return;
+    g_tested_obstacle_edge = true;
+    constexpr float dx[]{0, kTileSize, 0, -kTileSize}, dy[]{kTileSize, 0, -kTileSize, 0};
+    const unity::Vec3 destination{origin.x + dx[direction], origin.y + dy[direction], origin.z};
+    if (::field::confirm_blocked_move(player, destination))
+        readout::obstacle_hit(::field::current_map_id(), at);
 }
 
 void play_bump_sound()
@@ -74,7 +127,8 @@ void play_bump_sound()
 }
 
 /// CheckForWallBumpAfterFrame, after its 0.08 s wait.
-void check_for_wall_bump(void* player, unity::Vec3 position_before)
+void check_for_wall_bump(void* player, unity::Vec3 position_before, int direction, uint64_t direction_epoch,
+                         uint64_t route_token)
 {
     hooks::guarded("MovementSoundPatches.CheckForWallBumpAfterFrame", [&] {
         // The player may be gone (map change); a destroyed object reads as not alive.
@@ -94,8 +148,10 @@ void check_for_wall_bump(void* player, unity::Vec3 position_before)
                 // New position: restart the count.
                 g_same_position_count = 1;
                 g_last_collision_pos = position_before;
+                g_tested_obstacle_edge = false;
             }
 
+            confirm_route_obstacle(player, position_before, direction, direction_epoch, route_token);
             // Only after confirmed consecutive hits.
             if (g_same_position_count < kRequiredConsecutiveHits) return;
 
@@ -108,6 +164,8 @@ void check_for_wall_bump(void* player, unity::Vec3 position_before)
         } else {
             // The player moved: reset the collision counter.
             g_same_position_count = 0;
+            g_tested_obstacle_edge = false;
+            fieldnav::route_readout::movement_settled(route_token, position_after);
         }
 
         // Reset the collision flag at the end of the check.
@@ -126,7 +184,9 @@ void on_touch_pad_prefix(void* self, unity::Vec2 axis)
     }
 
     // No audio when menus or battle are active (same gate as controller routing).
-    if (!queries::is("ControllerRouter.IsFieldActive")) return;
+    if (!queries::is("ControllerRouter.IsFieldActive")) { observe_direction(-1); return; }
+    const auto route_token = fieldnav::route_readout::obstacle_token();
+    if (route_token || g_obstacle_direction >= 0) observe_direction(cardinal_direction(axis));
 
     // Only real movement input.
     if (!has_movement_input(axis)) return;
@@ -138,8 +198,10 @@ void on_touch_pad_prefix(void* self, unity::Vec2 axis)
     if (!g_wall_check_pending) {
         g_wall_check_pending = true;
         unity::Vec3 position_before = unity::local_position(player);
-        frame::after_seconds(kWallCheckDelay, [player, position_before] {
-            check_for_wall_bump(player, position_before);
+        frame::after_seconds(kWallCheckDelay, [player, position_before, route_token,
+                                             movement = g_movement_epoch, direction = g_obstacle_direction,
+                                             attempt = g_direction_epoch] {
+            if (movement == g_movement_epoch) check_for_wall_bump(player, position_before, direction, attempt, route_token);
         }, "MovementSoundPatches.WallCheck");
     }
     // Wall tones and beacons are the audio loops' job, not this hook's.
@@ -204,7 +266,7 @@ void reset_state()
     g_last_bump_time = -1.0e9;
     g_last_collision_pos = unity::Vec3{};
     g_same_position_count = 0;
-    g_wall_check_pending = false;
+    retire_movement_check();
     g_collision_detected_this_frame = false;
     g_last_tile_x = 0;
     g_last_tile_y = 0;
@@ -216,6 +278,8 @@ int install()
     actions::define("MovementSoundPatches.PollFootsteps", [] { poll_footsteps(); });
     actions::define("MovementSoundPatches.ResetState", [] { reset_state(); });
     events::on(events::Kind::SceneLoaded, [] { reset_state(); });
+    for (auto event : {events::Kind::MapChanging, events::Kind::BattleEntering, events::Kind::PartyChanging})
+        events::on(event, &retire_movement_check);
     return hooks::attach(mOnTouchPadCallback, &d_OnTouchPadCallback, &o_OnTouchPadCallback) ? 1 : 0;
 }
 

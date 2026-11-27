@@ -6,12 +6,17 @@
 #include <cstdlib>
 #include "../src/core/text.h"
 #include "../src/core/fieldnav/autowalk.cpp"
+#include "../src/core/fieldnav/route_readout.cpp"
+#include "../src/core/audio/movement_sounds.cpp"
 #include "../src/core/input/input_passthrough.cpp"
 namespace fixture {
 struct Node { void* player=nullptr; void* controller=nullptr; bool enabled=true, airship=false, moving=false, up=false, down=false; float angle=0; unity::Vec2 cached{}; int mode=0;float acceleration=0,left_scale=1,right_scale=1;bool translation=false; };
 Node player, controller, map, field_controller;
 uint64_t tick=10; double seconds=1;
 bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
+bool automatic_readout=false, transition_blocked=false, pose_ready=true;
+int pose_reads=0, obstacle_queries=0;
+unity::Vec3 attempted_destination{};
 game::Id game=game::Id::FF1;
 field::VehicleState vehicle{true,1,1,L""};
 field::baked_route::Cell cell{1,1,1};
@@ -23,6 +28,7 @@ unity::Vec2 native{};
 unity::Vec2 moved{};int calls=0, airship_calls=0, key_calls=0, cleaned=0; bool shoulders=false;
 std::map<events::Kind,std::vector<events::Handler>> handlers;
 std::vector<frame::Step> waits;int requests=0;
+std::vector<frame::Task> wall_checks;
 std::vector<std::function<void(field::PathInfo)>> route_results;
 std::vector<std::wstring> spoken;
 void step() { ++tick; seconds+=.016; }
@@ -68,6 +74,7 @@ namespace log_ {void write(const char*,...){} }
 namespace hooks {bool attach_raw(ref::Method&,void*,void**){return true;}void note_fault(const char*){std::abort();}}
 namespace game {Id current(){return fixture::game;}}
 namespace frame {uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
+namespace frame {void after_seconds(double,Task fn,const char*){fixture::wall_checks.push_back(std::move(fn));}}
 namespace actions {void define(const char*,Fn){} bool run(const char*){return false;}bool defined(const char*){return false;} }
 namespace events {void on(Kind kind,Handler handler){fixture::handlers[kind].push_back(std::move(handler));} void fire(Kind kind){for(auto& handler:fixture::handlers[kind])handler();} }
 namespace queries {
@@ -75,23 +82,31 @@ void define(const char*, std::function<bool()>) {}
 bool is(const char* name) {
     const std::string_view key = name;
     if (key == "GameStatePatches.IsFieldNavigationReady") return fixture::ready;
+    if (key == "ControllerRouter.IsFieldActive") return fixture::ready;
+    if (key == "MoveStateHelper.IsOnFoot") return fixture::vehicle.type==1;
     return key == "NavigationTargetTracker.IsEntity" && fixture::selected_target.valid;
 }
 }
-namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){return std::string(k)=="Autowalk"?true:d;}void set_bool(const char*,bool){} }
+namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){const std::string_view key=k;if(key=="Autowalk")return true;if(key==ui::prefs::kAutoRouteReadout)return fixture::automatic_readout;return d;}void set_bool(const char*,bool){} }
 namespace menu_state {bool any_active(){return fixture::menu;} }
+namespace ffpr::system {
+bool is_field_navigation_ready(){return fixture::ready;}
+bool input_transition_blocked(){return fixture::transition_blocked;}
+}
 namespace field::cache {void*get(ref::Class&t){return std::string(t.name)=="FieldMap"?&fixture::map:&fixture::controller;}void*get_or_refresh(ref::Class&t){return get(t);} }
 namespace field {
+bool confirm_blocked_move(void*,unity::Vec3 destination){++fixture::obstacle_queries;fixture::attempted_destination=destination;return !fixture::edge_open;}
 void*player_controller(){return &fixture::controller;}
 void*player(){return &fixture::player;}void*map_handle(){return &fixture::map;}int current_map_id(){return fixture::map_id;}bool face_player(void*,int direction){fixture::facing=direction;return true;}Target selected(){return fixture::selected_target;}
 VehicleState current_vehicle(){return fixture::vehicle;}const std::wstring&scene_name(){static std::wstring s=L"Field";return s;}
-namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){c=fixture::cell;return true;}bool cell_at(void*,unity::Vec3 position,baked_route::Cell&c){c={fixture::cell.layer,static_cast<int>(position.x),static_cast<int>(position.y)};return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
+namespace baked_nav {bool player_cell(void*,void*,baked_route::Cell&c){++fixture::pose_reads;c=fixture::cell;return fixture::pose_ready;}bool cell_at(void*,unity::Vec3 position,baked_route::Cell&c){c={fixture::cell.layer,static_cast<int>(position.x),static_cast<int>(position.y)};return true;}bool walk_edge(void*,void*,const baked_route::Cell&,const baked_route::Cell&,bool,route_progress::VehicleAction,int){return fixture::edge_open;}
 unity::Vec3 world_of(void*,const baked_route::Cell& cell){return {cell.x*16.f,-cell.y*16.f,0};}
 bool walk_precision_edge(void*,void*,const route_progress::PrecisionPoint&,const route_progress::PrecisionPoint&){++fixture::precision_queries;return fixture::edge_open;}
 void remember_destination(const MapGoal&,TargetKind,const std::wstring&){}void clear_pending(bool){++fixture::cleaned;}void cancel_requests(){++fixture::cleaned;}void request_route(MapGoal goal,TargetKind,std::wstring,std::function<void(PathInfo)> callback,bool){fixture::last_requested=std::move(goal);++fixture::requests;fixture::route_results.push_back(std::move(callback));} }
 }
 namespace modtext {std::wstring T(std::wstring_view s){return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);} }
 namespace ffpr {void say(std::wstring_view value,bool){fixture::spoken.emplace_back(value);} }
+namespace sound {void play_wall_bump(){} void play_footstep(){}}
 namespace input {
 bool game_window_focused(){return fixture::focus;}bool suppress_game_input(){return false;}bool field_active(){return true;}bool any_key_pressed(){return fixture::manual;}bool key_pressed(Key k){return fixture::manual && k==Key::W;}bool key_in_use(Key){return false;}
 bool shift_held(){return false;}bool ctrl_held(){return false;}bool alt_held(){return false;}float left_trigger(){return 0;}float right_trigger(){return 0;}float left_stick_x(){return 0;}float left_stick_y(){return 0;}float right_stick_x(){return 0;}float right_stick_y(){return 0;}
@@ -112,6 +127,173 @@ bool keyboard_in_use(Context c){
     return false;
 }
 }
+
+template<class Expect> void check_route_refresh(Expect expect)
+{
+    namespace readout=ffpr::fieldnav::route_readout;
+    using events::Kind;
+    using field::baked_route::Cell;
+    readout::install();
+    fixture::waits.clear();
+    fixture::ready=fixture::automatic_readout=fixture::pose_ready=true;
+    fixture::menu=fixture::transition_blocked=false;
+    fixture::map_id=261;
+    fixture::cell={1,13,26};
+    const auto pump=[] {
+        auto steps=std::move(fixture::waits);
+        fixture::waits.clear();
+        for(auto& step:steps)if(step())fixture::waits.push_back(std::move(step));
+    };
+    int refreshes=0, chunks=0;
+    Cell route_origin;
+    const auto refresh=[&] {++refreshes;route_origin=fixture::cell;};
+    const auto next_chunk=[&] {++chunks;};
+    const auto walking=[] {
+        field::PathInfo path;
+        path.success=true;
+        path.step_count=2;
+        field::route_progress::Phase phase;
+        phase.cells={{1,13,26},{1,13,25},{1,13,24}};
+        path.walk_phases={phase};
+        path.readout_cells=phase.cells;
+        return path;
+    };
+    auto path=walking();
+    auto token=readout::begin(refresh);
+    readout::follow(path,token,next_chunk);
+    readout::motion_input();
+    const int before_battle=fixture::pose_reads;
+    events::fire(Kind::BattleEntering);
+    events::fire(Kind::BattleStart);
+    fixture::cell={1,13,24};
+    pump();
+    expect(!readout::current(token)&&chunks==0&&fixture::pose_reads==before_battle,
+           "battle entry retires the pre-battle chunk without sampling native movement");
+    events::fire(Kind::BattleEnd);
+    expect(refreshes==0&&fixture::waits.empty(),"battle result alone cannot queue field route capture");
+    fixture::ready=false;
+    readout::field_returned(false);
+    readout::field_returned(false);
+    pump();
+    expect(refreshes==0&&fixture::waits.size()==1&&fixture::pose_reads==before_battle,
+           "a repeated native field return waits for readiness without reading the player");
+    fixture::ready=true;
+    fixture::pose_ready=false;
+    pump();
+    expect(refreshes==0&&fixture::waits.size()==1,"the refresh waits for the placed field player");
+    fixture::pose_ready=true;
+    fixture::cell={1,13,22};
+    pump();readout::field_returned(false);pump();
+    expect(refreshes==1&&route_origin==Cell{1,13,22}&&!readout::battle_refresh_pending(),
+           "the route refreshes once at the actual post-battle landing");
+
+    readout::begin(refresh); // a new directions request can be interrupted before publication
+    events::fire(Kind::BattleEntering);
+    events::fire(Kind::BattleStart);
+    events::fire(Kind::MapChanging);
+    events::fire(Kind::MapChanged);
+    expect(readout::battle_refresh_pending(),"battle refresh retains its destination through a scripted map handoff");
+    fixture::map_id=270;
+    readout::field_returned(false);pump();
+    expect(refreshes==2&&!readout::battle_refresh_pending(),"the new map has one battle refresh owner");
+
+    path=walking();
+    path.readout_cells.clear();
+    path.walk_phases.back().manual_after=true;
+    path.walk_phases.back().action_after=L"Operate the switch.";
+    token=readout::begin(refresh);
+    readout::follow(path,token,next_chunk);
+    expect(readout::expects_field_action(),"a fully spoken in-place switch records its interaction stance");
+    readout::field_action_started(270,{1,13,25});
+    readout::field_returned(true);pump();
+    expect(refreshes==2,"an unrelated script elsewhere does not refresh the route");
+    readout::field_action_started(270,{1,13,24});
+    readout::field_returned(false);pump();
+    expect(refreshes==2,"a switch needs its native script return");
+    fixture::transition_blocked=true;
+    readout::field_returned(true);pump();
+    expect(refreshes==2&&fixture::waits.size()==1,"native action return waits for the field to settle");
+    fixture::transition_blocked=false;
+    fixture::cell={1,12,21};
+    pump();readout::field_returned(true);pump();
+    expect(refreshes==3&&route_origin==Cell{1,12,21},"a same-floor platform switch refreshes once from its new pose");
+
+    path.readout_limited=true;
+    readout::follow(path,readout::begin(refresh),next_chunk);
+    expect(!readout::expects_field_action(),"an action beyond the spoken chunk is not armed");
+    path.readout_limited=false;
+    path.next_map_id=271;
+    readout::follow(path,readout::begin(refresh),next_chunk);
+    expect(!readout::expects_field_action(),"a map-changing interaction keeps its existing continuation");
+    events::fire(Kind::BattleEntering);
+    readout::field_returned(false);
+    events::fire(Kind::TitleScreen);pump();
+    expect(refreshes==3,"the title drops a queued refresh");
+    fixture::automatic_readout=false;
+    readout::follow(path,readout::begin(refresh),next_chunk);
+    events::fire(Kind::BattleEntering);
+    readout::field_returned(false);pump();
+    expect(refreshes==3,"refresh remains silent with automatic readout off");
+
+    namespace movement=ffpr::audio;
+    movement::install();
+    movement::o_OnTouchPadCallback=&fixture::touch;
+    fixture::automatic_readout=true;
+    fixture::vehicle={true,1,1,L""};
+    fixture::cell={1,13,26};
+    fixture::position={0,0,0};
+    const auto motion=[](unity::Vec2 axis) {movement::d_OnTouchPadCallback(&fixture::controller,axis,nullptr);};
+    const auto settle=[&] {
+        auto checks=std::move(fixture::wall_checks);
+        fixture::wall_checks.clear();
+        for(auto& check:checks)check();
+        pump();
+    };
+    const auto show_chunk=[&] {
+        auto chunk=walking();
+        chunk.readout_limited=true;
+        chunk.step_count=3;
+        chunk.walk_phases.back().cells={{1,13,26},{1,12,26},{1,11,26},{1,11,25}};
+        chunk.readout_cells=chunk.walk_phases.back().cells;
+        readout::follow(chunk,readout::begin(refresh),next_chunk);
+    };
+    show_chunk();
+    motion({-1,0});
+    fixture::cell={1,10,26};
+    fixture::position={-48,0,0};
+    settle();
+    expect(refreshes==3&&chunks==0&&fixture::obstacle_queries==0,
+           "overshooting west is silent and retains the destination for recovery");
+    fixture::edge_open=false;
+    motion({0,1});settle();
+    expect(refreshes==4&&route_origin==Cell{1,10,26}&&fixture::obstacle_queries==1&&
+           fixture::attempted_destination.x==-48&&fixture::attempted_destination.y==16,
+           "a blocked north move refreshes from the actual tile and native attempted direction");
+    show_chunk();
+    motion({0,1});settle();motion({0,1});settle();
+    expect(refreshes==4&&fixture::obstacle_queries==1,"holding against a wall stays quiet after the new readout");
+    motion({0,0});motion({0,1});motion({0,0});settle();
+    expect(refreshes==5&&fixture::obstacle_queries==2,"a released key can make a distinct obstacle hit, even on a short tap");
+    show_chunk();
+    fixture::edge_open=true;
+    motion({0,-1});settle();
+    expect(refreshes==5&&fixture::obstacle_queries==3,"a stationary but natively open edge is not an obstacle");
+    motion({1,0});
+    events::fire(Kind::BattleEntering);settle();
+    expect(refreshes==5&&fixture::obstacle_queries==3,"battle entry retires a queued obstacle observation");
+
+    path=walking();
+    path.readout_cells.clear();
+    fixture::cell={1,13,25};
+    fixture::position={208,-400,0};
+    readout::follow(path,readout::begin(refresh),next_chunk);
+    motion({0,1});
+    fixture::cell={1,13,24};
+    fixture::position={208,-384,0};
+    settle();
+    expect(!readout::obstacle_token(),"arriving at the destination ends obstacle correction for the old route");
+}
+
 int main(){
  namespace a=ffpr::fieldnav::autowalk;int failures=0;auto expect=[&](bool b,const char*s){if(!b){++failures;std::printf("FAIL %s\n",s);}};
  a::install();
@@ -290,5 +472,6 @@ int main(){
     fixture::selected_target = {};
  }
  std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
- std::printf("Autowalk native input/vehicle waits/FF6 flight: %d failures\n",failures);return failures?1:0;
+ check_route_refresh(expect);
+ std::printf("Autowalk native input, vehicle waits and route refresh: %d failures\n",failures);return failures?1:0;
 }

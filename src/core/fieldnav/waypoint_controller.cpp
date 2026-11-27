@@ -89,20 +89,21 @@ void cycle_previous_category()
 
 void announce_waypoint_route(::field::baked_nav::MapGoal goal, EntityPtr waypoint, bool automatic = false)
 {
-    const auto token = route_readout::begin();
+    const auto next = [goal, waypoint] {
+        if (nav::selected() == waypoint && ensure_field_context())
+            announce_waypoint_route(goal, waypoint, true);
+    };
+    const auto token = route_readout::begin(next);
     goal.spoken_leg_limit = route_readout::leg_limit();
     ::field::baked_nav::request_route(goal, ::field::TargetKind::Spot, waypoint->name,
-        [goal, waypoint, token, automatic](::field::PathInfo path) {
+        [waypoint, next, token, automatic](::field::PathInfo path) {
             if (!route_readout::current(token) || !ensure_field_context() || nav::selected() != waypoint) return;
             auto line = path.success && !path.description.empty() ? path.description :
                 (!path.reason.empty() ? path.reason : T(L"No path"));
             if (ui::prefs::mod_warnings_enabled() && !path.warning.empty())
                 ffpr::say_sequence({path.warning, std::move(line)}, !automatic);
             else ffpr::say(line, !automatic);
-            route_readout::follow(path, token, [goal, waypoint] {
-                if (nav::selected() == waypoint && ensure_field_context())
-                    announce_waypoint_route(goal, waypoint, true);
-            });
+            route_readout::follow(path, token, next);
         });
 }
 

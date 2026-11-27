@@ -171,7 +171,9 @@ void route_to_storyline(bool walking, double requested_at, bool automatic = fals
         candidate.goal.spoken_leg_limit = readout::leg_limit();
         if (!candidate.instruction.empty()) candidate.instruction = T(candidate.instruction);
     }
-    const auto token = readout::begin();
+    const auto token = readout::begin([] {
+        if (g_current_category == Category::Storyline) route_to_storyline(false, frame::now(), true);
+    });
     baked_nav::request_storyline_guidance(std::move(candidates),
         [generation = g_category_generation, id = objective->id, requested_at, token, automatic](PathInfo path) {
             if (!readout::current(token) || generation != g_category_generation ||
@@ -278,6 +280,8 @@ void format_current_entity(std::function<void(std::wstring)> publish)
         });
 }
 
+void request_continued_readout(const baked_nav::MapGoal& goal, TargetKind kind, const std::wstring& name);
+
 void announce_ready_entity(bool walking, double requested_at, bool automatic = false)
 {
     const EntityPtr e = scanner::current_entity();
@@ -318,9 +322,11 @@ void announce_ready_entity(bool walking, double requested_at, bool automatic = f
         readout::cancel();
         ffpr::fieldnav::autowalk::request(walk_goal, kind, name);
     } else {
-        const auto token = readout::begin();
         walk_goal.moving_flight_directions = true;
         walk_goal.spoken_leg_limit = readout::leg_limit();
+        const auto token = readout::begin([walk_goal, kind, name] {
+            request_continued_readout(walk_goal, kind, name);
+        });
         baked_nav::request_route(walk_goal, kind, name, [e, walk_goal, category_generation = g_category_generation, requested_at, token, automatic](PathInfo p) {
             if(!readout::current(token)||category_generation!=g_category_generation||!ensure_field_context())return;
             const auto selected=scanner::current_entity();
@@ -399,15 +405,22 @@ void present_continued_readout(PathInfo path, const baked_nav::MapGoal& goal, Ta
         (!path.reason.empty() ? path.reason : T(L"No path"));
     if (!path.warning.empty() && ui::prefs::mod_warnings_enabled()) ffpr::say_sequence({path.warning, message}, false);
     else ffpr::say(message, false);
-    readout::follow(path, token, [goal, kind, name, generation] {
-        if (generation != g_category_generation || !ensure_field_context()) return;
-        const auto next_token = readout::begin();
-        auto next_goal = goal;
-        next_goal.spoken_leg_limit = readout::leg_limit();
-        baked_nav::request_route(std::move(next_goal), kind, name, [goal, kind, name, generation, next_token](PathInfo next) {
-            present_continued_readout(std::move(next), goal, kind, name, generation, next_token);
+    const auto refresh = [goal, kind, name] { request_continued_readout(goal, kind, name); };
+    readout::follow(path, token, [refresh, generation] {
+        if (generation == g_category_generation) refresh();
+    }, refresh);
+}
+
+void request_continued_readout(const baked_nav::MapGoal& goal, TargetKind kind, const std::wstring& name)
+{
+    if (!ensure_field_context()) return;
+    const auto token = readout::begin([goal, kind, name] { request_continued_readout(goal, kind, name); });
+    auto next_goal = goal;
+    next_goal.spoken_leg_limit = readout::leg_limit();
+    baked_nav::request_route(std::move(next_goal), kind, name,
+        [goal, kind, name, generation = g_category_generation, token](PathInfo next) {
+            present_continued_readout(std::move(next), goal, kind, name, generation, token);
         });
-    });
 }
 
 void announce_entity_only(speech::Timing timing = {})
@@ -531,6 +544,7 @@ void category_reset_to_all()
     if (!ensure_field_context()) return;
     if (g_current_category == Category::All) {
         ++g_category_generation;
+        readout::cancel();
         speak(T(L"Already in All category"));
         return;
     }
@@ -628,7 +642,7 @@ int install()
     // A route that goes on past a transition (user, 2026-10-11): 0.8 s after "Entering X", the
     // next leg to the remembered destination from where the player arrived.
     events::on(events::Kind::MapChanged, [] {
-        if (ffpr::fieldnav::autowalk::active()) return; // walker owns continuation and its speech setting
+        if (ffpr::fieldnav::autowalk::active() || readout::battle_refresh_pending()) return;
         const auto generation = g_category_generation;
         frame::every_frame([generation] {
             if (generation != g_category_generation) return false;
@@ -642,7 +656,7 @@ int install()
                 TargetKind kind;
                 std::wstring name;
                 if (!baked_nav::pending_goal(goal, kind, name)) return;
-                const auto token = readout::begin();
+                const auto token = readout::begin({});
                 baked_nav::continue_pending([goal, kind, name, token, generation](PathInfo path) {
                     present_continued_readout(std::move(path), goal, kind, name, generation, token);
                 });
@@ -675,6 +689,7 @@ int install()
     });
     events::on(events::Kind::SceneLoaded, [] {
         if (scene_name() == L"Title") {
+            readout::cancel();
             g_storyline_selection = {};
             scanner::clear_selection();
             scanner::invalidate_map(); baked_nav::clear_pending(true); baked_nav::invalidate();

@@ -57,6 +57,8 @@ Mod
 
 Choose a pathfinding layout in F8, Navigation, Navigation keymap. Letters is the default; only the selected layout is active. The choice is saved separately for each game.
 
+Under F8, Navigation, Full route readout defaults to Off. Route legs per readout defaults to three. With Automatically speak next leg of route on, directions refresh after the issued movement, a battle return, or a spoken switch interaction. Leaving the route stays quiet until a blocked walking attempt. Holding against the obstacle gives one correction from the blocked tile. Automatic continuation defaults to Off and is independent of Autowalk.
+
 Letters layout:
 
 - J / L: previous / next destination.
