@@ -50,6 +50,8 @@ std::wstring target(void* content);
 /// Active native party-target slots; raw pools may include empty or reordered rows.
 int target_count(void* list);
 std::wstring spell_row(void* content);
+/// The focused field spell's rendered name uses the native disabled palette.
+bool field_spell_unavailable(void* content);
 std::wstring skill_row(void* content);
 std::wstring skill_name(void* content);
 std::optional<int> skill_percentage(void* content);

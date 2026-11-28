@@ -28,6 +28,36 @@ The following historical inventory records what each area of the native mod
 ported and the original port findings. Current gameplay confirmations are
 recorded above. "Parity finding" describes behavior retained from the C# mod.
 
+## Field spell availability
+
+November 28, 2026. The field spell lists in all six games append the localized
+“Unavailable” when the focused spell is grayed out. The speech keeps the
+existing name and any level, charges, cost, learning percentage, and details.
+Empty slots and FFIII's separate tome list keep their own behavior.
+
+The existing FFV reader uses the same per-ability value as its native painter.
+FFI–IV and FFVI read the painted name in the current list entry after native
+row preparation. The shared reader follows the key-input row's serialized
+view to `IconTextView.nameText` and compares its RGB to that install's
+`Last.UI.TextColors.Gray`. Missing, inactive, disabled, and transparent text
+does not produce an availability label. A gray cost or charge count is
+independent of the name. The reader checks this one row in the existing menu
+callback, with no new hook, cached row, or inference about what was learned.
+
+| Game | Verified row preparation and focus order |
+| --- | --- |
+| I | `SelectContent` at RVA `0x377E20` calls `UpdateFocus` before `SetCursor`. |
+| II | `UpdateView` at RVA `0x412780` paints spell rows before selecting one. `UpdateFocus` refreshes the same row color. |
+| III | `UpdateView` at RVA `0x687190` paints spell rows before selecting one. `UpdateFocus` refreshes the same row color. |
+| IV | `SelectContent` at RVA `0x9A8C50` calls `UpdateFocus` before positioning the cursor. |
+| VI | `SelectContent` at RVA `0x823AE0` calls `UpdateFocus` before positioning the cursor. |
+
+Native owner receipts are outside Git in
+`../tools/pr-spell-availability-20261128`. The production reader fixture
+covers native gray, a different palette, hidden labels, and gray cost with a
+normal name. The focus fixture covers the integrated FFII and FFIII
+announcements, including FFIII's charges and separate Learn screen.
+
 ## Phase 0 (data)
 
 - `data/common/mod_text.json`: 850 keys. Overrides: FF1 0, FF2 49, FF3 42, FF4 26, FF5 39.

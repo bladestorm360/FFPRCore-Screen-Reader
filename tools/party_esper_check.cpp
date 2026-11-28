@@ -106,6 +106,27 @@ namespace settings {bool get_bool(const char*,bool){return fixture::autodetail;}
 namespace dedup {bool text(const char*k,std::wstring_view v,Scope){if(fixture::guards[k]==v)return false;fixture::guards[k]=v;return true;}void reset(const char*k){fixture::guards.erase(k);}}
 namespace log_ {void write(const char*,...){} }
 int main(){using namespace fixture;background::prepare();int failed=0;auto expect=[&](bool ok,const char*s){if(!ok){++failed;std::printf("FAIL %s\n",s);}};
+ {
+  Node spell, view, icon, name=make_text(L"Cure"), cost=make_text(L"4");
+  set(spell,"view",&view);set(view,"iconText",&icon);set(icon,"nameText",&name);set(view,"valueText",&cost);
+  name.parent=&icon;icon.parent=&view;view.parent=&spell;
+  cost.r=cost.g=cost.b=153.0f/255.0f;
+  expect(!displayed::field_spell_unavailable(&spell),"gray cost does not make a normal spell unavailable");
+  name.r=name.g=name.b=153.0f/255.0f;
+  expect(displayed::field_spell_unavailable(&spell),"the native gray spell name is unavailable");
+  name.r=154.0f/255.0f;
+  expect(!displayed::field_spell_unavailable(&spell),"a different palette byte is not a disabled spell");
+  name.r=153.0f/255.0f;name.alpha=0;
+  expect(!displayed::field_spell_unavailable(&spell),"transparent retained text cannot mark a spell unavailable");
+  name.alpha=1;name.enabled=false;
+  expect(!displayed::field_spell_unavailable(&spell),"disabled graphics stay silent");
+  name.enabled=true;view.active=false;
+  expect(!displayed::field_spell_unavailable(&spell),"inactive recycled rows stay silent");
+  view.active=true;palette_ready=false;
+  expect(!displayed::field_spell_unavailable(&spell),"unknown palette stays silent");
+  palette_ready=true;set(icon,"nameText",nullptr);
+  expect(!displayed::field_spell_unavailable(&spell)&&!displayed::field_spell_unavailable(nullptr),"missing labels stay silent");
+ }
  // Actual character formatter/detail consumer, with the eight current-only MP
  // cells shown in FF1/III. Native cursor ownership retires I without comparing
  // speech strings or borrowing a previous character's values.

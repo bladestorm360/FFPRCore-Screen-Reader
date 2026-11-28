@@ -28,6 +28,13 @@ ref::Method mRendererEnabled{kRenderer, "get_enabled", 0}, mRendererVisible{kRen
 ref::Class kSpriteRenderer{"UnityEngine", "SpriteRenderer"};
 ref::Method mSpriteColor{kSpriteRenderer,"get_color",0};
 ref::Class kAbilityRow{"Last.UI.KeyInput", "AbilityContentController"};
+ref::Class kSpellRow{"Last.UI.KeyInput", "BattleAbilityInfomationContentController"};
+ref::Field fSpellView{kSpellRow, "view"};
+ref::Class kSpellView{"Last.UI.KeyInput", "BattleAbilityInfomationContentView"};
+ref::Field fSpellIconText{kSpellView, "iconText"};
+ref::Class kIconText{"Last.UI", "IconTextView"};
+ref::Field fSpellName{kIconText, "nameText"};
+ref::Class kTextColors{"Last.UI", "TextColors"};
 ref::Class kStatusBase{"Serial.Template.UI", "StatusWindowControllerBase"};
 ref::Field fMenuCommand{kStatusBase, "callerCommandId"};
 ref::Class kStatusKeyView{"Serial.Template.UI.KeyInput", "StatusWindowContentViewBase"};
@@ -261,5 +268,24 @@ std::wstring spell_row(void* content)
     if (!current.empty()) result += L", " + T(L"MP") + L" " + current +
         text_field(view, "separateCountText") + maximum;
     return result;
+}
+bool field_spell_unavailable(void* content)
+{
+    auto* view = ref::rd<void*>(content, fSpellView);
+    auto* icon = ref::rd<void*>(view, fSpellIconText);
+    auto* name = ref::rd<void*>(icon, fSpellName);
+    // The native list paints the spell name. Charge or cost labels can have
+    // their own colors. Read the focused row before scroll-culling catches up.
+    if (!container_visible(name) || !ref::call<bool>(mEnabled, name) || !mColor) return false;
+    int packed = 0;
+    if (!il2cpp::read_static_int(kTextColors.get(), "Gray", packed)) return false;
+    const auto gray = static_cast<uint32_t>(packed);
+    const auto color = ref::call<Color>(mColor, name);
+    const auto matches = [](float value, unsigned byte) {
+        return std::fabs(value - byte / 255.0f) < 0.5f / 255.0f;
+    };
+    return color.a > 0 && (gray >> 24) != 0 &&
+           matches(color.r, gray & 255) && matches(color.g, (gray >> 8) & 255) &&
+           matches(color.b, (gray >> 16) & 255);
 }
 }

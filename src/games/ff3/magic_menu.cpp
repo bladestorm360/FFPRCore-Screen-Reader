@@ -172,6 +172,7 @@ void announce_spell(void* ability, void* content, int index, int count)
 {
     std::wstring line = displayed::spell_row(content);
     if (line.empty()) return;
+    if (displayed::field_spell_unavailable(content)) line += L", " + T(L"Unavailable");
     const std::wstring description = ffpr::menus::spell_description(ability);
     if (auto_detail() && !text::is_blank(description)) line += L": " + description;
     line = ui::menu_position(line, index, count);

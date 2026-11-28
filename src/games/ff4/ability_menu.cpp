@@ -124,6 +124,7 @@ void d_ContentSelectContent(void* self, void* cursor, int32_t type, bool page_sk
         void* ability = ref::rd<void*>(owned, fOwnedAbilityAbility);
         int mp_cost = ability ? ref::call<int32_t>(mAbilityUseValue, ability) : 0;
         if (mp_cost > 0) announcement += L", " + T(L"MP") + L" " + text::num(mp_cost);
+        if (displayed::field_spell_unavailable(content)) announcement += L", " + T(L"Unavailable");
 
         std::wstring description = strip_icon(message(ref::call_str(mOwnedAbilityMesIdDescription, owned)));
         // Auto Detail: include the description the details key would read.

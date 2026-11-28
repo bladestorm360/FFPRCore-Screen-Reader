@@ -256,6 +256,7 @@ void announce_ability(void* self, void* cursor)
     const int skill_level = ref::call<int32_t>(mOwnedAbilitySkillLevel, ability);
     if (skill_level < 100 && skill_level > 0)
         announcement += TF(L", learning, {0} percent", {text::num(skill_level)});
+    if (displayed::field_spell_unavailable(content)) announcement += L", " + T(L"Unavailable");
 
     const std::wstring description = description_of(ref::call_str(mOwnedAbilityMesIdDescription, ability));
     set_ability_focus(self, description);

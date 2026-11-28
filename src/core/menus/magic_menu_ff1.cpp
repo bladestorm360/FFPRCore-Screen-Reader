@@ -103,6 +103,7 @@ bool announce_spell(void* ability, void* content, int index, int count)
 
     std::wstring base = displayed::spell_row(content);
     if (base.empty()) return false;
+    if (displayed::field_spell_unavailable(content)) base += L", " + T(L"Unavailable");
 
     // AutoDetail: append the description on focus.
     std::wstring announcement = base;

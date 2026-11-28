@@ -231,6 +231,7 @@ int target_count(void*p){int n=0;for(int i=0;i<unity::list_count(p);++i)if(!targ
 void*cursor_row(void*,void*p){return fixture::cursor_row_first&&unity::list_count(p)>0?unity::list_at(p,0):nullptr;}
 std::wstring formation_row(void*,void*){return {};}
 std::wstring spell_row(void*p){return text_field(field(p,"view"),"spell");}
+bool field_spell_unavailable(void*p){return visible(p)&&field(p,"graySpellName");}
 }
 namespace ffpr {void say(std::wstring_view v,bool interrupt){fixture::spoken.emplace_back(v);fixture::interruptions.push_back(interrupt);}}
 namespace ffpr::battle {std::wstring visible_party_status_icons(void*) { return {}; }}
@@ -792,6 +793,10 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  menu_state::reset(menu_state::MAGIC_MENU);spoken.clear();fm::d_ListSetCursor(&field_list,&field_cursor,false,0,nullptr);expect(spoken.empty(),"native list cursor before focus does not speak during pre-entry");
  fm::d_UseListInit(&field_window,nullptr);field_window.state=1;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&fm::g_pending_spell_window,"initial spell waits for native rendered row readiness");
  poisona_view.texts["spell"]=L"Poisona, Lv. 1, MP 25/25";fm::d_WindowUpdate(&field_window,nullptr);fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.size()==1&&spoken[0].find(L"Poisona, Lv. 1, MP 25/25")==0,"FF3 Use entry speaks its first ready spell exactly once");
+ poisona.fields["graySpellName"]=&poisona_view;spoken.clear();
+ fm::d_ListSetCursor(&field_list,&field_cursor,false,0,nullptr);
+ expect(spoken==std::vector<std::wstring>{L"Poisona, Lv. 1, MP 25/25, Unavailable (1 of 1)"},"FF3 unavailable spell keeps the name, level and charges");
+ poisona.fields.erase("graySpellName");
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,7);spoken.clear();fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"command return cancels pending spell read");
  fm::g_pending_spell_window=&field_window;fm::on_set_next_state(&field_window,2);field_window.state=2;fm::d_WindowUpdate(&field_window,nullptr);expect(spoken.empty()&&!fm::g_pending_spell_window,"spell target entry cancels pending list speech before the target owns focus");
  Node empty_first,terra,terra_view,target_cursor,field_use;empty_first.visible=false;terra.data=&ally;terra.view=&terra_view;terra_view.texts["nameText"]=L"Terra";List field_members{&empty_first,&terra};field_use.list=&field_members;target_cursor.parent=&terra;field_window.use=&field_use;field_use.cursor=&target_cursor;
@@ -843,6 +848,11 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
  std::printf("Exchange full entry/three arrows/cancel capture-to-fake-speech: median %.3f us, p99 %.3f us, max %.3f us (fake native/output only)\n",exchange_times[500],exchange_times[990],exchange_times.back());
  fm::o_WindowSetActive=&show;field_window.state=2;menu_state::set_active(menu_state::MAGIC_MENU,true);spoken.clear();fm::d_WindowSetActive(&field_window,false,nullptr);fm::on_use_set_cursor(&field_use,&target_cursor);expect(spoken.empty(),"closed character target cannot announce a stale character row");
  namespace f2=ffpr::ff2;Node target_window,target_list,target_cursor2,target_data[4],target_views[4],target_rows[4];List target_contents;
+ {
+  Node ability, spell;ability.name=L"Cure";spell.fields["graySpellName"]=&spell;
+  dedup::reset(f2::kCtxSpell);spoken.clear();f2::announce_spell(&ability,&spell,0,1);
+  expect(spoken==std::vector<std::wstring>{L"Cure lv1, Unavailable (1 of 1)"},"FF2 appends the same unavailable label to the focused spell");
+ }
  target_window.state=2;target_window.view=&target_window;owners["AbilityWindowController"]=&target_window;target_cursor2.parent=&target_rows[0];
  const wchar_t* target_names[]={L"Firion",L"Maria",L"Guy",L"Leon"};for(int i=0;i<4;++i){target_data[i].name=target_names[i];target_rows[i].data=&target_data[i];target_rows[i].view=&target_views[i];target_views[i].texts["nameText"]=target_names[i];target_contents.push_back(&target_rows[i]);}
  target_list.list=&target_contents;f2::o_UseSetCursor=&use_target_cursor;cursor_row_first=true;spoken.clear();

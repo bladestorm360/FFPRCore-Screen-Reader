@@ -4,9 +4,9 @@
 is visible. The internal aging ticks update the comparison baseline silently.
 [Battle evidence](docs/re/STAT_EFFECTS_20261024.md#november-28-ffv-old).
 
-**November 28 FFV field spell availability.** Dimmed field spell rows
-speak “Unavailable” from the same native value that colors the row.
-[FFV menu implementation](docs/PORT_STATUS.md#ff5-module-srcgamesff5--finished-first-pass).
+**November 28 field spell availability.** All six games speak
+“Unavailable” for gray field spell names.
+[Native sources and checks](docs/PORT_STATUS.md#field-spell-availability).
 
 **November 28 FFV meteorite travel.** Pathfinder connects Karnak and Walse
 through their playable meteorite landings. It can reach the Wind Drake

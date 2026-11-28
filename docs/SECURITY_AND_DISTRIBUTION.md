@@ -1,5 +1,21 @@
 # Build and distribution security
 
+## November 28 field spell availability in FFI–IV and FFVI
+
+The five updated Steam installs use a 22,165,504-byte DLL with SHA-256
+`982d1821db19b9331f28226e670648afd188b2aeca8349a543e236992ae7264e`.
+Spell focus, rendered party/menu details, and all-six field magic targeting
+passed offline. The build verified 73 resources and 9,305 native names.
+The isolated smoke check resolved all 47 exports.
+
+Defender definitions `1.463.507.0` reported no threats on the 22 staged
+files. Scan hashes were unchanged and no matching detection events occurred.
+Windows denied exclusion inspection, and no signing certificate was
+available. All 110 installed file hashes matched, and all 115 protected
+file states were preserved. FFV already had its spell availability cue.
+Receipts are in `build_check/pr-spell-availability-20261128`. The previous
+source checkpoint was `379ddd2`. No game was launched during verification.
+
 ## November 28 FFV navigation, spell availability and Old
 
 FFV's installed DLL has 22,162,432 bytes and SHA-256

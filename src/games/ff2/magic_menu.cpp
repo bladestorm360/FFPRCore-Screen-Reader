@@ -257,6 +257,7 @@ void announce_spell(void* ability, void* content, int index, int count)
 
     const int pct = content ? hooks::guarded_r("FF2.Magic.Gauge", -1, [&] { return gauge_percent(content); }) : -1;
     if (pct >= 0) announcement = TF(L"{0}, {1} percent", {announcement, text::num(pct)});
+    if (displayed::field_spell_unavailable(content)) announcement += L", " + T(L"Unavailable");
 
     // The level already conveys the MP cost. Description with Auto Detail; the I key reads it.
     const std::wstring description = menus::spell_description(ability);
