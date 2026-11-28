@@ -71,13 +71,22 @@ template<class Expect> void check_ff5_water_pushbacks(Expect expect)
     using namespace field;
     using baked_route::Cell;
     int contacts = 0;
+    int falls_currents = 0;
     for (const int map_id : {48, 54, 112, 261, 268, 476, 478, 545}) {
         const auto* map = baked::submap_by_map_id(map_id);
         if (!map) { expect(false, "Missing FFV current map"); continue; }
         const auto& grid = baked::grids(*map);
         for (const auto& object : grid.objects) {
-            if (object.type != baked::ObjType::Event ||
-                !baked::current_pushback(grid, object.layer, object.tx, object.ty)) continue;
+            if (object.type != baked::ObjType::Event) continue;
+            const bool pushback = baked::current_pushback(grid, object.layer, object.tx, object.ty);
+            if (map_id == 478 && (object.a == 2340 || object.a == 2341)) {
+                ++falls_currents;
+                const auto* crossing = baked::world_exit_at(grid, object.entity_id(),
+                    baked::object_identifier(object), object.tx, object.ty);
+                expect(!pushback && crossing && (crossing->d & baked::kAutomaticCurrent),
+                       "An Istory Falls current retains its native onward crossing");
+            }
+            if (!pushback) continue;
             ++contacts;
             const Cell contact{object.layer, object.tx, object.ty};
             baked_route::Request request;
@@ -92,7 +101,8 @@ template<class Expect> void check_ff5_water_pushbacks(Expect expect)
             }
         }
     }
-    expect(contacts == 83, "All source-qualified FFV pushbacks retain their native layers");
+    expect(contacts == 77, "All source-qualified FFV pushbacks retain their native layers");
+    expect(falls_currents == 6, "All six Istory Falls currents remain distinct from pushbacks");
 }
 
 template<class Expect> void check_ff4_lunar_subterrane_exits(Expect expect)
