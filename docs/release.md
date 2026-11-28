@@ -1,6 +1,6 @@
 # Release procedure
 
-## V1.1 preparation, November 28
+## V1.1, November 28
 
 The release covers the current six-game mod and the separately packaged
 Windows setup. The final FFV navigation pass covers the sunk Tower of Walse,
@@ -11,17 +11,42 @@ The player guide records that enemy appearance
 descriptions are included and that most expected automatic animation cues
 have not played in reported testing.
 
-The focused candidate passed 75 FFV contact assertions and 57 route legs,
-the Torna Canal checks, native obstacle and route-readout checks, 73 embedded
-resource checks and the 47-export isolated smoke. The exact 22-file local
-payload scan completed with zero matching detections. The exact payload is
-installed in FFV with 22 installed file hashes and 23 protected file states
-verified. Older test hosts needed updates during full release verification.
-The navigation speech fixture uses the current Storyline and route readout.
-The animation fixture now exercises actor displacement, changed tile frames,
-the visible flicker edge, and authored watch deadlines. In-game audibility
-remains unconfirmed.
-Evidence is in `build_check/v11_20261128`.
+The complete 287-target compile and all original release checks ran within
+the 2 GB and 25 percent CPU resource limits. After the full build reached
+the browse fixture, the suite resumed from that exact command with the
+updated count of 77 true pushbacks and a separate check for all six Istory
+Falls crossings. The deployed DLL hash remained unchanged.
+Verification passed 75 FFV story-contact assertions, 57 story route legs, 68 Istory
+Falls route legs, the Torna Canal and native obstacle checks, 9,305 native
+name checks, 73 embedded resources, and the 47-export isolated smoke. The
+animation fixture exercises actor displacement, changed tile frames,
+flicker, and authored watch deadlines. In-game audibility remains unconfirmed.
+
+The final FFV install verified 22 deployed hashes and 23 protected file
+states. Its DLL is 22,176,256 bytes with SHA-256
+`5655bf7e5b66a24c5df8e604d660a958ec810e6992875ec8a438206de7704678`.
+Defender definitions 1.463.507.0 reported no threats for the 22 local payload
+files or the 32 exact files in the release scan, including both archives.
+All scanned hashes remained unchanged. The exclusion query was protected,
+and no local signing certificate was available.
+
+[V1.1 was published as Latest](https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases/tag/v1.1)
+on November 28 at 17:28:40 UTC. Release 461730846 and annotated tag
+`v1.1` resolve to source `9e90be92aa340ea0937cb09a5752f0c44cc637cc`.
+The authenticated draft and anonymous public downloads matched both
+verified archives. All seven earlier releases and their assets were preserved.
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Complete mod ZIP, 805383710 | 8,919,844 | `c921fc77122a4cad332f4f37d8a1f56f57e3f9653b74d61b810d8506f3347fde` |
+| Windows setup ZIP, 805383702 | 26,931 | `08ff8d79638a3779affb64e4dcc4181eb703f2bf43b1ca8ad874567ab03b39c1` |
+
+The installer passed 29 assertions with the packaged release and again
+against the anonymous Latest release. The fixtures covered fresh install,
+update, skip when current, rollback and uninstall without launching a game.
+Evidence is in `build_check/v11_20261128`, including the build and resumed
+check receipts, exact-payload scans, public download hashes, and FFV install
+receipt.
 
 ## V1.0 preparation, October26
 

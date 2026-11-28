@@ -1,6 +1,8 @@
 # Native FFPR durable memory
 
-**November 28 V1.1.** [Release record and evidence](docs/release.md#v11-preparation-november-28).
+**November 28 V1.1.** Published as Latest and verified the exact public
+downloads and installer. The matching DLL is installed in FFV.
+[Release record and evidence](docs/release.md#v11-november-28).
 
 **November 28 FFV Cave and Wind Shrine.** Cave 1F lists its return under
 Map Exits. The world route to Cave 3F can use the Cave 2F switch, and the
