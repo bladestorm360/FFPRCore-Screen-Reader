@@ -240,6 +240,89 @@ void ff4_world_entrances(map_state::Flags flags){
     expect(list.rows.size()>2&&field::filter_worker::build_categories(list).views[0].order.size()==list.rows.size(),
            "literal world discovery still lists every physical Troia and Troia Castle entrance");
 }
+void karnak_town(map_state::Flags flags) {
+    constexpr int town=87, shop=88, inn=89;
+    const auto* outside=baked::submap_by_map_id(town);
+    const auto* inside=baked::submap_by_map_id(shop);
+    if(!outside||!inside){expect(false,"Karnak town and equipment shop exist");return;}
+    const auto& town_grid=baked::grids(*outside);
+    const auto& shop_grid=baked::grids(*inside);
+    flags.current_area_id=25;
+    flags.local.fill(0);flags.area.fill(0);
+    flags.scenario[41]=1;
+    const auto target=[](int map,const baked::Object& object){
+        MapGoal goal;goal.map_id=map;goal.cell={object.layer,object.tx,object.ty};
+        goal.entity_id=object.entity_id();goal.raw_name=baked::object_identifier(object);
+        goal.object_type=int(object.type);return goal;
+    };
+    const auto snapshot=[&](int map,Cell start,const MapGoal& goal,TargetKind kind){
+        auto origin_flags=flags;origin_flags.current_map_id=map;
+        RouteSnapshot route(map_state::Resolver(origin_flags,fixture::records));
+        route.map_id=map;route.submap=baked::submap_by_map_id(map);route.layer=start.layer;
+        route.position=world_of_cell(*route.submap,start);route.locale=L"en";route.vehicle={true,1,1,{},map};
+        route.goal=goal;route.kind=kind;
+        if(map==town)for(const auto& object:town_grid.objects) {
+            if(baked::str(object.group)!=L"ev_e_fire"||!route.state.active(*outside,object))continue;
+            NativeObstacle captured;captured.type=int(object.type);captured.id=object.entity_id();
+            captured.cell={object.layer,object.tx,object.ty};captured.raw_name=baked::object_identifier(object);
+            route.obstacles.push_back(std::move(captured));
+        }
+        return route;
+    };
+    std::thread worker([&]{
+        flags.current_map_id=town;
+        map_state::Resolver state(flags,fixture::records);
+        const auto list=connected_objects_snapshot(town,state);
+        expect(!has(list,shop,town),"neither equipment-shop return is listed from Karnak town");
+        expect(std::count_if(list.begin(),list.end(),[](const auto& row){return row.map_id==shop&&row.shop;})==2,
+               "both shopkeepers remain remote destinations");
+        expect(std::any_of(list.begin(),list.end(),[](const auto& row){
+            return row.map_id==92&&row.dest_map_id==93&&(row.world_exit||row.type==baked::ObjType::GotoMap);
+        }),"Karnak pub retains its onward floor, including its scripted stair");
+        int entrances=0,returns=0;
+        for(const auto& entry:town_grid.objects) {
+            if(entry.type!=baked::ObjType::GotoMap||entry.a!=shop)continue;
+            ++entrances;
+            auto route=snapshot(town,{1,28,41},target(town,entry),TargetKind::Transition);
+            const auto plan=plan_snapshot(route);
+            expect(plan.path.success&&!plan.path.walk_phases.empty()&&plan.path.walk_phases.back().cells.back()==route.goal.cell,
+                   "each physical town entrance remains reachable on foot");
+        }
+        for(const auto& entry:shop_grid.objects) {
+            if(entry.type!=baked::ObjType::GotoMap||entry.a!=town)continue;
+            ++returns;
+            auto route=snapshot(shop,{1,entry.tx,entry.ty-1},target(shop,entry),TargetKind::Transition);
+            const auto plan=plan_snapshot(route);
+            expect(plan.path.success&&!plan.path.walk_phases.empty()&&plan.path.walk_phases.back().cells.back()==route.goal.cell,
+                   "each return remains directly usable from inside the shop");
+        }
+        expect(entrances==2&&returns==2,"both pairs of native equipment-shop doors remain in the bake");
+        const auto chest=std::find_if(town_grid.objects.begin(),town_grid.objects.end(),[](const auto& object){
+            return object.type==baked::ObjType::TreasureBox&&object.entity_id()==144;
+        });
+        expect(chest!=town_grid.objects.end(),"Karnak town has the reported chest");
+        if(chest==town_grid.objects.end())return;
+        const auto goal=target(town,*chest);
+        for(const int flame_cleared:{0,1}) {
+            flags.scenario[47]=flame_cleared;
+            for(const auto& [map,at]:{std::pair{town,Cell{1,28,41}},std::pair{inn,Cell{1,3,9}}}) {
+                auto browsing=snapshot(map,at,goal,TargetKind::Interact);
+                auto directions=snapshot(map,at,goal,TargetKind::Interact);
+                const auto route=plan_snapshot(directions).path;
+                const auto browse=plan_browse_snapshot(browsing).route;
+                std::printf("Karnak chest from %d, flame receipt %d: successful %d, next %d, %ls\n",
+                            map,flame_cleared,route.success,route.next_map_id,route.reason.c_str());
+                if(flame_cleared==0) {
+                    expect(!route.success&&route.reason==L"Blocked by flames"&&browse.reason==route.reason,
+                           "the closed route in town and from the inn identifies the flames");
+                } else {
+                    expect(route.success&&route.reason.empty()&&(map==town?browse.direct:browse.via_map_id==town),
+                           "clearing the native flame group leaves a usable chest route from town and the inn");
+                }
+            }
+        }
+    });worker.join();
+}
 void ff4_zot_chest(map_state::Flags flags) {
     MapGoal target;target.map_id=206;target.cell={0,16,9};target.entity_id=25;
     const auto* fifth=baked::submap_by_map_id(206);
@@ -292,6 +375,7 @@ int main(){
         auto flags=std::make_unique<map_state::Flags>();flags->scenario.fill(0);flags->treasure.fill(0);flags->global.fill(0);
         if(number==3){dwarven(*flags);town_returns(*flags);animated_object_floors();}
         if(number==4){kaipo_returns(*flags);ff4_return_floors(*flags);ff4_world_entrances(*flags);ff4_zot_chest(*flags);}
+        if(number==5)karnak_town(*flags);
         int largest=0,root=0;
         for(int i=0;i<baked::submap_count();++i){
             const auto* sm=baked::submap_at(i);if(sm->world||sm->first_map_id<=0)continue;

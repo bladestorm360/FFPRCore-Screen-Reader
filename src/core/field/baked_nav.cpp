@@ -3817,6 +3817,9 @@ std::unordered_set<const baked::Object*> remote_return_doors(const baked::Submap
             remote_exits::Door door;door.source=source;door.destination=target;door.source_depth=floor.depth;
             door.destination_depth=level==depth.end()?-1:level->second;door.footprint=object;
             door.known=destination&&!destination->world&&state.known(*floor.submap)&&state.known(*destination);
+            // Both equipment-shop doors come back onto the same Karnak town
+            // street. Still require their individual native reciprocal pair.
+            door.paired_current_return_redundant=game::is(game::Id::FF5)&&map_id==87&&floor.map_id==88;
             doors.push_back(door);originals.push_back(&original);
         }
     }
@@ -4790,6 +4793,13 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
         result.path.error == L"No path found") {
         result.path.reason = T(L"Event required");
     }
+    // Karnak's town initializer removes the solid flame group after receipt
+    // 47. The gate-free route proof owns whether it is blocking this approach.
+    if (!result.path.success && !result.goal.storyline && game::is(game::Id::FF5) &&
+        result.goal.map_id == 87 && result.goal.entity_id == 144 &&
+        result.goal.cell == Cell{2,12,39} && result.path.reason == T(L"Story gated") &&
+        snapshot.state.scenario_value(47) == std::optional<int>(0))
+        result.path.reason = T(L"Blocked by flames");
     // A campaign objective is already the next incomplete story step. A
     // failed approach describes missing directions, not a later story lock.
     if (result.goal.storyline && !result.path.success && result.path.reason == T(L"Story gated"))

@@ -15,6 +15,7 @@ struct Door {
     std::optional<baked_route::Cell> arrival;
     int arrival_direction=0; // native PointIn facing: Up1,Right2,Down4,Left8
     bool known=false;
+    bool paired_current_return_redundant=false;
 };
 
 inline bool at_door(const baked_route::Cell& point,const baked::Object& door,int facing=0) {
@@ -65,7 +66,10 @@ inline std::vector<bool> return_mask(const std::vector<Door>& doors,const std::f
         // source floor, so unrelated interiors never make each other visible.
         if(returns_here(door)){
             hidden[i]=!current_returns.at(door.source).keep;
-            continue;
+            // Some paired doors lead back into the same verified approach
+            // space. An explicitly reviewed pair can be omitted even when
+            // its two native arrivals have different coordinates.
+            if(hidden[i]||!door.paired_current_return_redundant)continue;
         }
         if(door.footprint.type!=baked::ObjType::GotoMap||!door.known||!door.arrival||door.source_depth<=0||door.destination_depth<0||
             door.destination_depth>=door.source_depth||door.source==door.destination)continue;

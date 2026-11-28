@@ -1,5 +1,22 @@
 # Build and distribution security
 
+## November 28 FFV Karnak town
+
+The installed 22,166,528-byte FFV DLL has SHA-256
+`0262b745fbeda99661d6d28c0e424222fccea446c57befc15b2796d9f8194252`.
+Remote exit listing, field effects, and all-six browse routes passed.
+Karnak coverage includes both shop entrances and returns, the scripted
+pub stairs, and the chest from town and the inn with flames active and
+cleared. The build verified 73 resources and 9,305 native names. The
+isolated smoke resolved all 47 exports.
+
+Defender definitions `1.463.507.0` reported no threats on 22 exact staged
+files. Hashes stayed unchanged with no matching detection events. Windows
+denied exclusion inspection. The FFV installer matched all 22 files and
+preserved all 23 protected file states. Receipts are in
+`build_check/ff5-karnak-town-20261128`. The previous source checkpoint
+was `066293b`. Gameplay confirmation remains pending.
+
 ## November 28 Windows setup package
 
 `releases/FFPR-Screen-Reader-Setup.zip` is 26,931 bytes with SHA-256

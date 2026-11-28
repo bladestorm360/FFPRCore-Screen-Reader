@@ -438,3 +438,25 @@ selectable even with exit grouping on. The owned projection marks a redundant
 scripted return and the scanner skips it before resolving names. Raw scripted
 travel records and all native routing edges remain available.
 [Scope and evidence](MAP_AUDIT_FOLLOWUPS_20261028.md#november-10-ffiv-world-entrance-directions-and-remote-returns).
+
+## November 28 FFV Karnak town
+
+The FFV Steam log at 487972 lists both Equipment Shop returns as remote
+destinations from Karnak itself. Town entrances 44 and 45 on map 87 use
+shop PointIn 1 and 2. Shop returns 11 and 12 on map 88 use town PointIn
+2 and 3. Each arrival is adjacent to its opposite door. The two occupied
+town landings share one street, with a walking route between them. The
+remote list now suppresses both exact reciprocal returns while the player
+is on that street's map. The two town doors, both shopkeepers, onward floors,
+and both exits from inside the shop keep their routing and native identities.
+Other maps retain the existing treatment of distinct or uncertain landings.
+
+The same log at 488094 shows the inn's route to town chest 144 at (12,39),
+upper layer, blocked by a story gate. Its chest record is an ordinary treasure
+entry. The town initializer `sc_map_20060` includes the solid flame group
+until the castle escape's final world return `sc_e_0048_4` records scenario
+flag 47. The selected chest now reports “Blocked by flames” when the existing
+gate-free route proof succeeds and flag 47 is still unset. The
+navigation worker still uses the actual live and projected collision. The
+directions and browse replay uses the reported town and inn positions with
+the flames active and cleared.

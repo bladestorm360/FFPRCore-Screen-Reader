@@ -6,6 +6,11 @@ rollback record per game. It uses the current stable public release bundle.
 [Build and package](docs/release.md#windows-setup-package) ·
 [Verification](docs/SECURITY_AND_DISTRIBUTION.md#november-28-windows-setup-package).
 
+**November 28 FFV Karnak town.** Both Equipment Shop returns stay available
+inside the shop. The town list omits their redundant remote rows. The chest
+route identifies the flames when they block access.
+[Native door and flame evidence](docs/re/MAP_EXITS.md#november-28-ffv-karnak-town).
+
 **November 28 FFV Old.** Old is spoken once when the aged party sprite
 is visible. The internal aging ticks update the comparison baseline silently.
 [Battle evidence](docs/re/STAT_EFFECTS_20261024.md#november-28-ffv-old).

@@ -1,4 +1,18 @@
 {
+  "Blocked by flames": {
+    "en": "Blocked by flames",
+    "ja": "炎に阻まれている",
+    "fr": "Passage bloqué par les flammes",
+    "it": "Passaggio bloccato dalle fiamme",
+    "de": "Durch Flammen versperrt",
+    "es": "El fuego bloquea el paso",
+    "ko": "불길로 길이 막혀 있습니다",
+    "zht": "道路被火焰阻擋",
+    "zhc": "道路被火焰阻挡",
+    "ru": "Путь преграждает пламя",
+    "th": "เปลวไฟขวางทาง",
+    "pt": "Passagem bloqueada pelas chamas"
+  },
   "Approach the Tycoon meteorite": {
     "en": "Approach the Tycoon meteorite",
     "ja": "タイクーンの隕石に近づく",
