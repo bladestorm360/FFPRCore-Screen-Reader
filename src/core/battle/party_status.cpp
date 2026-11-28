@@ -3,6 +3,7 @@
 // UI labels and transient effect animations. No status cache or hook is needed.
 // Native source, bounds and verification: docs/re/BATTLE_LIVE_STATUS_20261029.md.
 #include "party_status.h"
+#include "status_appearance.h"
 #include "battle_util.h"
 #include "../displayed_ui.h"
 #include "../il2cpp.h"
@@ -57,8 +58,20 @@ std::vector<std::wstring> current_lines(void* player, void* view)
     if (nc < 0 || nc > kSourceLimit || nf < 0 || nf > kSourceLimit) return lines;
     std::array<int, kTotalLimit> represented{};
     int count = 0;
+    const bool ff5 = game::is(game::Id::FF5);
+    bool old_checked = false;
     auto add = [&](void* condition) {
-        if (!condition || condition_type(condition) == 4) return; // HP color owns Critical.
+        if (!condition) return;
+        const int type = condition_type(condition);
+        if (type == 4) return; // HP color owns Critical.
+        if (ff5 && type == kConditionTypeOld) {
+            // Two native entries can share the same aged body. The current
+            // image owns this one status across both condition sources.
+            if (old_checked) return;
+            old_checked = true;
+            if (ff5_old_appearance_visible(player)) lines.push_back(T(L"Old"));
+            return;
+        }
         const int id = condition_id(condition);
         if (id <= 0) return;
         for (int i = 0; i < count; ++i) if (represented[i] == id) return;

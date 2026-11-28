@@ -71,6 +71,7 @@ int painting_art=0;
 Node* acting_art_unit=nullptr;
 Node player_art_name;
 Node asset_addresses, loaded_sprites;
+Node battle_plug;
 bool sprite_cache_ready=false;
 std::map<std::wstring, Node> managed_names;
 std::map<std::string,bool> states;
@@ -100,6 +101,7 @@ void* player_art(void*,int32_t status,int32_t job,bool face,const void*){
  if(face)return nullptr;
  if(status==20){player_art_name.name=L"MO_FF6_N050_C00";return &player_art_name;}
  if(status==24){player_art_name.name=L"BC_FF4_P001";return &player_art_name;}
+ if(status==25){player_art_name.name=L"BC_FF5_P003_J00";return &player_art_name;}
  if(status!=1)return nullptr;
  player_art_name.name=job==7?L"BC_FF1_P007":L"BC_FF1_P001";
  return &player_art_name;
@@ -124,6 +126,7 @@ bool Class::is(void*p){
  return true;
 }
 il2cpp::Class*Class::get(){
+ if(std::string_view(name)=="BattlePlugManager")return reinterpret_cast<il2cpp::Class*>(&fixture::battle_plug);
  if(!fixture::sprite_cache_ready)return nullptr;
  if(std::string_view(name)=="AssetBundlePathMatch")return reinterpret_cast<il2cpp::Class*>(&fixture::asset_addresses);
  if(std::string_view(name)=="ResourceManager")return reinterpret_cast<il2cpp::Class*>(&fixture::loaded_sprites);
@@ -134,6 +137,9 @@ int32_t Field::get(){
  if(n=="<BattleSpriteEntity>k__BackingField"||n=="characterSR"||n=="sprite")
   return offsetof(fixture::Node,data);
  if(n=="meshRenderer")return offsetof(fixture::Node,view);
+ if(n=="<BattleStatusControl>k__BackingField"||n=="<BattleStatusControlInfo>k__BackingField")
+  return offsetof(fixture::Node,data);
+ if(n=="battlePlayerDatas")return offsetof(fixture::Node,list);
  if(n=="rideOnMagicArmor")return offsetof(fixture::Node,machine);
  if(n=="battleMagicArmor")return offsetof(fixture::Node,eligible_players);
  if(n=="entityMeshRenderer")return offsetof(fixture::Node,view);
@@ -254,6 +260,7 @@ bool has(std::wstring_view value){
         value==L"Character appearance bc_ff1_p001"||value==L"Character appearance bc_ff1_p007"||
         value==L"Character appearance mo_ff6_n050_c00"||value==L"Character appearance bc_ff4_p001"||
         value==L"Status appearance body bc_ff4_p001_p"||value==L"Status appearance body bc_ff6_p022"||
+        value==L"Status appearance changed bc_ff5_p003_j00_o default_00"||
         value==L"Status appearance body bc_ff6_p025"||value==L"Character appearance bc_ff6_p011";
 }
 std::wstring T(std::wstring_view v){return std::wstring(v);}
@@ -305,6 +312,7 @@ ref::Class kBattlePlayerData{"Last.Battle","BattlePlayerData"};
 void* unit_info(void* p){return p?static_cast<fixture::Node*>(p)->data:nullptr;}
 void* info_functions(void* p){return p?static_cast<fixture::Node*>(p)->list:nullptr;}
 void* acting_party_unit(){return fixture::acting_art_unit;}
+std::wstring unit_name(void* p){return p?static_cast<fixture::Node*>(p)->name:std::wstring();}
 bool battle_presentation_ready(){return fixture::battle_art_ready;}
 bool in_battle(){return fixture::battle_active;}
 bool formation_first_turn(){return fixture::opening_turn;}
@@ -435,6 +443,38 @@ int main(){using namespace fixture;namespace b=ffpr::battle;int failures=0;auto 
   expect(!b::focused_enemy_unit(),"closing targeting releases the enemy in every title");
  }
  fixture::game=::game::Id::FF6;
+ {
+  fixture::game=::game::Id::FF5;frame::g_main_tid=GetCurrentThreadId();
+  Node actor, info, entity, body, renderer, regular, aged, status, status_info, groups, addresses, cache;
+  actor.name=L"Lenna";actor.data=&info;info.data=&entity;entity.data=&body;entity.state=25;
+  body.data=&regular;body.view=&renderer;regular.name=aged.name=L"Default_00";
+  battle_plug.data=&status;status.data=&status_info;List party{&actor};status_info.list=&party;
+  groups.fields["bc_ff5_p003_j00_o"]=&addresses;
+  addresses.fields["Default_00"]=ref::new_str(L"aged-address");cache.fields["aged-address"]=&aged;
+  asset_addresses.data=&groups;loaded_sprites.data=&cache;sprite_cache_ready=true;
+  spoken.clear();battle_art_ready=false;b::observe_ff5_old_appearance(&actor);
+  battle_art_ready=true;frame::run_tick();
+  expect(spoken.empty()&&!b::old_appearances[0].identity,"battle entry cannot arm an Old cue");
+  b::observe_ff5_old_appearance(&actor);b::observe_ff5_old_appearance(&actor);
+  frame::run_tick();
+  expect(spoken.empty()&&!b::ff5_old_appearance_visible(&actor),"a normal sprite with the same pose name stays silent");
+  body.data=&aged;renderer.visible=false;
+  for(int i=0;i<3;++i)frame::run_tick();
+  expect(spoken.empty()&&!b::ff5_old_appearance_visible(&actor),"loaded aging art on a hidden renderer stays silent");
+  renderer.visible=true;
+  for(int i=0;i<3;++i)frame::run_tick();
+  expect(spoken==std::vector<std::wstring>{L"Lenna: Old"}&&b::ff5_old_appearance_visible(&actor),
+         "the live aged sprite announces once and is available to manual status reads");
+  b::observe_ff5_old_appearance(&actor);frame::run_tick();
+  expect(spoken.size()==1,"a refresh of the same visible application stays silent");
+  b::retire_ff5_old_appearance(&actor);b::observe_ff5_old_appearance(&actor);frame::run_tick();
+  expect(spoken.size()==2,"a fresh appearance after removal can announce again");
+  b::retire_ff5_old_appearance(&actor);b::observe_ff5_old_appearance(&actor);
+  party.clear();frame::run_tick();b::reset_ff5_old_appearance();frame::run_tick();
+  expect(spoken.size()==2,"retired or unrooted targets cannot publish a pending appearance");
+  battle_plug.data=nullptr;sprite_cache_ready=false;battle_art_ready=false;spoken.clear();
+  fixture::game=::game::Id::FF6;
+ }
  {
   Node actor,info,entity,body,renderer,pose,weapon,weapon_renderer,loader,blade;
   actor.data=&info;info.data=&entity;entity.data=&body;body.data=&pose;body.view=&renderer;

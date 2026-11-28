@@ -157,6 +157,7 @@ std::wstring resolve_condition_name(void* condition, int id, int* resolved_type 
 
 constexpr int kConditionTypeKO = 5;      // ConditionType.UnableFight
 constexpr int kConditionTypeStone = 11;  // ConditionType.Mineralization
+constexpr int kConditionTypeOld = 32;    // FFV ConditionType.Aging
 
 // --- actions and items --------------------------------------------------------------------------
 /// BattleMessagePatches.GetActionName(BattleActData): item, ability, then command name; empty on miss.

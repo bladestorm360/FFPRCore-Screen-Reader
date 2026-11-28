@@ -5,10 +5,12 @@
 #include "status_appearance.h"
 #include "../displayed_ui.h"
 #include "../frame.h"
+#include "../hooks.h"
 #include "../modtext.h"
 #include "../say.h"
 #include "../ui/preferences.h"
 #include "../unity.h"
+#include <array>
 
 namespace ffpr::battle {
 namespace {
@@ -40,6 +42,34 @@ ref::Method mWeaponSprite{kWeaponSpriteRenderer, "get_sprite", 0};
 ref::Class kMasterManager{"Last.Data.Master", "MasterManager"};
 ref::Class kAssets{"Last.Data", "CharacterAssetNameProvider"};
 ref::Method mGetAssetName{kAssets, "GetAssetName", 4};
+ref::Class kBattlePlug{"Last.Battle", "BattlePlugManager", game::kFF5};
+ref::Field fStatusControl{kBattlePlug, "<BattleStatusControl>k__BackingField"};
+ref::Class kStatusControl{"Last.Battle", "BattleStatusControl", game::kFF5};
+ref::Field fStatusControlInfo{kStatusControl, "<BattleStatusControlInfo>k__BackingField"};
+ref::Class kStatusControlInfo{"Last.Battle", "BattleStatusControlInfo", game::kFF5};
+ref::Field fLiveParty{kStatusControlInfo, "battlePlayerDatas"};
+
+struct OldAppearance {
+    uintptr_t identity = 0;
+    int pending = 0;
+};
+std::array<OldAppearance, 4> old_appearances;
+constexpr char kOldAppearanceTask[] = "Battle.OldAppearance";
+
+void* live_old_target(uintptr_t identity)
+{
+    auto* plug = il2cpp::read_static_ptr(kBattlePlug.get(), "instance");
+    auto* status = ref::rd<void*>(plug, fStatusControl);
+    auto* info = ref::rd<void*>(status, fStatusControlInfo);
+    auto* party = ref::rd<void*>(info, fLiveParty);
+    const int count = unity::list_count(party);
+    if (count < 1 || count > static_cast<int>(old_appearances.size())) return nullptr;
+    for (int i = 0; i < count; ++i) {
+        auto* unit = unity::list_at(party, i);
+        if (reinterpret_cast<uintptr_t>(unit) == identity) return unit;
+    }
+    return nullptr;
+}
 
 void* visible_mesh_sprite(void* body)
 {
@@ -125,6 +155,73 @@ void append(std::wstring& description, const std::wstring& detail)
     description += detail;
 }
 } // namespace
+
+bool ff5_old_appearance_visible(void* player)
+{
+    if (!game::is(game::Id::FF5) || !frame::on_main_thread() ||
+        !battle_presentation_ready() || !kBattlePlayerData.is(player)) return false;
+    auto* entity = ref::rd<void*>(unit_info(player), fSpriteEntity);
+    if (!kPlayerEntity.is(entity)) return false;
+    auto* sprite = visible_body_sprite(entity);
+    if (!sprite) return false;
+    const auto sprite_name = unity::name(sprite);
+    return rendered_ff5_old_sprite(sprite, visible_player_art(entity), sprite_name, art_key(sprite_name, L""));
+}
+
+void observe_ff5_old_appearance(void* player)
+{
+    if (!frame::on_main_thread() || !battle_presentation_ready() ||
+        !kBattlePlayerData.is(player)) return;
+    const auto identity = reinterpret_cast<uintptr_t>(player);
+    OldAppearance* available = nullptr;
+    for (auto& row : old_appearances) {
+        if (row.identity == identity) return; // One cue per visible application.
+        if (!row.identity && !available) available = &row;
+    }
+    if (!available) return;
+    auto& row = *available;
+    row.identity = identity;
+    // Native condition Add can precede the first drawn aged pose. Reacquire
+    // the live player each time. One short task per affected slot, no scene scan.
+    constexpr int max_frames = 90;
+    row.pending = frame::every_frame([&row, identity, ticks = 0]() mutable {
+        if (!battle_presentation_ready() || row.identity != identity) {
+            row = {};
+            return false;
+        }
+        if (ticks++ % 3 == 0 && hooks::guarded_r("Battle.OldAppearance", false, [&] {
+            auto* unit = live_old_target(identity);
+            if (!ff5_old_appearance_visible(unit)) return false;
+            say(unit_name(unit) + L": " + T(L"Old"), false);
+            return true;
+        })) {
+            row.pending = 0;
+            return false;
+        }
+        if (ticks < max_frames) return true;
+        row = {};
+        return false;
+    }, kOldAppearanceTask, max_frames);
+}
+
+void retire_ff5_old_appearance(void* player)
+{
+    const auto identity = reinterpret_cast<uintptr_t>(player);
+    for (auto& row : old_appearances) {
+        if (row.identity != identity) continue;
+        if (row.pending) frame::cancel(row.pending);
+        row = {};
+        return;
+    }
+}
+
+void reset_ff5_old_appearance()
+{
+    for (auto& row : old_appearances) {
+        if (row.pending) frame::cancel(row.pending);
+        row = {};
+    }
+}
 
 bool read_focused_enemy_appearance()
 {

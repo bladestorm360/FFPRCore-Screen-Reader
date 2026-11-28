@@ -1,5 +1,24 @@
 # Build and distribution security
 
+## November 28 FFV navigation, spell availability and Old
+
+FFV's installed DLL has 22,162,432 bytes and SHA-256
+`f00e1395326e67b9e63ed37721c762d5303778721eb141d3bcaa7d0dec6d703d`.
+Ten offline checks passed. The FFV story contacts replay ran 57 assertions
+over 51 route legs. The Fire-Powered Ship replay ran 1,491 assertions across
+2,959 legs and 4,280 cell observations. Battle feedback and focus checks
+covered 60 silent aging writes and a single cue after the aged sprite drew.
+The build verified 73 resources and 9,263 native names. The isolated smoke
+resolved all 47 exports.
+
+Defender definitions `1.463.507.0` reported no threats on the 22 staged
+files. All scan hashes were unchanged, and there were no matching detection
+events. Windows denied exclusion inspection, and no signing certificate was
+available. The installer matched all 22 FFV payload hashes and preserved 23
+protected file states. Receipts are in `build_check/ff5-combined-20261128`.
+The previous source checkpoint was `acdaccf`. The game remained closed
+during installation and gameplay verification remains pending.
+
 ## November 28 FFV battle countdown
 
 FFV's installed DLL has 22,147,072 bytes and SHA-256

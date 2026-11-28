@@ -28,6 +28,7 @@ HitMessage hit_message_dispatch=nullptr,native_hit_original=nullptr;
 bool defer_digits=false;std::vector<std::function<void()>> digit_callbacks;
 bool enemy_critical=false;
 int ko_master_id=-1;
+int aging_observations=0, aging_retirements=0;
 Dict* next_modifiers=nullptr;bool direct_applies=true,ff5_callback=false;
 json::Value status_catalog;
 game::Id game_id=game::Id::FF2;Node *effect=nullptr,*victim=nullptr,*caster=nullptr,*provider=nullptr,*key=nullptr;int drawn=1,native_calls=0,expected_type=-1;bool apply=false;
@@ -129,6 +130,16 @@ bool alive(void*p){return p!=nullptr;}
 int array_length(void*p){return list_count(p);}
 void* array_at(void*p,int i){return list_at(p,i);}
 }
+namespace il2cpp {
+bool read_string(void* object,wchar_t* out,size_t capacity) {
+ if(!object||!out)return false;
+ const auto& value=static_cast<fixture::Node*>(object)->name;
+ if(value.size()>=capacity)return false;
+ std::copy(value.begin(),value.end(),out);
+ out[value.size()]=L'\0';
+ return true;
+}
+}
 namespace ffpr{void say(std::wstring_view s,bool){fixture::spoken.emplace_back(s);}}
 namespace modtext{std::wstring T(std::wstring_view s){if(fixture::game_id==game::Id::FF2)if(const auto* key=fixture::status_catalog.get(std::wstring(s));key)if(const auto* value=key->get(L"en");value&&value->is_string())return value->s;return std::wstring(s);}std::wstring TF(std::wstring_view s,std::initializer_list<std::wstring>a){return text::format(s,a);}const std::wstring& lang(){static const std::wstring value=L"en";return value;}LocaleScope::LocaleScope(std::wstring){}LocaleScope::~LocaleScope(){}}
 namespace background{bool post(std::function<void()>f,Lane){if(fixture::background_busy)return false;fixture::work.push_back(std::move(f));return true;}}
@@ -140,7 +151,11 @@ namespace dedup{bool text(const char*,std::wstring_view,Scope){return true;}void
 namespace ffpr::battle::rendered {void damage(void*,bool,std::function<void(int)>f){if(fixture::defer_digits){const int digits=fixture::drawn;fixture::digit_callbacks.push_back([f=std::move(f),digits]{f(digits);});}else f(fixture::drawn);}void hit_count(void*){}}
 namespace ffpr::battle {
 bool in_battle(){return true;}
+bool battle_presentation_ready(){return true;}
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
+void observe_ff5_old_appearance(void*){++fixture::aging_observations;}
+void retire_ff5_old_appearance(void*){++fixture::aging_retirements;}
+void reset_ff5_old_appearance(){}
 std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"Unknown";}
 std::wstring action_name(void* p){return p?static_cast<fixture::Node*>(p)->name:L"";}
 void action_actor_started(void*){}void action_actor_finished(){}
@@ -379,6 +394,30 @@ int main(){using namespace fixture;namespace b=ffpr::battle;namespace s=b::speci
  namespace stats=ffpr::battle::stat_feedback;
  stats::original_status=b::o_UpdateTempParamter=&status_modify;
  stats::original_direct=&direct_modify;b::o_Add=&stat_add;b::o_AddFF5=&stat_add5;
+ {
+  game_id=game::Id::FF5;stats::reset();stats::active=true;spoken.clear();
+  Node lenna,old;lenna.name=L"Lenna";old.id=37;old.type=b::kConditionTypeOld;
+  List targets{&lenna}, old_functions{&old};
+  lenna.conditions={&old};lenna.functions=&old_functions;
+  b::removal_reset_state();
+  b::d_AddFF5(nullptr,&lenna,37,true,nullptr);flush();
+  expect(spoken.empty()&&aging_observations==1,"Old Add only arms observation of the aged sprite");
+  stats::observe_action(&lenna,L"Lenna",&targets);
+  stats::original_aging_parameters=+[](void* unit,const void*) {
+   for(int stat:{4,6,5,14}) stats::direct(unit,stat,-1,nullptr);
+  };
+  const int writes=native_calls;
+  for(int tick=0;tick<15;++tick) stats::aging_parameters(&lenna,nullptr);
+  stats::finish_action(&lenna,&targets);flush();
+  expect(native_calls==writes+60&&lenna.temporary_values[4]==-15&&spoken.empty(),
+         "fifteen aging ticks still change four native stats without direct or delayed speech");
+  stats::direct(&lenna,4,2,nullptr);flush();
+  expect(spoken==std::vector<std::wstring>{L"Lenna: Strength up"},"an ordinary write to the same stat remains audible after aging");
+  spoken.clear();
+  b::d_RemoveFunction(nullptr,&lenna,37,nullptr);flush();
+  expect(spoken.empty()&&aging_retirements==1,"Old removal retires the visual receipt without a raw condition announcement");
+  stats::reset();
+ }
  for(auto game:{game::Id::FF1,game::Id::FF2,game::Id::FF3,game::Id::FF4,game::Id::FF5,game::Id::FF6}) {
   game_id=game;stats::reset();spoken.clear();work.clear();Node ally,temp;ally.name=L"Ally";ally.temporary=&temp;
   Dict empty_modifiers,defense_up{{reinterpret_cast<void*>(11),reinterpret_cast<void*>(8)}};

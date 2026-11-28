@@ -1,5 +1,13 @@
 # Native FFPR durable memory
 
+**November 28 FFV Old.** Old is spoken once when the aged party sprite
+is visible. The internal aging ticks update the comparison baseline silently.
+[Battle evidence](docs/re/STAT_EFFECTS_20261024.md#november-28-ffv-old).
+
+**November 28 FFV field spell availability.** Dimmed field spell rows
+speak “Unavailable” from the same native value that colors the row.
+[FFV menu implementation](docs/PORT_STATUS.md#ff5-module-srcgamesff5--finished-first-pass).
+
 **November 28 FFV meteorite travel.** Pathfinder connects Karnak and Walse
 through their playable meteorite landings. It can reach the Wind Drake
 from the other side on the way to Tule. [Route and native evidence](docs/re/MAP_EXITS.md#november-28-ffv-meteorite-travel).

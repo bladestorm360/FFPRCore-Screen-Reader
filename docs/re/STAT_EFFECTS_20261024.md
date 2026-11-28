@@ -1,5 +1,28 @@
 # Applied battle statistic changes, all six games
 
+## November 28 FFV Old
+
+The owner's FFV log shows Aegir using Feeler and Lenna taking 24 damage.
+After “Lenna: Old” at 482493.000, the mod queued 59 Strength, Agility,
+Stamina, and Magic decreases over the following six seconds.
+The installed FFV `AgingConditionFunction.Update` calls its dedicated
+`SetParameter` body at RVA `0xCD7130`. That body applies these changes
+through the native temporary-parameter helper, without a displayed result
+producer. The FFV hook observes the exact setter scope so those updates keep
+the comparison baseline current without spilling into a later action's speech.
+
+The two FFV Aging condition entries, 37 and 114, have neither a status icon
+nor a battle effect asset. Aging changes the party character's battle motion
+set. The Add receipt arms a bounded observation of the current battle roster.
+The observer checks at most every third frame for 90 frames and speaks Old
+once the active body renderer holds the exact loaded aged sprite for a pose
+with audited pixel changes. Native reconciliation retires the receipt when
+the condition is gone. Battle entry and teardown cancel pending observations.
+Manual party status uses the same sprite test. The all-six statistic feedback
+fixture checks silent native aging writes, the updated baseline, and an
+ordinary stat change after aging. The battle focus fixture checks the delayed
+aged sprite, wrong sprite, hidden renderer, and lifecycle cancellation.
+
 November 6 [enemy visibility follow-up](ENEMY_STATUS.md). Gatlinger's
 Attack up/down came from native temporary parameter writes without a
 renderer. The combined correction limits this producer to party units.

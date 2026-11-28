@@ -251,7 +251,17 @@ battle targets ("All allies/enemies"), results log on L (points page only).
 - Kept as the core has them (FF1 behaviour): StatusMenuFocusPatches, GameTogglePatches,
   KeyboardGamepadReader, MessagePatches, the H key.
 - Mod_text key "No data available" added 2026-10-06 (line unreachable for now). English kept from the
-  C#: "Empty slot", "Slot N:", ", equipped", ", Not learned", "Lv.", "Mastered!".
+  C#: "Empty slot", "Slot N:", ", equipped", "Lv.", "Mastered!".
+- The FFV field spell list reads `AbilityContentListController.canUseAbilityIds`.
+  `UpdateFocus` and native Confirm use the same value for the spell's ID.
+  A visible dimmed row now adds the localized “Unavailable.” An
+  absent entry adds no status. The reported Blue Magic row keeps “???” as
+  its spell name and 3 MP as its cost. The field menu state does not establish
+  whether the party learned that spell.
+- FFV Old is reported when the party member's actual aged sprite is visible.
+  Its periodic internal stat changes are silent. Manual party status reads
+  use the same visible sprite check.
+  [Native evidence and timing](re/STAT_EFFECTS_20261024.md#november-28-ffv-old).
 - FF5 navigation additions: moved into the core (see "Core: FF5 navigation additions").
 
 ## FF4 module (`src/games/ff4`) — FINISHED (first pass)

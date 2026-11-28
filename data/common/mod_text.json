@@ -4829,6 +4829,20 @@
     "th": "ก้าว",
     "pt": "passos"
   },
+  "Unavailable": {
+    "en": "Unavailable",
+    "ja": "使用不可",
+    "fr": "Indisponible",
+    "it": "Non disponibile",
+    "de": "Nicht verfügbar",
+    "es": "No disponible",
+    "ko": "사용 불가",
+    "zht": "不可用",
+    "zhc": "不可用",
+    "ru": "Недоступно",
+    "th": "ไม่สามารถใช้งานได้",
+    "pt": "Indisponível"
+  },
   "Unavailable here": {
     "en": "Unavailable here",
     "ja": "ここでは利用不可",

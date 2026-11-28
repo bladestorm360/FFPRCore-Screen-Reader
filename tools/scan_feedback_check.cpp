@@ -140,6 +140,9 @@ namespace dedup{bool text(const char*,std::wstring_view,Scope){return true;}void
 namespace ffpr::battle::rendered {void damage(void*,bool,std::function<void(int)>f){if(fixture::defer_digits){const int digits=fixture::drawn;fixture::digit_callbacks.push_back([f=std::move(f),digits]{f(digits);});}else f(fixture::drawn);}void hit_count(void*){}}
 namespace ffpr::battle {
 ref::Class kBattleEnemyData{"Last.Battle","BattleEnemyData"};
+void observe_ff5_old_appearance(void*){}
+void retire_ff5_old_appearance(void*){}
+void reset_ff5_old_appearance(){}
 std::wstring unit_name(void*p){return p?static_cast<fixture::Node*>(p)->name:L"Unknown";}
 std::wstring action_name(void*){return {};}
 void action_actor_started(void*){}void action_actor_finished(){}

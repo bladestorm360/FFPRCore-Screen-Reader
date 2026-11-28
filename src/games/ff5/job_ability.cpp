@@ -75,15 +75,13 @@ ref::Class  kCommand{"Last.Data.Master", "Command", k5};
 ref::Method mCommandMesIdName{kCommand, "get_MesIdName", 0};
 
 ref::Class  kAbility{"Last.Data.Master", "Ability", k5};
+ref::Method mAbilityId{kAbility, "get_Id", 0};
 ref::Method mAbilityUseValue{kAbility, "get_UseValue", 0};
 
 ref::Class  kOwnedAbility{"Last.Data.User", "OwnedAbility", k5};
 ref::Method mOwnedAbilityMesIdName{kOwnedAbility, "get_MesIdName", 0};
 ref::Method mOwnedAbilityMesIdDescription{kOwnedAbility, "get_MesIdDescription", 0};
 ref::Method mOwnedAbilityAbility{kOwnedAbility, "get_Ability", 0};
-
-ref::Class  kAbilityUtility{"Last.Systems", "AbilityUtility", k5};
-ref::Method mCanUseMenuAbility{kAbilityUtility, "CanUseMenuAbility", 2};
 
 ref::Class  kAbilityCmd{"Serial.FF5.UI.KeyInput", "AbilityCommandController", k5};
 ref::Field  fCmdContentList{kAbilityCmd, "contentList"};
@@ -131,8 +129,8 @@ ref::Field  fTargetCurrentData{kItemTargetContent, "<CurrentData>k__BackingField
 ref::Class  kAbilityList{"Serial.FF5.UI.KeyInput", "AbilityContentListController", k5};
 ref::Field  fListSelectCursor{kAbilityList, "selectCursor"};
 ref::Field  fListContentList{kAbilityList, "contentList"};
+ref::Field  fListCanUseAbilityIds{kAbilityList, "canUseAbilityIds"};
 ref::Method mListSetCursor{kAbilityList, "SetCursor", 4};
-ref::Method mListGetTargetData{kAbilityList, "get_TargetData", 0};
 ref::Class  kAbilityInfoContent{"Last.UI.KeyInput", "BattleAbilityInfomationContentController", k5};
 ref::Field  fAbilityInfoData{kAbilityInfoContent, "<Data>k__BackingField"};
 
@@ -578,6 +576,20 @@ bool announce_use_target(void* self, int index)
 }
 
 // --- AbilityContentListController.SetCursor (spell list) ---------------------------------------
+bool unavailable_in_field_list(void* list, void* row, void* definition)
+{
+    // UpdateFocus uses this per-ability value to dim the row. The native
+    // Confirm handler reads the same value before admitting the spell.
+    auto* choices = ref::rd<void*>(list, fListCanUseAbilityIds);
+    if (!choices || !definition || !displayed::container_visible(row)) return false;
+    auto id = ref::call<int32_t>(mAbilityId, definition);
+    if (id <= 0) return false;
+    static auto* lookup = il2cpp::find_method(il2cpp::object_class(choices), "TryGetValue", 2);
+    bool usable = true;
+    void* args[]{&id, &usable};
+    return lookup && il2cpp::invoke_bool(lookup, choices, args, 2) && !usable;
+}
+
 bool announce_spell(void* self, int index)
 {
     if (!self) return false;
@@ -596,11 +608,10 @@ bool announce_spell(void* self, int index)
     name = strip_tags(name);
 
     std::wstring announcement = name;
-    int mp = use_value(ref::call<void*>(mOwnedAbilityAbility, ability));
+    auto* definition = ref::call<void*>(mOwnedAbilityAbility, ability);
+    int mp = use_value(definition);
     if (mp > 0) announcement += L", MP " + text::num(mp);
-    void* target = ref::call<void*>(mListGetTargetData, self);
-    if (target && mCanUseMenuAbility && !ref::call_static<bool>(mCanUseMenuAbility, target, ability))
-        announcement += L", Not learned";   // C#: hardcoded English
+    if (unavailable_in_field_list(self, controller, definition)) announcement += L", " + T(L"Unavailable");
     announcement = ui::menu_position(announcement, index, spell_count);
 
     if (!is_new(kCtxSpell, index)) return false;

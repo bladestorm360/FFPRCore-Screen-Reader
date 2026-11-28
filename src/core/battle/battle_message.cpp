@@ -34,6 +34,7 @@
 #include "rendered_feedback.h"
 #include "special_feedback.h"
 #include "stat_feedback.h"
+#include "status_appearance.h"
 #include "action_effects.h"
 #include "battle.h"
 #include "battle_util.h"
@@ -490,6 +491,10 @@ void condition_added(void* unit, int id)
     std::wstring name = resolve_condition_name(confirmed, id, &type);
     if (enemy && type != kConditionTypeKO) return;
     if (stat_feedback::announce_condition(unit,name,type)) return;
+    if (type == kConditionTypeOld && game::is(game::Id::FF5)) {
+        if (confirmed && !g_battle_end_cleanup) observe_ff5_old_appearance(unit);
+        return;
+    }
     if (!name.empty()) ffpr::say(unit_name(unit) + L": " + name, false);
 }
 
@@ -516,6 +521,7 @@ Void_t o_BattleEndRecoveryCondition;
 void d_BattleEndRecoveryCondition(void* self, const void* mi)
 {
     g_battle_end_cleanup = true;
+    if (game::is(game::Id::FF5)) reset_ff5_old_appearance();
     stat_feedback::cleanup();
     o_BattleEndRecoveryCondition(self, mi);
     // FF1 and FF6: the scope ends with the cleanup. FF2-FF5 keep the latch until the next battle starts.
@@ -562,17 +568,25 @@ void removal_after(void* unit, const RemovalSnapshot& before)
     const int nf=unity::list_count(functions), nc=unity::list_count(current);
     if (nf<0 || nf>kRemovalLimit || nc<0 || nc>kRemovalLimit) return;
     std::array<int,kRemovalLimit*2> remaining{}; int count=0;
-    bool incapacitated=false;
-    for (int i=0;i<nf;++i) if (void* c=function_condition(unity::list_at(functions,i)))
+    bool incapacitated=false, old_remaining=false;
+    const bool ff5=game::is(game::Id::FF5);
+    for (int i=0;i<nf;++i) if (void* c=function_condition(unity::list_at(functions,i))) {
         remaining[count++]=condition_id(c);
+        if (ff5) old_remaining |= condition_type(c)==kConditionTypeOld;
+    }
     for (int i=0;i<nc;++i) if (void* c=unity::list_at(current,i)) {
         remaining[count++]=condition_id(c);
         const int type=condition_type(c);
         incapacitated |= type==kConditionTypeKO || type==kConditionTypeStone;
+        old_remaining |= ff5 && type==kConditionTypeOld;
     }
     for (int i=0;i<before.count;++i) {
         const auto& entry=before.entries[i];
         if (std::find(remaining.begin(),remaining.begin()+count,entry.id)!=remaining.begin()+count) continue;
+        if (ff5 && entry.type==kConditionTypeOld) {
+            if (!old_remaining) retire_ff5_old_appearance(unit);
+            continue;
+        }
         // Keep native stacked/permanent conditions and prior KO/Stone cleanup
         // policy. A successful revive can still announce KO removed.
         if (incapacitated && entry.type!=kConditionTypeKO && entry.type!=kConditionTypeStone) continue;
@@ -612,6 +626,7 @@ void d_StateChange(void* self, int32_t state, const void* mi)
         g_battle_end_cleanup = false;
         g_spoken_this_frame.clear();
     } else if (state >= 7 && state <= 20) {
+        if (!g_battle_end_cleanup) reset_ff5_old_appearance();
         g_battle_end_cleanup = true;
     }
     o_StateChange(self, state, mi);
@@ -671,6 +686,11 @@ int install()
     n += hooks::attach(mRemoveConditionFunction, &d_RemoveConditionFunction, &o_RemoveConditionFunction) ? 1 : 0;
     if (game::in(game::kFF2)) n += hooks::attach(mUpdateTempParamter, &d_UpdateTempParamter, &o_UpdateTempParamter) ? 1 : 0;
     if (game::in(game::kFF5)) n += hooks::attach(mStateChange, &d_StateChange, &o_StateChange) ? 1 : 0;
+    if (game::is(game::Id::FF5)) {
+        events::on(events::Kind::BattleEntering, &reset_ff5_old_appearance);
+        events::on(events::Kind::BattleEnd, &reset_ff5_old_appearance);
+        events::on(events::Kind::TitleScreen, &reset_ff5_old_appearance);
+    }
     return n;
 }
 core::Install s_install{"Battle.Message", &install, 110};

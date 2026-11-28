@@ -330,6 +330,17 @@ std::wstring transformed_body_art(void* sprite, std::wstring_view art, std::wstr
     return match_loaded_sprite(sprite, pose, transformation_groups(art));
 }
 
+bool rendered_ff5_old_sprite(void* sprite, std::wstring_view art, std::wstring_view sprite_name,
+                             std::wstring_view normalized_pose)
+{
+    if (!sprite || !art.starts_with(L"bc_ff5_") || normalized_pose.empty()) return false;
+    const std::wstring groups[]{std::wstring(art) + L"_o"};
+    // Some poses in the aged sheet use identical pixels. The exact sprite
+    // address and the game-specific pixel comparison must both agree.
+    if (!modtext::has(L"Status appearance changed " + groups[0] + L" " + std::wstring(normalized_pose))) return false;
+    return !match_loaded_sprite(sprite, sprite_name, groups).empty();
+}
+
 std::wstring rendered_shield_art(void* sprite, std::wstring_view pose)
 {
     // Installed shields can use a group from a previous title. Both ordinary

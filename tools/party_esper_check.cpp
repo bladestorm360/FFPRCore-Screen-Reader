@@ -86,6 +86,7 @@ void* info_functions(void*p){return displayed::field(p,"functions");}
 void* function_condition(void*p){return displayed::field(p,"condition");}
 int condition_id(void*p){return p?static_cast<fixture::Node*>(p)->id:0;}
 int condition_type(void*p){return p?static_cast<fixture::Node*>(p)->command:0;}
+bool ff5_old_appearance_visible(void*){return false;}
 std::wstring condition_name(void*p){return p?static_cast<fixture::Node*>(p)->value:std::wstring();}
 }
 namespace speech {void request_load(){}}

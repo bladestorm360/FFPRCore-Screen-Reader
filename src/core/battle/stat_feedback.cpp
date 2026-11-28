@@ -22,6 +22,8 @@ ref::Field fModifiers{kTemporary,"parameterGroupDic"};
 ref::Class kStatus{"Last.Battle","BattleStatusControl",static_cast<uint8_t>(game::kAll & ~game::kFF2)};
 ref::Method mStatus{kStatus,"UpdateTempParamter",1};
 ref::Class kUtility{"Last.Battle","BattleUtility"};
+ref::Class kAging{"Last.Battle","AgingConditionFunction",game::kFF5};
+ref::Method mAgingParameters{kAging,"SetParameter",0};
 ref::Class kParameter{"Last.Data","CharacterParameterBase"};
 // Same fields, name-resolved per installed binary. HP/MP operations are excluded:
 // the native overload changes current resources, already owned by damage speech.
@@ -91,6 +93,7 @@ unsigned pending=0;
 std::atomic<bool> overflow{false};
 bool active=false;
 thread_local AddScope* adding=nullptr;
+thread_local bool applying_aging_tick=false;
 bool party_unit(void* unit) { return unit && !kBattleEnemyData.is(unit); }
 void remember(void* unit,void* parameter) {
     if(!unit||!parameter)return;
@@ -172,7 +175,7 @@ bool submit(std::wstring target,const Changes& changes,std::wstring condition={}
       },background::Lane::Data);
 }
 void changed(void* unit,const Changes& changes) {
-    if(!active||!any(changes)||param_current_hp(unit_parameter(unit))<=0)return;
+    if(!active||applying_aging_tick||!any(changes)||param_current_hp(unit_parameter(unit))<=0)return;
     if(adding&&adding->unit==unit) {
         for(size_t i=0;i<slots;++i)adding->changes[i]+=changes[i];
         return;
@@ -214,6 +217,7 @@ void direct(void* parameter,int32_t type,int32_t value,const void* mi) {
         if(!difference)return;
         auto* binding=binding_for(parameter);
         if(binding)binding->fields[id]+=difference;
+        if(applying_aging_tick)return; // Keep the baseline current for subsequent visible effects.
         if(param_current_hp(parameter)<=0)return; // KO teardown is not an applied effect
         Changes changes{};changes[id]=difference;
         if(adding&&unit_parameter(adding->unit)==parameter) {
@@ -221,6 +225,18 @@ void direct(void* parameter,int32_t type,int32_t value,const void* mi) {
         }
         if(binding)submit(binding->name,changes);
     });
+}
+using AgingParameters=void(*)(void*,const void*);
+AgingParameters original_aging_parameters=nullptr;
+void aging_parameters(void* self,const void* mi) {
+    // The periodic setter changes internal Strength, Agility, Stamina and
+    // Magic. Suppress this producer even during another action's stat scope.
+    struct Scope {
+        bool previous=applying_aging_tick;
+        ~Scope(){applying_aging_tick=previous;}
+    } scope;
+    applying_aging_tick=true;
+    original_aging_parameters(self,mi);
 }
 void reset() {
     cleanup();formatting.cancel();
@@ -236,6 +252,7 @@ int install() {
     // by the int-ID overload too; otherwise one native write would be seen twice.
     auto* method=find_method_param_type(kUtility.get(),"ChangeTemporaryParameter",3,1,"ParameterType");
     count+=hooks::attach_addr(il2cpp::method_pointer(method),"Battle.StatDirect",reinterpret_cast<void*>(&direct),reinterpret_cast<void**>(&original_direct))?1:0;
+    if(game::is(game::Id::FF5))count+=hooks::attach(mAgingParameters,&aging_parameters,&original_aging_parameters)?1:0;
     events::on(events::Kind::BattleEntering,[]{cleanup();}); // flags/epoch only
     events::on(events::Kind::BattleStart,[]{active=true;});
     events::on(events::Kind::BattleEnd,[]{reset();});
@@ -309,7 +326,9 @@ bool announce_condition(void* unit,const std::wstring& name,int type) {
     // Critical health, KO and petrification have their own visible condition
     // feedback. Their automatic parameter resets are not new ability effects.
     // Consume this native Add's accumulated stats, retaining the ordinary label.
-    if(type==4||type==5||type==11){adding->consumed=true;return false;}
+    if(type==4||type==5||type==11||(type==kConditionTypeOld&&game::is(game::Id::FF5))){
+        adding->consumed=true;return false;
+    }
     if(!any(adding->changes))return false;
     // Imbibe's fallback already describes these two statistics. Select the
     // structured applied result by semantic type, without comparing speech text.
