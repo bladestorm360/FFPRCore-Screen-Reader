@@ -16,6 +16,7 @@ struct Node {
     const char* type = "";
     std::wstring value;
     bool visible = true;
+    unity::Vec3 position{};
 };
 
 std::map<std::string_view, size_t> offsets;
@@ -39,6 +40,9 @@ json::Value fixture_appearances;
 uint64_t event_generation = 0;
 int instruction = 0, particle_count = 0, render_budget = 0, original_plays = 0;
 bool first_clock = true;
+bool advance_tile = true;
+int tile_frame = 0;
+double fixture_time = 0;
 frame::Step observation;
 frame::Task reveal;
 double reveal_delay = 0;
@@ -53,6 +57,12 @@ void put(Node& object, const char* field, void* value)
 void* client(const void*) { return message_client; }
 void* sprite(void* object, const void*) { return static_cast<Node*>(object)->fields.back(); }
 int native_animation(void*, const void*) { ++original_plays; return 3; }
+int native_region_animation(void*, const void*)
+{
+    if (advance_tile) ++tile_frame;
+    ++original_plays;
+    return 3;
+}
 void require(bool result, const char* detail)
 {
     if (!result) { std::fprintf(stderr, "FAIL %s\n", detail); std::exit(1); }
@@ -94,6 +104,7 @@ void* Method::ptr()
     if (method == "get_pc") return reinterpret_cast<void*>(+[](void*, const void*) { return instruction; });
     if (method == "IsFirstClock") return reinterpret_cast<void*>(+[](void*, const void*) { return first_clock; });
     if (method == "get_particleCount") return reinterpret_cast<void*>(+[](void*, const void*) { return particle_count; });
+    if (method == "GetElapsedFrame") return reinterpret_cast<void*>(+[](void*, const void*) { return tile_frame; });
     return reinterpret_cast<void*>(&sprite);
 }
 void* instance(Class& cls) { return std::string_view(cls.name) == "Integrator" ? battle_interpreter : manager; }
@@ -121,6 +132,8 @@ int current_map_id() { return current_map; }
 namespace field::cache { void* get(ref::Class&) { return player_map; } }
 namespace unity {
 bool alive(void* p) { return p != nullptr; }
+void* transform(void* p) { return p; }
+Vec3 position(void* p) { return static_cast<Node*>(p)->position; }
 std::wstring name(void* p) { return p ? static_cast<Node*>(p)->value : L""; }
 int list_count(void* p) { return p ? static_cast<int>(static_cast<std::vector<void*>*>(p)->size()) : 0; }
 void* list_at(void* p, int n) { ++actor_reads; return (*static_cast<std::vector<void*>*>(p))[n]; }
@@ -134,6 +147,7 @@ bool renderer_visible(void* p) { return visible(p); }
 }
 namespace frame {
 bool on_main_thread() { return owner_thread; }
+double now() { return fixture_time; }
 void after_seconds(double delay, Task task, const char*)
 {
     require(!reveal && !observation, "the authored fade queues one task without frame reads");
@@ -187,10 +201,11 @@ bool battle_presentation_ready() { return battle_ready; }
 void check_effect_cues()
 {
     using namespace ffpr::dialogue;
-    Node interpreter, core, effect, particle, script, card, card_renderer, card_sprite, card_texture;
+    Node interpreter, core, effect, particle, script, card, card_renderer, card_sprite, card_texture, tile_region;
     core.type = "PuppetCore";
     effect.type = "FieldEffectParticleEntity";
     card.type = "FieldSpriteEntity";
+    tile_region.type = "FieldTileAnimRegionEntity";
     card_renderer.fields.back() = &card_sprite;
     card_sprite.fields.back() = &card_texture;
     put(card, "spriteRenderer", &card_renderer);
@@ -206,6 +221,7 @@ void check_effect_cues()
     put(effect, "particleArray", &particles);
     battle_interpreter = &interpreter;
     native_play = native_show = native_move_bird_view = native_color_fade = native_animation;
+    native_move = native_set_pos = native_animation;
     int expected_native_plays = original_plays;
     for (const auto& cue : cues) {
         current_game = cue.title;
@@ -214,13 +230,20 @@ void check_effect_cues()
         instruction = cue.instruction;
         const bool is_sprite = !cue.art.empty();
         const bool is_color = cue.trigger == CueTrigger::ColorFade;
-        expected_native_plays += is_color ? 7 : 8;
+        const bool immediate = is_color || cue.tile_region;
+        expected_native_plays += immediate ? 7 : 8;
         auto dispatch = play_anim;
         if (cue.trigger == CueTrigger::Show) dispatch = show;
         if (cue.trigger == CueTrigger::MoveBirdView) dispatch = move_bird_view;
+        if (cue.trigger == CueTrigger::Move) dispatch = motion<CueTrigger::Move,native_move>;
+        if (cue.trigger == CueTrigger::SetPos) dispatch = motion<CueTrigger::SetPos,native_set_pos>;
+        if (cue.trigger == CueTrigger::CueAnim) {
+            dispatch = cue_anim;
+            native_cue_anim = cue.tile_region ? native_region_animation : native_animation;
+        }
         if (is_color) dispatch = color_fade;
         put(core, "<coreID>k__BackingField", reinterpret_cast<void*>(is_color ? uintptr_t{0} : uintptr_t{1}));
-        put(core, "<entity>k__BackingField", is_sprite ? &card : &effect);
+        put(core, "<entity>k__BackingField", cue.tile_region ? &tile_region : is_sprite ? &card : &effect);
         put(core, "<entityID>k__BackingField", reinterpret_cast<void*>(static_cast<uintptr_t>(cue.actor)));
         ++event_generation;
         spoken.clear();
@@ -240,17 +263,24 @@ void check_effect_cues()
         dispatch(&core, nullptr);
         require(!observation && spoken.empty(), "another instruction on the same actor is silent");
         --instruction;
-        if (is_color) {
+        if (immediate) {
+            if (cue.tile_region) {
+                advance_tile = false;
+                dispatch(&core, nullptr);
+                require(spoken.empty(), "an unchanged tile frame remains silent");
+                advance_tile = true;
+                ++expected_native_plays;
+            }
             fading = true;
             dispatch(&core, nullptr);
-            require(spoken.empty(), "a loading fade can obscure a native color filter");
+            require(spoken.empty(), "a loading fade can obscure a native color or tile command");
             fading = false;
             dispatch(&core, nullptr);
             require(!observation && !reveal && spoken == cue.text && !speech_interrupted,
-                    "the visible color command queues speech without depending on an actor renderer");
+                    "the visible color or updated tile frame queues speech immediately");
             spoken.clear();
             dispatch(&core, nullptr);
-            require(spoken.empty(), "the same color command cannot claim the cue twice in one event");
+            require(spoken.empty(), "the same instruction cannot claim the cue twice in one event");
             continue;
         }
         dispatch(&core, nullptr);
@@ -261,7 +291,8 @@ void check_effect_cues()
             auto due = std::move(reveal);
             due();
         }
-        require(observation && render_budget == 16, "the exact binding arms one finite owner observation");
+        require(observation && render_budget == (cue.observe_seconds > 0 ? 320 : 16),
+                "the exact binding arms one finite owner observation");
         fading = true;
         require(observation() && spoken.empty(), "faded footage is silent");
         fading = false;
@@ -279,9 +310,19 @@ void check_effect_cues()
                 require(observation() && spoken.empty(), "the same atlas in an idle pose cannot claim a motion cue");
                 card_sprite.value = std::wstring(cue.pose) + L"(Clone)";
             }
+            if (cue.flicker) {
+                require(observation() && spoken.empty(), "the flicker waits for the first visible drop");
+                card_renderer.visible = false;
+            }
             require(!observation() && spoken == cue.text && !speech_interrupted,
                     "the exact visible sprite queues one description without interrupting");
+            card_renderer.visible = true;
         } else {
+            if (cue.trigger == CueTrigger::Move) {
+                particle_count = 3;
+                require(observation() && spoken.empty(), "the animation waits for actual actor displacement");
+                effect.position.x += 1;
+            }
             particle_count = 0;
             require(observation() && spoken.empty(), "a playing system without particles is silent");
             particle_count = 3;
@@ -325,6 +366,15 @@ void check_effect_cues()
         }
         visual_descriptions = true;
         observation = {};
+        if (cue.observe_seconds > 0) {
+            ++event_generation;
+            dispatch(&core, nullptr);
+            ++expected_native_plays;
+            spoken.clear();
+            fixture_time += cue.observe_seconds + 0.01;
+            require(observation && !observation() && spoken.empty(), "the native animation watch expires at its authored deadline");
+            observation = {};
+        }
     }
     require(original_plays == expected_native_plays, "every captured call keeps the native return path");
     battle_interpreter = nullptr;

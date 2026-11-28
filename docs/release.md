@@ -13,9 +13,13 @@ have not played in reported testing.
 The focused candidate passed 75 FFV contact assertions and 57 route legs,
 the Torna Canal checks, native obstacle and route-readout checks, 73 embedded
 resource checks and the 47-export isolated smoke. The exact 22-file local
-payload scan completed with zero matching detections. Two legacy test hosts
-needed missing dependency wiring during the full release build. Evidence
-and the release verification sequence are in `build_check/v11_20261128`.
+payload scan completed with zero matching detections. The exact payload is
+installed in FFV with 22 installed file hashes and 23 protected file states
+verified. Three test hosts needed updates during full release verification.
+The animation fixture now exercises actor displacement, changed tile frames,
+the visible flicker edge, and authored watch deadlines. In-game audibility
+remains unconfirmed.
+Evidence is in `build_check/v11_20261128`.
 
 ## V1.0 preparation, October26
 
