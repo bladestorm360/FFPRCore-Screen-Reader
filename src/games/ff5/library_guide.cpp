@@ -262,6 +262,11 @@ int install() {
  actions::define("GameModule.PuzzleGuideMove",[]{if(active)move();});
  actions::define("GameModule.FieldStateChanged",[]{invalidate();});
  actions::define("GameModule.GuidedWalkReturnedAfterBattle",[]{if(follow_karnak)replan_karnak();});
+ actions::define("GameModule.AutowalkDisabled",[]{
+  if(!follow_karnak)return;
+  follow_karnak=false;
+  invalidate();
+ });
  actions::define("Settings.Changed.KarnakEscapeRoute",[]{replan_karnak();});
  actions::define("FF5.Jachol.PhaseChanged",[]{jachol_phase_changed();});
  queries::define("GameModule.HasPuzzleGuide",[]{return supports(field::current_map_id());});

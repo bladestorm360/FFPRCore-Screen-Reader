@@ -549,7 +549,11 @@ int install()
         g_key_bird.hooked=hooks::attach(g_key_bird.update,&d_key_bird,&g_key_bird.original) && g_key_bird.axis.ptr();
         g_touch_bird.hooked=hooks::attach(g_touch_bird.update,&d_touch_bird,&g_touch_bird.original) && g_touch_bird.axis.ptr();
     }
-    actions::define("Settings.Changed.Autowalk", [] { if (!ui::prefs::autowalk_enabled()) cancel(); });
+    actions::define("Settings.Changed.Autowalk", [] {
+        if (ui::prefs::autowalk_enabled()) return;
+        cancel();
+        if (actions::defined("GameModule.AutowalkDisabled")) actions::run("GameModule.AutowalkDisabled");
+    });
     queries::define("Autowalk.IsActive", [] { return active(); });
     actions::define("Autowalk.Cancel", [] { cancel(); });
     events::on(events::Kind::BattleEntering, [] {

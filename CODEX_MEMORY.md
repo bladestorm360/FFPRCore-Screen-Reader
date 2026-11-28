@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 28 Karnak Autowalk settings.** Shift+G uses the shared
+Autowalk and Auto-interact settings. Turning off Autowalk mid-guide
+returns to spoken directions. [Karnak controls and checks](docs/re/FF5_KARNAK_20261105.md#november-27-equipment-first-routes-and-menu-pause).
+
 **November 27 Karnak route choices.** Equipment then Elixirs defaults on
 the timed escape, with Equipment only and All chests available. All
 choices leave at 3:00 or less. The FFV mod menu uses native timer pause

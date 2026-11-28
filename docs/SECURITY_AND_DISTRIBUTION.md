@@ -1,5 +1,19 @@
 # Build and distribution security
 
+## November 28 Karnak Autowalk settings
+
+FFV's installed DLL has 22,142,976 bytes and SHA-256
+`486a9abe79f964358e011188291c43331dc7fb6d108bf8c0975e960a341a3408`.
+The timed castle replay and native Autowalk check passed. The guide
+owner passed 177 cases, including the four settings combinations
+and disabling Autowalk while the guide has a queued route. The build
+verified 73 resources and 9,243 native names. The isolated load resolved
+47 exports. Defender definitions `1.463.507.0` reported no threats on the
+22 staged files. Scan hashes stayed unchanged. Installation verified all
+22 FFV files and preserved 23 protected file states. Receipts are in
+`build_check/karnak-autowalk-preferences-20261128`. The prior source
+checkpoint is `d1bf592`.
+
 ## November 27 Karnak route choices and timer pause
 
 The FFV-installed DLL has 22,142,976 bytes and SHA-256

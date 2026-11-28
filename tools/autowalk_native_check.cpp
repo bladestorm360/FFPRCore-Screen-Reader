@@ -17,7 +17,8 @@ Node player, controller, map, field_controller;
 Node interaction_observer, wrong_observer;
 struct Interactive { int id = 19, type = 5, floor = 1; bool active = true, actionable = true, opened = false; unity::Vec3 position{2,1,0}; };
 Interactive interactible, wrong_interactible;
-bool auto_interact=false, request_pressed=false, face_available=true;
+bool auto_walk=true, auto_interact=false, request_pressed=false, face_available=true;
+std::function<void()> autowalk_setting_changed;
 int interaction_calls=0, guided_battle_returns=0;
 bool guide_can_replan=false;
 bool dispatched_while_walking=false;
@@ -124,7 +125,9 @@ namespace game {Id current(){return fixture::game;}}
 namespace frame {bool on_main_thread(){return true;}uint64_t count(){return fixture::tick;}double now(){return fixture::seconds;}void cancel_label(const char*){}int every_frame(Step fn,const char*,int){fixture::waits.push_back(std::move(fn));return 1;}}
 namespace frame {void after_seconds(double,Task fn,const char*){fixture::wall_checks.push_back(std::move(fn));}}
 namespace actions {
-void define(const char*,Fn){}
+void define(const char* name,Fn handler){
+    if(std::string_view(name)=="Settings.Changed.Autowalk") fixture::autowalk_setting_changed=std::move(handler);
+}
 bool defined(const char* name) {
     return fixture::guide_can_replan && std::string_view(name)=="GameModule.GuidedWalkReturnedAfterBattle";
 }
@@ -145,7 +148,7 @@ bool is(const char* name) {
     return key == "NavigationTargetTracker.IsEntity" && fixture::selected_target.valid;
 }
 }
-namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){const std::string_view key=k;if(key=="Autowalk")return true;if(key==ui::prefs::kAutoInteract)return fixture::auto_interact;if(key==ui::prefs::kAutoRouteReadout)return fixture::automatic_readout;return d;}void set_bool(const char*,bool){} }
+namespace settings {int get_int(const char*,int d){return d;} bool get_bool(const char*k,bool d){const std::string_view key=k;if(key==ui::prefs::kAutowalk)return fixture::auto_walk;if(key==ui::prefs::kAutoInteract)return fixture::auto_interact;if(key==ui::prefs::kAutoRouteReadout)return fixture::automatic_readout;return d;}void set_bool(const char*,bool){} }
 namespace data {
 const json::Value& game_json(const char*) {
     static const auto records = [] {
@@ -453,6 +456,26 @@ template<class Expect> void check_arrival_interaction(Expect expect)
     fixture::interactible.opened = false;
     native_observation();
     expect(!walk::active() && fixture::interaction_calls == 3, "A chest receives native confirm at its verified approach");
+
+    auto queue_guided_chest = [&] {
+        walk::start(path, &destination, TargetKind::Interact, {}, false);
+        walk::d_InputAxis(nullptr, nullptr);
+        expect(walk::following_guide() && walk::g_interaction, "A guided chest uses the same pending interaction owner");
+    };
+    queue_guided_chest();
+    fixture::auto_interact = false;
+    native_observation();
+    expect(!walk::active() && fixture::interaction_calls == 3,
+           "Turning off Auto-interact cancels the pending guided chest confirm");
+
+    fixture::auto_interact = true;
+    queue_guided_chest();
+    fixture::auto_walk = false;
+    fixture::autowalk_setting_changed();
+    fixture::auto_walk = true;
+    native_observation();
+    expect(!walk::active() && fixture::interaction_calls == 3,
+           "Turning off Autowalk retires the guided action even if the setting is turned back on");
     fixture::interactible.type = 5;
     fixture::auto_interact = false;
 }

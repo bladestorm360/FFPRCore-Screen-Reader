@@ -8,7 +8,7 @@
 namespace owner {
 bool ready=true,menu=false,battle=false,busy=false,position_valid=true;
 bool nav_guidance=true,other_guidance=true;
-bool auto_walk=false,walk_active=false,mod_menu_open=false;
+bool auto_walk=false,auto_interact=false,walk_active=false,mod_menu_open=false;
 int karnak_route=0;
 std::optional<int> karnak_time;
 std::optional<field::baked_nav::MapGoal> walking_goal;
@@ -30,7 +30,7 @@ void pulse(){std::vector<int> ids;for(const auto& [id,task]:tasks)ids.push_back(
 void drain(){auto work=std::move(jobs);jobs.clear();std::thread worker([&]{for(auto& fn:work)fn();});worker.join();auto ready_posts=std::move(posts);posts.clear();for(auto& fn:ready_posts)fn();}
 bool same(const field::baked_nav::MapGoal& a,const field::baked_nav::MapGoal& b){return a.map_id==b.map_id&&a.cell==b.cell&&a.entity_id==b.entity_id&&a.raw_name==b.raw_name;}
 void respond(size_t index=0){if(!publish||index>=targets.size()){check(false,"a real pending route is required for publication");return;}field::PathInfo path;path.success=true;path.guidance_index=int(index);path.description=L"Owned route";path.guidance=targets[index].instruction;
- if(auto_walk){field::route_progress::Phase phase;phase.cells={position};path.walk_phases.push_back(std::move(phase));}
+ field::route_progress::Phase phase;phase.cells={position};path.walk_phases.push_back(std::move(phase));
  beacon=targets[index].goal;auto callback=std::move(publish);publish={};callback(std::move(path));}
 void native_scene(int map) {
  fixture::current_map=map;fixture::running_game=game::Id::FF5;fixture::hidden_control=fixture::hidden_parent=fixture::bad_control=fixture::missing_control=fixture::dead_control=false;
@@ -62,7 +62,14 @@ std::wstring TF(std::wstring_view key,std::initializer_list<std::wstring> args){
 namespace data {bool game_data_ready(){return true;}}
 namespace settings {
 int get_int(const char* key,int fallback){return std::string_view(key)==ff5::karnak::preference?owner::karnak_route:fallback;}
-bool get_bool(const char* key,bool fallback){return std::string(key)==ui::prefs::kNavigationPuzzleGuidance?owner::nav_guidance:std::string(key)==ui::prefs::kOtherPuzzleGuidance?owner::other_guidance:std::string(key)==ui::prefs::kAutowalk?owner::auto_walk:fallback;}
+bool get_bool(const char* key,bool fallback){
+ const std::string_view name=key;
+ if(name==ui::prefs::kNavigationPuzzleGuidance)return owner::nav_guidance;
+ if(name==ui::prefs::kOtherPuzzleGuidance)return owner::other_guidance;
+ if(name==ui::prefs::kAutowalk)return owner::auto_walk;
+ if(name==ui::prefs::kAutoInteract)return owner::auto_interact;
+ return fallback;
+}
 }
 namespace ffpr::ff5 {std::optional<int> karnak_seconds_remaining(){fixture::native();return owner::karnak_time;}}
 namespace ffpr::fieldnav::autowalk {
@@ -297,6 +304,31 @@ int FFPR_LIBRARY_OWNER_MAIN(){
  check(routes==manual_routes+2&&!targets.empty()&&targets[0].goal.entity_id==29,
        "the live cutoff redirects spoken guidance without a new request");
  respond();
+ actions::run("GameModule.StopPuzzleGuide");
+ karnak_time=600;
+ for (const bool walk : {false,true}) {
+  for (const bool interact : {false,true}) {
+   auto_walk=walk;auto_interact=interact;
+   const auto speech_before=spoken.size();
+   actions::run("GameModule.PuzzleGuide");drain();respond();
+   check(walk_active==walk,"a usable Karnak route starts walking only when Autowalk is on");
+   if (!walk) check(spoken.back()==L"Owned route. Open the chest.",
+                    "Auto-interact alone never replaces the spoken route");
+   else if (!interact) check(spoken.back()==L"Open the chest.","a guided walk keeps the manual chest cue");
+   else check(spoken.size()==speech_before,"a guided walk with Auto-interact leaves chest speech to native interaction");
+   actions::run("GameModule.StopPuzzleGuide");
+  }
+ }
+ auto_walk=auto_interact=true;
+ actions::run("GameModule.PuzzleGuide");drain();
+ mod_menu_open=true;auto_walk=false;
+ actions::run("GameModule.AutowalkDisabled");
+ const int after_disable=routes;
+ respond();pulse();drain();
+ check(!walk_active&&routes==after_disable,"disabling Autowalk retires the queued walking route during the menu");
+ mod_menu_open=false;pulse();drain();respond();
+ check(!walk_active&&spoken.back()==L"Owned route. Open the chest.",
+       "after disabling Autowalk the current guide returns to spoken directions");
  actions::run("GameModule.StopPuzzleGuide");
  check(fixture::wrong_owner==0,"no native read or speech on layout worker");
  std::printf("FFV native guide owner: %d cases/%d failures; bounded controls, no blocked-frame/movement scans, cancellation/repeat/preview/native completion verified\n",cases,fixture::failures);return fixture::failures?1:0;
