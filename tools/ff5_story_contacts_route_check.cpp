@@ -38,7 +38,96 @@ bool reach(const map_state::Flags& state, Cell from, int entity, TargetKind kind
     return result.path.success && !result.path.required_trap;
 }
 
+void verify_meteorite_journey()
+{
+    auto flags = exdeath_routes::flags(1, 0, 0);
+    flags.current_area_id = 1;
+    for (int receipt : {37,38,39,40,43,44,45,46,47,991,992}) flags.scenario[receipt] = 1;
+    const auto& world = *baked::submap_by_map_id(1);
+    const auto& exits = baked::grids(world).objects;
+    const auto find_exit = [&](int id) {
+        const auto found = std::find_if(exits.begin(), exits.end(), [id](const auto& o) {
+            return o.type == baked::ObjType::GotoMap && o.entity_id() == id;
+        });
+        if (found == exits.end()) std::abort();
+        return MapGoal{1, {1,found->tx,found->ty}, false, {}, 0, id, baked::object_identifier(*found)};
+    };
+    const auto tule = find_exit(9);
+    const Cell escaped_castle{1,84,78}, walse_world{1,205,84}, parked_drake{1,204,83};
+    const MapGoal karnak{1,escaped_castle};
+    const auto replay = [&](Cell at, const MapGoal& goal, TargetKind kind, std::initializer_list<int> maps,
+                           std::optional<Cell> vehicle = {}) {
+        int current = 1;
+        for (const int expected : maps) {
+            auto state = flags;
+            state.current_map_id = current;
+            const auto result = route(current, at, state, goal, kind, false, 1, {}, {}, {}, vehicle);
+            const auto& hop = result.pending.incoming_transition;
+            if (!result.path.success || result.path.next_map_id != expected || !hop || hop->destination != expected) {
+                std::printf("Meteorite leg %d/%d,%d expected %d: %ls / %ls (next %d)\n", current, at.x, at.y,
+                    expected, result.path.reason.c_str(), result.path.error.c_str(), result.path.next_map_id);
+                return false;
+            }
+            const auto pad = current == 247 && expected == 246 ? std::optional<Cell>{Cell{1,15,14}} :
+                current == 246 && expected == 247 ? std::optional<Cell>{Cell{1,14,14}} : std::nullopt;
+            if (pad && hop->arrival != *pad) {
+                std::printf("Meteorite leg %d -> %d landed at %d,%d L%d\n", current, expected,
+                    hop->arrival.x, hop->arrival.y, hop->arrival.layer);
+                return false;
+            }
+            current = expected;
+            at = hop->arrival;
+            if (current == 1) at.layer = 1; // World movement uses one layer even for native Upper PointIn.
+        }
+        const auto last = route(current, at, flags, goal, kind, false, 1, {}, {}, {}, vehicle).path;
+        const bool complete = current == 1 && last.success && !last.next_map_id && !last.walk_phases.empty() &&
+            !last.walk_phases.back().cells.empty() && last.walk_phases.back().cells.back() == goal.cell &&
+            (!vehicle || std::any_of(last.walk_phases.begin(), last.walk_phases.end(), [](const auto& phase) {
+                return phase.transportation_id == 4;
+            }));
+        if (!complete) std::printf("Meteorite final leg from %d/%d,%d: %ls / %ls (next %d)\n",
+            current, at.x, at.y, last.reason.c_str(), last.error.c_str(), last.next_map_id);
+        return complete;
+    };
+    check(replay(escaped_castle, tule, TargetKind::Transition, {249,248,247,246,245,244,1}, parked_drake),
+        "Tule uses the actual meteorite journey followed by the previously unreachable Wind Drake");
+    check(replay(walse_world, karnak, TargetKind::Spot, {244,245,246,247,248,249,1}),
+        "The same pads provide the complete foot journey back to Karnak");
+
+    const auto& pad_room = *baked::submap_by_map_id(247);
+    const auto& actors = baked::grids(pad_room).objects;
+    const auto pad = std::find_if(actors.begin(), actors.end(), [](const auto& o) {
+        return o.type == baked::ObjType::Warp && (o.d & baked::kMeteoriteTransfer);
+    });
+    if (pad == actors.end()) std::abort();
+    flags.current_map_id = 247;
+    const Cell standing{1,14,14};
+    const auto back = route(247, standing, flags, tule, TargetKind::Transition, false, 1, {}, {}, {}, parked_drake).path;
+    const bool reentry = back.success && back.next_map_id == 246 && back.step_count == 2 &&
+        !back.walk_phases.empty() && !back.walk_phases.back().cells.empty() &&
+        back.walk_phases.back().cells.front() == standing && back.walk_phases.back().cells.back() == standing;
+    if (!reentry) std::printf("Meteorite reentry: %ls / %ls (next %d, %d steps)\n",
+        back.reason.c_str(), back.error.c_str(), back.next_map_id, back.step_count);
+    check(reentry,
+        "Standing on a landing pad requires stepping away and back to use it again");
+    for (const auto disabled : {std::optional<int>(1), std::optional<int>{}}) {
+        flags.scenario[74] = disabled;
+        map_state::Resolver state(flags, fixture::records);
+        check(!state.active(pad_room, *pad), "A closed or unknown story phase has no meteorite travel arc");
+    }
+    flags.scenario[74] = 0;
+    flags.current_map_id = 1;
+    const auto flying = route(1, parked_drake, flags, tule, TargetKind::Transition, false, 4).path;
+    check(flying.success && !flying.next_map_id, "An already usable Wind Drake remains a direct route");
+    check(!route(1, escaped_castle, flags, tule, TargetKind::Transition).path.success,
+        "The meteorite journey does not invent a route across the water when no Wind Drake is available");
+    MapGoal drake{1,parked_drake,false,{},4};
+    const auto parked = route(1, escaped_castle, flags, drake, TargetKind::Spot, false, 1, {}, {}, drake.cell).path;
+    check(parked.success && parked.next_map_id == 249, "A far-side parked Wind Drake can be approached on foot through the meteorites");
+}
+
 int verify() {
+    verify_meteorite_journey();
     auto walse = exdeath_routes::flags(1,0,0);
     walse.current_area_id = 1;
     MapGoal tower;

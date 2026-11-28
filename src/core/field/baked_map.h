@@ -30,6 +30,8 @@ inline constexpr int kConditionalSceneExit = 1 << 25;
 // The native step-on rope script supplies the same-floor player landing.
 inline constexpr int kRopeCrossing = 1 << 27;
 inline constexpr int kFireShipElevator = 1 << 28;
+// FFV's Walse and Karnak pads land inside the opposite meteorite.
+inline constexpr int kMeteoriteTransfer = 1 << 29;
 inline constexpr int kSerpentDiveChoice = 1 << 22;
 
 /// MapConstants.ObjectType values that are baked (bake_maps.py BAKED_TYPES).

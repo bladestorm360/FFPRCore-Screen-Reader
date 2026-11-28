@@ -1,5 +1,39 @@
 # Floor and world exits, October 13, 2026
 
+## November 28 FFV meteorite travel
+
+The FFV Steam log reports “Requires vehicle” for Tule from the post-Karnak
+position on World Map 1 at (84,78). The Wind Drake is parked on the Walse
+side. The native trip can start on foot at Karnak Meteorite, use its three
+interior maps, arrive inside Walse Meteorite, and exit to the other world
+region. Tule is still across water from that landing. Pathfinder checks
+whether the Wind Drake is reachable from the far side, then uses the
+existing boarding, flight and landing planner. Inside either meteorite it
+uses the enabled World 1 Drake record that the game uses to restore the
+model. On the world map the live parked model owns its position. The same
+pair of pads has a native return trip.
+
+The original navigation edges used World Map 1, PointIn 1, the first
+transfer in each flight cutscene. The complete native chains through
+`sc_e_0041_1` and `sc_e_0041_4` end on opposite room maps 247 and 246.
+Their last scripts place the player on the native pad at (14,14) or
+(15,14) respectively. The bake now links each pad to that playable
+interior. It verifies the complete script identities and placements.
+The binary comparison preserves all 655 room geometries and native
+objects and changes only the two derived edges.
+
+The pads remain ordinary walk-on events. A route starting on the arrival
+pad must take one legal step off and back before reusing it. The existing
+scenario flag 74 changes both contacts to pushback and closes the travel
+edges. An unknown flag also leaves them unavailable. An ordinary walking
+or usable vehicle route can still reach its destination directly.
+
+The production replay passed 57 assertions over 51 route legs. It reaches
+Tule using the logged origin and parked Drake, walks the reverse journey
+to Karnak without a vehicle, reuses an occupied pad, preserves a direct
+flight, and rejects an unknown or closed pad. The all-six browsing check
+also passed. Gameplay confirmation is pending.
+
 **Ebot’s Rock source/focused/documentation Closed, November4:** twentieth guide
 uses actual current-room coral/chests/layout, the native22 threshold, active
 Strago first-feed check, correct keep/feed choices and full first/repeat Hidon

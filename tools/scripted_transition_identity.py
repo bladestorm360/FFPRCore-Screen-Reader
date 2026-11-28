@@ -31,6 +31,8 @@ ISLAND_VENT_DESTINATIONS = {
 }
 
 def entry_flags(game,obj):
+    if game == 'ff5' and (obj['submap'], obj['id']) in _METEORITE_TRANSFERS:
+        return 1 << 29
     if game=='ff6':
         import blackjack_passage
         if flags:=blackjack_passage.entry_flags(obj):return flags
@@ -76,6 +78,44 @@ def karnak_pub_destination(obj, script_name, scripts):
     assert transfers == [([93, 1], ''), ([93, 1], 'sc_e_0052_1'), ([93, 1], 'sc_e_0190')]
     return 93, 1, ''
 
+# The meteor flight is staged on the world map. The other interior is the
+# first playable landing. Use the PointIn at the final player pose, even
+# where native ChangeMap first places the cutscene at the door.
+_METEORITE_TRANSFERS = {
+    ('Map_30131_2', 10): (
+        'entity_default', 2, 118, 'sc_e_0041',
+        'a03821859cae256c20771e4a2c1942543719bc4dc35263eb5f527160235ec18a',
+        'sc_e_0041_1', 'b258e1eeb1b5854dd278eb8e926f77e493624861b807554d6660b1dc69cbf5b5',
+        247, 1, 'Map_30141_2', 'sc_e_0041_2',
+        '74927a58d9cacdb5c8d67b9952c2a2274f1300c9623807622ab5804c3b723c6c', (14, 14), (16, 25)),
+    ('Map_30141_2', 16): (
+        'ev_e_0001', 8, 356, 'sc_e_0041_3',
+        '9ba49db86a708f47ed2897fdb10bb88a1032a7a9a40603380976170ad17a11bb',
+        'sc_e_0041_4', 'a35b477bb9ffee055cf6290f6525c1d042066119bb8d14913b05e37178a36d13',
+        246, 2, 'Map_30131_2', 'sc_e_0041_5',
+        'aae77742ecb62507d3526c8ae86561ba9a218a185db64761244854ef2bdd0a3f', (15, 14), (15, 24)),
+}
+
+def meteorite_destination(obj, script_name, scripts):
+    row = _METEORITE_TRANSFERS.get((obj['submap'], obj['id']))
+    if row is None:
+        return None
+    group, entity, script_id, departure, root_hash, flight, flight_hash, map_id, point, room, arrival, arrival_hash, pose, placements = row
+    prop = obj['props']
+    assert (obj['type_name'], obj['group'], prop['entity_id'], prop['script_id'], prop['action_id'], script_name) == (
+        'Event', group, entity, script_id, 2, departure)
+    root = scripts[(obj['submap'], departure)]
+    transit = scripts[('Map_10010', flight)]
+    landing = scripts[(room, arrival)]
+    assert (_sha(root), _sha(transit), _sha(landing)) == (root_hash, flight_hash, arrival_hash)
+    changes = lambda body: {(*op['operands']['iValues'][:2], op['operands']['sValues'][0])
+                            for op in body['mnemonics'] if op['mnemonic'] == 'ChangeMap'}
+    assert changes(root) == {(1, 1, flight)}
+    assert changes(transit) == {(map_id, 1, arrival)} and not changes(landing)
+    assert all(landing['mnemonics'][i]['mnemonic'] == 'SetPos' and
+               tuple(landing['mnemonics'][i]['operands']['iValues'][:2]) == pose for i in placements)
+    return map_id, point, arrival
+
 # Tower roller/duct travel uses movie-only map545 between two playable rooms.
 # Pin all three complete bodies. Returning the first transfer strands routing
 # in a scene with no player-controlled exit; the final continuation/landing is
@@ -120,6 +160,8 @@ def destination(game,obj,script_name,scripts,parents):
     actor identity is required even when a developer name happens to match.
     """
     n=int(game.removeprefix('ff'))
+    if n == 5 and (meteorite := meteorite_destination(obj, script_name, scripts)):
+        return meteorite
     if n == 5 and (pub := karnak_pub_destination(obj, script_name, scripts)):
         return pub
     if n==6:

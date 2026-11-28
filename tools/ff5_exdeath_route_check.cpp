@@ -34,7 +34,7 @@ map_state::Flags flags(int map, int layout, int bridge) {
 Planned route(int map, Cell start, const map_state::Flags& state,
               MapGoal goal, TargetKind kind, bool spinning = false, int vehicle = 1,
               std::shared_ptr<const ActiveRoute> previous = {}, std::optional<Cell> observed_goal = {},
-              std::optional<Cell> parked_goal = {}) {
+              std::optional<Cell> parked_goal = {}, std::optional<Cell> wind_drake = {}) {
     ++legs;
     RouteSnapshot snapshot(map_state::Resolver(state, fixture::records));
     snapshot.map_id = map;
@@ -49,6 +49,15 @@ Planned route(int map, Cell start, const map_state::Flags& state,
     if (parked_goal && snapshot.goal.transportation_id > 0) {
         const auto* model = baked::transport(snapshot.goal.transportation_id);
         snapshot.vehicles.push_back({nullptr, model->type, model->id, {}, world_of_cell(*snapshot.submap, *parked_goal)});
+    }
+    if (wind_drake) {
+        snapshot.vehicle_shortcuts = true;
+        if (map == 1) {
+            const auto* model = baked::transport(4);
+            snapshot.vehicles.push_back({nullptr, model->type, model->id, {}, world_of_cell(*snapshot.submap, *wind_drake)});
+        } else {
+            snapshot.saved_vehicles.push_back({4, 1, {static_cast<float>(wind_drake->x), static_cast<float>(wind_drake->y), 0}});
+        }
     }
     snapshot.previous_active = std::move(previous);
     for (const auto& original : baked::grids(*snapshot.submap).objects) {

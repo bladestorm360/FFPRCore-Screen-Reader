@@ -668,6 +668,9 @@ void capture_vehicle_names(RouteSnapshot& snapshot) {
     const bool world_scope=settings::get_int(ui::prefs::kPathfindingFilterMode,-1)==ui::prefs::kFilterWorldMap||
         (snapshot.submap->world&&destination&&snapshot.goal.map_id!=snapshot.map_id);
     if(world_scope&&snapshot.vehicle_shortcuts&&game::is(game::Id::FF3))snapshot.saved_vehicles=field::saved_world_vehicles();
+    if (game::is(game::Id::FF5) && snapshot.vehicle_shortcuts && snapshot.goal.map_id == 1 &&
+        snapshot.map_id >= 244 && snapshot.map_id <= 249 && snapshot.state.scenario_value(74) == 0)
+        snapshot.saved_vehicles = field::saved_world_vehicles();
     if(game::is(game::Id::FF6)&&snapshot.map_id==119&&snapshot.vehicle_shortcuts)
         snapshot.saved_vehicles=field::saved_world_vehicles();
     if (const auto whale = lunar_whale_storyline(snapshot.goal, snapshot.map_id); whale && snapshot.map_id != whale->world)
@@ -1382,12 +1385,13 @@ baked_route::Reach land_after_ride(const baked_route::Request& riding, const bak
 // each reachable parked vehicle and its legal shores once, then keep the best
 // owned distance per cell. Memory is bounded by the current baked world grid;
 // no live pointers or cross-request cache/invalidation assumptions are involved.
-baked_route::Reach parked_vehicle_reach(const baked_route::Request& walking, const baked_route::Reach& walk) {
+baked_route::Reach parked_vehicle_reach(const baked_route::Request& walking, const baked_route::Reach& walk,
+                                       const std::vector<VehicleOnMap>* projected = nullptr) {
     if (!walking.submap || !walking.submap->world || walking.vehicle_group || !walk.submap) return {};
     const auto& sm=*walking.submap;
     const auto& grid=baked::grids(sm);
     const bool chained=game::is(game::Id::FF3)&&g_route_snapshot;
-    const auto vehicles=chained?journey_vehicles():planning_vehicles();
+    const auto vehicles = projected ? *projected : chained ? journey_vehicles() : planning_vehicles();
     if(chained&&vehicles.size()>32)return {};
     baked_route::Reach best,combined=walk;
     std::vector<bool> done(vehicles.size(),false);
@@ -2188,16 +2192,22 @@ bool return_door_plan(const ActiveRoute& route)
     const auto& cells = route.phases.front().cells;
     if (cells.size() != 3 || cells.front() != cells.back()) return false;
     if (game::is(game::Id::FF5) && fire_ship_room(route.map_id)) return true;
+    if (game::is(game::Id::FF5) &&
+        ((route.map_id == 246 && route.next_map_id == 247) || (route.map_id == 247 && route.next_map_id == 246)))
+        return true;
     return game::is(game::Id::FF4) && route.map_id == 20 && route.goal_map_id == 17 &&
            route.next_map_id == 17 && route.target == kBaronChest && cells.front() == kBaronStair;
 }
 
 // Native arrivals can share the outgoing trigger. A return requires stepping
 // onto it again, with both cardinal steps validated against the live route.
-std::optional<Cell> return_door_step(baked_route::Request request, const Cell& entry)
+std::optional<Cell> return_door_step(baked_route::Request request, const Cell& entry, bool scripted_pad = false)
 {
     request.goals = {entry};
     request.ignore_hazards = false;
+    // The original Event can still be in the live trigger mask. Admit
+    // only its explicitly selected return step, like other scripted exits.
+    if (scripted_pad) request.allow_trap_goal = true;
     const auto& grid = baked::grids(*request.submap);
     std::array<Cell,8> away{}, back{};
     const auto exits = baked_route::successors(request, entry, away);
@@ -2209,6 +2219,43 @@ std::optional<Cell> return_door_step(baked_route::Request request, const Cell& e
         if (std::find(back.begin(), back.begin() + count, entry) != back.begin() + count) return at;
     }
     return {};
+}
+
+bool meteorite_pad_reentry(const baked::Object& pad, const Cell& at)
+{
+    return pad.type == baked::ObjType::Warp && (pad.d & baked::kMeteoriteTransfer) &&
+        at == Cell{pad.layer, pad.tx, pad.ty};
+}
+
+// Use the live World 1 model when it is loaded, or the ready saved Wind Drake
+// position while inside a meteorite. A different world and a missing/disabled
+// craft supply no projected landing range.
+void add_meteorite_drake_reach(const baked::Submap& world, const baked_route::Request& request,
+                               baked_route::Reach& reach)
+{
+    if (!reach.submap || !g_route_snapshot || !g_route_snapshot->vehicle_shortcuts) return;
+    const auto& snapshot = *g_route_snapshot;
+    constexpr int drake = 4;
+    std::vector<VehicleOnMap> parked;
+    if (snapshot.submap == &world) {
+        for (const auto& vehicle : snapshot.vehicles)
+            if (vehicle.transportation_id == drake) parked.push_back(vehicle);
+    } else {
+        for (const auto& saved : snapshot.saved_vehicles) {
+            if (saved.map != 1 || saved.id != drake) continue;
+            const Cell cell{1, static_cast<int>(saved.cell.x), static_cast<int>(saved.cell.y)};
+            if (const auto* type = baked::transport(drake); type &&
+                baked::in_bounds(baked::grids(world), cell.x, cell.y))
+                parked.push_back({nullptr, type->type, drake, {}, world_of_cell(world, cell)});
+        }
+    }
+    if (parked.size() != 1) return;
+    const auto assisted = parked_vehicle_reach(request, reach, &parked);
+    if (!assisted.submap || assisted.dist[0].size() != reach.dist[0].size()) return;
+    for (size_t i = 0; i < reach.dist[0].size(); ++i) {
+        if (planning_cancelled()) return;
+        reach.dist[0][i] = std::min(reach.dist[0][i], assisted.dist[0][i]);
+    }
 }
 
 } // namespace
@@ -2432,6 +2479,12 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                     }
                 }
             }
+            if (cur.parent >= 0 && sm->world && sm->first_map_id == 1 && game::is(game::Id::FF5) &&
+                state.scenario_value(74) == 0 && cur.via && cur.via->type == baked::ObjType::GotoMap) {
+                const auto* exit_room = baked::submap_at(states[static_cast<size_t>(cur.parent)].submap);
+                if (exit_room && (exit_room->first_map_id == 244 || exit_room->first_map_id == 249))
+                    add_meteorite_drake_reach(*sm, req, reach);
+            }
             if(bound_world_returns&&best==0) {
                 initial_world_reach=reach;
                 // Traps and remote-NPC retry change graph edges/later floors,
@@ -2522,10 +2575,11 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 // discovery and hundreds of redundant floods for a local gate.
                 if(!here->world&&!there->world&&dest->world&&!goal.allow_world_transit)continue;
                 if (sm == here && sealed(*e.object)) continue;
+                const bool pad_reentry = meteorite_pad_reentry(*e.object, cur.at);
                 const bool reenter = (stair_chest && sm->first_map_id == 20 && e.object->entity_id() == 3 &&
                     e.dest_map_id == 17 && e.dest_point == 3 && cur.at == kBaronStair) ||
-                    fire_ship_return_door(*sm, *e.object, cur.at);
-                const int d = reenter ? (return_door_step(req, cur.at) ? 2 : -1) :
+                    fire_ship_return_door(*sm, *e.object, cur.at) || pad_reentry;
+                const int d = reenter ? (return_door_step(req, cur.at, pad_reentry) ? 2 : -1) :
                     distance_to_object(req, reach, *e.object, cur.at.layer, sm->world);
                 if (d < 0) continue;
                 const baked::Object* arrival = point_in(*dest, e.dest_point, state);
@@ -2654,8 +2708,9 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
         req.allow_trap_goal = out.trap_leg||baked::world_exit(o);
         baked_route::Route route = baked_route::find(req);
         if ((stair_chest && here->first_map_id == 20 && o.entity_id() == 3 && hop.via_dest == 17 &&
-             o.b == 3 && start == kBaronStair) || fire_ship_return_door(*here, o, start)) {
-            const auto step = return_door_step(req, start);
+             o.b == 3 && start == kBaronStair) || fire_ship_return_door(*here, o, start) ||
+            meteorite_pad_reentry(o, start)) {
+            const auto step = return_door_step(req, start, meteorite_pad_reentry(o, start));
             if (!step || !route.found) return out;
             route.cells = {start, *step, start};
         }
@@ -3277,8 +3332,10 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             }
         }
         const bool magnetic_cavern = magnetic_cavern_target(g_route_snapshot->goal, kind);
+        const bool meteorite_detour = game::is(game::Id::FF5) && sm->world && map_id == 1 &&
+            g_route_snapshot->state.scenario_value(74) == 0;
         const bool world_dungeon_return = !magnetic_cavern && !route.found && equivalent_landing.empty() && sm->world &&
-            ((parked_airship&&req.vehicle_group==0) ||
+            (meteorite_detour || (parked_airship&&req.vehicle_group==0) ||
             ((kind == TargetKind::Transition || kind == TargetKind::Infer) &&
             std::any_of(g.objects.begin(), g.objects.end(), [&](const auto& object) {
                 if (!object.contains(target.x, target.y) ||
@@ -3302,7 +3359,7 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
         }
         MapGoal around;
         if (!route.found && (!sm->world || world_dungeon_return)) {
-            if (stair_chest) around = g_route_snapshot->goal;
+            if (stair_chest || meteorite_detour) around = g_route_snapshot->goal;
             around.map_id = map_id;
             around.cell = stair_chest ? kBaronChest : target;
             around.cells = req.goals;

@@ -199,6 +199,10 @@ const Selection& Resolver::selection(const baked::Submap& sm)
 }
 bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool obstacle)
 {
+    // Both pads turn into native pushback contacts at this story milestone.
+    // Preserve the physical Event, but close the derived travel edge.
+    if (object.type == baked::ObjType::Warp && (object.d & baked::kMeteoriteTransfer) &&
+        scenario_value(74) != 0) return false;
     const auto& selected = selection(sm);
     // PointIn/ToLayer and other graph metadata have their own ID domains. A
     // puppet changes a physical actor (and its derived Warp), never those IDs.

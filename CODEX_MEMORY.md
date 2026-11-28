@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 28 FFV meteorite travel.** Pathfinder connects Karnak and Walse
+through their playable meteorite landings. It can reach the Wind Drake
+from the other side on the way to Tule. [Route and native evidence](docs/re/MAP_EXITS.md#november-28-ffv-meteorite-travel).
+
 **November 28 Autowalk interactions.** Required elevator and switch
 confirmations keep the selected destination. Confirming the selected
 object itself ends the walk. [Behavior and checks](docs/re/AUTOWALK.md#november-28-automatic-interaction-and-continuation).
