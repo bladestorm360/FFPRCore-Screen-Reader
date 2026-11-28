@@ -3,6 +3,7 @@
 #define FFPR_ROUTE_FIXTURE_ONLY
 #include "route_worker_check.cpp"
 #include "ordinary_interaction_fixtures.h"
+#include <clocale>
 namespace {
 int failures=0,episodes=0,legs=0;json::Value guides;
 void observe(field::baked_nav::RouteSnapshot& snapshot,int live_contact=-1) {
@@ -134,13 +135,14 @@ void key_door(int map,int entity,int destination,int receipt,unsigned key, std::
 }
 void troia_passages() {
  using namespace field;using namespace baked_nav;
- struct Case {int map;Cell start;int destination;Cell target;TargetKind kind;int receipt;};
+ enum class Approach { Direct, Control, Npc };
+ struct Case {int map;Cell start;int destination;Cell target;TargetKind kind;int receipt;Approach expected;};
  const Case cases[]={
-  {94,{0,3,3},94,{0,3,13},TargetKind::Transition,283},
-  {94,{0,3,10},94,{0,3,3},TargetKind::Transition,283},
-  {95,{0,3,6},95,{0,7,7},TargetKind::Spot,280},
-  {93,{0,29,5},93,{0,4,3},TargetKind::Transition,-1},
-  {91,{0,7,9},91,{0,32,9},TargetKind::Transition,283},
+  {94,{0,3,3},94,{0,3,13},TargetKind::Transition,283,Approach::Direct},
+  {94,{0,3,10},94,{0,3,3},TargetKind::Transition,283,Approach::Control},
+  {95,{0,3,6},95,{0,7,7},TargetKind::Spot,280,Approach::Npc},
+  {93,{0,29,5},93,{0,4,3},TargetKind::Transition,-1,Approach::Direct},
+  {91,{0,7,9},91,{0,32,9},TargetKind::Transition,283,Approach::Control},
  };
  for(const auto& example:cases) {
   map_state::Flags flags;flags.scenario.fill(0);flags.current_map_id=example.map;flags.current_area_id=12;
@@ -154,10 +156,18 @@ void troia_passages() {
   const bool prefix=blocked.path.success&&blocked.path.event_on_route&&blocked.path.reason==L"Event required"&&
    !blocked.path.walk_phases.empty()&&blocked.path.walk_phases.back().manual_after&&blocked.pending.valid&&
    blocked.pending.goal.map_id==example.destination;
-  std::printf("Troia map%d to%d from%d,%d prefix%d steps%d reason[%ls] action[%ls]\n",example.map,
-   example.destination,example.start.x,example.start.y,prefix,blocked.path.step_count,blocked.path.reason.c_str(),
-   blocked.path.walk_phases.empty()?L"":blocked.path.walk_phases.back().action_after.c_str());
-  if(!prefix)++failures;
+  const auto end=blocked.path.walk_phases.empty()||blocked.path.walk_phases.back().cells.empty()?
+      Cell{}:blocked.path.walk_phases.back().cells.back();
+  const bool direct=blocked.path.success&&end==example.target&&!blocked.pending.valid&&blocked.path.reason.empty();
+  const bool npc=blocked.path.success&&blocked.path.npc_approach&&blocked.pending.valid&&
+   blocked.pending.goal.cell==example.target&&!blocked.path.walk_phases.empty()&&
+   blocked.path.walk_phases.back().manual_after;
+  const bool expected=example.expected==Approach::Direct?direct:example.expected==Approach::Control?prefix:npc;
+  if(!expected) {
+   std::printf("Troia map %d from (%d,%d) ended at (%d,%d): %ls\n",
+    example.map,example.start.x,example.start.y,end.x,end.y,blocked.path.reason.c_str());
+   ++failures;
+  }
   if(example.map==91) {
    auto crowded=snapshot;crowded.position=world_of_cell(*crowded.submap,{0,7,6});
    Planned wait;std::thread waiting([&]{wait=plan_snapshot(crowded);});waiting.join();
@@ -177,6 +187,7 @@ void troia_passages() {
 
 int main(){
  using namespace field;using namespace baked_nav;std::setvbuf(stdout,nullptr,_IONBF,0);
+ std::setlocale(LC_ALL,".UTF-8");
  const auto read=[](const char* path){std::ifstream f(path,std::ios::binary);return std::string(std::istreambuf_iterator<char>(f),{});};const auto bytes=read("data/ff4/maps.bin");
  if(!baked::load(bytes.data(),bytes.size())||!json::parse(read("data/ff4/mapstate.json"),fixture::records)||
     !json::parse(read("data/ff4/puzzles.json"),guides)||!append_ordinary_interactions(guides,4))return 2;

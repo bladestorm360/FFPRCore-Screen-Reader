@@ -34,16 +34,24 @@ int verify() {
     const auto ring = goal(478,12,{1,10,8},L"まもりのゆびわ",false);
     for (int timer : {0,1}) for (const Cell start : {Cell{0,24,2},Cell{1,16,2},Cell{1,3,8}}) {
         const auto state = flags(478,0,timer);
-        const auto onward = route(478,start,state,exit,TargetKind::Spot);
+        const auto onward = route(478,start,state,exit,TargetKind::Transition);
+        if (!onward.path.success || onward.path.required_trap)
+            std::printf("Istory exit timer%d from L%d (%d,%d): %ls / %ls\n",timer,start.layer,start.x,start.y,
+                        onward.path.reason.c_str(),onward.path.error.c_str());
         check(onward.path.success && !onward.path.required_trap,"both native entrances and the switch approach can reach the normal exit");
         const auto chest = route(478,start,state,ring,TargetKind::Interact);
         if (timer == 0) {
             check(!chest.path.success && chest.path.reason == L"Event required","running water makes the exact chest event gated");
         } else {
+            if (!chest.path.success || chest.path.required_trap)
+                std::printf("Istory chest from L%d (%d,%d): %ls / %ls\n",start.layer,start.x,start.y,
+                            chest.path.reason.c_str(),chest.path.error.c_str());
             check(chest.path.success && !chest.path.required_trap,"stopping the current opens the optional chest approach");
         }
     }
-    const auto first = route(478,{1,16,2},flags(478,0),exit,TargetKind::Spot);
+    const auto first = route(478,{1,16,2},flags(478,0),exit,TargetKind::Transition);
+    std::printf("Istory first: success%d next%d %ls / %ls / %ls\n",first.path.success,first.path.next_map_id,
+                first.path.reason.c_str(),first.path.error.c_str(),first.path.description.c_str());
     check(first.path.description.find(L"Ride the current") != std::wstring::npos,"ordinary directions stop their walking count at the real current");
     check(first.pending.incoming_transition && first.pending.incoming_transition->destination == 478 &&
           first.pending.incoming_transition->arrival == Cell{0,16,13},"ground current 37 uses the native Bottom landing");
@@ -71,7 +79,7 @@ int verify() {
             map_state::Resolver unknown(incomplete,fixture::records);
             check(!running.consumed(*map,object) && stopped.consumed(*map,object) == (id==38) &&
                   unknown.consumed(*map,object) == (id==38),"only the exact timed current is guarded against a stopped or unknown timer");
-            check(route(478,cell,flags(478,0),exit,TargetKind::Spot).path.success,"routing can resume from each actual waterfall landing");
+            check(route(478,cell,flags(478,0),exit,TargetKind::Transition).path.success,"routing can resume from each actual waterfall landing");
         }
     }
     check(checked_arcs == 6,"six exact native actors have one scripted movement arc each");

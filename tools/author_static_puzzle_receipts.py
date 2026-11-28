@@ -119,8 +119,11 @@ def main():
   assert original_retired==json.dumps(retired,ensure_ascii=False),(game,'retired interaction differs from native authoring')
   root['_comment']='Original factual puzzle recipes. Examined controls require native operation receipts and exact target identities; waypoint arrival alone completes only navigation steps. Source/evidence/limits: docs/re/SHIFTG_PUZZLE_AUDIT_20261030.md.'
   rendered=json.dumps(root,ensure_ascii=False,indent=2)+'\n'
-  if args.check:assert old==rendered,(game,'recipe differs; regenerate reviewed receipts')
-  else:path.write_text(rendered,encoding='utf-8')
+  # The Karnak route's distance table deliberately keeps each row compact.
+  # Verify the authored values without reformatting unrelated recipes.
+  changed=json.loads(old)!=root
+  if args.check:assert not changed,(game,'recipe differs; regenerate reviewed receipts')
+  elif changed:path.write_text(rendered,encoding='utf-8')
  (ROOT/'build_check/static_puzzle_receipts.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(f'Static puzzle receipts: {len(evidence)} exact controls in4 games; corrected Citadel maze endpoint, Zozo clock and flagless ship; no native code output')
 

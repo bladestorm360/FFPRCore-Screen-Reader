@@ -197,6 +197,7 @@ int main()
                         if (chests) for (const auto& row : chests->arr) {
                             const auto& r = row.arr;
                             if (r.size() < 3 || static_cast<int>(r[0].n) != o.entity_id() || r[1].s != baked::str(o.group)) continue;
+                            if (r.size() == 4 && r[3].s != baked::object_identifier(o)) continue;
                             const int bit = static_cast<int>(r[2].n);
                             if (bit < 0 || bit >= 1024) continue;
                             if(bit==0)++zero_chests;

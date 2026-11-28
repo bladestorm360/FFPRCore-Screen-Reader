@@ -5,6 +5,7 @@ import hashlib
 from pathlib import Path
 import json
 import sys
+from event_label_identities import WORLD_EVENT_REVIEWS
 
 ROOT = Path(__file__).resolve().parents[1]
 DUMP = ROOT.parent / 'tools/mapdump'
@@ -35,6 +36,7 @@ SPRINGS = {
     (5, 'Map_30421_1', 'entity_default', 19): (19, 'sc_30421_1_healing_spring'),
 }
 WIND_SHRINE_WARP = (5, 'Map_30041_8', 'entity_default', 72)
+CAVE_1F_RETURN = (5, 'Map_30021_1', 'entity_default', 22)
 
 
 def scene_transfer(game, obj, script, destination):
@@ -54,7 +56,7 @@ def scene_transfer(game, obj, script, destination):
 def apply_labels(game, labels, audit, objects, scripts, masters, maps):
     if game not in (5, 6):
         return
-    expected = {key for key in BOSSES.keys() | SPRINGS.keys() | {WIND_SHRINE_WARP} if key[0] == game}
+    expected = {key for key in BOSSES.keys() | SPRINGS.keys() | {WIND_SHRINE_WARP, CAVE_1F_RETURN} if key[0] == game}
     audit_rows = {(row['submap'], row['group'], row['id']): row for row in audit}
     for obj in objects:
         local = obj['submap'], obj['group'], obj['id']
@@ -83,7 +85,7 @@ def apply_labels(game, labels, audit, objects, scripts, masters, maps):
             for map_id in maps[obj['submap']]:
                 labels[f'@object:{map_id}:{actor}:2:{obj["name"]}'] = label
             audit_rows[local].update(label=label, reason='reviewed native healing spring event')
-        else:
+        elif key == WIND_SHRINE_WARP:
             assert (prop['entity_id'], obj['type'], prop['script_id'], script_name) == (26, 2, 2007, 'sc_e_0210')
             digest = hashlib.sha256(json.dumps(script, sort_keys=True, ensure_ascii=False,
                                               separators=(',', ':')).encode()).hexdigest()
@@ -93,6 +95,18 @@ def apply_labels(game, labels, audit, objects, scripts, masters, maps):
             for map_id in maps[obj['submap']]:
                 labels[f'@object:{map_id}:26:2:{obj["name"]}'] = 'Warp Tile'
             audit_rows[local].update(label='Warp Tile', reason='reviewed optional World Map warp after the ability tutorial')
+        else:
+            review, = (row for row in WORLD_EVENT_REVIEWS
+                       if (row['game'], row['submap'], row['group'], row['id']) == CAVE_1F_RETURN)
+            assert (prop['entity_id'], obj['type'], prop['script_id'], script_name) == (22, 2, 1129, review['script_name'])
+            digest = hashlib.sha256(json.dumps(script, sort_keys=True, ensure_ascii=False,
+                                              separators=(',', ':')).encode()).hexdigest()
+            assert digest == review['script_sha256']
+            changes = {tuple(c['operands']['iValues'][:2]) for c in commands if c['mnemonic'] == 'ChangeMap'}
+            assert changes == {(191, 2)}
+            for map_id in maps[obj['submap']]:
+                labels[f'@object:{map_id}:22:2:{obj["name"]}'] = review['label']
+            audit_rows[local].update(label=review['label'], reason=review['reason'])
     assert not expected, expected
 
 

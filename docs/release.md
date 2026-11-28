@@ -4,9 +4,10 @@
 
 The release covers the current six-game mod and the separately packaged
 Windows setup. The final FFV navigation pass covers the sunk Tower of Walse,
-Torna Canal's ship requirement, the cave switch and return exit, and the
-Wind Shrine warp. Manual route readout preserves new obstacle attempts
-while a prior step settles. The player guide records that enemy appearance
+Torna Canal's ship requirement, the cave switch and return exit, the
+Wind Shrine warp, and the Istory Falls current crossings. Manual route
+readout preserves new obstacle attempts while a prior step settles.
+The player guide records that enemy appearance
 descriptions are included and that most expected automatic animation cues
 have not played in reported testing.
 

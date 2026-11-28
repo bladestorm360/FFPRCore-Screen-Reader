@@ -309,7 +309,10 @@ const Grids& grids(const Submap& s)
             return !has_current_crossing(o);
         }
         case 476: return o.a == 2132 || o.a == 2136 || o.a == 2137;
-        case 478: return o.a == 2340 || o.a == 2341;
+        case 478:
+            // Istory Falls currents carry the party to reviewed landings.
+            // Let the route graph and timed-current guard own those contacts.
+            return (o.a == 2340 || o.a == 2341) && !has_current_crossing(o);
         case 545: return o.a == 1074 || o.a == 1075;
         default: return false;
         }

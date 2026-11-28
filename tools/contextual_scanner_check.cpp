@@ -36,7 +36,8 @@ int main(int argc,char** argv){
    const bool quicksand=n==5&&map->first_map_id==411&&source->entity_id()==19&&
        row.get(L"script_name")->s==L"sc_e_0290";
    const bool same_floor=expected_exit&&(expected_exit->a<0||expected_exit->a==map->first_map_id);
-   const bool transfer=!same_floor&&((grammar->s==L"contextual_transfer"&&!quicksand)||
+   const bool current=expected_exit&&(expected_exit->d&baked::kAutomaticCurrent);
+   const bool transfer=!same_floor&&!current&&((grammar->s==L"contextual_transfer"&&!quicksand)||
        (grammar->s==L"contextual_conditional"&&expected_exit));
    auto native=convert(&fixture::object);
    expect(native!=nullptr,"real reviewed event survives the actual native detector chain");
@@ -50,7 +51,7 @@ int main(int argc,char** argv){
    baked_nav::RemoteObject remote;remote.map_id=map->first_map_id;remote.type=source->type;
    remote.entity_id=source->entity_id();remote.raw_name=fixture::talk.name;remote.cell={source->layer,source->tx,source->ty};remote.event_type=L"Event";
    const auto* exit=baked::world_exit_at(grid,remote.entity_id,remote.raw_name,source->tx,source->ty);
-   remote.world_exit=exit!=nullptr;remote.dest_map_id=exit?exit->a:0;
+   remote.world_exit=exit&&!(exit->d&baked::kAutomaticCurrent);remote.dest_map_id=remote.world_exit?exit->a:0;
    RemoteBuilder builder({remote});builder.step();auto published=build_remote(builder.input);
    expect(published.size()==1,"actual remote publication retains the reviewed destination");
    if(published.size()==1){

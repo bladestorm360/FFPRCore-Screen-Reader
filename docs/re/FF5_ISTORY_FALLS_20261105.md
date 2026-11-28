@@ -53,3 +53,10 @@ or language key is required. All resource trees drained within the 2 GB and
 25 percent CPU limits. Checkpoint files are ff5_IstoryFalls/inputs.json and
 istory_falls_completion.json in the audit workspace. The initial probe's
 non-native switch approach was replaced by the real approach in final checks.
+
+The V1.1 release replay caught a later regression in the pushback mask. It
+marked all six redirecting contacts as impassable even though the bake had
+their verified onward landings. The mask now keeps a contact blocked only
+when it lacks that exact automatic-current edge. The native timer guard
+still controls contact 38. The replay checks the normal exit, optional chest,
+and the transition receipt needed to resume from the native landing.

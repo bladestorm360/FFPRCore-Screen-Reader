@@ -23,7 +23,8 @@ int main() {
     const auto bytes = fixture::read("data/ff5/maps.bin");
     if (!field::baked::load(bytes.data(),bytes.size())) return 2;
     ff5::library::stop(false);
-    scene(102,{1,4,7},{42,43,46});
+    karnak_time = 180;
+    scene(102,{1,4,7},{42,43,46,353});
     const auto initial_reads = fixture::native_control_reads;
     step();
     check(targets.size() == 1 && targets[0].goal.entity_id == 29,"the native-ready countdown starts the actual escape route");
@@ -32,7 +33,7 @@ int main() {
     ready = false;
     battle = true;
     event(events::Kind::BattleEntering);
-    scene(95,{1,23,35},{42,43,46,245});
+    scene(95,{1,23,35},{42,43,46,245,353});
     const auto before_battle = routes;
     for (int i = 0; i < 20; ++i) actions::run("GameModule.FieldStateChanged");
     for (int i = 0; i < 60; ++i) pulse();

@@ -14,7 +14,7 @@ bool crosses_town(const Planned& plan) {
     return false;
 }
 void all_doors() {
-    int doors=0,warps=0,flight=0,selected=0,projected=0,conditional=0;
+    int doors=0,warps=0,flight=0,selected=0,closed_faces=0,projected=0,conditional=0;
     map_state::Flags flags;flags.scenario.fill(0);flags.treasure.fill(0);flags.global.fill(0);
     map_state::Resolver state(flags,fixture::records);
     for(int index=0;index<baked::submap_count();++index) {
@@ -57,7 +57,11 @@ void all_doors() {
                 expect(!baked_route::edge_allowed(movement,grid,from,target),"boarding-side goal cannot substitute an adjacent entrance");
                 movement.goals_open=true;
                 if(sm->world&&object.type==baked::ObjType::GotoMap&&baked_route::transition_enterable(movement,grid,target.x,target.y)) {
-                    expect(baked_route::edge_allowed(movement,grid,from,target),"selected native town remains a legal exact terminal goal");++selected;
+                    const bool legal_face=baked_route::direction_allowed(movement,from,target);
+                    expect(baked_route::edge_allowed(movement,grid,from,target)==legal_face,
+                           "selecting a town permits its terminal cell through the native open faces");
+                    if(legal_face)++selected;
+                    else ++closed_faces;
                 }
             }
             if(sm->world&&object.type==baked::ObjType::GotoMap)for(const auto& row:baked::transports())if(row.type==3) {
@@ -69,7 +73,8 @@ void all_doors() {
         }
     }
     expect(doors>0&&projected>0,"each game audits real native doors and state-projected masks");
-    std::printf("FF%d: %d native doors, %d step warps, %d projected, %d conditional mode witnesses, %d explicit town edges, %d flight crossings checked\n",baked::game_number(),doors,warps,projected,conditional,selected,flight);
+    if (baked::game_number()==4) expect(closed_faces>0,"FFIV's world approaches retain their directional walls");
+    std::printf("FF%d: %d native doors, %d step warps, %d projected, %d conditional mode witnesses, %d explicit town edges, %d closed faces, %d flight crossings checked\n",baked::game_number(),doors,warps,projected,conditional,selected,closed_faces,flight);
 }
 void logged_enterprise() {
     const auto* world=baked::submap_by_map_id(1);const auto& grid=baked::grids(*world);

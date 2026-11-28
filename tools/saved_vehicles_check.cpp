@@ -68,6 +68,9 @@ int main(){using field::saved_world_vehicles;int failures=0;
  actual=saved_world_vehicles();expect(actual.size()==1&&actual[0].id==11&&actual[0].map==3&&actual[0].cell.x==20,"FFIV copies the Lunar Whale's saved Moon position");
  fixture::saved.map=1;expect(saved_world_vehicles().empty(),"FFIV does not substitute the surface craft");fixture::saved.map=3;
  fixture::saved.id=9;expect(saved_world_vehicles().empty(),"FFIV ignores other transportation records");
- for(int number:{1,2,5}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
+ fixture::game=game::Id::FF5;fixture::saved.id=4;fixture::saved.map=1;fixture::transport_type=7;
+ actual=saved_world_vehicles();expect(actual.size()==1&&actual[0].id==4&&actual[0].map==1&&actual[0].cell.x==20,"FFV copies the Wind Drake's saved World 1 position");
+ fixture::saved.map=2;expect(saved_world_vehicles().empty(),"FFV World 1 journey cannot reuse a Wind Drake from another world");
+ for(int number:{1,2}){fixture::game=static_cast<game::Id>(number);const int count=fixture::reads;expect(saved_world_vehicles().empty()&&fixture::reads==count,"other games abstain before native access");}
  std::printf("Saved vehicle reader: %d failures; no native allocation, clone, scene scan or retained game pointer\n",failures);return failures?1:0;
 }

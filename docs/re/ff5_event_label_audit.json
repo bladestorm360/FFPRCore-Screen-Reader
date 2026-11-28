@@ -14182,8 +14182,8 @@
     "id": 22,
     "raw": "海賊のアジト入口",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
+    "label": "Map entrance",
+    "reason": "both native branches return to the same Cave Entrance point, including the branch that starts a scene after arrival",
     "trap_hint": false
   },
   {
