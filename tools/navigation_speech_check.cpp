@@ -1,4 +1,4 @@
-// check-sources: field/field_refs.cpp text.cpp
+// check-sources: field/field_refs.cpp field/storyline.cpp fieldnav/route_readout.cpp text.cpp
 // Actual category/browse/route producers with manually delayed readiness; no game.
 #include <cstdio>
 #include <cstring>
@@ -96,9 +96,15 @@ namespace settings { bool get_bool(const char* key, bool def) {
     if(std::strcmp(key,"AudioBeacons")==0)return fixture::beacons;
     if(std::strcmp(key,"BeaconWithDirections")==0)return fixture::combined;
     return def;
-} }
-namespace ffpr::fieldnav::autowalk { bool active() { return false; } bool stop_requested() { return false; } void request(field::baked_nav::MapGoal, field::TargetKind, std::wstring) {} }
+}
+int get_int(const char*, int fallback) { return fallback; }
+}
+namespace ffpr::fieldnav::autowalk { bool active() { return false; } bool stop_requested() { return false; } void request(field::baked_nav::MapGoal, field::TargetKind, std::wstring, bool) {} }
 namespace ffpr::fieldnav::audio_loops { void restart_beacon() { ++fixture::beacon_requests; } }
+namespace ffpr::system {
+bool is_field_navigation_ready() { return fixture::field_ready && !fixture::battle; }
+bool input_transition_blocked() { return fixture::transition; }
+}
 namespace field::cache {
 void* get_or_refresh(ref::Class& type) { ++fixture::cache_reads; return std::strcmp(type.name, "FieldPlayerController") == 0 ? &fixture::controller : reinterpret_cast<void*>(1); }
 void* refresh(ref::Class& type) { return get_or_refresh(type); }
@@ -107,8 +113,11 @@ void clear(ref::Class&) {}
 namespace field {
 int current_map_id() { return fixture::map_id; }
 void* map_handle() {return reinterpret_cast<void*>(1);}
+void* player() { return fixture::controller.player; }
+int object_type_of(void*) { return int(baked::ObjType::TreasureBox); }
 std::wstring current_map_name() { return L"Map"; }
 bool Entity::is_alive() const { return true; }
+bool Entity::hovercraft_is_carried() const { return false; }
 Category Entity::category() const { return Category::Chests; }
 unity::Vec3 Entity::position() const { return pos; }
 std::wstring Entity::display_name() const { return L"Chest"; }
@@ -125,9 +134,17 @@ std::wstring direction_name(unity::Vec3, unity::Vec3 delta) { return delta.x > 0
 }
 namespace field::baked {
 const Submap* submap_by_map_id(int id) { return id == fixture::map_id ? &fixture::world : nullptr; }
+const Grids& grids(const Submap&) { static const Grids room; return room; }
+std::wstring object_identifier(const Object&) { return {}; }
+}
+namespace field::map_state {
+void read_scenario_flags(std::span<std::optional<int>> flags) { std::fill(flags.begin(),flags.end(),std::nullopt); }
+void read_keyword_flags(int, std::span<std::optional<bool>> flags) { std::fill(flags.begin(),flags.end(),std::nullopt); }
+std::optional<bool> has_dried_meat() { return {}; }
 }
 namespace field::scanner {
 void remember_selection() {} void clear_selection() {}
+bool remembered_chest(baked_nav::MapGoal&, std::wstring&) { return false; }
 void interrupt_navigation_work() { ++fixture::scan_cancels; }
 void when_filter_ready(std::function<void()> ready, bool) { fixture::pending.push_back(std::move(ready)); }
 void scan_entities() { ++fixture::scans; } void force_rescan() { ++fixture::scans; } void invalidate_map() {++fixture::view_invalidations;} void schedule_scan() {} void cancel_scan() {} void cancel_navigation_work() {++fixture::scan_cancels;}
@@ -142,7 +159,9 @@ double captured_at() { return frame::now(); }
 namespace field::baked_nav {
 void interrupt_requests() { ++fixture::invalidations; }
 void clear_pending(bool) {fixture::has_pending=false;}
-bool pending_goal(MapGoal& goal,TargetKind& kind,std::wstring& name) {if(!fixture::has_pending)return false;goal=fixture::requested_goal;kind=TargetKind::Interact;name=L"Retained chest";return true;} void continue_pending() {} void invalidate() {++fixture::invalidations;}
+bool pending_goal(MapGoal& goal,TargetKind& kind,std::wstring& name) {if(!fixture::has_pending)return false;goal=fixture::requested_goal;kind=TargetKind::Interact;name=L"Retained chest";return true;} void continue_pending(std::function<void(PathInfo)>) {} void invalidate() {++fixture::invalidations;}
+bool prepared() { return true; }
+void request_storyline_guidance(std::vector<GuideTarget>, std::function<void(PathInfo)> publish, bool) { fixture::route = std::move(publish); }
 void cancel_requests() { ++fixture::cancelled; }
 void cancel_browse_route() { fixture::browse = {}; }
 std::wstring map_name_of(int id) { return id == 186 ? L"Deist Cavern B2" : L""; }
@@ -152,6 +171,8 @@ void request_browse_route(MapGoal goal, TargetKind, std::function<void(BrowseRou
     else publish(fixture::browse_path);
 }
 bool cell_at(void*, unity::Vec3, baked_route::Cell&) { return true; }
+bool player_cell(void*, void*, baked_route::Cell& at) { at = {1,0,0}; return true; }
+unity::Vec3 world_of(void*, const baked_route::Cell& at) { return {16.f*at.x,-16.f*at.y,0}; }
 void request_route(MapGoal goal, TargetKind, std::wstring name, std::function<void(PathInfo)> publish, bool) { fixture::requested_goal=goal;fixture::requested_name=std::move(name);fixture::route = std::move(publish); }
 }
 int main() {
@@ -189,8 +210,9 @@ int main() {
     field::category_next(); // old callback for NPCs
     for (int i = 0; i < field::kCategoryCount; ++i) field::category_next(); // return to NPCs with new event identity
     fixture::finish();
-    expect(fixture::output.size() == 1 && fixture::output.back().parts.front() == L"Category: NPCs",
-        "returning to the same category enum cannot revive an obsolete callback");
+    expect(fixture::output.size() == 2 && fixture::output.front().parts.front() == L"Category: Storyline" &&
+           fixture::output.back().parts.front() == L"Category: NPCs",
+        "only the immediate Storyline readout and current NPC callback speak after a full cycle");
     fixture::output.clear(); fixture::selectable = false;
     field::category_next(); fixture::finish();
     expect(fixture::output.size() == 1 && fixture::output.back().parts.size() == 1,
@@ -311,7 +333,7 @@ int main() {
         std::vector<field::Category> cycle={field::Category::Chests,field::Category::NPCs,
             field::Category::MapExits,field::Category::Events,field::Category::Vehicles};
         if(n>=4)cycle.push_back(field::Category::SavePoints);
-        cycle.push_back(field::Category::Objects);cycle.push_back(field::Category::All);
+        cycle.push_back(field::Category::Objects);cycle.push_back(field::Category::Storyline);cycle.push_back(field::Category::All);
         field::g_current_category=field::Category::All;
         for(const auto expected:cycle) {
             fixture::output.clear();field::category_next();fixture::finish();
