@@ -258,12 +258,28 @@ void verify_pathfinder()
   const int upper=634+i;
   const auto check_lift=[&](int from, Cell at, int to, int exit){
    const auto goal=destination(to,exit,baked::ObjType::GotoMap,TargetKind::Transition);
-   const auto elevator=route(0,at,goal,from).path;
+   const auto result=route(0,at,goal,from);
+   const auto& elevator=result.path;
    const bool usable=elevator.success&&elevator.next_map_id==to&&!elevator.walk_phases.empty()&&
        elevator.walk_phases.back().manual_after&&elevator.description.find(T(L"Elevator"))!=std::wstring::npos;
    if(!usable)std::printf("Elevator %d -> %d: %ls / %ls / %ls\n",from,to,elevator.reason.c_str(),
        elevator.error.c_str(),elevator.description.c_str());
    check(usable,"The lift is a reachable, player-operated elevator from its native landing");
+   if(!usable)return;
+   const auto& phase=elevator.walk_phases.back();
+   const auto& target=phase.arrival_interaction;
+   const auto& hop=result.pending.incoming_transition;
+   const bool native=target&&hop&&target->continue_route&&target->cell.layer==2&&
+       target->entity_id==hop->entity_id&&target->cell.x==hop->x&&target->cell.y==hop->y&&
+       target->object_type==int(baked::ObjType::Entity)&&phase.arrival_direction>=0;
+   check(native,"The lift carries the exact upper-layer native confirm and keeps its onward route");
+   if(!native)return;
+   const auto selected=destination(from,target->entity_id,baked::ObjType::Entity,TargetKind::Transition);
+   const auto final=route(0,at,selected,from,true).path;
+   const auto arrival=final.walk_phases.empty() ? std::nullopt : final.walk_phases.back().arrival_interaction;
+   check(final.success&&!final.next_map_id&&arrival&&!arrival->continue_route&&
+         arrival->cell==target->cell&&arrival->entity_id==target->entity_id,
+         "Selecting the elevator itself confirms the real control as the final destination");
   };
   check_lift(lift.lower,{2,lift.from_x,8},upper,16);
   check_lift(upper,{2,5,8},lift.lower,lift.lower_exit);

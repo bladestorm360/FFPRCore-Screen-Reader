@@ -1,5 +1,35 @@
 # Shared autowalk and simultaneous navigation, 2026-10-11
 
+## November 28 automatic interaction and continuation
+
+Auto-interact uses the native Confirm action at the selected endpoint and
+at required interactible route stops. The planned actor includes its native
+type, ID, tile and layer. An ordinary destination can be inferred from its
+physical route and still receive Confirm. The game must select the same
+actor from the player's verified facing. The final action retires the walk.
+
+The FFV log showed stops on lift maps 263 and 264, even after the player
+enabled Auto-interact. The lift leg supplied a manual prompt but no native
+actor. The planner now joins a deterministic examined transition to its
+physical actor. It excludes timed choices, recurring NPC crossings and
+random outcomes from automatic route continuation. Authored switch and
+lock prerequisites supply the same native identity. The owner pauses
+movement before Confirm and waits for actual field control before one
+new plan. A repeated request for the same control and heading immediately
+after its script falls back to a prompt.
+
+An elevator can pass through native ChangeMap or switch to the destination
+map within its Event script. In both paths Autowalk owns the expected map
+before Confirm, so the initial Event cannot discard the onward destination.
+Same-floor controls use the native Event or Gimmick return and fresh field
+geometry. Walk-on doors keep their existing continuation path.
+
+The native fixture verifies one Confirm, direct Event-to-map and ordinary
+map-change continuation, waiting for the native controller, a same-floor
+switch replan and the duplicate-action fallback. The ship replay passed
+1,491 assertions and 2,959 route legs, covering both directions of all
+five lifts and selecting each lift itself. Gameplay confirmation is pending.
+
 ## November 27 battle return and chest selection
 
 Battle entry retires synthetic input and pending route work in the native
@@ -59,13 +89,11 @@ target, ID, tile, layer and any available selected live identity must match.
 Manual input and the navigation stop key have priority. The wait ends
 after a quarter-second if the native target never matches.
 
-The field owner releases movement and retires the route before calling
-`FieldPlayer.TakeAction`. Native keyboard and touch paths call the same
-method in the installed titles. FFIII's keyboard path calls it from the
-field controller's callback. Each interaction retains the game's usual
-dialogue, scripts and world changes. The player can request the next leg
-after the field is ready. Walk-on exits and other manual route actions keep
-their own control rules.
+The field owner releases movement before calling `FieldPlayer.TakeAction`.
+Native keyboard and touch paths call the same method in the installed
+titles. FFIII's keyboard path calls it from the field controller's callback.
+Each interaction retains the game's usual dialogue, scripts and world
+changes. The November 28 continuation rules govern required interactions.
 
 The offline checks exercise zero-step facing, post-turn native searches,
 same-ID impostors, a different observer and layer, the stop key, manual

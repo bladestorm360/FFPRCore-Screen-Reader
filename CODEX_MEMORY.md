@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 28 Autowalk interactions.** Required elevator and switch
+confirmations keep the selected destination. Confirming the selected
+object itself ends the walk. [Behavior and checks](docs/re/AUTOWALK.md#november-28-automatic-interaction-and-continuation).
+
 **November 28 FFV battle countdown.** Ctrl+T reads the rendered battle
 timer. The binding is independent of turn order and timer freeze.
 [Controls and native evidence](docs/re/FF5_KARNAK_20261105.md#november-28-battle-countdown).

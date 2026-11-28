@@ -73,6 +73,8 @@ void prepare_troia_passage_prefix(RouteSnapshot& snapshot, PathInfo& path)
         } else phase.cells = std::move(route.cells);
         if (!npc && control.examined) {
             annotate_facing(phase,goals);
+            if (phase.arrival_direction >= 0)
+                phase.arrival_interaction = route_progress::InteractionTarget{seen->cell, actor.entity_id(), int(actor.type), true};
             phase.action_after = TF(L"Interact: {0}",{
                 translate_entity_name_snapshot(baked::object_identifier(actor),snapshot.map_id)});
         } else if (!npc) phase.action_after = TF(L"Step on {0}.",{T(L"Passage switch")});

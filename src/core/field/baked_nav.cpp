@@ -371,6 +371,32 @@ void annotate_facing(Phase& phase, const baked_route::Goals& goals)
     phase.announce_arrival_facing = goals.arrival_facing >= 0;
 }
 
+bool interaction_object_type(int type)
+{
+    using baked::ObjType;
+    switch (static_cast<ObjType>(type)) {
+    case ObjType::Entity: case ObjType::AnimEntity: case ObjType::NPC:
+    case ObjType::ShopNPC: case ObjType::TreasureBox:
+        return true;
+    default:
+        return false;
+    }
+}
+
+const baked::Object* manual_warp_actor(const baked::Grids& grid, const baked::Object& warp)
+{
+    if (warp.type != baked::ObjType::Warp || (warp.d & 255) == 1) return nullptr;
+    // A Warp is a graph edge. Confirm the physical actor with the same
+    // source identity, never the synthetic edge.
+    const auto matches = [&](const baked::Object& native) {
+        return interaction_object_type(int(native.type)) && native.entity_id() == warp.entity_id() &&
+            native.name == warp.name && native.group == warp.group && native.layer == warp.layer &&
+            native.tx == warp.tx && native.ty == warp.ty;
+    };
+    const auto actor = std::find_if(grid.objects.begin(), grid.objects.end(), matches);
+    return actor != grid.objects.end() && std::none_of(std::next(actor), grid.objects.end(), matches) ? &*actor : nullptr;
+}
+
 /// Live obstacles for an explicit route, by what they are (user, 2026-10-11: say why a route
 /// is blocked): a chest is a wall; a collision entity or a collision object that is active now
 /// can be a story gate (FF1's bridge before it is built, a locked door). A proved
@@ -2689,7 +2715,15 @@ CrossLeg find_across(void* map_handle, void* player, const MapGoal& goal, bool w
                 p.action_after+=L" "+T(L"Choose Right at the junction.");
                 p.manual_after=true; // Native menu/timed arrow, no input automation.
             }
-            if (examine_warp) annotate_facing(p, warp_goals);
+            if (examine_warp) {
+                annotate_facing(p, warp_goals);
+                if (p.arrival_direction >= 0 && !out.random_transfer &&
+                    !(o.d & (baked::kRecurringNpcSource | baked::kSerpentRightJunction))) {
+                    if (const auto* actor = manual_warp_actor(gh, o))
+                        p.arrival_interaction = route_progress::InteractionTarget{
+                            {actor->layer, actor->tx, actor->ty}, actor->entity_id(), int(actor->type), true};
+                }
+            }
             if(o.d&baked::kRecurringNpcSource) {
                 // The native loop supplies the opening; no mod-side wait,
                 // movement or interaction runs. Repeated manual Confirm is
@@ -4522,6 +4556,39 @@ struct Planned {
 #include "magnetic_cavern.inl"
 #include "lunar_whale_landing.inl"
 #include "fire_ship_passages.inl"
+void annotate_selected_interaction(const RouteSnapshot& snapshot, PathInfo& path)
+{
+    const auto& goal = snapshot.goal;
+    if (!path.success || path.next_map_id || path.npc_approach || path.blocking_party >= 0 ||
+        snapshot.active.key_approach || goal.map_id != snapshot.map_id || goal.entity_id < 0 ||
+        goal.transportation_id || path.walk_phases.empty()) return;
+    auto& phase = path.walk_phases.back();
+    if (phase.arrival_interaction || phase.manual_after || phase.arrival_direction < 0) return;
+
+    // Use the selected native actor's layer and type, rather than assuming
+    // that it shares the player's standing layer or even the list's category.
+    const NativeObstacle* actor = nullptr;
+    for (const auto& row : snapshot.obstacles) {
+        if (planning_cancelled()) return;
+        if (row.id != goal.entity_id || row.cell.x != goal.cell.x || row.cell.y != goal.cell.y ||
+            (row.cell.layer >= 0 && row.cell.layer != goal.cell.layer) ||
+            !interaction_object_type(row.type) || row.party || !row.enabled || !row.applies ||
+            (goal.object_type >= 0 && row.type != goal.object_type) ||
+            (!goal.raw_name.empty() && row.raw_name != goal.raw_name)) continue;
+        if (actor) return;
+        actor = &row;
+    }
+    if (actor) {
+        auto cell = actor->cell;
+        if (cell.layer < 0) cell.layer = goal.cell.layer;
+        phase.arrival_interaction = route_progress::InteractionTarget{cell, actor->id, actor->type};
+    } else if (goal.object_type >= 0 && interaction_object_type(goal.object_type)) {
+        // Authored targets can carry the exact type and layer before their
+        // observation is available. The ready native observer still vetoes confirm.
+        phase.arrival_interaction = route_progress::InteractionTarget{goal.cell, goal.entity_id, goal.object_type};
+    }
+}
+
 Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     const double compute_started = frame::now();
     snapshot.flight_to_landing.reset();
@@ -4568,6 +4635,25 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     modtext::LocaleScope locale(snapshot.locale);
     SnapshotScope scope(snapshot);
     snapshot.observed_goal=snapshot.goal.cell;
+    if (snapshot.kind == TargetKind::Transition && snapshot.goal.entity_id >= 0) {
+        // The destinations list can present a manual travel actor under
+        // Map Exits. Its own final route still ends at an interaction stance.
+        const auto& goal = snapshot.goal;
+        if (const auto* area = baked::submap_by_map_id(goal.map_id); area && !area->world) {
+            const auto& grid = baked::grids(*area);
+            for (const auto& edge : grid.objects) {
+                if (edge.entity_id() != goal.entity_id || edge.layer != goal.cell.layer ||
+                    !edge.contains(goal.cell.x, goal.cell.y) ||
+                    (!goal.raw_name.empty() && baked::object_identifier(edge) != goal.raw_name)) continue;
+                if (const auto* actor = manual_warp_actor(grid, edge); actor && snapshot.state.active(*area, *actor)) {
+                    snapshot.kind = TargetKind::Interact;
+                    snapshot.goal.examine = true;
+                    snapshot.goal.object_type = int(actor->type);
+                    break;
+                }
+            }
+        }
+    }
     if(snapshot.goal.transportation_id>0&&snapshot.goal.map_id==snapshot.map_id) {
         const auto model=std::find_if(snapshot.vehicles.begin(),snapshot.vehicles.end(),[&](const auto& vehicle){
             return vehicle.transportation_id==snapshot.goal.transportation_id;
@@ -4642,6 +4728,7 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     prepare_baron_gate_prefix(snapshot,result.path);
     prepare_fire_ship_prefix(snapshot, result.path);
     if (snapshot.map_id == 1) prepare_magnetic_cavern_prefix(snapshot, result.path);
+    annotate_selected_interaction(snapshot, result.path);
     if (waterfall_state == 0 && !result.path.success && result.path.reason.empty() &&
         result.path.error == L"No path found") {
         result.path.reason = T(L"Event required");

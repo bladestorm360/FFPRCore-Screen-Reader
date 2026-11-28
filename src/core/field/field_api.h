@@ -77,6 +77,7 @@ struct Target {
     int entity_id = -1;
     int transportation_id = 0;    // vehicle model identity, independent of NPC entity IDs
     bool npc = false;
+    bool native_identity = false; // false for a list row that has no live game object
 };
 
 // --- player and map ---------------------------------------------------------------------

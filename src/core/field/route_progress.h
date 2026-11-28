@@ -16,6 +16,7 @@ struct InteractionTarget {
     baked_route::Cell cell;
     int entity_id = -1;
     int object_type = -1; // authored object class when the route names a prerequisite
+    bool continue_route = false; // the action is a prerequisite, not the selected destination
 };
 struct Phase {
     std::vector<baked_route::Cell> cells;

@@ -14,9 +14,9 @@ void start(const field::PathInfo& path, const field::baked_nav::MapGoal* goal = 
 void cancel(bool announce = false);
 /// Called after keyboard/SDL polling, before dispatch, even with no keyboard key pressed.
 void input_updated();
-/// Native field-state boundary for a verified walk-open door.
-bool door_phase_started(bool scripted);
-void door_phase_returned(int map_id);
+/// Native field-state boundaries for a walk-open door or confirmed prerequisite.
+bool field_action_started(bool scripted);
+void field_action_returned(int map_id);
 /// Native input checks see a one-frame confirm/back press for a planned vehicle action.
 bool virtual_key(int action, bool up = false);
 bool virtual_input_active();

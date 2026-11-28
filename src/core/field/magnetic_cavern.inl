@@ -53,6 +53,8 @@ void prepare_magnetic_cavern_prefix(RouteSnapshot& snapshot, PathInfo& path)
             if (!point) continue;
             arrival = TrapVisit{snapshot.map_id, id, forest_id, object.tx, object.ty, end,
                 {point->layer, point->tx, point->ty}};
+        } else if (phase.arrival_direction >= 0) {
+            phase.arrival_interaction = route_progress::InteractionTarget{approach.goal.cell, id, int(object.type), true};
         }
         if (phase.action_after.empty()) phase.action_after = talk;
         phase.manual_after = true;

@@ -312,6 +312,11 @@ void announce_ready_entity(bool walking, double requested_at, bool automatic = f
                 speak(T(L"Navigation map data unavailable"));return;
             }
             walk_goal.map_id=current_map_id();
+            if(e->game && (kind==TargetKind::Interact || kind==TargetKind::Infer || kind==TargetKind::Transition)) {
+                const int layer = game_object_layer(e->game) - 9;
+                if (layer >= 0 && layer <= 2) walk_goal.cell.layer = layer;
+                walk_goal.object_type = object_type_of(entity_property(e->game));
+            }
         }
         walk_goal.entity_id=e->entity_id;
         if(e->kind==Kind::TreasureChest)walk_goal.object_type=int(baked::ObjType::TreasureBox);
@@ -723,6 +728,7 @@ Target selected()
         t.position = e->position();
         t.name = e->display_name();
         t.identity = e->game ? e->game : static_cast<const void*>(e.get());
+        t.native_identity = e->game != nullptr;
         t.category = static_cast<int>(e->category());
         t.remote_map_id = e->remote_map_id;
         t.cell_layer = e->cell_layer;

@@ -40,8 +40,8 @@ void field_action_started(int,const field::baked_route::Cell&){}
 void field_returned(bool){}
 }
 namespace ffpr::fieldnav::autowalk {
-bool door_phase_started(bool){return fixture::door;}
-void door_phase_returned(int map) {
+bool field_action_started(bool){return fixture::door;}
+void field_action_returned(int map) {
     if (fixture::door && map == fixture::map_id) {
         ++fixture::door_returns;
         fixture::door_return_scan = fixture::scans;

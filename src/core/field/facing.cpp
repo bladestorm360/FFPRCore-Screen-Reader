@@ -73,8 +73,12 @@ void* autowalk_interaction_candidate(void* map, void* player, const void* observ
 
 bool confirm_autowalk_interaction(void* player, void* candidate)
 {
-    if (!player || !candidate || !mTakeAction.ptr()) return false;
-    ref::call<void>(mTakeAction, player, candidate);
-    return true;
+    const auto action = mTakeAction.ptr();
+    if (!player || !candidate || !action) return false;
+    try {
+        using TakeAction = void (*)(void*, void*, const void*);
+        reinterpret_cast<TakeAction>(action)(player, candidate, mTakeAction.get());
+        return true;
+    } catch (...) { ref::call_failed_note("Field.ConfirmAutowalkInteraction"); return false; }
 }
 }

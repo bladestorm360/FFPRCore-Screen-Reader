@@ -23,6 +23,7 @@ int interaction_calls=0, guided_battle_returns=0;
 bool guide_can_replan=false;
 bool dispatched_while_walking=false;
 void* dispatched_candidate=nullptr;
+bool confirm_starts_event=false;
 uint64_t tick=10; double seconds=1;
 bool ready=true, focus=true, menu=false, manual=false, edge_open=true;
 bool automatic_readout=false, transition_blocked=false, pose_ready=true;
@@ -47,7 +48,7 @@ static_assert(offsetof(ScriptName,size)==il2cpp::kStringLengthOff);
 bool door_changes_state = true;
 void start_native_door(bool script) {
     if (!door_changes_state) return;
-    ffpr::fieldnav::autowalk::door_phase_started(script);
+    ffpr::fieldnav::autowalk::field_action_started(script);
     ready = false;
 }
 void open_trigger(void*, int32_t, void*, int32_t, const void*) { start_native_door(false); }
@@ -62,6 +63,7 @@ void take_action(void*, void* target, const void*) {
     ++interaction_calls;
     dispatched_while_walking |= ffpr::fieldnav::autowalk::active();
     dispatched_candidate = target;
+    if (confirm_starts_event) start_native_door(true);
 }
 void search_interactions(void*, const void*) {}
 float angle(void* o,const void*) { return static_cast<Node*>(o)->angle; }
@@ -252,12 +254,12 @@ template<class Expect> void check_door_continuation(Expect expect)
         walk::input_updated();
         expect(!paused.x && !paused.y && walk::active() && fixture::requests == before &&
             fixture::pose_reads == poses, "Door opening holds movement and avoids native pose or route work");
-        walk::door_phase_returned(102);
+        walk::field_action_returned(102);
         fixture::ready = true;
         walk::input_updated();
         expect(fixture::requests == before, "An unrelated map's field return cannot renew the route");
-        walk::door_phase_returned(101);
-        walk::door_phase_returned(101);
+        walk::field_action_returned(101);
+        walk::field_action_returned(101);
         fixture::controller.enabled = false;
         walk::input_updated();
         expect(fixture::requests == before, "The returned door waits for its native controller");
@@ -315,11 +317,11 @@ template<class Expect> void check_door_continuation(Expect expect)
     const int before_battle = fixture::requests;
     events::fire(events::Kind::BattleEntering);
     events::fire(events::Kind::BattleStart);
-    walk::door_phase_returned(101);
+    walk::field_action_returned(101);
     fixture::manual = true;
     walk::input_updated();
     fixture::manual = false;
-    expect(walk::active() && !walk::g_door_wait && fixture::requests == before_battle &&
+    expect(walk::active() && !walk::g_field_action_wait && fixture::requests == before_battle &&
         walk::d_InputAxis(nullptr, nullptr).x == 0,
         "The battle retires the door wait, keeps the destination and owns native input");
     events::fire(events::Kind::BattleEnd);
@@ -375,6 +377,7 @@ template<class Expect> void check_arrival_interaction(Expect expect)
     walk::Phase arrival;
     arrival.cells = {fixture::cell};
     arrival.arrival_direction = 1;
+    arrival.arrival_interaction = field::route_progress::InteractionTarget{{1,2,1},destination.entity_id,5};
     field::PathInfo path;
     path.success = true;
     path.walk_phases = {arrival};
@@ -393,6 +396,8 @@ template<class Expect> void check_arrival_interaction(Expect expect)
            "The default-off setting still turns on a zero-step interaction route");
     fixture::auto_interact = true;
     fixture::selected_target.valid = true;
+    fixture::selected_target.native_identity = true;
+    fixture::selected_target.entity_id = fixture::interactible.id;
     fixture::selected_target.identity = &fixture::interactible;
     fixture::selected_target.position = fixture::interactible.position;
     finish_walking();
@@ -448,6 +453,7 @@ template<class Expect> void check_arrival_interaction(Expect expect)
     destination.object_type = int(field::baked::ObjType::TreasureBox);
     destination.avoid_other_events = true;
     path.walk_phases[0] = arrival;
+    path.walk_phases[0].arrival_interaction->object_type = destination.object_type;
     fixture::interactible.type = destination.object_type;
     fixture::interactible.opened = true;
     finish_walking();
@@ -478,6 +484,104 @@ template<class Expect> void check_arrival_interaction(Expect expect)
            "Turning off Autowalk retires the guided action even if the setting is turned back on");
     fixture::interactible.type = 5;
     fixture::auto_interact = false;
+}
+
+template<class Expect> void check_prerequisite_interaction(Expect expect)
+{
+    namespace walk = ffpr::fieldnav::autowalk;
+    using events::Kind;
+    using field::TargetKind;
+    fixture::map_id = 263;
+    fixture::auto_interact = true;
+    fixture::confirm_starts_event = true;
+    fixture::ready = fixture::door_changes_state = true;
+    fixture::waits.clear();
+    fixture::route_results.clear();
+    fixture::cell = {2,1,1};
+    fixture::interactible.floor = 2;
+    const field::baked_nav::MapGoal destination{265, {1,9,9}};
+    field::PathInfo path;
+    path.success = true;
+    path.next_map_id = 636;
+    walk::Phase approach;
+    approach.cells = {fixture::cell};
+    approach.manual_after = true;
+    approach.action_after = L"Interact: Elevator";
+    approach.arrival_direction = 1;
+    approach.arrival_interaction = field::route_progress::InteractionTarget{{2,2,1},19,5,true};
+    path.walk_phases = {approach};
+    const auto pulse = [] {
+        walk::d_search_interactions(&fixture::interaction_observer, nullptr);
+        fixture::step();
+        walk::input_updated();
+    };
+    const auto pump = [] {
+        auto waits = std::move(fixture::waits);
+        fixture::waits.clear();
+        for (auto& step : waits) if (step()) fixture::waits.push_back(std::move(step));
+    };
+    const auto begin = [&] {
+        walk::start(path, &destination, TargetKind::Interact);
+        walk::d_InputAxis(nullptr, nullptr);
+        pulse();
+    };
+    const auto before = fixture::interaction_calls;
+    const auto requests = fixture::requests;
+    begin();
+    expect(fixture::interaction_calls == before + 1 && walk::g_transition.waiting() && !fixture::ready,
+        "The lift receives one native confirm and keeps the onward map leg");
+    pulse();
+    const auto waiting_axis = walk::d_InputAxis(nullptr, nullptr);
+    expect(fixture::interaction_calls == before + 1 && !waiting_axis.x && !waiting_axis.y,
+        "No repeated confirm or movement while the elevator script owns input");
+    fixture::map_id = 636;
+    events::fire(Kind::MapChanged); // Log shows an elevator can change map ID during Event without ChangeMap.
+    events::fire(Kind::MapChanged);
+    fixture::controller.enabled = false;
+    pump();
+    expect(fixture::requests == requests, "Arrival waits for the real controller even on the correct floor");
+    fixture::ready = fixture::controller.enabled = true;
+    pump();
+    expect(fixture::requests == requests + 1 && fixture::last_requested.map_id == destination.map_id &&
+        fixture::last_requested.cell == destination.cell, "Lift exit replans to the original destination once");
+    walk::cancel();
+
+    fixture::map_id = 264;
+    path.next_map_id = 637;
+    begin();
+    events::fire(Kind::MapChanging);
+    fixture::map_id = 637;
+    fixture::ready = true;
+    events::fire(Kind::MapChanged);
+    pump();
+    expect(fixture::interaction_calls == before + 2 && fixture::requests == requests + 2,
+        "Native ChangeMap also retains a confirmed elevator route");
+    walk::cancel();
+
+    fixture::map_id = 270;
+    path.next_map_id = 0;
+    path.walk_phases[0].action_after = L"Operate the switch.";
+    begin();
+    expect(fixture::interaction_calls == before + 3 && walk::g_field_action_wait && walk::g_field_action_wait->started,
+        "A same-floor switch arms its native return before confirming");
+    pulse();
+    expect(fixture::requests == requests + 2, "A running switch event never requests a route");
+    fixture::ready = true;
+    walk::field_action_returned(270);
+    pulse();
+    expect(fixture::requests == requests + 3 && fixture::route_results.size() == 3,
+        "The settled switch result requests one updated route");
+    fixture::route_results.back()(path);
+    walk::d_InputAxis(nullptr, nullptr);
+    pulse();
+    expect(fixture::interaction_calls == before + 3 && !walk::active() &&
+        fixture::spoken.back() == L"Autowalk stopped, Operate the switch.",
+        "An unchanged route cannot toggle the same control again");
+
+    fixture::auto_interact = false;
+    fixture::confirm_starts_event = false;
+    fixture::interactible.floor = 1;
+    fixture::route_results.clear();
 }
 
 template<class Expect> void check_route_refresh(Expect expect)
@@ -793,6 +897,8 @@ int main(){
     fixture::cell = {0,17,19};
     fixture::vehicle = {true,1,1,L""};
     fixture::selected_target.valid = fixture::selected_target.npc = true;
+    fixture::selected_target.native_identity = true;
+    fixture::selected_target.entity_id = 14;
     fixture::selected_target.identity = &fixture::field_controller;
     fixture::selected_target.position = {17,18,0};
     field::baked_nav::MapGoal bird{160,{0,19,18},true,{},0,14,L"Black Chocobo"};
@@ -825,6 +931,7 @@ int main(){
  }
  std::printf("All-six live obstruction detour/wait/rate/cancellation/timeout checks complete\n");
  check_arrival_interaction(expect);
+ check_prerequisite_interaction(expect);
  check_door_continuation(expect);
  check_route_refresh(expect);
  std::printf("Autowalk native input, vehicle waits and route refresh: %d failures\n",failures);return failures?1:0;

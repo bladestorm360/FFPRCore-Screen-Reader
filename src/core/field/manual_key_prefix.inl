@@ -41,6 +41,8 @@ void prepare_manual_key_prefix(RouteSnapshot& snapshot,PathInfo& path) {
     prefix.action_after=baked::game_number()!=3?T(L"Interact to unlock the door."):
         TF(L"Interact: {0}",{translate_entity_name_snapshot(baked::object_identifier(actor),snapshot.map_id)});
     prefix.manual_after=true;
+    if (prefix.arrival_direction >= 0)
+        prefix.arrival_interaction = route_progress::InteractionTarget{first->at, actor.entity_id(), int(actor.type), true};
     path=PathInfo{};fill_result(sm,{prefix},path);path.reason=prefix.action_after;
     path.event_on_route=event_on_route(prefix.cells,live.triggers,{},&movement);
     set_active(snapshot.map_id,snapshot.goal.cell,snapshot.goal.map_id,{prefix},0);
