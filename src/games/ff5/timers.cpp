@@ -1,4 +1,4 @@
-// Ports FF5 Patches/TimerPatches.cs (Timer_Update_Patch, TimerHelper) and its two key bindings
+// Ports FF5 Patches/TimerPatches.cs (Timer_Update_Patch, TimerHelper) and its original key bindings
 // from Core/InputManager.cs (T: announce timers, Shift+F5: freeze/resume), gated on
 // game::flags().timer_freeze.
 //
@@ -15,6 +15,7 @@
 #include "ff5_internal.h"
 #include "karnak_escape.h"
 #include "../../core/core.h"
+#include "../../core/displayed_ui.h"
 #include "../../core/game.h"
 #include "../../core/hooks.h"
 #include "../../core/log.h"
@@ -45,6 +46,8 @@ ref::Field fGlobalTimer{kTimerManager, "<GrobalTimer>k__BackingField"};
 ref::Class kTimerStructure{"Last.Timer", "TimerStructure", k5};
 ref::Field fTimer{kTimerStructure, "<Timer>k__BackingField"};
 
+ref::Class kBattleTimerManager{"Last.Management", "BattleScreenTimerManager", k5};
+ref::Field fBattleTimerController{kBattleTimerManager, "timerController"};
 ref::Class  kScreenTimer{"Last.UI", "ScreenTimerController", k5};
 ref::Field  fScreenTimerView{kScreenTimer, "view"};
 ref::Class  kScreenTimerView{"Last.UI", "ScreenTimerView", k5};
@@ -192,6 +195,37 @@ void announce_active_timers()
     ffpr::say(count > 0 ? announcement : T(L"No active timers"), true);
 }
 
+std::wstring displayed_battle_time()
+{
+    // The native battle menu owns and updates this one widget. Read its
+    // initialized singleton slot without running the getter or scanning UI.
+    auto* singleton = il2cpp::class_parent(kBattleTimerManager.get());
+    auto* manager = il2cpp::read_static_ptr(singleton, "instance");
+    if (!kBattleTimerManager.is(manager) || !unity::alive(manager)) return {};
+
+    auto* timer = ref::rd<void*>(manager, fBattleTimerController);
+    if (!displayed::container_visible(timer)) return {};
+    auto* view = ref::rd<void*>(timer, fScreenTimerView);
+    if (!displayed::container_visible(view)) return {};
+    auto* group = ref::rd<void*>(view, fCanvasGroup);
+    if (!unity::alive(group) || !(ref::call<float>(mCanvasGroupAlpha, group) > 0.0f)) return {};
+
+    const auto minutes = displayed::text(ref::rd<void*>(view, fPlayTimeMinuteText));
+    const auto seconds = displayed::text(ref::rd<void*>(view, fPlayTimeSecondText));
+    int min = 0, sec = 0;
+    if (!try_parse_int(minutes, min) || min < 0 || !try_parse_int(seconds, sec) || sec < 0 || sec > 59) return {};
+    return format_time(minutes, seconds);
+}
+
+void announce_battle_timer()
+{
+    // Battle submenus can own the Information or Status input context while
+    // the native timer is still visible. Input drops the chord during loads.
+    if (!battle::battle_presentation_ready()) return;
+    const auto time = hooks::guarded_r("FF5.TimerHelper.AnnounceBattleTimer", std::wstring{}, displayed_battle_time);
+    ffpr::say(time.empty() ? T(L"No battle timer displayed") : time, true);
+}
+
 int install()
 {
     if (!game::flags().timer_freeze) return 0;
@@ -203,6 +237,7 @@ int install()
         });
         if (!ok) ffpr::say(T(L"Error reading timers"), true);
     });
+    actions::define("TimerHelper.AnnounceBattleTimer", &announce_battle_timer);
     queries::define("TimerHelper.TimersFrozen", [] { return g_frozen; });
     queries::define("FF5.KarnakEscape.Active", [] {
         if ((!queries::is("GameStatePatches.IsFieldNavigationReady") && !battle::battle_presentation_ready()) ||
@@ -214,6 +249,8 @@ int install()
                        "Toggle timer freeze");
     input::add_binding(input::Key::T, input::Mod::None, input::Context::Global, "TimerHelper.AnnounceActiveTimers",
                        "Announce active timers");
+    input::add_binding(input::Key::T, input::Mod::Ctrl, input::Context::Global, "TimerHelper.AnnounceBattleTimer",
+                       "Read battle timer");
     return hooks::attach(mUpdateTimers, &d_update_timers, &o_update_timers) ? 1 : 0;
 }
 

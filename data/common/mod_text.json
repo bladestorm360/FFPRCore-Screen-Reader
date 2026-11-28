@@ -10009,6 +10009,34 @@
     "th": "ไม่มีตัวจับเวลาที่ใช้งาน",
     "pt": "Nenhum temporizador ativo"
   },
+  "Read battle timer": {
+    "en": "Read battle timer",
+    "ja": "戦闘中のタイマーを読み上げる",
+    "fr": "Lire le chrono de combat",
+    "it": "Leggi il conto alla rovescia in battaglia",
+    "de": "Kampf-Timer vorlesen",
+    "es": "Leer el temporizador de combate",
+    "ko": "전투 타이머 읽기",
+    "zht": "朗讀戰鬥計時器",
+    "zhc": "朗读战斗计时器",
+    "ru": "Озвучить таймер боя",
+    "th": "อ่านเวลานับถอยหลังในการต่อสู้",
+    "pt": "Ler o temporizador de batalha"
+  },
+  "No battle timer displayed": {
+    "en": "No battle timer displayed",
+    "ja": "戦闘中のタイマーは表示されていません",
+    "fr": "Aucun chrono de combat affiché",
+    "it": "Nessun conto alla rovescia visibile in battaglia",
+    "de": "Kein Kampf-Timer sichtbar",
+    "es": "No se muestra ningún temporizador de combate",
+    "ko": "표시된 전투 타이머가 없습니다",
+    "zht": "目前未顯示戰鬥計時器",
+    "zhc": "当前未显示战斗计时器",
+    "ru": "Таймер боя не отображается",
+    "th": "ไม่มีเวลานับถอยหลังแสดงในการต่อสู้",
+    "pt": "Nenhum temporizador de batalha visível"
+  },
   "Error reading timers": {
     "en": "Error reading timers",
     "ja": "タイマーの読み取りエラー",

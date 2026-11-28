@@ -1,5 +1,18 @@
 # Build and distribution security
 
+## November 28 FFV battle countdown
+
+FFV's installed DLL has 22,147,072 bytes and SHA-256
+`ff43abc5c0f8ab8398c561e3fb0c55e37a7d4a3fedcda3eadc6e8bbd086c6cd5`.
+The battle countdown check passed 14 cases and the modal input check passed.
+The build verified 73 resources and 9,245 native names. The isolated load
+resolved all 47 exports. Defender definitions `1.463.507.0` reported no threats
+on the 22 staged files, with unchanged hashes and no matching detection events.
+The OS did not permit exclusion verification. Installation matched all 22 FFV
+payload hashes and preserved 23 protected file states. No game was launched.
+Receipts are in `build_check/ff5-battle-timer-20261128`. The prior source
+checkpoint is `e31786a`.
+
 ## November 28 Karnak Autowalk settings
 
 FFV's installed DLL has 22,142,976 bytes and SHA-256

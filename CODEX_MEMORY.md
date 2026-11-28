@@ -1,5 +1,9 @@
 # Native FFPR durable memory
 
+**November 28 FFV battle countdown.** Ctrl+T reads the rendered battle
+timer. The binding is independent of turn order and timer freeze.
+[Controls and native evidence](docs/re/FF5_KARNAK_20261105.md#november-28-battle-countdown).
+
 **November 28 Karnak Autowalk settings.** Shift+G uses the shared
 Autowalk and Auto-interact settings. Turning off Autowalk mid-guide
 returns to spoken directions. [Karnak controls and checks](docs/re/FF5_KARNAK_20261105.md#november-27-equipment-first-routes-and-menu-pause).

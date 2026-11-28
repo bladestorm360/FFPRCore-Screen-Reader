@@ -269,6 +269,7 @@ These are the native default previous/next-character controls. If you remapped t
 - FFII: I in Ask/Learn and key-term lists reads the selected term's description.
 - FFIII: I in job selection reads the displayed Equippable equipment types.
 - FFIV-VI: T outside battle reads active timers; Shift+F5 freezes/resumes them.
+- FFV: Ctrl+T reads the on-screen battle countdown. Use T for turn order.
 - FFI-VI: extra equipment/item detail screens support arrow-key review; native page controls remain available.
 
 ### Game controller
