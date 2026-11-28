@@ -162,6 +162,44 @@ Build, smoke and packaging do not launch or control a game, deploy into game fol
 install/upgrade dependencies. Gameplay confirmations and untested cases stay distinct in
 TESTING.md. Use only the locked runtime files already present in the source tree.
 
+## Windows setup package
+
+The reusable x64 Windows installer is separate from the core payload ZIP.
+Run `python -B scripts/run-build.py -- pwsh -NoProfile -File installer/build.ps1 -Tests`
+to compile the installer and its headless checks. Launch
+`out/checks/ffpr_installer_check.exe` with a new disposable workspace directory
+to exercise current stable GitHub metadata and the real payload. For an
+offline rerun, supply the verified ZIP path, tag, and SHA-256 after the
+directory. Use the bounded runner for the fixture. No part of this workflow
+starts a game or writes to a Steam installation.
+
+Run `pwsh -NoProfile -File installer/package.ps1` to create the setup ZIP.
+It contains the executable and its player install guide. Check the final
+ZIP and both contained files against the staged hashes and scan those exact
+three files before distributing. Public release publication continues through
+the versioned release procedure above.
+
+Setup uses the latest stable release from the project repository. Continue
+publishing complete bundles under the existing
+`Final Fantasy Pixel Master Core Screen Reader V<version>` name and `v<version>`
+tag. The DLL version must match the tag. The release asset must expose a
+GitHub SHA-256 digest, and the ZIP must match the current complete bundle
+layout. Runtime lock changes require a compatible new setup build. A normal
+mod update with matching runtime locks reuses the same setup executable.
+[GitHub release metadata and asset digests](https://docs.github.com/en/rest/releases/releases?apiVersion=latest).
+
+Setup discovers Steam libraries by app ID and checks the expected executable.
+Check and equal-version installs read only the latest metadata and the local
+version. Missing and older versions share one verified download per action.
+Install selections are processed independently. Each game owns one rollback
+record under `.ffpr-setup`. A write-ahead record and exact file hashes let
+Rollback restore an interrupted change as well as undo a completed operation.
+Uninstall preserves shared SDL3 files and restores any private files the
+installer replaced. Manual uninstall removes the positively identified proxy.
+Setup works at the current user's permissions and uses ordinary file
+operations on the known game paths. Existing development deployment scripts
+remain clients of the local build workflow.
+
 ## Complete V0.9 payload
 
 - hid.dll: shared mod for all six games, including built-in MinHook and embedded map/data resources.

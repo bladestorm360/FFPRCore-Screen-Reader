@@ -1,5 +1,11 @@
 # Native FFPR durable memory
 
+**November 28 Windows installer.** The standalone setup discovers Steam
+libraries, shares a verified download among selected games, and keeps one
+rollback record per game. It uses the current stable public release bundle.
+[Build and package](docs/release.md#windows-setup-package) ·
+[Verification](docs/SECURITY_AND_DISTRIBUTION.md#november-28-windows-setup-package).
+
 **November 28 FFV Old.** Old is spoken once when the aged party sprite
 is visible. The internal aging ticks update the comparison baseline silently.
 [Battle evidence](docs/re/STAT_EFFECTS_20261024.md#november-28-ffv-old).

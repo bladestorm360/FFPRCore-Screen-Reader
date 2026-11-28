@@ -1,0 +1,29 @@
+Final Fantasy Pixel Remaster Screen Reader Setup
+Publisher: FFPR Screen Reader Project (bladestorm360)
+
+1. Extract this ZIP and open InstallFFPRScreenReader.exe.
+2. Select the Steam games you want to manage. Use the arrow keys and Space
+   in the games list. Select all detected games checks every listed game.
+   If a game is missing, use Add Steam library folder and choose the folder
+   that contains steamapps.
+3. Choose Install or update. Setup checks the latest stable FFPR Core
+   release on GitHub and downloads its files if a selected game needs them.
+   Check for updates only reports the available versions. An equal or newer
+   installed version is left in place.
+4. Read the results for each selected game. Setup never starts a game.
+
+Close selected games before installing, rolling back, or uninstalling.
+These actions require write access to the selected Steam game folders.
+Settings, saves, waypoints, and other mods are preserved.
+
+Rollback restores the state before the selected game's last setup change.
+If a change was interrupted, Rollback first recovers that incomplete change.
+Rollback and Uninstall work offline.
+
+Uninstall removes the recognized screen reader and its setup-owned private
+files, retaining shared SDL3 files. For older manual installations, it
+removes the recognized hid.dll and leaves other files in place. Keep the
+.ffpr-setup folder in each game directory to retain its rollback record.
+
+Project and releases
+https://github.com/bladestorm360/FFPRCore-Screen-Reader/releases

@@ -18,6 +18,10 @@ Install
 
 Requires 64-bit Windows, a Steam Pixel Remaster game and a running screen reader such as NVDA or JAWS. The release includes Prism 0.18.3, SDL3 and OpenAL Soft with its HRTF data and notices. MelonLoader, BepInEx, Python and separate dependency downloads are not required.
 
+If you have the FFPR setup package, extract it and open InstallFFPRScreenReader.exe. Select the games you want to manage, or choose Select all detected games. Install or update checks the latest stable GitHub release and changes only games that need it. Check for updates reports versions without downloading the mod. Use Rollback or Uninstall with the selected games closed.
+
+For manual installation:
+
 1. Close the game and extract the zip.
 2. Open the game's installation folder using Steam's Manage, Browse local files command. This is the folder containing FINAL FANTASY.exe, FINAL FANTASY II.exe, and so on.
 3. If an older screen reader is installed, remove its DLL from the game's Mods folder: FFI_ScreenReader.dll, FFII_ScreenReader.dll, FFIII_ScreenReader.dll, FFIV_ScreenReader.dll, FFV_ScreenReader.dll or FFVI_ScreenReader.dll, as appropriate. Keep your UserData folder.
@@ -57,7 +61,17 @@ Mod
 
 Choose a pathfinding layout in F8, Navigation, Navigation keymap. Letters is the default; only the selected layout is active. The choice is saved separately for each game.
 
-Under F8, Navigation, Full route readout defaults to Off. Route legs per readout defaults to three. With Automatically speak next leg of route on, directions refresh after the issued movement, a battle return, or a spoken switch interaction. Leaving the route stays quiet until a blocked walking attempt. Holding against the obstacle gives one correction from the blocked tile. Automatic continuation defaults to Off and is independent of Autowalk.
+Under F8 → Navigation, Full route readout defaults to Off, so directions are read one chunk at a time. Turn it on for the full readout. Route legs per readout defaults to three and accepts one through twelve. A leg is consecutive movement in one direction, such as “2 south.” Backslash or P, depending on your layout, reads directions from where you are. With Automatically speak next leg of route on, directions refresh when you finish the announced movement, return to the field after battle, or complete a route transition or a spoken switch interaction. A detour stays quiet until a blocked walking attempt triggers fresh directions from that tile. Holding the direction against the obstacle speaks once. The setting defaults to Off. These settings apply to manual pathfinder directions and are independent of Autowalk.
+
+Autowalk turns you toward an interaction target when you arrive. Auto-interact under F8 → Navigation defaults to Off. Turn it on to use the game's interaction once at a planned stop. Autowalk resumes toward the selected destination after a required switch or elevator finishes. At the selected NPC, unopened chest, or interactible object, it uses the interaction and ends the walk. Handle any choices shown by the game as usual.
+
+During a walk, an automatic door can briefly take control. Autowalk waits for it to open and continues toward your original destination, including routes that cross floors. This works with Auto-interact off.
+
+Autowalk also resumes toward the same destination after battle, once field movement returns. With Auto-interact on, it opens your selected unopened chest from the correct stance.
+
+During FFV's timed Karnak Castle escape, F8 → Navigation → Karnak escape route offers Equipment then Elixirs (default), Equipment only, and All chests. The first two choices collect Ribbon, Elven Mantle and Main Gauche first. Every route heads to the courtyard fight at three minutes remaining or less. The countdown pauses while the mod menu is open.
+
+Press Shift+G for the chosen route. With Autowalk off, the guide speaks directions with the same chest priorities. With Autowalk on, it walks each leg. Chests open automatically only when both Autowalk and Auto-interact are on. Turning off Autowalk during the guide switches to spoken directions. Finish each battle and close its result or reward screens to continue.
 
 Letters layout:
 
@@ -114,6 +128,15 @@ Reachable locked doors remain in Objects even without a key or unlocking ability
 
 Scene triggers can be selected as destinations. For a story-gated destination, directions to a reachable scene trigger are included when one is available.
 
+Storyline and visual descriptions
+
+- Choose Storyline with the destination category keys. Use the normal destination and directions keys to hear the current objective and reach its next route leg. The category follows the current save and advances after the game's progress markers change.
+- Some Storyline stages offer an optional native clue conversation. Use the destination selection keys to switch between the conversation and the direct objective.
+- By default, Storyline selections speak “Destination” or “Clue.” For full names, open the mod menu with F8, then turn on Speech → Storyline spoilers.
+- Press I during dialogue to describe an identified speaker whose sprite is visible. During battle, press I while targeting an enemy to hear its current form and visible effects. Press Ctrl+I to describe the acting character, their visible equipment and current effects.
+- Some scenes describe significant visible actions alongside the game's dialogue. Both use the same screen reader voice.
+- F8 → Speech → Visual descriptions controls automatic scene cues and on-demand appearance descriptions. It defaults to On. Game dialogue and the usual item and spell descriptions remain available with either setting.
+
 Waypoints (field only)
 
 - Comma / Period: previous / next waypoint.
@@ -128,6 +151,7 @@ In the waypoint name window, type normally. Left/Right reviews letters, Up/Down 
 
 Other toggles
 
+- Alt+Shift+Backslash: toggle Autowalk in any game context that accepts mod shortcuts. The setting is also under F8 → Navigation → Autowalk.
 - Apostrophe: toggle footsteps.
 - Semicolon: toggle wall tones.
 - Shift+Semicolon / Shift+Apostrophe: reduce / increase soundscape distance by five steps, from 5 to 25. These do nothing when Soundscape is off. They do not change the unshifted wall-tone and footstep toggles.
@@ -249,6 +273,7 @@ Game-specific keys
 - FFII: I in Ask/Learn and key-term lists reads the selected term's description.
 - FFIII: I in job selection reads the displayed Equippable equipment types.
 - FFIV-VI: T outside battle reads active timers; Shift+F5 freezes/resumes them.
+- FFV: Ctrl+T reads the on-screen battle countdown. Use T for turn order.
 - FFI-VI: extra equipment/item detail screens support arrow-key review; native page controls remain available.
 
 Game controller

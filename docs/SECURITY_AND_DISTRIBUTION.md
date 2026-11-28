@@ -1,5 +1,27 @@
 # Build and distribution security
 
+## November 28 Windows setup package
+
+`releases/FFPR-Screen-Reader-Setup.zip` is 26,931 bytes with SHA-256
+`08ff8d79638a3779affb64e4dcc4181eb703f2bf43b1ca8ad874567ab03b39c1`.
+The contained 54,272-byte setup EXE has SHA-256
+`581f5e3e6ba8ffaae297c15e4a4bf288567123713090730c4e66cf18440f522f`.
+Archive verification matched the standalone EXE and Install.txt bytes.
+Defender definitions `1.463.507.0` reported no threats on those three
+files. Hashes stayed unchanged and no matching detection events occurred.
+Windows denied exclusion inspection. The setup is unsigned and no signing
+certificate was available.
+
+The headless setup fixture passed 29 assertions against the real public
+v1.0 release and disposable Steam libraries. Coverage includes six-game
+discovery, a shared download, equal/newer version no-ops, foreign files,
+archive integrity, fresh installs, updates, uninstall, and interrupted
+change recovery. The existing public ZIP matched GitHub SHA-256
+`a3b3c385bb446f0746cdcd14f9ee0ddb8e037604bc950b75f042f98eb795419f`.
+No game was launched or modified. Screen-reader interaction with the
+graphical installer has not been confirmed. Receipts are in
+`build_check/ffpr-setup-20261128`. The setup ZIP is a local deliverable.
+
 ## November 28 field spell availability in FFI–IV and FFVI
 
 The five updated Steam installs use a 22,165,504-byte DLL with SHA-256

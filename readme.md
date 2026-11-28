@@ -18,6 +18,10 @@ Logger health is recorded every ten seconds, with session and part identifiers. 
 
 Requires 64-bit Windows, a Steam Pixel Remaster game and a running screen reader such as NVDA or JAWS. The release includes Prism 0.18.3, SDL3 and OpenAL Soft with its HRTF data and notices. MelonLoader, BepInEx, Python and separate dependency downloads are not required.
 
+If you have the FFPR setup package, extract it and open InstallFFPRScreenReader.exe. Select the games you want to manage, or choose Select all detected games. Install or update checks the latest stable GitHub release and changes only games that need it. Check for updates reports versions without downloading the mod. Use Rollback or Uninstall with the selected games closed.
+
+For manual installation:
+
 1. Close the game and extract the zip.
 2. Open the game's installation folder using Steam's Manage, Browse local files command. This is the folder containing FINAL FANTASY.exe, FINAL FANTASY II.exe, and so on.
 3. If an older screen reader is installed, remove its DLL from the game's Mods folder: FFI_ScreenReader.dll, FFII_ScreenReader.dll, FFIII_ScreenReader.dll, FFIV_ScreenReader.dll, FFV_ScreenReader.dll or FFVI_ScreenReader.dll, as appropriate. Keep your UserData folder.
