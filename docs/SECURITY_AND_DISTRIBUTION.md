@@ -1,5 +1,18 @@
 # Build and distribution security
 
+## November 27 Karnak route choices and timer pause
+
+The FFV-installed DLL has 22,142,976 bytes and SHA-256
+`d9059367290c1ee5f7498c83e9c1d6536dc23510f069d60c3cac06172b4a66b4`.
+The timed castle replay passed 83 assertions over 77 route legs. The guide
+owner passed 159 cases, and the menu and Autowalk checks passed. The build
+verified 73 resources and 9,243 native names. The isolated load resolved 47
+exports. Defender definitions `1.463.500.0` reported no threats on the 22
+staged files. The bytes were unchanged and exclusion inspection was
+unavailable. FFV's 22 installed files matched and all 23 protected file
+states were preserved. Receipts are in `build_check/karnak-modes-20261127`.
+The previous source checkpoint is `55af6f8`.
+
 ## November 27 timed Karnak loot and battle continuation
 
 The shared DLL has 22,136,832 bytes and SHA-256

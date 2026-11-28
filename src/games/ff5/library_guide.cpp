@@ -9,6 +9,7 @@
 #include "jachol_model.h"
 #include "mechanics_model.h"
 #include "ff5_internal.h"
+#include <algorithm>
 #include <climits>
 #include <type_traits>
 #include <variant>
@@ -37,7 +38,7 @@ int finish_map=0,finish_source=0;bool finish_departed=false;
 unsigned finish_types=0;
 bool observe_waypoint_arrival=true;
 bool follow_karnak=false;
-bool karnak_battle_replan=false;
+bool karnak_replan=false;
 int karnak_chest_receipt=-1, karnak_story_receipt=-1;
 unsigned rule_types(int map){return mechanics::types(map)|mechanics::context_types(map,rule_id);}
 bool supports(int map){return supported(map)||catapult::supported(map)||stone::supported(map)||book::supported(map)||pyramid::supported(map)||jachol::supported(map)||rule_types(map);}
@@ -48,17 +49,21 @@ field::puzzle_policy::Kind kind() {
 }
 bool enabled(){const field::puzzle_policy::Policy policy{ui::prefs::navigation_puzzle_guidance(),ui::prefs::other_puzzle_guidance()};return rule_types(field::current_map_id())==3?policy.any():policy.allows(kind());}
 bool publication_enabled(unsigned types){return types?field::puzzle_policy::Policy{ui::prefs::navigation_puzzle_guidance(),ui::prefs::other_puzzle_guidance()}.allows_mask(types):enabled();}
-bool ready(){return !menu_state::any_active()&&!queries::is("GameStatePatches.IsInputTransitionBlocked")&&
+bool ready(){return !menu_state::any_active()&&!queries::is("ModMenu.IsOpen")&&!queries::is("GameStatePatches.IsInputTransitionBlocked")&&
  queries::is("GameStatePatches.IsFieldNavigationReady")&&!queries::is("BattleStateHelper.IsInBattle");}
 bool phase_ready(int phase,int map){return phase<0||(field::current_map_id()==map&&((map==284?jachol::phase_fresh(map,phase):map==424&&pyramid::phase_fresh(map,phase))||queries::is("TimerHelper.TimersFrozen")));}
 std::wstring wait_note(int map){return T(map==284?L"Wait for the skull switch to appear.":L"Wait for the floor to change.");}
 bool during_event(){return active&&!queries::is("BattleStateHelper.IsInBattle")&&
  (menu_state::any_active()||queries::is("MessageChoice.IsOpen")||queries::is("MessageWindowPatches.IsInDialogue"));}
-void retire(){if(preview)field::baked_nav::clear_preview_destination(*preview);preview.reset();}
+void retire(){
+ frame::cancel_label("FF5.Library.KarnakCutoff");
+ if(preview)field::baked_nav::clear_preview_destination(*preview);
+ preview.reset();
+}
 void stop(bool announce) {
  const bool was=active;active=pending=false;++context;work.cancel();retire();instruction.clear();rule_id.clear();
  if(follow_karnak&&autowalk::following_guide())autowalk::cancel();
- follow_karnak=karnak_battle_replan=false;karnak_chest_receipt=karnak_story_receipt=-1;
+ follow_karnak=karnak_replan=false;karnak_chest_receipt=karnak_story_receipt=-1;
  finish_map=finish_source=0;finish_departed=false;finish_types=0;
  observe_waypoint_arrival=true;
  frame::cancel_label("FF5.Library.Ready");if(was&&announce)ffpr::say(T(L"Puzzle guide stopped"),true);
@@ -77,9 +82,11 @@ CurrentSnapshot capture_current(){
  if(rule_types(field::current_map_id())){
   mechanics::Snapshot s;s.map=field::current_map_id();s.flags=field::map_state::snapshot();s.locale=modtext::lang();s.policy={ui::prefs::navigation_puzzle_guidance(),ui::prefs::other_puzzle_guidance()};s.guide_id=rule_id;
   if(!field::baked_nav::player_cell(field::map_handle(),field::player(),s.player))s.map=0;
-  if(s.map>=95&&s.map<=111 && s.flags.scenario[42]==1 && s.flags.scenario[43]==1 &&
-     s.flags.scenario[46]==1 && s.flags.scenario[47]==0)
+  if(karnak::is_castle(s.map) && s.flags.scenario[42]==1 && s.flags.scenario[43]==1 &&
+     s.flags.scenario[46]==1 && s.flags.scenario[47]==0) {
    s.karnak_seconds=ffpr::ff5::karnak_seconds_remaining();
+   s.karnak_route=karnak::Route(std::clamp(settings::get_int(karnak::preference,0),0,int(karnak::Route::AllChests)));
+  }
   if(s.map==397&&s.flags.area[0]==0&&s.player==field::baked_route::Cell{2,6,10}) {
    const auto hidden=field::map_state::entity_hidden(397,27,L"床を止める");
    if(hidden)s.exdeath_stop_visible=!*hidden;
@@ -126,6 +133,43 @@ CurrentSnapshot capture_current(){
  if(!field::baked_nav::player_cell(field::map_handle(),field::player(),s.player))s.map=0;
  return s;
 }
+void invalidate();
+
+void replan_karnak()
+{
+ if (!active || rule_id!=L"karnak_escape") return;
+ if (autowalk::following_guide()) autowalk::cancel();
+ karnak_replan=true;
+ invalidate();
+}
+
+bool watch_karnak_cutoff(int seconds, double requested)
+{
+ auto check_at=requested+std::max(0,seconds-karnak::exit_seconds-1);
+ // The native clock can pause or battle can take control before the estimated
+ // crossing. Verify the live clock on the ready field before changing goals.
+ if (check_at<=frame::now()) {
+  const auto current=ffpr::ff5::karnak_seconds_remaining();
+  if (current && *current<=karnak::exit_seconds) {replan_karnak();return false;}
+ }
+ frame::every_frame([check_at]() mutable {
+  if (!active || rule_id!=L"karnak_escape" || !preview) return false;
+  const auto now=frame::now();
+  if (now<check_at || !ready()) return true;
+  const auto current=ffpr::ff5::karnak_seconds_remaining();
+  if (!current) return false;
+  if (*current>karnak::exit_seconds) {
+   check_at=now+std::max(.10,double(*current-karnak::exit_seconds-1));
+   return true;
+  }
+  // A manually stopped walk may still have a spoken guide preview.
+  if (!autowalk::following_guide()) follow_karnak=false;
+  replan_karnak();
+  return false;
+ }, "FF5.Library.KarnakCutoff", INT_MAX);
+ return true;
+}
+
 void refresh(bool explicit_request) {
  if(!enabled()){stop(false);if(explicit_request)ffpr::say(T(field::puzzle_policy::disabled_key(kind())),true);return;}
  if(!ready())return;
@@ -135,12 +179,14 @@ void refresh(bool explicit_request) {
  finish_map=finish_source=0;finish_departed=false;finish_types=0;
  const double requested=frame::now();auto snapshot=capture_current();
  if(std::visit([](const auto& s){return s.map==0;},snapshot)){++context;work.cancel();retire();if(explicit_request)ffpr::say(T(L"Navigation data is loading"),true);return;}
- if(!explicit_request&&follow_karnak&&!karnak_battle_replan) {
-  const auto* state=std::get_if<mechanics::Snapshot>(&snapshot);
+ const auto* mechanics_state=std::get_if<mechanics::Snapshot>(&snapshot);
+ const auto cutoff_clock=mechanics_state ? mechanics_state->karnak_seconds : std::optional<int>{};
+ if(!explicit_request&&follow_karnak&&!karnak_replan) {
+  const auto* state=mechanics_state;
   if(!state || (karnak_chest_receipt>=0 && state->flags.treasure[size_t(karnak_chest_receipt)]!=1) ||
      (karnak_story_receipt>=0 && state->flags.scenario[size_t(karnak_story_receipt)]!=1))return;
  }
- karnak_battle_replan=false;
+ karnak_replan=false;
  active=true;const auto token=++context;work.cancel();const auto epoch=work.epoch();const auto generation=epoch->load();
  std::visit([epoch,generation](auto& s){s.cancelled=[epoch,generation]{return epoch->load()!=generation;};},snapshot);
  worker_job::start(work,std::move(snapshot),[](const CurrentSnapshot& s){return std::visit([](const auto& input){
@@ -152,7 +198,7 @@ void refresh(bool explicit_request) {
    else if constexpr(std::is_same_v<std::decay_t<decltype(input)>,jachol::Snapshot>)return jachol::plan(input,data::game_json("puzzles"));
    else return mechanics::plan(input,data::game_json("puzzles"));
   },s);},
-  [token,requested,explicit_request](Plan result) {
+  [token,requested,explicit_request,cutoff_clock](Plan result) {
    if(!active||context!=token||!ready()||result.map!=field::current_map_id()||!publication_enabled(result.puzzle_types))return;
    if(!result.supported){stop(false);if(explicit_request)ffpr::say(T(L"No puzzle guide for this map"),true);return;}
    rule_id=result.guide_id;
@@ -163,7 +209,7 @@ void refresh(bool explicit_request) {
    if(result.targets.empty()){retire();instruction=result.note;if(!instruction.empty())ffpr::say(instruction,explicit_request);return;}
    retire();
    auto targets=std::make_shared<std::vector<field::baked_nav::GuideTarget>>(result.targets);
-   field::baked_nav::request_guidance(std::move(result.targets),[targets,token,requested,explicit_request,phase=result.floor_phase,phase_map=result.phase_map,finish=result.finish_map,source=result.map,types=result.puzzle_types,chest=result.karnak_treasure_flag](field::PathInfo path) {
+   field::baked_nav::request_guidance(std::move(result.targets),[targets,token,requested,explicit_request,phase=result.floor_phase,phase_map=result.phase_map,finish=result.finish_map,source=result.map,types=result.puzzle_types,chest=result.karnak_treasure_flag,cutoff_clock](field::PathInfo path) {
     if(!active||context!=token||!ready()||!publication_enabled(types))return;
     if(!phase_ready(phase,phase_map)){for(const auto& target:*targets)field::baked_nav::clear_preview_destination(target.goal);retire();instruction=wait_note(phase_map);ffpr::say(instruction,explicit_request);return;}
     if(path.success&&finish){finish_map=finish;finish_source=source;finish_departed=false;finish_types=types;}
@@ -171,6 +217,7 @@ void refresh(bool explicit_request) {
     if(path.guidance_index>=0&&path.guidance_index<int(targets->size())) {
      preview=(*targets)[size_t(path.guidance_index)].goal;instruction=(*targets)[size_t(path.guidance_index)].instruction;
     }
+    if(path.success&&preview&&chest>=0&&cutoff_clock&&!watch_karnak_cutoff(*cutoff_clock,requested))return;
     if(follow_karnak&&ui::prefs::autowalk_enabled()&&path.success&&preview&&!path.walk_phases.empty()) {
      karnak_chest_receipt=chest;
      karnak_story_receipt=chest>=0 ? -1 : preview->entity_id==29 ? 245 : 47;
@@ -214,9 +261,8 @@ int install() {
  actions::define("GameModule.StopPuzzleGuide",[]{stop(true);});
  actions::define("GameModule.PuzzleGuideMove",[]{if(active)move();});
  actions::define("GameModule.FieldStateChanged",[]{invalidate();});
- actions::define("GameModule.GuidedWalkReturnedAfterBattle",[]{
-  if(active&&follow_karnak){karnak_battle_replan=true;invalidate();}
- });
+ actions::define("GameModule.GuidedWalkReturnedAfterBattle",[]{if(follow_karnak)replan_karnak();});
+ actions::define("Settings.Changed.KarnakEscapeRoute",[]{replan_karnak();});
  actions::define("FF5.Jachol.PhaseChanged",[]{jachol_phase_changed();});
  queries::define("GameModule.HasPuzzleGuide",[]{return supports(field::current_map_id());});
  queries::define("GameModule.PuzzleGuideActive",[]{return active;});

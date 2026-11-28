@@ -65,7 +65,9 @@ During a walk, an automatic door can briefly take control. Autowalk waits for it
 
 Autowalk also resumes toward the same destination after battle, once field movement returns. With Auto-interact on, it opens your selected unopened chest from the correct stance.
 
-In FFV's timed Karnak Castle escape, Shift+G guides you through the 15 chests and to the exit. With Autowalk on, it walks each leg for you. With Auto-interact off, confirm at each chest yourself. Finish any battles and close the result or reward screens to continue. The guide reads the game countdown, groups chests by room and favors equipment when the time budget tightens. It heads for the exit when there is too little time for another chest.
+During FFV's timed Karnak Castle escape, F8 → Navigation → **Karnak escape route** offers **Equipment then Elixirs** (default), **Equipment only**, and **All chests**. The first two choices collect Ribbon, Elven Mantle and Main Gauche first. Every route heads to the courtyard fight at three minutes remaining or less. The countdown pauses while the mod menu is open.
+
+Press Shift+G for the chosen route. With Autowalk off, the guide speaks directions with the same chest priorities. With Autowalk on, it walks each leg. Enable Auto-interact to open the chests automatically. Finish each battle and close its result or reward screens to continue.
 
 Letters layout:
 

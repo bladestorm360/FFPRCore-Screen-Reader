@@ -33,6 +33,7 @@ SHORT fake_key_state(int vk)
 #include "../src/core/ui/modal_input.cpp"
 #undef GetAsyncKeyState
 #include "../src/core/ui/mod_menu.cpp"
+#include "../src/games/ff5/ff5_internal.h"
 
 namespace core {
 Install::Install(const char* n, int (*f)(), int o, uint8_t g) : name(n), fn(f), order(o), games(g) {}
@@ -42,7 +43,11 @@ void define(const char*, Fn) {}
 bool defined(const char*) { return false; }
 bool run(const char*) { return false; }
 }
-namespace queries { bool is(const char*) { return fixture::transition; } void define(const char*, std::function<bool()>) {} }
+namespace fixture { bool karnak_escape = false; }
+namespace queries {
+bool is(const char* name) {return std::strcmp(name,"FF5.KarnakEscape.Active")==0 ? fixture::karnak_escape : fixture::transition;}
+void define(const char*, std::function<bool()>) {}
+}
 namespace data { std::string resource(const char*) { return {}; } }
 namespace log_ { void write(const char*, ...) {} }
 namespace frame {
@@ -565,6 +570,45 @@ int main()
         expect(row!=s.items.end(),"actual keyboard editor lists the registered gameplay action");
         if(row!=s.items.end()){s.index=int(row-s.items.begin());s.page=row->parent;const auto before=b::entries()[route].primary;const auto said=fixture::spoken.size();ui::mod_menu::adjust_current_item(1);const bool explained=std::any_of(fixture::spoken.begin()+said,fixture::spoken.end(),[](const auto&line){return line.find(L"unavailable")!=std::wstring::npos;});expect(b::entries()[route].primary==before&&explained,"unavailable game configuration preserves binding instead of cycling to Unbound");}
         b::native_keyboard_check(nullptr);s.open=false;
+    }
+    {
+        fixture::game_id=5;
+        fixture::values.erase(ff5::karnak::preference);
+        auto route_row=[] {
+            const auto& items=ui::mod_menu::st().items;
+            return std::find_if(items.begin(),items.end(),[](const auto& item) {
+                return item.key && std::strcmp(item.key,ff5::karnak::preference)==0;
+            });
+        };
+        auto& menu=ui::mod_menu::st();
+        ui::mod_menu::initialize();
+        expect(route_row()==menu.items.end(),"Karnak route is hidden before the timer starts");
+        fixture::karnak_escape=true;
+        ui::mod_menu::open();
+        const auto row=route_row();
+        expect(row!=menu.items.end()&&row->options.size()==3,"timed Karnak exposes all three route choices");
+        if (row!=menu.items.end()) {
+            menu.index=int(row-menu.items.begin());menu.page=row->parent;
+            expect(ui::mod_menu::value_string(*row)==L"Equipment then Elixirs","Karnak defaults to equipment then Elixirs");
+            ui::mod_menu::adjust_current_item(1);
+            expect(ui::mod_menu::value_string(*row)==L"Equipment only","the second choice collects only equipment");
+            ui::mod_menu::adjust_current_item(1);
+            expect(ui::mod_menu::value_string(*row)==L"All chests","the third choice attempts all chests");
+        }
+        using ffpr::ff5::timer_update_state;
+        for (int state : {3,4,13})
+            expect(timer_update_state(state,ui::mod_menu::is_open())==5,"the open mod menu forwards the native menu state to timer logic");
+        for (int state : {0,1,2,5,8,11,12,14})
+            expect(timer_update_state(state,ui::mod_menu::is_open())==state,"loading, transitions and native paused states keep their timer state");
+        ui::mod_menu::close();
+        for (int state : {3,4,13})
+            expect(timer_update_state(state,ui::mod_menu::is_open())==state,"closing the mod menu immediately restores native timer-state admission");
+        fixture::karnak_escape=false;ui::mod_menu::initialize();
+        expect(route_row()==menu.items.end()&&settings::get_int(ff5::karnak::preference,0)==2,
+               "the saved route persists when the context setting is hidden");
+        fixture::game_id=4;fixture::karnak_escape=true;ui::mod_menu::initialize();
+        expect(route_row()==menu.items.end(),"the Karnak option stays out of other games");
+        fixture::karnak_escape=false;
     }
     std::printf("All-six full menu construction: mean %.3f ms, peak %.3f ms; fixture settings/resource cap, no game or speech latency claim\n",menu_total_ms/6,menu_peak_ms);
     std::printf("Modal focus/custom menu regression: %s\n", failures ? "FAILED" : "PASS");

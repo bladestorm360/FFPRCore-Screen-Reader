@@ -35,6 +35,7 @@
 #include "../input/bindings.h"
 #include "../audio/volume_settings.h"
 #include "../audio/custom_cues.h"
+#include "../../games/ff5/karnak_escape.h"
 
 namespace ui::mod_menu {
 namespace {
@@ -196,6 +197,13 @@ void initialize()
                        L"Non-navigation puzzle guidance is on",L"Non-navigation puzzle guidance is off"));
     v.push_back(enumeration(L"Puzzle guide verbosity",{L"Minimal",L"Verbose"},p::kPuzzleGuideVerbosity,
                            p::kPuzzleGuideVerbosityDefault,p::kPuzzleGuideVerbosityMax,L"Puzzle guide verbosity help"));
+    if (game::is(game::Id::FF5) && queries::is("FF5.KarnakEscape.Active")) {
+        using Route = ff5::karnak::Route;
+        v.push_back(enumeration(L"Karnak escape route",
+            {L"Equipment then Elixirs", L"Equipment only", L"All chests"},
+            ff5::karnak::preference, int(Route::EquipmentThenElixirs), int(Route::AllChests),
+            L"Choose which chests to collect. Every route heads for the exit at three minutes."));
+    }
     v.push_back(toggle(L"Autowalk", p::kAutowalk, p::kAutowalkDefault,
                        L"On. The selected layout's navigation key, Slash for a waypoint, or controller LT walks to the destination. Press again to stop. Manual input, menus and battles stop the walk.",
                        L"Off. Navigation requests give directions or restart the beacon."));

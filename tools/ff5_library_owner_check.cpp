@@ -8,7 +8,8 @@
 namespace owner {
 bool ready=true,menu=false,battle=false,busy=false,position_valid=true;
 bool nav_guidance=true,other_guidance=true;
-bool auto_walk=false,walk_active=false;
+bool auto_walk=false,walk_active=false,mod_menu_open=false;
+int karnak_route=0;
 std::optional<int> karnak_time;
 std::optional<field::baked_nav::MapGoal> walking_goal;
 bool timers_frozen=false;double phase_test_time=1.;int interruptions=0;
@@ -59,7 +60,10 @@ std::wstring T(std::wstring_view value){return std::wstring(value);}
 std::wstring TF(std::wstring_view key,std::initializer_list<std::wstring> args){std::wstring out(key);int i=0;for(const auto& arg:args){auto token=L"{"+std::to_wstring(i++)+L"}";auto at=out.find(token);if(at!=out.npos)out.replace(at,token.size(),arg);}return out;}
 }
 namespace data {bool game_data_ready(){return true;}}
-namespace settings {bool get_bool(const char* key,bool fallback){return std::string(key)==ui::prefs::kNavigationPuzzleGuidance?owner::nav_guidance:std::string(key)==ui::prefs::kOtherPuzzleGuidance?owner::other_guidance:std::string(key)==ui::prefs::kAutowalk?owner::auto_walk:fallback;}}
+namespace settings {
+int get_int(const char* key,int fallback){return std::string_view(key)==ff5::karnak::preference?owner::karnak_route:fallback;}
+bool get_bool(const char* key,bool fallback){return std::string(key)==ui::prefs::kNavigationPuzzleGuidance?owner::nav_guidance:std::string(key)==ui::prefs::kOtherPuzzleGuidance?owner::other_guidance:std::string(key)==ui::prefs::kAutowalk?owner::auto_walk:fallback;}
+}
 namespace ffpr::ff5 {std::optional<int> karnak_seconds_remaining(){fixture::native();return owner::karnak_time;}}
 namespace ffpr::fieldnav::autowalk {
 bool active(){return owner::walk_active;}
@@ -102,6 +106,7 @@ bool is(const char* name){if(std::string(name)=="GameStatePatches.IsFieldNavigat
  if(std::string(name)=="GameStatePatches.IsInputTransitionBlocked")return !owner::ready;
  if(std::string(name)=="BattleStateHelper.IsInBattle")return owner::battle;
  if(std::string(name)=="TimerHelper.TimersFrozen")return owner::timers_frozen;
+ if(std::string(name)=="ModMenu.IsOpen")return owner::mod_menu_open;
  const auto it=owner::queries.find(name);return it!=owner::queries.end()&&it->second();}
 }
 namespace frame {
@@ -248,30 +253,51 @@ int FFPR_LIBRARY_OWNER_MAIN(){
  fixture::storage.treasure=&fixture::treasure_flags;fixture::treasure_flags.bits=&fixture::treasure;
  fixture::treasure_flags.length=1024;fixture::treasure.length=128;fixture::treasure.values.fill(0);
  actions::run("GameModule.PuzzleGuide");drain();
- check(!targets.empty()&&targets[0].goal.map_id==101&&targets[0].goal.entity_id==22,
-       "Karnak starts with the first timed chest");
+ check(!targets.empty()&&targets[0].goal.map_id==100&&targets[0].goal.entity_id==7,
+       "the default Karnak route starts with Ribbon");
  respond();
- check(walk_active&&walking_goal&&walking_goal->entity_id==22,
+ check(walk_active&&walking_goal&&walking_goal->entity_id==7,
        "Shift+G hands the finished route to autowalk");
  const int before_chest=routes;
- native_scene(101);position={1,12,16};
+ native_scene(100);position={1,7,15};
  event(events::Kind::MapChanged);event(events::Kind::BattleEnd);pulse();drain();
  check(routes==before_chest,"an active guided walk keeps its own floor and battle continuation");
  walk_active=false;
  actions::run("GameModule.FieldStateChanged");pulse();drain();
  check(routes==before_chest,"proximity or a canceled walk does not advance the treasure queue");
- fixture::treasure.values[86/32]|=1u<<(86%32);karnak_time=595;
+ fixture::treasure.values[88/32]|=1u<<(88%32);karnak_time=510;
  actions::run("GameModule.FieldStateChanged");pulse();drain();
- check(routes==before_chest+1&&!targets.empty()&&targets[0].goal.entity_id==23,
-       "the native chest receipt advances once to the next chest in the same room");
+ check(routes==before_chest+1&&!targets.empty()&&targets[0].goal.map_id==108,
+       "the native Ribbon receipt advances once to the Elven Mantle");
  respond();
- walk_active=false;karnak_time=40;
+ mod_menu_open=true;karnak_route=int(ff5::karnak::Route::EquipmentOnly);
+ actions::run("Settings.Changed.KarnakEscapeRoute");pulse();drain();
+ check(!walk_active&&routes==before_chest+1,"a menu choice waits to plan until the overlay closes");
+ mod_menu_open=false;pulse();drain();
+ check(routes==before_chest+2&&!targets.empty()&&targets[0].goal.map_id==108,
+       "closing the mod menu applies the new route choice to the current walk");
+ respond();
+ walk_active=false;karnak_time=180;
  actions::run("GameModule.GuidedWalkReturnedAfterBattle");pulse();drain();
- check(routes==before_chest+2&&!targets.empty()&&targets[0].goal.entity_id==29,
-       "an en-route battle can send the guide to the exit before the next chest fight");
+ check(routes==before_chest+3&&!targets.empty()&&targets[0].goal.entity_id==29,
+       "returning from an en-route battle at 3:00 sends the guide to the courtyard");
  respond();
  actions::run("GameModule.StopPuzzleGuide");
  check(!walk_active,"stopping Karnak guidance releases only its owned walk");
+ auto_walk=false;karnak_route=0;karnak_time=181;
+ fixture::treasure.values.fill(0);native_scene(102);position={1,4,7};
+ const int manual_routes=routes;
+ actions::run("GameModule.PuzzleGuide");drain();
+ check(routes==manual_routes+1&&!targets.empty()&&targets[0].goal.entity_id==7,
+       "manual guidance selects the same equipment-first objective");
+ respond();
+ check(!walk_active&&spoken.back()==L"Owned route. Open the chest.","manual guidance speaks without starting Autowalk");
+ karnak_time=180;phase_test_time+=1;
+ pulse();pulse();drain();
+ check(routes==manual_routes+2&&!targets.empty()&&targets[0].goal.entity_id==29,
+       "the live cutoff redirects spoken guidance without a new request");
+ respond();
+ actions::run("GameModule.StopPuzzleGuide");
  check(fixture::wrong_owner==0,"no native read or speech on layout worker");
  std::printf("FFV native guide owner: %d cases/%d failures; bounded controls, no blocked-frame/movement scans, cancellation/repeat/preview/native completion verified\n",cases,fixture::failures);return fixture::failures?1:0;
 }

@@ -15,6 +15,14 @@ namespace ffpr::ff5 {
 /// Snapshot the native 600-second escape timer on the ready field owner.
 std::optional<int> karnak_seconds_remaining();
 
+/// FFV's native timer manager advances only timers that accept this state.
+inline constexpr int timer_update_state(int state, bool mod_menu_open)
+{
+    // Player, Transport and Battle tick gameplay timers. Menu uses their
+    // native pause rules. Loading and scripted field states keep their owner.
+    return mod_menu_open && (state == 3 || state == 4 || state == 13) ? 5 : state;
+}
+
 // --- FF5 MenuStateRegistry keys the core does not define (FF5 Utils/MenuStateRegistry.cs) ------
 constexpr const char* JOB_MENU = "JobMenu";
 constexpr const char* ABILITY_MENU = "AbilityMenu";

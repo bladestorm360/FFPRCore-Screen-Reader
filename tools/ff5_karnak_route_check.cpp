@@ -8,6 +8,7 @@ using namespace field;
 using namespace baked_nav;
 using exdeath_routes::check;
 using exdeath_routes::route;
+using EscapeRoute = ff5::karnak::Route;
 
 map_state::Flags flags(int map, int encountered, bool timer = true, bool escaped = false, bool explosion = false) {
     auto value = exdeath_routes::flags(map,0,0);
@@ -24,7 +25,7 @@ map_state::Flags flags(int map, int encountered, bool timer = true, bool escaped
 
 ff5::library::Plan advice(int map, Cell at, const map_state::Flags& state,
                          std::wstring guide = {}, puzzle_policy::Policy policy = {true,true},
-                         std::optional<int> seconds = {}) {
+                         std::optional<int> seconds = {}, EscapeRoute mode = EscapeRoute::EquipmentThenElixirs) {
     ff5::mechanics::Snapshot snapshot;
     snapshot.map = map;
     snapshot.player = at;
@@ -33,6 +34,7 @@ ff5::library::Plan advice(int map, Cell at, const map_state::Flags& state,
     snapshot.locale = L"en";
     snapshot.policy = policy;
     snapshot.karnak_seconds = seconds;
+    snapshot.karnak_route = mode;
     return ff5::mechanics::plan(snapshot,fixture::guide_recipes);
 }
 
@@ -68,11 +70,10 @@ void verify_loot() {
     if (chests.size()!=15) return;
     auto state = flags(timer_start.map,0);
     Position at=timer_start;
-    double seconds=600;
     int distance=0;
     constexpr std::array expected{86,87,88,89,99,92,93,96,97,98,94,95,100,90,91};
     for (const int receipt : expected) {
-        const auto plan=advice(at.map,at.cell,state,L"karnak_escape",{true,true},int(seconds));
+        const auto plan=advice(at.map,at.cell,state,L"karnak_escape",{true,true},600,EscapeRoute::AllChests);
         check(plan.karnak_treasure_flag==receipt && plan.targets.size()==1,
               "full countdown selects the shortest room-grouped chest sequence");
         if (plan.karnak_treasure_flag!=receipt || plan.targets.size()!=1) return;
@@ -87,29 +88,52 @@ void verify_loot() {
                         next.goal.cells.front().x,next.goal.cells.front().y,steps);
         if (steps<0) return;
         distance+=steps;
-        seconds-=1 + steps*.14 + (chests[size_t(receipt-86)].fight ? 36 : 0);
         state.treasure[receipt]=1;
         at=reached;
     }
-    const auto exit=advice(at.map,at.cell,state,L"karnak_escape",{true,true},int(seconds));
+    const auto exit=advice(at.map,at.cell,state,L"karnak_escape",{true,true},181,EscapeRoute::AllChests);
     check(exit.targets.size()==1 && exit.targets.front().goal.entity_id==29,
           "all collected chests hand off to the native courtyard fight");
     if (exit.targets.size()==1) {
         Position outside;
         const auto steps=traverse(at,exit.targets.front().goal,exit.targets.front().kind,outside,state);
-        check(steps>=0 && distance+steps==674 && seconds-steps*.14>=55,
-              "full guided route matches the measured physical cost and reserves the exit fight");
-        std::printf("Karnak loot route: %d weighted steps with %.1f seconds reserved on the modeled clock\n",
-                    distance+steps,seconds-steps*.14);
+        check(steps>=0 && distance+steps==674,"full loot mode matches the measured physical route cost");
     }
-    auto late=flags(108,0);
-    const auto gear=advice(108,{1,4,7},late,L"karnak_escape",{true,true},109);
-    check(gear.karnak_treasure_flag==99,"reduced countdown prioritizes nearby equipment");
-    const auto hurry=advice(108,{1,4,7},late,L"karnak_escape",{true,true},45);
-    check(hurry.karnak_treasure_flag<0 && hurry.targets.size()==1 &&
-          hurry.targets.front().goal.entity_id==29 &&
-          hurry.targets.front().instruction.find(L"Time is short")!=std::wstring::npos,
-          "critical countdown bypasses loot and states the escape priority");
+    state=flags(timer_start.map,0);at=timer_start;
+    for (const int flag : {88,99,100}) {
+        const auto plan=advice(at.map,at.cell,state,L"karnak_escape",{true,true},350);
+        const auto equipment_only=advice(at.map,at.cell,state,L"karnak_escape",{true,true},350,EscapeRoute::EquipmentOnly);
+        check(plan.karnak_treasure_flag==flag && equipment_only.karnak_treasure_flag==flag,
+              "both equipment modes route to Ribbon, Elven Mantle and Main Gauche first");
+        if(plan.targets.empty())return;
+        const auto& target=plan.targets.front();
+        Position reached;
+        check(traverse(at,target.goal,target.kind,reached,state,true)>=0,"equipment leg uses the native castle route");
+        if (reached.map!=target.goal.map_id) return;
+        state.treasure[flag]=1;
+        at=reached;
+    }
+    const auto gear_exit=advice(at.map,at.cell,state,L"karnak_escape",{true,true},320,EscapeRoute::EquipmentOnly);
+    check(gear_exit.karnak_treasure_flag<0 && gear_exit.targets.size()==1 && gear_exit.targets.front().goal.entity_id==29,
+          "equipment-only mode leaves as soon as all three items are collected");
+    for (int i=0;i<6;++i) {
+        const auto next=advice(at.map,at.cell,state,L"karnak_escape",{true,true},181);
+        const auto flag=next.karnak_treasure_flag;
+        check(flag==87||flag==93||flag==94||flag==96||flag==97||flag==98,
+              "equipment-then-Elixirs selects only an unopened Elixir at 3:01");
+        if (flag<0 || next.targets.empty()) return;
+        const auto& goal=next.targets.front().goal;
+        state.treasure[flag]=1;at={goal.map_id,goal.cells.front()};
+    }
+    const auto done=advice(at.map,at.cell,state,L"karnak_escape",{true,true},300);
+    check(done.karnak_treasure_flag<0&&done.targets.size()==1&&done.targets.front().goal.entity_id==29,
+          "default mode leaves after the final Elixir even with time available");
+    for (const auto mode : {EscapeRoute::EquipmentThenElixirs,EscapeRoute::EquipmentOnly,EscapeRoute::AllChests}) {
+        const auto hurry=advice(108,{1,4,7},flags(108,0),L"karnak_escape",{true,true},180,mode);
+        check(hurry.karnak_treasure_flag<0 && hurry.targets.size()==1 && hurry.targets.front().goal.entity_id==29 &&
+              hurry.targets.front().instruction.find(L"Time is short")!=std::wstring::npos,
+              "at exactly three minutes every mode goes directly to the courtyard fight");
+    }
     const auto separate = [&](int opened, int closed) {
         auto two_gil=flags(105,0);
         two_gil.treasure[opened]=1;

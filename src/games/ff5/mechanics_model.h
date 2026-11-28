@@ -1,6 +1,7 @@
 #pragma once
 #include "library_model.h"
 #include "mechanics_maps.h"
+#include "karnak_escape.h"
 #include "../../core/field/map_state.h"
 #include "../../core/field/puzzle_policy.h"
 // New FFV rule leaf. Existing specialized models retain their designs. Only
@@ -15,6 +16,7 @@ struct Snapshot {
  // without replaying the scene that made the stop contacts visible.
  std::optional<bool> exdeath_stop_visible;
  std::optional<int> karnak_seconds;
+ karnak::Route karnak_route = karnak::Route::EquipmentThenElixirs;
 };
 inline bool supported(int map){return types(map)!=0;}
 library::Plan plan(const Snapshot&,const json::Value&);

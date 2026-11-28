@@ -1,5 +1,10 @@
 # Native FFPR durable memory
 
+**November 27 Karnak route choices.** Equipment then Elixirs defaults on
+the timed escape, with Equipment only and All chests available. All
+choices leave at 3:00 or less. The FFV mod menu uses native timer pause
+rules. [Controls and native evidence](docs/re/FF5_KARNAK_20261105.md#november-27-equipment-first-routes-and-menu-pause).
+
 **November 27 Karnak escape loot.** Timed chest guidance uses all 15
 native treasure receipts, room-grouped route costs and the actual
 countdown. Autowalk retains its destination through battle, and its

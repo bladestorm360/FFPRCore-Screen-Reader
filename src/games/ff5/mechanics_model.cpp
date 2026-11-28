@@ -38,10 +38,12 @@ std::optional<field::baked_nav::GuideTarget> target(const json::Value& row){
  t.kind=mode==L"spot"?field::TargetKind::Spot:mode==L"transition"?field::TargetKind::Transition:field::TargetKind::Interact;t.instruction=T(text);return t;
 }
 
+enum class Loot { Other, Equipment, Elixir };
+
 struct KarnakChest {
  field::baked_nav::GuideTarget target;
- int flag = 0, room = 0, priority = 0;
- bool fight = false;
+ int flag = 0, room = 0;
+ Loot loot = Loot::Other;
 };
 
 std::vector<KarnakChest> karnak_chests(const json::Value& root)
@@ -54,8 +56,9 @@ std::vector<KarnakChest> karnak_chests(const json::Value& root)
  for (const auto& row : rows->arr) {
   const auto n = [&](const wchar_t* key) { return row.get(key); };
   if (!integer(n(L"flag"),86,100) || !integer(n(L"map"),95,111) || !integer(n(L"id"),0,100) ||
-      !integer(n(L"x"),0,100) || !integer(n(L"y"),0,100) || !integer(n(L"room"),1,7) ||
-      !integer(n(L"priority"),0,4) || !n(L"fight") || n(L"fight")->type != json::Value::Type::Bool) return {};
+      !integer(n(L"x"),0,100) || !integer(n(L"y"),0,100) || !integer(n(L"room"),1,7)) return {};
+  const auto loot_type = str(row,L"loot");
+  if (loot_type!=L"equipment" && loot_type!=L"elixir" && loot_type!=L"other") return {};
   const int flag = int(n(L"flag")->n);
   if (flag != 86 + int(chests.size())) return {};
   field::baked_nav::MapGoal goal{int(n(L"map")->n), {1, int(n(L"x")->n), int(n(L"y")->n)}};
@@ -77,18 +80,22 @@ std::vector<KarnakChest> karnak_chests(const json::Value& root)
   goal.object_type = int(chest->type);
   goal.avoid_other_events = true;
   goal.allow_scripted_crossings = true;
-  chests.push_back({{std::move(goal),field::TargetKind::Interact,T(L"Open the chest.")},
-                    flag,int(n(L"room")->n),int(n(L"priority")->n),n(L"fight")->b});
+  const auto category = loot_type==L"equipment" ? Loot::Equipment : loot_type==L"elixir" ? Loot::Elixir : Loot::Other;
+  chests.push_back({{std::move(goal),field::TargetKind::Interact,T(L"Open the chest.")},flag,int(n(L"room")->n),category});
  }
  return chests;
 }
 
 // Distances are replayed against the production router at the authored chest
-// approaches. A room is finished in one visit if its chests fit the budget.
-// Reevaluate after each confirmed reward using the live countdown.
+// approaches. Finish the current loot category within each room before moving
+// on. Native treasure receipts and the live countdown drive subsequent legs.
 bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Plan& out, bool& short_on_time)
 {
  if (!s.karnak_seconds || s.flags.scenario[245] != 0 || s.map == 95) return false;
+ if (*s.karnak_seconds <= karnak::exit_seconds) {
+  short_on_time=true;
+  return false;
+ }
  auto chests = karnak_chests(root);
  if (chests.size()!=15) return false;
  const auto* distances = root.get(L"karnak_loot")->get(L"distance");
@@ -102,9 +109,9 @@ bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Pl
    distance[row][col] = int(entries[col].n);
   }
  }
- unsigned pending=0, fights=0;
+ unsigned pending=0, equipment=0, elixirs=0;
  std::array<unsigned,8> rooms{};
- int origin=0, remaining_walk=0;
+ int origin=0;
  int closest=1000;
  for (size_t i=0; i<chests.size(); ++i) {
   const auto& chest=chests[i];
@@ -112,7 +119,8 @@ bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Pl
   if (!opened || (*opened!=0 && *opened!=1)) return false;
   const unsigned bit=1u<<i;
   if (!*opened) pending|=bit;
-  if (chest.fight) fights|=bit;
+  if (chest.loot==Loot::Equipment) equipment|=bit;
+  if (chest.loot==Loot::Elixir) elixirs|=bit;
   rooms[chest.room]|=bit;
   const auto& at=chest.target.goal.cells.front();
   const int steps=std::abs(s.player.x-at.x)+std::abs(s.player.y-at.y);
@@ -120,21 +128,23 @@ bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Pl
    origin=int(i)+1; closest=steps;
   }
  }
+ if (s.karnak_route!=karnak::Route::AllChests) {
+  const unsigned needed_equipment=pending&equipment;
+  if (needed_equipment || s.karnak_route==karnak::Route::EquipmentOnly) pending=needed_equipment;
+  else pending&=elixirs;
+ }
  if (!pending) return false;
- if (origin) remaining_walk=closest;
- else if (s.map==102) remaining_walk=std::abs(s.player.x-4)+std::abs(s.player.y-7);
- else {
+ if (!origin) {
   // Off a chest floor, prefer the nearby verified route anchor. The actual
   // first leg is still resolved from the current pose by the normal router.
   if (s.map==97 || s.map==98 || s.map==99) origin=3;
   if (s.map==106 || s.map==107) origin=14;
   if (s.map==109 || s.map==110) origin=15;
-  remaining_walk=24;
  }
  struct Choice { int distance; int first; };
  constexpr int unavailable=100000;
  std::unordered_map<unsigned, Choice> memo;
- memo.reserve(4096);
+ memo.reserve(s.karnak_route==karnak::Route::AllChests ? 4096 : 128);
  auto best = [&](auto&& self, int from, unsigned mask) -> Choice {
   if (!mask) return {distance[from][15],-1};
   const unsigned key=(unsigned(from)<<15)|mask;
@@ -156,31 +166,8 @@ bool choose_karnak_chest(const Snapshot& s, const json::Value& root, library::Pl
   memo.emplace(key,result);
   return result;
  };
- // Hundredths of a second. The allowance covers running, one interaction
- // per chest, the observed middle of castle battle lengths and the exit fight.
- const auto estimate=[&](unsigned mask,Choice choice) {
-  return 14*(remaining_walk+choice.distance)+100*std::popcount(mask)+
-      3600*std::popcount(mask&fights)+5500;
- };
- auto choice=best(best,origin,pending);
- const int time_budget=100 * *s.karnak_seconds;
- while (pending && estimate(pending,choice)>time_budget) {
-  int priority=5, least_time=unavailable*100, drop=-1;
-  Choice shorter{};
-  for (size_t i=0;i<chests.size();++i) {
-   if (!(pending&(1u<<i)) || chests[i].priority>priority) continue;
-   const unsigned subset=pending&~(1u<<i);
-   const auto candidate=best(best,origin,subset);
-   const int time=estimate(subset,candidate);
-   if (chests[i].priority<priority || time<least_time) {
-    priority=chests[i].priority;least_time=time;drop=int(i);shorter=candidate;
-   }
-  }
-  if (drop<0) break;
-  pending&=~(1u<<drop);
-  choice=shorter;
- }
- if (choice.first<0 || !pending) {short_on_time=true;return false;}
+ const auto choice=best(best,origin,pending);
+ if (choice.first<0) return false;
  auto& chest=chests[size_t(choice.first)];
  out.puzzle_types=1;
  out.karnak_treasure_flag=chest.flag;

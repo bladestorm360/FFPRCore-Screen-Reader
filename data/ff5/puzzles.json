@@ -22,21 +22,21 @@
       [218,190,185,185,106,106,119,116,75,67,112,89,90,176,0,111]
     ],
     "chests": [
-      {"flag":86,"map":101,"id":22,"x":13,"y":16,"room":1,"priority":1,"fight":false},
-      {"flag":87,"map":101,"id":23,"x":17,"y":10,"room":1,"priority":0,"fight":true},
-      {"flag":88,"map":100,"id":7,"x":6,"y":15,"room":2,"priority":4,"fight":true},
-      {"flag":89,"map":100,"id":8,"x":26,"y":15,"room":2,"priority":2,"fight":true},
-      {"flag":90,"map":96,"id":24,"x":8,"y":20,"room":3,"priority":3,"fight":true},
-      {"flag":91,"map":96,"id":25,"x":22,"y":20,"room":3,"priority":2,"fight":true},
-      {"flag":92,"map":105,"id":0,"x":9,"y":7,"room":4,"priority":1,"fight":false},
-      {"flag":93,"map":105,"id":14,"x":15,"y":6,"room":4,"priority":0,"fight":true},
-      {"flag":94,"map":105,"id":15,"x":18,"y":7,"room":5,"priority":0,"fight":true},
-      {"flag":95,"map":105,"id":0,"x":25,"y":6,"room":5,"priority":1,"fight":false},
-      {"flag":96,"map":105,"id":17,"x":12,"y":17,"room":4,"priority":0,"fight":true},
-      {"flag":97,"map":105,"id":18,"x":21,"y":14,"room":5,"priority":0,"fight":true},
-      {"flag":98,"map":105,"id":19,"x":25,"y":17,"room":5,"priority":0,"fight":true},
-      {"flag":99,"map":108,"id":3,"x":4,"y":8,"room":6,"priority":4,"fight":true},
-      {"flag":100,"map":111,"id":3,"x":4,"y":8,"room":7,"priority":4,"fight":true}
+      {"flag":86,"map":101,"id":22,"x":13,"y":16,"room":1,"loot":"other"},
+      {"flag":87,"map":101,"id":23,"x":17,"y":10,"room":1,"loot":"elixir"},
+      {"flag":88,"map":100,"id":7,"x":6,"y":15,"room":2,"loot":"equipment"},
+      {"flag":89,"map":100,"id":8,"x":26,"y":15,"room":2,"loot":"other"},
+      {"flag":90,"map":96,"id":24,"x":8,"y":20,"room":3,"loot":"other"},
+      {"flag":91,"map":96,"id":25,"x":22,"y":20,"room":3,"loot":"other"},
+      {"flag":92,"map":105,"id":0,"x":9,"y":7,"room":4,"loot":"other"},
+      {"flag":93,"map":105,"id":14,"x":15,"y":6,"room":4,"loot":"elixir"},
+      {"flag":94,"map":105,"id":15,"x":18,"y":7,"room":5,"loot":"elixir"},
+      {"flag":95,"map":105,"id":0,"x":25,"y":6,"room":5,"loot":"other"},
+      {"flag":96,"map":105,"id":17,"x":12,"y":17,"room":4,"loot":"elixir"},
+      {"flag":97,"map":105,"id":18,"x":21,"y":14,"room":5,"loot":"elixir"},
+      {"flag":98,"map":105,"id":19,"x":25,"y":17,"room":5,"loot":"elixir"},
+      {"flag":99,"map":108,"id":3,"x":4,"y":8,"room":6,"loot":"equipment"},
+      {"flag":100,"map":111,"id":3,"x":4,"y":8,"room":7,"loot":"equipment"}
     ]
   },
   "library_policy": {

@@ -13,6 +13,7 @@
 #include <cmath>
 #include <string>
 #include "ff5_internal.h"
+#include "karnak_escape.h"
 #include "../../core/core.h"
 #include "../../core/game.h"
 #include "../../core/hooks.h"
@@ -23,8 +24,12 @@
 #include "../../core/say.h"
 #include "../../core/text.h"
 #include "../../core/unity.h"
+#include "../../core/battle/battle.h"
 #include "../../core/field/object_cache.h"
+#include "../../core/field/field_api.h"
+#include "../../core/field/map_state.h"
 #include "../../core/input/input.h"
+#include "../../core/ui/mod_ui.h"
 
 namespace ffpr::ff5 {
 namespace {
@@ -35,6 +40,7 @@ ref::Class  kTimer{"Last.Timer", "Timer", k5};
 ref::Method mTimerUpdate{kTimer, "Update", 1};
 ref::Field fRequired{kTimer, "requiredSec"}, fElapsed{kTimer, "elapsedSec"};
 ref::Class kTimerManager{"Last.Management", "TimerInstanceManager", k5};
+ref::Method mUpdateTimers{kTimerManager, "UpdateTimer", 1};
 ref::Field fGlobalTimer{kTimerManager, "<GrobalTimer>k__BackingField"};
 ref::Class kTimerStructure{"Last.Timer", "TimerStructure", k5};
 ref::Field fTimer{kTimerStructure, "<Timer>k__BackingField"};
@@ -58,6 +64,15 @@ void* g_update_target = nullptr;
 
 using Update_t = bool (*)(void* self, float dt, const void* mi);
 Update_t o_Update = nullptr;
+
+using UpdateTimers = void (*)(void*, int32_t, const void*);
+UpdateTimers o_update_timers = nullptr;
+void d_update_timers(void* self, int32_t state, const void* mi)
+{
+    // Keep the timer manager's cleanup and per-timer state filtering native.
+    // Read only the mod overlay flag. Nothing pauses or resumes a native object.
+    o_update_timers(self, timer_update_state(state, ui::mod_menu::is_open()), mi);
+}
 
 /// Timer_Update_Patch.Prefix: while frozen, skip the update (only installed while frozen).
 bool d_Update(void* self, float dt, const void* mi)
@@ -189,11 +204,17 @@ int install()
         if (!ok) ffpr::say(T(L"Error reading timers"), true);
     });
     queries::define("TimerHelper.TimersFrozen", [] { return g_frozen; });
+    queries::define("FF5.KarnakEscape.Active", [] {
+        if ((!queries::is("GameStatePatches.IsFieldNavigationReady") && !battle::battle_presentation_ready()) ||
+            !::ff5::karnak::is_castle(field::current_map_id())) return false;
+        return field::map_state::scenario_flag(46) == 1 &&
+               field::map_state::scenario_flag(47) == 0 && karnak_seconds_remaining().value_or(0) > 0;
+    });
     input::add_binding(input::Key::F5, input::Mod::Shift, input::Context::Global, "TimerHelper.ToggleTimerFreeze",
                        "Toggle timer freeze");
     input::add_binding(input::Key::T, input::Mod::None, input::Context::Global, "TimerHelper.AnnounceActiveTimers",
                        "Announce active timers");
-    return 0;
+    return hooks::attach(mUpdateTimers, &d_update_timers, &o_update_timers) ? 1 : 0;
 }
 
 core::Install s_install{"FF5.Timers", &install, 505, game::kFF5};
@@ -210,7 +231,7 @@ std::optional<int> karnak_seconds_remaining()
         if (!timer || ref::rd<float>(timer, fRequired) != 600.f) return {};
         const auto elapsed = ref::rd<float>(timer, fElapsed);
         if (!std::isfinite(elapsed) || elapsed < 0.f || elapsed > 600.f) return {};
-        return static_cast<int>(600.f - elapsed);
+        return static_cast<int>(std::ceil(600.f - elapsed));
     });
 }
 } // namespace ffpr::ff5
