@@ -3505,7 +3505,12 @@ bool find(Vec3 from, Vec3 to, void* map_handle, void* player, bool full, TargetK
             if (magnetic_cavern) {
                 if (req.transportation_id != 7) out.reason = TF(L"Requires {0}", {T(L"Black Chocobo")});
             } else {
-                out.reason = reason.empty() ? no_route_reason(*sm, g, req, live) : reason;
+                // A gate-free walking or landing path does not satisfy a
+                // native ship-entry selector, even if it reaches the tile.
+                if (ship_goal && ship_goal->transition && ship_goal->ids && !ship_ready &&
+                    (reason.empty() || reason == T(L"Story gated")))
+                    out.reason = TF(L"Requires {0}", {T(L"Ship")});
+                else out.reason = reason.empty() ? no_route_reason(*sm, g, req, live) : reason;
             }
             if (g_active && same_target(*g_active, map_id, target, map_id)) invalidate_active();
             LOGF("[BakedNav] no route: (%d,%d) L%d -> (%d,%d) on map %d, %zu goal cells; %zu chests, %zu gates, %zu fixed and %zu moving NPCs; %ls",

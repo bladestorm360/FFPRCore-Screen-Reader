@@ -197,8 +197,18 @@ const Selection& Resolver::selection(const baked::Submap& sm)
     if(id==observed_index_)selected.groups.insert(observed_groups_.begin(),observed_groups_.end());
     return cache_.emplace(id,std::move(selected)).first->second;
 }
+bool Resolver::sunk_walse_tower_entrance(int source_map, int entity, int destination) const
+{
+    // The native world entrance survives in the registry after the sinking
+    // scene replaces its ground with water. The later sunken tower is separate.
+    return source_map == 1 && entity == 64 && destination == 234 &&
+           baked::game_number() == 5 && scenario_value(991) == 1;
+}
+
 bool Resolver::active(const baked::Submap& sm, const baked::Object& object, bool obstacle)
 {
+    if (object.type == baked::ObjType::GotoMap &&
+        sunk_walse_tower_entrance(sm.first_map_id, object.entity_id(), object.a)) return false;
     // Both pads turn into native pushback contacts at this story milestone.
     // Preserve the physical Event, but close the derived travel edge.
     if (object.type == baked::ObjType::Warp && (object.d & baked::kMeteoriteTransfer) &&

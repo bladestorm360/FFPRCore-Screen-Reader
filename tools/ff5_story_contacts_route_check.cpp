@@ -38,6 +38,40 @@ bool reach(const map_state::Flags& state, Cell from, int entity, TargetKind kind
     return result.path.success && !result.path.required_trap;
 }
 
+void verify_walse_inventory(map_state::Flags flags)
+{
+    using namespace filter_worker;
+    const auto& world = *baked::submap_by_map_id(1);
+    const auto& entrance = object(1,64);
+    check(entrance.type == baked::ObjType::GotoMap && entrance.a == 234,
+          "the reported world row is the original Tower of Walse entrance");
+    for (const auto sunk : {std::optional<int>{0}, std::optional<int>{1}, std::optional<int>{}}) {
+        flags.scenario[991] = sunk;
+        auto state = std::make_shared<map_state::Resolver>(flags,fixture::records);
+        const bool exists = sunk != 1;
+        check(state->active(world,entrance) == exists,"only the known sinking removes the original tower edge");
+        for (bool reachable : {true,false}) {
+            FilterInput input;
+            input.current_map = 1; input.world = true; input.reachable_only = reachable; input.state = state;
+            for (const auto& [id,dest,cell] : {std::tuple{64,234,Cell{1,196,88}},
+                                               std::tuple{48,244,Cell{1,204,84}}}) {
+                FilterRow row;
+                row.index = input.rows.size(); row.entity_id = id; row.destination = dest;
+                row.category = Category::MapExits; row.kind = Kind::MapExit;
+                row.position = row.numbering_position = world_of_cell(world,cell);
+                row.route_distance = 1; // positive ranking cannot resurrect a retired destination
+                input.rows.push_back(std::move(row));
+            }
+            const auto categories = build_categories(input);
+            const std::vector<size_t> expected = exists ? std::vector<size_t>{0,1} : std::vector<size_t>{1};
+            check(categories.views[0].order == expected &&
+                    categories.views[static_cast<size_t>(Category::MapExits)].order == expected &&
+                    categories.views[0].exits.size() == expected.size() && categories.audio_order == expected,
+                  "all world inventory modes omit the sunk tower without hiding the meteorite");
+        }
+    }
+}
+
 void verify_meteorite_journey()
 {
     auto flags = exdeath_routes::flags(1, 0, 0);
@@ -130,6 +164,7 @@ int verify() {
     verify_meteorite_journey();
     auto walse = exdeath_routes::flags(1,0,0);
     walse.current_area_id = 1;
+    verify_walse_inventory(walse);
     MapGoal tower;
     tower.map_id = 1;
     tower.cell = {1,196,88};

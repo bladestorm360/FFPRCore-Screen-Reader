@@ -206,6 +206,24 @@ for Map_10010. The maintained FFV story-contact replay covers the logged
 walking pose and Wind Drake landings, both active meteorite phases, the sunk
 tower and unknown flag state.
 
+### November 28 world-map destination availability
+
+The FFV Steam log at 490278 listed Tower of Walse 1F after the sinking.
+World1 entry 64 to map 234 still exists in the native entity list. The
+pathfinder now retires that exact entrance in its navigation and inventory
+projections when the native sinking receipt 991 is set. This applies to the
+broad Map Exits list and its beacon inventory. The standing tower before
+the scene, Walse Meteorite, and the separate later sunken tower keep their
+own identities. Unknown state does not prove that the entrance has vanished.
+
+At 490284 the player at (204,85) was on foot and the Torna Canal marker at
+(170,88) reported a story gate. The canal entrance is a native ship
+transfer to map 210. The fallback proof had tested whether a path reached the
+tile after removing gates without proving the ship-entry requirement.
+The selected directions and browse result now give “Requires Ship” when
+the permitted ship cannot reach the entry. The native entrance still
+accepts Ship 2. [Ship transition evidence](TORNA_WORLD_EVENTS_20261029.md).
+
 ## Straight-line bearing for story-gated targets
 
 The current entity announcement adds the approximate geometric distance and

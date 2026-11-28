@@ -32,6 +32,23 @@ int main(){
  auto contains_entry=[](const auto& view){return std::find(view.order.begin(),view.order.end(),size_t(0))!=view.order.end();};
  expect(contains_entry(views.views[int(Category::MapExits)])&&contains_entry(literal.views[int(Category::MapExits)]),"reachable and literal category publication retain Torna under Map Exits");
  expect(!contains_entry(literal.views[int(Category::Events)]),"a plain ship-preserving map transfer is not duplicated as a storyline event");
+ {
+  auto completed=*flags;completed.scenario[24]=completed.scenario[37]=completed.scenario[991]=1;
+  auto make=[&] {
+   RouteSnapshot route(map_state::Resolver(completed,fixture::records));
+   route.map_id=1;route.submap=world;route.layer=1;route.locale=L"en";route.vehicle={true,1,1,L""};
+   route.position=world_of_cell(*world,{1,204,85});route.goal.map_id=1;route.goal.cell=target;
+   route.goal.entity_id=63;route.goal.raw_name=baked::object_identifier(*entry);route.kind=TargetKind::Transition;
+   return route;
+  };
+  std::thread reported([&]{
+   auto directions=make(),browsing=make();
+   const auto selected=plan_snapshot(directions).path;
+   const auto preview=plan_browse_snapshot(browsing).route;
+   expect(!selected.success&&selected.reason==L"Requires Ship"&&preview.reason==selected.reason,
+          "from the logged walking pose after Karlabos, the canal reports its native ship requirement");
+  });reported.join();
+ }
  if(plan.path.success){
   expect(!plan.path.walk_phases.empty()&&plan.path.walk_phases.back().cells.back().x==target.x&&plan.path.walk_phases.back().cells.back().y==target.y,"directions end at the exact native canal entrance");
   expect(std::none_of(plan.path.walk_phases.begin(),plan.path.walk_phases.end(),[](const auto& phase){return phase.vehicle_before==route_progress::VehicleAction::ConfirmLand||phase.vehicle_before==route_progress::VehicleAction::BackLand||phase.vehicle_before==route_progress::VehicleAction::WalkOff;}),"canal route does not invent a landing/disembark action");

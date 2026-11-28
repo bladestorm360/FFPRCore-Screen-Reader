@@ -94,7 +94,9 @@ static Filtered build_impl(FilterInput& input) {
     check_cancelled(input);
     for (const auto& row : input.rows) {
         check_cancelled(input);
-        if (row.kind == Kind::MapExit && !row.remote_map && (!input.reachable_only || !input.world || row.route_distance>=0)) result.exits.push_back(row.numbering_position);
+        if (row.available && row.kind == Kind::MapExit && !row.remote_map &&
+            (!input.reachable_only || !input.world || row.route_distance>=0))
+            result.exits.push_back(row.numbering_position);
         result.names.push_back(row.name);
         if (row.available && (!input.reachable_only || !row.story_gated) && (input.category == Category::All || input.category == row.category)) result.order.push_back(row.index);
     }
@@ -196,6 +198,11 @@ static Categories categories_impl(FilterInput& input) {
     save_points::consolidate(input);
     if (input.state) for (auto& row:input.rows) {
         check_cancelled(input);
+        if (row.kind == Kind::MapExit && input.state->sunk_walse_tower_entrance(
+                row.remote_map ? row.remote_map : input.current_map, row.entity_id, row.destination)) {
+            row.available = false;
+            continue;
+        }
         if (row.remote_map || row.entity_id<0 || (row.kind!=Kind::NPC&&row.kind!=Kind::Event)) continue;
         const auto* sm=baked::submap_by_map_id(input.current_map);if(!sm)continue;
         if (!std::isfinite(row.position.x)||!std::isfinite(row.position.y)||std::abs(row.position.x)>1.e6||std::abs(row.position.y)>1.e6)continue;
@@ -242,7 +249,7 @@ static Categories categories_impl(FilterInput& input) {
         for (size_t i=0; i<input.rows.size(); ++i) {
             check_cancelled(input);
             const auto& row = input.rows[i];
-            if (row.kind != Kind::MapExit && (!input.events || row.event_group.empty())) continue;
+            if (!row.available || (row.kind != Kind::MapExit && (!input.events || row.event_group.empty()))) continue;
             // Literal discovery never prunes by distance and sorts by physical
             // location. Only repeated exit/event groups need routes here.
             // Explicit selection/browse still captures/proves the real route.

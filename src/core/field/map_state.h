@@ -125,6 +125,7 @@ public:
     std::vector<baked_route::Cell> route_positions(const baked::Submap& sm,const baked::Object& object);
     // Read only the already copied scenario bank; no native access on workers.
     std::optional<int> scenario_value(size_t index) const { return index < flags_.scenario.size() ? flags_.scenario[index] : std::nullopt; }
+    bool sunk_walse_tower_entrance(int source_map, int entity, int destination) const;
     std::optional<int> treasure_value(size_t index) const { return index < flags_.treasure.size() ? flags_.treasure[index] : std::nullopt; }
     uint64_t signature() const; // copied persistent state only; worker-safe
     // Lazily projected once per map/kind in this owned resolver. Shared immutable
