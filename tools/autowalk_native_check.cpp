@@ -722,6 +722,9 @@ template<class Expect> void check_route_refresh(Expect expect)
            "overshooting west is silent and retains the destination for recovery");
     fixture::edge_open=false;
     motion({0,1});settle();
+    expect(refreshes==3&&fixture::obstacle_queries==0,
+           "a newer turn replaces the pending west sample without probing its old tile");
+    settle();
     expect(refreshes==4&&route_origin==Cell{1,10,26}&&fixture::obstacle_queries==1&&
            fixture::attempted_destination.x==-48&&fixture::attempted_destination.y==16,
            "a blocked north move refreshes from the actual tile and native attempted direction");
@@ -748,6 +751,21 @@ template<class Expect> void check_route_refresh(Expect expect)
     fixture::position={208,-384,0};
     settle();
     expect(!readout::obstacle_token(),"arriving at the destination ends obstacle correction for the old route");
+
+    fixture::cell={1,10,26};
+    fixture::position={-48,0,0};
+    fixture::edge_open=false;
+    show_chunk();
+    motion({0,1});
+    fixture::cell={1,10,25};
+    fixture::position={-48,16,0};
+    settle();
+    expect(refreshes==5&&fixture::obstacle_queries==3,
+           "a native step toward the obstacle is quiet during the first sample");
+    settle();
+    expect(refreshes==6&&route_origin==Cell{1,10,25}&&fixture::obstacle_queries==4&&
+           fixture::attempted_destination.y==32,
+           "a held direction that moved during sampling still detects the obstacle at its new tile");
 }
 
 int main(){

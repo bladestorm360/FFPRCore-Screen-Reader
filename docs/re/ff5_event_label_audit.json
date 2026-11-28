@@ -14726,8 +14726,8 @@
     "id": 72,
     "raw": "sc_e_0210:アビリティシステム説明",
     "type": 2,
-    "label": "Scene trigger",
-    "reason": "script action; outcome withheld",
+    "label": "Warp Tile",
+    "reason": "reviewed optional World Map warp after the ability tutorial",
     "trap_hint": false
   },
   {

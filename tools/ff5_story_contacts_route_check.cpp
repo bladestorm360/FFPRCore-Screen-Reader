@@ -349,6 +349,69 @@ int verify() {
     check(cave_return.path.success && cave_return.path.next_map_id == 194 && !cave_return.path.required_trap,
           "the logged world position uses the Cave 3F connector to the scripted Cave Entrance without a vehicle");
 
+    for (const int flag : {3,6,10,13,14,15,16,20,21,22,23,24,25,26,27,28,29,30,31,32,33,
+                           37,38,39,40,41,42,43,44,45,46,47,990,991}) pirates.scenario[flag] = 1;
+    const auto& south_door = object(1,62);
+    south_entrance.entity_id = 62;
+    south_entrance.raw_name = baked::object_identifier(south_door);
+    const auto direct_south = route(1, {1,214,116}, pirates, south_entrance, TargetKind::Transition, false, 4);
+    if (!direct_south.path.success)
+        std::printf("Cave Entrance from Wind Drake: %ls / %ls\n",direct_south.path.error.c_str(),direct_south.path.reason.c_str());
+    check(direct_south.path.success, "the logged Wind Drake approach reaches the southern Cave Entrance");
+    const auto& north_door = object(1, 7);
+    MapGoal north_entrance;
+    north_entrance.map_id = 1;
+    north_entrance.cell = {1, north_door.tx, north_door.ty};
+    north_entrance.entity_id = north_door.entity_id();
+    north_entrance.raw_name = baked::object_identifier(north_door);
+    const auto drake = route(1, {1,214,116}, pirates, north_entrance, TargetKind::Transition, false, 4);
+    if (!drake.path.success || drake.path.next_map_id != 191)
+        std::printf("Cave 3F from Wind Drake: next %d, %ls / %ls\n", drake.path.next_map_id,
+                    drake.path.error.c_str(), drake.path.reason.c_str());
+    check(drake.path.success && drake.path.next_map_id == 191 && !drake.path.required_trap &&
+          drake.path.reason.empty(), "Wind Drake route to Cave 3F approaches through the southern Cave Entrance");
+    const auto near_cave = route(1, {1,165,116}, pirates, north_entrance, TargetKind::Transition, false, 4);
+    check(near_cave.path.success && near_cave.path.next_map_id == 191 && near_cave.pending.incoming_transition &&
+          near_cave.pending.goal.entity_id == north_entrance.entity_id,
+          "landing beside the cave preserves the selected Cave 3F destination");
+    pirates.current_area_id = 81;
+    for (const auto [map, at, next] : {std::tuple{191,Cell{1,30,47},192},std::tuple{192,Cell{1,16,19},193}}) {
+        pirates.current_map_id = map;
+        const auto approach = route(map,at,pirates,north_entrance,TargetKind::Transition);
+        check(approach.path.success && approach.path.next_map_id == next && approach.pending.incoming_transition &&
+              approach.pending.goal.entity_id == north_entrance.entity_id,
+              "each cave floor routes to the next real entrance while retaining Cave 3F");
+    }
+    pirates.current_map_id = 193;
+    const auto cave_switch = route(193, {1,7,18}, pirates, north_entrance, TargetKind::Transition);
+    check(cave_switch.path.success && cave_switch.path.next_map_id == 0 && !cave_switch.path.walk_phases.empty() &&
+          cave_switch.path.walk_phases.back().action_after == L"Examine the switch" &&
+          cave_switch.path.walk_phases.back().arrival_interaction && cave_switch.path.walk_phases.back().arrival_interaction->entity_id == 11 &&
+          cave_switch.pending.goal.entity_id == north_entrance.entity_id,
+          "the closed Cave 2F door routes to the exact switch and retains the destination");
+    if (cave_switch.path.success && !cave_switch.path.walk_phases.empty()) {
+        RouteSnapshot opened(map_state::Resolver(pirates,fixture::records));
+        opened.map_id = 193;
+        opened.submap = baked::submap_by_map_id(opened.map_id);
+        opened.layer = 1;
+        opened.position = world_of_cell(*opened.submap,cave_switch.path.walk_phases.back().cells.back());
+        opened.locale = L"en";
+        opened.vehicle = {true,1,1,{}};
+        opened.goal = north_entrance;
+        opened.kind = TargetKind::Transition;
+        const auto onward = plan_snapshot(opened);
+        check(onward.path.success && onward.path.next_map_id == 194 && !onward.path.walk_phases.empty() &&
+              !onward.path.walk_phases.back().manual_after,
+              "once the live collider is gone, the same destination uses the 3F stairs");
+    }
+
+    const auto& cave_floor = *baked::submap_by_map_id(192);
+    const auto& cave_grid = baked::grids(cave_floor);
+    const auto& cave_exit = object(192, 22);
+    const auto* reviewed = baked::world_exit_at(cave_grid, cave_exit.entity_id(), baked::object_identifier(cave_exit), 16, 20);
+    check(reviewed && reviewed->a == 191 && reviewed->b == 2 && !scene_transfer(*reviewed),
+          "Cave 1F's native contact is a permanent Map Exit to Cave Entrance PointIn 2");
+
     auto tule = exdeath_routes::flags(30,0,0);
     tule.current_area_id = 9;
     tule.scenario[21] = 1;

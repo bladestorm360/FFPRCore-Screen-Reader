@@ -47,6 +47,30 @@ Focused checks passed for the scanner, exact bake comparison, the complete
 event label compatibility review, both popup choices and the 20-assertion
 route replay. The full verification and local delivery are separate.
 
+## November 28 Cave and Wind Shrine destinations
+
+The FFV log at 491467 and 491788 reports Cave 3F as story-gated from the
+Wind Drake. Cave 2F's native door collider 29 on the 3F stairs is reset
+by the room initializer. The ordinary switch, entity 11 on the ground
+layer, runs `sc_e_0206` to hide the collider during that visit. Once the
+early pirate scene is complete, the pathfinder routes to the switch
+through Cave Entrance and Cave 1F as needed. It keeps the selected exit
+through the floor transfers and uses the next live collision observation
+after the switch. The switch uses the normal directions and Auto-interact
+paths.
+
+Cave 1F entity 22 at (16,20) runs `sc_30021_1_to_30020`. Both branches
+transfer to Cave Entrance PointIn 2. One branch starts the native Boko
+scene after the same arrival. The reviewed baked graph now lists the
+contact under Map Exits and retains the exact arrival. The underlying
+geometry, native objects and other derived arcs are unchanged.
+
+At 491827 the Wind Shrine list described map 209 at (13,4) as a scene
+trigger. Entity 26 runs `sc_e_0210`, which offers the ability tutorial and
+has World Map warp outcomes for worlds 1 and 3. The contact now uses the
+existing localized Warp Tile label. Entity 6 farther south remains the
+Wind Crystal scene.
+
 ## Tule's World Map exit
 
 The game log at 77802.531 shows a route request from Tule (21,38) to the

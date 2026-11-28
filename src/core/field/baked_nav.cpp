@@ -4618,6 +4618,7 @@ struct Planned {
 #include "manual_key_prefix.inl"
 #include "troia_passages.inl"
 #include "baron_gate.inl"
+#include "pirate_cave_passage.inl"
 #include "magnetic_cavern.inl"
 #include "lunar_whale_landing.inl"
 #include "fire_ship_passages.inl"
@@ -4791,6 +4792,7 @@ Planned plan_single_snapshot(RouteSnapshot& snapshot) {
     prepare_manual_key_prefix(snapshot,result.path);
     prepare_troia_passage_prefix(snapshot,result.path);
     prepare_baron_gate_prefix(snapshot,result.path);
+    prepare_pirate_cave_prefix(snapshot,result.path);
     prepare_fire_ship_prefix(snapshot, result.path);
     if (snapshot.map_id == 1) prepare_magnetic_cavern_prefix(snapshot, result.path);
     annotate_selected_interaction(snapshot, result.path);

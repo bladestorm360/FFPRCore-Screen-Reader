@@ -790,6 +790,28 @@
   },
   {
     "game": 5,
+    "submap": "Map_30021_1",
+    "group": "entity_default",
+    "id": 22,
+    "entity_id": 22,
+    "raw": "海賊のアジト入口",
+    "script_id": 1129,
+    "script_name": "sc_30021_1_to_30020",
+    "script_sha256": "94f2729d0a533297923e2343c88dad7820bfbdd59d2a16903edb805c6fcd615e",
+    "label": "Map entrance",
+    "reason": "both native branches return to the same Cave Entrance point; one starts its scene after arrival",
+    "review_grammar": "contextual_transfer",
+    "primary_transfer": [191, 2, "sc_e_0202"],
+    "continuations": [
+      {
+        "submap": "Map_30020",
+        "script": "sc_e_0202",
+        "body_sha256": "ae868196667ab92011f8d517eb6c5677e104b9450a1b3147a9fd266845c54adc"
+      }
+    ]
+  },
+  {
+    "game": 5,
     "submap": "Map_30041_1",
     "group": "entity_default",
     "id": 77,

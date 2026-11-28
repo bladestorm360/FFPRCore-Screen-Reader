@@ -1,6 +1,7 @@
 """Bind scene, spring and boss roles to reviewed native event occurrences."""
 
 import csv
+import hashlib
 from pathlib import Path
 import json
 import sys
@@ -33,6 +34,7 @@ SPRINGS = {
     (5, 'Map_30021_1', 'entity_default', 23): (5, 'sc_e_0205'),
     (5, 'Map_30421_1', 'entity_default', 19): (19, 'sc_30421_1_healing_spring'),
 }
+WIND_SHRINE_WARP = (5, 'Map_30041_8', 'entity_default', 72)
 
 
 def scene_transfer(game, obj, script, destination):
@@ -52,7 +54,7 @@ def scene_transfer(game, obj, script, destination):
 def apply_labels(game, labels, audit, objects, scripts, masters, maps):
     if game not in (5, 6):
         return
-    expected = {key for key in BOSSES.keys() | SPRINGS.keys() if key[0] == game}
+    expected = {key for key in BOSSES.keys() | SPRINGS.keys() | {WIND_SHRINE_WARP} if key[0] == game}
     audit_rows = {(row['submap'], row['group'], row['id']): row for row in audit}
     for obj in objects:
         local = obj['submap'], obj['group'], obj['id']
@@ -72,7 +74,7 @@ def apply_labels(game, labels, audit, objects, scripts, masters, maps):
             assert not any(c['mnemonic'] == 'ChangeMap' for c in commands)
             for map_id in maps[obj['submap']]:
                 labels[f'@boss:{map_id}:{actor}:{native_type}:{obj["name"]}'] = '@name:' + translation
-        else:
+        elif key in SPRINGS:
             actor, name = SPRINGS[key]
             assert (prop['entity_id'], obj['type'], script_name) == (actor, 2, name)
             assert {'RecoveryHP', 'RecoveryMP', 'RemoveCondition'} <= {c['mnemonic'] for c in commands}
@@ -81,6 +83,16 @@ def apply_labels(game, labels, audit, objects, scripts, masters, maps):
             for map_id in maps[obj['submap']]:
                 labels[f'@object:{map_id}:{actor}:2:{obj["name"]}'] = label
             audit_rows[local].update(label=label, reason='reviewed native healing spring event')
+        else:
+            assert (prop['entity_id'], obj['type'], prop['script_id'], script_name) == (26, 2, 2007, 'sc_e_0210')
+            digest = hashlib.sha256(json.dumps(script, sort_keys=True, ensure_ascii=False,
+                                              separators=(',', ':')).encode()).hexdigest()
+            assert digest == '926a9a8f9557aad04ae5af6ec001196593009a7055f7e1d6fae18fb7d541dd41'
+            changes = {tuple(c['operands']['iValues'][:2]) for c in commands if c['mnemonic'] == 'ChangeMap'}
+            assert changes == {(1, 5), (19, 3)} and any(c['mnemonic'] == 'Select' for c in commands)
+            for map_id in maps[obj['submap']]:
+                labels[f'@object:{map_id}:26:2:{obj["name"]}'] = 'Warp Tile'
+            audit_rows[local].update(label='Warp Tile', reason='reviewed optional World Map warp after the ability tutorial')
     assert not expected, expected
 
 
@@ -119,7 +131,7 @@ def main():
                     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
             else:
                 assert value == read_json(path), path
-    print(f'Verified {len(BOSSES)} scripted boss contacts and {len(SPRINGS)} healing spring event identities.')
+    print(f'Verified {len(BOSSES)} scripted boss contacts, {len(SPRINGS)} healing springs and the Wind Shrine warp.')
 
 
 if __name__ == '__main__':

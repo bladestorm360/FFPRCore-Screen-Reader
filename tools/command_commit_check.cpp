@@ -1,4 +1,4 @@
-// check-sources: text.cpp
+// check-sources: battle/status_appearance.cpp text.cpp
 // Real registered command-commit/cursor/turn producers, native UI boundary fake.
 #define main retained_battle_focus_main
 #include "battle_focus_check.cpp"

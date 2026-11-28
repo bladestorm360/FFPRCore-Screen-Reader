@@ -1,5 +1,14 @@
 # Playability and natural-play confirmation records
 
+## V1.1 animation narration
+
+Enemy appearance descriptions are included. Automatic animation narration
+has yet to be confirmed in gameplay, and most expected cues have not played
+in reported testing. Offline producer and timing checks exercise the
+conditions for cue submission in fixtures. They do not establish that the
+cue played during a live game. Keep those results separate when reporting
+scene coverage.
+
 ## November 11 FFIV Tower of Zot 5F chest
 
 Select the unopened chest beside the Gaia Hammer chest from 4F. Follow the

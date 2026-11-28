@@ -1,12 +1,14 @@
-# Final Fantasy Pixel Master Core Screen Reader V1.0
+# Final Fantasy Pixel Master Core Screen Reader V1.1
 
 ## Purpose
 
 Adds speech, menu and battle reading, pathfinding, optional autowalk and audio navigation to FINAL FANTASY I-VI Pixel Remaster on Steam. One set of files supports all six games. Keyboard and controller controls are supported.
 
-V1.0 improves battle status and results reading, equipment comparisons, Fat Chocobo storage, connected-floor and vehicle routes, and access to locked doors. Route beacons now keep pinging while you walk, with full HRTF bearings and rear pitch cues only in stereo fallback. It includes the existing FFVI story guidance, puzzle guidance, soundscape and remappable controls.
+V1.1 adds Storyline destinations and configurable spoken route chunks. Autowalk can follow routes through doors and elevators, resume after battles, and interact with a selected target when Auto-interact is on. Enemy appearance descriptions are available from the battle target list. The Windows setup checks GitHub for updates and manages installations across all six games.
 
 ## Known Issues
+
+Automatic animation narration has yet to be confirmed during gameplay. Most expected animation cues have not played in reported testing. On-demand enemy appearance descriptions are included separately.
 
 Some game-specific screens, airships and scripted map exits still need gameplay confirmation. The latest beacon, storage, status and navigation corrections passed offline checks; their remaining listening checks are documented separately. Intermittent stalls are still under investigation; automatic timing logs remain enabled. FFIII and FFVI automatic airship boarding is disabled: board and take the wheel manually before requesting a flying route. FFVI flight autowalk has passed offline checks but still needs gameplay confirmation. A report of a numbered character name in battle results remains unreproduced; additional diagnostics are included. Report missing or repeated speech with the game's ffpr_screen_reader.log and a short description of what happened.
 
@@ -134,7 +136,7 @@ Scene triggers can be selected as destinations. For a story-gated destination, d
 - Some Storyline stages offer an optional native clue conversation. Use the destination selection keys to switch between the conversation and the direct objective.
 - By default, Storyline selections speak “Destination” or “Clue.” For full names, open the mod menu with F8, then turn on **Speech → Storyline spoilers**.
 - Press I during dialogue to describe an identified speaker whose sprite is visible. During battle, press I while targeting an enemy to hear its current form and visible effects. Press Ctrl+I to describe the acting character, their visible equipment and current effects.
-- Some scenes describe significant visible actions alongside the game's dialogue. Both use the same screen reader voice.
+- Automatic animation narration uses the same screen reader voice as game dialogue. Its gameplay status is under Known Issues.
 - **F8 → Speech → Visual descriptions** controls automatic scene cues and on-demand appearance descriptions. It defaults to On. Game dialogue and the usual item and spell descriptions remain available with either setting.
 
 ### Waypoints (field only)

@@ -1,5 +1,16 @@
 # Native FFPR durable memory
 
+**November 28 V1.1.** [Release record and evidence](docs/release.md#v11-preparation-november-28).
+
+**November 28 FFV Cave and Wind Shrine.** Cave 1F lists its return under
+Map Exits. The world route to Cave 3F can use the Cave 2F switch, and the
+Wind Shrine tutorial contact is named Warp Tile.
+[Native contacts and routing](docs/re/FF5_EVENT_CONTACTS_20261106.md#november-28-cave-and-wind-shrine-destinations).
+
+**November 28 manual route corrections.** A quick turn replaces an older
+obstacle sample. A held walking direction gets one check at the new tile.
+[Route readout behavior](docs/re/AUTOWALK.md#november-28-walking-obstacle-correction).
+
 **November 28 Windows installer.** The standalone setup discovers Steam
 libraries, shares a verified download among selected games, and keeps one
 rollback record per game. It uses the current stable public release bundle.

@@ -175,6 +175,7 @@ void magic_reset_state() {}
 namespace menus { std::wstring condition_name(void* value) {auto* condition=static_cast<fixture::Node*>(value);return condition->name.empty()?condition_labels::fallback(condition->condition_type):condition->name;} }
 }
 namespace modtext { std::wstring T(std::wstring_view s) { return std::wstring(s); }
+bool has(std::wstring_view) { return false; } // This fixture supplies no appearance catalog.
 std::wstring TF(std::wstring_view s, std::initializer_list<std::wstring> args) { return text::format(s, args); }
 const std::wstring& lang() { static const std::wstring value = L"en"; return value; }
 LocaleScope::LocaleScope(std::wstring) {} LocaleScope::~LocaleScope() {} }

@@ -101,6 +101,16 @@ input, native interaction veto and one action per arrival. The full ship
 route replay checks the authored headings and entity IDs while retaining
 all forward and return trips. In-game playback remains to confirm.
 
+## November 28 walking obstacle correction
+
+The manual readout observes each direction independently of the wall sound.
+A quick turn can replace an older pending sample. A direction still held
+after a completed step gets one trailing check at the new tile. Only a
+stationary attempt that the native field collision check rejects refreshes
+directions. The latest route and movement generations must still match.
+The same held direction at the same tile speaks once. Map and battle entry
+retire the observation before it can read the native player again.
+
 ## November 27 manual route readout
 
 The shared Navigation menu saves the full readout switch, the chunk size
